@@ -9,7 +9,8 @@ include(${PROJECT_SOURCE_DIR}/cmake/dependencies.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
 
 ##======================================================================================================================
-option( KYOSU_BUILD_TEST "Build tests for KYOSU" ON )
+option( KYOSU_BUILD_TEST          "Build tests for KYOSU"   ON  )
+option( KYOSU_BUILD_DOCUMENTATION "Build Doxygen for KYOSU" OFF )
 
 ##======================================================================================================================
 ## Project setup via copacabana
@@ -24,8 +25,11 @@ copa_project_version(MAJOR 2 MINOR 3 PATCH 0)
 if(NOT KYOSU_QUIET)
   if(CMAKE_BUILD_TYPE)
     message(STATUS "[${PROJECT_NAME}] - Building in ${CMAKE_BUILD_TYPE} mode")
+  set(QUIET_OPTION "")
   endif()
-  message(STATUS "[${PROJECT_NAME}] - Unit tests        : ${KYOSU_BUILD_TEST} (via KYOSU_BUILD_TEST)")
+  message(STATUS "[${PROJECT_NAME}] - Unit tests : ${KYOSU_BUILD_TEST} (via KYOSU_BUILD_TEST)")
+  message(STATUS "[${PROJECT_NAME}] - Doxygen    : ${KYOSU_BUILD_DOCUMENTATION} (via KYOSU_BUILD_DOCUMENTATION)")
+  set(QUIET_OPTION "QUIET")
 endif()
 
 ##======================================================================================================================
@@ -40,14 +44,13 @@ copa_setup_install( LIBRARY kyosu
 ##======================================================================================================================
 ## Setup doxygen
 ##======================================================================================================================
-copa_setup_doxygen(QUIET DESTINATION "${PROJECT_BINARY_DIR}/doc")
-
+if(KYOSU_BUILD_DOCUMENTATION)
+  copa_setup_doxygen(${QUIET_OPTION} DESTINATION "${PROJECT_BINARY_DIR}/doc")
+endif()
 ##======================================================================================================================
 ## Tests setup
 ##======================================================================================================================
 if(KYOSU_BUILD_TEST)
   enable_testing()
-  add_custom_target(kyosu-unit    )
-  add_dependencies(kyosu-unit unit)
-#  add_subdirectory(test)
+  add_subdirectory(test)
 endif()
