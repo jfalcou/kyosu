@@ -16,7 +16,6 @@
       <tab type="namespacelist" visible="yes" title="" intro=""/>
       <tab type="namespacemembers" visible="yes" title="" intro=""/>
     </tab>
-    </tab>
       <tab type="classes" visible="yes" title="">
         <tab type="classlist" visible="yes" title="" intro=""/>
         <tab type="classindex" visible="$ALPHABETICAL_INDEX" title=""/>
