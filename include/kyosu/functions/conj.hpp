@@ -1,0 +1,95 @@
+//======================================================================================================================
+/*
+  Kyosu - Complex Math Made Easy
+  Copyright : TTS Contributors & Maintainers
+  SPDX-License-Identifier: BSL-1.0
+*/
+//======================================================================================================================
+#pragma once
+
+#include <kyosu/details/invoke.hpp>
+
+namespace kyosu::tags
+{
+  struct callable_conj : eve::elementwise
+  {
+    using callable_tag_type = callable_conj;
+
+    KYOSU_DEFERS_CALLABLE(conj_);
+
+    template<typename T>
+    EVE_FORCEINLINE auto operator()(T target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    {
+      return eve::tag_invoke(*this, target);
+    }
+
+    template<typename... T>
+    eve::unsupported_call<callable_conj(T&&...)> operator()(T&&... x) const
+    requires(!requires { eve::tag_invoke(*this, EVE_FWD(x)...); }) = delete;
+  };
+}
+
+namespace kyosu
+{
+//======================================================================================================================
+//! @addtogroup functions
+//! @{
+//!   @var conj
+//!   @brief Computes the the conjugate value.
+//!
+//!   **Defined in Header**
+//!
+//!   @code
+//!   #include <kyosu/functions.hpp>
+//!   @endcode
+//!
+//!   @groupheader{Callable Signatures}
+//!
+//!   @code
+//!   namespace kyosu
+//!   {
+//!      template< eve::value T >
+//!      T conj(T z) noexcept;
+//!   }
+//!   @endcode
+//!
+//!   **Parameters**
+//!
+//!     * `z` :  [real](@ref eve::value) or [complex](@ref eve::complex) argument.
+//!
+//!   **Return value**
+//!
+//!     Returns the conjugate of its argument. For real inputs the call reduces to identity.
+//!
+//!  @groupheader{Example}
+//!
+//!  @godbolt{doc/core/regular/conj.cpp}
+//!
+//!  @groupheader{Semantic Modifiers}
+//!
+//!   * Masked Call
+//!
+//!     The call `eve;::conj[mask](x)` provides a masked version of `kyosu::conj` which is
+//!     equivalent to `eve::if_else(mask, kyosu::conj(x), x)`.
+//!
+//!      **Example**
+//!
+//!        @godbolt{doc/core/masked/conj.cpp}
+//!
+//! @}
+//======================================================================================================================
+inline constexpr tags::callable_conj conj = {};
+}
+
+namespace kyosu::_
+{
+  template<eve::ordered_value T> constexpr auto conj_(EVE_EXPECTS(eve::cpu_), T v) noexcept
+  {
+    return v;
+  }
+
+  template<concepts::caley_dickinson T> constexpr auto conj_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept
+  {
+    return T{kumi::map_index([]<typename I>(I, auto m) { if constexpr(I::value>0) return -m; else return m;}, v)};
+  }
+}
