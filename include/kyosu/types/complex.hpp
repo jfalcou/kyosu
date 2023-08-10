@@ -20,4 +20,7 @@ namespace kyosu
 {
   template<typename T>
   using complex     = caley_dickinson<T,2>;
+
+  template<typename T>
+  using as_complex_t = as_caley_dickinson_n_t<2,T>;
 }

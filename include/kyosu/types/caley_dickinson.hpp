@@ -36,7 +36,7 @@ namespace kyosu
 
     using underlying_type = Type;
 
-    constexpr caley_dickinson() noexcept {}
+    constexpr caley_dickinson() noexcept : contents{} {}
 
     template<unsigned int M>
     requires(M > 1 && M == N/2)
@@ -86,6 +86,8 @@ namespace kyosu
 
     template<std::size_t I>
     friend constexpr auto get(caley_dickinson const& c) noexcept { return get<I>(c.contents); }
+
+    friend constexpr bool operator==(caley_dickinson const&, caley_dickinson const&) noexcept =default;
 
     data_type contents;
   };
