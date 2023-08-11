@@ -1,0 +1,75 @@
+##======================================================================================================================
+## Kyosu - Complex Math Made Easy
+## Copyright : KYOSU Contributors & Maintainers
+## SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+name: KYOSU Integration Tests
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: kyosu-integration-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  install:
+    runs-on: [ubuntu-latest]
+    container:
+      image: ghcr.io/jfalcou/compilers:v6
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: Install KYOSU from checkout
+        run: |
+          mkdir build && cd build
+          cmake -G Ninja .. -DKYOSU_BUILD_TEST=OFF
+          ninja install
+      - name: Run Sample CMake
+        run: |
+          mkdir install && cd install
+          cmake ../test/integration/install-test -G Ninja
+          ninja test_kyosu && ctest -R ^test_kyosu* --verbose
+
+  fetch-content:
+    env:
+      BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+    runs-on: [ubuntu-latest]
+    container:
+      image: ghcr.io/jfalcou/compilers:v6
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: Run Sample CMake
+        run: |
+          git config --global --add safe.directory /__w/kyosu/kyosu
+          mkdir install && cd install
+          cmake ../test/integration/fetch-test -G Ninja -DGIT_BRANCH=${BRANCH_NAME} -DKYOSU_BUILD_TEST=OFF
+          ninja test_kyosu && ctest -R ^test_kyosu* --verbose
+
+  cpm:
+    env:
+      BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+    runs-on: [ubuntu-latest]
+    container:
+      image: ghcr.io/jfalcou/compilers:v6
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: Run Sample CMake
+        run: |
+          git config --global --add safe.directory /__w/kyosu/kyosu
+          mkdir install && cd install
+          cmake ../test/integration/cpm-test -G Ninja -DGIT_BRANCH=${BRANCH_NAME}
+          ninja test_kyosu && ctest -R ^test_kyosu* --verbose
