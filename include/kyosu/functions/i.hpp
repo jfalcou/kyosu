@@ -38,7 +38,7 @@ namespace kyosu::tags
 
     template<typename... T>
     eve::unsupported_call<callable_i(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, EVE_FWD(x)...); }) = delete;
+    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
 

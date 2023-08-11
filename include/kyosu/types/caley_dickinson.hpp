@@ -8,16 +8,8 @@
 #pragma once
 
 #include <eve/module/core.hpp>
+#include <kyosu/concepts.hpp>
 #include <bit>
-
-namespace kyosu::concepts
-{
-  template<typename T>
-  concept caley_dickinson = requires(T const&)
-  {
-    typename eve::element_type_t<std::remove_cvref_t<T>>::is_caley_dickinson;
-  };
-}
 
 namespace kyosu
 {

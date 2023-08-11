@@ -10,12 +10,6 @@
 #include <kyosu/types/caley_dickinson.hpp>
 #include <eve/concept/value.hpp>
 
-namespace kyosu::concepts
-{
-  template<typename T>
-  concept octonion = caley_dickinson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 8;
-}
-
 namespace kyosu
 {
   template<typename T>

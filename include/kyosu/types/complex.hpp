@@ -10,14 +10,18 @@
 #include <kyosu/types/caley_dickinson.hpp>
 #include <eve/concept/value.hpp>
 
-namespace kyosu::concepts
-{
-  template<typename T>
-  concept complex = caley_dickinson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 2;
-}
-
 namespace kyosu
 {
+  //====================================================================================================================
+  //! @addtogroup types
+  //! @{
+  //! @typedef complex
+  //! @brief Type alias for complex numbers
+  //!
+  //! Complex numbers are implemented as Caley-Dickinson numbers of dimension 2.
+  //!
+  //! @}
+  //====================================================================================================================
   template<typename T>
   using complex     = caley_dickinson<T,2>;
 

@@ -11,11 +11,11 @@
 
 namespace kyosu::tags
 {
-  struct callable_conj : eve::elementwise
+  struct callable_to_complex : eve::elementwise
   {
-    using callable_tag_type = callable_conj;
+    using callable_tag_type = callable_to_complex;
 
-    KYOSU_DEFERS_CALLABLE(conj_);
+    KYOSU_DEFERS_CALLABLE(to_complex_);
 
     template<typename T>
     EVE_FORCEINLINE auto operator()(T target) const noexcept -> decltype(eve::tag_invoke(*this, target))
@@ -24,7 +24,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_conj(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_to_complex(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -34,8 +34,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var conj
-//!   @brief Computes the conjugate value.
+//!   @var to_complex
+//!   @brief Constructs a kyosu::complex
 //!
 //!   **Defined in Header**
 //!
@@ -48,36 +48,38 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::caley_dickinson T> constexpr T conj(T z) noexcept;
-//!      template<eve::ordered_value T>               constexpr T conj(T z) noexcept;
+//!      template<eve::ordered_value T> constexpr auto to_complex(T r)            noexcept;
+//!      template<eve::ordered_value T> constexpr auto to_complex(T r, T i)       noexcept;
+
+//!      template<kyosu::concepts::caley_dickinson T> constexpr T to_complex(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to conjugate.
+//!     * `z`       : Complex value.
+//!     * `r`, `i`  : Real and imaginary part sued to construct a @ref kyosu::complex..
 //!
 //!   **Return value**
 //!
-//!     Returns the conjugate of its argument. For real inputs the call reduces to identity.
+//!     Returns a @ref kyosu::complex constructed from its arguments.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/conj.cpp}
+//!  @godbolt{doc/to_complex.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_conj conj = {};
+inline constexpr tags::callable_to_complex to_complex = {};
 }
 
 namespace kyosu::_
 {
-  template<eve::ordered_value T> constexpr auto conj_(EVE_EXPECTS(eve::cpu_), T v) noexcept
-  {
-    return v;
-  }
+  template<eve::ordered_value T>
+  constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T r)         noexcept  { return as_complex_t<T>(r, 0); }
 
-  template<concepts::caley_dickinson T> constexpr auto conj_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept
-  {
-    return T{kumi::map_index([]<typename I>(I, auto m) { if constexpr(I::value>0) return -m; else return m;}, v)};
-  }
+  template<eve::ordered_value T>
+  constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T r, T i)    noexcept  { return as_complex_t<T>(r, i); }
+
+  template<concepts::complex T>
+  constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T const& v)  noexcept  { return v; }
 }

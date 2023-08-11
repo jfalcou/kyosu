@@ -20,7 +20,7 @@ namespace kyosu
   constexpr auto& operator+=(concepts::caley_dickinson auto& self, eve::ordered_value auto other) noexcept
   requires( requires {get<0>(self) += other;} )
   {
-    get<0>(self) += other;
+    kumi::get<0>(self) += other;
     return self;
   }
 
@@ -29,7 +29,7 @@ namespace kyosu
   requires(dimension_v<Other> <= dimension_v<Self>)
   constexpr auto& operator+=(Self& self, Other const& other) noexcept
   {
-    kumi::for_each_index( [&]<typename I>(I,auto const& o) { get<I::value>(self) += o; }, other);
+    kumi::for_each_index( [&]<typename I>(I,auto const& o) { kumi::get<I::value>(self) += o; }, other);
     return self;
   }
 
@@ -37,7 +37,7 @@ namespace kyosu
   constexpr auto& operator-=(concepts::caley_dickinson auto& self, eve::ordered_value auto other) noexcept
   requires( requires {get<0>(self) -= other;} )
   {
-    get<0>(self) -= other;
+    kumi::get<0>(self) -= other;
     return self;
   }
 
@@ -46,7 +46,7 @@ namespace kyosu
   requires(dimension_v<Other> <= dimension_v<Self>)
   constexpr auto& operator-=(Self& self, Other const& other) noexcept
   {
-    kumi::for_each_index( [&]<typename I>(I,auto const& o) { get<I::value>(self) -= o; }, other);
+    kumi::for_each_index( [&]<typename I>(I,auto const& o) { kumi::get<I::value>(self) -= o; }, other);
     return self;
   }
 
@@ -54,7 +54,7 @@ namespace kyosu
   constexpr auto& operator*=(concepts::caley_dickinson auto& self, eve::ordered_value auto other) noexcept
   requires( requires {get<0>(self) *= other;} )
   {
-    get<0>(self) *= other;
+    kumi::get<0>(self) *= other;
     return self;
   }
 
@@ -70,7 +70,7 @@ namespace kyosu
   constexpr auto& operator/=(concepts::caley_dickinson auto& self, eve::ordered_value auto other) noexcept
   requires( requires {get<0>(self) /= other;} )
   {
-    get<0>(self) /= other;
+    kumi::get<0>(self) /= other;
     return self;
   }
 

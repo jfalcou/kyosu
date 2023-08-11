@@ -7,6 +7,7 @@
 //======================================================================================================================
 #pragma once
 
+#include <kyosu/details/abi.hpp>
 #include <eve/traits/invoke.hpp>
 
 namespace kyosu::tags { EVE_DEFERRED_INVOKE()     }

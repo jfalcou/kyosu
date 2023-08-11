@@ -7,7 +7,12 @@ copa_setup_test_targets()
 set(root "${CMAKE_SOURCE_DIR}/test")
 
 ##======================================================================================================================
-## Complex tests
+## Documentation tests
 ##======================================================================================================================
-copa_glob_unit(PATTERN "complex/*.cpp" INTERFACE kyosu_test)
-copa_glob_unit(PATTERN "quaternion/*.cpp" INTERFACE kyosu_test)
+copa_glob_unit(QUIET PATTERN "doc/*.cpp"    INTERFACE kyosu_docs)
+
+##======================================================================================================================
+## Unit tests
+##======================================================================================================================
+copa_glob_unit(QUIET PATTERN "complex/*.cpp"    INTERFACE kyosu_test)
+copa_glob_unit(QUIET PATTERN "quaternion/*.cpp" INTERFACE kyosu_test)

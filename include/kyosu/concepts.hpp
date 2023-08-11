@@ -7,11 +7,4 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/types/caley_dickinson.hpp>
-#include <eve/concept/value.hpp>
-
-namespace kyosu
-{
-  template<typename T>
-  using quaternion = caley_dickinson<T,4>;
-}
+#include <kyosu/concepts/types.hpp>

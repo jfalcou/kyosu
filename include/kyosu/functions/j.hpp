@@ -39,7 +39,7 @@ namespace kyosu::tags
 
     template<typename... T>
     eve::unsupported_call<callable_j(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, EVE_FWD(x)...); }) = delete;
+    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
 
@@ -63,13 +63,9 @@ namespace kyosu
   //!   }
   //!   @endcode
   //!
-  //!   **Parameters:** `x` - Constant type passed as a [Type wrapper](@ref eve::as).
+  //!   **Parameters:** `x` - Constant type passed as a Type wrapper.
   //!
   //!   **Return value:** The imaginary `j` value.
-  //!
-  //!   @groupheader{Supported decorators}
-  //!
-  //!   * @ref conditional : Apply masks to the generated constant.
   //!
   //!   @groupheader{Example}
   //!

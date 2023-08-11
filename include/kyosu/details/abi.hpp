@@ -7,11 +7,5 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/types/caley_dickinson.hpp>
-#include <eve/concept/value.hpp>
-
-namespace kyosu
-{
-  template<typename T>
-  using quaternion = caley_dickinson<T,4>;
-}
+// Faster than std::forward
+#define KYOSU_FWD(...) static_cast<decltype(__VA_ARGS__) &&>(__VA_ARGS__)

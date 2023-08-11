@@ -19,11 +19,13 @@ namespace kyosu
   /// Computes the a given Caley-Dickinson-like type from a series of compatible types
   template<unsigned int Dim, typename... Ts>
   requires( requires(Ts... ts) { eve::add(eve::underlying_type_t<Ts>{}...); } )
-  struct as_caley_dickinson_n : as_caley_dickinson_n< Dim
-                                                    , decltype(eve::add( std::declval<eve::underlying_type_t<Ts>>()...))
-                                                    >
+  struct  as_caley_dickinson_n
+#if !defined(KYOSU_DOXYGEN_INVOKED)
+        : as_caley_dickinson_n<Dim, decltype(eve::add( std::declval<eve::underlying_type_t<Ts>>()...))>
+#endif
   {};
 
+#if !defined(KYOSU_DOXYGEN_INVOKED)
   template<unsigned int Dim, typename T>
   struct as_caley_dickinson_n<Dim, T>
   {
@@ -34,6 +36,7 @@ namespace kyosu
 
   template<unsigned int Dim, typename... Ts>
   using as_caley_dickinson_n_t = typename as_caley_dickinson_n<Dim,Ts...>::type;
+#endif
 
   /// Computes the best Caley-Dickinson-like type from a series of compatible types
   template<typename... Ts>

@@ -10,5 +10,5 @@
 /// Main KYOSU namespace
 namespace kyosu {}
 
-#include <kyosu/functions.hpp>
 #include <kyosu/types.hpp>
+#include <kyosu/functions.hpp>
