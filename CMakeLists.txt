@@ -47,6 +47,13 @@ copa_setup_install( LIBRARY kyosu
 if(KYOSU_BUILD_DOCUMENTATION)
   copa_setup_doxygen(${QUIET_OPTION} DESTINATION "${PROJECT_BINARY_DIR}/doc")
 endif()
+
+##======================================================================================================================
+## Setup PCH
+##======================================================================================================================
+copa_setup_pch( TARGET kyosu      INTERFACES  kyosu_test HEADERS include/kyosu/kyosu.hpp)
+copa_setup_pch( TARGET kyosu_doc  INTERFACES  kyosu_docs HEADERS include/kyosu/kyosu.hpp)
+
 ##======================================================================================================================
 ## Tests setup
 ##======================================================================================================================
