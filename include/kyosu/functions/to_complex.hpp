@@ -17,10 +17,10 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(to_complex_);
 
-    template<typename T>
-    EVE_FORCEINLINE auto operator()(T target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    template<typename... T>
+    EVE_FORCEINLINE auto operator()(T... target) const noexcept -> decltype(eve::tag_invoke(*this, target...))
     {
-      return eve::tag_invoke(*this, target);
+      return eve::tag_invoke(*this, target...);
     }
 
     template<typename... T>
