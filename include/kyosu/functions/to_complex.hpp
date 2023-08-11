@@ -80,6 +80,12 @@ namespace kyosu::_
   template<eve::ordered_value T>
   constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T r, T i)    noexcept  { return as_complex_t<T>(r, i); }
 
+  template<eve::ordered_value T0, eve::ordered_value T1>
+  constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T0 r, T1 i)  noexcept -> as_complex_t<decltype(eve::add(r, i))>
+  {
+    return as_complex_t<decltype(eve::add(r, i))>{r, i};
+  }
+
   template<concepts::complex T>
   constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T const& v)  noexcept  { return v; }
 }
