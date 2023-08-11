@@ -1,5 +1,5 @@
 #include <kyosu/kyosu.hpp>
-#include <iostream;>
+#include <iostream>
 
 int main()
 {

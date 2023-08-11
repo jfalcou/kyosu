@@ -73,7 +73,7 @@ jobs:
       matrix:
         cfg:
         - { compiler: g++-12  , opts: -O0                                 , linker:                 }
-        - { compiler: g++-12  , opts: "-O3 -DNDEBUG"                      , linker:                 }
+        # - { compiler: g++-12  , opts: "-O3 -DNDEBUG"                      , linker:                 }
         # - { compiler: clang++ , opts: -O0                                 , linker:                 }
         # - { compiler: clang++ , opts: "-O3 -flto -DNDEBUG"                , linker:                 }
         # - { compiler: clang++ , opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++  }

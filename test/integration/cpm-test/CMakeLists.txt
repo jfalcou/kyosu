@@ -16,10 +16,10 @@ include(cpm.cmake)
 CPMAddPackage ( NAME kyosu
                 GIT_REPOSITORY "https://github.com/jfalcou/kyosu.git"
                 GIT_TAG "${GIT_BRANCH}"
-                OPTIONS "kyosu_BUILD_TEST OFF"
+                OPTIONS "KYOSU_BUILD_TEST OFF"
               )
 
 # Use kyosu
 add_executable(test_kyosu ../main.cpp)
-target_link_libraries(test_kyosu PUBLIC kyosu::kyosu)
+target_link_libraries(test_kyosu PUBLIC kyosu::kyosu eve::eve)
 add_test(NAME test_kyosu COMMAND test_kyosu)
