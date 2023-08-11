@@ -66,7 +66,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the imaginary part of its argument. For real inputs, the call returns 0.
+//!     Returns the imaginary part of its argument. For real inputs, the call returns 0. It is an alias of `jpart`.
 //!
 //!  @groupheader{Example}
 //!

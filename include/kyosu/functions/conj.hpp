@@ -59,7 +59,10 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the conjugate of its argument. For real inputs the call reduces to identity.
+//!     Returns the conjugate of its argument. i.e. the value with the same real part
+//!     and the opposite pure part.
+//!
+//!     For real inputs the call reduces to identity.
 //!
 //!  @groupheader{Example}
 //!

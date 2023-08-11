@@ -3,4 +3,10 @@
 # Kyosu
 ## Complex Math Made Easy
 
-Efficient and SIMD-aware computaton for complex, quaternion and octonions.
+Efficient and SIMD-aware computation for complex, quaternions and octonions.
+
+Kyosu proposes unified treatment of cayley-dickinson algebras on real numbers, for
+numerical comptations.
+
+Real numbers are implemented as float or double IEEE values and, as relying on
+EVE library can use SIMD entry as well .
