@@ -6,7 +6,6 @@
 */
 //======================================================================================================================
 #include <kyosu/kyosu.hpp>
-#include <kyosu/functions/to_complex.hpp>
 
 #include <test.hpp>
 
