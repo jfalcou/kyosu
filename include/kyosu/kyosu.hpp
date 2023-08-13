@@ -1,6 +1,6 @@
 //======================================================================================================================
 /*
-  Kyosu - Complex Math Made Easy
+  Kyosu - Complex Without Complexes
   Copyright : KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */

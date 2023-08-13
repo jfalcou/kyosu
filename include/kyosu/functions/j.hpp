@@ -1,6 +1,6 @@
 //======================================================================================================================
 /*
-  Kyosu - Complex Math Made Easy
+  Kyosu - Complex Without Complexes
   Copyright : KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
@@ -19,11 +19,11 @@ namespace kyosu::tags
     template<eve::floating_value T>
     static EVE_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
     {
-      using type = caley_dickinson<eve::element_type_t<T>,4>;
+      using type = cayley_dickinson<eve::element_type_t<T>,4>;
       return eve::as_wide_as_t<type,T>{type{0,0,1,0}};
     }
 
-    template<concepts::caley_dickinson T>
+    template<concepts::cayley_dickinson T>
     requires( dimension_v<T> >= 4)
     static EVE_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
     {

@@ -1,6 +1,6 @@
 //======================================================================================================================
 /*
-  Kyosu - Complex Math Made Easy
+  Kyosu - Complex Without Complexes
   Copyright : KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
@@ -17,7 +17,7 @@ namespace kyosu
   //====================================================================================================================
 
   /// Stream insertion for Caley-Dickinson based types
-  template<concepts::caley_dickinson CD>
+  template<concepts::cayley_dickinson CD>
   std::ostream& operator<<(std::ostream& os, CD const& z)
   {
     auto display_positive = [](std::ostream& os,auto e, bool first) -> std::ostream&

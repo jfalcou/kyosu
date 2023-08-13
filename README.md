@@ -1,7 +1,7 @@
 <img src="https://github.com/jfalcou/kyosu/raw/main/doc/logo.png" alt="" data-canonical-src="https://github.com/jfalcou/kyosu/main/doc/logo.png" align="left"  width="15%" height="15%" />
 
 # Kyosu
-## Complex Math Made Easy
+## Complex Without Complexes
 
 Efficient and SIMD-aware computation for complex, quaternions and octonions.
 

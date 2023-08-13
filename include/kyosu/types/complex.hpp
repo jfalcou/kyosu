@@ -1,13 +1,13 @@
 //======================================================================================================================
 /*
-  Kyosu - Complex Math Made Easy
+  Kyosu - Complex Without Complexes
   Copyright : KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/types/caley_dickinson.hpp>
+#include <kyosu/types/cayley_dickinson.hpp>
 #include <eve/concept/value.hpp>
 
 namespace kyosu
@@ -23,8 +23,8 @@ namespace kyosu
   //! @}
   //====================================================================================================================
   template<typename T>
-  using complex     = caley_dickinson<T,2>;
+  using complex     = cayley_dickinson<T,2>;
 
   template<typename T>
-  using as_complex_t = as_caley_dickinson_n_t<2,T>;
+  using as_complex_t = as_cayley_dickinson_n_t<2,T>;
 }

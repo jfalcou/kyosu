@@ -1,6 +1,6 @@
 //======================================================================================================================
 /*
-  Kyosu - Complex Math Made Easy
+  Kyosu - Complex Without Complexes
   Copyright : KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
@@ -14,20 +14,20 @@ namespace kyosu::concepts
 {
   /// General Caley-Dickinson concept
   template<typename T>
-  concept caley_dickinson = requires(T const&)
+  concept cayley_dickinson = requires(T const&)
   {
-    typename eve::element_type_t<std::remove_cvref_t<T>>::is_caley_dickinson;
+    typename eve::element_type_t<std::remove_cvref_t<T>>::is_cayley_dickinson;
   };
 
   /// Complex number concept
   template<typename T>
-  concept complex     = caley_dickinson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 2;
+  concept complex     = cayley_dickinson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 2;
 
   /// Quaternion concept
   template<typename T>
-  concept quaternion  = caley_dickinson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 4;
+  concept quaternion  = cayley_dickinson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 4;
 
   /// Octonion concept
   template<typename T>
-  concept octonion    = caley_dickinson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 8;
+  concept octonion    = cayley_dickinson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 8;
 }

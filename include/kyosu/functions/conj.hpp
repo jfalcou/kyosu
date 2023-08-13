@@ -1,6 +1,6 @@
 //======================================================================================================================
 /*
-  Kyosu - Complex Math Made Easy
+  Kyosu - Complex Without Complexes
   Copyright : KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
@@ -48,7 +48,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::caley_dickinson T> constexpr T conj(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickinson T> constexpr T conj(T z) noexcept;
 //!      template<eve::ordered_value T>               constexpr T conj(T z) noexcept;
 //!   }
 //!   @endcode
@@ -79,7 +79,7 @@ namespace kyosu::_
     return v;
   }
 
-  template<concepts::caley_dickinson T> constexpr auto conj_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept
+  template<concepts::cayley_dickinson T> constexpr auto conj_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept
   {
     return T{kumi::map_index([]<typename I>(I, auto m) { if constexpr(I::value>0) return -m; else return m;}, v)};
   }

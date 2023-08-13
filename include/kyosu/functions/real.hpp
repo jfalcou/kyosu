@@ -1,6 +1,6 @@
 //======================================================================================================================
 /*
-  Kyosu - Complex Math Made Easy
+  Kyosu - Complex Without Complexes
   Copyright : KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
@@ -54,8 +54,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::caley_dickinson T> constexpr auto& real(T& z)        noexcept;
-//!      template<kyosu::concepts::caley_dickinson T> constexpr auto  real(T const& z)  noexcept;
+//!      template<kyosu::concepts::cayley_dickinson T> constexpr auto& real(T& z)        noexcept;
+//!      template<kyosu::concepts::cayley_dickinson T> constexpr auto  real(T const& z)  noexcept;
 //!      template<eve::ordered_value T>               constexpr T&    real(T& z)        noexcept;
 //!      template<eve::ordered_value T>               constexpr T     real(T const& z)  noexcept;
 //!   }
@@ -82,9 +82,9 @@ namespace kyosu::_
   template<eve::ordered_value T> constexpr auto  real_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept { return v; }
   template<eve::ordered_value T> constexpr auto& real_(EVE_EXPECTS(eve::cpu_), T&       v) noexcept { return v; }
 
-  template<concepts::caley_dickinson T>
+  template<concepts::cayley_dickinson T>
   constexpr auto real_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept { return get<0>(v); }
 
-  template<concepts::caley_dickinson T>
+  template<concepts::cayley_dickinson T>
   constexpr auto& real_(EVE_EXPECTS(eve::cpu_), T&      v) noexcept { return get<0>(v); }
 }
