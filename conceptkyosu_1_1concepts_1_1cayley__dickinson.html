@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::as_caley_dickinson&lt; Ts &gt; Struct Template Reference</title>
+<title>kyosu: kyosu::concepts::cayley_dickinson Concept Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -57,7 +57,7 @@ MathJax.Hub.Config({
   <td id="projectalign">
    <div id="projectname">kyosu<span id="projectnumber">&#160;v2.3.0</span>
    </div>
-   <div id="projectbrief">Complex Math Made Easy</div>
+   <div id="projectbrief">Complex Without Complexes</div>
   </td>
  </tr>
    <tr><td colspan="2" style="padding: 20px 0px 0px 0px;">        <div id="MSearchBox" class="MSearchBoxInactive">
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('structkyosu_1_1as__caley__dickinson.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('conceptkyosu_1_1concepts_1_1cayley__dickinson.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,25 +122,30 @@ $(document).ready(function(){initNavTree('structkyosu_1_1as__caley__dickinson.ht
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kyosu::as_caley_dickinson&lt; Ts &gt; Struct Template Reference</div></div>
+  <div class="headertitle"><div class="title">kyosu::concepts::cayley_dickinson Concept Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Computes the best Caley-Dickinson-like type from a series of compatible types.  
- <a href="structkyosu_1_1as__caley__dickinson.html#details">More...</a></p>
+<p>General Caley-Dickinson concept.  
+<a href="conceptkyosu_1_1concepts_1_1cayley__dickinson.html#details">More...</a></p>
 
-<p><code>#include &lt;kyosu/types/traits.hpp&gt;</code></p>
+<p><code>#include &lt;kyosu/concepts/types.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename... Ts&gt;<br />
-requires ( requires(Ts... ts) { eve::add(eve::underlying_type_t&lt;Ts&gt;{}...); } )<br />
-struct kyosu::as_caley_dickinson&lt; Ts &gt;</div><p>Computes the best Caley-Dickinson-like type from a series of compatible types. </p>
-</div></div><!-- contents -->
+<div class="textblock"><p>General Caley-Dickinson concept. </p>
+</div><h2 class="groupheader">Concept definition</h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickinson.html">kyosu::concepts::cayley_dickinson</a> =  <span class="keyword">requires</span>(T <span class="keyword">const</span>&amp;)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="keyword">typename</span> eve::element_type_t&lt;std::remove_cvref_t&lt;T&gt;&gt;::is_cayley_dickinson;</div>
+<div class="line">  }</div>
+<div class="ttc" id="aconceptkyosu_1_1concepts_1_1cayley__dickinson_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1cayley__dickinson.html">kyosu::concepts::cayley_dickinson</a></div><div class="ttdoc">General Caley-Dickinson concept.</div><div class="ttdef"><b>Definition:</b> types.hpp:17</div></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li><li class="navelem"><a class="el" href="structkyosu_1_1as__caley__dickinson.html">as_caley_dickinson</a></li>
+    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li><li class="navelem"><b>concepts</b></li><li class="navelem"><a class="el" href="conceptkyosu_1_1concepts_1_1cayley__dickinson.html">cayley_dickinson</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->
