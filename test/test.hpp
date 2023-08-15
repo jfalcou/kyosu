@@ -17,7 +17,7 @@
 #include <eve/module/core.hpp>
 #include <eve/traits.hpp>
 #include <eve/wide.hpp>
-#include <kyosu/types.hpp>
+#include <kyosu/kyosu.hpp>
 
 namespace eve
 {

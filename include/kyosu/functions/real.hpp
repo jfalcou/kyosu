@@ -56,8 +56,8 @@ namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickinson T> constexpr auto& real(T& z)        noexcept;
 //!      template<kyosu::concepts::cayley_dickinson T> constexpr auto  real(T const& z)  noexcept;
-//!      template<eve::ordered_value T>               constexpr T&    real(T& z)        noexcept;
-//!      template<eve::ordered_value T>               constexpr T     real(T const& z)  noexcept;
+//!      template<eve::ordered_value T>                constexpr T&    real(T& z)        noexcept;
+//!      template<eve::ordered_value T>                constexpr T     real(T const& z)  noexcept;
 //!   }
 //!   @endcode
 //!

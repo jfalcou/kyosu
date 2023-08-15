@@ -18,7 +18,7 @@ namespace kyosu
   //! @typedef complex
   //! @brief Type alias for complex numbers
   //!
-  //! Complex numbers are implemented as Caley-Dickinson numbers of dimension 2.
+  //! Complex numbers are implemented as Caylay-Dickinson numbers of dimension 2.
   //!
   //! @}
   //====================================================================================================================

@@ -16,14 +16,14 @@ namespace kyosu
   //! @{
   //====================================================================================================================
 
-  /// Identity for Caley-Dickinson value
+  /// Identity for Caylay-Dickinson value
   template<concepts::cayley_dickinson Z>
   constexpr auto operator+(Z const& z) noexcept
   {
     return z;
   }
 
-  /// Compute the negation of a given Caley-Dickinson value
+  /// Compute the negation of a given Caylay-Dickinson value
   template<concepts::cayley_dickinson Z>
   constexpr auto operator-(Z const& z) noexcept
   {
@@ -39,7 +39,7 @@ namespace kyosu
   //! @{
   //====================================================================================================================
 
-  /// Returns the sum of a Caley-Dickinson value and a real value in any order
+  /// Returns the sum of a Caylay-Dickinson value and a real value in any order
   template<eve::value T1, eve::value T2>
   requires(concepts::cayley_dickinson<T1> || concepts::cayley_dickinson<T2>)
   as_cayley_dickinson_t<T1,T2> operator+(T1 const& a, T2 const& b) noexcept
@@ -48,7 +48,7 @@ namespace kyosu
     return that += b;
   }
 
-  /// Returns the difference of two Caley-Dickinson values
+  /// Returns the difference of two Caylay-Dickinson values
   template<eve::value T1, eve::value T2>
   requires(concepts::cayley_dickinson<T1> || concepts::cayley_dickinson<T2>)
   as_cayley_dickinson_t<T1,T2> operator-(T1 const& a, T2 const& b) noexcept

@@ -16,6 +16,8 @@
 #include <kyosu/functions/conj.hpp>
 #include <kyosu/functions/real.hpp>
 #include <kyosu/functions/imag.hpp>
+#include <kyosu/functions/jpart.hpp>
+#include <kyosu/functions/kpart.hpp>
 #include <kyosu/functions/to_complex.hpp>
 
 //======================================================================================================================

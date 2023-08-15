@@ -9,14 +9,14 @@
 
 namespace kyosu
 {
-  /// Computes the number of components for a given Caley-Dickinson value
+  /// Computes the number of components for a given Caylay-Dickinson value
   template<typename T>
   inline constexpr unsigned int dimension_v = 1;
 
   template<concepts::cayley_dickinson T>
   inline constexpr auto dimension_v<T> = eve::element_type_t<std::remove_cvref_t<T>>::static_size;
 
-  /// Computes the a given Caley-Dickinson-like type from a series of compatible types
+  /// Computes the a given Caylay-Dickinson-like type from a series of compatible types
   template<unsigned int Dim, typename... Ts>
   requires( requires(Ts... ts) { eve::add(eve::underlying_type_t<Ts>{}...); } )
   struct  as_cayley_dickinson_n
@@ -38,7 +38,7 @@ namespace kyosu
   using as_cayley_dickinson_n_t = typename as_cayley_dickinson_n<Dim,Ts...>::type;
 #endif
 
-  /// Computes the best Caley-Dickinson-like type from a series of compatible types
+  /// Computes the best Caylay-Dickinson-like type from a series of compatible types
   template<typename... Ts>
   requires( requires(Ts... ts) { eve::add(eve::underlying_type_t<Ts>{}...); } )
   struct as_cayley_dickinson : as_cayley_dickinson_n<std::max( {dimension_v<Ts>...} ), Ts...>

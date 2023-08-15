@@ -24,7 +24,7 @@ namespace kyosu
     return self;
   }
 
-  /// Adds the Caley-Dickinson value `other` to `self` and returns the new value of `self`.
+  /// Adds the Caylay-Dickinson value `other` to `self` and returns the new value of `self`.
   template<concepts::cayley_dickinson Self, concepts::cayley_dickinson Other>
   requires(dimension_v<Other> <= dimension_v<Self>)
   constexpr auto& operator+=(Self& self, Other const& other) noexcept
@@ -41,7 +41,7 @@ namespace kyosu
     return self;
   }
 
-  /// Substracts the Caley-Dickinson value `other` from `self` and returns the new value of `self`.
+  /// Substracts the Caylay-Dickinson value `other` from `self` and returns the new value of `self`.
   template<concepts::cayley_dickinson Self, concepts::cayley_dickinson Other>
   requires(dimension_v<Other> <= dimension_v<Self>)
   constexpr auto& operator-=(Self& self, Other const& other) noexcept
@@ -58,7 +58,7 @@ namespace kyosu
     return self;
   }
 
-  // /// Multiplies `self` by the Caley-Dickinson value `other`  and returns the new value of `self`.
+  // /// Multiplies `self` by the Caylay-Dickinson value `other`  and returns the new value of `self`.
   // template<concepts::cayley_dickinson Self, concepts::cayley_dickinson Other>
   // requires(dimension_v<Other> <= dimension_v<Self>)
   // constexpr auto& operator*=(Self& self, Other const& other) noexcept
@@ -83,7 +83,7 @@ namespace kyosu
   //  If a compilation error occurs and references one of those overloads, this means you tried to call an operator
   //  in an incorrect setup like:
   //    * compound assignment between a scalar and a wide (like Complex += Wide)
-  //    * compound assignment between two Caley-Dickinson of incompatible dimension_v (like Complex += Quaternion)
+  //    * compound assignment between two Caylay-Dickinson of incompatible dimension_v (like Complex += Quaternion)
   //====================================================================================================================
 #if !defined(KYOSU_DOXYGEN_INVOKED)
   template<concepts::cayley_dickinson Self, concepts::cayley_dickinson Other>

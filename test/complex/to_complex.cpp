@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : TTS Contributors & Maintainers
+  Copyright : KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================

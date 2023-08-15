@@ -11,11 +11,11 @@
 
 namespace kyosu::tags
 {
-  struct callable_imag : eve::elementwise
+  struct callable_kpart : eve::elementwise
   {
-    using callable_tag_type = callable_imag;
+    using callable_tag_type = callable_kpart;
 
-    KYOSU_DEFERS_CALLABLE(imag_);
+    KYOSU_DEFERS_CALLABLE(kpart_);
 
     template<typename T>
     EVE_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
@@ -30,7 +30,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_imag(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_kpart(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -40,8 +40,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var imag
-//!   @brief Extracts the imaginary part of a value.
+//!   @var kpart
+//!   @brief Extracts the \f$k\f$  part of a value.
 //!
 //!   **Defined in Header**
 //!
@@ -54,9 +54,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickinson T> constexpr auto& imag(T& z)        noexcept;
-//!      template<kyosu::concepts::cayley_dickinson T> constexpr auto  imag(T const& z)  noexcept;
-//!      template<eve::ordered_value T>                constexpr T     imag(T const& z)  noexcept;
+//!      template<kyosu::concepts::cayley_dickinson T> constexpr auto& kpart(T& z)        noexcept;
+//!      template<kyosu::concepts::cayley_dickinson T> constexpr auto  kpart(T const& z)  noexcept;
+//!      template<eve::ordered_value T>                constexpr T     kpart(T const& z)  noexcept;
 //!   }
 //!   @endcode
 //!
@@ -66,16 +66,13 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the imaginary part of its argument. For real inputs, the call returns 0. It is an alias of `ipart`.
+//!     Returns the \f$k\f$  part of its argument. For real and complex inputs, the call returns 0.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/imag.cpp}
+//!  @godbolt{doc/kpart.cpp}
 //======================================================================================================================
-inline constexpr tags::callable_imag imag = {};
-
-/// Alias for imag
-inline constexpr tags::callable_imag ipart = {};
+inline constexpr tags::callable_kpart kpart = {};
 
 //======================================================================================================================
 //! @}
@@ -84,11 +81,17 @@ inline constexpr tags::callable_imag ipart = {};
 
 namespace kyosu::_
 {
-  template<eve::ordered_value T> constexpr auto  imag_(EVE_EXPECTS(eve::cpu_), T const&) noexcept { return T{0}; }
+  template<eve::ordered_value T> constexpr auto  kpart_(EVE_EXPECTS(eve::cpu_), T const&) noexcept { return T{0}; }
 
   template<concepts::cayley_dickinson T>
-  constexpr auto imag_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept { return get<1>(v); }
+  requires(dimension_v<T> < 4)
+  constexpr auto kpart_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept { return eve::underlying_type_t<T>{0}; }
 
   template<concepts::cayley_dickinson T>
-  constexpr auto& imag_(EVE_EXPECTS(eve::cpu_), T&      v) noexcept { return get<1>(v); }
+  requires(dimension_v<T> >= 4)
+  constexpr auto kpart_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept { return get<3>(v); }
+
+  template<concepts::cayley_dickinson T>
+  requires(dimension_v<T> >= 4)
+  constexpr auto& kpart_(EVE_EXPECTS(eve::cpu_), T&      v) noexcept { return get<3>(v); }
 }

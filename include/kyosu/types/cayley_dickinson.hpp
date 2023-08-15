@@ -13,6 +13,11 @@
 
 namespace kyosu
 {
+  namespace tags
+  {
+    struct callable_jpart;
+  }
+
   //====================================================================================================================
   // cayley_dickinson struct is the bare bone support class for complex, quaternion and above.
   // It is built so that all operation over C, Q and other such algebra can be done in a streamlined fashion
@@ -51,7 +56,7 @@ namespace kyosu
     }
 
     template<std::convertible_to<Type> T0, std::convertible_to<Type>... Ts>
-    requires( (1+sizeof...(Ts)) <= static_size && std::has_single_bit(1+sizeof...(Ts)) )
+    requires( (1+sizeof...(Ts)) <= static_size )
     constexpr cayley_dickinson(T0 v0, Ts... vs) noexcept
             : contents(kumi::cat( kumi::tuple{static_cast<Type>(v0),static_cast<Type>(vs)...}
                                 , kumi::generate<(N-1-sizeof...(Ts))>(Type{0})
@@ -61,11 +66,21 @@ namespace kyosu
     template<std::convertible_to<Type> T>
     constexpr cayley_dickinson(T v) noexcept : contents{}
     {
-      get<0>(contents) = v;
+      kumi::get<0>(contents) = v;
     }
 
-    /// Construct a Caley-Dickinson abstraction from a properly sized product_type
+    /// Construct a Caylay-Dickinson abstraction from a properly sized product_type
     constexpr cayley_dickinson(kumi::sized_product_type<N> auto const& vs) : contents{vs} {}
+
+    //==================================================================================================================
+    //  Tag invoke override
+    //==================================================================================================================
+    // EVE_FORCEINLINE friend constexpr decltype(auto)
+    // tag_invoke(kyosu::tags::callable_jpart const&, auto, eve::like<cayley_dickinson> auto&& c) noexcept
+    // {
+    //   if constexpr(N>=4)  return get<2>(EVE_FWD(c));
+    //   else                return Type{0};
+    // }
 
     //==================================================================================================================
     //  Tuple-like behavior
@@ -74,10 +89,10 @@ namespace kyosu
     using is_product_type = void;
 
     template<std::size_t I>
-    friend constexpr auto& get(cayley_dickinson& c) noexcept { return get<I>(c.contents); }
+    friend constexpr auto& get(cayley_dickinson& c) noexcept { return kumi::get<I>(c.contents); }
 
     template<std::size_t I>
-    friend constexpr auto get(cayley_dickinson const& c) noexcept { return get<I>(c.contents); }
+    friend constexpr auto get(cayley_dickinson const& c) noexcept { return kumi::get<I>(c.contents); }
 
     friend constexpr bool operator==(cayley_dickinson const&, cayley_dickinson const&) noexcept =default;
 
@@ -116,6 +131,15 @@ template<typename T, unsigned int N, std::size_t I>
 struct std::tuple_element<I, kyosu::cayley_dickinson<T,N>>
 {
   using type = T;
+};
+
+template<typename Wrapper, typename T, unsigned int N>
+struct eve::supports_like<Wrapper,kyosu::cayley_dickinson<T,N>>
+      : std::bool_constant<   std::same_as<kyosu::cayley_dickinson<T,N>, element_type_t<Wrapper>>
+                          ||  std::same_as<T, element_type_t<Wrapper>>
+                          ||  plain_scalar_value<Wrapper>
+                          >
+{
 };
 #endif
 

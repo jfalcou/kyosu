@@ -12,7 +12,7 @@
 
 namespace kyosu::concepts
 {
-  /// General Caley-Dickinson concept
+  /// General Caylay-Dickinson concept
   template<typename T>
   concept cayley_dickinson = requires(T const&)
   {
