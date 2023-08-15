@@ -14,5 +14,6 @@ copa_glob_unit(QUIET PATTERN "doc/*.cpp"    INTERFACE kyosu_docs PCH kyosu_doc_p
 ##======================================================================================================================
 ## Unit tests
 ##======================================================================================================================
-copa_glob_unit(QUIET PATTERN "complex/*.cpp"    INTERFACE kyosu_test PCH kyosu_pch)
-copa_glob_unit(QUIET PATTERN "quaternion/*.cpp" INTERFACE kyosu_test PCH kyosu_pch)
+copa_glob_unit(QUIET PATTERN "unit/complex/*.cpp"     INTERFACE kyosu_test PCH kyosu_pch)
+copa_glob_unit(QUIET PATTERN "unit/quaternion/*.cpp"  INTERFACE kyosu_test PCH kyosu_pch)
+copa_glob_unit(QUIET PATTERN "unit/function/*.cpp"    INTERFACE kyosu_test PCH kyosu_pch)
