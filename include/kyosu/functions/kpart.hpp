@@ -11,20 +11,23 @@
 
 namespace kyosu::tags
 {
-  struct callable_kpart : eve::elementwise
+  struct callable_kpart : eve::elementwise, extractor<3,4>
   {
     using callable_tag_type = callable_kpart;
 
     KYOSU_DEFERS_CALLABLE(kpart_);
 
+    template<eve::ordered_value T>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const&) noexcept { return T{0}; }
+
     template<typename T>
-    EVE_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
     {
       return eve::tag_invoke(*this, target);
     }
 
     template<typename T>
-    EVE_FORCEINLINE auto operator()(T& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    KYOSU_FORCEINLINE auto operator()(T& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
     {
       return eve::tag_invoke(*this, target);
     }
@@ -77,21 +80,4 @@ inline constexpr tags::callable_kpart kpart = {};
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<eve::ordered_value T> constexpr auto  kpart_(EVE_EXPECTS(eve::cpu_), T const&) noexcept { return T{0}; }
-
-  template<concepts::cayley_dickinson T>
-  requires(dimension_v<T> < 4)
-  constexpr auto kpart_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept { return eve::underlying_type_t<T>{0}; }
-
-  template<concepts::cayley_dickinson T>
-  requires(dimension_v<T> >= 4)
-  constexpr auto kpart_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept { return get<3>(v); }
-
-  template<concepts::cayley_dickinson T>
-  requires(dimension_v<T> >= 4)
-  constexpr auto& kpart_(EVE_EXPECTS(eve::cpu_), T&      v) noexcept { return get<3>(v); }
 }

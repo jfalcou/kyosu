@@ -11,14 +11,17 @@
 
 namespace kyosu::tags
 {
-  struct callable_jpart : eve::elementwise
+  struct callable_jpart : eve::elementwise, extractor<2,4>
   {
     using callable_tag_type = callable_jpart;
 
     KYOSU_DEFERS_CALLABLE(jpart_);
 
+    template<eve::ordered_value T>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const&) noexcept { return T{0}; }
+
     template<typename T>
-    EVE_FORCEINLINE auto operator()(T&& target) const noexcept -> decltype(eve::tag_invoke(*this, KYOSU_FWD(target)))
+    KYOSU_FORCEINLINE auto operator()(T&& target) const noexcept -> decltype(eve::tag_invoke(*this, KYOSU_FWD(target)))
     {
       return eve::tag_invoke(*this, KYOSU_FWD(target));
     }
@@ -71,17 +74,4 @@ inline constexpr tags::callable_jpart jpart = {};
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<eve::ordered_value T>
-  EVE_FORCEINLINE constexpr auto  jpart_(EVE_EXPECTS(eve::cpu_), T const&) noexcept { return T{0}; }
-
-  template<concepts::cayley_dickinson C>
-  EVE_FORCEINLINE constexpr decltype(auto)  jpart_(EVE_EXPECTS(eve::cpu_), C&& c) noexcept
-  {
-    if constexpr(dimension_v<C> >= 4) return get<2>(EVE_FWD(c));
-    else                              return eve::underlying_type_t<std::remove_cvref_t<C>>{0};
-  }
 }

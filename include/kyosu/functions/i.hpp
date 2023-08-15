@@ -17,21 +17,20 @@ namespace kyosu::tags
     using callable_tag_type     = callable_i;
 
     template<eve::floating_value T>
-    static EVE_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
+    static KYOSU_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
     {
-      using type = cayley_dickinson<eve::element_type_t<T>,2>;
-      return eve::as_wide_as_t<type,T>{type{0,1}};
+      return to_complex(eve::element_type_t<T>{0},eve::element_type_t<T>{1});
     }
 
     template<concepts::cayley_dickinson T>
-    static EVE_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
+    static KYOSU_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
     {
       using type = eve::element_type_t<T>;
       return T{type{0,1}};
     }
 
     template<eve::value T>
-    EVE_FORCEINLINE auto operator()(eve::as<T> target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    KYOSU_FORCEINLINE auto operator()(eve::as<T> target) const noexcept -> decltype(eve::tag_invoke(*this, target))
     {
       return eve::tag_invoke(*this, target);
     }

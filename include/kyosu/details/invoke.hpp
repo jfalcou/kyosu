@@ -22,3 +22,20 @@ namespace kyosu::_    { EVE_DEFERRED_NAMESPACE(); }
 //  EVE-related macro that use eve::detail as the deferred namespace
 //==================================================================================================
 #define KYOSU_IMPLEMENTS_CALLABLE(TYPE,NAME)  EVE_IMPLEMENTS_CALLABLE_FROM(kyosu::_,TYPE,NAME)
+
+namespace kyosu
+{
+  template<unsigned int I, unsigned int Min>
+  struct extractor
+  {
+    using   is_extractor             = void;
+    static constexpr unsigned int index   = I;
+    static constexpr unsigned int minimal = Min;
+  };
+
+  namespace concepts
+  {
+    template<typename T>
+    concept extractor = requires(T) { typename T::is_extractor; };
+  }
+}

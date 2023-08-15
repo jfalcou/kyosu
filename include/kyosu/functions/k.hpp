@@ -17,7 +17,7 @@ namespace kyosu::tags
     using callable_tag_type     = callable_k;
 
     template<eve::floating_value T>
-    static EVE_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
+    static KYOSU_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
     {
       using type = cayley_dickinson<eve::element_type_t<T>,4>;
       return eve::as_wide_as_t<type,T>{type{0,0,0,1}};
@@ -25,14 +25,14 @@ namespace kyosu::tags
 
     template<concepts::cayley_dickinson T>
     requires( dimension_v<T> >= 4)
-    static EVE_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
+    static KYOSU_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
     {
       using type = eve::element_type_t<T>;
       return T{type{0,0,0,1}};
     }
 
     template<eve::value T>
-    EVE_FORCEINLINE auto operator()(eve::as<T> target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    KYOSU_FORCEINLINE auto operator()(eve::as<T> target) const noexcept -> decltype(eve::tag_invoke(*this, target))
     {
       return eve::tag_invoke(*this, target);
     }

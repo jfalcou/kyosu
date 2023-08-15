@@ -9,15 +9,11 @@
 
 #include <eve/module/core.hpp>
 #include <kyosu/concepts.hpp>
+#include <kyosu/functions.hpp>
 #include <bit>
 
 namespace kyosu
 {
-  namespace tags
-  {
-    struct callable_jpart;
-  }
-
   //====================================================================================================================
   // cayley_dickinson struct is the bare bone support class for complex, quaternion and above.
   // It is built so that all operation over C, Q and other such algebra can be done in a streamlined fashion
@@ -73,14 +69,15 @@ namespace kyosu
     constexpr cayley_dickinson(kumi::sized_product_type<N> auto const& vs) : contents{vs} {}
 
     //==================================================================================================================
-    //  Tag invoke override
+    //  Tag invoke override for parts extraction
     //==================================================================================================================
-    // EVE_FORCEINLINE friend constexpr decltype(auto)
-    // tag_invoke(kyosu::tags::callable_jpart const&, auto, eve::like<cayley_dickinson> auto&& c) noexcept
-    // {
-    //   if constexpr(N>=4)  return get<2>(EVE_FWD(c));
-    //   else                return Type{0};
-    // }
+    template<concepts::extractor T>
+    KYOSU_FORCEINLINE friend constexpr decltype(auto)
+    tag_invoke(T const&, auto, eve::like<cayley_dickinson> auto&& c) noexcept
+    {
+      if constexpr(N>=T::minimal) return get<T::index>(EVE_FWD(c));
+      else                        return Type{0};
+    }
 
     //==================================================================================================================
     //  Tuple-like behavior
@@ -99,8 +96,9 @@ namespace kyosu
     data_type contents;
   };
 
+  // TODO: Move to tag_invoke when EVE catch up on this front
   template<typename Tag, concepts::cayley_dickinson Z>
-  EVE_FORCEINLINE constexpr auto tagged_dispatch(Tag const&, eve::as<Z> const&) noexcept
+  KYOSU_FORCEINLINE constexpr auto tagged_dispatch(Tag const&, eve::as<Z> const&) noexcept
   {
     eve::detail::callable_object<Tag> cst;
     return  Z(cst(eve::as<typename Z::value_type>{}));

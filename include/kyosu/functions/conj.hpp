@@ -18,7 +18,7 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(conj_);
 
     template<typename T>
-    EVE_FORCEINLINE auto operator()(T target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    KYOSU_FORCEINLINE auto operator()(T target) const noexcept -> decltype(eve::tag_invoke(*this, target))
     {
       return eve::tag_invoke(*this, target);
     }

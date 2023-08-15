@@ -7,5 +7,8 @@
 //======================================================================================================================
 #pragma once
 
+#include <eve/detail/abi.hpp>
+
 // Faster than std::forward
-#define KYOSU_FWD(...) static_cast<decltype(__VA_ARGS__) &&>(__VA_ARGS__)
+#define KYOSU_FWD(...)    EVE_FWD(__VA_ARGS__)
+#define KYOSU_FORCEINLINE EVE_FORCEINLINE

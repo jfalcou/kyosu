@@ -8,11 +8,9 @@
 #pragma once
 
 //======================================================================================================================
-//! @defgroup functions Functions
-//! @brief Functions performing computations over complex, quaternions and octonions.
+//! @defgroup constants Constants
+//! @brief Constants generator related to complex, quaternions and octonions.
 //======================================================================================================================
-#include <kyosu/functions/conj.hpp>
-#include <kyosu/functions/real.hpp>
-#include <kyosu/functions/ipart.hpp>
-#include <kyosu/functions/jpart.hpp>
-#include <kyosu/functions/kpart.hpp>
+#include <kyosu/functions/i.hpp>
+#include <kyosu/functions/j.hpp>
+#include <kyosu/functions/k.hpp>
