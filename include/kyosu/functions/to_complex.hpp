@@ -51,7 +51,7 @@ namespace kyosu
 //!      template<eve::ordered_value T> constexpr auto to_complex(T r)            noexcept;
 //!      template<eve::ordered_value T> constexpr auto to_complex(T r, T i)       noexcept;
 
-//!      template<kyosu::concepts::cayley_dickinson T> constexpr T to_complex(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T to_complex(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -74,13 +74,13 @@ inline constexpr tags::callable_to_complex to_complex = {};
 
 namespace kyosu::_
 {
-  template<eve::ordered_value T>
+  template<eve::floating_value T>
   constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T r)         noexcept  { return as_complex_t<T>(r, 0); }
 
-  template<eve::ordered_value T>
+  template<eve::floating_value T>
   constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T r, T i)    noexcept  { return as_complex_t<T>(r, i); }
 
-  template<eve::ordered_value T0, eve::ordered_value T1>
+  template<eve::floating_value T0, eve::floating_value T1>
   constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T0 r, T1 i)  noexcept -> as_complex_t<decltype(eve::add(r, i))>
   {
     return as_complex_t<decltype(eve::add(r, i))>{r, i};

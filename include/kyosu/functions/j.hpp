@@ -19,11 +19,11 @@ namespace kyosu::tags
     template<eve::floating_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
     {
-      using type = cayley_dickinson<eve::element_type_t<T>,4>;
+      using type = cayley_dickson<eve::element_type_t<T>,4>;
       return eve::as_wide_as_t<type,T>{type{0,0,1,0}};
     }
 
-    template<concepts::cayley_dickinson T>
+    template<concepts::cayley_dickson T>
     requires( dimension_v<T> >= 4)
     static KYOSU_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
     {

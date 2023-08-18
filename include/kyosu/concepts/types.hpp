@@ -12,22 +12,22 @@
 
 namespace kyosu::concepts
 {
-  /// General Caylay-Dickinson concept
+  /// General Caylay-dickson concept
   template<typename T>
-  concept cayley_dickinson = requires(T const&)
+  concept cayley_dickson = requires(T const&)
   {
-    typename eve::element_type_t<std::remove_cvref_t<T>>::is_cayley_dickinson;
+    typename eve::element_type_t<std::remove_cvref_t<T>>::is_cayley_dickson;
   };
 
   /// Complex number concept
   template<typename T>
-  concept complex     = cayley_dickinson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 2;
+  concept complex     = cayley_dickson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 2;
 
   /// Quaternion concept
   template<typename T>
-  concept quaternion  = cayley_dickinson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 4;
+  concept quaternion  = cayley_dickson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 4;
 
   /// Octonion concept
   template<typename T>
-  concept octonion    = cayley_dickinson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 8;
+  concept octonion    = cayley_dickson<T> && eve::element_type_t<std::remove_cvref_t<T>>::static_size == 8;
 }

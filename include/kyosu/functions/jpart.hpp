@@ -51,8 +51,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickinson T> constexpr auto& jpart(T& z)        noexcept;
-//!      template<kyosu::concepts::cayley_dickinson T> constexpr auto  jpart(T const& z)  noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto& jpart(T& z)        noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto  jpart(T const& z)  noexcept;
 //!      template<eve::ordered_value T>                constexpr T     jpart(T const& z)  noexcept;
 //!   }
 //!   @endcode

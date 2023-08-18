@@ -22,7 +22,7 @@ namespace kyosu::tags
       return to_complex(eve::element_type_t<T>{0},eve::element_type_t<T>{1});
     }
 
-    template<concepts::cayley_dickinson T>
+    template<concepts::cayley_dickson T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, eve::as<T>) noexcept
     {
       using type = eve::element_type_t<T>;
