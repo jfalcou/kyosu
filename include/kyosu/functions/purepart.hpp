@@ -11,23 +11,23 @@
 
 namespace kyosu::tags
 {
-  struct callable_jpart : eve::elementwise, extractor<2>
+  struct callable_purepart : eve::elementwise, extractor<1,-1>
   {
-    using callable_tag_type = callable_jpart;
+    using callable_tag_type = callable_purepart;
 
-    KYOSU_DEFERS_CALLABLE(jpart_);
+    KYOSU_DEFERS_CALLABLE(purepart_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const&) noexcept { return T{0}; }
 
     template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T&& target) const noexcept -> decltype(eve::tag_invoke(*this, KYOSU_FWD(target)))
+    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
     {
-      return eve::tag_invoke(*this, KYOSU_FWD(target));
+      return eve::tag_invoke(*this, target);
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_jpart(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_purepart(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -37,8 +37,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var jpart
-//!   @brief Extracts the \f$j\f$  part of a value.
+//!   @var purepart
+//!   @brief Extracts the pure  part of a value.
 //!
 //!   **Defined in Header**
 //!
@@ -51,9 +51,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto& jpart(T& z)        noexcept;
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto  jpart(T const& z)  noexcept;
-//!      template<eve::ordered_value T>              constexpr T     jpart(T const& z)  noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto  purepart(T const& z)  noexcept;
+//!      template<eve::ordered_value T>              constexpr T     purepart(T const& z)  noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,13 +62,14 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the \f$j\f$  part of its argument. For real and complex inputs, the call returns 0.
+//!     Returns the pure part of its argument, ie the tuple of all its non-real components.
+//!     For real inputs, the call returns 0.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/jpart.cpp}
+//!  @godbolt{doc/purepart.cpp}
 //======================================================================================================================
-inline constexpr tags::callable_jpart jpart = {};
+inline constexpr tags::callable_purepart purepart = {};
 
 //======================================================================================================================
 //! @}

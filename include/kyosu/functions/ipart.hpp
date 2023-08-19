@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_ipart : eve::elementwise, extractor<1,2>
+  struct callable_ipart : eve::elementwise, extractor<1>
   {
     using callable_tag_type = callable_ipart;
 
@@ -59,7 +59,7 @@ namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto& ipart(T& z)        noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto  ipart(T const& z)  noexcept;
-//!      template<eve::ordered_value T>                constexpr T     ipart(T const& z)  noexcept;
+//!      template<eve::ordered_value T>              constexpr T     ipart(T const& z)  noexcept;
 //!   }
 //!   @endcode
 //!

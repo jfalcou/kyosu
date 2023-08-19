@@ -68,7 +68,7 @@ namespace kyosu
   struct  as_cayley_dickson_n;
 
   template<unsigned int Dim, typename... Ts>
-  requires( requires(Ts... ts) { eve::add( std::declval<_::sema_t<Ts>>()...); } )
+  requires( Dim > 1 &&requires(Ts... ts) { eve::add( std::declval<_::sema_t<Ts>>()...); } )
   struct  as_cayley_dickson_n<Dim,Ts...>
 #if !defined(KYOSU_DOXYGEN_INVOKED)
         : as_cayley_dickson_n<Dim, _::widen<decltype(eve::add( std::declval<_::sema_t<Ts>>()...)),Ts...>>
@@ -78,7 +78,7 @@ namespace kyosu
 #if !defined(KYOSU_DOXYGEN_INVOKED)
 
   template<unsigned int Dim, typename... Ts>
-  requires( !requires(Ts... ts) { eve::add( std::declval<_::sema_t<Ts>>()...); } )
+  requires( Dim > 1 && !requires(Ts... ts) { eve::add( std::declval<_::sema_t<Ts>>()...); } )
   struct  as_cayley_dickson_n<Dim, Ts...>
   {
     static_assert ( requires(Ts... ts) { eve::add( std::declval<_::sema_t<Ts>>()...); }
@@ -87,6 +87,7 @@ namespace kyosu
   };
 
   template<unsigned int Dim, typename T>
+  requires(Dim > 1)
   struct as_cayley_dickson_n<Dim, T>
   {
     static constexpr auto card = eve::cardinal_v<T>;

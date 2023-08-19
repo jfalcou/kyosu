@@ -25,17 +25,21 @@ namespace kyosu::_    { EVE_DEFERRED_NAMESPACE(); }
 
 namespace kyosu
 {
-  template<unsigned int I, unsigned int Min>
+  template<int Mn, int Mx = Mn>
+  requires((Mx != -1 && Mn<=Mx) || Mx == -1)
   struct extractor
   {
-    using   is_extractor             = void;
-    static constexpr unsigned int index   = I;
-    static constexpr unsigned int minimal = Min;
+    static constexpr unsigned int minimum_valid_index   = Mn;
+    static constexpr unsigned int maximum_valid_index   = Mx;
   };
 
   namespace concepts
   {
     template<typename T>
-    concept extractor = requires(T) { typename T::is_extractor; };
+    concept extractor = eve::callable<T> && requires(T t)
+    {
+      { t.minimum_valid_index };
+      { t.maximum_valid_index };
+    };
   }
 }

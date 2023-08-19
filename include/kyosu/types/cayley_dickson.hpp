@@ -10,6 +10,7 @@
 #include <eve/module/core.hpp>
 #include <kyosu/concepts.hpp>
 #include <kyosu/functions.hpp>
+#include <kyosu/types/impl/arithmetic.hpp>
 #include <bit>
 
 namespace kyosu
@@ -65,8 +66,18 @@ namespace kyosu
       kumi::get<0>(contents) = v;
     }
 
-    /// Construct a Caylay-dickson abstraction from a properly sized product_type
+    /// Construct a Caley-dickson abstraction from a properly sized product_type
     constexpr cayley_dickson(kumi::sized_product_type<N> auto const& vs) : contents{vs} {}
+
+    //==================================================================================================================
+    // Main function dispatchers
+    //==================================================================================================================
+    KYOSU_FORCEINLINE
+    friend constexpr auto tag_invoke(eve::callable auto const& f, auto, eve::like<cayley_dickson> auto&&... c) noexcept
+                  -> decltype(_::dispatch(f, KYOSU_FWD(c)...))
+    {
+      return _::dispatch(f, KYOSU_FWD(c)...);
+    }
 
     //==================================================================================================================
     //  Tuple-like behavior
@@ -86,15 +97,30 @@ namespace kyosu
   constexpr auto get(cayley_dickson<T,N> const& c) noexcept { return kumi::get<I>(c.contents); }
 
   //==================================================================================================================
-  //  Tag invoke override for parts extraction
+  //  Tag invoke override for parts extraction - Outside so they can see get<I>(c)
   //==================================================================================================================
   template<concepts::extractor T, concepts::cayley_dickson C>
   KYOSU_FORCEINLINE constexpr decltype(auto)
   tag_invoke(T const&, auto, C&& c) noexcept
   {
     constexpr auto sz = eve::element_type_t<std::remove_cvref_t<C>>::static_size;
-    if constexpr(sz >= T::minimal)  return get<T::index>(EVE_FWD(c));
-    else                            return eve::underlying_type_t<std::remove_cvref_t<C>>{0};
+
+    if constexpr(T::minimum_valid_index == T::maximum_valid_index)
+    {
+      if constexpr(sz > T::minimum_valid_index) return get<T::minimum_valid_index>(EVE_FWD(c));
+      else                                      return eve::underlying_type_t<std::remove_cvref_t<C>>{0};
+    }
+    else
+    {
+      auto parts = [&]()
+      {
+        auto idx = kumi::index<T::minimum_valid_index>;
+        if constexpr(T::maximum_valid_index == -1)  return kumi::extract(c, idx);
+        else                                        return kumi::extract(c, idx, kumi::index<T::maximum_valid_index>);
+      }();
+
+      return kumi::apply([](auto... e) { return eve::zip(e...); }, parts);
+    }
   }
 
   // TODO: Move to tag_invoke when EVE catch up on this front

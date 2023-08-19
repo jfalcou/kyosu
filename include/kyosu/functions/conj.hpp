@@ -17,8 +17,11 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(conj_);
 
+    template<eve::ordered_value T>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return v; }
+
     template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
     {
       return eve::tag_invoke(*this, target);
     }
@@ -49,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T conj(T z) noexcept;
-//!      template<eve::ordered_value T>               constexpr T conj(T z) noexcept;
+//!      template<eve::ordered_value T>              constexpr T conj(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -70,17 +73,4 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 inline constexpr tags::callable_conj conj = {};
-}
-
-namespace kyosu::_
-{
-  template<eve::ordered_value T> constexpr auto conj_(EVE_EXPECTS(eve::cpu_), T v) noexcept
-  {
-    return v;
-  }
-
-  template<concepts::cayley_dickson T> constexpr auto conj_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept
-  {
-    return T{kumi::map_index([]<typename I>(I, auto m) { if constexpr(I::value>0) return -m; else return m;}, v)};
-  }
 }

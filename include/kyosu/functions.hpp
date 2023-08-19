@@ -11,8 +11,11 @@
 //! @defgroup functions Functions
 //! @brief Functions performing computations over complex, quaternions and octonions.
 //======================================================================================================================
+#include <kyosu/functions/abs.hpp>
 #include <kyosu/functions/conj.hpp>
-#include <kyosu/functions/real.hpp>
 #include <kyosu/functions/ipart.hpp>
 #include <kyosu/functions/jpart.hpp>
 #include <kyosu/functions/kpart.hpp>
+#include <kyosu/functions/purepart.hpp>
+#include <kyosu/functions/real.hpp>
+#include <kyosu/functions/sqr_abs.hpp>

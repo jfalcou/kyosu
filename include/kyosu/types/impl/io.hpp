@@ -16,7 +16,7 @@ namespace kyosu
   //! @{
   //====================================================================================================================
 
-  /// Stream insertion for Caylay-dickson based types
+  /// Stream insertion for Caley-dickson based types
   template<concepts::cayley_dickson CD>
   std::ostream& operator<<(std::ostream& os, CD const& z)
   {

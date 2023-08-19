@@ -24,7 +24,7 @@ namespace kyosu
     return self;
   }
 
-  /// Adds the Caylay-dickson value `other` to `self` and returns the new value of `self`.
+  /// Adds the Caley-dickson value `other` to `self` and returns the new value of `self`.
   template<concepts::cayley_dickson Self, concepts::cayley_dickson Other>
   requires(dimension_v<Other> <= dimension_v<Self>)
   constexpr auto& operator+=(Self& self, Other const& other) noexcept
@@ -41,7 +41,7 @@ namespace kyosu
     return self;
   }
 
-  /// Substracts the Caylay-dickson value `other` from `self` and returns the new value of `self`.
+  /// Substracts the Caley-dickson value `other` from `self` and returns the new value of `self`.
   template<concepts::cayley_dickson Self, concepts::cayley_dickson Other>
   requires(dimension_v<Other> <= dimension_v<Self>)
   constexpr auto& operator-=(Self& self, Other const& other) noexcept
@@ -58,7 +58,7 @@ namespace kyosu
     return self;
   }
 
-  /// Multiplies `self` by the Caylay-dickson value `other`  and returns the new value of `self`.
+  /// Multiplies `self` by the Caley-dickson value `other`  and returns the new value of `self`.
   template<concepts::cayley_dickson Self, concepts::cayley_dickson Other>
   requires(dimension_v<Other> <= dimension_v<Self>)
   constexpr Self& operator*=(Self& self, Other const& other) noexcept
@@ -116,7 +116,7 @@ namespace kyosu
   //  If a compilation error occurs and references one of those overloads, this means you tried to call an operator
   //  in an incorrect setup like:
   //    * compound assignment between a scalar and a wide (like Complex += Wide)
-  //    * compound assignment between two Caylay-dickson of incompatible dimension_v (like Complex += Quaternion)
+  //    * compound assignment between two Caley-dickson of incompatible dimension_v (like Complex += Quaternion)
   //====================================================================================================================
 #if !defined(KYOSU_DOXYGEN_INVOKED)
   template<concepts::cayley_dickson Self, concepts::cayley_dickson Other>

@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_to_complex : eve::elementwise
+  struct callable_to_complex
   {
     using callable_tag_type = callable_to_complex;
 
@@ -76,9 +76,6 @@ namespace kyosu::_
 {
   template<eve::floating_value T>
   constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T r)         noexcept  { return as_complex_t<T>(r, 0); }
-
-  template<eve::floating_value T>
-  constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T r, T i)    noexcept  { return as_complex_t<T>(r, i); }
 
   template<eve::floating_value T0, eve::floating_value T1>
   constexpr auto to_complex_(EVE_EXPECTS(eve::cpu_), T0 r, T1 i)  noexcept -> as_complex_t<decltype(eve::add(r, i))>

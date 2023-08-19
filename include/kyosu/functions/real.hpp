@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_real : eve::elementwise, extractor<0,0>
+  struct callable_real : eve::elementwise, extractor<0>
   {
     using callable_tag_type = callable_real;
 
@@ -62,8 +62,8 @@ namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto& real(T& z)        noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto  real(T const& z)  noexcept;
-//!      template<eve::ordered_value T>                constexpr T&    real(T& z)        noexcept;
-//!      template<eve::ordered_value T>                constexpr T     real(T const& z)  noexcept;
+//!      template<eve::ordered_value T>              constexpr T&    real(T& z)        noexcept;
+//!      template<eve::ordered_value T>              constexpr T     real(T const& z)  noexcept;
 //!   }
 //!   @endcode
 //!
