@@ -18,9 +18,14 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  // Force a type to be looked at as a wide so we can apply wide-like type presrving semantic in type computations
-  template<typename T>                  struct  sema    { using type = T; };
-  template<concepts::cayley_dickson T>  struct  sema<T> { using type = eve::wide<eve::underlying_type_t<T>>; };
+  // Force a type to be looked at as a wide so we can apply wide-like type preserving semantic in type computations
+  template<typename T> struct  sema                             { using type = T; };
+  template<typename T> struct  sema<eve::logical<T>>  : sema<T> {};
+  template<typename T, typename N>
+  struct  sema<eve::wide<T,N>>                                  { using type = eve::wide<eve::underlying_type_t<T>>; };
+  template<concepts::cayley_dickson T>
+  struct  sema<T>                                               { using type = eve::wide<eve::underlying_type_t<T>>; };
+
   template<typename T>                  using   sema_t  = typename sema<T>::type;
 
   // Convert a Base type to a potential wide if any appear in T...
