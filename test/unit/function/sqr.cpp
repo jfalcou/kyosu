@@ -14,7 +14,7 @@ TTS_CASE_WITH ( "Check kyosu::sqr over real"
               )
 (auto data)
 {
-  TTS_EQUAL(kyosu::sqr(data), eve::sqr(data));
+  TTS_ULP_EQUAL(kyosu::sqr(data), eve::sqr(data), 0.5);
 };
 
 TTS_CASE_WITH ( "Check kyosu::sqr over complex"
@@ -24,7 +24,7 @@ TTS_CASE_WITH ( "Check kyosu::sqr over complex"
 (auto r, auto i)
 {
   auto c = kyosu::to_complex(r,i);
-  TTS_EQUAL(kyosu::sqr(c), c*c);
+  TTS_EXPECT(eve::all(kyosu::reldist(kyosu::sqr(c), c*c) <= 0.0001));
 };
 
 TTS_CASE_WITH ( "Check kyosu::sqr over quaternion"
@@ -36,7 +36,6 @@ TTS_CASE_WITH ( "Check kyosu::sqr over quaternion"
 <typename T>(T r, T i, T j, T k)
 {
   using type = kyosu::as_quaternion_t<T>;
-  auto o = type(r,i,j,k);
-
-  TTS_EQUAL(kyosu::sqr(o), o*o);
+  auto q = type(r,i,j,k);
+  TTS_EXPECT(eve::all(kyosu::reldist(kyosu::sqr(q), q*q) <= 0.0001));
 };

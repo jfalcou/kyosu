@@ -86,6 +86,7 @@ int main(int argc, char const **argv)
 
 namespace tts
 {
+
   template<kyosu::concepts::complex T> auto relative_distance(T const &l, T const &r)
   {
     auto [rl,il] = l;
