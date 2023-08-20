@@ -11,23 +11,18 @@
 
 namespace kyosu::tags
 {
-  struct callable_conj : eve::elementwise
+  struct callable_if_else : eve::elementwise
   {
-    using callable_tag_type = callable_conj;
+    using callable_tag_type = callable_if_else;
 
-    KYOSU_DEFERS_CALLABLE(conj_);
-
-    template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return v; }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    KYOSU_FORCEINLINE
+    auto operator()(auto const& m, auto const& t, auto const& f) const noexcept -> decltype(eve::tag_invoke(*this,m,t,f))
     {
-      return eve::tag_invoke(*this, target);
+      return eve::tag_invoke(*this, m, t, f);
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_conj(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_if_else(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -37,8 +32,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var conj
-//!   @brief Computes the conjugate value.
+//!   @var if_else
+//!   @brief Select a value between two arguments based on a logical mask
 //!
 //!   **Defined in Header**
 //!
@@ -51,26 +46,22 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T conj(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T conj(T z) noexcept;
+//!      template<eve::value T, eve::value U, eve::value V>
+//!      constexpr auto if_else(T x, U, y, V z ) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to conjugate.
+//!     * `z` : Value to process.
 //!
 //!   **Return value**
 //!
-//!     Returns the conjugate of its argument. i.e. the value with the same real part
-//!     and the opposite pure part.
-//!
-//!     For real inputs the call reduces to identity.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/conj.cpp}
+//!  @godbolt{doc/if_else.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_conj conj = {};
+inline constexpr tags::callable_if_else if_else = {};
 }

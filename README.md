@@ -5,7 +5,7 @@
 
 Efficient and SIMD-aware computation for complex, quaternions and octonions.
 
-Kyosu proposes unified treatment of cayley-dickinson algebras on real numbers, for
+Kyosu proposes unified treatment of Cayley-Dickson algebras on real numbers, for
 numerical comptations.
 
 Real numbers are implemented as float or double IEEE values and, as relying on

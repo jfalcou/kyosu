@@ -1,12 +1,11 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : TTS Contributors & Maintainers
+  Copyright : KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
 #include <kyosu/kyosu.hpp>
-
 #include <test.hpp>
 
 TTS_CASE_TPL( "Check to_complex converter from constants", kyosu::scalar_real_types)

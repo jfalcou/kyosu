@@ -11,26 +11,23 @@
 
 namespace kyosu::tags
 {
-  struct callable_imag : eve::elementwise
+  struct callable_purepart : eve::elementwise, extractor<1,-1>
   {
-    using callable_tag_type = callable_imag;
+    using callable_tag_type = callable_purepart;
 
-    KYOSU_DEFERS_CALLABLE(imag_);
+    KYOSU_DEFERS_CALLABLE(purepart_);
 
-    template<typename T>
-    EVE_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
+    template<eve::ordered_value T>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const&) noexcept { return T{0}; }
 
     template<typename T>
-    EVE_FORCEINLINE auto operator()(T& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
     {
       return eve::tag_invoke(*this, target);
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_imag(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_purepart(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -40,8 +37,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var imag
-//!   @brief Extracts the imaginary part of a value.
+//!   @var purepart
+//!   @brief Extracts the pure  part of a value.
 //!
 //!   **Defined in Header**
 //!
@@ -54,9 +51,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickinson T> constexpr auto& imag(T& z)        noexcept;
-//!      template<kyosu::concepts::cayley_dickinson T> constexpr auto  imag(T const& z)  noexcept;
-//!      template<eve::ordered_value T>               constexpr T     imag(T const& z)  noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto  purepart(T const& z)  noexcept;
+//!      template<eve::ordered_value T>              constexpr T     purepart(T const& z)  noexcept;
 //!   }
 //!   @endcode
 //!
@@ -66,29 +62,16 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the imaginary part of its argument. For real inputs, the call returns 0. It is an alias of `ipart`.
+//!     Returns the pure part of its argument, ie the tuple of all its non-real components.
+//!     For real inputs, the call returns 0.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/imag.cpp}
+//!  @godbolt{doc/purepart.cpp}
 //======================================================================================================================
-inline constexpr tags::callable_imag imag = {};
-
-/// Alias for imag
-inline constexpr tags::callable_imag ipart = {};
+inline constexpr tags::callable_purepart purepart = {};
 
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<eve::ordered_value T> constexpr auto  imag_(EVE_EXPECTS(eve::cpu_), T const&) noexcept { return T{0}; }
-
-  template<concepts::cayley_dickinson T>
-  constexpr auto imag_(EVE_EXPECTS(eve::cpu_), T const& v) noexcept { return get<1>(v); }
-
-  template<concepts::cayley_dickinson T>
-  constexpr auto& imag_(EVE_EXPECTS(eve::cpu_), T&      v) noexcept { return get<1>(v); }
 }

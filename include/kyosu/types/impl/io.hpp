@@ -16,8 +16,8 @@ namespace kyosu
   //! @{
   //====================================================================================================================
 
-  /// Stream insertion for Caley-Dickinson based types
-  template<concepts::cayley_dickinson CD>
+  /// Stream insertion for Caley-dickson based types
+  template<concepts::cayley_dickson CD>
   std::ostream& operator<<(std::ostream& os, CD const& z)
   {
     auto display_positive = [](std::ostream& os,auto e, bool first) -> std::ostream&

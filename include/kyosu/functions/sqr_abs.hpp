@@ -11,17 +11,14 @@
 
 namespace kyosu::tags
 {
-  struct callable_real : eve::elementwise, extractor<0>
+  struct callable_sqr_abs : eve::elementwise
   {
-    using callable_tag_type = callable_real;
+    using callable_tag_type = callable_sqr_abs;
 
-    KYOSU_DEFERS_CALLABLE(real_);
-
-    template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto& deferred_call(auto, T& v) noexcept { return v; }
+    KYOSU_DEFERS_CALLABLE(sqr_abs_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return v; }
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::sqr_abs(v); }
 
     template<typename T>
     KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
@@ -29,14 +26,8 @@ namespace kyosu::tags
       return eve::tag_invoke(*this, target);
     }
 
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
     template<typename... T>
-    eve::unsupported_call<callable_real(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_sqr_abs(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -46,8 +37,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var real
-//!   @brief Extracts the real part of a value.
+//!   @var sqr_abs
+//!   @brief Computes the squared absolute value of the parameter.
 //!
 //!   **Defined in Header**
 //!
@@ -60,25 +51,23 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto& real(T& z)        noexcept;
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto  real(T const& z)  noexcept;
-//!      template<eve::ordered_value T>              constexpr T&    real(T& z)        noexcept;
-//!      template<eve::ordered_value T>              constexpr T     real(T const& z)  noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_t<T> sqr_abs(T z) noexcept;
+//!      template<eve::ordered_value T>              constexpr T            sqr_abs(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Original value.
+//!     * `z` : Value to process.
 //!
 //!   **Return value**
 //!
-//!     Returns the real part of its argument. For real inputs the call reduces to identity.
+//!     Returns the squared modulus of its argument.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/real.cpp}
+//!  @godbolt{doc/sqr_abs.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_real real = {};
+inline constexpr tags::callable_sqr_abs sqr_abs = {};
 }

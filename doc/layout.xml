@@ -3,38 +3,21 @@
   <!-- Navigation index tabs for HTML output -->
   <navindex>
     <tab type="mainpage" visible="yes" title=""/>
-    <tab type="user" url="@ref kyosu101" title="Getting Started"/>
-    <tab type="usergroup" visible="yes" title="How-Tos">
-    </tab>
+    <!-- <tab type="user" url="@ref kyosu101" title="Getting Started"/> -->
+    <tab type="usergroup" visible="yes" title="How-Tos"/>
+
     <tab type="usergroup" visible="yes" title="Reference Documentation">
-      <tab type="usergroup" visible="yes" title="Macros">
-      </tab>
-    </tab>
-    <tab type="concepts" visible="yes" title="">
-    <tab type="modules" visible="yes" title="" intro=""/>
-    <tab type="namespaces" visible="yes" title="">
-      <tab type="namespacelist" visible="yes" title="" intro=""/>
-      <tab type="namespacemembers" visible="yes" title="" intro=""/>
-    </tab>
-      <tab type="classes" visible="yes" title="">
-        <tab type="classlist" visible="yes" title="" intro=""/>
-        <tab type="classindex" visible="$ALPHABETICAL_INDEX" title=""/>
-        <tab type="hierarchy" visible="yes" title="" intro=""/>
-        <tab type="classmembers" visible="yes" title="" intro=""/>
-      </tab>
-      <tab type="structs" visible="yes" title="">
-        <tab type="structlist" visible="yes" title="" intro=""/>
-        <tab type="structindex" visible="$ALPHABETICAL_INDEX" title=""/>
-      </tab>
+      <tab type="user" url="@ref types" title="Types"/>
+      <tab type="user" url="@ref functions" title="Functions"/>
+      <tab type="user" url="@ref traits" title="Traits"/>
+      <tab type="concepts" visible="yes" title=""/>
     </tab>
     <tab type="usergroup" visible="yes" title="Informations">
-       <tab type="user" url="@ref setup" title="Setup"/>
-       <tab type="user" url="@ref rationale" title="Rationale"/>
-       <tab type="user" url="@ref changelog" title="Changelog"/>
+       <!-- <tab type="user" url="@ref setup" title="Setup"/> -->
+       <!-- <tab type="user" url="@ref rationale" title="Rationale"/> -->
+       <!-- <tab type="user" url="@ref changelog" title="Changelog"/> -->
        <tab type="user" url="@ref licence" title="Licence"/>
     </tab>
-
-    <tab type="examples" visible="yes" title="" intro=""/>
   </navindex>
 
   <!-- Layout definition for a class page -->

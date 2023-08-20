@@ -14,3 +14,4 @@
 #include <kyosu/types/complex.hpp>
 #include <kyosu/types/quaternion.hpp>
 #include <kyosu/types/octonion.hpp>
+#include <kyosu/types/literals.hpp>
