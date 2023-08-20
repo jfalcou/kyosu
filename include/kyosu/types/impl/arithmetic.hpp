@@ -105,14 +105,6 @@ namespace kyosu::_
     auto r = kumi::sum( squares, 0);
     auto a =  2*real(c);
     real(c) = 0;
-<<<<<<< HEAD
     return r+a*c;
-=======
-     std::cout << "a "<< a << std::endl;
-     std::cout << "c "<< c << std::endl;
-     std::cout << "a*c " << a*c << std::endl;
-     return c;
-//       return r+a*c;
->>>>>>> 8229c13 (sqr)
   }
 }
