@@ -7,12 +7,21 @@
 //======================================================================================================================
 #pragma once
 
+#include <bit>
+
+namespace kyosu
+{
+  template<eve::floating_scalar_value Type, unsigned int N>
+  requires(N> 1 && std::has_single_bit(N))
+  struct cayley_dickson;
+}
+
 namespace kyosu::_
 {
   // Force a type to be looked at as a wide so we can apply wide-like type presrving semantic in type computations
-  template<typename T>                    struct  sema    { using type = T; };
+  template<typename T>                  struct  sema    { using type = T; };
   template<concepts::cayley_dickson T>  struct  sema<T> { using type = eve::wide<eve::underlying_type_t<T>>; };
-  template<typename T>                    using   sema_t  = typename sema<T>::type;
+  template<typename T>                  using   sema_t  = typename sema<T>::type;
 
   // Convert a Base type to a potential wide if any appear in T...
   template<typename Base, typename... T>
@@ -50,7 +59,7 @@ namespace kyosu
   inline constexpr auto dimension_v<T> = eve::element_type_t<std::remove_cvref_t<T>>::static_size;
 
   template<typename T>                  struct as_real                          { using type = T; };
-  template<typename T,unsigned int Dim> struct as_real<cayley_dickson<T,Dim>> { using type = T; };
+  template<typename T,unsigned int Dim> struct as_real<cayley_dickson<T,Dim>>   { using type = T; };
   template<typename T,typename N>       struct as_real<eve::wide<T,N>>
   {
     using type = eve::wide<typename as_real<T>::type,N>;
@@ -68,7 +77,7 @@ namespace kyosu
   struct  as_cayley_dickson_n;
 
   template<unsigned int Dim, typename... Ts>
-  requires( Dim > 1 &&requires(Ts... ts) { eve::add( std::declval<_::sema_t<Ts>>()...); } )
+  requires( Dim > 1 && requires(Ts... ts) { eve::add( std::declval<_::sema_t<Ts>>()...); } )
   struct  as_cayley_dickson_n<Dim,Ts...>
 #if !defined(KYOSU_DOXYGEN_INVOKED)
         : as_cayley_dickson_n<Dim, _::widen<decltype(eve::add( std::declval<_::sema_t<Ts>>()...)),Ts...>>

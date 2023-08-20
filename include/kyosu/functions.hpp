@@ -13,6 +13,7 @@
 //======================================================================================================================
 #include <kyosu/functions/abs.hpp>
 #include <kyosu/functions/conj.hpp>
+#include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/ipart.hpp>
 #include <kyosu/functions/jpart.hpp>
 #include <kyosu/functions/kpart.hpp>

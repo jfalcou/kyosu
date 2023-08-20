@@ -10,6 +10,7 @@
 #include <eve/module/core.hpp>
 #include <kyosu/concepts.hpp>
 #include <kyosu/functions.hpp>
+#include <kyosu/types/traits.hpp>
 #include <kyosu/types/impl/arithmetic.hpp>
 #include <bit>
 
@@ -97,6 +98,19 @@ namespace kyosu
   constexpr auto get(cayley_dickson<T,N> const& c) noexcept { return kumi::get<I>(c.contents); }
 
   //==================================================================================================================
+  //  Tag invoke override for if_else - Outside so it can properly deals with the complicated parameters of if_else
+  //==================================================================================================================
+  template<typename T, typename F>
+  requires(concepts::cayley_dickson<T> || concepts::cayley_dickson<F>)
+  KYOSU_FORCEINLINE constexpr auto  tag_invoke( eve::tag_of<kyosu::if_else> const& fn, auto, auto m
+                                              , T const& t, F const& f
+                                              ) noexcept
+                -> decltype(_::dispatch(fn, m, t, f))
+  {
+    return _::dispatch(fn, m,t,f);
+  }
+
+  //==================================================================================================================
   //  Tag invoke override for parts extraction - Outside so they can see get<I>(c)
   //==================================================================================================================
   template<concepts::extractor T, concepts::cayley_dickson C>
@@ -124,11 +138,11 @@ namespace kyosu
   }
 
   // TODO: Move to tag_invoke when EVE catch up on this front
-  template<typename Tag, concepts::cayley_dickson Z>
-  KYOSU_FORCEINLINE constexpr auto tagged_dispatch(Tag const&, eve::as<Z> const&) noexcept
+  template<typename Tag, eve::floating_scalar_value Type, unsigned int N>
+  KYOSU_FORCEINLINE constexpr auto tagged_dispatch(Tag const&, eve::as<cayley_dickson<Type,N>> const&) noexcept
   {
     eve::detail::callable_object<Tag> cst;
-    return  Z(cst(eve::as<typename Z::value_type>{}));
+    return cayley_dickson<Type,N>( cst(eve::as<Type>{}) );
   }
 
   //====================================================================================================================
@@ -167,7 +181,6 @@ struct eve::supports_like<Wrapper,kyosu::cayley_dickson<T,N>>
 };
 #endif
 
-#include <kyosu/types/traits.hpp>
 #include <kyosu/types/impl/io.hpp>
 #include <kyosu/types/impl/compounds.hpp>
 #include <kyosu/types/impl/operators.hpp>
