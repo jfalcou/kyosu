@@ -23,5 +23,6 @@
 #include <kyosu/functions/nearest.hpp>
 #include <kyosu/functions/purepart.hpp>
 #include <kyosu/functions/real.hpp>
+#include <kyosu/functions/sqr.hpp>
 #include <kyosu/functions/sqr_abs.hpp>
 #include <kyosu/functions/trunc.hpp>
