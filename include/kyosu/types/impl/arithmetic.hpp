@@ -12,20 +12,20 @@
 
 namespace kyosu::_
 {
-  template<concepts::cayley_dickson C>
+  template<typename C>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::conj> const&, C const& c) noexcept
   {
     return C{kumi::map_index([]<typename I>(I, auto const& m) { if constexpr(I::value>0) return -m; else return m;}, c)};
   }
 
-  template<concepts::cayley_dickson C>
+  template<typename C>
   KYOSU_FORCEINLINE constexpr auto dispatch(eve::tag_of<kyosu::abs> const&, C const& c) noexcept
   {
     return kumi::apply(eve::hypot, c);
   }
 
-  template<concepts::cayley_dickson C>
+  template<typename C>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::sqr_abs> const&, C const& c) noexcept
   {

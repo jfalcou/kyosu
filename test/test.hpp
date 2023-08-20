@@ -86,15 +86,48 @@ int main(int argc, char const **argv)
 
 namespace tts
 {
+  template<kyosu::concepts::complex T> auto relative_distance(T const &l, T const &r)
+  {
+    auto [rl,il] = l;
+    auto [rr,ir] = r;
+
+    return eve::max(relative_distance(rl,rr), relative_distance(il,ir));
+  }
+
+  template<kyosu::concepts::complex T> auto absolute_distance(T const &l, T const &r)
+  {
+     return eve::maximum(eve::dist(l, r));
+  }
+
   template<typename T, typename N>
   inline double ulp_distance(eve::wide<T, N> const &l, eve::wide<T, N> const &r)
   {
     double max_ulp = 0;
     for(auto i = 0; i < l.size(); ++i)
-      max_ulp = std::max(max_ulp, tts::ulp_distance(T(l.get(i)), T(r.get(i))));
+      max_ulp = std::max(max_ulp, ulp_distance(T(l.get(i)), T(r.get(i))));
 
     return max_ulp;
   }
+  template<typename T, typename N>
+  inline double relative_distance(eve::wide<T, N> const &l, eve::wide<T, N> const &r)
+  {
+    double max_ulp = 0;
+    for(auto i = 0; i < l.size(); ++i)
+      max_ulp = std::max(max_ulp, relative_distance(T(l.get(i)), T(r.get(i))));
+
+    return max_ulp;
+  }
+
+  template<typename T, typename N>
+  inline double absolute_distance(eve::wide<T, N> const &l, eve::wide<T, N> const &r)
+  {
+    double max_ulp = 0;
+    for(auto i = 0; i < l.size(); ++i)
+      max_ulp = std::max(max_ulp, absolute_distance(T(l.get(i)), T(r.get(i))));
+
+    return max_ulp;
+  }
+
 
   //================================================================================================
   // Poison wide data when using sub-sized types

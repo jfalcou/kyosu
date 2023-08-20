@@ -107,6 +107,15 @@ namespace kyosu
     return self;
   }
 
+  /// Divides  `self` by the Caley-dickson value `other`  and returns the new value of `self`.
+  template<concepts::cayley_dickson Self, concepts::cayley_dickson Other>
+  requires(dimension_v<Other> <= dimension_v<Self>)
+  constexpr Self& operator/=(Self& self, Other const& other) noexcept
+  {
+    self = (self * conj(other))/sqr_abs(other);
+    return self;
+  }
+
   //====================================================================================================================
   //! @}
   //====================================================================================================================
