@@ -95,4 +95,15 @@ namespace kyosu::_
   {
     return C{kumi::map([](auto const& e) { return eve::frac(e); }, c)};
   }
+
+  template<concepts::cayley_dickson C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<sqr> const&, C  c) noexcept
+  {
+    auto squares = kumi::map_index([]<typename I>(I, auto const& m) { if constexpr(I::value>0) return -m*m; else return m*m;}, c);
+    auto r = kumi::sum( squares, 0);
+    auto a =  2*real(c);
+    real(c) = 0;
+    return r+a*c;
+  }
 }
