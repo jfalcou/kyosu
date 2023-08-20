@@ -1,39 +1,36 @@
 var indexSectionsWithContent =
 {
-  0: "acdfijklort",
-  1: "a",
-  2: "k",
-  3: "co",
-  4: "cdijkrt",
-  5: "c",
-  6: "cft",
-  7: "l",
-  8: "k"
+  0: "acdfijkloprst",
+  1: "k",
+  2: "co",
+  3: "acdijkprst",
+  4: "ac",
+  5: "ft",
+  6: "l",
+  7: "k"
 };
 
 var indexSectionNames =
 {
   0: "all",
-  1: "classes",
-  2: "namespaces",
-  3: "functions",
-  4: "variables",
-  5: "typedefs",
-  6: "groups",
-  7: "pages",
-  8: "concepts"
+  1: "namespaces",
+  2: "functions",
+  3: "variables",
+  4: "typedefs",
+  5: "groups",
+  6: "pages",
+  7: "concepts"
 };
 
 var indexSectionLabels =
 {
   0: "All",
-  1: "Classes",
-  2: "Namespaces",
-  3: "Functions",
-  4: "Variables",
-  5: "Typedefs",
-  6: "Modules",
-  7: "Pages",
-  8: "Concepts"
+  1: "Namespaces",
+  2: "Functions",
+  3: "Variables",
+  4: "Typedefs",
+  5: "Modules",
+  6: "Pages",
+  7: "Concepts"
 };
 

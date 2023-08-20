@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['functions_0',['Functions',['../group__functions.html',1,'']]]
+  ['traits_0',['Traits',['../group__traits.html',1,'']]],
+  ['types_1',['Types',['../group__types.html',1,'']]]
 ];

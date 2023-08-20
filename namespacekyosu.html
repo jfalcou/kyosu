@@ -55,7 +55,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">kyosu<span id="projectnumber">&#160;v2.3.0</span>
+   <div id="projectname">kyosu<span id="projectnumber">&#160;v0.1.0</span>
    </div>
    <div id="projectbrief">Complex Without Complexes</div>
   </td>
@@ -123,7 +123,7 @@ $(document).ready(function(){initNavTree('namespacekyosu.html',''); initResizabl
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">kyosu Namespace Reference</div></div>
@@ -135,121 +135,165 @@ $(document).ready(function(){initNavTree('namespacekyosu.html',''); initResizabl
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main KYOSU namespace. </p>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkyosu_1_1as__cayley__dickinson.html">as_cayley_dickinson</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the best Caley-Dickinson-like type from a series of compatible types.  <a href="structkyosu_1_1as__cayley__dickinson.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkyosu_1_1as__cayley__dickinson__n.html">as_cayley_dickinson_n</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the a given Caley-Dickinson-like type from a series of compatible types.  <a href="structkyosu_1_1as__cayley__dickinson__n.html#details">More...</a><br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacekyosu_1_1tags"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekyosu_1_1tags.html">tags</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr class="memitem:ga1a12e2809e40c8011ec7702159c84b50"><td class="memTemplParams" colspan="2">template&lt;unsigned int Dim, typename... Ts&gt; </td></tr>
+<tr class="memitem:ga1a12e2809e40c8011ec7702159c84b50"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_ga1a12e2809e40c8011ec7702159c84b50.html#ga1a12e2809e40c8011ec7702159c84b50">as_cayley_dickson_n_t</a> = typename as_cayley_dickson_n&lt; Dim, Ts... &gt;::type</td></tr>
+<tr class="memdesc:ga1a12e2809e40c8011ec7702159c84b50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a Cayley-Dickson type of a given dimension.  <br /></td></tr>
+<tr class="separator:ga1a12e2809e40c8011ec7702159c84b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga715219c07991418c744f1fe1589ed407"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
+<tr class="memitem:ga715219c07991418c744f1fe1589ed407"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a> = typename as_cayley_dickson&lt; Ts... &gt;::type</td></tr>
+<tr class="memdesc:ga715219c07991418c744f1fe1589ed407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the best fitting Cayley-Dickson type from a series of types.  <br /></td></tr>
+<tr class="separator:ga715219c07991418c744f1fe1589ed407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacfae066446178c7d3f6328aaeafcbf1d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gacfae066446178c7d3f6328aaeafcbf1d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_gacfae066446178c7d3f6328aaeafcbf1d.html#gacfae066446178c7d3f6328aaeafcbf1d">as_real_t</a> = typename as_real&lt; T &gt;::type</td></tr>
+<tr class="memdesc:gacfae066446178c7d3f6328aaeafcbf1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the real type associated to a Cayley-Dickson-like type.  <br /></td></tr>
+<tr class="separator:gacfae066446178c7d3f6328aaeafcbf1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad699121c78ba21aef370db14abdd67ec"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:gad699121c78ba21aef370db14abdd67ec"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex</a> = cayley_dickinson&lt; T, 2 &gt;</td></tr>
+<tr class="memitem:gad699121c78ba21aef370db14abdd67ec"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex</a> = cayley_dickson&lt; T, 2 &gt;</td></tr>
 <tr class="memdesc:gad699121c78ba21aef370db14abdd67ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for complex numbers.  <br /></td></tr>
 <tr class="separator:gad699121c78ba21aef370db14abdd67ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Deduction Guides</div></td></tr>
-<tr class="memitem:a83f27811485f630db2d5a32b71d5c940"><td class="memTemplParams" colspan="2"><a id="a83f27811485f630db2d5a32b71d5c940" name="a83f27811485f630db2d5a32b71d5c940"></a>
+<tr class="memitem:acf9831abda678789de6f2a332351fee1"><td class="memTemplParams" colspan="2"><a id="acf9831abda678789de6f2a332351fee1" name="acf9831abda678789de6f2a332351fee1"></a>
 template&lt;kumi::product_type Tuple&gt; </td></tr>
-<tr class="memitem:a83f27811485f630db2d5a32b71d5c940"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cayley_dickinson</b> (Tuple const &amp;) -&gt; cayley_dickinson&lt; kumi::element_t&lt; 0, Tuple &gt;, kumi::size_v&lt; Tuple &gt; &gt;</td></tr>
-<tr class="memdesc:a83f27811485f630db2d5a32b71d5c940"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deduction guide for constructing from product type. <br /></td></tr>
-<tr class="separator:a83f27811485f630db2d5a32b71d5c940"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5c51f2eab9314451521ef019537bada"><td class="memTemplParams" colspan="2"><a id="ac5c51f2eab9314451521ef019537bada" name="ac5c51f2eab9314451521ef019537bada"></a>
+<tr class="memitem:acf9831abda678789de6f2a332351fee1"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cayley_dickson</b> (Tuple const &amp;) -&gt; cayley_dickson&lt; kumi::element_t&lt; 0, Tuple &gt;, kumi::size_v&lt; Tuple &gt; &gt;</td></tr>
+<tr class="memdesc:acf9831abda678789de6f2a332351fee1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deduction guide for constructing from product type. <br /></td></tr>
+<tr class="separator:acf9831abda678789de6f2a332351fee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa68ce492637572925df645dcb9d7c3a9"><td class="memTemplParams" colspan="2"><a id="aa68ce492637572925df645dcb9d7c3a9" name="aa68ce492637572925df645dcb9d7c3a9"></a>
 template&lt;typename T0 , std::convertible_to&lt; T0 &gt;... Ts&gt; </td></tr>
-<tr class="memitem:ac5c51f2eab9314451521ef019537bada"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cayley_dickinson</b> (T0, Ts...) -&gt; cayley_dickinson&lt; T0, 1+sizeof...(Ts)&gt;</td></tr>
-<tr class="memdesc:ac5c51f2eab9314451521ef019537bada"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deduction guide for constructing from sequence of values. <br /></td></tr>
-<tr class="separator:ac5c51f2eab9314451521ef019537bada"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa68ce492637572925df645dcb9d7c3a9"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cayley_dickson</b> (T0, Ts...) -&gt; cayley_dickson&lt; T0, 1+sizeof...(Ts)&gt;</td></tr>
+<tr class="memdesc:aa68ce492637572925df645dcb9d7c3a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deduction guide for constructing from sequence of values. <br /></td></tr>
+<tr class="separator:aa68ce492637572925df645dcb9d7c3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Compound Assignment Operators</div></td></tr>
-<tr class="memitem:a79d61e23c700b5d2763ab00e2aca4050"><td class="memItemLeft" align="right" valign="top"><a id="a79d61e23c700b5d2763ab00e2aca4050" name="a79d61e23c700b5d2763ab00e2aca4050"></a>
-constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator+=</b> (concepts::cayley_dickinson auto &amp;self, eve::ordered_value auto other) noexcept</td></tr>
-<tr class="memdesc:a79d61e23c700b5d2763ab00e2aca4050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the real value <code>other</code> to <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
-<tr class="separator:a79d61e23c700b5d2763ab00e2aca4050"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36ba6468989484acaf0706b3be6549fc"><td class="memItemLeft" align="right" valign="top"><a id="a36ba6468989484acaf0706b3be6549fc" name="a36ba6468989484acaf0706b3be6549fc"></a>
+constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator+=</b> (concepts::cayley_dickson auto &amp;self, eve::ordered_value auto other) noexcept</td></tr>
+<tr class="memdesc:a36ba6468989484acaf0706b3be6549fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the real value <code>other</code> to <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:a36ba6468989484acaf0706b3be6549fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a896627c7707355adad826b4dfafbd151"><td class="memTemplParams" colspan="2"><a id="a896627c7707355adad826b4dfafbd151" name="a896627c7707355adad826b4dfafbd151"></a>
-template&lt;concepts::cayley_dickinson Self, concepts::cayley_dickinson Other&gt; <br />
-requires (<a class="el" href="namespacekyosu.html#ab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Other&gt; &lt;= <a class="el" href="namespacekyosu.html#ab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Self&gt;)</td></tr>
+template&lt;concepts::cayley_dickson Self, concepts::cayley_dickson Other&gt; <br />
+requires (<a class="el" href="group__traits_gab76e6a5196c280967c692c2139d8301e.html#gab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Other&gt; &lt;= <a class="el" href="group__traits_gab76e6a5196c280967c692c2139d8301e.html#gab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Self&gt;)</td></tr>
 <tr class="memitem:a896627c7707355adad826b4dfafbd151"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator+=</b> (Self &amp;self, Other const &amp;other) noexcept</td></tr>
-<tr class="memdesc:a896627c7707355adad826b4dfafbd151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the Caley-Dickinson value <code>other</code> to <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="memdesc:a896627c7707355adad826b4dfafbd151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the Caley-dickson value <code>other</code> to <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
 <tr class="separator:a896627c7707355adad826b4dfafbd151"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0882328602add1ebc801524c1a31b6e1"><td class="memItemLeft" align="right" valign="top"><a id="a0882328602add1ebc801524c1a31b6e1" name="a0882328602add1ebc801524c1a31b6e1"></a>
-constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator-=</b> (concepts::cayley_dickinson auto &amp;self, eve::ordered_value auto other) noexcept</td></tr>
-<tr class="memdesc:a0882328602add1ebc801524c1a31b6e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substracts the real value <code>other</code> from <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
-<tr class="separator:a0882328602add1ebc801524c1a31b6e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84d0923c18d796b6c6b899e24d9e0b77"><td class="memItemLeft" align="right" valign="top"><a id="a84d0923c18d796b6c6b899e24d9e0b77" name="a84d0923c18d796b6c6b899e24d9e0b77"></a>
+constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator-=</b> (concepts::cayley_dickson auto &amp;self, eve::ordered_value auto other) noexcept</td></tr>
+<tr class="memdesc:a84d0923c18d796b6c6b899e24d9e0b77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substracts the real value <code>other</code> from <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:a84d0923c18d796b6c6b899e24d9e0b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad78329c7661638f22ba9e18e7eee8710"><td class="memTemplParams" colspan="2"><a id="ad78329c7661638f22ba9e18e7eee8710" name="ad78329c7661638f22ba9e18e7eee8710"></a>
-template&lt;concepts::cayley_dickinson Self, concepts::cayley_dickinson Other&gt; <br />
-requires (<a class="el" href="namespacekyosu.html#ab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Other&gt; &lt;= <a class="el" href="namespacekyosu.html#ab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Self&gt;)</td></tr>
+template&lt;concepts::cayley_dickson Self, concepts::cayley_dickson Other&gt; <br />
+requires (<a class="el" href="group__traits_gab76e6a5196c280967c692c2139d8301e.html#gab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Other&gt; &lt;= <a class="el" href="group__traits_gab76e6a5196c280967c692c2139d8301e.html#gab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Self&gt;)</td></tr>
 <tr class="memitem:ad78329c7661638f22ba9e18e7eee8710"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator-=</b> (Self &amp;self, Other const &amp;other) noexcept</td></tr>
-<tr class="memdesc:ad78329c7661638f22ba9e18e7eee8710"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substracts the Caley-Dickinson value <code>other</code> from <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="memdesc:ad78329c7661638f22ba9e18e7eee8710"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substracts the Caley-dickson value <code>other</code> from <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
 <tr class="separator:ad78329c7661638f22ba9e18e7eee8710"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1b7f1bb49150e397315310add4d2f32"><td class="memItemLeft" align="right" valign="top"><a id="ae1b7f1bb49150e397315310add4d2f32" name="ae1b7f1bb49150e397315310add4d2f32"></a>
-constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator*=</b> (concepts::cayley_dickinson auto &amp;self, eve::ordered_value auto other) noexcept</td></tr>
-<tr class="memdesc:ae1b7f1bb49150e397315310add4d2f32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies <code>self</code> by the real value <code>other</code> and returns the new value of <code>self</code>. <br /></td></tr>
-<tr class="separator:ae1b7f1bb49150e397315310add4d2f32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66d56df81e342f1c6608a1b75d0178af"><td class="memItemLeft" align="right" valign="top"><a id="a66d56df81e342f1c6608a1b75d0178af" name="a66d56df81e342f1c6608a1b75d0178af"></a>
-constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator/=</b> (concepts::cayley_dickinson auto &amp;self, eve::ordered_value auto other) noexcept</td></tr>
-<tr class="memdesc:a66d56df81e342f1c6608a1b75d0178af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides <code>self</code> by the real value <code>other</code> and returns the new value of <code>self</code>. <br /></td></tr>
-<tr class="separator:a66d56df81e342f1c6608a1b75d0178af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afca2e25a0166a66833f9e0b9a966bfdd"><td class="memItemLeft" align="right" valign="top"><a id="afca2e25a0166a66833f9e0b9a966bfdd" name="afca2e25a0166a66833f9e0b9a966bfdd"></a>
+constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator*=</b> (concepts::cayley_dickson auto &amp;self, eve::ordered_value auto other) noexcept</td></tr>
+<tr class="memdesc:afca2e25a0166a66833f9e0b9a966bfdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies <code>self</code> by the real value <code>other</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:afca2e25a0166a66833f9e0b9a966bfdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66d806634ef177162197efea5201c84a"><td class="memTemplParams" colspan="2"><a id="a66d806634ef177162197efea5201c84a" name="a66d806634ef177162197efea5201c84a"></a>
+template&lt;concepts::cayley_dickson Self, concepts::cayley_dickson Other&gt; <br />
+requires (<a class="el" href="group__traits_gab76e6a5196c280967c692c2139d8301e.html#gab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Other&gt; &lt;= <a class="el" href="group__traits_gab76e6a5196c280967c692c2139d8301e.html#gab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Self&gt;)</td></tr>
+<tr class="memitem:a66d806634ef177162197efea5201c84a"><td class="memTemplItemLeft" align="right" valign="top">constexpr Self &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator*=</b> (Self &amp;self, Other const &amp;other) noexcept</td></tr>
+<tr class="memdesc:a66d806634ef177162197efea5201c84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies <code>self</code> by the Caley-dickson value <code>other</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:a66d806634ef177162197efea5201c84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a342e9f969d16a50672d99867fcc9fc7a"><td class="memItemLeft" align="right" valign="top"><a id="a342e9f969d16a50672d99867fcc9fc7a" name="a342e9f969d16a50672d99867fcc9fc7a"></a>
+constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator/=</b> (concepts::cayley_dickson auto &amp;self, eve::ordered_value auto other) noexcept</td></tr>
+<tr class="memdesc:a342e9f969d16a50672d99867fcc9fc7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides <code>self</code> by the real value <code>other</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:a342e9f969d16a50672d99867fcc9fc7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2374a6326a6dfff79ba4b71ee66efc55"><td class="memTemplParams" colspan="2"><a id="a2374a6326a6dfff79ba4b71ee66efc55" name="a2374a6326a6dfff79ba4b71ee66efc55"></a>
+template&lt;concepts::cayley_dickson Self, concepts::cayley_dickson Other&gt; <br />
+requires (<a class="el" href="group__traits_gab76e6a5196c280967c692c2139d8301e.html#gab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Other&gt; &lt;= <a class="el" href="group__traits_gab76e6a5196c280967c692c2139d8301e.html#gab76e6a5196c280967c692c2139d8301e">dimension_v</a>&lt;Self&gt;)</td></tr>
+<tr class="memitem:a2374a6326a6dfff79ba4b71ee66efc55"><td class="memTemplItemLeft" align="right" valign="top">constexpr Self &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator/=</b> (Self &amp;self, Other const &amp;other) noexcept</td></tr>
+<tr class="memdesc:a2374a6326a6dfff79ba4b71ee66efc55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides <code>self</code> by the Caley-dickson value <code>other</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:a2374a6326a6dfff79ba4b71ee66efc55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Streaming Operators</div></td></tr>
 <tr class="memitem:a8db355b94ecea2ef6f8db24adb96d5eb"><td class="memTemplParams" colspan="2"><a id="a8db355b94ecea2ef6f8db24adb96d5eb" name="a8db355b94ecea2ef6f8db24adb96d5eb"></a>
-template&lt;concepts::cayley_dickinson CD&gt; </td></tr>
+template&lt;concepts::cayley_dickson CD&gt; </td></tr>
 <tr class="memitem:a8db355b94ecea2ef6f8db24adb96d5eb"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&lt;&lt;</b> (std::ostream &amp;os, CD const &amp;z)</td></tr>
-<tr class="memdesc:a8db355b94ecea2ef6f8db24adb96d5eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream insertion for Caley-Dickinson based types. <br /></td></tr>
+<tr class="memdesc:a8db355b94ecea2ef6f8db24adb96d5eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream insertion for Caley-dickson based types. <br /></td></tr>
 <tr class="separator:a8db355b94ecea2ef6f8db24adb96d5eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Unary Operators</div></td></tr>
 <tr class="memitem:a9dbe8533599d47d325b4b3c6c43d1309"><td class="memTemplParams" colspan="2"><a id="a9dbe8533599d47d325b4b3c6c43d1309" name="a9dbe8533599d47d325b4b3c6c43d1309"></a>
-template&lt;concepts::cayley_dickinson Z&gt; </td></tr>
+template&lt;concepts::cayley_dickson Z&gt; </td></tr>
 <tr class="memitem:a9dbe8533599d47d325b4b3c6c43d1309"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator+</b> (Z const &amp;z) noexcept</td></tr>
-<tr class="memdesc:a9dbe8533599d47d325b4b3c6c43d1309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identity for Caley-Dickinson value. <br /></td></tr>
+<tr class="memdesc:a9dbe8533599d47d325b4b3c6c43d1309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identity for Caley-dickson value. <br /></td></tr>
 <tr class="separator:a9dbe8533599d47d325b4b3c6c43d1309"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57e104c783c5c0900bf0f73e5b16c24d"><td class="memTemplParams" colspan="2"><a id="a57e104c783c5c0900bf0f73e5b16c24d" name="a57e104c783c5c0900bf0f73e5b16c24d"></a>
-template&lt;concepts::cayley_dickinson Z&gt; </td></tr>
+template&lt;concepts::cayley_dickson Z&gt; </td></tr>
 <tr class="memitem:a57e104c783c5c0900bf0f73e5b16c24d"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator-</b> (Z const &amp;z) noexcept</td></tr>
-<tr class="memdesc:a57e104c783c5c0900bf0f73e5b16c24d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the negation of a given Caley-Dickinson value. <br /></td></tr>
+<tr class="memdesc:a57e104c783c5c0900bf0f73e5b16c24d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the negation of a given Caley-dickson value. <br /></td></tr>
 <tr class="separator:a57e104c783c5c0900bf0f73e5b16c24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Binary Operators</div></td></tr>
-<tr class="memitem:a6b1cfdf61618071e69010d138b4cc151"><td class="memTemplParams" colspan="2"><a id="a6b1cfdf61618071e69010d138b4cc151" name="a6b1cfdf61618071e69010d138b4cc151"></a>
+<tr class="memitem:aa3fbb7e2dc607b914423a63faecbb548"><td class="memTemplParams" colspan="2"><a id="aa3fbb7e2dc607b914423a63faecbb548" name="aa3fbb7e2dc607b914423a63faecbb548"></a>
 template&lt;eve::value T1, eve::value T2&gt; <br />
-requires (concepts::cayley_dickinson&lt;T1&gt; || concepts::cayley_dickinson&lt;T2&gt;)</td></tr>
-<tr class="memitem:a6b1cfdf61618071e69010d138b4cc151"><td class="memTemplItemLeft" align="right" valign="top">as_cayley_dickinson_t&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator+</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
-<tr class="memdesc:a6b1cfdf61618071e69010d138b4cc151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sum of a Caley-Dickinson value and a real value in any order. <br /></td></tr>
-<tr class="separator:a6b1cfdf61618071e69010d138b4cc151"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19359bb709920ae85dee8af72b068296"><td class="memTemplParams" colspan="2"><a id="a19359bb709920ae85dee8af72b068296" name="a19359bb709920ae85dee8af72b068296"></a>
+requires (concepts::cayley_dickson&lt;T1&gt; || concepts::cayley_dickson&lt;T2&gt;)</td></tr>
+<tr class="memitem:aa3fbb7e2dc607b914423a63faecbb548"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator+</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+<tr class="memdesc:aa3fbb7e2dc607b914423a63faecbb548"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sum of a Caley-dickson value and a real value in any order. <br /></td></tr>
+<tr class="separator:aa3fbb7e2dc607b914423a63faecbb548"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab486c7e1ad4577bdffae36e6c8b4a616"><td class="memTemplParams" colspan="2"><a id="ab486c7e1ad4577bdffae36e6c8b4a616" name="ab486c7e1ad4577bdffae36e6c8b4a616"></a>
 template&lt;eve::value T1, eve::value T2&gt; <br />
-requires (concepts::cayley_dickinson&lt;T1&gt; || concepts::cayley_dickinson&lt;T2&gt;)</td></tr>
-<tr class="memitem:a19359bb709920ae85dee8af72b068296"><td class="memTemplItemLeft" align="right" valign="top">as_cayley_dickinson_t&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator-</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
-<tr class="memdesc:a19359bb709920ae85dee8af72b068296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the difference of two Caley-Dickinson values. <br /></td></tr>
-<tr class="separator:a19359bb709920ae85dee8af72b068296"><td class="memSeparator" colspan="2">&#160;</td></tr>
+requires (concepts::cayley_dickson&lt;T1&gt; || concepts::cayley_dickson&lt;T2&gt;)</td></tr>
+<tr class="memitem:ab486c7e1ad4577bdffae36e6c8b4a616"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator-</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+<tr class="memdesc:ab486c7e1ad4577bdffae36e6c8b4a616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the difference of two Caley-dickson values. <br /></td></tr>
+<tr class="separator:ab486c7e1ad4577bdffae36e6c8b4a616"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9dc1aa6d08e01a9156d550b7c63b64d"><td class="memTemplParams" colspan="2"><a id="ab9dc1aa6d08e01a9156d550b7c63b64d" name="ab9dc1aa6d08e01a9156d550b7c63b64d"></a>
+template&lt;eve::value T1, eve::value T2&gt; <br />
+requires (concepts::cayley_dickson&lt;T1&gt; &amp;&amp; concepts::cayley_dickson&lt;T2&gt;)</td></tr>
+<tr class="memitem:ab9dc1aa6d08e01a9156d550b7c63b64d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator*</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+<tr class="memdesc:ab9dc1aa6d08e01a9156d550b7c63b64d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the product of two Caley-dickson values. <br /></td></tr>
+<tr class="separator:ab9dc1aa6d08e01a9156d550b7c63b64d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7fa5d0155efedf57849689480afd0e6"><td class="memTemplParams" colspan="2"><a id="af7fa5d0155efedf57849689480afd0e6" name="af7fa5d0155efedf57849689480afd0e6"></a>
+template&lt;eve::value T1, eve::value T2&gt; <br />
+requires (concepts::cayley_dickson&lt;T1&gt; != concepts::cayley_dickson&lt;T2&gt;)</td></tr>
+<tr class="memitem:af7fa5d0155efedf57849689480afd0e6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator*</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+<tr class="separator:af7fa5d0155efedf57849689480afd0e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd449f412c2dbcdfb4839ea3dffee906"><td class="memTemplParams" colspan="2"><a id="afd449f412c2dbcdfb4839ea3dffee906" name="afd449f412c2dbcdfb4839ea3dffee906"></a>
+template&lt;eve::value T1, eve::value T2&gt; <br />
+requires (concepts::cayley_dickson&lt;T1&gt; || concepts::cayley_dickson&lt;T2&gt;)</td></tr>
+<tr class="memitem:afd449f412c2dbcdfb4839ea3dffee906"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator/</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+<tr class="memdesc:afd449f412c2dbcdfb4839ea3dffee906"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the ration of two Caley-dickson values. <br /></td></tr>
+<tr class="separator:afd449f412c2dbcdfb4839ea3dffee906"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:gaee913dc7298d2917743440e9d056d971"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_abs&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">abs</a> = {}</td></tr>
+<tr class="memdesc:gaee913dc7298d2917743440e9d056d971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the absolute value of the parameter.  <br /></td></tr>
+<tr class="separator:gaee913dc7298d2917743440e9d056d971"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad4e960a6cb254cdd741323efc8efa3a0"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_conj&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0">conj</a> = {}</td></tr>
 <tr class="memdesc:gad4e960a6cb254cdd741323efc8efa3a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the conjugate value.  <br /></td></tr>
 <tr class="separator:gad4e960a6cb254cdd741323efc8efa3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab76e6a5196c280967c692c2139d8301e"><td class="memTemplParams" colspan="2"><a id="ab76e6a5196c280967c692c2139d8301e" name="ab76e6a5196c280967c692c2139d8301e"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ab76e6a5196c280967c692c2139d8301e"><td class="memTemplItemLeft" align="right" valign="top">constexpr unsigned int&#160;</td><td class="memTemplItemRight" valign="bottom"><b>dimension_v</b> = 1</td></tr>
-<tr class="memdesc:ab76e6a5196c280967c692c2139d8301e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the number of components for a given Caley-Dickinson value. <br /></td></tr>
-<tr class="separator:ab76e6a5196c280967c692c2139d8301e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8e88be0e83296a515c882ad40e828386"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_imag&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga8e88be0e83296a515c882ad40e828386.html#ga8e88be0e83296a515c882ad40e828386">imag</a> = {}</td></tr>
-<tr class="memdesc:ga8e88be0e83296a515c882ad40e828386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the imaginary part of a value.  <br /></td></tr>
+<tr class="memitem:gab76e6a5196c280967c692c2139d8301e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gab76e6a5196c280967c692c2139d8301e"><td class="memTemplItemLeft" align="right" valign="top">constexpr unsigned int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_gab76e6a5196c280967c692c2139d8301e.html#gab76e6a5196c280967c692c2139d8301e">dimension_v</a> = *implementation-defined*</td></tr>
+<tr class="memdesc:gab76e6a5196c280967c692c2139d8301e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the number of dimensions of the algebra containing a given type.  <br /></td></tr>
+<tr class="separator:gab76e6a5196c280967c692c2139d8301e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6d65485712648eb40b8dc0453d9c3baf"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_if_else&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf">if_else</a> = {}</td></tr>
+<tr class="memdesc:ga6d65485712648eb40b8dc0453d9c3baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select a value between two arguments based on a logical mask.  <br /></td></tr>
+<tr class="separator:ga6d65485712648eb40b8dc0453d9c3baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8e88be0e83296a515c882ad40e828386"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_ipart&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga8e88be0e83296a515c882ad40e828386.html#ga8e88be0e83296a515c882ad40e828386">imag</a> = {}</td></tr>
+<tr class="memdesc:ga8e88be0e83296a515c882ad40e828386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for ipart.  <br /></td></tr>
 <tr class="separator:ga8e88be0e83296a515c882ad40e828386"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga788266e24269fa33d3768b0ffcff4c14"><td class="memItemLeft" align="right" valign="top">
-constexpr tags::callable_imag&#160;</td><td class="memItemRight" valign="bottom"><b>ipart</b> = {}</td></tr>
-<tr class="memdesc:ga788266e24269fa33d3768b0ffcff4c14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for imag. <br /></td></tr>
-<tr class="separator:ga788266e24269fa33d3768b0ffcff4c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga10ee015e3d16c0f854514d9b5392447c"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_j&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__constants_ga10ee015e3d16c0f854514d9b5392447c.html#ga10ee015e3d16c0f854514d9b5392447c">j</a> = {}</td></tr>
-<tr class="memdesc:ga10ee015e3d16c0f854514d9b5392447c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the constant \(i\).  <br /></td></tr>
-<tr class="separator:ga10ee015e3d16c0f854514d9b5392447c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa1ba802b81aac3ea60fdbd1fa551c20e"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_k&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__constants_gaa1ba802b81aac3ea60fdbd1fa551c20e.html#gaa1ba802b81aac3ea60fdbd1fa551c20e">k</a> = {}</td></tr>
-<tr class="memdesc:gaa1ba802b81aac3ea60fdbd1fa551c20e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the constant \(k\).  <br /></td></tr>
-<tr class="separator:gaa1ba802b81aac3ea60fdbd1fa551c20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga842342e7ca73ffdcaa7ca9141e45d56f"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_jpart&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga842342e7ca73ffdcaa7ca9141e45d56f.html#ga842342e7ca73ffdcaa7ca9141e45d56f">jpart</a> = {}</td></tr>
+<tr class="memdesc:ga842342e7ca73ffdcaa7ca9141e45d56f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the \(j\) part of a value.  <br /></td></tr>
+<tr class="separator:ga842342e7ca73ffdcaa7ca9141e45d56f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga057662e8933c9837bb4bbb5ffb2822f0"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_kpart&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga057662e8933c9837bb4bbb5ffb2822f0.html#ga057662e8933c9837bb4bbb5ffb2822f0">kpart</a> = {}</td></tr>
+<tr class="memdesc:ga057662e8933c9837bb4bbb5ffb2822f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the \(k\) part of a value.  <br /></td></tr>
+<tr class="separator:ga057662e8933c9837bb4bbb5ffb2822f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3d4a351565ed14e9021990fa72f9de4a"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_purepart&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga3d4a351565ed14e9021990fa72f9de4a.html#ga3d4a351565ed14e9021990fa72f9de4a">purepart</a> = {}</td></tr>
+<tr class="memdesc:ga3d4a351565ed14e9021990fa72f9de4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the pure part of a value.  <br /></td></tr>
+<tr class="separator:ga3d4a351565ed14e9021990fa72f9de4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa9d12dd4e1420039046c737ddd3240be"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a> = {}</td></tr>
 <tr class="memdesc:gaa9d12dd4e1420039046c737ddd3240be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the real part of a value.  <br /></td></tr>
 <tr class="separator:gaa9d12dd4e1420039046c737ddd3240be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga297cbe86ab12760ec934f76879f805d0"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_sqr_abs&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga297cbe86ab12760ec934f76879f805d0.html#ga297cbe86ab12760ec934f76879f805d0">sqr_abs</a> = {}</td></tr>
+<tr class="memdesc:ga297cbe86ab12760ec934f76879f805d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the squared absolute value of the parameter.  <br /></td></tr>
+<tr class="separator:ga297cbe86ab12760ec934f76879f805d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga467a58e50ffba284e333fac35f5cc93c"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_to_complex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga467a58e50ffba284e333fac35f5cc93c.html#ga467a58e50ffba284e333fac35f5cc93c">to_complex</a> = {}</td></tr>
 <tr class="memdesc:ga467a58e50ffba284e333fac35f5cc93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec" title="Type alias for complex numbers.">kyosu::complex</a>.  <br /></td></tr>
 <tr class="separator:ga467a58e50ffba284e333fac35f5cc93c"><td class="memSeparator" colspan="2">&#160;</td></tr>

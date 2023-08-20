@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: Namespace List</title>
+<title>kyosu: kyosu::if_else</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -55,7 +55,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">kyosu<span id="projectnumber">&#160;v2.3.0</span>
+   <div id="projectname">kyosu<span id="projectnumber">&#160;v0.1.0</span>
    </div>
    <div id="projectbrief">Complex Without Complexes</div>
   </td>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('namespaces.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,23 +121,54 @@ $(document).ready(function(){initNavTree('namespaces.html',''); initResizable();
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Namespace List</div></div>
-</div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all documented namespaces with brief descriptions:</div><div class="directory">
-<div class="levels">[detail level <span onclick="javascript:toggleLevel(1);">1</span><span onclick="javascript:toggleLevel(2);">2</span>]</div><table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_0_" class="arrow" onclick="toggleFolder('0_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="namespacekyosu.html" target="_self">kyosu</a></td><td class="desc">Main KYOSU namespace </td></tr>
-<tr id="row_0_0_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structkyosu_1_1as__cayley__dickinson.html" target="_self">as_cayley_dickinson</a></td><td class="desc">Computes the best Caley-Dickinson-like type from a series of compatible types </td></tr>
-<tr id="row_0_1_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structkyosu_1_1as__cayley__dickinson__n.html" target="_self">as_cayley_dickinson_n</a></td><td class="desc">Computes the a given Caley-Dickinson-like type from a series of compatible types </td></tr>
+<a id="ga6d65485712648eb40b8dc0453d9c3baf" name="ga6d65485712648eb40b8dc0453d9c3baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6d65485712648eb40b8dc0453d9c3baf">&#9670;&#160;</a></span>if_else</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kyosu::if_else = {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
 </table>
-</div><!-- directory -->
+</div><div class="memdoc">
+
+<p>Select a value between two arguments based on a logical mask. </p>
+<p><b>Defined in Header</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::value T, eve::value U, eve::value V&gt;</div>
+<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf">if_else</a>(T x, U, y, V z ) <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__functions_ga6d65485712648eb40b8dc0453d9c3baf_html_ga6d65485712648eb40b8dc0453d9c3baf"><div class="ttname"><a href="group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf">kyosu::if_else</a></div><div class="ttdeci">constexpr tags::callable_if_else if_else</div><div class="ttdoc">Select a value between two arguments based on a logical mask.</div><div class="ttdef"><b>Definition:</b> if_else.hpp:66</div></div>
+<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> types.hpp:14</div></div>
+</div><!-- fragment --><p><b>Parameters</b></p>
+<ul>
+<li><code>z</code> : Value to process.</li>
+</ul>
+<p><b>Return value</b></p>
+<h2 class="groupheader">Example </h2>
+<div class="fragment"></div><!-- fragment --> 
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

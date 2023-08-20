@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dimension_5fv_0',['dimension_v',['../namespacekyosu.html#ab76e6a5196c280967c692c2139d8301e',1,'kyosu']]]
+  ['conj_0',['conj',['../group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0',1,'kyosu']]]
 ];

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['complex_0',['complex',['../group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec',1,'kyosu']]]
+  ['as_5fcayley_5fdickson_5fn_5ft_0',['as_cayley_dickson_n_t',['../group__traits_ga1a12e2809e40c8011ec7702159c84b50.html#ga1a12e2809e40c8011ec7702159c84b50',1,'kyosu']]],
+  ['as_5fcayley_5fdickson_5ft_1',['as_cayley_dickson_t',['../group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407',1,'kyosu']]],
+  ['as_5freal_5ft_2',['as_real_t',['../group__traits_gacfae066446178c7d3f6328aaeafcbf1d.html#gacfae066446178c7d3f6328aaeafcbf1d',1,'kyosu']]]
 ];

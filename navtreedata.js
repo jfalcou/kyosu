@@ -25,31 +25,14 @@
 var NAVTREE =
 [
   [ "kyosu", "index.html", [
-    [ "Getting Started", "@ref kyosu101", null ],
     [ "How-Tos", "usergroup0.html", null ],
     [ "Reference Documentation", "usergroup1.html", [
-      [ "Macros", "usergroup2.html", null ]
+      [ "Types", "group__types.html", null ],
+      [ "Functions", "group__functions.html", null ],
+      [ "Traits", "group__traits.html", null ],
+      [ "Concept List", "concepts.html", "concepts" ]
     ] ],
-    [ "Concepts", "concepts.html", "concepts" ],
-    [ "Modules", "modules.html", "modules" ],
-    [ "Namespace List", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
-      [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ],
-        [ "Typedefs", "namespacemembers_type.html", null ]
-      ] ]
-    ] ],
-    [ "Class List", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ]
-    ] ],
-    [ "Informations", "usergroup3.html", [
-      [ "Setup", "@ref setup", null ],
-      [ "Rationale", "@ref rationale", null ],
-      [ "Changelog", "@ref changelog", null ],
+    [ "Informations", "usergroup2.html", [
       [ "Licence", "licence.html", null ]
     ] ]
   ] ]
@@ -57,7 +40,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"@ref changelog"
+"conceptkyosu_1_1concepts_1_1cayley__dickson.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
