@@ -43,7 +43,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var reldist
-//!   @brief Computes the relative distance of the two parameters.
+//!   @brief Computes the relative distance between the two parameters.
 //!
 //!   **Defined in Header**
 //!
@@ -69,7 +69,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the absolute value of the arguments difference dived by the maximum of their absolute values and 1.
+//!     Returns the the relative distance computed as the absolute value of the arguments difference
+//!     divided by the maximum of their absolute values and 1.
 //!
 //!  @groupheader{Example}
 //!

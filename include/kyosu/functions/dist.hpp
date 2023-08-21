@@ -42,7 +42,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var dist
-//!   @brief Computes the distance of the two parameters.
+//!   @brief Computes the distance between the two parameters.
 //!
 //!   **Defined in Header**
 //!
@@ -68,7 +68,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the absolute value of the arguments difference.
+//!     Returns the distance between the two arguments computed as the absolute value of the arguments difference.
 //!
 //!  @groupheader{Example}
 //!
