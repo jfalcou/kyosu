@@ -19,6 +19,8 @@
 #include <kyosu/functions/frac.hpp>
 #include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/is_equal.hpp>
+#include <kyosu/functions/is_eqz.hpp>
+#include <kyosu/functions/is_nez.hpp>
 #include <kyosu/functions/is_not_equal.hpp>
 #include <kyosu/functions/ipart.hpp>
 #include <kyosu/functions/jpart.hpp>
