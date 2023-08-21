@@ -60,4 +60,39 @@ namespace kyosu::_
       else                                return U{parts};
     }
   }
+
+  template<concepts::cayley_dickson C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::ceil> const&, C const& c) noexcept
+  {
+    return C{kumi::map([](auto const& e) { return eve::ceil(e); }, c)};
+  }
+
+  template<concepts::cayley_dickson C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::floor> const&, C const& c) noexcept
+  {
+    return C{kumi::map([](auto const& e) { return eve::floor(e); }, c)};
+  }
+
+  template<concepts::cayley_dickson C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::nearest> const&, C const& c) noexcept
+  {
+    return C{kumi::map([](auto const& e) { return eve::nearest(e); }, c)};
+  }
+
+  template<concepts::cayley_dickson C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::trunc> const&, C const& c) noexcept
+  {
+    return C{kumi::map([](auto const& e) { return eve::trunc(e); }, c)};
+  }
+
+  template<concepts::cayley_dickson C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::frac> const&, C const& c) noexcept
+  {
+    return C{kumi::map([](auto const& e) { return eve::frac(e); }, c)};
+  }
 }
