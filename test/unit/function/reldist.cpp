@@ -8,7 +8,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::dist over real"
+TTS_CASE_WITH ( "Check kyosu::reldist over real"
               , kyosu::real_types
               , tts::generate(tts::between(-10,10)
                              ,tts::between(-10,10)
@@ -16,10 +16,10 @@ TTS_CASE_WITH ( "Check kyosu::dist over real"
               )
 (auto r0, auto r1)
 {
-  TTS_EQUAL(kyosu::dist(r0, r1), eve::dist(r0, r1));
+  TTS_EQUAL(kyosu::reldist(r0, r1), eve::reldist(r0, r1));
 };
 
-TTS_CASE_WITH ( "Check kyosu::dist over complex"
+TTS_CASE_WITH ( "Check kyosu::reldist over complex"
               , kyosu::real_types
               , tts::generate(tts::between(-10,10), tts::between(-10,10)
                              ,tts::between(-10,10), tts::between(-10,10)
@@ -29,10 +29,12 @@ TTS_CASE_WITH ( "Check kyosu::dist over complex"
 {
   auto c0 = kyosu::to_complex(r0,i0);
   auto c1 = kyosu::to_complex(r1,i1);
-  TTS_RELATIVE_EQUAL(kyosu::dist(c0, c1), kyosu::abs(c0-c1), 1e-7);
+  using kyosu::abs;
+  auto one = eve::one(eve::as(r0));
+  TTS_RELATIVE_EQUAL(kyosu::reldist(c0, c1), abs(c0-c1)/eve::max(abs(c0), abs(c1), one), 1e-7);
 };
 
-TTS_CASE_WITH ( "Check kyosu::dist over quaternion"
+TTS_CASE_WITH ( "Check kyosu::reldist over quaternion"
               , kyosu::real_types
               , tts::generate ( tts::between(-10,10), tts::between(-10,10)
                               , tts::between(-10,10), tts::between(-10,10)
@@ -45,5 +47,7 @@ TTS_CASE_WITH ( "Check kyosu::dist over quaternion"
   using type = kyosu::as_quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::dist(q0, q1), kyosu::abs(q0-q1) , 1e-7);
+  using kyosu::abs;
+  auto one = eve::one(eve::as(r0));
+  TTS_RELATIVE_EQUAL(kyosu::reldist(q0, q1), abs(q0-q1)/eve::max(abs(q0), abs(q1), one), 1e-7);
 };
