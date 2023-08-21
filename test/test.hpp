@@ -86,17 +86,15 @@ int main(int argc, char const **argv)
 
 namespace tts
 {
-  template<kyosu::concepts::complex T> auto relative_distance(T const &l, T const &r)
-  {
-    auto [rl,il] = l;
-    auto [rr,ir] = r;
 
-    return eve::max(relative_distance(rl,rr), relative_distance(il,ir));
+  template<kyosu::concepts::cayley_dickson T> double relative_distance(T const &l, T const &r)
+  {
+    return kyosu::reldist(l,r);
   }
 
-  template<kyosu::concepts::complex T> auto absolute_distance(T const &l, T const &r)
+  template<kyosu::concepts::cayley_dickson T> double absolute_distance(T const &l, T const &r)
   {
-     return eve::maximum(eve::dist(l, r));
+     return kyosu::dist(l, r);
   }
 
   template<typename T, typename N>
@@ -108,6 +106,7 @@ namespace tts
 
     return max_ulp;
   }
+
   template<typename T, typename N>
   inline double relative_distance(eve::wide<T, N> const &l, eve::wide<T, N> const &r)
   {

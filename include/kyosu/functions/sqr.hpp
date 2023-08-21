@@ -11,14 +11,14 @@
 
 namespace kyosu::tags
 {
-  struct callable_abs : eve::elementwise
+  struct callable_sqr : eve::elementwise
   {
-    using callable_tag_type = callable_abs;
+    using callable_tag_type = callable_sqr;
 
-    KYOSU_DEFERS_CALLABLE(abs_);
+    KYOSU_DEFERS_CALLABLE(sqr_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::abs(v); }
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return v*v; }
 
     template<typename T>
     KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
@@ -27,7 +27,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_abs(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_sqr(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -37,8 +37,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var abs
-//!   @brief Computes the absolute value of the parameter.
+//!   @var sqr
+//!   @brief Computes the square value.
 //!
 //!   **Defined in Header**
 //!
@@ -51,23 +51,23 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_t<T> abs(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T            abs(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T sqr(T z) noexcept;
+//!      template<eve::ordered_value T>              constexpr T sqr(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `z` : Value to for which square is computed.
 //!
 //!   **Return value**
 //!
-//!     Returns the modulus of its argument.
+//!     Returns the square of its argument. i.e. `z*z` in an optimized way.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/abs.cpp}
+//!  @godbolt{doc/sqr.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_abs abs = {};
+inline constexpr tags::callable_sqr sqr = {};
 }

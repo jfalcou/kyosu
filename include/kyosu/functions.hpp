@@ -16,6 +16,7 @@
 #include <kyosu/functions/conj.hpp>
 #include <kyosu/functions/floor.hpp>
 #include <kyosu/functions/frac.hpp>
+#include <kyosu/functions/dist.hpp>
 #include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/ipart.hpp>
 #include <kyosu/functions/jpart.hpp>
@@ -23,5 +24,7 @@
 #include <kyosu/functions/nearest.hpp>
 #include <kyosu/functions/purepart.hpp>
 #include <kyosu/functions/real.hpp>
+#include <kyosu/functions/reldist.hpp>
+#include <kyosu/functions/sqr.hpp>
 #include <kyosu/functions/sqr_abs.hpp>
 #include <kyosu/functions/trunc.hpp>

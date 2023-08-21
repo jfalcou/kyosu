@@ -9,6 +9,7 @@
 
 #include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
+#include <iostream>
 
 namespace kyosu::_
 {
@@ -95,4 +96,38 @@ namespace kyosu::_
   {
     return C{kumi::map([](auto const& e) { return eve::frac(e); }, c)};
   }
+
+  template<concepts::cayley_dickson C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<sqr> const&, C  c) noexcept
+  {
+    if constexpr(kyosu::dimension_v<C> <= 2)
+    {
+      return c*c;
+    }else
+    {
+      auto squares = kumi::map_index([]<typename I>(I, auto const& m)
+                                     { constexpr auto sgn = (I::value == 0)-(I::value > 0);
+                                       return sgn*m*m; }, c);
+      auto r = kumi::sum( squares, 0);
+      auto a =  2*real(c);
+      real(c) = 0;
+      return r+a*c;
+    }
+  }
+
+  template<typename C0, typename C1>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<dist> const&, C0 const & c0, C1 const &  c1) noexcept
+  {
+    return kyosu::abs(c0-c1);
+  }
+
+  template<typename C0, typename C1>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<reldist> const&, C0 const & c0, C1 const & c1) noexcept
+  {
+    return kyosu::dist(c0, c1)/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
+  }
+
 }
