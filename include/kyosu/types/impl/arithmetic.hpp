@@ -101,7 +101,9 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<sqr> const&, C  c) noexcept
   {
-    auto squares = kumi::map_index([]<typename I>(I, auto const& m) { if constexpr(I::value>0) return -m*m; else return m*m;}, c);
+    auto squares = kumi::map_index([]<typename I>(I, auto const& m)
+                                   { constexpr auto sgn = (I::value == 0)-(I::value > 0);
+                                     return sgn*m*m; }, c);
     auto r = kumi::sum( squares, 0);
     auto a =  2*real(c);
     real(c) = 0;
