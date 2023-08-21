@@ -5,6 +5,5 @@ var searchData=
   ['kpart_2',['kpart',['../group__functions_ga057662e8933c9837bb4bbb5ffb2822f0.html#ga057662e8933c9837bb4bbb5ffb2822f0',1,'kyosu']]],
   ['kyosu_3',['kyosu',['../namespacekyosu.html',1,'']]],
   ['octonion_4',['octonion',['../conceptkyosu_1_1concepts_1_1octonion.html',1,'kyosu::concepts']]],
-  ['quaternion_5',['quaternion',['../conceptkyosu_1_1concepts_1_1quaternion.html',1,'kyosu::concepts']]],
-  ['tags_6',['tags',['../namespacekyosu_1_1tags.html',1,'kyosu']]]
+  ['quaternion_5',['quaternion',['../conceptkyosu_1_1concepts_1_1quaternion.html',1,'kyosu::concepts']]]
 ];

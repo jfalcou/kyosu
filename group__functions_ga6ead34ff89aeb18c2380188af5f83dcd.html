@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::abs</title>
+<title>kyosu: kyosu::sqr</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_gaee913dc7298d2917743440e9d056d971.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga6ead34ff89aeb18c2380188af5f83dcd.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_gaee913dc7298d2917743
 </div>
 
 <div class="contents">
-<a id="gaee913dc7298d2917743440e9d056d971" name="gaee913dc7298d2917743440e9d056d971"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaee913dc7298d2917743440e9d056d971">&#9670;&#160;</a></span>abs</h2>
+<a id="ga6ead34ff89aeb18c2380188af5f83dcd" name="ga6ead34ff89aeb18c2380188af5f83dcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6ead34ff89aeb18c2380188af5f83dcd">&#9670;&#160;</a></span>sqr</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_gaee913dc7298d2917743
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::abs = {}</td>
+          <td class="memname">kyosu::sqr = {}</td>
         </tr>
       </table>
   </td>
@@ -142,26 +142,56 @@ $(document).ready(function(){initNavTree('group__functions_gaee913dc7298d2917743
 </table>
 </div><div class="memdoc">
 
-<p>Computes the absolute value of the parameter. </p>
+<p>Computes the square value. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__traits_gacfae066446178c7d3f6328aaeafcbf1d.html#gacfae066446178c7d3f6328aaeafcbf1d">as_real_t&lt;T&gt;</a> <a class="code hl_variable" href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">abs</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T            <a class="code hl_variable" href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">abs</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6ead34ff89aeb18c2380188af5f83dcd.html#ga6ead34ff89aeb18c2380188af5f83dcd">sqr</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6ead34ff89aeb18c2380188af5f83dcd.html#ga6ead34ff89aeb18c2380188af5f83dcd">sqr</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaee913dc7298d2917743440e9d056d971_html_gaee913dc7298d2917743440e9d056d971"><div class="ttname"><a href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">kyosu::abs</a></div><div class="ttdeci">constexpr tags::callable_abs abs</div><div class="ttdoc">Computes the absolute value of the parameter.</div><div class="ttdef"><b>Definition:</b> abs.hpp:72</div></div>
-<div class="ttc" id="agroup__traits_gacfae066446178c7d3f6328aaeafcbf1d_html_gacfae066446178c7d3f6328aaeafcbf1d"><div class="ttname"><a href="group__traits_gacfae066446178c7d3f6328aaeafcbf1d.html#gacfae066446178c7d3f6328aaeafcbf1d">kyosu::as_real_t</a></div><div class="ttdeci">typename as_real&lt; T &gt;::type as_real_t</div><div class="ttdoc">Compute the real type associated to a Cayley-Dickson-like type.</div><div class="ttdef"><b>Definition:</b> traits.hpp:79</div></div>
+<div class="ttc" id="agroup__functions_ga6ead34ff89aeb18c2380188af5f83dcd_html_ga6ead34ff89aeb18c2380188af5f83dcd"><div class="ttname"><a href="group__functions_ga6ead34ff89aeb18c2380188af5f83dcd.html#ga6ead34ff89aeb18c2380188af5f83dcd">kyosu::sqr</a></div><div class="ttdeci">constexpr tags::callable_sqr sqr</div><div class="ttdoc">Computes the square value.</div><div class="ttdef"><b>Definition:</b> sqr.hpp:72</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> types.hpp:14</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Value to process.</li>
+<li><code>z</code> : Value to for which square is computed.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the modulus of its argument.</p>
+<p>Returns the square of its argument. i.e. <code>z*z</code> in an optimized way.</p>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_ga6ead34ff89aeb18c2380188af5f83dcd.html#ga6ead34ff89aeb18c2380188af5f83dcd">kyosu::sqr</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a>;</div>
+<div class="line">  <span class="keyword">using </span>kyosu::quaternion;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; 72.9f &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga6ead34ff89aeb18c2380188af5f83dcd.html#ga6ead34ff89aeb18c2380188af5f83dcd">sqr</a>(72.9f) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; 72.9f &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; (72.9f)*(72.9f) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; complex&lt;float&gt;(3.5f,-2.9f) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga6ead34ff89aeb18c2380188af5f83dcd.html#ga6ead34ff89aeb18c2380188af5f83dcd">sqr</a>(<a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;float&gt;</a>(3.5f,-2.9f)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; complex&lt;float&gt;(3.5f,-2.9f) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; (<a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;float&gt;</a>(3.5f,-2.9f))*(<a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;float&gt;</a>(3.5f,-2.9f)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; quaternion&lt;double&gt;(1.1,2.2,-3.3,4.4) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga6ead34ff89aeb18c2380188af5f83dcd.html#ga6ead34ff89aeb18c2380188af5f83dcd">sqr</a>(quaternion&lt;double&gt;(1.1,2.2,-3.3,4.4)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; quaternion&lt;double&gt;(1.1,2.2,-3.3,4.4) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt;    (quaternion&lt;double&gt;(1.1,2.2,-3.3,4.4))*(quaternion&lt;double&gt;(1.1,2.2,-3.3,4.4))&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;SIMD:        &quot;</span>;</div>
+<div class="line">   <span class="keyword">using </span>wc_t = eve::wide&lt;complex&lt;double&gt;, eve::fixed&lt;2&gt;&gt;;</div>
+<div class="line">   std::cout &lt;&lt; wc_t(complex&lt;double&gt;(1.3,-3.7)) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga6ead34ff89aeb18c2380188af5f83dcd.html#ga6ead34ff89aeb18c2380188af5f83dcd">sqr</a>(wc_t(<a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;double&gt;</a>(1.3,-3.7))) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">   std::cout &lt;&lt; wc_t(complex&lt;double&gt;(1.3,-3.7)) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt;    (wc_t(<a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;double&gt;</a>(1.3,-3.7)))*(wc_t(<a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;double&gt;</a>(1.3,-3.7)))&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__types_gad699121c78ba21aef370db14abdd67ec_html_gad699121c78ba21aef370db14abdd67ec"><div class="ttname"><a href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a></div><div class="ttdeci">cayley_dickson&lt; T, 2 &gt; complex</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:26</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

@@ -123,7 +123,6 @@ $(document).ready(function(){initNavTree('namespacekyosu.html',''); initResizabl
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">kyosu Namespace Reference</div></div>
@@ -135,11 +134,6 @@ $(document).ready(function(){initNavTree('namespacekyosu.html',''); initResizabl
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main KYOSU namespace. </p>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespacekyosu_1_1tags"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekyosu_1_1tags.html">tags</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ga1a12e2809e40c8011ec7702159c84b50"><td class="memTemplParams" colspan="2">template&lt;unsigned int Dim, typename... Ts&gt; </td></tr>
@@ -276,6 +270,9 @@ Variables</h2></td></tr>
 <tr class="memitem:gab76e6a5196c280967c692c2139d8301e"><td class="memTemplItemLeft" align="right" valign="top">constexpr unsigned int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_gab76e6a5196c280967c692c2139d8301e.html#gab76e6a5196c280967c692c2139d8301e">dimension_v</a> = *implementation-defined*</td></tr>
 <tr class="memdesc:gab76e6a5196c280967c692c2139d8301e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the number of dimensions of the algebra containing a given type.  <br /></td></tr>
 <tr class="separator:gab76e6a5196c280967c692c2139d8301e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3c49606902ab917444da4ac9ed3003ce"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_dist&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga3c49606902ab917444da4ac9ed3003ce.html#ga3c49606902ab917444da4ac9ed3003ce">dist</a> = {}</td></tr>
+<tr class="memdesc:ga3c49606902ab917444da4ac9ed3003ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the distance between the two parameters.  <br /></td></tr>
+<tr class="separator:ga3c49606902ab917444da4ac9ed3003ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2cccab7b0cb7548aabfcd581a6c98fa6"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_floor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga2cccab7b0cb7548aabfcd581a6c98fa6.html#ga2cccab7b0cb7548aabfcd581a6c98fa6">floor</a> = {}</td></tr>
 <tr class="memdesc:ga2cccab7b0cb7548aabfcd581a6c98fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the floor value.  <br /></td></tr>
 <tr class="separator:ga2cccab7b0cb7548aabfcd581a6c98fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -303,6 +300,12 @@ Variables</h2></td></tr>
 <tr class="memitem:gaa9d12dd4e1420039046c737ddd3240be"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a> = {}</td></tr>
 <tr class="memdesc:gaa9d12dd4e1420039046c737ddd3240be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the real part of a value.  <br /></td></tr>
 <tr class="separator:gaa9d12dd4e1420039046c737ddd3240be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga23d96b11ec047300319b6b8ccfa07765"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_reldist&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765">reldist</a> = {}</td></tr>
+<tr class="memdesc:ga23d96b11ec047300319b6b8ccfa07765"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the relative distance between the two parameters.  <br /></td></tr>
+<tr class="separator:ga23d96b11ec047300319b6b8ccfa07765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6ead34ff89aeb18c2380188af5f83dcd"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_sqr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga6ead34ff89aeb18c2380188af5f83dcd.html#ga6ead34ff89aeb18c2380188af5f83dcd">sqr</a> = {}</td></tr>
+<tr class="memdesc:ga6ead34ff89aeb18c2380188af5f83dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the square value.  <br /></td></tr>
+<tr class="separator:ga6ead34ff89aeb18c2380188af5f83dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga297cbe86ab12760ec934f76879f805d0"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_sqr_abs&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga297cbe86ab12760ec934f76879f805d0.html#ga297cbe86ab12760ec934f76879f805d0">sqr_abs</a> = {}</td></tr>
 <tr class="memdesc:ga297cbe86ab12760ec934f76879f805d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the squared absolute value of the parameter.  <br /></td></tr>
 <tr class="separator:ga297cbe86ab12760ec934f76879f805d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
