@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['if_5felse_0',['if_else',['../group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf',1,'kyosu']]],
-  ['imag_1',['imag',['../group__functions_ga8e88be0e83296a515c882ad40e828386.html#ga8e88be0e83296a515c882ad40e828386',1,'kyosu']]]
+  ['floor_0',['floor',['../group__functions_ga2cccab7b0cb7548aabfcd581a6c98fa6.html#ga2cccab7b0cb7548aabfcd581a6c98fa6',1,'kyosu']]],
+  ['frac_1',['frac',['../group__functions_ga4c6ee3532d93a937aaa603ba4699b3ed.html#ga4c6ee3532d93a937aaa603ba4699b3ed',1,'kyosu']]]
 ];
