@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['to_5fcomplex_0',['to_complex',['../group__functions_ga467a58e50ffba284e333fac35f5cc93c.html#ga467a58e50ffba284e333fac35f5cc93c',1,'kyosu']]],
-  ['trunc_1',['trunc',['../group__functions_ga57a5e1064f03073d3e81144181f6ac71.html#ga57a5e1064f03073d3e81144181f6ac71',1,'kyosu']]]
+  ['sqr_0',['sqr',['../group__functions_ga6ead34ff89aeb18c2380188af5f83dcd.html#ga6ead34ff89aeb18c2380188af5f83dcd',1,'kyosu']]],
+  ['sqr_5fabs_1',['sqr_abs',['../group__functions_ga297cbe86ab12760ec934f76879f805d0.html#ga297cbe86ab12760ec934f76879f805d0',1,'kyosu']]]
 ];

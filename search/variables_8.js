@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['purepart_0',['purepart',['../group__functions_ga3d4a351565ed14e9021990fa72f9de4a.html#ga3d4a351565ed14e9021990fa72f9de4a',1,'kyosu']]]
+  ['nearest_0',['nearest',['../group__functions_ga8febd271f0bc94c5fb1d12cd5644778b.html#ga8febd271f0bc94c5fb1d12cd5644778b',1,'kyosu']]]
 ];
