@@ -175,6 +175,7 @@ struct std::tuple_element<I, kyosu::cayley_dickson<T,N>>
 template<typename Wrapper, typename T, unsigned int N>
 struct eve::supports_like<Wrapper,kyosu::cayley_dickson<T,N>>
       : std::bool_constant<   kyosu::concepts::cayley_dickson<Wrapper>
+                          ||  std::same_as<T, element_type_t<Wrapper>>
                           ||  plain_scalar_value<Wrapper>
                           >
 {
