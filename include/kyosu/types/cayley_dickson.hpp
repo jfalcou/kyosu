@@ -72,6 +72,32 @@ namespace kyosu
     constexpr cayley_dickson(kumi::sized_product_type<N> auto const& vs) : contents{vs} {}
 
     //==================================================================================================================
+    // ++/--
+    //==================================================================================================================
+
+    //! Pre-incrementation operator
+    KYOSU_FORCEINLINE auto& operator++() noexcept { kumi::get<0>(contents)++; return *this; }
+
+    //! Pre-decrementation operator
+    KYOSU_FORCEINLINE auto& operator--() noexcept { kumi::get<0>(contents)--; return *this; }
+
+    //! Post-incrementation operator
+    KYOSU_FORCEINLINE auto operator++(int) noexcept
+    {
+      auto  that(*this);
+      this->operator++();
+      return that;
+    }
+
+    //! Post-decrementation operator
+    KYOSU_FORCEINLINE auto operator--(int) noexcept
+    {
+      auto  that(*this);
+      this->operator--();
+      return that;
+    }
+
+    //==================================================================================================================
     // Main function dispatchers
     //==================================================================================================================
     KYOSU_FORCEINLINE
