@@ -116,18 +116,29 @@ namespace kyosu::_
     }
   }
 
-  template<typename C0, typename C1>
+  template<concepts::cayley_dickson  C0, concepts::cayley_dickson  C1>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<dist> const&, C0 const & c0, C1 const &  c1) noexcept
   {
     return kyosu::abs(c0-c1);
   }
 
-  template<typename C0, typename C1>
+  template<concepts::cayley_dickson  C0, concepts::cayley_dickson  C1>
   KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<reldist> const&, C0 const & c0, C1 const & c1) noexcept
+  auto dispatch(eve::tag_of<reldist> const&, C0 con
+                a++
+                st & c0, C1 const & c1) noexcept
   {
     return kyosu::dist(c0, c1)/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
+  }
+
+  template<concepts::cayley_dickson  C0, concepts::cayley_dickson  C1, eve::ordered_value T>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<lerp> const&, C0 const & c0, C1 const & c1, T const & t) noexcept
+  -> as_cayley_dickson_t<C0,C1,T>
+  {
+    using r_t = as_cayley_dickson_t<C0,C1,T>;
+    return r_t{kumi::map([&t](auto const& e, auto const & f) { return eve::lerp(e, f, t); }, c0, c1)};
   }
 
 }
