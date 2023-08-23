@@ -44,7 +44,7 @@ namespace kyosu
   requires(concepts::cayley_dickson<T1> || concepts::cayley_dickson<T2>)
   as_cayley_dickson_t<T1,T2> operator+(T1 const& a, T2 const& b) noexcept
   {
-    as_cayley_dickson_t<T1,T2> that{a};
+    as_cayley_dickson_t<T1,T2> that = kyosu::convert(a,eve::as(that));;
     return that += b;
   }
 
