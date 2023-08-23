@@ -103,7 +103,8 @@ namespace kyosu::_
     if constexpr(kyosu::dimension_v<C> <= 2)
     {
       return c*c;
-    }else
+    }
+    else
     {
       auto squares = kumi::map_index([]<typename I>(I, auto const& m)
                                      { constexpr auto sgn = (I::value == 0)-(I::value > 0);
@@ -136,5 +137,28 @@ namespace kyosu::_
     using r_t = as_cayley_dickson_t<C0,C1,T>;
     return r_t{kumi::map([&t](auto const& e, auto const & f) { return eve::lerp(e, f, t); }, c0, c1)};
  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::inc> const&, C c) noexcept
+  {
+    real(c) = eve::inc(real(c));
+    return c;
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::dec> const&, C c) noexcept
+  {
+    real(c) = eve::dec(real(c));
+    return c;
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::oneminus> const&, C c) noexcept
+  {
+    return kyosu::inc(kyosu::minus(c));
+  }
 
 }
