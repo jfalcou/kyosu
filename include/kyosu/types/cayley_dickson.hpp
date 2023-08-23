@@ -13,6 +13,7 @@
 #include <kyosu/types/traits.hpp>
 #include <kyosu/types/impl/arithmetic.hpp>
 #include <kyosu/types/impl/predicates.hpp>
+#include <kyosu/types/impl/math.hpp>
 #include <bit>
 
 namespace kyosu
