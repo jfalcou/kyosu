@@ -13,6 +13,13 @@
 #    define HAS_BOOST
 #  endif
 
+template < typename T >
+auto cv(boost::math::quaternion<T> const &bq)
+{
+  return kyosu::quaternion<T>(bq.R_component_1(), bq.R_component_2(),
+                              bq.R_component_3(), bq.R_component_4());
+}
+
 TTS_CASE_WITH ( "Check kyosu::exp over real"
               , kyosu::real_types
               , tts::generate(tts::between(-10,10))
