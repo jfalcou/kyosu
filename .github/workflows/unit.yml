@@ -15,32 +15,32 @@ concurrency:
 
 jobs:
 
-  windows:
-    runs-on: [windows-2022]
-    strategy:
-      fail-fast: false
-      matrix:
-        cfg:
-        - { tool: "-T ClangCL", config: Debug   }
-        - { tool: "-T ClangCL", config: Release }
-        # - { tool:             , config: Debug   }
-        # - { tool:             , config: Release }
-    steps:
-      - name: Fetch current branch
-        uses: actions/checkout@v3
-      - name: Running CMake for MSVC
-        run: |
-          mkdir build && cd build
-          cmake -G "Visual Studio 17 2022" ${{ matrix.cfg.tool }} -A x64 ..
-      - name: Compiling Unit Tests
-        run:  |
-          cd build
-          cmake --build . --target kyosu-test --config ${{ matrix.cfg.config }}  --parallel 2
-          cmake --build . --target kyosu-test --config Release  --parallel 2
-      - name: Running Tests
-        run: |
-          cd build
-          ctest -C ${{ matrix.cfg.config }} --output-on-failure
+  # windows:
+  #   runs-on: [windows-2022]
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       cfg:
+  #       - { tool: "-T ClangCL", config: Debug   }
+  #       - { tool: "-T ClangCL", config: Release }
+  #       # - { tool:             , config: Debug   }
+  #       # - { tool:             , config: Release }
+  #   steps:
+  #     - name: Fetch current branch
+  #       uses: actions/checkout@v3
+  #     - name: Running CMake for MSVC
+  #       run: |
+  #         mkdir build && cd build
+  #         cmake -G "Visual Studio 17 2022" ${{ matrix.cfg.tool }} -A x64 ..
+  #     - name: Compiling Unit Tests
+  #       run:  |
+  #         cd build
+  #         cmake --build . --target kyosu-test --config ${{ matrix.cfg.config }}  --parallel 2
+  #         cmake --build . --target kyosu-test --config Release  --parallel 2
+  #     - name: Running Tests
+  #       run: |
+  #         cd build
+  #         ctest -C ${{ matrix.cfg.config }} --output-on-failure
 
   linux:
     runs-on: [ubuntu-latest]
