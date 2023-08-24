@@ -107,6 +107,21 @@ namespace tts
      return kyosu::dist(l, r);
   }
 
+  template<kyosu::concepts::cayley_dickson T> inline bool is_ieee_equal(T const &l, T const &r)
+  {
+    return kumi::all_of(kumi::map( [](auto a, auto b) { return tts::is_ieee_equal(a,b); }, l, r));
+  }
+
+  template<typename T, typename N>
+  inline bool is_ieee_equal(eve::wide<T, N> const &l, eve::wide<T, N> const &r)
+  {
+    bool check = true;
+    for(auto i = 0; i < l.size(); ++i)
+      check = check && tts::is_ieee_equal(l.get(i), r.get(i));
+
+    return check;
+  }
+
   template<typename T, typename N>
   inline double ulp_distance(eve::wide<T, N> const &l, eve::wide<T, N> const &r)
   {
