@@ -7,7 +7,11 @@
 //======================================================================================================================
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
-#include <boost/math/quaternion.hpp>
+
+#  if __has_include (<boost/math/quaternion.hpp>)
+#    include <boost/math/quaternion.hpp>
+#    define HAS_BOOST
+#  endif
 
 template < typename T >
 auto cv(boost::math::quaternion<T> const &bq)
@@ -25,7 +29,7 @@ TTS_CASE_WITH ( "Check kyosu::exp over real"
   TTS_ULP_EQUAL(kyosu::exp(data), eve::exp(data), 0.5);
 };
 
-
+#ifdef HAS_BOOST
 TTS_CASE_WITH ( "Check kyosu::exp over quaternion"
               , kyosu::simd_real_types
               , tts::generate ( tts::between(-10,10), tts::between(-10,10)
@@ -41,3 +45,4 @@ TTS_CASE_WITH ( "Check kyosu::exp over quaternion"
   auto q = ke_t(r,i,j,k);
   TTS_RELATIVE_EQUAL(kyosu::exp(q), e, 1e-5);
 };
+#  endif
