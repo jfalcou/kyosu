@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::imag</title>
+<title>kyosu: kyosu::is_not_real</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga8e88be0e83296a515c882ad40e828386.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga45677fbbb676a8b5287c2c0c0ab5deae.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_ga8e88be0e83296a515c8
 </div>
 
 <div class="contents">
-<a id="ga8e88be0e83296a515c882ad40e828386" name="ga8e88be0e83296a515c882ad40e828386"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8e88be0e83296a515c882ad40e828386">&#9670;&#160;</a></span>imag</h2>
+<a id="ga45677fbbb676a8b5287c2c0c0ab5deae" name="ga45677fbbb676a8b5287c2c0c0ab5deae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga45677fbbb676a8b5287c2c0c0ab5deae">&#9670;&#160;</a></span>is_not_real</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_ga8e88be0e83296a515c8
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::imag = {}</td>
+          <td class="memname">kyosu::is_not_real = {}</td>
         </tr>
       </table>
   </td>
@@ -142,40 +142,23 @@ $(document).ready(function(){initNavTree('group__functions_ga8e88be0e83296a515c8
 </table>
 </div><div class="memdoc">
 
-<p>Alias for ipart. </p>
-<p>Extracts the imaginary part of a value.</p>
+<p>test if the parameter is not_real. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>&amp; ipart(T&amp; z)        <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>  ipart(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T     ipart(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga45677fbbb676a8b5287c2c0c0ab5deae.html#ga45677fbbb676a8b5287c2c0c0ab5deae">is_not_real</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga45677fbbb676a8b5287c2c0c0ab5deae.html#ga45677fbbb676a8b5287c2c0c0ab5deae">is_not_real</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__functions_ga45677fbbb676a8b5287c2c0c0ab5deae_html_ga45677fbbb676a8b5287c2c0c0ab5deae"><div class="ttname"><a href="group__functions_ga45677fbbb676a8b5287c2c0c0ab5deae.html#ga45677fbbb676a8b5287c2c0c0ab5deae">kyosu::is_not_real</a></div><div class="ttdeci">constexpr tags::callable_is_not_real is_not_real</div><div class="ttdoc">test if the parameter is not_real.</div><div class="ttdef"><b>Definition:</b> is_not_real.hpp:72</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> types.hpp:14</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Original value.</li>
+<li><code>z</code> : Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the imaginary part of its argument. For real inputs, the call returns 0. It is an alias of <code>imag</code>.</p>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --><p><b>Defined in Header</b></p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
-</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
-<div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>&amp; pure(T&amp; z)        <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>  pure(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T     pure(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
-<div class="line">}</div>
-</div><!-- fragment --><p><b>Parameters</b></p>
-<ul>
-<li><code>z</code> : Original value.</li>
-</ul>
-<p><b>Return value</b></p>
-<p>Returns the imaginary part of its argument. For real inputs, the call returns 0. It is an alias of <code>imag</code>.</p>
+<p>Returns elementwise true is any of the non real parts of the argument is not zero.</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"></div><!-- fragment --> 
 </div>

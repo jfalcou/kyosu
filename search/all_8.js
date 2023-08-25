@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['minus_0',['minus',['../group__functions_ga1b78fa57857ad714ce5f0e6e3ace5db9.html#ga1b78fa57857ad714ce5f0e6e3ace5db9',1,'kyosu']]]
+  ['lerp_0',['lerp',['../group__functions_gaf190a649d5907b9f6c177bb100a73c8d.html#gaf190a649d5907b9f6c177bb100a73c8d',1,'kyosu']]],
+  ['licence_1',['Licence',['../licence.html',1,'']]]
 ];
