@@ -17,6 +17,13 @@
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/dist.hpp>
 #include <kyosu/functions/exp.hpp>
+#include <kyosu/functions/exp2.hpp>
+#include <kyosu/functions/exp10.hpp>
+#include <kyosu/functions/expm1.hpp>
+#include <kyosu/functions/expmx2.hpp>
+#include <kyosu/functions/expx2.hpp>
+#include <kyosu/functions/exp_i.hpp>
+#include <kyosu/functions/exp_ipi.hpp>
 #include <kyosu/functions/floor.hpp>
 #include <kyosu/functions/frac.hpp>
 #include <kyosu/functions/if_else.hpp>
