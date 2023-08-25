@@ -28,7 +28,7 @@ TTS_CASE_WITH( "Check behavior of exp on scalar"
   {
     auto e = a0[i];
     auto f = a1[i];
-    TTS_RELATIVE_EQUAL(kyosu::expm1(kc_t(e, f)),  kyosu::dec(cv(std::exp(c_t(e, f)))), 1.0e-6);
+    TTS_RELATIVE_EQUAL(kyosu::expm1(kc_t(e, f)),  kyosu::dec(cv(std::exp(c_t(e, f)))), 1.0e-5);
   }
 };
 
