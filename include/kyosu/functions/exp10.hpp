@@ -12,14 +12,14 @@
 
 namespace kyosu::tags
 {
-  struct callable_exp : eve::elementwise
+  struct callable_exp10 : eve::elementwise
   {
-    using callable_tag_type = callable_exp;
+    using callable_tag_type = callable_exp10;
 
-    KYOSU_DEFERS_CALLABLE(exp_);
+    KYOSU_DEFERS_CALLABLE(exp10_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::exp(v); }
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::exp10(v); }
 
     template<typename T>
     KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
@@ -28,7 +28,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_exp(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_exp10(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -38,8 +38,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var exp
-//!   @brief Computes the exponential of the argument.
+//!   @var exp10
+//!   @brief Computes the base 10 exponential of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -52,8 +52,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T exp(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T exp(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexp10r T exp10(T z) noexcept;
+//!      template<eve::ordered_value T>              constexp10r T exp10(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,12 +63,12 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the exponential of the argument.
+//!     Returns 10 to the argument.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/exp.cpp}
+//!  @godbolt{doc/exp10.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_exp exp = {};
+inline constexpr tags::callable_exp10 exp10 = {};
 }
