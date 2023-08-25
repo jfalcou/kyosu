@@ -161,4 +161,11 @@ namespace kyosu::_
     return kyosu::inc(kyosu::minus(c));
   }
 
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::pure> const&, C c) noexcept
+  {
+    real(c) = 0;
+    return c;
+  }
 }

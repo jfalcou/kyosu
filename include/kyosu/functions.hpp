@@ -16,6 +16,7 @@
 #include <kyosu/functions/conj.hpp>
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/dist.hpp>
+#include <kyosu/functions/exp.hpp>
 #include <kyosu/functions/floor.hpp>
 #include <kyosu/functions/frac.hpp>
 #include <kyosu/functions/if_else.hpp>
@@ -33,12 +34,15 @@
 #include <kyosu/functions/is_not_finite.hpp>
 #include <kyosu/functions/is_not_infinite.hpp>
 #include <kyosu/functions/is_not_nan.hpp>
+#include <kyosu/functions/is_not_real.hpp>
+#include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/jpart.hpp>
 #include <kyosu/functions/kpart.hpp>
 #include <kyosu/functions/lerp.hpp>
 #include <kyosu/functions/minus.hpp>
 #include <kyosu/functions/nearest.hpp>
 #include <kyosu/functions/oneminus.hpp>
+#include <kyosu/functions/pure.hpp>
 #include <kyosu/functions/purepart.hpp>
 #include <kyosu/functions/real.hpp>
 #include <kyosu/functions/reldist.hpp>
