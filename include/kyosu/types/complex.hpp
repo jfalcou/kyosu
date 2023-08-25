@@ -28,5 +28,3 @@ namespace kyosu
   template<typename T>
   using as_complex_t = as_cayley_dickson_n_t<2,T>;
 }
-
-#include <kyosu/functions/to_complex.hpp>

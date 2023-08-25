@@ -79,28 +79,26 @@ namespace kyosu::_
     return exp(z*eve::log_10(eve::as<e_t>()));
   }
 
-//   template<typename C>
-//   KYOSU_FORCEINLINE constexpr
-//   auto dispatch(eve::tag_of<kyosu::expmx2> const&, C const& z) noexcept
-//   {
-//     return exp(-sqr(z));
-//   }
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::expmx2> const&, C const& z) noexcept
+  {
+    return exp(-sqr(z));
+  }
 
-//   template<typename C>
-//   KYOSU_FORCEINLINE constexpr
-//   auto dispatch(eve::tag_of<kyosu::expx2> const&, C const& z) noexcept
-//   {
-//     return exp(sqr(z));
-//   }
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::expx2> const&, C const& z) noexcept
+  {
+    return exp(sqr(z));
+  }
 
-//   template<typename C>
-//   KYOSU_FORCEINLINE constexpr
-//   auto dispatch(eve::tag_of<kyosu::exp_i> const&, C const& z) noexcept
-//   {
-//     using u_t = eve::underlying_type_t<C>>;
-//     auto ii = as_complex_t<u_t>(u_t(0), u_t(1));
-//     return exp(ii*z);
-//   }
+ template<eve::ordered_value T>
+ static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
+ {
+   constexpr auto ii =  as_cayley_dickson_n_t<2,T>(T(0), T(1));
+   return eve::exp(ii*v);
+ }
 
 //   template<typename C>
 //   KYOSU_FORCEINLINE constexpr

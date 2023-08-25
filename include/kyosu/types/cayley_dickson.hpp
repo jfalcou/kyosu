@@ -213,3 +213,4 @@ struct eve::supports_like<Wrapper,kyosu::cayley_dickson<T,N>>
 #include <kyosu/types/impl/io.hpp>
 #include <kyosu/types/impl/compounds.hpp>
 #include <kyosu/types/impl/operators.hpp>
+#include <kyosu/types/impl/reals.hpp>
