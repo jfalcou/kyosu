@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::inc</title>
+<title>kyosu: kyosu::to_quaternion</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga4169785cc523f33d0cb1f8615f1d1323.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_ga5354d486ec4fca0c826
 </div>
 
 <div class="contents">
-<a id="ga5354d486ec4fca0c8261639b8ccfffd7" name="ga5354d486ec4fca0c8261639b8ccfffd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5354d486ec4fca0c8261639b8ccfffd7">&#9670;&#160;</a></span>inc</h2>
+<a id="ga4169785cc523f33d0cb1f8615f1d1323" name="ga4169785cc523f33d0cb1f8615f1d1323"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4169785cc523f33d0cb1f8615f1d1323">&#9670;&#160;</a></span>to_quaternion</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_ga5354d486ec4fca0c826
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::inc = {}</td>
+          <td class="memname">kyosu::to_quaternion = {}</td>
         </tr>
       </table>
   </td>
@@ -142,63 +142,28 @@ $(document).ready(function(){initNavTree('group__functions_ga5354d486ec4fca0c826
 </table>
 </div><div class="memdoc">
 
-<p>Increments the argument. </p>
+<p>Constructs a <a class="el" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f" title="Type alias for quaternion numbers.">kyosu::quaternion</a>. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4169785cc523f33d0cb1f8615f1d1323.html#ga4169785cc523f33d0cb1f8615f1d1323">to_quaternion</a>(T r)            <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4169785cc523f33d0cb1f8615f1d1323.html#ga4169785cc523f33d0cb1f8615f1d1323">to_quaternion</a>(T r, T i)       <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga4169785cc523f33d0cb1f8615f1d1323.html#ga4169785cc523f33d0cb1f8615f1d1323">to_quaternion</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga5354d486ec4fca0c8261639b8ccfffd7_html_ga5354d486ec4fca0c8261639b8ccfffd7"><div class="ttname"><a href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">kyosu::inc</a></div><div class="ttdeci">constexpr tags::callable_inc inc</div><div class="ttdoc">Increments the argument.</div><div class="ttdef"><b>Definition:</b> inc.hpp:72</div></div>
+<div class="ttc" id="agroup__functions_ga4169785cc523f33d0cb1f8615f1d1323_html_ga4169785cc523f33d0cb1f8615f1d1323"><div class="ttname"><a href="group__functions_ga4169785cc523f33d0cb1f8615f1d1323.html#ga4169785cc523f33d0cb1f8615f1d1323">kyosu::to_quaternion</a></div><div class="ttdeci">constexpr tags::callable_to_quaternion to_quaternion</div><div class="ttdoc">Constructs a kyosu::quaternion.</div><div class="ttdef"><b>Definition:</b> to_quaternion.hpp:72</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> types.hpp:14</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Value to increment.</li>
+<li><code>z</code> : Quaternion value.</li>
+<li><code>r</code>, <code>i</code> : Real and imaginary part sued to construct a <a class="el" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a>..</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns its argument plus 1.</p>
+<p>Returns a <a class="el" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a> constructed from its arguments.</p>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">kyosu::inc</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a>;</div>
-<div class="line">  <span class="keyword">using </span>e_t = float;</div>
-<div class="line">  <span class="keyword">using </span>c_t = <a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;float&gt;</a>;</div>
-<div class="line">  <span class="keyword">using </span>q_t = <a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">quaternion&lt;float&gt;</a>;</div>
-<div class="line">  <span class="keyword">using </span>we_t = eve::wide&lt;e_t, eve::fixed&lt;2&gt;&gt;;</div>
-<div class="line">  <span class="keyword">using </span>wc_t = eve::wide&lt;c_t, eve::fixed&lt;2&gt;&gt;;</div>
-<div class="line">  <span class="keyword">using </span>wq_t = eve::wide&lt;q_t, eve::fixed&lt;2&gt;&gt;;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        \n&quot;</span>;</div>
-<div class="line">  e_t e(72.9f);</div>
-<div class="line">  we_t we = we_t(e);</div>
-<div class="line">  std::cout &lt;&lt; e &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a>(e) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; we &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a>(we) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     \n&quot;</span>;</div>
-<div class="line">  c_t c(3.5f,-2.9f);</div>
-<div class="line">  wc_t wc = wc_t(c);</div>
-<div class="line">  std::cout &lt;&lt; c &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a>(c) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; wc &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a>(wc) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  \n&quot;</span>;</div>
-<div class="line">  q_t q(3.5f,-2.9f, 2.1f, 3.2f);</div>
-<div class="line">  wq_t wq = wq_t(q);</div>
-<div class="line">  std::cout &lt;&lt; q &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a>(q) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; wq &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a>(wq) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__types_gaaa8536022a04b81b80cfe47246a4897f_html_gaaa8536022a04b81b80cfe47246a4897f"><div class="ttname"><a href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a></div><div class="ttdeci">cayley_dickson&lt; T, 4 &gt; quaternion</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:26</div></div>
-<div class="ttc" id="agroup__types_gad699121c78ba21aef370db14abdd67ec_html_gad699121c78ba21aef370db14abdd67ec"><div class="ttname"><a href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a></div><div class="ttdeci">cayley_dickson&lt; T, 2 &gt; complex</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:26</div></div>
-</div><!-- fragment --> 
+<div class="fragment"></div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

@@ -169,7 +169,7 @@ $(document).ready(function(){initNavTree('group__functions_ga842342e7ca73ffdcaa7
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_ga842342e7ca73ffdcaa7ca9141e45d56f.html#ga842342e7ca73ffdcaa7ca9141e45d56f">kyosu::jpart</a>;</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a>;</div>
-<div class="line">  <span class="keyword">using </span>kyosu::quaternion;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        &quot;</span>;</div>
 <div class="line">  <span class="keywordtype">float</span> f = 72.9f;</div>
@@ -180,19 +180,20 @@ $(document).ready(function(){initNavTree('group__functions_ga842342e7ca73ffdcaa7
 <div class="line">  std::cout &lt;&lt; z &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga842342e7ca73ffdcaa7ca9141e45d56f.html#ga842342e7ca73ffdcaa7ca9141e45d56f">jpart</a>(z) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>;</div>
-<div class="line">  <span class="keyword">auto</span> q = quaternion&lt;double&gt;(1.,2.,3.,4.);</div>
+<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">quaternion&lt;double&gt;</a>(1.,2.,3.,4.);</div>
 <div class="line">  std::cout &lt;&lt; q &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga842342e7ca73ffdcaa7ca9141e45d56f.html#ga842342e7ca73ffdcaa7ca9141e45d56f">jpart</a>(q)  &lt;&lt;  <span class="stringliteral">&quot; =&gt; &quot;</span>;</div>
 <div class="line">  <a class="code hl_variable" href="group__functions_ga842342e7ca73ffdcaa7ca9141e45d56f.html#ga842342e7ca73ffdcaa7ca9141e45d56f">jpart</a>(q) = 42.7;</div>
 <div class="line">  std::cout &lt;&lt; q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;SIMD:        &quot;</span>;</div>
-<div class="line">  eve::wide&lt;quaternion&lt;double&gt;, eve::fixed&lt;2&gt;&gt; wz(quaternion&lt;double&gt;(1.3,-3.7,4.2,-7.8));</div>
+<div class="line">  eve::wide&lt;quaternion&lt;double&gt;, eve::fixed&lt;2&gt;&gt; wz(<a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">quaternion&lt;double&gt;</a>(1.3,-3.7,4.2,-7.8));</div>
 <div class="line">  std::cout &lt;&lt; wz &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga842342e7ca73ffdcaa7ca9141e45d56f.html#ga842342e7ca73ffdcaa7ca9141e45d56f">jpart</a>(wz) &lt;&lt;   <span class="stringliteral">&quot; =&gt; &quot;</span>;</div>
 <div class="line">  <a class="code hl_variable" href="group__functions_ga842342e7ca73ffdcaa7ca9141e45d56f.html#ga842342e7ca73ffdcaa7ca9141e45d56f">jpart</a>(wz) = eve::wide&lt;double, eve::fixed&lt;2&gt;&gt;{13.37,63.24};</div>
 <div class="line">  std::cout &lt;&lt; wz &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__types_gaaa8536022a04b81b80cfe47246a4897f_html_gaaa8536022a04b81b80cfe47246a4897f"><div class="ttname"><a href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a></div><div class="ttdeci">cayley_dickson&lt; T, 4 &gt; quaternion</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:26</div></div>
 <div class="ttc" id="agroup__types_gad699121c78ba21aef370db14abdd67ec_html_gad699121c78ba21aef370db14abdd67ec"><div class="ttname"><a href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a></div><div class="ttdeci">cayley_dickson&lt; T, 2 &gt; complex</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:26</div></div>
 </div><!-- fragment --> 
 </div>
