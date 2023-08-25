@@ -23,6 +23,7 @@
 #include <kyosu/functions/expmx2.hpp>
 #include <kyosu/functions/expx2.hpp>
 #include <kyosu/functions/exp_i.hpp>
+#include <kyosu/functions/exp_ipi.hpp>
 #include <kyosu/functions/floor.hpp>
 #include <kyosu/functions/frac.hpp>
 #include <kyosu/functions/if_else.hpp>
