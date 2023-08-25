@@ -22,7 +22,7 @@ namespace kyosu::tags
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      const auto ii = kyosu::to_complex(T(0), T(1))*pi(as<T>());
+      const auto ii = kyosu::to_complex(T(0), T(1))*eve::pi(eve::as<T>());
       return kyosu::exp(ii*v);
     }
 
