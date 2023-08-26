@@ -9,6 +9,7 @@
 
 #include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
+#include <iostream>
 
 namespace kyosu::_
 {
@@ -123,6 +124,43 @@ namespace kyosu::_
       using u_t = as_cayley_dickson_n_t<2,eve::underlying_type_t<C>>;
       const auto ipi = c_t(u_t(0), eve::pi<eve::as<u_t>());
       return kyosu::exp(ipi*z);
+    }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::log> const&, C const& z) noexcept
+  {
+    using c_t = as_cayley_dickson_n_t<2,eve::underlying_type_t<C>>;
+    if constexpr(kyosu::concepts::complex<C>)
+    {
+      auto arg = [](auto z){ return eve::pedantic(eve::atan2)(kyosu::imag(z), kyosu::real(z));};
+      auto [rz, iz] = z;
+      auto infty = eve::inf(eve::as(rz));
+      auto argz = arg(z);
+      auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
+      auto la = eve::log(absz);
+      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), to_complex(la, eve::zero(eve::as(rz))), to_complex(la, argz));
+      if(eve::any(kyosu::is_not_finite(z)))
+      {
+        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), to_complex(infty, iz), r);
+      }
+      return r;
+    }
+    else
+    {
+      using e_t = eve::element_type_t<C>;
+      auto az = kyosu::abs(z);
+      auto v = kyosu::pure(z);
+      auto s = kyosu::real(z);
+      auto z1 = (eve::acos(s/az)/abs(v))*v+eve::log(az);
+      return kyosu::if_else( kyosu::is_eqz(z)
+                           , eve::minf(eve::as(az))
+                           , kyosu::if_else( kyosu::is_real(z)
+                                           ,  kyosu::log(kyosu::real(z))
+                                           , z1
+                                           )
+                           );
     }
   }
 
