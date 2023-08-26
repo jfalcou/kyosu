@@ -225,4 +225,44 @@ namespace kyosu::_
      }
   }
 
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::log1p> const&, C const& z) noexcept
+  {
+    using c_t = as_cayley_dickson_n_t<2,eve::underlying_type_t<C>>;
+      using e_t = eve::underlying_type_t<C>;
+    if constexpr(kyosu::concepts::complex<C>)
+    {
+      auto m = kyosu::inc(z);
+      auto arg = [](auto z){ return eve::pedantic(eve::atan2)(kyosu::imag(z), kyosu::real(z));};
+      auto theta = eve::if_else((kyosu::is_real(m) && eve::is_nltz(kyosu::real(m))), eve::zero, arg(m)) ;
+      auto rz =  kyosu::real(z);
+      auto iz2 =  eve::sqr(kyosu::imag(z));
+      return to_complex(eve::half(eve::as<e_t>())*eve::log1p(rz*(rz+e_t(2))+iz2), theta);
+    }
+    else
+    {
+      auto incz = inc(z);
+      auto az = kyosu::abs(incz);
+      auto az2 = kyosu::sqr_abs(z) + 2*real(z);
+      auto v = kyosu::pure(z);
+      auto s = kyosu::real(incz);
+      auto z1 = (eve::acos(s/az)/abs(v))*v+ eve::half(eve::as<e_t>())*eve::log1p(az2);
+//       auto tmp =  kyosu::if_else( kyosu::is_real(z)
+//                                 ,  kyosu::log(kyosu::real(z))
+//                                 , z1
+//                                 );
+//       return tmp;
+
+//       return kyosu::if_else( kyosu::is_eqz(z)
+//                            , eve::minf(eve::as(az))
+//                            , tmp
+//                            );
+
+      return kyosu::if_else( kyosu::is_eqz(z)
+                           , eve::minf(eve::as(az))
+                           , z1
+                           );
+    }
+  }
 }
