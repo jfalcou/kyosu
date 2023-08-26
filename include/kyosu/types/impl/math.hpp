@@ -149,19 +149,80 @@ namespace kyosu::_
     }
     else
     {
-      using e_t = eve::element_type_t<C>;
       auto az = kyosu::abs(z);
       auto v = kyosu::pure(z);
       auto s = kyosu::real(z);
       auto z1 = (eve::acos(s/az)/abs(v))*v+eve::log(az);
+//       auto tmp =  kyosu::if_else( kyosu::is_real(z)
+//                                 ,  kyosu::log(kyosu::real(z))
+//                                 , z1
+//                                 );
+//       return tmp;
+
+//       return kyosu::if_else( kyosu::is_eqz(z)
+//                            , eve::minf(eve::as(az))
+//                            , tmp
+//                            );
+
       return kyosu::if_else( kyosu::is_eqz(z)
                            , eve::minf(eve::as(az))
-                           , kyosu::if_else( kyosu::is_real(z)
-                                           ,  kyosu::log(kyosu::real(z))
-                                           , z1
-                                           )
+                           , z1
                            );
     }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::log10> const&, C const& z) noexcept
+  {
+    using c_t = as_cayley_dickson_n_t<2,eve::underlying_type_t<C>>;
+    if constexpr(kyosu::concepts::complex<C>)
+    {
+      auto [rz, iz] = z;
+      auto infty = eve::inf(eve::as(rz));
+      auto arg = [](auto z){ return eve::pedantic(eve::atan2)(kyosu::imag(z), kyosu::real(z));};
+      auto argz = arg(z)*eve::invlog_10(eve::as(rz));
+      auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
+      auto la = eve::log10(absz);
+      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), to_complex(la, eve::zero(eve::as(rz))), to_complex(la, argz));
+      if(eve::any(kyosu::is_not_finite(z)))
+      {
+        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), to_complex(infty, iz), r);
+      }
+      return r;
+    }
+    else
+    {
+      using e_t = eve::underlying_type_t<C>;
+      return log(z)*eve::invlog_10(eve::as<e_t>());
+     }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::log2> const&, C const& z) noexcept
+  {
+    using c_t = as_cayley_dickson_n_t<2,eve::underlying_type_t<C>>;
+    if constexpr(kyosu::concepts::complex<C>)
+    {
+      auto [rz, iz] = z;
+      auto infty = eve::inf(eve::as(rz));
+      auto arg = [](auto z){ return eve::pedantic(eve::atan2)(kyosu::imag(z), kyosu::real(z));};
+      auto argz = arg(z)*eve::invlog_2(eve::as(rz));
+      auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
+      auto la = eve::log2(absz);
+      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), to_complex(la, eve::zero(eve::as(rz))), to_complex(la, argz));
+      if(eve::any(kyosu::is_not_finite(z)))
+      {
+        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), to_complex(infty, iz), r);
+      }
+      return r;
+    }
+    else
+    {
+      using e_t = eve::underlying_type_t<C>;
+      return log(z)*eve::invlog_2(eve::as<e_t>());
+     }
   }
 
 }
