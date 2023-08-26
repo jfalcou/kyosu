@@ -49,6 +49,8 @@
 #include <kyosu/functions/kpart.hpp>
 #include <kyosu/functions/lerp.hpp>
 #include <kyosu/functions/log.hpp>
+#include <kyosu/functions/log10.hpp>
+#include <kyosu/functions/log2.hpp>
 #include <kyosu/functions/minus.hpp>
 #include <kyosu/functions/nearest.hpp>
 #include <kyosu/functions/oneminus.hpp>
