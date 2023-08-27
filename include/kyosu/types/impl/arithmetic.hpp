@@ -168,4 +168,11 @@ namespace kyosu::_
     real(c) = 0;
     return c;
   }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::rec> const&, C c) noexcept
+  {
+    return conj(c)/sqr_abs(c);
+  }  
 }
