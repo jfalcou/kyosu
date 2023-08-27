@@ -9,7 +9,6 @@
 
 #include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
-#include <iostream>
 
 namespace kyosu::_
 {
