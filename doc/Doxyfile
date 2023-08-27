@@ -40,6 +40,9 @@ EXAMPLE_PATH           = ../test/doc \
 SEPARATE_MEMBER_PAGES  = YES
 TAB_SIZE               = 2
 
+USE_MDFILE_AS_MAINPAGE = index.md
+
+
 ALIASES += "godbolt{1}=@include \1"
 ALIASES += "groupheader{1}=<h2 class=\"groupheader\"> \1 </h2>"
 ALIASES += "nullable=[NullablePointer](https://en.cppreference.com/w/cpp/named_req/NullablePointer)"

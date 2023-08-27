@@ -21,7 +21,7 @@ namespace kyosu
   //====================================================================================================================
   // cayley_dickson struct is the bare bone support class for complex, quaternion and above.
   // It is built so that all operation over C, Q and other such algebra can be done in a streamlined fashion
-  // based on the Cayley–Dickson construction.
+  // based on the Cayley-Dickson construction.
   //====================================================================================================================
   template<eve::floating_scalar_value Type, unsigned int N>
   requires(N> 1 && std::has_single_bit(N))
