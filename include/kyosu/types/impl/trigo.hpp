@@ -111,7 +111,45 @@ namespace kyosu::_
     {
       auto e = kyosu::exp(z);
       auto ie = kyosu::rec(e);
-      return kumi::tuple{ eve::average(e, -ie,  eve::average(e, ie))};
+      return kumi::tuple{ eve::average(e, -ie),  eve::average(e, ie)};
     }
   }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::tanh> const&, C const& z) noexcept
+  {
+    if constexpr(concepts::complex<C> )
+    {
+      auto zz = z+z;
+      auto [rz, iz] = zz;
+      auto [s, c] = eve::sincos(iz);
+      auto [sh, ch] = eve::sinhcosh(rz);
+      auto tmp = c+ch;
+      auto rr = eve::if_else(eve::is_eqz(kyosu::real(z)), eve::zero, sh/tmp);
+      auto ii = eve::if_else(kyosu::is_real(z), eve::zero, s/tmp);
+      return kyosu::if_else(eve::is_infinite(rz), kyosu::to_complex(eve::sign(rz)), kyosu::to_complex(rr, ii));
+    }
+    else
+    {
+      auto e = kyosu::expm1(z+z);
+      return e/(e+2);
+    }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::coth> const&, C const& z) noexcept
+  {
+    if constexpr(concepts::complex<C> )
+    {
+      return kyosu::rec(kyosu::tanh(z));
+    }
+    else
+    {
+      auto e = kyosu::expm1(z+z);
+      return (e+2)/e;
+    }
+  }
+
 }

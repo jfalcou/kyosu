@@ -23,10 +23,10 @@ TTS_CASE_WITH ( "Check kyosu::sinh over quaternion"
   }
   {
     using ke_t = kyosu::as_complex_t<T>;
-    auto qc= ke_t(r,i,j,k);
-    auto [s, c] = kyosu::sinhcosh(q);
-    TTS_RELATIVE_EQUAL(s, kyosu::sinh(c), 1e-5);
-    TTS_RELATIVE_EQUAL(c, kyosu::cosh(c), 1e-5);
+    auto cq= ke_t(r,i);
+    auto [s, c] = kyosu::sinhcosh(cq);
+    TTS_RELATIVE_EQUAL(s, kyosu::sinh(cq), 1e-5);
+    TTS_RELATIVE_EQUAL(c, kyosu::cosh(cq), 1e-5);
   }
   {
     using ke_t = kyosu::as_quaternion_t<T>;
