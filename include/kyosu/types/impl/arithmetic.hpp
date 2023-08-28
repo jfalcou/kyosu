@@ -39,11 +39,14 @@ namespace kyosu::_
   {
     if constexpr(concepts::cayley_dickson<T> && concepts::cayley_dickson<U>)
     {
-      using type = as_cayley_dickson_t<T,U>;
-      auto parts = kumi::map([&](auto const& v, auto const& w) { return eve::if_else(m, v, w); }, t, f);
+      using type  = as_cayley_dickson_t<T,U>;
+      using ret_t = std::conditional_t<eve::simd_value<Mask>, eve::as_wide_as_t<type,Mask>, type>;
+      constexpr eve::as<eve::element_type_t<type>> tgt = {};
 
-      if constexpr(eve::simd_value<Mask>) return eve::as_wide_as_t<type,Mask>{parts};
-      else                                return type{parts};
+      return ret_t{ kumi::map ( [&](auto const& v, auto const& w) { return eve::if_else(m, v, w); }
+                              , kyosu::convert(t, tgt), kyosu::convert(f, tgt)
+                              )
+                  };
     }
     else if constexpr(concepts::cayley_dickson<T> && !concepts::cayley_dickson<U>)
     {
