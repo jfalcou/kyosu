@@ -14,7 +14,9 @@
 #include <kyosu/functions/abs.hpp>
 #include <kyosu/functions/ceil.hpp>
 #include <kyosu/functions/conj.hpp>
+#include <kyosu/functions/cos.hpp>
 #include <kyosu/functions/cosh.hpp>
+#include <kyosu/functions/cot.hpp>
 #include <kyosu/functions/coth.hpp>
 #include <kyosu/functions/convert.hpp>
 #include <kyosu/functions/dec.hpp>
@@ -61,9 +63,12 @@
 #include <kyosu/functions/real.hpp>
 #include <kyosu/functions/rec.hpp>
 #include <kyosu/functions/reldist.hpp>
+#include <kyosu/functions/sin.hpp>
+#include <kyosu/functions/sincos.hpp>
 #include <kyosu/functions/sinh.hpp>
 #include <kyosu/functions/sinhcosh.hpp>
 #include <kyosu/functions/sqr_abs.hpp>
 #include <kyosu/functions/sqr.hpp>
+#include <kyosu/functions/tan.hpp>
 #include <kyosu/functions/tanh.hpp>
 #include <kyosu/functions/trunc.hpp>
