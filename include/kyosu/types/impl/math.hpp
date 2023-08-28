@@ -153,21 +153,21 @@ namespace kyosu::_
       auto v = kyosu::pure(z);
       auto s = kyosu::real(z);
       auto z1 = (eve::acos(s/az)/abs(v))*v+eve::log(az);
-//       auto tmp =  kyosu::if_else( kyosu::is_real(z)
-//                                 ,  kyosu::log(kyosu::real(z))
-//                                 , z1
-//                                 );
-//       return tmp;
-
-//       return kyosu::if_else( kyosu::is_eqz(z)
-//                            , eve::minf(eve::as(az))
-//                            , tmp
-//                            );
+      auto tmp =  kyosu::if_else( kyosu::is_real(z)
+                                ,  kyosu::log(kyosu::real(z))
+                                , z1
+                                );
+      return tmp;
 
       return kyosu::if_else( kyosu::is_eqz(z)
                            , eve::minf(eve::as(az))
-                           , z1
+                           , tmp
                            );
+
+//      return kyosu::if_else( kyosu::is_eqz(z)
+//                            , eve::minf(eve::as(az))
+//                            , z1
+//                            );
     }
   }
 
@@ -248,21 +248,21 @@ namespace kyosu::_
       auto v = kyosu::pure(z);
       auto s = kyosu::real(incz);
       auto z1 = (eve::acos(s/az)/abs(v))*v+ eve::half(eve::as<e_t>())*eve::log1p(az2);
-//       auto tmp =  kyosu::if_else( kyosu::is_real(z)
-//                                 ,  kyosu::log(kyosu::real(z))
-//                                 , z1
-//                                 );
-//       return tmp;
-
-//       return kyosu::if_else( kyosu::is_eqz(z)
-//                            , eve::minf(eve::as(az))
-//                            , tmp
-//                            );
+      auto tmp =  kyosu::if_else( kyosu::is_real(z)
+                                ,  kyosu::log(kyosu::real(z))
+                                , z1
+                                );
+      return tmp;
 
       return kyosu::if_else( kyosu::is_eqz(z)
                            , eve::minf(eve::as(az))
-                           , z1
+                           , tmp
                            );
+
+//       return kyosu::if_else( kyosu::is_eqz(z)
+//                            , eve::minf(eve::as(az))
+//                            , z1
+//                            );
     }
   }
 }
