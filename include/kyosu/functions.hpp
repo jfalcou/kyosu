@@ -18,6 +18,8 @@
 #include <kyosu/functions/cosh.hpp>
 #include <kyosu/functions/cot.hpp>
 #include <kyosu/functions/coth.hpp>
+#include <kyosu/functions/csc.hpp>
+#include <kyosu/functions/csch.hpp>
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/dist.hpp>
 #include <kyosu/functions/exp.hpp>
@@ -62,6 +64,8 @@
 #include <kyosu/functions/real.hpp>
 #include <kyosu/functions/rec.hpp>
 #include <kyosu/functions/reldist.hpp>
+#include <kyosu/functions/sec.hpp>
+#include <kyosu/functions/sech.hpp>
 #include <kyosu/functions/sin.hpp>
 #include <kyosu/functions/sincos.hpp>
 #include <kyosu/functions/sinh.hpp>

@@ -41,6 +41,13 @@ namespace kyosu::_
 
   template<typename C>
   KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::sech> const&, C const& z) noexcept
+  {
+    return kyosu::rec(kyosu::cosh(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::sinh> const&, C const& z) noexcept
   {
     if constexpr(concepts::complex<C> )
@@ -69,6 +76,13 @@ namespace kyosu::_
       auto e = kyosu::exp(z);
       return eve::average(e, -kyosu::rec(e));
     }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::csch> const&, C const& z) noexcept
+  {
+    return kyosu::rec(kyosu::sinh(z));
   }
 
   template<typename C>
@@ -171,6 +185,13 @@ namespace kyosu::_
 
   template<typename C>
   KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::sec> const&, C const& z) noexcept
+  {
+    return kyosu::rec(kyosu::cos(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::sin> const&, C const& z) noexcept
   {
     if constexpr(concepts::complex<C> )
@@ -186,6 +207,13 @@ namespace kyosu::_
       auto w = c*eve::sinhc(az);
       return s*cosh(az)+w*pure(z);
     }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::csc> const&, C const& z) noexcept
+  {
+    return kyosu::rec(kyosu::sin(z));
   }
 
   template<typename C>
