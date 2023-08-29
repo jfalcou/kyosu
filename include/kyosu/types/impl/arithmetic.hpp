@@ -178,6 +178,7 @@ namespace kyosu::_
   {
     return conj(c)/sqr_abs(c);
   }
+
   template<typename C0, concepts::cayley_dickson C1>
   requires(dimension_v<C0> <= dimension_v<C1>)
   KYOSU_FORCEINLINE constexpr
@@ -192,5 +193,11 @@ namespace kyosu::_
       using u_t = eve::underlying_type_t<C1>;
       return kumi::apply([](auto const&... e) { return type{kyosu::convert(e, eve::as<u_t>{})...}; }, c);
     }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::sign> const&, C c) noexcept
+  {
+    return kyosu::if_else(kyosu::is_nez(c), c/abs(c), C(0));
   }
 }

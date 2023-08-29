@@ -67,12 +67,14 @@
 #include <kyosu/functions/reldist.hpp>
 #include <kyosu/functions/sec.hpp>
 #include <kyosu/functions/sech.hpp>
+#include <kyosu/functions/sign.hpp>
 #include <kyosu/functions/sin.hpp>
 #include <kyosu/functions/sincos.hpp>
 #include <kyosu/functions/sinh.hpp>
 #include <kyosu/functions/sinhcosh.hpp>
 #include <kyosu/functions/sqr_abs.hpp>
 #include <kyosu/functions/sqr.hpp>
+#include <kyosu/functions/sqrt.hpp>
 #include <kyosu/functions/tan.hpp>
 #include <kyosu/functions/tanh.hpp>
 #include <kyosu/functions/trunc.hpp>
