@@ -42,9 +42,10 @@ namespace kyosu
   /// Returns the sum of a Caley-dickson value and a real value in any order
   template<eve::value T1, eve::value T2>
   requires(concepts::cayley_dickson<T1> || concepts::cayley_dickson<T2>)
-  as_cayley_dickson_t<T1,T2> operator+(T1 const& a, T2 const& b) noexcept
+  auto operator+(T1 const& a, T2 const& b) noexcept -> as_cayley_dickson_t<T1,T2>
   {
-    as_cayley_dickson_t<T1,T2> that{a};
+    using type = as_cayley_dickson_t<T1,T2>;
+    type that{kyosu::convert(a,eve::as<eve::element_type_t<type>>())};
     return that += b;
   }
 
@@ -53,7 +54,8 @@ namespace kyosu
   requires(concepts::cayley_dickson<T1> || concepts::cayley_dickson<T2>)
   as_cayley_dickson_t<T1,T2> operator-(T1 const& a, T2 const& b) noexcept
   {
-    as_cayley_dickson_t<T1,T2> that{a};
+    using type = as_cayley_dickson_t<T1,T2>;
+    type that{kyosu::convert(a,eve::as<eve::element_type_t<type>>())};
     return that -= b;
   }
 
@@ -62,7 +64,8 @@ namespace kyosu
   requires(concepts::cayley_dickson<T1> && concepts::cayley_dickson<T2>)
   as_cayley_dickson_t<T1,T2> operator*(T1 const& a, T2 const& b) noexcept
   {
-    as_cayley_dickson_t<T1,T2> that{a};
+    using type = as_cayley_dickson_t<T1,T2>;
+    type that{kyosu::convert(a,eve::as<eve::element_type_t<type>>())};
     return that *= b;
   }
 
@@ -73,12 +76,14 @@ namespace kyosu
     // This is ok as the non cayley-dickson type is a scalar
     if constexpr(concepts::cayley_dickson<T1>)
     {
-      as_cayley_dickson_t<T1,T2> that{a};
+      using type = as_cayley_dickson_t<T1,T2>;
+      type that{kyosu::convert(a,eve::as<eve::element_type_t<type>>())};
       return that *= b;
     }
     else
     {
-      as_cayley_dickson_t<T1,T2> that{b};
+      using type = as_cayley_dickson_t<T1,T2>;
+      type that{kyosu::convert(b,eve::as<eve::element_type_t<type>>())};
       return that *= a;
     }
   }
@@ -88,7 +93,8 @@ namespace kyosu
   requires(concepts::cayley_dickson<T1> || concepts::cayley_dickson<T2>)
   as_cayley_dickson_t<T1,T2> operator/(T1 const& a, T2 const& b) noexcept
   {
-    as_cayley_dickson_t<T1,T2> that{a};
+    using type = as_cayley_dickson_t<T1,T2>;
+    type that{kyosu::convert(a,eve::as<eve::element_type_t<type>>())};
     return that /= b;
   }
 

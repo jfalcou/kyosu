@@ -16,6 +16,7 @@
 #include <kyosu/functions/conj.hpp>
 #include <kyosu/functions/cosh.hpp>
 #include <kyosu/functions/coth.hpp>
+#include <kyosu/functions/convert.hpp>
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/dist.hpp>
 #include <kyosu/functions/exp.hpp>

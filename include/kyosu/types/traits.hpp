@@ -93,12 +93,7 @@ namespace kyosu
 
   template<unsigned int Dim, typename... Ts>
   requires( Dim > 1 && !requires(Ts... ts) { eve::add( std::declval<_::sema_t<Ts>>()...); } )
-  struct  as_cayley_dickson_n<Dim, Ts...>
-  {
-    static_assert ( requires(Ts... ts) { eve::add( std::declval<_::sema_t<Ts>>()...); }
-                  , "[KYOSU] - STATIC ASSERT: Incompatible types in type resolution"
-                  );
-  };
+  struct  as_cayley_dickson_n<Dim, Ts...> {};
 
   template<unsigned int Dim, typename T>
   requires(Dim > 1)
