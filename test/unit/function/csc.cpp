@@ -42,7 +42,7 @@ TTS_CASE_WITH ( "Check kyosu::csc over quaternion"
   using ke_t = kyosu::as_quaternion_t<T>;
   using bq_t = boost::math::quaternion<eve::element_type_t<T>>;
   auto boost_csc = [](auto x, auto y, auto z,  auto t){return kyosu::rec(cv(boost::math::sin(bq_t(x, y, z, t)))); };
-  ke_t e([&](auto n, auto){return boost_csc(r.get(n), i.get(n), j.get(n), k.get(n)); });
+  ke_t e([&](auto n, auto){return boost_csc(r.get(n), i.get(n), j.get(n), k.get(n)); } );
   auto q = ke_t(r,i,j,k);
   TTS_RELATIVE_EQUAL(kyosu::csc(q), e, 1e-5);
 };
