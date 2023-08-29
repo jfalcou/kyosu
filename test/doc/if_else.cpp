@@ -1,0 +1,18 @@
+#include <kyosu/kyosu.hpp>
+#include <eve/wide.hpp>
+#include <iostream>
+
+int main()
+{
+  using kyosu::complex;
+  using kyosu::quaternion;
+
+
+  auto c = complex<float>(3.5f,-2.9f);
+  auto q =  quaternion<float>(1.f,2.f,3.f,4.f);
+  auto t = 1.0f;
+  auto r = kyosu::if_else(t > 2.0f, q, c);
+  std::cout << r << std::endl;
+
+  return 0;
+}
