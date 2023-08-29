@@ -229,12 +229,12 @@ template&lt;concepts::cayley_dickson Z&gt; </td></tr>
 <tr class="memdesc:a57e104c783c5c0900bf0f73e5b16c24d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the negation of a given Caley-dickson value. <br /></td></tr>
 <tr class="separator:a57e104c783c5c0900bf0f73e5b16c24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Binary Operators</div></td></tr>
-<tr class="memitem:aa3fbb7e2dc607b914423a63faecbb548"><td class="memTemplParams" colspan="2"><a id="aa3fbb7e2dc607b914423a63faecbb548" name="aa3fbb7e2dc607b914423a63faecbb548"></a>
+<tr class="memitem:a2d6a4bba9bb2fa9899ba5a0b98300743"><td class="memTemplParams" colspan="2"><a id="a2d6a4bba9bb2fa9899ba5a0b98300743" name="a2d6a4bba9bb2fa9899ba5a0b98300743"></a>
 template&lt;eve::value T1, eve::value T2&gt; <br />
 requires (concepts::cayley_dickson&lt;T1&gt; || concepts::cayley_dickson&lt;T2&gt;)</td></tr>
-<tr class="memitem:aa3fbb7e2dc607b914423a63faecbb548"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator+</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
-<tr class="memdesc:aa3fbb7e2dc607b914423a63faecbb548"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sum of a Caley-dickson value and a real value in any order. <br /></td></tr>
-<tr class="separator:aa3fbb7e2dc607b914423a63faecbb548"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d6a4bba9bb2fa9899ba5a0b98300743"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator+</b> (T1 const &amp;a, T2 const &amp;b) noexcept -&gt; <a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a>&lt; T1, T2 &gt;</td></tr>
+<tr class="memdesc:a2d6a4bba9bb2fa9899ba5a0b98300743"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sum of a Caley-dickson value and a real value in any order. <br /></td></tr>
+<tr class="separator:a2d6a4bba9bb2fa9899ba5a0b98300743"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab486c7e1ad4577bdffae36e6c8b4a616"><td class="memTemplParams" colspan="2"><a id="ab486c7e1ad4577bdffae36e6c8b4a616" name="ab486c7e1ad4577bdffae36e6c8b4a616"></a>
 template&lt;eve::value T1, eve::value T2&gt; <br />
 requires (concepts::cayley_dickson&lt;T1&gt; || concepts::cayley_dickson&lt;T2&gt;)</td></tr>
@@ -270,6 +270,9 @@ Variables</h2></td></tr>
 <tr class="memitem:gad4e960a6cb254cdd741323efc8efa3a0"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_conj&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0">conj</a> = {}</td></tr>
 <tr class="memdesc:gad4e960a6cb254cdd741323efc8efa3a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the conjugate value.  <br /></td></tr>
 <tr class="separator:gad4e960a6cb254cdd741323efc8efa3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae8e08be7b28ad1cf9159ae564115867f"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_convert&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">convert</a> = {}</td></tr>
+<tr class="memdesc:gae8e08be7b28ad1cf9159ae564115867f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select a value between two arguments based on a logical mask.  <br /></td></tr>
+<tr class="separator:gae8e08be7b28ad1cf9159ae564115867f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa608876852fffef8d90a4f7280ff4549"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_cosh&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gaa608876852fffef8d90a4f7280ff4549.html#gaa608876852fffef8d90a4f7280ff4549">cosh</a> = {}</td></tr>
 <tr class="memdesc:gaa608876852fffef8d90a4f7280ff4549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the hyperbolic cosine of the argument.  <br /></td></tr>
 <tr class="separator:gaa608876852fffef8d90a4f7280ff4549"><td class="memSeparator" colspan="2">&#160;</td></tr>
