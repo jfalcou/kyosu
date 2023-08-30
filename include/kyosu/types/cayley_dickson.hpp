@@ -139,6 +139,16 @@ namespace kyosu
     return _::dispatch(fn, m,t,f);
   }
 
+  template<concepts::cayley_dickson T, eve::value C>
+  requires( eve::scalar_value<T> )
+  KYOSU_FORCEINLINE
+  constexpr auto tag_invoke( eve::tag_of<kyosu::convert> const& f, auto, C const& c, eve::as<T> const& tgt) noexcept
+                -> decltype(_::dispatch(f, c, tgt))
+  {
+    return _::dispatch(f, c, tgt);
+  }
+
+
   //==================================================================================================================
   //  Tag invoke override for parts extraction - Outside so they can see get<I>(c)
   //==================================================================================================================
@@ -204,7 +214,7 @@ struct std::tuple_element<I, kyosu::cayley_dickson<T,N>>
 template<typename Wrapper, typename T, unsigned int N>
 struct eve::supports_like<Wrapper,kyosu::cayley_dickson<T,N>>
       : std::bool_constant<   kyosu::concepts::cayley_dickson<Wrapper>
-                          ||  std::same_as<T, element_type_t<Wrapper>>
+                          ||  std::same_as<T, eve::element_type_t<Wrapper>>
                           ||  plain_scalar_value<Wrapper>
                           >
 {

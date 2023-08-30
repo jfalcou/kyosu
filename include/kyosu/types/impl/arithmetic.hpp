@@ -39,11 +39,14 @@ namespace kyosu::_
   {
     if constexpr(concepts::cayley_dickson<T> && concepts::cayley_dickson<U>)
     {
-      using type = as_cayley_dickson_t<T,U>;
-      auto parts = kumi::map([&](auto const& v, auto const& w) { return eve::if_else(m, v, w); }, t, f);
+      using type  = as_cayley_dickson_t<T,U>;
+      using ret_t = std::conditional_t<eve::simd_value<Mask>, eve::as_wide_as_t<type,Mask>, type>;
+      constexpr eve::as<eve::element_type_t<type>> tgt = {};
 
-      if constexpr(eve::simd_value<Mask>) return eve::as_wide_as_t<type,Mask>{parts};
-      else                                return type{parts};
+      return ret_t{ kumi::map ( [&](auto const& v, auto const& w) { return eve::if_else(m, v, w); }
+                              , kyosu::convert(t, tgt), kyosu::convert(f, tgt)
+                              )
+                  };
     }
     else if constexpr(concepts::cayley_dickson<T> && !concepts::cayley_dickson<U>)
     {
@@ -136,7 +139,7 @@ namespace kyosu::_
   {
     using r_t = as_cayley_dickson_t<C0,C1,T>;
     return r_t{kumi::map([&t](auto const& e, auto const & f) { return eve::lerp(e, f, t); }, c0, c1)};
- }
+  }
 
   template<typename C>
   KYOSU_FORCEINLINE constexpr
@@ -174,5 +177,20 @@ namespace kyosu::_
   auto dispatch(eve::tag_of<kyosu::rec> const&, C c) noexcept
   {
     return conj(c)/sqr_abs(c);
-  }  
+  }
+  template<typename C0, concepts::cayley_dickson C1>
+  requires(dimension_v<C0> <= dimension_v<C1>)
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<convert> const&, C0 const & c, eve::as<C1> const & tgt) noexcept
+  {
+    using type = eve::as_wide_as_t<C1, C0>;
+
+    if      constexpr(std::same_as<eve::element_type_t<C0>,C1>) return c;
+    else if constexpr(dimension_v<C0> == 1ULL)                  return type{c};
+    else
+    {
+      using u_t = eve::underlying_type_t<C1>;
+      return kumi::apply([](auto const&... e) { return type{kyosu::convert(e, eve::as<u_t>{})...}; }, c);
+    }
+  }
 }

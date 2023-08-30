@@ -14,6 +14,7 @@
 #include <kyosu/functions/abs.hpp>
 #include <kyosu/functions/ceil.hpp>
 #include <kyosu/functions/conj.hpp>
+#include <kyosu/functions/convert.hpp>
 #include <kyosu/functions/cos.hpp>
 #include <kyosu/functions/cosh.hpp>
 #include <kyosu/functions/cot.hpp>
