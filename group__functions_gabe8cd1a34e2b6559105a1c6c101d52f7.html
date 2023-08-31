@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::if_else</title>
+<title>kyosu: kyosu::log10</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_gabe8cd1a34e2b6559105a1c6c101d52f7.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_ga6d65485712648eb40b8
 </div>
 
 <div class="contents">
-<a id="ga6d65485712648eb40b8dc0453d9c3baf" name="ga6d65485712648eb40b8dc0453d9c3baf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6d65485712648eb40b8dc0453d9c3baf">&#9670;&#160;</a></span>if_else</h2>
+<a id="gabe8cd1a34e2b6559105a1c6c101d52f7" name="gabe8cd1a34e2b6559105a1c6c101d52f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabe8cd1a34e2b6559105a1c6c101d52f7">&#9670;&#160;</a></span>log10</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_ga6d65485712648eb40b8
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::if_else = {}</td>
+          <td class="memname">kyosu::log10 = {}</td>
         </tr>
       </table>
   </td>
@@ -142,44 +142,25 @@ $(document).ready(function(){initNavTree('group__functions_ga6d65485712648eb40b8
 </table>
 </div><div class="memdoc">
 
-<p>Select a value between two arguments based on a logical mask. </p>
+<p>Computes the base 10 logarithm of the argument. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::value T, eve::value U, eve::value V&gt;</div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf">if_else</a>(T x, U, y, V z ) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gabe8cd1a34e2b6559105a1c6c101d52f7.html#gabe8cd1a34e2b6559105a1c6c101d52f7">log10</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> as_complex_t&lt;T&gt; <a class="code hl_variable" href="group__functions_gabe8cd1a34e2b6559105a1c6c101d52f7.html#gabe8cd1a34e2b6559105a1c6c101d52f7">log10</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga6d65485712648eb40b8dc0453d9c3baf_html_ga6d65485712648eb40b8dc0453d9c3baf"><div class="ttname"><a href="group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf">kyosu::if_else</a></div><div class="ttdeci">constexpr tags::callable_if_else if_else</div><div class="ttdoc">Select a value between two arguments based on a logical mask.</div><div class="ttdef"><b>Definition:</b> if_else.hpp:66</div></div>
+<div class="ttc" id="agroup__functions_gabe8cd1a34e2b6559105a1c6c101d52f7_html_gabe8cd1a34e2b6559105a1c6c101d52f7"><div class="ttname"><a href="group__functions_gabe8cd1a34e2b6559105a1c6c101d52f7.html#gabe8cd1a34e2b6559105a1c6c101d52f7">kyosu::log10</a></div><div class="ttdeci">constexpr tags::callable_log10 log10</div><div class="ttdoc">Computes the base 10 logarithm of the argument.</div><div class="ttdef"><b>Definition:</b> log10.hpp:78</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> types.hpp:14</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code> : Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
+<p>Returns the <code><a class="el" href="group__functions_gabe8cd1a34e2b6559105a1c6c101d52f7.html#gabe8cd1a34e2b6559105a1c6c101d52f7" title="Computes the base 10 logarithm of the argument.">log10(z)</a></code>. If z is an ordered value log10 returns a complex typed value.</p>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a>;</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> c = <a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;float&gt;</a>(3.5f,-2.9f);</div>
-<div class="line">  <span class="keyword">auto</span> q =  <a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">quaternion&lt;float&gt;</a>(1.f,2.f,3.f,4.f);</div>
-<div class="line">  <span class="keyword">auto</span> t = 1.0f;</div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf">kyosu::if_else</a>(t &gt; 2.0f, q, c);</div>
-<div class="line">  std::cout &lt;&lt; r &lt;&lt; std::endl;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__types_gaaa8536022a04b81b80cfe47246a4897f_html_gaaa8536022a04b81b80cfe47246a4897f"><div class="ttname"><a href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a></div><div class="ttdeci">cayley_dickson&lt; T, 4 &gt; quaternion</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:26</div></div>
-<div class="ttc" id="agroup__types_gad699121c78ba21aef370db14abdd67ec_html_gad699121c78ba21aef370db14abdd67ec"><div class="ttname"><a href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a></div><div class="ttdeci">cayley_dickson&lt; T, 2 &gt; complex</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:26</div></div>
-</div><!-- fragment --> 
+<div class="fragment"></div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
