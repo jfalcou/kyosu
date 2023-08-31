@@ -79,7 +79,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::is_not_finite> const&, C const& c) noexcept
   {
-    return kumi::all_of(c, [](auto const& e) { return eve::is_not_finite(e); });
+    return kumi::any_of(c, [](auto const& e) { return eve::is_not_finite(e); });
   }
 
 }

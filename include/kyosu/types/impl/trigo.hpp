@@ -41,6 +41,13 @@ namespace kyosu::_
 
   template<typename C>
   KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::sech> const&, C const& z) noexcept
+  {
+    return kyosu::rec(kyosu::cosh(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::sinh> const&, C const& z) noexcept
   {
     if constexpr(concepts::complex<C> )
@@ -69,6 +76,13 @@ namespace kyosu::_
       auto e = kyosu::exp(z);
       return eve::average(e, -kyosu::rec(e));
     }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::csch> const&, C const& z) noexcept
+  {
+    return kyosu::rec(kyosu::sinh(z));
   }
 
   template<typename C>
@@ -150,5 +164,114 @@ namespace kyosu::_
       return (e+2)/e;
     }
   }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::cos> const&, C const& z) noexcept
+  {
+    if constexpr(concepts::complex<C> )
+    {
+      return cosh(to_complex(-kyosu::imag(z), kyosu::real(z)));
+    }
+    else
+    {
+      auto p = kyosu::pure(z);
+      auto az = kyosu::abs(p);
+      auto [s, c] = eve::sincos(real(z));
+      auto w = -s*eve::sinhc(az);
+      return c*cosh(az)+w*pure(z);
+    }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::sec> const&, C const& z) noexcept
+  {
+    return kyosu::rec(kyosu::cos(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::sin> const&, C const& z) noexcept
+  {
+    if constexpr(concepts::complex<C> )
+    {
+      auto s = kyosu::sinh(to_complex(-kyosu::imag(z), kyosu::real(z)));
+      return to_complex(kyosu::imag(s), -kyosu::real(s));
+    }
+    else
+    {
+      auto p = kyosu::pure(z);
+      auto az = kyosu::abs(p);
+      auto [s, c] = eve::sincos(real(z));
+      auto w = c*eve::sinhc(az);
+      return s*cosh(az)+w*pure(z);
+    }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::csc> const&, C const& z) noexcept
+  {
+    return kyosu::rec(kyosu::sin(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::sincos> const&, C const& z) noexcept
+  {
+    if constexpr(concepts::complex<C> )
+    {
+      auto [sh, ch] = sinhcosh(to_complex(-kyosu::imag(z), kyosu::real(z)));
+      return kumi::tuple{to_complex(kyosu::imag(sh), -kyosu::real(sh)), ch};
+
+    }
+    else
+    {
+      auto p = kyosu::pure(z);
+      auto az = kyosu::abs(p);
+      auto [s, c] = eve::sincos(kyosu::real(z));
+      auto shc = eve::sinhc(az);
+      auto ch  = eve::cosh(az);
+      auto wc = c*shc;
+      auto ws =-s*shc;
+      auto sq = s*ch + wc*p;
+      auto cq = c*ch + ws*p;
+      return kumi::tuple{sq, cq};
+    }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::tan> const&, C const& z) noexcept
+  {
+    if constexpr(concepts::complex<C> )
+    {
+      auto t = kyosu::tanh(kyosu::to_complex(-kyosu::imag(z), kyosu::real(z)));
+      return kyosu::to_complex(kyosu::imag(t), -kyosu::real(t));
+    }
+    else
+    {
+      auto [s, c] = sincos(z);
+      return s/c;
+    }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::cot> const&, C const& z) noexcept
+  {
+    if constexpr(concepts::complex<C> )
+    {
+      auto r = kyosu::tan(z);
+      return kyosu::if_else(kyosu::is_infinite(r), kyosu::to_complex(eve::zero(eve::as(eve::underlying_type_t<C>()))), kyosu::rec(r));
+    }
+    else
+    {
+      auto [s, c] = sincos(z);
+      return c/s;
+    }
+  }
+
 
 }
