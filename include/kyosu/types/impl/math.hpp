@@ -153,21 +153,15 @@ namespace kyosu::_
       auto v = kyosu::pure(z);
       auto s = kyosu::real(z);
       auto z1 = (eve::acos(s/az)/abs(v))*v+eve::log(az);
-//       auto tmp =  kyosu::if_else( kyosu::is_real(z)
-//                                 ,  kyosu::log(kyosu::real(z))
-//                                 , z1
-//                                 );
-//       return tmp;
-
-//       return kyosu::if_else( kyosu::is_eqz(z)
-//                            , eve::minf(eve::as(az))
-//                            , tmp
-//                            );
-
-     return kyosu::if_else( kyosu::is_eqz(z)
+      auto tmp =  kyosu::if_else( kyosu::is_real(z)
+                                ,  kyosu::log(kyosu::real(z))
+                                , z1
+                                );
+      return kyosu::if_else( kyosu::is_eqz(z)
                            , eve::minf(eve::as(az))
-                           , z1
+                           , tmp
                            );
+
     }
   }
 
@@ -248,69 +242,68 @@ namespace kyosu::_
       auto v = kyosu::pure(z);
       auto s = kyosu::real(incz);
       auto z1 = (eve::acos(s/az)/abs(v))*v+ eve::half(eve::as<e_t>())*eve::log1p(az2);
-//       auto tmp =  kyosu::if_else( kyosu::is_real(z)
-//                                 , kyosu::log(kyosu::real(z))
-//                                 , z1
-//                                 );
-//       return tmp;
-
-//       return kyosu::if_else( kyosu::is_eqz(z)
-//                            , eve::minf(eve::as(az))
-//                            , tmp
-//                            );
-
+      auto tmp =  kyosu::if_else( kyosu::is_real(z)
+                                , kyosu::log(kyosu::real(z))
+                                , z1
+                                );
       return kyosu::if_else( kyosu::is_eqz(z)
                            , eve::minf(eve::as(az))
-                           , z1
+                           , tmp
                            );
-    }
+
+     }
   }
 
   template<typename C>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::sqrt> const&, C const& z) noexcept
   {
-//     if constexpr(kyosu::concepts::complex<C>)
-//     {
-//       //always compute the sqrt of the complex with positive imaginary part
-//       //then conjugate if necessary
-//       auto [rz, iz] = z;
-//       auto negimag = eve::is_negative(iz);
-//       auto x = eve::abs(rz);
-//       auto y = eve::abs(iz);
-//       auto iaz = eve::if_else(negimag, -iz, iz); // always >= 0 or -Nan
-//       auto gtxy = (x > y);
-//       auto gezrz = eve::is_gez(rz);
-//       auto r = eve::if_else(gtxy, y/x, x/y);
-//       auto rr= eve::sqrt(eve::inc(eve::sqr(r)));
-//       auto sqrtx = eve::sqrt(x);
-//       auto w = kyosu::if_else(gtxy,
-//                        sqrtx*eve::sqrt(eve::half(eve::as(r))*eve::inc(rr)),
-//                        sqrt(y)*eve::sqrt(eve::half(eve::as(r))*(r+rr)));
-//       auto is_real_z = kyosu::is_real(z);
-//       auto rr1 = kyosu::if_else(is_real_z, sqrtx, w);
-//       auto ii1 = kyosu::if_else(is_real_z, eve::zero, iaz*eve::half(eve::as(r))/w);
-//       auto res = to_complex(rr1, ii1);
-//       return res;
-// //       res = kyosu::if_else(gezrz, res, to_complex(kyosu::imag(res), kyosu::real(res)));
-// //       if (eve::any(is_not_finite(z))) [[unlikely]]
-// //       {
-// //         res = kyosu::if_else(rz == minf(eve::as(rz))
-// //                      , if_else( is_nan(iz), to_complex(iz, eve::minf(as(rz))),to_complex(eve::zero(as(rz)), eve::inf(as(rz))))
-// //                      , res
-// //                      );
-// //         res = kyosu::if_else(rz == eve::inf(eve::as(rz))
-// //                      , if_else( eve::is_nan(iz), to_complex(eve::inf(as(rz)), iz), to_complex( eve::inf(as(rz)), eve::zero(as(rz)) ))
-// //                      , res
-// //                      );
-// //         res = kyosu::if_else(eve::is_nan(rz), to_complex(rz, rz), res);
-// //         auto infty = eve::inf(eve::as(iaz));
-// //         res = kyosu::if_else(iaz == infty,  to_complex(infty, infty), res);
-// //       }
-// //       return if_else(negimag, kyosu::conj(res), res);
-//     }
-//     else
-//     {
+    if constexpr(kyosu::concepts::complex<C>)
+    {
+      //always compute the sqrt of the complex with positive imaginary part
+      //then conjugate if necessary
+      auto [rz, iz] = z;
+      auto negimag = eve::is_negative(iz);
+      auto x = eve::abs(rz);
+      auto y = eve::abs(iz);
+      auto iaz = eve::if_else(negimag, -iz, iz); // always >= 0 or -Nan
+      auto gtxy = (x > y);
+      auto gezrz = eve::is_gez(rz);
+      auto r = eve::if_else(gtxy, y/x, x/y);
+      auto rr= eve::sqrt(eve::inc(eve::sqr(r)));
+      auto sqrtx = eve::sqrt(x);
+      auto w = eve::if_else(gtxy,
+                            sqrtx*eve::sqrt(eve::half(eve::as(r))*eve::inc(rr)),
+                            eve::sqrt(y)*eve::sqrt(eve::half(eve::as(r))*(r+rr)));
+      auto is_real_z = kyosu::is_real(z);
+      C res;
+      auto rr1 = eve::if_else(is_real_z, sqrtx, w);
+      auto ii1 = eve::if_else(is_real_z, eve::zero, iaz*eve::half(eve::as(r))/w);
+//      auto res = kyosu::to_complex(rr1, ii1);
+      res = kyosu::if_else(gezrz
+                          , to_complex(rr1, ii1)
+                          , to_complex(ii1, rr1)
+                          );
+      if (eve::any(is_not_finite(z))) [[unlikely]]
+      {
+        res = kyosu::if_else(rz == eve::minf(eve::as(rz))
+                            , kyosu::if_else( eve::is_nan(iz), to_complex(iz, eve::minf(eve::as(rz)))
+                                            , to_complex(eve::zero(eve::as(rz)), eve::inf(eve::as(rz))))
+                            , res
+                            );
+        res = kyosu::if_else(rz == eve::inf(eve::as(rz))
+                            , if_else( eve::is_nan(iz), to_complex(eve::inf(eve::as(rz)), iz)
+                                     , to_complex( eve::inf(eve::as(rz)), eve::zero(eve::as(rz)) ))
+                            , res
+                            );
+        res = kyosu::if_else(eve::is_nan(rz), to_complex(rz, rz), res);
+        auto infty = eve::inf(eve::as(iaz));
+        res = kyosu::if_else(iaz == infty,  to_complex(infty, infty), res);
+      }
+      return if_else(negimag, kyosu::conj(res), res);
+    }
+    else
+    {
       auto r = kyosu::abs(z);
       auto theta = eve::acos(real(z)/r);
       auto u = kyosu::sign(kyosu::pure(z));
@@ -318,7 +311,7 @@ namespace kyosu::_
       auto res = u*s;
       kyosu::real(res) = c;
       return kyosu::if_else(eve::is_eqz(r), eve::zero(eve::as(z)), res*eve::sqrt(r));
-//    }
+    }
   }
 
 }

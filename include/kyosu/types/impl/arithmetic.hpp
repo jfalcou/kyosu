@@ -193,6 +193,7 @@ namespace kyosu::_
       using u_t = eve::underlying_type_t<C1>;
       return kumi::apply([](auto const&... e) { return type{kyosu::convert(e, eve::as<u_t>{})...}; }, c);
     }
+  }
 
   template<typename C>
   KYOSU_FORCEINLINE constexpr
