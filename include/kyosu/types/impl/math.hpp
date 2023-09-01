@@ -279,7 +279,6 @@ namespace kyosu::_
       C res;
       auto rr1 = eve::if_else(is_real_z, sqrtx, w);
       auto ii1 = eve::if_else(is_real_z, eve::zero, iaz*eve::half(eve::as(r))/w);
-//      auto res = kyosu::to_complex(rr1, ii1);
       res = kyosu::if_else(gezrz
                           , to_complex(rr1, ii1)
                           , to_complex(ii1, rr1)
@@ -314,4 +313,29 @@ namespace kyosu::_
     }
   }
 
+  template<eve::floating_value T, typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::lpnorm> const&, T const & p, Cs const &... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0) return 0.0f;
+    if constexpr(sizeof...(zs) == 1) return kyosu::abs(zs...);
+    else return eve::lpnorm(p, kyosu::abs(zs)...);
+  }
+
+  template<typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::hypot> const&, Cs const &... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0) return 0.0f;
+    if constexpr(sizeof...(zs) == 1) return kyosu::abs(zs...);
+    else return eve::hypot(kumi::flatten(kumi::cat(zs...)));
+  }
+
+  template<typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::manhattan> const&, Cs const &... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0) return 0.0f;
+    else return eve::manhattan(kumi::flatten(kumi::cat(zs...)));
+  }
 }
