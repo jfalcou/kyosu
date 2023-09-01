@@ -101,16 +101,6 @@ namespace kyosu
     }
 
     //==================================================================================================================
-    // Main function dispatchers
-    //==================================================================================================================
-    KYOSU_FORCEINLINE
-    friend constexpr auto tag_invoke(eve::callable auto const& f, auto, eve::like<cayley_dickson> auto&&... c) noexcept
-                  -> decltype(_::dispatch(f, KYOSU_FWD(c)...))
-    {
-      return _::dispatch(f, KYOSU_FWD(c)...);
-    }
-
-    //==================================================================================================================
     //  Tuple-like behavior
     //==================================================================================================================
     using data_type       = kumi::result::generate_t<static_size,underlying_type>;
@@ -126,6 +116,17 @@ namespace kyosu
 
   template<std::size_t I, typename T, unsigned int N>
   constexpr auto get(cayley_dickson<T,N> const& c) noexcept { return kumi::get<I>(c.contents); }
+
+  //==================================================================================================================
+  // Main function dispatchers
+  //==================================================================================================================
+  template<typename... T>
+  requires(concepts::cayley_dickson<T> || ... )
+  KYOSU_FORCEINLINE   constexpr auto tag_invoke(eve::callable auto const& f, auto, T&&... c) noexcept
+                  ->  decltype(_::dispatch(f, KYOSU_FWD(c)...))
+  {
+    return _::dispatch(f, KYOSU_FWD(c)...);
+  }
 
   //==================================================================================================================
   //  Tag invoke override for if_else - Outside so it can properly deals with the complicated parameters of if_else
@@ -148,7 +149,6 @@ namespace kyosu
   {
     return _::dispatch(f, c, tgt);
   }
-
 
   //==================================================================================================================
   //  Tag invoke override for parts extraction - Outside so they can see get<I>(c)
