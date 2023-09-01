@@ -15,6 +15,7 @@
 #include <kyosu/types/impl/predicates.hpp>
 #include <kyosu/types/impl/math.hpp>
 #include <kyosu/types/impl/trigo.hpp>
+#include <kyosu/types/impl/complex/predicates.hpp>
 #include <bit>
 
 namespace kyosu
