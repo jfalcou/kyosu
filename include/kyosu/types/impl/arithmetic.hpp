@@ -119,17 +119,21 @@ namespace kyosu::_
     }
   }
 
-  template<concepts::cayley_dickson  C0, concepts::cayley_dickson  C1>
+  template<typename  C0, typename  C1>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::dist> const&, C0 const & c0, C1 const &  c1) noexcept
   {
     return kyosu::abs(c0-c1);
   }
 
-  template<concepts ::cayley_dickson  C0, concepts::cayley_dickson  C1>
+  template<typename  C0, typename  C1>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::reldist> const&, C0 const & c0, C1 const & c1) noexcept
   {
+//     using r_t = kyosu::as_cayley_dickson_t<C0,C1>;
+//     using er_t = eve::element_type_t<r_t>;
+//     auto cc0 = kyosu::convert(c0, eve::as<er_t>());
+//     auto cc1 = kyosu::convert(c1, eve::as<er_t>());
     return kyosu::dist(c0, c1)/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
   }
 

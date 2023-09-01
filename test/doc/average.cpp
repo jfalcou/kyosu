@@ -43,18 +43,9 @@ int main()
 
   std::cout << "Mixed:  "<< "\n";
   std::cout << kyosu::average(c0, q1) << std::endl;
+  std::cout << kyosu::average(e0, q1) << std::endl;
+  std::cout << kyosu::average(c0, wq1) << std::endl;
+  std::cout << kyosu::average(we0, q1) << std::endl;
 
-  using r_t = kyosu::as_cayley_dickson_t<q_t, c_t>;
-  using er_t = eve::element_type_t<r_t>;
-  std::cout << kyosu::average(kyosu::convert(c0, eve::as<er_t>())
-                             , kyosu::convert(q1, eve::as<er_t>())) << std::endl;
-
-
-  auto z = r_t{kumi::map([](auto const& e, auto const& f) { return eve::average(e, f); }
-                        , kyosu::convert(c0, eve::as<er_t>())
-                        , kyosu::convert(q1, eve::as<er_t>())
-                        )
-  };
-  std::cout << z << std::endl;
   return 0;
 }
