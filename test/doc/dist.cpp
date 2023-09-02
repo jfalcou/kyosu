@@ -37,6 +37,8 @@ int main()
   wq_t wq0(q0);
   wq_t wq1(q1);
   std::cout << wq0 << ", " << wq1 << " -> " << dist(wq0, wq1) << "\n";
+  std::cout << wq0 << ", " << q1 << " -> " << dist(wq0, q1) << "\n";
+  std::cout << wq0 << ", " << e1 << " -> " << dist(wq0, e1) << "\n";
 
   return 0;
 }

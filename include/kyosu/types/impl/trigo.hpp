@@ -35,7 +35,7 @@ namespace kyosu::_
     else
     {
       auto e = kyosu::exp(z);
-      return eve::average(e, rec(e));
+      return kyosu::average(e, rec(e));
     }
   }
 
