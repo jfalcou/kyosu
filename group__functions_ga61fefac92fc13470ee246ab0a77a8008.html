@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::real</title>
+<title>kyosu: kyosu::average</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_gaa9d12dd4e1420039046c737ddd3240be.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga61fefac92fc13470ee246ab0a77a8008.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_gaa9d12dd4e1420039046
 </div>
 
 <div class="contents">
-<a id="gaa9d12dd4e1420039046c737ddd3240be" name="gaa9d12dd4e1420039046c737ddd3240be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa9d12dd4e1420039046c737ddd3240be">&#9670;&#160;</a></span>real</h2>
+<a id="ga61fefac92fc13470ee246ab0a77a8008" name="ga61fefac92fc13470ee246ab0a77a8008"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga61fefac92fc13470ee246ab0a77a8008">&#9670;&#160;</a></span>average</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_gaa9d12dd4e1420039046
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::real = {}</td>
+          <td class="memname">kyosu::average = {}</td>
         </tr>
       </table>
   </td>
@@ -142,25 +142,25 @@ $(document).ready(function(){initNavTree('group__functions_gaa9d12dd4e1420039046
 </table>
 </div><div class="memdoc">
 
-<p>Extracts the real part of a value. </p>
+<p>Computes the average of the two parameters. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
-<div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>&amp; <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(T&amp; z)        <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>  <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T&amp;    <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(T&amp; z)        <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T     <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaa9d12dd4e1420039046c737ddd3240be_html_gaa9d12dd4e1420039046c737ddd3240be"><div class="ttname"><a href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">kyosu::real</a></div><div class="ttdeci">constexpr tags::callable_real real</div><div class="ttdoc">Extracts the real part of a value.</div><div class="ttdef"><b>Definition:</b> real.hpp:83</div></div>
+<div class="fragment"><div class="line">   <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="line">   {</div>
+<div class="line">      <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
+<div class="line">      <span class="keyword">template</span>&lt;eve::ordered_value T0, kyosu::concepts::cayley_dickson T1&gt;             &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
+<div class="line">      <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
+<div class="line">      <span class="keyword">template</span>&lt;eve::ordered_value T0, ordered_value T1&gt;                               &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
+<div class="line">!   }</div>
+<div class="ttc" id="agroup__functions_ga61fefac92fc13470ee246ab0a77a8008_html_ga61fefac92fc13470ee246ab0a77a8008"><div class="ttname"><a href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">kyosu::average</a></div><div class="ttdeci">constexpr tags::callable_average average</div><div class="ttdoc">Computes the average of the two parameters.</div><div class="ttdef"><b>Definition:</b> average.hpp:77</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> predicates.hpp:12</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Original value.</li>
+<li><code>z0, z1</code> : Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the real part of its argument. For real inputs the call reduces to identity.</p>
+<p>Returns the average of the two arguments .</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -168,33 +168,48 @@ $(document).ready(function(){initNavTree('group__functions_gaa9d12dd4e1420039046
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">kyosu::real</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">kyosu::average</a>;</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a>;</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a>;</div>
+<div class="line">  <span class="keyword">using </span>e_t = float;</div>
+<div class="line">  <span class="keyword">using </span>c_t = <a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;float&gt;</a>;</div>
+<div class="line">  <span class="keyword">using </span>q_t = <a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">quaternion&lt;float&gt;</a>;</div>
+<div class="line">  <span class="keyword">using </span>we_t = eve::wide&lt;float, eve::fixed&lt;2&gt;&gt;;</div>
+<div class="line">  <span class="keyword">using </span>wc_t = eve::wide&lt;complex&lt;float&gt;, eve::fixed&lt;2&gt;&gt;;</div>
+<div class="line">  <span class="keyword">using </span>wq_t = eve::wide&lt;quaternion&lt;float&gt;, eve::fixed&lt;2&gt;&gt;;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        &quot;</span>;</div>
-<div class="line">  <span class="keywordtype">float</span> f = 72.9f;</div>
-<div class="line">  std::cout &lt;&lt; f &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(f) &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span>;</div>
-<div class="line">  <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(f) = -9.f;</div>
-<div class="line">  std::cout &lt;&lt; f &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  e_t e0(1);</div>
+<div class="line">  e_t e1(2);</div>
+<div class="line">  std::cout &lt;&lt; e0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; e1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span>  &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(e0, e1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; e0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; e0 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span>  &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(e0, e0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  we_t we0(e0);</div>
+<div class="line">  we_t we1(e1);</div>
+<div class="line">  std::cout &lt;&lt; we0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; we1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(we0, we1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     &quot;</span>;</div>
-<div class="line">  <span class="keyword">auto</span> z = <a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;float&gt;</a>(3.5f,-2.9f);</div>
-<div class="line">  std::cout &lt;&lt; z &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(z) &lt;&lt;  <span class="stringliteral">&quot; =&gt; &quot;</span>;</div>
-<div class="line">  <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(z) = 11.23f;</div>
-<div class="line">  std::cout &lt;&lt; z &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  c_t c0(1, 5);</div>
+<div class="line">  c_t c1(5, 9);</div>
+<div class="line">  std::cout &lt;&lt; c0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; c1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span>  &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(c0, c1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; c0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; c0 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span>  &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(c0, c0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  wc_t wc0(c0, c1);</div>
+<div class="line">  wc_t wc1(c1, c1);</div>
+<div class="line">  std::cout &lt;&lt; wc0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; wc1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(wc0, wc1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>;</div>
-<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">quaternion&lt;double&gt;</a>(1.,2.,3.,4.);</div>
-<div class="line">  std::cout &lt;&lt; q &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(q)  &lt;&lt;  <span class="stringliteral">&quot; =&gt; &quot;</span>;</div>
-<div class="line">  <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(q) = 42.7;</div>
-<div class="line">  std::cout &lt;&lt; q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  q_t q0(1, 5, 2, 3);</div>
+<div class="line">  q_t q1(5, 9, 6, 7);</div>
+<div class="line">  std::cout &lt;&lt; q0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; q1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span>  &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(q0, q1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; q0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; q0 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span>  &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(q0, q0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  wq_t wq0(q0, q1);</div>
+<div class="line">  wq_t wq1(q1, q1);</div>
+<div class="line">  std::cout &lt;&lt; wq0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; wq1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(wq0, wq1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;SIMD:        &quot;</span>;</div>
-<div class="line">  eve::wide&lt;complex&lt;double&gt;, eve::fixed&lt;2&gt;&gt; wz(<a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;double&gt;</a>(1.3,-3.7));</div>
-<div class="line">  std::cout &lt;&lt; wz &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(wz) &lt;&lt;   <span class="stringliteral">&quot; =&gt; &quot;</span>;</div>
-<div class="line">  <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">real</a>(wz) = eve::wide&lt;double, eve::fixed&lt;2&gt;&gt;{13.37,63.24};</div>
-<div class="line">  std::cout &lt;&lt; wz &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Mixed:  &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">kyosu::average</a>(c0, q1) &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">kyosu::average</a>(e0, q1) &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">kyosu::average</a>(c0, wq1) &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">kyosu::average</a>(we0, q1) &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
