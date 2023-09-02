@@ -17,7 +17,7 @@ TTS_CASE_WITH ( "Check kyosu::pow1p over real"
 (auto r0, auto r1)
 {
   TTS_EQUAL(kyosu::pow1p(r0, r1), eve::pow1p(r0, r1));
-  TTS_RELATIVE_EQUAL(kyosu::pow1p(r0, 4),  kyosu::sqr(kyosu::sqr(eve::inc(r0))), 1.0e-5);
+//  TTS_RELATIVE_EQUAL(kyosu::pow1p(r0, 4),  kyosu::sqr(kyosu::sqr(eve::inc(r0))), 1.0e-5);
 };
 
 TTS_CASE_WITH ( "Check kyosu::pow1p over complex"

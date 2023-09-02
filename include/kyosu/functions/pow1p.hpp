@@ -20,7 +20,7 @@ namespace kyosu::tags
                                                , eve::ordered_value auto const& v0
                                                , eve::ordered_value auto const& v1) noexcept
     {
-      return eve::pow(eve::inc(v0), v1);
+      return eve::pow1p(v0, v1);
     }
 
     KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1) const noexcept
