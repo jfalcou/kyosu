@@ -10,6 +10,7 @@
 #include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
 #include <kyosu/types/impl/reals.hpp>
+#include <iostream>
 
 namespace kyosu::_
 {
@@ -125,6 +126,14 @@ namespace kyosu::_
       const auto ipi = c_t(u_t(0), eve::pi<eve::as<u_t>());
       return kyosu::exp(ipi*z);
     }
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::log_abs> const&, C const& z) noexcept
+  {
+    using u_t = eve::underlying_type_t<C>;
+    return eve::half(eve::as<u_t>())*eve::log(kyosu::sqr_abs(z));
   }
 
   template<typename C>
@@ -346,17 +355,21 @@ namespace kyosu::_
     using r_t = kyosu::as_cayley_dickson_t<C0,C1>;
     using er_t = eve::element_type_t<r_t>;
     using u_t  = eve::underlying_type_t<er_t>;
-    if constexpr(integral_value<C1>)
+    if constexpr(eve::integral_value<C1>)
     {
-      if constexpr( unsigned_value<C1> )
+      if constexpr( eve::unsigned_value<C1> )
       {
         C0 base = c0;
         C1 expo = c1;
-        auto const o = eve::one(as<u_t>());
-        r_t result = o;
-        while( eve::any(to_logical(expo)) )
+        auto const o = eve::one(eve::as<u_t>());
+        r_t result(o);
+        std::cout << "result " << result << std::endl;
+        while(true)
         {
-          result *= kyosu::if_else(eve::is_odd(expo), base, o);
+          if  (eve::all(eve::is_eqz(expo))) break;
+          std::cout << "expo " << expo << " base " << base <<  "result " << result << std::endl;
+          result = kyosu::if_else(eve::is_odd(expo), result*base, o);
+          std::cout << "expo " << expo << " base " << base << "result " << result << std::endl;
           expo = (expo >> 1);
           base = kyosu::sqr(base);
         }
@@ -364,20 +377,19 @@ namespace kyosu::_
       }
       else
       {
-        using ic1_t = as_integer_t<C1, unsigned>;
-        auto tmp = kyosu::pow(c0, bit_cast(eve::abs(c1), as<ic1_t>()));
-        return kyosu::if_else(is_ltz(c1), kyosu::rec(tmp), tmp);
+        using ic1_t = eve::as_integer_t<C1, unsigned>;
+        auto tmp = kyosu::pow(c0, eve::bit_cast(eve::abs(c1), eve::as<ic1_t>()));
+        return kyosu::if_else(eve::is_ltz(c1), kyosu::rec(tmp), tmp);
       }
     }
     else if (kyosu::concepts::complex<C0> && kyosu::concepts::complex<C1>)
     {
       r_t r;
-      auto arg = [](auto c){return eve::pedantic(eve::atan2(kyosu:::imag(c), kyosu::real(c))); };
-      if constexpr(floating_value<C0> ) // c1 is complex c0 is real
+      if constexpr(eve::floating_value<C0> && kyosu::concepts::complex<C1>) // c1 is complex c0 is real
       {
         auto [rc1, ic1] = c1;
         auto lgac0 = eve::log_abs(c0);
-        auto ang = eve::if_else(kyosu::is_real(c1), zero, ic1*lgac0);
+        auto ang = eve::if_else(kyosu::is_real(c1), eve::zero, ic1*lgac0);
         auto mod = eve::pow(c0, rc1);
         auto r1 = kyosu::polar(mod, ang);
         auto isposc0 = eve::is_positive(c0);
@@ -387,27 +399,25 @@ namespace kyosu::_
         }
         else
         {
-          auto rho = eve::exp(eve::diff_of_prod(lgac0, rc1, ic1, eve::pi(as(rc1))));
-          auto theta = eve::pedantic(eve::sum_of_prod)(eve::pi(as(rc1)), rc1, ic1, lgac0);
+          auto rho = eve::exp(eve::diff_of_prod(lgac0, rc1, ic1, eve::pi(eve::as(rc1))));
+          auto theta = eve::pedantic(eve::sum_of_prod)(eve::pi(eve::as(rc1)), rc1, ic1, lgac0);
           auto r2 = rho*kyosu::exp_i(theta);
           r = kyosu::if_else(isposc0, r1, r2);
         }
       }
-      else if constexpr(floating_value<C1> ) // c0 is complex c1 is real
+      else if constexpr(kyosu::concepts::complex<C0> && eve::floating_value<C1> ) // c0 is complex c1 is real
       {
-        auto flintc1 = eve::is_flint(c1);
-        if (eve::any(flintc1)) r = kyosu::pow(c0, int_(c1));
-        auto lc0 = eve::log_abs(c0);
-        auto argc0 = arg(c0);
+        auto lc0 = kyosu::log_abs(c0);
+        auto argc0 = kyosu::arg(c0);
         auto rho = eve::exp(lc0*c1);
         auto theta = argc0*c1;
-        r = kyosu::if_else(flintc1, r, rho*kyosu::exp_i(theta));
+        return rho*kyosu::exp_i(theta);
       }
-      else  // c0 and c1 are complex
+      else if constexpr( kyosu::concepts::complex<C0> && kyosu::concepts::complex<C1>)// c0 and c1 are complex
       {
         auto [rc1, ic1] = c1;
-        auto lc0 = eve::log_abs(c0);
-        auto argc0 = arg(c0);
+        auto lc0 = kyosu::log_abs(c0);
+        auto argc0 = kyosu::arg(c0);
         auto rho = eve::exp(eve::pedantic(eve::diff_of_prod)(lc0, rc1, ic1, argc0));
         auto theta = eve::pedantic(eve::sum_of_prod)(argc0, rc1, ic1, lc0);
         r = rho*exp_i(theta);
@@ -418,7 +428,7 @@ namespace kyosu::_
           r = kyosu::if_else(realc0, rr, r);
         }
       }
-      r = kyosu::if_else(kyosu::is_eqz(c1), eve::one(as<u_t>()), r);
+      r = kyosu::if_else(kyosu::is_eqz(c1), eve::one(eve::as<u_t>()), r);
       return r;
     }
     else
@@ -427,7 +437,34 @@ namespace kyosu::_
       auto cc1 = kyosu::convert(c1, eve::as<er_t>());
 
       auto r = kyosu::exp(kyosu::log(cc0)*cc1);
-      return kyosu::if_else (kyosu::is_eqz(cc0), kyosu::if_else(is_eqz(cc1), one(as<u_t>()), zero(as<u_t>())), r);
+      return kyosu::if_else (kyosu::is_eqz(cc0)
+                            , eve::if_else(kyosu::is_eqz(cc1)
+                                            , eve::one(eve::as<u_t>())
+                                            , eve::zero(eve::as<u_t>()))
+                            , r
+                            );
     }
+  }
+
+  template<typename  C0, typename  C1>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::pow_abs> const&, C0 const & c0, C1 const &  c1) noexcept
+  {
+    auto ac0 = kyosu::sqr_abs(c0);
+    return kyosu::pow(ac0, c1*eve::half(eve::as(kyosu::real(c0))));
+  }
+
+  template<typename  C0, typename  C1>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::powm1> const&, C0 const & c0, C1 const &  c1) noexcept
+  {
+    return kyosu::dec(kyosu::pow(c0, c1));
+  }
+
+  template<typename  C0, typename  C1>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::pow1p> const&, C0 const & c0, C1 const &  c1) noexcept
+  {
+    return kyosu::pow(kyosu::inc(c0), c1);
   }
 }

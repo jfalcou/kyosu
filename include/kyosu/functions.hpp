@@ -8,8 +8,8 @@
 #pragma once
 
 //======================================================================================================================
-//! @defgroup functions Functions
-//! @brief Functions performing computations over complex, quaternions and octonions.
+//! @defgroup functions Cayley-Dickson Functions
+//! @brief Functions performing computations over all caylet-dickson types complex, quaternions, octonions...
 //======================================================================================================================
 #include <kyosu/functions/abs.hpp>
 #include <kyosu/functions/average.hpp>
@@ -42,7 +42,6 @@
 #include <kyosu/functions/is_equal.hpp>
 #include <kyosu/functions/is_eqz.hpp>
 #include <kyosu/functions/is_finite.hpp>
-#include <kyosu/functions/is_imag.hpp>
 #include <kyosu/functions/is_infinite.hpp>
 #include <kyosu/functions/is_nan.hpp>
 #include <kyosu/functions/is_nez.hpp>
@@ -57,6 +56,7 @@
 #include <kyosu/functions/kpart.hpp>
 #include <kyosu/functions/lerp.hpp>
 #include <kyosu/functions/log.hpp>
+#include <kyosu/functions/log_abs.hpp>
 #include <kyosu/functions/log1p.hpp>
 #include <kyosu/functions/log10.hpp>
 #include <kyosu/functions/log2.hpp>
@@ -65,6 +65,10 @@
 #include <kyosu/functions/minus.hpp>
 #include <kyosu/functions/nearest.hpp>
 #include <kyosu/functions/oneminus.hpp>
+#include <kyosu/functions/pow.hpp>
+#include <kyosu/functions/powm1.hpp>
+#include <kyosu/functions/pow1p.hpp>
+#include <kyosu/functions/pow_abs.hpp>
 #include <kyosu/functions/pure.hpp>
 #include <kyosu/functions/purepart.hpp>
 #include <kyosu/functions/real.hpp>
@@ -83,3 +87,11 @@
 #include <kyosu/functions/tan.hpp>
 #include <kyosu/functions/tanh.hpp>
 #include <kyosu/functions/trunc.hpp>
+
+//======================================================================================================================
+//! @brief Functions performing computations over complex or real elements only.
+//======================================================================================================================
+
+#include <kyosu/complex/arg.hpp>
+#include <kyosu/complex/is_imag.hpp>
+#include <kyosu/complex/polar.hpp>
