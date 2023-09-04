@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quaternion_0',['quaternion',['../group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f',1,'kyosu']]]
+  ['purepart_0',['purepart',['../group__functions_ga3d4a351565ed14e9021990fa72f9de4a.html#ga3d4a351565ed14e9021990fa72f9de4a',1,'kyosu']]]
 ];

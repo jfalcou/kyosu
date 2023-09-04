@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['lerp_0',['lerp',['../group__functions_gaf190a649d5907b9f6c177bb100a73c8d.html#gaf190a649d5907b9f6c177bb100a73c8d',1,'kyosu']]],
-  ['licence_1',['Licence',['../licence.html',1,'']]],
-  ['log_2',['log',['../group__functions_ga398aa088354c3b9d0a0a1b5d6b7145f9.html#ga398aa088354c3b9d0a0a1b5d6b7145f9',1,'kyosu']]],
-  ['log10_3',['log10',['../group__functions_gabe8cd1a34e2b6559105a1c6c101d52f7.html#gabe8cd1a34e2b6559105a1c6c101d52f7',1,'kyosu']]],
-  ['log1p_4',['log1p',['../group__functions_ga42fce115bbd07cb330a84af0213c656d.html#ga42fce115bbd07cb330a84af0213c656d',1,'kyosu']]],
-  ['log2_5',['log2',['../group__functions_gafb007a0b170f27331d8aa088e9f8f0b0.html#gafb007a0b170f27331d8aa088e9f8f0b0',1,'kyosu']]]
+  ['cayley_5fdickson_0',['cayley_dickson',['../conceptkyosu_1_1concepts_1_1cayley__dickson.html',1,'kyosu::concepts']]],
+  ['complex_1',['complex',['../conceptkyosu_1_1concepts_1_1complex.html',1,'kyosu::concepts']]],
+  ['kpart_2',['kpart',['../group__functions_ga057662e8933c9837bb4bbb5ffb2822f0.html#ga057662e8933c9837bb4bbb5ffb2822f0',1,'kyosu']]],
+  ['kyosu_3',['kyosu',['../namespacekyosu.html',1,'']]],
+  ['octonion_4',['octonion',['../conceptkyosu_1_1concepts_1_1octonion.html',1,'kyosu::concepts']]],
+  ['quaternion_5',['quaternion',['../conceptkyosu_1_1concepts_1_1quaternion.html',1,'kyosu::concepts']]]
 ];
