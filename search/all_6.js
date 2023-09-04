@@ -7,7 +7,7 @@ var searchData=
   ['is_5fequal_4',['is_equal',['../group__functions_gabfab93a2a2b4f527d3c69eeb13856d2c.html#gabfab93a2a2b4f527d3c69eeb13856d2c',1,'kyosu']]],
   ['is_5feqz_5',['is_eqz',['../group__functions_ga5ed3799fdd8b66d17a274669dcf3319b.html#ga5ed3799fdd8b66d17a274669dcf3319b',1,'kyosu']]],
   ['is_5ffinite_6',['is_finite',['../group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f',1,'kyosu']]],
-  ['is_5fimag_7',['is_imag',['../group__functions_ga21d5d167082826101212cdd740c8c572.html#ga21d5d167082826101212cdd740c8c572',1,'kyosu']]],
+  ['is_5fimag_7',['is_imag',['../group__functions_gaa370bac6943c4ab923e63d86dcea41ea.html#gaa370bac6943c4ab923e63d86dcea41ea',1,'kyosu']]],
   ['is_5finfinite_8',['is_infinite',['../group__functions_ga9c043e0de4393e03663a8b017f3776d1.html#ga9c043e0de4393e03663a8b017f3776d1',1,'kyosu']]],
   ['is_5fnan_9',['is_nan',['../group__functions_ga686170a43d13c97096af719b7c0e7fda.html#ga686170a43d13c97096af719b7c0e7fda',1,'kyosu']]],
   ['is_5fnez_10',['is_nez',['../group__functions_ga7ab67d971ae8c2c4d99fe414d6085116.html#ga7ab67d971ae8c2c4d99fe414d6085116',1,'kyosu']]],

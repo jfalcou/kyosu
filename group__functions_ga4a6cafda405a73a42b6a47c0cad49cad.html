@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::sqr_abs</title>
+<title>kyosu: kyosu::polar</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga297cbe86ab12760ec934f76879f805d0.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga4a6cafda405a73a42b6a47c0cad49cad.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_ga297cbe86ab12760ec93
 </div>
 
 <div class="contents">
-<a id="ga297cbe86ab12760ec934f76879f805d0" name="ga297cbe86ab12760ec934f76879f805d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga297cbe86ab12760ec934f76879f805d0">&#9670;&#160;</a></span>sqr_abs</h2>
+<a id="ga4a6cafda405a73a42b6a47c0cad49cad" name="ga4a6cafda405a73a42b6a47c0cad49cad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4a6cafda405a73a42b6a47c0cad49cad">&#9670;&#160;</a></span>polar</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_ga297cbe86ab12760ec93
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::sqr_abs = {}</td>
+          <td class="memname">kyosu::polar = {}</td>
         </tr>
       </table>
   </td>
@@ -142,24 +142,23 @@ $(document).ready(function(){initNavTree('group__functions_ga297cbe86ab12760ec93
 </table>
 </div><div class="memdoc">
 
-<p>Computes the squared absolute value of the parameter. </p>
+<p>complex number from modulus and argument. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__traits_gacfae066446178c7d3f6328aaeafcbf1d.html#gacfae066446178c7d3f6328aaeafcbf1d">as_real_t&lt;T&gt;</a> <a class="code hl_variable" href="group__functions_ga297cbe86ab12760ec934f76879f805d0.html#ga297cbe86ab12760ec934f76879f805d0">sqr_abs</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T            <a class="code hl_variable" href="group__functions_ga297cbe86ab12760ec934f76879f805d0.html#ga297cbe86ab12760ec934f76879f805d0">sqr_abs</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T0, eve::ordered_value T1&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4a6cafda405a73a42b6a47c0cad49cad.html#ga4a6cafda405a73a42b6a47c0cad49cad">polar</a>(T0 rho, T1 theta) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga297cbe86ab12760ec934f76879f805d0_html_ga297cbe86ab12760ec934f76879f805d0"><div class="ttname"><a href="group__functions_ga297cbe86ab12760ec934f76879f805d0.html#ga297cbe86ab12760ec934f76879f805d0">kyosu::sqr_abs</a></div><div class="ttdeci">constexpr tags::callable_sqr_abs sqr_abs</div><div class="ttdoc">Computes the squared absolute value of the parameter.</div><div class="ttdef"><b>Definition:</b> sqr_abs.hpp:72</div></div>
-<div class="ttc" id="agroup__traits_gacfae066446178c7d3f6328aaeafcbf1d_html_gacfae066446178c7d3f6328aaeafcbf1d"><div class="ttname"><a href="group__traits_gacfae066446178c7d3f6328aaeafcbf1d.html#gacfae066446178c7d3f6328aaeafcbf1d">kyosu::as_real_t</a></div><div class="ttdeci">typename as_real&lt; T &gt;::type as_real_t</div><div class="ttdoc">Compute the real type associated to a Cayley-Dickson-like type.</div><div class="ttdef"><b>Definition:</b> traits.hpp:79</div></div>
+<div class="ttc" id="agroup__functions_ga4a6cafda405a73a42b6a47c0cad49cad_html_ga4a6cafda405a73a42b6a47c0cad49cad"><div class="ttname"><a href="group__functions_ga4a6cafda405a73a42b6a47c0cad49cad.html#ga4a6cafda405a73a42b6a47c0cad49cad">kyosu::polar</a></div><div class="ttdeci">constexpr tags::callable_polar polar</div><div class="ttdoc">complex number from modulus and argument.</div><div class="ttdef"><b>Definition:</b> polar.hpp:77</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> arg.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Value to process.</li>
+<li><code>rho</code> : modulus.</li>
+<li><code>theta</code> : argument.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the squared modulus of its argument.</p>
+<p>Returns elementwise true the polarument of the complex number i.e. \(\rho e^{i\theta}\).</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"></div><!-- fragment --> 
 </div>

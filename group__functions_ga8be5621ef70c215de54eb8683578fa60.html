@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::is_imag</title>
+<title>kyosu: kyosu::log_abs</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga21d5d167082826101212cdd740c8c572.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga8be5621ef70c215de54eb8683578fa60.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_ga21d5d16708282610121
 </div>
 
 <div class="contents">
-<a id="ga21d5d167082826101212cdd740c8c572" name="ga21d5d167082826101212cdd740c8c572"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga21d5d167082826101212cdd740c8c572">&#9670;&#160;</a></span>is_imag</h2>
+<a id="ga8be5621ef70c215de54eb8683578fa60" name="ga8be5621ef70c215de54eb8683578fa60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8be5621ef70c215de54eb8683578fa60">&#9670;&#160;</a></span>log_abs</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_ga21d5d16708282610121
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr tags::callable_is_imag kyosu::is_imag = {}</td>
+          <td class="memname">kyosu::log_abs = {}</td>
         </tr>
       </table>
   </td>
@@ -142,39 +142,23 @@ $(document).ready(function(){initNavTree('group__functions_ga21d5d16708282610121
 </table>
 </div><div class="memdoc">
 
-<p>test if the parameter is imag. </p>
-<p>test if the complex parameter is pure imaginary.</p>
+<p>Computes the natural logarithm of the absolute value of the argument. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga21d5d167082826101212cdd740c8c572.html#ga21d5d167082826101212cdd740c8c572">is_imag</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;       <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga21d5d167082826101212cdd740c8c572.html#ga21d5d167082826101212cdd740c8c572">is_imag</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; constlog_absr T <a class="code hl_variable" href="group__functions_ga8be5621ef70c215de54eb8683578fa60.html#ga8be5621ef70c215de54eb8683578fa60">log_abs</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              constlog_absr T <a class="code hl_variable" href="group__functions_ga8be5621ef70c215de54eb8683578fa60.html#ga8be5621ef70c215de54eb8683578fa60">log_abs</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga21d5d167082826101212cdd740c8c572_html_ga21d5d167082826101212cdd740c8c572"><div class="ttname"><a href="group__functions_ga21d5d167082826101212cdd740c8c572.html#ga21d5d167082826101212cdd740c8c572">kyosu::is_imag</a></div><div class="ttdeci">constexpr tags::callable_is_imag is_imag</div><div class="ttdoc">test if the parameter is imag.</div><div class="ttdef"><b>Definition:</b> is_imag.hpp:73</div></div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> predicates.hpp:12</div></div>
+<div class="ttc" id="agroup__functions_ga8be5621ef70c215de54eb8683578fa60_html_ga8be5621ef70c215de54eb8683578fa60"><div class="ttname"><a href="group__functions_ga8be5621ef70c215de54eb8683578fa60.html#ga8be5621ef70c215de54eb8683578fa60">kyosu::log_abs</a></div><div class="ttdeci">constexpr tags::callable_log_abs log_abs</div><div class="ttdoc">Computes the natural logarithm of the absolute value of the argument.</div><div class="ttdef"><b>Definition:</b> log_abs.hpp:78</div></div>
+<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> arg.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code> : Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns elementwise true the real part of the argument is zero. For Caley-Dickson types of dimension greater than 2 use is_pure.</p>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --><p><b>Defined in Header</b></p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
-</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
-<div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga21d5d167082826101212cdd740c8c572.html#ga21d5d167082826101212cdd740c8c572">is_imag</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga21d5d167082826101212cdd740c8c572.html#ga21d5d167082826101212cdd740c8c572">is_imag</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">}</div>
-</div><!-- fragment --><p><b>Parameters</b></p>
-<ul>
-<li><code>z</code> : Value to process.</li>
-</ul>
-<p><b>Return value</b></p>
-<p>Returns the value of <a class="el" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be" title="Extracts the real part of a value.">real(z)</a> == 0.</p>
+<p>Returns the <code><a class="el" href="group__functions_ga398aa088354c3b9d0a0a1b5d6b7145f9.html#ga398aa088354c3b9d0a0a1b5d6b7145f9" title="Computes the natural logarithm of the argument.">log(abs(z))</a></code>.</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"></div><!-- fragment --> 
 </div>
