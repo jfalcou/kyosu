@@ -38,6 +38,8 @@
 #include <kyosu/functions/exp_ipi.hpp>
 #include <kyosu/functions/floor.hpp>
 #include <kyosu/functions/frac.hpp>
+#include <kyosu/functions/from_cylindrical.hpp>
+#include <kyosu/functions/from_euler.hpp>
 #include <kyosu/functions/hypot.hpp>
 #include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/inc.hpp>
