@@ -34,6 +34,7 @@
 #include <kyosu/functions/exp_ipi.hpp>
 #include <kyosu/functions/floor.hpp>
 #include <kyosu/functions/frac.hpp>
+#include <kyosu/functions/hypot.hpp>
 #include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/inc.hpp>
 #include <kyosu/functions/ipart.hpp>
@@ -59,6 +60,8 @@
 #include <kyosu/functions/log1p.hpp>
 #include <kyosu/functions/log10.hpp>
 #include <kyosu/functions/log2.hpp>
+#include <kyosu/functions/lpnorm.hpp>
+#include <kyosu/functions/manhattan.hpp>
 #include <kyosu/functions/minus.hpp>
 #include <kyosu/functions/nearest.hpp>
 #include <kyosu/functions/oneminus.hpp>
