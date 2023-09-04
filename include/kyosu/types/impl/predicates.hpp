@@ -82,4 +82,14 @@ namespace kyosu::_
     return kumi::any_of(c, [](auto const& e) { return eve::is_not_finite(e); });
   }
 
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::is_unitary> const&, C const& c) noexcept
+  {
+    // almost is used to encompass the fact that normalization of cayley_dickson can suffer
+    // rounding errors. Whhen available use pedantic if you don't accept this behavior.
+    using ar_t = decltype(kyosu::sqr_abs(c));
+    return eve::almost(eve::is_equal)(kyosu::sqr_abs(c), eve::one(eve::as<ar_t>()));
+  }
+
 }

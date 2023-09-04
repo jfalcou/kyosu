@@ -55,6 +55,7 @@
 #include <kyosu/functions/is_not_nan.hpp>
 #include <kyosu/functions/is_not_real.hpp>
 #include <kyosu/functions/is_real.hpp>
+#include <kyosu/functions/is_unitary.hpp>
 #include <kyosu/functions/jpart.hpp>
 #include <kyosu/functions/kpart.hpp>
 #include <kyosu/functions/lerp.hpp>
