@@ -12,24 +12,23 @@
 
 namespace kyosu::tags
 {
-  struct callable_from_spherical : eve::elementwise
+  struct callable_from_semipolar : eve::elementwise
   {
-    using callable_tag_type = callable_from_spherical;
+    using callable_tag_type = callable_from_semipolar;
 
-    KYOSU_DEFERS_CALLABLE(from_spherical_);
+    KYOSU_DEFERS_CALLABLE(from_semipolar_);
 
     template<eve::ordered_value V,  eve::ordered_value U,  eve::ordered_value W,  eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const & rho
-                                               , U const & theta
-                                               , W const & phi1
-                                               , T const & phi2) noexcept
+                                               , U const & alpha
+                                               , W const & theta1
+                                               , T const & theta2) noexcept
     {
-      auto [st, ct] = eve::sincos(theta);
-      auto [sp1, cp1] = eve::sincos(phi1);
-      auto [sp2, cp2] = eve::sincos(phi2);
-      auto f = cp1*cp2;
-      return rho*to_quaternion(ct*f, st*f, sp1*cp2, sp2);
+      auto [st1, ct1] = eve::sincos(theta1);
+      auto [st2, ct2] = eve::sincos(theta2);
+      auto [sa, ca] = eve::sincos(alpha);
+      return rho*kyosu::to_quaternion(ca*ct1, ca*st1, sa*ct2, sa*st2);
     }
 
     template<typename T0, typename T1, typename T2, typename T3>
@@ -44,7 +43,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_from_spherical(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_from_semipolar(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -54,48 +53,45 @@ namespace kyosu
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
-  //! @var from_spherical
+  //! @var from_semipolar
   //!
-  //! @brief Callable object computing a quaternion from its spherical representation.
+  //! @brief Callable object computing a quaternion from its semipolar representation.
   //!
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
-  //!  from a spherical representation of an \f$\mathbb{R}^4\f$ element.
+  //!  from a semipolar representation of an \f$\mathbb{R}^2\f$ element.
   //!
-  //!  from_spherical takes as inputs a (positive) magnitude and a point on the hypersphere, given by three angles.
-  //!  The first of these, theta has a natural range of \f$-\pi\f$ to \f$+\pi\f$, and the other two have natural
-  //!  ranges of \f$-\pi/2\f$ to \f$+\pi/2\f$ (as is the case with the usual spherical coordinates in \f$\mathbb{R}^3\f$).
+  //! from_semipolar first two inputs are the polar coordinates of the first \f$\mathbb{C}\f$
+  //! component of the quaternion.
+  //! The third and fourth inputs are placed into the third and fourth \f$\mathbb{R}\f$
+  //! components of the quaternion, respectively.
   //!
   //! **Defined in header**
   //!
   //!   @code
-  //!   #include eve/module/quaternion.hpp>`
+  //!   #include kyosu/module/quaternion.hpp>`
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
-  //!     auto from_spherical(auto rho, auto theta, auto phi1, auto phi2) const noexcept;
+  //!     auto from_semipolar(auto r, auto angle, auto h1, auto h2) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!   * `rho`:  the modulus
-  //!   * `theta`, 'phi1`, 'phi2`: angles in radian
+  //!  * `r`, angle`, `h1`, `h2`
   //!
   //! **Return value**
   //!
-  //! the quaternion value
+  //! the quaternion value.
   //!
-  //! ---
+  //!  @groupheader{Example}
   //!
-  //! #### Example
-  //!
-  //! @godbolt{doc/conversions.cpp}
-  //!
+  //! @godbolt{doc/quaternion/regular/conversions.cpp}
   //!  @}
   //================================================================================================
-  inline constexpr tags::callable_from_spherical from_spherical = {};
+  inline constexpr tags::callable_from_semipolar from_semipolar = {};
 }
