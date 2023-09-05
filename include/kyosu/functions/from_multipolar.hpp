@@ -12,23 +12,20 @@
 
 namespace kyosu::tags
 {
-  struct callable_from_cylindrospherical : eve::elementwise
+  struct callable_from_multipolar : eve::elementwise
   {
-    using callable_tag_type = callable_from_cylindrospherical;
+    using callable_tag_type = callable_from_multipolar;
 
-    KYOSU_DEFERS_CALLABLE(from_cylindrospherical_);
+    KYOSU_DEFERS_CALLABLE(from_multipolar_);
 
     template<eve::ordered_value V,  eve::ordered_value U,  eve::ordered_value W,  eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & r
-                                               , U const & angle
-                                               , W const & h1
-                                               , T const & h2) noexcept
+                                               , V const & rho1
+                                               , U const & theta1
+                                               , W const & rho2
+                                               , T const & theta2) noexcept
     {
-      auto [slat, clat] = eve::sincos(latitude);
-      auto [slon, clon] = eve::sincos(longitude);
-      auto f = r*clat;
-      return kyosu::to_quaternion(t, f*clon, f*slon, r*slat);
+      return to_quaternion(kyosu::polar(rho1, theta1), kyosu::polar(rho2, theta2));
     }
 
     template<typename T0, typename T1, typename T2, typename T3>
@@ -43,25 +40,24 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_from_cylindrospherical(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_from_multipolar(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
 
 namespace kyosu
 {
- //================================================================================================
+  //================================================================================================
   //! @addtogroup quaternion
   //! @{
-  //! @var from_cylindrospherical
+  //! @var from_multipolar
   //!
-  //! @brief Callable object computing a quaternion from its cylindrospherical representation.
+  //! @brief Callable object computing a quaternion from its multipolar representation.
   //!
-  //!  cylindrospherical is specific to quaternions. It is often interesting to consider
-  //!  \f$\mathbb{H}\f$ as the cartesian product of \f$\mathbb{R}\f$ by \f$\mathbb{R3}\f$
-  //!  (the quaternionic multiplication has then a special form, as given here).
-  //!  This function therefore builds a quaternion from this representation, with the \f$\mathbb{R3}\f$ component given
-  //!  in usual \f$\mathbb{R3}\f$ spherical coordinates.
+  //!  This function build quaternions in a way similar to the way polar builds complex numbers
+  //!  from a multipolar representation of an \f$\mathbb{R}^4\f$ element.
+  //!
+  //!  from_multipolar  the two \f$\mathbb{C}\f$ components of the quaternion are given in polar coordinates
   //!
   //! **Defined in header**
   //!
@@ -73,15 +69,14 @@ namespace kyosu
   //!
   //!   @code
   //!   namespace eve
-  //!   {
-  //!     auto from_cylindrospherical(auto t, auto radius, auto longitude, auto latitude) const noexcept;
-  //!   }
-  //!   @endcode
+ //!   {
+  //!     auto from_multipolar( auto rho1, auto theta1 auto rho2, auto theta2) const noexcept;
+  //!  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   //!
   //! **Parameters**
   //!
-  //!  * `t`, `radius`:  the moduli
-  //!  * `longitude`, `latitude`: angles in radian
+  //!`rho1`, `rho2`:  the moduli
+  //! 'theta1', 'theta2': the angles in radian
   //!
   //! **Return value**
   //!
@@ -91,9 +86,9 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/conversions.cpp}
+  //! @godbolt{doc/quaternion/regular/conversions.cpp}
   //!
   //!  @}
   //================================================================================================
-  inline constexpr tags::callable_from_cylindrospherical from_cylindrospherical = {};
+  inline constexpr tags::callable_from_multipolar from_multipolar = {};
 }

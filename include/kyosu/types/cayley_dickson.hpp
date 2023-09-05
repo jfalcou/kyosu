@@ -18,6 +18,7 @@
 #include <kyosu/types/impl/trigo_pi.hpp>
 #include <kyosu/types/impl/complex/predicates.hpp>
 #include <kyosu/types/impl/complex/arithmetic.hpp>
+#include <kyosu/types/impl/quaternion/specific.hpp>
 
 #include <bit>
 

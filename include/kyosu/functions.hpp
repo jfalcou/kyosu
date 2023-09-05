@@ -97,6 +97,7 @@
 #include <kyosu/functions/tan.hpp>
 #include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
+#include <kyosu/functions/to_euler.hpp>
 #include <kyosu/functions/trunc.hpp>
 
 //======================================================================================================================
