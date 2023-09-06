@@ -40,6 +40,10 @@
 #include <kyosu/functions/frac.hpp>
 #include <kyosu/functions/from_cylindrical.hpp>
 #include <kyosu/functions/from_euler.hpp>
+#include <kyosu/functions/from_multipolar.hpp>
+#include <kyosu/functions/from_polar.hpp>
+#include <kyosu/functions/from_semipolar.hpp>
+#include <kyosu/functions/from_spherical.hpp>
 #include <kyosu/functions/hypot.hpp>
 #include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/inc.hpp>
@@ -97,8 +101,13 @@
 #include <kyosu/functions/tan.hpp>
 #include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
+#include <kyosu/functions/to_cylindrical.hpp>
 #include <kyosu/functions/to_euler.hpp>
+#include <kyosu/functions/to_multipolar.hpp>
+#include <kyosu/functions/to_polar.hpp>
 #include <kyosu/functions/to_rotation_matrix.hpp>
+#include <kyosu/functions/to_semipolar.hpp>
+#include <kyosu/functions/to_spherical.hpp>
 #include <kyosu/functions/trunc.hpp>
 
 //======================================================================================================================

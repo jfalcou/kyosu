@@ -9,6 +9,7 @@
 
 #include <kyosu/details/invoke.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
+#include <kyosu/functions/from_polar.hpp>
 
 namespace kyosu::tags
 {
@@ -25,7 +26,9 @@ namespace kyosu::tags
                                                , W const & rho2
                                                , T const & theta2) noexcept
     {
-      return to_quaternion(kyosu::polar(rho1, theta1), kyosu::polar(rho2, theta2));
+      auto [a0, a1] = kyosu::from_polar(rho1, theta1);
+      auto [a2, a3] = kyosu::from_polar(rho2, theta2);
+      return kyosu::to_quaternion(a0, a1, a2, a3);
     }
 
     template<typename T0, typename T1, typename T2, typename T3>
@@ -69,13 +72,13 @@ namespace kyosu
   //!
   //!   @code
   //!   namespace eve
- //!   {
+  //!   {
   //!     auto from_multipolar( auto rho1, auto theta1 auto rho2, auto theta2) const noexcept;
   //!  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   //!
   //! **Parameters**
   //!
-  //!`rho1`, `rho2`:  the moduli
+  //! `rho1`, `rho2`:  the moduli
   //! 'theta1', 'theta2': the angles in radian
   //!
   //! **Return value**

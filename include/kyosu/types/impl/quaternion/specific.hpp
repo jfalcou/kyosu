@@ -8,7 +8,7 @@
 #pragma once
 
 #include <eve/module/core.hpp>
-
+#include <kyosu/functions/to_complex.hpp>
 namespace kyosu::_
 {
 
@@ -178,6 +178,88 @@ namespace kyosu::_
     return to_rotation_matrix(q, Normalize);
   }
 
+  template<typename Z>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::to_multipolar> const&
+               , Z const& q) noexcept
+  {
+    auto c0 = to_complex(get<0>(q), get<1>(q));
+    if constexpr(kyosu::concepts::complex<Z>)
+    {
+      auto z =  eve::zero(eve::as(abs(c0)));
+      return kumi::tuple{abs(c0), arg(c0), z, z};
+    }
+    else
+    {
+      auto c1 = to_complex(get<2>(q), get<3>(q));
+      return kumi::tuple{abs(c0), arg(c0), abs(c1), arg(c1)};
+    }
+  }
+
+  template<typename Z>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::to_cylindrical> const&
+               , Z const& q) noexcept
+  {
+    auto c0 = to_complex(get<0>(q), get<1>(q));
+    if constexpr(kyosu::concepts::complex<Z>)
+    {
+      auto z =  eve::zero(eve::as(abs(c0)));
+      return kumi::tuple{abs(c0), arg(c0), z, z};
+    }
+    else
+    {
+      return kumi::tuple{abs(c0), arg(c0), get<2>(q), get<3>(q) };
+    }
+  }
+
+  template<typename Z>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::to_semipolar> const&
+               , Z const& q) noexcept
+  {
+    auto c0 = to_complex(get<0>(q), get<1>(q));
+    if constexpr(kyosu::concepts::complex<Z>)
+    {
+      auto z =  eve::zero(eve::as(abs(c0)));
+      return kumi::tuple{abs(c0), z, arg(c0), z};
+    }
+    else
+    {
+      auto rho = kyosu::abs(q);
+      auto c0 = to_complex(get<0>(q), get<1>(q));
+      auto c1 = to_complex(get<2>(q), get<3>(q));
+      auto alpha = eve::pedantic(eve::atan2)(abs(c1), abs(c0));
+      auto theta1 = arg(c0);
+      auto theta2 = arg(c1);
+      return kumi::tuple{rho, alpha, theta1, theta2};
+    }
+  }
+
+  template<typename Z>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::to_spherical> const&
+               , Z q) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<Z>)
+    {
+      auto c0 = to_complex(get<0>(q), get<1>(q));
+      auto z =  eve::zero(eve::as(abs(c0)));
+      return kumi::tuple{abs(c0), arg(c0), z, z};
+    }
+    else
+    {
+      auto rho = kyosu::abs(q);
+      auto phi2 = eve::asin(get<3>(q)/rho);
+      get<3>(q) = 0;
+      auto rho1 = kyosu::abs(q);
+      auto phi1 = eve::asin(get<2>(q)/rho1);
+      get<2>(q) = 0;
+      auto rho2 = kyosu::abs(q);
+      auto theta= eve::asin(get<1>(q)/rho2);
+      return kumi::tuple{rho, theta, phi1, phi2};
+    }
+  }
 
 
 //   template<typename Q0, typename Q1, typename Q2, typename Q3, floating_ordered_value T>
