@@ -98,6 +98,7 @@
 #include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
 #include <kyosu/functions/to_euler.hpp>
+#include <kyosu/functions/to_rotation_matrix.hpp>
 #include <kyosu/functions/trunc.hpp>
 
 //======================================================================================================================

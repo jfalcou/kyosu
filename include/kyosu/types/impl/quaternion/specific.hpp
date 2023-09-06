@@ -119,6 +119,66 @@ namespace kyosu::_
     return kumi::tuple{theta0, theta1, theta2};
   }
 
+  template<typename Z, bool normalize>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::to_rotation_matrix> const&
+               , Z const& q
+               , nor<normalize>) noexcept
+    {
+      if constexpr (!normalize) EVE_ASSERT(eve::all(sqr_abs(q) == decltype(sqr_abs(q))(1)), "some quaternions are not unitary");
+      else return to_rotation_matrix(sign(q), Assume_normalized);
+
+      if constexpr(kyosu::concepts::complex<Z>)
+      {
+        auto q0 = real(q);
+        auto q1 = imag(q);
+        auto q02 = 2*sqr(q0)-1;
+        auto q0q1= 2*q0*q1;
+        using m_t = std::array< std::array<Z, 3>, 3>;
+        return m_t{{1, 0, 0}, {0, q02, -q0q1}, {0, q0q1, q02}};
+      }
+      else
+      {
+        auto q0 = real(q);
+        auto q1 = ipart(q);
+        auto q2 = jpart(q);
+        auto q3 = kpart(q);
+
+        // First row of the rotation matrix
+        auto r00 = 2 * (sqr(q0) + sqr(q1)) - 1;
+        auto r01 = 2 * (q1 * q2 - q0 * q3);
+        auto r02 = 2 * (q1 * q3 + q0 * q2);
+
+        // Second row of the rotation matrix
+        auto r10 = 2 * (q1 * q2 + q0 * q3);
+        auto r11 = 2 * (sqr(q0) + sqr(q2)) - 1;
+        auto r12 = 2 * (q2 * q3 - q0 * q1);
+
+        // Third row of the rotation matrix
+        auto r20 = 2 * (q1 * q3 - q0 * q2);
+        auto r21 = 2 * (q2 * q3 + q0 * q1);
+        auto r22 = 2 * (sqr(q0) + sqr(q3)) - 1;
+
+        // 3x3 rotation matrix
+        using e_t = std::decay_t<decltype(q0)>;
+        using l_t = std::array<e_t, 3>;
+        using m_t = std::array<l_t, 3>;
+        std::array<e_t, 3> l1{r00, r01, r02};
+        std::array<e_t, 3> l2{r10, r11, r12};
+        std::array<e_t, 3> l3{r20, r21, r22};
+        return m_t{l1, l2, l3};
+      }
+    }
+
+  template<typename Z, bool normalize>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::to_rotation_matrix> const&
+               , Z const& q) noexcept
+  {
+    return to_rotation_matrix(q, Normalize);
+  }
+
+
 
 //   template<typename Q0, typename Q1, typename Q2, typename Q3, floating_ordered_value T>
 //   KYOSU_FORCEINLINE constexpr
