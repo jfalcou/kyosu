@@ -8,7 +8,7 @@
 #include "test.hpp"
 #include <kyosu/kyosu.hpp>
 
-TTS_CASE_WITH ( "Check behavior of to_rotation_matrix on wide"
+TTS_CASE_WITH ( "Check behavior of from_multipolar on wide"
               , kyosu::simd_real_types
               , tts::generate( tts::randoms(0.5, +1.0)
                              , tts::randoms(0.5, +1.0)

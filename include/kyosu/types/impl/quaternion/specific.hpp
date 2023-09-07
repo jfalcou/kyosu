@@ -122,12 +122,17 @@ namespace kyosu::_
   template<typename Z, bool normalize>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::to_rotation_matrix> const&
-               , Z const& q
+               , Z q
                , nor<normalize>) noexcept
     {
-      if constexpr (!normalize) EVE_ASSERT(eve::all(sqr_abs(q) == decltype(sqr_abs(q))(1)), "some quaternions are not unitary");
-      else return to_rotation_matrix(sign(q), Assume_normalized);
-
+      if constexpr (!normalize)
+      {
+        EVE_ASSERT(eve::all(sqr_abs(q) == decltype(sqr_abs(q))(1)), "some quaternions are not unitary");
+      }
+      else
+      {
+        q =  sign(q);
+      }
       if constexpr(kyosu::concepts::complex<Z>)
       {
         auto q0 = real(q);
@@ -261,6 +266,73 @@ namespace kyosu::_
     }
   }
 
+  template<typename Z, typename T, bool normalize>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::rotate_vec> const&
+               , Z const & q
+               , std::span<T, 3> const & v
+               , nor<normalize>) noexcept
+  {
+    using e_t = std::decay_t<decltype(kyosu::real(q))>;
+    using v_t = decltype(T()+e_t());
+    if constexpr (!normalize) EVE_ASSERT(eve::all(eve::pedantic(kyosu::is_unitary)(q)), "some quaternions are not unitary");
+    std::array<v_t, 3> w, wp;
+    using a_t = decltype(kyosu::abs(q));
+    a_t fac(2);
+    if constexpr(normalize) fac *= kyosu::rec(kyosu::sqr_abs(q));
+    auto [r, i, j, k] = q;
+    w[0] = fma(r, v[0], diff_of_prod(j, v[2], k, v[1]));
+    w[1] = fma(r, v[1], diff_of_prod(k, v[0], i, v[2]));
+    w[2] = fma(r, v[2], diff_of_prod(i, v[1], j, v[0]));
+
+    wp[0] = fam(v[0], fac, diff_of_prod(j, w[2], k, w[1]));
+    wp[1] = fam(v[1], fac, diff_of_prod(k, w[0], i, w[2]));
+    wp[2] = fam(v[2], fac, diff_of_prod(i, w[1], j, w[0]));
+    return wp;
+  }
+
+  template<typename Z, typename T, bool normalize>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::rotate_vec> const&
+               , Z const & q
+               , std::span<T, 3> const & v) noexcept
+  {
+    return rot_vec(q, v, Normalize);
+  }
+
+  template<typename Z>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::rot_axis> const&
+               , Z const& q) noexcept
+  {
+    using e_t = std::decay_t<decltype(real(q))>;
+    auto invn = eve::rec(kyosu::abs(kyosu::pure(q)));
+    invn = eve::if_else(eve::is_nan(invn), eve::zero, invn);
+    std::array<e_t, 3> v{kyosu::ipart(q)*invn, kyosu::jpart(q)*invn, kyosu::kpart(q)*invn};
+    return v;
+  }
+
+  template<typename Z>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::rot_angle> const&
+                           , const Z &q) noexcept
+  {
+    return 2*eve::pedantic(eve::atan2)(kyosu::abs(kyosu::pure(q)), kyosu::real(q));
+  }
+
+  template<typename Z>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::to_angle_axis> const&
+                           , const Z &q) noexcept
+  {
+    using e_t = std::decay_t<decltype(real(q))>;
+    auto ap = kyosu::abs(pure(q));
+    auto invn = eve::rec(ap);
+    invn = eve::if_else(eve::is_nan(invn), eve::zero, invn);
+    std::array<e_t, 3> v{kyosu::ipart(q)*invn, kyosu::jpart(q)*invn, kyosu::kpart(q)*invn};
+    auto a =  2*eve::pedantic(eve::atan2)(ap, kyosu::real(q));
+    return kumi::tuple{a, v};
+  }
 
 //   template<typename Q0, typename Q1, typename Q2, typename Q3, floating_ordered_value T>
 //   KYOSU_FORCEINLINE constexpr
