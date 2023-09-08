@@ -30,7 +30,7 @@ namespace kyosu::tags
                                              ) noexcept
     requires(I != J && J != K)
     {
-      return  kumi::tuple{zero(as<V>()), zero(as<V>()), zero(as<V>())};
+      return  kumi::tuple{eve::zero(eve::as<V>()), eve::zero(eve::as<V>()), eve::zero(eve::as<V>())};
     }
 
     template<typename T0, int I,  int J,  int K, bool Extrinsic>

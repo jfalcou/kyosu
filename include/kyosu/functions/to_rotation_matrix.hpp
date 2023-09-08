@@ -24,7 +24,7 @@ namespace kyosu::tags
                                                , [[maybe_unused]] V const & q
                                                , nor<normalize>) noexcept
     {
-      if constexpr (!normalize) EVE_ASSERT(eve::all(kyosu::is_unitary(v)), "some quaternions are not unitary");
+      if constexpr (!normalize) EVE_ASSERT(eve::all(kyosu::is_unitary(q)), "some quaternions are not unitary");
       using m_t = std::array< std::array<V, 3>, 3>;
       return m_t{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}} ;
 
