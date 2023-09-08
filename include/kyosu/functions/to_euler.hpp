@@ -32,7 +32,8 @@ namespace kyosu::tags
     {
       return  kumi::tuple{zero(as<V>()), zero(as<V>()), zero(as<V>())};
     }
-    template<typename T0, typename T1, typename T2, int I,  int J,  int K, bool Extrinsic>
+
+    template<typename T0, int I,  int J,  int K, bool Extrinsic>
     KYOSU_FORCEINLINE auto operator()(T0 const& target0
                                      , axes<I>
                                      , axes<J>

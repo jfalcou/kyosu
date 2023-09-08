@@ -23,13 +23,14 @@ namespace kyosu::tags
                                                , V const & v
                                                , U const & u) noexcept
     {
-      auto r = abs(v);
-      auto [s, c] = eve::sincos(u*eve::signnz(v));
-      return kumi::tuple{r*c, r*s};
+      auto r = eve::abs(v);
+      auto a = eve::if_else(eve::is_positive(v), u, eve::pi(eve::as(u))+u);
+      auto [s, c] = eve::sincos(a);
+      return to_complex(r*c, r*s);
     }
 
     template<typename T0, typename T1>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0,T1 const& target1
+    KYOSU_FORCEINLINE auto operator()(T0 const& target0, T1 const& target1
                                      ) const noexcept
     -> decltype(eve::tag_invoke(*this, target0, target1))
     {
@@ -45,11 +46,11 @@ namespace kyosu::tags
 namespace kyosu
 {
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @addtogroup complex
   //! @{
   //! @var from_polar
   //!
-  //! @brief Callable object computing the polar coordinates from a quaternion.
+  //! @brief Callable object computing a complex from its polar coordinates.
   //!
   //!  This function is the reciprocal of from_polar
   //!
@@ -64,17 +65,19 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto from_polar( auto q) const noexcept;
+  //!     auto from_polar( auto rho, auto theta) const noexcept;
   //!  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   //!
   //! **Parameters**
   //!
-  //!  `q` : quaternion
+  //!  `rho` : modulus
+  //!  `rho` : argument.
   //!
   //! **Return value**
   //!
-  //!  a tuple containing in this order `rho`, 'theta':  the modulus
-  //!  and  the argument in radian of the complex input
+  //!  the complex number associated.
+  //!
+  //! @note : a negative rho is not an error but is treated as {-rho, theta+pi}.
   //!
   //! ---
   //!

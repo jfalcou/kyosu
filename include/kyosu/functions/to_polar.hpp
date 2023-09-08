@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
-#include <kyosu/functions/to_quaternion.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu::tags
 {
@@ -18,11 +18,11 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(to_polar_);
 
-    template<eve::ordered_value V,  eve::ordered_value U,  eve::ordered_value W,  eve::ordered_value T>
+    template<eve::floating_ordered_value V>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const & v) noexcept
     {
-      auto z = eve::zero(as(v));
+      auto z = eve::zero(eve::as(v));
       return kumi::tuple{eve::abs(v), eve::arg(v)};
     }
 
@@ -43,11 +43,11 @@ namespace kyosu::tags
 namespace kyosu
 {
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @addtogroup complex
   //! @{
   //! @var to_polar
   //!
-  //! @brief Callable object computing the polar coordinates from a quaternion.
+  //! @brief Callable object computing the polar coordinates from a complex.
   //!
   //!  This function is the reciprocal of from_polar
   //!

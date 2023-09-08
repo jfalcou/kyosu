@@ -74,9 +74,9 @@ namespace kyosu::_
     auto [a, b, c, d, sign] = prepare();
     auto a2pb2 = eve::sqr(a)+eve::sqr(b);
     auto n2 = a2pb2+eve::sqr(c)+eve::sqr(d);
-    auto theta1 = eve::acos(dec(2*a2pb2/n2));
+    auto theta1 = eve::acos(eve::dec(2*a2pb2/n2));
     auto eps = 1e-7;
-    auto pi  = eve::pi(as<e_t>());
+    auto pi  = eve::pi(eve::as<e_t>());
     auto twopi = eve::two_pi(eve::as<e_t>());
     auto mpi = -pi;
     auto is_safe1 = eve::abs(theta1) >= eps;
@@ -281,13 +281,13 @@ namespace kyosu::_
     a_t fac(2);
     if constexpr(normalize) fac *= kyosu::rec(kyosu::sqr_abs(q));
     auto [r, i, j, k] = q;
-    w[0] = fma(r, v[0], diff_of_prod(j, v[2], k, v[1]));
-    w[1] = fma(r, v[1], diff_of_prod(k, v[0], i, v[2]));
-    w[2] = fma(r, v[2], diff_of_prod(i, v[1], j, v[0]));
+    w[0] = eve::fma(r, v[0], eve::diff_of_prod(j, v[2], k, v[1]));
+    w[1] = eve::fma(r, v[1], eve::diff_of_prod(k, v[0], i, v[2]));
+    w[2] = eve::fma(r, v[2], eve::diff_of_prod(i, v[1], j, v[0]));
 
-    wp[0] = fam(v[0], fac, diff_of_prod(j, w[2], k, w[1]));
-    wp[1] = fam(v[1], fac, diff_of_prod(k, w[0], i, w[2]));
-    wp[2] = fam(v[2], fac, diff_of_prod(i, w[1], j, w[0]));
+    wp[0] = eve::fam(v[0], fac, eve::diff_of_prod(j, w[2], k, w[1]));
+    wp[1] = eve::fam(v[1], fac, eve::diff_of_prod(k, w[0], i, w[2]));
+    wp[2] = eve::fam(v[2], fac, eve::diff_of_prod(i, w[1], j, w[0]));
     return wp;
   }
 
@@ -323,50 +323,27 @@ namespace kyosu::_
   template<typename Z>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::to_angle_axis> const&
-                           , const Z &q) noexcept
+                           , Z q) noexcept
   {
+    q =  sign(q);
     using e_t = std::decay_t<decltype(real(q))>;
     auto ap = kyosu::abs(pure(q));
     auto invn = eve::rec(ap);
-    invn = eve::if_else(eve::is_nan(invn), eve::zero, invn);
+    invn = eve::if_else(eve::is_infinite(invn), eve::zero, invn);
     std::array<e_t, 3> v{kyosu::ipart(q)*invn, kyosu::jpart(q)*invn, kyosu::kpart(q)*invn};
     auto a =  2*eve::pedantic(eve::atan2)(ap, kyosu::real(q));
     return kumi::tuple{a, v};
   }
 
-//   template<typename Q0, typename Q1, typename Q2, typename Q3, floating_ordered_value T>
-//   KYOSU_FORCEINLINE constexpr
-//   auto dispatch(eve::tag_of<kyosu::squad> const&
-//                , Q0 const& q0, Q1 const& q1, Q2  const & q2, Q3  const & q3
-//                , T const & t
-//                ) noexcept
-//   {
-//     // t interpolates between q1 and q2
-//     // q0 and q3 are the preceeding and following quaternion
-//     // if one want to interpolate between qq0, qq1, ... qqn
-//     // the first call can take q0 = q1 = qq0 and the last q2 = q3 = qqn
-//     EVE_ASSERT(eve::all(is_unitary(q0) && is_unitary(q1) && is_unitary(q2) && is_unitary(q3)) , "quaternion parameters must be unitary");
-//     using e_t = eve::underlying_type_t<Q0>;
-//     auto mh = (-e_t(0.25));
-//     auto cq1 = kyosu::conj(q1);
-//     auto s1 = q1*kyosu::exp((kyosu::log(cq1*q2)+kyosu::log(cq1*q0))*mh);
-//     auto cq2 = kyosu::conj(q2);
-//     auto s2 = q2*kyosu::exp((kyosu::log(cq2*q3)*kyosu::log(cq2*q1))*mh);
-//     return kyosu::slerp(kyosu::slerp(q1, q2, t),
-//                         kyosu::slerp(s1, s2, t),
-//                         2*t*eve::oneminus(t));
-//   }
-
-
-//   template<typename Z1, typename Z2, floating_ordered_value T>
-//   KYOSU_FORCEINLINE constexpr
-//   auto dispatch(eve::tag_of<kyosu::slerp> const&
-//                , Z1 const& z1, Z2  z2, T const & t
-//                ) noexcept
-//   {
-//     EVE_ASSERT(eve::all(is_unitary(z1) && is_unitary(z2)), "quaternion parameters must be unitary");
-//     z2 = kyosu::if_else(eve::is_gez(kyosu::dot(z1, z2)), z2, -z2);
-//     return z1*kyosu::pow(kyosu::conj(z1)*z2, t);
-//   }
+  template<typename Z1, typename Z2, eve::floating_ordered_value T>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::slerp> const&
+               , Z1 const& z1, Z2  z2, T const & t
+               ) noexcept
+  {
+    EVE_ASSERT(eve::all(is_unitary(z1) && is_unitary(z2)), "quaternion parameters must be unitary");
+    z2 = kyosu::if_else(eve::is_gez(kyosu::dot(z1, z2)), z2, -z2);
+    return z1*kyosu::pow(kyosu::conj(z1)*z2, t);
+  }
 
 }

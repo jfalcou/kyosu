@@ -122,8 +122,9 @@ namespace kyosu::_
     }
     else
     {
-      using u_t = as_cayley_dickson_n_t<2,eve::underlying_type_t<C>>;
-      const auto ipi = c_t(u_t(0), eve::pi<eve::as<u_t>());
+      //     using u_t = as_cayley_dickson_n_t<2,eve::underlying_type_t<C>>;
+             using u_t = eve::underlying_type_t<C>;
+      const auto ipi = to_complex(u_t(0), eve::pi(eve::as<u_t>()));
       return kyosu::exp(ipi*z);
     }
   }

@@ -19,12 +19,11 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(sqrt_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_log{};
-      return fn(kyosu::to_complex(v, T(0)));
-
+      auto asq = eve::sqrt(eve::abs(v));
+      return if_else(eve::is_gez(v), to_complex(asq, T(0)), to_complex(T(0), asq));
     }
 
     template<typename T>

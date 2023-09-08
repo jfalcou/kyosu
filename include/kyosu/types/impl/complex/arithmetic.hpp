@@ -22,7 +22,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::to_polar> const&, C const& c) noexcept
   {
-    return kumi::tuple(kyosu::abs(c),  kyosu::arg(c));
+    return kumi::tuple{kyosu::abs(c),  kyosu::arg(c)};
   }
 
 }

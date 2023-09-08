@@ -9,7 +9,7 @@
 #include <kyosu/kyosu.hpp>
 
 TTS_CASE_WITH ( "Check behavior of to_cylindrical on wide"
-              , kyosu::simd_real_types
+              , kyosu::real_types
               , tts::generate( tts::randoms(0.5, +1.0)
                              , tts::randoms(0.5, +1.0)
                              , tts::randoms(0.5, +1.0)

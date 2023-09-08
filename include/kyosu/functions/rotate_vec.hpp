@@ -8,6 +8,7 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
+#include <kyosu/types/impl/quaternion/axes.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
 
 namespace kyosu::tags
@@ -18,17 +19,17 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(rotate_vec_);
 
-    template<eve::floating_ordered_value V, bool normalize>
+    template<eve::floating_ordered_value V, eve::floating_ordered_value T, bool normalize>
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & v
+                                               , V const &
+                                               , std::span<T, 3> const & v
                                                , nor<normalize>) noexcept
     {
       return v;
     }
 
     template<eve::floating_ordered_value V
-             , eve::floating_ordered_value T
-             , bool normalize>
+             , eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const &
                                                , std::span<T, 3> const & v
@@ -41,9 +42,9 @@ namespace kyosu::tags
     KYOSU_FORCEINLINE auto operator()( T0 const& target0
                                      , T1 const& target1
                                      , nor<normalize>) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, nor<normalize>()))
+    -> decltype(eve::tag_invoke(*this, target0, target1, nor<normalize>()))
     {
-      return eve::tag_invoke(*this, target0, nor<normalize>());
+      return eve::tag_invoke(*this, target0, target1, nor<normalize>());
     }
 
     template<typename T0, typename T1>

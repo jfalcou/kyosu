@@ -19,45 +19,15 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(from_angle_axis_);
 
-    template<eve::ordered_value V,  eve::ordered_value U, bool normalize>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & angle
-                                               , std::span<U, 3>  axis
-                                              , nor<normalize>) noexcept
-    {
-      if constexpr (!normalize)
-      {
-        auto q =  to_quaternion(U(0), axis[0], axis[1], axis[2]);
-        EVE_ASSERT(eve::all(is_unitary(q)), "some axies are not unitary");
-        auto [c, s] = eve::sincos(angle*eve::half(as(angle)));
-        return c+ s*q;
-      }
-      else
-      {
-        auto n = eve::rec(eve::pedantic(eve::hypot)(axis[0], axis[1], axis[2]));
-        axis[0]*= n;
-        axis[1]*= n;
-        axis[2]*= n;
-        return to_angle_axis(angle, axis, Assume_normalized);
-      }
-    }
-
     template<eve::ordered_value V,  eve::ordered_value U>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const & angle
-                                               , std::span<U, 3>const & axis) noexcept
+                                               , std::span<U, 3>  axis) noexcept
     {
-       return to_angle_axis(angle, axis, Normalize);
-    }
-
-    template<eve::ordered_value T0,  eve::ordered_value T1, bool normalize>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0,
-                                      T1 const& target1,
-                                      nor<normalize> const & target2
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0,  target1, target2))
-    {
-      return eve::tag_invoke(*this, target0,  target1, target2);
+      auto q =  to_quaternion(U(0), axis[0], axis[1], axis[2]);
+//      q = sign(q);
+      auto [s, c] = eve::sincos(angle*eve::half(eve::as(angle)));
+      return c+s*q;
     }
 
     template<typename T0, typename T1>

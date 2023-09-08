@@ -14,16 +14,18 @@ namespace kyosu::_
 {
   template<typename C>
   KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::is_not_real> const&, C const& c) noexcept
+  auto dispatch(eve::tag_of<kyosu::is_not_real> const&, C c) noexcept
   {
-    return kumi::any_of(purepart(c), [](auto const& e) { return eve::is_nez(e); });
+    get<0>(c) = eve::zero(eve::as(get<0>(c)));
+    return kumi::any_of(c, [](auto const& e) { return eve::is_nez(e); });
   }
 
   template<typename C>
   KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::is_real> const&, C const& c) noexcept
+  auto dispatch(eve::tag_of<kyosu::is_real> const&, C c) noexcept
   {
-    return kumi::all_of(purepart(c), [](auto const& e) { return eve::is_eqz(e); });
+    get<0>(c) = eve::zero(eve::as(get<0>(c)));
+    return kumi::all_of(c, [](auto const& e) { return eve::is_eqz(e); });
   }
 
   template<typename C>
