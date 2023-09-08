@@ -70,7 +70,7 @@ namespace kyosu
 //!
 //!     Returns the dot product of z0 and z1. If z0 and z1 are floating point this is equivalent to z0*z1.
 //!
-//!     `dot(zà, z0)` is always semantically equivalent to `sqr_abs(z0)`.
+//!     `dot(z0, z0)` is always semantically equivalent to `sqr_abs(z0)`.
 //!
 //!  @groupheader{Example}
 //!

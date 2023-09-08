@@ -25,7 +25,6 @@ namespace kyosu::tags
                                                , std::span<U, 3>  axis) noexcept
     {
       auto q =  to_quaternion(U(0), axis[0], axis[1], axis[2]);
-//      q = sign(q);
       auto [s, c] = eve::sincos(angle*eve::half(eve::as(angle)));
       return c+s*q;
     }
@@ -68,7 +67,6 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!     auto from_angle_axis(auto angle,  auto axis, auto normalize = Normalize) const noexcept;
-
   //!   }
   //!   @endcode
   //!
