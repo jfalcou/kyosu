@@ -88,7 +88,7 @@
 #include <kyosu/functions/sinpicospi.hpp>
 #include <kyosu/functions/sinh.hpp>
 #include <kyosu/functions/sinhcosh.hpp>
-#include <kyosu/functions/slerp.hpp>            //ko
+#include <kyosu/functions/slerp.hpp>
 #include <kyosu/functions/sqr.hpp>
 #include <kyosu/functions/sqr_abs.hpp>
 #include <kyosu/functions/sqrt.hpp>
@@ -104,8 +104,8 @@
 #include <kyosu/complex/arg.hpp>
 #include <kyosu/complex/is_imag.hpp>
 #include <kyosu/complex/polar.hpp>
-#include <kyosu/functions/from_polar.hpp>      //ko
-#include <kyosu/functions/to_polar.hpp>      //ko
+#include <kyosu/functions/from_polar.hpp>
+#include <kyosu/functions/to_polar.hpp>
 
 //======================================================================================================================
 //! @brief Functions performing computations over quaternion complex or real elements only.
