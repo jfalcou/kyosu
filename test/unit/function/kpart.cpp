@@ -17,14 +17,14 @@ TTS_CASE_WITH ( "Check kyosu::kpart over real"
   TTS_EQUAL(kyosu::kpart(data), eve::zero(eve::as(data)));
 };
 
-// TTS_CASE_WITH ( "Check kyosu::kpart over complex"
-//               , kyosu::real_types
-//               , tts::generate(tts::between(-10,10), tts::between(-10,10))
-//               )
-// (auto r, auto i)
-// {
-//   TTS_EQUAL(kyosu::kpart(kyosu::to_complex(r,i)), eve::zero(eve::as(r)));
-// };
+TTS_CASE_WITH ( "Check kyosu::kpart over complex"
+              , kyosu::real_types
+              , tts::generate(tts::between(-10,10), tts::between(-10,10))
+              )
+(auto r, auto i)
+{
+  TTS_EQUAL(kyosu::kpart(kyosu::to_complex(r,i)), eve::zero(eve::as(r)));
+};
 
 TTS_CASE_WITH ( "Check kyosu::kpart over quaternion"
               , kyosu::real_types

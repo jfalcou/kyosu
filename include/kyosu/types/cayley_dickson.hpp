@@ -166,7 +166,8 @@ namespace kyosu
     if constexpr(T::minimum_valid_index == T::maximum_valid_index)
     {
       if constexpr(sz > T::minimum_valid_index) return get<T::minimum_valid_index>(EVE_FWD(c));
-      else                                      return eve::underlying_type_t<std::remove_cvref_t<C>>{0};
+      else                                      return as_real_t<std::remove_cvref_t<C>>{0};
+      //return eve::underlying_type_t<std::remove_cvref_t<C>>{0};
     }
     else
     {
