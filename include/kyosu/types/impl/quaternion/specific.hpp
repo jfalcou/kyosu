@@ -127,7 +127,7 @@ namespace kyosu::_
     {
       if constexpr (!normalize)
       {
-        EVE_ASSERT(eve::all(sqr_abs(q) == decltype(sqr_abs(q))(1)), "some quaternions are not unitary");
+        EVE_ASSERT(eve::all(kyosu::is_unitary(q)), "some quaternions are not unitary");
       }
       else
       {
