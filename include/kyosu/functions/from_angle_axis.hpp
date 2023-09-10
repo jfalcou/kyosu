@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
-#include <kyosu/types/impl/quaternion/axes.hpp>
+#include <kyosu/types/impl/quaternion/axis.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
 
 namespace kyosu::tags
@@ -66,7 +66,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     auto from_angle_axis(auto angle,  auto axis, auto normalize = Normalize) const noexcept;
+  //!     auto from_angle_axis(auto angle,  auto axis, auto norming = normalize) const noexcept;
   //!   }
   //!   @endcode
   //!
@@ -74,8 +74,8 @@ namespace kyosu
   //!
   //!  * `angle` : rotation angle in radian
   //!  * `axis`` : rotation axis given by an std::span of dimension 3.
-  //!  * normalize : can be Assume_normalized or Normalize in the second case axis is normalized.
-  //!                if axis is already normalized use Assume_normalized.
+  //!  * normalize : can be assume_normalized or normalize in the second case axis is normalized.
+  //!                if axis is already normalized use assume_normalized.
   //!
   //! **Return value**
   //!

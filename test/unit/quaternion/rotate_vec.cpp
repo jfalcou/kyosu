@@ -26,8 +26,8 @@ TTS_CASE_WITH ( "Check behavior of rotate_vec on wide"
     std::array<T, 3> axis{rsq3, rsq3, rsq3};
     pr("axis = ", axis);
     auto  q = kyosu::from_angle_axis(eve::pi(eve::as(a0)), std::span<T, 3>(axis));
-    auto vr = kyosu::rotate_vec(q, std::span<T, 3>(v), kyosu::Normalize);
-    auto vr2= kyosu::rotate_vec(q, std::span<T, 3>(vr), kyosu::Normalize);
+    auto vr = kyosu::rotate_vec(q, std::span<T, 3>(v), kyosu::normalize);
+    auto vr2= kyosu::rotate_vec(q, std::span<T, 3>(vr), kyosu::normalize);
     pr("v   = ", v);
     pr("vr  = ", vr);
     pr("vr2 = ", vr2);

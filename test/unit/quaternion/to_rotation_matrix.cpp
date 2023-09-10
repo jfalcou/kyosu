@@ -34,7 +34,7 @@ TTS_CASE_WITH ( "Check behavior of to_rotation_matrix on wide"
   std::array<T, 3> v{T(1), T(2), T(3)};
   auto q = kyosu::sign(wq_t(a0, a1, a2, a3));
   wq_t qv(0, v[0], v[1], v[2]);
-  auto m = kyosu::to_rotation_matrix(q, kyosu::Assume_normalized);
+  auto m = kyosu::to_rotation_matrix(q, kyosu::assume_normalized);
   auto refq = q*qv*kyosu::conj(q);
   auto res  = prod(m, v);
   std::array<T, 3> ref{kyosu::ipart(refq), kyosu::jpart(refq), kyosu::kpart(refq)};

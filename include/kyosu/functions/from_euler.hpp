@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
-#include <kyosu/types/impl/quaternion/axes.hpp>
+#include <kyosu/types/impl/quaternion/axis.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
 
 namespace kyosu::tags
@@ -23,14 +23,14 @@ namespace kyosu::tags
              eve::floating_ordered_value V,
              eve::floating_ordered_value W, int I,  int J,  int K, bool Extrinsic>
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                             , U const & v1
-                                             , V const & v2
-                                             , W const & v3
-                                             , axes<I>
-                                             , axes<J>
-                                             , axes<K>
-                                             , ext<Extrinsic>
-                                             ) noexcept
+                                               , U const & v1
+                                               , V const & v2
+                                               , W const & v3
+                                               , _::axis<I>
+                                               , _::axis<J>
+                                               , _::axis<K>
+                                               , _::ext<Extrinsic>
+                                               ) noexcept
     requires(I != J && J != K)
     {
       using e_t = decltype(v1+v2+v3);
@@ -63,23 +63,23 @@ namespace kyosu::tags
     KYOSU_FORCEINLINE auto operator()(T0 const& target0,
                                       T1 const& target1,
                                       T2 const& target2
-                                     , axes<I>
-                                     , axes<J>
-                                     , axes<K>
-                                     , ext<Extrinsic>
+                                     , _::axis<I>
+                                     , _::axis<J>
+                                     , _::axis<K>
+                                     , _::ext<Extrinsic>
                                      ) const noexcept
     -> decltype(eve::tag_invoke(*this, target0,  target1,  target2
-                               , axes<I>{}
-                               , axes<J>{}
-                               , axes<K>{}
-                               , ext<Extrinsic>{}
+                               , _::axis<I>{}
+                               , _::axis<J>{}
+                               , _::axis<K>{}
+                               , _::ext<Extrinsic>{}
                                ))
     {
       return eve::tag_invoke(*this, target0, target1, target2
-                            , axes<I>{}
-                            , axes<J>{}
-                            , axes<K>{}
-                            , ext<Extrinsic>{} );
+                            , _::axis<I>{}
+                            , _::axis<J>{}
+                            , _::axis<K>{}
+                            , _::ext<Extrinsic>{} );
     }
 
     template<typename... T>
@@ -115,7 +115,7 @@ namespace kyosu
   //!   namespace eve
   //!   {
   //!      template < int I, int J, int K > auto from_euler(auto a, auto b, auto c
-  //!                                                      , axes<I> a1, axes<J> a2, axes<K> a3
+  //!                                                      , axis<I> a1, axis<J> a2, axis<K> a3
   //!                                                      , ext e
   //!                                                      ) const noexcept;
   //!      requires(I != J && J != K)
@@ -125,12 +125,12 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  * `a`, `b`, `c` : the angles in radian
-  //!  * `a1`, `a2`, `a3` the axes parameters to be chosen between _X,  _Y, _Z (two consecutive axes cannot be the same)
+  //!  * `a1`, `a2`, `a3` the axis parameters to be chosen between _X,  _Y, _Z (two consecutive axis cannot be the same)
   //!  * `e' : allows to choose between Extrinsic or Intrinsic representations.
   //!
   //!  **Template parameters**
   //!
-  //!     * I, J, K : are on call deduced from the axes parameters
+  //!     * I, J, K : are on call deduced from the axis parameters
   //!
   //!
   //!   The computation method is taken from the article : "Quaternion to Euler angles conversion: A

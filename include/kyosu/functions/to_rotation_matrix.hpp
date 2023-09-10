@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
-#include <kyosu/types/impl/quaternion/axes.hpp>
+#include <kyosu/types/impl/quaternion/axis.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
 
 namespace kyosu::tags
@@ -22,7 +22,7 @@ namespace kyosu::tags
     template<eve::floating_ordered_value V, bool normalize>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , [[maybe_unused]] V const & q
-                                               , nor<normalize>) noexcept
+                                               , _::norming<normalize>) noexcept
     {
       if constexpr (!normalize) EVE_ASSERT(eve::all(kyosu::is_unitary(q)), "some quaternions are not unitary");
       using m_t = std::array< std::array<V, 3>, 3>;
@@ -34,12 +34,12 @@ namespace kyosu::tags
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const & q) noexcept
     {
-      return to_rotation_matrix(q, Assume_normalized);
+      return to_rotation_matrix(q, assume_normalized);
     }
 
     template<typename T0, bool normalize>
     KYOSU_FORCEINLINE auto operator()(T0 target0,
-                                      nor<normalize> target1
+                                      _::norming<normalize> target1
                                      ) const noexcept
     -> decltype(eve::tag_invoke(*this, target0,  target1))
     {
@@ -48,9 +48,9 @@ namespace kyosu::tags
 
     template<typename T0>
     KYOSU_FORCEINLINE auto operator()(T0 target0) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0,  Normalize))
+    -> decltype(eve::tag_invoke(*this, target0,  normalize))
     {
-      return eve::tag_invoke(*this, target0,  Normalize);
+      return eve::tag_invoke(*this, target0,  normalize);
     }
 
     template<typename... T>
@@ -86,14 +86,14 @@ namespace kyosu
   //!   namespace eve
   //!   {
   //!       auto to_rotation_matrix(auto q) const noexcept;
-  //!       auto to_rotation_matrix(auto q, Assume_normalized) const noexcept;
+  //!       auto to_rotation_matrix(auto q, assume_normalized) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
   //!  * `q`  quaternion representing the rotation
-  //!  * `Asume_normalized``: implies that q is already normalized
+  //!  * `assume_normalized``: suppose that q is already normalized
   //!
   //!
   //!

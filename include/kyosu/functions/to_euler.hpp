@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
-#include <kyosu/types/impl/quaternion/axes.hpp>
+#include <kyosu/types/impl/quaternion/axis.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
 
 namespace kyosu::tags
@@ -23,10 +23,10 @@ namespace kyosu::tags
              int I,  int J,  int K, bool Extrinsic>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                              , V const & v
-                                             , axes<I>
-                                             , axes<J>
-                                             , axes<K>
-                                             , ext<Extrinsic>
+                                             , _::axis<I>
+                                             , _::axis<J>
+                                             , _::axis<K>
+                                             , _::ext<Extrinsic>
                                              ) noexcept
     requires(I != J && J != K)
     {
@@ -35,23 +35,23 @@ namespace kyosu::tags
 
     template<typename T0, int I,  int J,  int K, bool Extrinsic>
     KYOSU_FORCEINLINE auto operator()(T0 const& target0
-                                     , axes<I>
-                                     , axes<J>
-                                     , axes<K>
-                                     , ext<Extrinsic>
+                                     , _::axis<I>
+                                     , _::axis<J>
+                                     , _::axis<K>
+                                     , _::ext<Extrinsic>
                                      ) const noexcept
     -> decltype(eve::tag_invoke(*this, target0
-                               , axes<I>{}
-                               , axes<J>{}
-                               , axes<K>{}
-                               , ext<Extrinsic>{}
+                               , _::axis<I>{}
+                               , _::axis<J>{}
+                               , _::axis<K>{}
+                               , _::ext<Extrinsic>{}
                                ))
     {
       return eve::tag_invoke(*this, target0
-                            , axes<I>{}
-                            , axes<J>{}
-                            , axes<K>{}
-                            , ext<Extrinsic>{} );
+                            , _::axis<I>{}
+                            , _::axis<J>{}
+                            , _::axis<K>{}
+                            , _::ext<Extrinsic>{} );
     }
 
     template<typename... T>
@@ -88,7 +88,7 @@ namespace kyosu
   //!   {
   //!      template < int I, int J, int K >
   //!      auto to_euler(auto q
-  //!                  , axes<I> const & a1, axes<J> const & a2, axes<K> const & a3) const noexcept
+  //!                  , axis<I> const & a1, axis<J> const & a2, axis<K> const & a3) const noexcept
   //!        requires(I != J && J != K)
   //!   }
   //!   @endcode
@@ -96,12 +96,12 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  * `q` the rotation quaternion (not necesseraly normalized)
-  //!  * `a1`, `a2`, `a3` : the axes parameters to be chosen between _X,  _Y, _Z (two consecutive axes cannot be the same)
+  //!  * `a1`, `a2`, `a3` : the axis parameters to be chosen between _X,  _Y, _Z (two consecutive axis cannot be the same)
   //!  *                    depending of the euler order
   //!
   //!  **Template parameters**
   //!
-  //!     * I, J, K : actual parameters can be chosen between axes values _X,  _Y,  _Z from
+  //!     * I, J, K : actual parameters can be chosen between axis values _X,  _Y,  _Z from
   //!                 which I, J and K are deduced
   //!
   //!

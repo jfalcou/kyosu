@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
-#include <kyosu/types/impl/quaternion/axes.hpp>
+#include <kyosu/types/impl/quaternion/axis.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
 
 namespace kyosu::tags
@@ -23,7 +23,7 @@ namespace kyosu::tags
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const &
                                                , std::span<T, 3> const & v
-                                               , nor<normalize>) noexcept
+                                               , _::norming<normalize>) noexcept
     {
       return v;
     }
@@ -41,10 +41,10 @@ namespace kyosu::tags
     template<typename T0, typename T1, bool normalize>
     KYOSU_FORCEINLINE auto operator()( T0 const& target0
                                      , T1 const& target1
-                                     , nor<normalize>) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1, nor<normalize>()))
+                                     , _::norming<normalize>) const noexcept
+    -> decltype(eve::tag_invoke(*this, target0, target1, _::norming<normalize>()))
     {
-      return eve::tag_invoke(*this, target0, target1, nor<normalize>());
+      return eve::tag_invoke(*this, target0, target1, _::norming<normalize>());
     }
 
     template<typename T0, typename T1>
@@ -52,7 +52,7 @@ namespace kyosu::tags
                                       T1 const& target1) const noexcept
     -> decltype(eve::tag_invoke(*this, target0, target1))
     {
-      return eve::tag_invoke(*this, target0, target1, Normalize);
+      return eve::tag_invoke(*this, target0, target1, normalize);
     }
 
     template<typename... T>

@@ -16,9 +16,9 @@ namespace kyosu::_
  KYOSU_FORCEINLINE constexpr
  auto dispatch(eve::tag_of<kyosu::to_euler> const&
               , Z const& q0
-              , axes<II>
-              , axes<JJ>
-              , axes<KK>
+              , axis<II>
+              , axis<JJ>
+              , axis<KK>
               , ext<Extrinsic>
               ) noexcept
   requires(II != JJ && JJ != KK)
@@ -123,7 +123,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::to_rotation_matrix> const&
                , Z q
-               , nor<normalize>) noexcept
+               , _::norming<normalize>) noexcept
     {
       if constexpr (!normalize)
       {
@@ -180,7 +180,7 @@ namespace kyosu::_
   auto dispatch(eve::tag_of<kyosu::to_rotation_matrix> const&
                , Z const& q) noexcept
   {
-    return to_rotation_matrix(q, Normalize);
+    return to_rotation_matrix(q, _::norming<normalize>{});
   }
 
   template<typename Z>
@@ -271,7 +271,7 @@ namespace kyosu::_
   auto dispatch(eve::tag_of<kyosu::rotate_vec> const&
                , Z const & q
                , std::span<T, 3> const & v
-               , nor<normalize>) noexcept
+               , _::norming<normalize>) noexcept
   {
     using e_t = std::decay_t<decltype(kyosu::real(q))>;
     using v_t = decltype(T()+e_t());
@@ -297,7 +297,7 @@ namespace kyosu::_
                , Z const & q
                , std::span<T, 3> const & v) noexcept
   {
-    return rot_vec(q, v, Normalize);
+    return rot_vec(q, v, _::norming<normalize>{});
   }
 
   template<typename Z>
