@@ -125,7 +125,7 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  * `a`, `b`, `c` : the angles in radian
-  //!  * `a1`, `a2`, `a3` the axis parameters to be chosen between _X,  _Y, _Z (two consecutive axis cannot be the same)
+  //!  * `a1`, `a2`, `a3` the axis parameters to be chosen between X_,  Y_, Z_ (two consecutive axis cannot be the same)
   //!  * `e' : allows to choose between Extrinsic or Intrinsic representations.
   //!
   //!  **Template parameters**

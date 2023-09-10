@@ -5,9 +5,9 @@
 int main()
 {
   using kyosu::from_euler;
-  using kyosu::_X;
-  using kyosu::_Z;
-  using kyosu::Extrinsic;
+  using kyosu::X_;
+  using kyosu::Z_;
+  using kyosu::extrinsic;
 
   auto psi  = eve::pio_3(eve::as(0.0));
   auto theta= eve::pio_4(eve::as(0.0));
@@ -16,8 +16,8 @@ int main()
   std::cout << " <- psi   " << psi << std::endl;
   std::cout << " <- theta " << theta << std::endl;
   std::cout << " <- phi   " << phi<< std::endl;
-  std::cout << " -> from_euler(psi, theta, phi, _X, _Z, _X, Extrinsic) "
-            << kyosu::from_euler(psi, theta, phi, _X, _Z, _X, Extrinsic) << "\n";
+  std::cout << " -> from_euler(psi, theta, phi, X_, Z_, X_, extrinsic) "
+            << kyosu::from_euler(psi, theta, phi, X_, Z_, X_, extrinsic) << "\n";
 
   return 0;
 }

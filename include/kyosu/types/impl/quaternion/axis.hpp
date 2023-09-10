@@ -17,9 +17,9 @@ namespace kyosu::_
 namespace kyosu
 {
 
-  inline constexpr auto _X(kyosu::_::axis<1>{});
-  inline constexpr auto _Y(kyosu::_::axis<2>{});
-  inline constexpr auto _Z(kyosu::_::axis<3>{});
+  inline constexpr auto X_(kyosu::_::axis<1>{});
+  inline constexpr auto Y_(kyosu::_::axis<2>{});
+  inline constexpr auto Z_(kyosu::_::axis<3>{});
 
   inline constexpr kyosu::_::ext<true>  extrinsic = {};
   inline constexpr kyosu::_::ext<false> intrinsic = {};

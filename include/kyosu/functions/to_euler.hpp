@@ -96,12 +96,12 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  * `q` the rotation quaternion (not necesseraly normalized)
-  //!  * `a1`, `a2`, `a3` : the axis parameters to be chosen between _X,  _Y, _Z (two consecutive axis cannot be the same)
+  //!  * `a1`, `a2`, `a3` : the axis parameters to be chosen between X_,  Y_, Z_ (two consecutive axis cannot be the same)
   //!  *                    depending of the euler order
   //!
   //!  **Template parameters**
   //!
-  //!     * I, J, K : actual parameters can be chosen between axis values _X,  _Y,  _Z from
+  //!     * I, J, K : actual parameters can be chosen between axis values X_,  Y_, Z_ from
   //!                 which I, J and K are deduced
   //!
   //!
