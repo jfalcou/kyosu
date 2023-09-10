@@ -15,7 +15,14 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::arg> const&, C const& c) noexcept
   {
-    return /*eve::pedantic*/(eve::atan2(kyosu::imag(c), kyosu::real(c)));
+    return eve::pedantic(eve::atan2)(kyosu::imag(c), kyosu::real(c));
+  }
+
+  template<kyosu::concepts::complex C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::to_polar> const&, C const& c) noexcept
+  {
+    return kumi::tuple{kyosu::abs(c),  kyosu::arg(c)};
   }
 
 }

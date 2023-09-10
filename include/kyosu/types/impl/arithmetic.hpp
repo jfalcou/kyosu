@@ -130,10 +130,6 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::reldist> const&, C0 const & c0, C1 const & c1) noexcept
   {
-//     using r_t = kyosu::as_cayley_dickson_t<C0,C1>;
-//     using er_t = eve::element_type_t<r_t>;
-//     auto cc0 = kyosu::convert(c0, eve::as<er_t>());
-//     auto cc1 = kyosu::convert(c1, eve::as<er_t>());
     return kyosu::dist(c0, c1)/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
   }
 
@@ -219,5 +215,28 @@ namespace kyosu::_
         };
   }
 
+  template<typename  C0, typename  C1>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::dot> const&, C0 const & c0, C1 const &  c1) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<C0,C1>;
+    using er_t = decltype(kyosu::abs(r_t{}));
 
+    if constexpr(eve::floating_value<C1> || eve::floating_value<C0>)
+    {
+      return kyosu::real(c0)*kyosu::real(c1);
+    }
+    else
+    {
+      constexpr auto P = kyosu::dimension_v<C0> < kyosu::dimension_v<C1> ? kyosu::dimension_v<C0> : kyosu::dimension_v<C1>;
+      er_t res(0.0f);
+      auto sum = [&](auto i, auto x){
+        auto [e, f] = x;
+        res = eve::fam(res, e, f);
+      };
+      kumi::for_each_index(sum, kumi::zip( kumi::extract(c0, kumi::index_t<0>{}, kumi::index_t<P>{})
+                                         , kumi::extract(c1, kumi::index_t<0>{}, kumi::index_t<P>{})));
+      return res;
+    }
+  }
 }

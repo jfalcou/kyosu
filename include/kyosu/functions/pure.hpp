@@ -18,7 +18,7 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(pure_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::zero(as(v)); }
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::zero(eve::as(v)); }
 
     template<typename T>
     KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
