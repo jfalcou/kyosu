@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu/types/impl Directory Reference</title>
+<title>kyosu: kyosu::slerp</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('dir_12c6a5b07df34aef879622d954c76196.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga660e094a5a7d9c646c30eeb9273ef80a.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,25 +121,58 @@ $(document).ready(function(){initNavTree('dir_12c6a5b07df34aef879622d954c76196.h
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">impl Directory Reference</div></div>
-</div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="subdirs" name="subdirs"></a>
-Directories</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_ed1a6274ad69fef7717ab4437f6bb5cc.html">complex</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_afb7ef6c7507f2c05327abc9a8754bf2.html">quaternion</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<a id="ga660e094a5a7d9c646c30eeb9273ef80a" name="ga660e094a5a7d9c646c30eeb9273ef80a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga660e094a5a7d9c646c30eeb9273ef80a">&#9670;&#160;</a></span>slerp</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kyosu::slerp = {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
 </table>
+</div><div class="memdoc">
+
+<p>Computes the spherical interpolation between unitary quaternions. </p>
+<p><b>Defined in Header</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line">   <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="line">   {</div>
+<div class="line">      <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga660e094a5a7d9c646c30eeb9273ef80a.html#ga660e094a5a7d9c646c30eeb9273ef80a">slerp</a>(T0 z0, T1, z1, <span class="keyword">auto</span> eve::ordered_value t) <span class="keyword">noexcept</span>;</div>
+<div class="line">      <span class="keyword">template</span>&lt;eve::ordered_value T0, kyosu::concepts::cayley_dickson T1&gt;             &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga660e094a5a7d9c646c30eeb9273ef80a.html#ga660e094a5a7d9c646c30eeb9273ef80a">slerp</a>(T0 z0, T1, z1, <span class="keyword">auto</span> eve::ordered_value t) <span class="keyword">noexcept</span>;</div>
+<div class="line">      <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga660e094a5a7d9c646c30eeb9273ef80a.html#ga660e094a5a7d9c646c30eeb9273ef80a">slerp</a>(T0 z0, T1, z1, <span class="keyword">auto</span> eve::ordered_value t) <span class="keyword">noexcept</span>;</div>
+<div class="line">      <span class="keyword">template</span>&lt;eve::ordered_value T0, ordered_value T1&gt;                               &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga660e094a5a7d9c646c30eeb9273ef80a.html#ga660e094a5a7d9c646c30eeb9273ef80a">slerp</a>(T0 z0, T1, z1, <span class="keyword">auto</span> eve::ordered_value t) <span class="keyword">noexcept</span>;</div>
+<div class="line">!   }</div>
+<div class="ttc" id="agroup__functions_ga660e094a5a7d9c646c30eeb9273ef80a_html_ga660e094a5a7d9c646c30eeb9273ef80a"><div class="ttname"><a href="group__functions_ga660e094a5a7d9c646c30eeb9273ef80a.html#ga660e094a5a7d9c646c30eeb9273ef80a">kyosu::slerp</a></div><div class="ttdeci">constexpr tags::callable_slerp slerp</div><div class="ttdoc">Computes the spherical interpolation between unitary quaternions.</div><div class="ttdef"><b>Definition:</b> slerp.hpp:82</div></div>
+<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> arg.hpp:13</div></div>
+</div><!-- fragment --><p><b>Parameters</b></p>
+<ul>
+<li><code>z0, z1</code> : unitary quaternions to process.</li>
+<li><code>t</code> : floating value interpolation coefficient.</li>
+</ul>
+<p><b>Return value</b></p>
+<p>The value of the spherical interpolation (or extrapolation) between <code>z0</code> and <code>z1</code> is returned. The functions asserts if the quaternions are not unitary.</p>
+<h2 class="groupheader">Example </h2>
+<div class="fragment"></div><!-- fragment --> 
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_23e6206bbfca4c239e48a9df5ece59a6.html">kyosu</a></li><li class="navelem"><a class="el" href="dir_8e64518fd9c41270bd88a691299a99d9.html">types</a></li><li class="navelem"><a class="el" href="dir_12c6a5b07df34aef879622d954c76196.html">impl</a></li>
+    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu/types/impl Directory Reference</title>
+<title>kyosu: kyosu::from_rotation_matrix</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('dir_12c6a5b07df34aef879622d954c76196.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__quaternion_gafe4deac1b486b7f1203090424e8df302.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,25 +121,58 @@ $(document).ready(function(){initNavTree('dir_12c6a5b07df34aef879622d954c76196.h
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">impl Directory Reference</div></div>
-</div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="subdirs" name="subdirs"></a>
-Directories</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_ed1a6274ad69fef7717ab4437f6bb5cc.html">complex</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_afb7ef6c7507f2c05327abc9a8754bf2.html">quaternion</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<a id="gafe4deac1b486b7f1203090424e8df302" name="gafe4deac1b486b7f1203090424e8df302"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafe4deac1b486b7f1203090424e8df302">&#9670;&#160;</a></span>from_rotation_matrix</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kyosu::from_rotation_matrix = {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
 </table>
+</div><div class="memdoc">
+
+<p>Callable object computing a quaternion from its rotation_matrix representation. </p>
+<p>This function returns a quaternion associated to the input rotation matrix m. If m is not a proper rotation 3x3 rotation matrix (i.e an orthogonal matrix with determinant 1) the result is undefined.</p>
+<p><b>Defined in header</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include eve/module/quaternion.hpp&gt;`</span></div>
+</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">template</span> &lt; <span class="keyword">typename</span> M &gt;</div>
+<div class="line">   <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302">from_rotation_matrix</a>(<span class="keyword">auto</span> m) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__quaternion_gafe4deac1b486b7f1203090424e8df302_html_gafe4deac1b486b7f1203090424e8df302"><div class="ttname"><a href="group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302">kyosu::from_rotation_matrix</a></div><div class="ttdeci">constexpr tags::callable_from_rotation_matrix from_rotation_matrix</div><div class="ttdoc">Callable object computing a quaternion from its rotation_matrix representation.</div><div class="ttdef"><b>Definition:</b> from_rotation_matrix.hpp:114</div></div>
+</div><!-- fragment --><p><b>Parameters</b></p>
+<ul>
+<li><p class="startli"><code>m</code> the rotation matrix. The actual implementation assumes that m[i][j] will return the ith line and jth column element of the matrix (indices starting from 0).</p>
+<p class="startli">The computation method is inspired from the article : "Accurate Computation of
+  Quaternions from Rotation Matrices", by Soheil Sarabandi and Federico Thomas Institut de Robotica i Informatica Industrial (CSIC-UPC) Llorens Artigas 4-6, 08028 Barcelona, Spain.</p>
+</li>
+</ul>
+<p><b>Return value</b></p>
+<p>an unitary quaternion representing the rotation</p>
+<h2 class="groupheader">Example </h2>
+<div class="fragment"></div><!-- fragment --> 
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_23e6206bbfca4c239e48a9df5ece59a6.html">kyosu</a></li><li class="navelem"><a class="el" href="dir_8e64518fd9c41270bd88a691299a99d9.html">types</a></li><li class="navelem"><a class="el" href="dir_12c6a5b07df34aef879622d954c76196.html">impl</a></li>
+    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

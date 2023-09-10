@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu/types/impl Directory Reference</title>
+<title>kyosu: kyosu::from_spherical</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('dir_12c6a5b07df34aef879622d954c76196.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__quaternion_ga943f811be2981809d36a4f31f52b0025.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,25 +121,90 @@ $(document).ready(function(){initNavTree('dir_12c6a5b07df34aef879622d954c76196.h
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">impl Directory Reference</div></div>
-</div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="subdirs" name="subdirs"></a>
-Directories</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_ed1a6274ad69fef7717ab4437f6bb5cc.html">complex</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_afb7ef6c7507f2c05327abc9a8754bf2.html">quaternion</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<a id="ga943f811be2981809d36a4f31f52b0025" name="ga943f811be2981809d36a4f31f52b0025"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga943f811be2981809d36a4f31f52b0025">&#9670;&#160;</a></span>from_spherical</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kyosu::from_spherical = {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
 </table>
+</div><div class="memdoc">
+
+<p>Callable object computing a quaternion from its spherical representation. </p>
+<p>This function build quaternions in a way similar to the way polar builds complex numbers from a spherical representation of an \(\mathbb{R}^4\) element.</p>
+<p>from_spherical takes as inputs a (positive) magnitude and a point on the hypersphere, given by three angles. The first of these, theta has a natural range of \(-\pi\) to \(+\pi\), and the other two have natural ranges of \(-\pi/2\) to \(+\pi/2\) (as is the case with the usual spherical coordinates in \(\mathbb{R}^3\)).</p>
+<p><b>Defined in header</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include eve/module/quaternion.hpp&gt;`</span></div>
+</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#ga943f811be2981809d36a4f31f52b0025">from_spherical</a>(<span class="keyword">auto</span> rho, <span class="keyword">auto</span> theta, <span class="keyword">auto</span> phi1, <span class="keyword">auto</span> phi2) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__quaternion_ga943f811be2981809d36a4f31f52b0025_html_ga943f811be2981809d36a4f31f52b0025"><div class="ttname"><a href="group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#ga943f811be2981809d36a4f31f52b0025">kyosu::from_spherical</a></div><div class="ttdeci">constexpr tags::callable_from_spherical from_spherical</div><div class="ttdoc">Callable object computing a quaternion from its spherical representation.</div><div class="ttdef"><b>Definition:</b> from_spherical.hpp:100</div></div>
+</div><!-- fragment --><p><b>Parameters</b></p>
+<ul>
+<li><code>rho</code>: the modulus</li>
+<li><code>theta</code>, 'phi1<code>, 'phi2</code>: angles in radian</li>
+</ul>
+<p><b>Return value</b></p>
+<p>the quaternion value</p>
+<hr  />
+<h4><a class="anchor" id="autotoc_md3"></a>
+Example</h4>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/module/quaternion.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using </span>wide_ft = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  wide_ft a = { 0.0f, 1.0f, -1.0f, 0.5f};</div>
+<div class="line">  wide_ft b = { 2.0f , -1.0,  -5.0, 0.0};</div>
+<div class="line">  wide_ft c = { 1.0f, -3.0f,  -4.0f, 1.5f};</div>
+<div class="line">  wide_ft d = { -2.0, 1.5f, 2.3f, 6.7f};</div>
+<div class="line">  wide_ft r1= { 1.0f, 2.0f, 3.0f,  0.0f};</div>
+<div class="line">  wide_ft r2= { 0.0f, 3.0f, 4.0f, 10.0f};</div>
+<div class="line"> </div>
+<div class="line">  std::cout</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- a                               = &quot;</span> &lt;&lt; a &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- b                               = &quot;</span> &lt;&lt; b &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- c                               = &quot;</span> &lt;&lt; c &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- d                               = &quot;</span> &lt;&lt; d &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- r1                              = &quot;</span> &lt;&lt; c &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- r2                              = &quot;</span> &lt;&lt; d &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; cylindrical(r1, b, c, d)        = &quot;</span> &lt;&lt; eve::from_cylindrical(r1, b, c, d) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; cylindrospherical(r1, r2, c, d) = &quot;</span> &lt;&lt; eve::from_cylindrospherical(r1, r2, c, d) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; multipolar(r1, c, r2, d)        = &quot;</span> &lt;&lt; eve::from_multipolar(r1, c, r2, d) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; semipolar(r1, b, c, d)          = &quot;</span> &lt;&lt; eve::from_semipolar(r1, b, c, d) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; spherical(r1, b, c, d)          = &quot;</span> &lt;&lt; eve::from_spherical(r1, b, c, d) &lt;&lt; std::endl</div>
+<div class="line">   ;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_23e6206bbfca4c239e48a9df5ece59a6.html">kyosu</a></li><li class="navelem"><a class="el" href="dir_8e64518fd9c41270bd88a691299a99d9.html">types</a></li><li class="navelem"><a class="el" href="dir_12c6a5b07df34aef879622d954c76196.html">impl</a></li>
+    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu/types/impl Directory Reference</title>
+<title>kyosu: Quaternion</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('dir_12c6a5b07df34aef879622d954c76196.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__quaternion.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,16 +122,41 @@ $(document).ready(function(){initNavTree('dir_12c6a5b07df34aef879622d954c76196.h
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">impl Directory Reference</div></div>
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Quaternion</div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="subdirs" name="subdirs"></a>
-Directories</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_ed1a6274ad69fef7717ab4437f6bb5cc.html">complex</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_afb7ef6c7507f2c05327abc9a8754bf2.html">quaternion</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gaeb24f578562330d825ff8f68da4b9252"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_from_angle_axis&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a> = {}</td></tr>
+<tr class="memdesc:gaeb24f578562330d825ff8f68da4b9252"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its angle_axis representation.  <br /></td></tr>
+<tr class="separator:gaeb24f578562330d825ff8f68da4b9252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga06868e959a899a9f2348b07c330c0048"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_from_cylindrical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_ga06868e959a899a9f2348b07c330c0048.html#ga06868e959a899a9f2348b07c330c0048">kyosu::from_cylindrical</a> = {}</td></tr>
+<tr class="memdesc:ga06868e959a899a9f2348b07c330c0048"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its cylindrical representation.  <br /></td></tr>
+<tr class="separator:ga06868e959a899a9f2348b07c330c0048"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga36f4e319eab743013ddf5a868679fb63"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_from_cylindrospherical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_ga36f4e319eab743013ddf5a868679fb63.html#ga36f4e319eab743013ddf5a868679fb63">kyosu::from_cylindrospherical</a> = {}</td></tr>
+<tr class="memdesc:ga36f4e319eab743013ddf5a868679fb63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its cylindrospherical representation.  <br /></td></tr>
+<tr class="separator:ga36f4e319eab743013ddf5a868679fb63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3f3485eda1a78b4bb970df61c7b602d7"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_from_euler&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">kyosu::from_euler</a> = {}</td></tr>
+<tr class="memdesc:ga3f3485eda1a78b4bb970df61c7b602d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its euler representation.  <br /></td></tr>
+<tr class="separator:ga3f3485eda1a78b4bb970df61c7b602d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafe4deac1b486b7f1203090424e8df302"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_from_rotation_matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302">kyosu::from_rotation_matrix</a> = {}</td></tr>
+<tr class="memdesc:gafe4deac1b486b7f1203090424e8df302"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its rotation_matrix representation.  <br /></td></tr>
+<tr class="separator:gafe4deac1b486b7f1203090424e8df302"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6bd1f5ec343e8cf12fec6cc72eae2a87"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_from_semipolar&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_ga6bd1f5ec343e8cf12fec6cc72eae2a87.html#ga6bd1f5ec343e8cf12fec6cc72eae2a87">kyosu::from_semipolar</a> = {}</td></tr>
+<tr class="memdesc:ga6bd1f5ec343e8cf12fec6cc72eae2a87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its semipolar representation.  <br /></td></tr>
+<tr class="separator:ga6bd1f5ec343e8cf12fec6cc72eae2a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga943f811be2981809d36a4f31f52b0025"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_from_spherical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#ga943f811be2981809d36a4f31f52b0025">kyosu::from_spherical</a> = {}</td></tr>
+<tr class="memdesc:ga943f811be2981809d36a4f31f52b0025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its spherical representation.  <br /></td></tr>
+<tr class="separator:ga943f811be2981809d36a4f31f52b0025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8d6d4d74663080af513e4428dcc01612"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_to_euler&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_ga8d6d4d74663080af513e4428dcc01612.html#ga8d6d4d74663080af513e4428dcc01612">kyosu::to_euler</a> = {}</td></tr>
+<tr class="memdesc:ga8d6d4d74663080af513e4428dcc01612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing euler angles from a quaternion.  <br /></td></tr>
+<tr class="separator:ga8d6d4d74663080af513e4428dcc01612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga77eff7a7e881497c34bc74d948cf82b0"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_to_rotation_matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0">kyosu::to_rotation_matrix</a> = {}</td></tr>
+<tr class="memdesc:ga77eff7a7e881497c34bc74d948cf82b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its to_rotation_matrix representation.  <br /></td></tr>
+<tr class="separator:ga77eff7a7e881497c34bc74d948cf82b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -139,7 +164,6 @@ Directories</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_23e6206bbfca4c239e48a9df5ece59a6.html">kyosu</a></li><li class="navelem"><a class="el" href="dir_8e64518fd9c41270bd88a691299a99d9.html">types</a></li><li class="navelem"><a class="el" href="dir_12c6a5b07df34aef879622d954c76196.html">impl</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

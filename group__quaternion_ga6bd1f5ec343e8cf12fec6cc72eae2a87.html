@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::sqrt</title>
+<title>kyosu: kyosu::from_semipolar</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__quaternion_ga6bd1f5ec343e8cf12fec6cc72eae2a87.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_ga6f78a4312ac7bd38e25
 </div>
 
 <div class="contents">
-<a id="ga6f78a4312ac7bd38e25d0b09b18fe3e6" name="ga6f78a4312ac7bd38e25d0b09b18fe3e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6f78a4312ac7bd38e25d0b09b18fe3e6">&#9670;&#160;</a></span>sqrt</h2>
+<a id="ga6bd1f5ec343e8cf12fec6cc72eae2a87" name="ga6bd1f5ec343e8cf12fec6cc72eae2a87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6bd1f5ec343e8cf12fec6cc72eae2a87">&#9670;&#160;</a></span>from_semipolar</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_ga6f78a4312ac7bd38e25
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::sqrt = {}</td>
+          <td class="memname">constexpr tags::callable_from_semipolar kyosu::from_semipolar = {}</td>
         </tr>
       </table>
   </td>
@@ -142,25 +142,75 @@ $(document).ready(function(){initNavTree('group__functions_ga6f78a4312ac7bd38e25
 </table>
 </div><div class="memdoc">
 
-<p>Computes a square root value. </p>
-<p><b>Defined in Header</b></p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
+<p>Callable object computing a quaternion from its semipolar representation. </p>
+<p>This function build quaternions in a way similar to the way polar builds complex numbers from a semipolar representation of an \(\mathbb{R}^2\) element.</p>
+<p>from_semipolar first two inputs are the polar coordinates of the first \(\mathbb{C}\) component of the quaternion. The third and fourth inputs are placed into the third and fourth \(\mathbb{R}\) components of the quaternion, respectively.</p>
+<p><b>Defined in header</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include kyosu/module/quaternion.hpp&gt;`</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga6bd1f5ec343e8cf12fec6cc72eae2a87.html#ga6bd1f5ec343e8cf12fec6cc72eae2a87">from_semipolar</a>(<span class="keyword">auto</span> r, <span class="keyword">auto</span> angle, <span class="keyword">auto</span> h1, <span class="keyword">auto</span> h2) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6_html_ga6f78a4312ac7bd38e25d0b09b18fe3e6"><div class="ttname"><a href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">kyosu::sqrt</a></div><div class="ttdeci">constexpr tags::callable_sqrt sqrt</div><div class="ttdoc">Computes a square root value.</div><div class="ttdef"><b>Definition:</b> sqrt.hpp:78</div></div>
+<div class="ttc" id="agroup__quaternion_ga6bd1f5ec343e8cf12fec6cc72eae2a87_html_ga6bd1f5ec343e8cf12fec6cc72eae2a87"><div class="ttname"><a href="group__quaternion_ga6bd1f5ec343e8cf12fec6cc72eae2a87.html#ga6bd1f5ec343e8cf12fec6cc72eae2a87">kyosu::from_semipolar</a></div><div class="ttdeci">constexpr tags::callable_from_semipolar from_semipolar</div><div class="ttdoc">Callable object computing a quaternion from its semipolar representation.</div><div class="ttdef"><b>Definition:</b> from_semipolar.hpp:96</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> arg.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Value to for which square root is computed.</li>
+<li><code>r</code>, angle<code>,</code>h1<code>,</code>h2`</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns a square root of its argument.</p>
+<p>the quaternion value.</p>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<div class="fragment"></div><!-- fragment --><p>This function build quaternions in a way similar to the way polar builds complex numbers from a semipolar representation of an \(\mathbb{R}^4\) element.</p>
+<p>from_semipolar takes as a first input the magnitude of the quaternion, as a second input an angle in the range 0 to \(\pi/2\) such that magnitudes of the first two \(\mathbb{C}\) components of the quaternion are the product of the first input and the sine and cosine of this angle, respectively, and finally as third and fourth inputs angles in the range \(-\pi/2\) to \(+\pi/2\) which represent the arguments of the first and second \(\mathbb{C}\) components of the quaternion, respectively.</p>
+<p><b>Defined in header</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include eve/module/quaternion.hpp&gt;`</span></div>
+</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga6bd1f5ec343e8cf12fec6cc72eae2a87.html#ga6bd1f5ec343e8cf12fec6cc72eae2a87">from_semipolar</a>(<span class="keyword">auto</span> rho, <span class="keyword">auto</span> alpha <span class="keyword">auto</span> theta1, <span class="keyword">auto</span> theta2) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>Parameters</b></p>
+<ul>
+<li><code>rho</code>: the modulus</li>
+<li><code>alpha</code>, <code>theta1</code>, <code>theta2</code>: angles in radian</li>
+</ul>
+<p><b>Return value</b></p>
+<p>the quaternion value representing the \(\R^4\) element.</p>
+<h2 class="groupheader">Example </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/module/quaternion.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using </span>wide_ft = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  wide_ft a = { 0.0f, 1.0f, -1.0f, 0.5f};</div>
+<div class="line">  wide_ft b = { 2.0f , -1.0,  -5.0, 0.0};</div>
+<div class="line">  wide_ft c = { 1.0f, -3.0f,  -4.0f, 1.5f};</div>
+<div class="line">  wide_ft d = { -2.0, 1.5f, 2.3f, 6.7f};</div>
+<div class="line">  wide_ft r1= { 1.0f, 2.0f, 3.0f,  0.0f};</div>
+<div class="line">  wide_ft r2= { 0.0f, 3.0f, 4.0f, 10.0f};</div>
+<div class="line"> </div>
+<div class="line">  std::cout</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- a                               = &quot;</span> &lt;&lt; a &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- b                               = &quot;</span> &lt;&lt; b &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- c                               = &quot;</span> &lt;&lt; c &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- d                               = &quot;</span> &lt;&lt; d &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- r1                              = &quot;</span> &lt;&lt; c &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- r2                              = &quot;</span> &lt;&lt; d &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; cylindrical(r1, b, c, d)        = &quot;</span> &lt;&lt; eve::from_cylindrical(r1, b, c, d) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; cylindrospherical(r1, r2, c, d) = &quot;</span> &lt;&lt; eve::from_cylindrospherical(r1, r2, c, d) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; multipolar(r1, c, r2, d)        = &quot;</span> &lt;&lt; eve::from_multipolar(r1, c, r2, d) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; semipolar(r1, b, c, d)          = &quot;</span> &lt;&lt; eve::from_semipolar(r1, b, c, d) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; spherical(r1, b, c, d)          = &quot;</span> &lt;&lt; eve::from_spherical(r1, b, c, d) &lt;&lt; std::endl</div>
+<div class="line">   ;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
