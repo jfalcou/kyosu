@@ -273,5 +273,12 @@ namespace kyosu::_
     }
   }
 
-
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::sinc> const&, C const& z) noexcept
+  {
+    auto s = kyosu::sin(z);
+    using u_t = eve::underlying_type_t<C>;
+    return kyosu::if_else(kyosu::abs(z) < eve::eps(eve::as(u_t())), eve::one(eve::as(u_t())), s/z);
+  }
 }
