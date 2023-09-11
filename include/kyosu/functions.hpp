@@ -83,6 +83,7 @@
 #include <kyosu/functions/sech.hpp>
 #include <kyosu/functions/sign.hpp>
 #include <kyosu/functions/sin.hpp>
+#include <kyosu/functions/sinc.hpp>
 #include <kyosu/functions/sincos.hpp>
 #include <kyosu/functions/sinpi.hpp>
 #include <kyosu/functions/sinpicospi.hpp>
@@ -101,7 +102,19 @@
 //! @brief Functions performing computations over complex or real elements only.
 //======================================================================================================================
 
+#include <kyosu/complex/acos.hpp>
+#include <kyosu/complex/acosh.hpp>
+#include <kyosu/complex/acot.hpp>
+#include <kyosu/complex/acoth.hpp>
+#include <kyosu/complex/acsc.hpp>
+#include <kyosu/complex/acsch.hpp>
 #include <kyosu/complex/arg.hpp>
+#include <kyosu/complex/asec.hpp>
+#include <kyosu/complex/asech.hpp>
+#include <kyosu/complex/asin.hpp>
+#include <kyosu/complex/asinh.hpp>
+#include <kyosu/complex/atan.hpp>
+#include <kyosu/complex/atanh.hpp>
 #include <kyosu/complex/is_imag.hpp>
 #include <kyosu/complex/polar.hpp>
 #include <kyosu/functions/from_polar.hpp>
