@@ -56,7 +56,7 @@ auto sc( auto  ec)
 TTS_CASE_TPL( "Check corner casesof eve::atanh", kyosu::scalar_real_types)
   <typename T>(tts::type<T>)
 {
-  if constexpr(spy::stdlib != spy::libcpp_)
+  if constexpr(spy::operating_system != spy::macos_)
   {
     using e_t = T;
     auto tcx = kyosu::to_complex;
@@ -95,5 +95,5 @@ TTS_CASE_TPL( "Check corner casesof eve::atanh", kyosu::scalar_real_types)
     }
   }
   else
-    TTS_PASS("no test for clang standard lib atanh corner cases are almost all false according C99");
+    TTS_PASS("no test for macosx: atanh corner cases are almost all false according C99");
 };
