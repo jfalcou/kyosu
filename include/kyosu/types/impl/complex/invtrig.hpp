@@ -537,4 +537,47 @@ namespace kyosu::_
   {
     return kyosu::atanh(kyosu::rec(a0));
   }
+
+  template<kyosu::concepts::complex C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acospi> const&, C const& a0) noexcept
+  {
+    return kyosu::radinpi(kyosu::acos(a0));
+  }
+
+  template<kyosu::concepts::complex C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acotpi> const&, C const& a0) noexcept
+  {
+    return kyosu::radinpi(kyosu::acot(a0));
+  }
+
+  template<kyosu::concepts::complex C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acscpi> const&, C const& a0) noexcept
+  {
+    return kyosu::radinpi(kyosu::acsc(a0));
+  }
+
+  template<kyosu::concepts::complex C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::asecpi> const&, C const& a0) noexcept
+  {
+    return kyosu::radinpi(kyosu::asec(a0));
+  }
+
+  template<kyosu::concepts::complex C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::asinpi> const&, C const& a0) noexcept
+  {
+    return kyosu::radinpi(kyosu::asin(a0));
+  }
+
+  template<kyosu::concepts::complex C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::atanpi> const&, C const& a0) noexcept
+  {
+    return kyosu::radinpi(kyosu::atan(a0));
+  }
+
 }
