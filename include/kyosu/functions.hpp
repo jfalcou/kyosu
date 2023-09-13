@@ -122,8 +122,10 @@
 #include <kyosu/complex/atan.hpp>
 #include <kyosu/complex/atanh.hpp>
 #include <kyosu/complex/atanpi.hpp>
+#include <kyosu/complex/beta.hpp>
 #include <kyosu/complex/digamma.hpp>
 #include <kyosu/complex/is_imag.hpp>
+#include <kyosu/complex/lbeta.hpp>
 #include <kyosu/complex/log_abs_gamma.hpp>
 #include <kyosu/complex/log_gamma.hpp>
 #include <kyosu/complex/polar.hpp>

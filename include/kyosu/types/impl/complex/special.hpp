@@ -223,20 +223,21 @@ namespace kyosu::_
 //     return  if_else(is_eqz(a1), zero, log( pedantic(div)(tgamma(a0+a1),tgamma(a0))));
 //   }
 
-//   template<kyosu::concepts::complex Z1, kyosu::concepts::complex Z2 >
-//   EVE_FORCEINLINE auto complex_binary_dispatch( eve::tag::lbeta_
+  template<typename Z1, typename Z2 >
+  EVE_FORCEINLINE auto complex_binary_dispatch( eve::tag::lbeta_
+                                              , Z1 const& a0, Z2 const& a1) noexcept
 
-//   {
-//     return log(beta(a0, a1));
-//   }
+  {
+    return log(beta(a0, a1));
+  }
 
-//   template<kyosu::concepts::complex Z1, kyosu::concepts::complex Z2 >
-//   EVE_FORCEINLINE auto complex_binary_dispatch( eve::tag::beta_
-//                                              , Z1 const& a0, Z2 const& a1) noexcept
-//   {
-//     auto y = a0 + a1;
-//     return tgamma(a0)*tgamma(a1)/tgamma(y);
-//   }
+  template<typename Z1, typename Z2 >
+  EVE_FORCEINLINE auto complex_binary_dispatch( eve::tag::beta_
+                                             , Z1 const& a0, Z2 const& a1) noexcept
+  {
+    auto y = a0 + a1;
+    return tgamma(a0)*tgamma(a1)/tgamma(y);
+  }
 
 
 //  }
