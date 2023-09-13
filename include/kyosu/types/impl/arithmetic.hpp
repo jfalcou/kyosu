@@ -239,4 +239,14 @@ namespace kyosu::_
       return res;
     }
   }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::radinpi> const&, C c) noexcept
+  {
+    using u_t =  eve::element_type_t<C>;
+    return c*eve::inv_pi(eve::as<u_t>()); ;
+  }
+
+
 }
