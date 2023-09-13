@@ -61,12 +61,12 @@ namespace kyosu::_
     {
       auto rz = -kyosu::imag(z);
       auto iz =  kyosu::real(z);
-      rz *= eve::pi(as(rz));
+      rz *= eve::pi(eve::as(rz));
       auto [s, c]   = eve::sinpicospi(iz);
       auto [sh, ch] = eve::sinhcosh(rz);
       auto r = c*sh;
       auto i = s*ch;
-      if (any(kyosu::is_not_finite(z)))
+      if (eve::any(kyosu::is_not_finite(z)))
       {
         r = eve::if_else(eve::is_infinite(rz) && eve::is_not_finite(iz), rz, r);
         i = eve::if_else(eve::is_infinite(rz) && eve::is_nan(iz), iz, i);
