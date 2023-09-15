@@ -17,15 +17,15 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(beta_);
 
-    template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
+    template<eve::ordered_value T1, eve::ordered_value T2>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T1 const& v, T2 const& w) noexcept {
       auto fn = callable_beta{};
-      return fn(v); }
+      return fn(v, w); }
 
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    template<typename T1, typename T2>
+    KYOSU_FORCEINLINE auto operator()(T1 const& target1, T2 const& target2) const noexcept -> decltype(eve::tag_invoke(*this, target1, target2))
     {
-      return eve::tag_invoke(*this, target);
+      return eve::tag_invoke(*this, target1, target2);
     }
 
     template<typename... T>

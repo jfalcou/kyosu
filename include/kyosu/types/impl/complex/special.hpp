@@ -7,6 +7,7 @@
 //======================================================================================================================
 #pragma once
 #include <eve/module/math.hpp>
+#include <eve/module/special.hpp>
 
 namespace kyosu::_
 {
@@ -51,7 +52,7 @@ namespace kyosu::_
     auto zgh=zh+g;
     //trick for avoiding FP overflow above z=141
     auto zp=pow(zgh,(zh*eve::half(eve::as<r_t>())));
-    auto ss = Z{0, 0};
+    auto ss = Z{};
     for(int pp = N-1; pp >= 1; --pp){
       ss+= c[pp]/(z+pp);
     }
@@ -66,7 +67,8 @@ namespace kyosu::_
       f = if_else(negra0, rec(-eve::inv_pi(eve::as(real(a0)))*a0*f*sinpi(a0)), eve::zero);
       f = if_else (negra0 && reala0 && eve::is_flint(real(a0)), to_complex(eve::nan(eve::as(sq2pi)), eve::inf(eve::as(sq2pi))), f);
     }
-    f = if_else(eve::is_gtz(real(a0)) && eve::is_flint(real(a0)) && reala0, to_complex(eve::nearest(real(f))), f);
+    f = if_else (reala0, to_complex(eve::tgamma(real(a0))), f);
+    f = if_else (eve::is_nan(real(f)), to_complex(eve::nan(eve::as(sq2pi)), eve::inf(eve::as(sq2pi))), f);
     f = if_else (is_eqz(a0), to_complex(eve::inf(eve::as(g))*eve::pedantic(eve::signnz)(real(a0))), f);
     return f;
   }
@@ -223,19 +225,19 @@ namespace kyosu::_
 //     return  if_else(is_eqz(a1), zero, log( pedantic(div)(tgamma(a0+a1),tgamma(a0))));
 //   }
 
-  template<typename Z1, typename Z2 >
-  EVE_FORCEINLINE auto complex_binary_dispatch( eve::tag::lbeta_
-                                              , Z1 const& a0, Z2 const& a1) noexcept
-
+  template<typename Z1, typename Z2>
+  auto dispatch(eve::tag_of<kyosu::lbeta>, Z1 const& a0, Z2 const& a1) noexcept
+  requires (kyosu::concepts::complex<Z1> || kyosu::concepts::complex<Z2>)
   {
     return log(beta(a0, a1));
   }
 
-  template<typename Z1, typename Z2 >
-  EVE_FORCEINLINE auto complex_binary_dispatch( eve::tag::beta_
-                                             , Z1 const& a0, Z2 const& a1) noexcept
+  template<typename Z1, typename Z2>
+  auto dispatch(eve::tag_of<kyosu::beta>, Z1 const& a0, Z2 const& a1) noexcept
+  requires (kyosu::concepts::complex<Z1> || kyosu::concepts::complex<Z2>)
   {
     auto y = a0 + a1;
+    std::cout << a0 <<  "   --- " << a1 << std::endl;
     return tgamma(a0)*tgamma(a1)/tgamma(y);
   }
 
