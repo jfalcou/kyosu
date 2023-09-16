@@ -124,13 +124,15 @@
 #include <kyosu/complex/atanpi.hpp>
 #include <kyosu/complex/beta.hpp>
 #include <kyosu/complex/digamma.hpp>
+#include <kyosu/functions/from_polar.hpp>
 #include <kyosu/complex/is_imag.hpp>
 #include <kyosu/complex/lbeta.hpp>
 #include <kyosu/complex/log_abs_gamma.hpp>
 #include <kyosu/complex/log_gamma.hpp>
+#include <kyosu/complex/lrising_factorial.hpp>
 #include <kyosu/complex/polar.hpp>
+#include <kyosu/complex/rising_factorial.hpp>
 #include <kyosu/complex/tgamma.hpp>
-#include <kyosu/functions/from_polar.hpp>
 #include <kyosu/functions/to_polar.hpp>
 
 //======================================================================================================================

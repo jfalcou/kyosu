@@ -197,33 +197,27 @@ namespace kyosu::_
     return f;
   }
 
-//   //===-------------------------------------------------------------------------------------------
-//   //  Unary functions : zeta
-//   //===-------------------------------------------------------------------------------------------
-//   template<kyosu::concepts::complex Z>
-//   EVE_FORCEINLINE auto dispatch(eve::tag_of<kyosu::zeta>, Z const& z) noexcept
-//   {
-//     auto zz=exp2(z);
-//     auto k = zz/(zz-2);
-//     return if_else(z == one(eve::as(z)), Z(inf(eve::as(real(z))), 0), k*eta(z));
-//   }
+  //===-------------------------------------------------------------------------------------------
+  //  Binary functions : rising_factorial, lrising_factorial, lbeta, beta
+  //===-------------------------------------------------------------------------------------------
+  // WAITING FOR DECORATORS
+  template<typename Z1, typename Z2>
+  auto dispatch(eve::tag_of<kyosu::rising_factorial>
+               , Z1 const& a0, Z2 const& a1) noexcept
+  requires (kyosu::concepts::complex<Z1> || kyosu::concepts::complex<Z2>)
+  {
+    using r_t = as_cayley_dickson_t<Z1, Z2>;
+    return kyosu::if_else(is_eqz(a1), r_t(1), tgamma(a0+a1)/tgamma(a0)); //pedantic(div)(tgamma(a0+a1),tgamma(a0)));
+  }
 
-//   //===-------------------------------------------------------------------------------------------
-//   //  Binary functions : rising_factorial, lrising_factorial, lbeta, beta
-//   //===-------------------------------------------------------------------------------------------
-//   template<kyosu::concepts::complex Z1, kyosu::concepts::complex Z2 >
-//   EVE_FORCEINLINE auto complex_binary_dispatch( eve::tag::rising_factorial>
-//                                              , Z1 const& a0, Z2 const& a1) noexcept
-//   {
-//     return if_else(is_eqz(a1), one, pedantic(div)(tgamma(a0+a1),tgamma(a0)));
-//   }
-
-//   template<kyosu::concepts::complex Z1, kyosu::concepts::complex Z2 >
-//   EVE_FORCEINLINE auto complex_binary_dispatch( eve::tag::lrising_factorial_
-//                                              , Z1 const& a0, Z2 const& a1) noexcept
-//   {
-//     return  if_else(is_eqz(a1), zero, log( pedantic(div)(tgamma(a0+a1),tgamma(a0))));
-//   }
+  template<typename Z1, typename Z2>
+  auto dispatch(eve::tag_of<kyosu::lrising_factorial>
+                                             , Z1 const& a0, Z2 const& a1) noexcept
+  requires (kyosu::concepts::complex<Z1> || kyosu::concepts::complex<Z2>)
+  {
+   using r_t = as_cayley_dickson_t<Z1, Z2>;
+   return  kyosu::if_else(is_eqz(a1), r_t{}, log(tgamma(a0+a1)/tgamma(a0))); //pedantic(divide)(tgamma(a0+a1),tgamma(a0))));
+  }
 
   template<typename Z1, typename Z2>
   auto dispatch(eve::tag_of<kyosu::lbeta>, Z1 const& a0, Z2 const& a1) noexcept
@@ -237,14 +231,21 @@ namespace kyosu::_
   requires (kyosu::concepts::complex<Z1> || kyosu::concepts::complex<Z2>)
   {
     auto y = a0 + a1;
-    std::cout << a0 <<  "   --- " << a1 << std::endl;
     return tgamma(a0)*tgamma(a1)/tgamma(y);
   }
 
 
-//  }
-
-// #include <eve/module/complex/detail/special/erf.hpp>
-// #include <eve/module/complex/detail/special/erfcx.hpp>
+//   //===-------------------------------------------------------------------------------------------
+//   //  Unary functions : zeta
+//   //===-------------------------------------------------------------------------------------------
+//   template<kyosu::concepts::complex Z>
+//   EVE_FORCEINLINE auto dispatch(eve::tag_of<kyosu::zeta>, Z const& z) noexcept
+//   {
+//     auto zz=exp2(z);
+//     auto k = zz/(zz-2);
+//     return if_else(z == one(eve::as(z)), Z(inf(eve::as(real(z))), 0), k*eta(z));
+//   }
 
 }
+// #include <eve/module/complex/detail/special/erf.hpp>
+// #include <eve/module/complex/detail/special/erfcx.hpp>
