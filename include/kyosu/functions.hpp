@@ -123,7 +123,9 @@
 #include <kyosu/complex/atanh.hpp>
 #include <kyosu/complex/atanpi.hpp>
 #include <kyosu/complex/beta.hpp>
+#include <kyosu/complex/deta.hpp>
 #include <kyosu/complex/digamma.hpp>
+#include <kyosu/complex/eta.hpp>
 #include <kyosu/functions/from_polar.hpp>
 #include <kyosu/complex/is_imag.hpp>
 #include <kyosu/complex/lbeta.hpp>
@@ -134,6 +136,7 @@
 #include <kyosu/complex/rising_factorial.hpp>
 #include <kyosu/complex/tgamma.hpp>
 #include <kyosu/functions/to_polar.hpp>
+#include <kyosu/complex/zeta.hpp>
 
 //======================================================================================================================
 //! @brief Functions performing computations over quaternion complex or real elements only.

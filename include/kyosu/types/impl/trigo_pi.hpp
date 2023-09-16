@@ -20,15 +20,15 @@ namespace kyosu::_
     if constexpr(concepts::complex<C> )
     {
       auto [rz, iz] = z;
-      iz *= eve::pi(as(iz));
+      iz *= eve::pi(eve::as(iz));
       auto [s, c]   = eve::sinpicospi(rz);
       auto [sh, ch] = eve::sinhcosh(iz);
       auto r = c*ch;
-      auto i = kyosu::if_else(is_imag(z) || kyosu::is_real(z),eve::zero, -s*sh);
+      auto i = eve::if_else(is_imag(z) || kyosu::is_real(z),eve::zero, -s*sh);
       if (eve::any(kyosu::is_not_finite(z)))
       {
-        r = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::inf(as(r)), r);
-        i = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::nan(as(r)), i);
+        r = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::inf(eve::as(r)), r);
+        i = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::nan(eve::as(r)), i);
         r = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, r);
         i = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, i);
       }
