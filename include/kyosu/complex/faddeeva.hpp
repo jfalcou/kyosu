@@ -12,27 +12,27 @@
 
 namespace kyosu::tags
 {
-  struct callable_eta : eve::elementwise
+  struct callable_faddeeva : eve::elementwise
   {
-    using callable_tag_type = callable_eta;
+    using callable_tag_type = callable_faddeeva;
 
-    KYOSU_DEFERS_CALLABLE(eta_);
+    KYOSU_DEFERS_CALLABLE(faddeeva_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_eta{};
+      auto fn = callable_faddeeva{};
       return fn(to_complex(v));
     }
 
     template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const & target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
     {
       return eve::tag_invoke(*this, target);
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_eta(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_faddeeva(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,9 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var eta
-//!   @brief Computes the Dirichlet sum \f$ \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\f$.
-//!   Sometimes this function is for obvious reasons called the alternative \f$\zeta\f$ function .
+//!   @var faddeeva
+//!   @brief  Callable object computing \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex error func
 //!
 //!   **Defined in Header**
 //!
@@ -57,23 +56,23 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<unsigned_scalar_value K, eve::ordered_value T>       constexpr auto eta(K, k, T z) noexcept;  //1
-//!      template<unsigned_scalar_value K, kyosu::concepts::complex T> constexpr auto eta(K, k, T z) noexcept;  //2
+//!      template<eve::ordered_value T>       constexpr auto faddeeva(T z) noexcept;  //1
+//!      template<kyosu::concepts::complex T> constexpr auto faddeeva(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Vcomplex or real value to process.
+//!     * `z` : Value to process.
 //!
 //! **Return value**
 //!
-//!   Returns the Dirichlet alternating zeta function: sum \f$  \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\f$
+//!   Returns \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex error function
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/eta.cpp}
+//!  @godbolt{doc/faddeeva.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_eta eta = {};
+inline constexpr tags::callable_faddeeva faddeeva = {};
 }

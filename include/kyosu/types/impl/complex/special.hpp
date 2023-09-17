@@ -374,6 +374,19 @@ namespace kyosu::_
     return if_else(real(z) == eve::inf(eve::as(real(z))), to_complex(eve::one(eve::as(real(z)))), g);
   }
 
+  //===-------------------------------------------------------------------------------------------
+  //  Unary functions : lambda
+  //===-------------------------------------------------------------------------------------------
+  template<kyosu::concepts::complex Z>
+  EVE_FORCEINLINE auto dispatch(eve::tag_of<kyosu::lambda>, Z const& z) noexcept
+  {
+    auto zz=exp2(z);
+    auto k = (z-1)/(z-2);
+    auto r = if_else(z == to_complex(eve::one(eve::as(real(z)))), to_complex(eve::inf(eve::as(real(z)))), k*deta(1u, zz));
+    imag(r) = eve::if_else(is_real(z), eve::zero, imag(r));
+    return r;
+  }
 }
-// #include <eve/module/complex/detail/special/erf.hpp>
+ #include <kyosu/types/impl/complex/faddeeva.hpp>
+// #include <kyosu/types/impl/complex/erf.hpp>
 // #include <eve/module/complex/detail/special/erfcx.hpp>

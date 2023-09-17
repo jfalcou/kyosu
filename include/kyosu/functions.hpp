@@ -126,8 +126,10 @@
 #include <kyosu/complex/deta.hpp>
 #include <kyosu/complex/digamma.hpp>
 #include <kyosu/complex/eta.hpp>
+#include <kyosu/complex/faddeeva.hpp>
 #include <kyosu/functions/from_polar.hpp>
 #include <kyosu/complex/is_imag.hpp>
+#include <kyosu/complex/lambda.hpp>
 #include <kyosu/complex/lbeta.hpp>
 #include <kyosu/complex/log_abs_gamma.hpp>
 #include <kyosu/complex/log_gamma.hpp>
