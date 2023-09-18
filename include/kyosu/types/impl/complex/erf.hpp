@@ -6,13 +6,18 @@
 */
 //======================================================================================================================
 #pragma once
+#include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
 #include <eve/module/special.hpp>
+#include <eve/detail/overload.hpp>
+#include <eve/detail/hz_device.hpp>
+//#include <eve/traits/common_value.hpp>
+
 
 namespace kyosu::_
 {
   template<kyosu::concepts::complex Z>
-  auto dispatch(eve::tag_of<kyosu::erf>, Z const& a0) noexcept
+  auto dispatch(eve::tag_of<kyosu::erf>, Z z) noexcept
   {
     auto numeric_sqr = [](auto z){ // UNTIL DECORATORS ARE AT HAND
       auto [zr, zi] = z;
@@ -22,7 +27,7 @@ namespace kyosu::_
     auto y =  imag(z);
     using real_t =  decltype(x);
     using r_t = eve::element_type_t<real_t>;
-    auto mz2 = -numeric_sqr)(z);// -z^2, being careful of overflow
+    auto mz2 = -numeric_sqr(z);// -z^2, being careful of overflow
     using A9 = kumi::result::generate_t<9, r_t>;
     static constexpr std::array< A9, 97> coefs =
       {
@@ -149,7 +154,7 @@ namespace kyosu::_
       return eve::reverse_horner(mz2, a)*z;
     };
 
-    if constexpr(scalar_value<Z>)
+    if constexpr(eve::scalar_value<Z>)
     {
       auto w_im = [w_im_y100](real_t xx){
         const r_t ispi = 0.56418958354775628694807945156; // 1 / sqrt(pi)
@@ -205,13 +210,13 @@ namespace kyosu::_
         };
         auto remain = [w_im_y100, signx](auto xx){
 
-          if constexpr(scalar_value<real_t>)
+          if constexpr(eve::scalar_value<real_t>)
           {
             return  w_im_y100(100/(1+xx), xx)*signx;
           }
           else
           {
-            return eve::map(w_im_y100, 100/(1+xx), xx)*signx;
+            return eve::detail::map(w_im_y100, 100/(1+xx), xx)*signx;
           }
         };
 
@@ -236,11 +241,16 @@ namespace kyosu::_
 
       auto signy = eve::signnz(y);
       auto no_underflow = real(mz2) >= -750;
+//      std::cout << "no_underflow " << no_underflow << "   " << real(mz2) << std::endl;
       auto nfin = eve::is_not_finite(y); //|| is_nan(z);
-      auto r = to_complex(signx, 0);           // treat underflow
+      auto r = if_else(no_underflow || is_nan( real(mz2))
+                      , to_complex(eve::nan(eve::as(real_t(0))), eve::nan(eve::as(real_t(0))))
+                      , to_complex(signx, real_t(0)));           // treat underflow and nan
+//      std::cout << "level0 -- r " << r << std::endl;
       auto notdone = (no_underflow && !nfin) || eve::is_eqz(y);  // no underflow
       r = if_else(nfin, to_complex(eve::nan(eve::as(y)), eve::nan(eve::as(y))), r);
-      r = if_else(eve::is_eqz(x)&&nfin, to_complex(0, y), r);
+      r = if_else(eve::is_eqz(x) && nfin, to_complex(real_t(0), y), r);
+//      std::cout << "level1 -- r " << r << std::endl;
       auto ax = eve::abs(x);
       auto xsmall = ax < 8e-2;
       auto ysmall = eve::abs(y) < 1e-2;
@@ -248,7 +258,7 @@ namespace kyosu::_
         return to_complex(eve::erf(x), y);
       };
       auto nullx = [signy, w_im](auto x,  auto y){
-        return to_complex(x, eve::if_else(eve::sqr(y) > real_t(720), eve::inf(eve::as(y))*signy, eve::expx2(y) * w_im(y)));
+        return to_complex(x, eve::if_else(eve::sqr(y) > real_t(720), eve::inf(eve::as(y)), eve::expx2(y) * w_im(y)))*signy;
       };
 
       auto smallxy = [taylor](){
@@ -258,7 +268,7 @@ namespace kyosu::_
       auto remain =  [mz2, signx](auto x, auto y){
         auto [mRe_z2, mIm_z2] = mz2;
         auto [s, c] = eve::sincos(mIm_z2);
-        auto zz = eve::oneminus(eve::exp(mRe_z2)*(Z(c, s)*faddeeva(to_complex(-y, x)*signx)))*signx;
+        auto zz = oneminus(eve::exp(mRe_z2)*(to_complex(c, s)*faddeeva(to_complex(-y, x)*signx)))*signx;
         return zz;
       };
 

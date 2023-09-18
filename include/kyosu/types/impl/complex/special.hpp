@@ -387,6 +387,6 @@ namespace kyosu::_
     return r;
   }
 }
- #include <kyosu/types/impl/complex/faddeeva.hpp>
-// #include <kyosu/types/impl/complex/erf.hpp>
+#include <kyosu/types/impl/complex/faddeeva.hpp>
+#include <kyosu/types/impl/complex/erf.hpp>
 // #include <eve/module/complex/detail/special/erfcx.hpp>
