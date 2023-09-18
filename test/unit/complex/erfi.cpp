@@ -9,60 +9,59 @@
 #include <test.hpp>
 #include <complex>
 
-TTS_CASE_TPL( "Check corner cases of erfcx", kyosu::real_types)
+TTS_CASE_TPL( "Check corner cases of erfi", kyosu::real_types)
   <typename T>(tts::type<T>)
 {
   using e_t = T;
   using c_t = decltype(kyosu::to_complex(e_t(0)));
   using eve::as;
-  const int N = 9;
- auto zer = eve::zero(as<T>());
+  const int N = 11;
+  auto zer = eve::zero(as<T>());
   auto inf = eve::inf(as<T>());
   auto nan = eve::nan(as<T>());
   auto one = eve::one(as<T>());
   auto half= eve::half(as<T>());
   auto tcx = [](auto r, auto i){return kyosu::to_complex(T(r), T(i));};
 
-
-  std::array<c_t, N> z =
+  std::array<c_t, N> inputs =
     {
       tcx(one,one),   //0
       tcx(half,one),  //1
       tcx(10, 10),    //2
-      tcx(65, zer),   //3
+      tcx(65, zer),   //3*
       tcx(0.01, one), //4
       tcx(1.0e-4, 2), //5
       tcx(0.785398163397448, zer), //6
       tcx(inf,zer),   //7
-      tcx(nan,nan)    //8
+      tcx(nan,nan),   //8
+      tcx(one, 0 ),   //9
+      tcx(half, 0)    //10
     };
 
-  std::array<c_t, N> w =
+  std::array<c_t, N> results =
     {
-      tcx(3.04744205256913e-01, -2.08218938202832e-01 ), //0
-      tcx(3.54900332867578e-01, -3.42871719131101e-01 ), //1
-      tcx(2.82794674542325e-02, -2.81384332763369e-02 ), //2
-      tcx(eve::erfcx(T(65)), zer), //tcx(8.67881291138928e-03, +0.00000000000000e+00 ), //3
-      tcx(3.68702417397766e-01, -5.99851994495788e-01 ), //4
-      tcx(1.83388101767463e-02, -3.40018889576381e-01 ), //5
-      tcx(4.94195834537586e-01, +0.00000000000000e+00 ), //6
-      tcx(eve::erfcx(inf), zer), //tcx(0.00000000000000e+00, +0.00000000000000e+00 ), //7
-      tcx(nan                ,  nan                   )  //8
+      tcx(1.90453469237835e-01, 1.31615128169795e+00), //0
+      tcx(1.87973467223383e-01, 9.50709728318957e-01), //1
+      tcx(-1.09876846081940e-02, 9.61649374272475e-01), //2
+      tcx(inf,                  0.00000000000000e+00), //3
+      tcx(4.15093659812155e-03, 8.42742304391298e-01), //4
+      tcx(2.06669848718624e-06, 9.95322265432292e-01), //5
+      tcx(1.10778360148748e+00, 0.00000000000000e+00), //6
+      tcx(inf,                  0.00000000000000e+00), //7
+      tcx(nan,                  nan                 ), //8
+      tcx(1.65042575879754e+00, 0.00000000000000e+00), //9
+      tcx(6.14952094696511e-01, 0.00000000000000e+00)  //10
     };
-  using kyosu::erfcx;
+
+  using kyosu::erfi;
   using kyosu::conj;
-  double ulps = 2000;
   for(int i=0; i < N; ++i)
   {
-    auto [er, ei] = erfcx(z[i]);
-    auto [wr, wi] = w[i];
-
-    TTS_ULP_EQUAL(er, wr, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erfcx(z[i]) <<  " -> " <<w[i] <<"\n";
-    TTS_ULP_EQUAL(ei, wi, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erfcx(z[i]) <<  " -> " <<w[i] <<'\n';
+    TTS_RELATIVE_EQUAL(kyosu::erfi(inputs[i]), results[i], 1.0e-4) << "i " << i << " -> " << inputs[i] <<"\n";
   }
 };
 
-TTS_CASE_WITH( "Check behavior of erfcx on wide"
+TTS_CASE_WITH( "Check behavior of erfi on wide"
              , kyosu::simd_real_types
              , tts::generate( tts::randoms(-10.0, 10.0)
                             , tts::randoms(-10.0, 10.0))
@@ -70,9 +69,9 @@ TTS_CASE_WITH( "Check behavior of erfcx on wide"
   <typename T>(T const& a0, T const& a1 )
 {
   auto z = kyosu::to_complex(a0, a1);
-  auto ez = kyosu::erfcx(z);
+  auto ez = kyosu::erfi(z);
   for(int i = 0; i !=  eve::cardinal_v<T>; ++i)
   {
-    TTS_RELATIVE_EQUAL(ez.get(i), kyosu::erfcx(z.get(i)), 1.0e-4);
+    TTS_RELATIVE_EQUAL(ez.get(i), kyosu::erfi(z.get(i)), 1.0e-4);
   }
 };

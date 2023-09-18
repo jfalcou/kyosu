@@ -398,10 +398,26 @@ namespace kyosu::_
   {
     auto realz = is_real(z);
     if (eve::all(realz))
-      return to_complex(erfcx(real(z)));
+      return to_complex(eve::erfcx(real(z)));
     else  if (eve::none(realz))
       return faddeeva(to_complex(-imag(z), real(z)));
     else
       return if_else(realz, to_complex(eve::erfcx(real(z))), faddeeva(to_complex(-imag(z), real(z))));
+  }
+
+  template<typename Z>
+  EVE_FORCEINLINE auto dispatch(eve::tag_of<kyosu::erfi>, Z const& z) noexcept
+  {
+    auto realz = is_real(z);
+    if (eve::all(realz))
+    {
+      return kyosu::erfi(real(z));
+    }
+    else
+    {
+      auto [rz, iz] = z;
+      auto tmp = erf(to_complex(-iz, rz));
+      return to_complex(imag(tmp), -real(tmp));
+   }
   }
 }

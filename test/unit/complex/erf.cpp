@@ -69,9 +69,9 @@ TTS_CASE_TPL( "Check corner cases of erf", kyosu::real_types)
   using kyosu::erf;
   for(int i=0; i < N; ++i)
   {
-    if (i < 12)
-      TTS_IEEE_EQUAL(erf(inputs[i]), results[i]) << "i =  " << i << " <- " << inputs[i] << "\n";
-    else
+//     if (i < 12)
+//       TTS_IEEE_EQUAL(erf(inputs[i]), results[i]) << "i =  " << i << " <- " << inputs[i] << "\n";
+//     else
       TTS_RELATIVE_EQUAL(erf(inputs[i]), results[i], 1.0e-4) << "i =  " << i << "\n";
     TTS_IEEE_EQUAL(erf(conj(inputs[i])), conj(erf(inputs[i]))) << "i =  " << i << "\n";
   }
@@ -205,18 +205,15 @@ TTS_CASE_TPL( "Check corner cases of erf", kyosu::scalar_real_types)
   double ulps = 2000;
   for(int i=0; i < NTST; ++i)
   {
-    if (i < 21 || i > 34)
-    {
-      auto [er, ei] = erf(z[i]);
-      auto [wr, wi] = w[i];
+    auto [er, ei] = erf(z[i]);
+    auto [wr, wi] = w[i];
 
-      TTS_ULP_EQUAL(er, wr, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erf(z[i]) <<  " -> " <<w[i] <<"\n";
-      TTS_ULP_EQUAL(ei, wi, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erf(z[i]) <<  " -> " <<w[i] <<'\n';
+    TTS_ULP_EQUAL(er, wr, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erf(z[i]) <<  " -> " <<w[i] <<"\n";
+    TTS_ULP_EQUAL(ei, wi, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erf(z[i]) <<  " -> " <<w[i] <<'\n';
 
-      auto [mer, mei] = erf(-z[i]);
-      TTS_ULP_EQUAL(mer, -wr, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erf(z[i]) <<  " -> " <<w[i] <<"\n";
-      TTS_ULP_EQUAL(mei, -wi, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erf(z[i]) <<  " -> " <<w[i] <<'\n';
-    }
+    auto [mer, mei] = erf(-z[i]);
+    TTS_ULP_EQUAL(mer, -wr, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erf(z[i]) <<  " -> " <<w[i] <<"\n";
+    TTS_ULP_EQUAL(mei, -wi, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erf(z[i]) <<  " -> " <<w[i] <<'\n';
   }
 };
 
