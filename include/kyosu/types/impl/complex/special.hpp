@@ -387,6 +387,21 @@ namespace kyosu::_
     return r;
   }
 }
+
 #include <kyosu/types/impl/complex/faddeeva.hpp>
 #include <kyosu/types/impl/complex/erf.hpp>
-// #include <eve/module/complex/detail/special/erfcx.hpp>
+
+namespace kyosu::_
+{
+  template<typename Z>
+  EVE_FORCEINLINE auto dispatch(eve::tag_of<kyosu::erfcx>, Z const& z) noexcept
+  {
+    auto realz = is_real(z);
+    if (eve::all(realz))
+      return to_complex(erfcx(real(z)));
+    else  if (eve::none(realz))
+      return faddeeva(to_complex(-imag(z), real(z)));
+    else
+      return if_else(realz, to_complex(eve::erfcx(real(z))), faddeeva(to_complex(-imag(z), real(z))));
+  }
+}

@@ -126,6 +126,7 @@
 #include <kyosu/complex/deta.hpp>
 #include <kyosu/complex/digamma.hpp>
 #include <kyosu/complex/erf.hpp>
+#include <kyosu/complex/erfcx.hpp>
 #include <kyosu/complex/eta.hpp>
 #include <kyosu/complex/faddeeva.hpp>
 #include <kyosu/functions/from_polar.hpp>
