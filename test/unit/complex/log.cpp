@@ -102,7 +102,6 @@ TTS_CASE_TPL( "Check corner cases of log", kyosu::scalar_real_types)
   using kyosu::log;
   for(int i=0; i < N; ++i)
   {
-    std::cout << "i " << i << " input " << inputs[i] << " ->" << log(inputs[i]) << std::endl;
     TTS_IEEE_EQUAL(log(inputs[i]), results[i]) << "i " << i << " -> " << inputs[i] << "\n";
     TTS_IEEE_EQUAL(log(conj(inputs[i])), conj(log(inputs[i])));
   }

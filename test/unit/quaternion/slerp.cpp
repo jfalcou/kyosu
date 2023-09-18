@@ -24,7 +24,6 @@ TTS_CASE_WITH ( "Check behavior of slerp on"
   <typename T>(T const& a0, T const& a1, T const& a2, T const& a3
               , T const& a4, T const& a5, T const& a6, T const& a7)
 {
-//  auto pr = [](auto name, auto v){std::cout << name << v[0] << ", " << v[1] << ", " << v[2] << std::endl; };
   using e_t =  eve::element_type_t<T>;
   using q_t =  kyosu::as_quaternion_t<T>;
   if constexpr(sizeof(e_t) == 8)

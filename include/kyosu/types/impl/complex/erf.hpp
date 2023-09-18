@@ -11,7 +11,6 @@
 #include <eve/module/special.hpp>
 #include <eve/detail/overload.hpp>
 #include <eve/detail/hz_device.hpp>
-//#include <eve/traits/common_value.hpp>
 
 
 namespace kyosu::_
@@ -241,16 +240,13 @@ namespace kyosu::_
 
       auto signy = eve::signnz(y);
       auto no_underflow = real(mz2) >= -750;
-//      std::cout << "no_underflow " << no_underflow << "   " << real(mz2) << std::endl;
       auto nfin = eve::is_not_finite(y); //|| is_nan(z);
       auto r = if_else(no_underflow || is_nan( real(mz2))
                       , to_complex(eve::nan(eve::as(real_t(0))), eve::nan(eve::as(real_t(0))))
                       , to_complex(signx, real_t(0)));           // treat underflow and nan
-//      std::cout << "level0 -- r " << r << std::endl;
       auto notdone = (no_underflow && !nfin) || eve::is_eqz(y);  // no underflow
       r = if_else(nfin, to_complex(eve::nan(eve::as(y)), eve::nan(eve::as(y))), r);
       r = if_else(eve::is_eqz(x) && nfin, to_complex(real_t(0), y), r);
-//      std::cout << "level1 -- r " << r << std::endl;
       auto ax = eve::abs(x);
       auto xsmall = ax < 8e-2;
       auto ysmall = eve::abs(y) < 1e-2;

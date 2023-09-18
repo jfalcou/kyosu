@@ -363,13 +363,10 @@ namespace kyosu::_
         C1 expo = c1;
         auto const o = eve::one(eve::as<u_t>());
         r_t result(o);
-        std::cout << "result " << result << std::endl;
         while(true)
         {
           if  (eve::all(eve::is_eqz(expo))) break;
-          std::cout << "expo " << expo << " base " << base <<  "result " << result << std::endl;
           result = kyosu::if_else(eve::is_odd(expo), result*base, o);
-          std::cout << "expo " << expo << " base " << base << "result " << result << std::endl;
           expo = (expo >> 1);
           base = kyosu::sqr(base);
         }

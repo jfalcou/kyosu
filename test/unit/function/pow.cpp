@@ -33,15 +33,6 @@ TTS_CASE_WITH ( "Check kyosu::pow over complex"
   TTS_RELATIVE_EQUAL(kyosu::pow(c0, c1), kyosu::exp(c1*kyosu::log(c0)), 1e-5);
   TTS_RELATIVE_EQUAL(kyosu::pow(r0, c1), kyosu::exp(c1*kyosu::log(r0)), 1e-5);
   TTS_RELATIVE_EQUAL(kyosu::pow(c0, r1), kyosu::exp(r1*kyosu::log(c0)), 1e-5);
-//  TTS_RELATIVE_EQUAL(kyosu::pow(c0, 4u),  c0*kyosu::sqr(kyosu::sqr(c0)), 1.0e-5);
-
-   auto o = 1.0f;
-   auto oo = kyosu::to_complex(o+o, o);
-   auto z =  kyosu::if_else(4 <  2, o*oo, o);
-   std::cout << "o  " << o << std::endl;
-   std::cout << "oo " << oo << std::endl;
-   std::cout << "o*oo " << o*oo << std::endl;
-   std::cout << "z  " << z << std::endl;
 };
 
 TTS_CASE_WITH ( "Check kyosu::pow over quaternion"
@@ -58,5 +49,4 @@ TTS_CASE_WITH ( "Check kyosu::pow over quaternion"
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
   TTS_RELATIVE_EQUAL(kyosu::pow(q0, q1),  kyosu::exp(q1*kyosu::log(q0)), 1e-5);
-//  TTS_RELATIVE_EQUAL(kyosu::pow(q0, 4),  kyosu::sqr(kyosu::sqr(q0)), 1.0e-5);
 };
