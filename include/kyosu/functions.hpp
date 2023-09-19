@@ -74,6 +74,7 @@
 #include <kyosu/functions/pow1p.hpp>
 #include <kyosu/functions/pow_abs.hpp>
 #include <kyosu/functions/powm1.hpp>
+#include <kyosu/functions/proj.hpp>
 #include <kyosu/functions/pure.hpp>
 #include <kyosu/functions/radinpi.hpp>
 #include <kyosu/functions/real.hpp>

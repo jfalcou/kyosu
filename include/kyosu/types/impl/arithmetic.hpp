@@ -248,5 +248,28 @@ namespace kyosu::_
     return c*eve::inv_pi(eve::as<u_t>()); ;
   }
 
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::proj> const&, C c) noexcept
+  {
+    using real_t = eve::as<as_real_t<C>>;
+    constexpr auto P = kyosu::dimension_v<C>;
+    if constexpr (P == 2)
+//      std::cout << c << " -> " << is_infinite(c) << std::endl;
+      return if_else(is_infinite(c)
+                    , to_complex(eve::inf(real_t{}), eve::copysign(eve::zero(real_t{}), imag(c)))
+                    , c);
+    else
+    {
+      auto isinf = is_infinite(c);
+      auto tmp = eve::if_else(isinf, eve::inf(real_t{}), real(c));
+      auto setpure = [isinf](auto & x){
+        x = eve::if_else(isinf, eve::copysign(eve::zero(real_t{}), x), x);
+      };
+      kumi::for_each(setpure,  c);
+      real(c) = tmp;
+      return c;
+    }
+  }
 
 }
