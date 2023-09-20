@@ -72,9 +72,10 @@ namespace kyosu
   //!
   //!   @code
   //!   namespace eve
- //!   {
+  //!   {
   //!     auto from_multipolar( auto rho1, auto theta1 auto rho2, auto theta2) const noexcept;
-  //!  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //!   }
+  //!   @endcode
   //!
   //! **Parameters**
   //!

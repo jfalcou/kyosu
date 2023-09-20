@@ -66,7 +66,8 @@ namespace kyosu
   //!   namespace eve
   //!   {
   //!     auto from_polar( auto rho, auto theta) const noexcept;
-  //!  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //!   }
+  //!   @endcode
   //!
   //! **Parameters**
   //!

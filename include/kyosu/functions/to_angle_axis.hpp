@@ -60,9 +60,10 @@ namespace kyosu
   //!
   //!   @code
   //!   namespace eve
- //!   {
+  //!   {
   //!     auto to_angle_axis( auto q) const noexcept;
-  //!  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //!   }
+  //!   @endcode
   //!
   //! **Parameters**
   //!

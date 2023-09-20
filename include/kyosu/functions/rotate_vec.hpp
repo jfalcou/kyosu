@@ -82,7 +82,8 @@ namespace kyosu
   //!   namespace eve
   //!   {
   //!     auto rotate_vec( auto q) const noexcept;
-  //!  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //!   }
+  //!   @endcode
   //!
   //! **Parameters**
   //!
