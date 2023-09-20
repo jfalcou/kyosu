@@ -272,4 +272,15 @@ namespace kyosu::_
     }
   }
 
+  template<typename  C0, typename  C1>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::ldiv> const&, C0 const & c0, C1 const &  c1) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<C0,C1>;
+    if constexpr(dimension_v<r_t> <= 2 || eve::ordered_value<C0>|| eve::ordered_value<C1> )
+      return c1/c0;
+    else
+      return rec(c0)*c1;
+  }
+
 }

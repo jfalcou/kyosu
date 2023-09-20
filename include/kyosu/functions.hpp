@@ -59,6 +59,7 @@
 #include <kyosu/functions/is_unitary.hpp>
 #include <kyosu/functions/jpart.hpp>
 #include <kyosu/functions/kpart.hpp>
+#include <kyosu/functions/ldiv.hpp>
 #include <kyosu/functions/lerp.hpp>
 #include <kyosu/functions/log.hpp>
 #include <kyosu/functions/log10.hpp>

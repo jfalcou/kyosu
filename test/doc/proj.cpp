@@ -25,6 +25,9 @@ int main()
   std::cout << "    " <<  quaternion<double>(1.f,2.f,3.f,4.f) << " -> " << proj(quaternion<double>(1.f,2.f,3.f,4.f)) << "\n";
   std::cout << "    " <<  quaternion<double>(-1.f,inf,3.f,-4.f) << " -> " << proj(quaternion<double>(-1.f,inf,3.f,-4.f)) << "\n";
 
-
+  using T =  eve::wide < float, eve::fixed < 2 > >;
+  using c_t = kyosu::as_quaternion_t<T>;
+  auto g = c_t(32, 44, 55, 34);
+  std::cout << g << std::endl;
   return 0;
 }
