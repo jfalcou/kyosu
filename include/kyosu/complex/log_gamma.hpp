@@ -20,7 +20,7 @@ namespace kyosu::tags
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
       auto fn = callable_log_gamma{};
-      return fn(v); }
+      return fn(to_complex(v)); }
 
     template<typename T>
     KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))

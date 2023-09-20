@@ -20,7 +20,7 @@ namespace kyosu::tags
     template<eve::ordered_value T, eve::ordered_value U>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v, U const& w) noexcept {
       auto fn = callable_lbeta{};
-      return fn(v, w); }
+      return fn(to_complex(v), w); }
 
     template<typename T, typename U>
     KYOSU_FORCEINLINE auto operator()(T const& target1, U const& target2) const noexcept -> decltype(eve::tag_invoke(*this, target1, target2))
@@ -39,8 +39,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var beta
-//!   @brief Computes the natural logarithm of the beta function.
+//!   @var lbeta
+//!   @brief Computes the natural logarithm of the lbeta function.
 //!
 //!   **Defined in Header**
 //!
