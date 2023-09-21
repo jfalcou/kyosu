@@ -48,8 +48,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T> constexpr auto quaternion(T r)            noexcept;
-//!      template<eve::ordered_value T> constexpr auto quaternion(T r, T i)       noexcept;
+//!      template<eve::ordered_value T> constexpr auto quaternion(T r)                      noexcept;
+//!      template<eve::ordered_value T> constexpr auto quaternion(T r, T i, T j, T k)       noexcept;
 
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T quaternion(T z) noexcept;
 //!   }
@@ -57,8 +57,8 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z`       : Quaternion value.
-//!     * `r`, `i`  : Real and imaginary part sued to construct a @ref kyosu::quaternion..
+//!     * `z`                 : Quaternion value.
+//!     * `r`, `i`, `j`, `k`  : Real and unreal parts sued to construct a @ref kyosu::quaternion..
 //!
 //!   **Return value**
 //!
