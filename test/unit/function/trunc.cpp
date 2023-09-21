@@ -47,7 +47,7 @@ TTS_CASE_WITH ( "Check kyosu::trunc over octonion"
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::as_octonion_t<T>;
+  using type = kyosu::octonion_t<T>;
   TTS_EQUAL(kyosu::trunc(type(r,i,j,k,l,li,lj,lk)), type(eve::trunc(r), eve::trunc(i), eve::trunc(j), eve::trunc(k)
                                                        , eve::trunc(l), eve::trunc(li), eve::trunc(lj), eve::trunc(lk) ));
 };

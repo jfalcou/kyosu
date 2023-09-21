@@ -51,7 +51,7 @@ TTS_CASE_WITH ( "Check kyosu::is_denormal over octonion"
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::as_octonion_t<T>;
+  using type = kyosu::octonion_t<T>;
   auto z(eve::mindenormal(eve::as(r)));
   TTS_EQUAL(kyosu::is_denormal(type(r,i,j,k,l,li,lj,lk)), eve::is_denormal(r) || eve::is_denormal(i) || eve::is_denormal(j) || eve::is_denormal(k)
             || eve::is_denormal(l) || eve::is_denormal(li) || eve::is_denormal(lj) || eve::is_denormal(lk) );

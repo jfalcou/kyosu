@@ -19,5 +19,5 @@ TTS_CASE_TPL( "Check as_real behavior on non-real types", kyosu::real_types)
 {
   TTS_TYPE_IS(kyosu::as_real_t<kyosu::complex_t<T>>    , T);
   TTS_TYPE_IS(kyosu::as_real_t<kyosu::quaternion_t<T>> , T);
-  TTS_TYPE_IS(kyosu::as_real_t<kyosu::as_octonion_t<T>>   , T);
+  TTS_TYPE_IS(kyosu::as_real_t<kyosu::octonion_t<T>>   , T);
 };

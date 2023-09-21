@@ -49,7 +49,7 @@ TTS_CASE_WITH ( "Check kyosu::is_not_real over octonion"
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::as_octonion_t<T>;
+  using type = kyosu::octonion_t<T>;
   TTS_EQUAL(kyosu::is_not_real(type(r,i,j,k,l,li,lj,lk)),  eve::is_nez(i) || eve::is_nez(j) || eve::is_nez(k)
             || eve::is_nez(l) || eve::is_nez(li) || eve::is_nez(lj) || eve::is_nez(lk) );
   TTS_EQUAL(kyosu::is_not_real(type(r)), eve::false_(eve::as(r)));

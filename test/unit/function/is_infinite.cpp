@@ -51,7 +51,7 @@ TTS_CASE_WITH ( "Check kyosu::is_infinite over octonion"
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::as_octonion_t<T>;
+  using type = kyosu::octonion_t<T>;
   auto z(eve::inf(eve::as(r)));
   TTS_EQUAL(kyosu::is_infinite(type(r,i,j,k,l,li,lj,lk)), eve::is_infinite(r) || eve::is_infinite(i) || eve::is_infinite(j) || eve::is_infinite(k)
             || eve::is_infinite(l) || eve::is_infinite(li) || eve::is_infinite(lj) || eve::is_infinite(lk) );

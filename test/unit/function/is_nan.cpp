@@ -51,7 +51,7 @@ TTS_CASE_WITH ( "Check kyosu::is_nan over octonion"
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::as_octonion_t<T>;
+  using type = kyosu::octonion_t<T>;
   auto z(eve::nan(eve::as(r)));
   TTS_EQUAL(kyosu::is_nan(type(r,i,j,k,l,li,lj,lk)), eve::is_nan(r) || eve::is_nan(i) || eve::is_nan(j) || eve::is_nan(k)
             || eve::is_nan(l) || eve::is_nan(li) || eve::is_nan(lj) || eve::is_nan(lk) );

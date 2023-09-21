@@ -47,6 +47,6 @@ TTS_CASE_WITH ( "Check kyosu::pure over octonion"
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::as_octonion_t<T>;
+  using type = kyosu::octonion_t<T>;
   TTS_EQUAL(kyosu::pure(type(r,i,j,k,l,li,lj,lk)), type(T(0),i,j,k,l,li,lj,lk) );
 };
