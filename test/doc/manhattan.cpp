@@ -5,14 +5,14 @@
 int main()
 {
   using kyosu::manhattan;
-  using kyosu::complex;
-  using kyosu::quaternion;
+  using kyosu::as_complex_t;
+  using kyosu::as_quaternion_t;
   using e_t = float;
-  using c_t = complex<float>;
-  using q_t = quaternion<float>;
+  using c_t = kyosu::as_complex_t<float>;
+  using q_t = kyosu::as_quaternion_t<float>;
   using we_t = eve::wide<float, eve::fixed<2>>;
-  using wc_t = eve::wide<complex<float>, eve::fixed<2>>;
-  using wq_t = eve::wide<quaternion<float>, eve::fixed<2>>;
+  using wc_t = eve::wide<kyosu::as_complex_t<float>, eve::fixed<2>>;
+  using wq_t = eve::wide<kyosu::as_quaternion_t<float>, eve::fixed<2>>;
 
   std::cout << "Real:        "<< "\n";
   e_t e0(1);

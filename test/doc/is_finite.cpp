@@ -5,12 +5,12 @@
 int main()
 {
   using kyosu::is_finite;
-  using kyosu::complex;
-  using kyosu::quaternion;
+  using kyosu::as_complex_t;
+  using kyosu::as_quaternion_t;
   using eve::as;
   using e_t = float;
-  using c_t = complex<float>;
-  using q_t = quaternion<float>;
+  using c_t = kyosu::as_complex_t<float>;
+  using q_t = kyosu::as_quaternion_t<float>;
   using we_t = eve::wide<e_t, eve::fixed<4>>;
   using wc_t = eve::wide<c_t, eve::fixed<4>>;
   using wq_t = eve::wide<q_t, eve::fixed<4>>;

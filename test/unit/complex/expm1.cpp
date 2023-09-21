@@ -50,7 +50,7 @@ TTS_CASE_WITH( "Check behavior of exp on wide"
 TTS_CASE_TPL( "Check corner cases of exp", kyosu::scalar_real_types)
   <typename T>(tts::type<T>)
 {
-  using c_t = kyosu::complex<T>;
+  using c_t = kyosu::as_complex_t<T>;
   using eve::as;
   const int N = 12;
   auto zer = eve::zero(as<T>());

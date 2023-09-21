@@ -11,7 +11,7 @@
 TTS_CASE_TPL( "Check complex::div", kyosu::scalar_real_types)
 <typename T>(tts::type<T>)
 {
-  using c_t   = kyosu::complex<T>;
+  using c_t   = kyosu::as_complex_t<T>;
   using w_t   = eve::wide<T>;
   using wc_t  = eve::wide<c_t>;
   using eve::div;
@@ -63,7 +63,7 @@ TTS_CASE_TPL( "Check complex::div", kyosu::scalar_real_types)
 TTS_CASE_TPL( "Check complex::operator/", kyosu::scalar_real_types)
 <typename T>(tts::type<T>)
 {
-  using c_t   = kyosu::complex<T>;
+  using c_t   = kyosu::as_complex_t<T>;
   using w_t   = eve::wide<T>;
   using wc_t  = eve::wide<c_t>;
 

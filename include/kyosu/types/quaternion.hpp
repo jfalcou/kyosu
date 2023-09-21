@@ -22,8 +22,8 @@ namespace kyosu
   //!
   //! @}
   //====================================================================================================================
-  template<typename T>
-  using quaternion = cayley_dickson<T,4>;
+//   template<typename T>
+//   using quaternion = cayley_dickson<T,4>;
 
   template<typename T>
   using as_quaternion_t = as_cayley_dickson_n_t<4,T>;

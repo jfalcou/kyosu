@@ -27,7 +27,7 @@ TTS_CASE_WITH ( "Check kyosu::sech over real"
 template < typename T >
 auto cv(boost::math::quaternion<T> const &bq)
 {
-  return kyosu::quaternion<T>(bq.R_component_1(), bq.R_component_2(),
+  return kyosu::as_quaternion_t<T>(bq.R_component_1(), bq.R_component_2(),
                               bq.R_component_3(), bq.R_component_4());
 }
 
