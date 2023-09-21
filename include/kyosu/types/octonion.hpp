@@ -12,8 +12,8 @@
 
 namespace kyosu
 {
-  template<typename T>
-  using octonion = cayley_dickson<T,8>;
+//   template<typename T>
+//   using octonion = cayley_dickson<T,8>;
 
   template<typename T>
   using octonion_t = as_cayley_dickson_n_t<8,T>;
