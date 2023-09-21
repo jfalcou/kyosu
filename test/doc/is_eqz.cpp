@@ -25,8 +25,8 @@ int main()
   std::cout << we << " -> " << is_eqz(we) << "\n";
   std::cout               << is_eqz(c_t(e))<< "\n";
   std::cout               << is_eqz(q_t(e))<< "\n";
-  std::cout               << is_eqz(kyosu::to_complex(we))<< "\n";
-  std::cout               << is_eqz(kyosu::to_quaternion(we))<< "\n";
+  std::cout               << is_eqz(kyosu::complex(we))<< "\n";
+  std::cout               << is_eqz(kyosu::quaternion(we))<< "\n";
 
   std::cout << "Complex:     \n";
   c_t c(3.5f,-2.9f);
@@ -34,8 +34,8 @@ int main()
   wc_t wc = wc_t(c, zer, nan, d);
   std::cout << c << " -> " << is_eqz(c) << "\n";
   std::cout << wc << " -> " << is_eqz(wc) << "\n";
-  std::cout                 << is_eqz(kyosu::to_complex(wc))<< "\n";;
-  std::cout                 << is_eqz(kyosu::to_quaternion(wc))<< "\n";
+  std::cout                 << is_eqz(kyosu::complex(wc))<< "\n";;
+  std::cout                 << is_eqz(kyosu::quaternion(wc))<< "\n";
 
   std::cout << "Quaternion:  \n";
   q_t q(3.5f,-2.9f, 2.1f, 3.2f);

@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::is_denormal over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::is_denormal(kyosu::to_complex(r,i)), eve::is_denormal(r) || eve::is_denormal(i));
+  TTS_EQUAL(kyosu::is_denormal(kyosu::complex(r,i)), eve::is_denormal(r) || eve::is_denormal(i));
   auto z(eve::mindenormal(eve::as(r)));
   TTS_EQUAL(kyosu::is_denormal(z), eve::true_(eve::as(r)));
 };

@@ -12,7 +12,7 @@
 template < typename T >
 auto cv(std::complex < T > const &sc)
 {
-  return kyosu::to_complex(sc.real(), sc.imag());
+  return kyosu::complex(sc.real(), sc.imag());
 }
 
 TTS_CASE_WITH( "Check behavior of cos on scalar"
@@ -39,6 +39,6 @@ TTS_CASE_WITH( "Check behavior of cos on wide"
              )
   <typename T>(T const& a0, T const& a1 )
 {
-  auto z = kyosu::to_complex(a0, a1);
+  auto z = kyosu::complex(a0, a1);
   TTS_EQUAL(kyosu::is_imag(z), eve::is_eqz(kyosu::real(z)));
 };

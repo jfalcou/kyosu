@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::floor over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::floor(kyosu::to_complex(r,i)), kyosu::to_complex(eve::floor(r),eve::floor(i)));
+  TTS_EQUAL(kyosu::floor(kyosu::complex(r,i)), kyosu::complex(eve::floor(r),eve::floor(i)));
 };
 
 TTS_CASE_WITH ( "Check kyosu::floor over quaternion"

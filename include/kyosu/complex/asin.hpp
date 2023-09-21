@@ -22,7 +22,7 @@ namespace kyosu::tags
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_asin{};
-      return fn(to_complex(v));
+      return fn(complex(v));
     }
 
     template<typename T>
@@ -67,7 +67,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if to_complex(z) was entered.
+//!   1. a real input z is treated as if complex(z) was entered.
 //!
 //!   2. Returns the elementwise the complex principal value
 //!      of the arc sine of the input in the range of a strip unbounded along the imaginary axis

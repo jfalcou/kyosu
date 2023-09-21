@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::pure over complex"
               )
   <typename T>(T r, T i)
 {
-  TTS_EQUAL(kyosu::pure(kyosu::to_complex(r,i)), kyosu::to_complex(T(0),i));
+  TTS_EQUAL(kyosu::pure(kyosu::complex(r,i)), kyosu::complex(T(0),i));
 };
 
 TTS_CASE_WITH ( "Check kyosu::pure over quaternion"

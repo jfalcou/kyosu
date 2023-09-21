@@ -20,7 +20,7 @@ namespace kyosu::tags
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
       auto fn = callable_tgamma{};
-      return fn(to_complex(v));
+      return fn(complex(v));
     }
 
     template<typename T>
@@ -65,7 +65,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns \f$\Gamma(z)\f$. If z is floating the result is as if to_complex(z) was used in the call.
+//!     Returns \f$\Gamma(z)\f$. If z is floating the result is as if complex(z) was used in the call.
 //!
 //!  @groupheader{Example}
 //!

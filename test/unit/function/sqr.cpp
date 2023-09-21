@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::sqr over complex"
               )
 (auto r, auto i)
 {
-  auto c = kyosu::to_complex(r,i);
+  auto c = kyosu::complex(r,i);
   TTS_RELATIVE_EQUAL(kyosu::sqr(c), c*c, 1e-7);
 };
 

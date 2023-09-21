@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::is_eqz over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::is_eqz(kyosu::to_complex(r,i)), eve::is_eqz(r) && eve::is_eqz(i));
+  TTS_EQUAL(kyosu::is_eqz(kyosu::complex(r,i)), eve::is_eqz(r) && eve::is_eqz(i));
   auto z(eve::zero(eve::as(r)));
   TTS_EQUAL(kyosu::is_eqz(z), eve::true_(eve::as(r)));
 };

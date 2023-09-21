@@ -65,11 +65,11 @@ namespace kyosu::_
     if(eve::any(negra0))
     {
       f = if_else(negra0, rec(-eve::inv_pi(eve::as(real(a0)))*a0*f*sinpi(a0)), eve::zero);
-      f = if_else (negra0 && reala0 && eve::is_flint(real(a0)), to_complex(eve::nan(eve::as(sq2pi)), eve::inf(eve::as(sq2pi))), f);
+      f = if_else (negra0 && reala0 && eve::is_flint(real(a0)), complex(eve::nan(eve::as(sq2pi)), eve::inf(eve::as(sq2pi))), f);
     }
-    f = if_else (reala0, to_complex(eve::tgamma(real(a0))), f);
-    f = if_else (eve::is_nan(real(f)), to_complex(eve::nan(eve::as(sq2pi)), eve::inf(eve::as(sq2pi))), f);
-    f = if_else (is_eqz(a0), to_complex(eve::inf(eve::as(g))*eve::pedantic(eve::signnz)(real(a0))), f);
+    f = if_else (reala0, complex(eve::tgamma(real(a0))), f);
+    f = if_else (eve::is_nan(real(f)), complex(eve::nan(eve::as(sq2pi)), eve::inf(eve::as(sq2pi))), f);
+    f = if_else (is_eqz(a0), complex(eve::inf(eve::as(g))*eve::pedantic(eve::signnz)(real(a0))), f);
     return f;
   }
 
@@ -133,7 +133,7 @@ namespace kyosu::_
        auto reala0 = is_real(a0);
        f = kyosu::if_else(negra0, lpi-log(a0*sinpi(-a0))-f, f);
        f = kyosu::if_else (negra0 && reala0 && eve::is_flint(real(a0))
-                          , to_complex(eve::nan(eve::as(g)), eve::inf(eve::as(g)))
+                          , complex(eve::nan(eve::as(g)), eve::inf(eve::as(g)))
                           , f);
      }
      return f;
@@ -192,7 +192,7 @@ namespace kyosu::_
     {
       f = if_else(reflection, f-eve::pi(eve::as(g))*cotpi(a0), f);
       f = if_else (reflection && is_real(a0) && eve::is_flint(real(a0))
-                  , to_complex(eve::nan(eve::as(g)), eve::inf(eve::as(g))), f);
+                  , complex(eve::nan(eve::as(g)), eve::inf(eve::as(g))), f);
     }
     return f;
   }
@@ -338,8 +338,8 @@ namespace kyosu::_
         auto u = dec(exp2(z));
         auto t = -2*u/dec(u)/pow(eve::pi(eve::as(real(z))), z);;
         auto g = t*cospi(eve::half(eve::as(real(z)))*z)*tgamma(z)*f;
-        g = if_else(iszero, to_complex(eve::half(eve::as(real(f)))), g);
-        return if_else(iseven, to_complex(eve::zero(eve::as(real(f)))), g);
+        g = if_else(iszero, complex(eve::half(eve::as(real(f)))), g);
+        return if_else(iseven, complex(eve::zero(eve::as(real(f)))), g);
       }
       else if (k == 2){
         auto g= pow(eve::two_o_pi(eve::as(real(f))), z)*sinpi(z)*tgamma(z)*f;
@@ -347,7 +347,7 @@ namespace kyosu::_
       }
       else
       {
-        return to_complex(eve::allbits(eve::as(real(f))));
+        return complex(eve::allbits(eve::as(real(f))));
       }
     };
     return if_else(reflect, reflection(f), f);
@@ -370,8 +370,8 @@ namespace kyosu::_
   {
     auto zz=exp2(z);
     auto k = zz/(zz-2);
-    auto g = if_else(z == Z(1), to_complex(eve::nan(eve::as(real(z)))), k*eta(z));
-    return if_else(real(z) == eve::inf(eve::as(real(z))), to_complex(eve::one(eve::as(real(z)))), g);
+    auto g = if_else(z == Z(1), complex(eve::nan(eve::as(real(z)))), k*eta(z));
+    return if_else(real(z) == eve::inf(eve::as(real(z))), complex(eve::one(eve::as(real(z)))), g);
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -382,7 +382,7 @@ namespace kyosu::_
   {
     auto zz=exp2(z);
     auto k = (z-1)/(z-2);
-    auto r = if_else(z == to_complex(eve::one(eve::as(real(z)))), to_complex(eve::inf(eve::as(real(z)))), k*deta(1u, zz));
+    auto r = if_else(z == complex(eve::one(eve::as(real(z)))), complex(eve::inf(eve::as(real(z)))), k*deta(1u, zz));
     imag(r) = eve::if_else(is_real(z), eve::zero, imag(r));
     return r;
   }
@@ -398,11 +398,11 @@ namespace kyosu::_
   {
     auto realz = is_real(z);
     if (eve::all(realz))
-      return to_complex(eve::erfcx(real(z)));
+      return complex(eve::erfcx(real(z)));
     else  if (eve::none(realz))
-      return faddeeva(to_complex(-imag(z), real(z)));
+      return faddeeva(complex(-imag(z), real(z)));
     else
-      return if_else(realz, to_complex(eve::erfcx(real(z))), faddeeva(to_complex(-imag(z), real(z))));
+      return if_else(realz, complex(eve::erfcx(real(z))), faddeeva(complex(-imag(z), real(z))));
   }
 
   template<typename Z>
@@ -416,8 +416,8 @@ namespace kyosu::_
     else
     {
       auto [rz, iz] = z;
-      auto tmp = erf(to_complex(-iz, rz));
-      return to_complex(imag(tmp), -real(tmp));
+      auto tmp = erf(complex(-iz, rz));
+      return complex(imag(tmp), -real(tmp));
    }
   }
 }

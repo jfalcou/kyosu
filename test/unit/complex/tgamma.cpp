@@ -14,7 +14,7 @@ TTS_CASE_TPL( "Check acos lilits", kyosu::real_types)
 {
   using e_t = T;
   using z_t = kyosu::complex_t<T>;
-  auto tcx = [](auto r,  auto i){return kyosu::to_complex(T(r), T(i)); };
+  auto tcx = [](auto r,  auto i){return kyosu::complex(T(r), T(i)); };
   z_t inf(eve::inf(eve::as<e_t>()), 0);
   z_t nan(eve::nan(eve::as<e_t>()), eve::nan(eve::as<e_t>()));
   z_t one = tcx(1, 0);
@@ -38,5 +38,5 @@ TTS_CASE_TPL( "Check acos lilits", kyosu::real_types)
   TTS_RELATIVE_EQUAL( kyosu::tgamma(tcx(1, -2))  , tcx(0.1519040026700361, -0.01980488016185498), 1.0e-5);
   TTS_RELATIVE_EQUAL( kyosu::tgamma(tcx(-1,-2))  , tcx(-0.0323612885501927257,  -0.0112294242346326173504), 1.0e-5);
   TTS_IEEE_EQUAL( kyosu::tgamma(tcx(-1,0))   , tcx(eve::nan(eve::as<e_t>()), eve::inf(eve::as<e_t>())));
-  TTS_RELATIVE_EQUAL( kyosu::tgamma(kyosu::to_complex(eve::half(eve::as<e_t>()))),  kyosu::to_complex(eve::tgamma(eve::half(eve::as<e_t>()))), 1.0e-5);
+  TTS_RELATIVE_EQUAL( kyosu::tgamma(kyosu::complex(eve::half(eve::as<e_t>()))),  kyosu::complex(eve::tgamma(eve::half(eve::as<e_t>()))), 1.0e-5);
 };

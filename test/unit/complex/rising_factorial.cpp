@@ -21,7 +21,7 @@ TTS_CASE_WITH ( "Check behavior of rising_factorial on wide"
 {
   using e_t = T;
   using z_t = kyosu::complex_t<T>;
- auto tcx = [](auto r,  auto i){return kyosu::to_complex(T(r), T(i)); };
+ auto tcx = [](auto r,  auto i){return kyosu::complex(T(r), T(i)); };
   auto a = tcx(a0, a1);
   auto b = tcx(a2, a3);
 

@@ -12,7 +12,7 @@
 template < typename T >
 auto cv(std::complex < T > const &sc)
 {
-  return kyosu::to_complex(sc.real(), sc.imag());
+  return kyosu::complex(sc.real(), sc.imag());
 }
 
 TTS_CASE_WITH( "Check behavior of tanh on scalar"

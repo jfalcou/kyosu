@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::trunc over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::trunc(kyosu::to_complex(r,i)), kyosu::to_complex(eve::trunc(r),eve::trunc(i)));
+  TTS_EQUAL(kyosu::trunc(kyosu::complex(r,i)), kyosu::complex(eve::trunc(r),eve::trunc(i)));
 };
 
 TTS_CASE_WITH ( "Check kyosu::trunc over quaternion"

@@ -27,8 +27,8 @@ TTS_CASE_WITH ( "Check kyosu::average over complex"
               )
 <typename T>(T r0, T i0, T r1, T i1)
 {
-  auto c0 = kyosu::to_complex(r0,i0);
-  auto c1 = kyosu::to_complex(r1,i1);
+  auto c0 = kyosu::complex(r0,i0);
+  auto c1 = kyosu::complex(r1,i1);
   TTS_RELATIVE_EQUAL(kyosu::average(c0, c1), (c0+c1)*T(0.5), 1e-7);
 };
 

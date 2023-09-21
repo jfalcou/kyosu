@@ -13,7 +13,7 @@ TTS_CASE_TPL( "Check faddeeva", kyosu::real_types)
 <typename T>(tts::type<T>)
 {
   using e_t = T;
-  auto tcx = kyosu::to_complex;
+  auto tcx = kyosu::complex;
   using c_t = decltype(tcx(e_t(0)));
   using eve::as;
   const int N = 10;

@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::jpart over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::jpart(kyosu::to_complex(r,i)), eve::zero(eve::as(r)));
+  TTS_EQUAL(kyosu::jpart(kyosu::complex(r,i)), eve::zero(eve::as(r)));
 };
 
 TTS_CASE_WITH ( "Check kyosu::jpart over quaternion"

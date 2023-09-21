@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::ipart over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::ipart(kyosu::to_complex(r,i)), i);
+  TTS_EQUAL(kyosu::ipart(kyosu::complex(r,i)), i);
 };
 
 TTS_CASE_WITH ( "Check kyosu::ipart over quaternion"

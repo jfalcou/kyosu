@@ -20,7 +20,7 @@ namespace kyosu::tags
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
       auto fn = callable_log_gamma{};
-      return fn(to_complex(v)); }
+      return fn(complex(v)); }
 
     template<typename T>
     KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
@@ -64,7 +64,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns \f$\log(\Gamma(z))\f$. If z is floating the result is as if to_complex(z) was used in the call.
+//!     Returns \f$\log(\Gamma(z))\f$. If z is floating the result is as if complex(z) was used in the call.
 //!
 //!  @groupheader{Example}
 //!

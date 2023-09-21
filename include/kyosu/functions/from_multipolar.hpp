@@ -28,7 +28,7 @@ namespace kyosu::tags
     {
       auto [a0, a1] = kyosu::from_polar(rho1, theta1);
       auto [a2, a3] = kyosu::from_polar(rho2, theta2);
-      return kyosu::to_quaternion(a0, a1, a2, a3);
+      return kyosu::quaternion(a0, a1, a2, a3);
     }
 
     template<typename T0, typename T1, typename T2, typename T3>

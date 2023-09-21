@@ -25,8 +25,8 @@ int main()
   std::cout << we << " -> " << is_nez(we) << "\n";
   std::cout               << is_nez(c_t(e))<< "\n";
   std::cout               << is_nez(q_t(e))<< "\n";
-  std::cout               << is_nez(kyosu::to_complex(we))<< "\n";
-  std::cout               << is_nez(kyosu::to_quaternion(we))<< "\n";
+  std::cout               << is_nez(kyosu::complex(we))<< "\n";
+  std::cout               << is_nez(kyosu::quaternion(we))<< "\n";
 
   std::cout << "Complex:     \n";
   c_t c(3.5f,-2.9f);
@@ -34,8 +34,8 @@ int main()
   wc_t wc = wc_t(c, zer, nan, d);
   std::cout << c << " -> " << is_nez(c) << "\n";
   std::cout << wc << " -> " << is_nez(wc) << "\n";
-  std::cout                 << is_nez(kyosu::to_complex(wc))<< "\n";;
-  std::cout                 << is_nez(kyosu::to_quaternion(wc))<< "\n";
+  std::cout                 << is_nez(kyosu::complex(wc))<< "\n";;
+  std::cout                 << is_nez(kyosu::quaternion(wc))<< "\n";
 
   std::cout << "Quaternion:  \n";
   q_t q(3.5f,-2.9f, 2.1f, 3.2f);

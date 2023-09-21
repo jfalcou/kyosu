@@ -24,7 +24,7 @@ TTS_CASE_WITH ( "Check kyosu::is_unitary over complex"
               )
 (auto r, auto i)
 {
-  auto c = kyosu::to_complex(r,i);
+  auto c = kyosu::complex(r,i);
   c /= kyosu::abs(c);
   auto o = eve::one(eve::as(kyosu::abs(c)));
   TTS_EQUAL(kyosu::is_unitary(c), eve::almost(eve::is_equal)(kyosu::abs(c), o));

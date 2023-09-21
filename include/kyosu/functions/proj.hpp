@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
-      return to_complex(v,eve::sign(v)*eve::zero(eve::as(v)));
+      return complex(v,eve::sign(v)*eve::zero(eve::as(v)));
     }
 
     template<typename T>

@@ -19,7 +19,7 @@ TTS_CASE_WITH ( "Check behavior of acscpi on scalar"
 {
   for(size_t i = 0; i < a0.size(); ++i)
   {
-    auto z = kyosu::to_complex(a0[i], a1[i]);
+    auto z = kyosu::complex(a0[i], a1[i]);
     TTS_RELATIVE_EQUAL(kyosu::asecpi(z),  kyosu::acospi(kyosu::rec(z)), 1.0e-5);
   }
 };
@@ -31,6 +31,6 @@ TTS_CASE_WITH( "Check behavior of acsc on wide"
              )
   <typename T>(T const& a0, T const&  a1)
 {
-  auto z = kyosu::to_complex(a0, a1);
+  auto z = kyosu::complex(a0, a1);
   TTS_RELATIVE_EQUAL(kyosu::asecpi(z), kyosu::acospi(kyosu::rec(z)), 1.0e-5);
 };

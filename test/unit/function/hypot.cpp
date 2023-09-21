@@ -27,8 +27,8 @@ TTS_CASE_WITH ( "Check kyosu::hypot over complex"
               )
 (auto r0, auto i0, auto r1, auto i1)
 {
-  auto c0 = kyosu::to_complex(r0,i0);
-  auto c1 = kyosu::to_complex(r1,i1);
+  auto c0 = kyosu::complex(r0,i0);
+  auto c1 = kyosu::complex(r1,i1);
   TTS_RELATIVE_EQUAL(kyosu::hypot(c0, c1), eve::hypot(r0, i0, r1, i1), 2e-5);
 };
 

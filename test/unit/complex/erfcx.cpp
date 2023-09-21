@@ -13,7 +13,7 @@ TTS_CASE_TPL( "Check corner cases of erfcx", kyosu::real_types)
   <typename T>(tts::type<T>)
 {
   using e_t = T;
-  using c_t = decltype(kyosu::to_complex(e_t(0)));
+  using c_t = decltype(kyosu::complex(e_t(0)));
   using eve::as;
   const int N = 9;
  auto zer = eve::zero(as<T>());
@@ -21,7 +21,7 @@ TTS_CASE_TPL( "Check corner cases of erfcx", kyosu::real_types)
   auto nan = eve::nan(as<T>());
   auto one = eve::one(as<T>());
   auto half= eve::half(as<T>());
-  auto tcx = [](auto r, auto i){return kyosu::to_complex(T(r), T(i));};
+  auto tcx = [](auto r, auto i){return kyosu::complex(T(r), T(i));};
 
 
   std::array<c_t, N> z =
@@ -69,7 +69,7 @@ TTS_CASE_WITH( "Check behavior of erfcx on wide"
              )
   <typename T>(T const& a0, T const& a1 )
 {
-  auto z = kyosu::to_complex(a0, a1);
+  auto z = kyosu::complex(a0, a1);
   auto ez = kyosu::erfcx(z);
   for(int i = 0; i !=  eve::cardinal_v<T>; ++i)
   {

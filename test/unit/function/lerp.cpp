@@ -29,8 +29,8 @@ TTS_CASE_WITH ( "Check kyosu::lerp over complex"
               )
 (auto r0, auto i0, auto r1, auto i1, auto t)
 {
-  auto c0 = kyosu::to_complex(r0,i0);
-  auto c1 = kyosu::to_complex(r1,i1);
+  auto c0 = kyosu::complex(r0,i0);
+  auto c1 = kyosu::complex(r1,i1);
   TTS_RELATIVE_EQUAL(kyosu::lerp(c0, c1, t), c0+t*(c1-c0), 1e-7);
 };
 

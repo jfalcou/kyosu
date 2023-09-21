@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::ceil over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::ceil(kyosu::to_complex(r,i)), kyosu::to_complex(eve::ceil(r),eve::ceil(i)));
+  TTS_EQUAL(kyosu::ceil(kyosu::complex(r,i)), kyosu::complex(eve::ceil(r),eve::ceil(i)));
 };
 
 TTS_CASE_WITH ( "Check kyosu::ceil over quaternion"

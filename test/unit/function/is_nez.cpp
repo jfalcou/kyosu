@@ -24,7 +24,7 @@ TTS_CASE_WITH ( "Check kyosu::is_nez over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::is_nez(kyosu::to_complex(r,i)), eve::is_nez(r) && eve::is_nez(i));
+  TTS_EQUAL(kyosu::is_nez(kyosu::complex(r,i)), eve::is_nez(r) && eve::is_nez(i));
   auto z(eve::zero(eve::as(r)));
   TTS_EQUAL(kyosu::is_nez(z), eve::false_(eve::as(r)));
 };

@@ -27,8 +27,8 @@ TTS_CASE_WITH ( "Check kyosu::reldist over complex"
               )
 (auto r0, auto i0, auto r1, auto i1)
 {
-  auto c0 = kyosu::to_complex(r0,i0);
-  auto c1 = kyosu::to_complex(r1,i1);
+  auto c0 = kyosu::complex(r0,i0);
+  auto c1 = kyosu::complex(r1,i1);
   using kyosu::abs;
   auto one = eve::one(eve::as(r0));
   TTS_RELATIVE_EQUAL(kyosu::reldist(c0, c1), abs(c0-c1)/eve::max(abs(c0), abs(c1), one), 1e-7);

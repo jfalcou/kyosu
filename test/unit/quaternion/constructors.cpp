@@ -26,7 +26,7 @@ TTS_CASE_TPL( "Check quaternion constructor from constants", kyosu::scalar_real_
   eve::wide<kyosu::quaternion_t<T>>  z_vv{wo,wpi,wpi,wpi};
 
   // auto a = kumi::make_tuple(wpi,wpi,wpi);
-  // eve::wide<kyosu::quaternion_t<T>> z_ra =  eve::to_quaternion(wo,a);
+  // eve::wide<kyosu::quaternion_t<T>> z_ra =  eve::quaternion(wo,a);
 
   TTS_EQUAL( get<0>(z_sd), T{0}  );
   TTS_EQUAL( get<1>(z_sd), T{0} );

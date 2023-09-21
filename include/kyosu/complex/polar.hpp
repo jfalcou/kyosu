@@ -21,7 +21,7 @@ namespace kyosu::tags
     static KYOSU_FORCEINLINE auto deferred_call(auto, T0 const& rho, T1 const & theta) noexcept
     {
       auto [s, c] = eve::sincos(theta);
-      return kyosu::to_complex(rho*c, eve::if_else(eve::is_eqz(s), eve::zero, rho*s));
+      return kyosu::complex(rho*c, eve::if_else(eve::is_eqz(s), eve::zero, rho*s));
     }
 
     template<typename T0, typename T1>

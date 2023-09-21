@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::sqr_abs over complex"
               )
 (auto r, auto i)
 {
-  TTS_ULP_EQUAL(kyosu::sqr_abs(kyosu::to_complex(r,i)), r*r+i*i, 0.5);
+  TTS_ULP_EQUAL(kyosu::sqr_abs(kyosu::complex(r,i)), r*r+i*i, 0.5);
 };
 
 TTS_CASE_WITH ( "Check kyosu::sqr_abs over quaternion"

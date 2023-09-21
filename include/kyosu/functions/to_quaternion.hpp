@@ -11,11 +11,11 @@
 
 namespace kyosu::tags
 {
-  struct callable_to_quaternion
+  struct callable_quaternion
   {
-    using callable_tag_type = callable_to_quaternion;
+    using callable_tag_type = callable_quaternion;
 
-    KYOSU_DEFERS_CALLABLE(to_quaternion_);
+    KYOSU_DEFERS_CALLABLE(quaternion_);
 
     template<typename... T>
     KYOSU_FORCEINLINE auto operator()(T... target) const noexcept -> decltype(eve::tag_invoke(*this, target...))
@@ -24,7 +24,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_to_quaternion(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_quaternion(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -34,7 +34,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var to_quaternion
+//!   @var quaternion
 //!   @brief Constructs a kyosu::quaternion
 //!
 //!   **Defined in Header**
@@ -48,10 +48,10 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T> constexpr auto to_quaternion(T r)            noexcept;
-//!      template<eve::ordered_value T> constexpr auto to_quaternion(T r, T i)       noexcept;
+//!      template<eve::ordered_value T> constexpr auto quaternion(T r)            noexcept;
+//!      template<eve::ordered_value T> constexpr auto quaternion(T r, T i)       noexcept;
 
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T to_quaternion(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T quaternion(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -66,8 +66,8 @@ namespace kyosu
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/to_quaternion.cpp}
+//!  @godbolt{doc/quaternion.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_to_quaternion to_quaternion = {};
+inline constexpr tags::callable_quaternion quaternion = {};
 }

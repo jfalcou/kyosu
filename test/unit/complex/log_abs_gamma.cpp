@@ -13,7 +13,7 @@ TTS_CASE_TPL( "Check log_abs_gamma", kyosu::real_types)
 <typename T>(tts::type<T>)
 {
   using z_t = kyosu::complex_t<T>;
-  auto tcx = [](auto r,  auto i){return kyosu::to_complex(T(r), T(i)); };
+  auto tcx = [](auto r,  auto i){return kyosu::complex(T(r), T(i)); };
   T inf(eve::inf(eve::as<T>()));
   z_t one = tcx(1, 0);
   z_t zer = tcx(0, 0);

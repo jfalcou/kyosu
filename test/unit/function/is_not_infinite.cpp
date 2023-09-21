@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::is_not_infinite over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::is_not_infinite(kyosu::to_complex(r,i)), eve::is_not_infinite(r) && eve::is_not_infinite(i));
+  TTS_EQUAL(kyosu::is_not_infinite(kyosu::complex(r,i)), eve::is_not_infinite(r) && eve::is_not_infinite(i));
   auto z(eve::inf(eve::as(r)));
   TTS_EQUAL(kyosu::is_not_infinite(z), eve::false_(eve::as(r)));
 };

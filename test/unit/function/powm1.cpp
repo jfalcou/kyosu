@@ -28,8 +28,8 @@ TTS_CASE_WITH ( "Check kyosu::powm1 over complex"
               )
 (auto r0, auto i0, auto r1, auto i1)
 {
-  auto c0 = kyosu::to_complex(r0,i0);
-  auto c1 = kyosu::to_complex(r1,i1);
+  auto c0 = kyosu::complex(r0,i0);
+  auto c1 = kyosu::complex(r1,i1);
   TTS_RELATIVE_EQUAL(kyosu::powm1(c0, c1), kyosu::dec(kyosu::exp(c1*kyosu::log(c0))), 1e-5);
   TTS_RELATIVE_EQUAL(kyosu::powm1(r0, c1), kyosu::dec(kyosu::exp(c1*kyosu::log(r0))), 1e-5);
   TTS_RELATIVE_EQUAL(kyosu::powm1(c0, r1), kyosu::dec(kyosu::exp(r1*kyosu::log(c0))), 1e-5);

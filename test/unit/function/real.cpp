@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::real over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::real(kyosu::to_complex(r,i)), r);
+  TTS_EQUAL(kyosu::real(kyosu::complex(r,i)), r);
 };
 
 TTS_CASE_WITH ( "Check kyosu::real over quaternion"

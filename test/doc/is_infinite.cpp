@@ -25,8 +25,8 @@ int main()
   std::cout << we << " -> " << is_infinite(we) << "\n";
   std::cout               << is_infinite(c_t(e))<< "\n";
   std::cout               << is_infinite(q_t(e))<< "\n";
-  std::cout               << is_infinite(kyosu::to_complex(we))<< "\n";
-  std::cout               << is_infinite(kyosu::to_quaternion(we))<< "\n";
+  std::cout               << is_infinite(kyosu::complex(we))<< "\n";
+  std::cout               << is_infinite(kyosu::quaternion(we))<< "\n";
 
   std::cout << "Complex:     \n";
   c_t c(3.5f,-2.9f);
@@ -34,8 +34,8 @@ int main()
   wc_t wc = wc_t(c, zer, nan, d);
   std::cout << c << " -> " << is_infinite(c) << "\n";
   std::cout << wc << " -> " << is_infinite(wc) << "\n";
-  std::cout                 << is_infinite(kyosu::to_complex(wc))<< "\n";;
-  std::cout                 << is_infinite(kyosu::to_quaternion(wc))<< "\n";
+  std::cout                 << is_infinite(kyosu::complex(wc))<< "\n";;
+  std::cout                 << is_infinite(kyosu::quaternion(wc))<< "\n";
 
   std::cout << "Quaternion:  \n";
   q_t q(3.5f,-2.9f, 2.1f, 3.2f);

@@ -27,8 +27,8 @@ TTS_CASE_WITH ( "Check kyosu::is_not_equal over complex"
               )
 (auto r0, auto i0, auto r1, auto i1)
 {
-  auto c0 = kyosu::to_complex(r0,i0);
-  auto c1 = kyosu::to_complex(r1,i1);
+  auto c0 = kyosu::complex(r0,i0);
+  auto c1 = kyosu::complex(r1,i1);
   using kyosu::abs;
   TTS_EQUAL(kyosu::is_not_equal(c0, c1), (r0 != r1) || (i0 != i1));
 };

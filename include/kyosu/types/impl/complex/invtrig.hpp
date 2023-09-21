@@ -154,7 +154,7 @@ namespace kyosu::_
     // restore signs
     r = eve::if_else(ltzra0, -r, r);
     i = eve::if_else(ltzia0, -i, i);
-    return to_complex(r, i);
+    return complex(r, i);
   }
 
   template<kyosu::concepts::complex C>
@@ -297,7 +297,7 @@ namespace kyosu::_
     // restore signs
     r = eve::if_else(ltzra0, eve::pi(eve::as(x))-r, r);
     i = eve::if_else(gtzia0, -i, i);
-    return to_complex(r, i);
+    return complex(r, i);
   }
 
   template<kyosu::concepts::complex C>
@@ -309,12 +309,12 @@ namespace kyosu::_
     // we have compatibility with C99.
     auto [r, i] = kyosu::acos(a0);
     auto lez = eve::is_negative(i);;
-    auto res = to_complex(-i, r);
+    auto res = complex(-i, r);
     res = eve::if_else(lez, res, -res);
     auto nani = is_nan(i);
     if (eve::any(nani))
       return eve::if_else(nani && eve::is_finite(r)
-                         , to_complex(eve::nan(eve::as(r)), eve::nan(eve::as(r)))
+                         , complex(eve::nan(eve::as(r)), eve::nan(eve::as(r)))
                          , res);
     else
       return res;
@@ -325,8 +325,8 @@ namespace kyosu::_
   auto dispatch(eve::tag_of<kyosu::asinh> const&, C const& a0) noexcept
   {
     auto [r, i] = a0;
-    auto [r1, i1] = kyosu::asin(to_complex(-i, r));
-    return to_complex(i1, -r1); //      -(eve::i*asin(eve::i*z));
+    auto [r1, i1] = kyosu::asin(complex(-i, r));
+    return complex(i1, -r1); //      -(eve::i*asin(eve::i*z));
   }
 
   template<kyosu::concepts::complex C>
@@ -361,7 +361,7 @@ namespace kyosu::_
     auto special = eve::is_eqz(y) && (x < eve::one(eve::as(a0r)));
     auto sr = eve::atanh(a0r);
     if (eve::all(special)) {
-      return to_complex(sr, eve::zero(eve::as(sr)));
+      return complex(sr, eve::zero(eve::as(sr)));
     }
 
     rtype r = eve::zero(eve::as(a0r));
@@ -482,7 +482,7 @@ namespace kyosu::_
     i = eve::if_else(realinf, -eve::sign(a0r)*eve::pio_2(eve::as(a0r)), i);
     r = eve::if_else(special, sr, r);
     i = eve::if_else(special, eve::zero, i);
-    return  to_complex(r, i);
+    return  complex(r, i);
   }
 
   template<kyosu::concepts::complex C>
@@ -492,8 +492,8 @@ namespace kyosu::_
 
     // C99 definition here; atan(z) = -i atanh(iz):
     auto [r, i] = a0;
-    auto [r1, i1] = kyosu::atanh(to_complex(-i, r));
-    return to_complex(i1, -r1);
+    auto [r1, i1] = kyosu::atanh(complex(-i, r));
+    return complex(i1, -r1);
   }
 
   template<kyosu::concepts::complex C>

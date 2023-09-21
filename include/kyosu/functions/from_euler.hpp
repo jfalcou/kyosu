@@ -34,7 +34,7 @@ namespace kyosu::tags
     requires(I != J && J != K)
     {
       using e_t = decltype(v1+v2+v3);
-      using q_t = decltype(to_quaternion(e_t{}));
+      using q_t = decltype(quaternion(e_t{}));
       auto h = eve::half(eve::as<e_t>());
       std::array<q_t, 3> qs;
       auto [sa, ca] = eve::sincos(v3*h);

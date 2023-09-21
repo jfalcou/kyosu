@@ -22,7 +22,7 @@ namespace kyosu::tags
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_zeta{};
-      return fn(to_complex(v));
+      return fn(complex(v));
     }
 
     template<typename T>

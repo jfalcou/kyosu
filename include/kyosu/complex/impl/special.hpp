@@ -73,8 +73,8 @@ namespace kyosu::_
       f = if_else(negra0, rec(-eve::inv_pi(as(real(a0)))*a0*f*sinpi(a0)), eve::zero);
       f = if_else (negra0 && reala0 && is_flint(real(a0)), Z{nan(as(sq2pi)), eve::inf(as(sq2pi))}, f);
     }
-    f = if_else(eve::is_gtz(real(a0)) && eve::is_flint(real(a0)) && reala0, to_complex(nearest(real(f))), f);
-    f = if_else (is_eqz(a0), to_complex(inf(as(g))*pedantic(signnz)(real(a0))), f);
+    f = if_else(eve::is_gtz(real(a0)) && eve::is_flint(real(a0)) && reala0, complex(nearest(real(f))), f);
+    f = if_else (is_eqz(a0), complex(inf(as(g))*pedantic(signnz)(real(a0))), f);
     return f;
   }
 

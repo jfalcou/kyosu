@@ -42,7 +42,7 @@ namespace kyosu::tags
       auto q2 =  eve::sqrt(eve::if_else(is_gtz(qq2m1), eve::inc(qq2m1), (eve::sqr(r02mr20)+sqr(r01pr10)+eve::sqr(r12pr21))/(3-qq2m1)))*h;
       auto q3 =  eve::sqrt(eve::if_else(is_gtz(qq3m1), eve::inc(qq3m1), (eve::sqr(r10mr01)+sqr(r20pr02)+eve::sqr(r12pr21))/(3-qq3m1)))*h;
       using e_t = decltype(r11pr22);
-      return to_quaternion(q0, q1, q2, q3);
+      return quaternion(q0, q1, q2, q3);
     }
 
     template<typename T0, typename T1, typename T2, typename T3>

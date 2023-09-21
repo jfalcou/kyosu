@@ -23,9 +23,9 @@ TTS_CASE_WITH ( "Check kyosu::conj over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::conj(kyosu::to_complex(r,i)), kyosu::to_complex(r,-i));
-  TTS_IEEE_EQUAL(kyosu::conj(kyosu::to_complex(eve::nan(eve::as(r)),i)) , kyosu::to_complex(eve::nan(eve::as(r)),-i));
-  TTS_IEEE_EQUAL(kyosu::conj(kyosu::to_complex(r,eve::nan(eve::as(i)))) , kyosu::to_complex(r,eve::nan(eve::as(i))));
+  TTS_EQUAL(kyosu::conj(kyosu::complex(r,i)), kyosu::complex(r,-i));
+  TTS_IEEE_EQUAL(kyosu::conj(kyosu::complex(eve::nan(eve::as(r)),i)) , kyosu::complex(eve::nan(eve::as(r)),-i));
+  TTS_IEEE_EQUAL(kyosu::conj(kyosu::complex(r,eve::nan(eve::as(i)))) , kyosu::complex(r,eve::nan(eve::as(i))));
 };
 
 TTS_CASE_WITH ( "Check kyosu::conj over quaternion"

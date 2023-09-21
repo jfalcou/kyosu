@@ -12,7 +12,7 @@
 template < typename T >
 auto cv(std::complex < T > const &sc)
 {
-  return kyosu::to_complex(sc.real(), sc.imag());
+  return kyosu::complex(sc.real(), sc.imag());
 }
 
 TTS_CASE_WITH( "Check behavior of acos on scalar"
@@ -51,7 +51,7 @@ TTS_CASE_TPL( "Check acos lilits", kyosu::real_types)
 <typename T>(tts::type<T>)
 {
   using e_t = T;
-  auto tcx = kyosu::to_complex;
+  auto tcx = kyosu::complex;
   using c_t = decltype(tcx(e_t(0)));
   using eve::as;
   const int N = 22;

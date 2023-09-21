@@ -14,13 +14,13 @@ TTS_CASE_TPL( "Check log_abs_gamma", kyosu::real_types)
 {
   using z_t = kyosu::complex_t<T>;
   using e_t = T;
-  auto tcx = [](auto r,  auto i){return kyosu::to_complex(T(r), T(i)); };
+  auto tcx = [](auto r,  auto i){return kyosu::complex(T(r), T(i)); };
   T nan(eve::nan(eve::as<T>()));
   z_t one = tcx(1, 0);
   z_t zer = tcx(0, 0);
   z_t two = tcx(2, 0);
   z_t three = tcx(3, 0);
-  TTS_IEEE_EQUAL( kyosu::log_gamma(zer), kyosu::to_complex(nan, nan) );
+  TTS_IEEE_EQUAL( kyosu::log_gamma(zer), kyosu::complex(nan, nan) );
   TTS_EQUAL( kyosu::log_gamma(one), zer );
   TTS_EQUAL( kyosu::log_gamma(two), zer);
   TTS_RELATIVE_EQUAL( kyosu::log_gamma(three), kyosu::log(two), 1.0e-5);

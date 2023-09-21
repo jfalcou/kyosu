@@ -20,7 +20,7 @@ namespace kyosu::_
   {
     auto numeric_sqr = [](auto z){ // UNTIL DECORATORS ARE AT HAND
       auto [zr, zi] = z;
-      return to_complex((zr-zi)*(zi+zr), 2 * zr * zi);
+      return complex((zr-zi)*(zi+zr), 2 * zr * zi);
     };
     auto x =  real(z);
     auto y =  imag(z);
@@ -171,15 +171,15 @@ namespace kyosu::_
 
       if(eve::is_eqz(y))
       {
-        return to_complex(eve::erf(x), y); //call to real implementation
+        return complex(eve::erf(x), y); //call to real implementation
       }
       else if(eve::is_eqz(x))
       {
-        return to_complex(x, (eve::sqr(y) > real_t(720) ? eve::inf(eve::as(y))*eve::sign(y) : eve::expx2(y) * w_im(y)));
+        return complex(x, (eve::sqr(y) > real_t(720) ? eve::inf(eve::as(y))*eve::sign(y) : eve::expx2(y) * w_im(y)));
       }
       if (real(mz2) < -750)
       {
-        return to_complex(eve::signnz(x)); // underflow
+        return complex(eve::signnz(x)); // underflow
       }
       /* Handle positive and negative x via different formulas,
          using the mirror symmetries of w, to avoid overflow/underflow
@@ -193,7 +193,7 @@ namespace kyosu::_
          values when multiplying w in an overflow situation. */
       auto [mRe_z2, mIm_z2] = mz2;
       auto [s, c] = eve::sincos(mIm_z2);
-      return oneminus(eve::exp(mRe_z2)*(to_complex(c, s)*faddeeva(to_complex(-y, x)*signx)))*signx;
+      return oneminus(eve::exp(mRe_z2)*(complex(c, s)*faddeeva(complex(-y, x)*signx)))*signx;
     }
     else //simd
     {
@@ -242,19 +242,19 @@ namespace kyosu::_
       auto no_underflow = real(mz2) >= -750;
       auto nfin = eve::is_not_finite(y); //|| is_nan(z);
       auto r = if_else(no_underflow || is_nan( real(mz2))
-                      , to_complex(eve::nan(eve::as(real_t(0))), eve::nan(eve::as(real_t(0))))
-                      , to_complex(signx, real_t(0)));           // treat underflow and nan
+                      , complex(eve::nan(eve::as(real_t(0))), eve::nan(eve::as(real_t(0))))
+                      , complex(signx, real_t(0)));           // treat underflow and nan
       auto notdone = (no_underflow && !nfin) || eve::is_eqz(y);  // no underflow
-      r = if_else(nfin, to_complex(eve::nan(eve::as(y)), eve::nan(eve::as(y))), r);
-      r = if_else(eve::is_eqz(x) && nfin, to_complex(real_t(0), y), r);
+      r = if_else(nfin, complex(eve::nan(eve::as(y)), eve::nan(eve::as(y))), r);
+      r = if_else(eve::is_eqz(x) && nfin, complex(real_t(0), y), r);
       auto ax = eve::abs(x);
       auto xsmall = ax < 8e-2;
       auto ysmall = eve::abs(y) < 1e-2;
       auto nully = [](auto x,  auto y){
-        return to_complex(eve::erf(x), y);
+        return complex(eve::erf(x), y);
       };
       auto nullx = [signy, w_im](auto x,  auto y){
-        return to_complex(x, eve::if_else(eve::sqr(y) > real_t(720), eve::inf(eve::as(y)), eve::expx2(y) * w_im(y)))*signy;
+        return complex(x, eve::if_else(eve::sqr(y) > real_t(720), eve::inf(eve::as(y)), eve::expx2(y) * w_im(y)))*signy;
       };
 
       auto smallxy = [taylor](){
@@ -264,7 +264,7 @@ namespace kyosu::_
       auto remain =  [mz2, signx](auto x, auto y){
         auto [mRe_z2, mIm_z2] = mz2;
         auto [s, c] = eve::sincos(mIm_z2);
-        auto zz = oneminus(eve::exp(mRe_z2)*(to_complex(c, s)*faddeeva(to_complex(-y, x)*signx)))*signx;
+        auto zz = oneminus(eve::exp(mRe_z2)*(complex(c, s)*faddeeva(complex(-y, x)*signx)))*signx;
         return zz;
       };
 

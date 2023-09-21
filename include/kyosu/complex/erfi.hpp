@@ -23,8 +23,8 @@ namespace kyosu::tags
     {
       auto over = eve::sqr(v) > 720;
       auto r = eve::inf(eve::as(v))*eve::sign(v);
-      r = eve::if_else(over,  r, -kyosu::imag(kyosu::erf(to_complex(eve::zero(eve::as(v)), -v))));
-      return to_complex(r);
+      r = eve::if_else(over,  r, -kyosu::imag(kyosu::erf(complex(eve::zero(eve::as(v)), -v))));
+      return complex(r);
     }
 
     template<typename T>

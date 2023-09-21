@@ -32,7 +32,7 @@ namespace kyosu::_
         r = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, r);
         i = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, i);
       }
-      return kyosu::to_complex(r, i);
+      return kyosu::complex(r, i);
     }
     else
     {
@@ -75,7 +75,7 @@ namespace kyosu::_
         i = eve::if_else(kyosu::is_imag(z), eve::zero, i);
         r = eve::if_else(kyosu::is_real(z), eve::zero, r);
       }
-      return kyosu::to_complex(i, -r);
+      return kyosu::complex(i, -r);
     }
     else
     {
@@ -115,7 +115,7 @@ namespace kyosu::_
         rc = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, rc);
         ic = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, ic);
       }
-      auto cpi = kyosu::to_complex(rc, ic);
+      auto cpi = kyosu::complex(rc, ic);
       auto  arz = -kyosu::imag(z);
       auto  aiz =  kyosu::real(z);
       arz*= eve::pi(as(arz));
@@ -132,7 +132,7 @@ namespace kyosu::_
         is = if_else(eve::is_eqz(aiz), eve::zero, is);
         rs = if_else(eve::is_eqz(arz), eve::zero, rs);
       }
-      auto spi = kyosu::to_complex(is, -rs);
+      auto spi = kyosu::complex(is, -rs);
       return kumi::tuple{spi, cpi};
     }
     else
@@ -165,10 +165,10 @@ namespace kyosu::_
         auto tmp = c+ch;
         auto rr = eve::if_else(kyosu::is_imag(z), eve::zero, sh/tmp);
         auto ii = eve::if_else(kyosu::is_real(z),eve:: zero, s/tmp);
-        return kyosu::if_else(eve::is_infinite(rz), kyosu::to_complex(sign(rz)), kyosu::to_complex(rr, ii));
+        return kyosu::if_else(eve::is_infinite(rz), kyosu::complex(sign(rz)), kyosu::complex(rr, ii));
       };
-      auto r = machin(kyosu::to_complex(-kyosu::imag(z), kyosu::real(z)));
-      return kyosu::to_complex(kyosu::imag(r), -kyosu::real(r));
+      auto r = machin(kyosu::complex(-kyosu::imag(z), kyosu::real(z)));
+      return kyosu::complex(kyosu::imag(r), -kyosu::real(r));
     }
     else
     {
@@ -186,7 +186,7 @@ namespace kyosu::_
       auto r = kyosu::tanpi(z);
       r = kyosu::if_else(kyosu::is_infinite(r), C(), kyosu::rec(r));
       r = kyosu::if_else(kyosu::is_real(z) && eve::is_flint(kyosu::real(z)*2) && eve::is_not_flint(kyosu::real(z)), C{}, r);
-      return  kyosu::if_else(kyosu::is_real(z), kyosu::to_complex(kyosu::real(r)), r);
+      return  kyosu::if_else(kyosu::is_real(z), kyosu::complex(kyosu::real(r)), r);
     }
     else
     {

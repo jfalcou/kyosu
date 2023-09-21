@@ -23,8 +23,8 @@ TTS_CASE_WITH ( "Check kyosu::is_real over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::is_real(kyosu::to_complex(r,i)), eve::is_eqz(i));
-  TTS_EQUAL(kyosu::is_real(kyosu::to_complex(r,eve::zero(eve::as(r)))), eve::true_(eve::as(r)));
+  TTS_EQUAL(kyosu::is_real(kyosu::complex(r,i)), eve::is_eqz(i));
+  TTS_EQUAL(kyosu::is_real(kyosu::complex(r,eve::zero(eve::as(r)))), eve::true_(eve::as(r)));
 };
 
 TTS_CASE_WITH ( "Check kyosu::is_real over quaternion"

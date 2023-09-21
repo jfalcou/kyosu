@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::is_nan over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::is_nan(kyosu::to_complex(r,i)), eve::is_nan(r) || eve::is_nan(i));
+  TTS_EQUAL(kyosu::is_nan(kyosu::complex(r,i)), eve::is_nan(r) || eve::is_nan(i));
   auto z(eve::nan(eve::as(r)));
   TTS_EQUAL(kyosu::is_nan(z), eve::true_(eve::as(r)));
 };

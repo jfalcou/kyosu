@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::frac over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::frac(kyosu::to_complex(r,i)), kyosu::to_complex(eve::frac(r),eve::frac(i)));
+  TTS_EQUAL(kyosu::frac(kyosu::complex(r,i)), kyosu::complex(eve::frac(r),eve::frac(i)));
 };
 
 TTS_CASE_WITH ( "Check kyosu::frac over quaternion"

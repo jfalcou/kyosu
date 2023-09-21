@@ -17,7 +17,7 @@ namespace kyosu::_
     using v_t = as_real_t<Z>;
     using real_t = eve::element_type_t<v_t>;
     auto const   sqrtpi = eve::sqrt_pi(eve::as<real_t>());
-    auto const iosqrtpi = to_complex(real_t(0), eve::rec(sqrtpi));
+    auto const iosqrtpi = complex(real_t(0), eve::rec(sqrtpi));
 
     auto fexp =  [iosqrtpi, sqrtpi](auto z){//Fourier expansion approximation
 
@@ -51,7 +51,7 @@ namespace kyosu::_
       auto  zP4=sqr(zP2);
       auto  zP6=zP2*zP4;
 
-      return (((6 - 6*zP2 + 3*zP4 - zP6)*(15*sqrtpi + to_complex(real_t(0), real_t(1))*z*(30 + 10*zP2 + 3*zP4)))/(90*sqrtpi));
+      return (((6 - 6*zP2 + 3*zP4 - zP6)*(15*sqrtpi + complex(real_t(0), real_t(1))*z*(30 + 10*zP2 + 3*zP4)))/(90*sqrtpi));
     };
 
     auto narr_band = [sqrtpi](auto z, auto aN, auto tauM){ // the narrow band
@@ -61,7 +61,7 @@ namespace kyosu::_
       auto z2 = tauM2*sqr(z);
       Z NB{};
       for (size_t n = 1; n <= maxN; ++n) NB += (aN[n-1]*dec(eve::sign_alternate(real_t(n))*z1)/(sqr(n*eve::pi(eve::as(tauM))) - z2));
-      return exp(-sqr(z)) - to_complex(real_t(0), real_t(1))*(dec(z1)/(tauM*z) - tauM2*z/sqrtpi*NB);
+      return exp(-sqr(z)) - complex(real_t(0), real_t(1))*(dec(z1)/(tauM*z) - tauM2*z/sqrtpi*NB);
     };
 
 
@@ -93,7 +93,7 @@ namespace kyosu::_
 
     auto indneg  = eve::is_ltz(imag(z));
     z = if_else(indneg, conj(z), z);
-    auto r = to_complex(eve::nan(eve::as(real(z))), eve::nan(eve::as(real(z)))); // nan case treated here
+    auto r = complex(eve::nan(eve::as(real(z))), eve::nan(eve::as(real(z)))); // nan case treated here
     r = if_else(eve::is_infinite(real(z)), Z{}, r);
     auto notdone = is_finite(z);
     if (eve::any(notdone))
