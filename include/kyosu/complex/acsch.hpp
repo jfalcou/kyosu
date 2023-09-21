@@ -69,7 +69,7 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if to_complex(z) was entered.
 //!
-//!   2. Returns [elementwise](@ref glossary_elementwise) \f$\mathop{\mathrm{asinh}}(1/z)\f$.
+//!   2. Returns elementwise \f$\mathop{\mathrm{asinh}}(1/z)\f$.
 //!
 //!  @groupheader{Example}
 //!

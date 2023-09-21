@@ -69,7 +69,7 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if to_complex(z) was entered.
 //!
-//!   2. Returns [elementwise](@ref glossary_elementwise) the complex principal value
+//!   2. Returns elementwise the complex principal value
 //!      of the arc cotangent of the input as the arc tangent of the inverse of the input.
 //!
 //!  @groupheader{Example}

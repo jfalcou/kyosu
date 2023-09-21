@@ -4,7 +4,7 @@
 
 int main()
 {
-  using kyosu::is_denormal;
+  using kyosu::is_not_denormal;
   using kyosu::complex;
   using kyosu::quaternion;
   using eve::as;
@@ -22,28 +22,28 @@ int main()
   e_t zer = eve::zero(as(e));
   e_t mind= eve::mindenormal(as(e));
   we_t we = we_t(e, zer, nan, mind);
-  std::cout << e << " -> " << is_denormal(e) << "\n";
-  std::cout << we << " -> " << is_denormal(we) << "\n";
-  std::cout               << is_denormal(c_t(e))<< "\n";
-  std::cout               << is_denormal(q_t(e))<< "\n";
-  std::cout               << is_denormal(kyosu::to_complex(we))<< "\n";
-  std::cout               << is_denormal(kyosu::to_quaternion(we))<< "\n";
+  std::cout << e << " -> " << is_not_denormal(e) << "\n";
+  std::cout << we << " -> " << is_not_denormal(we) << "\n";
+  std::cout               << is_not_denormal(c_t(e))<< "\n";
+  std::cout               << is_not_denormal(q_t(e))<< "\n";
+  std::cout               << is_not_denormal(kyosu::to_complex(we))<< "\n";
+  std::cout               << is_not_denormal(kyosu::to_quaternion(we))<< "\n";
 
   std::cout << "Complex:     \n";
   c_t c(3.5f,-2.9f);
   c_t d(0.0f, mind);
   wc_t wc = wc_t(c, zer, nan, d);
-  std::cout << c << " -> " << is_denormal(c) << "\n";
-  std::cout << wc << " -> " << is_denormal(wc) << "\n";
-  std::cout                 << is_denormal(kyosu::to_complex(wc))<< "\n";;
-  std::cout                 << is_denormal(kyosu::to_quaternion(wc))<< "\n";
+  std::cout << c << " -> " << is_not_denormal(c) << "\n";
+  std::cout << wc << " -> " << is_not_denormal(wc) << "\n";
+  std::cout                 << is_not_denormal(kyosu::to_complex(wc))<< "\n";;
+  std::cout                 << is_not_denormal(kyosu::to_quaternion(wc))<< "\n";
 
   std::cout << "Quaternion:  \n";
   q_t q(3.5f,-2.9f, mind, 3.2f);
   q_t r(3.5f, nan, inf, zer);
   wq_t wq = wq_t(q, zer, nan, r);
-  std::cout << q << " -> " << is_denormal(q) << "\n";
-  std::cout << wq << " -> " << is_denormal(wq) << "\n";
+  std::cout << q << " -> " << is_not_denormal(q) << "\n";
+  std::cout << wq << " -> " << is_not_denormal(wq) << "\n";
 
   return 0;
 }
