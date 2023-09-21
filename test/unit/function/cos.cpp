@@ -27,7 +27,7 @@ TTS_CASE_WITH ( "Check kyosu::cos over real"
 template < typename T >
 auto cv(boost::math::quaternion<T> const &bq)
 {
-  return kyosu::as_quaternion_t<T>(bq.R_component_1(), bq.R_component_2(),
+  return kyosu::quaternion_t<T>(bq.R_component_1(), bq.R_component_2(),
                               bq.R_component_3(), bq.R_component_4());
 }
 
@@ -39,7 +39,7 @@ TTS_CASE_WITH ( "Check kyosu::cos over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  using ke_t = kyosu::as_quaternion_t<T>;
+  using ke_t = kyosu::quaternion_t<T>;
   using bq_t = boost::math::quaternion<eve::element_type_t<T>>;
   auto boost_cos = [](auto x, auto y, auto z,  auto t){return cv(boost::math::cos(bq_t(x, y, z, t))); };
   ke_t e([&](auto n, auto){return boost_cos(r.get(n), i.get(n), j.get(n), k.get(n)); });

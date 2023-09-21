@@ -57,13 +57,13 @@ namespace kyosu
 //!      auto beta(T x,U y) noexcept;                                        //1
 //!
 //!      template< eve::floating_value T, eve::floating_value U >
-//!      auto beta(eve::as_complex_t<T> x, U y) noexcept;                    //2
+//!      auto beta(eve::complex_t<T> x, U y) noexcept;                    //2
 //!
 //!      template< eve::floating_value T, eve::floating_value U >
-//!      auto beta(T x, eve::as_complex_t<U> y) noexcept;                    //2
+//!      auto beta(T x, eve::complex_t<U> y) noexcept;                    //2
 //!
 //!      template< eve::floating_value T, eve::floating_value U >
-//!      auto beta(eve::as_complex_t<T> x, eve::as_complex_t<U> y) noexcept; //2
+//!      auto beta(eve::complex_t<T> x, eve::complex_t<U> y) noexcept; //2
 //!   }
 //!   @endcode
 //!

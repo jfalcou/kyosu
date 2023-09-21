@@ -17,16 +17,16 @@ TTS_CASE_TPL( "Check quaternion constructor from constants", kyosu::scalar_real_
   auto wpi  = w_t(spi);
   auto wo   = w_t(so);
 
-  kyosu::as_quaternion_t<T>             z_sd{};
-  kyosu::as_quaternion_t<T>             z_s0{spi};
-  kyosu::as_quaternion_t<T>             z_ss{spi,so, so, so};
-  eve::wide<kyosu::as_quaternion_t<T>>  z_vd{};
-  eve::wide<kyosu::as_quaternion_t<T>>  z_vs{wo,spi,spi,spi};
-  eve::wide<kyosu::as_quaternion_t<T>>  z_sv{spi,wo,wo,wo};
-  eve::wide<kyosu::as_quaternion_t<T>>  z_vv{wo,wpi,wpi,wpi};
+  kyosu::quaternion_t<T>             z_sd{};
+  kyosu::quaternion_t<T>             z_s0{spi};
+  kyosu::quaternion_t<T>             z_ss{spi,so, so, so};
+  eve::wide<kyosu::quaternion_t<T>>  z_vd{};
+  eve::wide<kyosu::quaternion_t<T>>  z_vs{wo,spi,spi,spi};
+  eve::wide<kyosu::quaternion_t<T>>  z_sv{spi,wo,wo,wo};
+  eve::wide<kyosu::quaternion_t<T>>  z_vv{wo,wpi,wpi,wpi};
 
   // auto a = kumi::make_tuple(wpi,wpi,wpi);
-  // eve::wide<kyosu::as_quaternion_t<T>> z_ra =  eve::to_quaternion(wo,a);
+  // eve::wide<kyosu::quaternion_t<T>> z_ra =  eve::to_quaternion(wo,a);
 
   TTS_EQUAL( get<0>(z_sd), T{0}  );
   TTS_EQUAL( get<1>(z_sd), T{0} );
@@ -78,12 +78,12 @@ TTS_CASE_TPL("Check quaternion constructor from lambda", kyosu::scalar_real_type
   auto fill_i = [](auto i, auto) { return T(1)/(1+i); };
   auto fill_j = [](auto i, auto) { return T(i); };
   auto fill_k = [](auto  , auto) { return T(1); };
-  auto fill   = [](auto i, auto) { return kyosu::as_quaternion_t<T>(T(1+i),T(1)/(1+i),T(i),T(1)); };
+  auto fill   = [](auto i, auto) { return kyosu::quaternion_t<T>(T(1+i),T(1)/(1+i),T(i),T(1)); };
 
-  eve::wide<kyosu::as_quaternion_t<T>> z_l(fill);
-  eve::wide<kyosu::as_quaternion_t<T>> z_ll(fill_r, fill_i, fill_j, fill_k);
-  eve::wide<kyosu::as_quaternion_t<T>> z_lc(fill_r, T{1.25}, T{2.25}, T{3.25});
-  eve::wide<kyosu::as_quaternion_t<T>> z_cl(T{8.8},fill_i, T(1.0), fill_k);
+  eve::wide<kyosu::quaternion_t<T>> z_l(fill);
+  eve::wide<kyosu::quaternion_t<T>> z_ll(fill_r, fill_i, fill_j, fill_k);
+  eve::wide<kyosu::quaternion_t<T>> z_lc(fill_r, T{1.25}, T{2.25}, T{3.25});
+  eve::wide<kyosu::quaternion_t<T>> z_cl(T{8.8},fill_i, T(1.0), fill_k);
 
   TTS_EQUAL( get<0>(z_l)  , w_t(fill_r));
   TTS_EQUAL( get<1>(z_l)  , w_t(fill_i));
@@ -115,14 +115,14 @@ TTS_CASE_TPL("Check quaternion copy/assignment", kyosu::scalar_real_types)
   auto wpi  = w_t(spi);
   auto wo   = w_t(so);
 
-  kyosu::as_quaternion_t<T>  z_s{spi,so, so, so};
+  kyosu::quaternion_t<T>  z_s{spi,so, so, so};
   auto                  z_sc{z_s};
-  kyosu::as_quaternion_t<T>  z_sa;
+  kyosu::quaternion_t<T>  z_sa;
   z_sa = z_s;
 
-  eve::wide<kyosu::as_quaternion_t<T>> z_v{wo,wpi, wpi, wpi};
+  eve::wide<kyosu::quaternion_t<T>> z_v{wo,wpi, wpi, wpi};
   auto                            z_vc{z_v};
-  eve::wide<kyosu::as_quaternion_t<T>> z_va;
+  eve::wide<kyosu::quaternion_t<T>> z_va;
   z_va = z_v;
 
   TTS_EQUAL ( z_sc, z_s );

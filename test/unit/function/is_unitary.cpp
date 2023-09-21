@@ -38,7 +38,7 @@ TTS_CASE_WITH ( "Check kyosu::is_unitary over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto z(type(r,i,j,k));
   z /= kyosu::abs(z);
   auto o = eve::one(eve::as(kyosu::abs(z)));

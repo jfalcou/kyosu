@@ -35,7 +35,7 @@ TTS_CASE_WITH ( "Check kyosu::is_not_real over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   TTS_EQUAL(kyosu::is_not_real(type(r,i,j,k)), eve::is_nez(i) || eve::is_nez(j) || eve::is_nez(k));
   TTS_EQUAL(kyosu::is_not_real(type(r)), eve::false_(eve::as(r)));
 };

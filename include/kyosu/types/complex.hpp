@@ -26,5 +26,5 @@ namespace kyosu
 //   using complex     = cayley_dickson<T,2>;
 
   template<typename T>
-  using as_complex_t = as_cayley_dickson_n_t<2,T>;
+  using complex_t = as_cayley_dickson_n_t<2,T>;
 }

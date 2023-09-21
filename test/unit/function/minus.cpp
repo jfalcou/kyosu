@@ -34,6 +34,6 @@ TTS_CASE_WITH ( "Check kyosu::minus over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   TTS_EQUAL(kyosu::minus(type(r,i,j,k)), type(-r,-i,-j,-k));
 };

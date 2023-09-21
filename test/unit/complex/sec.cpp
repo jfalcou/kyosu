@@ -23,7 +23,7 @@ TTS_CASE_WITH( "Check behavior of sec on scalar"
 {
   using e_t = typename T::value_type;
   using c_t = std::complex<e_t>;
-  using kc_t = kyosu::as_complex_t<e_t>;
+  using kc_t = kyosu::complex_t<e_t>;
   for(size_t i = 0; i < a0.size(); ++i)
   {
     auto e = a0[i];
@@ -40,7 +40,7 @@ TTS_CASE_WITH( "Check behavior of sec on wide"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = T;
-  using ke_t = kyosu::as_complex_t<e_t>;
+  using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return kyosu::rec(cv(std::cos(c_t(a0.get(i), a1.get(i))))); });
   TTS_RELATIVE_EQUAL(kyosu::sec(ke_t{a0,a1}), e, 1.0e-6);

@@ -45,7 +45,7 @@ TTS_CASE_WITH ( "Check kyosu::pow_abs over quaternion"
               )
 <typename T>(T r0, T i0, T j0, T k0, T r1, T i1, T j1, T k1)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
   TTS_RELATIVE_EQUAL(kyosu::pow_abs(q0, q1), kyosu::exp(q1*kyosu::log_abs(q0)), 1e-4);

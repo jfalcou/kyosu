@@ -52,12 +52,12 @@ namespace kyosu
                                         >;
   using real_types          = tts::concatenate_t<scalar_real_types, simd_real_types>;
 
-  template<typename T>    struct complex_t;
-  template<typename... T> struct complex_t<tts::types<T...>> { using types_list = tts::types<as_complex_t<T>...>; };
+  template<typename T>    struct tts_complex_t;
+  template<typename... T> struct tts_complex_t<tts::types<T...>> { using types_list = tts::types<complex_t<T>...>; };
 
-  using scalar_complex_types = complex_t<scalar_real_types>;
-  using simd_complex_types   = complex_t<simd_real_types>;
-  using complex_types        = complex_t<real_types>;
+  using scalar_complex_types = tts_complex_t<scalar_real_types>;
+  using simd_complex_types   = tts_complex_t<simd_real_types>;
+  using complex_types        = tts_complex_t<real_types>;
 }
 
 //==================================================================================================

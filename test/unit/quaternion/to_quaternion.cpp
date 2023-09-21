@@ -13,8 +13,8 @@ TTS_CASE_TPL( "Check to_quaternion converter from constants", kyosu::scalar_real
 {
   using e_t = T;
   using w_t = eve::wide<e_t>;
-  using q_t = kyosu::as_quaternion_t<e_t>;
-  using wq_t = eve::wide<kyosu::as_quaternion_t<e_t>>;
+  using q_t = kyosu::quaternion_t<e_t>;
+  using wq_t = eve::wide<kyosu::quaternion_t<e_t>>;
   auto zer (e_t(0));
   auto wzer(w_t(0));
   auto o(e_t(1));
@@ -62,7 +62,7 @@ TTS_CASE_TPL( "Check to_quaternion converter from constants", kyosu::scalar_real
     TTS_EQUAL( get<3>(wz_3), wo);
   }
 
-  using c_t = kyosu::as_complex_t<e_t>;
+  using c_t = kyosu::complex_t<e_t>;
   auto zcc = kyosu::to_quaternion(c_t(1, 1), c_t(0, 1));
 
     TTS_EQUAL( get<0>(zcc), T(1));

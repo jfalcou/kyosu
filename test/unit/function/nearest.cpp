@@ -34,7 +34,7 @@ TTS_CASE_WITH ( "Check kyosu::nearest over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   TTS_EQUAL(kyosu::nearest(type(r,i,j,k)), type(eve::nearest(r), eve::nearest(i), eve::nearest(j), eve::nearest(k)));
 };
 

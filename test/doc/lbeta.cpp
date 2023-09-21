@@ -5,11 +5,11 @@
 int main()
 {
   using kyosu::lbeta;
-  using kyosu::as_complex_t;
+  using kyosu::complex_t;
   using e_t = float;
-  using c_t = kyosu::as_complex_t<float>;
+  using c_t = kyosu::complex_t<float>;
   using we_t = eve::wide<float, eve::fixed<2>>;
-  using wc_t = eve::wide<kyosu::as_complex_t<float>, eve::fixed<2>>;
+  using wc_t = eve::wide<kyosu::complex_t<float>, eve::fixed<2>>;
 
   std::cout << "Real:        "<< "\n";
   e_t e0(1);

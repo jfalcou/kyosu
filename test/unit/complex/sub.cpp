@@ -11,14 +11,14 @@
 TTS_CASE_TPL( "Check complex::sub", kyosu::scalar_real_types)
 <typename T>(tts::type<T>)
 {
-  using c_t   = kyosu::as_complex_t<T>;
+  using c_t   = kyosu::complex_t<T>;
   using w_t   = eve::wide<T>;
   using wc_t  = eve::wide<c_t>;
   using eve::sub;
 
   auto fill_ur = [](auto i, auto) { return -T(1+i); };
   auto fill_ui = [](auto i, auto) { return -T(1)/(1+i); };
-  auto fill_u   = [](auto i, auto) { return kyosu::as_complex_t<T>(T(1+i),T(1)/(1+i)); };
+  auto fill_u   = [](auto i, auto) { return kyosu::complex_t<T>(T(1+i),T(1)/(1+i)); };
 
   c_t   z_s(T{1.234}, T{5.678});
   wc_t  z_v(fill_u);
@@ -28,7 +28,7 @@ TTS_CASE_TPL( "Check complex::sub", kyosu::scalar_real_types)
 
   auto fill_r = [](auto i, auto) { return T(1+i); };
   auto fill_i = [](auto i, auto) { return 13+(1+i); };
-  auto fill   = [](auto i, auto) { return kyosu::as_complex_t<T>(T(1+i),13+(1+i)); };
+  auto fill   = [](auto i, auto) { return kyosu::complex_t<T>(T(1+i),13+(1+i)); };
 
   c_t   z_s1(T{1.5}, T{5.5}), z_s2(T{2.5}, T{1.25});
   wc_t  z_v1(fill), z_v2(fill_i,fill_r);
@@ -74,13 +74,13 @@ TTS_CASE_TPL( "Check complex::sub", kyosu::scalar_real_types)
 TTS_CASE_TPL( "Check complex::operator-", kyosu::scalar_real_types)
 <typename T>(tts::type<T>)
 {
-  using c_t   = kyosu::as_complex_t<T>;
+  using c_t   = kyosu::complex_t<T>;
   using w_t   = eve::wide<T>;
   using wc_t  = eve::wide<c_t>;
 
   auto fill_ur = [](auto i, auto) { return -T(1+i); };
   auto fill_ui = [](auto i, auto) { return -T(1)/(1+i); };
-  auto fill_u  = [](auto i, auto) { return kyosu::as_complex_t<T>(T(1+i),T(1)/(1+i)); };
+  auto fill_u  = [](auto i, auto) { return kyosu::complex_t<T>(T(1+i),T(1)/(1+i)); };
 
   c_t   z_s(T{1.234}, T{5.678});
   wc_t  z_v(fill_u);
@@ -90,7 +90,7 @@ TTS_CASE_TPL( "Check complex::operator-", kyosu::scalar_real_types)
 
   auto fill_r = [](auto i, auto) { return T(1+i); };
   auto fill_i = [](auto i, auto) { return 13+(1+i); };
-  auto fill   = [](auto i, auto) { return kyosu::as_complex_t<T>(T(1+i),13+(1+i)); };
+  auto fill   = [](auto i, auto) { return kyosu::complex_t<T>(T(1+i),13+(1+i)); };
 
   c_t   z_s1(T{1.5}, T{5.5}), z_s2(T{2.5}, T{1.25});
   wc_t  z_v1(fill), z_v2(fill_i,fill_r);

@@ -36,7 +36,7 @@ TTS_CASE_WITH ( "Check kyosu::is_finite over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto z(eve::inf(eve::as(r)));
   TTS_EQUAL(kyosu::is_finite(type(r,i,j,k)), eve::is_finite(r) && eve::is_finite(i) && eve::is_finite(j) && eve::is_finite(k));
   TTS_EQUAL(kyosu::is_finite(z), eve::false_(eve::as(r)));

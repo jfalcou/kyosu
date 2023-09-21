@@ -13,8 +13,8 @@ TTS_CASE_TPL( "Check to_complex converter from constants", kyosu::scalar_real_ty
 {
   using e_t = T;
   using w_t = eve::wide<e_t>;
-  using c_t = kyosu::as_complex_t<e_t>;
-  using wc_t = eve::wide<kyosu::as_complex_t<e_t>>;
+  using c_t = kyosu::complex_t<e_t>;
+  using wc_t = eve::wide<kyosu::complex_t<e_t>>;
   auto zer (e_t(0));
   auto wzer(w_t(0));
   auto o(e_t(1));

@@ -34,7 +34,7 @@ TTS_CASE_WITH ( "Check kyosu::trunc over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   TTS_EQUAL(kyosu::trunc(type(r,i,j,k)), type(eve::trunc(r), eve::trunc(i), eve::trunc(j), eve::trunc(k)));
 };
 

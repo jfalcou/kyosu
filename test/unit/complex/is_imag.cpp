@@ -22,7 +22,7 @@ TTS_CASE_WITH( "Check behavior of cos on scalar"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = typename T::value_type;
-  using kc_t = kyosu::as_complex_t<e_t>;
+  using kc_t = kyosu::complex_t<e_t>;
   for(size_t i = 0; i < a0.size(); ++i)
   {
     auto e = a0[i];

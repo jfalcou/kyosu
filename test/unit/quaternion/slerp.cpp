@@ -25,7 +25,7 @@ TTS_CASE_WITH ( "Check behavior of slerp on"
               , T const& a4, T const& a5, T const& a6, T const& a7)
 {
   using e_t =  eve::element_type_t<T>;
-  using q_t =  kyosu::as_quaternion_t<T>;
+  using q_t =  kyosu::quaternion_t<T>;
   if constexpr(sizeof(e_t) == 8)
   {
     auto z1 = kyosu::sign(q_t(a0, a1, a2, a3));

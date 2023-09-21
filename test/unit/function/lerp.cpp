@@ -45,7 +45,7 @@ TTS_CASE_WITH ( "Check kyosu::lerp over quaternion"
               )
 <typename T>(T r0, T i0, T j0, T k0, T r1, T i1, T j1, T k1, auto t)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
   TTS_RELATIVE_EQUAL(kyosu::lerp(q0, q1, t), q0+t*(q1-q0) , 1e-7);

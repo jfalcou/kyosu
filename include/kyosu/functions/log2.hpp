@@ -58,7 +58,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T log2(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr as_complex_t<T> log2(T z) noexcept;
+//!      template<eve::ordered_value T>              constexpr complex_t<T> log2(T z) noexcept;
 //!   }
 //!   @endcode
 //!

@@ -34,7 +34,7 @@ TTS_CASE_WITH ( "Check kyosu::ceil over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   TTS_EQUAL(kyosu::ceil(type(r,i,j,k)), type(eve::ceil(r), eve::ceil(i), eve::ceil(j), eve::ceil(k)));
 };
 

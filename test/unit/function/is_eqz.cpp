@@ -36,7 +36,7 @@ TTS_CASE_WITH ( "Check kyosu::is_eqz over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto z(eve::zero(eve::as(r)));
   TTS_EQUAL(kyosu::is_eqz(type(r,i,j,k)), eve::is_eqz(r) && eve::is_eqz(i) && eve::is_eqz(j) && eve::is_eqz(k));
   TTS_EQUAL(kyosu::is_eqz(z), eve::true_(eve::as(r)));

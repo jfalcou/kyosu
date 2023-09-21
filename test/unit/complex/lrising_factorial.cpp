@@ -20,11 +20,11 @@ TTS_CASE_WITH ( "Check behavior of lrising_factorial on wide"
 <typename T>(T const& a0, T const& a1, T const& a2, T const& a3 )
 {
   using e_t = T;
-  using z_t = kyosu::as_complex_t<T>;
+  using z_t = kyosu::complex_t<T>;
  auto tcx = [](auto r,  auto i){return kyosu::to_complex(T(r), T(i)); };
  auto a = tcx(a0, a1);
  auto b = tcx(a2, a3);
- using z_t = kyosu::as_complex_t<T>;
+ using z_t = kyosu::complex_t<T>;
   z_t i = tcx(T(0), T(1));
   z_t o = tcx(T(1), T(0));
   auto lrf =  [](auto a,  auto b){return kyosu::log(kyosu::tgamma(a+b)/kyosu::tgamma(a)); };

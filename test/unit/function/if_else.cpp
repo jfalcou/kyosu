@@ -18,25 +18,25 @@ TTS_CASE_WITH ( "Check behavior of if_else on scalar cayley-dickson"
   for(auto e : a0)
   {
     auto m = eve::is_odd(e);
-    TTS_EQUAL ( kyosu::if_else( m, kyosu::as_complex_t<e_t>(0,-e), kyosu::as_complex_t<e_t>(0, e))
-              , kyosu::as_complex_t<e_t>(0,m ? -e : e)
+    TTS_EQUAL ( kyosu::if_else( m, kyosu::complex_t<e_t>(0,-e), kyosu::complex_t<e_t>(0, e))
+              , kyosu::complex_t<e_t>(0,m ? -e : e)
               );
 
-    TTS_EQUAL ( kyosu::if_else(m, kyosu::as_quaternion_t<e_t>(0,-e,1,-2), kyosu::as_quaternion_t<e_t>(0,e,-1, 2))
-              , kyosu::as_quaternion_t<e_t>(0,m ? -e : e,m ? 1 : -1,m ? -2 : 2)
+    TTS_EQUAL ( kyosu::if_else(m, kyosu::quaternion_t<e_t>(0,-e,1,-2), kyosu::quaternion_t<e_t>(0,e,-1, 2))
+              , kyosu::quaternion_t<e_t>(0,m ? -e : e,m ? 1 : -1,m ? -2 : 2)
               );
 
     TTS_EQUAL ( kyosu::if_else( eve::is_odd(e)
-                              , kyosu::as_complex_t<e_t>(0,-e)
-                              , kyosu::as_quaternion_t<e_t>(0, e,-1,  2)
+                              , kyosu::complex_t<e_t>(0,-e)
+                              , kyosu::quaternion_t<e_t>(0, e,-1,  2)
                               )
-              , kyosu::as_quaternion_t<e_t>(0,m ? -e : e,m ? 0 : -1,m ? 0 : 2)
+              , kyosu::quaternion_t<e_t>(0,m ? -e : e,m ? 0 : -1,m ? 0 : 2)
               );
     TTS_EQUAL ( kyosu::if_else( eve::is_odd(e)
-                              , kyosu::as_quaternion_t<e_t>(0,-e, 1, -2)
-                              , kyosu::as_complex_t<e_t>(0, e)
+                              , kyosu::quaternion_t<e_t>(0,-e, 1, -2)
+                              , kyosu::complex_t<e_t>(0, e)
                               )
-              , kyosu::as_quaternion_t<e_t>(0,m ? -e : e,m ? 1 : 0,m ? -2 : 0)
+              , kyosu::quaternion_t<e_t>(0,m ? -e : e,m ? 1 : 0,m ? -2 : 0)
               );
   }
 };
@@ -48,8 +48,8 @@ TTS_CASE_WITH ( "Check behavior of if_else on SIMD cayley-dickson"
 <typename T>(T const& a0 )
 {
   using e_t   = typename T::value_type;
-  using c_t   = kyosu::as_complex_t<e_t>;
-  using q_t   = kyosu::as_quaternion_t<e_t>;
+  using c_t   = kyosu::complex_t<e_t>;
+  using q_t   = kyosu::quaternion_t<e_t>;
   using wc_t  = eve::wide<c_t>;
   using wq_t  = eve::wide<q_t>;
 

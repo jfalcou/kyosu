@@ -9,9 +9,9 @@ using wide_ft = eve::wide <float, eve::fixed<4>>;
 
   wide_ft ref1 = { 3.0f, 2.0f, 1.0f, 0.6f};
   wide_ft imf1 = { 2.0f , -1.0,  -5.0, 0.0};
-  auto zc = kyosu::as_complex_t<wide_ft>(ref1, imf1);
-  auto z = kyosu::as_complex_t<double>(1.0, 0.0);
-  auto zf= kyosu::as_complex_t<float >(1.0, 0.0);
+  auto zc = kyosu::complex_t<wide_ft>(ref1, imf1);
+  auto z = kyosu::complex_t<double>(1.0, 0.0);
+  auto zf= kyosu::complex_t<float >(1.0, 0.0);
   std::cout
     << "---- simd" << std::endl
     << "<- z           = " << z << std::endl

@@ -36,7 +36,7 @@ TTS_CASE_WITH ( "Check kyosu::is_denormal over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto z(eve::mindenormal(eve::as(r)));
   TTS_EQUAL(kyosu::is_denormal(type(r,i,j,k)), eve::is_denormal(r) || eve::is_denormal(i) || eve::is_denormal(j) || eve::is_denormal(k));
   TTS_EQUAL(kyosu::is_denormal(z), eve::true_(eve::as(r)));

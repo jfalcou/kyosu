@@ -57,13 +57,13 @@ namespace kyosu
 //!      auto lrising_factorial(T x,U y) noexcept;                                        //1
 //!
 //!      template< eve::floating_value T, eve::floating_value U >
-//!      auto lrising_factorial(eve::as_complex_t<T> x, U y) noexcept;                    //2
+//!      auto lrising_factorial(eve::complex_t<T> x, U y) noexcept;                    //2
 //!
 //!      template< eve::floating_value T, eve::floating_value U >
-//!      auto lrising_factorial(T x, eve::as_complex_t<U> y) noexcept;                    //2
+//!      auto lrising_factorial(T x, eve::complex_t<U> y) noexcept;                    //2
 //!
 //!      template< eve::floating_value T, eve::floating_value U >
-//!      auto lrising_factorial(eve::as_complex_t<T> x, eve::as_complex_t<U> y) noexcept; //2
+//!      auto lrising_factorial(eve::complex_t<T> x, eve::complex_t<U> y) noexcept; //2
 //!   }
 //!   @endcode
 //!

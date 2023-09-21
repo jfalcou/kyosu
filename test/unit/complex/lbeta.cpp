@@ -12,7 +12,7 @@
 TTS_CASE_TPL( "Check log_abs_gamma", kyosu::scalar_real_types)
 <typename T>(tts::type<T>)
 {
-  using z_t = kyosu::as_complex_t<T>;
+  using z_t = kyosu::complex_t<T>;
   z_t i = kyosu::to_complex(T(0), T(1));
   z_t o = kyosu::to_complex(T(1), T(0));
   TTS_RELATIVE_EQUAL(kyosu::lbeta(i, i),      z_t(1.2673795683871619728767940, -2.30372328403975132639009246361848), 1.0e-5);
