@@ -48,9 +48,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T> constexpr auto quaternion(T r)                      noexcept;
-//!      template<eve::ordered_value T> constexpr auto quaternion(T r, T i, T j, T k)       noexcept;
-
+//!      template<eve::ordered_value T> constexpr auto quaternion(T r, T i = 0, T j = 0, T k = 0)       noexcept;
+//!      template<eve::ordered_value T> constexpr auto quaternion(complex_t<T> c0, complex_t<T> c1 = 0)  noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T quaternion(T z) noexcept;
 //!   }
 //!   @endcode
@@ -58,7 +57,8 @@ namespace kyosu
 //!   **Parameters**
 //!
 //!     * `z`                 : Quaternion value.
-//!     * `r`, `i`, `j`, `k`  : Real and unreal parts sued to construct a @ref kyosu::quaternion..
+//!     * `c0 `,`c1`          : Complex values generates the quaternion c0+j*conj(c1) i.e. real(c0+i*imag(c1)+j*real(1)+k*imag(c1)
+//!     * `r`, `i`, `j`, `k`  : Real and unreal parts sued to construct a @ref kyosu::quaternion from its components
 //!
 //!   **Return value**
 //!
@@ -66,7 +66,7 @@ namespace kyosu
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/quaternion.cpp}
+//!  @godbolt{doc/to_quaternion.cpp}
 //! @}
 //======================================================================================================================
 inline constexpr tags::callable_quaternion quaternion = {};

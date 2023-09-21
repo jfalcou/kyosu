@@ -48,10 +48,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T> constexpr auto complex(T r)            noexcept;
-//!      template<eve::ordered_value T> constexpr auto complex(T r, T i)       noexcept;
-
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T complex(T z) noexcept;
+//!      template<eve::ordered_value T> constexpr auto complex(T r, T i = 0)       noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T complex(T z)  noexcept;
 //!   }
 //!   @endcode
 //!
@@ -66,7 +64,7 @@ namespace kyosu
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/complex.cpp}
+//!  @godbolt{doc/to_complex.cpp}
 //! @}
 //======================================================================================================================
 inline constexpr tags::callable_complex complex = {};
