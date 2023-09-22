@@ -79,7 +79,7 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/quaternion/regular/to_semipolar.cpp}
+  //! @godbolt{doc/regular/to_semipolar.cpp}
   //!
   //!  @}
   //================================================================================================

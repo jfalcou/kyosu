@@ -144,7 +144,7 @@ namespace kyosu
   //!
   //!  @groupheader{Example}
   //!
-  //! @godbolt{doc/quaternion/regular/from_euler.cpp}
+  //! @godbolt{doc/regular/from_euler.cpp}
   //!  @}
   //================================================================================================
   inline constexpr tags::callable_from_euler from_euler = {};

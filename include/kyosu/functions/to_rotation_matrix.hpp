@@ -109,7 +109,7 @@ namespace kyosu
   //!
   //!  @groupheader{Example}
   //!
-  //! @godbolt{doc/quaternion/regular/to_rotation_matrix.cpp}
+  //! @godbolt{doc/regular/to_rotation_matrix.cpp}
   //!  @}
   //================================================================================================
   inline constexpr tags::callable_to_rotation_matrix to_rotation_matrix = {};

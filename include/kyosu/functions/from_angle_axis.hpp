@@ -19,28 +19,29 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(from_angle_axis_);
 
-    template<eve::ordered_value V,  eve::ordered_value U>
+    template<eve::ordered_value V,  typename  U>
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & angle
-                                               , std::span<U, 3>  axis) noexcept
+                                               , V  angle
+                                               , U  axis) noexcept
     {
-      auto q =  quaternion(U(0), axis[0], axis[1], axis[2]);
+      using e_t = decltype(axis[0]+angle);
+      auto q =  quaternion(e_t(0), e_t(axis[0]), e_t(axis[1]), e_t(axis[2]));
       auto [s, c] = eve::sincos(angle*eve::half(eve::as(angle)));
       return c+s*q;
     }
 
     template<typename T0, typename T1>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0,
-                                      T1 const& target1
+    KYOSU_FORCEINLINE auto operator()(T0 target0,
+                                      T1 target1
                                      ) const noexcept
     -> decltype(eve::tag_invoke(*this, target0,  target1))
     {
       return eve::tag_invoke(*this, target0,  target1);
     }
 
-    template<typename... T>
-    eve::unsupported_call<callable_from_angle_axis(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+//     template<typename... T>
+//     eve::unsupported_call<callable_from_angle_axis(T&&...)> operator()(T&&... x) const
+//     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
 
@@ -83,7 +84,7 @@ namespace kyosu
   //!
   //!  @groupheader{Example}
   //!
-  //! @godbolt{doc/quaternion/regular/conversions.cpp}
+  //! @godbolt{doc/from_angle_axis.cpp}
   //!  @}
   //================================================================================================
   inline constexpr tags::callable_from_angle_axis from_angle_axis = {};

@@ -79,7 +79,7 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/quaternion/regular/to_cylindrical.cpp}
+  //! @godbolt{doc/regular/to_cylindrical.cpp}
   //!
   //!  @}
   //================================================================================================

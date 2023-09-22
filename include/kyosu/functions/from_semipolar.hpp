@@ -90,7 +90,7 @@ namespace kyosu
   //!
   //!  @groupheader{Example}
   //!
-  //! @godbolt{doc/quaternion/regular/conversions.cpp}
+  //! @godbolt{doc/regular/conversions.cpp}
   //!  @}
   //================================================================================================
   inline constexpr tags::callable_from_semipolar from_semipolar = {};

@@ -98,7 +98,7 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/quaternion/regular/rotate_vec.cpp}
+  //! @godbolt{doc/regular/rotate_vec.cpp}
   //!
   //!  @}
   //================================================================================================
