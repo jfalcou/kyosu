@@ -9,10 +9,8 @@ int main()
   using kyosu::quaternion_t;
   using e_t = float;
   using c_t = kyosu::complex_t<float>;
-  using q_t = kyosu::quaternion_t<float>;
   using we_t = eve::wide<float, eve::fixed<2>>;
   using wc_t = eve::wide<kyosu::complex_t<float>, eve::fixed<2>>;
-  using wq_t = eve::wide<kyosu::quaternion_t<float>, eve::fixed<2>>;
 
   std::cout << "Real:        "<< "\n";
   e_t e0(1);
@@ -31,21 +29,6 @@ int main()
   wc_t wc0(c0, c1);
   wc_t wc1(c1, c1);
   std::cout << wc0 << ", " << wc1 << " -> " << lrising_factorial(wc0, wc1) << "\n";
-
-  std::cout << "Quaternion:  "<< "\n";
-  q_t q0(1, 5, 2, 3);
-  q_t q1(5, 9, 6, 7);
-  std::cout << q0 << ", " << q1 << " -> "  << lrising_factorial(q0, q1) << "\n";
-  std::cout << q0 << ", " << q0 << " -> "  << lrising_factorial(q0, q0) << "\n";
-  wq_t wq0(q0, q1);
-  wq_t wq1(q1, q1);
-  std::cout << wq0 << ", " << wq1 << " -> " << lrising_factorial(wq0, wq1) << "\n";
-
-  std::cout << "Mixed:  "<< "\n";
-  std::cout << kyosu::lrising_factorial(c0, q1) << std::endl;
-  std::cout << kyosu::lrising_factorial(e0, q1) << std::endl;
-  std::cout << kyosu::lrising_factorial(c0, wq1) << std::endl;
-  std::cout << kyosu::lrising_factorial(we0, q1) << std::endl;
 
   return 0;
 }

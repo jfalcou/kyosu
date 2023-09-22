@@ -20,7 +20,7 @@ namespace kyosu::tags
     template<eve::ordered_value T1, eve::ordered_value T2>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T1 const& v, T2 const& w) noexcept {
       auto fn = callable_lrising_factorial{};
-      return fn(v, w); }
+      return fn(complex(v), complex(w)); }
 
     template<typename T1, typename T2>
     KYOSU_FORCEINLINE auto operator()(T1 const& target1, T2 const& target2) const noexcept -> decltype(eve::tag_invoke(*this, target1, target2))

@@ -103,7 +103,7 @@ namespace kyosu::_
     if constexpr(concepts::complex<C> )
     {
       auto [rz, iz] = z;
-      iz *= eve::pi(as(iz));
+      iz *= eve::pi(eve::as(iz));
       auto [s, c]   = eve::sinpicospi(rz);
       auto [sh, ch] = eve::sinhcosh(iz);
       auto rc = c*ch;
@@ -118,19 +118,19 @@ namespace kyosu::_
       auto cpi = kyosu::complex(rc, ic);
       auto  arz = -kyosu::imag(z);
       auto  aiz =  kyosu::real(z);
-      arz*= eve::pi(as(arz));
+      arz*= eve::pi(eve::as(arz));
       auto [as, ac]   = eve::sinpicospi(aiz);
       auto [ash, ach] = eve::sinhcosh(arz);
       auto rs = ac*ash;
       auto is = as*ach;
       if (eve::any(kyosu::is_not_finite(z)))
       {
-        rs = if_else(eve::is_infinite(aiz) && eve::is_not_finite(arz), arz, rs);
-        is = if_else(eve::is_infinite(aiz) && eve::is_nan(arz), iz, is);
-        rs = if_else(eve::is_nan(aiz), arz, rs);
-        is = if_else(eve::is_nan(aiz), arz, is);
-        is = if_else(eve::is_eqz(aiz), eve::zero, is);
-        rs = if_else(eve::is_eqz(arz), eve::zero, rs);
+        rs = eve::if_else(eve::is_infinite(aiz) && eve::is_not_finite(arz), arz, rs);
+        is = eve::if_else(eve::is_infinite(aiz) && eve::is_nan(arz), iz, is);
+        rs = eve::if_else(eve::is_nan(aiz), arz, rs);
+        is = eve::if_else(eve::is_nan(aiz), arz, is);
+        is = eve::if_else(eve::is_eqz(aiz), eve::zero, is);
+        rs = eve::if_else(eve::is_eqz(arz), eve::zero, rs);
       }
       auto spi = kyosu::complex(is, -rs);
       return kumi::tuple{spi, cpi};
