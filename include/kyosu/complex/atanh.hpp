@@ -22,7 +22,7 @@ namespace kyosu::tags
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_atanh{};
-      return fn(v);
+      return fn(complex(v));
     }
 
     template<typename T>
@@ -67,7 +67,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if to_complex(z) was entered.
+//!   1. a real input z is treated as if complex(z) was entered.
 //!
 //!   2.  Returns the complex arc hyperbolic sine of z, in the range of a half-strip mathematically
 //!       unbounded along the real axis and in the interval  \f$i\times[-\pi/2, \pi/2]\f$ along

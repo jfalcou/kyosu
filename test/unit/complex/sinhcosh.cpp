@@ -17,7 +17,7 @@ TTS_CASE_WITH( "Check behavior of sinhcosh on scalar"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = typename T::value_type;
-  using kc_t = kyosu::as_complex_t<e_t>;
+  using kc_t = kyosu::complex_t<e_t>;
   for(size_t i = 0; i < a0.size(); ++i)
   {
     auto e = kc_t(a0[i], a1[i]);
@@ -35,7 +35,7 @@ TTS_CASE_WITH( "Check behavior of sinhcosh on wide"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = T;
-  using ke_t = kyosu::as_complex_t<e_t>;
+  using ke_t = kyosu::complex_t<e_t>;
   auto e = ke_t(a0, a1);
   auto [s, c] = kyosu::sinhcosh(e);
   TTS_RELATIVE_EQUAL(c,  kyosu::cosh(e), 1.0e-6);

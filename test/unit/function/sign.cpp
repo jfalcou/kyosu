@@ -26,7 +26,7 @@ TTS_CASE_WITH ( "Check kyosu::sign over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  using ke_t = kyosu::as_quaternion_t<T>;
+  using ke_t = kyosu::quaternion_t<T>;
   auto q = ke_t(r,i,j,k);
   TTS_RELATIVE_EQUAL(kyosu::sign(q), q/kyosu::abs(q), 1e-5);
 };

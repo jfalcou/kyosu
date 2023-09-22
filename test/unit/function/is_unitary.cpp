@@ -24,7 +24,7 @@ TTS_CASE_WITH ( "Check kyosu::is_unitary over complex"
               )
 (auto r, auto i)
 {
-  auto c = kyosu::to_complex(r,i);
+  auto c = kyosu::complex(r,i);
   c /= kyosu::abs(c);
   auto o = eve::one(eve::as(kyosu::abs(c)));
   TTS_EQUAL(kyosu::is_unitary(c), eve::almost(eve::is_equal)(kyosu::abs(c), o));
@@ -38,7 +38,7 @@ TTS_CASE_WITH ( "Check kyosu::is_unitary over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto z(type(r,i,j,k));
   z /= kyosu::abs(z);
   auto o = eve::one(eve::as(kyosu::abs(z)));
@@ -54,7 +54,7 @@ TTS_CASE_WITH ( "Check kyosu::is_unitary over octonion"
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::as_octonion_t<T>;
+  using type = kyosu::octonion_t<T>;
   auto z(type(r,i,j,k,l,li,lj,lk));
   z /= kyosu::abs(z);
   auto o = eve::one(eve::as(kyosu::abs(z)));

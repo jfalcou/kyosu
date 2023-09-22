@@ -24,8 +24,8 @@ namespace kyosu::_
       auto [s, c]   = eve::sincos(iz);
       auto rho = eve::if_else(is_nan(rz), eve::allbits, eve::exp(rz));
       auto res = eve::if_else(is_real(z) || rz == eve::minf(eve::as(rz)),
-                              to_complex(rho, eve::zero(eve::as(rho))),
-                              to_complex(rho*c, rho*s));
+                              complex(rho, eve::zero(eve::as(rho))),
+                              complex(rho*c, rho*s));
       return if_else(rz == eve::inf(eve::as(rz)) && eve::is_not_finite(iz), C{rz, eve::nan(eve::as(iz))}, res);
     }
     else
@@ -57,7 +57,7 @@ namespace kyosu::_
       auto r = eve::fma(expm1(rz), ciz, cosm1(iz));
       auto i = eve::exp(rz)*siz;
       r = eve::if_else(rz == eve::inf(eve::as(rz)) && eve::is_not_finite(iz), rz, r);
-      return  to_complex(r, eve::if_else(kyosu::is_real(z), eve::zero, i));
+      return  complex(r, eve::if_else(kyosu::is_real(z), eve::zero, i));
     }
     else
     {
@@ -116,14 +116,14 @@ namespace kyosu::_
       auto [s, c]   = eve::sinpicospi(iz);
       auto rho = eve::exp(rz*eve::pi(eve::as(rz)));
       return eve::if_else(kyosu::is_real(z) || rz == eve::minf(eve::as(rz)),
-                          kyosu::to_complex(rho, eve::zero(eve::as(rho))),
-                          kyosu::to_complex(rho*c, rho*s)
+                          kyosu::complex(rho, eve::zero(eve::as(rho))),
+                          kyosu::complex(rho*c, rho*s)
                          );
     }
     else
     {
       using u_t = eve::underlying_type_t<C>;
-      const auto ipi = to_complex(u_t(0), eve::pi(eve::as<u_t>()));
+      const auto ipi = complex(u_t(0), eve::pi(eve::as<u_t>()));
       return kyosu::exp(ipi*z);
     }
   }
@@ -149,10 +149,10 @@ namespace kyosu::_
       auto argz = arg(z);
       auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
       auto la = eve::log(absz);
-      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), to_complex(la, eve::zero(eve::as(rz))), to_complex(la, argz));
+      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), complex(la, eve::zero(eve::as(rz))), complex(la, argz));
       if(eve::any(kyosu::is_not_finite(z)))
       {
-        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), to_complex(infty, iz), r);
+        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), complex(infty, iz), r);
       }
       return r;
     }
@@ -187,10 +187,10 @@ namespace kyosu::_
       auto argz = arg(z)*eve::invlog_10(eve::as(rz));
       auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
       auto la = eve::log10(absz);
-      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), to_complex(la, eve::zero(eve::as(rz))), to_complex(la, argz));
+      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), complex(la, eve::zero(eve::as(rz))), complex(la, argz));
       if(eve::any(kyosu::is_not_finite(z)))
       {
-        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), to_complex(infty, iz), r);
+        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), complex(infty, iz), r);
       }
       return r;
     }
@@ -214,10 +214,10 @@ namespace kyosu::_
       auto argz = arg(z)*eve::invlog_2(eve::as(rz));
       auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
       auto la = eve::log2(absz);
-      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), to_complex(la, eve::zero(eve::as(rz))), to_complex(la, argz));
+      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), complex(la, eve::zero(eve::as(rz))), complex(la, argz));
       if(eve::any(kyosu::is_not_finite(z)))
       {
-        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), to_complex(infty, iz), r);
+        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), complex(infty, iz), r);
       }
       return r;
     }
@@ -241,7 +241,7 @@ namespace kyosu::_
       auto theta = eve::if_else((kyosu::is_real(m) && eve::is_nltz(kyosu::real(m))), eve::zero, arg(m)) ;
       auto rz =  kyosu::real(z);
       auto iz2 =  eve::sqr(kyosu::imag(z));
-      return to_complex(eve::half(eve::as<e_t>())*eve::log1p(rz*(rz+e_t(2))+iz2), theta);
+      return complex(eve::half(eve::as<e_t>())*eve::log1p(rz*(rz+e_t(2))+iz2), theta);
     }
     else
     {
@@ -289,24 +289,24 @@ namespace kyosu::_
       auto rr1 = eve::if_else(is_real_z, sqrtx, w);
       auto ii1 = eve::if_else(is_real_z, eve::zero, iaz*eve::half(eve::as(r))/w);
       res = kyosu::if_else(gezrz
-                          , to_complex(rr1, ii1)
-                          , to_complex(ii1, rr1)
+                          , complex(rr1, ii1)
+                          , complex(ii1, rr1)
                           );
       if (eve::any(is_not_finite(z))) [[unlikely]]
       {
         res = kyosu::if_else(rz == eve::minf(eve::as(rz))
-                            , kyosu::if_else( eve::is_nan(iz), to_complex(iz, eve::minf(eve::as(rz)))
-                                            , to_complex(eve::zero(eve::as(rz)), eve::inf(eve::as(rz))))
+                            , kyosu::if_else( eve::is_nan(iz), complex(iz, eve::minf(eve::as(rz)))
+                                            , complex(eve::zero(eve::as(rz)), eve::inf(eve::as(rz))))
                             , res
                             );
         res = kyosu::if_else(rz == eve::inf(eve::as(rz))
-                            , if_else( eve::is_nan(iz), to_complex(eve::inf(eve::as(rz)), iz)
-                                     , to_complex( eve::inf(eve::as(rz)), eve::zero(eve::as(rz)) ))
+                            , if_else( eve::is_nan(iz), complex(eve::inf(eve::as(rz)), iz)
+                                     , complex( eve::inf(eve::as(rz)), eve::zero(eve::as(rz)) ))
                             , res
                             );
-        res = kyosu::if_else(eve::is_nan(rz), to_complex(rz, rz), res);
+        res = kyosu::if_else(eve::is_nan(rz), complex(rz, rz), res);
         auto infty = eve::inf(eve::as(iaz));
-        res = kyosu::if_else(iaz == infty,  to_complex(infty, infty), res);
+        res = kyosu::if_else(iaz == infty,  complex(infty, infty), res);
       }
       return if_else(negimag, kyosu::conj(res), res);
     }
@@ -363,13 +363,10 @@ namespace kyosu::_
         C1 expo = c1;
         auto const o = eve::one(eve::as<u_t>());
         r_t result(o);
-        std::cout << "result " << result << std::endl;
         while(true)
         {
           if  (eve::all(eve::is_eqz(expo))) break;
-          std::cout << "expo " << expo << " base " << base <<  "result " << result << std::endl;
           result = kyosu::if_else(eve::is_odd(expo), result*base, o);
-          std::cout << "expo " << expo << " base " << base << "result " << result << std::endl;
           expo = (expo >> 1);
           base = kyosu::sqr(base);
         }
@@ -424,7 +421,7 @@ namespace kyosu::_
         auto realc0 = is_real(c0);
         if(eve::any(realc0))
         {
-          auto rr = to_complex(kyosu::pow(real(c0), c1));
+          auto rr = complex(kyosu::pow(real(c0), c1));
           r = kyosu::if_else(realc0, rr, r);
         }
       }

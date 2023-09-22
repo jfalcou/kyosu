@@ -29,7 +29,7 @@ namespace kyosu::tags
       auto [sp1, cp1] = eve::sincos(phi1);
       auto [sp2, cp2] = eve::sincos(phi2);
       auto f = cp1*cp2;
-      return rho*to_quaternion(ct*f, st*f, sp1*cp2, sp2);
+      return rho*quaternion(ct*f, st*f, sp1*cp2, sp2);
     }
 
     template<typename T0, typename T1, typename T2, typename T3>

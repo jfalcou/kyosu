@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::oneminus over complex"
               )
 <typename T>(T r, T i)
 {
-  using type = kyosu::as_complex_t<T>;
+  using type = kyosu::complex_t<T>;
   auto o = type(1);
   TTS_EQUAL(kyosu::oneminus(type(r,i)), o-type(r,i));
 };
@@ -36,7 +36,7 @@ TTS_CASE_WITH ( "Check kyosu::oneminus over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto o = type(T(1));
   TTS_EQUAL(kyosu::oneminus(type(r,i,j,k)), o-type(r,i,j,k));
 };

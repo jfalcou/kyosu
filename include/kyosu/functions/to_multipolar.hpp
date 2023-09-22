@@ -61,9 +61,10 @@ namespace kyosu
   //!
   //!   @code
   //!   namespace eve
- //!   {
+  //!   {
   //!     auto to_multipolar( auto q) const noexcept;
-  //!  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //!   }
+  //!   @endcode
   //!
   //! **Parameters**
   //!

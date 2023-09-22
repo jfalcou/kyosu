@@ -27,7 +27,7 @@ namespace kyosu::tags
     {
       using e_t = decltype(r+angle+h1+h2);
       auto [sa, ca] = eve::sincos(angle);
-      return kyosu::to_quaternion(r*ca, r*sa, h1, h2);
+      return kyosu::quaternion(r*ca, r*sa, h1, h2);
     }
 
     template<typename T0, typename T1, typename T2, typename T3>

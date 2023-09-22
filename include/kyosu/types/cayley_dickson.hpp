@@ -19,6 +19,7 @@
 #include <kyosu/types/impl/complex/predicates.hpp>
 #include <kyosu/types/impl/complex/arithmetic.hpp>
 #include <kyosu/types/impl/complex/invtrig.hpp>
+#include <kyosu/types/impl/complex/special.hpp>
 #include <kyosu/types/impl/quaternion/specific.hpp>
 
 #include <bit>

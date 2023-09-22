@@ -63,9 +63,9 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if to_complex(z) was entered.
+//!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns the [elementwise](@ref glossary_elementwise) the complex principal value
+//!   2. Returns elementwise the complex principal value
 //!      of the arc sine of the input in the range of a strip unbounded along the imaginary axis
 //!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
 //!

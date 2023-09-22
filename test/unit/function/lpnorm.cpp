@@ -29,8 +29,8 @@ TTS_CASE_WITH ( "Check kyosu::lpnorm over complex"
               )
 (auto r0, auto i0, auto r1, auto i1, auto p)
 {
-  auto c0 = kyosu::to_complex(r0,i0);
-  auto c1 = kyosu::to_complex(r1,i1);
+  auto c0 = kyosu::complex(r0,i0);
+  auto c1 = kyosu::complex(r1,i1);
   TTS_RELATIVE_EQUAL(kyosu::lpnorm(p, c0, c1), eve::lpnorm(p, kyosu::abs(c0), kyosu::abs(c1)), 1e-7);
 };
 
@@ -45,7 +45,7 @@ TTS_CASE_WITH ( "Check kyosu::lpnorm over quaternion"
               )
 <typename T>(T r0, T i0, T j0, T k0, T r1, T i1, T j1, T k1, T p)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
   TTS_RELATIVE_EQUAL(kyosu::lpnorm(p, q0, q1), eve::lpnorm(p, kyosu::abs(q0), kyosu::abs(q1)), 1e-7);

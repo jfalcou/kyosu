@@ -28,7 +28,7 @@ namespace kyosu::tags
       auto [slat, clat] = eve::sincos(latitude);
       auto [slon, clon] = eve::sincos(longitude);
       auto f = r*clat;
-      return kyosu::to_quaternion(t, f*clon, f*slon, r*slat);
+      return kyosu::quaternion(t, f*clon, f*slon, r*slat);
     }
 
     template<typename T0, typename T1, typename T2, typename T3>

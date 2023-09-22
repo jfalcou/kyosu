@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::is_infinite over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::is_infinite(kyosu::to_complex(r,i)), eve::is_infinite(r) || eve::is_infinite(i));
+  TTS_EQUAL(kyosu::is_infinite(kyosu::complex(r,i)), eve::is_infinite(r) || eve::is_infinite(i));
   auto z(eve::inf(eve::as(r)));
   TTS_EQUAL(kyosu::is_infinite(z), eve::true_(eve::as(r)));
 };
@@ -36,7 +36,7 @@ TTS_CASE_WITH ( "Check kyosu::is_infinite over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto z(eve::inf(eve::as(r)));
   TTS_EQUAL(kyosu::is_infinite(type(r,i,j,k)), eve::is_infinite(r) || eve::is_infinite(i) || eve::is_infinite(j) || eve::is_infinite(k));
   TTS_EQUAL(kyosu::is_infinite(z), eve::true_(eve::as(r)));
@@ -51,7 +51,7 @@ TTS_CASE_WITH ( "Check kyosu::is_infinite over octonion"
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::as_octonion_t<T>;
+  using type = kyosu::octonion_t<T>;
   auto z(eve::inf(eve::as(r)));
   TTS_EQUAL(kyosu::is_infinite(type(r,i,j,k,l,li,lj,lk)), eve::is_infinite(r) || eve::is_infinite(i) || eve::is_infinite(j) || eve::is_infinite(k)
             || eve::is_infinite(l) || eve::is_infinite(li) || eve::is_infinite(lj) || eve::is_infinite(lk) );

@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::minus over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::minus(kyosu::to_complex(r,i)), kyosu::to_complex(-r,-i));
+  TTS_EQUAL(kyosu::minus(kyosu::complex(r,i)), kyosu::complex(-r,-i));
 };
 
 TTS_CASE_WITH ( "Check kyosu::minus over quaternion"
@@ -34,6 +34,6 @@ TTS_CASE_WITH ( "Check kyosu::minus over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   TTS_EQUAL(kyosu::minus(type(r,i,j,k)), type(-r,-i,-j,-k));
 };

@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::inc over complex"
               )
 <typename T>(T r, T i)
 {
-  using type = kyosu::as_complex_t<T>;
+  using type = kyosu::complex_t<T>;
   TTS_EQUAL(kyosu::inc(type(r,i)), type(r+1,i));
 };
 
@@ -35,6 +35,6 @@ TTS_CASE_WITH ( "Check kyosu::inc over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   TTS_EQUAL(kyosu::inc(type(r,i,j,k)), type(r+1,i,j,k));
 };

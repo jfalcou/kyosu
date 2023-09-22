@@ -30,7 +30,7 @@ TTS_CASE_WITH ( "Check behavior of to_rotation_matrix on wide"
   <typename T>(T const& a0, T const& a1, T const& a2, T const& a3 )
 {
   using e_t =  eve::element_type_t<T> ;
-  using wq_t = eve::wide<kyosu::quaternion<e_t>, eve::cardinal_t<T>>;
+  using wq_t = eve::wide<kyosu::quaternion_t<e_t>, eve::cardinal_t<T>>;
   std::array<T, 3> v{T(1), T(2), T(3)};
   auto q = kyosu::sign(wq_t(a0, a1, a2, a3));
   wq_t qv(0, v[0], v[1], v[2]);

@@ -21,7 +21,7 @@ TTS_CASE_WITH( "Check behavior of arg on scalar"
     auto e = a0[i];
     auto f = a1[i];
 
-    TTS_RELATIVE_EQUAL(kyosu::arg(kyosu::to_complex(e, f)),  eve::atan2(f, e), 1.0e-6);
+    TTS_RELATIVE_EQUAL(kyosu::arg(kyosu::complex(e, f)),  eve::atan2(f, e), 1.0e-6);
   }
 };
 
@@ -32,5 +32,5 @@ TTS_CASE_WITH( "Check behavior of arg on wide"
              )
   <typename T>(T const& a0, T const& a1 )
 {
-  TTS_RELATIVE_EQUAL(kyosu::arg(kyosu::to_complex(a0,a1)), eve::atan2(a1, a0), 1.0e-6);
+  TTS_RELATIVE_EQUAL(kyosu::arg(kyosu::complex(a0,a1)), eve::atan2(a1, a0), 1.0e-6);
 };

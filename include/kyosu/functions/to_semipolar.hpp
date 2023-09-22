@@ -63,7 +63,8 @@ namespace kyosu
   //!   namespace eve
   //!   {
   //!     auto to_semipolar( auto q) const noexcept;
-  //!  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //!   }
+  //!   @endcode
   //!
   //! **Parameters**
   //!

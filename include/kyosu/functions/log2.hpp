@@ -23,7 +23,7 @@ namespace kyosu::tags
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_log2{};
-      return fn( kyosu::to_complex(v, T(0)));
+      return fn( kyosu::complex(v, T(0)));
     }
 
     template<typename T>
@@ -58,7 +58,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T log2(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr as_complex_t<T> log2(T z) noexcept;
+//!      template<eve::ordered_value T>              constexpr complex_t<T> log2(T z) noexcept;
 //!   }
 //!   @endcode
 //!

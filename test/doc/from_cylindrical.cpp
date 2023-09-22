@@ -5,8 +5,8 @@
 int main()
 {
   using kyosu::from_cylindrical;
-  using kyosu::complex;
-  using kyosu::quaternion;
+  using kyosu::complex_t;
+  using kyosu::quaternion_t;
 
   auto r = 2.0;
   auto a = eve::pio_3(eve::as(r));

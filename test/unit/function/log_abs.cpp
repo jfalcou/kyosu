@@ -16,8 +16,8 @@ TTS_CASE_WITH ( "Check kyosu::exp over quaternion"
               )
 <typename T>(T a0, T a1, T a2, T a3)
 {
-  using ce_t = kyosu::as_complex_t<T>;
-  using qe_t = kyosu::as_quaternion_t<T>;
+  using ce_t = kyosu::complex_t<T>;
+  using qe_t = kyosu::quaternion_t<T>;
 
   auto r  = T(a0);
   auto c  = ce_t(a0,a1);

@@ -59,6 +59,7 @@
 #include <kyosu/functions/is_unitary.hpp>
 #include <kyosu/functions/jpart.hpp>
 #include <kyosu/functions/kpart.hpp>
+#include <kyosu/functions/ldiv.hpp>
 #include <kyosu/functions/lerp.hpp>
 #include <kyosu/functions/log.hpp>
 #include <kyosu/functions/log10.hpp>
@@ -74,6 +75,7 @@
 #include <kyosu/functions/pow1p.hpp>
 #include <kyosu/functions/pow_abs.hpp>
 #include <kyosu/functions/powm1.hpp>
+#include <kyosu/functions/proj.hpp>
 #include <kyosu/functions/pure.hpp>
 #include <kyosu/functions/radinpi.hpp>
 #include <kyosu/functions/real.hpp>
@@ -122,10 +124,26 @@
 #include <kyosu/complex/atan.hpp>
 #include <kyosu/complex/atanh.hpp>
 #include <kyosu/complex/atanpi.hpp>
-#include <kyosu/complex/is_imag.hpp>
-#include <kyosu/complex/polar.hpp>
+#include <kyosu/complex/beta.hpp>
+#include <kyosu/complex/deta.hpp>
+#include <kyosu/complex/digamma.hpp>
+#include <kyosu/complex/erf.hpp>
+#include <kyosu/complex/erfcx.hpp>
+#include <kyosu/complex/erfi.hpp>
+#include <kyosu/complex/eta.hpp>
+#include <kyosu/complex/faddeeva.hpp>
 #include <kyosu/functions/from_polar.hpp>
+#include <kyosu/complex/is_imag.hpp>
+#include <kyosu/complex/lambda.hpp>
+#include <kyosu/complex/lbeta.hpp>
+#include <kyosu/complex/log_abs_gamma.hpp>
+#include <kyosu/complex/log_gamma.hpp>
+#include <kyosu/complex/lrising_factorial.hpp>
+#include <kyosu/complex/polar.hpp>
+#include <kyosu/complex/rising_factorial.hpp>
+#include <kyosu/complex/tgamma.hpp>
 #include <kyosu/functions/to_polar.hpp>
+#include <kyosu/complex/zeta.hpp>
 
 //======================================================================================================================
 //! @brief Functions performing computations over quaternion complex or real elements only.

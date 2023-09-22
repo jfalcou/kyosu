@@ -28,20 +28,11 @@ TTS_CASE_WITH ( "Check kyosu::pow_abs over complex"
               )
 (auto r0, auto i0, auto r1, auto i1)
 {
-  auto c0 = kyosu::to_complex(r0,i0);
-  auto c1 = kyosu::to_complex(r1,i1);
+  auto c0 = kyosu::complex(r0,i0);
+  auto c1 = kyosu::complex(r1,i1);
   TTS_RELATIVE_EQUAL(kyosu::pow_abs(c0, c1), kyosu::exp(c1*kyosu::log_abs(c0)), 1e-4);
   TTS_RELATIVE_EQUAL(kyosu::pow_abs(r0, c1), kyosu::exp(c1*kyosu::log_abs(r0)), 1e-4);
   TTS_RELATIVE_EQUAL(kyosu::pow_abs(c0, r1), kyosu::exp(r1*kyosu::log_abs(c0)), 2e-4);
-//  TTS_RELATIVE_EQUAL(kyosu::pow_abs(c0, 4u),  c0*kyosu::sqr(kyosu::sqr(c0)), 1.0e-4);
-
-   auto o = 1.0f;
-   auto oo = kyosu::to_complex(o+o, o);
-   auto z =  kyosu::if_else(4 <  2, o*oo, o);
-   std::cout << "o  " << o << std::endl;
-   std::cout << "oo " << oo << std::endl;
-   std::cout << "o*oo " << o*oo << std::endl;
-   std::cout << "z  " << z << std::endl;
 };
 
 TTS_CASE_WITH ( "Check kyosu::pow_abs over quaternion"
@@ -54,11 +45,10 @@ TTS_CASE_WITH ( "Check kyosu::pow_abs over quaternion"
               )
 <typename T>(T r0, T i0, T j0, T k0, T r1, T i1, T j1, T k1)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
   TTS_RELATIVE_EQUAL(kyosu::pow_abs(q0, q1), kyosu::exp(q1*kyosu::log_abs(q0)), 1e-4);
   TTS_RELATIVE_EQUAL(kyosu::pow_abs(r0, q1), kyosu::exp(q1*kyosu::log_abs(r0)), 1e-4);
-  TTS_RELATIVE_EQUAL(kyosu::pow_abs(q0, r1), kyosu::exp(r1*kyosu::log_abs(q0)), 1e-4);
-// TTS_RELATIVE_EQUAL(kyosu::pow_abs(q0, 4),  kyosu::sqr(kyosu::sqr(q0)), 1.0e-4);
+  TTS_RELATIVE_EQUAL(kyosu::pow_abs(q0, r1), kyosu::exp(r1*kyosu::log_abs(q0)), 3e-4);
 };

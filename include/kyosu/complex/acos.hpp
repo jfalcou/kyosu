@@ -22,7 +22,7 @@ namespace kyosu::tags
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_acos{};
-      return fn(v);
+      return fn(complex(v));
     }
 
     template<typename T>
@@ -67,9 +67,9 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if to_complex(z) was entered.
+//!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns [elementwise](@ref glossary_elementwise) the complex principal value
+//!   2. Returns elementwise the complex principal value
 //!      of the arc cosine of the input.
 //!      Branch cuts exist outside the interval \f$[-1, +1]\f$ along the real axis.
 //!

@@ -26,7 +26,7 @@ namespace kyosu::tags
       auto r = eve::abs(v);
       auto a = eve::if_else(eve::is_positive(v), u, eve::pi(eve::as(u))+u);
       auto [s, c] = eve::sincos(a);
-      return to_complex(r*c, r*s);
+      return complex(r*c, r*s);
     }
 
     template<typename T0, typename T1>
@@ -66,7 +66,8 @@ namespace kyosu
   //!   namespace eve
   //!   {
   //!     auto from_polar( auto rho, auto theta) const noexcept;
-  //!  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //!   }
+  //!   @endcode
   //!
   //! **Parameters**
   //!

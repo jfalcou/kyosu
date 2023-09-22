@@ -12,7 +12,7 @@
 template < typename T >
 auto cv(std::complex < T > const &sc)
 {
-  return kyosu::to_complex(sc.real(), sc.imag());
+  return kyosu::complex(sc.real(), sc.imag());
 }
 
 TTS_CASE_WITH( "Check behavior of sqrt on scalar"
@@ -23,7 +23,7 @@ TTS_CASE_WITH( "Check behavior of sqrt on scalar"
 {
   using e_t = typename T::value_type;
   using c_t = std::complex<e_t>;
-  using kc_t = kyosu::as_complex_t<e_t>;
+  using kc_t = kyosu::complex_t<e_t>;
   for(size_t i = 0; i < a0.size(); ++i)
   {
     auto e = a0[i];
@@ -41,7 +41,7 @@ TTS_CASE_WITH( "Check behavior of sqrt on wide"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = T;
-  using ke_t = kyosu::as_complex_t<e_t>;
+  using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return cv(std::sqrt(c_t(a0.get(i), a1.get(i)))); });
   TTS_RELATIVE_EQUAL(kyosu::sqrt(ke_t{a0,a1}), e, 1.0e-6);
@@ -50,7 +50,7 @@ TTS_CASE_WITH( "Check behavior of sqrt on wide"
 TTS_CASE_TPL( "Check corner cases of sqrt", kyosu::scalar_real_types)
   <typename T>(tts::type<T>)
 {
-  using c_t = kyosu::complex<T>;
+  using c_t = kyosu::complex_t<T>;
   using eve::as;
   const int N = 14;
   auto zer = eve::zero(as<T>());

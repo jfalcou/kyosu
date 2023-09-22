@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::is_not_nan over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::is_not_nan(kyosu::to_complex(r,i)), eve::is_not_nan(r) && eve::is_not_nan(i));
+  TTS_EQUAL(kyosu::is_not_nan(kyosu::complex(r,i)), eve::is_not_nan(r) && eve::is_not_nan(i));
   auto z(eve::nan(eve::as(r)));
   TTS_EQUAL(kyosu::is_not_nan(z), eve::false_(eve::as(r)));
 };
@@ -36,7 +36,7 @@ TTS_CASE_WITH ( "Check kyosu::is_not_nan over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   auto z(eve::nan(eve::as(r)));
   TTS_EQUAL(kyosu::is_not_nan(type(r,i,j,k)), eve::is_not_nan(r) && eve::is_not_nan(i) && eve::is_not_nan(j) && eve::is_not_nan(k));
   TTS_EQUAL(kyosu::is_not_nan(z), eve::false_(eve::as(r)));
@@ -51,7 +51,7 @@ TTS_CASE_WITH ( "Check kyosu::is_not_nan over octonion"
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::as_octonion_t<T>;
+  using type = kyosu::octonion_t<T>;
   auto z(eve::nan(eve::as(r)));
   TTS_EQUAL(kyosu::is_not_nan(type(r,i,j,k,l,li,lj,lk)), eve::is_not_nan(r) && eve::is_not_nan(i) && eve::is_not_nan(j) && eve::is_not_nan(k)
             && eve::is_not_nan(l) && eve::is_not_nan(li) && eve::is_not_nan(lj) && eve::is_not_nan(lk) );

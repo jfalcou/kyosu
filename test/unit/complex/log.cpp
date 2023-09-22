@@ -12,7 +12,7 @@
 template < typename T >
 auto cv(std::complex < T > const &sc)
 {
-  return kyosu::to_complex(sc.real(), sc.imag());
+  return kyosu::complex(sc.real(), sc.imag());
 }
 
 TTS_CASE_WITH( "Check behavior of log on scalar"
@@ -23,7 +23,7 @@ TTS_CASE_WITH( "Check behavior of log on scalar"
 {
   using e_t = typename T::value_type;
   using c_t = std::complex<e_t>;
-  using kc_t = kyosu::as_complex_t<e_t>;
+  using kc_t = kyosu::complex_t<e_t>;
   for(size_t i = 0; i < a0.size(); ++i)
   {
     auto e = a0[i];
@@ -40,7 +40,7 @@ TTS_CASE_WITH( "Check behavior of log on wide"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = T;
-  using ke_t = kyosu::as_complex_t<e_t>;
+  using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   auto std_log = [](auto x, auto y){return cv(std::log(c_t(x, y))); };
   ke_t e([&](auto i, auto){return std_log(a0.get(i), a1.get(i)); });
@@ -50,7 +50,7 @@ TTS_CASE_WITH( "Check behavior of log on wide"
 TTS_CASE_TPL( "Check corner cases of log", kyosu::scalar_real_types)
   <typename T>(tts::type<T>)
 {
-  using c_t = kyosu::complex<T>;
+  using c_t = kyosu::complex_t<T>;
   using eve::as;
   const int N = 14;
   auto zer = eve::zero(as<T>());
@@ -102,7 +102,6 @@ TTS_CASE_TPL( "Check corner cases of log", kyosu::scalar_real_types)
   using kyosu::log;
   for(int i=0; i < N; ++i)
   {
-    std::cout << "i " << i << " input " << inputs[i] << " ->" << log(inputs[i]) << std::endl;
     TTS_IEEE_EQUAL(log(inputs[i]), results[i]) << "i " << i << " -> " << inputs[i] << "\n";
     TTS_IEEE_EQUAL(log(conj(inputs[i])), conj(log(inputs[i])));
   }

@@ -25,11 +25,11 @@ namespace kyosu::tags
                                                , W const & theta1
                                                , T const & theta2) noexcept
     {
-      using z_t = eve::as_quaternion_t<U>;
+      using z_t = eve::quaternion_t<U>;
       auto [st1, ct1] = eve::sincos(theta1);
       auto [st2, ct2] = eve::sincos(theta2);
       auto [sa, ca] = eve::sincos(alpha);
-      return rho*to_quaternion(ca*ct1, ca*st1, sa*ct2, sa*st2);
+      return rho*quaternion(ca*ct1, ca*st1, sa*ct2, sa*st2);
     }
 
     template<typename T0, typename T1, typename T2, typename T3>

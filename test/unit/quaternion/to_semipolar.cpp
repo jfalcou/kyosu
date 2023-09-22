@@ -19,22 +19,22 @@ TTS_CASE_WITH ( "Check behavior of to_semipolar on wide"
   <typename T>(T const& a0, T const& a1, T const& a2, T const& a3 )
 {
   {
-    auto  q = kyosu::to_quaternion(a0, a1, a2, a3);
+    auto  q = kyosu::quaternion(a0, a1, a2, a3);
     auto [r1, t1, r2, t2] = kyosu::to_semipolar(q);
     auto q1 = kyosu::from_semipolar(r1, t1, r2, t2);
     TTS_RELATIVE_EQUAL(q, q1, 1.0e-5);
   }
   {
-    auto  c = kyosu::to_complex(a0, a1);
+    auto  c = kyosu::complex(a0, a1);
     auto [r1, t1, r2, t2] = kyosu::to_semipolar(c);
     auto c1 = kyosu::from_semipolar(r1, t1, r2, t2);
-    TTS_RELATIVE_EQUAL(kyosu::to_quaternion(c), c1, 1.0e-5);
+    TTS_RELATIVE_EQUAL(kyosu::quaternion(c), c1, 1.0e-5);
   }
 
   {
     auto [r1, t1, r2, t2] = kyosu::to_semipolar(a0);
     auto q1 = kyosu::from_semipolar(r1, t1, r2, t2);
-    TTS_RELATIVE_EQUAL(kyosu::to_quaternion(a0), q1, 1.0e-5);
+    TTS_RELATIVE_EQUAL(kyosu::quaternion(a0), q1, 1.0e-5);
   }
 
 

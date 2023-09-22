@@ -23,7 +23,7 @@ namespace kyosu::tags
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto asq = eve::sqrt(eve::abs(v));
-      return if_else(eve::is_gez(v), to_complex(asq, T(0)), to_complex(T(0), asq));
+      return if_else(eve::is_gez(v), complex(asq, T(0)), complex(T(0), asq));
     }
 
     template<typename T>

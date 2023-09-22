@@ -25,10 +25,10 @@ TTS_CASE_WITH ( "Check kyosu::exp2 over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  using ce_t = kyosu::as_complex_t<T>;
+  using ce_t = kyosu::complex_t<T>;
   auto c = ce_t(r,i);
   TTS_RELATIVE_EQUAL(kyosu::exp2(c), kyosu::exp(eve::log_2(eve::as<T>())*c), 1e-5);
-  using qe_t = kyosu::as_quaternion_t<T>;
+  using qe_t = kyosu::quaternion_t<T>;
   auto q = qe_t(r,i,j,k);
   TTS_RELATIVE_EQUAL(kyosu::exp2(q), kyosu::exp(eve::log_2(eve::as<T>())*q), 1e-5);
 };

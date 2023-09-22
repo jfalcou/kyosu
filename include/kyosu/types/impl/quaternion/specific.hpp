@@ -24,7 +24,7 @@ namespace kyosu::_
   requires(II != JJ && JJ != KK)
   {
     using e_t =  std::remove_reference_t<decltype(real(Z()))>;
-    auto q = to_quaternion(q0);
+    auto q = quaternion(q0);
     std::array<e_t, 4> aq{get<0>(q), get<1>(q), get<2>(q), get<3>(q)};
     EVE_ASSERT(eve::all(is_nez(q)), "some quaternion are null");
     constexpr bool is_proper = II == KK; //Proper Euler angles else Tait-Bryan
@@ -188,7 +188,7 @@ namespace kyosu::_
   auto dispatch(eve::tag_of<kyosu::to_multipolar> const&
                , Z const& q) noexcept
   {
-    auto c0 = to_complex(get<0>(q), get<1>(q));
+    auto c0 = complex(get<0>(q), get<1>(q));
     if constexpr(kyosu::concepts::complex<Z>)
     {
       auto z =  eve::zero(eve::as(abs(c0)));
@@ -196,7 +196,7 @@ namespace kyosu::_
     }
     else
     {
-      auto c1 = to_complex(get<2>(q), get<3>(q));
+      auto c1 = complex(get<2>(q), get<3>(q));
       return kumi::tuple{abs(c0), arg(c0), abs(c1), arg(c1)};
     }
   }
@@ -206,7 +206,7 @@ namespace kyosu::_
   auto dispatch(eve::tag_of<kyosu::to_cylindrical> const&
                , Z const& q) noexcept
   {
-    auto c0 = to_complex(get<0>(q), get<1>(q));
+    auto c0 = complex(get<0>(q), get<1>(q));
     if constexpr(kyosu::concepts::complex<Z>)
     {
       auto z =  eve::zero(eve::as(abs(c0)));
@@ -223,7 +223,7 @@ namespace kyosu::_
   auto dispatch(eve::tag_of<kyosu::to_semipolar> const&
                , Z const& q) noexcept
   {
-    auto c0 = to_complex(get<0>(q), get<1>(q));
+    auto c0 = complex(get<0>(q), get<1>(q));
     if constexpr(kyosu::concepts::complex<Z>)
     {
       auto z =  eve::zero(eve::as(abs(c0)));
@@ -232,8 +232,8 @@ namespace kyosu::_
     else
     {
       auto rho = kyosu::abs(q);
-      auto c0 = to_complex(get<0>(q), get<1>(q));
-      auto c1 = to_complex(get<2>(q), get<3>(q));
+      auto c0 = complex(get<0>(q), get<1>(q));
+      auto c1 = complex(get<2>(q), get<3>(q));
       auto alpha = eve::pedantic(eve::atan2)(abs(c1), abs(c0));
       auto theta1 = arg(c0);
       auto theta2 = arg(c1);
@@ -248,7 +248,7 @@ namespace kyosu::_
   {
     if constexpr(kyosu::concepts::complex<Z>)
     {
-      auto c0 = to_complex(get<0>(q), get<1>(q));
+      auto c0 = complex(get<0>(q), get<1>(q));
       auto z =  eve::zero(eve::as(abs(c0)));
       return kumi::tuple{abs(c0), arg(c0), z, z};
     }

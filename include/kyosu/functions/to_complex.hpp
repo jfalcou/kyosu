@@ -11,11 +11,11 @@
 
 namespace kyosu::tags
 {
-  struct callable_to_complex
+  struct callable_complex
   {
-    using callable_tag_type = callable_to_complex;
+    using callable_tag_type = callable_complex;
 
-    KYOSU_DEFERS_CALLABLE(to_complex_);
+    KYOSU_DEFERS_CALLABLE(complex_);
 
     template<typename... T>
     KYOSU_FORCEINLINE auto operator()(T... target) const noexcept -> decltype(eve::tag_invoke(*this, target...))
@@ -24,7 +24,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_to_complex(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_complex(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -34,7 +34,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var to_complex
+//!   @var complex
 //!   @brief Constructs a kyosu::complex
 //!
 //!   **Defined in Header**
@@ -48,10 +48,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T> constexpr auto to_complex(T r)            noexcept;
-//!      template<eve::ordered_value T> constexpr auto to_complex(T r, T i)       noexcept;
-
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T to_complex(T z) noexcept;
+//!      template<eve::ordered_value T> constexpr auto complex(T r, T i = 0)       noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T complex(T z)  noexcept;
 //!   }
 //!   @endcode
 //!
@@ -69,6 +67,5 @@ namespace kyosu
 //!  @godbolt{doc/to_complex.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_to_complex to_complex = {};
+inline constexpr tags::callable_complex complex = {};
 }
-

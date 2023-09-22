@@ -22,14 +22,14 @@ TTS_CASE_WITH ( "Check kyosu::sin over quaternion"
     TTS_RELATIVE_EQUAL(c, kyosu::cos(r), 1e-5);
   }
   {
-    using ke_t = kyosu::as_complex_t<T>;
+    using ke_t = kyosu::complex_t<T>;
     auto cq= ke_t(r,i);
     auto [s, c] = kyosu::sincos(cq);
     TTS_RELATIVE_EQUAL(s, kyosu::sin(cq), 1e-5);
     TTS_RELATIVE_EQUAL(c, kyosu::cos(cq), 1e-5);
   }
   {
-    using ke_t = kyosu::as_quaternion_t<T>;
+    using ke_t = kyosu::quaternion_t<T>;
     auto q = ke_t(r,i,j,k);
     auto [s, c] = kyosu::sincos(q);
     TTS_RELATIVE_EQUAL(s, kyosu::sin(q), 1e-5);

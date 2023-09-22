@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::abs over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::abs(kyosu::to_complex(r,i)), eve::hypot(r, i));
+  TTS_EQUAL(kyosu::abs(kyosu::complex(r,i)), eve::hypot(r, i));
 };
 
 TTS_CASE_WITH ( "Check kyosu::abs over quaternion"
@@ -34,6 +34,6 @@ TTS_CASE_WITH ( "Check kyosu::abs over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   TTS_EQUAL(kyosu::abs(type(r,i,j,k)), eve::hypot(r, i, j, k));
 };

@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::ceil over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::ceil(kyosu::to_complex(r,i)), kyosu::to_complex(eve::ceil(r),eve::ceil(i)));
+  TTS_EQUAL(kyosu::ceil(kyosu::complex(r,i)), kyosu::complex(eve::ceil(r),eve::ceil(i)));
 };
 
 TTS_CASE_WITH ( "Check kyosu::ceil over quaternion"
@@ -34,7 +34,7 @@ TTS_CASE_WITH ( "Check kyosu::ceil over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   TTS_EQUAL(kyosu::ceil(type(r,i,j,k)), type(eve::ceil(r), eve::ceil(i), eve::ceil(j), eve::ceil(k)));
 };
 
@@ -47,7 +47,7 @@ TTS_CASE_WITH ( "Check kyosu::ceil over octonion"
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::as_octonion_t<T>;
+  using type = kyosu::octonion_t<T>;
   TTS_EQUAL(kyosu::ceil(type(r,i,j,k,l,li,lj,lk)), type(eve::ceil(r), eve::ceil(i), eve::ceil(j), eve::ceil(k)
                                                        , eve::ceil(l), eve::ceil(li), eve::ceil(lj), eve::ceil(lk) ));
 };

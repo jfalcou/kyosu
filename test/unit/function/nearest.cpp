@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::nearest over complex"
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::nearest(kyosu::to_complex(r,i)), kyosu::to_complex(eve::nearest(r),eve::nearest(i)));
+  TTS_EQUAL(kyosu::nearest(kyosu::complex(r,i)), kyosu::complex(eve::nearest(r),eve::nearest(i)));
 };
 
 TTS_CASE_WITH ( "Check kyosu::nearest over quaternion"
@@ -34,7 +34,7 @@ TTS_CASE_WITH ( "Check kyosu::nearest over quaternion"
               )
   <typename T>(T r, T i, T j, T k)
 {
-  using type = kyosu::as_quaternion_t<T>;
+  using type = kyosu::quaternion_t<T>;
   TTS_EQUAL(kyosu::nearest(type(r,i,j,k)), type(eve::nearest(r), eve::nearest(i), eve::nearest(j), eve::nearest(k)));
 };
 
@@ -47,7 +47,7 @@ TTS_CASE_WITH ( "Check kyosu::nearest over octonion"
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::as_octonion_t<T>;
+  using type = kyosu::octonion_t<T>;
   TTS_EQUAL(kyosu::nearest(type(r,i,j,k,l,li,lj,lk)), type(eve::nearest(r), eve::nearest(i), eve::nearest(j), eve::nearest(k)
                                                        , eve::nearest(l), eve::nearest(li), eve::nearest(lj), eve::nearest(lk) ));
 };
