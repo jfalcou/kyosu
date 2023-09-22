@@ -139,7 +139,6 @@
 #include <kyosu/complex/log_abs_gamma.hpp>
 #include <kyosu/complex/log_gamma.hpp>
 #include <kyosu/complex/lrising_factorial.hpp>
-#include <kyosu/complex/polar.hpp>
 #include <kyosu/complex/rising_factorial.hpp>
 #include <kyosu/complex/tgamma.hpp>
 #include <kyosu/functions/to_polar.hpp>

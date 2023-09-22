@@ -78,7 +78,7 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/regular/to_angle_axis.cpp}
+  //! @godbolt{doc/to_angle_axis.cpp}
   //!
   //!  @}
   //================================================================================================
