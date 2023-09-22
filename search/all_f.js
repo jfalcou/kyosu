@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['radinpi_0',['radinpi',['../group__functions_gabd703393200a757087fb7f2054546dcf.html#gabd703393200a757087fb7f2054546dcf',1,'kyosu']]],
-  ['real_1',['real',['../group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be',1,'kyosu']]],
-  ['rec_2',['rec',['../group__functions_ga054a9a0efe44dd5dcc9bb675b0f9e89d.html#ga054a9a0efe44dd5dcc9bb675b0f9e89d',1,'kyosu']]],
-  ['reldist_3',['reldist',['../group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765',1,'kyosu']]]
+  ['quaternion_0',['quaternion',['../group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4',1,'kyosu']]],
+  ['quaternion_1',['Quaternion',['../group__quaternion.html',1,'']]],
+  ['quaternion_5ft_2',['quaternion_t',['../group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd',1,'kyosu']]]
 ];

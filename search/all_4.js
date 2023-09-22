@@ -1,12 +1,15 @@
 var searchData=
 [
-  ['floor_0',['floor',['../group__functions_ga2cccab7b0cb7548aabfcd581a6c98fa6.html#ga2cccab7b0cb7548aabfcd581a6c98fa6',1,'kyosu']]],
-  ['frac_1',['frac',['../group__functions_ga4c6ee3532d93a937aaa603ba4699b3ed.html#ga4c6ee3532d93a937aaa603ba4699b3ed',1,'kyosu']]],
-  ['from_5fangle_5faxis_2',['from_angle_axis',['../group__quaternion_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252',1,'kyosu']]],
-  ['from_5fcylindrical_3',['from_cylindrical',['../group__quaternion_ga06868e959a899a9f2348b07c330c0048.html#ga06868e959a899a9f2348b07c330c0048',1,'kyosu']]],
-  ['from_5fcylindrospherical_4',['from_cylindrospherical',['../group__quaternion_ga36f4e319eab743013ddf5a868679fb63.html#ga36f4e319eab743013ddf5a868679fb63',1,'kyosu']]],
-  ['from_5feuler_5',['from_euler',['../group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7',1,'kyosu']]],
-  ['from_5frotation_5fmatrix_6',['from_rotation_matrix',['../group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302',1,'kyosu']]],
-  ['from_5fsemipolar_7',['from_semipolar',['../group__quaternion_ga6bd1f5ec343e8cf12fec6cc72eae2a87.html#ga6bd1f5ec343e8cf12fec6cc72eae2a87',1,'kyosu']]],
-  ['from_5fspherical_8',['from_spherical',['../group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#ga943f811be2981809d36a4f31f52b0025',1,'kyosu']]]
+  ['erf_0',['erf',['../group__functions_gacb0340f73510f30b99ad37fa82c22e8f.html#gacb0340f73510f30b99ad37fa82c22e8f',1,'kyosu']]],
+  ['erfcx_1',['erfcx',['../group__functions_ga738d6a61ebf48d0bacd80f958d1b590b.html#ga738d6a61ebf48d0bacd80f958d1b590b',1,'kyosu']]],
+  ['erfi_2',['erfi',['../group__functions_gac01bdb4384827ce21ddddedd19f8b032.html#gac01bdb4384827ce21ddddedd19f8b032',1,'kyosu']]],
+  ['eta_3',['eta',['../group__functions_ga7ad40bb479ce858eed855c2819c4ab22.html#ga7ad40bb479ce858eed855c2819c4ab22',1,'kyosu']]],
+  ['exp_4',['exp',['../group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449',1,'kyosu']]],
+  ['exp10_5',['exp10',['../group__functions_ga9c08281f95af17445823ff698486d24b.html#ga9c08281f95af17445823ff698486d24b',1,'kyosu']]],
+  ['exp2_6',['exp2',['../group__functions_ga0ae8f99de8716a46dd7de3ff990602bb.html#ga0ae8f99de8716a46dd7de3ff990602bb',1,'kyosu']]],
+  ['exp_5fi_7',['exp_i',['../group__functions_gad5a796471bcfd81c38de6db0658fa23a.html#gad5a796471bcfd81c38de6db0658fa23a',1,'kyosu']]],
+  ['exp_5fipi_8',['exp_ipi',['../group__functions_ga761c2a207a0417867f0eb4b3dc30ee2b.html#ga761c2a207a0417867f0eb4b3dc30ee2b',1,'kyosu']]],
+  ['expm1_9',['expm1',['../group__functions_gab0f1c35d5251d1f6db39bec53d8960b6.html#gab0f1c35d5251d1f6db39bec53d8960b6',1,'kyosu']]],
+  ['expmx2_10',['expmx2',['../group__functions_ga29021b202d2832d1e6863d7402e25b79.html#ga29021b202d2832d1e6863d7402e25b79',1,'kyosu']]],
+  ['expx2_11',['expx2',['../group__functions_ga6658defe6cc879802872ceb5e92749a9.html#ga6658defe6cc879802872ceb5e92749a9',1,'kyosu']]]
 ];

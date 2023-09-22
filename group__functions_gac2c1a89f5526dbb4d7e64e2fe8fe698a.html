@@ -159,11 +159,33 @@ $(document).ready(function(){initNavTree('group__functions_gac2c1a89f5526dbb4d7e
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>a real input z is treated as if <a class="el" href="group__functions_ga467a58e50ffba284e333fac35f5cc93c.html#ga467a58e50ffba284e333fac35f5cc93c" title="Constructs a kyosu::complex.">to_complex(z)</a> was entered.</li>
+<li>a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex.">complex(z)</a> was entered.</li>
 <li>Returns elementwise \(\mathop{\mathrm{asinh}}(1/z)\).</li>
 </ol>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="keyword">using </span>wide_ft = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
+<div class="line">  wide_ft ref1 = { 3.0f, 2.0f, 1.0f, 0.5f};</div>
+<div class="line">  wide_ft imf1 = { 2.0f , -1.0,  -5.0, 0.0};</div>
+<div class="line">  wide_ft ref2 = { 0.0, 1.0, 2.0, 3.0};</div>
+<div class="line">  <span class="keyword">auto</span> zc = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_ft&gt;</a>(ref1, imf1);</div>
+<div class="line"> </div>
+<div class="line">  std::cout</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc             = &quot;</span> &lt;&lt; zc &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; acsch(zc)      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gac2c1a89f5526dbb4d7e64e2fe8fe698a.html#gac2c1a89f5526dbb4d7e64e2fe8fe698a">kyosu::acsch</a>(zc)&lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; acsch(ref2)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gac2c1a89f5526dbb4d7e64e2fe8fe698a.html#gac2c1a89f5526dbb4d7e64e2fe8fe698a">kyosu::acsch</a>(ref2) &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

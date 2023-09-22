@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['tan_0',['tan',['../group__functions_ga2f8614d64bb1b781e4496b56b0accfa1.html#ga2f8614d64bb1b781e4496b56b0accfa1',1,'kyosu']]],
-  ['tanh_1',['tanh',['../group__functions_gad65d1920bd1721b78982441aeb5b4036.html#gad65d1920bd1721b78982441aeb5b4036',1,'kyosu']]],
-  ['tanpi_2',['tanpi',['../group__functions_ga680756a6a228206f45212247b16d5961.html#ga680756a6a228206f45212247b16d5961',1,'kyosu']]],
-  ['to_5fcomplex_3',['to_complex',['../group__functions_ga467a58e50ffba284e333fac35f5cc93c.html#ga467a58e50ffba284e333fac35f5cc93c',1,'kyosu']]],
-  ['to_5feuler_4',['to_euler',['../group__quaternion_ga8d6d4d74663080af513e4428dcc01612.html#ga8d6d4d74663080af513e4428dcc01612',1,'kyosu']]],
-  ['to_5fquaternion_5',['to_quaternion',['../group__functions_ga4169785cc523f33d0cb1f8615f1d1323.html#ga4169785cc523f33d0cb1f8615f1d1323',1,'kyosu']]],
-  ['to_5frotation_5fmatrix_6',['to_rotation_matrix',['../group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0',1,'kyosu']]],
-  ['trunc_7',['trunc',['../group__functions_ga57a5e1064f03073d3e81144181f6ac71.html#ga57a5e1064f03073d3e81144181f6ac71',1,'kyosu']]]
+  ['radinpi_0',['radinpi',['../group__functions_gabd703393200a757087fb7f2054546dcf.html#gabd703393200a757087fb7f2054546dcf',1,'kyosu']]],
+  ['real_1',['real',['../group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be',1,'kyosu']]],
+  ['rec_2',['rec',['../group__functions_ga054a9a0efe44dd5dcc9bb675b0f9e89d.html#ga054a9a0efe44dd5dcc9bb675b0f9e89d',1,'kyosu']]],
+  ['reldist_3',['reldist',['../group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765',1,'kyosu']]],
+  ['rising_5ffactorial_4',['rising_factorial',['../group__functions_ga2ddfc28eca2aadd941d5fc5e991a5fde.html#ga2ddfc28eca2aadd941d5fc5e991a5fde',1,'kyosu']]],
+  ['rot_5fangle_5',['rot_angle',['../group__quaternion_ga47b1fa117c5671882a31b65c997660d7.html#ga47b1fa117c5671882a31b65c997660d7',1,'kyosu']]],
+  ['rot_5faxis_6',['rot_axis',['../group__quaternion_gaa5964ee08fa64046a80d3908056a09c4.html#gaa5964ee08fa64046a80d3908056a09c4',1,'kyosu']]],
+  ['rotate_5fvec_7',['rotate_vec',['../group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a',1,'kyosu']]]
 ];

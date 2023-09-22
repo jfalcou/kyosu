@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::complex</title>
+<title>kyosu: kyosu::from_polar</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__types_gad699121c78ba21aef370db14abdd67ec.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__complex_gad70670d8278d34dc0f0faf883a48eab8.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,23 +122,45 @@ $(document).ready(function(){initNavTree('group__types_gad699121c78ba21aef370db1
 </div>
 
 <div class="contents">
-<a id="gad699121c78ba21aef370db14abdd67ec" name="gad699121c78ba21aef370db14abdd67ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad699121c78ba21aef370db14abdd67ec">&#9670;&#160;</a></span>complex</h2>
+<a id="gad70670d8278d34dc0f0faf883a48eab8" name="gad70670d8278d34dc0f0faf883a48eab8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad70670d8278d34dc0f0faf883a48eab8">&#9670;&#160;</a></span>from_polar</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a></td>
+          <td class="memname">kyosu::from_polar = {}</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Type alias for complex numbers. </p>
-<p>Complex numbers are implemented as Caley-dickson numbers of dimension 2. </p>
-
+<p>Callable object computing a complex from its polar coordinates. </p>
+<p>This function is the reciprocal of from_polar</p>
+<p><b>Defined in header</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include eve/module/quaternion.hpp&gt;`</span></div>
+</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">from_polar</a>( <span class="keyword">auto</span> rho, <span class="keyword">auto</span> theta) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__complex_gad70670d8278d34dc0f0faf883a48eab8_html_gad70670d8278d34dc0f0faf883a48eab8"><div class="ttname"><a href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">kyosu::from_polar</a></div><div class="ttdeci">constexpr tags::callable_from_polar from_polar</div><div class="ttdoc">Callable object computing a complex from its polar coordinates.</div><div class="ttdef"><b>Definition:</b> from_polar.hpp:91</div></div>
+</div><!-- fragment --><p><b>Parameters</b></p>
+<p><code>rho</code> : modulus <code>rho</code> : argument.</p>
+<p><b>Return value</b></p>
+<p>the complex number associated.</p>
+<dl class="section note"><dt>Note</dt><dd>: a negative rho is not an error but is treated as {-rho, theta+pi}.</dd></dl>
+<hr  />
+<h4><a class="anchor" id="autotoc_md5"></a>
+Example</h4>
+<div class="fragment"></div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

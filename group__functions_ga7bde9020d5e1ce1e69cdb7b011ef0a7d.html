@@ -169,14 +169,14 @@ $(document).ready(function(){initNavTree('group__functions_ga7bde9020d5e1ce1e69c
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_ga7bde9020d5e1ce1e69cdb7b011ef0a7d.html#ga7bde9020d5e1ce1e69cdb7b011ef0a7d">kyosu::is_not_equal</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>;</div>
 <div class="line">  <span class="keyword">using </span>e_t = float;</div>
-<div class="line">  <span class="keyword">using </span>c_t = <a class="code hl_typedef" href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">complex&lt;float&gt;</a>;</div>
-<div class="line">  <span class="keyword">using </span>q_t = <a class="code hl_typedef" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">quaternion&lt;float&gt;</a>;</div>
+<div class="line">  <span class="keyword">using </span>c_t = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;float&gt;</a>;</div>
+<div class="line">  <span class="keyword">using </span>q_t = <a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t&lt;float&gt;</a>;</div>
 <div class="line">  <span class="keyword">using </span>we_t = eve::wide&lt;float, eve::fixed&lt;2&gt;&gt;;</div>
-<div class="line">  <span class="keyword">using </span>wc_t = eve::wide&lt;complex&lt;float&gt;, eve::fixed&lt;2&gt;&gt;;</div>
-<div class="line">  <span class="keyword">using </span>wq_t = eve::wide&lt;quaternion&lt;float&gt;, eve::fixed&lt;2&gt;&gt;;</div>
+<div class="line">  <span class="keyword">using </span>wc_t = eve::wide&lt;kyosu::complex_t&lt;float&gt;, eve::fixed&lt;2&gt;&gt;;</div>
+<div class="line">  <span class="keyword">using </span>wq_t = eve::wide&lt;kyosu::quaternion_t&lt;float&gt;, eve::fixed&lt;2&gt;&gt;;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  e_t e0(1);</div>
@@ -207,8 +207,8 @@ $(document).ready(function(){initNavTree('group__functions_ga7bde9020d5e1ce1e69c
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__types_gaaa8536022a04b81b80cfe47246a4897f_html_gaaa8536022a04b81b80cfe47246a4897f"><div class="ttname"><a href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a></div><div class="ttdeci">cayley_dickson&lt; T, 4 &gt; quaternion</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:26</div></div>
-<div class="ttc" id="agroup__types_gad699121c78ba21aef370db14abdd67ec_html_gad699121c78ba21aef370db14abdd67ec"><div class="ttname"><a href="group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec">kyosu::complex</a></div><div class="ttdeci">cayley_dickson&lt; T, 2 &gt; complex</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:26</div></div>
+<div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:27</div></div>
+<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::to_quaternion</title>
+<title>kyosu: kyosu::eta</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga4169785cc523f33d0cb1f8615f1d1323.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga7ad40bb479ce858eed855c2819c4ab22.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_ga4169785cc523f33d0cb
 </div>
 
 <div class="contents">
-<a id="ga4169785cc523f33d0cb1f8615f1d1323" name="ga4169785cc523f33d0cb1f8615f1d1323"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4169785cc523f33d0cb1f8615f1d1323">&#9670;&#160;</a></span>to_quaternion</h2>
+<a id="ga7ad40bb479ce858eed855c2819c4ab22" name="ga7ad40bb479ce858eed855c2819c4ab22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7ad40bb479ce858eed855c2819c4ab22">&#9670;&#160;</a></span>eta</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_ga4169785cc523f33d0cb
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::to_quaternion = {}</td>
+          <td class="memname">kyosu::eta = {}</td>
         </tr>
       </table>
   </td>
@@ -142,28 +142,47 @@ $(document).ready(function(){initNavTree('group__functions_ga4169785cc523f33d0cb
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f" title="Type alias for quaternion numbers.">kyosu::quaternion</a>. </p>
+<p>Computes the Dirichlet sum \( \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\). Sometimes this function is for obvious reasons called the alternative \(\zeta\) function . </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4169785cc523f33d0cb1f8615f1d1323.html#ga4169785cc523f33d0cb1f8615f1d1323">to_quaternion</a>(T r)            <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4169785cc523f33d0cb1f8615f1d1323.html#ga4169785cc523f33d0cb1f8615f1d1323">to_quaternion</a>(T r, T i)       <span class="keyword">noexcept</span>;</div>
-<div class="line"> </div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga4169785cc523f33d0cb1f8615f1d1323.html#ga4169785cc523f33d0cb1f8615f1d1323">to_quaternion</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span>_scalar_value K, eve::ordered_value T&gt;       <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7ad40bb479ce858eed855c2819c4ab22.html#ga7ad40bb479ce858eed855c2819c4ab22">eta</a>(K, k, T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span>_scalar_value K, kyosu::concepts::complex T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7ad40bb479ce858eed855c2819c4ab22.html#ga7ad40bb479ce858eed855c2819c4ab22">eta</a>(K, k, T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga4169785cc523f33d0cb1f8615f1d1323_html_ga4169785cc523f33d0cb1f8615f1d1323"><div class="ttname"><a href="group__functions_ga4169785cc523f33d0cb1f8615f1d1323.html#ga4169785cc523f33d0cb1f8615f1d1323">kyosu::to_quaternion</a></div><div class="ttdeci">constexpr tags::callable_to_quaternion to_quaternion</div><div class="ttdoc">Constructs a kyosu::quaternion.</div><div class="ttdef"><b>Definition:</b> to_quaternion.hpp:72</div></div>
+<div class="ttc" id="agroup__functions_ga7ad40bb479ce858eed855c2819c4ab22_html_ga7ad40bb479ce858eed855c2819c4ab22"><div class="ttname"><a href="group__functions_ga7ad40bb479ce858eed855c2819c4ab22.html#ga7ad40bb479ce858eed855c2819c4ab22">kyosu::eta</a></div><div class="ttdeci">constexpr tags::callable_eta eta</div><div class="ttdoc">Computes the Dirichlet sum . Sometimes this function is for obvious reasons called the alternative  f...</div><div class="ttdef"><b>Definition:</b> eta.hpp:78</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> acos.hpp:14</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Quaternion value.</li>
-<li><code>r</code>, <code>i</code> : Real and imaginary part sued to construct a <a class="el" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a>..</li>
+<li><code>z</code> : Vcomplex or real value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns a <a class="el" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a> constructed from its arguments.</p>
+<p>Returns the Dirichlet alternating zeta function: sum \(  \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\)</p>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="keyword">using </span>wide_ft = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
+<div class="line">  wide_ft ref1 = { 3.0f, 2.0f, 1.0f, 0.5f};</div>
+<div class="line">  wide_ft imf1 = { 2.0f , -1.0,  -5.0, 0.0};</div>
+<div class="line">  wide_ft ref2 = { 0.0, 1.0, 2.0, 3.0};</div>
+<div class="line">  <span class="keyword">auto</span> zc = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_ft&gt;</a>(ref1, imf1);</div>
+<div class="line"> </div>
+<div class="line">  std::cout</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc        = &quot;</span> &lt;&lt; zc &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; eta(zc)   = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga7ad40bb479ce858eed855c2819c4ab22.html#ga7ad40bb479ce858eed855c2819c4ab22">kyosu::eta</a>(zc)&lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; eta(ref2)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga7ad40bb479ce858eed855c2819c4ab22.html#ga7ad40bb479ce858eed855c2819c4ab22">kyosu::eta</a>(ref2) &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

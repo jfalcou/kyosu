@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::quaternion</title>
+<title>kyosu: kyosu::rotate_vec</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__types_gaaa8536022a04b81b80cfe47246a4897f.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,23 +122,43 @@ $(document).ready(function(){initNavTree('group__types_gaaa8536022a04b81b80cfe47
 </div>
 
 <div class="contents">
-<a id="gaaa8536022a04b81b80cfe47246a4897f" name="gaaa8536022a04b81b80cfe47246a4897f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaaa8536022a04b81b80cfe47246a4897f">&#9670;&#160;</a></span>quaternion</h2>
+<a id="gafb8e2e7cadea72110b134c4df850ee3a" name="gafb8e2e7cadea72110b134c4df850ee3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafb8e2e7cadea72110b134c4df850ee3a">&#9670;&#160;</a></span>rotate_vec</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__types_gaaa8536022a04b81b80cfe47246a4897f.html#gaaa8536022a04b81b80cfe47246a4897f">kyosu::quaternion</a></td>
+          <td class="memname">kyosu::rotate_vec = {}</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Type alias for quaternion numbers. </p>
-<p>Quaternion numbers are implemented as Caley-dickson numbers of dimension 4. </p>
-
+<p>Callable object rotating an \(\mathbb{R}^3\) vector using a quaternion. </p>
+<p><b>Defined in header</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include eve/module/quaternion.hpp&gt;`</span></div>
+</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a">rotate_vec</a>( <span class="keyword">auto</span> q) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__quaternion_gafb8e2e7cadea72110b134c4df850ee3a_html_gafb8e2e7cadea72110b134c4df850ee3a"><div class="ttname"><a href="group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a">kyosu::rotate_vec</a></div><div class="ttdeci">constexpr tags::callable_rotate_vec rotate_vec</div><div class="ttdoc">Callable object rotating an  vector using a quaternion.</div><div class="ttdef"><b>Definition:</b> rotate_vec.hpp:105</div></div>
+</div><!-- fragment --><p><b>Parameters</b></p>
+<p><code>q</code>: quaternion defining the rotation. <code>x</code>: span of 3 elements to rotate</p>
+<p><b>Return value</b></p>
+<p>the span rotated by q</p>
+<hr  />
+<h4><a class="anchor" id="autotoc_md15"></a>
+Example</h4>
+<div class="fragment"></div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

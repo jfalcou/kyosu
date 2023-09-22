@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['radinpi_0',['radinpi',['../group__functions_gabd703393200a757087fb7f2054546dcf.html#gabd703393200a757087fb7f2054546dcf',1,'kyosu']]],
-  ['real_1',['real',['../group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be',1,'kyosu']]],
-  ['rec_2',['rec',['../group__functions_ga054a9a0efe44dd5dcc9bb675b0f9e89d.html#ga054a9a0efe44dd5dcc9bb675b0f9e89d',1,'kyosu']]],
-  ['reldist_3',['reldist',['../group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765',1,'kyosu']]]
+  ['polar_0',['polar',['../group__functions_ga4a6cafda405a73a42b6a47c0cad49cad.html#ga4a6cafda405a73a42b6a47c0cad49cad',1,'kyosu']]],
+  ['pow_1',['pow',['../group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f',1,'kyosu']]],
+  ['pow1p_2',['pow1p',['../group__functions_gaae9065f698fe37841a85e340a16af948.html#gaae9065f698fe37841a85e340a16af948',1,'kyosu']]],
+  ['pow_5fabs_3',['pow_abs',['../group__functions_ga764d5554dc7ce3cac3302591c4d75947.html#ga764d5554dc7ce3cac3302591c4d75947',1,'kyosu']]],
+  ['powm1_4',['powm1',['../group__functions_ga047b3d79d00d4907df04ec98f2a0fada.html#ga047b3d79d00d4907df04ec98f2a0fada',1,'kyosu']]],
+  ['proj_5',['proj',['../group__functions_gae97bce0027166d1321885e92abb15836.html#gae97bce0027166d1321885e92abb15836',1,'kyosu']]],
+  ['purepart_6',['purepart',['../group__functions_ga3d4a351565ed14e9021990fa72f9de4a.html#ga3d4a351565ed14e9021990fa72f9de4a',1,'kyosu']]]
 ];

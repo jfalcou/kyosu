@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['complex_0',['complex',['../group__types_gad699121c78ba21aef370db14abdd67ec.html#gad699121c78ba21aef370db14abdd67ec',1,'kyosu']]]
+  ['complex_5ft_0',['complex_t',['../group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76',1,'kyosu']]]
 ];
