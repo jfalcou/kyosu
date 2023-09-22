@@ -40,6 +40,7 @@ int main()
   std::cout << wq0 << ", " << q1 << " -> " << dot(wq0, q1) << "\n";
   std::cout << wq0 << ", " << c1 << " -> " << dot(wq0, c1) << "\n";
   std::cout << wq0 << ", " << e1 << " -> " << dot(wq0, e1) << "\n";
+  std::cout << q0 << ", " << we1 << " -> " << dot(q0, we1) << "\n";
 
   return 0;
 }

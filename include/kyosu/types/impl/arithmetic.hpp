@@ -133,12 +133,12 @@ namespace kyosu::_
     return kyosu::dist(c0, c1)/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
   }
 
-  template<concepts::cayley_dickson  C0, concepts::cayley_dickson  C1, eve::ordered_value T>
+  template<typename  C0, typename  C1, eve::ordered_value T>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::lerp> const&, C0 const & c0, C1 const & c1, T const & t) noexcept
   {
     using r_t = as_cayley_dickson_t<C0,C1,T>;
-    return r_t{kumi::map([&t](auto const& e, auto const & f) { return eve::lerp(e, f, t); }, c0, c1)};
+    return r_t{kumi::map([&t](auto const& e, auto const & f) { return eve::lerp(e, f, t); }, r_t(c0), r_t(c1))};
   }
 
   template<typename C>
@@ -255,7 +255,6 @@ namespace kyosu::_
     using real_t = eve::as<as_real_t<C>>;
     constexpr auto P = kyosu::dimension_v<C>;
     if constexpr (P == 2)
-//      std::cout << c << " -> " << is_infinite(c) << std::endl;
       return if_else(is_infinite(c)
                     , complex(eve::inf(real_t{}), eve::copysign(eve::zero(real_t{}), imag(c)))
                     , c);
