@@ -36,24 +36,21 @@ namespace kyosu::tags
       auto r20pr02 = r[2][0] + r[0][2];
       auto r12pr21 = r[1][2] + r[2][1];
 
-      auto h = half(as(r11pr22));
-      auto q0 =  eve::sqrt(eve::if_else(is_gtz(qq0m1), eve::inc(qq0m1), (eve::sqr(r21mr12)+sqr(r02mr20)+eve::sqr(r10mr01))/(3-qq0m1)))*h;
-      auto q1 =  eve::sqrt(eve::if_else(is_gtz(qq1m1), eve::inc(qq1m1), (eve::sqr(r21mr12)+sqr(r01pr10)+eve::sqr(r20pr02))/(3-qq1m1)))*h;
-      auto q2 =  eve::sqrt(eve::if_else(is_gtz(qq2m1), eve::inc(qq2m1), (eve::sqr(r02mr20)+sqr(r01pr10)+eve::sqr(r12pr21))/(3-qq2m1)))*h;
-      auto q3 =  eve::sqrt(eve::if_else(is_gtz(qq3m1), eve::inc(qq3m1), (eve::sqr(r10mr01)+sqr(r20pr02)+eve::sqr(r12pr21))/(3-qq3m1)))*h;
+      auto h = eve::half(eve::as(r11pr22));
+      auto q0 =  eve::sqrt(eve::if_else(eve::is_gtz(qq0m1), eve::inc(qq0m1), (eve::sqr(r21mr12)+sqr(r02mr20)+eve::sqr(r10mr01))/(3-qq0m1)))*h;
+      auto q1 =  eve::sqrt(eve::if_else(eve::is_gtz(qq1m1), eve::inc(qq1m1), (eve::sqr(r21mr12)+sqr(r01pr10)+eve::sqr(r20pr02))/(3-qq1m1)))*h;
+      auto q2 =  eve::sqrt(eve::if_else(eve::is_gtz(qq2m1), eve::inc(qq2m1), (eve::sqr(r02mr20)+sqr(r01pr10)+eve::sqr(r12pr21))/(3-qq2m1)))*h;
+      auto q3 =  eve::sqrt(eve::if_else(eve::is_gtz(qq3m1), eve::inc(qq3m1), (eve::sqr(r10mr01)+sqr(r20pr02)+eve::sqr(r12pr21))/(3-qq3m1)))*h;
       using e_t = decltype(r11pr22);
       return quaternion(q0, q1, q2, q3);
     }
 
-    template<typename T0, typename T1, typename T2, typename T3>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0,
-                                      T1 const& target1,
-                                      T2 const& target2,
-                                      T3 const& target3
+    template<typename T0>
+    KYOSU_FORCEINLINE auto operator()(T0 const& target0
                                      ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0,  target1,  target2,  target3))
+    -> decltype(eve::tag_invoke(*this, target0))
     {
-      return eve::tag_invoke(*this, target0,  target1,  target2,  target3);
+      return eve::tag_invoke(*this, target0);
     }
 
     template<typename... T>
