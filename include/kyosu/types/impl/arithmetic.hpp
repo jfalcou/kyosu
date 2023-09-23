@@ -40,27 +40,27 @@ namespace kyosu::_
     if constexpr(concepts::cayley_dickson<T> && concepts::cayley_dickson<U>)
     {
       using type  = as_cayley_dickson_t<T,U>;
-      using ret_t = std::conditional_t<eve::simd_value<Mask>, eve::as_wide_as_t<type,Mask>, type>;
-      constexpr eve::as<eve::element_type_t<type>> tgt = {};
+      using ret_t = eve::as_wide_as_t<type,Mask>;
 
       return ret_t{ kumi::map ( [&](auto const& v, auto const& w) { return eve::if_else(m, v, w); }
-                              , kyosu::convert(t, tgt), kyosu::convert(f, tgt)
+                              , kyosu::convert(t, eve::as_element<type>{})
+                              , kyosu::convert(f, eve::as_element<type>{})
                               )
                   };
     }
-    else if constexpr(concepts::cayley_dickson<T> && !concepts::cayley_dickson<U>)
+    else
     {
-      auto parts = kumi::map([&](auto const& v) { return eve::if_else(m, v, f); }, t);
+      auto parts = [&]()
+      {
+        auto cst = []<typename I>(auto x, I const&) { if constexpr(I::value == 0) return x; else return eve::zero; };
+        if      constexpr(!concepts::cayley_dickson<U>)
+          return kumi::map_index([&](auto i, auto const& e) { return eve::if_else(m, e, cst(f, i)); }, t);
+        else if constexpr(!concepts::cayley_dickson<T>)
+          return kumi::map_index([&](auto i, auto const& e) { return eve::if_else(m, cst(t, i), e); }, f);
+      }();
 
-      if constexpr(eve::simd_value<Mask>) return eve::as_wide_as_t<T,Mask>{parts};
-      else                                return T{parts};
-    }
-    else if constexpr(!concepts::cayley_dickson<T> && concepts::cayley_dickson<U>)
-    {
-      auto parts = kumi::map([&](auto const& w) { return eve::if_else(m, t, w); }, f);
-
-      if constexpr(eve::simd_value<Mask>) return eve::as_wide_as_t<U,Mask>{parts};
-      else                                return U{parts};
+      using type = eve::as_wide_as_t<std::conditional_t<!concepts::cayley_dickson<U>,T,U>,Mask>;
+      return type{parts};
     }
   }
 
