@@ -15,7 +15,11 @@ int main()
 
   std::cout << " <- theta = " << theta << std::endl;
   std::cout << " <- axis  = (" << ax[0] << ", " <<  ax[1] << ", " <<  ax[2] << ")" << std::endl;
+  auto q = kyosu::from_angle_axis(theta,  ax);
   std::cout << " -> " << kyosu::from_angle_axis(theta,  ax) << "\n";
+  auto [aa, axx] = kyosu::to_angle_axis(q);
+  std::cout << " ->theta = " << aa << std::endl;
+  std::cout << " -> axis  = (" << axx[0] << ", " <<  axx[1] << ", " <<  axx[2] << ")" << std::endl;
 
   return 0;
 }

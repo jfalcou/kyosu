@@ -76,7 +76,7 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/regular/rot_angle.cpp}
+  //! @godbolt{doc/rot_angle.cpp}
   //!
   //!  @}
   //================================================================================================

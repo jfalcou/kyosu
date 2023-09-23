@@ -93,7 +93,7 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/conversions.cpp}
+  //! @godbolt{doc/from_spherical.cpp}
   //!
   //!  @}
   //================================================================================================

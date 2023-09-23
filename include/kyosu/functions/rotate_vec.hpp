@@ -87,7 +87,7 @@ namespace kyosu
   //!
   //! **Parameters**
   //!
-  //!  `q`:   [quaternion](@ref eve::value) defining the rotation.
+  //!  `q`:   quaternion value defining the rotation.
   //!  `x`:   span of 3 elements to rotate
   //!
   //! **Return value**
@@ -98,7 +98,7 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/regular/rotate_vec.cpp}
+  //! @godbolt{doc/rotate_vec.cpp}
   //!
   //!  @}
   //================================================================================================
