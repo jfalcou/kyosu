@@ -139,7 +139,6 @@
 #include <kyosu/complex/log_abs_gamma.hpp>
 #include <kyosu/complex/log_gamma.hpp>
 #include <kyosu/complex/lrising_factorial.hpp>
-#include <kyosu/complex/polar.hpp>
 #include <kyosu/complex/rising_factorial.hpp>
 #include <kyosu/complex/tgamma.hpp>
 #include <kyosu/functions/to_polar.hpp>
@@ -152,8 +151,10 @@
 
 #include <kyosu/functions/from_angle_axis.hpp>
 #include <kyosu/functions/from_cylindrical.hpp>
+#include <kyosu/functions/from_cylindricospherical.hpp>
 #include <kyosu/functions/from_euler.hpp>
 #include <kyosu/functions/from_multipolar.hpp>
+#include <kyosu/functions/from_rotation_matrix.hpp>
 #include <kyosu/functions/from_semipolar.hpp>
 #include <kyosu/functions/from_spherical.hpp>
 #include <kyosu/functions/rot_angle.hpp>

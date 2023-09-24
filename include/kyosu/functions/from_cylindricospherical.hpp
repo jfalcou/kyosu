@@ -20,15 +20,15 @@ namespace kyosu::tags
 
     template<eve::ordered_value V,  eve::ordered_value U,  eve::ordered_value W,  eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & r
-                                               , U const & angle
-                                               , W const & h1
-                                               , T const & h2) noexcept
+                                               , V const & t
+                                               , U const & radius
+                                               , W const & longitude
+                                               , T const & latitude) noexcept
     {
       auto [slat, clat] = eve::sincos(latitude);
       auto [slon, clon] = eve::sincos(longitude);
-      auto f = r*clat;
-      return kyosu::quaternion(t, f*clon, f*slon, r*slat);
+      auto f = radius*clat;
+      return kyosu::quaternion(t, f*clon, f*slon, radius*slat);
     }
 
     template<typename T0, typename T1, typename T2, typename T3>
@@ -91,7 +91,7 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/conversions.cpp}
+  //! @godbolt{doc/from_cylindrospherical.cpp}
   //!
   //!  @}
   //================================================================================================

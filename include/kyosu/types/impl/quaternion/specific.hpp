@@ -291,13 +291,13 @@ namespace kyosu::_
     return wp;
   }
 
-  template<typename Z, typename T, bool normalize>
+  template<typename Z, typename T>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::rotate_vec> const&
                , Z const & q
                , std::span<T, 3> const & v) noexcept
   {
-    return rot_vec(q, v, _::norming<normalize>{});
+    return rotate_vec(q, v, _::norming<true>{});
   }
 
   template<typename Z>
@@ -338,12 +338,13 @@ namespace kyosu::_
   template<typename Z1, typename Z2, eve::floating_ordered_value T>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::slerp> const&
-               , Z1 const& z1, Z2  z2, T const & t
+               , Z1 z1, Z2  z2, T const & t
                ) noexcept
   {
     EVE_ASSERT(eve::all(is_unitary(z1) && is_unitary(z2)), "quaternion parameters must be unitary");
-    z2 = kyosu::if_else(eve::is_gez(kyosu::dot(z1, z2)), z2, -z2);
-    return z1*kyosu::pow(kyosu::conj(z1)*z2, t);
+    auto gez = eve::is_gez(kyosu::dot(z1, z2));
+    auto mix = kyosu::if_else(gez, z2, -z2);
+    return z1*kyosu::pow(kyosu::conj(z1)*mix, t);
   }
 
 }

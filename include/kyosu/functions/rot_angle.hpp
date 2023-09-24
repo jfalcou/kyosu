@@ -21,7 +21,7 @@ namespace kyosu::tags
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const & v) noexcept
     {
-      return eve::zero(as(v));
+      return eve::zero(eve::as(v));
     }
 
     template<typename T0>
@@ -76,7 +76,7 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/quaternion/regular/rot_angle.cpp}
+  //! @godbolt{doc/rot_angle.cpp}
   //!
   //!  @}
   //================================================================================================

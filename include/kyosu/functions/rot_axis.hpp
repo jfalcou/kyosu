@@ -77,7 +77,7 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/quaternion/regular/rot_axis.cpp}
+  //! @godbolt{doc/rot_axis.cpp}
   //!
   //!  @}
   //================================================================================================

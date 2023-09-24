@@ -12,23 +12,23 @@
 
 namespace kyosu::tags
 {
-  struct callable_from_multipolar : eve::elementwise
+  struct callable_from_cylindrospherical : eve::elementwise
   {
-    using callable_tag_type = callable_from_multipolar;
+    using callable_tag_type = callable_from_cylindrospherical;
 
-    KYOSU_DEFERS_CALLABLE(from_multipolar_);
+    KYOSU_DEFERS_CALLABLE(from_cylindrospherical_);
 
     template<eve::ordered_value V,  eve::ordered_value U,  eve::ordered_value W,  eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & rho1
-                                               , U const & theta1
-                                               , W const & rho2
-                                               , T const & theta2) noexcept
+                                               , V const & t
+                                               , U const & radius
+                                               , W const & longitude
+                                               , T const & latitude) noexcept
     {
       auto [slat, clat] = eve::sincos(latitude);
       auto [slon, clon] = eve::sincos(longitude);
-      auto f = r*clat;
-      return kyosu::quaternion(t, f*clon, f*slon, r*slat);
+      auto f = radius*clat;
+      return kyosu::quaternion(t, f*clon, f*slon, radius*slat);
     }
 
     template<typename T0, typename T1, typename T2, typename T3>
@@ -43,24 +43,25 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_from_multipolar(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_from_cylindrospherical(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
 
 namespace kyosu
 {
-  //================================================================================================
+ //================================================================================================
   //! @addtogroup quaternion
   //! @{
-  //! @var from_multipolar
+  //! @var from_cylindrospherical
   //!
-  //! @brief Callable object computing a quaternion from its multipolar representation.
+  //! @brief Callable object computing a quaternion from its cylindrospherical representation.
   //!
-  //!  This function build quaternions in a way similar to the way polar builds complex numbers
-  //!  from a multipolar representation of an \f$\mathbb{R}^4\f$ element.
-  //!
-  //!  from_multipolar  the two \f$\mathbb{C}\f$ components of the quaternion are given in polar coordinates
+  //!  cylindrospherical is specific to quaternions. It is often interesting to consider
+  //!  \f$\mathbb{H}\f$ as the cartesian product of \f$\mathbb{R}\f$ by \f$\mathbb{R3}\f$
+  //!  (the quaternionic multiplication has then a special form, as given here).
+  //!  This function therefore builds a quaternion from this representation, with the \f$\mathbb{R3}\f$ component given
+  //!  in usual \f$\mathbb{R3}\f$ spherical coordinates.
   //!
   //! **Defined in header**
   //!
@@ -73,14 +74,14 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto from_multipolar( auto rho1, auto theta1 auto rho2, auto theta2) const noexcept;
+  //!     auto from_cylindrospherical(auto t, auto radius, auto longitude, auto latitude) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!`rho1`, `rho2`:  the moduli
-  //! 'theta1', 'theta2': the angles in radian
+  //!  * `t`, `radius`:  the moduli
+  //!  * `longitude`, `latitude`: angles in radian
   //!
   //! **Return value**
   //!
@@ -90,9 +91,9 @@ namespace kyosu
   //!
   //! #### Example
   //!
-  //! @godbolt{doc/quaternion/regular/conversions.cpp}
+  //! @godbolt{doc/from_cylindrospherical.cpp}
   //!
   //!  @}
   //================================================================================================
-  inline constexpr tags::callable_from_multipolar from_multipolar = {};
+  inline constexpr tags::callable_from_cylindrospherical from_cylindrospherical = {};
 }

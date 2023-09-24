@@ -388,7 +388,7 @@ namespace kyosu::_
         auto lgac0 = eve::log_abs(c0);
         auto ang = eve::if_else(kyosu::is_real(c1), eve::zero, ic1*lgac0);
         auto mod = eve::pow(c0, rc1);
-        auto r1 = kyosu::polar(mod, ang);
+        auto r1 = kyosu::to_polar(mod, ang);
         auto isposc0 = eve::is_positive(c0);
         if (eve::all(isposc0))
         {

@@ -281,4 +281,92 @@ namespace kyosu::_
     using u_t = eve::underlying_type_t<C>;
     return kyosu::if_else(kyosu::abs(z) < eve::eps(eve::as(u_t())), eve::one(eve::as(u_t())), s/z);
   }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::atanh> const&, C const& z) noexcept
+  {
+    return eve::half(as(real(z)))*(log((inc(z))-log(dec(z))));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acoth> const&, C const& z) noexcept
+  {
+    return eve::half(as(real(z)))*(log((dec(z)-log(inc(z)))));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acosh> const&, C const& z) noexcept
+  {
+    return log(z+sqrt(inc(z))*sqrt(dec(z)));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::asinh> const&, C const& z) noexcept
+  {
+    return log(z+sqrt(inc(sqr(z))));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::asech> const&, C const& z) noexcept
+  {
+    return acosh(rec(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acsch> const&, C const& z) noexcept
+  {
+    return sinh(rec(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acos> const&, C const& z) noexcept
+  {
+    auto s = sign(pure(z));
+    return s*asinh(z*s);
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::asin> const&, C const& z) noexcept
+  {
+    return sign(pure(z))*acosh(z);
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::atan> const&, C const& z) noexcept
+  {
+    auto s = sign(pure(z));
+    return s*atanh(z*s);
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acot> const&, C const& z) noexcept
+  {
+    auto s = sign(pure(z));
+    return s*acoth(z*s);
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::asec> const&, C const& z) noexcept
+  {
+    return acos(rec(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acsc> const&, C const& z) noexcept
+  {
+    return asin(rec(z));
+  }
+
 }

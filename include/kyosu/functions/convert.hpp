@@ -42,7 +42,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var convert
-//!   @brief Select a value between two arguments based on a logical mask
+//!   @brief convert to a target typek
 //!
 //!   **Defined in Header**
 //!
@@ -55,14 +55,15 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::value T, eve::value U, eve::value V>
-//!      constexpr auto convert(T x, U, y, V z ) noexcept;
+//!      template<eve::value T, eve::value U, eve::value U>
+//!      constexpr auto convert(T x, eve::as<U> ) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `x` : Value to process.
+//!     * `U``: target scalar type to convert to.
 //!
 //!   **Return value**
 //!

@@ -89,7 +89,7 @@ namespace kyosu
   //!
   //!  @groupheader{Example}
   //!
-  //! @godbolt{doc/quaternion/regular/conversions.cpp}
+  //! @godbolt{doc/from_cylindrical.cpp}
   //!  @}
   //================================================================================================
   inline constexpr tags::callable_from_cylindrical from_cylindrical = {};
