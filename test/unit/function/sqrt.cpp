@@ -10,7 +10,7 @@
 
 TTS_CASE_WITH ( "Check kyosu::sqrt over real"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10))
+              , tts::generate(tts::randoms(-10,10))
               )
   <typename T>  (T v)
 {
@@ -22,7 +22,7 @@ TTS_CASE_WITH ( "Check kyosu::sqrt over real"
 
 TTS_CASE_WITH ( "Check kyosu::sqrt over complex"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10), tts::between(-10,10))
+              , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10))
               )
 (auto r, auto i)
 {
@@ -32,8 +32,8 @@ TTS_CASE_WITH ( "Check kyosu::sqrt over complex"
 
 TTS_CASE_WITH ( "Check kyosu::sqrt over quaternion"
               , kyosu::real_types
-              , tts::generate ( tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
   <typename T>(T r, T i, T j, T k)

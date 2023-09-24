@@ -10,9 +10,9 @@
 
 TTS_CASE_WITH ( "Check kyosu::lpnorm over real"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10)
-                             ,tts::between(-10,10)
-                             ,tts::between(1, 3)
+              , tts::generate(tts::randoms(-10,10)
+                             ,tts::randoms(-10,10)
+                             ,tts::randoms(1, 3)
                              )
               )
 (auto r0, auto r1, auto p)
@@ -22,9 +22,9 @@ TTS_CASE_WITH ( "Check kyosu::lpnorm over real"
 
 TTS_CASE_WITH ( "Check kyosu::lpnorm over complex"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10), tts::between(-10,10)
-                             ,tts::between(-10,10), tts::between(-10,10)
-                             ,tts::between(1, 3)
+              , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10)
+                             ,tts::randoms(-10,10), tts::randoms(-10,10)
+                             ,tts::randoms(1, 3)
                              )
               )
 (auto r0, auto i0, auto r1, auto i1, auto p)
@@ -36,11 +36,11 @@ TTS_CASE_WITH ( "Check kyosu::lpnorm over complex"
 
 TTS_CASE_WITH ( "Check kyosu::lpnorm over quaternion"
               , kyosu::real_types
-              , tts::generate ( tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
-                              ,tts::between(1, 3)
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              ,tts::randoms(1, 3)
                               )
               )
 <typename T>(T r0, T i0, T j0, T k0, T r1, T i1, T j1, T k1, T p)

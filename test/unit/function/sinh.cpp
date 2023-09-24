@@ -15,7 +15,7 @@
 
 TTS_CASE_WITH ( "Check kyosu::sinh over real"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10))
+              , tts::generate(tts::randoms(-10,10))
               )
 (auto data)
 {
@@ -33,8 +33,8 @@ auto cv(boost::math::quaternion<T> const &bq)
 
 TTS_CASE_WITH ( "Check kyosu::sinh over quaternion"
               , kyosu::simd_real_types
-              , tts::generate ( tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
 <typename T>(T r, T i, T j, T k)

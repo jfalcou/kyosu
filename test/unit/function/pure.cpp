@@ -10,7 +10,7 @@
 
 TTS_CASE_WITH ( "Check kyosu::pure over real"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10))
+              , tts::generate(tts::randoms(-10,10))
               )
 (auto data)
 {
@@ -19,7 +19,7 @@ TTS_CASE_WITH ( "Check kyosu::pure over real"
 
 TTS_CASE_WITH ( "Check kyosu::pure over complex"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10), tts::between(-10,10))
+              , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10))
               )
   <typename T>(T r, T i)
 {
@@ -28,8 +28,8 @@ TTS_CASE_WITH ( "Check kyosu::pure over complex"
 
 TTS_CASE_WITH ( "Check kyosu::pure over quaternion"
               , kyosu::real_types
-              , tts::generate ( tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
   <typename T>(T r, T i, T j, T k)
@@ -40,10 +40,10 @@ TTS_CASE_WITH ( "Check kyosu::pure over quaternion"
 
 TTS_CASE_WITH ( "Check kyosu::pure over octonion"
               , kyosu::real_types
-              , tts::generate ( tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)                              )
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)                              )
               )
   <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {

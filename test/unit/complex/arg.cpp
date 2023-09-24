@@ -27,8 +27,8 @@ TTS_CASE_WITH( "Check behavior of arg on scalar"
 
 TTS_CASE_WITH( "Check behavior of arg on wide"
              , kyosu::simd_real_types
-             , tts::generate( tts::between(-10, 10)
-                            , tts::between(-10, 10))
+             , tts::generate( tts::randoms(-10, 10)
+                            , tts::randoms(-10, 10))
              )
   <typename T>(T const& a0, T const& a1 )
 {

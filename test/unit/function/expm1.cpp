@@ -10,7 +10,7 @@
 
 TTS_CASE_WITH ( "Check kyosu::expm1 over real"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10))
+              , tts::generate(tts::randoms(-10,10))
               )
 (auto data)
 {
@@ -19,8 +19,8 @@ TTS_CASE_WITH ( "Check kyosu::expm1 over real"
 
 TTS_CASE_WITH ( "Check kyosu::expm1 over quaternion"
               , kyosu::simd_real_types
-              , tts::generate ( tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
 <typename T>(T r, T i, T j, T k)

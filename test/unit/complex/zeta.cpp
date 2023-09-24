@@ -12,7 +12,7 @@
 
 TTS_CASE_WITH("Check behavior of zeta on wide"
              , kyosu::scalar_real_types
-             , tts::generate( tts::between(-10, 10))
+             , tts::generate( tts::randoms(-10, 10))
              )
   <typename T>([[maybe_unused]] T const& a0)
 {

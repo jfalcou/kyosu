@@ -10,8 +10,8 @@
 
 TTS_CASE_WITH ( "Check kyosu::average over real"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10)
-                             ,tts::between(-10,10)
+              , tts::generate(tts::randoms(-10,10)
+                             ,tts::randoms(-10,10)
                              )
               )
 (auto r0, auto r1)
@@ -21,8 +21,8 @@ TTS_CASE_WITH ( "Check kyosu::average over real"
 
 TTS_CASE_WITH ( "Check kyosu::average over complex"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10), tts::between(-10,10)
-                             ,tts::between(-10,10), tts::between(-10,10)
+              , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10)
+                             ,tts::randoms(-10,10), tts::randoms(-10,10)
                              )
               )
 <typename T>(T r0, T i0, T r1, T i1)
@@ -34,10 +34,10 @@ TTS_CASE_WITH ( "Check kyosu::average over complex"
 
 TTS_CASE_WITH ( "Check kyosu::average over quaternion"
               , kyosu::real_types
-              , tts::generate ( tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
 <typename T>(T r0, T i0, T j0, T k0, T r1, T i1, T j1, T k1)
