@@ -52,7 +52,7 @@ int main()
   std::cout << e0 << ", " << q1 << ", " << t << " -> "  << kyosu::slerp(e0, q1, t) << std::endl;
   std::cout << c0 << ", " << wq1<< ", " << t << " -> "  << kyosu::slerp(c0, wq1, t) << std::endl;
   std::cout << we0<< ", " << wq1 << ", " << t << " -> " << kyosu::slerp(we0, wq1, t) << std::endl;
-//  std::cout << we0<< ", " << q1 << ", " << t << " -> "  << kyosu::slerp(we0, q1, t) << std::endl;
+  std::cout << we0<< ", " << q1 << ", " << t << " -> "  << kyosu::slerp(we0, q1, t) << std::endl;
 
   return 0;
 }

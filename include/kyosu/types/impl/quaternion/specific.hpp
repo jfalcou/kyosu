@@ -343,8 +343,8 @@ namespace kyosu::_
   {
     EVE_ASSERT(eve::all(is_unitary(z1) && is_unitary(z2)), "quaternion parameters must be unitary");
     auto gez = eve::is_gez(kyosu::dot(z1, z2));
-    z2 = kyosu::if_else(gez, z2, -z2);
-    return z1*kyosu::pow(kyosu::conj(z1)*z2, t);
+    auto mix = kyosu::if_else(gez, z2, -z2);
+    return z1*kyosu::pow(kyosu::conj(z1)*mix, t);
   }
 
 }
