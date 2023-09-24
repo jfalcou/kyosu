@@ -291,13 +291,13 @@ namespace kyosu::_
     return wp;
   }
 
-  template<typename Z, typename T, bool normalize>
+  template<typename Z, typename T>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::rotate_vec> const&
                , Z const & q
                , std::span<T, 3> const & v) noexcept
   {
-    return rot_vec(q, v, _::norming<normalize>{});
+    return rotate_vec(q, v, _::norming<true>{});
   }
 
   template<typename Z>

@@ -19,20 +19,19 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(rotate_vec_);
 
-    template<eve::floating_ordered_value V, eve::floating_ordered_value T, bool normalize>
+    template<eve::floating_ordered_value V, typename U, bool normalize>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const &
-                                               , std::span<T, 3> const & v
+                                               , U const & v
                                                , _::norming<normalize>) noexcept
     {
       return v;
     }
 
-    template<eve::floating_ordered_value V
-             , eve::floating_ordered_value T>
+    template<eve::floating_ordered_value V, typename U>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const &
-                                               , std::span<T, 3> const & v
+                                               , U const & v
                                                ) noexcept
     {
       return v;
@@ -50,9 +49,9 @@ namespace kyosu::tags
     template<typename T0, typename T1>
     KYOSU_FORCEINLINE auto operator()(T0 const& target0,
                                       T1 const& target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
+    -> decltype(eve::tag_invoke(*this, target0, target1, _::norming<true>()))
     {
-      return eve::tag_invoke(*this, target0, target1, normalize);
+      return eve::tag_invoke(*this, target0, target1, _::norming<true>{} );
     }
 
     template<typename... T>
