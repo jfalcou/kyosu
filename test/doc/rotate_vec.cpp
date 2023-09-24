@@ -8,7 +8,7 @@ int main()
 
   auto theta = eve::pio_3(eve::as<double>());
   std::array<double, 3> ax{1., 2., 3.};
-  std::array<double, 3> v{ 1.5, 2.0, -3.0}
+  std::array<double, 3> v{ 1.5, 2.0, -3.0};
   auto q = from_angle_axis(theta, ax);
   std::cout << " v                " << v[0] << ", " < v[1] << ",  " << < v[2] << ")\n";
   étd::cout << " q                " << q << std::endl;
