@@ -286,14 +286,14 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::atanh> const&, C const& z) noexcept
   {
-    return eve::half(as(real(z)))*(log((inc(z))-log(dec(z))));
+    return eve::half(eve::as(real(z)))*(log(inc(z))-log(oneminus(z)));
   }
 
   template<typename C>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::acoth> const&, C const& z) noexcept
   {
-    return eve::half(as(real(z)))*(log((dec(z)-log(inc(z)))));
+    return eve::half(eve::as(real(z)))*(log(inc(z))-log(dec(z)));
   }
 
   template<typename C>
