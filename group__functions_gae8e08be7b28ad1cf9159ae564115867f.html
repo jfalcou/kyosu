@@ -142,20 +142,21 @@ $(document).ready(function(){initNavTree('group__functions_gae8e08be7b28ad1cf915
 </table>
 </div><div class="memdoc">
 
-<p>Select a value between two arguments based on a logical mask. </p>
+<p>convert to a target typek </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::value T, eve::value U, eve::value V&gt;</div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">convert</a>(T x, U, y, V z ) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::value T, eve::value U, eve::value U&gt;</div>
+<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">convert</a>(T x, eve::as&lt;U&gt; ) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gae8e08be7b28ad1cf9159ae564115867f_html_gae8e08be7b28ad1cf9159ae564115867f"><div class="ttname"><a href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">kyosu::convert</a></div><div class="ttdeci">constexpr tags::callable_convert convert</div><div class="ttdoc">Select a value between two arguments based on a logical mask.</div><div class="ttdef"><b>Definition:</b> convert.hpp:75</div></div>
+<div class="ttc" id="agroup__functions_gae8e08be7b28ad1cf9159ae564115867f_html_gae8e08be7b28ad1cf9159ae564115867f"><div class="ttname"><a href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">kyosu::convert</a></div><div class="ttdeci">constexpr tags::callable_convert convert</div><div class="ttdoc">convert to a target typek</div><div class="ttdef"><b>Definition:</b> convert.hpp:76</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> acos.hpp:14</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Value to process.</li>
+<li><code>x</code> : Value to process.</li>
+<li><code>U</code>`: target scalar type to convert to.</li>
 </ul>
 <p><b>Return value</b></p>
 <h2 class="groupheader">Example </h2>

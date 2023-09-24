@@ -161,40 +161,32 @@ $(document).ready(function(){initNavTree('group__quaternion_ga943f811be2981809d3
 <p><b>Return value</b></p>
 <p>the quaternion value</p>
 <hr  />
-<h4><a class="anchor" id="autotoc_md7"></a>
+<h4><a class="anchor" id="autotoc_md9"></a>
 Example</h4>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/module/quaternion.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">using </span>wide_ft = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
-<div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  wide_ft a = { 0.0f, 1.0f, -1.0f, 0.5f};</div>
-<div class="line">  wide_ft b = { 2.0f , -1.0,  -5.0, 0.0};</div>
-<div class="line">  wide_ft c = { 1.0f, -3.0f,  -4.0f, 1.5f};</div>
-<div class="line">  wide_ft d = { -2.0, 1.5f, 2.3f, 6.7f};</div>
-<div class="line">  wide_ft r1= { 1.0f, 2.0f, 3.0f,  0.0f};</div>
-<div class="line">  wide_ft r2= { 0.0f, 3.0f, 4.0f, 10.0f};</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#ga943f811be2981809d36a4f31f52b0025">kyosu::from_spherical</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- a                               = &quot;</span> &lt;&lt; a &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- b                               = &quot;</span> &lt;&lt; b &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- c                               = &quot;</span> &lt;&lt; c &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- d                               = &quot;</span> &lt;&lt; d &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- r1                              = &quot;</span> &lt;&lt; c &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- r2                              = &quot;</span> &lt;&lt; d &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; cylindrical(r1, b, c, d)        = &quot;</span> &lt;&lt; eve::from_cylindrical(r1, b, c, d) &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; cylindrospherical(r1, r2, c, d) = &quot;</span> &lt;&lt; eve::from_cylindrospherical(r1, r2, c, d) &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; multipolar(r1, c, r2, d)        = &quot;</span> &lt;&lt; eve::from_multipolar(r1, c, r2, d) &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; semipolar(r1, b, c, d)          = &quot;</span> &lt;&lt; eve::from_semipolar(r1, b, c, d) &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; spherical(r1, b, c, d)          = &quot;</span> &lt;&lt; eve::from_spherical(r1, b, c, d) &lt;&lt; std::endl</div>
-<div class="line">   ;</div>
+<div class="line">  <span class="keyword">auto</span> r = 2.0;</div>
+<div class="line">  <span class="keyword">auto</span> theta  = eve::pio_3(eve::as(r));</div>
+<div class="line">  <span class="keyword">auto</span> phi1   = eve::pio_4(eve::as(r));</div>
+<div class="line">  <span class="keyword">auto</span> phi2   = eve::pio_2(eve::as(r));</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- r     &quot;</span> &lt;&lt; r &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- theta &quot;</span> &lt;&lt; theta&lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- phi1  &quot;</span> &lt;&lt; phi1&lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- phi2  &quot;</span> &lt;&lt; phi2&lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#ga943f811be2981809d36a4f31f52b0025">from_spherical</a>(r, theta, phi1, phi2) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:27</div></div>
+<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

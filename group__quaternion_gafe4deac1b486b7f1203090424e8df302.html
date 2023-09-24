@@ -152,7 +152,7 @@ $(document).ready(function(){initNavTree('group__quaternion_gafe4deac1b486b7f120
 <div class="line">   <span class="keyword">template</span> &lt; <span class="keyword">typename</span> M &gt;</div>
 <div class="line">   <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302">from_rotation_matrix</a>(<span class="keyword">auto</span> m) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__quaternion_gafe4deac1b486b7f1203090424e8df302_html_gafe4deac1b486b7f1203090424e8df302"><div class="ttname"><a href="group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302">kyosu::from_rotation_matrix</a></div><div class="ttdeci">constexpr tags::callable_from_rotation_matrix from_rotation_matrix</div><div class="ttdoc">Callable object computing a quaternion from its rotation_matrix representation.</div><div class="ttdef"><b>Definition:</b> from_rotation_matrix.hpp:114</div></div>
+<div class="ttc" id="agroup__quaternion_gafe4deac1b486b7f1203090424e8df302_html_gafe4deac1b486b7f1203090424e8df302"><div class="ttname"><a href="group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302">kyosu::from_rotation_matrix</a></div><div class="ttdeci">constexpr tags::callable_from_rotation_matrix from_rotation_matrix</div><div class="ttdoc">Callable object computing a quaternion from its rotation_matrix representation.</div><div class="ttdef"><b>Definition:</b> from_rotation_matrix.hpp:111</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><p class="startli"><code>m</code> the rotation matrix. The actual implementation assumes that m[i][j] will return the ith line and jth column element of the matrix (indices starting from 0).</p>
@@ -163,7 +163,43 @@ $(document).ready(function(){initNavTree('group__quaternion_gafe4deac1b486b7f120
 <p><b>Return value</b></p>
 <p>an unitary quaternion representing the rotation</p>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0">kyosu::to_rotation_matrix</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302">kyosu::from_rotation_matrix</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>;</div>
+<div class="line">  <span class="keyword">using </span>q_t = <a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t&lt;float&gt;</a>;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  q_t q0(1, 5, 2, 3);</div>
+<div class="line">  q0 = <a class="code hl_variable" href="group__functions_ga961299cde75efe464ea2e3f9944d1f33.html#ga961299cde75efe464ea2e3f9944d1f33">kyosu::sign</a>(q0); <span class="comment">//normalization is optional</span></div>
+<div class="line">  <span class="keyword">auto</span> m = <a class="code hl_variable" href="group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0">to_rotation_matrix</a>(q0);</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;q0 =  &quot;</span> &lt;&lt; q0 &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;m = to_rotation_matrix(q0) = \n&quot;</span>;</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i &lt;3 ; ++i)</div>
+<div class="line">  {</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;    &quot;</span>;</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0; j &lt; 2 ; ++j)</div>
+<div class="line">    {</div>
+<div class="line">      std::cout &lt;&lt; m[i][j] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;</div>
+<div class="line">    }</div>
+<div class="line">    std::cout &lt;&lt; m[i][2] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_rotation_matrix(m) =  &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302">from_rotation_matrix</a>(m) &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__functions_ga961299cde75efe464ea2e3f9944d1f33_html_ga961299cde75efe464ea2e3f9944d1f33"><div class="ttname"><a href="group__functions_ga961299cde75efe464ea2e3f9944d1f33.html#ga961299cde75efe464ea2e3f9944d1f33">kyosu::sign</a></div><div class="ttdeci">constexpr tags::callable_sign sign</div><div class="ttdoc">Computes tne normalized value z/abs(z) if z is not zero else 0.</div><div class="ttdef"><b>Definition:</b> sign.hpp:75</div></div>
+<div class="ttc" id="agroup__quaternion_ga77eff7a7e881497c34bc74d948cf82b0_html_ga77eff7a7e881497c34bc74d948cf82b0"><div class="ttname"><a href="group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0">kyosu::to_rotation_matrix</a></div><div class="ttdeci">constexpr tags::callable_to_rotation_matrix to_rotation_matrix</div><div class="ttdoc">Callable object computing a quaternion from its to_rotation_matrix representation.</div><div class="ttdef"><b>Definition:</b> to_rotation_matrix.hpp:115</div></div>
+<div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:27</div></div>
+<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

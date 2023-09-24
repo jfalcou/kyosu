@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::purepart</title>
+<title>kyosu: kyosu::from_multipolar</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga3d4a351565ed14e9021990fa72f9de4a.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__quaternion_ga768dc300e06ddd80f84746662db3c01b.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_ga3d4a351565ed14e9021
 </div>
 
 <div class="contents">
-<a id="ga3d4a351565ed14e9021990fa72f9de4a" name="ga3d4a351565ed14e9021990fa72f9de4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3d4a351565ed14e9021990fa72f9de4a">&#9670;&#160;</a></span>purepart</h2>
+<a id="ga768dc300e06ddd80f84746662db3c01b" name="ga768dc300e06ddd80f84746662db3c01b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga768dc300e06ddd80f84746662db3c01b">&#9670;&#160;</a></span>from_multipolar</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_ga3d4a351565ed14e9021
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::purepart = {}</td>
+          <td class="memname">kyosu::from_multipolar = {}</td>
         </tr>
       </table>
   </td>
@@ -142,25 +142,49 @@ $(document).ready(function(){initNavTree('group__functions_ga3d4a351565ed14e9021
 </table>
 </div><div class="memdoc">
 
-<p>Extracts the pure part of a value. </p>
-<p><b>Defined in Header</b></p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
+<p>Callable object computing a quaternion from its multipolar representation. </p>
+<p>This function build quaternions in a way similar to the way polar builds complex numbers from a multipolar representation of an \(\mathbb{R}^4\) element.</p>
+<p>from_multipolar the two \(\mathbb{C}\) components of the quaternion are given in polar coordinates</p>
+<p><b>Defined in header</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include eve/module/quaternion.hpp&gt;`</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>  <a class="code hl_variable" href="group__functions_ga3d4a351565ed14e9021990fa72f9de4a.html#ga3d4a351565ed14e9021990fa72f9de4a">purepart</a>(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T     <a class="code hl_variable" href="group__functions_ga3d4a351565ed14e9021990fa72f9de4a.html#ga3d4a351565ed14e9021990fa72f9de4a">purepart</a>(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga768dc300e06ddd80f84746662db3c01b.html#ga768dc300e06ddd80f84746662db3c01b">from_multipolar</a>( <span class="keyword">auto</span> rho1, <span class="keyword">auto</span> theta1 <span class="keyword">auto</span> rho2, <span class="keyword">auto</span> theta2) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga3d4a351565ed14e9021990fa72f9de4a_html_ga3d4a351565ed14e9021990fa72f9de4a"><div class="ttname"><a href="group__functions_ga3d4a351565ed14e9021990fa72f9de4a.html#ga3d4a351565ed14e9021990fa72f9de4a">kyosu::purepart</a></div><div class="ttdeci">constexpr tags::callable_purepart purepart</div><div class="ttdoc">Extracts the pure part of a value.</div><div class="ttdef"><b>Definition:</b> purepart.hpp:72</div></div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> acos.hpp:14</div></div>
+<div class="ttc" id="agroup__quaternion_ga768dc300e06ddd80f84746662db3c01b_html_ga768dc300e06ddd80f84746662db3c01b"><div class="ttname"><a href="group__quaternion_ga768dc300e06ddd80f84746662db3c01b.html#ga768dc300e06ddd80f84746662db3c01b">kyosu::from_multipolar</a></div><div class="ttdeci">constexpr tags::callable_from_multipolar from_multipolar</div><div class="ttdoc">Callable object computing a quaternion from its multipolar representation.</div><div class="ttdef"><b>Definition:</b> from_multipolar.hpp:97</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
-<ul>
-<li><code>z</code> : Original value.</li>
-</ul>
+<p><code>rho1</code>, <code>rho2</code>: the moduli 'theta1', 'theta2': the angles in radian</p>
 <p><b>Return value</b></p>
-<p>Returns the pure part of its argument, ie the tuple of all its non-real components. For real inputs, the call returns 0.</p>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<p>the quaternion value</p>
+<hr  />
+<h4><a class="anchor" id="autotoc_md5"></a>
+Example</h4>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__quaternion_ga768dc300e06ddd80f84746662db3c01b.html#ga768dc300e06ddd80f84746662db3c01b">kyosu::from_multipolar</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span> r1 = 2.0;</div>
+<div class="line">  <span class="keyword">auto</span> t1 = eve::pio_3(eve::as(r1));</div>
+<div class="line">  <span class="keyword">auto</span> r2 = 3.0;</div>
+<div class="line">  <span class="keyword">auto</span> t2 = eve::pio_2(eve::as(r1));</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- r1 &quot;</span> &lt;&lt; r1 &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- t1 &quot;</span> &lt;&lt; t1&lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- r2 &quot;</span> &lt;&lt; r2&lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- t2 &quot;</span> &lt;&lt; t2&lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__quaternion_ga768dc300e06ddd80f84746662db3c01b.html#ga768dc300e06ddd80f84746662db3c01b">from_multipolar</a>(r1, t1, r2, t2) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:27</div></div>
+<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
