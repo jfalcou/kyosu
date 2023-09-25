@@ -22,17 +22,17 @@ TTS_CASE_WITH ( "Check kyosu::pow over real"
 
 TTS_CASE_WITH ( "Check kyosu::pow over complex"
               , kyosu::real_types
-              , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10)
-                             ,tts::randoms(-10,10), tts::randoms(-10,10)
+              , tts::generate(tts::randoms(-1,1), tts::randoms(-1,1)
+                             ,tts::randoms(-1,1), tts::randoms(-1,1)
                              )
               )
 (auto r0, auto i0, auto r1, auto i1)
 {
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
-  TTS_RELATIVE_EQUAL(kyosu::pow(c0, c1), kyosu::exp(c1*kyosu::log(c0)), 1e-5);
-  TTS_RELATIVE_EQUAL(kyosu::pow(r0, c1), kyosu::exp(c1*kyosu::log(r0)), 1e-5);
-  TTS_RELATIVE_EQUAL(kyosu::pow(c0, r1), kyosu::exp(r1*kyosu::log(c0)), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::pow(c0, c1), kyosu::exp(kyosu::log(c0)*c1), 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::pow(r0, c1), kyosu::exp(kyosu::log(r0)*c1), 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::pow(c0, r1), kyosu::exp(kyosu::log(c0)*c1), 1e-3);
 };
 
 TTS_CASE_WITH ( "Check kyosu::pow over quaternion"

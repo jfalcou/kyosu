@@ -33,4 +33,5 @@ TTS_CASE_WITH( "Check behavior of arg on wide"
   <typename T>(T const& a0, T const& a1 )
 {
   TTS_RELATIVE_EQUAL(kyosu::arg(kyosu::complex(a0,a1)), eve::atan2(a1, a0), 1.0e-6);
+  TTS_RELATIVE_EQUAL(kyosu::arg(kyosu::complex(a0,a1)),kyosu::arg(kyosu::quaternion(a0,a1)), 1.0e-6);
 };

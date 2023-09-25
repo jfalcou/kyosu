@@ -32,7 +32,7 @@ namespace kyosu::_
     if constexpr(kyosu::concepts::complex<C>)
       return eve::pedantic(eve::atan2)(kyosu::imag(z), real(z));
     else
-      return eve::pedantic(eve::atan2)(kyosu::abs(pure(z)), real(z));
+      return eve::pedantic(eve::atan2)(sign(ipart(z))*kyosu::abs(pure(z)), real(z));
   }
 
   template<typename C>
