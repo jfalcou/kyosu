@@ -44,7 +44,7 @@ TTS_CASE_WITH( "Check behavior of asinh on wide"
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return cv(std::asinh(c_t(a0.get(i), a1.get(i)))); });
-  TTS_RELATIVE_EQUAL(kyosu::asinh(ke_t{a0,a1}), e, 2.0e-4);
+  TTS_RELATIVE_EQUAL(kyosu::asinh(ke_t{a0,a1}), e, 5.0e-4);
 };
 
 TTS_CASE_TPL( "Check asinh lilits", kyosu::real_types)

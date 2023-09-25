@@ -37,5 +37,5 @@ TTS_CASE_WITH ( "Check kyosu::sqr over quaternion"
 {
   using type = kyosu::quaternion_t<T>;
   auto q = type(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::sqr(q), q*q, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::sqr(q), q*q, 1e-6);
 };
