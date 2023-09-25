@@ -14,13 +14,20 @@
 #include <kyosu/functions/abs.hpp>
 #include <kyosu/functions/acos.hpp>
 #include <kyosu/functions/acosh.hpp>
+#include <kyosu/functions/acospi.hpp>
 #include <kyosu/functions/acot.hpp>
+#include <kyosu/functions/acotpi.hpp>
+#include <kyosu/functions/atanpi.hpp>
 #include <kyosu/functions/acoth.hpp>
+#include <kyosu/functions/arg.hpp>
 #include <kyosu/functions/acsc.hpp>
+#include <kyosu/functions/acscpi.hpp>
 #include <kyosu/functions/acsch.hpp>
 #include <kyosu/functions/asec.hpp>
+#include <kyosu/functions/asecpi.hpp>
 #include <kyosu/functions/asech.hpp>
 #include <kyosu/functions/asin.hpp>
+#include <kyosu/functions/asinpi.hpp>
 #include <kyosu/functions/asinh.hpp>
 #include <kyosu/functions/atan.hpp>
 #include <kyosu/functions/atanh.hpp>
@@ -117,14 +124,6 @@
 //! @brief Functions performing computations over complex or real elements only.
 //======================================================================================================================
 
-#include <kyosu/complex/acospi.hpp>
-#include <kyosu/complex/acotpi.hpp>
-#include <kyosu/complex/acscpi.hpp>
-#include <kyosu/complex/arg.hpp>
-#include <kyosu/complex/asecpi.hpp>
-#include <kyosu/complex/asinpi.hpp>
-
-#include <kyosu/complex/atanpi.hpp>
 #include <kyosu/complex/beta.hpp>
 #include <kyosu/complex/deta.hpp>
 #include <kyosu/complex/digamma.hpp>

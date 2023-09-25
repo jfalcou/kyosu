@@ -53,8 +53,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T> constexpr auto arg(T z) noexcept;
-//!      template<eve::ordered_value T>       constexpr auto arg(T z) noexcept;
+//!      template<eve::ordered_value T>              constexpr auto arg(T z) noexcept; //1
+//!      template<kyosu::concepts::complex T>        constexpr auto arg(T z) noexcept; //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto arg(T z) noexcept; //3
 //!   }
 //!   @endcode
 //!
@@ -64,7 +65,11 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise true the argument of the complex number i.e. `atan2(imag(z), real(z))`.
+//!     1. Returns 0 or pi acording to the non negativity of z.
+//!     2. Returns elementwise the argument of the complex number i.e. `atan2(imag(z), real(z))`.
+//!     3. Returns \f$\mathrm{atan2}(|\underline{z}|, z_0)\f$ where \f$z_0\f$ is the real part of \f$z\f$ and
+//!         \f$\underline{z}\f$ is the pure part of \f$z\f$.
+
 //!
 //!  @groupheader{Example}
 //!

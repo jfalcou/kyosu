@@ -25,6 +25,13 @@ namespace kyosu::_
     return kumi::apply(eve::hypot, c);
   }
 
+ template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::arg> const&, C const& z) noexcept
+  {
+    return eve::atan2(kyosu::abs(pure(z)), real(z));
+  }
+
   template<typename C>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::sqr_abs> const&, C const& c) noexcept
