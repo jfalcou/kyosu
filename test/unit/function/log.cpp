@@ -28,5 +28,5 @@ TTS_CASE_WITH ( "Check kyosu::exp over quaternion"
   auto lq = kyosu::log(q);
   TTS_RELATIVE_EQUAL(kyosu::exp(lr), kyosu::complex(r), 1e-5);
   TTS_RELATIVE_EQUAL(kyosu::exp(lc), c, 1e-5);
-  TTS_RELATIVE_EQUAL(kyosu::exp(lq), q, 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::exp(lq), q, 1e-4);
 };

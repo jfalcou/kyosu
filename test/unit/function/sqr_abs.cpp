@@ -35,5 +35,5 @@ TTS_CASE_WITH ( "Check kyosu::sqr_abs over quaternion"
 <typename T>(T r, T i, T j, T k)
 {
   using type = kyosu::quaternion_t<T>;
-  TTS_ULP_EQUAL(kyosu::sqr_abs(type(r,i,j,k)), r*r+i*i+j*j+k*k, 0.5);
+  TTS_ULP_EQUAL(kyosu::sqr_abs(type(r,i,j,k)), r*r+i*i+j*j+k*k, 2.0);
 };

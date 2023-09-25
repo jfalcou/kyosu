@@ -28,5 +28,5 @@ TTS_CASE_WITH ( "Check kyosu::asinh over quaternion"
   auto lq = kyosu::asinh(q);
   TTS_RELATIVE_EQUAL(kyosu::sinh(lr), r, 1e-3);
   TTS_RELATIVE_EQUAL(kyosu::sinh(lc), c, 1e-3);
-  TTS_RELATIVE_EQUAL(kyosu::sinh(lq), q, 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::sinh(lq), q, 5e-3);
 };

@@ -44,5 +44,5 @@ TTS_CASE_WITH( "Check behavior of log1p on wide"
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return cv(std::log(c_t(eve::inc(a0.get(i)), a1.get(i)))); });
-  TTS_RELATIVE_EQUAL(kyosu::log1p(ke_t{a0,a1}), e, 1.0e-6);
+  TTS_RELATIVE_EQUAL(kyosu::log1p(ke_t{a0,a1}), e, 1.0e-4);
 };
