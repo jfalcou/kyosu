@@ -56,8 +56,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto asecpi(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto asecpi(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto asecpi(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto asecpi(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -69,7 +69,7 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns `pi(as(z))*asec(z)`
+//!   2. Returns `invpi(as(z))*asec(z)`
 //!
 //!  @groupheader{Example}
 //!
