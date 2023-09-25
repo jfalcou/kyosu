@@ -21,8 +21,7 @@ namespace kyosu::tags
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_asinh{};
-      return fn(complex(v));
+      return eve::asinh(v);
     }
 
     template<typename T>
@@ -56,8 +55,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto asinh(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto asinh(T z) noexcept;  //2
+//!      template<eve::floating_ordered_value T>     constexpr auto asinh(T z) noexcept;  //1
+//!      template<kyosu::concepts::complex T>        constexpr auto asinh(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto asinh(T z) noexcept;  //3
 //!   }
 //!   @endcode
 //!
@@ -67,8 +67,8 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
-//!  
+//!   1. A real type input z calls eve::asinh(z); and so returns the same type as input.
+//!
 //!   2. Returns the complex arc hyperbolic sine of z, with branch cuts outside the interval
 //!      \f$i\times[-\pi/2, \pi/2]\f$ along the imaginary axis.
 //!
@@ -84,6 +84,8 @@ namespace kyosu
 //!      * If z is \f$NaN+ iy\f$ (for any finite nonzero y), the result is \f$NaN+ iNaN\f$
 //!      * If z is \f$NaN+i \infty\f$, the result is \f$\pm \infty+ iNaN\f$ (the sign of the real part is unspecified)
 //!      * If z is \f$NaN+ iNaN\f$, the result is \f$NaN+ iNaN\f$
+//!
+//!   3. Returns \f$\log(z+\sqrt{1+z^2})\f$.
 //!
 //!  @groupheader{Example}
 //!

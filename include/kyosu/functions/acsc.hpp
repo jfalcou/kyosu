@@ -9,19 +9,19 @@
 
 #include <kyosu/details/invoke.hpp>
 #include <eve/module/math.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu::tags
 {
-  struct callable_asin : eve::elementwise
+  struct callable_acsc : eve::elementwise
   {
-    using callable_tag_type = callable_asin;
+    using callable_tag_type = callable_acsc;
 
-    KYOSU_DEFERS_CALLABLE(asin_);
+    KYOSU_DEFERS_CALLABLE(acsc_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      auto fn = callable_asin{};
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
+      auto fn =  callable_acsc{};
       return fn(complex(v));
     }
 
@@ -32,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_asin(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_acsc(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var asin
-//!   @brief Computes the asinine of the argument.
+//!   @var acsc
+//!   @brief Computes the arccosecant of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +56,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto asin(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto asin(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto acsc(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acsc(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -69,16 +69,12 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns the elementwise the complex principal value
-//!      of the arc sine of the input in the range of a strip unbounded along the imaginary axis
-//!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
-//!
-//!      special cases are handled as if the operation was implemented by \f$-i \mathrm{asinh}(i z)\f$
+//!   2. Returns elementwise \f$\mathop{\mathrm{asin}}(1/z)\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/asin.cpp}
+//!  @godbolt{doc/acsc.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_asin asin = {};
+inline constexpr tags::callable_acsc acsc = {};
 }

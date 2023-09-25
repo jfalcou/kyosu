@@ -12,16 +12,16 @@
 
 namespace kyosu::tags
 {
-  struct callable_acot : eve::elementwise
+  struct callable_acsch : eve::elementwise
   {
-    using callable_tag_type = callable_acot;
+    using callable_tag_type = callable_acsch;
 
-    KYOSU_DEFERS_CALLABLE(acot_);
+    KYOSU_DEFERS_CALLABLE(acsch_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_acot{};
+      auto fn = callable_acsch{};
       return fn(complex(v));
     }
 
@@ -32,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_acot(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_acsch(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var acot
-//!   @brief Computes the acotine of the argument.
+//!   @var acsch
+//!   @brief Computes the acschine of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +56,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto acot(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto acot(T z) noexcept;  //2
+//!      template<eve::ordered_value T>       constexpr auto acsch(T z) noexcept;  //1
+//!      template<kyosu::concepts::complex T> constexpr auto acsch(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -69,13 +69,12 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns elementwise the complex principal value
-//!      of the arc cotangent of the input as the arc tangent of the inverse of the input.
+//!   2.  Returns elementwise asinh(1/z).
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/acot.cpp}
+//!  @godbolt{doc/acsch.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_acot acot = {};
+inline constexpr tags::callable_acsch acsch = {};
 }

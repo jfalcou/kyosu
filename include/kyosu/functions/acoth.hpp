@@ -9,6 +9,7 @@
 
 #include <kyosu/details/invoke.hpp>
 #include <eve/module/math.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu::tags
 {
@@ -43,7 +44,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var acoth
-//!   @brief Computes the acothine of the argument.
+//!   @brief Computes the inverse hyperbolic cotangent of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +57,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto acoth(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto acoth(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto acoth(T z) noexcept;  //1
+//!      template<kyosu::concepts::complex T>        constexpr auto acoth(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acoth(T z) noexcept;  //3
 //!   }
 //!   @endcode
 //!
@@ -69,9 +71,11 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns the complex arc hyperbolic cotangent of z, computed as \f$\mathop{\mathrm{atanh}}(1/z)\f$.
+//!   2. Returns the complex inverse hyperbolic cotangent of z, computed as \f$\mathop{\mathrm{atanh}}(1/z)\f$.
 //!
-//!  @groupheader{Example}
+//!   3. Returns \f$(\log(z+1)-\log(z-1))/2 \f$.
+//!
+///!  @groupheader{Example}
 //!
 //!  @godbolt{doc/acoth.cpp}
 //! @}

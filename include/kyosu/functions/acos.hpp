@@ -9,6 +9,7 @@
 
 #include <kyosu/details/invoke.hpp>
 #include <eve/module/math.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu::tags
 {
@@ -19,7 +20,10 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(acos_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::acos(v); }
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
+      auto fn =  callable_acos{};
+      return fn(complex(v));
+    }
 
     template<typename T>
     KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
@@ -52,8 +56,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto acos(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto acos(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto acos(T z) noexcept;  //1
+//!      template<kyosu::concepts::complex T>        constexpr auto atan(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acos(T z) noexcept;  //3
 //!   }
 //!   @endcode
 //!
@@ -83,6 +88,9 @@ namespace kyosu
 //!      * If z is \f$NaN+i y\f$ (for any finite y), the result is \f$NaN+i NaN\f$
 //!      * If z is \f$NaN+i\infty\f$, the result is \f$NaN-i\infty\f$
 //!      * If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
+//!
+//!   3. Returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!         \f$\underline{z}\f$ is the pure part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!

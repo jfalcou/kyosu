@@ -43,7 +43,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var atan
-//!   @brief Computes the atanine of the argument.
+//!   @brief Computes the inverse hyperbolic tangent of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +56,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto atan(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto atan(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto atan(T z) noexcept;  //1
+//!      template<kyosu::concepts::complex T>        constexpr auto atan(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto atan(T z) noexcept;  //3
 //!   }
 //!   @endcode
 //!
@@ -72,8 +73,10 @@ namespace kyosu
 //!   2. Returns the elementwise the complex principal value
 //!      of the arc tangent of the input in the range of a strip unbounded along the imaginary axis
 //!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
+//!      Special cases are handled as if the operation was implemented by \f$-i\; \mathrm{atanh}(z\; i)\f$.
 //!
-//!      special cases are handled as if the operation was implemented by \f$-i \mathrm{atanh}(i z)\f$
+//!   3. Returns \f$ -I_z \mathrm{atanh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!         \f$\underline{z}\f$ is the pure part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!

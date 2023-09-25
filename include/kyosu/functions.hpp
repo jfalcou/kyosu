@@ -12,6 +12,18 @@
 //! @brief Functions performing computations over all caylet-dickson types complex, quaternions, octonions...
 //======================================================================================================================
 #include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/acos.hpp>
+#include <kyosu/functions/acosh.hpp>
+#include <kyosu/functions/acot.hpp>
+#include <kyosu/functions/acoth.hpp>
+#include <kyosu/functions/acsc.hpp>
+#include <kyosu/functions/acsch.hpp>
+#include <kyosu/functions/asec.hpp>
+#include <kyosu/functions/asech.hpp>
+#include <kyosu/functions/asin.hpp>
+#include <kyosu/functions/asinh.hpp>
+#include <kyosu/functions/atan.hpp>
+#include <kyosu/functions/atanh.hpp>
 #include <kyosu/functions/average.hpp>
 #include <kyosu/functions/ceil.hpp>
 #include <kyosu/functions/conj.hpp>
@@ -105,24 +117,13 @@
 //! @brief Functions performing computations over complex or real elements only.
 //======================================================================================================================
 
-#include <kyosu/complex/acos.hpp>
-#include <kyosu/complex/acosh.hpp>
-#include <kyosu/complex/acot.hpp>
 #include <kyosu/complex/acospi.hpp>
-#include <kyosu/complex/acoth.hpp>
 #include <kyosu/complex/acotpi.hpp>
-#include <kyosu/complex/acsc.hpp>
-#include <kyosu/complex/acsch.hpp>
 #include <kyosu/complex/acscpi.hpp>
 #include <kyosu/complex/arg.hpp>
-#include <kyosu/complex/asec.hpp>
-#include <kyosu/complex/asech.hpp>
 #include <kyosu/complex/asecpi.hpp>
-#include <kyosu/complex/asin.hpp>
-#include <kyosu/complex/asinh.hpp>
 #include <kyosu/complex/asinpi.hpp>
-#include <kyosu/complex/atan.hpp>
-#include <kyosu/complex/atanh.hpp>
+
 #include <kyosu/complex/atanpi.hpp>
 #include <kyosu/complex/beta.hpp>
 #include <kyosu/complex/deta.hpp>

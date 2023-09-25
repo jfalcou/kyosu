@@ -8,8 +8,8 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::atanh over quaternion"
-              , kyosu::simd_real_types
+TTS_CASE_WITH ( "Check kyosu::asin over quaternion"
+              , kyosu::scalar_real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
@@ -23,10 +23,10 @@ TTS_CASE_WITH ( "Check kyosu::atanh over quaternion"
   auto c  = ce_t(a0,a1);
   auto q  = qe_t(a0,a1,a2,a3);
 
-  auto lr = kyosu::atanh(r);
-  auto lc = kyosu::atanh(c);
-  auto lq = kyosu::atanh(q);
-  TTS_RELATIVE_EQUAL(kyosu::tanh(lr), kyosu::complex(r), 1e-5);
-  TTS_RELATIVE_EQUAL(kyosu::tanh(lc), c, 1e-3);
-  TTS_RELATIVE_EQUAL(kyosu::tanh(lq), q, 1e-3);
+  auto lr = kyosu::asin(r);
+  auto lc = kyosu::asin(c);
+  auto lq = kyosu::asin(q);
+  TTS_RELATIVE_EQUAL(kyosu::sin(lr), kyosu::complex(r), 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::sin(lc), c, 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::sin(lq), q, 1e-3);
 };

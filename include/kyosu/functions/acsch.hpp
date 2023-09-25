@@ -9,6 +9,7 @@
 
 #include <kyosu/details/invoke.hpp>
 #include <eve/module/math.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu::tags
 {
@@ -43,7 +44,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var acsch
-//!   @brief Computes the hyperbolic arccosecant of the argument.
+//!   @brief Computes the inverse hyperbolic cosecant of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +57,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto acsch(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto acsch(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto acsch(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acsch(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!

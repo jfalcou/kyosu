@@ -8,10 +8,10 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::atanh over quaternion"
+TTS_CASE_WITH ( "Check kyosu::atan over quaternion"
               , kyosu::simd_real_types
-              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
-                              , tts::randoms(-10,10), tts::randoms(-10,10)
+              , tts::generate ( tts::randoms(-1,1), tts::randoms(-1,1)
+                              , tts::randoms(-1,1), tts::randoms(-1,1)
                               )
               )
 <typename T>(T a0, T a1, T a2, T a3)
@@ -23,10 +23,10 @@ TTS_CASE_WITH ( "Check kyosu::atanh over quaternion"
   auto c  = ce_t(a0,a1);
   auto q  = qe_t(a0,a1,a2,a3);
 
-  auto lr = kyosu::atanh(r);
-  auto lc = kyosu::atanh(c);
-  auto lq = kyosu::atanh(q);
-  TTS_RELATIVE_EQUAL(kyosu::tanh(lr), kyosu::complex(r), 1e-5);
-  TTS_RELATIVE_EQUAL(kyosu::tanh(lc), c, 1e-3);
-  TTS_RELATIVE_EQUAL(kyosu::tanh(lq), q, 1e-3);
+  auto lr = kyosu::atan(r);
+  auto lc = kyosu::atan(c);
+  auto lq = kyosu::atan(q);
+  TTS_RELATIVE_EQUAL(kyosu::tan(lr), kyosu::complex(r), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::tan(lc), c, 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::tan(lq), q, 1e-3);
 };
