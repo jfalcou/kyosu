@@ -29,7 +29,10 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::arg> const&, C const& z) noexcept
   {
-    return eve::atan2(kyosu::abs(pure(z)), real(z));
+    if constexpr(kyosu::concepts::complex<C>)
+      return eve::pedantic(eve::atan2)(kyosu::imag(z), real(z));
+    else
+      return eve::pedantic(eve::atan2)(kyosu::abs(pure(z)), real(z));
   }
 
   template<typename C>
