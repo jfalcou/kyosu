@@ -128,38 +128,38 @@ complex functions and rotation related quaternion usage.
 
    |              |               |                 |            |                 |
    |--------------|---------------|-----------------|------------|-----------------|
-   | abs          | acos          | acosh           | acospi     | acot            |
-   | acotpi       | atanpi        | acoth           | arg        | acsc            |
-   | acscpi       | acsch         | asec            | asecpi     | asech           |
-   | asin         | asinpi        | asinh           | atan       | atanh           |
-   | average      | ceil          | conj            | cos        | cosh            |
-   | cospi        | cot           | cotpi           | coth       | convert         |
-   | csc          | cscpi         | csch            | dec        | dist            |
-   | dot          | exp           | exp10           | exp2       | exp_i           |
-   | exp_ipi      | expm1         | expmx2          | expx2      | floor           |
-   | frac         | from_polar    | hypot           | if_else    | inc             |
-   | ipart        | is_denormal   | is_equal        | is_eqz     | is_finite       |
-   | is_infinite  | is_imag       | is_nan          | is_nez     | is_not_denormal |
-   | is_not_equal | is_not_finite | is_not_infinite | is_not_nan | is_not_real     |
-   | is_pure      | is_real       | is_unitary      | jpart      | kpart           |
-   | ldiv         | lerp          | log             | log10      | log1p           |
-   | log_abs      | log2          | lpnorm          | manhattan  | minus           |
-   | nearest      | oneminus      | pow             | pow1p      | pow_abs         |
-   | powm1        | proj          | pure            | radinpi    | real            |
-   | rec          | reldist       | sec             | secpi      | sech            |
-   | sign         | sin           | sinc            | sincos     | sinpi           |
-   | sinpicospi   | sinh          | sinhcosh        | slerp      | sqr             |
-   | sqr_abs      | sqrt          | tan             | tanpi      | tanh            |
-   | to_polar     | trunc         |                 |            |                 |
+   | [abs](@ref kyosu::abs )          | [acos](@ref kyosu::acos )          | [acosh](@ref kyosu::acosh )           | [acospi](@ref kyosu::acospi )     | [acot](@ref kyosu::acot )            |
+   | [acotpi](@ref kyosu::acotpi )       | [atanpi](@ref kyosu::atanpi )        | [acoth](@ref kyosu::acoth )           | [arg](@ref kyosu::arg )        | [acsc](@ref kyosu::acsc )            |
+   | [acscpi](@ref kyosu::acscpi )       | [acsch](@ref kyosu::acsch )         | [asec](@ref kyosu::asec )            | [asecpi](@ref kyosu::asecpi )     | [asech](@ref kyosu::asech )           |
+   | [asin](@ref kyosu::asin )         | [asinpi](@ref kyosu::asinpi )        | [asinh](@ref kyosu::asinh )           | [atan](@ref kyosu::atan )       | [atanh](@ref kyosu::atanh )           |
+   | [average](@ref kyosu::average )      | [ceil](@ref kyosu::ceil )          | [conj](@ref kyosu::conj )            | [cos](@ref kyosu::cos )        | [cosh](@ref kyosu::cosh )            |
+   | [cospi](@ref kyosu::cospi )        | [cot](@ref kyosu::cot )           | [cotpi](@ref kyosu::cotpi )           | [coth](@ref kyosu::coth )       | [convert](@ref kyosu::convert )         |
+   | [csc](@ref kyosu::csc )          | [cscpi](@ref kyosu::cscpi )         | [csch](@ref kyosu::csch )            | [dec](@ref kyosu::dec )        | [dist](@ref kyosu::dist )            |
+   | [dot](@ref kyosu::dot )          | [exp](@ref kyosu::exp )           | [exp10](@ref kyosu::exp10 )           | [exp2](@ref kyosu::exp2 )       | [exp_i](@ref kyosu::exp_i )           |
+   | [exp_ipi](@ref kyosu::exp_ipi )      | [expm1](@ref kyosu::expm1 )         | [expmx2](@ref kyosu::expmx2 )          | [expx2](@ref kyosu::expx2 )      | [floor](@ref kyosu::floor )           |
+   | [frac](@ref kyosu::frac )         | [from_polar](@ref kyosu::from_polar )    | [hypot](@ref kyosu::hypot )           | [if_else](@ref kyosu::if_else )    | [inc](@ref kyosu::inc )             |
+   | [ipart](@ref kyosu::ipart )        | [is_denormal](@ref kyosu::is_denormal )   | [is_equal](@ref kyosu::is_equal )        | [is_eqz](@ref kyosu::is_eqz )     | [is_finite](@ref kyosu::is_finite )       |
+   | [is_infinite](@ref kyosu::is_infinite )  | [is_imag](@ref kyosu::is_imag )       | [is_nan](@ref kyosu::is_nan )          | [is_nez](@ref kyosu::is_nez )     | [is_not_denormal](@ref kyosu::is_not_denormal ) |
+   | [is_not_equal](@ref kyosu::is_not_equal ) | [is_not_finite](@ref kyosu::is_not_finite ) | [is_not_infinite](@ref kyosu::is_not_finite ) | [is_not_nan](@ref kyosu::is_not_nan ) | [is_not_real](@ref kyosu::is_not_real )     |
+   | [is_pure](@ref kyosu::is_pure )      | [is_real](@ref kyosu::is_real )       | [is_unitary](@ref kyosu::is_unitary )      | [jpart](@ref kyosu::jpart )      | [kpart](@ref kyosu::kyosu )           |
+   | [ldiv](@ref kyosu::ldiv )         | [lerp](@ref kyosu::lerp )          | [log](@ref kyosu::log )             | [log10](@ref kyosu::log10 )      | [log1p](@ref kyosu::log1p )           |
+   | [log_abs](@ref kyosu::log_abs )      | [log2](@ref kyosu::log2 )          | [lpnorm](@ref kyosu::lpnorm )          | [manhattan](@ref kyosu::manhattan )  | [minus](@ref kyosu::minus )           |
+   | [nearest](@ref kyosu::nearest )      | [oneminus](@ref kyosu::oneminus )      | [pow](@ref kyosu::pow )             | [pow1p](@ref kyosu::pow1p )      | [pow_abs](@ref kyosu::pow_abs )         |
+   | [powm1](@ref kyosu::powm1 )        | [proj](@ref kyosu::proj )          | [pure](@ref kyosu::imag )            | [radinpi](@ref kyosu::radinpi )    | [real](@ref kyosu::real )            |
+   | [rec](@ref kyosu::rec )          | [reldist](@ref kyosu::reldist )       | [sec](@ref kyosu::sec )             | [secpi](@ref kyosu::secpi )      | [sech](@ref kyosu::sech )            |
+   | [sign](@ref kyosu::sign )         | [sin](@ref kyosu::sin )           | [sinc](@ref kyosu::sinc )            | [sincos](@ref kyosu::sincos )     | [sinpi](@ref kyosu::sinpi )           |
+   | [sinpicospi](@ref kyosu::sinpicospi )   | [sinh](@ref kyosu::sinh )          | [sinhcosh](@ref kyosu::sinhcosh )        | [slerp](@ref kyosu::slerp )      | [sqr](@ref kyosu::sqr )             |
+   | [sqr_abs](@ref kyosu::sqr_abs )      | [sqrt](@ref kyosu::sqrt )          | [tan](@ref kyosu::tan )             | [tanpi](@ref kyosu::tanpi )      | [tanh](@ref kyosu::tanh )            |
+   | [to_polar](@ref kyosu::to_polar )     | [trunc](@ref kyosu::trunc )         |                 |            |                 |
 
   * callables usable with complex or real only. These are mainly implementation of classical meromorphic functions
 
     |                  |                  |                    |                  |               |
     |------------------|------------------|--------------------|------------------|---------------|
-    | beta             | deta             | digamma            | erf              | erfcx         |
-    | erfi             | eta              | faddeeva           | lambda           | lbeta         |
-    | log_abs_gamma    | log_gamma        | lrising_factorial  | rising_factorial | tgamma        |
-    | zeta             |                  |                    |                  |               |
+    | [beta](@ref kyosu::beta ) | [deta](@ref kyosu::deta )    | [digamma](@ref kyosu::digamma )  | [erf](@ref kyosu::erf )  | [erfcx](@ref kyosu::erfcx )  |
+    | [erfi](@ref kyosu::erfi ) | [eta](@ref kyosu::eta )      | [faddeeva](@ref kyosu::faddeeva ) | [lambda](@ref kyosu::lambda )  | [lbeta](@ref kyosu::lbeta )  |
+    | [log_abs_gamma](@ref kyosu::log_abs_gamma )    | [log_gamma](@ref kyosu::log_gamma )  | [lrising_factorial](@ref kyosu:lrising_factorial ) | [rising_factorial](@ref kyosu::rising_factorial ) | [tgamma](@ref kyosu::tgamma )        |
+    | [zeta](@ref kyosu::zeta ) |                  |                    |                  |               |
 
   * callables usable with quaternion complex and real only
 
@@ -167,4 +167,4 @@ complex functions and rotation related quaternion usage.
 
     |           |            |            |
     |-----------|------------|------------|
-    | rot_angle |   rot_axis | rotate_vec |
+    | [rot_angle](@ref kyosu::rot_angle) |  [rot_axis](@ref kyosu::rot_axis) | [rotate_vec](@ref kyosu::rotate_vec) |
