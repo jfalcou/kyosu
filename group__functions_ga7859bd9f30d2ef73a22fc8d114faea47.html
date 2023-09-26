@@ -142,17 +142,18 @@ $(document).ready(function(){initNavTree('group__functions_ga7859bd9f30d2ef73a22
 </table>
 </div><div class="memdoc">
 
-<p>Computes the atanine of the argument. </p>
+<p>Computes the inverse hyperbolic tangent of the argument. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;       <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7859bd9f30d2ef73a22fc8d114faea47.html#ga7859bd9f30d2ef73a22fc8d114faea47">atan</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7859bd9f30d2ef73a22fc8d114faea47.html#ga7859bd9f30d2ef73a22fc8d114faea47">atan</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7859bd9f30d2ef73a22fc8d114faea47.html#ga7859bd9f30d2ef73a22fc8d114faea47">atan</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;        <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7859bd9f30d2ef73a22fc8d114faea47.html#ga7859bd9f30d2ef73a22fc8d114faea47">atan</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7859bd9f30d2ef73a22fc8d114faea47.html#ga7859bd9f30d2ef73a22fc8d114faea47">atan</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga7859bd9f30d2ef73a22fc8d114faea47_html_ga7859bd9f30d2ef73a22fc8d114faea47"><div class="ttname"><a href="group__functions_ga7859bd9f30d2ef73a22fc8d114faea47.html#ga7859bd9f30d2ef73a22fc8d114faea47">kyosu::atan</a></div><div class="ttdeci">constexpr tags::callable_atan atan</div><div class="ttdoc">Computes the atanine of the argument.</div><div class="ttdef"><b>Definition:</b> atan.hpp:83</div></div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> acos.hpp:14</div></div>
+<div class="ttc" id="agroup__functions_ga7859bd9f30d2ef73a22fc8d114faea47_html_ga7859bd9f30d2ef73a22fc8d114faea47"><div class="ttname"><a href="group__functions_ga7859bd9f30d2ef73a22fc8d114faea47.html#ga7859bd9f30d2ef73a22fc8d114faea47">kyosu::atan</a></div><div class="ttdeci">constexpr tags::callable_atan atan</div><div class="ttdoc">Computes the inverse hyperbolic tangent of the argument.</div><div class="ttdef"><b>Definition:</b> atan.hpp:86</div></div>
+<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code> : Value to process.</li>
@@ -160,9 +161,8 @@ $(document).ready(function(){initNavTree('group__functions_ga7859bd9f30d2ef73a22
 <p><b>Return value</b></p>
 <ol type="1">
 <li>a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex.">complex(z)</a> was entered.</li>
-<li><p class="startli">Returns the elementwise the complex principal value of the arc tangent of the input in the range of a strip unbounded along the imaginary axis and in the interval \([-\pi/2, \pi/2]\) along the real axis.</p>
-<p class="startli">special cases are handled as if the operation was implemented by \(-i \mathrm{atanh}(i z)\)</p>
-</li>
+<li>Returns the elementwise the complex principal value of the arc tangent of the input in the range of a strip unbounded along the imaginary axis and in the interval \([-\pi/2, \pi/2]\) along the real axis. Special cases are handled as if the operation was implemented by \(-i\; \mathrm{atanh}(z\; i)\).</li>
+<li>Returns \( -I_z \mathrm{atanh}(z I_z)\) where \(I_z = \frac{\underline{z}}{|\underline{z}|}\) and \(\underline{z}\) is the pure part of \(z\).</li>
 </ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>

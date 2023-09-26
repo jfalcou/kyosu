@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu/complex/impl Directory Reference</title>
+<title>kyosu: kyosu::align</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('dir_aa11a8d0dac33f348999697b244e2582.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,17 +121,58 @@ $(document).ready(function(){initNavTree('dir_aa11a8d0dac33f348999697b244e2582.h
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">impl Directory Reference</div></div>
-</div><!--header-->
 <div class="contents">
+<a id="ga6b47fd35280cf1ec86c8596e0cd1b73c" name="ga6b47fd35280cf1ec86c8596e0cd1b73c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6b47fd35280cf1ec86c8596e0cd1b73c">&#9670;&#160;</a></span>align</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kyosu::align = {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callable object computing a quaternion from its angle_axis representation. </p>
+<p>This function build an unitary quaternion from an angle value and a 3 dimensionnal axis vector</p>
+<p><b>Defined in header</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include kyosu/module/quaternion.hpp&gt;`</span></div>
+</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">align</a>(<span class="keyword">auto</span> angle,  <span class="keyword">auto</span> axis, <span class="keyword">auto</span> norming = normalize) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c_html_ga6b47fd35280cf1ec86c8596e0cd1b73c"><div class="ttname"><a href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">kyosu::align</a></div><div class="ttdeci">constexpr tags::callable_align align</div><div class="ttdoc">Callable object computing a quaternion from its angle_axis representation.</div><div class="ttdef"><b>Definition:</b> align.hpp:118</div></div>
+<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
+</div><!-- fragment --><p><b>Parameters</b></p>
+<ul>
+<li><code>v0</code> : span of 3 elements</li>
+<li><code>v1</code> : span of 3 elements</li>
+<li>normalize : can be assume_normalized or normalize. In the second case axis is normalized. if axis is already normalized use assume_normalized is more efficient.</li>
+</ul>
+<p><b>Return value</b></p>
+<p>An unitaryquaternion value representing a rotation that align v0 to v1.</p>
+<p>If v0 or v1 is a nullvector the result is UB</p>
+<h2 class="groupheader">Example </h2>
+<div class="fragment"></div><!-- fragment --> 
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_23e6206bbfca4c239e48a9df5ece59a6.html">kyosu</a></li><li class="navelem"><a class="el" href="dir_cc5d1005398dc97e68496b52c0cb5ac3.html">complex</a></li><li class="navelem"><a class="el" href="dir_aa11a8d0dac33f348999697b244e2582.html">impl</a></li>
+    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

@@ -149,16 +149,20 @@ $(document).ready(function(){initNavTree('group__complex_gad70670d8278d34dc0f0fa
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">from_polar</a>( <span class="keyword">auto</span> rho, <span class="keyword">auto</span> theta) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"> <span class="keyword">template</span>&lt;eve::ordered_value T0, eve::ordered_value T1&gt;,</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">from_polar</a>( T0 rho, T1 theta) <span class="keyword">const</span> <span class="keyword">noexcept</span>;                   <span class="comment">// 1</span></div>
+<div class="line"> <span class="keyword">template</span>&lt;eve::ordered_value T0, eve::ordered_value T1, kyosu::concepts::cayley_dickson C&gt;,</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">from_polar</a>( T0 rho, T1 theta, C iz) <span class="keyword">const</span> <span class="keyword">noexcept</span>;             <span class="comment">// 2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__complex_gad70670d8278d34dc0f0faf883a48eab8_html_gad70670d8278d34dc0f0faf883a48eab8"><div class="ttname"><a href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">kyosu::from_polar</a></div><div class="ttdeci">constexpr tags::callable_from_polar from_polar</div><div class="ttdoc">Callable object computing a complex from its polar coordinates.</div><div class="ttdef"><b>Definition:</b> from_polar.hpp:91</div></div>
+<div class="ttc" id="agroup__complex_gad70670d8278d34dc0f0faf883a48eab8_html_gad70670d8278d34dc0f0faf883a48eab8"><div class="ttname"><a href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">kyosu::from_polar</a></div><div class="ttdeci">constexpr tags::callable_from_polar from_polar</div><div class="ttdoc">Callable object computing a complex from its polar coordinates.</div><div class="ttdef"><b>Definition:</b> from_polar.hpp:102</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
-<p><code>rho</code> : modulus <code>rho</code> : argument.</p>
+<p><code>rho</code> : modulus. <code>theta</code> : argument. &lsquo;iz&rsquo; : unitary cayley dickson value.</p>
 <p><b>Return value</b></p>
-<p>the complex number associated.</p>
-<dl class="section note"><dt>Note</dt><dd>: a negative rho is not an error but is treated as {-rho, theta+pi}.</dd></dl>
-<hr  />
-<h4><a class="anchor" id="autotoc_md7"></a>
+<ol type="1">
+<li>the complex number <code>rho*exp(i*theta)</code>.</li>
+<li>the cayley_dickson value <code>rho*exp(iz*theta)</code>.</li>
+</ol>
+<h4><a class="anchor" id="autotoc_md6"></a>
 Example</h4>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -174,13 +178,19 @@ Example</h4>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> theta = eve::pio_3(eve::as&lt;double&gt;());</div>
 <div class="line">  <span class="keyword">auto</span> rho   = 3.0;</div>
+<div class="line">  <span class="keyword">auto</span> iz0   = <a class="code hl_variable" href="group__functions_ga961299cde75efe464ea2e3f9944d1f33.html#ga961299cde75efe464ea2e3f9944d1f33">kyosu::sign</a>(<a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">kyosu::quaternion</a>(0., 1.));</div>
+<div class="line">  <span class="keyword">auto</span> iz1   = <a class="code hl_variable" href="group__functions_ga961299cde75efe464ea2e3f9944d1f33.html#ga961299cde75efe464ea2e3f9944d1f33">kyosu::sign</a>(<a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">kyosu::quaternion</a>(0., 1., 2., 3.));</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- theta = &quot;</span> &lt;&lt; theta &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- rho   = &quot;</span> &lt;&lt; rho &lt;&lt; std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">kyosu::from_polar</a>(theta,  rho) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">from_polar</a>(theta, rho) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">from_polar</a>(theta, rho, iz0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">from_polar</a>(theta, rho, iz1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__functions_ga961299cde75efe464ea2e3f9944d1f33_html_ga961299cde75efe464ea2e3f9944d1f33"><div class="ttname"><a href="group__functions_ga961299cde75efe464ea2e3f9944d1f33.html#ga961299cde75efe464ea2e3f9944d1f33">kyosu::sign</a></div><div class="ttdeci">constexpr tags::callable_sign sign</div><div class="ttdoc">Computes tne normalized value z/abs(z) if z is not zero else 0.</div><div class="ttdef"><b>Definition:</b> sign.hpp:75</div></div>
+<div class="ttc" id="agroup__functions_gae6df724ac822c7361d9ea9252e62d0a4_html_gae6df724ac822c7361d9ea9252e62d0a4"><div class="ttname"><a href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">kyosu::quaternion</a></div><div class="ttdeci">constexpr tags::callable_quaternion quaternion</div><div class="ttdoc">Constructs a kyosu::quaternion.</div><div class="ttdef"><b>Definition:</b> to_quaternion.hpp:72</div></div>
 <div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:27</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
 </div><!-- fragment --> 

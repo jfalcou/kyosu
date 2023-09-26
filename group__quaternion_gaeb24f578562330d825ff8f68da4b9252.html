@@ -152,12 +152,12 @@ $(document).ready(function(){initNavTree('group__quaternion_gaeb24f578562330d825
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">from_angle_axis</a>(<span class="keyword">auto</span> angle,  <span class="keyword">auto</span> axis, <span class="keyword">auto</span> norming = normalize) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__quaternion_gaeb24f578562330d825ff8f68da4b9252_html_gaeb24f578562330d825ff8f68da4b9252"><div class="ttname"><a href="group__quaternion_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr tags::callable_from_angle_axis from_angle_axis</div><div class="ttdoc">Callable object computing a quaternion from its angle_axis representation.</div><div class="ttdef"><b>Definition:</b> from_angle_axis.hpp:90</div></div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> acos.hpp:14</div></div>
+<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>angle</code> : rotation angle in radian</li>
 <li><code>axis</code>` : rotation axis given by an std::span of dimension 3.</li>
-<li>normalize : can be assume_normalized or normalize in the second case axis is normalized. if axis is already normalized use assume_normalized.</li>
+<li>normalize : can be assume_normalized or normalize. In the second case axis is normalized. if axis is already normalized use assume_normalized is more efficient.</li>
 </ul>
 <p><b>Return value</b></p>
 <p>the quaternion value representing the rotation.</p>

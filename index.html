@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: Main Page</title>
+<title>kyosu: Kyosu</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -121,22 +121,79 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">kyosu Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Kyosu </div></div>
 </div><!--header-->
 <div class="contents">
-<ul><li><a href="index.html"><span>Main&#160;Page</span></a>
-</li><li><a href="usergroup0.html"><span>How-Tos</span></a>
-</li><li><a href="usergroup1.html"><span>Reference&#160;Documentation</span></a>
-<ul><li><a href="group__types.html"><span>Types</span></a>
-</li><li><a href="group__functions.html"><span>Functions</span></a>
-</li><li><a href="group__traits.html"><span>Traits</span></a>
-</li><li><a href="concepts.html"><span>Concept&#160;List</span></a>
-</li></ul>
-</li><li><a href="usergroup2.html"><span>Informations</span></a>
-<ul><li><a href="licence.html"><span>Licence</span></a>
-</li></ul>
-</li></ul>
+<div class="textblock"><p><a class="anchor" id="md____w_kyosu_kyosu_doc_index"></a></p>
+<p><b>KYOSU</b> is an unified implementation of the complex, quaternions, octonions and more generally all \(\mathbb{R}\)-Cayley-Dickson algebras in an SIMD aware context provided by <b>EVE</b></p>
+<p>The Cayley-Dickson construction scheme defines a new algebra as a Cartesian product of an algebra with itself, with multiplication defined in a specific way (different from the componentwise multiplication) and an involution known as conjugation.</p>
+<p>We currently only implement the Cayley-Dickson algebras based on the IEEE float and double representations of real numbers.</p>
+<p>Kyosu proper usable objects are all in the namespace <code>kyosu</code>.</p>
+<h1><a class="anchor" id="autotoc_md27"></a>
+Cayley-Dickson algebras</h1>
+<p>These are algebras over the real numbers with an involution named conjugation. The product of an element by its conjugate is 'real' and its positive square root is a norm on the vector space defined by the algebra.</p>
+<p>Starting from the real numbers (supported by type T float or double) we define:</p>
+<ul>
+<li>complex numbers (dimension 2)</li>
+<li>quaternion (dimension 4)</li>
+<li>octonion (dimension 8)</li>
+<li>and more generally for any integral power of 2: N, the cayley_dickson algebra of dimension N</li>
+</ul>
+<p>Let \(\mathbb{K}\) be a Cayley-Dickson algebra of dimension N its elements can be mathematically written</p>
+<p>\(\displaystyle z=\sum_0^{N-1} z_i\;e_i\)</p>
+<p>where \(e_0=1\) and \((e_i)_{i&gt;1}\) satisfy \(e_i^2 = -1\) and a proper multiplication table relating them.</p>
+<dl class="section note"><dt>Note</dt><dd>Up to octonions these \((e_i)_{i&lt;8}\) have (non indicial) standard names, namely : i, j, k, l, li, lj, lk. And \(e_0\) is 1 and so is generally omitted.</dd></dl>
+<p>In the documentation we will sometimes use the following notations:</p>
+<ul>
+<li>\(|z|\) is the absolute value (or modulus) of \(z\), i.e. \(\sqrt{\sum_0^{N-1} |z_i|^2}\).</li>
+<li>\(z_0\) is the real part of \(z\).</li>
+<li>\(\underline{z}\) is the pure part of \(z\) i.e. \(\sum_1^{N-1} z_i\;e_i\).</li>
+<li>If \(I_z\) denotes \(\pm\underline{z}/|\underline{z}|\) (with \(\pm\) chosen to be the sign of \(z_1\)), the polar form of \(z\) is \(\rho e^{\theta\;I_z} = \rho(\cos\theta + I_z\sin\theta)\), \( \rho\) being the norm of \(z\) and \(\theta\) its argument. (Note the similarity with complex numbers: it is easy to see that \(I_z^2=-1\)).</li>
+</ul>
+<p>These datas with different dimensions can be freely mixed with the obvious semantic that if N &lt;M an element of cayley_dickson&lt;N&gt; will be considered as having its components from N to M-1, null as an element of cayley_dickson&lt;M&gt;</p>
+<p>Higher are the dimensions weirder are these algebras</p>
+<ul>
+<li>real numbers is a commutative ordered field</li>
+<li>complex is a commutative field with no multiplication-compatible order</li>
+<li>quaternion is a non-commutative field</li>
+<li>octonion is a non associative (but alternative) division algebra</li>
+</ul>
+<p>Greater dimensions are not even alternative but keep power-associativity which allows to define most elementary functions.</p>
+<h1><a class="anchor" id="autotoc_md28"></a>
+What does this implementation provide</h1>
+<p>All operators and functions implemented can receive a mix of scalar or simd of cayley-dickson and reals of various dimensionnality and are defined in the namespace kyosu.</p>
+<p>Of course the algebra operation +, -, * and / are provided, but as \ is not an usable <b>C++</b> character as an operator, the left division a<b>is</b> provided as the call ldiv(a,b).</p>
+<h2><a class="anchor" id="autotoc_md29"></a>
+Constructors</h2>
+<p>complex and quaternion can be constructed using callables facilities <code>complex</code> and <code>quaternion</code>.</p>
+<p>complex can also be constructed from their polar representation quaternion from various parametrizations of \(\mathbb{R}^4\) or from \(\mathbb{R}^3\) rotations:</p>
+<ul>
+<li>angle and axis</li>
+<li>cylindrical</li>
+<li>cylindricospherical</li>
+<li>euler</li>
+<li>multipolar</li>
+<li>rotation_matrix</li>
+<li>semipolar</li>
+<li>spherical</li>
+</ul>
+<p>TODO cayley_dickson&lt;N&gt;</p>
+<h2><a class="anchor" id="autotoc_md30"></a>
+Functions</h2>
+<p>Most <b>KYOSU</b> callables are usable with all cayley_dickson types. The exception being mainly special complex functions and rotation related quaternion usage.</p>
+<dl class="section warning"><dt>Warning</dt><dd>: <b>EVE</b> callables that correspond to mathematical functions that are only defined on a proper part of the real axis as, for example, <code>acos</code> DOES NOT ever provide the same result if called in <b>EVE</b> or <b>KYOSU</b> context.</dd></dl>
+<p>eve::acos(2.0) wil returns a NaN value, but <a class="el" href="group__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6.html#ga46ff71e1e2cf6bbbeb771eeb0885f3b6" title="Computes the acosine of the argument.">kyosu::acos</a>(2.0) will return the pure imaginary complex number \(i\;\log(2+\sqrt{3})\)</p>
+<p>All these kinds of functions called with a floating value in the kyosu namespace will return a complex value.</p>
+<ul>
+<li><p class="startli">callables usable with all cayley_dickson types</p>
+<p class="startli">Most <b>EVE</b> arithmetic functions are provided.</p>
+</li>
+<li>callables usable with complex only</li>
+<li>callables usable with quaternion (and complex) only</li>
+</ul>
+<p>Most <b>EVE</b> arithmetic functions are provided. </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
