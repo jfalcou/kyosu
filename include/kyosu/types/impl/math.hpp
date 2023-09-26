@@ -379,7 +379,7 @@ namespace kyosu::_
         return kyosu::if_else(eve::is_ltz(c1), kyosu::rec(tmp), tmp);
       }
     }
-    else if constexpr(kyosu::concepts::complex<C0> && kyosu::concepts::complex<C1>)
+    else if constexpr(kyosu::concepts::complex<C0> || kyosu::concepts::complex<C1>)
     {
       r_t r;
       if constexpr(eve::floating_value<C0> && kyosu::concepts::complex<C1>) // c1 is complex c0 is real
