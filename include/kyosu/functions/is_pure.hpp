@@ -11,11 +11,11 @@
 
 namespace kyosu::tags
 {
-  struct callable_is_imag : eve::elementwise
+  struct callable_is_pure : eve::elementwise
   {
-    using callable_tag_type = callable_is_imag;
+    using callable_tag_type = callable_is_pure;
 
-    KYOSU_DEFERS_CALLABLE(is_imag_);
+    KYOSU_DEFERS_CALLABLE(is_pure_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::is_eqz(v); }
@@ -27,7 +27,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_is_imag(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_is_pure(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -37,8 +37,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var is_imag
-//!   @brief test if the parameter is imag.
+//!   @var is_pure
+//!   @brief test if the parameter is pure.
 //!
 //!   **Defined in Header**
 //!
@@ -51,8 +51,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T> constexpr auto is_imag(T z) noexcept;
-//!      template<eve::ordered_value T>       constexpr auto is_imag(T z) noexcept;
+//!      template<kyosu::concepts::complex T> constexpr auto is_pure(T z) noexcept;
+//!      template<eve::ordered_value T>       constexpr auto is_pure(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,13 +62,13 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise true the real part of the argument is zero.
-//!     For Caley-Dickson types of dimension greater than 2 use is_pure.
+//!     Returns elementwise true if the real part of the argument is zero.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/is_imag.cpp}
+//!  @godbolt{doc/is_pure.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_is_imag is_imag = {};
+inline constexpr tags::callable_is_pure is_pure = {};
+inline constexpr tags::callable_is_pure is_imag = {};
 }

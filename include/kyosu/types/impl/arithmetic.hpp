@@ -292,4 +292,14 @@ namespace kyosu::_
       return rec(c0)*c1;
   }
 
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::to_polar> const&, C const& c) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<C>)
+      return kumi::tuple{kyosu::abs(c),  kyosu::arg(c)};
+    else
+      return kumi::tuple{kyosu::abs(c),  kyosu::arg(c), sign(ipart(c))*sign(pure(c))};
+  }
+
 }

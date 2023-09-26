@@ -57,6 +57,7 @@
 #include <kyosu/functions/expx2.hpp>
 #include <kyosu/functions/floor.hpp>
 #include <kyosu/functions/frac.hpp>
+#include <kyosu/functions/from_polar.hpp>
 #include <kyosu/functions/hypot.hpp>
 #include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/inc.hpp>
@@ -66,6 +67,7 @@
 #include <kyosu/functions/is_eqz.hpp>
 #include <kyosu/functions/is_finite.hpp>
 #include <kyosu/functions/is_infinite.hpp>
+#include <kyosu/functions/is_imag.hpp>
 #include <kyosu/functions/is_nan.hpp>
 #include <kyosu/functions/is_nez.hpp>
 #include <kyosu/functions/is_not_denormal.hpp>
@@ -74,6 +76,7 @@
 #include <kyosu/functions/is_not_infinite.hpp>
 #include <kyosu/functions/is_not_nan.hpp>
 #include <kyosu/functions/is_not_real.hpp>
+#include <kyosu/functions/is_pure.hpp>
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/is_unitary.hpp>
 #include <kyosu/functions/jpart.hpp>
@@ -118,6 +121,7 @@
 #include <kyosu/functions/tan.hpp>
 #include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
+#include <kyosu/functions/to_polar.hpp>
 #include <kyosu/functions/trunc.hpp>
 
 //======================================================================================================================
@@ -132,8 +136,6 @@
 #include <kyosu/complex/erfi.hpp>
 #include <kyosu/complex/eta.hpp>
 #include <kyosu/complex/faddeeva.hpp>
-#include <kyosu/functions/from_polar.hpp>
-#include <kyosu/complex/is_imag.hpp>
 #include <kyosu/complex/lambda.hpp>
 #include <kyosu/complex/lbeta.hpp>
 #include <kyosu/complex/log_abs_gamma.hpp>
@@ -141,7 +143,6 @@
 #include <kyosu/complex/lrising_factorial.hpp>
 #include <kyosu/complex/rising_factorial.hpp>
 #include <kyosu/complex/tgamma.hpp>
-#include <kyosu/functions/to_polar.hpp>
 #include <kyosu/complex/zeta.hpp>
 
 //======================================================================================================================

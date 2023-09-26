@@ -40,12 +40,12 @@ And  \f$e_0\f$ is 1 and so is generally omitted.
 In the documentation we will sometimes use the following notations:
 
  * \f$|z|\f$ is the absolute value (or modulus) of \f$z\f$, i.e. \f$\sqrt{\sum_0^{N-1} |z_i|^2}\f$.
- * \f$z0 \f$ is the real part of \f$z\f$.
+ * \f$z_0\f$ is the real part of \f$z\f$.
  * \f$\underline{z}\f$ is the pure part of \f$z\f$ i.e. \f$\sum_1^{N-1} z_i\;e_i\f$.
- * If \f$I_z\f$ denotes \f$\pm\underline{z}/|z|\f$ (with \f$\pm\f$ chosen to be the sign of \f$\z1\f$),
-   the polar form of \f$z\f$ is \f$\rho e^{\theta\;I_z} = \rho(\cos\theta + I_z\sin\theta)\f$
-   \f$ \rho\f$ being the norm of \f$z\f$ and \f$\theta\f$ its argument. (Note the similariraty with complex numbers:
-   it is easy to see that \f$I_z^2=-1\f$
+ * If \f$I_z\f$ denotes \f$\pm\underline{z}/|\underline{z}|\f$ (with \f$\pm\f$ chosen to be the sign of \f$z_1\f$),
+   the polar form of \f$z\f$ is \f$\rho e^{\theta\;I_z} = \rho(\cos\theta + I_z\sin\theta)\f$,
+   \f$ \rho\f$ being the norm of \f$z\f$ and \f$\theta\f$ its argument. (Note the similarity with complex numbers:
+   it is easy to see that \f$I_z^2=-1\f$).
 
 These datas with different dimensions can be freely mixed with the obvious semantic that if N <M an element of
 cayley_dickson<N> will be considered as having its components from N to M-1, null as an element of cayley_dickson<M>
