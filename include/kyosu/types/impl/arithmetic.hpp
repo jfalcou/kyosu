@@ -302,4 +302,13 @@ namespace kyosu::_
       return kumi::tuple{kyosu::abs(c),  kyosu::arg(c), sign(ipart(c))*sign(pure(c))};
   }
 
+  template<eve::ordered_value T0, eve::ordered_value T1, typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::from_polar> const&
+               , T0 const& rho
+               , T1 const& theta
+               , C const& iz) noexcept
+  {
+    return rho*kyosu::exp(theta*iz);
+  }
 }
