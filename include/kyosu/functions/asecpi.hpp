@@ -12,16 +12,16 @@
 
 namespace kyosu::tags
 {
-  struct callable_acoth : eve::elementwise
+  struct callable_asecpi : eve::elementwise
   {
-    using callable_tag_type = callable_acoth;
+    using callable_tag_type = callable_asecpi;
 
-    KYOSU_DEFERS_CALLABLE(acoth_);
+    KYOSU_DEFERS_CALLABLE(asecpi_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_acoth{};
+      auto fn = callable_asecpi{};
       return fn(complex(v));
     }
 
@@ -32,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_acoth(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_asecpi(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var acoth
-//!   @brief Computes the acothine of the argument.
+//!   @var asecpi
+//!   @brief Computes the arc secant of the argument times \f$\pi\f$.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +56,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto acoth(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto acoth(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto asecpi(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto asecpi(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -69,12 +69,12 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns the complex arc hyperbolic cotangent of z, computed as \f$\mathop{\mathrm{atanh}}(1/z)\f$.
+//!   2. Returns `invpi(as(z))*asec(z)`
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/acoth.cpp}
+//!  @godbolt{doc/asecpi.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_acoth acoth = {};
+inline constexpr tags::callable_asecpi asecpi = {};
 }

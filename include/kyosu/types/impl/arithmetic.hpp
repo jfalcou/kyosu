@@ -25,6 +25,16 @@ namespace kyosu::_
     return kumi::apply(eve::hypot, c);
   }
 
+ template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::arg> const&, C const& z) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<C>)
+      return eve::pedantic(eve::atan2)(kyosu::imag(z), real(z));
+    else
+      return eve::pedantic(eve::atan2)(sign(ipart(z))*kyosu::abs(pure(z)), real(z));
+  }
+
   template<typename C>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::sqr_abs> const&, C const& c) noexcept
@@ -282,4 +292,23 @@ namespace kyosu::_
       return rec(c0)*c1;
   }
 
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::to_polar> const&, C const& c) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<C>)
+      return kumi::tuple{kyosu::abs(c),  kyosu::arg(c)};
+    else
+      return kumi::tuple{kyosu::abs(c),  kyosu::arg(c), sign(ipart(c))*sign(pure(c))};
+  }
+
+  template<eve::ordered_value T0, eve::ordered_value T1, typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::from_polar> const&
+               , T0 const& rho
+               , T1 const& theta
+               , C const& iz) noexcept
+  {
+    return rho*kyosu::exp(theta*iz);
+  }
 }

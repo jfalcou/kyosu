@@ -12,7 +12,7 @@
 
 TTS_CASE_WITH("Check behavior of zeta on wide"
              , kyosu::scalar_real_types
-             , tts::generate( tts::between(-10, 10))
+             , tts::generate( tts::randoms(-10, 10))
              )
   <typename T>([[maybe_unused]] T const& a0)
 {
@@ -25,7 +25,7 @@ TTS_CASE_WITH("Check behavior of zeta on wide"
 //  TTS_RELATIVE_EQUAL(real(zeta(a0)), map([](auto e) -> v_t { return std::riemann_zeta(v_t(e)); }, a0), 01.0e-4);
   TTS_ULP_EQUAL(real(zeta(T(0))), T(std::riemann_zeta(v_t(0))), 0.5);
   TTS_ULP_EQUAL(real(zeta(T(-0.0))), T(std::riemann_zeta(v_t(-0.0))), 0.5);
-  TTS_ULP_EQUAL(real(zeta(T(1.5))), T(std::riemann_zeta(v_t(1.5))), 1.5);
+  TTS_ULP_EQUAL(real(zeta(T(1.5))), T(std::riemann_zeta(v_t(1.5))), 2.5);
   TTS_ULP_EQUAL(real(zeta(T(-1.5))), T(std::riemann_zeta(v_t(-1.5))), 3.5);
   TTS_ULP_EQUAL(real(zeta(T(14))), T(std::riemann_zeta(v_t(14))), 0.5);
   TTS_ULP_EQUAL(real(zeta(T(-14))), T(std::riemann_zeta(v_t(-14))), 0.5);

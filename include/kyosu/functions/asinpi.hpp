@@ -12,16 +12,16 @@
 
 namespace kyosu::tags
 {
-  struct callable_acscpi : eve::elementwise
+  struct callable_asinpi : eve::elementwise
   {
-    using callable_tag_type = callable_acscpi;
+    using callable_tag_type = callable_asinpi;
 
-    KYOSU_DEFERS_CALLABLE(acscpi_);
+    KYOSU_DEFERS_CALLABLE(asinpi_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_acscpi{};
+      auto fn = callable_asinpi{};
       return fn(complex(v));
     }
 
@@ -32,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_acscpi(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_asinpi(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var acscpi
-//!   @brief Computes the arc cosecant of the argument times \f$\pi\f$.
+//!   @var asinpi
+//!   @brief Computes the arc sine of the argument times \f$\pi\f$.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +56,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto acscpi(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto acscpi(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto asinpi(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto asinpi(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -69,12 +69,12 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns `pi(as(z))*acsc(z)`
+//!   2. Returns `invpi(as(z))*asin(z)`
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/acscpi.cpp}
+//!  @godbolt{doc/asinpi.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_acscpi acscpi = {};
+inline constexpr tags::callable_asinpi asinpi = {};
 }

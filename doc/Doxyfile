@@ -37,6 +37,8 @@ EXAMPLE_PATH           = ../test/doc \
                          ../examples \
                          .
 
+USE_MDFILE_AS_MAINPAGE = ./index.md
+
 SEPARATE_MEMBER_PAGES  = YES
 TAB_SIZE               = 2
 

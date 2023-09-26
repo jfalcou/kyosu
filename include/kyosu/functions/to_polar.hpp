@@ -62,18 +62,27 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto to_polar( auto q) const noexcept;
+  //!      template<eve::ordered_value T>              constexpr auto arg(T z) noexcept;  //1
+  //!      template<kyosu::concepts::complex T>        constexpr auto atan(T z) noexcept;  //2
+  //!      template<kyosu::concepts::cayley_dickson T> constexpr auto argy(T z) noexcept;  //3
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!  `q` : quaternion
+  //!  `q` : cayley dickson value
   //!
   //! **Return value**
   //!
-  //!  a tuple containing in this order `rho`, 'theta':  the modulus
-  //!  and  the argument in radian of the complex input
+  //!    1. a tuple containing `rho`, 'theta':  the absolute value
+  //!      and  the argument in radian of the real input (\f$0\f$ or\f$\pi\f$).
+  //!
+  //!    2. a tuple containing `rho`, 'theta':  the modulus
+  //!      and  the argument in radian of the complex  input.
+  //!
+  //!    3. a tuple containing `rho`, 'theta'  the modulus
+  //!      and  the argument in radian of the cayley input and a square root of -1 iz such
+  //!       that `z = rho*exp(iz*theta). The leading coefficient of ìz` is chosen non-negative.`
   //!
   //! ---
   //!

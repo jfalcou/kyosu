@@ -12,6 +12,25 @@
 //! @brief Functions performing computations over all caylet-dickson types complex, quaternions, octonions...
 //======================================================================================================================
 #include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/acos.hpp>
+#include <kyosu/functions/acosh.hpp>
+#include <kyosu/functions/acospi.hpp>
+#include <kyosu/functions/acot.hpp>
+#include <kyosu/functions/acotpi.hpp>
+#include <kyosu/functions/atanpi.hpp>
+#include <kyosu/functions/acoth.hpp>
+#include <kyosu/functions/arg.hpp>
+#include <kyosu/functions/acsc.hpp>
+#include <kyosu/functions/acscpi.hpp>
+#include <kyosu/functions/acsch.hpp>
+#include <kyosu/functions/asec.hpp>
+#include <kyosu/functions/asecpi.hpp>
+#include <kyosu/functions/asech.hpp>
+#include <kyosu/functions/asin.hpp>
+#include <kyosu/functions/asinpi.hpp>
+#include <kyosu/functions/asinh.hpp>
+#include <kyosu/functions/atan.hpp>
+#include <kyosu/functions/atanh.hpp>
 #include <kyosu/functions/average.hpp>
 #include <kyosu/functions/ceil.hpp>
 #include <kyosu/functions/conj.hpp>
@@ -38,6 +57,7 @@
 #include <kyosu/functions/expx2.hpp>
 #include <kyosu/functions/floor.hpp>
 #include <kyosu/functions/frac.hpp>
+#include <kyosu/functions/from_polar.hpp>
 #include <kyosu/functions/hypot.hpp>
 #include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/inc.hpp>
@@ -47,6 +67,7 @@
 #include <kyosu/functions/is_eqz.hpp>
 #include <kyosu/functions/is_finite.hpp>
 #include <kyosu/functions/is_infinite.hpp>
+#include <kyosu/functions/is_imag.hpp>
 #include <kyosu/functions/is_nan.hpp>
 #include <kyosu/functions/is_nez.hpp>
 #include <kyosu/functions/is_not_denormal.hpp>
@@ -55,6 +76,7 @@
 #include <kyosu/functions/is_not_infinite.hpp>
 #include <kyosu/functions/is_not_nan.hpp>
 #include <kyosu/functions/is_not_real.hpp>
+#include <kyosu/functions/is_pure.hpp>
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/is_unitary.hpp>
 #include <kyosu/functions/jpart.hpp>
@@ -99,31 +121,13 @@
 #include <kyosu/functions/tan.hpp>
 #include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
+#include <kyosu/functions/to_polar.hpp>
 #include <kyosu/functions/trunc.hpp>
 
 //======================================================================================================================
 //! @brief Functions performing computations over complex or real elements only.
 //======================================================================================================================
 
-#include <kyosu/complex/acos.hpp>
-#include <kyosu/complex/acosh.hpp>
-#include <kyosu/complex/acot.hpp>
-#include <kyosu/complex/acospi.hpp>
-#include <kyosu/complex/acoth.hpp>
-#include <kyosu/complex/acotpi.hpp>
-#include <kyosu/complex/acsc.hpp>
-#include <kyosu/complex/acsch.hpp>
-#include <kyosu/complex/acscpi.hpp>
-#include <kyosu/complex/arg.hpp>
-#include <kyosu/complex/asec.hpp>
-#include <kyosu/complex/asech.hpp>
-#include <kyosu/complex/asecpi.hpp>
-#include <kyosu/complex/asin.hpp>
-#include <kyosu/complex/asinh.hpp>
-#include <kyosu/complex/asinpi.hpp>
-#include <kyosu/complex/atan.hpp>
-#include <kyosu/complex/atanh.hpp>
-#include <kyosu/complex/atanpi.hpp>
 #include <kyosu/complex/beta.hpp>
 #include <kyosu/complex/deta.hpp>
 #include <kyosu/complex/digamma.hpp>
@@ -132,8 +136,6 @@
 #include <kyosu/complex/erfi.hpp>
 #include <kyosu/complex/eta.hpp>
 #include <kyosu/complex/faddeeva.hpp>
-#include <kyosu/functions/from_polar.hpp>
-#include <kyosu/complex/is_imag.hpp>
 #include <kyosu/complex/lambda.hpp>
 #include <kyosu/complex/lbeta.hpp>
 #include <kyosu/complex/log_abs_gamma.hpp>
@@ -141,7 +143,6 @@
 #include <kyosu/complex/lrising_factorial.hpp>
 #include <kyosu/complex/rising_factorial.hpp>
 #include <kyosu/complex/tgamma.hpp>
-#include <kyosu/functions/to_polar.hpp>
 #include <kyosu/complex/zeta.hpp>
 
 //======================================================================================================================
@@ -149,6 +150,7 @@
 //======================================================================================================================
 
 
+#include <kyosu/functions/align.hpp>
 #include <kyosu/functions/from_angle_axis.hpp>
 #include <kyosu/functions/from_cylindrical.hpp>
 #include <kyosu/functions/from_cylindricospherical.hpp>

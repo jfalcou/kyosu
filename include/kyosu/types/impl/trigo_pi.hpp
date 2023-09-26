@@ -195,5 +195,46 @@ namespace kyosu::_
     }
   }
 
+ template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::asinpi> const&, C const& z) noexcept
+  {
+    return radinpi(asin(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acospi> const&, C const& z) noexcept
+  {
+    return radinpi(acos(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::atanpi> const&, C const& z) noexcept
+  {
+    return radinpi(atan(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acotpi> const&, C const& z) noexcept
+  {
+    return radinpi(acot(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::asecpi> const&, C const& z) noexcept
+  {
+    return radinpi(asec(z));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::acscpi> const&, C const& z) noexcept
+  {
+    return radinpi(acsc(z));
+  }
 
 }

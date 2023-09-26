@@ -9,19 +9,19 @@
 
 #include <kyosu/details/invoke.hpp>
 #include <eve/module/math.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu::tags
 {
-  struct callable_asinpi : eve::elementwise
+  struct callable_asec : eve::elementwise
   {
-    using callable_tag_type = callable_asinpi;
+    using callable_tag_type = callable_asec;
 
-    KYOSU_DEFERS_CALLABLE(asinpi_);
+    KYOSU_DEFERS_CALLABLE(asec_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      auto fn = callable_asinpi{};
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
+      auto fn =  callable_asec{};
       return fn(complex(v));
     }
 
@@ -32,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_asinpi(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_asec(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var asinpi
-//!   @brief Computes the arc sine of the argument times \f$\pi\f$.
+//!   @var asec
+//!   @brief Computes the arcsecant of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +56,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto asinpi(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto asinpi(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto asec(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto asec(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -69,12 +69,12 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns `pi(as(z))*asin(z)`
+//!   2. Returns elementwise \f$\mathop{\mathrm{acos}}(1/z)\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/asinpi.cpp}
+//!  @godbolt{doc/asec.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_asinpi asinpi = {};
+inline constexpr tags::callable_asec asec = {};
 }

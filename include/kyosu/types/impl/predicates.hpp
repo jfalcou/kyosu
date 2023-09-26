@@ -14,6 +14,13 @@ namespace kyosu::_
 {
   template<typename C>
   KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::is_pure> const&, C c) noexcept
+  {
+    return is_eqz(real(c));
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::is_not_real> const&, C c) noexcept
   {
     get<0>(c) = eve::zero(eve::as(get<0>(c)));

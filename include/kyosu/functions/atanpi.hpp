@@ -12,16 +12,16 @@
 
 namespace kyosu::tags
 {
-  struct callable_acotpi : eve::elementwise
+  struct callable_atanpi : eve::elementwise
   {
-    using callable_tag_type = callable_acotpi;
+    using callable_tag_type = callable_atanpi;
 
-    KYOSU_DEFERS_CALLABLE(acotpi_);
+    KYOSU_DEFERS_CALLABLE(atanpi_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_acotpi{};
+      auto fn = callable_atanpi{};
       return fn(complex(v));
     }
 
@@ -32,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_acotpi(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_atanpi(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var acotpi
-//!   @brief Computes the arc cotangent of the argument times \f$\pi\f$.
+//!   @var atanpi
+//!   @brief Computes the arc tangent of the argument times \f$\pi\f$.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +56,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto acotpi(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto acotpi(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto atanpi(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto atanpi(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -69,12 +69,12 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns `pi(as(z))*acot(z)`
+//!   2. Returns `invpi(as(z))*atan(z)`
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/acotpi.cpp}
+//!  @godbolt{doc/atanpi.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_acotpi acotpi = {};
+inline constexpr tags::callable_atanpi atanpi = {};
 }

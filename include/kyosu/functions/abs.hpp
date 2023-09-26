@@ -62,7 +62,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the modulus of its argument.
+//!     * Returns the modulus of its argument which always is a floating ordered value.
+//!       The modulus is the square root of the square of the absolute values of the components.
 //!
 //!  @groupheader{Example}
 //!

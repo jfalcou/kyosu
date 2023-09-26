@@ -266,15 +266,15 @@ namespace kyosu::_
     }
   }
 
-  template<typename Z, typename T, bool normalize>
+  template<typename Z, typename M, bool normalize>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::rotate_vec> const&
                , Z const & q
-               , std::span<T, 3> const & v
+               , M const & v
                , _::norming<normalize>) noexcept
   {
     using e_t = std::decay_t<decltype(kyosu::real(q))>;
-    using v_t = decltype(T()+e_t());
+    using v_t = decltype(v[0]+e_t());
     if constexpr (!normalize) EVE_ASSERT(eve::all(eve::pedantic(kyosu::is_unitary)(q)), "some quaternions are not unitary");
     std::array<v_t, 3> w, wp;
     using a_t = decltype(kyosu::abs(q));
@@ -291,11 +291,11 @@ namespace kyosu::_
     return wp;
   }
 
-  template<typename Z, typename T>
+  template<typename Z, typename M>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::rotate_vec> const&
                , Z const & q
-               , std::span<T, 3> const & v) noexcept
+               , M const & v) noexcept
   {
     return rotate_vec(q, v, _::norming<true>{});
   }

@@ -12,16 +12,16 @@
 
 namespace kyosu::tags
 {
-  struct callable_acsch : eve::elementwise
+  struct callable_acscpi : eve::elementwise
   {
-    using callable_tag_type = callable_acsch;
+    using callable_tag_type = callable_acscpi;
 
-    KYOSU_DEFERS_CALLABLE(acsch_);
+    KYOSU_DEFERS_CALLABLE(acscpi_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_acsch{};
+      auto fn = callable_acscpi{};
       return fn(complex(v));
     }
 
@@ -32,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_acsch(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_acscpi(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var acsch
-//!   @brief Computes the hyperbolic arccosecant of the argument.
+//!   @var acscpi
+//!   @brief Computes the arc cosecant of the argument times \f$\pi\f$.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +56,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto acsch(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto acsch(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto acscpi(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acscpi(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -69,12 +69,12 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns elementwise \f$\mathop{\mathrm{asinh}}(1/z)\f$.
+//!   2. Returns `invpi(as(z))*acsc(z)`
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/acsch.cpp}
+//!  @godbolt{doc/acscpi.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_acsch acsch = {};
+inline constexpr tags::callable_acscpi acscpi = {};
 }

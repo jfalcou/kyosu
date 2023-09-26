@@ -9,19 +9,20 @@
 
 #include <kyosu/details/invoke.hpp>
 #include <eve/module/math.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu::tags
 {
-  struct callable_acospi : eve::elementwise
+  struct callable_acsch : eve::elementwise
   {
-    using callable_tag_type = callable_acospi;
+    using callable_tag_type = callable_acsch;
 
-    KYOSU_DEFERS_CALLABLE(acospi_);
+    KYOSU_DEFERS_CALLABLE(acsch_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_acospi{};
+      auto fn = callable_acsch{};
       return fn(complex(v));
     }
 
@@ -32,7 +33,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_acospi(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_acsch(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,8 +43,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var acospi
-//!   @brief Computes the arc cosine of the argument times \f$\pi\f$.
+//!   @var acsch
+//!   @brief Computes the inverse hyperbolic cosecant of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +57,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto acospi(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto acospi(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto acsch(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acsch(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -69,12 +70,12 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns `pi(as(z))*acos(z)`
+//!   2. Returns elementwise \f$\mathop{\mathrm{asinh}}(1/z)\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/acospi.cpp}
+//!  @godbolt{doc/acsch.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_acospi acospi = {};
+inline constexpr tags::callable_acsch acsch = {};
 }

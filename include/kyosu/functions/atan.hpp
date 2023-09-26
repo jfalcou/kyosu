@@ -12,16 +12,16 @@
 
 namespace kyosu::tags
 {
-  struct callable_atanpi : eve::elementwise
+  struct callable_atan : eve::elementwise
   {
-    using callable_tag_type = callable_atanpi;
+    using callable_tag_type = callable_atan;
 
-    KYOSU_DEFERS_CALLABLE(atanpi_);
+    KYOSU_DEFERS_CALLABLE(atan_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_atanpi{};
+      auto fn = callable_atan{};
       return fn(complex(v));
     }
 
@@ -32,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_atanpi(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_atan(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var atanpi
-//!   @brief Computes the arc tangent of the argument times \f$\pi\f$.
+//!   @var atan
+//!   @brief Computes the inverse hyperbolic tangent of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +56,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto atanpi(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto atanpi(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto atan(T z) noexcept;  //1
+//!      template<kyosu::concepts::complex T>        constexpr auto atan(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto atan(T z) noexcept;  //3
 //!   }
 //!   @endcode
 //!
@@ -69,12 +70,18 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns `pi(as(z))*atan(z)`
+//!   2. Returns the elementwise the complex principal value
+//!      of the arc tangent of the input in the range of a strip unbounded along the imaginary axis
+//!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
+//!      Special cases are handled as if the operation was implemented by \f$-i\; \mathrm{atanh}(z\; i)\f$.
+//!
+//!   3. Returns \f$ -I_z \mathrm{atanh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!         \f$\underline{z}\f$ is the pure part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/atanpi.cpp}
+//!  @godbolt{doc/atan.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_atanpi atanpi = {};
+inline constexpr tags::callable_atan atan = {};
 }

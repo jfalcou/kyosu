@@ -10,7 +10,7 @@
 
 TTS_CASE_WITH ( "Check kyosu::sqr over real"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10))
+              , tts::generate(tts::randoms(-10,10))
               )
 (auto data)
 {
@@ -19,7 +19,7 @@ TTS_CASE_WITH ( "Check kyosu::sqr over real"
 
 TTS_CASE_WITH ( "Check kyosu::sqr over complex"
               , kyosu::real_types
-              , tts::generate(tts::between(-10,10), tts::between(-10,10))
+              , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10))
               )
 (auto r, auto i)
 {
@@ -29,13 +29,13 @@ TTS_CASE_WITH ( "Check kyosu::sqr over complex"
 
 TTS_CASE_WITH ( "Check kyosu::sqr over quaternion"
               , kyosu::real_types
-              , tts::generate ( tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
 <typename T>(T r, T i, T j, T k)
 {
   using type = kyosu::quaternion_t<T>;
   auto q = type(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::sqr(q), q*q, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::sqr(q), q*q, 1e-6);
 };

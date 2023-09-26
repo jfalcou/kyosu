@@ -10,8 +10,8 @@
 
 TTS_CASE_WITH ( "Check kyosu::exp over quaternion"
               , kyosu::simd_real_types
-              , tts::generate ( tts::between(-10,10), tts::between(-10,10)
-                              , tts::between(-10,10), tts::between(-10,10)
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
 <typename T>(T a0, T a1, T a2, T a3)

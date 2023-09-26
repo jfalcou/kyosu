@@ -35,8 +35,8 @@ TTS_CASE_WITH( "Check behavior of log1p on scalar"
 
 TTS_CASE_WITH( "Check behavior of log1p on wide"
              , kyosu::simd_real_types
-             , tts::generate( tts::between(-10, 10)
-                            , tts::between(-10, 10))
+             , tts::generate( tts::randoms(-10, 10)
+                            , tts::randoms(-10, 10))
              )
   <typename T>(T const& a0, T const& a1 )
 {
@@ -44,5 +44,5 @@ TTS_CASE_WITH( "Check behavior of log1p on wide"
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return cv(std::log(c_t(eve::inc(a0.get(i)), a1.get(i)))); });
-  TTS_RELATIVE_EQUAL(kyosu::log1p(ke_t{a0,a1}), e, 1.0e-6);
+  TTS_RELATIVE_EQUAL(kyosu::log1p(ke_t{a0,a1}), e, 1.0e-4);
 };

@@ -39,9 +39,9 @@ namespace kyosu::tags
       return eve::tag_invoke(*this, target0,  target1);
     }
 
-//     template<typename... T>
-//     eve::unsupported_call<callable_from_angle_axis(T&&...)> operator()(T&&... x) const
-//     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    template<typename... T>
+    eve::unsupported_call<callable_from_angle_axis(T&&...)> operator()(T&&... x) const
+    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
 
@@ -75,8 +75,8 @@ namespace kyosu
   //!
   //!  * `angle` : rotation angle in radian
   //!  * `axis`` : rotation axis given by an std::span of dimension 3.
-  //!  * normalize : can be assume_normalized or normalize in the second case axis is normalized.
-  //!                if axis is already normalized use assume_normalized.
+  //!  * normalize : can be assume_normalized or normalize. In the second case axis is normalized.
+  //!                if axis is already normalized use assume_normalized is more efficient.
   //!
   //! **Return value**
   //!

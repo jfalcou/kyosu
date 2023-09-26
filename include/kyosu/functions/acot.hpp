@@ -8,18 +8,21 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
+#include <eve/module/math.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu::tags
 {
-  struct callable_arg : eve::elementwise
+  struct callable_acot : eve::elementwise
   {
-    using callable_tag_type = callable_arg;
+    using callable_tag_type = callable_acot;
 
-    KYOSU_DEFERS_CALLABLE(arg_);
+    KYOSU_DEFERS_CALLABLE(acot_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
-      return eve::if_else(eve::is_positive(v), eve::zero, eve::pi(eve::as(v)));
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
+    {
+      return eve::acot(v);
     }
 
     template<typename T>
@@ -29,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_arg(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_acot(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -39,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var arg
-//!   @brief complex number argument.
+//!   @var acot
+//!   @brief Computes the arc cotangent of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -53,8 +56,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T> constexpr auto arg(T z) noexcept;
-//!      template<eve::ordered_value T>       constexpr auto arg(T z) noexcept;
+//!      template<eve::ordered_value T>              constexpr auto acot(T z) noexcept;  //1
+//!      template<kyosu::concepts::complex T>        constexpr auto acot(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acot(T z) noexcept;  //3
 //!   }
 //!   @endcode
 //!
@@ -62,14 +66,20 @@ namespace kyosu
 //!
 //!     * `z` : Value to process.
 //!
-//!   **Return value**
+//! **Return value**
 //!
-//!     Returns elementwise true the argument of the complex number i.e. `atan2(imag(z), real(z))`.
+//!   1. A real type input z calls eve::acot(z); and so returns the same type as input.
+//!
+//!   2. Returns elementwise the complex principal value
+//!      of the arc cotangent of the input as the arc tangent of the inverse of the input.
+//!
+//!   3. Returns \f$I_z \mathrm{acoth}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!         \f$\underline{z}\f$ is the pure part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/arg.cpp}
+//!  @godbolt{doc/acot.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_arg arg = {};
+inline constexpr tags::callable_acot acot = {};
 }

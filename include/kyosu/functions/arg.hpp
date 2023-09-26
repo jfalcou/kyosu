@@ -8,21 +8,18 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
 
 namespace kyosu::tags
 {
-  struct callable_atan : eve::elementwise
+  struct callable_arg : eve::elementwise
   {
-    using callable_tag_type = callable_atan;
+    using callable_tag_type = callable_arg;
 
-    KYOSU_DEFERS_CALLABLE(atan_);
+    KYOSU_DEFERS_CALLABLE(arg_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      auto fn = callable_atan{};
-      return fn(complex(v));
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
+      return eve::if_else(eve::is_positive(v), eve::zero, eve::pi(eve::as(v)));
     }
 
     template<typename T>
@@ -32,7 +29,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_atan(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_arg(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,8 +39,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var atan
-//!   @brief Computes the atanine of the argument.
+//!   @var arg
+//!   @brief complex number argument.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +53,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto atan(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto atan(T z) noexcept;  //2
+//!      template<eve::ordered_value T>              constexpr auto arg(T z) noexcept; //1
+//!      template<kyosu::concepts::complex T>        constexpr auto arg(T z) noexcept; //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto arg(T z) noexcept; //3
 //!   }
 //!   @endcode
 //!
@@ -65,20 +63,18 @@ namespace kyosu
 //!
 //!     * `z` : Value to process.
 //!
-//! **Return value**
+//!   **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
-//!
-//!   2. Returns the elementwise the complex principal value
-//!      of the arc tangent of the input in the range of a strip unbounded along the imaginary axis
-//!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
-//!
-//!      special cases are handled as if the operation was implemented by \f$-i \mathrm{atanh}(i z)\f$
+//!     1. Returns 0 or pi acording to the non negativity of z.
+//!     2. Returns elementwise the argument of the complex number i.e. `atan2(imag(z), real(z))`.
+//!     3. Returns \f$\mathrm{atan2}(|\underline{z}|, z_0)\f$ where \f$z_0\f$ is the real part of \f$z\f$ and
+//!         \f$\underline{z}\f$ is the pure part of \f$z\f$.
+
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/atan.cpp}
+//!  @godbolt{doc/arg.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_atan atan = {};
+inline constexpr tags::callable_arg arg = {};
 }
