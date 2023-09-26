@@ -379,7 +379,7 @@ namespace kyosu::_
         return kyosu::if_else(eve::is_ltz(c1), kyosu::rec(tmp), tmp);
       }
     }
-    else if constexpr(kyosu::concepts::complex<C0> || kyosu::concepts::complex<C1>)
+    else if constexpr((dimension_v<C0> <= 2) && (dimension_v<C1> <= 2))
     {
       r_t r;
       if constexpr(eve::floating_value<C0> && kyosu::concepts::complex<C1>) // c1 is complex c0 is real
@@ -412,7 +412,9 @@ namespace kyosu::_
       }
       else if constexpr( kyosu::concepts::complex<C0>)// c0 and c1 are complex
       {
-        auto [rc1, ic1] = c1;
+//         auto   rc1 = real(c1);
+//         auto   ic1 = imag(c1);
+        auto  [rc1, ic1] = c1;
         auto lc0 = kyosu::log_abs(c0);
         auto argc0 = kyosu::arg(c0);
         auto rho = eve::exp(eve::pedantic(eve::diff_of_prod)(lc0, rc1, ic1, argc0));
@@ -421,7 +423,7 @@ namespace kyosu::_
         auto realc0 = is_real(c0);
         if(eve::any(realc0))
         {
-          auto rr = complex(kyosu::pow(real(c0), c1));
+          auto rr = kyosu::pow(real(c0), c1);
           r = kyosu::if_else(realc0, rr, r);
         }
       }
