@@ -55,20 +55,18 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto dot(T0 z0, T1, z1) noexcept;
-//!      template<eve::floating_ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto dot(T0 z0, T1, z1) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T0,  eve::floating_ordered_value T1             > constexpr auto dot(T0 z0, T1, z1) noexcept;
-//!      template<eve::floating_ordered_value T0, floating_ordered_value T1>                               > constexpr auto dot(T0 z0, T1, z1) noexcept;
-///!   }
+//!      constexpr auto dot(auto z0,  auto z1) noexcept;
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1` : Value to process.
+//!     * `z0, z1` : Values to process.
 //!
 //!   **Return value**
 //!
 //!     Returns the dot product of z0 and z1. If z0 and z1 are floating point this is equivalent to z0*z1.
+//!     Arguments can be a mix of floting or Cayley-Dicson values.
 //!
 //!     `dot(z0, z0)` is always semantically equivalent to `sqr_abs(z0)`.
 //!

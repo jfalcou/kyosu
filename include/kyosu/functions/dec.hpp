@@ -43,7 +43,7 @@ namespace kyosu
 //!   **Defined in Header**
 //!
 //!   @code
-//!   #declude <kyosu/functions.hpp>
+//!   #include <kyosu/functions.hpp>
 //!   @endcode
 //!
 //!   @groupheader{Callable Signatures}
@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T dec(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr T dec(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T dec(T z) noexcept;
 //!   }
 //!   @endcode
 //!

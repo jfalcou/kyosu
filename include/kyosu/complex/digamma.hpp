@@ -39,7 +39,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var digamma
-//!   @brief Computes the Digamma function i.e. the logarithmic derivative of the \f$\Gamma\f$
+//!   @brief Computes the Digamma function i.e. the logarithmic derivative of the \f$\Gamma\f$ function
 //!
 //!   **Defined in Header**
 //!
@@ -59,7 +59,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `z` : rel or complex value to process.
 //!
 //!   **Return value**
 //!
