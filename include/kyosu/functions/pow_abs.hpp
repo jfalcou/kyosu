@@ -17,10 +17,10 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(pow_abs_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const& v0
-                                               , eve::floating_ordered_value auto const& v1) noexcept
+                                               , eve::ordered_value auto const& v0
+                                               , eve::ordered_value auto const& v1) noexcept
     {
-      return eve::pow(eve::abs(v0), v1);
+      return eve::pow(kyosu::abs(v0), v1);
     }
 
     KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1) const noexcept

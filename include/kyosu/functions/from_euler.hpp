@@ -19,9 +19,9 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(from_euler_);
 
-    template<eve::floating_floating_ordered_value U,
-             eve::floating_floating_ordered_value V,
-             eve::floating_floating_ordered_value W, int I,  int J,  int K, bool Extrinsic>
+    template<eve::floating_ordered_value U,
+             eve::floating_ordered_value V,
+             eve::floating_ordered_value W, int I,  int J,  int K, bool Extrinsic>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , U const & v1
                                                , V const & v2

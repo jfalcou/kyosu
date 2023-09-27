@@ -16,11 +16,18 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(pow_);
 
+    template < eve::floating_ordered_value U,  eve::ordered_value V>
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const& v0
-                                               , eve::floating_ordered_value auto const& v1) noexcept
+                                               , U const& v0
+                                               , V const& v1) noexcept
     {
-      return eve::pow(v0, v1);
+      if constexpr(eve::integral_value<V>)
+        return eve::pow(v0, v1);
+      else
+      {
+        auto fn = callable_pow{};
+        return fn(kyosu::complex(v0), v1);
+      }
     }
 
     KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1) const noexcept

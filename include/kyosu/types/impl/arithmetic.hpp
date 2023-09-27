@@ -225,6 +225,18 @@ namespace kyosu::_
         };
   }
 
+  template<typename...  C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::average> const&, C... cs) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<C...>;
+    using er_t = eve::element_type_t<r_t>;
+    return r_t{kumi::map([](auto const& ... es) { return eve::average(es...); }
+                         , kyosu::convert(cs..., eve::as<er_t>())
+                        )
+        };
+  }
+
   template<typename  C0, typename  C1>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::dot> const&, C0 const & c0, C1 const &  c1) noexcept

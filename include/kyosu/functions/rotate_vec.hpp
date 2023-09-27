@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(rotate_vec_);
 
-    template<eve::floating_floating_ordered_value V, typename U, bool normalize>
+    template<eve::floating_ordered_value V, typename U, bool normalize>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const &
                                                , U const & v
@@ -28,7 +28,7 @@ namespace kyosu::tags
       return v;
     }
 
-    template<eve::floating_floating_ordered_value V, typename U>
+    template<eve::floating_ordered_value V, typename U>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const &
                                                , U const & v

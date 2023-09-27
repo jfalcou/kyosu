@@ -16,7 +16,7 @@ TTS_CASE_WITH ( "Check kyosu::pow over real"
               )
 (auto r0, auto r1)
 {
-  TTS_EQUAL(kyosu::pow(r0, r1), eve::pow(r0, r1));
+  TTS_RELATIVE_EQUAL(kyosu::pow(r0, r1), kyosu::exp(kyosu::log(r0)*r1), 1.0e-5);
   TTS_RELATIVE_EQUAL(kyosu::pow(r0, 4),  kyosu::sqr(kyosu::sqr(r0)), 1.0e-5);
 };
 
