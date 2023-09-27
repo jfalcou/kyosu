@@ -44,7 +44,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var exp_i
-//!   @brief Computes the exponential of the argument times i.
+//!   @brief Computes the exponential of i times the argument
 //!
 //!   **Defined in Header**
 //!
@@ -58,7 +58,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexp_ir T exp_i(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexp_ir T exp_i(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexp_ir T exp_i(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -68,7 +68,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the `exp(i*z)`.
+//!     Returns `exp(i*z)`.
 //!
 //!  @groupheader{Example}
 //!

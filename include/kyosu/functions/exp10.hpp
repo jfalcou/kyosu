@@ -52,8 +52,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexp10r T exp10(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexp10r T exp10(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T exp10(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T exp10(T z) noexcept;
 //!   }
 //!   @endcode
 //!

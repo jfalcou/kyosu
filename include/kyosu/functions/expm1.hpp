@@ -39,7 +39,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var expm1
-//!   @brief Computes the expm1onential of the argument minus 1.
+//!   @brief Computes the exponential of the argument minus 1.
 //!
 //!   **Defined in Header**
 //!
@@ -53,7 +53,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpm1r T expm1(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpm1r T expm1(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpm1r T expm1(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the expm1onential of the argument minus &.
+//!     Returns the expm1onential of the argument minus 1.
 //!     for real and complex typed inputs, provisions are made to ensure good precision near zero.
 //!
 //!  @groupheader{Example}

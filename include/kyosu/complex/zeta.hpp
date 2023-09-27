@@ -64,7 +64,7 @@ namespace kyosu
 //!   **Parameters**
 //!
 //!     * `k` : scalar unsigned value,  parameter of the sum.
-//!     * `z` : Vcomplex or real value to process.
+//!     * `z` : complex or real value to process.
 //!
 //! **Return value**
 //!
