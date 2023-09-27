@@ -58,7 +58,7 @@ namespace kyosu
   //! @{
   //! @var from_polar
   //!
-  //! @brief Callable object computing a complex from its polar coordinates.
+  //! @brief Callable object computing a complex or a general Cayley-Dickson from a polar representation.
   //!
   //!  This function is the reciprocal of from_polar
   //!
@@ -83,7 +83,9 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  `rho`   : modulus.
+  //!
   //!  `theta` : argument.
+  //!
   //!  `iz'    : unitary cayley dickson value.
   //!
   //! **Return value**
@@ -91,6 +93,8 @@ namespace kyosu
   //!    1. the complex number `rho*exp(i*theta)`.
   //!    2. the cayley_dickson value `rho*exp(iz*theta)`.
   //!
+  //!  @note the entries constitue a proper polar representation if rho is non-negative and if iz present
+  //!        it must be pure unitary with non-negative jpart. However the formula is taken anyway.
   //!
   //!
   //! #### Example

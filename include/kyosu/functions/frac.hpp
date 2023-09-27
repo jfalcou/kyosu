@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T frac(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr T frac(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T frac(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,7 +63,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     Returns the frac of its argument. i.e. the value with parts are the fractionnal
-//!     part of the original ones.
+//!     parts of the original ones.
 //!
 //!  @groupheader{Example}
 //!
