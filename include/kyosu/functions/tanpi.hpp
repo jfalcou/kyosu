@@ -39,7 +39,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var tanpi
-//!   @brief Computes the tangent of the argument in \f$\pi\f$ mutiples.
+//!   @brief Computes the tangent of the argument in \f$\pi\f$ multiples.
 //!
 //!   **Defined in Header**
 //!
@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the tangent of the argument in \f$\pi\f$ mutiples.
+//!     Returns the tangent of the argument in \f$\pi\f$ multiples.
 //!
 //!  @groupheader{Example}
 //!

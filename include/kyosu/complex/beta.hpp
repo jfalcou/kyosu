@@ -23,7 +23,8 @@ namespace kyosu::tags
       return fn(complex(v), w); }
 
     template<typename T1, typename T2>
-    KYOSU_FORCEINLINE auto operator()(T1 const& target1, T2 const& target2) const noexcept -> decltype(eve::tag_invoke(*this, target1, target2))
+    KYOSU_FORCEINLINE auto operator()(T1 const& target1, T2 const& target2) const noexcept
+    -> decltype(eve::tag_invoke(*this, target1, target2))
     {
       return eve::tag_invoke(*this, target1, target2);
     }
@@ -40,7 +41,8 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var beta
-//!   @brief Computes the beta function: \f$\displaystyle \mathbf{B}(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$.
+//!   @brief Computes the beta function: \f$\displaystyle \mathbf{B}(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$
+//!   for real or complex entries.
 //!
 //!   **Defined in Header**
 //!
@@ -53,28 +55,18 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template< eve::floating_ordered_value T, eve::floating_ordered_value U >
-//!      auto beta(T x,U y) noexcept;                                        //1
-//!
-//!      template< eve::floating_value T, eve::floating_value U >
-//!      auto beta(eve::complex_t<T> x, U y) noexcept;                    //2
-//!
-//!      template< eve::floating_value T, eve::floating_value U >
-//!      auto beta(T x, eve::complex_t<U> y) noexcept;                    //2
-//!
-//!      template< eve::floating_value T, eve::floating_value U >
-//!      auto beta(eve::complex_t<T> x, eve::complex_t<U> y) noexcept; //2
+//!      auto beta(auto x, auto y) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `x`,`y` : Values to process.
+//!     * `x`,`y` : Values to process. Can be a mix of complex and real floating values and complex values.
 //!
 //!   **Return value**
 //!
-//!     1.  \f$\displaystyle \mathbf{B}(x,y) = \int_0^1 t^{x-1}(1-t)^{y-1}\mbox{d}t\f$
-//!     2.  The complex \f$\displaystyle  \mathbb{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
+//!     1.  If x and y are real typed values returns \f$\displaystyle \mathbf{B}(x,y) = \int_0^1 t^{x-1}(1-t)^{y-1}\mbox{d}t\f$
+//!     2.  The complex value \f$\displaystyle  \mathbb{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
 //!
 //!  @groupheader{Example}
 //!

@@ -39,7 +39,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var csch
-//!   @brief Computes the hyperbolic cscant of the argument.
+//!   @brief Computes the hyperbolic cosecant of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -53,7 +53,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T csch(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr T csch(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T csch(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the hyperbolic cscant of the argument.
+//!     Returns the hyperbolic cosecant of the argument.
 //!
 //!  @groupheader{Example}
 //!

@@ -39,7 +39,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var sinpicospi
-//!   @brief Computes simultaneously  the sine and cosine of the argument in \f$\pi\f$ mutiples.
+//!   @brief Computes simultaneously  the sine and cosine of the argument in \f$\pi\f$ multiples.
 //!
 //!   **Defined in Header**
 //!
@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns simultaneously  the sine and cosine of the argument in \f$\pi\f$ mutiples.
+//!     Returns simultaneously  the sine and cosine of the argument in \f$\pi\f$ multiples.
 //!
 //!  @groupheader{Example}
 //!

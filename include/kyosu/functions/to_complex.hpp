@@ -48,15 +48,15 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T> constexpr auto complex(T r, T i = 0)       noexcept;
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T complex(T z)  noexcept;
+//!      template<eve::floating_ordered_value T>  constexpr auto complex(T r, T i = 0)  noexcept;
+//!      template<kyosu::concepts::complex T>     constexpr T complex(T z)  noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
 //!     * `z`       : Complex value.
-//!     * `r`, `i`  : Real and imaginary part sued to construct a @ref kyosu::complex..
+//!     * `r`, `i`  : Real and imaginary part used to construct a @ref kyosu::complex..
 //!
 //!   **Return value**
 //!

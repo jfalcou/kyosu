@@ -39,7 +39,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var cospi
-//!   @brief Computes the cosine of the argument in \f$\pi\f$ mutiples.
+//!   @brief Computes the cosine from the argument in \f$\pi\f$ multiples.
 //!
 //!   **Defined in Header**
 //!
@@ -53,7 +53,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T cospi(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr T cospi(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T cospi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the cosine of the argument in \f$\pi\f$ mutiples.
+//!     Returns the cosine from the argument in \f$\pi\f$ multiples.
 //!
 //!  @groupheader{Example}
 //!
