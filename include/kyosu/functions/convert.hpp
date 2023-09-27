@@ -18,7 +18,7 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(convert_);
 
     template<eve::plain_scalar_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, eve::ordered_value auto const& v, eve::as<T> const& tgt) noexcept
+    static KYOSU_FORCEINLINE auto deferred_call(auto, eve::floating_ordered_value auto const& v, eve::as<T> const& tgt) noexcept
     {
       return eve::convert(v,tgt);
     }

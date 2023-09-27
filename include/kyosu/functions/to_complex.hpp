@@ -48,7 +48,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T> constexpr auto complex(T r, T i = 0)       noexcept;
+//!      template<eve::floating_ordered_value T> constexpr auto complex(T r, T i = 0)       noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T complex(T z)  noexcept;
 //!   }
 //!   @endcode

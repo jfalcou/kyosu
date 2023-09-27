@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(log1p_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_log1p{};
@@ -58,7 +58,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T log1p(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr complex_t<T> log1p(T z) noexcept;
+//!      template<eve::floating_ordered_value T>              constexpr complex_t<T> log1p(T z) noexcept;
 //!   }
 //!   @endcode
 //!

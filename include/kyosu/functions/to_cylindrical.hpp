@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(to_cylindrical_);
 
-    template<eve::ordered_value V>
+    template<eve::floating_ordered_value V>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const & v) noexcept
     {

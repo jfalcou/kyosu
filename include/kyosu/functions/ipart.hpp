@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(ipart_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const&) noexcept { return T{0}; }
 
     template<typename T>
@@ -59,7 +59,7 @@ namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto& ipart(T& z)        noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto  ipart(T const& z)  noexcept;
-//!      template<eve::ordered_value T>              constexpr T     ipart(T const& z)  noexcept;
+//!      template<eve::floating_ordered_value T>              constexpr T     ipart(T const& z)  noexcept;
 //!   }
 //!   @endcode
 //!

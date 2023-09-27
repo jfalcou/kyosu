@@ -18,7 +18,7 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(manhattan_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::ordered_value auto const&... vs) noexcept
+                                               , eve::floating_ordered_value auto const&... vs) noexcept
     {
       return eve::manhattan(vs...);
     }

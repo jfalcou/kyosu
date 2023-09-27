@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(acsc_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
       auto fn =  callable_acsc{};
       return fn(complex(v));
@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>              constexpr auto acsc(T z) noexcept;  //1
+//!      template<eve::floating_ordered_value T>     constexpr auto acsc(T z) noexcept;  //1
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto acsc(T z) noexcept;  //2
 //!   }
 //!   @endcode
@@ -67,7 +67,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
 //!
 //!   2. Returns elementwise \f$\mathop{\mathrm{asin}}(1/z)\f$.
 //!

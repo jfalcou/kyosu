@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(atanh_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_atanh{};
@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>              constexpr auto atanh(T z) noexcept; //1
+//!      template<eve::floating_ordered_value T>     constexpr auto atanh(T z) noexcept; //1
 //!      template<kyosu::concepts::complex T>        constexpr auto atanh(T z) noexcept; //2
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto atanh(T z) noexcept;  //3
 //!   }
@@ -68,14 +68,14 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. a real input z is treated as if kyosu::complex(z) was entered.
 //!
-//!   2.  Returns the complex arc hyperbolic sine of z, in the range of a half-strip mathematically
+//!   2.  Returns the complex inverse hyperbolic tangent of z, in the range of a half-strip mathematically
 //!       unbounded along the real axis and in the interval  \f$i\times[-\pi/2, \pi/2]\f$ along
 //!       the imaginary axis.
 //!
-//!         * for every z: eve::atanh(eve::conj(z)) == eve::conj(std::atanh(z))
-//!         * for every z: eve::atanh(-z) == -eve::atanh(z)
+//!         * for every z: kyosu::atanh( [kyosu::conj](@ref kyosu::conj)(z)) == kyosu::conj([kyosu::atanh](@ref kyosu::atanh)(z)
+//!         * for every z: kyosu::atanh(-z) == -[kyosu::atanh](@ref kyosu::atanh)(z)
 //!         * If z is \f$+0\f$, the result is \f$+0\f$
 //!         * If z is \f$NaN\f$, the result is \f$NaN\f$
 //!         * If z is \f$+1\f$, the result is \f$+\infty\f$

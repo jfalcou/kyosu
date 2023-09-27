@@ -17,8 +17,8 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(average_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::ordered_value auto const& v0
-                                               , eve::ordered_value auto const& v1) noexcept
+                                               , eve::floating_ordered_value auto const& v0
+                                               , eve::floating_ordered_value auto const& v1) noexcept
     {
       return eve::average(v0, v1);
     }
@@ -54,10 +54,10 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto average(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto average(T0 z0, T1, z1) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             > constexpr auto average(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, ordered_value T1>                               > constexpr auto average(T0 z0, T1, z1) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1> constexpr auto average(T0 z0, T1, z1) noexcept;
+//!      template<eve::floating_ordered_value T0, kyosu::concepts::cayley_dickson T1>     constexpr auto average(T0 z0, T1, z1) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T0,  eve::floating_ordered_value T1     constexpr auto average(T0 z0, T1, z1) noexcept;
+//!      template<eve::floating_ordered_value T0, floating_ordered_value T1>              constexpr auto average(T0 z0, T1, z1) noexcept;
 ///!   }
 //!   @endcode
 //!
@@ -67,7 +67,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the average of the two arguments .
+//!     Returns the arithmetic mean of the two arguments.
 //!
 //!  @groupheader{Example}
 //!

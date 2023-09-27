@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(acot_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       return eve::acot(v);
@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>              constexpr auto acot(T z) noexcept;  //1
+//!      template<eve::floating_ordered_value T>     constexpr auto acot(T z) noexcept;  //1
 //!      template<kyosu::concepts::complex T>        constexpr auto acot(T z) noexcept;  //2
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto acot(T z) noexcept;  //3
 //!   }
@@ -68,13 +68,13 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. A real type input z calls eve::acot(z); and so returns the same type as input.
+//!   1. A real type input z calls eve::acot(z); and so returns the same type as the input.
 //!
 //!   2. Returns elementwise the complex principal value
 //!      of the arc cotangent of the input as the arc tangent of the inverse of the input.
 //!
 //!   3. Returns \f$I_z \mathrm{acoth}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the pure part of \f$z\f$.
+//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!

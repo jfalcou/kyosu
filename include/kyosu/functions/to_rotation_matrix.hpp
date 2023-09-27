@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(to_rotation_matrix_);
 
-    template<eve::floating_ordered_value V, bool normalize>
+    template<eve::floating_floating_ordered_value V, bool normalize>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , [[maybe_unused]] V const & q
                                                , _::norming<normalize>) noexcept
@@ -30,7 +30,7 @@ namespace kyosu::tags
 
     }
 
-    template<eve::floating_ordered_value V>
+    template<eve::floating_floating_ordered_value V>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const & q) noexcept
     {

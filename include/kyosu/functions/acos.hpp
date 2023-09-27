@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>              constexpr auto acos(T z) noexcept;  //1
+//!      template<eve::floating_ordered_value T>     constexpr auto acos(T z) noexcept;  //1
 //!      template<kyosu::concepts::complex T>        constexpr auto atan(T z) noexcept;  //2
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto acos(T z) noexcept;  //3
 //!   }
@@ -68,13 +68,12 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
 //!
-//!   2. Returns elementwise the complex principal value
-//!      of the arc cosine of the input.
+//!   2. Returns elementwise the complex principal value of the arc cosine of the input.
 //!      Branch cuts exist outside the interval \f$[-1, +1]\f$ along the real axis.
 //!
-//!      * for every z: eve::acos(eve::conj(z)) == eve::conj(std::acos(z))
+//!      * for every z: kyosu::acos( [kyosu::conj](@ref kyosu::conj)(z) ) == kyosu::conj([kyosu::acos](@ref kyosu::acos)(z))
 //!      * If z is \f$\pm0\f$, the result is \f$\pi/2\f$
 //!      * If z is \f$i NaN\f$, the result is \f$\pi/2+ i NaN\f$
 //!      * If z is \f$x+i\infty\f$ (for any finite x), the result is \f$\pi/2-i\infty\f$
@@ -90,7 +89,7 @@ namespace kyosu
 //!      * If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
 //!
 //!   3. Returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the pure part of \f$z\f$.
+//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!

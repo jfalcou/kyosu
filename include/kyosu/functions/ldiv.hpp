@@ -17,8 +17,8 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(ldiv_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::ordered_value auto const& v0
-                                               , eve::ordered_value auto const& v1) noexcept
+                                               , eve::floating_ordered_value auto const& v0
+                                               , eve::floating_ordered_value auto const& v1) noexcept
     {
       return v1/v0;
     }
@@ -55,9 +55,9 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, ordered_value T1>                               > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
+//!      template<eve::floating_ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T0,  eve::floating_ordered_value T1             > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
+//!      template<eve::floating_ordered_value T0, floating_ordered_value T1>                               > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
 ///!   }
 //!   @endcode
 //!

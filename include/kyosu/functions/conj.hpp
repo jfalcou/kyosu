@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(conj_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return v; }
 
     template<typename T>
@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T conj(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T conj(T z) noexcept;
+//!      template<eve::floating_ordered_value T>              constexpr T conj(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,7 +63,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     Returns the conjugate of its argument. i.e. the value with the same real part
-//!     and the opposite pure part.
+//!     and the opposite [pure](@ref kyosu::imag ) part.
 //!
 //!     For real inputs the call reduces to identity.
 //!

@@ -53,7 +53,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T minus(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T minus(T z) noexcept;
+//!      template<eve::floating_ordered_value T>              constexpr T minus(T z) noexcept;
 //!   }
 //!   @endcode
 //!

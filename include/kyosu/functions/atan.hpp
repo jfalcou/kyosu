@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(atan_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_atan{};
@@ -43,7 +43,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var atan
-//!   @brief Computes the inverse hyperbolic tangent of the argument.
+//!   @brief Computes the arctangent of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>              constexpr auto atan(T z) noexcept;  //1
+//!      template<eve::floating_ordered_value T>     constexpr auto atan(T z) noexcept;  //1
 //!      template<kyosu::concepts::complex T>        constexpr auto atan(T z) noexcept;  //2
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto atan(T z) noexcept;  //3
 //!   }
@@ -68,7 +68,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
 //!
 //!   2. Returns the elementwise the complex principal value
 //!      of the arc tangent of the input in the range of a strip unbounded along the imaginary axis
@@ -76,7 +76,7 @@ namespace kyosu
 //!      Special cases are handled as if the operation was implemented by \f$-i\; \mathrm{atanh}(z\; i)\f$.
 //!
 //!   3. Returns \f$ -I_z \mathrm{atanh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the pure part of \f$z\f$.
+//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!

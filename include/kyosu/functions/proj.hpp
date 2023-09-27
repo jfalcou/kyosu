@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(proj_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
       return complex(v,eve::sign(v)*eve::zero(eve::as(v)));
     }
@@ -54,7 +54,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T proj(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T proj(T z) noexcept;
+//!      template<eve::floating_ordered_value T>              constexpr T proj(T z) noexcept;
 //!   }
 //!   @endcode
 //!

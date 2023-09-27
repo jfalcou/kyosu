@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(sqrt_);
 
-    template<eve::floating_ordered_value T>
+    template<eve::floating_floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto asq = eve::sqrt(eve::abs(v));
@@ -58,7 +58,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T sqrt(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T sqrt(T z) noexcept;
+//!      template<eve::floating_ordered_value T>              constexpr T sqrt(T z) noexcept;
 //!   }
 //!   @endcode
 //!

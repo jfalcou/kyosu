@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(log_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_log{};
@@ -58,7 +58,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constlogr T log(T z) noexcept;
-//!      template<eve::ordered_value T>              constlogr T log(T z) noexcept;
+//!      template<eve::floating_ordered_value T>              constlogr T log(T z) noexcept;
 //!   }
 //!   @endcode
 //!

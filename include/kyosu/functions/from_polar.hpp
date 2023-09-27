@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(from_polar_);
 
-    template<eve::ordered_value V, eve::ordered_value U>
+    template<eve::floating_ordered_value V, eve::floating_ordered_value U>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const & v
                                                , U const & u) noexcept
@@ -73,9 +73,9 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!    template<eve::ordered_value T0, eve::ordered_value T1>,
+  //!    template<eve::floating_ordered_value T0, eve::floating_ordered_value T1>,
   //!     auto from_polar( T0 rho, T1 theta) const noexcept;                   // 1
-  //!    template<eve::ordered_value T0, eve::ordered_value T1, kyosu::concepts::cayley_dickson C>,
+  //!    template<eve::floating_ordered_value T0, eve::floating_ordered_value T1, kyosu::concepts::cayley_dickson C>,
   //!     auto from_polar( T0 rho, T1 theta, C iz) const noexcept;             // 2
   //!   }
   //!   @endcode

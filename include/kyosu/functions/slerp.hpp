@@ -18,9 +18,9 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(slerp_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::ordered_value auto const& v0
-                                               , eve::ordered_value auto const& v1
-                                              ,  eve::ordered_value auto const& t) noexcept
+                                               , eve::floating_ordered_value auto const& v0
+                                               , eve::floating_ordered_value auto const& v1
+                                              ,  eve::floating_ordered_value auto const& t) noexcept
     {
      EVE_ASSERT(eve::all(is_unitary(v0) && is_unitary(v1)), "quaternion parameters must be unitary");
      return v0;
@@ -57,10 +57,10 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto slerp(T0 z0, T1, z1, auto eve::ordered_value t) noexcept;
-//!      template<eve::ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto slerp(T0 z0, T1, z1, auto eve::ordered_value t) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             > constexpr auto slerp(T0 z0, T1, z1, auto eve::ordered_value t) noexcept;
-//!      template<eve::ordered_value T0, ordered_value T1>                               > constexpr auto slerp(T0 z0, T1, z1, auto eve::ordered_value t) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto slerp(T0 z0, T1, z1, auto eve::floating_ordered_value t) noexcept;
+//!      template<eve::floating_ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto slerp(T0 z0, T1, z1, auto eve::floating_ordered_value t) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T0,  eve::floating_ordered_value T1             > constexpr auto slerp(T0 z0, T1, z1, auto eve::floating_ordered_value t) noexcept;
+//!      template<eve::floating_ordered_value T0, floating_ordered_value T1>                               > constexpr auto slerp(T0 z0, T1, z1, auto eve::floating_ordered_value t) noexcept;
 ///!   }
 //!   @endcode
 //!

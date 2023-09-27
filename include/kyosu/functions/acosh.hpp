@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(acosh_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_acosh{};
@@ -57,7 +57,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>              constexpr auto acosh(T z) noexcept;  //1
+//!      template<eve::floating_ordered_value T>     constexpr auto acosh(T z) noexcept;  //1
 //!      template<kyosu::concepts::complex T>        constexpr auto acosh(T z) noexcept;  //2
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto acosh(T z) noexcept;  //3
 //!   }
@@ -69,25 +69,24 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
 //!
-//!   2.  Returns the complex arc hyperbolic sine of z, in the range of a half-strip mathematically
-//!       unbounded along the real axis and in the interval  \f$i\times[-\pi/2, \pi/2]\f$ along
-//!       the imaginary axis.
+//!   2. Returns the complex inverse hyperbolic cosine of z, in the range of a
+//!      strip unbounded along the imaginary axis and
+//!      in the interval \f$[0,\pi]\f$ along the real axis.
 //!
-//!         * for every z: eve::acosh(eve::conj(z)) == eve::conj(std::acosh(z))
-//!         * for every z: eve::acosh(-z) == -eve::acosh(z)
-//!         * If z is \f$+0\f$, the result is \f$+0\f$
-//!         * If z is \f$NaN\f$, the result is \f$NaN\f$
-//!         * If z is \f$+1\f$, the result is \f$+\infty\f$
-//!         * If z is \f$x+i \infty\f$ (for any finite positive x), the result is \f$+0,\pi/2\f$
-//!         * If z is \f$x+i NaN\f$ (for any finite nonzero x),  the result is \f$NaN+i NaN\f$
-//!         * If z is \f$+\infty+i y\f$ (for any finite positive y),  the result is \f$i \pi/2\f$
-//!         * If z is \f$+\infty+i \infty\f$, the result is \f$i \pi/2\f$
-//!         * If z is \f$+\infty+i NaN\f$,  the result is \f$i NaN\f$
-//!         * If z is \f$NaN+i y\f$ (for any finite y), the result is \f$NaN+i NaN\f$
-//!         * If z is \f$NaN+i \infty\f$, the result is \f$i \pi/2\f$ (the sign of the real part is unspecified)
-//!         * If z is \f$NaN+i NaN\f$,  the result is \f$NaN+i NaN\f$
+//!      * for every z: kyosu::acosh( [kyosu::conj](@ref kyosu::conj)(z)) == kyosu::conj([kyosu::acosh](@ref kyosu::acosh)(z)
+//!      * If z is \f$\pm0\f$, the result is \f$+0,\pi/2\f$
+//!      * If z is \f$x+i\infty\f$ (for any finite x), the result is \f$\infty+i\pi/2\f$
+//!      * If z is \f$x+i NaN\f$ (for any finite non zero x), the result is \f$NaN+i NaN\f$.
+//!      * If z is \f$i NaN\f$  the result is \f$NaN+i\pi/2\f$.
+//!      * If z is \f$-\infty,y\f$ (for any positive finite y), the result is \f$+\infty,\pi\f$
+//!      * If z is \f$+\infty,y\f$ (for any positive finite y), the result is \f$+\infty+i 0\f$
+//!      * If z is \f$-\infty+i \infty\f$, the result is \f$+\infty,3\pi/4\f$
+//!      * If z is \f$\pm\infty+i NaN\f$, the result is \f$+\infty+i NaN\f$
+//!      * If z is \f$NaN,y\f$ (for any finite y), the result is \f$NaN+i NaN\f$.
+//!      * If z is \f$NaN+i \infty\f$, the result is \f$+\infty+i NaN\f$
+//!      * If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
 //!
 //!   3. Returns \f$\log(z+\sqrt{z+1}\sqrt{z-1})\f$.
 //!

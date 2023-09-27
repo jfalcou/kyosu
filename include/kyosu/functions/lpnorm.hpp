@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , eve::floating_value auto const& p
-                                               , eve::floating_ordered_value auto const&... vs) noexcept
+                                               , eve::floating_floating_ordered_value auto const&... vs) noexcept
     {
       return eve::lpnorm(p, vs...);
     }

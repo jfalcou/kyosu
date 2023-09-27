@@ -18,9 +18,9 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(lerp_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::ordered_value auto const& v0
-                                               , eve::ordered_value auto const& v1
-                                              ,  eve::ordered_value auto const& t) noexcept
+                                               , eve::floating_ordered_value auto const& v0
+                                               , eve::floating_ordered_value auto const& v1
+                                              ,  eve::floating_ordered_value auto const& t) noexcept
     {
       return eve::lerp(v0, v1, t);
     }
@@ -56,10 +56,10 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto lerp(T0 z0, T1, z1, auto eve::ordered_value t) noexcept;
-//!      template<eve::ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto lerp(T0 z0, T1, z1, auto eve::ordered_value t) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             > constexpr auto lerp(T0 z0, T1, z1, auto eve::ordered_value t) noexcept;
-//!      template<eve::ordered_value T0, ordered_value T1>                               > constexpr auto lerp(T0 z0, T1, z1, auto eve::ordered_value t) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto lerp(T0 z0, T1, z1, auto eve::floating_ordered_value t) noexcept;
+//!      template<eve::floating_ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto lerp(T0 z0, T1, z1, auto eve::floating_ordered_value t) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T0,  eve::floating_ordered_value T1             > constexpr auto lerp(T0 z0, T1, z1, auto eve::floating_ordered_value t) noexcept;
+//!      template<eve::floating_ordered_value T0, floating_ordered_value T1>                               > constexpr auto lerp(T0 z0, T1, z1, auto eve::floating_ordered_value t) noexcept;
 ///!   }
 //!   @endcode
 //!

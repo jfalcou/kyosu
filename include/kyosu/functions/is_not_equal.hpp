@@ -57,9 +57,9 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto is_not_equal(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto is_not_equal(T0 z0, T1, z1) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             > constexpr auto is_not_equal(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, ordered_value T1>                               > constexpr auto is_not_equal(T0 z0, T1, z1) noexcept;
+//!      template<eve::floating_ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto is_not_equal(T0 z0, T1, z1) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T0,  eve::floating_ordered_value T1             > constexpr auto is_not_equal(T0 z0, T1, z1) noexcept;
+//!      template<eve::floating_ordered_value T0, floating_ordered_value T1>                               > constexpr auto is_not_equal(T0 z0, T1, z1) noexcept;
 ///!   }
 //!   @endcode
 //!

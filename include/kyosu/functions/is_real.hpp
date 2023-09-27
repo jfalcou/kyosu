@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(is_real_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::true_(eve::as(v)); }
 
     template<typename T>
@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_real(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr auto is_real(T z) noexcept;
+//!      template<eve::floating_ordered_value T>              constexpr auto is_real(T z) noexcept;
 //!   }
 //!   @endcode
 //!

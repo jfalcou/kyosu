@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(acospi_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_acospi{};
@@ -43,7 +43,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var acospi
-//!   @brief Computes the arc cosine of the argument times \f$\pi\f$.
+//!   @brief Computes the arc cosine of the argument in \f$\pi\f$ multiples.
 //!
 //!   **Defined in Header**
 //!
@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>              constexpr auto acospi(T z) noexcept;  //1
+//!      template<eve::floating_ordered_value T>     constexpr auto acospi(T z) noexcept;  //1
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto acospi(T z) noexcept;  //2
 //!   }
 //!   @endcode
@@ -67,9 +67,9 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
 //!
-//!   2. Returns `invpi(as(z))*acos(z)`
+//!   2. Returns kyosu::radinpi([kyosu::acos](@ref kyosu::acos)(z))
 //!
 //!  @groupheader{Example}
 //!

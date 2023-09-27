@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(from_angle_axis_);
 
-    template<eve::ordered_value V,  typename  U>
+    template<eve::floating_ordered_value V,  typename  U>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V  angle
                                                , U  axis) noexcept
