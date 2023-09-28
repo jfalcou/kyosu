@@ -56,8 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template< floating_value P, typename T, typename ... Ts>
-//!      auto operator()(P p, T z,Ts ... zs ) const noexcept
+//!      template< floating_value P, typename T, typename ... Ts> auto operator()(P p, T z,Ts ... zs ) const noexcept
 ///!   }
 //!   @endcode
 //!
@@ -67,7 +66,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns \f$ \left(\sum_{i = 0}^n//! |x_i|^p\right)^{\frac1p} \f$.
+//!     Returns \f$ \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \f$.
 //!
 //!  @groupheader{Example}
 //!

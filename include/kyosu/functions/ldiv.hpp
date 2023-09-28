@@ -54,11 +54,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
-//!      template<eve::floating_ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T0,  eve::floating_ordered_value T1             > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
-//!      template<eve::floating_ordered_value T0, floating_ordered_value T1>                               > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
-///!   }
+//!     constexpr auto ldiv(auto z0, auto, z1) noexcept;
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**
@@ -68,7 +65,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     Returns the left division  of the two arguments. This function not equivalent to z1/z0 as soon as multiplication
-//!     is not commutative.
+//!     is not commutative (i.e. for general Cayley-Dickson values with dimensionality strictly above 2).
 //!
 //!  @groupheader{Example}
 //!

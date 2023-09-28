@@ -55,7 +55,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     constexpr auto average(auto z0, auto, z1) noexcept;
-///!   }
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**

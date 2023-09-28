@@ -29,9 +29,9 @@ namespace kyosu::tags
       return eve::tag_invoke(*this, targets...);
     }
 
-//     template<typename... T>
-//     eve::unsupported_call<callable_manhattan(T&&...)> operator()(T&&... x) const
-//     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    template<typename... T>
+    eve::unsupported_call<callable_manhattan(T&&...)> operator()(T&&... x) const
+    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
 
@@ -54,8 +54,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template< floating_value P, typename ... Ts>
-//!      auto operator()(Ts ... zi ) const noexcept
+//!      template< floating_value P, typename ... Ts> auto operator()(Ts ... zi ) const noexcept
 ///!   }
 //!   @endcode
 //!
@@ -65,7 +64,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the sum of the absolute values of all elements of all zi.
+//!     Returns elementwise  the sum of the absolute values of all elements of each zi.
 //!
 //!  @groupheader{Example}
 //!

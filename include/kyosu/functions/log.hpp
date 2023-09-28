@@ -57,8 +57,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constlogr T log(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constlogr T log(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T log(T z) noexcept; //1
+//!      template<kyosu::concepts::complex T> constexpr T log(T z) noexcept; //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T log(T z) noexcept; //2
 //!   }
 //!   @endcode
 //!
@@ -68,7 +69,29 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the `log(z)`. If z is an ordered value log returns a complex typed value.
+//!   1.  a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!
+//!   2. Returns [elementwise](@ref glossary_elementwise) the natural logarithm of the input
+//!      in the range of a strip in the interval \f$i\times[-\pi, \pi]\f$ along the imaginary axis
+//!      and mathematically unbounded along the real axis. .
+//!
+//!      * The function is continuous onto the branch cut  along the negative real axis,
+//!        taking into account the sign of imaginary part
+//!      * for every z: `kyosu::log(kyosu::conj(z)) == kyosu::conj(kyosu::log(z))`
+//!      * If z is \f$-0\f$, the result is \f$-\infty+i \pi \f$
+//!      * If z is \f$+0\f$, the result is \f$-\infty\f$
+//!      * If z is \f$x+i \infty\f$ (for any finite x), the result is \f$+\infty+i \pi/2\f$
+//!      * If z is \f$x+i NaN\f$ (for any finite x), the result is \f$NaN+i NaN\f$
+//!      * If z is \f$-\infty+i y\f$ (for any finite positive y), the result is \f$+\infty+i \pi \f$
+//!      * If z is \f$+\infty+i y\f$ (for any finite positive y), the result is \f$+\infty\f$
+//!      * If z is \f$-\infty+i \infty\f$, the result is \f$+\infty+i 3\pi/4\f$
+//!      * If z is \f$+\infty+i \infty\f$, the result is \f$+\infty+i \pi/4\f$
+//!      * If z is \f$\pm\infty+i NaN\f$, the result is \f$+\infty+i NaN\f$
+//!      * If z is \f$NaN+i y\f$ (for any finite y), the result is \f$NaN+i NaN\f$
+//!      * If z is \f$NaN+i \infty\f$, the result is \f$+\infty+i NaN\f$
+//!      * If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
+//!
+//!   3. `log(z)` is semantically equivalent to `log(abs(z))+sign(pure(z))*arg(z)`
 //!
 //!  @groupheader{Example}
 //!
