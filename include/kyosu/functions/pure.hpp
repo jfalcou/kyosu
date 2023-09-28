@@ -43,7 +43,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var imag
+//!   @var pure
 //!   @brief Extracts the imaginary part of a value.
 //!
 //!   **Defined in Header**
@@ -59,7 +59,7 @@ namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto& pure(T& z)        noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto  pure(T const& z)  noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr T     pure(T const& z)  noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T     pure(T const& z)  noexcept;
 //!   }
 //!   @endcode
 //!
@@ -69,7 +69,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the imaginary part of its argument. For real inputs, the call returns 0. It is an alias of `imag`.
+//!     Returns the pure (olso called imaginary) part of its argument. For real inputs, the call returns 0. It is an alias of `imag`.
 //!
 //!  @groupheader{Example}
 //!

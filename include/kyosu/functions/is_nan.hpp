@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_nan(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr auto is_nan(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto is_nan(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise true is a component of the element is nan .
+//!     Returns elementwise true is any component of the element is nan .
 //!
 //!  @groupheader{Example}
 //!

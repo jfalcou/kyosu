@@ -141,7 +141,7 @@ complex functions and rotation related quaternion usage.
    | [ipart](@ref kyosu::ipart )        | [is_denormal](@ref kyosu::is_denormal )   | [is_equal](@ref kyosu::is_equal )        | [is_eqz](@ref kyosu::is_eqz )     | [is_finite](@ref kyosu::is_finite )       |
    | [is_infinite](@ref kyosu::is_infinite )  | [is_imag](@ref kyosu::is_imag )       | [is_nan](@ref kyosu::is_nan )          | [is_nez](@ref kyosu::is_nez )     | [is_not_denormal](@ref kyosu::is_not_denormal ) |
    | [is_not_equal](@ref kyosu::is_not_equal ) | [is_not_finite](@ref kyosu::is_not_finite ) | [is_not_infinite](@ref kyosu::is_not_finite ) | [is_not_nan](@ref kyosu::is_not_nan ) | [is_not_real](@ref kyosu::is_not_real )     |
-   | [is_pure](@ref kyosu::is_pure )      | [is_real](@ref kyosu::is_real )       | [is_unitary](@ref kyosu::is_unitary )      | [jpart](@ref kyosu::jpart )      | [kpart](@ref kyosu::kyosu )           |
+   | [is_pure](@ref kyosu::is_pure )      | [is_real](@ref kyosu::is_real )       | [is_unitary](@ref kyosu::is_unitary )      | [jpart](@ref kyosu::jpart )      | [kpart](@ref kyosu::kpart )           |
    | [ldiv](@ref kyosu::ldiv )         | [lerp](@ref kyosu::lerp )          | [log](@ref kyosu::log )             | [log10](@ref kyosu::log10 )      | [log1p](@ref kyosu::log1p )           |
    | [log_abs](@ref kyosu::log_abs )      | [log2](@ref kyosu::log2 )          | [lpnorm](@ref kyosu::lpnorm )          | [manhattan](@ref kyosu::manhattan )  | [minus](@ref kyosu::minus )           |
    | [nearest](@ref kyosu::nearest )      | [oneminus](@ref kyosu::oneminus )      | [pow](@ref kyosu::pow )             | [pow1p](@ref kyosu::pow1p )      | [pow_abs](@ref kyosu::pow_abs )         |

@@ -51,8 +51,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T> constexpr auto is_pure(T z) noexcept;
-//!      template<eve::floating_ordered_value T>       constexpr auto is_pure(T z) noexcept;
+//!      template<kyosu::concepts::complex T>    constexpr auto is_pure(T z) noexcept;
+//!      template<eve::floating_ordered_value T> constexpr auto is_pure(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise true if the real part of the argument is zero.
+//!     Returns elementwise true if the [real](@ref kyosu::real) part of the argument is zero.
 //!
 //!  @groupheader{Example}
 //!
@@ -70,5 +70,7 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 inline constexpr tags::callable_is_pure is_pure = {};
+
+/// alias of is_pure
 inline constexpr tags::callable_is_pure is_imag = {};
 }

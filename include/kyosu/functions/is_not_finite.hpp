@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_not_finite(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr auto is_not_finite(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto is_not_finite(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise true is a component of the element is not finite .
+//!     Returns elementwise true is any component of the element is not finite .
 //!
 //!  @groupheader{Example}
 //!

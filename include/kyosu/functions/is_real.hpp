@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_real(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr auto is_real(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto is_real(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise true is all the non real parts of the argument are zero.
+//!     Returns elementwise true if its  [pure](@ref kyosu::pure) part is zero.
 //!
 //!  @groupheader{Example}
 //!

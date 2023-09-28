@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_finite(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr auto is_finite(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto is_finite(T z) noexcept;
 //!   }
 //!   @endcode
 //!

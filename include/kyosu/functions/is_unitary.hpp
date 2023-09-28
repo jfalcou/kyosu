@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_unitary(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr auto is_unitary(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto is_unitary(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise true if an element is of absolute value one.
+//!     Returns elementwise true if the element is of absolute value one.
 //!
 //!   @note As for now is_unitary accepts almost equality (will change when decorators will be at hand in kyosu)
 //!
