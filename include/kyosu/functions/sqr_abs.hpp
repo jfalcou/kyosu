@@ -51,8 +51,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_t<T> sqr_abs(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr T            sqr_abs(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sqr_abs(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto sqr_abs(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the squared modulus of its argument.
+//!     Returns the squared modulus of its argument, a floating value.
 //!
 //!  @groupheader{Example}
 //!

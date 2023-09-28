@@ -52,8 +52,10 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T cosh(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T cosh(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T cosh(T z) noexcept; //1
+//!      template<kyosu::concepts::complex T>        constexpr T cosh(T z) noexcept; //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T cosh(T z) noexcept; //3
+//!   }
 //!   }
 //!   @endcode
 //!
@@ -63,7 +65,26 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the hyperbolic cosine of the argument.
+//!   2. Returns [elementwise](@ref glossary_elementwise) the complex value
+//!      of the hyperbolic cosine of the input.
+//!
+//!      * for every z: `kyosu::cosh(kyosu::conj(z)) == kyosu::conj(std::cosh(z))`
+//!      * for every z: `kyosu::cosh(-z)           == kyosu::cosh(z)`
+//!      *  If z is \f$0\f$, the result is \f$1\f$
+//!      *  If z is \f$i \infty\f$, the result is \f$NaN\f$
+//!      *  If z is \f$i NaN\f$, the result is \f$NaN\f$
+//!      *  If z is \f$x+i \infty\f$ (for any finite non-zero x), the result is \f$NaN+i NaN\f$
+//!      *  If z is \f$x+i NaN\f$ (for any finite non-zero x), the result is \f$NaN+i NaN\f$
+//!      *  If z is \f$\infty+i 0\f$, the result is \f$\infty+i 0\f$
+//!      *  If z is \f$\infty,y\f$ (for any finite non-zero y), the result is \f$\infty e^{iy}\f$
+//!      *  If z is \f$\infty+i \infty\f$, the result is \f$\pm \infty+i NaN\f$  (the sign of the real part is unspecified)
+//!      *  If z is \f$\infty+i NaN\f$, the result is \f$\infty+i NaN\f$
+//!      *  If z is \f$NaN\f$, the result is \f$NaN\f$
+//!      *  If z is \f$NaN+i y\f$ (for any finite non-zero y), the result is \f$NaN+i NaN\f$
+//!      *  If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
+//!
+//!   3. Is semantically equivalent to (exp(z)+exp(-z))/2.
+
 //!
 //!  @groupheader{Example}
 //!

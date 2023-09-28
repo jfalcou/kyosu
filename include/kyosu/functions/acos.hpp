@@ -90,6 +90,8 @@ namespace kyosu
 //!
 //!   3. Returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T cosh(T z) noexcept;
+//!   }
 //!
 //!  @groupheader{Example}
 //!

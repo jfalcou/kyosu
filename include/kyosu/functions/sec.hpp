@@ -52,8 +52,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T sec(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr T sec(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto sec(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sec(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the secant of the argument.
+//!    Returns the secant of the argument.
 //!
 //!  @groupheader{Example}
 //!

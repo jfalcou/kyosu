@@ -39,7 +39,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var sincos
-//!   @brief Computes simultaneously  the sine and cosine of the argument.
+//!   @brief Computes simultaneously the sine and cosine of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -53,7 +53,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto sincos(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr auto sincos(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto sincos(T z) noexcept;
 //!   }
 //!   @endcode
 //!

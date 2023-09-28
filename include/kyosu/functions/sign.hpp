@@ -55,13 +55,13 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T sign(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr T sign(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T sign(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to for which square root is computed.
+//!     * `z` : Value to process.
 //!
 //!   **Return value**
 //!
