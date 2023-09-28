@@ -62,7 +62,8 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z, zs...` : Values to process.
+//!     * `p`:    : positive floating ordered value
+//!     * `zs...` : Values to process.
 //!
 //!   **Return value**
 //!

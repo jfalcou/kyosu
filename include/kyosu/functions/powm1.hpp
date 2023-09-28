@@ -55,11 +55,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto powm1(T0 z0, T1, z1) noexcept;
-//!      template<eve::floating_ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto powm1(T0 z0, T1, z1) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T0,  eve::floating_ordered_value T1             > constexpr auto powm1(T0 z0, T1, z1) noexcept;
-//!      template<eve::floating_ordered_value T0, floating_ordered_value T1>                               > constexpr auto powm1(T0 z0, T1, z1) noexcept;
-///!   }
+//!     constexpr auto average(auto z0, auto, z1) noexcept;
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**
@@ -68,7 +65,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!      the call is semantically equivalent to `eve::exp(z1*eve::log(z0))-1`
+//!      the call is semantically equivalent to `dec(eve::pow(z0, z1))`
 //!
 //!  @groupheader{Example}
 //!
