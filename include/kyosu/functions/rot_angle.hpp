@@ -66,11 +66,11 @@ namespace kyosu
   //!
   //! **Parameters**
   //!
-  //!  `q` : quaternion
+  //!  `q` : quaternion, complex or floating
   //!
   //! **Return value**
   //!
-  //!  the rotation angle in radian
+  //!  the rotation angle in radian. This is two times the arg of the quaternion.
   //!
   //! ---
   //!

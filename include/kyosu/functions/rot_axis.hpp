@@ -66,7 +66,7 @@ namespace kyosu
   //!
   //! **Parameters**
   //!
-  //!  `q` : quaternion
+  //!  `q` : quaternion, complex or floating.
   //!
   //! **Return value**
   //!

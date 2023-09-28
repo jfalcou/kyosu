@@ -57,7 +57,6 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto& pure(T& z)        noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto  pure(T const& z)  noexcept;
 //!      template<eve::floating_ordered_value T>     constexpr T     pure(T const& z)  noexcept;
 //!   }

@@ -80,14 +80,14 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto rotate_vec( auto q) const noexcept;
+  //!     auto rotate_vec( auto q, auto v) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
   //!  `q`:   quaternion value defining the rotation.
-  //!  `x`:   span of 3 elements to rotate
+  //!  `x`:   span of 3 elements to rotate.
   //!
   //! **Return value**
   //!

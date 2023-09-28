@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
-      return complex(v,eve::sign(v)*eve::zero(eve::as(v)));
+      return if(if_not_finite(v), eve::inf(eve::as(v)), v);
     }
 
     template<typename T>
@@ -40,7 +40,8 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var proj
-//!   @brief Callable object computing proj(x), the projection of the cayley_dickson number z onto the (hyper) Riemann sphere
+//!   @brief Callable object computing proj(x), the projection of the cayley_dickson number
+//!   z onto the (hyper) Riemann sphere
 //!
 //!   **Defined in Header**
 //!
@@ -54,21 +55,20 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T proj(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr T proj(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T proj(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to projugate.
+//!     * `z` : Value to project.
 //!
 //!   **Return value**
 //!
-//! For most z, std::proj(z)==z, but all infinities, even the numbers where one component
-//! is infinite and the other is NaN, become positive real infinity, (inf, 0.0...) or (inf, -0.0...).
-//! The sign of the pure (zero) components is the signs of the components of pure(z).
-//!
-//!     For floating inputs the call returns a complex number.
+//!     *  For most z, proj(z)==z, but all infinities, even the numbers where one component
+//!       is infinite and the other is NaN, become positive real\n
+//!       infinity, (inf, 0.0...) or (inf, -0.0...).\n
+//!       The sign of the pure (zero) components are the signs of the components of pure(z).
 //!
 //!  @groupheader{Example}
 //!
