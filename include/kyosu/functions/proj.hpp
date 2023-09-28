@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
-      return if_else(eve::is_not_finite(v), eve::inf(eve::as(v)), v);
+      return eve::if_else(eve::is_not_finite(v), eve::inf(eve::as(v)), v);
     }
 
     template<typename T>
