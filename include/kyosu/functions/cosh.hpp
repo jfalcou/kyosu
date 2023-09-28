@@ -65,7 +65,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   2. Returns [elementwise](@ref glossary_elementwise) the complex value
+//!   2. Returns elementwise the complex value
 //!      of the hyperbolic cosine of the input.
 //!
 //!      * for every z: `kyosu::cosh(kyosu::conj(z)) == kyosu::conj(std::cosh(z))`

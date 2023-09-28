@@ -79,20 +79,22 @@ Constructors
 
 complex and  quaternion can be constructed using callables facilities `complex` and `quaternion`.
 
-complex can also be constructed from their polar representation
+complex can also be constructed from their polar representation\n
 quaternion from various parametrizations of \f$\mathbb{R}^4\f$ or from \f$\mathbb{R}^3\f$ rotations:
 
-  * angle and axis:          from_angle_axis.hpp
-  * cylindrical:             from_cylindrical
-  * cylindricospherical:     from_cylindricospherical
-  * euler:                   from_eule
-  * multipolar:              from_multipolar
-  * rotationmatrix:          from_rotation_matrix
-  * semipolar:               from_semipolar
-  * spherical:               from_spherical
-  * two vectors:             align
+  |                         |                                                                 |                                                             |
+  |-------------------------|-----------------------------------------------------------------|-------------------------------------------------------------|
+  | angle and axis          | [from_angle_axis](@ref kyosu::from_angle_axis )                 | [to_angle_axis](@ref kyosu::to_angle_axis )                 |
+  | cylindrical             | [from_cylindrical](@ref kyosu::from_cylindrical )               | [to_cylindrical](@ref kyosu::to_cylindrical )               |
+  | cylindricospherical     | [from_cylindrospherical](@ref kyosu::from_cylindrospherical )   | [to_cylindrospherical](@ref kyosu::to_cylindrospherical )   |
+  | euler                   | [from_euler](@ref kyosu::from_euler )                           | [to_euler](@ref kyosu::to_euler )                           |
+  | multipolar              | [from_multipolar](@ref kyosu::from_multipolar )                 | [to_multipolar](@ref kyosu::to_multipolar )                 |
+  | rotation matrix         | [from_rotation_matrix](@ref kyosu::from_rotation_matrix )       | [to_rotation_matrix](@ref kyosu::to_rotation_matrix )       |
+  | semipolar               | [from_semipolar](@ref kyosu::from_semipolar )                   | [to_semipolar](@ref kyosu::to_semipolar )                   |
+  | spherical               | [from_spherical](@ref kyosu::from_spherical )                   | [to_spherical](@ref kyosu::to_spherical )                   |
+  | two vectors             | [align](@ref kyosu::align )                                     |                                                             |
 
-each of the from_xxx functions has a corresponding to_xxx version that gives back the
+The third column references to the corresponding to_xxx version that gives back the
 chosen representation from a quaternion input.
 
 TODO cayley_dickson<N> construction
@@ -158,7 +160,7 @@ complex functions and rotation related quaternion usage.
     |------------------|------------------|--------------------|------------------|---------------|
     | [beta](@ref kyosu::beta ) | [deta](@ref kyosu::deta )    | [digamma](@ref kyosu::digamma )  | [erf](@ref kyosu::erf )  | [erfcx](@ref kyosu::erfcx )  |
     | [erfi](@ref kyosu::erfi ) | [eta](@ref kyosu::eta )      | [faddeeva](@ref kyosu::faddeeva ) | [lambda](@ref kyosu::lambda )  | [lbeta](@ref kyosu::lbeta )  |
-    | [log_abs_gamma](@ref kyosu::log_abs_gamma )    | [log_gamma](@ref kyosu::log_gamma )  | [lrising_factorial](@ref kyosu:lrising_factorial ) | [rising_factorial](@ref kyosu::rising_factorial ) | [tgamma](@ref kyosu::tgamma )        |
+    | [log_abs_gamma](@ref kyosu::log_abs_gamma )    | [log_gamma](@ref kyosu::log_gamma )  | [lrising_factorial](@ref kyosu::lrising_factorial ) | [rising_factorial](@ref kyosu::rising_factorial ) | [tgamma](@ref kyosu::tgamma )        |
     | [zeta](@ref kyosu::zeta ) |                  |                    |                  |               |
 
   * callables usable with quaternion complex and real only

@@ -43,7 +43,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var zeta
-//!   @brief Computes the Riemann \f$\zeta\f$  \f$ \displaystyle \sum_0^\infty \frac{1}{(n+1)^z}\f$.
+//!   @brief Computes the Riemann \f$ \displaystyle\zeta(z)=\sum_0^\infty \frac{1}{(n+1)^z}\f$.
 //!
 //!   **Defined in Header**
 //!
@@ -56,19 +56,18 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<unsigned_scalar_value K, eve::ordered_value T>       constexpr auto zeta(K, k, T z) noexcept;  //1
-//!      template<unsigned_scalar_value K, kyosu::concepts::complex T> constexpr auto zeta(K, k, T z) noexcept;  //2
+//!      template<eve::floatingordered_value T> constexpr auto zeta(T z) noexcept;
+//!      template<kyosu::concepts::complex T>  constexpr auto zeta(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `k` : scalar unsigned value,  parameter of the sum.
 //!     * `z` : complex or real value to process.
 //!
 //! **Return value**
 //!
-//!   Returns the Dirichlet alternating zzeta function: sum \f$  \displaystyle \sum_0^\infty \frac{1}{(n+1)^z}\f$
+//!   Returns the Dirichlet zeta function: \f$  \displaystyle \sum_0^\infty \frac{1}{(n+1)^z}\f$
 //!
 //!  @groupheader{Example}
 //!

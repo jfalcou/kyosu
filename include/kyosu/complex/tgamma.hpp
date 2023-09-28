@@ -65,7 +65,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns \f$\Gamma(z)\f$. If z is floating the result is as if complex(z) was used in the call.
+//!     Returns \f$\Gamma(z)\f$.
 //!
 //!  @groupheader{Example}
 //!

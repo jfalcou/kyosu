@@ -48,7 +48,7 @@ namespace kyosu::tags
 namespace kyosu
 {
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @addtogroup functions
   //! @{
   //! @var from_angle_axis
   //!

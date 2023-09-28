@@ -87,7 +87,8 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  `q`:   quaternion value defining the rotation.
-  //!  `x`:   span of 3 elements to rotate.
+  //!
+  //!  `v`:   span of 3 elements to rotate.
   //!
   //! **Return value**
   //!

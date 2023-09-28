@@ -63,7 +63,26 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the hyperbolic tangent of the argument.
+//!     1.  Returns eve::tanh(z).
+//!
+//!     2. Returns elementwise the complex value
+//!        of the hyperbolic tangent of the input.
+//!
+//!       * for every z: `kyosu::tanh(kyosu::conj(z)) == kyosu::conj(std::tanh(z))`
+//!       * for every z: `kyosu::tanh(-z)           == -kyosu::tanh(z)`
+//!       * If z is \f$+0\f$, the result is \f$+0\f$
+//!       * If z is \f$x+i \infty\f$ (for any non zero finite x), the result is \f$NaN+i NaN\f$
+//!       * If z is \f$i \infty\f$  the result is \f$i NaN\f$
+//!       * If z is \f$x,NaN\f$ (for any non zero finite x), the result is \f$NaN+i NaN\f$
+//!       * If z is \f$i NaN\f$  the result is \f$i NaN\f$
+//!       * If z is \f$+\infty,y\f$ (for any finite positive y), the result is \f$1\f$
+//!       * If z is \f$+\infty+i \infty\f$, the result is \f$1,\pm 0\f$ (the sign of the imaginary part is unspecified)
+//!       * If z is \f$+\infty+i NaN\f$, the result is \f$1\f$ (the sign of the imaginary part is unspecified)
+//!       * If z is \f$NaN\f$, the result is \f$NaN\f$
+//!       * If z is \f$NaN+i y\f$ (for any non-zero y), the result is \f$NaN+i NaN\f$
+//!       * If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
+//!
+//!     3. The call is semantically equivalent to sinh(z)/cosh(z);
 //!
 //!  @groupheader{Example}
 //!

@@ -71,7 +71,7 @@ namespace kyosu
 //!
 //!     1. a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
 //!
-//!     2. Returns the [elementwise](@ref glossary_elementwise) the square root of z,
+//!     2. Returns the elementwise the square root of z,
 //!        in the range of the right half-plane, including the imaginary axis (\f$[0, +\infty]\f$
 //!        along the real axis and \f$[-\infty, +\infty]\f$ along the imaginary axis.)
 //!

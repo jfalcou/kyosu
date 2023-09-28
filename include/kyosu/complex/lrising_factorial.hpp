@@ -73,7 +73,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   @brief Computes the Rising Factorial function i.e. \f$\log\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
+//!   @brief Computes the logarithm Rising Factorial function i.e. \f$\log\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
 //!
 //!  @groupheader{Example}
 //!

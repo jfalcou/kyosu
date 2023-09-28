@@ -71,7 +71,7 @@ namespace kyosu
 //!
 //!   1.  a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
 //!
-//!   2. Returns [elementwise](@ref glossary_elementwise) the natural logarithm of the input
+//!   2. Returns elementwise the natural logarithm of the input
 //!      in the range of a strip in the interval \f$i\times[-\pi, \pi]\f$ along the imaginary axis
 //!      and mathematically unbounded along the real axis. .
 //!
