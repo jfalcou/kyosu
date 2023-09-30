@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_from_cylindrospherical : eve::elementwise
+  struct callable_from_cylindrospherical: eve::elementwise
   {
     using callable_tag_type = callable_from_cylindrospherical;
 
@@ -58,10 +58,10 @@ namespace kyosu
   //! @brief Callable object computing a quaternion from its cylindrospherical representation.
   //!
   //!  cylindrospherical is specific to quaternions. It is often interesting to consider
-  //!  \f$\mathbb{H}\f$ as the cartesian product of \f$\mathbb{R}\f$ by \f$\mathbb{R3}\f$
+  //!  \f$\mathbb{H}\f$ as the cartesian product of \f$\mathbb{R}\f$ by \f$\mathbb{R}^3\f$
   //!  (the quaternionic multiplication has then a special form, as given here).
-  //!  This function therefore builds a quaternion from this representation, with the \f$\mathbb{R3}\f$ component given
-  //!  in usual \f$\mathbb{R3}\f$ spherical coordinates.
+  //!  This function therefore builds a quaternion from this representation, with the \f$\mathbb{R}^3\f$ component given
+  //!  in usual \f$\mathbb{R}^3\f$ spherical coordinates.
   //!
   //! **Defined in header**
   //!

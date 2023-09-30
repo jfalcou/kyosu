@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_to_polar : eve::elementwise
+  struct callable_to_polar: eve::elementwise
   {
     using callable_tag_type = callable_to_polar;
 
@@ -70,7 +70,7 @@ namespace kyosu
   //!
   //! **Parameters**
   //!
-  //!  `q` : cayley dickson value
+  //!  `q`: cayley dickson value
   //!
   //! **Return value**
   //!

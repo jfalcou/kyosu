@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_slerp : eve::elementwise
+  struct callable_slerp: eve::elementwise
   {
     using callable_tag_type = callable_slerp;
 
@@ -63,8 +63,8 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1` : unitary quaternions to process.
-//!     * `t` : floating value interpolation coefficient.
+//!     * `z0, z1`: unitary quaternions to process.
+//!     * `t`: floating value interpolation coefficient.
 //!
 //!   **Return value**
 //!

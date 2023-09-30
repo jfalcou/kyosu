@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_manhattan : eve::elementwise
+  struct callable_manhattan: eve::elementwise
   {
     using callable_tag_type = callable_manhattan;
 
@@ -60,7 +60,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `zi...` : Values to process.
+//!     * `zi...`: Values to process.
 //!
 //!   **Return value**
 //!

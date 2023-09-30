@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -13,7 +13,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_to_euler : eve::elementwise
+  struct callable_to_euler: eve::elementwise
   {
     using callable_tag_type = callable_to_euler;
 
@@ -87,25 +87,24 @@ namespace kyosu
   //!   namespace eve
   //!   {
   //!      template < int I, int J, int K >
-  //!      auto to_euler(auto q
-  //!                  , axis<I> const & a1, axis<J> const & a2, axis<K> const & a3) const noexcept
-  //!        requires(I != J && J != K)
+  //!      auto to_euler(auto q, axis<I> const & a1, axis<J> const & a2, axis<K> const & a3) noexcept
+  //!      requires(I != J && J != K)
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
   //!  * `q` the rotation quaternion (not necesseraly normalized)
-  //!  * `a1`, `a2`, `a3` : the axis parameters to be chosen between X_,  Y_, Z_ (two consecutive axis cannot be the same)
+  //!  * `a1`, `a2`, `a3`: the axis parameters to be chosen between X_,  Y_, Z_ (two consecutive axis cannot be the same)
   //!  *                    depending of the euler order
   //!
   //!  **Template parameters**
   //!
-  //!     * I, J, K : actual parameters can be chosen between axis values X_,  Y_, Z_ from
+  //!     * I, J, K: actual parameters can be chosen between axis values X_,  Y_, Z_ from
   //!                 which I, J and K are deduced
   //!
   //!
-  //!   The computation method is taken from the article : "Quaternion to Euler angles conversion: A
+  //!   The computation method is taken from the article: "Quaternion to Euler angles conversion: A
   //!   direct, general and computationally efficient method". PLoS ONE
   //!   17(11): e0276302. https://doi.org/10.1371/journal pone 0276302.
   //!   Evandro Bernardes, and Stephane Viollet

@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_to_multipolar : eve::elementwise
+  struct callable_to_multipolar: eve::elementwise
   {
     using callable_tag_type = callable_to_multipolar;
 
@@ -62,17 +62,17 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto to_multipolar( auto q) const noexcept;
+  //!     auto to_multipolar(auto q) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!  `q` : quaternion
+  //!  `q`: quaternion
   //!
   //! **Return value**
   //!
-  //!  a tuple containing in this order `rho1`, 'theta1', `rho2` 'theta2':  the moduli
+  //!  a tuple containing in this order `rho1`, `theta1`, `rho2` `theta2`:  the moduli
   //!  and  the angles in radian of the multipolar \f$\mathbb{R}^4\f$ coordinates
   //!
   //! ---

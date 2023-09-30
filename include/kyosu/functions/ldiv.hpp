@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -10,7 +10,7 @@
 #include <kyosu/details/invoke.hpp>
 namespace kyosu::tags
 {
-  struct callable_ldiv : eve::elementwise
+  struct callable_ldiv: eve::elementwise
   {
     using callable_tag_type = callable_ldiv;
 
@@ -60,7 +60,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1` : Values to process.
+//!     * `z0, z1`: Values to process.
 //!
 //!   **Return value**
 //!

@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -10,7 +10,7 @@
 #include <kyosu/details/invoke.hpp>
 namespace kyosu::tags
 {
-  struct callable_average : eve::elementwise
+  struct callable_average: eve::elementwise
   {
     using callable_tag_type = callable_average;
 
@@ -60,7 +60,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1` : Value to process. Can be a mix of complex and real floating values and complex values.
+//!     * `z0, z1`: Value to process. Can be a mix of complex and real floating values and complex values.
 //!
 //!   **Return value**
 //!

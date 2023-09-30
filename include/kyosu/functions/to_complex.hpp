@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -55,8 +55,8 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z`       : Complex value.
-//!     * `r`, `i`  : Real and imaginary part used to construct a @ref kyosu::complex..
+//!     * `z`      : Complex value.
+//!     * `r`, `i` : Real and imaginary part used to construct a @ref kyosu::complex..
 //!
 //!   **Return value**
 //!

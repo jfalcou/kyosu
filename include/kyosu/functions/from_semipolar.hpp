@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_from_semipolar : eve::elementwise
+  struct callable_from_semipolar: eve::elementwise
   {
     using callable_tag_type = callable_from_semipolar;
 
@@ -58,7 +58,7 @@ namespace kyosu
   //! @brief Callable object computing a quaternion from its semipolar representation.
   //!
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
-  //!  from a semipolar representation of an \f$\mathbb{R}^2\f$ element.
+  //!  from a polar representation of an \f$\mathbb{R}^2\f$ element.
   //!
   //! from_semipolar first two inputs are the polar coordinates of the first \f$\mathbb{C}\f$
   //! component of the quaternion.

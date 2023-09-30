@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_to_cylindrospherical : eve::elementwise
+  struct callable_to_cylindrospherical: eve::elementwise
   {
     using callable_tag_type = callable_to_cylindrospherical;
 
@@ -62,17 +62,17 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto to_cylindrospherical( auto q) const noexcept;
+  //!     auto to_cylindrospherical(auto q) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!  `q` : quaternion
+  //!  `q`: quaternion
   //!
   //! **Return value**
   //!
-  //!  a tuple containing in this order `t`, 'radius', `longitude` 'latitude':  the components
+  //!  a tuple containing in this order `t`, `radius`, `longitude` `latitude`:  the components
   //!  of the cylindrospherical parametrisation of \f$\mathbb{R}^4\f$ coordinates
   //!
   //! ---

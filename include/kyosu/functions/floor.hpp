@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_floor : eve::elementwise
+  struct callable_floor: eve::elementwise
   {
     using callable_tag_type = callable_floor;
 
@@ -58,7 +58,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to for which floor is computed.
+//!     * `z`: Value to for which floor is computed.
 //!
 //!   **Return value**
 //!

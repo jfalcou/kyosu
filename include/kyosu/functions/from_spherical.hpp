@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_from_spherical : eve::elementwise
+  struct callable_from_spherical: eve::elementwise
   {
     using callable_tag_type = callable_from_spherical;
 
@@ -83,7 +83,7 @@ namespace kyosu
   //! **Parameters**
   //!
   //!   * `rho`:  the modulus
-  //!   * `theta`, 'phi1`, 'phi2`: angles in radian
+  //!   * `theta`, `phi1`, `phi2`: angles in radian
   //!
   //! **Return value**
   //!

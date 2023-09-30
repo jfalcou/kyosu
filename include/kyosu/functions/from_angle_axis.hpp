@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -13,7 +13,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_from_angle_axis : eve::elementwise
+  struct callable_from_angle_axis: eve::elementwise
   {
     using callable_tag_type = callable_from_angle_axis;
 
@@ -73,9 +73,9 @@ namespace kyosu
   //!
   //! **Parameters**
   //!
-  //!  * `angle` : rotation angle in radian
-  //!  * `axis` : rotation axis given by an std::span of dimension 3.
-  //!  * `normalize` : can be assume_normalized or normalize. In the second case axis is normalized.
+  //!  * `angle`: rotation angle in radian
+  //!  * `axis`: rotation axis given by an std::span of dimension 3.
+  //!  * `normalize`: can be assume_normalized or normalize. In the second case axis is normalized.
   //!                if axis is already normalized use assume_normalized is more efficient.
   //!
   //! **Return value**
