@@ -57,8 +57,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T sqrt(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T sqrt(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T sqrt(T z) noexcept; //1
+//!      template<kyosu::concepts::complex T>        constexpr T sqrt(T z) noexcept; //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T sqrt(T z) noexcept; //3
 //!   }
 //!   @endcode
 //!
@@ -68,7 +69,26 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns a square root of its argument.
+//!     1. a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!
+//!     2. Returns the elementwise the square root of z,
+//!        in the range of the right half-plane, including the imaginary axis (\f$[0, +\infty]\f$
+//!        along the real axis and \f$[-\infty, +\infty]\f$ along the imaginary axis.)
+//!
+//!        *  The function is continuous onto the branch cut taking into account
+//!           the sign of imaginary part
+//!        *  eve::sqrt(kyosu::conj(z)) == kyosu::conj(kyosu::sqrt(z))
+//!        *  If z is \f$\pm0\f$, the result is \f$+0\f$
+//!        *  If z is \f$x+i \infty\f$, the result is \f$\infty+i \infty\f$ even if x is \f$NaN\f$
+//!        *  If z is \f$x,NaN\f$, the result is \f$NaN,NaN\f$ (unless x is \f$\pm\infty\f$)
+//!        *  If z is \f$-\infty+i y\f$, the result is \f$+0+i \infty\f$ for finite positive y
+//!        *  If z is \f$+\infty+i y\f$, the result is \f$+\infty+i 0\f$ for finite positive y
+//!        *  If z is \f$-\infty+i NaN\f$, the result is \f$NaN \pm i \infty\f$ (sign of imaginary part unspecified)
+//!        *  If z is \f$+\infty+i NaN\f$, the result is \f$+\infty+i NaN\f$
+//!        *  If z is \f$NaN+i y\f$, the result is \f$NaN+i NaN\f$
+//!        *  If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
+//!
+//!     2. Returns a square root of z.
 //!
 //!  @groupheader{Example}
 //!

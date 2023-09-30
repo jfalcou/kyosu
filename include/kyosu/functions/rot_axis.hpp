@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(rot_axis_);
 
-    template<eve::ordered_value V>
+    template<eve::floating_ordered_value V>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const & v) noexcept
     {
@@ -66,7 +66,7 @@ namespace kyosu
   //!
   //! **Parameters**
   //!
-  //!  `q` : quaternion
+  //!  `q` : quaternion, complex or floating.
   //!
   //! **Return value**
   //!

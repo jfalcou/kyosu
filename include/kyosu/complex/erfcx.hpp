@@ -67,7 +67,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. a real input z return eve::erfcx(z).
 //!
 //!   2. The value of the normalized complementary error function is returned.
 //!

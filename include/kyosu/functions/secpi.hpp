@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(secpi_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::secpi(v); }
 
     template<typename T>
@@ -39,7 +39,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var secpi
-//!   @brief Computes the secant of the argument in \f$\pi\f$ mutiples.
+//!   @brief Computes the secant of the argument in \f$\pi\f$ multiples.
 //!
 //!   **Defined in Header**
 //!
@@ -52,8 +52,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T secpi(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T secpi(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto secpi(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto secpi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the secant of the argument in \f$\pi\f$ mutiples.
+//!     Returns the secant of the argument in \f$\pi\f$ multiples.
 //!
 //!  @groupheader{Example}
 //!

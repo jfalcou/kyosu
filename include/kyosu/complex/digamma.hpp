@@ -39,7 +39,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var digamma
-//!   @brief Computes the Digamma function i.e. the logarithmic derivative of the \f$\Gamma\f$
+//!   @brief Computes the Digamma function i.e. the logarithmic derivative of the \f$\Gamma\f$ function
 //!
 //!   **Defined in Header**
 //!
@@ -53,13 +53,13 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::complex T>   constexpr T  digamma(T z) noexcept;
-//!      template<eve::floatingordered_value T> constexpr T  digamma(T z) noexcept;
+//!      template<eve::floating_ordered_value T> constexpr T  digamma(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `z` : real or complex value to process.
 //!
 //!   **Return value**
 //!

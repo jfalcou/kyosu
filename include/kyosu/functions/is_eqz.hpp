@@ -38,7 +38,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var is_eqz
-//!   @brief test the parameter for zero equality.
+//!   @brief test the parameter for equality to zero.
 //!
 //!   **Defined in Header**
 //!
@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_eqz(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr auto is_eqz(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto is_eqz(T z) noexcept;
 //!   }
 //!   @endcode
 //!

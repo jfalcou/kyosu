@@ -17,8 +17,8 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(ldiv_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::ordered_value auto const& v0
-                                               , eve::ordered_value auto const& v1) noexcept
+                                               , eve::floating_ordered_value auto const& v0
+                                               , eve::floating_ordered_value auto const& v1) noexcept
     {
       return v1/v0;
     }
@@ -54,11 +54,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, ordered_value T1>                               > constexpr auto ldiv(T0 z0, T1, z1) noexcept;
-///!   }
+//!     constexpr auto ldiv(auto z0, auto, z1) noexcept;
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**
@@ -68,7 +65,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     Returns the left division  of the two arguments. This function not equivalent to z1/z0 as soon as multiplication
-//!     is not commutative.
+//!     is not commutative (i.e. for general Cayley-Dickson values with dimensionality strictly above 2).
 //!
 //!  @groupheader{Example}
 //!

@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(sinh_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::sinh(v); }
 
     template<typename T>
@@ -52,8 +52,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T sinh(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T sinh(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto sinh(T z) noexcept; //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sinh(T z) noexcept; //2
 //!   }
 //!   @endcode
 //!
@@ -63,7 +63,26 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the hyperbolic sine of the argument.
+//!   1. Returns the hyperbolic sine of the argument.
+//!
+//!   2. Returns elementwise the complex value
+//!      of the hyperbolic sine of the input.
+//!
+//!      * for every z: `eve::sinh(kyosu::conj(z)) == kyosu::conj(std::sinh(z))`
+//!      * for every z: `kyosu::sinh(-z)           == -kyosu::sinh(z)`
+//!      * If z is \f$+0\f$, the result is \f$+0\f$
+//!      * If z is \f$i \infty\f$, the result is \f$i NaN\f$ (the sign of the real part is unspecified)
+//!      * If z is \f$i NaN\f$, the result is \f$NaN\f$
+//!      * If z is \f$x+i \infty\f$ (for any positive finite x), the result is \f$NaN+i NaN\f$
+//!      * If z is \f$x+i NaN\f$ (for any positive finite x), the result is \f$NaN+i NaN\f$
+//!      * If z is \f$+\infty\f$, the result is \f$+\infty\f$
+//!      * If z is \f$+\infty+i y\f$ (for any positive finite y), the result is \f$\infty\times e^{iy}\f$
+//!      * If z is \f$+\infty+i \infty\f$, the result is \f$\pm \infty+i NaN\f$ (the sign of the real part is unspecified)
+//!      * If z is \f$+\infty+i NaN\f$, the result is \f$\pm \infty+i NaN\f$ (the sign of the real part is unspecified)
+//!      * If z is \f$NaN\f$, the result is \f$NaN\f$
+//!      * If z is \f$NaN+i y\f$ (for any finite nonzero y), the result is \f$NaN+i NaN\f$
+//!
+//!   3. Is semantically equivalent to (exp(z)-exp(-z))/2.
 //!
 //!  @groupheader{Example}
 //!

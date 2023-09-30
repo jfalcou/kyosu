@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(asech_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
      auto fn = callable_asech{};
@@ -43,7 +43,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var asech
-//!   @brief Computes the hyperbolic arcsecant of the argument.
+//!   @brief Computes the inverse  hyperbolic secant of the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +56,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto asech(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto asech(T z) noexcept;  //2
+//!      template<eve::floating_ordered_value T>     constexpr auto asech(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto asech(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -67,7 +67,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
 //!
 //!   2. Returns elementwise \f$\mathop{\mathrm{acosh}}(1/z)\f$.
 //!

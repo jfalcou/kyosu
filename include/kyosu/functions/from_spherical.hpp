@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(from_spherical_);
 
-    template<eve::ordered_value V,  eve::ordered_value U,  eve::ordered_value W,  eve::ordered_value T>
+    template<eve::floating_ordered_value V,  eve::floating_ordered_value U,  eve::floating_ordered_value W,  eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const & rho
                                                , U const & theta

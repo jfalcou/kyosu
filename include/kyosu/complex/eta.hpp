@@ -64,11 +64,11 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Vcomplex or real value to process.
+//!     * `z` : complex or real value to process.
 //!
 //! **Return value**
 //!
-//!   Returns the Dirichlet alternating zeta function: sum \f$  \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\f$
+//!   Returns the Dirichlet alternating zeta function: \f$  \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\f$
 //!
 //!  @groupheader{Example}
 //!

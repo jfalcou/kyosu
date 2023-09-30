@@ -10,7 +10,6 @@
 #include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
 #include <kyosu/types/impl/reals.hpp>
-#include <iostream>
 
 namespace kyosu::_
 {
@@ -450,7 +449,10 @@ namespace kyosu::_
   auto dispatch(eve::tag_of<kyosu::pow_abs> const&, C0 const & c0, C1 const &  c1) noexcept
   {
     auto ac0 = kyosu::sqr_abs(c0);
-    return kyosu::pow(ac0, c1*eve::half(eve::as(kyosu::real(c0))));
+    if constexpr(eve::ordered_value<C1>)
+      return eve::pow(ac0, c1*eve::half(eve::as(ac0)));
+    else
+      return kyosu::pow(ac0, c1*eve::half(eve::as(ac0)));
   }
 
   template<typename  C0, typename  C1>

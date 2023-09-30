@@ -48,8 +48,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T> constexpr auto quaternion(T r, T i = 0, T j = 0, T k = 0)       noexcept;
-//!      template<eve::ordered_value T> constexpr auto quaternion(complex_t<T> c0, complex_t<T> c1 = 0)  noexcept;
+//!      template<eve::floating_ordered_value T> constexpr auto quaternion(T r, T i = 0, T j = 0, T k = 0)       noexcept;
+//!      template<eve::floating_ordered_value T> constexpr auto quaternion(complex_t<T> c0, complex_t<T> c1 = 0)  noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T quaternion(T z) noexcept;
 //!   }
 //!   @endcode

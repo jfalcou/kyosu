@@ -18,7 +18,7 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(lpnorm_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_value auto const& p
+                                               , eve::floating_ordered_value auto const& p
                                                , eve::floating_ordered_value auto const&... vs) noexcept
     {
       return eve::lpnorm(p, vs...);
@@ -56,18 +56,18 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template< floating_value P, typename T, typename ... Ts>
-//!      auto operator()(P p, T z,Ts ... zs ) const noexcept
+//!      template< floating_value P, typename T, typename ... Ts> auto lpnorm(P p, T z,Ts ... zs ) const noexcept
 ///!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z, zs...` : Values to process.
+//!     * `p`:    : positive floating ordered value
+//!     * `zs...` : Values to process.
 //!
 //!   **Return value**
 //!
-//!     Returns \f$ \left(\sum_{i = 0}^n//! |x_i|^p\right)^{\frac1p} \f$.
+//!     Returns \f$ \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \f$.
 //!
 //!  @groupheader{Example}
 //!

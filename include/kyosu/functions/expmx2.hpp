@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(expmx2_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::expmx2(v); }
 
     template<typename T>
@@ -52,8 +52,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpmx2r T expmx2(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpmx2r T expmx2(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T expmx2(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T expmx2(T z) noexcept;
 //!   }
 //!   @endcode
 //!

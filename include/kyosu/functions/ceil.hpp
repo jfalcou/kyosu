@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(ceil_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::ceil(v); }
 
     template<typename T>
@@ -52,13 +52,13 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T ceil(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T ceil(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T ceil(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to for which ceil is computed.
+//!     * `z` : Value for which ceil is computed.
 //!
 //!   **Return value**
 //!

@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(sign_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       return eve::sign(v);
@@ -55,13 +55,13 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T sign(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T sign(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T sign(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to for which square root is computed.
+//!     * `z` : Value to process.
 //!
 //!   **Return value**
 //!

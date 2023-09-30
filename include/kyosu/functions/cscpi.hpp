@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(cscpi_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::cscpi(v); }
 
     template<typename T>
@@ -39,7 +39,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var cscpi
-//!   @brief Computes the cosecant of the argument in \f$\pi\f$ mutiples.
+//!   @brief Computes the cosecant from the argument in \f$\pi\f$ multiples.
 //!
 //!   **Defined in Header**
 //!
@@ -53,7 +53,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T cscpi(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T cscpi(T z) noexcept;
+//!      template<eve::floating_ordered_value T>              constexpr T cscpi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the cosecant of the argument in \f$\pi\f$ mutiples.
+//!     Returns the cosecant from the argument in \f$\pi\f$ multiples.
 //!
 //!  @groupheader{Example}
 //!

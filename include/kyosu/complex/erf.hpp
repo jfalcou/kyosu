@@ -68,7 +68,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. a real input z returns eve::erf(z).
 //!
 //!   2.  The value of the error function in the complex plane is returned
 //!

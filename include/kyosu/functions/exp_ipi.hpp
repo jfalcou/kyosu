@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(exp_ipi_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       const auto ii = kyosu::complex(T(0), T(1))*eve::pi(eve::as<T>());
@@ -44,7 +44,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var exp_ipi
-//!   @brief Computes the exponential of the argument times i.
+//!   @brief Computes the exponential of \f$i\pi\f$ times the argument.
 //!
 //!   **Defined in Header**
 //!
@@ -58,7 +58,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexp_ipir T exp_ipi(T z) noexcept;
-//!      template<eve::ordered_value T>              constexp_ipir T exp_ipi(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexp_ipir T exp_ipi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -68,7 +68,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the `exp(i*z)`.
+//!     Returns  `exp(i*pi(as(z))*z)`.
 //!
 //!  @groupheader{Example}
 //!

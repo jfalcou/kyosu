@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(ipart_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const&) noexcept { return T{0}; }
 
     template<typename T>
@@ -43,7 +43,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var imag
+//!   @var ipart
 //!   @brief Extracts the imaginary part of a value.
 //!
 //!   **Defined in Header**
@@ -59,7 +59,7 @@ namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto& ipart(T& z)        noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto  ipart(T const& z)  noexcept;
-//!      template<eve::ordered_value T>              constexpr T     ipart(T const& z)  noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T     ipart(T const& z)  noexcept;
 //!   }
 //!   @endcode
 //!
@@ -69,15 +69,19 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the imaginary part of its argument. For real inputs, the call returns 0. It is an alias of `imag`.
+//!     Returns the second part of its argument.
+//!
+//!     For real inputs, the call returns 0.
+//!
+//!     For complex inputs it is the imaginary part.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/imag.cpp}
+//!  @godbolt{doc/ipart.cpp}
 //======================================================================================================================
 inline constexpr tags::callable_ipart ipart = {};
 
-/// Alias for ipart
+//! Alias for [ipart](@ref kyosu::ipart)
 inline constexpr tags::callable_ipart imag = {};
 
 //======================================================================================================================

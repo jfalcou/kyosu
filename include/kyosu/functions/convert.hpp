@@ -18,7 +18,7 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(convert_);
 
     template<eve::plain_scalar_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, eve::ordered_value auto const& v, eve::as<T> const& tgt) noexcept
+    static KYOSU_FORCEINLINE auto deferred_call(auto, eve::floating_ordered_value auto const& v, eve::as<T> const& tgt) noexcept
     {
       return eve::convert(v,tgt);
     }
@@ -55,18 +55,18 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::value T, eve::value U, eve::value U>
-//!      constexpr auto convert(T x, eve::as<U> ) noexcept;
+//!      template<eve::floating_scalar_ordered_value U> constexpr auto convert(auto x, eve::as<U> ) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `x` : Value to process.
-//!     * `U``: target scalar type to convert to.
+//!     * `x`: floating or Cayley Dickinson value to process.
+//!     * `U`: target type to convert to.
 //!
 //!   **Return value**
 //!
+//!        a value resulting of the conversion of each of its elements to type U.
 //!
 //!  @groupheader{Example}
 //!

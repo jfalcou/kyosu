@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(from_polar_);
 
-    template<eve::ordered_value V, eve::ordered_value U>
+    template<eve::floating_ordered_value V, eve::floating_ordered_value U>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , V const & v
                                                , U const & u) noexcept
@@ -58,7 +58,7 @@ namespace kyosu
   //! @{
   //! @var from_polar
   //!
-  //! @brief Callable object computing a complex from its polar coordinates.
+  //! @brief Callable object computing a complex or a general Cayley-Dickson from a polar representation.
   //!
   //!  This function is the reciprocal of from_polar
   //!
@@ -73,9 +73,9 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!    template<eve::ordered_value T0, eve::ordered_value T1>,
+  //!    template<eve::floating_ordered_value T0, eve::floating_ordered_value T1>,
   //!     auto from_polar( T0 rho, T1 theta) const noexcept;                   // 1
-  //!    template<eve::ordered_value T0, eve::ordered_value T1, kyosu::concepts::cayley_dickson C>,
+  //!    template<eve::floating_ordered_value T0, eve::floating_ordered_value T1, kyosu::concepts::cayley_dickson C>,
   //!     auto from_polar( T0 rho, T1 theta, C iz) const noexcept;             // 2
   //!   }
   //!   @endcode
@@ -83,7 +83,9 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  `rho`   : modulus.
+  //!
   //!  `theta` : argument.
+  //!
   //!  `iz'    : unitary cayley dickson value.
   //!
   //! **Return value**
@@ -91,6 +93,8 @@ namespace kyosu
   //!    1. the complex number `rho*exp(i*theta)`.
   //!    2. the cayley_dickson value `rho*exp(iz*theta)`.
   //!
+  //!  @note the entries constitue a proper polar representation if rho is non-negative and if iz present
+  //!        it must be pure unitary with non-negative jpart. However the formula is taken anyway.
   //!
   //!
   //! #### Example

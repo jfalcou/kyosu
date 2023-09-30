@@ -18,7 +18,7 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(hypot_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::ordered_value auto const&... vs) noexcept
+                                               , eve::floating_ordered_value auto const&... vs) noexcept
     {
       return eve::hypot(vs...);
     }
@@ -29,9 +29,9 @@ namespace kyosu::tags
       return eve::tag_invoke(*this, targets...);
     }
 
-//     template<typename... T>
-//     eve::unsupported_call<callable_hypot(T&&...)> operator()(T&&... x) const
-//     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    template<typename... T>
+    eve::unsupported_call<callable_hypot(T&&...)> operator()(T&&... x) const
+    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
 
@@ -54,18 +54,17 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template< floating_value P, typename ... Ts>
-//!      auto operator()(Ts ... zi ) const noexcept
+//!      template< f typename ... Ts> auto hypot(Ts ... zi ) const noexcept
 ///!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * ` zi...` : Values to process.
+//!     * ` zi...` : Values to process: mix of floating and Cayley-Dickson.
 //!
 //!   **Return value**
 //!
-//!     Returns \f$ \sqrt\sum_{i = 0}^n//! |z_i|^2} \f$.
+//!     *  Returns \f$ \sqrt{\sum_{i = 0}^{n-1} |z_i|^2} \f$ where \f$n\f$ is the number of arguments.
 //!
 //!  @groupheader{Example}
 //!

@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(log2_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_log2{};
@@ -57,8 +57,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
+//!      template<eve::floating_ordered_value T>     constexpr complex_t<T> log2(T z) noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T log2(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr complex_t<T> log2(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -68,7 +68,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the `log2(z)`. If z is an ordered value log2 returns a complex typed value.
+//!   1.  a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!   2.  returns [log](@ref kyosu::log)(z)/log_2(as(z)).
 //!
 //!  @groupheader{Example}
 //!

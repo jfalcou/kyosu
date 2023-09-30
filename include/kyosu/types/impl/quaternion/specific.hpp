@@ -220,6 +220,25 @@ namespace kyosu::_
 
   template<typename Z>
   KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::to_cylindrospherical> const&
+               , Z const& q) noexcept
+  {
+    auto q0 = get<0>(q);
+    if constexpr(kyosu::concepts::complex<Z>)
+    {
+      auto z =  eve::zero(eve::as(get<0>(q)));
+      return kumi::tuple{get<0>(q), eve::abs(get<1>(q)), z, z};
+    }
+    else
+    {
+      auto lon =  eve::pedantic(eve::atan2)(get<2>(q), get<1>(q));
+      auto lat =  eve::pedantic(eve::atan2)(get<3>(q)*eve::sin(lon),get<2>(q));
+      return kumi::tuple{get<0>(q), abs(pure(q)), lon, lat};
+    }
+  }
+
+  template<typename Z>
+  KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::to_semipolar> const&
                , Z const& q) noexcept
   {

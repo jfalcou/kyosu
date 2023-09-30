@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(radinpi_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return T(0); }//eve::radinpi(v); }
 
     template<typename T>
@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_t<T> radinpi(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T            radinpi(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T            radinpi(T z) noexcept;
 //!   }
 //!   @endcode
 //!

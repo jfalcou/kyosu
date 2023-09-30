@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(arg_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
       return eve::if_else(eve::is_positive(v), eve::zero, eve::pi(eve::as(v)));
     }
@@ -40,7 +40,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var arg
-//!   @brief complex number argument.
+//!   @brief  argument.
 //!
 //!   **Defined in Header**
 //!
@@ -53,7 +53,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>              constexpr auto arg(T z) noexcept; //1
+//!      template<eve::floating_ordered_value T>     constexpr auto arg(T z) noexcept; //1
 //!      template<kyosu::concepts::complex T>        constexpr auto arg(T z) noexcept; //2
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto arg(T z) noexcept; //3
 //!   }
@@ -66,10 +66,9 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     1. Returns 0 or pi acording to the non negativity of z.
-//!     2. Returns elementwise the argument of the complex number i.e. `atan2(imag(z), real(z))`.
-//!     3. Returns \f$\mathrm{atan2}(|\underline{z}|, z_0)\f$ where \f$z_0\f$ is the real part of \f$z\f$ and
-//!         \f$\underline{z}\f$ is the pure part of \f$z\f$.
-
+//!     2. Returns elementwise the argument of the complex number i.e. eve::atan2([kyosu::imag(z)](@ref kyosu::imag )(z), [kyosu::real(z)](@ref kyosu::real )(z)).
+//!     3. Returns \f$\mathrm{atan2}(\mathrm{sign}(z_1)|\underline{z}|, z_0)\f$ where \f$z_0\f$ is the real part of \f$z\f$,  \f$z_1\f$ is the ipart of \f$z\f$ and
+//!         \f$\underline{z}\f$ the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!

@@ -55,7 +55,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::complex T>   constexpr T  tgamma(T z) noexcept;
-//!      template<eve::floatingordered_value T> constexpr T  tgamma(T z) noexcept;
+//!      template<eve::floating_ordered_value T> constexpr T  tgamma(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -65,7 +65,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns \f$\Gamma(z)\f$. If z is floating the result is as if complex(z) was used in the call.
+//!     Returns \f$\Gamma(z)\f$.
 //!
 //!  @groupheader{Example}
 //!

@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(abs_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::abs(v); }
 
     template<typename T>
@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_t<T> abs(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T            abs(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T            abs(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,7 +63,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     * Returns the modulus of its argument which always is a floating ordered value.
-//!       The modulus is the square root of the square of the absolute values of the components.
+//!       The modulus is the square root of the sum of the square of the absolute value of each component.
 //!
 //!  @groupheader{Example}
 //!

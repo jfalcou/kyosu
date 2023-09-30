@@ -29,10 +29,12 @@
 #include <kyosu/functions/asin.hpp>
 #include <kyosu/functions/asinpi.hpp>
 #include <kyosu/functions/asinh.hpp>
+#include <kyosu/functions/associator.hpp>
 #include <kyosu/functions/atan.hpp>
 #include <kyosu/functions/atanh.hpp>
 #include <kyosu/functions/average.hpp>
 #include <kyosu/functions/ceil.hpp>
+#include <kyosu/functions/commutator.hpp>
 #include <kyosu/functions/conj.hpp>
 #include <kyosu/functions/cos.hpp>
 #include <kyosu/functions/cosh.hpp>
@@ -88,6 +90,10 @@
 #include <kyosu/functions/log1p.hpp>
 #include <kyosu/functions/log_abs.hpp>
 #include <kyosu/functions/log2.hpp>
+#include <kyosu/functions/lpart.hpp>
+#include <kyosu/functions/lipart.hpp>
+#include <kyosu/functions/ljpart.hpp>
+#include <kyosu/functions/lkpart.hpp>
 #include <kyosu/functions/lpnorm.hpp>
 #include <kyosu/functions/manhattan.hpp>
 #include <kyosu/functions/minus.hpp>
@@ -164,6 +170,7 @@
 #include <kyosu/functions/rotate_vec.hpp>
 #include <kyosu/functions/to_angle_axis.hpp>
 #include <kyosu/functions/to_cylindrical.hpp>
+#include <kyosu/functions/to_cylindrospherical.hpp>
 #include <kyosu/functions/to_euler.hpp>
 #include <kyosu/functions/to_multipolar.hpp>
 #include <kyosu/functions/to_rotation_matrix.hpp>

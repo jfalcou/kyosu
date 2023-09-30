@@ -117,7 +117,7 @@ namespace kyosu::_
      auto z = if_else(negra0, -a0, a0);
      Z ss{};
      for(int pp = N-1; pp >= 1; --pp){
-       ss += c[pp]*rec(z+dec(pp));
+       ss += c[pp]*rec(z+eve::dec(pp));
      }
      auto zg = z+g-eve::half(eve::as(g));
      auto lsq2pi = r_t(0.9189385332046727417803297);
@@ -179,7 +179,7 @@ namespace kyosu::_
     Z d{};
     auto n = d;
     for(int pp = N-1; pp >= 1; --pp){
-      auto dz = rec(z+dec(pp));
+      auto dz = rec(z+eve::dec(pp));
       auto dd =  c[pp]*dz;
       d += dd;
       n -= dd*dz;

@@ -19,7 +19,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(log1p_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_log1p{};
@@ -57,8 +57,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T log1p(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr complex_t<T> log1p(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr complex_t<T> log1p(T z) noexcept; //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T log1p(T z) noexcept;            //2
 //!   }
 //!   @endcode
 //!
@@ -68,7 +68,10 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the `log1p(1+z)`. If z is an ordered value log1p returns a complex typed value.
+//!   1.  a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.\n
+//!       For real and complex entries provision are made to get better precision near z = 0.
+//!
+//!   2.  returns [log](@ref kyosu::log)(1+z).
 //!
 //!  @groupheader{Example}
 //!

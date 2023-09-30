@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(sinhcosh_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::sinhcosh(v); }
 
     template<typename T>
@@ -53,7 +53,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto sinhcosh(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr auto sinhcosh(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto sinhcosh(T z) noexcept;
 //!   }
 //!   @endcode
 //!

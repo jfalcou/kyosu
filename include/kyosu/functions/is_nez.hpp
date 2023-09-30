@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_nez(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr auto is_nez(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto is_nez(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the value of z != 0.
+//!     Returns elementwise true is any component of the element is not zero.
 //!
 //!  @groupheader{Example}
 //!

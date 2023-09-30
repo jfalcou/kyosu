@@ -17,8 +17,8 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(pow1p_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::ordered_value auto const& v0
-                                               , eve::ordered_value auto const& v1) noexcept
+                                               , eve::floating_ordered_value auto const& v0
+                                               , eve::floating_ordered_value auto const& v1) noexcept
     {
       return eve::pow1p(v0, v1);
     }
@@ -54,11 +54,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto pow1p(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto pow1p(T0 z0, T1, z1) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             > constexpr auto pow1p(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, ordered_value T1>                               > constexpr auto pow1p(T0 z0, T1, z1) noexcept;
-///!   }
+//!     constexpr auto average(auto z0, auto, z1) noexcept;
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**
@@ -67,7 +64,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!      the call is semantically equivalent to `eve::exp(z1*eve::log1p(z0))`
+//!      the call is semantically equivalent to `pow(inc(z))`
 //!
 //!  @groupheader{Example}
 //!

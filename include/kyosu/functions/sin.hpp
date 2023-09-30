@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(sin_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::sin(v); }
 
     template<typename T>
@@ -52,8 +52,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T sin(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr T sin(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto sin(T z) noexcept; //1
+//!      template<kyosu::concepts::complex T>        constexpr auto sin(T z) noexcept; //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sin(T z) noexcept; //3
 //!   }
 //!   @endcode
 //!
@@ -63,7 +64,13 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the sine of the argument.
+//!     1. Returns the sine of the argument.
+//!
+//!     2. The behavior of this function is equivalent to \f$-i*\sinh(i*z)\f$.
+//!
+//!     3.  Returns \f$-I_z\cosh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\sin(z_0)\f$,
+//!       where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!        \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!

@@ -43,7 +43,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var deta
-//!   @brief Computes the Dirichlet sums \f$ \displaystyle \sum_0^\infty \frac{(-1)^n}{(kn+1)^z}\f$.
+//!   @brief Computes the Dirichlet sums \f$ \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\f$.
 //!
 //!   **Defined in Header**
 //!
@@ -56,19 +56,19 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<unsigned_scalar_value K, eve::ordered_value T>       constexpr auto deta(K, k, T z) noexcept;  //1
-//!      template<unsigned_scalar_value K, kyosu::concepts::complex T> constexpr auto deta(K, k, T z) noexcept;  //2
+//!      template<unsigned_scalar_value K, eve::ordered_value T>       constexpr auto deta(K k, T z) noexcept;  //1
+//!      template<unsigned_scalar_value K, kyosu::concepts::complex T> constexpr auto deta(K k, T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
 //!     * `k` : scalar unsigned value,  parameter of the sum.
-//!     * `z` : Vcomplex or real value to process.
+//!     * `z` : complex or real value to process.
 //!
 //! **Return value**
 //!
-//!   Returns the Dirichlet sum \f$  \displaystyle \sum_0^\infty \frac{(-1)^n}{(kn+1)^z}\f$
+//!   Returns the Dirichlet sum \f$  \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\f$
 //!
 //!  @groupheader{Example}
 //!

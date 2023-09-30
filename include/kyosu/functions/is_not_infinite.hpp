@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(is_not_infinite_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::is_not_infinite(v); }
 
     template<typename T>
@@ -52,7 +52,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_not_infinite(T z) noexcept;
-//!      template<eve::ordered_value T>              constexpr auto is_not_infinite(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto is_not_infinite(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise true is a component of the element is not infinite .
+//!     Returns elementwise false is any component of the element is infinite .
 //!
 //!  @groupheader{Example}
 //!

@@ -16,11 +16,18 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(pow_);
 
+    template < eve::floating_ordered_value U,  eve::ordered_value V>
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::ordered_value auto const& v0
-                                               , eve::ordered_value auto const& v1) noexcept
+                                               , U const& v0
+                                               , V const& v1) noexcept
     {
-      return eve::pow(v0, v1);
+      if constexpr(eve::integral_value<V>)
+        return eve::pow(v0, v1);
+      else
+      {
+        auto fn = callable_pow{};
+        return fn(kyosu::complex(v0), v1);
+      }
     }
 
     KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1) const noexcept
@@ -54,11 +61,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 > constexpr auto pow(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, kyosu::concepts::cayley_dickson T1>             > constexpr auto pow(T0 z0, T1, z1) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             > constexpr auto pow(T0 z0, T1, z1) noexcept;
-//!      template<eve::ordered_value T0, ordered_value T1>                               > constexpr auto pow(T0 z0, T1, z1) noexcept;
-///!   }
+//!     constexpr auto pow(auto z0, auto, z1) noexcept;               \\123
+//!     constexpr auto pow(auto z0, eve::integral_value n)  noexcept; \\4
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**
@@ -66,8 +71,39 @@ namespace kyosu
 //!     * `z0, z1` : Values to process.
 //!
 //!   **Return value**
+//!      1. if both parameters are floating the call will act as if they were converted to complex before call
+//!      2. if both parameters are floating or complex. The ieee specification are taken:\n
+//!         In particular we have (IEC 60559):
 //!
-//!      the call is semantically equivalent to `eve::exp(z1*eve::log(z0))`
+//!         * pow(+0, y), where y is a negative odd integer, returns \f$+\infty\f$
+//!         * pow(-0, y), where y is a negative odd integer, returns \f$-\infty\f$
+//!         * pow(\f$\pm0\f$, y), where y is negative, finite, and is an even integer or a non-integer,
+//!           returns \f$+\infty\f$
+//!         * pow(\f$\pm0\f$, \f$-\infty\f$) returns \f$+\infty\f$
+//!         * pow(+0, y), where y is a positive odd integer, returns +0
+//!         * pow(-0, y), where y is a positive odd integer, returns -0
+//!         * pow(\f$\pm0\f$, y), where y is positive non-integer or a positive even integer, returns +0
+//!         * pow(-1,\f$\pm\infty\f$) returns 1
+//!         * pow(+1, y) returns 1 for any y, even when y is NaN
+//!         * pow(x, \f$\pm0\f$) returns 1 for any x, even when x is NaN
+//!         * pow(x, y) returns NaN if x is finite and less than 0 and y is finite and non-integer.
+//!         * pow(x, \f$-\infty\f$) returns \f$+\infty\f$ for any |x|<1
+//!         * pow(x, \f$-\infty\f$) returns +0 for any |x|>1
+//!         * pow(x, \f$+\infty\f$) returns +0 for any |x|<1
+//!         * pow(x, \f$+\infty\f$) returns \f$+\infty\f$ for any |x|>1
+//!         * pow(\f$-\infty\f$, y) returns -0 if y is a negative odd integer
+//!         * pow(\f$-\infty\f$, y) returns +0 if y is a negative non-integer or even integer
+//!         * pow(\f$-\infty\f$, y) returns \f$-\infty\f$ if y is a positive odd integer
+//!         * pow(\f$-\infty\f$, y) returns \f$+\infty\f$ if y is a positive non-integer or even integer
+//!         * pow(\f$+\infty\f$, y) returns +0 for any y less than 0
+//!         * pow(\f$+\infty\f$, y) returns \f$+\infty\f$ for any y greater than 0
+//!         * except where specified above, if any argument is NaN, NaN is returned
+//!
+//!      3. if any parameter as a dimensionnality greater yhan 2, the call is semantically equivalent
+//!         to `kyosu::exp(z1*eve::log(z0))`
+//!
+//!      4. pow can accept an integral typed second parameter,  in this case it is the russian peasant algorithm
+//!         that is used.
 //!
 //!  @groupheader{Example}
 //!

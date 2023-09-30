@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(acsch_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
       auto fn = callable_acsch{};
@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto acsch(T z) noexcept;  //1
+//!      template<eve::floating_ordered_value T>       constexpr auto acsch(T z) noexcept;  //1
 //!      template<kyosu::concepts::complex T> constexpr auto acsch(T z) noexcept;  //2
 //!   }
 //!   @endcode
@@ -67,7 +67,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. a real input z is treated as if kyosu::complex(z) was entered.
 //!
 //!   2.  Returns elementwise asinh(1/z).
 //!

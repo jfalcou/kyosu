@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(pure_);
 
-    template<eve::ordered_value T>
+    template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::zero(eve::as(v)); }
 
     template<typename T>
@@ -43,7 +43,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var imag
+//!   @var pure
 //!   @brief Extracts the imaginary part of a value.
 //!
 //!   **Defined in Header**
@@ -57,9 +57,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto& pure(T& z)        noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto  pure(T const& z)  noexcept;
-//!      template<eve::ordered_value T>              constexpr T     pure(T const& z)  noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T     pure(T const& z)  noexcept;
 //!   }
 //!   @endcode
 //!
@@ -69,7 +68,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the imaginary part of its argument. For real inputs, the call returns 0. It is an alias of `imag`.
+//!     Returns the pure (also called imaginary) part of its argument. For real inputs, the call returns 0. It is an alias of `imag`.
 //!
 //!  @groupheader{Example}
 //!

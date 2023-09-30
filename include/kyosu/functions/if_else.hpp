@@ -21,9 +21,9 @@ namespace kyosu::tags
       return eve::tag_invoke(*this, m, t, f);
     }
 
-//     template<typename... T>
-//     eve::unsupported_call<callable_if_else(T&&...)> operator()(T&&... x) const
-//     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    template<typename... T>
+    eve::unsupported_call<callable_if_else(T&&...)> operator()(T&&... x) const
+    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
 
@@ -46,8 +46,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::value T, eve::value U, eve::value V>
-//!      constexpr auto if_else(T x, U, y, V z ) noexcept;
+//!      template<eve::value T, eve::value U, eve::value V> constexpr auto if_else(T x, U, y, V z ) noexcept;
 //!   }
 //!   @endcode
 //!
