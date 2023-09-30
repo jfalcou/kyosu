@@ -58,6 +58,9 @@ Higher are the dimensions weirder are these algebras
    - quaternion   is a non-commutative field
    - octonion     is a non associative (but alternative) division algebra
 
+The functions [commutator](@ref kyosu::commutator ) (resp. [associator](@ref kyosu::associator ))
+can be used to see if two (resp. three)  Cayley-Dickson value commute (resp. associate).
+
 Greater dimensions are not even alternative but keep power-associativity which allows
 to define most elementary functions.
 
@@ -86,7 +89,7 @@ quaternion from various parametrizations of \f$\mathbb{R}^4\f$ or from \f$\mathb
   |-------------------------|-----------------------------------------------------------------|-------------------------------------------------------------|
   | angle and axis          | [from_angle_axis](@ref kyosu::from_angle_axis )                 | [to_angle_axis](@ref kyosu::to_angle_axis )                 |
   | cylindrical             | [from_cylindrical](@ref kyosu::from_cylindrical )               | [to_cylindrical](@ref kyosu::to_cylindrical )               |
-  | cylindricospherical     | [from_cylindrospherical](@ref kyosu::from_cylindrospherical )   | [to_cylindrospherical](@ref kyosu::to_cylindrospherical )   |
+  | cylindrospherical       | [from_cylindrospherical](@ref kyosu::from_cylindrospherical )   | [to_cylindrospherical](@ref kyosu::to_cylindrospherical )   |
   | euler                   | [from_euler](@ref kyosu::from_euler )                           | [to_euler](@ref kyosu::to_euler )                           |
   | multipolar              | [from_multipolar](@ref kyosu::from_multipolar )                 | [to_multipolar](@ref kyosu::to_multipolar )                 |
   | rotation matrix         | [from_rotation_matrix](@ref kyosu::from_rotation_matrix )       | [to_rotation_matrix](@ref kyosu::to_rotation_matrix )       |
@@ -97,7 +100,7 @@ quaternion from various parametrizations of \f$\mathbb{R}^4\f$ or from \f$\mathb
 The third column references to the corresponding to_xxx version that gives back the
 chosen representation from a quaternion input.
 
-TODO cayley_dickson<N> construction
+TODO cayley_dickson<N> construction by a function.
 
 Operators
 ---------
@@ -130,31 +133,32 @@ complex functions and rotation related quaternion usage.
 
    |              |               |                 |            |                 |
    |--------------|---------------|-----------------|------------|-----------------|
-   | [abs](@ref kyosu::abs )          | [acos](@ref kyosu::acos )          | [acosh](@ref kyosu::acosh )           | [acospi](@ref kyosu::acospi )     | [acot](@ref kyosu::acot )            |
-   | [acotpi](@ref kyosu::acotpi )       | [atanpi](@ref kyosu::atanpi )        | [acoth](@ref kyosu::acoth )           | [arg](@ref kyosu::arg )        | [acsc](@ref kyosu::acsc )            |
-   | [acscpi](@ref kyosu::acscpi )       | [acsch](@ref kyosu::acsch )         | [asec](@ref kyosu::asec )            | [asecpi](@ref kyosu::asecpi )     | [asech](@ref kyosu::asech )           |
-   | [asin](@ref kyosu::asin )         | [asinpi](@ref kyosu::asinpi )        | [asinh](@ref kyosu::asinh )           | [atan](@ref kyosu::atan )       | [atanh](@ref kyosu::atanh )           |
-   | [average](@ref kyosu::average )      | [ceil](@ref kyosu::ceil )          | [conj](@ref kyosu::conj )            | [cos](@ref kyosu::cos )        | [cosh](@ref kyosu::cosh )            |
-   | [cospi](@ref kyosu::cospi )        | [cot](@ref kyosu::cot )           | [cotpi](@ref kyosu::cotpi )           | [coth](@ref kyosu::coth )       | [convert](@ref kyosu::convert )         |
-   | [csc](@ref kyosu::csc )          | [cscpi](@ref kyosu::cscpi )         | [csch](@ref kyosu::csch )            | [dec](@ref kyosu::dec )        | [dist](@ref kyosu::dist )            |
-   | [dot](@ref kyosu::dot )          | [exp](@ref kyosu::exp )           | [exp10](@ref kyosu::exp10 )           | [exp2](@ref kyosu::exp2 )       | [exp_i](@ref kyosu::exp_i )           |
-   | [exp_ipi](@ref kyosu::exp_ipi )      | [expm1](@ref kyosu::expm1 )         | [expmx2](@ref kyosu::expmx2 )          | [expx2](@ref kyosu::expx2 )      | [floor](@ref kyosu::floor )           |
-   | [frac](@ref kyosu::frac )         | [from_polar](@ref kyosu::from_polar )    | [hypot](@ref kyosu::hypot )           | [if_else](@ref kyosu::if_else )    | [inc](@ref kyosu::inc )             |
-   | [ipart](@ref kyosu::ipart )        | [is_denormal](@ref kyosu::is_denormal )   | [is_equal](@ref kyosu::is_equal )        | [is_eqz](@ref kyosu::is_eqz )     | [is_finite](@ref kyosu::is_finite )       |
-   | [is_infinite](@ref kyosu::is_infinite )  | [is_imag](@ref kyosu::is_imag )       | [is_nan](@ref kyosu::is_nan )          | [is_nez](@ref kyosu::is_nez )     | [is_not_denormal](@ref kyosu::is_not_denormal ) |
+   | [abs](@ref kyosu::abs )                   | [acos](@ref kyosu::acos )               | [acosh](@ref kyosu::acosh )           | [acospi](@ref kyosu::acospi )  | [acot](@ref kyosu::acot )            |
+   | [acotpi](@ref kyosu::acotpi )             | [atanpi](@ref kyosu::atanpi )           | [acoth](@ref kyosu::acoth )           | [arg](@ref kyosu::arg )        | [acsc](@ref kyosu::acsc )            |
+   | [acscpi](@ref kyosu::acscpi )             | [acsch](@ref kyosu::acsch )             | [asec](@ref kyosu::asec )             | [asecpi](@ref kyosu::asecpi )  | [asech](@ref kyosu::asech )          |
+   | [asin](@ref kyosu::asin )                 | [asinpi](@ref kyosu::asinpi )           | [asinh](@ref kyosu::asinh )           | [atan](@ref kyosu::atan )      | [atanh](@ref kyosu::atanh )          |
+   | [average](@ref kyosu::average )           | [ceil](@ref kyosu::ceil )               | [conj](@ref kyosu::conj )             | [cos](@ref kyosu::cos )        | [cosh](@ref kyosu::cosh )            |
+   | [cospi](@ref kyosu::cospi )               | [cot](@ref kyosu::cot )                 | [cotpi](@ref kyosu::cotpi )           | [coth](@ref kyosu::coth )      | [convert](@ref kyosu::convert )      |
+   | [csc](@ref kyosu::csc )                   | [cscpi](@ref kyosu::cscpi )             | [csch](@ref kyosu::csch )             | [dec](@ref kyosu::dec )        | [dist](@ref kyosu::dist )            |
+   | [dot](@ref kyosu::dot )                   | [exp](@ref kyosu::exp )                 | [exp10](@ref kyosu::exp10 )           | [exp2](@ref kyosu::exp2 )      | [exp_i](@ref kyosu::exp_i )          |
+   | [exp_ipi](@ref kyosu::exp_ipi )           | [expm1](@ref kyosu::expm1 )             | [expmx2](@ref kyosu::expmx2 )         | [expx2](@ref kyosu::expx2 )    | [floor](@ref kyosu::floor )          |
+   | [frac](@ref kyosu::frac )                 | [from_polar](@ref kyosu::from_polar )   | [hypot](@ref kyosu::hypot )           | [if_else](@ref kyosu::if_else )| [inc](@ref kyosu::inc )              |
+   | [ipart](@ref kyosu::ipart )               | [is_denormal](@ref kyosu::is_denormal ) | [is_equal](@ref kyosu::is_equal )     | [is_eqz](@ref kyosu::is_eqz )  | [is_finite](@ref kyosu::is_finite )  |
+   | [is_infinite](@ref kyosu::is_infinite )   | [is_imag](@ref kyosu::is_imag )         | [is_nan](@ref kyosu::is_nan )         | [is_nez](@ref kyosu::is_nez )  | [is_not_denormal](@ref kyosu::is_not_denormal ) |
    | [is_not_equal](@ref kyosu::is_not_equal ) | [is_not_finite](@ref kyosu::is_not_finite ) | [is_not_infinite](@ref kyosu::is_not_finite ) | [is_not_nan](@ref kyosu::is_not_nan ) | [is_not_real](@ref kyosu::is_not_real )     |
-   | [is_pure](@ref kyosu::is_pure )      | [is_real](@ref kyosu::is_real )       | [is_unitary](@ref kyosu::is_unitary )      | [jpart](@ref kyosu::jpart )      | [kpart](@ref kyosu::kpart )           |
-   | [ldiv](@ref kyosu::ldiv )         | [lerp](@ref kyosu::lerp )          | [log](@ref kyosu::log )             | [log10](@ref kyosu::log10 )      | [log1p](@ref kyosu::log1p )           |
-   | [log_abs](@ref kyosu::log_abs )      | [log2](@ref kyosu::log2 )          | [lpnorm](@ref kyosu::lpnorm )          | [manhattan](@ref kyosu::manhattan )  | [minus](@ref kyosu::minus )           |
-   | [nearest](@ref kyosu::nearest )      | [oneminus](@ref kyosu::oneminus )      | [pow](@ref kyosu::pow )             | [pow1p](@ref kyosu::pow1p )      | [pow_abs](@ref kyosu::pow_abs )         |
-   | [powm1](@ref kyosu::powm1 )        | [proj](@ref kyosu::proj )          | [pure](@ref kyosu::imag )            | [radinpi](@ref kyosu::radinpi )    | [real](@ref kyosu::real )            |
-   | [rec](@ref kyosu::rec )          | [reldist](@ref kyosu::reldist )       | [sec](@ref kyosu::sec )             | [secpi](@ref kyosu::secpi )      | [sech](@ref kyosu::sech )            |
-   | [sign](@ref kyosu::sign )         | [sin](@ref kyosu::sin )           | [sinc](@ref kyosu::sinc )            | [sincos](@ref kyosu::sincos )     | [sinpi](@ref kyosu::sinpi )           |
-   | [sinpicospi](@ref kyosu::sinpicospi )   | [sinh](@ref kyosu::sinh )          | [sinhcosh](@ref kyosu::sinhcosh )        | [slerp](@ref kyosu::slerp )      | [sqr](@ref kyosu::sqr )             |
-   | [sqr_abs](@ref kyosu::sqr_abs )      | [sqrt](@ref kyosu::sqrt )          | [tan](@ref kyosu::tan )             | [tanpi](@ref kyosu::tanpi )      | [tanh](@ref kyosu::tanh )            |
-   | [to_polar](@ref kyosu::to_polar )     | [trunc](@ref kyosu::trunc )         |                 |            |                 |
+   | [is_pure](@ref kyosu::is_pure )           | [is_real](@ref kyosu::is_real )         | [is_unitary](@ref kyosu::is_unitary ) | [jpart](@ref kyosu::jpart )    | [kpart](@ref kyosu::kpart )          |
+   | [ldiv](@ref kyosu::ldiv )                 | [lerp](@ref kyosu::lerp )               | [log](@ref kyosu::log )               | [log10](@ref kyosu::log10 )    | [log1p](@ref kyosu::log1p )          |
+   | [log_abs](@ref kyosu::log_abs )           | [log2](@ref kyosu::log2 )               | [lpnorm](@ref kyosu::lpnorm )         | [manhattan](@ref kyosu::manhattan ) | [minus](@ref kyosu::minus )     |
+   | [lpart](@ref kyosu::lpart )               | [lipart](@ref kyosu::lipart )           | [ljpart](@ref kyosu::ljpart )         | [lkpart](@ref kyosu::lkpart )  |                                      |
+   | [nearest](@ref kyosu::nearest )           | [oneminus](@ref kyosu::oneminus )       | [pow](@ref kyosu::pow )               | [pow1p](@ref kyosu::pow1p )    | [pow_abs](@ref kyosu::pow_abs )      |
+   | [powm1](@ref kyosu::powm1 )               | [proj](@ref kyosu::proj )               | [pure](@ref kyosu::imag )             | [radinpi](@ref kyosu::radinpi )| [real](@ref kyosu::real )            |
+   | [rec](@ref kyosu::rec )                   | [reldist](@ref kyosu::reldist )         | [sec](@ref kyosu::sec )               | [secpi](@ref kyosu::secpi )    | [sech](@ref kyosu::sech )            |
+   | [sign](@ref kyosu::sign )                 | [sin](@ref kyosu::sin )                 | [sinc](@ref kyosu::sinc )             | [sincos](@ref kyosu::sincos )  | [sinpi](@ref kyosu::sinpi )          |
+   | [sinpicospi](@ref kyosu::sinpicospi )     | [sinh](@ref kyosu::sinh )               | [sinhcosh](@ref kyosu::sinhcosh )     | [slerp](@ref kyosu::slerp )    | [sqr](@ref kyosu::sqr )              |
+   | [sqr_abs](@ref kyosu::sqr_abs )           | [sqrt](@ref kyosu::sqrt )               | [tan](@ref kyosu::tan )               | [tanpi](@ref kyosu::tanpi )    | [tanh](@ref kyosu::tanh )            |
+   | [to_polar](@ref kyosu::to_polar )         | [trunc](@ref kyosu::trunc )             |                                       |                                |                                      |
 
-  * callables usable with complex or real only. These are mainly implementation of classical meromorphic functions
+  * callables usable with complex or real only. These are mainly implementation of some classical meromorphic functions.
 
     |                  |                  |                    |                  |               |
     |------------------|------------------|--------------------|------------------|---------------|
