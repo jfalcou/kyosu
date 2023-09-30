@@ -148,7 +148,7 @@ $(document).ready(function(){initNavTree('group__functions_ga4f764df12120f10236e
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4f764df12120f10236ef0c746e9ed6ff.html#ga4f764df12120f10236ef0c746e9ed6ff">atanh</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4f764df12120f10236ef0c746e9ed6ff.html#ga4f764df12120f10236ef0c746e9ed6ff">atanh</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;        <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4f764df12120f10236ef0c746e9ed6ff.html#ga4f764df12120f10236ef0c746e9ed6ff">atanh</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4f764df12120f10236ef0c746e9ed6ff.html#ga4f764df12120f10236ef0c746e9ed6ff">atanh</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
 <div class="line">}</div>
@@ -160,10 +160,10 @@ $(document).ready(function(){initNavTree('group__functions_ga4f764df12120f10236e
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex.">complex(z)</a> was entered.</li>
-<li>Returns the complex arc hyperbolic sine of z, in the range of a half-strip mathematically unbounded along the real axis and in the interval \(i\times[-\pi/2, \pi/2]\) along the imaginary axis.<ul>
-<li>for every z: eve::atanh(eve::conj(z)) == eve::conj(std::atanh(z))</li>
-<li>for every z: eve::atanh(-z) == -eve::atanh(z)</li>
+<li>a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex.">kyosu::complex(z)</a> was entered.</li>
+<li>Returns the complex inverse hyperbolic tangent of z, in the range of a half-strip mathematically unbounded along the real axis and in the interval \(i\times[-\pi/2, \pi/2]\) along the imaginary axis.<ul>
+<li>for every z: <a class="el" href="group__functions_ga4f764df12120f10236ef0c746e9ed6ff.html#ga4f764df12120f10236ef0c746e9ed6ff" title="Computes the inverse hyperbolic tangent of the argument.">kyosu::atanh</a>( <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0">kyosu::conj</a>(z)) == <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">kyosu::conj</a>(<a class="el" href="group__functions_ga4f764df12120f10236ef0c746e9ed6ff.html#ga4f764df12120f10236ef0c746e9ed6ff">kyosu::atanh</a>(z)</li>
+<li>for every z: <a class="el" href="group__functions_ga4f764df12120f10236ef0c746e9ed6ff.html#ga4f764df12120f10236ef0c746e9ed6ff" title="Computes the inverse hyperbolic tangent of the argument.">kyosu::atanh</a>(-z) == -<a class="el" href="group__functions_ga4f764df12120f10236ef0c746e9ed6ff.html#ga4f764df12120f10236ef0c746e9ed6ff">kyosu::atanh</a>(z)</li>
 <li>If z is \(+0\), the result is \(+0\)</li>
 <li>If z is \(NaN\), the result is \(NaN\)</li>
 <li>If z is \(+1\), the result is \(+\infty\)</li>

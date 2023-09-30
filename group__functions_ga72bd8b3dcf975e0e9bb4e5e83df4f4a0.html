@@ -148,7 +148,7 @@ $(document).ready(function(){initNavTree('group__functions_ga72bd8b3dcf975e0e9bb
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0.html#ga72bd8b3dcf975e0e9bb4e5e83df4f4a0">acoth</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0.html#ga72bd8b3dcf975e0e9bb4e5e83df4f4a0">acoth</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;        <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0.html#ga72bd8b3dcf975e0e9bb4e5e83df4f4a0">acoth</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0.html#ga72bd8b3dcf975e0e9bb4e5e83df4f4a0">acoth</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
 <div class="line">}</div>
@@ -160,7 +160,7 @@ $(document).ready(function(){initNavTree('group__functions_ga72bd8b3dcf975e0e9bb
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex.">complex(z)</a> was entered.</li>
+<li>a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(z) was entered.</li>
 <li>Returns the complex inverse hyperbolic cotangent of z, computed as \(\mathop{\mathrm{atanh}}(1/z)\).</li>
 <li>Returns \((\log(z+1)-\log(z-1))/2 \).</li>
 </ol>

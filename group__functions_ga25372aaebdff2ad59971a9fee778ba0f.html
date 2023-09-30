@@ -146,21 +146,48 @@ $(document).ready(function(){initNavTree('group__functions_ga25372aaebdff2ad5997
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line">   <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
-<div class="line">   {</div>
-<div class="line">      <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
-<div class="line">      <span class="keyword">template</span>&lt;eve::ordered_value T0, kyosu::concepts::cayley_dickson T1&gt;             &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
-<div class="line">      <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
-<div class="line">      <span class="keyword">template</span>&lt;eve::ordered_value T0, ordered_value T1&gt;                               &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
-<div class="line">!   }</div>
-<div class="ttc" id="agroup__functions_ga25372aaebdff2ad59971a9fee778ba0f_html_ga25372aaebdff2ad59971a9fee778ba0f"><div class="ttname"><a href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">kyosu::pow</a></div><div class="ttdeci">constexpr tags::callable_pow pow</div><div class="ttdoc">Computes the computing the pow operation .</div><div class="ttdef"><b>Definition:</b> pow.hpp:77</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(<span class="keyword">auto</span> z0, <span class="keyword">auto</span>, z1) <span class="keyword">noexcept</span>;               \\123</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(<span class="keyword">auto</span> z0, eve::integral_value n)  <span class="keyword">noexcept</span>; \\4</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__functions_ga25372aaebdff2ad59971a9fee778ba0f_html_ga25372aaebdff2ad59971a9fee778ba0f"><div class="ttname"><a href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">kyosu::pow</a></div><div class="ttdeci">constexpr tags::callable_pow pow</div><div class="ttdoc">Computes the computing the pow operation .</div><div class="ttdef"><b>Definition:</b> pow.hpp:113</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z0, z1</code> : Values to process.</li>
 </ul>
-<p><b>Return value</b></p>
-<p>the call is semantically equivalent to <code>eve::exp(z1*eve::log(z0))</code></p>
+<p><b>Return value</b></p><ol type="1">
+<li>if both parameters are floating the call will act as if they were converted to complex before call</li>
+<li>if both parameters are floating or complex. The ieee specification are taken:<br  />
+ In particular we have (IEC 60559):<ul>
+<li>pow(+0, y), where y is a negative odd integer, returns \(+\infty\)</li>
+<li>pow(-0, y), where y is a negative odd integer, returns \(-\infty\)</li>
+<li>pow( \(\pm0\), y), where y is negative, finite, and is an even integer or a non-integer, returns \(+\infty\)</li>
+<li>pow( \(\pm0\), \(-\infty\)) returns \(+\infty\)</li>
+<li>pow(+0, y), where y is a positive odd integer, returns +0</li>
+<li>pow(-0, y), where y is a positive odd integer, returns -0</li>
+<li>pow( \(\pm0\), y), where y is positive non-integer or a positive even integer, returns +0</li>
+<li>pow(-1, \(\pm\infty\)) returns 1</li>
+<li>pow(+1, y) returns 1 for any y, even when y is NaN</li>
+<li>pow(x, \(\pm0\)) returns 1 for any x, even when x is NaN</li>
+<li><a class="el" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f" title="Computes the computing the pow operation .">pow(x, y)</a> returns NaN if x is finite and less than 0 and y is finite and non-integer.</li>
+<li>pow(x, \(-\infty\)) returns \(+\infty\) for any |x|&lt;1</li>
+<li>pow(x, \(-\infty\)) returns +0 for any |x|&gt;1</li>
+<li>pow(x, \(+\infty\)) returns +0 for any |x|&lt;1</li>
+<li>pow(x, \(+\infty\)) returns \(+\infty\) for any |x|&gt;1</li>
+<li>pow( \(-\infty\), y) returns -0 if y is a negative odd integer</li>
+<li>pow( \(-\infty\), y) returns +0 if y is a negative non-integer or even integer</li>
+<li>pow( \(-\infty\), y) returns \(-\infty\) if y is a positive odd integer</li>
+<li>pow( \(-\infty\), y) returns \(+\infty\) if y is a positive non-integer or even integer</li>
+<li>pow( \(+\infty\), y) returns +0 for any y less than 0</li>
+<li>pow( \(+\infty\), y) returns \(+\infty\) for any y greater than 0</li>
+<li>except where specified above, if any argument is NaN, NaN is returned</li>
+</ul>
+</li>
+<li>if any parameter as a dimensionnality greater yhan 2, the call is semantically equivalent to <code><a class="el" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449" title="Computes the exponential of the argument.">kyosu::exp(z1*eve::log(z0))</a></code></li>
+<li>pow can accept an integral typed second parameter, in this case it is the russian peasant algorithm that is used.</li>
+</ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

@@ -163,7 +163,33 @@ $(document).ready(function(){initNavTree('group__quaternion_ga6b47fd35280cf1ec86
 <p>An unitaryquaternion value representing a rotation that align v0 to v1.</p>
 <p>If v0 or v1 is a nullvector the result is UB</p>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">kyosu::align</a>;</div>
+<div class="line">  <span class="keyword">auto</span> norm = [](<span class="keyword">auto</span> &amp;v){</div>
+<div class="line">    <span class="keyword">auto</span> n = eve::hypot(v[0], v[1], v[2]);</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i &lt;= 2; ++i) v[i]/= n;</div>
+<div class="line">  };</div>
+<div class="line"> </div>
+<div class="line">  std::array&lt;double, 3&gt; v0{-1.0, 5.0, 4.0};</div>
+<div class="line">  std::array&lt;double, 3&gt; v1{ 1.5, 2.0, -3.0};</div>
+<div class="line">  norm(v0);</div>
+<div class="line">  norm(v1);</div>
+<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_variable" href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">kyosu::align</a>(v0, v1);</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; v0                &quot;</span> &lt;&lt; v0[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; v0[1] &lt;&lt; <span class="stringliteral">&quot;,  &quot;</span> &lt;&lt;  v0[2] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; v1                &quot;</span> &lt;&lt; v1[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; v1[1] &lt;&lt; <span class="stringliteral">&quot;,  &quot;</span> &lt;&lt;  v1[2] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; q                 &quot;</span> &lt;&lt; q &lt;&lt; std::endl;</div>
+<div class="line">  <span class="keyword">auto</span> rv = <a class="code hl_variable" href="group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a">kyosu::rotate_vec</a>(q, v0);</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; rotate_vec(q, v0) &quot;</span> &lt;&lt; rv[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; rv[1] &lt;&lt; <span class="stringliteral">&quot;,  &quot;</span> &lt;&lt; rv[2] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__quaternion_gafb8e2e7cadea72110b134c4df850ee3a_html_gafb8e2e7cadea72110b134c4df850ee3a"><div class="ttname"><a href="group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a">kyosu::rotate_vec</a></div><div class="ttdeci">constexpr tags::callable_rotate_vec rotate_vec</div><div class="ttdoc">Callable object rotating an  vector using a quaternion.</div><div class="ttdef"><b>Definition:</b> rotate_vec.hpp:105</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('group__functions_ga97d21d58bdd2678e7da
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga97d21d58bdd2678e7dacea216758a5a8.html#ga97d21d58bdd2678e7dacea216758a5a8">is_real</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga97d21d58bdd2678e7dacea216758a5a8.html#ga97d21d58bdd2678e7dacea216758a5a8">is_real</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga97d21d58bdd2678e7dacea216758a5a8.html#ga97d21d58bdd2678e7dacea216758a5a8">is_real</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_ga97d21d58bdd2678e7dacea216758a5a8_html_ga97d21d58bdd2678e7dacea216758a5a8"><div class="ttname"><a href="group__functions_ga97d21d58bdd2678e7dacea216758a5a8.html#ga97d21d58bdd2678e7dacea216758a5a8">kyosu::is_real</a></div><div class="ttdeci">constexpr tags::callable_is_real is_real</div><div class="ttdoc">test if the parameter is real.</div><div class="ttdef"><b>Definition:</b> is_real.hpp:72</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
@@ -158,7 +158,7 @@ $(document).ready(function(){initNavTree('group__functions_ga97d21d58bdd2678e7da
 <li><code>z</code> : Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns elementwise true is all the non real parts of the argument are zero.</p>
+<p>Returns elementwise true if its <a class="el" href="group__functions_ga6a75cd107789510275cb469d917ea79b.html#ga6a75cd107789510275cb469d917ea79b">pure</a> part is zero.</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

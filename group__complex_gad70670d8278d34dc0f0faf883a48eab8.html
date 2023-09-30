@@ -142,26 +142,29 @@ $(document).ready(function(){initNavTree('group__complex_gad70670d8278d34dc0f0fa
 </table>
 </div><div class="memdoc">
 
-<p>Callable object computing a complex from its polar coordinates. </p>
+<p>Callable object computing a complex or a general Cayley-Dickson from a polar representation. </p>
 <p>This function is the reciprocal of from_polar</p>
 <p><b>Defined in header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include eve/module/quaternion.hpp&gt;`</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
 <div class="line">{</div>
-<div class="line"> <span class="keyword">template</span>&lt;eve::ordered_value T0, eve::ordered_value T1&gt;,</div>
+<div class="line"> <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T0, eve::<span class="keywordtype">float</span>ing_ordered_value T1&gt;,</div>
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">from_polar</a>( T0 rho, T1 theta) <span class="keyword">const</span> <span class="keyword">noexcept</span>;                   <span class="comment">// 1</span></div>
-<div class="line"> <span class="keyword">template</span>&lt;eve::ordered_value T0, eve::ordered_value T1, kyosu::concepts::cayley_dickson C&gt;,</div>
+<div class="line"> <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T0, eve::<span class="keywordtype">float</span>ing_ordered_value T1, kyosu::concepts::cayley_dickson C&gt;,</div>
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">from_polar</a>( T0 rho, T1 theta, C iz) <span class="keyword">const</span> <span class="keyword">noexcept</span>;             <span class="comment">// 2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__complex_gad70670d8278d34dc0f0faf883a48eab8_html_gad70670d8278d34dc0f0faf883a48eab8"><div class="ttname"><a href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">kyosu::from_polar</a></div><div class="ttdeci">constexpr tags::callable_from_polar from_polar</div><div class="ttdoc">Callable object computing a complex from its polar coordinates.</div><div class="ttdef"><b>Definition:</b> from_polar.hpp:102</div></div>
+<div class="ttc" id="agroup__complex_gad70670d8278d34dc0f0faf883a48eab8_html_gad70670d8278d34dc0f0faf883a48eab8"><div class="ttname"><a href="group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8">kyosu::from_polar</a></div><div class="ttdeci">constexpr tags::callable_from_polar from_polar</div><div class="ttdoc">Callable object computing a complex or a general Cayley-Dickson from a polar representation.</div><div class="ttdef"><b>Definition:</b> from_polar.hpp:106</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
-<p><code>rho</code> : modulus. <code>theta</code> : argument. &lsquo;iz&rsquo; : unitary cayley dickson value.</p>
+<p><code>rho</code> : modulus.</p>
+<p><code>theta</code> : argument.</p>
+<p>&lsquo;iz&rsquo; : unitary cayley dickson value.</p>
 <p><b>Return value</b></p>
 <ol type="1">
 <li>the complex number <code>rho*exp(i*theta)</code>.</li>
 <li>the cayley_dickson value <code>rho*exp(iz*theta)</code>.</li>
 </ol>
+<dl class="section note"><dt>Note</dt><dd>the entries constitue a proper polar representation if rho is non-negative and if iz present it must be pure unitary with non-negative jpart. However the formula is taken anyway.</dd></dl>
 <h4><a class="anchor" id="autotoc_md6"></a>
 Example</h4>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>

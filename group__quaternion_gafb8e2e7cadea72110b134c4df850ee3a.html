@@ -148,11 +148,12 @@ $(document).ready(function(){initNavTree('group__quaternion_gafb8e2e7cadea72110b
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a">rotate_vec</a>( <span class="keyword">auto</span> q) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a">rotate_vec</a>( <span class="keyword">auto</span> q, <span class="keyword">auto</span> v) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__quaternion_gafb8e2e7cadea72110b134c4df850ee3a_html_gafb8e2e7cadea72110b134c4df850ee3a"><div class="ttname"><a href="group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a">kyosu::rotate_vec</a></div><div class="ttdeci">constexpr tags::callable_rotate_vec rotate_vec</div><div class="ttdoc">Callable object rotating an  vector using a quaternion.</div><div class="ttdef"><b>Definition:</b> rotate_vec.hpp:104</div></div>
+<div class="ttc" id="agroup__quaternion_gafb8e2e7cadea72110b134c4df850ee3a_html_gafb8e2e7cadea72110b134c4df850ee3a"><div class="ttname"><a href="group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a">kyosu::rotate_vec</a></div><div class="ttdeci">constexpr tags::callable_rotate_vec rotate_vec</div><div class="ttdoc">Callable object rotating an  vector using a quaternion.</div><div class="ttdef"><b>Definition:</b> rotate_vec.hpp:105</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
-<p><code>q</code>: quaternion value defining the rotation. <code>x</code>: span of 3 elements to rotate</p>
+<p><code>q</code>: quaternion value defining the rotation.</p>
+<p><code>v</code>: span of 3 elements to rotate.</p>
 <p><b>Return value</b></p>
 <p>the span rotated by q</p>
 <hr  />
@@ -169,7 +170,7 @@ Example</h4>
 <div class="line">  <span class="keyword">auto</span> theta = eve::pio_3(eve::as&lt;double&gt;());</div>
 <div class="line">  std::array&lt;double, 3&gt; ax{1., 2., 3.};</div>
 <div class="line">  std::array&lt;double, 3&gt; v{ 1.5, 2.0, -3.0};</div>
-<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_variable" href="group__quaternion_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>(theta, ax);</div>
+<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>(theta, ax);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; v                &quot;</span> &lt;&lt; v[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; v[1] &lt;&lt; <span class="stringliteral">&quot;,  &quot;</span> &lt;&lt;  v[2] &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; q                &quot;</span> &lt;&lt; q &lt;&lt; std::endl;</div>
 <div class="line">  <span class="keyword">auto</span> rv = <a class="code hl_variable" href="group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a">kyosu::rotate_vec</a>(q, std::span&lt;double, 3&gt;(v));</div>
@@ -177,7 +178,7 @@ Example</h4>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__quaternion_gaeb24f578562330d825ff8f68da4b9252_html_gaeb24f578562330d825ff8f68da4b9252"><div class="ttname"><a href="group__quaternion_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr tags::callable_from_angle_axis from_angle_axis</div><div class="ttdoc">Callable object computing a quaternion from its angle_axis representation.</div><div class="ttdef"><b>Definition:</b> from_angle_axis.hpp:90</div></div>
+<div class="ttc" id="agroup__functions_gaeb24f578562330d825ff8f68da4b9252_html_gaeb24f578562330d825ff8f68da4b9252"><div class="ttname"><a href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr tags::callable_from_angle_axis from_angle_axis</div><div class="ttdoc">Callable object computing a quaternion from its angle_axis representation.</div><div class="ttdef"><b>Definition:</b> from_angle_axis.hpp:90</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

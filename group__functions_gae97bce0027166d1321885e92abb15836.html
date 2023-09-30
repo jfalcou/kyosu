@@ -149,17 +149,21 @@ $(document).ready(function(){initNavTree('group__functions_gae97bce0027166d13218
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gae97bce0027166d1321885e92abb15836.html#gae97bce0027166d1321885e92abb15836">proj</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gae97bce0027166d1321885e92abb15836.html#gae97bce0027166d1321885e92abb15836">proj</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gae97bce0027166d1321885e92abb15836.html#gae97bce0027166d1321885e92abb15836">proj</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_gae97bce0027166d1321885e92abb15836_html_gae97bce0027166d1321885e92abb15836"><div class="ttname"><a href="group__functions_gae97bce0027166d1321885e92abb15836.html#gae97bce0027166d1321885e92abb15836">kyosu::proj</a></div><div class="ttdeci">constexpr tags::callable_proj proj</div><div class="ttdoc">Callable object computing proj(x), the projection of the cayley_dickson number z onto the (hyper) Rie...</div><div class="ttdef"><b>Definition:</b> proj.hpp:78</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Value to projugate.</li>
+<li><code>z</code> : Value to project.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>For most z, std::proj(z)==z, but all infinities, even the numbers where one component is infinite and the other is NaN, become positive real infinity, (inf, 0.0...) or (inf, -0.0...). The sign of the pure (zero) components is the signs of the components of pure(z). </p><pre class="fragment">For floating inputs the call returns a complex number.
-</pre> <h2 class="groupheader">Example </h2>
+<ul>
+<li>For most z, <a class="el" href="group__functions_gae97bce0027166d1321885e92abb15836.html#gae97bce0027166d1321885e92abb15836" title="Callable object computing proj(x), the projection of the cayley_dickson number z onto the (hyper) Rie...">proj(z)</a>==z, but all infinities, even the numbers where one component is infinite and the other is NaN, become positive real<br  />
+ infinity, (inf, 0.0...) or (inf, -0.0...).<br  />
+ The sign of the pure (zero) components are the signs of the components of <a class="el" href="group__functions_ga6a75cd107789510275cb469d917ea79b.html#ga6a75cd107789510275cb469d917ea79b" title="Extracts the imaginary part of a value.">pure(z)</a>.</li>
+</ul>
+<h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>

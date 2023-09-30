@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('group__functions_gaee913dc7298d2917743
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__traits_gacfae066446178c7d3f6328aaeafcbf1d.html#gacfae066446178c7d3f6328aaeafcbf1d">as_real_t&lt;T&gt;</a> <a class="code hl_variable" href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">abs</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T            <a class="code hl_variable" href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">abs</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T            <a class="code hl_variable" href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">abs</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_gaee913dc7298d2917743440e9d056d971_html_gaee913dc7298d2917743440e9d056d971"><div class="ttname"><a href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">kyosu::abs</a></div><div class="ttdeci">constexpr tags::callable_abs abs</div><div class="ttdoc">Computes the absolute value of the parameter.</div><div class="ttdef"><b>Definition:</b> abs.hpp:73</div></div>
 <div class="ttc" id="agroup__traits_gacfae066446178c7d3f6328aaeafcbf1d_html_gacfae066446178c7d3f6328aaeafcbf1d"><div class="ttname"><a href="group__traits_gacfae066446178c7d3f6328aaeafcbf1d.html#gacfae066446178c7d3f6328aaeafcbf1d">kyosu::as_real_t</a></div><div class="ttdeci">typename as_real&lt; T &gt;::type as_real_t</div><div class="ttdoc">Compute the real type associated to a Cayley-Dickson-like type.</div><div class="ttdef"><b>Definition:</b> traits.hpp:79</div></div>
@@ -160,7 +160,7 @@ $(document).ready(function(){initNavTree('group__functions_gaee913dc7298d2917743
 </ul>
 <p><b>Return value</b></p>
 <ul>
-<li>Returns the modulus of its argument which always is a floating ordered value. The modulus is the square root of the square of the absolute values of the components.</li>
+<li>Returns the modulus of its argument which always is a floating ordered value. The modulus is the square root of the sum of the square of the absolute value of each component.</li>
 </ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>

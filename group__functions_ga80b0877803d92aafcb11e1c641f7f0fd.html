@@ -142,24 +142,24 @@ $(document).ready(function(){initNavTree('group__functions_ga80b0877803d92aafcb1
 </table>
 </div><div class="memdoc">
 
-<p>Computes the Dirichlet sums \( \displaystyle \sum_0^\infty \frac{(-1)^n}{(kn+1)^z}\). </p>
+<p>Computes the Dirichlet sums \( \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\). </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span>_scalar_value K, eve::ordered_value T&gt;       <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(K, k, T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span>_scalar_value K, kyosu::concepts::complex T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(K, k, T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span>_scalar_value K, eve::ordered_value T&gt;       <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(K k, T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span>_scalar_value K, kyosu::concepts::complex T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(K k, T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_ga80b0877803d92aafcb11e1c641f7f0fd_html_ga80b0877803d92aafcb11e1c641f7f0fd"><div class="ttname"><a href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">kyosu::deta</a></div><div class="ttdeci">constexpr tags::callable_deta deta</div><div class="ttdoc">Computes the Dirichlet sums .</div><div class="ttdef"><b>Definition:</b> deta.hpp:78</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>k</code> : scalar unsigned value, parameter of the sum.</li>
-<li><code>z</code> : Vcomplex or real value to process.</li>
+<li><code>z</code> : complex or real value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the Dirichlet sum \(  \displaystyle \sum_0^\infty \frac{(-1)^n}{(kn+1)^z}\)</p>
+<p>Returns the Dirichlet sum \(  \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\)</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

@@ -148,11 +148,11 @@ $(document).ready(function(){initNavTree('group__functions_ga7586f69da3dd2de8eb3
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7586f69da3dd2de8eb36e571d0cda51a.html#ga7586f69da3dd2de8eb36e571d0cda51a">asin</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7586f69da3dd2de8eb36e571d0cda51a.html#ga7586f69da3dd2de8eb36e571d0cda51a">asin</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;        <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7586f69da3dd2de8eb36e571d0cda51a.html#ga7586f69da3dd2de8eb36e571d0cda51a">asin</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6.html#ga46ff71e1e2cf6bbbeb771eeb0885f3b6">acos</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6_html_ga46ff71e1e2cf6bbbeb771eeb0885f3b6"><div class="ttname"><a href="group__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6.html#ga46ff71e1e2cf6bbbeb771eeb0885f3b6">kyosu::acos</a></div><div class="ttdeci">constexpr tags::callable_acos acos</div><div class="ttdoc">Computes the acosine of the argument.</div><div class="ttdef"><b>Definition:</b> acos.hpp:100</div></div>
+<div class="ttc" id="agroup__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6_html_ga46ff71e1e2cf6bbbeb771eeb0885f3b6"><div class="ttname"><a href="group__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6.html#ga46ff71e1e2cf6bbbeb771eeb0885f3b6">kyosu::acos</a></div><div class="ttdeci">constexpr tags::callable_acos acos</div><div class="ttdoc">Computes the acosine of the argument.</div><div class="ttdef"><b>Definition:</b> acos.hpp:101</div></div>
 <div class="ttc" id="agroup__functions_ga7586f69da3dd2de8eb36e571d0cda51a_html_ga7586f69da3dd2de8eb36e571d0cda51a"><div class="ttname"><a href="group__functions_ga7586f69da3dd2de8eb36e571d0cda51a.html#ga7586f69da3dd2de8eb36e571d0cda51a">kyosu::asin</a></div><div class="ttdeci">constexpr tags::callable_asin asin</div><div class="ttdoc">Computes the arcsine of the argument.</div><div class="ttdef"><b>Definition:</b> asin.hpp:87</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
@@ -161,11 +161,11 @@ $(document).ready(function(){initNavTree('group__functions_ga7586f69da3dd2de8eb3
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex.">complex(z)</a> was entered.</li>
+<li>a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(z) was entered.</li>
 <li><p class="startli">Returns the elementwise the complex principal value of the arc sine of the input in the range of a strip unbounded along the imaginary axis and in the interval \([-\pi/2, \pi/2]\) along the real axis.</p>
 <p class="startli">special cases are handled as if the operation was implemented by \(-i\; \mathrm{asinh}(z\; i)\)</p>
 </li>
-<li>Returns \(-I_z \mathrm{asinh}(z I_z)\) where \(I_z = \frac{\underline{z}}{|\underline{z}|}\) and \(\underline{z}\) is the pure part of \(z\).</li>
+<li>Returns \(-I_z \mathrm{asinh}(z I_z)\) where \(I_z = \frac{\underline{z}}{|\underline{z}|}\) and \(\underline{z}\) is the <a class="el" href="group__functions.html#ga9f2e79c9e3d6becebb04d76ed8c95d11">pure</a> part of \(z\).</li>
 </ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>

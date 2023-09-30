@@ -148,17 +148,37 @@ $(document).ready(function(){initNavTree('group__functions_ga6f78a4312ac7bd38e25
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;        <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//3</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6_html_ga6f78a4312ac7bd38e25d0b09b18fe3e6"><div class="ttname"><a href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">kyosu::sqrt</a></div><div class="ttdeci">constexpr tags::callable_sqrt sqrt</div><div class="ttdoc">Computes a square root value.</div><div class="ttdef"><b>Definition:</b> sqrt.hpp:78</div></div>
+<div class="ttc" id="agroup__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6_html_ga6f78a4312ac7bd38e25d0b09b18fe3e6"><div class="ttname"><a href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">kyosu::sqrt</a></div><div class="ttdeci">constexpr tags::callable_sqrt sqrt</div><div class="ttdoc">Computes a square root value.</div><div class="ttdef"><b>Definition:</b> sqrt.hpp:98</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code> : Value to for which square root is computed.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns a square root of its argument.</p>
+<ol type="1">
+<li>a real typed input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(z) was entered.</li>
+<li>Returns the elementwise the square root of z, in the range of the right half-plane, including the imaginary axis ( \([0, +\infty]\) along the real axis and \([-\infty, +\infty]\) along the imaginary axis.)<ul>
+<li>The function is continuous onto the branch cut taking into account the sign of imaginary part</li>
+<li>eve::sqrt(kyosu::conj(z)) == <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">kyosu::conj(kyosu::sqrt(z))</a></li>
+<li>If z is \(\pm0\), the result is \(+0\)</li>
+<li>If z is \(x+i \infty\), the result is \(\infty+i \infty\) even if x is \(NaN\)</li>
+<li>If z is \(x,NaN\), the result is \(NaN,NaN\) (unless x is \(\pm\infty\))</li>
+<li>If z is \(-\infty+i y\), the result is \(+0+i \infty\) for finite positive y</li>
+<li>If z is \(+\infty+i y\), the result is \(+\infty+i 0\) for finite positive y</li>
+<li>If z is \(-\infty+i NaN\), the result is \(NaN \pm i \infty\) (sign of imaginary part unspecified)</li>
+<li>If z is \(+\infty+i NaN\), the result is \(+\infty+i NaN\)</li>
+<li>If z is \(NaN+i y\), the result is \(NaN+i NaN\)</li>
+<li>If z is \(NaN+i NaN\), the result is \(NaN+i NaN\)</li>
+</ul>
+</li>
+</ol>
+<ol type="1">
+<li>Returns a square root of z.</li>
+</ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

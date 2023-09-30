@@ -146,21 +146,18 @@ $(document).ready(function(){initNavTree('group__functions_gaae9065f698fe37841a8
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line">   <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
-<div class="line">   {</div>
-<div class="line">      <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T0, kyosu::concepts::cayley_dickson T1 &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaae9065f698fe37841a85e340a16af948.html#gaae9065f698fe37841a85e340a16af948">pow1p</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
-<div class="line">      <span class="keyword">template</span>&lt;eve::ordered_value T0, kyosu::concepts::cayley_dickson T1&gt;             &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaae9065f698fe37841a85e340a16af948.html#gaae9065f698fe37841a85e340a16af948">pow1p</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
-<div class="line">      <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T0,  eve::ordered_value T1             &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaae9065f698fe37841a85e340a16af948.html#gaae9065f698fe37841a85e340a16af948">pow1p</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
-<div class="line">      <span class="keyword">template</span>&lt;eve::ordered_value T0, ordered_value T1&gt;                               &gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaae9065f698fe37841a85e340a16af948.html#gaae9065f698fe37841a85e340a16af948">pow1p</a>(T0 z0, T1, z1) <span class="keyword">noexcept</span>;</div>
-<div class="line">!   }</div>
-<div class="ttc" id="agroup__functions_gaae9065f698fe37841a85e340a16af948_html_gaae9065f698fe37841a85e340a16af948"><div class="ttname"><a href="group__functions_gaae9065f698fe37841a85e340a16af948.html#gaae9065f698fe37841a85e340a16af948">kyosu::pow1p</a></div><div class="ttdeci">constexpr tags::callable_pow1p pow1p</div><div class="ttdoc">Computes the computing the pow1p operation .</div><div class="ttdef"><b>Definition:</b> pow1p.hpp:77</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a>(<span class="keyword">auto</span> z0, <span class="keyword">auto</span>, z1) <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__functions_ga61fefac92fc13470ee246ab0a77a8008_html_ga61fefac92fc13470ee246ab0a77a8008"><div class="ttname"><a href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">kyosu::average</a></div><div class="ttdeci">constexpr tags::callable_average average</div><div class="ttdoc">Computes the average of the two parameters.</div><div class="ttdef"><b>Definition:</b> average.hpp:74</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z0, z1</code> : Values to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>the call is semantically equivalent to <code>eve::exp(z1*eve::log1p(z0))</code></p>
+<p>the call is semantically equivalent to <code><a class="el" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f" title="Computes the computing the pow operation .">pow(inc(z))</a></code></p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -213,6 +210,7 @@ $(document).ready(function(){initNavTree('group__functions_gaae9065f698fe37841a8
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__functions_gaae9065f698fe37841a85e340a16af948_html_gaae9065f698fe37841a85e340a16af948"><div class="ttname"><a href="group__functions_gaae9065f698fe37841a85e340a16af948.html#gaae9065f698fe37841a85e340a16af948">kyosu::pow1p</a></div><div class="ttdeci">constexpr tags::callable_pow1p pow1p</div><div class="ttdoc">Computes the computing the pow1p operation .</div><div class="ttdef"><b>Definition:</b> pow1p.hpp:74</div></div>
 <div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:27</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
 </div><!-- fragment --> 

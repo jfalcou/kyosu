@@ -142,7 +142,7 @@ $(document).ready(function(){initNavTree('group__functions_gafb2c650b3e7a1251e5a
 </table>
 </div><div class="memdoc">
 
-<p>Computes the asinhine of the argument. </p>
+<p>Computes the inverse hyperbolic sine of the argument. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
@@ -152,7 +152,7 @@ $(document).ready(function(){initNavTree('group__functions_gafb2c650b3e7a1251e5a
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;        <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">asinh</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">asinh</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gafb2c650b3e7a1251e5ace712ad2fad44_html_gafb2c650b3e7a1251e5ace712ad2fad44"><div class="ttname"><a href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">kyosu::asinh</a></div><div class="ttdeci">constexpr tags::callable_asinh asinh</div><div class="ttdoc">Computes the asinhine of the argument.</div><div class="ttdef"><b>Definition:</b> asinh.hpp:95</div></div>
+<div class="ttc" id="agroup__functions_gafb2c650b3e7a1251e5ace712ad2fad44_html_gafb2c650b3e7a1251e5ace712ad2fad44"><div class="ttname"><a href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">kyosu::asinh</a></div><div class="ttdeci">constexpr tags::callable_asinh asinh</div><div class="ttdoc">Computes the inverse hyperbolic sine of the argument.</div><div class="ttdef"><b>Definition:</b> asinh.hpp:95</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -161,9 +161,9 @@ $(document).ready(function(){initNavTree('group__functions_gafb2c650b3e7a1251e5a
 <p><b>Return value</b></p>
 <ol type="1">
 <li>A real type input z calls eve::asinh(z); and so returns the same type as input.</li>
-<li>Returns the complex arc hyperbolic sine of z, with branch cuts outside the interval \(i\times[-\pi/2, \pi/2]\) along the imaginary axis.<ul>
-<li>for every z: eve::asinh(eve::conj(z)) == eve::conj(std::asinh(z))</li>
-<li>for every z: eve::asinh(-z) == -eve::asinh(z)</li>
+<li>Returns the complex inverse hyperbolic sine of z, with branch cuts outside the interval \(i\times[-\pi/2, \pi/2]\) along the imaginary axis.<ul>
+<li>for every z: <a class="el" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44" title="Computes the inverse hyperbolic sine of the argument.">kyosu::asinh</a>( <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0">kyosu::conj</a>(z)) == <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">kyosu::conj</a>(<a class="el" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">kyosu::asinh</a>(z)</li>
+<li>for every z: <a class="el" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44" title="Computes the inverse hyperbolic sine of the argument.">kyosu::asinh</a>(-z) == -<a class="el" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">kyosu::asinh</a>(z)</li>
 <li>If z is \(+0\), the result is \(+0\)</li>
 <li>If z is \(x+i \infty\) (for any positive finite x), the result is \(+\infty+i \pi/2\)</li>
 <li>If z is \(x,NaN\) (for any finite x), the result is \(NaN+ iNaN\)</li>

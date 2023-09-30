@@ -148,19 +148,44 @@ $(document).ready(function(){initNavTree('group__functions_gae8e08be7b28ad1cf915
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::value T, eve::value U, eve::value U&gt;</div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">convert</a>(T x, eve::as&lt;U&gt; ) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_scalar_ordered_value U&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">convert</a>(<span class="keyword">auto</span> x, eve::as&lt;U&gt; ) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_gae8e08be7b28ad1cf9159ae564115867f_html_gae8e08be7b28ad1cf9159ae564115867f"><div class="ttname"><a href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">kyosu::convert</a></div><div class="ttdeci">constexpr tags::callable_convert convert</div><div class="ttdoc">convert to a target typek</div><div class="ttdef"><b>Definition:</b> convert.hpp:76</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>x</code> : Value to process.</li>
-<li><code>U</code>`: target scalar type to convert to.</li>
+<li><code>x</code>: floating or Cayley Dickinson value to process.</li>
+<li><code>U</code>: target type to convert to.</li>
 </ul>
-<p><b>Return value</b></p>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<p><b>Return value</b> </p><pre class="fragment"> a value resulting of the conversion of each of its elements to type U.
+</pre> <h2 class="groupheader">Example </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iomanip&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">kyosu::convert</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">double</span> f =  72.987654321;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real to complex of floats:      &quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; std::setprecision(10) &lt;&lt; f &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">convert</a>(f, eve::as&lt;<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">complex_t&lt;float&gt;</a>&gt;()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real to quaternion of double:   &quot;</span> ;</div>
+<div class="line">  std::cout &lt;&lt; f &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">convert</a>(f, eve::as&lt;<a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">quaternion_t&lt;double&gt;</a>&gt;()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex to quaternion ofdouble: &quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> c = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(3.5f,-2.9f);</div>
+<div class="line">  std::cout &lt;&lt; c &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f">convert</a>(c, eve::as&lt;<a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">quaternion_t&lt;double&gt;</a>&gt;()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__functions_gae0cdc9d2dae205852268d4c5cdca6578_html_gae0cdc9d2dae205852268d4c5cdca6578"><div class="ttname"><a href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a></div><div class="ttdeci">constexpr tags::callable_complex complex</div><div class="ttdoc">Constructs a kyosu::complex.</div><div class="ttdef"><b>Definition:</b> to_complex.hpp:70</div></div>
+<div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:27</div></div>
+<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

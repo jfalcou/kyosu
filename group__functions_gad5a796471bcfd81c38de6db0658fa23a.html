@@ -142,23 +142,23 @@ $(document).ready(function(){initNavTree('group__functions_gad5a796471bcfd81c38d
 </table>
 </div><div class="memdoc">
 
-<p>Computes the exponential of the argument times i. </p>
+<p>Computes the exponential of i times the argument. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; constexp_ir T <a class="code hl_variable" href="group__functions_gad5a796471bcfd81c38de6db0658fa23a.html#gad5a796471bcfd81c38de6db0658fa23a">exp_i</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              constexp_ir T <a class="code hl_variable" href="group__functions_gad5a796471bcfd81c38de6db0658fa23a.html#gad5a796471bcfd81c38de6db0658fa23a">exp_i</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     constexp_ir T <a class="code hl_variable" href="group__functions_gad5a796471bcfd81c38de6db0658fa23a.html#gad5a796471bcfd81c38de6db0658fa23a">exp_i</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gad5a796471bcfd81c38de6db0658fa23a_html_gad5a796471bcfd81c38de6db0658fa23a"><div class="ttname"><a href="group__functions_gad5a796471bcfd81c38de6db0658fa23a.html#gad5a796471bcfd81c38de6db0658fa23a">kyosu::exp_i</a></div><div class="ttdeci">constexpr tags::callable_exp_i exp_i</div><div class="ttdoc">Computes the exponential of the argument times i.</div><div class="ttdef"><b>Definition:</b> exp_i.hpp:78</div></div>
+<div class="ttc" id="agroup__functions_gad5a796471bcfd81c38de6db0658fa23a_html_gad5a796471bcfd81c38de6db0658fa23a"><div class="ttname"><a href="group__functions_gad5a796471bcfd81c38de6db0658fa23a.html#gad5a796471bcfd81c38de6db0658fa23a">kyosu::exp_i</a></div><div class="ttdeci">constexpr tags::callable_exp_i exp_i</div><div class="ttdoc">Computes the exponential of i times the argument.</div><div class="ttdef"><b>Definition:</b> exp_i.hpp:78</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code> : Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the <code><a class="el" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449" title="Computes the exponential of the argument.">exp(i*z)</a></code>.</p>
+<p>Returns <code><a class="el" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449" title="Computes the exponential of the argument.">exp(i*z)</a></code>.</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

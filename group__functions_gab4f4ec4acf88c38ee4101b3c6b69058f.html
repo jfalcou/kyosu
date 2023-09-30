@@ -142,16 +142,16 @@ $(document).ready(function(){initNavTree('group__functions_gab4f4ec4acf88c38ee41
 </table>
 </div><div class="memdoc">
 
-<p>Computes the arc cosecant of the argument times \(\pi\). </p>
+<p>Computes the arc cosecant of the argume!nt in \(\pi\) multiples. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gab4f4ec4acf88c38ee4101b3c6b69058f.html#gab4f4ec4acf88c38ee4101b3c6b69058f">acscpi</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gab4f4ec4acf88c38ee4101b3c6b69058f.html#gab4f4ec4acf88c38ee4101b3c6b69058f">acscpi</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gab4f4ec4acf88c38ee4101b3c6b69058f.html#gab4f4ec4acf88c38ee4101b3c6b69058f">acscpi</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gab4f4ec4acf88c38ee4101b3c6b69058f_html_gab4f4ec4acf88c38ee4101b3c6b69058f"><div class="ttname"><a href="group__functions_gab4f4ec4acf88c38ee4101b3c6b69058f.html#gab4f4ec4acf88c38ee4101b3c6b69058f">kyosu::acscpi</a></div><div class="ttdeci">constexpr tags::callable_acscpi acscpi</div><div class="ttdoc">Computes the arc cosecant of the argument times .</div><div class="ttdef"><b>Definition:</b> acscpi.hpp:79</div></div>
+<div class="ttc" id="agroup__functions_gab4f4ec4acf88c38ee4101b3c6b69058f_html_gab4f4ec4acf88c38ee4101b3c6b69058f"><div class="ttname"><a href="group__functions_gab4f4ec4acf88c38ee4101b3c6b69058f.html#gab4f4ec4acf88c38ee4101b3c6b69058f">kyosu::acscpi</a></div><div class="ttdeci">constexpr tags::callable_acscpi acscpi</div><div class="ttdoc">Computes the arc cosecant of the argume!nt in  multiples.</div><div class="ttdef"><b>Definition:</b> acscpi.hpp:79</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -159,8 +159,8 @@ $(document).ready(function(){initNavTree('group__functions_gab4f4ec4acf88c38ee41
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex.">complex(z)</a> was entered.</li>
-<li>Returns <code>invpi(as(z))*acsc(z)</code></li>
+<li>a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(z) was entered.</li>
+<li>Returns Returns <a class="el" href="group__functions_gabd703393200a757087fb7f2054546dcf.html#gabd703393200a757087fb7f2054546dcf" title="Computes the parameter divided by .">kyosu::radinpi</a>(<a class="el" href="group__functions_ga40c963ecefcdeba9487598d5ef9bf874.html#ga40c963ecefcdeba9487598d5ef9bf874">kyosu::csc</a>(z))</li>
 </ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>

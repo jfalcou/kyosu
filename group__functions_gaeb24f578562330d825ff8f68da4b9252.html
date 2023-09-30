@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::imag</title>
+<title>kyosu: kyosu::from_angle_axis</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga8e88be0e83296a515c882ad40e828386.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_gaeb24f578562330d825ff8f68da4b9252.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_ga8e88be0e83296a515c8
 </div>
 
 <div class="contents">
-<a id="ga8e88be0e83296a515c882ad40e828386" name="ga8e88be0e83296a515c882ad40e828386"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8e88be0e83296a515c882ad40e828386">&#9670;&#160;</a></span>imag</h2>
+<a id="gaeb24f578562330d825ff8f68da4b9252" name="gaeb24f578562330d825ff8f68da4b9252"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaeb24f578562330d825ff8f68da4b9252">&#9670;&#160;</a></span>from_angle_axis</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_ga8e88be0e83296a515c8
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::imag = {}</td>
+          <td class="memname">kyosu::from_angle_axis = {}</td>
         </tr>
       </table>
   </td>
@@ -142,85 +142,54 @@ $(document).ready(function(){initNavTree('group__functions_ga8e88be0e83296a515c8
 </table>
 </div><div class="memdoc">
 
-<p>Alias for ipart. </p>
-<p>Extracts the imaginary part of a value.</p>
-<p><b>Defined in Header</b></p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
+<p>Callable object computing a quaternion from its angle_axis representation. </p>
+<p>This function build an unitary quaternion from an angle value and a 3 dimensionnal axis vector</p>
+<p><b>Defined in header</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include kyosu/module/quaternion.hpp&gt;`</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>&amp; ipart(T&amp; z)        <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>  ipart(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T     ipart(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">from_angle_axis</a>(<span class="keyword">auto</span> angle,  <span class="keyword">auto</span> axis, <span class="keyword">auto</span> norming = normalize) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__functions_gaeb24f578562330d825ff8f68da4b9252_html_gaeb24f578562330d825ff8f68da4b9252"><div class="ttname"><a href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr tags::callable_from_angle_axis from_angle_axis</div><div class="ttdoc">Callable object computing a quaternion from its angle_axis representation.</div><div class="ttdef"><b>Definition:</b> from_angle_axis.hpp:90</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Original value.</li>
+<li><code>angle</code> : rotation angle in radian</li>
+<li><code>axis</code>` : rotation axis given by an std::span of dimension 3.</li>
+<li>normalize : can be assume_normalized or normalize. In the second case axis is normalized. if axis is already normalized use assume_normalized is more efficient.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the imaginary part of its argument. For real inputs, the call returns 0. It is an alias of <code>imag</code>.</p>
+<p>the quaternion value representing the rotation.</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>;</div>
 <div class="line"> </div>
-<div class="line"> <span class="keyword">using </span>wide_ft = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
-<div class="line">  wide_ft ref1 = { 3.0f, 2.0f, 1.0f, 0.5f};</div>
-<div class="line">  wide_ft imf1 = { 2.0f , -1.0,  -5.0, 0.0};</div>
-<div class="line">  wide_ft ref2 = { 0.0, 1.0, 2.0, 3.0};</div>
-<div class="line">  <span class="keyword">auto</span> zc = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_ft&gt;</a>(ref1, imf1);</div>
 <div class="line"> </div>
-<div class="line">  std::cout</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc            = &quot;</span> &lt;&lt; zc &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; imag(zc)      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga8e88be0e83296a515c882ad40e828386.html#ga8e88be0e83296a515c882ad40e828386">kyosu::imag</a>(zc)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; imag(ref2)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga8e88be0e83296a515c882ad40e828386.html#ga8e88be0e83296a515c882ad40e828386">kyosu::imag</a>(ref2) &lt;&lt; std::endl;</div>
+<div class="line">  <span class="keyword">auto</span> theta = eve::pio_3(eve::as&lt;double&gt;());</div>
+<div class="line">  std::array&lt;double, 3&gt; ax{1., 2., 3.};</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- theta = &quot;</span> &lt;&lt; theta &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- axis  = (&quot;</span> &lt;&lt; ax[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt;  ax[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt;  ax[2] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>(theta,  ax);</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>(theta,  ax) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> [aa, axx] = <a class="code hl_variable" href="group__quaternion_ga31804ee3fdb4a806efea330cf1e20898.html#ga31804ee3fdb4a806efea330cf1e20898">kyosu::to_angle_axis</a>(q);</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt;theta = &quot;</span> &lt;&lt; aa &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; axis  = (&quot;</span> &lt;&lt; axx[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt;  axx[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt;  axx[2] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga8e88be0e83296a515c882ad40e828386_html_ga8e88be0e83296a515c882ad40e828386"><div class="ttname"><a href="group__functions_ga8e88be0e83296a515c882ad40e828386.html#ga8e88be0e83296a515c882ad40e828386">kyosu::imag</a></div><div class="ttdeci">constexpr tags::callable_ipart imag</div><div class="ttdoc">Alias for ipart.</div><div class="ttdef"><b>Definition:</b> ipart.hpp:81</div></div>
+<div class="ttc" id="agroup__quaternion_ga31804ee3fdb4a806efea330cf1e20898_html_ga31804ee3fdb4a806efea330cf1e20898"><div class="ttname"><a href="group__quaternion_ga31804ee3fdb4a806efea330cf1e20898.html#ga31804ee3fdb4a806efea330cf1e20898">kyosu::to_angle_axis</a></div><div class="ttdeci">constexpr tags::callable_to_angle_axis to_angle_axis</div><div class="ttdoc">Callable object computing the angle_axis coordinates from a quaternion.</div><div class="ttdef"><b>Definition:</b> to_angle_axis.hpp:85</div></div>
+<div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:27</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
-</div><!-- fragment --><p><b>Defined in Header</b></p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
-</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
-<div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>&amp; pure(T&amp; z)        <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>  pure(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> T     pure(T <span class="keyword">const</span>&amp; z)  <span class="keyword">noexcept</span>;</div>
-<div class="line">}</div>
-</div><!-- fragment --><p><b>Parameters</b></p>
-<ul>
-<li><code>z</code> : Original value.</li>
-</ul>
-<p><b>Return value</b></p>
-<p>Returns the imaginary part of its argument. For real inputs, the call returns 0. It is an alias of <code>imag</code>.</p>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line"> </div>
-<div class="line"> <span class="keyword">using </span>wide_ft = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
-<div class="line">  wide_ft ref1 = { 3.0f, 2.0f, 1.0f, 0.5f};</div>
-<div class="line">  wide_ft imf1 = { 2.0f , -1.0,  -5.0, 0.0};</div>
-<div class="line">  wide_ft ref2 = { 0.0, 1.0, 2.0, 3.0};</div>
-<div class="line">  <span class="keyword">auto</span> zc = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_ft&gt;</a>(ref1, imf1);</div>
-<div class="line"> </div>
-<div class="line">  std::cout</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc            = &quot;</span> &lt;&lt; zc &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; imag(zc)      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga8e88be0e83296a515c882ad40e828386.html#ga8e88be0e83296a515c882ad40e828386">kyosu::imag</a>(zc)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; imag(ref2)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga8e88be0e83296a515c882ad40e828386.html#ga8e88be0e83296a515c882ad40e828386">kyosu::imag</a>(ref2) &lt;&lt; std::endl;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
 </div><!-- fragment --> 
 </div>
 </div>

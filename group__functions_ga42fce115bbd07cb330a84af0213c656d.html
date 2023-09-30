@@ -148,10 +148,10 @@ $(document).ready(function(){initNavTree('group__functions_ga42fce115bbd07cb330a
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga42fce115bbd07cb330a84af0213c656d.html#ga42fce115bbd07cb330a84af0213c656d">log1p</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">complex_t&lt;T&gt;</a> <a class="code hl_variable" href="group__functions_ga42fce115bbd07cb330a84af0213c656d.html#ga42fce115bbd07cb330a84af0213c656d">log1p</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">complex_t&lt;T&gt;</a> <a class="code hl_variable" href="group__functions_ga42fce115bbd07cb330a84af0213c656d.html#ga42fce115bbd07cb330a84af0213c656d">log1p</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga42fce115bbd07cb330a84af0213c656d.html#ga42fce115bbd07cb330a84af0213c656d">log1p</a>(T z) <span class="keyword">noexcept</span>;            <span class="comment">//2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga42fce115bbd07cb330a84af0213c656d_html_ga42fce115bbd07cb330a84af0213c656d"><div class="ttname"><a href="group__functions_ga42fce115bbd07cb330a84af0213c656d.html#ga42fce115bbd07cb330a84af0213c656d">kyosu::log1p</a></div><div class="ttdeci">constexpr tags::callable_log1p log1p</div><div class="ttdoc">Computes the natural logarithm of the argument plus 1.</div><div class="ttdef"><b>Definition:</b> log1p.hpp:78</div></div>
+<div class="ttc" id="agroup__functions_ga42fce115bbd07cb330a84af0213c656d_html_ga42fce115bbd07cb330a84af0213c656d"><div class="ttname"><a href="group__functions_ga42fce115bbd07cb330a84af0213c656d.html#ga42fce115bbd07cb330a84af0213c656d">kyosu::log1p</a></div><div class="ttdeci">constexpr tags::callable_log1p log1p</div><div class="ttdoc">Computes the natural logarithm of the argument plus 1.</div><div class="ttdef"><b>Definition:</b> log1p.hpp:81</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
@@ -159,7 +159,11 @@ $(document).ready(function(){initNavTree('group__functions_ga42fce115bbd07cb330a
 <li><code>z</code> : Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the <code>log1p(1+z)</code>. If z is an ordered value log1p returns a complex typed value.</p>
+<ol type="1">
+<li>a real typed input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(z) was entered.<br  />
+ For real and complex entries provision are made to get better precision near z = 0.</li>
+<li>returns <a class="el" href="group__functions_ga398aa088354c3b9d0a0a1b5d6b7145f9.html#ga398aa088354c3b9d0a0a1b5d6b7145f9">log</a>(1+z).</li>
+</ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

@@ -148,7 +148,7 @@ $(document).ready(function(){initNavTree('group__functions_ga0704e6ec9b43b3f6a88
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga0704e6ec9b43b3f6a8864e38b566f795.html#ga0704e6ec9b43b3f6a8864e38b566f795">acot</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga0704e6ec9b43b3f6a8864e38b566f795.html#ga0704e6ec9b43b3f6a8864e38b566f795">acot</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;        <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga0704e6ec9b43b3f6a8864e38b566f795.html#ga0704e6ec9b43b3f6a8864e38b566f795">acot</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga0704e6ec9b43b3f6a8864e38b566f795.html#ga0704e6ec9b43b3f6a8864e38b566f795">acot</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
 <div class="line">}</div>
@@ -160,9 +160,9 @@ $(document).ready(function(){initNavTree('group__functions_ga0704e6ec9b43b3f6a88
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>A real type input z calls eve::acot(z); and so returns the same type as input.</li>
+<li>A real type input z calls eve::acot(z); and so returns the same type as the input.</li>
 <li>Returns elementwise the complex principal value of the arc cotangent of the input as the arc tangent of the inverse of the input.</li>
-<li>Returns \(I_z \mathrm{acoth}(z I_z)\) where \(I_z = \frac{\underline{z}}{|\underline{z}|}\) and \(\underline{z}\) is the pure part of \(z\).</li>
+<li>Returns \(I_z \mathrm{acoth}(z I_z)\) where \(I_z = \frac{\underline{z}}{|\underline{z}|}\) and \(\underline{z}\) is the <a class="el" href="group__functions.html#ga9f2e79c9e3d6becebb04d76ed8c95d11">pure</a> part of \(z\).</li>
 </ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
