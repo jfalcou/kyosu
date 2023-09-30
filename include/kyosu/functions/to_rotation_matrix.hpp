@@ -93,7 +93,7 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  * `q`  quaternion representing the rotation
-  //!  * `assume_normalized``: suppose that q is already normalized
+  //!  * `assume_normalized`: suppose that q is already normalized
   //!
   //!
   //!

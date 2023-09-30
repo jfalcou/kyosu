@@ -74,8 +74,8 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  * `angle` : rotation angle in radian
-  //!  * `axis`` : rotation axis given by an std::span of dimension 3.
-  //!  * normalize : can be assume_normalized or normalize. In the second case axis is normalized.
+  //!  * `axis` : rotation axis given by an std::span of dimension 3.
+  //!  * `normalize` : can be assume_normalized or normalize. In the second case axis is normalized.
   //!                if axis is already normalized use assume_normalized is more efficient.
   //!
   //! **Return value**

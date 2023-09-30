@@ -60,7 +60,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * ` zi...` : Values to process: mix of floating and Cayley-Dickson.
+//!     * `zi...` : Values to process: mix of floating and Cayley-Dickson.
 //!
 //!   **Return value**
 //!
