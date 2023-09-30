@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the conjugate of its argument. i.e. the value with the same real part
+//!     Returns the conjugate of its argument. i.e. the value with the same [real](@ref kyosu::real ) part
 //!     and the opposite [pure](@ref kyosu::imag ) part.
 //!
 //!     For real inputs the call reduces to identity.

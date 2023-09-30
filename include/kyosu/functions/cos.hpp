@@ -68,7 +68,7 @@ namespace kyosu
 //!
 //!     2. The behavior of this function is equivalent to `eve::cosh(i*z)`.
 //!
-//!     3  Returns \f$\cosh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\cos(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!     3.  Returns \f$\cosh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\cos(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{Example}

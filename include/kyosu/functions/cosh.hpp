@@ -56,7 +56,6 @@ namespace kyosu
 //!      template<kyosu::concepts::complex T>        constexpr T cosh(T z) noexcept; //2
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T cosh(T z) noexcept; //3
 //!   }
-//!   }
 //!   @endcode
 //!
 //!   **Parameters**

@@ -59,9 +59,12 @@ namespace kyosu
 //!   }
 //!   @endcode
 //!
-//!   **Parameters**
+//!   **Parameter**
 //!
 //!     * `x`: floating or Cayley Dickinson value to process.
+//!
+//!   **Template Parameter**
+//!
 //!     * `U`: target type to convert to.
 //!
 //!   **Return value**
