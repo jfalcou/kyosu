@@ -76,9 +76,9 @@ namespace kyosu
 //!      in the interval \f$[0,\pi]\f$ along the real axis.
 //!
 //!      * for every z: kyosu::acosh( [kyosu::conj](@ref kyosu::conj)(z)) == kyosu::conj([kyosu::acosh](@ref kyosu::acosh)(z)
-//!      * If z is \f$\pm0\f$, the result is \f$+0,\pi/2\f$
+//!      * If z is \f$\pm0\f$, the result is \f$+0+i\pi/2\f$
 //!      * If z is \f$x+i\infty\f$ (for any finite x), the result is \f$\infty+i\pi/2\f$
-//!      * If z is \f$x+i NaN\f$ (for any finite non zero x), the result is \f$NaN+i NaN\f$.
+//!      * If z is \f$x+i NaN\f$ (for any finite non zero x), the result is \f$NaN+iNaN\f$.
 //!      * If z is \f$i NaN\f$  the result is \f$NaN+i\pi/2\f$.
 //!      * If z is \f$-\infty,y\f$ (for any positive finite y), the result is \f$+\infty,\pi\f$
 //!      * If z is \f$+\infty,y\f$ (for any positive finite y), the result is \f$+\infty+i 0\f$
