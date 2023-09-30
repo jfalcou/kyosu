@@ -232,7 +232,7 @@ namespace kyosu::_
     else
     {
       auto lon =  eve::pedantic(eve::atan2)(get<2>(q), get<1>(q));
-      auto lat =  eve::pedantic(eve::atan2)(get<3>(q)*eve::sin(lon),getget<2>(q));
+      auto lat =  eve::pedantic(eve::atan2)(get<3>(q)*eve::sin(lon),get<2>(q));
       return kumi::tuple{get<0>(q), abs(pure(q)), lon, lat};
     }
   }

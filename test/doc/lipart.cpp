@@ -21,8 +21,8 @@ int main()
   std::cout << q << " -> " << lipart(q)  <<  " => ";
 
   std::cout << "octonion:  ";
-  auto q = kyosu::cayley_dickson_t<8, double>(1.,2.,3.,4.,11.,12.,13.,14.);
-  std::cout << q << " -> " << lipart(q)  <<  " => ";
+  auto o = kyosu::octonion_t<double>(1.,2.,3.,4.,11.,12.,13.,14.);
+  std::cout << o << " -> " << lipart(q)  <<  " => ";
 
 
   return 0;

@@ -21,8 +21,8 @@ int main()
   std::cout << q << " -> " << ljpart(q)  <<  " => ";
 
   std::cout << "octonion:  ";
-  auto q = kyosu::cayley_dickson_t<8, double>(1.,2.,3.,4.,11.,12.,13.,14.);
-  std::cout << q << " -> " << ljpart(q)  <<  " => ";
+  auto o = kyosu::octonion_t<double>(1.,2.,3.,4.,11.,12.,13.,14.);
+  std::cout << o << " -> " << ljpart(o)  <<  " => ";
 
 
   return 0;
