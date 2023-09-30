@@ -10,7 +10,6 @@
 #include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
 #include <kyosu/types/impl/reals.hpp>
-#include <iostream>
 
 namespace kyosu::_
 {

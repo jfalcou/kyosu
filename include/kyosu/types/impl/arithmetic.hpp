@@ -9,7 +9,7 @@
 
 #include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
-#include <iostream>
+
 namespace kyosu::_
 {
   template<typename C>
@@ -310,5 +310,38 @@ namespace kyosu::_
                , C const& iz) noexcept
   {
     return rho*kyosu::exp(theta*iz);
+  }
+
+  template<typename  C0, typename  C1>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::commutator> const&, C0 const & c0, C1 const &  c1) noexcept
+  {
+    constexpr size_t dC0 = dimension_v<C0>;
+    constexpr size_t dC1 = dimension_v<C1>;
+    if constexpr((dC0 < 4 && dC1 < 4) || (dC0 == 1 || dC1 == 1))
+    {
+      return decltype(c0+c1){};
+    }
+    else
+    {
+      return c0*c1 - c1*c0;
+    }
+  }
+
+  template<typename  C0, typename  C1, typename  C2>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::associator> const&, C0 const & c0, C1 const &  c1, C2 const &  c2) noexcept
+  {
+    constexpr size_t dC0 = dimension_v<C0>;
+    constexpr size_t dC1 = dimension_v<C1>;
+    constexpr size_t dC2 = dimension_v<C2>;
+    if constexpr((dC0 < 8 && dC1 < 8 && dC1 < 8) || (dC0 == 1 || dC1 == 1 || dC1 == 1))
+    {
+      return decltype(c0+c1+c2){};
+    }
+    else
+    {
+      return (c0*c1)*c2 - c0*(c1*c2);
+    }
   }
 }

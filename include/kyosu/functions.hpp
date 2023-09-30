@@ -29,10 +29,12 @@
 #include <kyosu/functions/asin.hpp>
 #include <kyosu/functions/asinpi.hpp>
 #include <kyosu/functions/asinh.hpp>
+#include <kyosu/functions/associator.hpp>
 #include <kyosu/functions/atan.hpp>
 #include <kyosu/functions/atanh.hpp>
 #include <kyosu/functions/average.hpp>
 #include <kyosu/functions/ceil.hpp>
+#include <kyosu/functions/commutator.hpp>
 #include <kyosu/functions/conj.hpp>
 #include <kyosu/functions/cos.hpp>
 #include <kyosu/functions/cosh.hpp>
