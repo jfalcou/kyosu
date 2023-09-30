@@ -53,13 +53,13 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::complex T>   constexpr T  digamma(T z) noexcept;
-//!      template<eve::floatingordered_value T> constexpr T  digamma(T z) noexcept;
+//!      template<eve::floating_ordered_value T> constexpr T  digamma(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : rel or complex value to process.
+//!     * `z` : real or complex value to process.
 //!
 //!   **Return value**
 //!

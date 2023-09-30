@@ -44,7 +44,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var lkpart
-//!   @brief Extracts the lk-part of a value.
+//!   @brief Extracts the lk (eighth) part of a value.
 //!
 //!   **Defined in Header**
 //!
@@ -69,7 +69,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the second part of its argument.
+//!     Returns the eighth part of its argument.
 //!
 //!     For up to quaterion inputs, the call always returns 0.
 //!

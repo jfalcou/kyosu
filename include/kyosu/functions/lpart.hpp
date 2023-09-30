@@ -44,7 +44,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var lpart
-//!   @brief Extracts the l part of a value.
+//!   @brief Extracts the l (fifth) part of a value.
 //!
 //!   **Defined in Header**
 //!
@@ -69,7 +69,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the second part of its argument.
+//!     Returns the fifth part of its argument.
 //!
 //!     For up to quaterion inputs, the call always returns 0.
 //!

@@ -68,7 +68,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the pure (olso called imaginary) part of its argument. For real inputs, the call returns 0. It is an alias of `imag`.
+//!     Returns the pure (also called imaginary) part of its argument. For real inputs, the call returns 0. It is an alias of `imag`.
 //!
 //!  @groupheader{Example}
 //!

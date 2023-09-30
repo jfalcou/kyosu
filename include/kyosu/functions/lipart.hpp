@@ -44,7 +44,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var lipart
-//!   @brief Extracts the li-part of a value.
+//!   @brief Extracts the li (sixth) part of a value.
 //!
 //!   **Defined in Header**
 //!
@@ -69,7 +69,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the second part of its argument.
+//!     Returns the sixth part of its argument.
 //!
 //!     For up to quaternion inputs, the call always returns 0.
 //!

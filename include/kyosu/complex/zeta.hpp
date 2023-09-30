@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floatingordered_value T> constexpr auto zeta(T z) noexcept;
+//!      template<eve::floating_ordered_value T> constexpr auto zeta(T z) noexcept;
 //!      template<kyosu::concepts::complex T>  constexpr auto zeta(T z) noexcept;
 //!   }
 //!   @endcode

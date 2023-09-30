@@ -42,7 +42,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var associator
-//!   @brief Computes the associator of the two parameters.
+//!   @brief Computes the associator of the three parameters.
 //!
 //!   **Defined in Header**
 //!

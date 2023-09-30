@@ -44,7 +44,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var ljpart
-//!   @brief Extracts the lj-part of a value.
+//!   @brief Extracts the lj (seventh) part of a value.
 //!
 //!   **Defined in Header**
 //!
@@ -69,7 +69,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the second part of its argument.
+//!     Returns the seventh part of its argument.
 //!
 //!     For up to quaterion inputs, the call always returns 0.
 //!
