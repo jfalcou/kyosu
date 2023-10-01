@@ -66,7 +66,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     Returns the distance between the two arguments computed as the absolute value of the arguments difference.
-//!     Arguments can be a mix of floting or Cayley-Dicson values.
+//!     Arguments can be a mix of floating or Cayley-Dicson values.
 //!
 //!  @groupheader{Example}
 //!
