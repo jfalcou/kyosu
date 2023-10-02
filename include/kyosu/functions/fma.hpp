@@ -11,18 +11,18 @@
 
 namespace kyosu::tags
 {
-  struct callable_lerp: eve::elementwise
+  struct callable_fma: eve::elementwise
   {
-    using callable_tag_type = callable_lerp;
+    using callable_tag_type = callable_fma;
 
-    KYOSU_DEFERS_CALLABLE(lerp_);
+    KYOSU_DEFERS_CALLABLE(fma_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , eve::floating_ordered_value auto const& v0
                                                , eve::floating_ordered_value auto const& v1
-                                              ,  eve::floating_ordered_value auto const& t) noexcept
+                                              ,  eve::floating_ordered_value auto const& v2) noexcept
     {
-      return eve::lerp(v0, v1, t);
+      return eve::fma(v0, v1, v2);
     }
 
     KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1, auto const & target2) const noexcept
@@ -32,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_lerp(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_fma(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var lerp
-//!   @brief  Computes the  linear interpolation.
+//!   @var fma
+//!   @brief  Computes fused multiply add.
 //!
 //!   **Defined in Header**
 //!
@@ -56,26 +56,22 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto lerp(auto z0, auto, z1, floating_ordered_value t) noexcept;
+//!     constexpr auto fma(auto z0, auto, z1, aut z2) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0, `z1`: Values to process.
-//!     * `t`: floating value interpolation coefficient.
+//!     * `z0, `z1`,`z2`: Values to process.
 //!
 //!   **Return value**
 //!
-//!    The value of the interpolation (or extrapolation)  between `z0` and `z1` is returned.
-//!    The call is semantically equivalent to `z0+t*(z1-z0)`.
-//!
-//!    @see slerp for better unitary quaternion (spheroidal) interpolation.
+//!    The call is semantically equivalent to `z0*z1+z2`.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/lerp.cpp}
+//!  @godbolt{doc/fma.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_lerp lerp = {};
+inline constexpr tags::callable_fma fma = {};
 }
