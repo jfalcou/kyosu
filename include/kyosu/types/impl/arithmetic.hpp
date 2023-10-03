@@ -387,4 +387,64 @@ namespace kyosu::_
   {
     return kumi::apply( [&](auto... m) { return horner(x, m...); }, tup);
   }
+
+  template<typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::reverse_horner>, Cs const & ...cs) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<Cs...>;
+    return eve::reverse_horner(kyosu::convert(cs, eve::as<r_t>())...);
+  }
+
+  template<typename C, typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::reverse_horner> const&, C x, kumi::tuple<Cs...> tup) noexcept
+  {
+    return kumi::apply( [&](auto... m) { return reverse_horner(x, m...); }, tup);
+  }
+
+  template<typename C0, typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::right_horner>, C0 const & xx, Cs ...cs) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<C0, Cs...>;
+    constexpr size_t N = sizeof...(Cs);
+    if constexpr( N == 0 ) return r_t(0);
+    else if constexpr( N == 1 ) return (kyosu::convert(cs, eve::as<r_t>()), ...);
+    else
+    {
+      r_t x = convert(xx, eve::as<r_t>());
+      auto dfma = /*d*/(fma);
+      r_t  that(eve::zero(eve::as<as_real_t<r_t>>()));
+      auto next = [&](auto that, auto arg) { return dfma(x, that, arg); };
+      ((that = next(that, cs)), ...);
+      return that;
+    }
+  }
+
+  template<typename C, typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::right_horner> const&, C x, kumi::tuple<Cs...> tup) noexcept
+  {
+    return kumi::apply( [&](auto... m) { return right_horner(x, m...); }, tup);
+  }
+
+  template<typename C, typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::right_reverse_horner>, C xx, Cs const & ...cs) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<C, Cs...>;
+    auto x = convert(xx, eve::as<r_t>());
+    using t_t = kumi::result::generate_t<sizeof...(cs)+1, r_t>;
+    t_t tup{convert(cs, eve::as<r_t>())...};
+    return /*d*/(right_reverse_horner)(x, tup);
+  }
+
+  template<typename C, typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::right_reverse_horner> const&, C x, kumi::tuple<Cs...> tup) noexcept
+  {
+    return right_horner(x, kumi::reverse(tup));
+  }
+
 }

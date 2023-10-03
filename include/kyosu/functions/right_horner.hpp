@@ -13,11 +13,11 @@
 
 namespace kyosu::tags
 {
-  struct callable_horner: eve::elementwise
+  struct callable_right_horner: eve::elementwise
   {
-    using callable_tag_type = callable_horner;
+    using callable_tag_type = callable_right_horner;
 
-    KYOSU_DEFERS_CALLABLE(horner_);
+    KYOSU_DEFERS_CALLABLE(right_horner_);
 
     template < eve::floating_ordered_value ... Ts>
     static KYOSU_FORCEINLINE auto deferred_call(auto
@@ -41,7 +41,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_horner(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_right_horner(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -50,13 +50,13 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var horner
-//!   @brief Implement the horner scheme to evaluate polynomials
+//!   @var right_horner
+//!   @brief Implement the right_horner scheme to evaluate polynomials
 //!
 //!   If \f$(a_i)_{0\le i\le n-1}\f$ denotes the coefficients of the polynomial by decreasing
-//!   power order,  the Horner scheme evaluates the polynom \f$p\f$ at \f$x\f$ by :
-//!   \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
-//!   For non commutative cases it is a right-horner scheme  are at the left of the x powers).
+//!   power order,  the Right_Horner scheme evaluates the polynom \f$p\f$ at \f$x\f$ by :
+//!   \f$\displaystyle p(x) = (a_{n-1}+x(...+x (a_1+ x a_0)) ))\f$.\n
+//!   For non commutative cases it is a right_horner scheme  (the coefficients are at the right of the x powers).
 //!
 //!   **Defined in header**
 //!
@@ -69,8 +69,8 @@ namespace kyosu
 //!   @code
 //!   namespace eve
 //!   {
-//!     template<auto T, auto C ...>  auto horner(T x, C ... coefs) noexcept;  //1
-//!     template< auto C, eve::Range R> auto horner(T x, R r) noexcept; //2
+//!     template<auto T, auto C ...>  auto right_horner(T x, C ... coefs) noexcept;  //1
+//!     template< auto C, eve::Range R> auto right_horner(T x, R r) noexcept; //2
 //!
 //!   }
 //!   @endcode
@@ -90,8 +90,8 @@ namespace kyosu
 //!   **Return value**
 //!
 //!   The value of the polynom at  `x` is returned,  according to the formula:
-//!    \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
-//!   For non commutative cases it is a rigt-horner scheme. See [left_horner](@ref lefthorner)
+//!    \f$\displaystyle p(x) = (a_{n-1}+x(...+x (a_1+ x a_0)) ))\f$.\n
+//!   For non commutative cases it is a rigt-right_horner scheme. See [horner](@ref horner)
 //!   for the left scheme
 //!
 //!    **Notes**
@@ -104,8 +104,8 @@ namespace kyosu
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/horner.cpp}
+//!  @godbolt{doc/right_horner.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_horner horner = {};
+inline constexpr tags::callable_right_horner right_horner = {};
 }

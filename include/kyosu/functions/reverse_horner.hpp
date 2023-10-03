@@ -13,24 +13,24 @@
 
 namespace kyosu::tags
 {
-  struct callable_horner: eve::elementwise
+  struct callable_reverse_horner: eve::elementwise
   {
-    using callable_tag_type = callable_horner;
+    using callable_tag_type = callable_reverse_horner;
 
-    KYOSU_DEFERS_CALLABLE(horner_);
+    KYOSU_DEFERS_CALLABLE(reverse_horner_);
 
     template < eve::floating_ordered_value ... Ts>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , Ts const &  ... vs) noexcept
     {
-      return eve::horner(vs...);
+      return eve::reverse_horner(vs...);
     }
 
     template < eve::floating_ordered_value T0,  eve::floating_ordered_value ... Ts>
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , T0 x, kumi::tuple<Ts...> tup) noexcept
     {
-      return eve::horner(x, tup);
+      return eve::reverse_horner(x, tup);
     }
 
     template < typename ... Ts>
@@ -41,7 +41,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_horner(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_reverse_horner(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -50,18 +50,19 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var horner
-//!   @brief Implement the horner scheme to evaluate polynomials
+//!   @var reverse_horner
+//!   @brief Implement the reverse_horner scheme to evaluate polynomials
 //!
 //!   If \f$(a_i)_{0\le i\le n-1}\f$ denotes the coefficients of the polynomial by decreasing
-//!   power order,  the Horner scheme evaluates the polynom \f$p\f$ at \f$x\f$ by :
+//!   power order,  the Reverse_Horner scheme evaluates the polynom \f$p\f$ at \f$x\f$ by :
 //!   \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
-//!   For non commutative cases it is a right-horner scheme  are at the left of the x powers).
+//!   For non commutative cases it is a left-reverse_horner scheme. The coefficients
+//!   are at the left of the x powers.
 //!
 //!   **Defined in header**
 //!
 //!   @code
-//!   #include <eve/module/polynomial.hpp>
+//!   #include <kyosu/kyosu.hpp>
 //!   @endcode
 //!
 //!   @groupheader{Callable Signatures}
@@ -69,8 +70,8 @@ namespace kyosu
 //!   @code
 //!   namespace eve
 //!   {
-//!     template<auto T, auto C ...>  auto horner(T x, C ... coefs) noexcept;  //1
-//!     template< auto C, eve::Range R> auto horner(T x, R r) noexcept; //2
+//!     template<auto T, auto C ...>    auto reverse_horner(T x, C ... coefs) noexcept;  //1
+//!     template< auto C, kumi::tuple T> auto reverse_horner(C x, T t) noexcept;          //2
 //!
 //!   }
 //!   @endcode
@@ -85,13 +86,13 @@ namespace kyosu
 //!     * `coefs...` :  real or cayley-dickson arguments.
 //!        The coefficients by decreasing power order
 //!
-//!     * `r` : Range containing The coefficients by decreasing power order.
+//!     * `t` : kumi::tuple containing The coefficients by decreasing power order.
 //!
 //!   **Return value**
 //!
 //!   The value of the polynom at  `x` is returned,  according to the formula:
-//!    \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
-//!   For non commutative cases it is a rigt-horner scheme. See [left_horner](@ref lefthorner)
+//!    \f$\displaystyle p(x) = (((a_{n-1}x+a_{n-2})x+ ... )x + a_0)\f$.\n
+//!   For non commutative cases it is a rigt-reverse_horner scheme. See [left_reverse_horner](@ref leftreverse_horner)
 //!   for the left scheme
 //!
 //!    **Notes**
@@ -104,8 +105,8 @@ namespace kyosu
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/horner.cpp}
+//!  @godbolt{doc/reverse_horner.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_horner horner = {};
+inline constexpr tags::callable_reverse_horner reverse_horner = {};
 }
