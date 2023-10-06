@@ -29,7 +29,7 @@ TTS_CASE_WITH ( "Check kyosu::negmaxabs over complex"
 {
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
-  TTS_RELATIVE_EQUAL(kyosu::negmaxabs(c0, c1), eve::negmaxabs(kyosu::abs(c0), kyosu::abs(c1)), 2e-5);
+  TTS_RELATIVE_EQUAL(kyosu::negmaxabs(c0, c1), -eve::max(kyosu::abs(c0), kyosu::abs(c1)), 2e-5);
 };
 
 TTS_CASE_WITH ( "Check kyosu::negmaxabs over quaternion"
@@ -45,5 +45,5 @@ TTS_CASE_WITH ( "Check kyosu::negmaxabs over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::negmaxabs(q0, q1), eve::negmax(kyosu::abs(q0), kyosu::abs(q1)), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::negmaxabs(q0, q1), -eve::max(kyosu::abs(q0), kyosu::abs(q1)), 1e-5);
 };

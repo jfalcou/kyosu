@@ -212,18 +212,6 @@ namespace kyosu::_
     return kyosu::if_else(kyosu::is_nez(c), c/abs(c), C(0));
   }
 
-  template<typename  C0, typename  C1>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::average> const&, C0 const & c0, C1 const &  c1) noexcept
-  {
-    using r_t = kyosu::as_cayley_dickson_t<C0,C1>;
-    using er_t = eve::element_type_t<r_t>;
-    return r_t{kumi::map([](auto const& e, auto const& f) { return eve::average(e, f); }
-                         , kyosu::convert(c0, eve::as<er_t>())
-                         , kyosu::convert(c1, eve::as<er_t>())
-                        )
-        };
-  }
 
   template<typename  C0, typename  C1>
   KYOSU_FORCEINLINE constexpr
@@ -495,7 +483,7 @@ namespace kyosu::_
     }
     else
     {
-      using r_t = as_cayley_dickson_t<C0, C1, Cs...>;
+      using r_t = kyosu::as_cayley_dickson_t<C0, C1, Cs...>;
       r_t that(maxmag(c0, c1));
       ((that = maxmag(that, cs)), ...);
       return that;
@@ -518,10 +506,30 @@ namespace kyosu::_
     }
     else
     {
-      using r_t = as_cayley_dickson_t<C0, C1, Cs...>;
+      using r_t = kyosu::as_cayley_dickson_t<C0, C1, Cs...>;
       r_t that(minmag(c0, c1));
       ((that = minmag(that, cs)), ...);
       return that;
+    }
+  }
+
+  template<typename  C0, typename  C1,  typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::average> const&, C0 const & c0, C1 const &  c1, Cs const &...  cs) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<C0,C1, Cs...>;
+    if constexpr(sizeof...(cs) == 0)
+    {
+      using er_t = eve::element_type_t<r_t>;
+      return r_t{kumi::map([](auto const& e, auto const& f) { return eve::average(e, f); }
+                          , kyosu::convert(c0, eve::as<er_t>())
+                          , kyosu::convert(c1, eve::as<er_t>())
+                          )
+          };
+    }
+    else
+    {
+      return add(c0, c1, cs...) / (sizeof...(cs) + 2);
     }
   }
 }
