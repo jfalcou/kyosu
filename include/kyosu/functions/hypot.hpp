@@ -54,8 +54,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template< f typename ... Ts> auto hypot(Ts ... zi ) const noexcept
-///!   }
+//!      template<typename ... Ts> auto hypot(Ts ... zi ) const noexcept
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**

@@ -101,8 +101,14 @@
 #include <kyosu/functions/lkpart.hpp>
 #include <kyosu/functions/lpnorm.hpp>
 #include <kyosu/functions/manhattan.hpp>
+#include <kyosu/functions/maxabs.hpp>
+#include <kyosu/functions/maxmag.hpp>
+#include <kyosu/functions/minabs.hpp>
+#include <kyosu/functions/minmag.hpp>
 #include <kyosu/functions/minus.hpp>
 #include <kyosu/functions/nearest.hpp>
+#include <kyosu/functions/negmaxabs.hpp>
+#include <kyosu/functions/negminabs.hpp>
 #include <kyosu/functions/oneminus.hpp>
 #include <kyosu/functions/pow.hpp>
 #include <kyosu/functions/pow1p.hpp>

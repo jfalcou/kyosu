@@ -447,4 +447,81 @@ namespace kyosu::_
     return right_horner(x, kumi::reverse(tup));
   }
 
+  template<typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::maxabs> const&, Cs const &... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0) return 0.0f;
+    else return eve::max(kyosu::abs(zs)...);
+  }
+
+  template<typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::minabs> const&, Cs const &... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0) return 0.0f;
+    else return eve::min(kyosu::abs(zs)...);
+  }
+
+  template<typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::negmaxabs> const&, Cs const &... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0) return 0.0f;
+    else return -eve::max(kyosu::abs(zs)...);
+  }
+
+  template<typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::negminabs> const&, Cs const &... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0) return 0.0f;
+    else return -eve::min(kyosu::abs(zs)...);
+  }
+
+  template<typename C0, typename C1, typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::maxmag> const&
+               , C0 const & c0
+               , C1 const & c1
+               , Cs const &... cs) noexcept
+  {
+    if constexpr(sizeof...(cs) == 0)
+    {
+      auto ac0 = kyosu::sqr_abs(c0);
+      auto ac1 = kyosu::sqr_abs(c1);
+      auto tmp = kyosu::if_else(eve::is_not_greater_equal(ac0, ac1), c1, c0);
+      return kyosu::if_else(eve::is_not_greater_equal(ac1, ac0), c0, tmp);
+    }
+    else
+    {
+      using r_t = as_cayley_dickson_t<C0, C1, Cs...>;
+      r_t that(maxmag(c0, c1));
+      ((that = maxmag(that, cs)), ...);
+      return that;
+    }
+  }
+
+  template<typename C0, typename C1, typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::minmag> const&
+               , C0 const & c0
+               , C1 const & c1
+               , Cs const &... cs) noexcept
+  {
+    if constexpr(sizeof...(cs) == 0)
+    {
+      auto ac0 = kyosu::sqr_abs(c0);
+      auto ac1 = kyosu::sqr_abs(c1);
+      auto tmp = kyosu::if_else(eve::is_not_greater_equal(ac1, ac0), c1, c0);
+      return kyosu::if_else(eve::is_not_greater_equal(ac0, ac1), c0, tmp);
+    }
+    else
+    {
+      using r_t = as_cayley_dickson_t<C0, C1, Cs...>;
+      r_t that(minmag(c0, c1));
+      ((that = minmag(that, cs)), ...);
+      return that;
+    }
+  }
 }

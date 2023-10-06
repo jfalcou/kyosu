@@ -57,7 +57,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     constexpr auto reldist(auto z0, auto, z1) noexcept;
-///!   }
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**

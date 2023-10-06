@@ -75,7 +75,7 @@ namespace kyosu
 //!
 //!   3. Returns \f$(\log(z+1)-\log(z-1))/2 \f$.
 //!
-///!  @groupheader{Example}
+//!  @groupheader{Example}
 //!
 //!  @godbolt{doc/acoth.cpp}
 //! @}

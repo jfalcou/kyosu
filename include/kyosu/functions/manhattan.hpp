@@ -54,8 +54,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template< floating_value P, typename ... Ts> auto manhattan(Ts ... zi ) const noexcept
-///!   }
+//!      template<typename ... Ts> auto manhattan(Ts ... zi ) const noexcept
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**

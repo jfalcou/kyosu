@@ -11,17 +11,16 @@
 
 namespace kyosu::tags
 {
-  struct callable_lpnorm: eve::elementwise
+  struct callable_negminabs: eve::elementwise
   {
-    using callable_tag_type = callable_lpnorm;
+    using callable_tag_type = callable_negminabs;
 
-    KYOSU_DEFERS_CALLABLE(lpnorm_);
+    KYOSU_DEFERS_CALLABLE(negminabs_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const& p
                                                , eve::floating_ordered_value auto const&... vs) noexcept
     {
-      return eve::lpnorm(p, vs...);
+      return eve::negminabs(vs...);
     }
 
     KYOSU_FORCEINLINE auto operator()(auto const&... targets ) const noexcept
@@ -31,7 +30,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_lpnorm(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_negminabs(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -41,9 +40,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var lpnorm
-//!   @brief Callable object computing the lpnorm operation \f$ \left(\sum_{i = 0}^n
-//! |x_i|^p\right)^{\frac1p} \f$.
+//!   @var negminabs
+//!   @brief Callable object computing the negminabs operation.
 //!
 //!   **Defined in Header**
 //!
@@ -56,23 +54,22 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template< floating_value P, typename T, typename ... Ts> auto lpnorm(P p, T z,Ts ... zs ) const noexcept
+//!      template<typename ... Ts> auto negminabs(Ts ... zi ) const noexcept
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `p`:   : positive floating ordered value
-//!     * `zs...`: Values to process.
+//!     * `zi...`: Values to process.
 //!
 //!   **Return value**
 //!
-//!     Returns \f$ \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \f$.
+//!     Returns elementwise  the negminimum of the absolute values of the parameters.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/lpnorm.cpp}
+//!  @godbolt{doc/negminabs.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_lpnorm lpnorm = {};
+inline constexpr tags::callable_negminabs negminabs = {};
 }
