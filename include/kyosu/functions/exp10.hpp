@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns 10 to the argument.
+//!     Returns 10 to the argument. The call is semantically equivalent to \f$e^{\log(10)z}\f$
 //!
 //!  @groupheader{Example}
 //!

@@ -349,6 +349,20 @@ namespace kyosu::_
 
   template<typename  C0, typename  C1, typename C2>
   KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::fam> const&, C0 const & c0, C1 const & c1, C2 const & c2) noexcept
+  {
+    return c0+c1*c2;
+  }
+
+  template<typename  C0, typename  C1, typename C2>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::fsm> const&, C0 const & c0, C1 const & c1, C2 const & c2) noexcept
+  {
+    return -c0+c1*c2;
+  }
+
+  template<typename  C0, typename  C1, typename C2>
+  KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::fnma> const&, C0 const & c0, C1 const & c1, C2 const & c2) noexcept
   {
     return -c0*c1+c2;
@@ -529,7 +543,7 @@ namespace kyosu::_
     }
     else
     {
-      return add(c0, c1, cs...) / (sizeof...(cs) + 2);
+      return (c0+ (c1+ ... + cs)) / (sizeof...(cs) + 2);
     }
   }
 }

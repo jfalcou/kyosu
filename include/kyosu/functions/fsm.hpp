@@ -8,29 +8,31 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
+
 namespace kyosu::tags
 {
-  struct callable_average: eve::elementwise
+  struct callable_fsm: eve::elementwise
   {
-    using callable_tag_type = callable_average;
+    using callable_tag_type = callable_fsm;
 
-    KYOSU_DEFERS_CALLABLE(average_);
+    KYOSU_DEFERS_CALLABLE(fsm_);
 
     static KYOSU_FORCEINLINE auto deferred_call(auto
                                                , eve::floating_ordered_value auto const& v0
-                                               , eve::floating_ordered_value auto const& ...v1) noexcept
+                                               , eve::floating_ordered_value auto const& v1
+                                              ,  eve::floating_ordered_value auto const& v2) noexcept
     {
-      return eve::average(v0, v1...);
+      return eve::fsm(v0, v1, v2);
     }
 
-    KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& ...target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1...))
+    KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1, auto const & target2) const noexcept
+    -> decltype(eve::tag_invoke(*this, target0, target1, target2))
     {
-      return eve::tag_invoke(*this, target0, target1...);
+      return eve::tag_invoke(*this, target0, target1, target2);
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_average(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_fsm(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -40,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var average
-//!   @brief Computes the average of the two parameters.
+//!   @var fsm
+//!   @brief  Computes fused sub multiply.
 //!
 //!   **Defined in Header**
 //!
@@ -54,22 +56,22 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto average(auto z0, auto, z1) noexcept;
+//!     constexpr auto fsm(auto z0, auto, z1, aut z2) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1`: Value to process. Can be a mix of complex and real floating values and complex values.
+//!     * `z0, `z1`,`z2`: Values to process.
 //!
 //!   **Return value**
 //!
-//!     Returns the arithmetic mean of the two arguments.
+//!    The call is semantically equivalent to `-z0+z1*z2`.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/average.cpp}
+//!  @godbolt{doc/fsm.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_average average = {};
+inline constexpr tags::callable_fsm fsm = {};
 }

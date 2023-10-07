@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns 2 to the argument.
+//!     Returns 2 to the argument. The call is semantically equivalent to \f$e^{\log(2)z}\f$
 //!
 //!  @groupheader{Example}
 //!

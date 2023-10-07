@@ -57,6 +57,7 @@
 #include <kyosu/functions/expm1.hpp>
 #include <kyosu/functions/expmx2.hpp>
 #include <kyosu/functions/expx2.hpp>
+#include <kyosu/functions/fam.hpp>
 #include <kyosu/functions/floor.hpp>
 #include <kyosu/functions/fma.hpp>
 #include <kyosu/functions/fms.hpp>
@@ -64,6 +65,7 @@
 #include <kyosu/functions/fnms.hpp>
 #include <kyosu/functions/frac.hpp>
 #include <kyosu/functions/from_polar.hpp>
+#include <kyosu/functions/fsm.hpp>
 #include <kyosu/functions/hypot.hpp>
 #include <kyosu/functions/horner.hpp>
 #include <kyosu/functions/if_else.hpp>
