@@ -41,7 +41,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var average
-//!   @brief Computes the average of the two parameters.
+//!   @brief Computes the average of the parameters.
 //!
 //!   **Defined in Header**
 //!
@@ -54,17 +54,17 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto average(auto z0, auto, z1) noexcept;
+//!     constexpr auto average(auto z0, auto... z1) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1`: Value to process. Can be a mix of complex and real floating values and complex values.
+//!     * `z0, z1...`: Values to process. Can be a mix of complex and real floating values and complex values.
 //!
 //!   **Return value**
 //!
-//!     Returns the arithmetic mean of the two arguments.
+//!     Returns the arithmetic mean of the arguments.
 //!
 //!  @groupheader{Example}
 //!

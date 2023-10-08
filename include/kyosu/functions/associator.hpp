@@ -55,7 +55,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto associator(auto z0, auto, z1, auto, z2) noexcept;
+//!     constexpr auto associator(auto z0, auto z1, auto z2) noexcept;
 //!   }
 //!   @endcode
 //!

@@ -61,7 +61,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto pow(auto z0, auto, z1) noexcept;               \\123
+//!     constexpr auto pow(auto z0, auto z1) noexcept;               \\123
 //!     constexpr auto pow(auto z0, eve::integral_value n)  noexcept; \\4
 //!   }
 //!   @endcode

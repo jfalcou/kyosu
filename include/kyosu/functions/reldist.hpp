@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto reldist(auto z0, auto, z1) noexcept;
+//!     constexpr auto reldist(auto z0, auto z1) noexcept;
 //!   }
 //!   @endcode
 //!

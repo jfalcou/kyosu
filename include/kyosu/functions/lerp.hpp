@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto lerp(auto z0, auto, z1, floating_ordered_value t) noexcept;
+//!     constexpr auto lerp(auto z0, auto z1, floating_ordered_value t) noexcept;
 //!   }
 //!   @endcode
 //!

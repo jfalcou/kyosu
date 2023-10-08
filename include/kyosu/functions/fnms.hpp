@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto fnms(auto z0, auto, z1, auto z2) noexcept;
+//!     constexpr auto fnms(auto z0, auto z1, auto z2) noexcept;
 //!   }
 //!   @endcode
 //!

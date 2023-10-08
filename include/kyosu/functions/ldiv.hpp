@@ -54,7 +54,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto ldiv(auto z0, auto, z1) noexcept;
+//!     constexpr auto ldiv(auto z0, auto z1) noexcept;
 //!   }
 //!   @endcode
 //!
