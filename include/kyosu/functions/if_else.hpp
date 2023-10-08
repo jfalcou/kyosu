@@ -46,16 +46,18 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::value T, eve::value U, eve::value V> constexpr auto if_else(T x, U, y, V z ) noexcept;
+//!     constexpr auto if_else(auto x, auto y, auto z ) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z`: Value to process.
+//!     * `x`: logical mask.
+//!     * `y`, `z`: values to be selected.
 //!
 //!   **Return value**
 //!
+//!        elementwise `y` or `z` according the truth value of `x`.
 //!
 //!  @groupheader{Example}
 //!

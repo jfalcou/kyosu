@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      constexpr auto is_equal(auto z0, auto z1) noexcept;
+//!      constexpr auto is_not_equal(auto z0, auto z1) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -66,7 +66,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elemtwise true or false according the inequality of the parameters
+//!     Returns elemtwise true or false according to the inequality of the parameters
 //!
 //!  @groupheader{Example}
 //!

@@ -29,7 +29,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dicson T> constexpr auto is_imag(T z) noexcept;
-//!      template<eve::floating_ordered_value T>             constexpr auto is_imag(T z) noexcept;
+//!      template<eve::floating_ordered_value T>    constexpr auto is_imag(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -39,7 +39,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise true the real part of the argument is zero.
+//!     Returns elementwise true if the real part of the argument is zero.
 //!     is_imag is an alias of is_pure.
 //!
 //!  @groupheader{Example}
