@@ -56,7 +56,7 @@ namespace kyosu
 //!   If \f$(a_i)_{0\le i\le n-1}\f$ denotes the coefficients of the polynomial by decreasing
 //!   power order,  the Horner scheme evaluates the polynom \f$p\f$ at \f$x\f$ by :
 //!   \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
-//!   For non commutative cases it is a right-horner scheme  are at the left of the x powers).
+//!   For non commutative cases it is a left-horner scheme: coefficients are at the left of the x powers).
 //!
 //!   **Defined in header**
 //!
@@ -70,29 +70,28 @@ namespace kyosu
 //!   namespace eve
 //!   {
 //!     template<auto T, auto C ...>  auto horner(T x, C ... coefs) noexcept;  //1
-//!     template< auto C, eve::Range R> auto horner(T x, R r) noexcept; //2
+//!     template< auto C, auto K> auto horner(T x, K tup) noexcept;            //2
 //!
 //!   }
 //!   @endcode
 //!
 //!   1. Polynom is evaluated at x the other inputs are the polynomial coefficients.
-//!   2. Polynom is evaluated at x the other input is a range containing the coefficients
+//!   2. Polynom is evaluated at x the other input is a kumi tuple containing the coefficients
 //!
 //!   **Parameters**
 //!
 //!     * `x` :  real or cayley-dickson argument.
 //!
-//!     * `coefs...` :  real or cayley-dickson arguments.
-//!        The coefficients by decreasing power order
+//!     * `coefs...` :  real or cayley-dickson arguments. The coefficients by decreasing power order
 //!
-//!     * `r` : Range containing The coefficients by decreasing power order.
+//!     * `tup` : kumi tuple containing The coefficients by decreasing power order.
 //!
 //!   **Return value**
 //!
 //!   The value of the polynom at  `x` is returned,  according to the formula:
 //!    \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
-//!   For non commutative cases it is a rigt-horner scheme. See [left_horner](@ref lefthorner)
-//!   for the left scheme
+//!   For non commutative cases it is a left-horner scheme. See [right_horner](@ref right_horner)
+//!   for the right scheme
 //!
 //!    **Notes**
 //!

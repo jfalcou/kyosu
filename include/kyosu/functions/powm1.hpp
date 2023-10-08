@@ -61,11 +61,11 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1`: Values to process.
+//!     * `z0`, `z1`: Values to process.
 //!
 //!   **Return value**
 //!
-//!      the call is semantically equivalent to `dec(eve::pow(z0, z1))`
+//!      the call is semantically equivalent to `dec(eve::pow(z0`, `z1))`
 //!
 //!  @groupheader{Example}
 //!

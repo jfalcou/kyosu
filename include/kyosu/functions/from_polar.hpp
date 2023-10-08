@@ -60,7 +60,7 @@ namespace kyosu
   //!
   //! @brief Callable object computing a complex or a general Cayley-Dickson from a polar representation.
   //!
-  //!  This function is the reciprocal of from_polar
+  //!  This function is the reciprocal of to_polar
   //!
   //! **Defined in header**
   //!
@@ -86,7 +86,7 @@ namespace kyosu
   //!
   //!  `theta`: argument.
   //!
-  //!  `iz'   : unitary cayley dickson value.
+  //!  `iz`   : unitary cayley dickson value.
   //!
   //! **Return value**
   //!

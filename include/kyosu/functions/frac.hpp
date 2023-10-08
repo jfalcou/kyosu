@@ -58,11 +58,11 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z`: Value to for which frac is computed.
+//!     * `z`: Value to process.
 //!
 //!   **Return value**
 //!
-//!     Returns the frac of its argument. i.e. the value with parts are the fractionnal
+//!     Returns the fractionnal part of its argument. i.e. the value whose parts are the fractionnal
 //!     parts of the original ones.
 //!
 //!  @groupheader{Example}

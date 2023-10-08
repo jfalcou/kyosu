@@ -68,7 +68,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1`: Values to process.
+//!     * `z0`, `z1`: Values to process.
 //!
 //!   **Return value**
 //!      1. if both parameters are floating the call will act as if they were converted to complex before call

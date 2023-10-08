@@ -21,5 +21,7 @@ int main()
   std::cout << " ->theta = " << aa << std::endl;
   std::cout << " -> axis  = (" << axx[0] << ", " <<  axx[1] << ", " <<  axx[2] << ")" << std::endl;
 
+  std::array<double, 3> azz{0., 0., 0.};
+  std::cout << kyosu::from_angle_axis(theta,  azz) << std::endl;
   return 0;
 }

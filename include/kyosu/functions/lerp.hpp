@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z0, `z1`: Values to process.
+//!     * `z0`, `z1`: Values to process.
 //!     * `t`: floating value interpolation coefficient.
 //!
 //!   **Return value**

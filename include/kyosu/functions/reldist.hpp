@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1`: Value to process.
+//!     * `z0`, `z1`: Value to process.
 //!
 //!   **Return value**
 //!

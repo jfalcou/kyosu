@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1`: unitary quaternions to process.
+//!     * `z0`, `z1`: unitary quaternions to process.
 //!     * `t`: floating value interpolation coefficient.
 //!
 //!   **Return value**
