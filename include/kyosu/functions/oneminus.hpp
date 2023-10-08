@@ -43,7 +43,7 @@ namespace kyosu
 //!   **Defined in Header**
 //!
 //!   @code
-//!   #oneminuslude <kyosu/functions.hpp>
+//!   #include <kyosu/functions.hpp>
 //!   @endcode
 //!
 //!   @groupheader{Callable Signatures}
