@@ -41,7 +41,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var pow_abs
-//!   @brief Computes the  computing the pow_abs operation \f$(|x|)^y\f$.
+//!   @brief Computes the  computing the pow_abs operation \f$|x|^y\f$.
 //!
 //!   **Defined in Header**
 //!

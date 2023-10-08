@@ -47,8 +47,6 @@ namespace kyosu
   //!
   //! @brief Callable object computing the normalized angle of rotation defined by a quaternion.
   //!
-  //!  This function is the reciprocal of from_polar
-  //!
   //! **Defined in header**
   //!
   //!   @code
