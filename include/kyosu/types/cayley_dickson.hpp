@@ -16,7 +16,7 @@
 #include <kyosu/types/impl/math.hpp>
 #include <kyosu/types/impl/trigo.hpp>
 #include <kyosu/types/impl/trigo_pi.hpp>
-#include <kyosu/types/impl/complex/invtrig.hpp>
+#include <kyosu/types/impl/invtrig.hpp>
 #include <kyosu/types/impl/complex/special.hpp>
 #include <kyosu/types/impl/quaternion/specific.hpp>
 

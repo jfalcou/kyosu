@@ -36,13 +36,7 @@ namespace kyosu::_
     }
     else
     {
-      using u_t = eve::underlying_type_t<C>;
-      auto pi = eve::pi(eve::as<u_t>());
-      auto p = kyosu::pure(z);
-      auto az = kyosu::abs(p)*eve::pi(eve::as(kyosu::abs(p)));
-      auto [s, c] = eve::sinpicospi(real(z));
-      auto w = -s*eve::sinhc(az)*pi;
-      return c*cosh(az)+w*pure(z);
+      return cayley_extend(cospi, z);
     }
   }
 
@@ -79,13 +73,7 @@ namespace kyosu::_
     }
     else
     {
-      using u_t = eve::underlying_type_t<C>;
-      auto pi = eve::pi(eve::as<u_t>());
-      auto p = kyosu::pure(z);
-      auto az = kyosu::abs(p)*pi;
-      auto [s, c] = eve::sinpicospi(kyosu::real(z));
-      auto w = c*eve::sinhc(az)*pi;
-      return s*cosh(az)+w*p;
+     return cayley_extend(sinpi, z);
     }
   }
 
@@ -137,18 +125,7 @@ namespace kyosu::_
     }
     else
     {
-      using u_t = eve::underlying_type_t<C>;
-      auto pi = eve::pi(eve::as<u_t>());
-      auto p = kyosu::pure(z);
-      auto az = kyosu::abs(p)*pi;
-      auto [s, c] = eve::sinpicospi(kyosu::real(z));
-      auto shc = eve::sinhc(az)*pi;
-      auto ch  = eve::cosh(az);
-      auto wc = c*shc;
-      auto ws =-s*shc;
-      auto sq = s*ch + wc*p;
-      auto cq = c*ch + ws*p;
-      return kumi::tuple{sq, cq};
+      return cayley_extend2(sinpicospi, z);
     }
   }
 
@@ -172,8 +149,7 @@ namespace kyosu::_
     }
     else
     {
-      auto [s, c] = kyosu::sinpicospi(z);
-      return s/c;
+      return cayley_extend(tanpi, z);
     }
   }
 
@@ -190,51 +166,7 @@ namespace kyosu::_
     }
     else
     {
-      auto [s, c] = kyosu::sinpicospi(z);
-      return c/s;
+      return cayley_extend(cotpi, z);
     }
   }
-
- template<typename C>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::asinpi> const&, C const& z) noexcept
-  {
-    return radinpi(asin(z));
-  }
-
-  template<typename C>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::acospi> const&, C const& z) noexcept
-  {
-    return radinpi(acos(z));
-  }
-
-  template<typename C>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::atanpi> const&, C const& z) noexcept
-  {
-    return radinpi(atan(z));
-  }
-
-  template<typename C>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::acotpi> const&, C const& z) noexcept
-  {
-    return radinpi(acot(z));
-  }
-
-  template<typename C>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::asecpi> const&, C const& z) noexcept
-  {
-    return radinpi(asec(z));
-  }
-
-  template<typename C>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::acscpi> const&, C const& z) noexcept
-  {
-    return radinpi(acsc(z));
-  }
-
 }
