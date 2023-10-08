@@ -53,8 +53,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T>   constexpr T  log_gamma(T z) noexcept;
-//!      template<eve::floating_ordered_value T> constexpr T  log_gamma(T z) noexcept;
+//!      template<kyosu::concepts::complex T>    constexpr auto  log_gamma(T z) noexcept;
+//!      template<eve::floating_ordered_value T> constexpr auto  log_gamma(T z) noexcept;
 //!   }
 //!   @endcode
 //!

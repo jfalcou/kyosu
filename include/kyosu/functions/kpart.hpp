@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_kpart : eve::elementwise, extractor<3>
+  struct callable_kpart: eve::elementwise, extractor<3>
   {
     using callable_tag_type = callable_kpart;
 
@@ -65,7 +65,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Original value.
+//!     * `z`: Original value.
 //!
 //!   **Return value**
 //!

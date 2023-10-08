@@ -60,7 +60,10 @@ namespace kyosu::_
     }
     else
     {
-      return dec(exp(z));
+      auto p = pure(z);
+      auto az = abs(p);
+      auto c = expm1(complex(real(z), az));
+      return real(c) + ipart(c)*sign(p);
     }
   }
 

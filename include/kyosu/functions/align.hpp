@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -13,7 +13,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_align : eve::elementwise
+  struct callable_align: eve::elementwise
   {
     using callable_tag_type = callable_align;
 
@@ -93,20 +93,20 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     auto align(auto angle,  auto axis, auto norming = normalize) const noexcept;
+  //!     auto align(auto v1, auto v2, auto norming = normalize) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!  * `v0` :  span of 3 elements
-  //!  * `v1` :  span of 3 elements
-  //!  * normalize : can be assume_normalized or normalize. In the second case axis is normalized.
-  //!                if axis is already normalized use assume_normalized is more efficient.
+  //!  * `v0`:  span of 3 elements
+  //!  * `v1`:  span of 3 elements
+  //!  * normalize: can be assume_normalized or normalize. In the second case axis is normalized.
+  //!                if axis is already normalized use of assume_normalized is more efficient.
   //!
   //! **Return value**
   //!
-  //!   An unitaryquaternion value representing a rotation that align v0 to v1.
+  //!   An unitary quaternion value representing a rotation that align v0 to v1.
   //!
   //!   If v0 or v1 is a nullvector  the result is UB
   //!

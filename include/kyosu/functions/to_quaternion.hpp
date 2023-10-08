@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -56,9 +56,9 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z`                 : Quaternion value.
-//!     * `c0 `,`c1`          : Complex values generates the quaternion c0+j*conj(c1) i.e. real(c0+i*imag(c1)+j*real(1)+k*imag(c1)
-//!     * `r`, `i`, `j`, `k`  : Real and unreal parts sued to construct a @ref kyosu::quaternion from its components
+//!     * `z`                : Quaternion value.
+//!     * `c0 `,`c1`         : Complex values generates the quaternion c0+j*conj(c1) i.e. real(c0+i*imag(c1)+j*real(1)+k*imag(c1)
+//!     * `r`, `i`, `j`, `k` : Real and unreal parts sued to construct a @ref kyosu::quaternion from its components
 //!
 //!   **Return value**
 //!

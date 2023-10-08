@@ -15,9 +15,9 @@ namespace kyosu
   //! @addtogroup types
   //! @{
   //! @typedef octonion_t
-  //! @brief Type alias for quaternion numbers
+  //! @brief Type alias for octonion numbers
   //!
-  //! Quaternion numbers are implemented as Caley-dickson numbers of dimension 4.
+  //! Octonion  numbers are implemented as Caley-dickson numbers of dimension 8.
   //!
   //! @}
   //====================================================================================================================

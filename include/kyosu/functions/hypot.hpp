@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_hypot : eve::elementwise
+  struct callable_hypot: eve::elementwise
   {
     using callable_tag_type = callable_hypot;
 
@@ -54,13 +54,13 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template< f typename ... Ts> auto hypot(Ts ... zi ) const noexcept
-///!   }
+//!      template<typename ... Ts> auto hypot(Ts ... zi ) const noexcept
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * ` zi...` : Values to process: mix of floating and Cayley-Dickson.
+//!     * `zi...`: Values to process: mix of floating and Cayley-Dickson.
 //!
 //!   **Return value**
 //!

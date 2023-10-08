@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -13,7 +13,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_from_multipolar : eve::elementwise
+  struct callable_from_multipolar: eve::elementwise
   {
     using callable_tag_type = callable_from_multipolar;
 
@@ -73,14 +73,15 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto from_multipolar( auto rho1, auto theta1 auto rho2, auto theta2) const noexcept;
+  //!     auto from_multipolar(auto rho1, auto theta1, auto rho2, auto theta2) noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
   //! `rho1`, `rho2`:  the moduli
-  //! 'theta1', 'theta2': the angles in radian
+  //!
+  //! `theta1`, `theta2`: the angles in radian
   //!
   //! **Return value**
   //!

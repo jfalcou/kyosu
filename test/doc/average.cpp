@@ -42,8 +42,8 @@ int main()
   std::cout << wq0 << ", " << wq1 << " -> " << average(wq0, wq1) << "\n";
 
   std::cout << "Mixed:  "<< "\n";
-  std::cout << kyosu::average(c0, q1) << std::endl;
-  std::cout << kyosu::average(e0, q1) << std::endl;
+  std::cout << kyosu::average(c0, q1, e0) << std::endl;
+  std::cout << kyosu::average(e0, q1, c1) << std::endl;
   std::cout << kyosu::average(c0, wq1) << std::endl;
   std::cout << kyosu::average(we0, q1) << std::endl;
 

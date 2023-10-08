@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -10,7 +10,7 @@
 #include <kyosu/details/invoke.hpp>
 namespace kyosu::tags
 {
-  struct callable_pow : eve::elementwise
+  struct callable_pow: eve::elementwise
   {
     using callable_tag_type = callable_pow;
 
@@ -61,14 +61,14 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto pow(auto z0, auto, z1) noexcept;               \\123
+//!     constexpr auto pow(auto z0, auto z1) noexcept;               \\123
 //!     constexpr auto pow(auto z0, eve::integral_value n)  noexcept; \\4
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1` : Values to process.
+//!     * `z0`, `z1`: Values to process.
 //!
 //!   **Return value**
 //!      1. if both parameters are floating the call will act as if they were converted to complex before call
@@ -99,7 +99,7 @@ namespace kyosu
 //!         * pow(\f$+\infty\f$, y) returns \f$+\infty\f$ for any y greater than 0
 //!         * except where specified above, if any argument is NaN, NaN is returned
 //!
-//!      3. if any parameter as a dimensionnality greater yhan 2, the call is semantically equivalent
+//!      3. if any parameter as a dimensionnality greater than 2, the call is semantically equivalent
 //!         to `kyosu::exp(z1*eve::log(z0))`
 //!
 //!      4. pow can accept an integral typed second parameter,  in this case it is the russian peasant algorithm

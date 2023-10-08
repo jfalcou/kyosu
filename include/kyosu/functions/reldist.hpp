@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_reldist : eve::elementwise
+  struct callable_reldist: eve::elementwise
   {
     using callable_tag_type = callable_reldist;
 
@@ -56,13 +56,13 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto reldist(auto z0, auto, z1) noexcept;
-///!   }
+//!     constexpr auto reldist(auto z0, auto z1) noexcept;
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1` : Value to process.
+//!     * `z0`, `z1`: Value to process.
 //!
 //!   **Return value**
 //!

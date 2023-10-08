@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_to_spherical : eve::elementwise
+  struct callable_to_spherical: eve::elementwise
   {
     using callable_tag_type = callable_to_spherical;
 
@@ -62,17 +62,17 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto to_spherical( auto q) const noexcept;
+  //!     auto to_spherical(auto q) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!  `q` : quaternion
+  //!  `q`: quaternion
   //!
   //! **Return value**
   //!
-  //!  a tuple containing in this order `rho`, 'theta', `ph1` 'ph2':  the components
+  //!  a tuple containing in this order `rho`, `theta`, `ph1` `ph2`:  the components
   //!  of the spherical parametrisation of \f$\mathbb{R}^4\f$ coordinates
   //!
   //! ---

@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -10,7 +10,7 @@
 #include <kyosu/details/invoke.hpp>
 namespace kyosu::tags
 {
-  struct callable_commutator : eve::elementwise
+  struct callable_commutator: eve::elementwise
   {
     using callable_tag_type = callable_commutator;
 
@@ -54,13 +54,13 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto commutator(auto z0, auto, z1) noexcept;
+//!     constexpr auto commutator(auto z0, auto z1) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0`, `z1` : Values to process. Can be a mix of complex and real floating values and complex values.
+//!     * `z0`, `z1`: Values to process. Can be a mix of complex and real floating values and complex values.
 //!
 //!   **Return value**
 //!

@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -13,7 +13,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_log_abs : eve::elementwise
+  struct callable_log_abs: eve::elementwise
   {
     using callable_tag_type = callable_log_abs;
 
@@ -57,14 +57,14 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constlog_absr auto log_abs(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constlog_absr auto log_abs(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto log_abs(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto log_abs(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `z`: Value to process.
 //!
 //!   **Return value**
 //!

@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_arg : eve::elementwise
+  struct callable_arg: eve::elementwise
   {
     using callable_tag_type = callable_arg;
 
@@ -61,12 +61,12 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `z`: Value to process.
 //!
 //!   **Return value**
 //!
-//!     1. Returns 0 or pi acording to the non negativity of z.
-//!     2. Returns elementwise the argument of the complex number i.e. eve::atan2([kyosu::imag(z)](@ref kyosu::imag )(z), [kyosu::real(z)](@ref kyosu::real )(z)).
+//!     1. Returns 0 or pi according to the non negativity of z.
+//!     2. Returns elementwise the argument of the complex number i.e. eve::atan2([kyosu::imag](@ref kyosu::imag )(z), [kyosu::real](@ref kyosu::real )(z)).
 //!     3. Returns \f$\mathrm{atan2}(\mathrm{sign}(z_1)|\underline{z}|, z_0)\f$ where \f$z_0\f$ is the real part of \f$z\f$,  \f$z_1\f$ is the ipart of \f$z\f$ and
 //!         \f$\underline{z}\f$ the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!

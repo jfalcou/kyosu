@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_exp : eve::elementwise
+  struct callable_exp: eve::elementwise
   {
     using callable_tag_type = callable_exp;
 
@@ -52,18 +52,38 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T exp(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T exp(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T exp(T z) noexcept; //1
+//!      template<kyosu::concepts::ccomplex T>       constexpr T exp(T z) noexcept; //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T exp(T z) noexcept; //3
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `z`: Value to process.
 //!
 //!   **Return value**
 //!
-//!     Returns the exponential of the argument.
+//!     1. Returns the exponential of the argument, calling `eve::exp`.
+//!
+//!     2. Returns the exponential of the complex input following IEEE standards:
+//!
+//!      * for every z: kyosu::exp(eve::conj(z)) == kyosu::conj(std::exp(z))
+//!      * If z is \f$\pm0\f$, the result is \f$1\f$
+//!      * If z is \f$x+i \infty\f$ (for any finite x), the result is \f$NaN+i NaN\f$.
+//!      * If z is \f$x+i NaN\f$ (for any finite x), the result is \f$NaN+i NaN\f$.
+//!      * If z is \f$+\infty+i 0\f$, the result is \f$+\infty\f$
+//!      * If z is \f$-\infty+i y\f$ (for any finite y), the result is \f$+0 \mathrm{cis}(y)\f$.
+//!      * If z is \f$+\infty+i y\f$ (for any finite nonzero y), the result is \f$+\infty \mathrm{cis}(y)\f$.
+//!      * If z is \f$-\infty+i \infty\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified)
+//!      * If z is \f$+\infty+i \pm\infty\f$, the result is \f$\pm \infty+i NaN\f$ (the sign of the real part is unspecified).
+//!      * If z is \f$-\infty+i NaN\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified).
+//!      * If z is \f$\pm\infty+i NaN\f$, the result is \f$\pm \infty+i NaN\f$ (the sign of the real part is unspecified).
+//!      * If z is \f$NaN\f$, the result is \f$NaN\f$.
+//!      * If z is \f$NaN+i y\f$ (for any nonzero y), the result is \f$NaN+i NaN\f$.
+//!      * If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$.
+//!
+//!     3.  Returns \f$e^{z_0}(\cos|\underline{z}|+\underline{z}\; \mathop{sinc}|\underline{z}|)\f$
 //!
 //!  @groupheader{Example}
 //!

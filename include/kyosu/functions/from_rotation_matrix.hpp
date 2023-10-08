@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_from_rotation_matrix : eve::elementwise
+  struct callable_from_rotation_matrix: eve::elementwise
   {
     using callable_tag_type = callable_from_rotation_matrix;
 
@@ -94,7 +94,7 @@ namespace kyosu
   //!        the ith line and jth column element of the matrix (indices starting from 0).
   //!
   //!
-  //!   The computation method is inspired from the article : "Accurate Computation of
+  //!   The computation method is inspired from the article: "Accurate Computation of
   //!   Quaternions from Rotation Matrices",  by   Soheil Sarabandi and Federico Thomas
   //!   Institut de Robotica i Informatica Industrial (CSIC-UPC)
   //!   Llorens Artigas 4-6, 08028 Barcelona, Spain.

@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_dist : eve::elementwise
+  struct callable_dist: eve::elementwise
   {
     using callable_tag_type = callable_dist;
 
@@ -61,12 +61,12 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1` : Values to process.
+//!     * `z0`, `z1`: Values to process.
 //!
 //!   **Return value**
 //!
 //!     Returns the distance between the two arguments computed as the absolute value of the arguments difference.
-//!     Arguments can be a mix of floting or Cayley-Dicson values.
+//!     Arguments can be a mix of floating or Cayley-Dicson values.
 //!
 //!  @groupheader{Example}
 //!

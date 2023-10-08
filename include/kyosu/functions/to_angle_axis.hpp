@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_to_angle_axis : eve::elementwise
+  struct callable_to_angle_axis: eve::elementwise
   {
     using callable_tag_type = callable_to_angle_axis;
 
@@ -46,7 +46,7 @@ namespace kyosu
   //! @{
   //! @var to_angle_axis
   //!
-  //! @brief Callable object computing the angle_axis coordinates from a quaternion.
+  //! @brief Callable object computing the angle and axis coordinates from a quaternion.
   //!
   //!  This function is the reciprocal of from_angle_axis
   //!
@@ -61,18 +61,18 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto to_angle_axis( auto q) const noexcept;
+  //!     auto to_angle_axis(auto q) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!  `q` : quaternion
+  //!  `q`: quaternion
   //!
   //! **Return value**
   //!
-  //!  a tuple containing in this order `rho1`, 'theta1', `rho2` 'theta2':  the moduli
-  //!  and  the angles in radian of the angle_axis \f$\mathbb{R}^4\f$ coordinates
+  //!  a tuple an angle of rotation and a vector of \f$\mathbb{R}^3\f$
+  //!  representing the direction of the rotation axis.
   //!
   //! ---
   //!

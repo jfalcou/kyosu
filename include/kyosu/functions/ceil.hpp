@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_ceil : eve::elementwise
+  struct callable_ceil: eve::elementwise
   {
     using callable_tag_type = callable_ceil;
 
@@ -58,7 +58,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value for which ceil is computed.
+//!     * `z`: Value for which ceil is computed.
 //!
 //!   **Return value**
 //!

@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_rot_axis : eve::elementwise
+  struct callable_rot_axis: eve::elementwise
   {
     using callable_tag_type = callable_rot_axis;
 
@@ -47,8 +47,6 @@ namespace kyosu
   //!
   //! @brief Callable object computing the normalized axis of rotation defined by a quaternion.
   //!
-  //!  This function is the reciprocal of from_polar
-  //!
   //! **Defined in header**
   //!
   //!   @code
@@ -60,13 +58,13 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto rot_axis( auto q) const noexcept;
+  //!     auto rot_axis(auto q) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!  `q` : quaternion, complex or floating.
+  //!  `q`: quaternion, complex or floating.
   //!
   //! **Return value**
   //!

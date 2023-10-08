@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_oneminus : eve::elementwise
+  struct callable_oneminus: eve::elementwise
   {
     using callable_tag_type = callable_oneminus;
 
@@ -43,7 +43,7 @@ namespace kyosu
 //!   **Defined in Header**
 //!
 //!   @code
-//!   #oneminuslude <kyosu/functions.hpp>
+//!   #include <kyosu/functions.hpp>
 //!   @endcode
 //!
 //!   @groupheader{Callable Signatures}
@@ -58,7 +58,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z` : argument.
+//!     * `z`: argument.
 //!
 //!   **Return value**
 //!

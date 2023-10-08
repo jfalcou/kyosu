@@ -28,4 +28,5 @@ TTS_CASE_WITH ( "Check kyosu::expm1 over quaternion"
   using ke_t = kyosu::quaternion_t<T>;
   auto q = ke_t(r,i,j,k);
   TTS_RELATIVE_EQUAL(kyosu::expm1(q), kyosu::dec(kyosu::exp(q)), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::expm1(kyosu::quaternion(T(0))), kyosu::quaternion(T(0)), 1e-5);
 };

@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_cosh : eve::elementwise
+  struct callable_cosh: eve::elementwise
   {
     using callable_tag_type = callable_cosh;
 
@@ -56,12 +56,11 @@ namespace kyosu
 //!      template<kyosu::concepts::complex T>        constexpr T cosh(T z) noexcept; //2
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T cosh(T z) noexcept; //3
 //!   }
-//!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `z`: Value to process.
 //!
 //!   **Return value**
 //!

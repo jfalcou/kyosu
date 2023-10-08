@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_conj : eve::elementwise
+  struct callable_conj: eve::elementwise
   {
     using callable_tag_type = callable_conj;
 
@@ -58,11 +58,11 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to conjugate.
+//!     * `z`: Value to conjugate.
 //!
 //!   **Return value**
 //!
-//!     Returns the conjugate of its argument. i.e. the value with the same real part
+//!     Returns the conjugate of its argument. i.e. the value with the same [real](@ref kyosu::real ) part
 //!     and the opposite [pure](@ref kyosu::imag ) part.
 //!
 //!     For real inputs the call reduces to identity.

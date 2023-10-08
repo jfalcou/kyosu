@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -10,7 +10,7 @@
 #include <kyosu/details/invoke.hpp>
 namespace kyosu::tags
 {
-  struct callable_pow1p : eve::elementwise
+  struct callable_pow1p: eve::elementwise
   {
     using callable_tag_type = callable_pow1p;
 
@@ -54,13 +54,13 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto average(auto z0, auto, z1) noexcept;
+//!     constexpr auto average(auto z0, auto z1) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1` : Values to process.
+//!     * `z0`, `z1`: Values to process.
 //!
 //!   **Return value**
 //!

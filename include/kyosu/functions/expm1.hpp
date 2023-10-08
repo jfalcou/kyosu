@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -12,7 +12,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_expm1 : eve::elementwise
+  struct callable_expm1: eve::elementwise
   {
     using callable_tag_type = callable_expm1;
 
@@ -59,12 +59,12 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `z`: Value to process.
 //!
 //!   **Return value**
 //!
 //!     Returns the expm1onential of the argument minus 1.
-//!     for real and complex typed inputs, provisions are made to ensure good precision near zero.
+//!     Provisions are made to ensure good precision near zero.
 //!
 //!  @groupheader{Example}
 //!

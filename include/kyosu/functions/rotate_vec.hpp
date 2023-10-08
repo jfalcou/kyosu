@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -13,7 +13,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_rotate_vec : eve::elementwise
+  struct callable_rotate_vec: eve::elementwise
   {
     using callable_tag_type = callable_rotate_vec;
 
@@ -80,7 +80,7 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto rotate_vec( auto q, auto v) const noexcept;
+  //!     auto rotate_vec(auto q, auto v) const noexcept;
   //!   }
   //!   @endcode
   //!

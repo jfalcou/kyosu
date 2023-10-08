@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_lpnorm : eve::elementwise
+  struct callable_lpnorm: eve::elementwise
   {
     using callable_tag_type = callable_lpnorm;
 
@@ -57,13 +57,13 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template< floating_value P, typename T, typename ... Ts> auto lpnorm(P p, T z,Ts ... zs ) const noexcept
-///!   }
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `p`:    : positive floating ordered value
-//!     * `zs...` : Values to process.
+//!     * `p`:   : positive floating ordered value
+//!     * `zs...`: Values to process.
 //!
 //!   **Return value**
 //!

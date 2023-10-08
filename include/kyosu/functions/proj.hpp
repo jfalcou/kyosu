@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_proj : eve::elementwise
+  struct callable_proj: eve::elementwise
   {
     using callable_tag_type = callable_proj;
 
@@ -61,13 +61,13 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to project.
+//!     * `z`: Value to project.
 //!
 //!   **Return value**
 //!
 //!     *  For most z, proj(z)==z, but all infinities, even the numbers where one component
 //!       is infinite and the other is NaN, become positive real\n
-//!       infinity, (inf, 0.0...) or (inf, -0.0...).\n
+//!       infinity, (inf, 0...) or (inf, -0...).\n
 //!       The sign of the pure (zero) components are the signs of the components of pure(z).
 //!
 //!  @groupheader{Example}

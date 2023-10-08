@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_convert : eve::elementwise
+  struct callable_convert: eve::elementwise
   {
     using callable_tag_type = callable_convert;
 
@@ -59,9 +59,12 @@ namespace kyosu
 //!   }
 //!   @endcode
 //!
-//!   **Parameters**
+//!   **Parameter**
 //!
 //!     * `x`: floating or Cayley Dickinson value to process.
+//!
+//!   **Template Parameter**
+//!
 //!     * `U`: target type to convert to.
 //!
 //!   **Return value**

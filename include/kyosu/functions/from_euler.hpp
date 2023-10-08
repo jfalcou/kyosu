@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -13,7 +13,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_from_euler : eve::elementwise
+  struct callable_from_euler: eve::elementwise
   {
     using callable_tag_type = callable_from_euler;
 
@@ -97,7 +97,7 @@ namespace kyosu
   //!
   //! @brief Callable object computing a quaternion from its euler representation.
   //!
-  //!  This function build euler angles from 3 euler angles in radian. Template parameters I, J, K of type int
+  //!  This function builds a quaternion from 3 euler angles in radian. Template parameters I, J, K of type int
   //!  are used to choose the euler axis order.
   //!
   //!  for instance I = 3, J = 2, K = 3 choose the ZYZ sequence.
@@ -124,16 +124,16 @@ namespace kyosu
   //!
   //! **Parameters**
   //!
-  //!  * `a`, `b`, `c` : the angles in radian
+  //!  * `a`, `b`, `c`: the angles in radian
   //!  * `a1`, `a2`, `a3` the axis parameters to be chosen between X_,  Y_, Z_ (two consecutive axis cannot be the same)
-  //!  * `e' : allows to choose between Extrinsic or Intrinsic representations.
+  //!  * `e': allows to choose between extrinsic or intrinsic representations.
   //!
   //!  **Template parameters**
   //!
-  //!     * I, J, K : are on call deduced from the axis parameters
+  //!     * I, J, K: are on call deduced from the axis parameters
   //!
   //!
-  //!   The computation method is taken from the article : "Quaternion to Euler angles conversion: A
+  //!   The computation method is taken from the article: "Quaternion to Euler angles conversion: A
   //!   direct, general and computationally efficient method". PLoS ONE
   //!   17(11): e0276302. https://doi.org/10.1371/journal pone 0276302.
   //!   Evandro Bernardes, and Stephane Viollet

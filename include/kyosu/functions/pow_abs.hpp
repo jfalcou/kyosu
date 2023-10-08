@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -10,7 +10,7 @@
 #include <kyosu/details/invoke.hpp>
 namespace kyosu::tags
 {
-  struct callable_pow_abs : eve::elementwise
+  struct callable_pow_abs: eve::elementwise
   {
     using callable_tag_type = callable_pow_abs;
 
@@ -41,7 +41,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var pow_abs
-//!   @brief Computes the  computing the pow_abs operation \f$(|x|)^y\f$.
+//!   @brief Computes the  computing the pow_abs operation \f$|x|^y\f$.
 //!
 //!   **Defined in Header**
 //!
@@ -54,13 +54,13 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto pow_abs(auto z0, auto, z1) noexcept;
+//!     constexpr auto pow_abs(auto z0, auto z1) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0, z1` : Values to process.
+//!     * `z0`, `z1`: Values to process.
 //!
 //!   **Return value**
 //!

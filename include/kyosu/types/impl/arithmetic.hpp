@@ -212,18 +212,6 @@ namespace kyosu::_
     return kyosu::if_else(kyosu::is_nez(c), c/abs(c), C(0));
   }
 
-  template<typename  C0, typename  C1>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::average> const&, C0 const & c0, C1 const &  c1) noexcept
-  {
-    using r_t = kyosu::as_cayley_dickson_t<C0,C1>;
-    using er_t = eve::element_type_t<r_t>;
-    return r_t{kumi::map([](auto const& e, auto const& f) { return eve::average(e, f); }
-                         , kyosu::convert(c0, eve::as<er_t>())
-                         , kyosu::convert(c1, eve::as<er_t>())
-                        )
-        };
-  }
 
   template<typename  C0, typename  C1>
   KYOSU_FORCEINLINE constexpr
@@ -342,6 +330,220 @@ namespace kyosu::_
     else
     {
       return (c0*c1)*c2 - c0*(c1*c2);
+    }
+  }
+
+  template<typename  C0, typename  C1, typename C2>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::fma> const&, C0 const & c0, C1 const & c1, C2 const & c2) noexcept
+  {
+    return c0*c1+c2;
+  }
+
+  template<typename  C0, typename  C1, typename C2>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::fms> const&, C0 const & c0, C1 const & c1, C2 const & c2) noexcept
+  {
+    return c0*c1-c2;
+  }
+
+  template<typename  C0, typename  C1, typename C2>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::fam> const&, C0 const & c0, C1 const & c1, C2 const & c2) noexcept
+  {
+    return c0+c1*c2;
+  }
+
+  template<typename  C0, typename  C1, typename C2>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::fsm> const&, C0 const & c0, C1 const & c1, C2 const & c2) noexcept
+  {
+    return -c0+c1*c2;
+  }
+
+  template<typename  C0, typename  C1, typename C2>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::fnma> const&, C0 const & c0, C1 const & c1, C2 const & c2) noexcept
+  {
+    return -c0*c1+c2;
+  }
+
+  template<typename  C0, typename  C1, typename C2>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::fnms> const&, C0 const & c0, C1 const & c1, C2 const & c2) noexcept
+  {
+    return -c0*c1-c2;
+  }
+
+  template<typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::horner>, Cs const & ...cs) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<Cs...>;
+    return eve::horner(kyosu::convert(cs, eve::as<r_t>())...);
+  }
+
+  template<typename C, typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::horner> const&, C x, kumi::tuple<Cs...> tup) noexcept
+  {
+    return kumi::apply( [&](auto... m) { return horner(x, m...); }, tup);
+  }
+
+  template<typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::reverse_horner>, Cs const & ...cs) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<Cs...>;
+    return eve::reverse_horner(kyosu::convert(cs, eve::as<r_t>())...);
+  }
+
+  template<typename C, typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::reverse_horner> const&, C x, kumi::tuple<Cs...> tup) noexcept
+  {
+    return kumi::apply( [&](auto... m) { return reverse_horner(x, m...); }, tup);
+  }
+
+  template<typename C0, typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::right_horner>, C0 const & xx, Cs ...cs) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<C0, Cs...>;
+    constexpr size_t N = sizeof...(Cs);
+    if constexpr( N == 0 ) return r_t(0);
+    else if constexpr( N == 1 ) return (kyosu::convert(cs, eve::as<r_t>()), ...);
+    else
+    {
+      r_t x = convert(xx, eve::as<r_t>());
+      auto dfma = /*d*/(fma);
+      r_t  that(eve::zero(eve::as<as_real_t<r_t>>()));
+      auto next = [&](auto that, auto arg) { return dfma(x, that, arg); };
+      ((that = next(that, cs)), ...);
+      return that;
+    }
+  }
+
+  template<typename C, typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::right_horner> const&, C x, kumi::tuple<Cs...> tup) noexcept
+  {
+    return kumi::apply( [&](auto... m) { return right_horner(x, m...); }, tup);
+  }
+
+  template<typename C, typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::right_reverse_horner>, C xx, Cs const & ...cs) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<C, Cs...>;
+    auto x = convert(xx, eve::as<r_t>());
+    using t_t = kumi::result::generate_t<sizeof...(cs)+1, r_t>;
+    t_t tup{convert(cs, eve::as<r_t>())...};
+    return /*d*/(right_reverse_horner)(x, tup);
+  }
+
+  template<typename C, typename ... Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::right_reverse_horner> const&, C x, kumi::tuple<Cs...> tup) noexcept
+  {
+    return right_horner(x, kumi::reverse(tup));
+  }
+
+  template<typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::maxabs> const&, Cs const &... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0) return 0.0f;
+    else return eve::max(kyosu::abs(zs)...);
+  }
+
+  template<typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::minabs> const&, Cs const &... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0) return 0.0f;
+    else return eve::min(kyosu::abs(zs)...);
+  }
+
+  template<typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::negmaxabs> const&, Cs const &... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0) return 0.0f;
+    else return -eve::max(kyosu::abs(zs)...);
+  }
+
+  template<typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::negminabs> const&, Cs const &... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0) return 0.0f;
+    else return -eve::min(kyosu::abs(zs)...);
+  }
+
+  template<typename C0, typename C1, typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::maxmag> const&
+               , C0 const & c0
+               , C1 const & c1
+               , Cs const &... cs) noexcept
+  {
+    if constexpr(sizeof...(cs) == 0)
+    {
+      auto ac0 = kyosu::sqr_abs(c0);
+      auto ac1 = kyosu::sqr_abs(c1);
+      auto tmp = kyosu::if_else(eve::is_not_greater_equal(ac0, ac1), c1, c0);
+      return kyosu::if_else(eve::is_not_greater_equal(ac1, ac0), c0, tmp);
+    }
+    else
+    {
+      using r_t = kyosu::as_cayley_dickson_t<C0, C1, Cs...>;
+      r_t that(maxmag(c0, c1));
+      ((that = maxmag(that, cs)), ...);
+      return that;
+    }
+  }
+
+  template<typename C0, typename C1, typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::minmag> const&
+               , C0 const & c0
+               , C1 const & c1
+               , Cs const &... cs) noexcept
+  {
+    if constexpr(sizeof...(cs) == 0)
+    {
+      auto ac0 = kyosu::sqr_abs(c0);
+      auto ac1 = kyosu::sqr_abs(c1);
+      auto tmp = kyosu::if_else(eve::is_not_greater_equal(ac1, ac0), c1, c0);
+      return kyosu::if_else(eve::is_not_greater_equal(ac0, ac1), c0, tmp);
+    }
+    else
+    {
+      using r_t = kyosu::as_cayley_dickson_t<C0, C1, Cs...>;
+      r_t that(minmag(c0, c1));
+      ((that = minmag(that, cs)), ...);
+      return that;
+    }
+  }
+
+  template<typename  C0, typename  C1,  typename ...Cs>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::average> const&, C0 const & c0, C1 const &  c1, Cs const &...  cs) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<C0,C1, Cs...>;
+    if constexpr(sizeof...(cs) == 0)
+    {
+      using er_t = eve::element_type_t<r_t>;
+      return r_t{kumi::map([](auto const& e, auto const& f) { return eve::average(e, f); }
+                          , kyosu::convert(c0, eve::as<er_t>())
+                          , kyosu::convert(c1, eve::as<er_t>())
+                          )
+          };
+    }
+    else
+    {
+      return (c0+ (c1+ ... + cs)) / (sizeof...(cs) + 2);
     }
   }
 }

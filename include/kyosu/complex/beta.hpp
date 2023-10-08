@@ -66,7 +66,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     1.  If x and y are real typed values returns \f$\displaystyle \mathbf{B}(x,y) = \int_0^1 t^{x-1}(1-t)^{y-1}\mbox{d}t\f$
-//!     2.  The complex value \f$\displaystyle  \mathbb{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
+//!     2.  if x or y is complex the value \f$\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
 //!
 //!  @groupheader{Example}
 //!

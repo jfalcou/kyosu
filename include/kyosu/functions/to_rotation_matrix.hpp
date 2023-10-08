@@ -1,7 +1,7 @@
 //==================================================================================================
 /*
   KYOSU - Expressive Vector Engine
-  Copyright : KYOSU Project Contributors
+  Copyright: KYOSU Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
@@ -13,7 +13,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_to_rotation_matrix : eve::elementwise
+  struct callable_to_rotation_matrix: eve::elementwise
   {
     using callable_tag_type = callable_to_rotation_matrix;
 
@@ -93,7 +93,7 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  * `q`  quaternion representing the rotation
-  //!  * `assume_normalized``: suppose that q is already normalized
+  //!  * `assume_normalized`: suppose that q is already normalized
   //!
   //!
   //!

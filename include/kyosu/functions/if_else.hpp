@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
@@ -11,7 +11,7 @@
 
 namespace kyosu::tags
 {
-  struct callable_if_else : eve::elementwise
+  struct callable_if_else: eve::elementwise
   {
     using callable_tag_type = callable_if_else;
 
@@ -46,16 +46,18 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::value T, eve::value U, eve::value V> constexpr auto if_else(T x, U, y, V z ) noexcept;
+//!     constexpr auto if_else(auto x, auto y, auto z ) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `x`: logical mask.
+//!     * `y`, `z`: values to be selected.
 //!
 //!   **Return value**
 //!
+//!        elementwise `y` or `z` according the truth value of `x`.
 //!
 //!  @groupheader{Example}
 //!
