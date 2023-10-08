@@ -41,7 +41,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var tgamma
-//!   @brief Computes the tgammaolute value of the parameter.
+//!   @brief Computes \f$\Gamma(z)\f$r.
 //!
 //!   **Defined in Header**
 //!
@@ -54,7 +54,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T>   constexpr T  tgamma(T z) noexcept;
+//!      template<kyosu::concepts::complex T>    constexpr T  tgamma(T z) noexcept;
 //!      template<eve::floating_ordered_value T> constexpr T  tgamma(T z) noexcept;
 //!   }
 //!   @endcode
