@@ -149,18 +149,18 @@ $(document).ready(function(){initNavTree('group__quaternion_ga6b47fd35280cf1ec86
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">align</a>(<span class="keyword">auto</span> angle,  <span class="keyword">auto</span> axis, <span class="keyword">auto</span> norming = normalize) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">align</a>(<span class="keyword">auto</span> v1, <span class="keyword">auto</span> v2, <span class="keyword">auto</span> norming = normalize) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c_html_ga6b47fd35280cf1ec86c8596e0cd1b73c"><div class="ttname"><a href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">kyosu::align</a></div><div class="ttdeci">constexpr tags::callable_align align</div><div class="ttdoc">Callable object computing a quaternion from its angle_axis representation.</div><div class="ttdef"><b>Definition:</b> align.hpp:118</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>v0</code> : span of 3 elements</li>
-<li><code>v1</code> : span of 3 elements</li>
-<li>normalize : can be assume_normalized or normalize. In the second case axis is normalized. if axis is already normalized use assume_normalized is more efficient.</li>
+<li><code>v0</code>: span of 3 elements</li>
+<li><code>v1</code>: span of 3 elements</li>
+<li>normalize: can be assume_normalized or normalize. In the second case axis is normalized. if axis is already normalized use of assume_normalized is more efficient.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>An unitaryquaternion value representing a rotation that align v0 to v1.</p>
+<p>An unitary quaternion value representing a rotation that align v0 to v1.</p>
 <p>If v0 or v1 is a nullvector the result is UB</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>

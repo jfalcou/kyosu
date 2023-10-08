@@ -148,17 +148,38 @@ $(document).ready(function(){initNavTree('group__functions_gad726f439fb9920c055c
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449">exp</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449">exp</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449">exp</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::ccomplex T&gt;       <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449">exp</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449">exp</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//3</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gad726f439fb9920c055c094631185d449_html_gad726f439fb9920c055c094631185d449"><div class="ttname"><a href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449">kyosu::exp</a></div><div class="ttdeci">constexpr tags::callable_exp exp</div><div class="ttdoc">Computes the exponential of the argument.</div><div class="ttdef"><b>Definition:</b> exp.hpp:73</div></div>
+<div class="ttc" id="agroup__functions_gad726f439fb9920c055c094631185d449_html_gad726f439fb9920c055c094631185d449"><div class="ttname"><a href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449">kyosu::exp</a></div><div class="ttdeci">constexpr tags::callable_exp exp</div><div class="ttdoc">Computes the exponential of the argument.</div><div class="ttdef"><b>Definition:</b> exp.hpp:93</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Value to process.</li>
+<li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the exponential of the argument.</p>
+<ol type="1">
+<li>Returns the exponential of the argument, calling <code>eve::exp</code>.</li>
+<li>Returns the exponential of the complex input following IEEE standards:<ul>
+<li>for every z: <a class="el" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449" title="Computes the exponential of the argument.">kyosu::exp(eve::conj(z))</a> == <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">kyosu::conj(std::exp(z))</a></li>
+<li>If z is \(\pm0\), the result is \(1\)</li>
+<li>If z is \(x+i \infty\) (for any finite x), the result is \(NaN+i NaN\).</li>
+<li>If z is \(x+i NaN\) (for any finite x), the result is \(NaN+i NaN\).</li>
+<li>If z is \(+\infty+i 0\), the result is \(+\infty\)</li>
+<li>If z is \(-\infty+i y\) (for any finite y), the result is \(+0 \mathrm{cis}(y)\).</li>
+<li>If z is \(+\infty+i y\) (for any finite nonzero y), the result is \(+\infty \mathrm{cis}(y)\).</li>
+<li>If z is \(-\infty+i \infty\), the result is \(\pm 0+i \pm 0\) (signs are unspecified)</li>
+<li>If z is \(+\infty+i \pm\infty\), the result is \(\pm \infty+i NaN\) (the sign of the real part is unspecified).</li>
+<li>If z is \(-\infty+i NaN\), the result is \(\pm 0+i \pm 0\) (signs are unspecified).</li>
+<li>If z is \(\pm\infty+i NaN\), the result is \(\pm \infty+i NaN\) (the sign of the real part is unspecified).</li>
+<li>If z is \(NaN\), the result is \(NaN\).</li>
+<li>If z is \(NaN+i y\) (for any nonzero y), the result is \(NaN+i NaN\).</li>
+<li>If z is \(NaN+i NaN\), the result is \(NaN+i NaN\).</li>
+</ul>
+</li>
+<li>Returns \(e^{z_0}(\cos|\underline{z}|+\underline{z}\; \mathop{sinc}|\underline{z}|)\)</li>
+</ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

@@ -154,7 +154,7 @@ Typedefs</h2></td></tr>
 <tr class="separator:ga642e4c9da3267bde80011f41e698ba76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa3272e84862798bbb6561c13620c165b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:gaa3272e84862798bbb6561c13620c165b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__types_gaa3272e84862798bbb6561c13620c165b.html#gaa3272e84862798bbb6561c13620c165b">octonion_t</a> = <a class="el" href="group__traits_ga1a12e2809e40c8011ec7702159c84b50.html#ga1a12e2809e40c8011ec7702159c84b50">as_cayley_dickson_n_t</a>&lt; 8, T &gt;</td></tr>
-<tr class="memdesc:gaa3272e84862798bbb6561c13620c165b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for quaternion numbers.  <br /></td></tr>
+<tr class="memdesc:gaa3272e84862798bbb6561c13620c165b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for octonion numbers.  <br /></td></tr>
 <tr class="separator:gaa3272e84862798bbb6561c13620c165b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0fb102adb92b2be024f398e2ac5dd5cd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga0fb102adb92b2be024f398e2ac5dd5cd"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">quaternion_t</a> = <a class="el" href="group__traits_ga1a12e2809e40c8011ec7702159c84b50.html#ga1a12e2809e40c8011ec7702159c84b50">as_cayley_dickson_n_t</a>&lt; 4, T &gt;</td></tr>
@@ -332,7 +332,7 @@ Variables</h2></td></tr>
 <tr class="memdesc:gab07fa9f73fd002dccfcb769a87bee81c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the arc tangent of the argument in \(\pi\) multiples.  <br /></td></tr>
 <tr class="separator:gab07fa9f73fd002dccfcb769a87bee81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga61fefac92fc13470ee246ab0a77a8008"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_average&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga61fefac92fc13470ee246ab0a77a8008.html#ga61fefac92fc13470ee246ab0a77a8008">average</a> = {}</td></tr>
-<tr class="memdesc:ga61fefac92fc13470ee246ab0a77a8008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the average of the two parameters.  <br /></td></tr>
+<tr class="memdesc:ga61fefac92fc13470ee246ab0a77a8008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the average of the parameters.  <br /></td></tr>
 <tr class="separator:ga61fefac92fc13470ee246ab0a77a8008"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga64a0550a46270d01b31593e38a364f72"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_beta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga64a0550a46270d01b31593e38a364f72.html#ga64a0550a46270d01b31593e38a364f72">beta</a> = {}</td></tr>
 <tr class="memdesc:ga64a0550a46270d01b31593e38a364f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the beta function: \(\displaystyle \mathbf{B}(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\) for real or complex entries.  <br /></td></tr>
@@ -438,14 +438,29 @@ Variables</h2></td></tr>
 <tr class="memitem:ga64844c4bb1523fd1a5bfc288ec1186df"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_faddeeva&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga64844c4bb1523fd1a5bfc288ec1186df.html#ga64844c4bb1523fd1a5bfc288ec1186df">faddeeva</a> = {}</td></tr>
 <tr class="memdesc:ga64844c4bb1523fd1a5bfc288ec1186df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing \(e^{-z^2}\mathrm{erfc}(-iz)\) the scaled complex error func.  <br /></td></tr>
 <tr class="separator:ga64844c4bb1523fd1a5bfc288ec1186df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7d6bb68c3e208a12fcf7262631136f92"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_fam&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga7d6bb68c3e208a12fcf7262631136f92.html#ga7d6bb68c3e208a12fcf7262631136f92">fam</a> = {}</td></tr>
+<tr class="memdesc:ga7d6bb68c3e208a12fcf7262631136f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused add multiply.  <br /></td></tr>
+<tr class="separator:ga7d6bb68c3e208a12fcf7262631136f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2cccab7b0cb7548aabfcd581a6c98fa6"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_floor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga2cccab7b0cb7548aabfcd581a6c98fa6.html#ga2cccab7b0cb7548aabfcd581a6c98fa6">floor</a> = {}</td></tr>
 <tr class="memdesc:ga2cccab7b0cb7548aabfcd581a6c98fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the floor value.  <br /></td></tr>
 <tr class="separator:ga2cccab7b0cb7548aabfcd581a6c98fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaea12bea891cdb9ddf8a61b057f8b026b"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_fma&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gaea12bea891cdb9ddf8a61b057f8b026b.html#gaea12bea891cdb9ddf8a61b057f8b026b">fma</a> = {}</td></tr>
+<tr class="memdesc:gaea12bea891cdb9ddf8a61b057f8b026b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused multiply add.  <br /></td></tr>
+<tr class="separator:gaea12bea891cdb9ddf8a61b057f8b026b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa5d55cd8007d6e55072b650ad1b8012f"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_fms&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gaa5d55cd8007d6e55072b650ad1b8012f.html#gaa5d55cd8007d6e55072b650ad1b8012f">fms</a> = {}</td></tr>
+<tr class="memdesc:gaa5d55cd8007d6e55072b650ad1b8012f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused multiply add.  <br /></td></tr>
+<tr class="separator:gaa5d55cd8007d6e55072b650ad1b8012f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3aa689f71584cda3e39637cd787d2615"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_fnma&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga3aa689f71584cda3e39637cd787d2615.html#ga3aa689f71584cda3e39637cd787d2615">fnma</a> = {}</td></tr>
+<tr class="memdesc:ga3aa689f71584cda3e39637cd787d2615"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused negate multiply add.  <br /></td></tr>
+<tr class="separator:ga3aa689f71584cda3e39637cd787d2615"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga794ce1725753903a4a54c220a3fe7ba9"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_fnms&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga794ce1725753903a4a54c220a3fe7ba9.html#ga794ce1725753903a4a54c220a3fe7ba9">fnms</a> = {}</td></tr>
+<tr class="memdesc:ga794ce1725753903a4a54c220a3fe7ba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused negate multiply sub.  <br /></td></tr>
+<tr class="separator:ga794ce1725753903a4a54c220a3fe7ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4c6ee3532d93a937aaa603ba4699b3ed"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_frac&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga4c6ee3532d93a937aaa603ba4699b3ed.html#ga4c6ee3532d93a937aaa603ba4699b3ed">frac</a> = {}</td></tr>
 <tr class="memdesc:ga4c6ee3532d93a937aaa603ba4699b3ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the frac value.  <br /></td></tr>
 <tr class="separator:ga4c6ee3532d93a937aaa603ba4699b3ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaeb24f578562330d825ff8f68da4b9252"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_from_angle_axis&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">from_angle_axis</a> = {}</td></tr>
-<tr class="memdesc:gaeb24f578562330d825ff8f68da4b9252"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its angle_axis representation.  <br /></td></tr>
+<tr class="memdesc:gaeb24f578562330d825ff8f68da4b9252"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing an an unitary quaternion from an angle value and a 3 dimensionnal axis vector.  <br /></td></tr>
 <tr class="separator:gaeb24f578562330d825ff8f68da4b9252"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga06868e959a899a9f2348b07c330c0048"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_from_cylindrical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_ga06868e959a899a9f2348b07c330c0048.html#ga06868e959a899a9f2348b07c330c0048">from_cylindrical</a> = {}</td></tr>
 <tr class="memdesc:ga06868e959a899a9f2348b07c330c0048"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its cylindrical representation.  <br /></td></tr>
@@ -471,6 +486,12 @@ Variables</h2></td></tr>
 <tr class="memitem:ga943f811be2981809d36a4f31f52b0025"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_from_spherical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#ga943f811be2981809d36a4f31f52b0025">from_spherical</a> = {}</td></tr>
 <tr class="memdesc:ga943f811be2981809d36a4f31f52b0025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its spherical representation.  <br /></td></tr>
 <tr class="separator:ga943f811be2981809d36a4f31f52b0025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9ff0e0971171a0cf6b8c8b84390707bd"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_fsm&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga9ff0e0971171a0cf6b8c8b84390707bd.html#ga9ff0e0971171a0cf6b8c8b84390707bd">fsm</a> = {}</td></tr>
+<tr class="memdesc:ga9ff0e0971171a0cf6b8c8b84390707bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused sub multiply.  <br /></td></tr>
+<tr class="separator:ga9ff0e0971171a0cf6b8c8b84390707bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga002c8ed4aedb1a6523be122842f526ab"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_horner&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga002c8ed4aedb1a6523be122842f526ab.html#ga002c8ed4aedb1a6523be122842f526ab">horner</a> = {}</td></tr>
+<tr class="memdesc:ga002c8ed4aedb1a6523be122842f526ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implement the horner scheme to evaluate polynomials.  <br /></td></tr>
+<tr class="separator:ga002c8ed4aedb1a6523be122842f526ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf0240aea3dcf4428abd35906e94323e7"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_hypot&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gaf0240aea3dcf4428abd35906e94323e7.html#gaf0240aea3dcf4428abd35906e94323e7">hypot</a> = {}</td></tr>
 <tr class="memdesc:gaf0240aea3dcf4428abd35906e94323e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the hypot operation.  <br /></td></tr>
 <tr class="separator:gaf0240aea3dcf4428abd35906e94323e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -591,7 +612,7 @@ constexpr tags::callable_ipart&#160;</td><td class="memItemRight" valign="bottom
 <tr class="separator:gac828b36348f592f5f2d891bd546ee733"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3d9e6e28fb334f64bbe3c1b60f28d15b"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_lpnorm&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga3d9e6e28fb334f64bbe3c1b60f28d15b.html#ga3d9e6e28fb334f64bbe3c1b60f28d15b">lpnorm</a> = {}</td></tr>
 <tr class="memdesc:ga3d9e6e28fb334f64bbe3c1b60f28d15b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the lpnorm operation \( \left(\sum_{i = 0}^n
- |x_i|^p\right)^{\frac1p} \).  <br /></td></tr>
+|x_i|^p\right)^{\frac1p} \).  <br /></td></tr>
 <tr class="separator:ga3d9e6e28fb334f64bbe3c1b60f28d15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga926e8d9f232cf45c07fe4f2a23353bb9"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_lrising_factorial&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga926e8d9f232cf45c07fe4f2a23353bb9.html#ga926e8d9f232cf45c07fe4f2a23353bb9">lrising_factorial</a> = {}</td></tr>
 <tr class="memdesc:ga926e8d9f232cf45c07fe4f2a23353bb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the lrising_factorial function: \(\log\frac{\Gamma(x+y)}{\Gamma(x)}\).  <br /></td></tr>
@@ -599,12 +620,30 @@ constexpr tags::callable_ipart&#160;</td><td class="memItemRight" valign="bottom
 <tr class="memitem:ga013ae7a04bb6a995c81537ab9c4396b4"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_manhattan&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga013ae7a04bb6a995c81537ab9c4396b4.html#ga013ae7a04bb6a995c81537ab9c4396b4">manhattan</a> = {}</td></tr>
 <tr class="memdesc:ga013ae7a04bb6a995c81537ab9c4396b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the manhattan operation.  <br /></td></tr>
 <tr class="separator:ga013ae7a04bb6a995c81537ab9c4396b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga98bf34c99abee3391f768328eb622b15"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_maxabs&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga98bf34c99abee3391f768328eb622b15.html#ga98bf34c99abee3391f768328eb622b15">maxabs</a> = {}</td></tr>
+<tr class="memdesc:ga98bf34c99abee3391f768328eb622b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the maxabs operation.  <br /></td></tr>
+<tr class="separator:ga98bf34c99abee3391f768328eb622b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4407e9699352f7ad2d48f57bad47aa3c"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_maxmag&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga4407e9699352f7ad2d48f57bad47aa3c.html#ga4407e9699352f7ad2d48f57bad47aa3c">maxmag</a> = {}</td></tr>
+<tr class="memdesc:ga4407e9699352f7ad2d48f57bad47aa3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the maxmag operation.  <br /></td></tr>
+<tr class="separator:ga4407e9699352f7ad2d48f57bad47aa3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga51f203310426d80b4717446f3ec0dca6"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_minabs&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga51f203310426d80b4717446f3ec0dca6.html#ga51f203310426d80b4717446f3ec0dca6">minabs</a> = {}</td></tr>
+<tr class="memdesc:ga51f203310426d80b4717446f3ec0dca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the minabs operation.  <br /></td></tr>
+<tr class="separator:ga51f203310426d80b4717446f3ec0dca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6213963f8df73993f075797ac53a19fd"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_minmag&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga6213963f8df73993f075797ac53a19fd.html#ga6213963f8df73993f075797ac53a19fd">minmag</a> = {}</td></tr>
+<tr class="memdesc:ga6213963f8df73993f075797ac53a19fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the minmag operation.  <br /></td></tr>
+<tr class="separator:ga6213963f8df73993f075797ac53a19fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1b78fa57857ad714ce5f0e6e3ace5db9"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_minus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga1b78fa57857ad714ce5f0e6e3ace5db9.html#ga1b78fa57857ad714ce5f0e6e3ace5db9">minus</a> = {}</td></tr>
 <tr class="memdesc:ga1b78fa57857ad714ce5f0e6e3ace5db9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the opposite value.  <br /></td></tr>
 <tr class="separator:ga1b78fa57857ad714ce5f0e6e3ace5db9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8febd271f0bc94c5fb1d12cd5644778b"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_nearest&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga8febd271f0bc94c5fb1d12cd5644778b.html#ga8febd271f0bc94c5fb1d12cd5644778b">nearest</a> = {}</td></tr>
 <tr class="memdesc:ga8febd271f0bc94c5fb1d12cd5644778b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the nearest value.  <br /></td></tr>
 <tr class="separator:ga8febd271f0bc94c5fb1d12cd5644778b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabdadf5dea3b6b79d1a01beb33e7eb679"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_negmaxabs&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gabdadf5dea3b6b79d1a01beb33e7eb679.html#gabdadf5dea3b6b79d1a01beb33e7eb679">negmaxabs</a> = {}</td></tr>
+<tr class="memdesc:gabdadf5dea3b6b79d1a01beb33e7eb679"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the negmaxabs operation.  <br /></td></tr>
+<tr class="separator:gabdadf5dea3b6b79d1a01beb33e7eb679"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad18c641894be2868d9a977d8a7ce0d3e"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_negminabs&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gad18c641894be2868d9a977d8a7ce0d3e.html#gad18c641894be2868d9a977d8a7ce0d3e">negminabs</a> = {}</td></tr>
+<tr class="memdesc:gad18c641894be2868d9a977d8a7ce0d3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the negminabs operation.  <br /></td></tr>
+<tr class="separator:gad18c641894be2868d9a977d8a7ce0d3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae8a89a63722b9cdec2f2d4daf58bf025"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_oneminus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gae8a89a63722b9cdec2f2d4daf58bf025.html#gae8a89a63722b9cdec2f2d4daf58bf025">oneminus</a> = {}</td></tr>
 <tr class="memdesc:gae8a89a63722b9cdec2f2d4daf58bf025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value one minus the argument.  <br /></td></tr>
 <tr class="separator:gae8a89a63722b9cdec2f2d4daf58bf025"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -615,7 +654,7 @@ constexpr tags::callable_ipart&#160;</td><td class="memItemRight" valign="bottom
 <tr class="memdesc:gaae9065f698fe37841a85e340a16af948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the computing the pow1p operation \((x+1)^y\).  <br /></td></tr>
 <tr class="separator:gaae9065f698fe37841a85e340a16af948"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga764d5554dc7ce3cac3302591c4d75947"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_pow_abs&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga764d5554dc7ce3cac3302591c4d75947.html#ga764d5554dc7ce3cac3302591c4d75947">pow_abs</a> = {}</td></tr>
-<tr class="memdesc:ga764d5554dc7ce3cac3302591c4d75947"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the computing the pow_abs operation \((|x|)^y\).  <br /></td></tr>
+<tr class="memdesc:ga764d5554dc7ce3cac3302591c4d75947"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the computing the pow_abs operation \(|x|^y\).  <br /></td></tr>
 <tr class="separator:ga764d5554dc7ce3cac3302591c4d75947"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga047b3d79d00d4907df04ec98f2a0fada"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_powm1&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga047b3d79d00d4907df04ec98f2a0fada.html#ga047b3d79d00d4907df04ec98f2a0fada">powm1</a> = {}</td></tr>
 <tr class="memdesc:ga047b3d79d00d4907df04ec98f2a0fada"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the computing the powm1 operation \(x^y-1\).  <br /></td></tr>
@@ -641,6 +680,15 @@ constexpr tags::callable_ipart&#160;</td><td class="memItemRight" valign="bottom
 <tr class="memitem:ga23d96b11ec047300319b6b8ccfa07765"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_reldist&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765">reldist</a> = {}</td></tr>
 <tr class="memdesc:ga23d96b11ec047300319b6b8ccfa07765"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the relative distance between the two parameters.  <br /></td></tr>
 <tr class="separator:ga23d96b11ec047300319b6b8ccfa07765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga471f433dd0f13d23748a166037346228"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_reverse_horner&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga471f433dd0f13d23748a166037346228.html#ga471f433dd0f13d23748a166037346228">reverse_horner</a> = {}</td></tr>
+<tr class="memdesc:ga471f433dd0f13d23748a166037346228"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implement the reverse_horner scheme to evaluate polynomials.  <br /></td></tr>
+<tr class="separator:ga471f433dd0f13d23748a166037346228"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabf9633c1e987c8e0fed000a68a5126f1"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_right_horner&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gabf9633c1e987c8e0fed000a68a5126f1.html#gabf9633c1e987c8e0fed000a68a5126f1">right_horner</a> = {}</td></tr>
+<tr class="memdesc:gabf9633c1e987c8e0fed000a68a5126f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implement the right_horner scheme to evaluate polynomials.  <br /></td></tr>
+<tr class="separator:gabf9633c1e987c8e0fed000a68a5126f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae49b34d68c97aafa11592d69b40fb19d"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_right_reverse_horner&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gae49b34d68c97aafa11592d69b40fb19d.html#gae49b34d68c97aafa11592d69b40fb19d">right_reverse_horner</a> = {}</td></tr>
+<tr class="memdesc:gae49b34d68c97aafa11592d69b40fb19d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implement the right_reverse_horner scheme to evaluate polynomials.  <br /></td></tr>
+<tr class="separator:gae49b34d68c97aafa11592d69b40fb19d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2ddfc28eca2aadd941d5fc5e991a5fde"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_rising_factorial&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga2ddfc28eca2aadd941d5fc5e991a5fde.html#ga2ddfc28eca2aadd941d5fc5e991a5fde">rising_factorial</a> = {}</td></tr>
 <tr class="memdesc:ga2ddfc28eca2aadd941d5fc5e991a5fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the rising_factorial function: \(\frac{\Gamma(x+y)}{\Gamma(x)}\).  <br /></td></tr>
 <tr class="separator:ga2ddfc28eca2aadd941d5fc5e991a5fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -708,10 +756,10 @@ constexpr tags::callable_ipart&#160;</td><td class="memItemRight" valign="bottom
 <tr class="memdesc:ga680756a6a228206f45212247b16d5961"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the tangent of the argument in \(\pi\) multiples.  <br /></td></tr>
 <tr class="separator:ga680756a6a228206f45212247b16d5961"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf57c0dd30eab1c6bf0a4c81c849307d5"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_tgamma&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gaf57c0dd30eab1c6bf0a4c81c849307d5.html#gaf57c0dd30eab1c6bf0a4c81c849307d5">tgamma</a> = {}</td></tr>
-<tr class="memdesc:gaf57c0dd30eab1c6bf0a4c81c849307d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the tgammaolute value of the parameter.  <br /></td></tr>
+<tr class="memdesc:gaf57c0dd30eab1c6bf0a4c81c849307d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes \(\Gamma(z)\)r.  <br /></td></tr>
 <tr class="separator:gaf57c0dd30eab1c6bf0a4c81c849307d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga31804ee3fdb4a806efea330cf1e20898"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_to_angle_axis&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_ga31804ee3fdb4a806efea330cf1e20898.html#ga31804ee3fdb4a806efea330cf1e20898">to_angle_axis</a> = {}</td></tr>
-<tr class="memdesc:ga31804ee3fdb4a806efea330cf1e20898"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the angle_axis coordinates from a quaternion.  <br /></td></tr>
+<tr class="memdesc:ga31804ee3fdb4a806efea330cf1e20898"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the angle and axis coordinates from a quaternion.  <br /></td></tr>
 <tr class="separator:ga31804ee3fdb4a806efea330cf1e20898"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa82e66812fcb0f8af20b07a448752561"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_to_cylindrical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__quaternion_gaa82e66812fcb0f8af20b07a448752561.html#gaa82e66812fcb0f8af20b07a448752561">to_cylindrical</a> = {}</td></tr>
 <tr class="memdesc:gaa82e66812fcb0f8af20b07a448752561"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the cylindrical coordinates from a quaternion.  <br /></td></tr>

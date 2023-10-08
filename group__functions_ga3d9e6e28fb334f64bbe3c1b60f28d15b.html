@@ -143,20 +143,20 @@ $(document).ready(function(){initNavTree('group__functions_ga3d9e6e28fb334f64bbe
 </div><div class="memdoc">
 
 <p>Callable object computing the lpnorm operation \( \left(\sum_{i = 0}^n
- |x_i|^p\right)^{\frac1p} \). </p>
+|x_i|^p\right)^{\frac1p} \). </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line">   <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
-<div class="line">   {</div>
-<div class="line">      <span class="keyword">template</span>&lt; floating_value P, <span class="keyword">typename</span> T, <span class="keyword">typename</span> ... Ts&gt; <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga3d9e6e28fb334f64bbe3c1b60f28d15b.html#ga3d9e6e28fb334f64bbe3c1b60f28d15b">lpnorm</a>(P p, T z,Ts ... zs ) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
-<div class="line">!   }</div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">template</span>&lt; floating_value P, <span class="keyword">typename</span> T, <span class="keyword">typename</span> ... Ts&gt; <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga3d9e6e28fb334f64bbe3c1b60f28d15b.html#ga3d9e6e28fb334f64bbe3c1b60f28d15b">lpnorm</a>(P p, T z,Ts ... zs ) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line">}</div>
 <div class="ttc" id="agroup__functions_ga3d9e6e28fb334f64bbe3c1b60f28d15b_html_ga3d9e6e28fb334f64bbe3c1b60f28d15b"><div class="ttname"><a href="group__functions_ga3d9e6e28fb334f64bbe3c1b60f28d15b.html#ga3d9e6e28fb334f64bbe3c1b60f28d15b">kyosu::lpnorm</a></div><div class="ttdeci">constexpr tags::callable_lpnorm lpnorm</div><div class="ttdoc">Callable object computing the lpnorm operation .</div><div class="ttdef"><b>Definition:</b> lpnorm.hpp:77</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>p</code>: : positive floating ordered value</li>
-<li><code>zs...</code> : Values to process.</li>
+<li><code>zs...</code>: Values to process.</li>
 </ul>
 <p><b>Return value</b></p>
 <p>Returns \( \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \).</p>

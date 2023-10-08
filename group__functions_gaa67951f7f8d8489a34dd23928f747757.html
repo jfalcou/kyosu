@@ -156,16 +156,16 @@ $(document).ready(function(){initNavTree('group__functions_gaa67951f7f8d8489a34d
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Value to process.</li>
+<li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
 <li>a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(z) was entered.</li>
 <li>Returns the complex inverse hyperbolic cosine of z, in the range of a strip unbounded along the imaginary axis and in the interval \([0,\pi]\) along the real axis.<ul>
 <li>for every z: <a class="el" href="group__functions_gaa67951f7f8d8489a34dd23928f747757.html#gaa67951f7f8d8489a34dd23928f747757" title="Computes the inverse hyperbolic cosine of the argument.">kyosu::acosh</a>( <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0">kyosu::conj</a>(z)) == <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">kyosu::conj</a>(<a class="el" href="group__functions_gaa67951f7f8d8489a34dd23928f747757.html#gaa67951f7f8d8489a34dd23928f747757">kyosu::acosh</a>(z)</li>
-<li>If z is \(\pm0\), the result is \(+0,\pi/2\)</li>
+<li>If z is \(\pm0\), the result is \(+0+i\pi/2\)</li>
 <li>If z is \(x+i\infty\) (for any finite x), the result is \(\infty+i\pi/2\)</li>
-<li>If z is \(x+i NaN\) (for any finite non zero x), the result is \(NaN+i NaN\).</li>
+<li>If z is \(x+i NaN\) (for any finite non zero x), the result is \(NaN+iNaN\).</li>
 <li>If z is \(i NaN\) the result is \(NaN+i\pi/2\).</li>
 <li>If z is \(-\infty,y\) (for any positive finite y), the result is \(+\infty,\pi\)</li>
 <li>If z is \(+\infty,y\) (for any positive finite y), the result is \(+\infty+i 0\)</li>

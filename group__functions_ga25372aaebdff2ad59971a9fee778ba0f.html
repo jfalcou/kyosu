@@ -148,14 +148,14 @@ $(document).ready(function(){initNavTree('group__functions_ga25372aaebdff2ad5997
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(<span class="keyword">auto</span> z0, <span class="keyword">auto</span>, z1) <span class="keyword">noexcept</span>;               \\123</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(<span class="keyword">auto</span> z0, <span class="keyword">auto</span> z1) <span class="keyword">noexcept</span>;               \\123</div>
 <div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(<span class="keyword">auto</span> z0, eve::integral_value n)  <span class="keyword">noexcept</span>; \\4</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_ga25372aaebdff2ad59971a9fee778ba0f_html_ga25372aaebdff2ad59971a9fee778ba0f"><div class="ttname"><a href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">kyosu::pow</a></div><div class="ttdeci">constexpr tags::callable_pow pow</div><div class="ttdoc">Computes the computing the pow operation .</div><div class="ttdef"><b>Definition:</b> pow.hpp:113</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z0, z1</code> : Values to process.</li>
+<li><code>z0</code>, <code>z1</code>: Values to process.</li>
 </ul>
 <p><b>Return value</b></p><ol type="1">
 <li>if both parameters are floating the call will act as if they were converted to complex before call</li>
@@ -185,7 +185,7 @@ $(document).ready(function(){initNavTree('group__functions_ga25372aaebdff2ad5997
 <li>except where specified above, if any argument is NaN, NaN is returned</li>
 </ul>
 </li>
-<li>if any parameter as a dimensionnality greater yhan 2, the call is semantically equivalent to <code><a class="el" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449" title="Computes the exponential of the argument.">kyosu::exp(z1*eve::log(z0))</a></code></li>
+<li>if any parameter as a dimensionnality greater than 2, the call is semantically equivalent to <code><a class="el" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449" title="Computes the exponential of the argument.">kyosu::exp(z1*eve::log(z0))</a></code></li>
 <li>pow can accept an integral typed second parameter, in this case it is the russian peasant algorithm that is used.</li>
 </ol>
 <h2 class="groupheader">Example </h2>

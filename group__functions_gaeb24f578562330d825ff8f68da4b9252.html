@@ -142,8 +142,7 @@ $(document).ready(function(){initNavTree('group__functions_gaeb24f578562330d825f
 </table>
 </div><div class="memdoc">
 
-<p>Callable object computing a quaternion from its angle_axis representation. </p>
-<p>This function build an unitary quaternion from an angle value and a 3 dimensionnal axis vector</p>
+<p>Callable object computing an an unitary quaternion from an angle value and a 3 dimensionnal axis vector. </p>
 <p><b>Defined in header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include kyosu/module/quaternion.hpp&gt;`</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
@@ -151,13 +150,18 @@ $(document).ready(function(){initNavTree('group__functions_gaeb24f578562330d825f
 <div class="line">{</div>
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">from_angle_axis</a>(<span class="keyword">auto</span> angle,  <span class="keyword">auto</span> axis, <span class="keyword">auto</span> norming = normalize) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaeb24f578562330d825ff8f68da4b9252_html_gaeb24f578562330d825ff8f68da4b9252"><div class="ttname"><a href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr tags::callable_from_angle_axis from_angle_axis</div><div class="ttdoc">Callable object computing a quaternion from its angle_axis representation.</div><div class="ttdef"><b>Definition:</b> from_angle_axis.hpp:90</div></div>
+<div class="ttc" id="agroup__functions_gaeb24f578562330d825ff8f68da4b9252_html_gaeb24f578562330d825ff8f68da4b9252"><div class="ttname"><a href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr tags::callable_from_angle_axis from_angle_axis</div><div class="ttdoc">Callable object computing an an unitary quaternion from an angle value and a 3 dimensionnal axis vect...</div><div class="ttdef"><b>Definition:</b> from_angle_axis.hpp:119</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>angle</code> : rotation angle in radian</li>
-<li><code>axis</code>` : rotation axis given by an std::span of dimension 3.</li>
-<li>normalize : can be assume_normalized or normalize. In the second case axis is normalized. if axis is already normalized use assume_normalized is more efficient.</li>
+<li><code>angle</code>: rotation angle in radian</li>
+<li><code>axis</code>: rotation axis given by an std::span of dimension 3.</li>
+<li><code>normalize</code>: can be <code>assume_normalized</code> or <code>normalize</code>.<ul>
+<li>In the second case the axis is normalized before use.</li>
+<li>if the axis is already normalized using <code>assume_normalized</code> is more efficient, but the result is u.b. if it is not the case.</li>
+<li>if the axis is null the axis is normalized as (1, 0, 0).</li>
+</ul>
+</li>
 </ul>
 <p><b>Return value</b></p>
 <p>the quaternion value representing the rotation.</p>
@@ -185,9 +189,11 @@ $(document).ready(function(){initNavTree('group__functions_gaeb24f578562330d825f
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt;theta = &quot;</span> &lt;&lt; aa &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; axis  = (&quot;</span> &lt;&lt; axx[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt;  axx[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt;  axx[2] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line">  std::array&lt;double, 3&gt; azz{0., 0., 0.};</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>(theta,  azz) &lt;&lt; std::endl;</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__quaternion_ga31804ee3fdb4a806efea330cf1e20898_html_ga31804ee3fdb4a806efea330cf1e20898"><div class="ttname"><a href="group__quaternion_ga31804ee3fdb4a806efea330cf1e20898.html#ga31804ee3fdb4a806efea330cf1e20898">kyosu::to_angle_axis</a></div><div class="ttdeci">constexpr tags::callable_to_angle_axis to_angle_axis</div><div class="ttdoc">Callable object computing the angle_axis coordinates from a quaternion.</div><div class="ttdef"><b>Definition:</b> to_angle_axis.hpp:85</div></div>
+<div class="ttc" id="agroup__quaternion_ga31804ee3fdb4a806efea330cf1e20898_html_ga31804ee3fdb4a806efea330cf1e20898"><div class="ttname"><a href="group__quaternion_ga31804ee3fdb4a806efea330cf1e20898.html#ga31804ee3fdb4a806efea330cf1e20898">kyosu::to_angle_axis</a></div><div class="ttdeci">constexpr tags::callable_to_angle_axis to_angle_axis</div><div class="ttdoc">Callable object computing the angle and axis coordinates from a quaternion.</div><div class="ttdef"><b>Definition:</b> to_angle_axis.hpp:85</div></div>
 <div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:27</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
 </div><!-- fragment --> 

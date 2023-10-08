@@ -148,17 +148,18 @@ $(document).ready(function(){initNavTree('group__functions_gad00c7ec993028936478
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;   <span class="keyword">constexpr</span> T  <a class="code hl_variable" href="group__functions_gad00c7ec9930289364786f5004c212c9b.html#gad00c7ec9930289364786f5004c212c9b">log_abs_gamma</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt; <span class="keyword">constexpr</span> T  <a class="code hl_variable" href="group__functions_gad00c7ec9930289364786f5004c212c9b.html#gad00c7ec9930289364786f5004c212c9b">log_abs_gamma</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;    <span class="keyword">constexpr</span> T  <a class="code hl_variable" href="group__functions_gad00c7ec9930289364786f5004c212c9b.html#gad00c7ec9930289364786f5004c212c9b">log_abs_gamma</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt; <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__traits_gacfae066446178c7d3f6328aaeafcbf1d.html#gacfae066446178c7d3f6328aaeafcbf1d">as_real_t&lt;T&gt;</a>  <a class="code hl_variable" href="group__functions_gad00c7ec9930289364786f5004c212c9b.html#gad00c7ec9930289364786f5004c212c9b">log_abs_gamma</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_gad00c7ec9930289364786f5004c212c9b_html_gad00c7ec9930289364786f5004c212c9b"><div class="ttname"><a href="group__functions_gad00c7ec9930289364786f5004c212c9b.html#gad00c7ec9930289364786f5004c212c9b">kyosu::log_abs_gamma</a></div><div class="ttdeci">constexpr tags::callable_log_abs_gamma log_abs_gamma</div><div class="ttdoc">Computes the log of the modulus of the  function of the parameter.</div><div class="ttdef"><b>Definition:</b> log_abs_gamma.hpp:76</div></div>
+<div class="ttc" id="agroup__traits_gacfae066446178c7d3f6328aaeafcbf1d_html_gacfae066446178c7d3f6328aaeafcbf1d"><div class="ttname"><a href="group__traits_gacfae066446178c7d3f6328aaeafcbf1d.html#gacfae066446178c7d3f6328aaeafcbf1d">kyosu::as_real_t</a></div><div class="ttdeci">typename as_real&lt; T &gt;::type as_real_t</div><div class="ttdoc">Compute the real type associated to a Cayley-Dickson-like type.</div><div class="ttdef"><b>Definition:</b> traits.hpp:79</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code> : Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns \(\log(|\Gamma(z)|)\). If z is floating the result is as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex.">complex(z)</a> was used in the call.</p>
+<p>Returns \(\log(|\Gamma(z)|)\).</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

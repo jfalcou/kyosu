@@ -143,17 +143,16 @@ $(document).ready(function(){initNavTree('group__quaternion_gaa5964ee08fa64046a8
 </div><div class="memdoc">
 
 <p>Callable object computing the normalized axis of rotation defined by a quaternion. </p>
-<p>This function is the reciprocal of from_polar</p>
 <p><b>Defined in header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include eve/module/quaternion.hpp&gt;`</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_gaa5964ee08fa64046a80d3908056a09c4.html#gaa5964ee08fa64046a80d3908056a09c4">rot_axis</a>( <span class="keyword">auto</span> q) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_gaa5964ee08fa64046a80d3908056a09c4.html#gaa5964ee08fa64046a80d3908056a09c4">rot_axis</a>(<span class="keyword">auto</span> q) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__quaternion_gaa5964ee08fa64046a80d3908056a09c4_html_gaa5964ee08fa64046a80d3908056a09c4"><div class="ttname"><a href="group__quaternion_gaa5964ee08fa64046a80d3908056a09c4.html#gaa5964ee08fa64046a80d3908056a09c4">kyosu::rot_axis</a></div><div class="ttdeci">constexpr tags::callable_rot_axis rot_axis</div><div class="ttdoc">Callable object computing the normalized axis of rotation defined by a quaternion.</div><div class="ttdef"><b>Definition:</b> rot_axis.hpp:84</div></div>
+<div class="ttc" id="agroup__quaternion_gaa5964ee08fa64046a80d3908056a09c4_html_gaa5964ee08fa64046a80d3908056a09c4"><div class="ttname"><a href="group__quaternion_gaa5964ee08fa64046a80d3908056a09c4.html#gaa5964ee08fa64046a80d3908056a09c4">kyosu::rot_axis</a></div><div class="ttdeci">constexpr tags::callable_rot_axis rot_axis</div><div class="ttdoc">Callable object computing the normalized axis of rotation defined by a quaternion.</div><div class="ttdef"><b>Definition:</b> rot_axis.hpp:82</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
-<p><code>q</code> : quaternion, complex or floating.</p>
+<p><code>q</code>: quaternion, complex or floating.</p>
 <p><b>Return value</b></p>
 <p>a span containing the three coordinates of the axis if the quaternion is zero {1, 0, 0} is returned</p>
 <hr  />

@@ -148,16 +148,17 @@ $(document).ready(function(){initNavTree('group__functions_ga6d65485712648eb40b8
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::value T, eve::value U, eve::value V&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf">if_else</a>(T x, U, y, V z ) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf">if_else</a>(<span class="keyword">auto</span> x, <span class="keyword">auto</span> y, <span class="keyword">auto</span> z ) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga6d65485712648eb40b8dc0453d9c3baf_html_ga6d65485712648eb40b8dc0453d9c3baf"><div class="ttname"><a href="group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf">kyosu::if_else</a></div><div class="ttdeci">constexpr tags::callable_if_else if_else</div><div class="ttdoc">Select a value between two arguments based on a logical mask.</div><div class="ttdef"><b>Definition:</b> if_else.hpp:65</div></div>
+<div class="ttc" id="agroup__functions_ga6d65485712648eb40b8dc0453d9c3baf_html_ga6d65485712648eb40b8dc0453d9c3baf"><div class="ttname"><a href="group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf">kyosu::if_else</a></div><div class="ttdeci">constexpr tags::callable_if_else if_else</div><div class="ttdoc">Select a value between two arguments based on a logical mask.</div><div class="ttdef"><b>Definition:</b> if_else.hpp:67</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code> : Value to process.</li>
+<li><code>x</code>: logical mask.</li>
+<li><code>y</code>, <code>z</code>: values to be selected.</li>
 </ul>
-<p><b>Return value</b></p>
-<h2 class="groupheader">Example </h2>
+<p><b>Return value</b> </p><pre class="fragment"> elementwise `y` or `z` according the truth value of `x`.
+</pre> <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
