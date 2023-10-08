@@ -55,8 +55,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T>   constexpr T  log_abs_gamma(T z) noexcept;
-//!      template<eve::floating_ordered_value T> constexpr T  log_abs_gamma(T z) noexcept;
+//!      template<kyosu::concepts::complex T>    constexpr T  log_abs_gamma(T z) noexcept;
+//!      template<eve::floating_ordered_value T> constexpr as_real_t<T>  log_abs_gamma(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -66,7 +66,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns \f$\log(|\Gamma(z)|)\f$. If z is floating the result is as if complex(z) was used in the call.
+//!     Returns \f$\log(|\Gamma(z)|)\f$.
 //!
 //!  @groupheader{Example}
 //!
