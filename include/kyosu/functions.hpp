@@ -47,6 +47,8 @@
 #include <kyosu/functions/csc.hpp>
 #include <kyosu/functions/cscpi.hpp>
 #include <kyosu/functions/csch.hpp>
+#include <kyosu/functions/cyl_bessel_j0.hpp>
+#include <kyosu/functions/cyl_bessel_j1.hpp>
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/deta.hpp>
 #include <kyosu/functions/digamma.hpp>
@@ -65,7 +67,6 @@
 #include <kyosu/functions/expmx2.hpp>
 #include <kyosu/functions/expx2.hpp>
 #include <kyosu/functions/faddeeva.hpp>
-
 #include <kyosu/functions/fam.hpp>
 #include <kyosu/functions/floor.hpp>
 #include <kyosu/functions/fma.hpp>
