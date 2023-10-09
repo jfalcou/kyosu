@@ -61,7 +61,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `x`,`y` : Values to process. Can be a mix of cayley_dicson and real floating values.
+//!     * `x`,`y` : Values to process. Can be a mix of cayley_dickson and real floating values.
 //!
 //!   **Return value**
 //!

@@ -28,8 +28,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dicson T> constexpr auto is_imag(T z) noexcept;
-//!      template<eve::floating_ordered_value T>    constexpr auto is_imag(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_imag(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto is_imag(T z) noexcept;
 //!   }
 //!   @endcode
 //!

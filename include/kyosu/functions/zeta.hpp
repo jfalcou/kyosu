@@ -56,17 +56,18 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      constexpr auto zeta(auto z) noexcept;
+//!      template<eve::floating_ordered_value T> constexpr auto zeta(T z) noexcept;
+//!      template<kyosu::concepts::complex T>    constexpr auto zeta(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : complex or real value to process.
+//!     * `z` : value to process.
 //!
 //! **Return value**
 //!
-//!   Returns the Dirichlet zeta function: \f$  \displaystyle \sum_0^\infty \frac{1}{(n+1)^z}\f$
+//!   Returns the Dirichlet zeta sum: \f$  \displaystyle \sum_0^\infty \frac{1}{(n+1)^z}\f$
 //!
 //!  @groupheader{Example}
 //!
