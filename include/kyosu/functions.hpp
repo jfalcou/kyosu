@@ -33,6 +33,7 @@
 #include <kyosu/functions/atan.hpp>
 #include <kyosu/functions/atanh.hpp>
 #include <kyosu/functions/average.hpp>
+#include <kyosu/functions/beta.hpp>
 #include <kyosu/functions/ceil.hpp>
 #include <kyosu/functions/commutator.hpp>
 #include <kyosu/functions/conj.hpp>
@@ -47,8 +48,14 @@
 #include <kyosu/functions/cscpi.hpp>
 #include <kyosu/functions/csch.hpp>
 #include <kyosu/functions/dec.hpp>
+#include <kyosu/functions/deta.hpp>
+#include <kyosu/functions/digamma.hpp>
 #include <kyosu/functions/dist.hpp>
 #include <kyosu/functions/dot.hpp>
+#include <kyosu/functions/erf.hpp>
+#include <kyosu/functions/erfcx.hpp>
+#include <kyosu/functions/erfi.hpp>
+#include <kyosu/functions/eta.hpp>
 #include <kyosu/functions/exp.hpp>
 #include <kyosu/functions/exp10.hpp>
 #include <kyosu/functions/exp2.hpp>
@@ -57,6 +64,8 @@
 #include <kyosu/functions/expm1.hpp>
 #include <kyosu/functions/expmx2.hpp>
 #include <kyosu/functions/expx2.hpp>
+#include <kyosu/functions/faddeeva.hpp>
+
 #include <kyosu/functions/fam.hpp>
 #include <kyosu/functions/floor.hpp>
 #include <kyosu/functions/fma.hpp>
@@ -90,18 +99,24 @@
 #include <kyosu/functions/is_unitary.hpp>
 #include <kyosu/functions/jpart.hpp>
 #include <kyosu/functions/kpart.hpp>
+#include <kyosu/functions/lambda.hpp>
+#include <kyosu/functions/lbeta.hpp>
 #include <kyosu/functions/ldiv.hpp>
 #include <kyosu/functions/lerp.hpp>
 #include <kyosu/functions/log.hpp>
 #include <kyosu/functions/log10.hpp>
 #include <kyosu/functions/log1p.hpp>
 #include <kyosu/functions/log_abs.hpp>
+#include <kyosu/functions/log_abs_gamma.hpp>
+#include <kyosu/functions/log_gamma.hpp>
 #include <kyosu/functions/log2.hpp>
 #include <kyosu/functions/lpart.hpp>
 #include <kyosu/functions/lipart.hpp>
 #include <kyosu/functions/ljpart.hpp>
 #include <kyosu/functions/lkpart.hpp>
 #include <kyosu/functions/lpnorm.hpp>
+#include <kyosu/functions/lrising_factorial.hpp>
+#include <kyosu/functions/rising_factorial.hpp>
 #include <kyosu/functions/manhattan.hpp>
 #include <kyosu/functions/maxabs.hpp>
 #include <kyosu/functions/maxmag.hpp>
@@ -143,34 +158,14 @@
 #include <kyosu/functions/tan.hpp>
 #include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
+#include <kyosu/functions/tgamma.hpp>
 #include <kyosu/functions/to_polar.hpp>
 #include <kyosu/functions/trunc.hpp>
-
-//======================================================================================================================
-//! @brief Functions performing computations over complex or real elements only.
-//======================================================================================================================
-
-#include <kyosu/complex/beta.hpp>
-#include <kyosu/complex/deta.hpp>
-#include <kyosu/complex/digamma.hpp>
-#include <kyosu/complex/erf.hpp>
-#include <kyosu/complex/erfcx.hpp>
-#include <kyosu/complex/erfi.hpp>
-#include <kyosu/complex/eta.hpp>
-#include <kyosu/complex/faddeeva.hpp>
-#include <kyosu/complex/lambda.hpp>
-#include <kyosu/complex/lbeta.hpp>
-#include <kyosu/complex/log_abs_gamma.hpp>
-#include <kyosu/complex/log_gamma.hpp>
-#include <kyosu/complex/lrising_factorial.hpp>
-#include <kyosu/complex/rising_factorial.hpp>
-#include <kyosu/complex/tgamma.hpp>
-#include <kyosu/complex/zeta.hpp>
+#include <kyosu/functions/zeta.hpp>
 
 //======================================================================================================================
 //! @brief Functions performing computations over quaternion complex or real elements only.
 //======================================================================================================================
-
 
 #include <kyosu/functions/align.hpp>
 #include <kyosu/functions/from_angle_axis.hpp>

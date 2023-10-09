@@ -12,19 +12,17 @@
 
 namespace kyosu::tags
 {
-  struct callable_erfi : eve::elementwise
+  struct callable_lambda : eve::elementwise
   {
-    using callable_tag_type = callable_erfi;
+    using callable_tag_type = callable_lambda;
 
-    KYOSU_DEFERS_CALLABLE(erfi_);
+    KYOSU_DEFERS_CALLABLE(lambda_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto over = eve::sqr(v) > 720;
-      auto r = eve::inf(eve::as(v))*eve::sign(v);
-      r = eve::if_else(over,  r, -kyosu::imag(kyosu::erf(complex(eve::zero(eve::as(v)), -v))));
-      return complex(r);
+      auto fn = callable_lambda{};
+      return fn(complex(v));
     }
 
     template<typename T>
@@ -34,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_erfi(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_lambda(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -44,8 +42,13 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var erfi
-//!   @brief Callable object computing The imaginary error function \f$ \displaystyle \mathrm{erfi}(z) = -i\mathrm{erf}(iz)\f$
+//!   @var lambda
+//! @brief Callable object computing The Dirichlet \f$ \displaystyle \lambda(z) = \sum_0^\infty \frac{1}{(2n+1)^z}\f$
+//!
+//! This function can be extended to the whole complex plane as \f$\lambda(z) = \zeta(z)(1-2^{-x})\f$
+//! (where \f$\zeta\f$ is the Riemann zeta function). It coincides with the serie where the serie converges.
+//! However for `z = 1` the result is \f$\infty\f$.
+//! The usual extension mechanism is used for general Cayleyâ-dickson values.
 //!
 //!   **Defined in Header**
 //!
@@ -58,8 +61,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto erfi(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto erfi(T z) noexcept;  //2
+//!      template<unsigned_scalar_value K, eve::ordered_value T>              constexpr auto lambda(T z) noexcept;  //1
+//!      template<unsigned_scalar_value K, kyosu::concepts::cayley-dickson T> constexpr auto lambda(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -69,12 +72,12 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   Returns the imaginary error function \f$ \displaystyle \mathrm{erfi}(z) = -i\mathrm{erf}(iz)\f$
+//!    Returns the Dirichlet sum \f$  \displaystyle \sum_0^\infty \frac{1}{(2n+1)^z}\f$
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/erfi.cpp}
+//!  @godbolt{doc/lambda.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_erfi erfi = {};
+inline constexpr tags::callable_lambda lambda = {};
 }

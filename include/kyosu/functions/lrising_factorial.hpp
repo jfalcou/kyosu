@@ -11,26 +11,25 @@
 
 namespace kyosu::tags
 {
-  struct callable_beta : eve::elementwise
+  struct callable_lrising_factorial : eve::elementwise
   {
-    using callable_tag_type = callable_beta;
+    using callable_tag_type = callable_lrising_factorial;
 
-    KYOSU_DEFERS_CALLABLE(beta_);
+    KYOSU_DEFERS_CALLABLE(lrising_factorial_);
 
     template<eve::ordered_value T1, eve::ordered_value T2>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T1 const& v, T2 const& w) noexcept {
-      auto fn = callable_beta{};
-      return fn(complex(v), w); }
+      auto fn = callable_lrising_factorial{};
+      return fn(complex(v), complex(w)); }
 
     template<typename T1, typename T2>
-    KYOSU_FORCEINLINE auto operator()(T1 const& target1, T2 const& target2) const noexcept
-    -> decltype(eve::tag_invoke(*this, target1, target2))
+    KYOSU_FORCEINLINE auto operator()(T1 const& target1, T2 const& target2) const noexcept -> decltype(eve::tag_invoke(*this, target1, target2))
     {
       return eve::tag_invoke(*this, target1, target2);
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_beta(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_lrising_factorial(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -40,9 +39,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var beta
-//!   @brief Computes the beta function: \f$\displaystyle \mathbf{B}(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$
-//!   for real or complex entries.
+//!   @var lrising_factorial
+//!   @brief Computes the lrising_factorial function: \f$\log\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
 //!
 //!   **Defined in Header**
 //!
@@ -55,23 +53,22 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      auto beta(auto x, auto y) noexcept;
+//!      auto lrising_factorial(auto x,auto y) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `x`,`y` : Values to process. Can be a mix of complex and real floating values and complex values.
+//!     * `x`,`y` : Values to process.
 //!
 //!   **Return value**
 //!
-//!     1.  If x and y are real typed values returns \f$\displaystyle \mathbf{B}(x,y) = \int_0^1 t^{x-1}(1-t)^{y-1}\mbox{d}t\f$
-//!     2.  if x or y is complex the value \f$\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
+//!   @brief Computes the logarithm of rising Factorial i.e. \f$\log\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/beta.cpp}
+//!  @godbolt{doc/lrising_factorial.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_beta beta = {};
+inline constexpr tags::callable_lrising_factorial lrising_factorial = {};
 }

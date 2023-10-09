@@ -8,18 +8,20 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
+#include <eve/module/math.hpp>
 
 namespace kyosu::tags
 {
-  struct callable_tgamma : eve::elementwise
+  struct callable_faddeeva : eve::elementwise
   {
-    using callable_tag_type = callable_tgamma;
+    using callable_tag_type = callable_faddeeva;
 
-    KYOSU_DEFERS_CALLABLE(tgamma_);
+    KYOSU_DEFERS_CALLABLE(faddeeva_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
-      auto fn = callable_tgamma{};
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
+    {
+      auto fn = callable_faddeeva{};
       return fn(complex(v));
     }
 
@@ -30,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_tgamma(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_faddeeva(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -40,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var tgamma
-//!   @brief Computes \f$\Gamma(z)\f$r.
+//!   @var faddeeva
+//!   @brief  Callable object computing \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex error func
 //!
 //!   **Defined in Header**
 //!
@@ -54,8 +56,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T>    constexpr T  tgamma(T z) noexcept;
-//!      template<eve::floating_ordered_value T> constexpr T  tgamma(T z) noexcept;
+//!      template<eve::ordered_value T>              constexpr auto faddeeva(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto faddeeva(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,14 +65,14 @@ namespace kyosu
 //!
 //!     * `z` : Value to process.
 //!
-//!   **Return value**
+//! **Return value**
 //!
-//!     Returns \f$\Gamma(z)\f$.
+//!   Returns \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex error function
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/tgamma.cpp}
+//!  @godbolt{doc/faddeeva.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_tgamma tgamma = {};
+inline constexpr tags::callable_faddeeva faddeeva = {};
 }

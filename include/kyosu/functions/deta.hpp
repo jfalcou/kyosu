@@ -12,26 +12,27 @@
 
 namespace kyosu::tags
 {
-  struct callable_erf : eve::elementwise
+  struct callable_deta : eve::elementwise
   {
-    using callable_tag_type = callable_erf;
+    using callable_tag_type = callable_deta;
 
-    KYOSU_DEFERS_CALLABLE(erf_);
+    KYOSU_DEFERS_CALLABLE(deta_);
 
-    template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
+    template<eve::unsigned_scalar_value K, eve::ordered_value T>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, K const & k, T const& v) noexcept
     {
-      return eve::erf(v);
+      auto fn = callable_deta{};
+      return fn(k, complex(v));
     }
 
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    template<typename K, typename T>
+    KYOSU_FORCEINLINE auto operator()(K const & target1, T const& target2) const noexcept -> decltype(eve::tag_invoke(*this, target1, target2))
     {
-      return eve::tag_invoke(*this, target);
+      return eve::tag_invoke(*this, target1, target2);
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_erf(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_deta(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -41,10 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var erf
-//!   @brief Computes the error function: \f$ \displaystyle
-//!   \mbox{erf}(x)=\frac{2}{\sqrt\pi}\int_0^{x} e^{-t^2}\mbox{d}t\f$ or
-//!   its analytic continuation in the complex plane
+//!   @var deta
+//!   @brief Computes the Dirichlet sums \f$ \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\f$.
 //!
 //!   **Defined in Header**
 //!
@@ -57,25 +56,23 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto erf(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto erf(T z) noexcept;  //2
+//!     constexpr auto deta(unsigned_scalar_value k, auto z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `k` : scalar unsigned value,  parameter of the sum.
+//!     * `z` : complex or real value to process.
 //!
 //! **Return value**
 //!
-//!   1. a real input z returns eve::erf(z).
-//!
-//!   2.  The value of the error function in the complex plane is returned
+//!   Returns the Dirichlet sum \f$  \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\f$
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/erf.cpp}
+//!  @godbolt{doc/deta.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_erf erf = {};
+inline constexpr tags::callable_deta deta = {};
 }

@@ -12,16 +12,16 @@
 
 namespace kyosu::tags
 {
-  struct callable_erfcx : eve::elementwise
+  struct callable_erf : eve::elementwise
   {
-    using callable_tag_type = callable_erfcx;
+    using callable_tag_type = callable_erf;
 
-    KYOSU_DEFERS_CALLABLE(erfcx_);
+    KYOSU_DEFERS_CALLABLE(erf_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      return eve::erfcx(v);
+      return eve::erf(v);
     }
 
     template<typename T>
@@ -31,7 +31,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_erfcx(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_erf(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -41,9 +41,10 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var erfcx
-//!   @brief Computes the normalized complementary error function
-//!   \f$ \displaystyle \mbox{erfcx}(x) = e^{x^2} \mbox{erfc}(x)\f$.
+//!   @var erf
+//!   @brief Computes the error function: \f$ \displaystyle
+//!   \mbox{erf}(x)=\frac{2}{\sqrt\pi}\int_0^{x} e^{-t^2}\mbox{d}t\f$ or
+//!   its extension to complex and general cayley-dickson values
 //!
 //!   **Defined in Header**
 //!
@@ -56,8 +57,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>       constexpr auto erfcx(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T> constexpr auto erfcx(T z) noexcept;  //2
+//!      constexpr auto erf(auto z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -67,14 +67,14 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z return eve::erfcx(z).
+//!   * a real input z returns eve::erf(z),  a real typed value.
 //!
-//!   2. The value of the normalized complementary error function is returned.
+//!   * The value of the error function is returned
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/erfcx.cpp}
+//!  @godbolt{doc/erf.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_erfcx erfcx = {};
+inline constexpr tags::callable_erf erf = {};
 }

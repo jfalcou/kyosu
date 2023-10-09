@@ -11,15 +11,15 @@
 
 namespace kyosu::tags
 {
-  struct callable_lrising_factorial : eve::elementwise
+  struct callable_rising_factorial : eve::elementwise
   {
-    using callable_tag_type = callable_lrising_factorial;
+    using callable_tag_type = callable_rising_factorial;
 
-    KYOSU_DEFERS_CALLABLE(lrising_factorial_);
+    KYOSU_DEFERS_CALLABLE(rising_factorial_);
 
     template<eve::ordered_value T1, eve::ordered_value T2>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T1 const& v, T2 const& w) noexcept {
-      auto fn = callable_lrising_factorial{};
+      auto fn = callable_rising_factorial{};
       return fn(complex(v), complex(w)); }
 
     template<typename T1, typename T2>
@@ -29,7 +29,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_lrising_factorial(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_rising_factorial(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -39,8 +39,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var lrising_factorial
-//!   @brief Computes the lrising_factorial function: \f$\log\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
+//!   @var rising_factorial
+//!   @brief Computes the rising_factorial function: \f$\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
 //!
 //!   **Defined in Header**
 //!
@@ -53,17 +53,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template< eve::floating_ordered_value T, eve::floating_ordered_value U >
-//!      auto lrising_factorial(T x,U y) noexcept;                                        //1
-//!
-//!      template< eve::floating_value T, eve::floating_value U >
-//!      auto lrising_factorial(eve::complex_t<T> x, U y) noexcept;                    //2
-//!
-//!      template< eve::floating_value T, eve::floating_value U >
-//!      auto lrising_factorial(T x, eve::complex_t<U> y) noexcept;                    //2
-//!
-//!      template< eve::floating_value T, eve::floating_value U >
-//!      auto lrising_factorial(eve::complex_t<T> x, eve::complex_t<U> y) noexcept; //2
+//!      constexpr auto rising_factorial(auto x,auto y) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -73,12 +63,12 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   @brief Computes the logarithm Rising Factorial function i.e. \f$\log\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
+//!   @brief Computes the rising Factorial i.e. \f$\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/lrising_factorial.cpp}
+//!  @godbolt{doc/rising_factorial.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_lrising_factorial lrising_factorial = {};
+inline constexpr tags::callable_rising_factorial rising_factorial = {};
 }

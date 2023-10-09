@@ -8,31 +8,30 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
 
 namespace kyosu::tags
 {
-  struct callable_eta : eve::elementwise
+  struct callable_log_abs_gamma : eve::elementwise
   {
-    using callable_tag_type = callable_eta;
+    using callable_tag_type = callable_log_abs_gamma;
 
-    KYOSU_DEFERS_CALLABLE(eta_);
+    KYOSU_DEFERS_CALLABLE(log_abs_gamma_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_eta{};
+      auto fn = callable_log_abs_gamma{};
       return fn(complex(v));
     }
 
     template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const & target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
     {
       return eve::tag_invoke(*this, target);
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_eta(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_log_abs_gamma(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -42,9 +41,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var eta
-//!   @brief Computes the Dirichlet sum \f$ \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\f$.
-//!   Sometimes this function is for obvious reasons called the alternative \f$\zeta\f$ function .
+//!   @var log_abs_gamma
+//!   @brief Computes the log of the modulus of the \f$\Gamma\f$ function of the parameter.
 //!
 //!   **Defined in Header**
 //!
@@ -57,23 +55,22 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<unsigned_scalar_value K, eve::ordered_value T>       constexpr auto eta(K, k, T z) noexcept;  //1
-//!      template<unsigned_scalar_value K, kyosu::concepts::complex T> constexpr auto eta(K, k, T z) noexcept;  //2
+//!     constexpr auto  log_abs_gamma(auto z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : complex or real value to process.
+//!     * `z` : Value to process.
 //!
-//! **Return value**
+//!   **Return value**
 //!
-//!   Returns the Dirichlet alternating zeta function: \f$  \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\f$
+//!     Returns \f$\log(|\Gamma(z)|)\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/eta.cpp}
+//!  @godbolt{doc/log_abs_gamma.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_eta eta = {};
+inline constexpr tags::callable_log_abs_gamma log_abs_gamma = {};
 }

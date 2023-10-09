@@ -8,30 +8,33 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
+#include <eve/module/math.hpp>
 
 namespace kyosu::tags
 {
-  struct callable_log_abs_gamma : eve::elementwise
+  struct callable_erfi : eve::elementwise
   {
-    using callable_tag_type = callable_log_abs_gamma;
+    using callable_tag_type = callable_erfi;
 
-    KYOSU_DEFERS_CALLABLE(log_abs_gamma_);
+    KYOSU_DEFERS_CALLABLE(erfi_);
 
     template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_log_abs_gamma{};
-      return fn(complex(v));
+      auto over = eve::sqr(v) > 720;
+      auto r = eve::inf(eve::as(v))*eve::sign(v);
+      r = eve::if_else(over,  r, -get<1>(kyosu::erf(complex(eve::zero(eve::as(v)), -v))));
+      return complex(r);
     }
 
     template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    KYOSU_FORCEINLINE auto operator()(T const & target) const noexcept -> decltype(eve::tag_invoke(*this, target))
     {
       return eve::tag_invoke(*this, target);
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_log_abs_gamma(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_erfi(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -41,8 +44,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var log_abs_gamma
-//!   @brief Computes the log of the modulus of the \f$\Gamma\f$ function of the parameter.
+//!   @var erfi
+//!   @brief Callable object computing The imaginary error function \f$ \displaystyle \mathrm{erfi}(z) = -i\mathrm{erf}(iz)\f$
 //!
 //!   **Defined in Header**
 //!
@@ -55,23 +58,23 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T>    constexpr T  log_abs_gamma(T z) noexcept;
-//!      template<eve::floating_ordered_value T> constexpr as_real_t<T>  log_abs_gamma(T z) noexcept;
+//!      template<eve::ordered_value T>              constexpr auto erfi(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto erfi(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : Value to process.
+//!     * `z` : complex or real value to process.
 //!
-//!   **Return value**
+//! **Return value**
 //!
-//!     Returns \f$\log(|\Gamma(z)|)\f$.
+//!   Returns the imaginary error function \f$ \displaystyle \mathrm{erfi}(z) = -i\mathrm{erf}(iz)\f$
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/log_abs_gamma.cpp}
+//!  @godbolt{doc/erfi.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_log_abs_gamma log_abs_gamma = {};
+inline constexpr tags::callable_erfi erfi = {};
 }

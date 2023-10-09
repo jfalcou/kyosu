@@ -40,7 +40,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var log_gamma
-//!   @brief Computes the log of the \f$\Gamma\f$ function of the parameter.
+//!   @brief Computes the log of the \f$\Gamma\f$ function.
 //!
 //!   **Defined in Header**
 //!
@@ -53,8 +53,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T>    constexpr auto  log_gamma(T z) noexcept;
-//!      template<eve::floating_ordered_value T> constexpr auto  log_gamma(T z) noexcept;
+//!      constexpr auto  log_gamma(T z) noexcept;
 //!   }
 //!   @endcode
 //!
