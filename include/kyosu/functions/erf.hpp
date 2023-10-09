@@ -57,7 +57,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      constexpr auto erf(auto z) noexcept;
+//!   {  template<eve::floating_ordered_value T>     constexpr T erf(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T erf(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -67,9 +68,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   * a real input z returns eve::erf(z),  a real typed value.
-//!
-//!   * The value of the error function is returned
+//!   * The value of the error function is returned.
 //!
 //!  @groupheader{Example}
 //!

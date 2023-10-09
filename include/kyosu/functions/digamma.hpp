@@ -52,7 +52,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto  digamma(T z) noexcept;
+//!     constexpr auto  digamma(auto z) noexcept;
 //!   }
 //!   @endcode
 //!

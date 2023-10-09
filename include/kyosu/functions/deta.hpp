@@ -56,7 +56,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto deta(unsigned_scalar_value k, auto z) noexcept;
+//!     constexpr auto deta(unsigned_scalar_value auto k, auto z) noexcept;
 //!   }
 //!   @endcode
 //!
