@@ -17,7 +17,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(dec_);
 
-    template<eve::floating_ordered_value T>
+    template<eve::ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::dec(v); }
 
     template<typename T>

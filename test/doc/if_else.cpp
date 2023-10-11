@@ -13,6 +13,5 @@ int main()
   auto t = 1.0f;
   auto r = kyosu::if_else(t > 2.0f, q, c);
   std::cout << r << std::endl;
-
   return 0;
 }
