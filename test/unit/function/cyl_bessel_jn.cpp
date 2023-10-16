@@ -33,25 +33,21 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
       TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_jn(3, c), res, 1.0e-7) << i <<  " <- " << c << '\n';
     }
   }
+
+  std::array<T, 8> re{-2.2013892240657134e+00, -2.8382367527759522e-01, -7.0737598522551182e-01, 8.6178612999047166e-02, 1.8217799341954277e-01, -7.6718326053284047e-01, -5.9167207480492257e-01, 7.5911892713725948e-01};
+
+  std::array<T, 8> im{8.7228967955690240e-01, -2.1140894389723703e+00, 2.2905192466959483e+00, -1.5275122978034243e+00, 5.5435596674685006e-01, -1.1418929858153533e+00, 1.1666506779144503e+00, -1.9198575359478032e+00};
+
+  std::array<T, 8> reres{-1.3672173596226031e-01, 1.2004993008474076e-01, 3.4070032613198098e-01, -1.5845109266378627e-02, -3.4617874091075179e-03, 5.4024365099246512e-02, 4.9541047773116346e-02, -2.1467277569289250e-01};
+
+  std::array<T, 8> imres{1.6497274394928027e-01, 2.3540711137379494e-01, -1.7769121638069371e-01, 8.4636178354763933e-02, -2.3973187185149024e-03, -1.7452629167850800e-02, -3.8485807736362864e-03, 5.8435910432745555e-02};
+  using e_t = eve::element_type_t<T>;
+
+  for(size_t i=0; i < re.size(); ++i)
+  {
+    auto c = kyosu::complex(re[i], im[i]);
+    auto res = kyosu::complex(reres[i], imres[i]);
+    double tol = (sizeof(e_t) == 4) ? 1.e-3 :1.e-7;
+    TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_jn(3, c), res, tol) << i <<  " <- " << c << '\n';
+  }
 };
-
-// TTS_CASE_WITH ( "Check kyosu::abs over complex"
-//               , kyosu::real_types
-//               , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10))
-//               )
-// (auto r, auto i)
-// {
-//   TTS_EQUAL(kyosu::abs(kyosu::complex(r,i)), eve::hypot(r, i));
-// };
-
-// TTS_CASE_WITH ( "Check kyosu::abs over quaternion"
-//               , kyosu::real_types
-//               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
-//                               , tts::randoms(-10,10), tts::randoms(-10,10)
-//                               )
-//               )
-// <typename T>(T r, T i, T j, T k)
-// {
-//   using type = kyosu::quaternion_t<T>;
-//   TTS_EQUAL(kyosu::abs(type(r,i,j,k)), eve::hypot(r, i, j, k));
-// };

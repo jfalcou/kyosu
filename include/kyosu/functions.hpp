@@ -47,6 +47,8 @@
 #include <kyosu/functions/csc.hpp>
 #include <kyosu/functions/cscpi.hpp>
 #include <kyosu/functions/csch.hpp>
+#include <kyosu/functions/cyl_bessel_i0.hpp>
+#include <kyosu/functions/cyl_bessel_i1.hpp>
 #include <kyosu/functions/cyl_bessel_in.hpp>
 #include <kyosu/functions/cyl_bessel_j0.hpp>
 #include <kyosu/functions/cyl_bessel_j1.hpp>

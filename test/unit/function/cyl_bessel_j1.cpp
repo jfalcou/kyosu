@@ -14,7 +14,8 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
               )
 <typename T>(T )
 {
-  if constexpr(sizeof(T) == 8)
+  using e_t = eve::element_type_t<T>;
+  if constexpr(sizeof(e_t) == 8)
   {
     std::cout.precision(17);
     std::array<T, 10> re{ -9.8403264736233908e+01, 8.6287324687322851e+01, 2.8677183208357349e+01, 7.5642931882481321e+01, 9.6351793077594323e+01
@@ -33,25 +34,19 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
       TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_j1(c), res, 1.0e-7) << i <<  " <- " << c << '\n';
     }
   }
+  std::cout.precision(17);
+  std::array<T, 8> re{2.175102683907268e+00, 3.007738475083643e-01, 3.571791197760752e+00, 1.916834892035037e+00, 2.309329011574615e+00, 1.116302757926106e+00, 3.454188251414261e+00, 2.504516854443353e+00};
+  std::array<T, 8> im{  3.008362577802520e+00, 3.733804275914350e+00, 2.988312632706299e+00, 4.411110052057489e+00, 3.055249958745497e+00, 2.508994160634028e+00, 3.100976745146938e-01, 3.854880352108083e+00};
+
+  std::array<T, 8> reres{3.6097545599299043e+00, 2.0607036224436954e+00, -2.1724057594208968e-01, 1.3644664632775582e+01, 3.5380568884368788e+00, 2.1507545829381751e+00, 1.5764037998430128e-01, 6.2619292962097814e+00};
+  std::array<T, 8> imres{-1.3891357467781533e+00, 7.3810832876707710e+00, -3.4818290031753225e+00, -2.4845686655182946e+00, -1.8826359832772270e+00, 1.3851339474357725e+00, -1.3157891968242472e-01, -5.2738074786282327e+00};
+  for(int i=0; i < 8; ++i)
+  {
+    auto c = kyosu::complex(re[i], im[i]);
+    auto res = kyosu::complex(reres[i], imres[i]);
+    double tol = (sizeof(e_t) == 4) ? 1.e-3 :1.e-7;
+    TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_j1(c), res, tol) << i <<  " <- " << c << '\n';
+    TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_j1(re[i]), kyosu::real(kyosu::cyl_bessel_j1(kyosu::complex(re[i], e_t(0.0)))), tol)<< re[i] << '\n';
+    TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_j1(im[i]), kyosu::real(kyosu::cyl_bessel_j1(kyosu::complex(im[i], e_t(0.0)))), tol)<< re[i] << '\n';
+  }
 };
-
-// TTS_CASE_WITH ( "Check kyosu::abs over complex"
-//               , kyosu::real_types
-//               , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10))
-//               )
-// (auto r, auto i)
-// {
-//   TTS_EQUAL(kyosu::abs(kyosu::complex(r,i)), eve::hypot(r, i));
-// };
-
-// TTS_CASE_WITH ( "Check kyosu::abs over quaternion"
-//               , kyosu::real_types
-//               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
-//                               , tts::randoms(-10,10), tts::randoms(-10,10)
-//                               )
-//               )
-// <typename T>(T r, T i, T j, T k)
-// {
-//   using type = kyosu::quaternion_t<T>;
-//   TTS_EQUAL(kyosu::abs(type(r,i,j,k)), eve::hypot(r, i, j, k));
-// };

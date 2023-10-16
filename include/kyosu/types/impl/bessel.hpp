@@ -421,4 +421,33 @@ namespace kyosu::_
       return cayley_extend_rev(cyl_bessel_in, n, z);
     }
   }
+
+
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_i0>, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      return cyl_bessel_in(0, z);
+    }
+    else
+    {
+      return cayley_extend(cyl_bessel_i0, z);
+    }
+  }
+
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_i1>, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      return cyl_bessel_in(1, z);
+    }
+    else
+    {
+      return cayley_extend(cyl_bessel_i1, z);
+    }
+  }
+
+
 }
