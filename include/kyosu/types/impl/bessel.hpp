@@ -106,7 +106,7 @@ namespace kyosu::_
           auto m = eve::one((eve::as<e_t>()));
 
           auto z2 = sqr(z);
-           if (eve::scalar_value<e_t>)
+           if constexpr(eve::scalar_value<e_t>)
            {
              for ( int m=1; m<=bds; m++ )
              {
