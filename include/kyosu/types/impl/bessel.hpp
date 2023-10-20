@@ -44,127 +44,154 @@
 //!
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <kyosu/types/impl/detail/besselj0.hpp>
 namespace kyosu::_
 {
 
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_j0
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_j0>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      using e_t = as_real_t<Z>;
-      auto saz = kyosu::sqr_abs(z);
+//   //===-------------------------------------------------------------------------------------------
+//   //  cyl_bessel_j0
+//   //===-------------------------------------------------------------------------------------------
+//   template<typename Z>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_j0>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       using e_t = as_real_t<Z>;
+//       using u_t = eve::underlying_type_t<e_t>;
+//       auto saz = kyosu::sqr_abs(z);
 
-      auto ascending_series_cyl_j0 = [](auto z)
-        {
-//          std::cout << "ascending z " << z << std::endl;
-          // Ascending Series from G. N. Watson 'A treatise on the
-          //  theory of Bessel functions', 2ed, Cambridge, 1996,
-          //  Chapter II, equation (3); or from Equation 9.1.12 of
-          //  M. Abramowitz, I. A. Stegun 'Handbook of Mathematical
-          //  Functions'.
-          // good for abs(z) < 12
-          auto eps = eve::eps(eve::as<e_t>());
-          auto j0 = complex(eve::one((eve::as<e_t>())));
-          auto sm = j0;
-          auto test = sqr_abs(sm) >= eps*sqr_abs(j0);
-          auto  m(eve::one(eve::as<e_t>()));
-          auto z2 = - sqr(z);
-          while(eve::any(test))
-          {
-            sm *= z2*e_t(0.25)/sqr(m);
-            j0 = if_else(test, j0+sm, j0);
-            test = sqr_abs(sm) >= eps*sqr_abs(j0);
-            m = inc(m);
-          }
-          return j0;
-        };
+//       auto ascending_series_cyl_j0 = [](auto z)
+//         {
+// //          std::cout << "ascending z " << z << std::endl;
+//           // Ascending Series from G. N. Watson 'A treatise on the
+//           //  theory of Bessel functions', 2ed, Cambridge, 1996,
+//           //  Chapter II, equation (3); or from Equation 9.1.12 of
+//           //  M. Abramowitz, I. A. Stegun 'Handbook of Mathematical
+//           //  Functions'.
+//           // good for abs(z) < 12
+//           std::cout << "ascending" << std::endl;
+//           auto eps = eve::eps(eve::as<e_t>());
+//           auto j0 = complex(eve::one((eve::as<e_t>())));
+//           auto sm = j0;
+//           auto test = sqr_abs(sm) >= eps*sqr_abs(j0);
+//           auto  m(eve::one(eve::as<e_t>()));
+//           auto z2 = - sqr(z);
+//           while(eve::any(test))
+//           {
+//             sm *= z2*e_t(0.25)/sqr(m);
+//             j0 = if_else(test, j0+sm, j0);
+//             test = sqr_abs(sm) >= eps*sqr_abs(j0);
+//             m = inc(m);
+//           }
+//           return j0;
+//         };
 
-      auto semiconvergent_series_cyl_j0 = [saz](auto z)
-        {
-//          std::cout << "semi z " << z << std::endl;
-          auto bound_compute = [saz]()
-          {
-//            std::cout << "saz " << saz << std::endl;
-            auto bds = eve::if_else(saz < 50*50, e_t(10), e_t(8));
-            bds = eve::if_else(saz < 35*35, e_t(12), bds);
-//            std::cout << "bds " << bds << std::endl;
-            return bds;
-          };
+//       auto semiconvergent_series_cyl_j0 = [saz](auto z)
+//         {
+// //          std::cout << "semi z " << z << std::endl;
+//           auto bound_compute = [saz]()
+//           {
+// //            std::cout << "saz " << saz << std::endl;
+//             auto bds = eve::if_else(saz < 50*50, e_t(10), e_t(8));
+//             bds = eve::if_else(saz < 35*35, e_t(12), bds);
+//             bds = eve::if_else(saz < 12*12, e_t(0),  bds);
+//             std::cout << "bds " << bds << std::endl;
+//             return bds;
+//           };
 
-          // Stokes Semiconvergent Series from A. Gray, G. B. Mathews 'A
-          //  treatise on Bessel functions and their applications to
-          //  physics, 1895.
-          auto Pm = complex(eve::one((eve::as<e_t>())));
-          auto Qm = rec(8*z);
-          auto P = Pm;
-          auto Q = Qm;
-          auto bds = bound_compute();
-          auto m = eve::one((eve::as<e_t>()));
+//           // DLMF 10.17.1 Hankel expansion tabulated p[i] = a[2i],  q[i] = a{2i°1]
+//           std::array<u_t, 14> p{1.0000000000000000e+00, 7.0312500000000000e-02, 1.1215209960937500e-01, 5.7250142097473145e-01,
+//               6.0740420012734830e+00, 1.1001714026924674e+02, 3.0380905109223841e+03, 1.1883842625678323e+05, 6.2529514934347952e+06,
+//               4.2593921650476676e+08, 3.6468400807065552e+10,3.8335346613939438e+12, 4.8540146868528994e+14, 7.2868573493776544e+16};
 
-          auto z2 = sqr(z);
-           if constexpr(eve::scalar_value<e_t>)
-           {
-             for ( int m=1; m<=bds; m++ )
-             {
-               e_t pim = e_t(4*m-3)*e_t(4*m-3)*e_t(4*m-1)*e_t(4*m-1) / ( e_t(2*m-1)*e_t(128*m) );
-               Pm = -Pm*pim/(z2);
-               e_t xim = e_t(4*m-1)*e_t(4*m-1)*e_t(4*m+1)*e_t(4*m+1) / ( e_t(2*m+1)*e_t(128*m) );
-               Qm = -Qm*xim/(z2);
-               P += Pm;
-               Q += Qm;
-             }
-             auto [s, c] = kyosu::sincos(z);
-             e_t isqtpi(5.641895835477563e-01);
-             auto r = isqtpi*(c*(P-Q) + s*(P+Q))/(kyosu::sqrt(z)); ;
-             return r;
-           }
-           else
-           {
-            auto  bound_not_reached = m <= bds;
-            while (eve::any(bound_not_reached))
-            {
-              auto twom = m+m;
-              auto fourm = twom+twom;
-              auto pim = sqr((fourm-3)*(fourm-1))/((twom-1)*128*m);
-              Pm = kyosu::if_else(bound_not_reached, -Pm*pim/z2, Pm);
-              auto xim =  sqr((fourm-1)*(fourm+1))/((twom+1)*128*m);
-              Qm = kyosu::if_else(bound_not_reached, -Qm*xim/z2, Qm);
-              P = kyosu::if_else(bound_not_reached, P+Pm, P);
-              Q = kyosu::if_else(bound_not_reached, Q+Qm, Q);
-              m = inc(m);
-              bound_not_reached = m <= bds;
-            }
-            auto [s, c] = kyosu::sincos(z);
-            auto r = (c*(P-Q) + s*(P+Q))/kyosu::sqrt(z*eve::pi(eve::as<e_t>()));
-            return r;
-          };
-        };
+//           std::array<u_t, 14> q{-1.2500000000000000e-01, -7.3242187500000000e-02, -2.2710800170898438e-01, -1.7277275025844574e+00,
+//               -2.4380529699556064e+01, -5.5133589612202059e+02, -1.8257755474293172e+04, -8.3285930401628907e+05, -5.0069589531988911e+07,
+//               -3.8362551802304325e+09, -3.6490108188498328e+11, -4.2189715702840953e+13, -5.8272446315669060e+15, -9.4762880992601062e+17};
 
-      auto rzneg = eve::is_ltz(real(z));
-      z = if_else(rzneg, -z, z);
+//           // Stokes Semiconvergent Series from A. Gray, G. B. Mathews 'A
+//           //  treatise on Bessel functions and their applications to
+//           //  physics, 1895.
+//           //
+//           std::cout << "semi" << std::endl;
+//           if constexpr(eve::scalar_value<e_t>)
+//           {
+// //            std::cout << "icitte" << std::endl;
+//             auto Pm = complex(u_t(p[0]));
+//             auto Qm = complex(u_t(q[0]));
+//             auto rz = rec(z);
+//             auto rz2 = sqr(rz);
+//             auto P = Pm;
+//             auto Q = Qm;
+//             size_t bds = bound_compute();
+//             for ( size_t m=1; m<=bds; m++ )
+//             {
+//               Pm *= -Pm*p[m]*rz2;
+//               Qm *= -Qm*q[m]*rz2;
+//  //              Pm = -Pm*Pm*p[m]*rz2;
+// //               Qm = -Pm*Qm*q[m]*rz2;
 
-      auto r = kyosu::if_else(is_eqz(saz), Z(1), eve::nan(eve::as(saz)));
-      auto notdone = kyosu::is_nan(r);
+//               P += Pm;
+//               Q += Qm;
+//             }
+//             Q*= rec(z);
+//             auto [s, c] = kyosu::sincos(z);
+//             e_t isqtpi(5.641895835477563e-01);
+//             auto r = isqtpi*(c*(P+Q) + s*(P-Q))/(kyosu::sqrt(z)); ;
+//             return r;
+//           }
+//           else
+//           {
+//             //            std::cout << "latte" << std::endl;
+//             auto zero = complex(u_t(0));
+//             auto Pm = complex(e_t(p[0]));
+//             auto Qm = complex(e_t(q[0]));
+//             auto rz = rec(z);
+//             auto rz2 = sqr(rz);
+//             auto P = Pm;
+//             auto Q = Qm;
+//             auto bds = bound_compute();
+//             //           std::cout << "bds " << bds << std::endl;
+//             size_t im = 1;
+//             auto  bound_not_reached = u_t(im) <= bds;
+//             while (eve::any(bound_not_reached))
+//             {
+//               std::cout << "im " << im << std::endl;
+//               Pm *= kyosu::if_else(bound_not_reached, -Pm*p[im]*rz2, zero);
+//               Qm *= kyosu::if_else(bound_not_reached, -Qm*q[im]*rz2, zero);
+//               P += Pm;
+//               Q += Qm;
+//               im = inc(im);
+//               bound_not_reached = u_t(im) <= bds;
+//             }
+//             Q *= rec(z);
+//             auto [s, c] = kyosu::sincos(z);
+//             e_t isqtpi(5.641895835477563e-01);
+//             auto r = isqtpi*(c*(P+Q) + s*(P-Q))/(kyosu::sqrt(z)); ;
+//             return r;
+//           };
+//         };
 
-      if( eve::any(notdone) )
-      {
-        notdone = next_interval(ascending_series_cyl_j0, notdone, saz <= as_real_t<Z>(144), r, z);
-        if( eve::any(notdone) )
-        {
-          last_interval(semiconvergent_series_cyl_j0, notdone, r, z);
-        }
-      }
-      return r;
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_j0, z);
-    }
-  }
+//       auto rzneg = eve::is_ltz(real(z));
+//       z = if_else(rzneg, -z, z);
+
+//       auto r = kyosu::if_else(is_eqz(saz), Z(1), eve::nan(eve::as(saz)));
+//       auto notdone = kyosu::is_nan(r);
+
+//       if( eve::any(notdone) )
+//       {
+//         notdone = next_interval(ascending_series_cyl_j0, notdone, saz <= as_real_t<Z>(144), r, z);
+//         if( eve::any(notdone) )
+//         {
+//           last_interval(semiconvergent_series_cyl_j0, notdone, r, z);
+//         }
+//       }
+//       return r;
+//     }
+//     else
+//     {
+//       return cayley_extend(cyl_bessel_j0, z);
+//     }
+//   }
 
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_j1
@@ -175,6 +202,7 @@ namespace kyosu::_
     if constexpr(concepts::complex<Z> )
     {
       using e_t = as_real_t<Z>;
+      using u_t = eve::underlying_type_t<e_t>;
       auto saz = kyosu::sqr_abs(z);
 
       auto ascending_series_cyl_j1 = [](auto z){
@@ -211,30 +239,83 @@ namespace kyosu::_
           // Stokes Semiconvergent Series from A. Gray, G. B. Mathews 'A
           //  treatise on Bessel functions and their applications to
           //  physics, 1895.
-          auto Pm = complex(eve::one((eve::as<e_t>())));
-          auto Qm = -e_t(0.375)*rec(z); //-8*rec(3*z);
-          auto P = Pm;
-          auto Q = Qm;
-          auto bds = bound_compute();
-          auto m = eve::one((eve::as<e_t>()));
-          auto  bound_not_reached = m <= bds;
-          auto z2 = sqr(z);
-          while (eve::any(bound_not_reached))
+          if constexpr(false && eve::scalar_value<e_t>)
           {
-            auto twom = m+m;
-            auto fourm = twom+twom;
-            auto pim = (4-sqr(fourm-3))*(4-sqr(fourm-1))/((twom-1)*128*m);
-            Pm = kyosu::if_else(bound_not_reached, -Pm*pim/z2, Pm);
-            auto xim =  (sqr(fourm-1)-4)*(sqr(fourm+1)-4)/((twom+1)*128*m);
-            Qm = kyosu::if_else(bound_not_reached, -Qm*xim/z2, Qm);
-            P += Pm;
-            Q += Qm;
-            m = inc(m);
-            bound_not_reached = m <= bds;
+
+            std::array<u_t, 14> p{1.0000000000000000e+00, -1.1718750000000000e-01, -1.4419555664062500e-01, -6.7659258842468262e-01,
+                -6.8839142681099474e+00, -1.2159789187653587e+02, -3.3022722944808525e+03, -1.2764127264617461e+05, -6.6563677188176867e+06,
+                -4.5027860030503923e+08, -3.8338575207427895e+10, -4.0118385991331973e+12, -5.0605685033147256e+14, -7.5726164611179552e+16};
+
+            std::array<u_t, 14> q{3.7500000000000000e-01, 1.0253906250000000e-01, 2.7757644653320312e-01, 1.9935317337512970e+00,
+                2.7248827311268542e+01, 6.0384407670507017e+02, 1.9718375912236628e+04, 8.9029787670706783e+05, 5.3104110109685220e+07,
+                4.0436203251077538e+09, 3.8270113465986060e+11,4.4064814178522781e+13, 6.0650913512226980e+15, 9.8338838765906790e+17};
+//             std::array<u_t, 14> p{1.0000000000000000e+00, 1.1718750000000000e-01, -1.4419555664062500e-01, 6.7659258842468262e-01,
+//                 -6.8839142681099474e+00, 1.2159789187653587e+02, -3.3022722944808525e+03, 1.2764127264617461e+05, -6.6563677188176867e+06,
+//                 4.5027860030503923e+08, -3.8338575207427887e+10, 4.0118385991331968e+12, -5.0605685033147250e+14, 7.5726164611179552e+16};
+//             std::array<u_t, 14> q{-3.7500000000000000e-01, 1.0253906250000000e-01, -2.7757644653320312e-01, 1.9935317337512970e+00,
+//                 -2.7248827311268542e+01, 6.0384407670507028e+02, -1.9718375912236632e+04, 8.9029787670706806e+05, -5.3104110109685242e+07,
+//                 4.0436203251077561e+09, -3.8270113465986078e+11, 4.4064814178522805e+13, -6.0650913512227020e+15, +9.8338838765906842e+17};
+
+            auto Pm = complex(u_t(p[0]));
+            auto Qm = complex(u_t(q[0]));
+            auto rz = rec(z);
+            auto rz2 = sqr(rz);
+            auto P = Pm;
+            auto Q = Qm;
+            size_t bds = bound_compute();
+            for ( size_t m=1; m<=bds; m++ )
+            {
+               Pm *= -Pm*p[m]*rz2;
+               Qm *= -Qm*q[m]*rz2;
+               P+= Pm;
+               Q+= Qm;
+//               P += p[m]*rz2;
+//               Q += q[m]*rz2;
+//              std::cout << "m " << m << " -> " << Pm <<  " --- " << Qm/z << std::endl;
+            }
+            Q *= rz;
+            auto pio4 = eve::pio_4(eve::as<u_t>());
+            auto [s, c] = kyosu::sincos(z+pio4);
+            e_t isqtpi(5.641895835477563e-01);
+//            auto r = isqtpi*(c*(P+Q) + s*(P-Q))/(kyosu::sqrt(z));
+//            auto r = isqtpi*(s*(P-Q) + c*(P+Q))/(kyosu::sqrt(z)); ;
+            auto r = isqtpi*(s*P+c*Q)*rz;
+            return r;
           }
-          auto [s, c] = kyosu::sincos(z);
-          return (s*(P-Q)-c*(P+Q))/kyosu::sqrt(z*eve::pi(eve::as<e_t>()));
-      };
+          else
+          {
+            auto Pm = complex(eve::one((eve::as<e_t>())));
+            auto Qm = -e_t(0.375)*rec(z);
+            auto P = Pm;
+            auto Q = Qm;
+            auto bds = bound_compute();
+            auto m = eve::one((eve::as<e_t>()));
+            auto  bound_not_reached = m <= bds;
+            auto PPm = Pm;
+            auto QQm = -3*Pm/8;
+            auto z2 = sqr(z);
+            while (eve::any(bound_not_reached))
+            {
+              auto twom = m+m;
+              auto fourm = twom+twom;
+              auto pim = (4-sqr(fourm-3))*(4-sqr(fourm-1))/((twom-1)*128*m);
+              PPm = -PPm*pim;
+//              std::cout << m << "  -> " << std::scientific << PPm << std::endl;
+              Pm = kyosu::if_else(bound_not_reached, -Pm*pim/z2, Pm);
+              auto xim =  (sqr(fourm-1)-4)*(sqr(fourm+1)-4)/((twom+1)*128*m);
+              QQm = -QQm*xim;
+//              std::cout << m << "  -> " << std::scientific << QQm << std::endl;
+              Qm = kyosu::if_else(bound_not_reached, -Qm*xim/z2, Qm);
+              P += Pm;
+              Q += Qm;
+//              std::cout << "m " << int(m) << " -> " << Pm <<  " --- " << Qm << std::endl;
+              m = inc(m);
+              bound_not_reached = m <= bds;
+            }
+            auto [s, c] = kyosu::sincos(z);
+            return (s*(P-Q)-c*(P+Q))/kyosu::sqrt(z*eve::pi(eve::as<e_t>()));
+          }
+        };
 
       auto rzneg = eve::is_ltz(real(z));
       z = if_else(rzneg, -z, z);
@@ -452,139 +533,157 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_y0
   //===-------------------------------------------------------------------------------------------
-  template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_y0>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      using e_t = as_real_t<Z>;
-      auto saz = kyosu::sqr_abs(z);
+//   template<typename Z>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_y0>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       using e_t = as_real_t<Z>;
+//       using u_t = eve::underlying_type_t<Z>;
+//       auto saz = kyosu::sqr_abs(z);
 
-      auto ascending_series_cyl_y0 = [](auto z)
-        {
-          std::cout << "ascending z " << z << std::endl;
-          // Ascending Series from G. N. Watson 'A treatise on the
-          //  theory of Bessel functions', 2ed, Cambridge, 1996,
-          //  Chapter II, equation (3); or from Equation 9.1.12 of
-          //  M. Abramowitz, I. A. Stegun 'Handbook of Mathematical
-          //  Functions'.
-          // good for abs(z) < 12
-          using u_t = eve::underlying_type_t<Z>;
-          auto g =eve::egamma(eve::as<u_t>());// u_t(0.5772156649015328606);
-          auto twoopi= eve::two_o_pi(eve::as<u_t>());
-          auto eps = eve::eps(eve::as<u_t>());
-          auto hk(eve::zero(eve::as<u_t>()));
-          auto z2o_4 = sqr(z*e_t(0.5));
-          auto n(eve::one(eve::as<u_t>()));
-          auto sgn(eve::one(eve::as<u_t>()));
-          auto t = complex(eve::one ((eve::as<e_t>())));
-          auto s = complex(eve::zero((eve::as<e_t>())));
-          auto ds= complex(eve::zero((eve::as<e_t>())));
-          auto test = sqr_abs(ds) >= eps*sqr_abs(s);
+//       auto ascending_series_cyl_y0 = [](auto z) {
+// //          std::cout << "ascending z " << z << std::endl;
+//         // Ascending Series from G. N. Watson 'A treatise on the
+//         //  theory of Bessel functions', 2ed, Cambridge, 1996,
+//         //  Chapter II, equation (3); or from Equation 9.1.12 of
+//         //  M. Abramowitz, I. A. Stegun 'Handbook of Mathematical
+//         //  Functions'.
+//         // good for abs(z) < 12
+//         using u_t = eve::underlying_type_t<Z>;
+//         auto g =eve::egamma(eve::as<u_t>());// u_t(0.5772156649015328606);
+//         auto twoopi= eve::two_o_pi(eve::as<u_t>());
+//         auto eps = eve::eps(eve::as<u_t>());
+//         auto hk(eve::zero(eve::as<u_t>()));
+//         auto z2o_4 = sqr(z*e_t(0.5));
+//         auto n(eve::one(eve::as<u_t>()));
+//         auto sgn(eve::one(eve::as<u_t>()));
+//         auto t = complex(eve::one ((eve::as<e_t>())));
+//         auto s = complex(eve::zero((eve::as<e_t>())));
+//         auto ds= complex(eve::zero((eve::as<e_t>())));
+//         auto test = sqr_abs(ds) >= eps*sqr_abs(s);
 
-          while(eve::any(test))
-          {
-            std::cout << "sgn " << sgn << std::endl;
-            std::cout << "nn  " << eve::sqr(n)<< std::endl;
-            std::cout << "z2o_4 " << z2o_4 << std::endl;
-            std::cout << "n     " << n     << std::endl;
-            auto recn = rec(n);
-            hk += recn;
-            t *= z2o_4*sqr(recn);
-            ds = hk*t;
-            auto dssgn = sgn*ds;
-            std::cout << "dssgn     " << dssgn  << std::endl;
-            s = if_else(test, s+dssgn, s);
-            std::cout  << " s " << s << std::endl;
-            test = sqr_abs(ds) >= sqr(eps)*sqr_abs(s);
-            n = inc(n);
-            sgn = -sgn;
-          }
-          return ((kyosu::log(z*eve::half(eve::as<u_t>()))+g)*kyosu::cyl_bessel_j0(z)+s)*twoopi;
-        };
+//         while(eve::any(test))
+//         {
+// //             std::cout << "sgn " << sgn << std::endl;
+// //             std::cout << "nn  " << eve::sqr(n)<< std::endl;
+// //             std::cout << "z2o_4 " << z2o_4 << std::endl;
+// //             std::cout << "n     " << n     << std::endl;
+//           auto recn = rec(n);
+//           hk += recn;
+//           t *= z2o_4*sqr(recn);
+//           ds = hk*t;
+//           auto dssgn = sgn*ds;
+// //            std::cout << "dssgn     " << dssgn  << std::endl;
+//           s = if_else(test, s+dssgn, s);
+// //            std::cout  << " s " << s << std::endl;
+//           test = sqr_abs(ds) >= sqr(eps)*sqr_abs(s);
+//           n = inc(n);
+//           sgn = -sgn;
+//         }
+//         return ((kyosu::log(z*eve::half(eve::as<u_t>()))+g)*kyosu::cyl_bessel_j0(z)+s)*twoopi;
+//       };
 
-      auto semiconvergent_series_cyl_y0 = [saz](auto z)
-        {
-          return z;
-// //          std::cout << "semi z " << z << std::endl;
-//           auto bound_compute = [saz]()
-//           {
+//       auto semiconvergent_series_cyl_y0 = [saz](auto z) {
+//         std::cout << "semi z " << z << std::endl;
+//         auto bound_compute = [saz]()
+//         {
 // //            std::cout << "saz " << saz << std::endl;
-//             auto bds = eve::if_else(saz < 50*50, e_t(10), e_t(8));
-//             bds = eve::if_else(saz < 35*35, e_t(12), bds);
-// //            std::cout << "bds " << bds << std::endl;
-//             return bds;
-//           };
+//           auto bds = eve::if_else(saz < 50*50, e_t(10), e_t(8));
+//           bds = eve::if_else(saz < 35*35, e_t(12), bds);
+//           bds = eve::if_else(saz < 12*12, e_t(1),  bds);
+//           std::cout << "bds " << bds << std::endl;
+//           return bds;
+//         };
 
-//           // Stokes Semiconvergent Series from A. Gray, G. B. Mathews 'A
-//           //  treatise on Bessel functions and their applications to
-//           //  physics, 1895.
-//           auto Pm = complex(eve::one((eve::as<e_t>())));
-//           auto Qm = rec(8*z);
-//           auto P = Pm;
-//           auto Q = Qm;
-//           auto bds = bound_compute();
-//           auto m = eve::one((eve::as<e_t>()));
+//         // Stokes Semiconvergent Series from A. Gray, G. B. Mathews 'A
+//         //  treatise on Bessel functions and their applications to
+//         //  physics, 1895.
+// //         auto Pm = complex(eve::one((eve::as<e_t>())));
+// //         auto Qm = rec(8*z);
+//         auto P = complex(eve::one((eve::as<e_t>())));
+//         auto Q = u_t(0.375)/z;
+//         auto bds = bound_compute();
+//         auto m = eve::one((eve::as<e_t>()));
 
-//           auto z2 = sqr(z);
-//            if constexpr(eve::scalar_value<e_t>)
-//            {
-//              for ( int m=1; m<=bds; m++ )
-//              {
-//                e_t pim = e_t(4*m-3)*e_t(4*m-3)*e_t(4*m-1)*e_t(4*m-1) / ( e_t(2*m-1)*e_t(128*m) );
-//                Pm = -Pm*pim/(z2);
-//                e_t xim = e_t(4*m-1)*e_t(4*m-1)*e_t(4*m+1)*e_t(4*m+1) / ( e_t(2*m+1)*e_t(128*m) );
-//                Qm = -Qm*xim/(z2);
-//                P += Pm;
-//                Q += Qm;
-//              }
-//              auto [s, c] = kyosu::sincos(z);
-//              e_t isqtpi(5.641895835477563e-01);
-//              auto r = isqtpi*(c*(P-Q) + s*(P+Q))/(kyosu::sqrt(z)); ;
-//              return r;
-//            }
-//            else
-//            {
-//             auto  bound_not_reached = m <= bds;
-//             while (eve::any(bound_not_reached))
-//             {
-//               auto twom = m+m;
-//               auto fourm = twom+twom;
-//               auto pim = sqr((fourm-3)*(fourm-1))/((twom-1)*128*m);
-//               Pm = kyosu::if_else(bound_not_reached, -Pm*pim/z2, Pm);
-//               auto xim =  sqr((fourm-1)*(fourm+1))/((twom+1)*128*m);
-//               Qm = kyosu::if_else(bound_not_reached, -Qm*xim/z2, Qm);
-//               P = kyosu::if_else(bound_not_reached, P+Pm, P);
-//               Q = kyosu::if_else(bound_not_reached, Q+Qm, Q);
-//               m = inc(m);
-//               bound_not_reached = m <= bds;
-//             }
-//             auto [s, c] = kyosu::sincos(z);
-//             auto r = (c*(P-Q) + s*(P+Q))/kyosu::sqrt(z*eve::pi(eve::as<e_t>()));
-//             return r;
-//           };
-        };
+//         auto rz2 = rec(sqr(z));
+//         if constexpr(eve::scalar_value<e_t>)
+//         {
+//           //A1
+//           std::array<u_t, 12> p{1.0000000000000000e+00, 1.1718750000000000e-01, -1.4419555664062500e-01, 6.7659258842468262e-01,
+//               -6.8839142681099474e+00, 1.2159789187653587e+02, -3.3022722944808525e+03, 1.2764127264617461e+05, -6.6563677188176867e+06,
+//               4.5027860030503923e+08, -3.8338575207427887e+10, 4.0118385991331968e+12}; //, -5.0605685033147250e+14, 7.5726164611179552e+16 };
+//           //B1
+//           std::array<u_t, 12> q{3.7500000000000000e-01, -1.0253906250000000e-01, 2.7757644653320312e-01, -1.9935317337512970e+00,
+//               2.7248827311268542e+01, -6.0384407670507028e+02, 1.9718375912236632e+04, -8.9029787670706806e+05, 5.3104110109685242e+07,
+//               -4.0436203251077561e+09, 3.8270113465986078e+11, -4.4064814178522805e+13}; //, 6.0650913512227020e+15, -9.8338838765906842e+17 };
+//           auto zz = complex(eve::one((eve::as<e_t>())));;
+//           for ( int m=1; m<bds; ++m )
+//           {
 
-      auto rzneg = eve::is_ltz(real(z));
-      z = if_else(rzneg, -z, z);
+//             P += p[m]*pow(z, -2*m);
+//             Q += q[m]*pow(z, -2*m-1);
+//             //           zz   *= rz2;
+//           }
+// //          Q*= rec(z);
+// //          auto [s, c] = kyosu::sincos(z);
+//           auto t2 = z-u_t(0.75)*eve::pi(eve::as<u_t>());
+//           auto [s, c] = kyosu::sincos(t2);
+//           e_t sqtpio2(1.253314137315500);
+// //          isqtpi = e_t isqtpi(5.641895835477563e-01);
+//           auto r = sqtpio2*(c*P-s*Q)/(kyosu::sqrt(z)*sqtpio2);
+//  //auto r = (c*(Q-P) + s*(P+Q))/(kyosu::sqrt(z)*sqtpio2);
+//           return r;
+// //           auto log2mg = u_t(0.1159315156584124488107);
+//           //     auto r = sqtpio2*(c*Q-s*P)/kyosu::sqrt(z);
+// //          return (eve::log_2(eve::as<u_t>())-eve::egamma(eve::as<u_t>()))*cyl_bessel_j0(z)+ r;
+// //          return log2mg*cyl_bessel_j0(z)+r;
+//         }
+//         else
+//         {
+//           return z;
+// //           auto  bound_not_reached = m <= bds;
+// //           while (eve::any(bound_not_reached))
+// //           {
+// //             auto twom = m+m;
+// //             auto fourm = twom+twom;
+// //             auto pim = sqr((fourm-3)*(fourm-1))/((twom-1)*128*m);
+// //             Pm = kyosu::if_else(bound_not_reached, -Pm*pim/z2, Pm);
+// //             auto xim =  sqr((fourm-1)*(fourm+1))/((twom+1)*128*m);
+// //             Qm = kyosu::if_else(bound_not_reached, -Qm*xim/z2, Qm);
+// //             P = kyosu::if_else(bound_not_reached, P+Pm, P);
+// //             Q = kyosu::if_else(bound_not_reached, Q+Qm, Q);
+// //             m = inc(m);
+// //             bound_not_reached = m <= bds;
+// //           }
+// //           auto [s, c] = kyosu::sincos(z);
+// // //          e_t sqtpio2(1.253314137315500);
+// //           e_t sqtpi(1.772453850905516);
+// //           auto r = sqtpi*(c*(Q-P) + s*(P+Q))/kyosu::sqrt(z);
+// //           return (eve::log_2(eve::as<u_t>()-eve::egamma(eve::as<u_t>())))*cyl_bessel_j0(z)+r;
+//         };
+//       };
 
-      auto r = kyosu::if_else(is_eqz(saz), Z(1), eve::nan(eve::as(saz)));
-      auto notdone = kyosu::is_nan(r);
+//       auto rzneg = eve::is_ltz(real(z));
+//       z = if_else(rzneg, -z, z);
 
-      if( eve::any(notdone) )
-      {
-        notdone = next_interval(ascending_series_cyl_y0, notdone, saz <= as_real_t<Z>(144), r, z);
-        if( eve::any(notdone) )
-        {
-          last_interval(semiconvergent_series_cyl_y0, notdone, r, z);
-        }
-      }
-      return r;
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_y0, z);
-    }
-  }
+//       auto r = kyosu::if_else(is_eqz(saz), Z(1), eve::nan(eve::as(saz)));
+//       auto notdone = kyosu::is_nan(r);
+
+//       if( eve::any(notdone) )
+//       {
+//         notdone = next_interval(ascending_series_cyl_y0, notdone, saz <= as_real_t<Z>(144), r, z);
+//         if( eve::any(notdone) )
+//         {
+//           last_interval(semiconvergent_series_cyl_y0, notdone, r, z);
+//         }
+//       }
+//       return r;
+//     }
+//     else
+//     {
+//       return cayley_extend(cyl_bessel_y0, z);
+//     }
+//   }
 
 }
