@@ -55,14 +55,14 @@ auto pr = [](auto name, auto p){
    if(i != p.size()-1) std::cout << ",  ";
    if(i%4 == 0) std::cout << "\n  ";
  }
-  std::cout << "\n}; ";
+  std::cout << "}\n; ";
 
 };
 
 int main()
 {
   constexpr size_t N = 14;
-  auto [p, q] = stokes_gen<N, double>(0u);
+  auto [p, q] = stokes_gen<N, double>(1u);
   pr("p =  ", p);
   pr("q =  ", q);
   std::array<double, N+1> pq, qp;
@@ -72,7 +72,7 @@ int main()
   for(size_t i=1; i < N+1 ; ++i)
   {
     pq[i] = p[i]*q[i-1];
-    qp[i] = q[i]*p[i-1];
+    qp[i] = q[i]*p[i];
   }
    pr("pq =  ", pq);
    pr("qp =  ", qp);
