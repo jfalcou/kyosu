@@ -26,8 +26,8 @@ int main()
   std::cout << "1.0+36.0i+2.0j+1.5k " << " -> " << cyl_bessel_j0(kyosu::quaternion(1.0, 36.0, 2.0, 1.5)) << "\n";
 
 
-  eve::wide<double, eve::fixed<2>> z1(1.0, 2.0),  z2(36.0, 0.5);
-  auto z3 = kyosu::complex(z1, z2);
-  std::cout << z3 << " -> " << cyl_bessel_j0(z3) << "\n";
+  eve::wide<double, eve::fixed<4>> z1(1.0, 2.0, 40.0, 0.0),  z2(36.0, 0.5, 0.0, 40.0);
+  auto z0 = kyosu::complex(z1, z2);
+  std::cout << z0 << "\n -> " << cyl_bessel_j0(z0) << "\n";
   return 0;
 }

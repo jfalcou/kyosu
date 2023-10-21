@@ -28,17 +28,17 @@ namespace kyosu::_
         //  M. Abramowitz, I. A. Stegun 'Handbook of Mathematical
         //  Functions'.
         // good for abs(z) < 12
-        auto eps = sqr(eve::eps(eve::as<e_t>()));
+        auto eps2 = sqr(eve::eps(eve::as<e_t>()));
         auto j1 = complex(eve::one((eve::as<e_t>())));
         auto sm = j1;
-        auto test = sqr_abs(sm) >= eps*sqr_abs(j1);
+        auto test = sqr_abs(sm) >= eps2*sqr_abs(j1);
         auto  m(eve::one(eve::as<e_t>()));
         auto z2o_4 = - sqr(z)*e_t(0.25);
         while(eve::any(test))
         {
           sm *= z2o_4/(m*inc(m));
           j1 += sm;
-          test = sqr_abs(sm) >= eps*sqr_abs(j1);
+          test = sqr_abs(sm) >= eps2*sqr_abs(j1);
           m = inc(m);
         }
         return j1*eve::half(eve::as<e_t>())*z;
