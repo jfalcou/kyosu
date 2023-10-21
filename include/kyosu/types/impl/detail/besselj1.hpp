@@ -28,7 +28,7 @@ namespace kyosu::_
         //  M. Abramowitz, I. A. Stegun 'Handbook of Mathematical
         //  Functions'.
         // good for abs(z) < 12
-        auto eps = eve::eps(eve::as<e_t>());
+        auto eps = sqr(eve::eps(eve::as<e_t>()));
         auto j1 = complex(eve::one((eve::as<e_t>())));
         auto sm = j1;
         auto test = sqr_abs(sm) >= eps*sqr_abs(j1);
@@ -54,7 +54,7 @@ namespace kyosu::_
             return bds;
           };
 
-          // DLMF 10.17.1 Hankel expansion tabulated p[i] = a[2i],  q[i] = a{2i°1]
+          // DLMF 10.17.1 Hankel expansion tabulated p[i] = a[2*i],  q[i] = a{2*i+1]
           std::array<u_t, 15> pim{1.0000000000000000e+00,
               -1.1718750000000000e-01,  1.2304687500000000e+00,  4.6921875000000002e+00,  1.0174386160714286e+01,
               1.7664062500000004e+01,  2.7157315340909090e+01,  3.8652558379120876e+01,  5.2149023437499999e+01,
@@ -74,38 +74,31 @@ namespace kyosu::_
           auto P = Pm;
           auto Q = Qm;
           auto bds = bound_compute();
-          if constexpr(eve::scalar_value<e_t>)
-           {
-             for ( size_t im=1; im<=bds; ++im)
-             {
-               Pm *= -pim[im]*rz2;
-               Qm *= -xim[im]*rz2;
-               P += Pm;
-               Q += Qm;
-             }
-             //    auto sh = eve::three_quarters_pi(eve::as<u_t>());
-             auto [s, c] = kyosu::sincos(z);
-             e_t isqtpi(5.641895835477563e-01);
-             auto r = isqtpi*(c*(Q-P) + s*(P+Q))/(kyosu::sqrt(z)); ;
-             return r;
-          }
-          else
+          auto zero = Z{};
+          size_t im = 1;
+          auto  bound_not_reached = u_t(im) <= bds;
+
+          while (eve::any(bound_not_reached))
           {
-            size_t im = 1;
-            auto  bound_not_reached = u_t(im) <= bds;
-            while (eve::any(bound_not_reached))
+            auto m = u_t(im);
+            Pm *= -pim[im]*rz2;
+            Qm *= -xim[im]*rz2;
+            if constexpr(eve::scalar_value<e_t>)
             {
-              Pm *= -pim[im]*rz2;
-              Qm *= -xim[im]*rz2;
               P += Pm;
               Q += Qm;
-              bound_not_reached = u_t(++im) <= bds;
             }
-            auto [s, c] = kyosu::sincos(z);
-            e_t isqtpi(5.641895835477563e-01);
-            auto r = isqtpi*(c*(P-Q) + s*(P+Q))/(kyosu::sqrt(z)); ;
-            return r;
-          };
+            else
+            {
+              P += kyosu::if_else(bound_not_reached, Pm, zero);
+              Q += kyosu::if_else(bound_not_reached, Qm, zero);
+            }
+            bound_not_reached = u_t(++im) <= bds;
+          }
+          auto [s, c] = kyosu::sincos(z);
+          u_t rsqrtpi = eve::rsqrt_pi(eve::as<u_t>());
+          auto r = rsqrtpi*(s*(P-Q) - c*(P+Q))/(kyosu::sqrt(z));
+          return r;
         };
 
       auto rzneg = eve::is_ltz(real(z));
