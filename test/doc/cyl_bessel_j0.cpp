@@ -6,7 +6,7 @@ int main()
 {
   using kyosu::cyl_bessel_j0;
   std::cout.precision(16);
-  std::cout << std::scientific << std::endl;
+
   std::cout << "1.0   " << " -> " << cyl_bessel_j0(1.0) << "\n";
   std::cout << "1+0i  " << " -> " << cyl_bessel_j0(kyosu::complex(1.0, 0.0)) << "\n";
   std::cout << "15.0  " << " -> " << cyl_bessel_j0(15.0) << "\n";

@@ -11,7 +11,7 @@ int main()
   std::cout << "1.0             " << " -> " << cyl_bessel_in(n,1.0) << "\n";
   std::cout << "1+0i            " << " -> " << cyl_bessel_in(n,kyosu::complex(1.0, 0.0)) << "\n";
   std::cout << "15.0            " << " -> " << cyl_bessel_in(n,15.0) << "\n";
-  std::cout << "15+0i           " << " -> " << cyl_bessel_in(n,kyosu::complex-(5.0, 0.0)) << "\n";
+  std::cout << "15+0i           " << " -> " << cyl_bessel_in(n,kyosu::complex(15.0, 0.0)) << "\n";
   std::cout << "40.0            " << " -> " << cyl_bessel_in(n,40.0) << "\n";
   std::cout << "40+0i           " << " -> " << cyl_bessel_in(n,kyosu::complex(40.0, 0.0)) << "\n";
   std::cout << "60.0            " << " -> " << cyl_bessel_in(n,60.0) << "\n";

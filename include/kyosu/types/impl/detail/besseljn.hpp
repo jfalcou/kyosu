@@ -42,6 +42,7 @@ namespace kyosu::_
         auto az = kyosu::abs(z);
 
         auto forward = [n](auto z){
+          std::cout << "\nforward\n";
           auto b0 = cyl_bessel_j0(z);
           auto b1 = cyl_bessel_j1(z);
           Z bn;
@@ -52,6 +53,7 @@ namespace kyosu::_
             b0 = b1;
             b1 = bn;
           }
+          real(bn) = eve::if_else(is_pure(z), eve::zero, real(bn));
           return bn;
         };
 
@@ -114,6 +116,7 @@ namespace kyosu::_
         };
 
         auto backward = [az, n, ini_for_br_1, ini_for_br_2](auto z){
+          std::cout << "\nbackward\n";
           auto m = ini_for_br_1(az, e_t(200));
           m = eve::if_else ( m >= n, ini_for_br_2(n, az, e_t(15)), m);
           auto cf2 = Z(0);
@@ -145,7 +148,7 @@ namespace kyosu::_
         auto notdone = kyosu::is_nan(r);
         if( eve::any(notdone) )
         {
-          notdone = next_interval(forward, notdone, 8*n < az, r, z);
+          notdone = next_interval(forward, notdone, 4*n < az, r, z);
           if( eve::any(notdone) )
           {
             last_interval(backward, notdone, r, z);
