@@ -42,7 +42,6 @@ namespace kyosu::_
         auto az = kyosu::abs(z);
 
         auto forward = [n](auto z){
-          std::cout << "\nforward\n";
           auto b0 = cyl_bessel_j0(z);
           auto b1 = cyl_bessel_j1(z);
           Z bn;
@@ -116,7 +115,6 @@ namespace kyosu::_
         };
 
         auto backward = [az, n, ini_for_br_1, ini_for_br_2](auto z){
-          std::cout << "\nbackward\n";
           auto m = ini_for_br_1(az, e_t(200));
           m = eve::if_else ( m >= n, ini_for_br_2(n, az, e_t(15)), m);
           auto cf2 = Z(0);

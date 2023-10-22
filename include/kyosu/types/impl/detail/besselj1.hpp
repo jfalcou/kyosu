@@ -101,8 +101,8 @@ namespace kyosu::_
           return r;
         };
 
-      auto isnegiz = eve::is_ltz(imag(z));
-      z = if_else(isnegiz, -z, z);
+      auto izneg = eve::is_ltz(imag(z));
+      z = if_else(izneg, conj(z), z);
       auto rzneg = eve::is_ltz(real(z));
       z = if_else(rzneg, -z, z);
 
@@ -118,7 +118,8 @@ namespace kyosu::_
         }
       }
       real(r) = eve::if_else(is_pure(z), eve::zero, real(r));
-      return  if_else(isnegiz, -r, r);
+      r = if_else(rzneg, -r, r);
+      return  if_else(izneg, conj(r), r);
     }
     else
     {

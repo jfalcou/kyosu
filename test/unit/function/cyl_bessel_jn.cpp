@@ -51,3 +51,28 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
     TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_jn(3, c), res, tol) << i <<  " <- " << c << '\n';
   }
 };
+
+
+TTS_CASE_WITH ( "Check kyosu::abs over real"
+              , kyosu::real_types
+              , tts::generate(tts::randoms(-10,10),
+                              tts::randoms(-10,10)
+                             )
+              )
+<typename T>(T a0, T a1)
+{
+//  if constexpr(sizeof(eve::underlying_type_t<T>) == 8)
+  {
+    auto c =  kyosu::complex(a0, a1);
+    auto cb=  kyosu::conj(c);
+    auto cm=  -c;
+    auto cr=  kyosu::complex(a0);
+    auto ci=  kyosu::complex(T(0), a1);
+    using kyosu::cyl_bessel_jn;
+    auto jnc = cyl_bessel_jn(3, c);
+    TTS_IEEE_EQUAL(jnc, -cyl_bessel_jn(3, cm)) << "c " << c << "\n";
+    TTS_IEEE_EQUAL(jnc, kyosu::conj(cyl_bessel_jn(3, cb)));
+    TTS_EXPECT(eve::all(kyosu::is_real(cr)));
+    TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
+  }
+};

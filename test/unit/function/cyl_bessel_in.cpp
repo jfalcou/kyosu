@@ -50,3 +50,25 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
     TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_in(3, c), res, tol) << i <<  " <- " << c << '\n';
   }
 };
+
+
+TTS_CASE_WITH ( "Check kyosu::abs over real"
+              , kyosu::real_types
+              , tts::generate(tts::randoms(-10,10),
+                              tts::randoms(-10,10)
+                             )
+              )
+<typename T>(T a0, T a1)
+{
+  auto c =  kyosu::complex(a0, a1);
+  auto cb=  kyosu::conj(c);
+  auto cm=  -c;
+  auto cr=  kyosu::complex(a0);
+  auto ci=  kyosu::complex(T(0), a1);
+  using kyosu::cyl_bessel_in;
+  auto inc = cyl_bessel_in(3, c);
+  TTS_IEEE_EQUAL(inc, -cyl_bessel_in(3, cm));
+  TTS_IEEE_EQUAL(inc, kyosu::conj(cyl_bessel_in(3, cb)));
+  TTS_EXPECT(eve::all(kyosu::is_real(cr)));
+  TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
+};
