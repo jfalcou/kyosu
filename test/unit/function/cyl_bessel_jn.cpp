@@ -61,18 +61,17 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
               )
 <typename T>(T a0, T a1)
 {
-//  if constexpr(sizeof(eve::underlying_type_t<T>) == 8)
-  {
-    auto c =  kyosu::complex(a0, a1);
-    auto cb=  kyosu::conj(c);
-    auto cm=  -c;
-    auto cr=  kyosu::complex(a0);
-    auto ci=  kyosu::complex(T(0), a1);
-    using kyosu::cyl_bessel_jn;
-    auto jnc = cyl_bessel_jn(3, c);
-    TTS_IEEE_EQUAL(jnc, -cyl_bessel_jn(3, cm)) << "c " << c << "\n";
-    TTS_IEEE_EQUAL(jnc, kyosu::conj(cyl_bessel_jn(3, cb)));
-    TTS_EXPECT(eve::all(kyosu::is_real(cr)));
-    TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
-  }
+  auto c =  kyosu::complex(a0, a1);
+  auto cb=  kyosu::conj(c);
+  auto cm=  -c;
+  auto cr=  kyosu::complex(a0);
+  auto ci=  kyosu::complex(T(0), a1);
+  using kyosu::cyl_bessel_jn;
+  auto jnc = cyl_bessel_jn(3, c);
+  TTS_IEEE_EQUAL(jnc, -cyl_bessel_jn(3, cm)) << "c " << c << "\n";
+  TTS_IEEE_EQUAL(jnc, kyosu::conj(cyl_bessel_jn(3, cb)));
+  TTS_EXPECT(eve::all(kyosu::is_real(cr)));
+  TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
+  auto z =   kyosu::complex(T(0), T(0));
+  TTS_IEEE_EQUAL(cyl_bessel_jn(3, z), z);
 };
