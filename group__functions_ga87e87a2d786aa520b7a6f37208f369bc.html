@@ -143,17 +143,17 @@ $(document).ready(function(){initNavTree('group__functions_ga87e87a2d786aa520b7a
 </div><div class="memdoc">
 
 <p>Callable object computing The Dirichlet \( \displaystyle \lambda(z) = \sum_0^\infty \frac{1}{(2n+1)^z}\). </p>
-<p>This function can be extended to the whole complex plane as \(\lambda(z) = \zeta(z)(1-2^{-x})\) (where \(\zeta\) is the Riemann zeta function). It coincides with the serie where the serie converges. However for <code>z = 1</code> the result is \(\infty\).</p>
+<p>This function can be extended to the whole complex plane as \(\lambda(z) = \zeta(z)(1-2^{-x})\) (where \(\zeta\) is the Riemann zeta function). It coincides with the serie where the serie converges. However for <code>z = 1</code> the result is \(\infty\). The usual extension mechanism is used for general Cayleyâ-dickson values.</p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span>_scalar_value K, eve::ordered_value T&gt;       <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">lambda</a>(K, k, T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span>_scalar_value K, kyosu::concepts::complex T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">lambda</a>(K, k, T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span>_scalar_value K, eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">lambda</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;unsigned_scalar_value K, kyosu::concepts::cayley-dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">lambda</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga87e87a2d786aa520b7a6f37208f369bc_html_ga87e87a2d786aa520b7a6f37208f369bc"><div class="ttname"><a href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">kyosu::lambda</a></div><div class="ttdeci">constexpr tags::callable_lambda lambda</div><div class="ttdoc">Callable object computing The Dirichlet .</div><div class="ttdef"><b>Definition:</b> lambda.hpp:81</div></div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
+<div class="ttc" id="agroup__functions_ga87e87a2d786aa520b7a6f37208f369bc_html_ga87e87a2d786aa520b7a6f37208f369bc"><div class="ttname"><a href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">kyosu::lambda</a></div><div class="ttdeci">constexpr tags::callable_lambda lambda</div><div class="ttdoc">Callable object computing The Dirichlet .</div><div class="ttdef"><b>Definition:</b> lambda.hpp:82</div></div>
+<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> types.hpp:14</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code> : complex or real value to process.</li>

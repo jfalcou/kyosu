@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu/complex Directory Reference</title>
+<title>kyosu: kyosu::cyl_bessel_y0</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('dir_cc5d1005398dc97e68496b52c0cb5ac3.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_gaa83c3abe27e3ecd25b8eccdada1b8f2d.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,17 +121,58 @@ $(document).ready(function(){initNavTree('dir_cc5d1005398dc97e68496b52c0cb5ac3.h
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">complex Directory Reference</div></div>
-</div><!--header-->
 <div class="contents">
+<a id="gaa83c3abe27e3ecd25b8eccdada1b8f2d" name="gaa83c3abe27e3ecd25b8eccdada1b8f2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa83c3abe27e3ecd25b8eccdada1b8f2d">&#9670;&#160;</a></span>cyl_bessel_y0</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kyosu::cyl_bessel_y0 = {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Computes the Bessel function of the second kind,  \( J_0(x)=\frac1{\pi }\int _{0}^{\pi}\cos(x\sin \tau)
+  \,\mathrm {d} \tau \) extended to the complex plane and cayley_dickson values. </p>
+<p>In the real field, it is the solution of \( x^{2}y&#39;&#39;+xy&#39;+x^2y=0\) for which \( y(0) = 1\).</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaa83c3abe27e3ecd25b8eccdada1b8f2d.html#gaa83c3abe27e3ecd25b8eccdada1b8f2d">cyl_bessel_y0</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T    <a class="code hl_variable" href="group__functions_gaa83c3abe27e3ecd25b8eccdada1b8f2d.html#gaa83c3abe27e3ecd25b8eccdada1b8f2d">cyl_bessel_y0</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__functions_gaa83c3abe27e3ecd25b8eccdada1b8f2d_html_gaa83c3abe27e3ecd25b8eccdada1b8f2d"><div class="ttname"><a href="group__functions_gaa83c3abe27e3ecd25b8eccdada1b8f2d.html#gaa83c3abe27e3ecd25b8eccdada1b8f2d">kyosu::cyl_bessel_y0</a></div><div class="ttdeci">constexpr tags::callable_cyl_bessel_y0 cyl_bessel_y0</div><div class="ttdoc">Computes the Bessel function of the second kind,   extended to the complex plane and cayley_dickson v...</div><div class="ttdef"><b>Definition:</b> cyl_bessel_y0.hpp:75</div></div>
+<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> types.hpp:14</div></div>
+</div><!-- fragment --><p><b>Parameters</b></p>
+<ul>
+<li><code>z</code>: Value to process.</li>
+</ul>
+<p><b>Return value</b></p>
+<ul>
+<li>return the cylindrical \(J_0(z)\).</li>
+</ul>
+<h2 class="groupheader">Example </h2>
+<div class="fragment"></div><!-- fragment --> 
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_23e6206bbfca4c239e48a9df5ece59a6.html">kyosu</a></li><li class="navelem"><a class="el" href="dir_cc5d1005398dc97e68496b52c0cb5ac3.html">complex</a></li>
+    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::is_finite</title>
+<title>kyosu: kyosu::cyl_bessel_j0</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_gaca9f3f8f0c75ddbff90
 </div>
 
 <div class="contents">
-<a id="gaca9f3f8f0c75ddbff90aab0785d7a23f" name="gaca9f3f8f0c75ddbff90aab0785d7a23f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaca9f3f8f0c75ddbff90aab0785d7a23f">&#9670;&#160;</a></span>is_finite</h2>
+<a id="gaeae54b007bf49f4ff84a5f73e3c9b0a8" name="gaeae54b007bf49f4ff84a5f73e3c9b0a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaeae54b007bf49f4ff84a5f73e3c9b0a8">&#9670;&#160;</a></span>cyl_bessel_j0</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_gaca9f3f8f0c75ddbff90
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::is_finite = {}</td>
+          <td class="memname">kyosu::cyl_bessel_j0 = {}</td>
         </tr>
       </table>
   </td>
@@ -142,23 +142,26 @@ $(document).ready(function(){initNavTree('group__functions_gaca9f3f8f0c75ddbff90
 </table>
 </div><div class="memdoc">
 
-<p>test if the parameter is finite. </p>
-<p><b>Defined in Header</b></p>
+<p>Computes the Bessel function of the first kind,  \( J_0(x)=\frac1{\pi }\int _{0}^{\pi}\cos(x\sin \tau)
+  \,\mathrm {d} \tau \) extended to the complex plane and cayley_dickson values. </p>
+<p>In the real field, it is the solution of \( x^{2}y&#39;&#39;+xy&#39;+x^2y=0\) for which \( y(0) = 1\).</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T    <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f_html_gaca9f3f8f0c75ddbff90aab0785d7a23f"><div class="ttname"><a href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">kyosu::is_finite</a></div><div class="ttdeci">constexpr tags::callable_is_finite is_finite</div><div class="ttdoc">test if the parameter is finite.</div><div class="ttdef"><b>Definition:</b> is_finite.hpp:72</div></div>
+<div class="ttc" id="agroup__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8_html_gaeae54b007bf49f4ff84a5f73e3c9b0a8"><div class="ttname"><a href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">kyosu::cyl_bessel_j0</a></div><div class="ttdeci">constexpr tags::callable_cyl_bessel_j0 cyl_bessel_j0</div><div class="ttdoc">Computes the Bessel function of the first kind,   extended to the complex plane and cayley_dickson va...</div><div class="ttdef"><b>Definition:</b> cyl_bessel_j0.hpp:75</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> types.hpp:14</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns elementwise true is all component of the element are finite .</p>
+<ul>
+<li>return the cylindrical \(J_0(z)\).</li>
+</ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -166,52 +169,35 @@ $(document).ready(function(){initNavTree('group__functions_gaca9f3f8f0c75ddbff90
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">kyosu::is_finite</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>;</div>
-<div class="line">  <span class="keyword">using </span>eve::as;</div>
-<div class="line">  <span class="keyword">using </span>e_t = float;</div>
-<div class="line">  <span class="keyword">using </span>c_t = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;float&gt;</a>;</div>
-<div class="line">  <span class="keyword">using </span>q_t = <a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t&lt;float&gt;</a>;</div>
-<div class="line">  <span class="keyword">using </span>we_t = eve::wide&lt;e_t, eve::fixed&lt;4&gt;&gt;;</div>
-<div class="line">  <span class="keyword">using </span>wc_t = eve::wide&lt;c_t, eve::fixed&lt;4&gt;&gt;;</div>
-<div class="line">  <span class="keyword">using </span>wq_t = eve::wide&lt;q_t, eve::fixed&lt;4&gt;&gt;;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">kyosu::cyl_bessel_j0</a>;</div>
+<div class="line">  std::cout.precision(16);</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        \n&quot;</span>;</div>
-<div class="line">  e_t e(2.9f);</div>
-<div class="line">  e_t nan = eve::nan(as(e));</div>
-<div class="line">  e_t inf = eve::inf(as(e));</div>
-<div class="line">  e_t zer = eve::zero(as(e));</div>
-<div class="line">  we_t we = we_t(e, zer, nan, inf);</div>
-<div class="line">  std::cout &lt;&lt; e &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(e) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; we &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(we) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout               &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(c_t(e))&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout               &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(q_t(e))&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout               &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(we))&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout               &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(<a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">kyosu::quaternion</a>(we))&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0   &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(1.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1+0i  &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(1.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;15.0  &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(15.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;15+0i &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(15.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;40.0  &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(40.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;40+0i &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(40.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;60.0  &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(60.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;60+0i &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(60.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     \n&quot;</span>;</div>
-<div class="line">  c_t c(3.5f,-2.9f);</div>
-<div class="line">  c_t d(0.0f, inf);</div>
-<div class="line">  wc_t wc = wc_t(c, zer, nan, d);</div>
-<div class="line">  std::cout &lt;&lt; c &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(c) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; wc &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(wc) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout                 &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(wc))&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;;</div>
-<div class="line">  std::cout                 &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(<a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">kyosu::quaternion</a>(wc))&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  eve::wide&lt;double, eve::fixed&lt;4&gt;&gt; z(1.0, 15.0, 40.0, 60.0);</div>
+<div class="line">  <span class="keyword">auto</span> zz = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(z);</div>
+<div class="line">  std::cout &lt;&lt; z &lt;&lt; <span class="stringliteral">&quot; -&gt; \n&quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(z) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; zz &lt;&lt; <span class="stringliteral">&quot; -&gt; \n&quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(zz) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  \n&quot;</span>;</div>
-<div class="line">  q_t q(3.5f,-2.9f, 2.1f, 3.2f);</div>
-<div class="line">  q_t r(3.5f, nan, inf, zer);</div>
-<div class="line">  wq_t wq = wq_t(q, zer, nan, r);</div>
-<div class="line">  std::cout &lt;&lt; q &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(q) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; wq &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaca9f3f8f0c75ddbff90aab0785d7a23f.html#gaca9f3f8f0c75ddbff90aab0785d7a23f">is_finite</a>(wq) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0                 &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(1.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0+36.0i           &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(1.0, 36.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0+36.0i+2.0j+1.5k &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(<a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">kyosu::quaternion</a>(1.0, 36.0, 2.0, 1.5)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  eve::wide&lt;double, eve::fixed&lt;4&gt;&gt; z1(1.0, 2.0, 40.0, 0.0),  z2(36.0, 0.5, 0.0, 40.0);</div>
+<div class="line">  <span class="keyword">auto</span> z0 = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(z1, z2);</div>
+<div class="line">  std::cout &lt;&lt; z0 &lt;&lt; <span class="stringliteral">&quot;\n -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeae54b007bf49f4ff84a5f73e3c9b0a8.html#gaeae54b007bf49f4ff84a5f73e3c9b0a8">cyl_bessel_j0</a>(z0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_gae0cdc9d2dae205852268d4c5cdca6578_html_gae0cdc9d2dae205852268d4c5cdca6578"><div class="ttname"><a href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a></div><div class="ttdeci">constexpr tags::callable_complex complex</div><div class="ttdoc">Constructs a kyosu::complex.</div><div class="ttdef"><b>Definition:</b> to_complex.hpp:70</div></div>
 <div class="ttc" id="agroup__functions_gae6df724ac822c7361d9ea9252e62d0a4_html_gae6df724ac822c7361d9ea9252e62d0a4"><div class="ttname"><a href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">kyosu::quaternion</a></div><div class="ttdeci">constexpr tags::callable_quaternion quaternion</div><div class="ttdoc">Constructs a kyosu::quaternion.</div><div class="ttdef"><b>Definition:</b> to_quaternion.hpp:72</div></div>
-<div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:27</div></div>
-<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

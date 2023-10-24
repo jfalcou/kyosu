@@ -143,26 +143,25 @@ $(document).ready(function(){initNavTree('group__functions_gacb0340f73510f30b99a
 </div><div class="memdoc">
 
 <p>Computes the error function: \( \displaystyle
-  \mbox{erf}(x)=\frac{2}{\sqrt\pi}\int_0^{x} e^{-t^2}\mbox{d}t\) or its analytic continuation in the complex plane. </p>
+  \mbox{erf}(x)=\frac{2}{\sqrt\pi}\int_0^{x} e^{-t^2}\mbox{d}t\) or its extension to complex and general cayley-dickson values. </p>
 <p><b>Defined in Header</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;       <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gacb0340f73510f30b99ad37fa82c22e8f.html#gacb0340f73510f30b99ad37fa82c22e8f">erf</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gacb0340f73510f30b99ad37fa82c22e8f.html#gacb0340f73510f30b99ad37fa82c22e8f">erf</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
+<div class="line">{  <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gacb0340f73510f30b99ad37fa82c22e8f.html#gacb0340f73510f30b99ad37fa82c22e8f">erf</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gacb0340f73510f30b99ad37fa82c22e8f.html#gacb0340f73510f30b99ad37fa82c22e8f">erf</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gacb0340f73510f30b99ad37fa82c22e8f_html_gacb0340f73510f30b99ad37fa82c22e8f"><div class="ttname"><a href="group__functions_gacb0340f73510f30b99ad37fa82c22e8f.html#gacb0340f73510f30b99ad37fa82c22e8f">kyosu::erf</a></div><div class="ttdeci">constexpr tags::callable_erf erf</div><div class="ttdoc">Computes the error function:  or its analytic continuation in the complex plane.</div><div class="ttdef"><b>Definition:</b> erf.hpp:80</div></div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> beta.hpp:13</div></div>
+<div class="ttc" id="agroup__functions_gacb0340f73510f30b99ad37fa82c22e8f_html_gacb0340f73510f30b99ad37fa82c22e8f"><div class="ttname"><a href="group__functions_gacb0340f73510f30b99ad37fa82c22e8f.html#gacb0340f73510f30b99ad37fa82c22e8f">kyosu::erf</a></div><div class="ttdeci">constexpr tags::callable_erf erf</div><div class="ttdoc">Computes the error function:  or its extension to complex and general cayley-dickson values.</div><div class="ttdef"><b>Definition:</b> erf.hpp:78</div></div>
+<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> types.hpp:14</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code> : Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<ol type="1">
-<li>a real input z returns eve::erf(z).</li>
-<li>The value of the error function in the complex plane is returned</li>
-</ol>
+<ul>
+<li>The value of the error function is returned.</li>
+</ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
