@@ -31,8 +31,15 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::is_real> const&, C c) noexcept
   {
-    get<0>(c) = eve::zero(eve::as(get<0>(c)));
+    if constexpr(kyosu::concepts::complex<C>)
+    {
+      return eve::is_eqz(ipart(c));
+    }
+    else
+    {
+      get<0>(c) = eve::zero(eve::as(get<0>(c)));
     return kumi::all_of(c, [](auto const& e) { return eve::is_eqz(e); });
+    }
   }
 
   template<typename C>

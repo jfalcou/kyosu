@@ -1,24 +1,29 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright: KYOSU Contributors & Maintainers
+  Copyright : KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
+#include <eve/module/math.hpp>
 
 namespace kyosu::tags
 {
-  struct callable_dec: eve::elementwise
+  struct callable_faddeeva : eve::elementwise
   {
-    using callable_tag_type = callable_dec;
+    using callable_tag_type = callable_faddeeva;
 
-    KYOSU_DEFERS_CALLABLE(dec_);
+    KYOSU_DEFERS_CALLABLE(faddeeva_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::dec(v); }
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
+    {
+      auto fn = callable_faddeeva{};
+      return fn(complex(v));
+    }
 
     template<typename T>
     KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
@@ -27,7 +32,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_dec(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_faddeeva(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -37,8 +42,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var dec
-//!   @brief decrements the argument by 1.
+//!   @var faddeeva
+//!   @brief  Callable object computing \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex error func
 //!
 //!   **Defined in Header**
 //!
@@ -51,23 +56,23 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T dec(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T dec(T z) noexcept;
+//!      template<eve::ordered_value T>              constexpr auto faddeeva(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto faddeeva(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z`: Value to decrement.
+//!     * `z` : Value to process.
 //!
-//!   **Return value**
+//! **Return value**
 //!
-//!     Returns  its argument minus 1.
+//!   Returns \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex error function
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/dec.cpp}
+//!  @godbolt{doc/faddeeva.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_dec dec = {};
+inline constexpr tags::callable_faddeeva faddeeva = {};
 }

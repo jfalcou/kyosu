@@ -10,6 +10,7 @@
 #include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
 #include <kyosu/types/impl/reals.hpp>
+#include <kyosu/details/cayleyify.hpp>
 
 namespace kyosu::_
 {
@@ -29,11 +30,7 @@ namespace kyosu::_
     }
     else
     {
-      auto p = pure(z);
-      auto az = abs(p);
-      auto r  = exp(real(z));
-      auto w = r*eve::sinc(az);
-      return r*eve::cos(az) + w*p;
+      return cayley_extend(exp, z);
     }
   }
 
@@ -60,10 +57,7 @@ namespace kyosu::_
     }
     else
     {
-      auto p = pure(z);
-      auto az = abs(p);
-      auto c = expm1(complex(real(z), az));
-      return real(c) + ipart(c)*sign(p);
+      return cayley_extend(expm1, z);
     }
   }
 
@@ -160,19 +154,7 @@ namespace kyosu::_
     }
     else
     {
-      auto az = kyosu::abs(z);
-      auto v = kyosu::pure(z);
-      auto s = kyosu::real(z);
-      auto z1 = (eve::acos(s/az)/abs(v))*v+eve::log(az);
-      auto tmp =  kyosu::if_else( kyosu::is_real(z)
-                                ,  kyosu::log(kyosu::real(z))
-                                , z1
-                                );
-      return kyosu::if_else( kyosu::is_eqz(z)
-                           , eve::minf(eve::as(az))
-                           , tmp
-                           );
-
+      return cayley_extend(log, z);
     }
   }
 
@@ -198,9 +180,8 @@ namespace kyosu::_
     }
     else
     {
-      using e_t = eve::underlying_type_t<C>;
-      return log(z)*eve::invlog_10(eve::as<e_t>());
-     }
+      return cayley_extend(log10, z);
+    }
   }
 
   template<typename C>
@@ -225,9 +206,8 @@ namespace kyosu::_
     }
     else
     {
-      using e_t = eve::underlying_type_t<C>;
-      return log(z)*eve::invlog_2(eve::as<e_t>());
-     }
+      return cayley_extend(log2, z);
+    }
   }
 
   template<typename C>
@@ -247,22 +227,8 @@ namespace kyosu::_
     }
     else
     {
-      auto incz = inc(z);
-      auto az = kyosu::abs(incz);
-      auto az2 = kyosu::sqr_abs(z) + 2*real(z);
-      auto v = kyosu::pure(z);
-      auto s = kyosu::real(incz);
-      auto z1 = (eve::acos(s/az)/abs(v))*v+ eve::half(eve::as<e_t>())*eve::log1p(az2);
-      auto tmp =  kyosu::if_else( kyosu::is_real(z)
-                                , kyosu::log(kyosu::real(z))
-                                , z1
-                                );
-      return kyosu::if_else( kyosu::is_eqz(z)
-                           , eve::minf(eve::as(az))
-                           , tmp
-                           );
-
-     }
+      return cayley_extend(log1p, z);
+    }
   }
 
   template<typename C>
@@ -294,6 +260,7 @@ namespace kyosu::_
                           , complex(rr1, ii1)
                           , complex(ii1, rr1)
                           );
+      res = if_else(is_pure(z), eve::sqrt_2(eve::as(r))*complex( eve::half(eve::as(r)),  eve::half(eve::as(r)))*eve::sqrt(iz), res);
       if (eve::any(is_not_finite(z))) [[unlikely]]
       {
         res = kyosu::if_else(rz == eve::minf(eve::as(rz))
@@ -314,13 +281,7 @@ namespace kyosu::_
     }
     else
     {
-      auto r = kyosu::abs(z);
-      auto theta = eve::acos(real(z)/r);
-      auto u = kyosu::sign(kyosu::pure(z));
-      auto [s, c] = eve::sincos(theta*eve::half(eve::as(theta)));
-      auto res = u*s;
-      kyosu::real(res) = c;
-      return kyosu::if_else(eve::is_eqz(r), eve::zero(eve::as(z)), res*eve::sqrt(r));
+      return cayley_extend(sqrt, z);
     }
   }
 
@@ -361,18 +322,25 @@ namespace kyosu::_
     {
       if constexpr( eve::unsigned_value<C1> )
       {
-        C0 base = c0;
-        C1 expo = c1;
-        auto const o = eve::one(eve::as<u_t>());
-        r_t result(o);
-        while(true)
+        if constexpr(kyosu::concepts::complex<C0>)
         {
-          if  (eve::all(eve::is_eqz(expo))) break;
-          result = kyosu::if_else(eve::is_odd(expo), result*base, o);
-          expo = (expo >> 1);
-          base = kyosu::sqr(base);
+          C0 base = c0;
+          C1 expo = c1;
+          auto const o = eve::one(eve::as<u_t>());
+          r_t result(o);
+          while(true)
+          {
+            if  (eve::all(eve::is_eqz(expo))) break;
+            result = kyosu::if_else(eve::is_odd(expo), result*base, o);
+            expo = (expo >> 1);
+            base = kyosu::sqr(base);
+          }
+          return result;
         }
-        return result;
+        else
+        {
+          return cayley_extend(pow, c0, c1);
+        }
       }
       else
       {
@@ -414,8 +382,6 @@ namespace kyosu::_
       }
       else if constexpr( kyosu::concepts::complex<C0>)// c0 and c1 are complex
       {
-//         auto   rc1 = real(c1);
-//         auto   ic1 = imag(c1);
         auto  [rc1, ic1] = c1;
         auto lc0 = kyosu::log_abs(c0);
         auto argc0 = kyosu::arg(c0);
@@ -434,16 +400,27 @@ namespace kyosu::_
     }
     else
     {
-      auto cc0 = kyosu::convert(c0, eve::as<er_t>());
-      auto cc1 = kyosu::convert(c1, eve::as<er_t>());
+      if constexpr(eve::floating_value<C1>) //c0 cayley c1 real
+      {
+        return cayley_extend(pow, c0, c1);
+      }
+      else if  constexpr(eve::floating_value<C0>)//c1 cayley c0 real
+      {
+         return cayley_extend_rev(pow, c0, c1);
+      }
+      else
+      {
+        auto cc0 = kyosu::convert(c0, eve::as<er_t>());
+        auto cc1 = kyosu::convert(c1, eve::as<er_t>());
 
-      auto r = kyosu::exp(kyosu::log(cc0)*cc1);
-      return kyosu::if_else (kyosu::is_eqz(cc0)
-                            , eve::if_else(kyosu::is_eqz(cc1)
+        auto r = kyosu::exp(kyosu::log(cc0)*cc1);
+        return kyosu::if_else (kyosu::is_eqz(cc0)
+                              , eve::if_else(kyosu::is_eqz(cc1)
                                             , eve::one(eve::as<u_t>())
                                             , eve::zero(eve::as<u_t>()))
-                            , r
-                            );
+                              , r
+                              );
+      }
     }
   }
 

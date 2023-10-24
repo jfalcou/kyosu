@@ -1,24 +1,28 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright: KYOSU Contributors & Maintainers
+  Copyright : KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
+#include <eve/module/math.hpp>
 
 namespace kyosu::tags
 {
-  struct callable_dec: eve::elementwise
+  struct callable_erf : eve::elementwise
   {
-    using callable_tag_type = callable_dec;
+    using callable_tag_type = callable_erf;
 
-    KYOSU_DEFERS_CALLABLE(dec_);
+    KYOSU_DEFERS_CALLABLE(erf_);
 
     template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::dec(v); }
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
+    {
+      return eve::erf(v);
+    }
 
     template<typename T>
     KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
@@ -27,7 +31,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_dec(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_erf(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -37,8 +41,10 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var dec
-//!   @brief decrements the argument by 1.
+//!   @var erf
+//!   @brief Computes the error function: \f$ \displaystyle
+//!   \mbox{erf}(x)=\frac{2}{\sqrt\pi}\int_0^{x} e^{-t^2}\mbox{d}t\f$ or
+//!   its extension to complex and general cayley-dickson values
 //!
 //!   **Defined in Header**
 //!
@@ -51,23 +57,23 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T dec(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T dec(T z) noexcept;
+//!   {  template<eve::floating_ordered_value T>     constexpr T erf(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T erf(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z`: Value to decrement.
+//!     * `z` : Value to process.
 //!
-//!   **Return value**
+//! **Return value**
 //!
-//!     Returns  its argument minus 1.
+//!   * The value of the error function is returned.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/dec.cpp}
+//!  @godbolt{doc/erf.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_dec dec = {};
+inline constexpr tags::callable_erf erf = {};
 }
