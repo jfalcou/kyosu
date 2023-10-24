@@ -155,19 +155,6 @@ namespace kyosu::_
     else
     {
       return cayley_extend(log, z);
-//       auto az = kyosu::abs(z);
-//       auto v = kyosu::pure(z);
-//       auto s = kyosu::real(z);
-//       auto z1 = (eve::acos(s/az)/abs(v))*v+eve::log(az);
-//       auto tmp =  kyosu::if_else( kyosu::is_real(z)
-//                                 ,  kyosu::log(kyosu::real(z))
-//                                 , z1
-//                                 );
-//       return kyosu::if_else( kyosu::is_eqz(z)
-//                            , eve::minf(eve::as(az))
-//                            , tmp
-//                            );
-
     }
   }
 
@@ -194,9 +181,7 @@ namespace kyosu::_
     else
     {
       return cayley_extend(log10, z);
-//       using e_t = eve::underlying_type_t<C>;
-//       return log(z)*eve::invlog_10(eve::as<e_t>());
-     }
+    }
   }
 
   template<typename C>
@@ -222,8 +207,6 @@ namespace kyosu::_
     else
     {
       return cayley_extend(log2, z);
-//       using e_t = eve::underlying_type_t<C>;
-//       return log(z)*eve::invlog_2(eve::as<e_t>());
     }
   }
 
@@ -245,22 +228,7 @@ namespace kyosu::_
     else
     {
       return cayley_extend(log1p, z);
-//       auto incz = inc(z);
-//       auto az = kyosu::abs(incz);
-//       auto az2 = kyosu::sqr_abs(z) + 2*real(z);
-//       auto v = kyosu::pure(z);
-//       auto s = kyosu::real(incz);
-//       auto z1 = (eve::acos(s/az)/abs(v))*v+ eve::half(eve::as<e_t>())*eve::log1p(az2);
-//       auto tmp =  kyosu::if_else( kyosu::is_real(z)
-//                                 , kyosu::log(kyosu::real(z))
-//                                 , z1
-//                                 );
-//       return kyosu::if_else( kyosu::is_eqz(z)
-//                            , eve::minf(eve::as(az))
-//                            , tmp
-//                            );
-
-     }
+    }
   }
 
   template<typename C>
@@ -314,13 +282,6 @@ namespace kyosu::_
     else
     {
       return cayley_extend(sqrt, z);
-//       auto r = kyosu::abs(z);
-//       auto theta = eve::acos(real(z)/r);
-//       auto u = kyosu::sign(kyosu::pure(z));
-//       auto [s, c] = eve::sincos(theta*eve::half(eve::as(theta)));
-//       auto res = u*s;
-//       kyosu::real(res) = c;
-//       return kyosu::if_else(eve::is_eqz(r), eve::zero(eve::as(z)), res*eve::sqrt(r));
     }
   }
 
