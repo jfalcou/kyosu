@@ -198,29 +198,29 @@ namespace kyosu::_
     else  return z;
   }
 
-//   template<typename Z>
-//   inline auto lbesseljn(size_t n, Z z) noexcept
-//   // compute log(Jn(z))
-//   {
-//     Z r{}, s{};
-//     if (n > 0)
-//     {
-//       auto rz = rec(z);
-//       auto rn = R(n, z);
-//       auto lri = log(rn);
-//       for(int i=n-1; i > 0; --i)
-//       {
-//         rn = 2*(i)*rz-rec(rn);
-// //         std::cout << "i " << i << " ri " << rn << std::endl;
-// //         std::cout << "i " << i << " Ri " << R(i,z) << std::endl;
-//         lri += log(rn);
-//       }
-//       s = log(kyosu::cyl_bessel_j0(z))-lri;
-//     }
-//     else
-//       s =  kyosu::log(cyl_bessel_j0(z));
-//     //   ipart(s) = eve::to_nearest(eve::rem)(ipart(s), 2*eve::pi(eve::as(ipart(s))));
-//     return arg_adjust(s);
-//   }
+  template<typename Z>
+  inline auto lbesseljn(size_t n, Z z) noexcept
+  // compute log(Jn(z))
+  {
+    Z r{}, s{};
+    if (n > 0)
+    {
+      auto rz = rec(z);
+      auto rn = R(n, z);
+      auto lri = log(rn);
+      for(int i=n-1; i > 0; --i)
+      {
+        rn = 2*(i)*rz-rec(rn);
+        std::cout << "i " << i << " ri " << rn << std::endl;
+        std::cout << "i " << i << " Ri " << R(i,z) << std::endl;
+        lri += log(rn);
+      }
+      s = log(kyosu::cyl_bessel_j0(z))-lri;
+    }
+    else
+      s =  kyosu::log(cyl_bessel_j0(z));
+    //   ipart(s) = eve::to_nearest(eve::rem)(ipart(s), 2*eve::pi(eve::as(ipart(s))));
+    return arg_adjust(s);
+  }
 
 }
