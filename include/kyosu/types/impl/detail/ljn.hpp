@@ -30,37 +30,13 @@ namespace kyosu::_
         for(int i=n-1; i > 0; --i)
         {
           rn = 2*i*rz-rec(rn);
-//           std::cout << "i " << i << " ri " << rn << std::endl;
-//           std::cout << "i " << i << " Ri " << R(i,z) << std::endl;
           lri += log(rn);
         }
         s = log(kyosu::cyl_bessel_j0(z))-lri;
       }
       else s =  kyosu::log(cyl_bessel_j0(z));
-      return arg_adjust(s);
-
-
-//      return lbesseljn(n, z);
-//       if ( is_eqz(n) )
-//       {
-//         return cyl_lbessel_j0(z);
-//       }
-//       else
-//       {
-//         Z r{}, s{};
-//         auto rz = rec(z);
-//         auto rn = R(n, z);
-//         auto lri = log(rn);
-//         for(int i=n-1; i > 0; --i)
-//         {
-//           rn = 2*(i)*rz-rec(rn);
-//          std::cout << "i " << i << " ri " << rn << std::endl;
-//          std::cout << "i " << i << " Ri " << R(i,z) << std::endl;
-//           lri += log(rn);
-//         }
-//         s = log(kyosu::cyl_lbessel_j0(z))-lri;
-//         return arg_adjust(s);
-//       }
+      using e_t =  eve::element_type_t<Z>;
+      return if_else(is_nez(z), arg_adjust(s), kyosu::complex(eve::minf(eve::as<e_t>())));
     }
     else
     {

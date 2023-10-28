@@ -19,11 +19,11 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      return cyl_bessel_jn(1, z);
+      return cyl_lbessel_jn(1, z);
     }
     else
     {
-      return cayley_extend(cyl_bessel_j0, z);
+      return cayley_extend(cyl_bessel_j1, z);
     }
   }
 }

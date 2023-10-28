@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kyosu/details/invoke.hpp>
-#include <eve/module/bessel.hpp>
+
 
 namespace kyosu::tags
 {
@@ -21,8 +21,8 @@ namespace kyosu::tags
     template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-
-      return log(cyl_bessel_j0(complex(v)));
+      auto fn = callable_cyl_lbessel_j0{};
+      return fn(complex(v));
     }
 
     template<typename T>
