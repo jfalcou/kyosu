@@ -22,3 +22,6 @@
 #include <kyosu/types/impl/detail/ljn.hpp>
 #include <kyosu/types/impl/detail/lj0.hpp>
 #include <kyosu/types/impl/detail/lj1.hpp>
+#include <kyosu/types/impl/detail/lin.hpp>
+#include <kyosu/types/impl/detail/li0.hpp>
+#include <kyosu/types/impl/detail/li1.hpp>
