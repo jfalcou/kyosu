@@ -161,29 +161,22 @@ namespace kyosu::_
     return r;
   }
 
-   template<typename Z>
-  inline auto bjn(size_t n, Z z) noexcept
-  // compute log(Jn(z))
+  template<typename Z>
+  inline auto R(size_t n, size_t p, Z z) noexcept
+  // compute the ratio Jn(n, z)/Jp(n-1, z)J
   {
-    Z r{};
-    if (n > 0)
+    using u_t = eve::underlying_type_t<Z>;
+    if (is_eqz(n)) return Z(eve::nan(as<u_t>()));
+    if (n == p)    return Z(eve::one(as<u_t>()));
+    Z r{}, s{};
+    auto rz = rec(z);
+    auto rn = R(n, z);
+    for(int i=n-1; i > p; --i)
     {
-      auto rz = rec(z);
-      auto rn = R(n, z);
-      auto pri = rn;
-      for(int i=n-1; i > 0; --i)
-      {
-        rn = 2*(i)*rz-rec(rn);
-//         std::cout << "i " << i << " ri " << rn << std::endl;
-//         std::cout << "i " << i << " Ri " << R(i,z) << std::endl;
-        pri *= rn;
-      }
-      auto s = kyosu::cyl_bessel_j0(z)/pri;
-      return s;
+      rn = 2*i*rz-rec(rn);
+      pri *= rn;
     }
-    else
-      return  cyl_bessel_j0(z);
-
+    return lri;
   }
 
   template<typename Z>
@@ -196,31 +189,6 @@ namespace kyosu::_
       return z;
     }
     else  return z;
-  }
-
-  template<typename Z>
-  inline auto lbesseljn(size_t n, Z z) noexcept
-  // compute log(Jn(z))
-  {
-    Z r{}, s{};
-    if (n > 0)
-    {
-      auto rz = rec(z);
-      auto rn = R(n, z);
-      auto lri = log(rn);
-      for(int i=n-1; i > 0; --i)
-      {
-        rn = 2*(i)*rz-rec(rn);
-        std::cout << "i " << i << " ri " << rn << std::endl;
-        std::cout << "i " << i << " Ri " << R(i,z) << std::endl;
-        lri += log(rn);
-      }
-      s = log(kyosu::cyl_bessel_j0(z))-lri;
-    }
-    else
-      s =  kyosu::log(cyl_bessel_j0(z));
-    //   ipart(s) = eve::to_nearest(eve::rem)(ipart(s), 2*eve::pi(eve::as(ipart(s))));
-    return arg_adjust(s);
   }
 
 }

@@ -53,6 +53,8 @@
 #include <kyosu/functions/cyl_bessel_j0.hpp>
 #include <kyosu/functions/cyl_bessel_j1.hpp>
 #include <kyosu/functions/cyl_bessel_jn.hpp>
+#include <kyosu/functions/cyl_bessel_y0.hpp>
+
 #include <kyosu/functions/cyl_lbessel_j0.hpp>
 #include <kyosu/functions/cyl_lbessel_j1.hpp>
 #include <kyosu/functions/cyl_lbessel_jn.hpp>

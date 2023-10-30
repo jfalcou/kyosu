@@ -19,6 +19,7 @@
 #include <kyosu/types/impl/detail/besseli0.hpp>
 #include <kyosu/types/impl/detail/besseli1.hpp>
 #include <kyosu/types/impl/detail/besselin.hpp>
+#include <kyosu/types/impl/detail/bessely0.hpp>
 #include <kyosu/types/impl/detail/ljn.hpp>
 #include <kyosu/types/impl/detail/lj0.hpp>
 #include <kyosu/types/impl/detail/lj1.hpp>

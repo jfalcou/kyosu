@@ -19,7 +19,10 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(cyl_bessel_y0_);
 
     template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::cyl_bessel_y0(v); }
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
+    {
+      return eve::cyl_bessel_y0(v);
+    }
 
     template<typename T>
     KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
