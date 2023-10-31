@@ -19,19 +19,35 @@ namespace kyosu::_
   template<typename Z>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_yn>, int n, Z z) noexcept
   {
-    std::cout << "icitte " << n << std::endl;
-    if (n == 0) return cyl_bessel_y0(z);
+//    std::cout << std::endl << "icitte " << n << std::endl;
+    auto y = cyl_bessel_y0(z);
+    auto jold = cyl_bessel_j0(z);
+    if (n == 0) return y;
     using u_t   =  eve::underlying_type_t<Z>;
     auto twoopi = eve::two_o_pi(eve::as<u_t>());
-    auto rs = Rs(n, z);
-    auto y1 = cyl_bessel_y1(z);
-    auto ypred = y0;
-    Z pr(one(eve::as<u_t>())); ;
-    for(int i=n-1; i > 0; --i)
+
+    for(int i=1; i <= n ; ++i)
     {
-      auto recsi = rec(rs[i-1])-twoopi/(cyl_bessel_jn(i-1, z)*ypred);
-      pr *= recsi;
+      auto jnew = cyl_bessel_jn(i, z);
+      y = (jnew*y-twoopi*rec(z))/jold;
+      jold = jnew;
     }
-    return pr;
+    return y;
+
+//     auto rs = Rs(n, z);
+//     auto ypred = y0;
+//     std::cout  << "ypred  " << ypred << std::endl;
+//     Z pr(eve::one(eve::as<u_t>())); ;
+//     for(int i=n; i > 0; --i)
+//     {
+//       std::cout << "r      " << rs[i-1] << std::endl;
+//       auto recsi = rec(rs[i-1])-twoopi/(z*cyl_bessel_jn(i-1, z)*ypred);
+//       pr *= recsi;
+//       ypred = pr*y0;
+//       std::cout << "pr      " << pr << std::endl;
+
+//     }
+//     std::cout << "pr*y0      " << pr*y0 << std::endl;
+//     return pr*y0;
   }
 }
