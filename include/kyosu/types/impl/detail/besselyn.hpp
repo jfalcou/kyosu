@@ -7,32 +7,31 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/types/impl/detail/besselj0.hpp>
+#include <kyosu/types/impl/detail/bessely0.hpp>
+#include <kyosu/types/impl/detail/bessely1.hpp>
 
 namespace kyosu::_
 {
 
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_y0
+  //  cyl_bessel_yn
   //===-------------------------------------------------------------------------------------------
   template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_y0>, Z z) noexcept
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_yn>, int n, Z z) noexcept
   {
+    std::cout << "icitte " << n << std::endl;
+    if (n == 0) return cyl_bessel_y0(z);
     using u_t   =  eve::underlying_type_t<Z>;
     auto twoopi = eve::two_o_pi(eve::as<u_t>());
-    auto egamma = eve::egamma(eve::as<u_t>());
-    auto eps    = eve::eps(eve::as<u_t>());
-    auto j0z    = cyl_bessel_j0(z);
-    auto bd = bound(z);
-    Z s{}, sk{};
-    auto sgn = -rec(j0z);
-    int k = 1;
-    do {
-      sk = sgn*cyl_bessel_jn(k+k, z)/k;
-      ++k;
-      sgn = -sgn;
-      s+= sk;
-    } while (k < bd && eve::any(kyosu::abs(sk) > abs(s)*eps));
-    std::cout << "k " << k << " bound(z) "<<  bound(z) << std::endl;
-    return twoopi*((log(z/2)+egamma)-2*s)*cyl_bessel_j0(z);
+    auto rs = Rs(n, z);
+    auto y1 = cyl_bessel_y1(z);
+    auto ypred = y0;
+    Z pr(one(eve::as<u_t>())); ;
+    for(int i=n-1; i > 0; --i)
+    {
+      auto recsi = rec(rs[i-1])-twoopi/(cyl_bessel_jn(i-1, z)*ypred);
+      pr *= recsi;
+    }
+    return pr;
   }
 }

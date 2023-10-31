@@ -7,7 +7,7 @@
 //======================================================================================================================
 #pragma once
 #include <type_traits>
-
+#include <vector>
 namespace kyosu::_
 {
 
@@ -18,7 +18,7 @@ namespace kyosu::_
   auto bound(Z const & z) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;
-    return abs(z)*u_t(1.1)+2;
+    return int(eve::ceil(eve::maximum(abs(z)*u_t(1.1)+2)));
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -161,23 +161,42 @@ namespace kyosu::_
     return r;
   }
 
+//   template<typename Z>
+//   inline auto R(size_t n, size_t p, Z z) noexcept
+//   // compute the ratio Jn(n, z)/Jp(n-1, z)J
+//   {
+//     using u_t = eve::underlying_type_t<Z>;
+//     if (is_eqz(n)) return Z(eve::nan(as<u_t>()));
+//     if (n == p)    return Z(eve::one(as<u_t>()));
+//     Z r{}, s{};
+//     auto rz = rec(z);
+//     auto rn = R(n, z);
+//     for(int i=n-1; i > p; --i)
+//     {
+//       rn = 2*i*rz-rec(rn);
+//       pri *= rn;
+//     }
+//     return lri;
+//   }
+
+
   template<typename Z>
-  inline auto R(size_t n, size_t p, Z z) noexcept
-  // compute the ratio Jn(n, z)/Jp(n-1, z)J
+  inline auto Rs(size_t n, Z z) noexcept
+  // compute the ratio Jn(i, z)/Jn(i-1, z)J for i = n:-1:1
   {
+    std::vector<Z> rs(n);
     using u_t = eve::underlying_type_t<Z>;
-    if (is_eqz(n)) return Z(eve::nan(as<u_t>()));
-    if (n == p)    return Z(eve::one(as<u_t>()));
+    if (is_eqz(n)) return rs;
     Z r{}, s{};
     auto rz = rec(z);
-    auto rn = R(n, z);
-    for(int i=n-1; i > p; --i)
+    rs[n-1] = R(n, z);
+    for(int i=n-1; i >= 1; --i)
     {
-      rn = 2*i*rz-rec(rn);
-      pri *= rn;
+      rs[i-1] = 2*i*rz-rec(rs[i]);
     }
-    return lri;
+    return rs;
   }
+
 
   template<typename Z>
   inline auto arg_adjust(Z z) noexcept
