@@ -14,27 +14,30 @@ namespace kyosu::_
 {
 
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_yn
+  //  cyl_bessel_h1n
   //===-------------------------------------------------------------------------------------------
   template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_yn>, int n, Z z) noexcept
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_kn>, int n, Z z) noexcept
   {
-    using u_t   =  eve::underlying_type_t<Z>;
-    auto y = cyl_bessel_y0(z);
-    if (n != 0)
+    if constexpr(concepts::complex<Z>)
     {
-      auto jold = cyl_bessel_j0(z);
-      using u_t   =  eve::underlying_type_t<Z>;
-      auto twoopi = eve::two_o_pi(eve::as<u_t>());
+      using u_t = eve::underlying_type_t<Z>;
+      auto argz = arg(z);
+      auto piotwo = eve::pio_2(eve::as<u_t>());
+      auto i = complex(u_t(0), u_t(1));
+      auto cpi = piotwo*i*exp_ipi(u_t(n)/2);
+      auto cmi = -piotwo*i*exp_ipi(-u_t(n)/2);
+      auto epio2 = exp_ipi(eve::half(eve::as<u_t>()));
+      auto empio2 = exp_ipi(eve::mhalf(eve::as<u_t>()));
+      auto r =  if_else(eve::is_ltz(argz)
+                       , cpi*cyl_bessel_h1n(n, z*epio2)
+                       , cmi*cyl_bessel_h2n(n, z*empio2));
 
-      for(int i=1; i <= n ; ++i)
-      {
-        auto jnew = cyl_bessel_jn(i, z);
-        y = (jnew*y-twoopi*rec(z))/jold;
-        jold = jnew;
-      }
+      return r;
     }
-    auto r = if_else(eve::is_gtz(real(z)) && is_real(z) && is_nan(y), complex(real(y)), y);
-    return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), r);
+    else
+    {
+      return cayley_extend_rev(cyl_bessel_kn, n, z);
+    }
   }
 }

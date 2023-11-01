@@ -8,7 +8,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::abs over real"
+TTS_CASE_WITH ( "Check kyosu::cyl_lbessel_j0 over real"
               , kyosu::scalar_real_types
               , tts::generate(tts::randoms(-10,10))
               )
@@ -51,7 +51,7 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
 };
 
 
-TTS_CASE_WITH ( "Check kyosu::abs over real"
+TTS_CASE_WITH ( "Check kyosu::cyl_lbessel_j0 over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10),
                               tts::randoms(-10,10)

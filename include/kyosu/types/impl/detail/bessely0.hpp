@@ -32,7 +32,6 @@ namespace kyosu::_
       sgn = -sgn;
       s+= sk;
     } while (k < bd && eve::any(kyosu::abs(sk) > abs(s)*eps));
-//    std::cout << "k " << k << " bound(z) "<<  bound(z) << std::endl;
-    return twoopi*((log(z/2)+egamma)-2*s)*cyl_bessel_j0(z);
+    return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), twoopi*((log(z/2)+egamma)-2*s)*cyl_bessel_j0(z));
   }
 }

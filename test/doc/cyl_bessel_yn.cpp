@@ -8,8 +8,8 @@ int main()
   using kyosu::cyl_bessel_yn;
   std::cout.precision(16);
   std::cout << std::scientific << std::endl;
-  std::cout << "1.0             " << " -> " << cyl_bessel_yn(n,1.0) << "\n";
-  std::cout << "1+0i            " << " -> " << cyl_bessel_yn(n,kyosu::complex(1.0, 0.0)) << "\n";
+  std::cout << "1.0             " << " -> " << cyl_bessel_yn(n,-1.0) << "\n";
+  std::cout << "1+0i            " << " -> " << cyl_bessel_yn(n,kyosu::complex(-1.0, 0.0)) << "\n";
   std::cout << "15.0            " << " -> " << cyl_bessel_yn(n,15.0) << "\n";
   std::cout << "15+0i           " << " -> " << cyl_bessel_yn(n,kyosu::complex(15.0, 0.0)) << "\n";
   std::cout << "40.0            " << " -> " << cyl_bessel_yn(n,40.0) << "\n";

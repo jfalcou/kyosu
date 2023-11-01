@@ -8,7 +8,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::abs over real"
+TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
               , kyosu::scalar_real_types
               , tts::generate(tts::randoms(-10,10))
               )
@@ -53,7 +53,7 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
 };
 
 
-TTS_CASE_WITH ( "Check kyosu::abs over real"
+TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10),
                               tts::randoms(-10,10)
@@ -61,17 +61,24 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
               )
 <typename T>(T a0, T a1)
 {
+  using u_t = eve::underlying_type_t<T>;
   auto c =  kyosu::complex(a0, a1);
   auto cb=  kyosu::conj(c);
   auto cm=  -c;
   auto cr=  kyosu::complex(a0);
   auto ci=  kyosu::complex(T(0), a1);
+  auto zer =   kyosu::complex(T(0), T(0));
+  auto one =   kyosu::complex(T(1), T(0));
+
   using kyosu::cyl_bessel_jn;
-  auto jnc = cyl_bessel_jn(3, c);
-  TTS_IEEE_EQUAL(jnc, -cyl_bessel_jn(3, cm)) << "c " << c << "\n";
-  TTS_IEEE_EQUAL(jnc, kyosu::conj(cyl_bessel_jn(3, cb)));
-  TTS_EXPECT(eve::all(kyosu::is_real(cr)));
-  TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
-  auto z =   kyosu::complex(T(0), T(0));
-  TTS_IEEE_EQUAL(cyl_bessel_jn(3, z), z);
+
+  for(int i=0; i < 10 ; ++i)
+  {
+    auto jnc = cyl_bessel_jn(i, c);
+    TTS_IEEE_EQUAL(jnc, eve::sign_alternate(u_t(i))*cyl_bessel_jn(i, cm)) << "c " << c << "\n";
+    TTS_IEEE_EQUAL(jnc, kyosu::conj(cyl_bessel_jn(i, cb)));
+    TTS_EXPECT(eve::all(kyosu::is_real(cr)));
+    TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
+    TTS_IEEE_EQUAL(cyl_bessel_jn(i, zer), i ? zer : one);
+  }
 };
