@@ -6,15 +6,13 @@
 */
 //======================================================================================================================
 #pragma once
-#include <kyosu/types/impl/detail/besselj0.hpp>
-#include <kyosu/types/impl/detail/bessely0.hpp>
-#include <kyosu/types/impl/detail/bessely1.hpp>
+#include <kyosu/types/impl/detail/besselhn.hpp>
 
 namespace kyosu::_
 {
 
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_h1n
+  //  cyl_bessel_kn
   //===-------------------------------------------------------------------------------------------
   template<typename Z>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_kn>, int n, Z z) noexcept
@@ -32,12 +30,24 @@ namespace kyosu::_
       auto r =  if_else(eve::is_ltz(argz)
                        , cpi*cyl_bessel_h1n(n, z*epio2)
                        , cmi*cyl_bessel_h2n(n, z*empio2));
-
-      return r;
+//      std::cout << "zut " << cyl_bessel_h2n(n, z*empio2) << "   === " << z*empio2 << std::endl;
+      return if_else(is_eqz(z), complex(eve::one(eve::as<u_t>())), r);
     }
     else
     {
       return cayley_extend_rev(cyl_bessel_kn, n, z);
     }
+  }
+
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_k0>, Z z) noexcept
+  {
+    return cyl_bessel_kn(0, z);
+  }
+
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_k1>, Z z) noexcept
+  {
+    return cyl_bessel_kn(1, z);
   }
 }

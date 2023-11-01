@@ -22,12 +22,16 @@ namespace kyosu::_
     auto egamma = eve::egamma(eve::as<u_t>());
     auto eps    = eve::eps(eve::as<u_t>());
     auto j0z    = cyl_bessel_j0(z);
+//    std::cout << "z " << z << " j0z " << j0z << std::endl;
     auto bd = bound(z);
     Z s{}, sk{};
     auto sgn = -rec(j0z);
+//    std::cout << "sgn " << sgn << std::endl;
     int k = 1;
     do {
+//      std::cout << "jn(2k, z) " <<  cyl_bessel_jn(k+k, z) << std::endl;
       sk = sgn*cyl_bessel_jn(k+k, z)/k;
+//      std::cout << "k " <<  k << " sk " << sk << std::endl;
       ++k;
       sgn = -sgn;
       s+= sk;

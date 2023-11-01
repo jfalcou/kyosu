@@ -40,7 +40,7 @@ namespace kyosu::_
     }
     else
     {
-      return cayley_extend_rev(cyl_bessel_h1n, n, z);
+      return cayley_extend_rev(cyl_bessel_h2n, n, z);
     }
   }
 }

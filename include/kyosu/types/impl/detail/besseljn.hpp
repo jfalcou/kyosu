@@ -66,7 +66,7 @@ namespace kyosu::_
           // Starting point for backward recurrence
           //  for when |Jn(x)|~10e-mg
           //  using the secant method.
-          auto n0 = inc(eve::nearest( u_t(1.1)*az));
+          auto n0 = inc(eve::ceil( u_t(1.1)*az));
           auto f0 = minus_log10_cyl_j_at_infinity(n0, az) - mg;
           auto n1 = n0 + 5;
           auto f1 = minus_log10_cyl_j_at_infinity(n1, az) - mg;
@@ -94,7 +94,7 @@ namespace kyosu::_
           auto ejn = minus_log10_cyl_j_at_infinity(n, az);
           auto t = ejn <= hmp;
           auto obj = eve::if_else(t, sd, hmp+ejn);
-          auto n0  = eve::if_else(t, eve::nearest(e_t(1.1)*az), n);
+          auto n0  = eve::if_else(t, eve::ceil(e_t(1.1)*az), n);
           auto f0 = minus_log10_cyl_j_at_infinity(n0, az) - obj;
           auto n1 = n0 + 5;
           auto f1 = minus_log10_cyl_j_at_infinity(n1, az) - obj;
@@ -115,8 +115,9 @@ namespace kyosu::_
         };
 
         auto backward = [az, n, ini_for_br_1, ini_for_br_2](auto z){
-          auto m = ini_for_br_1(az, e_t(200));
-          m = eve::if_else ( m >= n, ini_for_br_2(n, az, e_t(15)), m);
+          auto m1 = ini_for_br_1(az, e_t(200));
+          auto m2 = ini_for_br_2(n, az, e_t(15));
+          auto m = eve::if_else( m1 >= n && eve::is_not_nan(m2), m2, m1);
           auto cf2 = Z(0);
           auto cf1 = complex(eve::sqrtsmallestposval(eve::as< e_t>()));
           Z cf(cf2);
