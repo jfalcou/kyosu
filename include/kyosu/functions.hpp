@@ -62,12 +62,12 @@
 #include <kyosu/functions/cyl_bessel_k1.hpp>
 #include <kyosu/functions/cyl_bessel_kn.hpp>
 
-#include <kyosu/functions/cyl_lbessel_j0.hpp>
-#include <kyosu/functions/cyl_lbessel_j1.hpp>
-#include <kyosu/functions/cyl_lbessel_jn.hpp>
-#include <kyosu/functions/cyl_lbessel_i0.hpp>
-#include <kyosu/functions/cyl_lbessel_i1.hpp>
-#include <kyosu/functions/cyl_lbessel_in.hpp>
+// #include <kyosu/functions/cyl_lbessel_j0.hpp>
+// #include <kyosu/functions/cyl_lbessel_j1.hpp>
+// #include <kyosu/functions/cyl_lbessel_jn.hpp>
+// #include <kyosu/functions/cyl_lbessel_i0.hpp>
+// #include <kyosu/functions/cyl_lbessel_i1.hpp>
+// #include <kyosu/functions/cyl_lbessel_in.hpp>
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/deta.hpp>
 #include <kyosu/functions/digamma.hpp>
