@@ -47,9 +47,11 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k0 over real"
   auto cr=  kyosu::complex(a0);
   using kyosu::cyl_bessel_k0;
   auto k0c = cyl_bessel_k0(c);
+  auto inf =   kyosu::complex(eve::inf(eve::as<T>()));
+  auto z =   kyosu::complex(T(0), T(0));
+
   TTS_IEEE_EQUAL(k0c, kyosu::conj(cyl_bessel_k0(cb)));
   TTS_EXPECT(eve::all(kyosu::is_real(cr)));
-  auto z =   kyosu::complex(T(0), T(0));
-  auto o =   kyosu::complex(T(1), T(0));
-  TTS_IEEE_EQUAL(cyl_bessel_k0(z), o);
+  TTS_IEEE_EQUAL(cyl_bessel_k0(z), inf);
+  TTS_IEEE_EQUAL(k0c, cyl_bessel_k0(c));
 };
