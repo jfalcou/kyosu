@@ -85,16 +85,8 @@ namespace kyosu::_
 
     result_type f, C, delta;
     f = traits::b(v);
-    //   if constexpr(b_only)
-//    {
-//      f = kyosu::if_else(kyosu::is_eqz(v), tiny, v) ;
-//    }
-//    else
-//    {
-//      f = kyosu::if_else(kyosu::is_eqz(kumi::get<0>(v)), tiny, kumi::get<0>(v)) ;
-//    }
     C = f;
-    result_type   D{}; //(u_t(0));
+    result_type   D{};
 
     std::uintmax_t counter(max_terms);
     do{
@@ -161,28 +153,9 @@ namespace kyosu::_
     return r;
   }
 
-//   template<typename Z>
-//   inline auto R(size_t n, size_t p, Z z) noexcept
-//   // compute the ratio Jn(n, z)/Jp(n-1, z)J
-//   {
-//     using u_t = eve::underlying_type_t<Z>;
-//     if (is_eqz(n)) return Z(eve::nan(as<u_t>()));
-//     if (n == p)    return Z(eve::one(as<u_t>()));
-//     Z r{}, s{};
-//     auto rz = rec(z);
-//     auto rn = R(n, z);
-//     for(int i=n-1; i > p; --i)
-//     {
-//       rn = 2*i*rz-rec(rn);
-//       pri *= rn;
-//     }
-//     return lri;
-//   }
-
-
   template<typename Z>
   inline auto Rs(size_t n, Z z) noexcept
-  // compute the ratio Jn(i, z)/Jn(i-1, z)J for i = n:-1:1
+  // compute the ratio Jn(i, z)/Jn(i+1, z)J for i = n-1:-1:0
   {
     std::vector<Z> rs(n);
     using u_t = eve::underlying_type_t<Z>;
@@ -196,6 +169,22 @@ namespace kyosu::_
     }
     return rs;
   }
+
+
+  template<typename Z>
+  inline auto Js(size_t n, Z z) noexcept
+  // compute  Jn(i, z) for i = n:-1:0
+  {
+    auto rs = Rs(n+1, z);
+    std::vector<Z> js(n+1);
+    js[n] = cyl_bessel_jn(n, z);
+    for(int i=n-1; i >= 0; --i)
+    {
+      js[i] = js[i+1]*rs[i];
+    }
+    return js;
+  }
+
 
 
   template<typename Z>

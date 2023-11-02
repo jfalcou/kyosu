@@ -43,6 +43,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_yn over real"
               )
 <typename T>(T a0, T a1)
 {
+  using u_t = eve::underlying_type_t<T>;
   auto z =  kyosu::complex(a0, a1);
   auto re = kyosu::complex(eve::abs(a0));
   auto zer =   kyosu::complex(T(0), T(0));
@@ -52,12 +53,13 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_yn over real"
 
     for(int i=0; i <10 ; ++i)
     {
-      auto jnz = kyosu::cyl_bessel_yn(i, z);
-      TTS_IEEE_EQUAL(jnz, kyosu::conj(kyosu::cyl_bessel_yn(i, conjz)));
-      auto yre = kyosu::cyl_bessel_yn(i, re);
-      TTS_EXPECT(eve::all(kyosu::is_real(yre)));
+      auto ynz = kyosu::cyl_bessel_yn(i, z);
+      TTS_IEEE_EQUAL(ynz, kyosu::conj(kyosu::cyl_bessel_yn(i, conjz)));
+      auto yre = kyosu::cyl_bessel_yn(i, kyosu::abs(re));
+      TTS_EXPECT(eve::all(kyosu::is_real(yre)))<< i << " -> " << yre << '\n';
       auto yzer =  kyosu::cyl_bessel_yn(i, zer);
       TTS_IEEE_EQUAL(yzer, minf);
+      TTS_IEEE_EQUAL(ynz, eve::sign_alternate(u_t(i))*kyosu::cyl_bessel_yn(-i, z)) << i << '\n';
     }
   }
 };

@@ -26,8 +26,8 @@ namespace kyosu::_
         else if (n%4 == 2) return complex(eve::mone(eve::as<e_t>()));
         else return complex(eve::zero(eve::as<e_t>()), eve::one(eve::as<e_t>()));
       };
-
-      return miton(n)*cyl_bessel_jn(n,complex(-ipart(z), real(z)));
+      auto an =  eve::abs(n);
+      return miton(an)*cyl_bessel_jn(an,complex(-ipart(z), real(z)));
     }
     else
     {

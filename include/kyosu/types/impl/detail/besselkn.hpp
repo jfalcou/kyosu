@@ -21,6 +21,7 @@ namespace kyosu::_
     {
       using u_t = eve::underlying_type_t<Z>;
       auto argz = arg(z);
+      n =  eve::abs(n);
       auto piotwo = eve::pio_2(eve::as<u_t>());
       auto i = complex(u_t(0), u_t(1));
       auto cpi = piotwo*i*exp_ipi(u_t(n)/2);
@@ -30,8 +31,7 @@ namespace kyosu::_
       auto r =  if_else(eve::is_ltz(argz)
                        , cpi*cyl_bessel_h1n(n, z*epio2)
                        , cmi*cyl_bessel_h2n(n, z*empio2));
-//      std::cout << "zut " << cyl_bessel_h2n(n, z*empio2) << "   === " << z*empio2 << std::endl;
-      return if_else(is_eqz(z), complex(eve::one(eve::as<u_t>())), r);
+      return if_else(is_eqz(z), complex(eve::inf(eve::as<u_t>())), r);
     }
     else
     {

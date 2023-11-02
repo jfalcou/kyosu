@@ -79,5 +79,6 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_in over real"
   TTS_EXPECT(eve::all(kyosu::is_real(cr)));
   TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
   TTS_IEEE_EQUAL(cyl_bessel_in(i, zer), i ? zer : one);
+  TTS_IEEE_EQUAL(inc, cyl_bessel_in(-i, c)) << i << '\n';
  }
 };

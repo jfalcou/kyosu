@@ -22,20 +22,17 @@ namespace kyosu::_
     auto egamma = eve::egamma(eve::as<u_t>());
     auto eps    = eve::eps(eve::as<u_t>());
     auto j0z    = cyl_bessel_j0(z);
-//    std::cout << "z " << z << " j0z " << j0z << std::endl;
     auto bd = bound(z);
+    auto js = Js(2*bd, z);
     Z s{}, sk{};
     auto sgn = -rec(j0z);
-//    std::cout << "sgn " << sgn << std::endl;
     int k = 1;
     do {
-//      std::cout << "jn(2k, z) " <<  cyl_bessel_jn(k+k, z) << std::endl;
-      sk = sgn*cyl_bessel_jn(k+k, z)/k;
-//      std::cout << "k " <<  k << " sk " << sk << std::endl;
+      sk = sgn*js[2*k]/k;
       ++k;
       sgn = -sgn;
       s+= sk;
     } while (k < bd && eve::any(kyosu::abs(sk) > abs(s)*eps));
-    return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), twoopi*((log(z/2)+egamma)-2*s)*cyl_bessel_j0(z));
+    return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), twoopi*((log(z/2)+egamma)-2*s)*js[0]); //cyl_bessel_j0(z));
   }
 }

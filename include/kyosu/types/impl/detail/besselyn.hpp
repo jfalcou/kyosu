@@ -17,24 +17,24 @@ namespace kyosu::_
   //  cyl_bessel_yn
   //===-------------------------------------------------------------------------------------------
   template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_yn>, int n, Z z) noexcept
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_yn>, int nn, Z z) noexcept
   {
     using u_t   =  eve::underlying_type_t<Z>;
     auto y = cyl_bessel_y0(z);
-    if (n != 0)
+    if (nn != 0)
     {
-      auto jold = cyl_bessel_j0(z);
+      auto n = eve::abs(nn);
+      auto js = Js(n, z);
       using u_t   =  eve::underlying_type_t<Z>;
       auto twoopi = eve::two_o_pi(eve::as<u_t>());
-
       for(int i=1; i <= n ; ++i)
       {
-        auto jnew = cyl_bessel_jn(i, z);
-        y = (jnew*y-twoopi*rec(z))/jold;
-        jold = jnew;
+        y = (js[i]*y-twoopi*rec(z))/js[i-1];
       }
+      auto r = if_else(eve::is_gtz(real(z)) && is_real(z) && is_nan(y), complex(real(y)), y);
+      r = if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), r);
+      return nn < 0 ? r*eve::sign_alternate(u_t(n)) : r;
     }
-    auto r = if_else(eve::is_gtz(real(z)) && is_real(z) && is_nan(y), complex(real(y)), y);
-    return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), r);
+    else return y;
   }
 }

@@ -37,8 +37,7 @@ namespace kyosu::_
       {
         using e_t = as_real_t<Z>;
         using u_t = eve::underlying_type_t<e_t>;
-        auto n = u_t(nn);
-        auto an = eve::abs(n);
+        auto n = u_t(eve::abs(nn));
         auto az = kyosu::abs(z);
 
         auto forward = [n](auto z){
@@ -154,7 +153,8 @@ namespace kyosu::_
           }
         }
         auto sgnaltern = [n](auto x){return eve::if_else(eve::is_ltz(x), eve::one, eve::sign_alternate(n));};
-        return sgnaltern(srz)*sgnaltern(n)*r;
+        r = sgnaltern(srz)*sgnaltern(n)*r;
+        return nn < 0 ? r*eve::sign_alternate(u_t(nn)) : r;
       }
     }
     else
