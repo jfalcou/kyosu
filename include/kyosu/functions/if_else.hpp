@@ -15,6 +15,11 @@ namespace kyosu::tags
   {
     using callable_tag_type = callable_if_else;
 
+    KYOSU_DEFERS_CALLABLE(if_else_);
+
+    template<eve::floating_ordered_value T, eve::floating_ordered_value U>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, auto c, T const& t, U u) noexcept { return eve::if_else(c, t, u); }
+
     KYOSU_FORCEINLINE
     auto operator()(auto const& m, auto const& t, auto const& f) const noexcept -> decltype(eve::tag_invoke(*this,m,t,f))
     {

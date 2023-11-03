@@ -12,9 +12,15 @@
 #include <kyosu/details/cayleyify.hpp>
 #include <complex>
 
+#include <kyosu/types/impl/detail/bessel_utils.hpp>
 #include <kyosu/types/impl/detail/besselj0.hpp>
 #include <kyosu/types/impl/detail/besselj1.hpp>
 #include <kyosu/types/impl/detail/besseljn.hpp>
 #include <kyosu/types/impl/detail/besseli0.hpp>
 #include <kyosu/types/impl/detail/besseli1.hpp>
 #include <kyosu/types/impl/detail/besselin.hpp>
+#include <kyosu/types/impl/detail/bessely0.hpp>
+#include <kyosu/types/impl/detail/bessely1.hpp>
+#include <kyosu/types/impl/detail/besselyn.hpp>
+#include <kyosu/types/impl/detail/besselhn.hpp>
+#include <kyosu/types/impl/detail/besselkn.hpp>

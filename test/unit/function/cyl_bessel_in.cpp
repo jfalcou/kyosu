@@ -8,7 +8,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::abs over real"
+TTS_CASE_WITH ( "Check kyosu::cyl_bessel_in over real"
               , kyosu::scalar_real_types
               , tts::generate(tts::randoms(-10,10))
               )
@@ -16,7 +16,6 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
 {
   if constexpr(sizeof(T) == 8)
   {
-    std::cout.precision(17);
     std::array<T, 8> re{-4.2214088790474964e+00, -7.8055061036477191e-01, 3.4677730339081023e+00, -3.5357366395596843e+00, 2.6849636588863888e+00, 4.1415226198517496e+00, -4.3623200824031505e+00, 1.0341209529062589e-01};
 
     std::array<T, 8> im{1.0956977560286330e+00, -7.5270747683236494e-01, -2.3663854475056922e+00, 2.1367696130628167e-01, 3.8676287626125005e+00, 1.2360189302485036e+00, -1.6272444761141791e+00, 2.3032771326096082e+00};
@@ -52,7 +51,7 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
 };
 
 
-TTS_CASE_WITH ( "Check kyosu::abs over real"
+TTS_CASE_WITH ( "Check kyosu::cyl_bessel_in over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10),
                               tts::randoms(-10,10)
@@ -60,17 +59,25 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
               )
 <typename T>(T a0, T a1)
 {
+  using u_t = eve::underlying_type_t<T>;
   auto c =  kyosu::complex(a0, a1);
   auto cb=  kyosu::conj(c);
   auto cm=  -c;
   auto cr=  kyosu::complex(a0);
   auto ci=  kyosu::complex(T(0), a1);
+  auto zer =   kyosu::complex(T(0), T(0));
+  auto one =   kyosu::complex(T(1), T(0));
+
   using kyosu::cyl_bessel_in;
-  auto inc = cyl_bessel_in(3, c);
-  TTS_IEEE_EQUAL(inc, -cyl_bessel_in(3, cm));
-  TTS_IEEE_EQUAL(inc, kyosu::conj(cyl_bessel_in(3, cb)));
+
+ for(int i=0; i < 10; ++i)
+ {
+  auto inc = cyl_bessel_in(i, c);
+  TTS_IEEE_EQUAL(inc, eve::sign_alternate(u_t(i))*cyl_bessel_in(i, cm));
+  TTS_IEEE_EQUAL(inc, kyosu::conj(cyl_bessel_in(i, cb)));
   TTS_EXPECT(eve::all(kyosu::is_real(cr)));
   TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
-  auto z =   kyosu::complex(T(0), T(0));
-  TTS_IEEE_EQUAL(cyl_bessel_in(3, z), z);
+  TTS_IEEE_EQUAL(cyl_bessel_in(i, zer), i ? zer : one);
+  TTS_IEEE_EQUAL(inc, cyl_bessel_in(-i, c)) << i << '\n';
+ }
 };

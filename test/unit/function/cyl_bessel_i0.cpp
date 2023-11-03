@@ -8,7 +8,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::abs over real"
+TTS_CASE_WITH ( "Check kyosu::cyl_bessel_i0 over real"
               , kyosu::scalar_real_types
               , tts::generate(tts::randoms(-10,10))
               )
@@ -17,7 +17,6 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
   using e_t = eve::element_type_t<T>;
   if constexpr(sizeof(e_t) == 8)
   {
-    std::cout.precision(17);
     std::array<T, 8> re{1.3556565953650257e+00, 3.3014253671480853e+00, -2.5475601159592665e+00, 1.1681025625526764e+00, 2.0457564384951734e+00, -1.2532453407268573e+00, -4.7295944112409973e+00, -2.2840688135673504e+00};
 
     std::array<T, 8> im{4.0914290638525896e+00, -5.6356545999116547e-01, -3.6064274257830387e+00, 1.6951171853616265e+00, -1.3703722677989172e+00, -1.2563658033049907e+00, -6.3364633643107848e-01, 3.7665729797577785e+00};
@@ -34,7 +33,6 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
       TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_i0(c), res, 1.0e-7) << i <<  " <- " << c << '\n';
     }
   }
-  std::cout.precision(17);
 
   std::array<T, 8> re{1.1554018562666468e-01, 5.3044189227319072e-01, 3.5245310048347744e-01, 3.2527350287655354e-01, 2.4688936247411308e+00, -5.1146428618899231e-01, 1.6635701653597774e+00, -1.7452778188732947e+00};
 
@@ -56,7 +54,7 @@ TTS_CASE_WITH ( "Check kyosu::abs over real"
 };
 
 
-TTS_CASE_WITH ( "Check kyosu::abs over real"
+TTS_CASE_WITH ( "Check kyosu::cyl_bessel_i0 over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10),
                               tts::randoms(-10,10)

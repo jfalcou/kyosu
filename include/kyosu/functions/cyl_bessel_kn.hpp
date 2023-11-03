@@ -12,14 +12,14 @@
 
 namespace kyosu::tags
 {
-  struct callable_cyl_bessel_jn: eve::elementwise
+  struct callable_cyl_bessel_kn: eve::elementwise
   {
-    using callable_tag_type = callable_cyl_bessel_jn;
+    using callable_tag_type = callable_cyl_bessel_kn;
 
-    KYOSU_DEFERS_CALLABLE(cyl_bessel_jn_);
+    KYOSU_DEFERS_CALLABLE(cyl_bessel_kn_);
 
     template<eve::ordered_value N, eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v) noexcept { return eve::cyl_bessel_jn(n, v); }
+    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v) noexcept { return eve::cyl_bessel_kn(n, v); }
 
     template<typename N, typename T>
     KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1) const noexcept
@@ -29,7 +29,7 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_cyl_bessel_jn(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_cyl_bessel_kn(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -39,14 +39,10 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_jn
-//!   @brief Computes the Bessel functions of the first kind,
-//!   \f$ J_{n}(x)=\sum_{p=0}^{\infty}{\frac{(-1)^p}{p!\,\Gamma (p+n +1)}}
-//!   {\left({x \over 2}\right)}^{2p+n }\f$
-//!   extended to the complex plane and cayley_dickson values.
-//!
-//!   It is the solution of \f$ x^{2}y''+xy'+(x^2-n^2)y=0\f$ for which
-//!   \f$ y(0) = 0\f$ if \f$n \ne 0\f$ else \f$1\f$.
+//!   @var cyl_bessel_kn
+//!   @brief Computes the modified Bessel functions of the second kind,
+//!   \f$ K_{n}(x)=\lim_{\alpha\to n}{\frac {\pi }{2}}{\frac {I_{-\alpha  }(x)-I_{\alpha }(x)}{\sin \alpha \pi }}\f$.
+//!   extended to the complex plane and cayley_dickson algebras.
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -57,8 +53,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto cyl_bessel_jn(int n, T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T    cyl_bessel_jn(int n, T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto cyl_bessel_kn(int n, T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T    cyl_bessel_kn(int n, T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -68,12 +64,12 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns \f$J_n(z)\f$.
+//!     * returns \f$K_n(z)\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/cyl_bessel_jn.cpp}
+//!  @godbolt{doc/cyl_bessel_kn.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_cyl_bessel_jn cyl_bessel_jn = {};
+inline constexpr tags::callable_cyl_bessel_kn cyl_bessel_kn = {};
 }
