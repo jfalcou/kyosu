@@ -39,11 +39,11 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @brief Computes the Bessel functions of the first kind,
-//!   \f$ J_{n}(x)=\sum_{p=0}^{\infty}{\frac{(-1)^p}{p!\,\Gamma (p+n +1)}}
-//!   {\left({x \over 2}\right)}^{2p+n }\f$.
+//!   @var cyl_bessel_in
+//!   @brief Computes the modified Bessel functions of the first kind \f$I_{n}(x)=i^{-n}J_{n }(ix)\f$,
+//!   extended to the complex plane and cayley_dickson algebras.
 //!
-//!   In the real field, it is the solution of \f$ x^{2}y''+xy'+(x^2-n^2)y=0\f$ for which
+//!   It is the solution of \f$ x^{2}y''+xy'+(x^2+n^2)y=0\f$ for which
 //!   \f$ y(0) = 0\f$ if \f$n \ne 0\f$ else \f$1\f$.
 //!
 //!   @code
@@ -55,8 +55,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T>                                constexpr auto cyl_bessel_in(int n, T z) noexcept;
-//!      template<eve::floating_ordered_value N, eve::floating_ordered_value T>     constexpr T    cyl_bessel_in(N n, T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto cyl_bessel_in(int n, T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T    cyl_bessel_in(int n, T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -66,9 +66,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * return the cylindrical \f$J_n(z)\f$.
-//!
-//!  @warning Up to now the cayley_dickson versions have only been imlemented dor scalar int values of n.
+//!     * returns \f$J_n(z)\f$.
 //!
 //!  @groupheader{Example}
 //!

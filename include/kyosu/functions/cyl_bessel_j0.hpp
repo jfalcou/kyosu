@@ -41,9 +41,9 @@ namespace kyosu
 //!   @var cyl_bessel_j0
 //!   @brief Computes  the Bessel function of the first kind,
 //!   \f$ J_0(x)=\frac1{\pi }\int _{0}^{\pi}\cos(x\sin \tau)
-//!   \,\mathrm {d} \tau \f$ extended to the complex plane and cayley_dickson values.
+//!   \,\mathrm {d} \tau \f$ extended to the complex plane and cayley_dickson algebras.
 //!
-//!   In the real field, it is the solution of \f$ x^{2}y''+xy'+x^2y=0\f$ for which \f$ y(0) = 1\f$.
+//!   It is the solution of \f$ x^{2}y''+xy'+x^2y=0\f$ for which \f$ y(0) = 1\f$.
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -65,7 +65,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * return the cylindrical \f$J_0(z)\f$.
+//!     * returns \f$J_0(z)\f$.
 //!
 //!  @groupheader{Example}
 //!

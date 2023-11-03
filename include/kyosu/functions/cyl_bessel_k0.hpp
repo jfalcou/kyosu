@@ -39,8 +39,9 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var cyl_bessel_k0
-//!   @brief Computes  the Bessel function of the second kind,
-//!   \f$ K_0(x)\f$ extended to the complex plane and cayley_dickson values.
+//!   @brief Computes  the modified Bessel function of the second kind,
+//!   \f$ K_0(x)=\lim_{\alpha\to 0}{\frac {\pi }{2}}{\frac {I_{-\alpha }(x)-I_{\alpha }(x)}{\sin \alpha \pi }}\f$.
+//!   extended to the complex plane and cayley_dickson values.
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -62,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * return the cylindrical \f$K_0(z)\f$.
+//!     * returns \f$K_0(z)\f$.
 //!
 //!  @groupheader{Example}
 //!

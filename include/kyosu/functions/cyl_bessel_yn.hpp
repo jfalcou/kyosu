@@ -39,12 +39,10 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @brief Computes the Bessel functions of the first kind,
-//!   \f$ J_{n}(x)=\sum_{p=0}^{\infty}{\frac{(-1)^p}{p!\,\Gamma (p+n +1)}}
-//!   {\left({x \over 2}\right)}^{2p+n }\f$.
-//!
-//!   In the real field, it is the solution of \f$ x^{2}y''+xy'+(x^2-n^2)y=0\f$ for which
-//!   \f$ y(0) = 0\f$ if \f$n \ne 0\f$ else \f$1\f$.
+//!   @var cyl_bessel_yn
+//!   @brief Computes the modified Bessel functions of the second kind,
+//!   \f$ Y_n(x)=\lim_{\alpha\to n}{{\frac {J_{\alpha  }(x)\cos(\alpha\pi)-J_{-\alpha }(x)}{\sin(\alpha\pi)}}}\f$,
+//!   extended to the complex plane and cayley_dickson algebras.
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -66,9 +64,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * return the cylindrical \f$J_n(z)\f$.
-//!
-//!  @warning Up to now the cayley_dickson versions have only been imlemented dor scalar int values of n.
+//!     * returns  \f$Y_n(z)\f$.
 //!
 //!  @groupheader{Example}
 //!
