@@ -142,8 +142,7 @@ $(document).ready(function(){initNavTree('group__functions_gab07b0b22e10bac659c9
 </table>
 </div><div class="memdoc">
 
-<p>Computes the Bessel function of the first kind, \( J_1(x)=\frac1{\pi }\int _{0}^{\pi}\cos(\tau-x\sin \tau )\,\mathrm {d} \tau \) extended to the complex plane and cayley_dickson values. </p>
-<p>In the real field, it is the solution of \( x^{2}y&#39;&#39;+xy&#39;+x^2y=0\) for which \( y(0) = 1\).</p>
+<p>Computes the Bessel function of the first kind, \( J_1(x)=\frac1{\pi }\int _{0}^{\pi}\cos(\tau-x\sin \tau )\,\mathrm {d} \tau \) extended to the complex plane and cayley_dickson values. It is the solution of \( x^{2}y&#39;&#39;+xy&#39;+x^2y=0\) for which \( y(0) = 1\). </p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
@@ -151,7 +150,7 @@ $(document).ready(function(){initNavTree('group__functions_gab07b0b22e10bac659c9
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gab07b0b22e10bac659c95fd81ea819086.html#gab07b0b22e10bac659c95fd81ea819086">cyl_bessel_j1</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T    <a class="code hl_variable" href="group__functions_gab07b0b22e10bac659c95fd81ea819086.html#gab07b0b22e10bac659c95fd81ea819086">cyl_bessel_j1</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gab07b0b22e10bac659c95fd81ea819086_html_gab07b0b22e10bac659c95fd81ea819086"><div class="ttname"><a href="group__functions_gab07b0b22e10bac659c95fd81ea819086.html#gab07b0b22e10bac659c95fd81ea819086">kyosu::cyl_bessel_j1</a></div><div class="ttdeci">constexpr tags::callable_cyl_bessel_j1 cyl_bessel_j1</div><div class="ttdoc">Computes the Bessel function of the first kind,  extended to the complex plane and cayley_dickson val...</div><div class="ttdef"><b>Definition:</b> cyl_bessel_j1.hpp:75</div></div>
+<div class="ttc" id="agroup__functions_gab07b0b22e10bac659c95fd81ea819086_html_gab07b0b22e10bac659c95fd81ea819086"><div class="ttname"><a href="group__functions_gab07b0b22e10bac659c95fd81ea819086.html#gab07b0b22e10bac659c95fd81ea819086">kyosu::cyl_bessel_j1</a></div><div class="ttdeci">constexpr tags::callable_cyl_bessel_j1 cyl_bessel_j1</div><div class="ttdoc">Computes the Bessel function of the first kind,  extended to the complex plane and cayley_dickson val...</div><div class="ttdef"><b>Definition:</b> cyl_bessel_j1.hpp:74</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> types.hpp:14</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -159,7 +158,7 @@ $(document).ready(function(){initNavTree('group__functions_gab07b0b22e10bac659c9
 </ul>
 <p><b>Return value</b></p>
 <ul>
-<li>return the cylindrical \(J_0(z)\).</li>
+<li>returns \(J_0(z)\).</li>
 </ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
