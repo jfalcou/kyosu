@@ -23,6 +23,7 @@ auto cayley_extend_rev(auto f, auto z1, auto z2)
   return kyosu::real(c) + kyosu::ipart(c)*kyosu::sign(p);
 }
 
+
 auto cayley_extend2(auto f, auto z, auto... rs)
 {
   auto p = kyosu::pure(z);
