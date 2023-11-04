@@ -6,8 +6,7 @@
 */
 //======================================================================================================================
 #pragma once
-#include <kyosu/types/impl/detail/besselj0.hpp>
-#include <kyosu/types/impl/detail/bessely0.hpp>
+#include <kyosu/types/impl/detail/bessel_j.hpp>
 
 namespace kyosu::_
 {
