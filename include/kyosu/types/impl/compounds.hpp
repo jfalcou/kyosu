@@ -77,7 +77,7 @@ namespace kyosu
       auto ria  = kumi::split(self ,kumi::index<sz>);
       auto rib  = kumi::split(other,kumi::index<sz>);
 
-      using cd_t = as_cayley_dickson_n_t<sz,as_real_t<Self>,as_real_t<Other>>;
+      using cd_t = as_cayley_dickson_n_t<sz,as_real_type_t<Self>,as_real_type_t<Other>>;
       cd_t  ra{get<0>(ria)}, ia{get<1>(ria)}
           , rb{get<0>(rib)}, ib{get<1>(rib)};
 
@@ -91,7 +91,7 @@ namespace kyosu
       constexpr auto idx  = kumi::index<sz>;
       auto ria  = kumi::split(self,idx);
 
-      using cd_t = as_cayley_dickson_n_t<sz,as_real_t<Self>,as_real_t<Other>>;
+      using cd_t = as_cayley_dickson_n_t<sz,as_real_type_t<Self>,as_real_type_t<Other>>;
       cd_t ra{get<0>(ria)}, ia{get<1>(ria)};
       self = as_cayley_dickson_t<Self,Other>{kumi::cat(ra * other,ia * conj(other))};
     }

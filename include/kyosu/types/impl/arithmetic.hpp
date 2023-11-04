@@ -250,7 +250,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::proj> const&, C c) noexcept
   {
-    using real_t = eve::as<as_real_t<C>>;
+    using real_t = eve::as<as_real_type_t<C>>;
     constexpr auto P = kyosu::dimension_v<C>;
     if constexpr (P == 2)
       return if_else(is_infinite(c)
@@ -417,7 +417,7 @@ namespace kyosu::_
     {
       r_t x = convert(xx, eve::as<r_t>());
       auto dfma = /*d*/(fma);
-      r_t  that(eve::zero(eve::as<as_real_t<r_t>>()));
+      r_t  that(eve::zero(eve::as<as_real_type_t<r_t>>()));
       auto next = [&](auto that, auto arg) { return dfma(x, that, arg); };
       ((that = next(that, cs)), ...);
       return that;

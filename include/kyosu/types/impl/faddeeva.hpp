@@ -17,7 +17,7 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      using v_t = as_real_t<Z>;
+      using v_t = as_real_type_t<Z>;
       using real_t = eve::element_type_t<v_t>;
       auto const   sqrtpi = eve::sqrt_pi(eve::as<real_t>());
       auto const iosqrtpi = complex(real_t(0), eve::rec(sqrtpi));

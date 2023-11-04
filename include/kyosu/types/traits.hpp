@@ -7,6 +7,7 @@
 //======================================================================================================================
 #pragma once
 
+#include <eve/as.hpp>
 #include <bit>
 
 namespace kyosu
@@ -63,11 +64,11 @@ namespace kyosu
   template<concepts::cayley_dickson T>
   inline constexpr auto dimension_v<T> = eve::element_type_t<std::remove_cvref_t<T>>::static_size;
 
-  template<typename T>                  struct as_real                          { using type = T; };
-  template<typename T,unsigned int Dim> struct as_real<cayley_dickson<T,Dim>>   { using type = T; };
-  template<typename T,typename N>       struct as_real<eve::wide<T,N>>
+  template<typename T>                  struct as_real_type                          { using type = T; };
+  template<typename T,unsigned int Dim> struct as_real_type<cayley_dickson<T,Dim>>   { using type = T; };
+  template<typename T,typename N>       struct as_real_type<eve::wide<T,N>>
   {
-    using type = eve::wide<typename as_real<T>::type,N>;
+    using type = eve::wide<typename as_real_type<T>::type,N>;
   };
 
   //====================================================================================================================
@@ -76,7 +77,7 @@ namespace kyosu
   //! @tparam T Type to convert to a real type.
   //====================================================================================================================
   template<typename T>
-  using as_real_t = typename as_real<T>::type;
+  using as_real_type_t = typename as_real_type<T>::type;
 
   template<unsigned int Dim, typename... Ts>
   struct  as_cayley_dickson_n;
@@ -126,6 +127,26 @@ namespace kyosu
   //====================================================================================================================
   template<typename... Ts>
   using as_cayley_dickson_t = typename as_cayley_dickson<Ts...>::type;
+
+  using eve::as;
+
+  //====================================================================================================================
+  //! @struct as_real
+  //! @brief Lightweight type-wrapper of real value type
+  //!
+  //! Wraps the real type associed to `T` into a constexpr, trivially constructible empty class to optimize passing type
+  //! parameters via object instead of via template parameters.
+  //!
+  //! @tparam T Type to wrap
+  //====================================================================================================================
+  template<typename T> struct as_real
+  {
+    using type        = as_real_type_t<T>;
+    using target_type = eve::as<type>;
+
+    constexpr as_real()          noexcept {}
+    constexpr as_real(T const&)  noexcept {}
+  };
 
   //====================================================================================================================
   //!  @}

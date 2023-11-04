@@ -122,9 +122,9 @@ namespace kyosu
   template<std::size_t I, typename T, unsigned int N>
   constexpr auto get(cayley_dickson<T,N> const& c) noexcept { return kumi::get<I>(c.contents); }
 
-  //==================================================================================================================
+  //====================================================================================================================
   // Main function dispatchers
-  //==================================================================================================================
+  //====================================================================================================================
   template<typename... T>
   requires(concepts::cayley_dickson<T> || ... )
   KYOSU_FORCEINLINE   constexpr auto tag_invoke(eve::callable auto const& f, auto, T&&... c) noexcept
@@ -133,9 +133,9 @@ namespace kyosu
     return _::dispatch(f, KYOSU_FWD(c)...);
   }
 
-  //==================================================================================================================
+  //====================================================================================================================
   //  Tag invoke override for if_else - Outside so it can properly deals with the complicated parameters of if_else
-  //==================================================================================================================
+  //====================================================================================================================
   template<typename T, typename F>
   requires(concepts::cayley_dickson<T> || concepts::cayley_dickson<F>)
   KYOSU_FORCEINLINE constexpr auto  tag_invoke( eve::tag_of<kyosu::if_else> const& fn, auto, auto m
@@ -155,9 +155,9 @@ namespace kyosu
     return _::dispatch(f, c, tgt);
   }
 
-  //==================================================================================================================
+  //====================================================================================================================
   //  Tag invoke override for parts extraction - Outside so they can see get<I>(c)
-  //==================================================================================================================
+  //====================================================================================================================
   template<concepts::extractor T, concepts::cayley_dickson C>
   KYOSU_FORCEINLINE constexpr decltype(auto)
   tag_invoke(T const&, auto, C&& c) noexcept
@@ -167,7 +167,7 @@ namespace kyosu
     if constexpr(T::minimum_valid_index == T::maximum_valid_index)
     {
       if constexpr(sz > T::minimum_valid_index) return get<T::minimum_valid_index>(EVE_FWD(c));
-      else                                      return as_real_t<std::remove_cvref_t<C>>{0};
+      else                                      return as_real_type_t<std::remove_cvref_t<C>>{0};
     }
     else
     {
@@ -188,6 +188,13 @@ namespace kyosu
   {
     eve::detail::callable_object<Tag> cst;
     return cayley_dickson<Type,N>( cst(eve::as<Type>{}) );
+  }
+
+  template<typename Tag, typename T>
+  KYOSU_FORCEINLINE constexpr auto tagged_dispatch(Tag const&, as_real<T> const&) noexcept
+  {
+    eve::detail::callable_object<Tag> cst;
+    return cst(typename as_real<T>::target_type{});
   }
 
   //====================================================================================================================
@@ -217,14 +224,6 @@ struct std::tuple_element<I, kyosu::cayley_dickson<T,N>>
   using type = T;
 };
 
-template<typename Wrapper, typename T, unsigned int N>
-struct eve::supports_like<Wrapper,kyosu::cayley_dickson<T,N>>
-      : std::bool_constant<   kyosu::concepts::cayley_dickson<Wrapper>
-                          ||  std::same_as<T, eve::element_type_t<Wrapper>>
-                          ||  plain_scalar_value<Wrapper>
-                          >
-{
-};
 #endif
 
 #include <kyosu/types/impl/io.hpp>
