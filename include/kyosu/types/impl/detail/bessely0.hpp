@@ -11,6 +11,25 @@
 namespace kyosu::_
 {
 
+  template < typename Z> struct mkjs
+  {
+    mkjs(size_t n, Z z):
+      rz(kyosu::rec(z)),
+      rs(kyosu::_:: R(n, z)),
+      j(kyosu::cyl_bessel_jn(n, z)),
+      i(n-1){}
+
+    auto operator()(){
+      auto pj = j;
+      j = pj*rs;
+      rs = 2*(i--)*rz-kyosu::rec(rs);
+      return pj;
+    }
+
+    Z rz, rs, j, pj;
+    int i;
+  };
+
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_y0
   //===-------------------------------------------------------------------------------------------
@@ -21,27 +40,17 @@ namespace kyosu::_
     auto twoopi = eve::two_o_pi(eve::as<u_t>());
     auto egamma = eve::egamma(eve::as<u_t>());
     auto eps    = eve::eps(eve::as<u_t>());
-    auto j0z    = cyl_bessel_j0(z);
     auto bd = bound(z);
-    auto js = Js(2*bd+1, z);
-    Z s{}, sk{};
-    auto sgn = u_t(1); //rec(j0z);
+    Z s{};
+    mkjs jj(2*bd-2, z);
+    auto sgn =  eve::sign_alternate(u_t(bd+1));
     for (int k = bd-1; k >= 1; --k)
     {
-      sk = sgn*js[2*k]/k;
-      std::cout << "k " << k << " -> " <<  sk << std::endl;
+      auto sk = sgn*jj()/k;
+      jj();
       sgn = -sgn;
       s+= sk;
     }
-    s /= js[0];
-//     int k = 1;
-//     do {
-//       sk = sgn*js[2*k]/k;
-//       std::cout << "k " << k << " -> " <<  sk << std::endl;
-//       ++k;
-//       sgn = -sgn;
-//       s+= sk;
-//     } while (k < bd && eve::any(kyosu::abs(sk) > abs(s)*eps));
-    return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), twoopi*((log(z/2)+egamma)-2*s)*js[0]); //cyl_bessel_j0(z));
+    return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), twoopi*((log(z/2)+egamma)*jj()-2*s));
   }
 }
