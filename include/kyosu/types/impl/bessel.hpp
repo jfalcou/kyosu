@@ -20,5 +20,6 @@
 #include <kyosu/types/impl/detail/bessely1.hpp>
 #include <kyosu/types/impl/detail/besselyn.hpp>
 #include <kyosu/types/impl/detail/besselhn.hpp>
-#include <kyosu/types/impl/detail/besselkn.hpp>
+#include <kyosu/types/impl/detail/bessel_k.hpp>
+
 #include <kyosu/types/impl/detail/cylseq.hpp>
