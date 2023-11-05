@@ -27,9 +27,10 @@ namespace kyosu::_
       auto js = Js(n, z);
       using u_t   =  eve::underlying_type_t<Z>;
       auto twoopi = eve::two_o_pi(eve::as<u_t>());
+      auto b = twoopi*rec(z);
       for(int i=1; i <= n ; ++i)
       {
-        y = (js[i]*y-twoopi*rec(z))/js[i-1];
+        y = fms(js[i], y, b)/js[i-1];
       }
       auto r = if_else(eve::is_gtz(real(z)) && is_real(z) && is_nan(y), complex(real(y)), y);
       r = if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), r);
