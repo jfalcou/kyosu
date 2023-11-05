@@ -16,9 +16,7 @@
 
 #include <kyosu/types/impl/detail/bessel_j.hpp>
 #include <kyosu/types/impl/detail/bessel_i.hpp>
-#include <kyosu/types/impl/detail/bessely0.hpp>
-#include <kyosu/types/impl/detail/bessely1.hpp>
-#include <kyosu/types/impl/detail/besselyn.hpp>
+#include <kyosu/types/impl/detail/bessel_y.hpp>
 #include <kyosu/types/impl/detail/besselhn.hpp>
 #include <kyosu/types/impl/detail/bessel_k.hpp>
 
