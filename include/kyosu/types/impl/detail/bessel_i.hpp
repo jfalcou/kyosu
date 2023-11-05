@@ -6,10 +6,35 @@
 */
 //======================================================================================================================
 #pragma once
-#include <kyosu/types/impl/detail/bessel_j.hpp>
 
 namespace kyosu::_
 {
+
+  //===-------------------------------------------------------------------------------------------
+  //  cyl_bessel_i0
+  //===-------------------------------------------------------------------------------------------
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_i0>, Z z) noexcept
+  {
+    return cyl_bessel_j0(complex(-ipart(z), real(z)));
+  }
+
+  //===-------------------------------------------------------------------------------------------
+  //  cyl_bessel_i1
+  //===-------------------------------------------------------------------------------------------
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_i1>, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      auto [r, i] = cyl_bessel_j1(complex(-ipart(z), real(z)));
+      return complex(i, -r);
+    }
+    else
+    {
+      return cayley_extend(cyl_bessel_i1, z);
+    }
+  }
 
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_in
@@ -33,5 +58,5 @@ namespace kyosu::_
     {
       return cayley_extend_rev(cyl_bessel_in, n, z);
     }
-  }
+  }  
 }
