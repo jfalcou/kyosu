@@ -30,5 +30,11 @@ int main()
   eve::wide<double, eve::fixed<4>> z1(1.0, 2.0, 40.0, 0.0),  z2(36.0, 0.5, 0.0, 40.0);
   auto z0 = kyosu::complex(z1, z2);
   std::cout << z0 << " \n-> " << cyl_bessel_yn(n,z0) << "\n";
+
+
+  for(int i=75; i < 100; ++i)
+    std::cout << "i " << i << " -> " << cyl_bessel_yn(i,kyosu::complex(1.0, 1.0)) << "\n";
+
+
   return 0;
 }

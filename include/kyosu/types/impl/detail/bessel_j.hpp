@@ -393,4 +393,74 @@ namespace kyosu::_
       return cayley_extend_rev(cyl_bessel_jn, nn, z);
     }
   }
+
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::sph_bessel_j0>, Z z) noexcept
+  {
+    return sinc(z);
+  }
+
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::sph_bessel_j1>, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      auto rz = rec(z);
+      return if_else(kyosu::abs(z) < eve::eps(eve::as(real(z)))
+                    , eve::zero(eve::as(real(z)))
+                    , (sinc(z)-cos(z))*rz
+                    );
+    }
+    else
+    {
+      return cayley_extend(sph_bessel_j0, z);
+    }
+  }
+
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::sph_bessel_jn>, int n, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      using u_t = eve::underlying_type_t<Z>;
+      auto bd = [z](int n){
+        auto st = eve::abs(eve::sin(eve::abs(arg(z))));
+        auto r  = kyosu::abs(z);
+        auto m = eve::maximum(eve::ceil((1.83+4.1*eve::pow(st, 0.33))*eve::pow(r, (0.91-0.43*eve::pow(st, 0.36)))+9*(1-eve::sqrt(st))));
+        return eve::max(n+1, int(m));
+      };
+
+      auto j0 = kyosu::sph_bessel_j0(z);
+      if (n == 0) return j0;
+      auto j1 = kyosu::sph_bessel_j1(z);
+      if (n == 1) return j1;
+
+      auto rz = kyosu::rec(z);
+      auto nn = bd(n);
+      std::vector < Z > jj(nn+1);
+      jj[nn] =  kyosu::complex(u_t(0));
+      jj[nn-1] =  eve::sqrtsmallestposval(eve::as<u_t>()); //kyosu::complex(u_t(1));
+      auto jnext =  kyosu::complex(u_t(0));
+      auto j     =   kyosu::complex(eve::sqrtsmallestposval(eve::as<u_t>()));//kyosu::complex(u_t(1));
+      auto init = j;
+      auto jcur = jnext;
+      auto res = j;
+      for(int i=nn-1; i > 0 ; --i)
+      {
+        jcur = (2*i+1)*rz*j-jnext;
+        if(i == n) res = j;
+        jnext = j;
+        j = jcur;
+      }
+      auto j0ltj1 = kyosu::abs(j0) <= kyosu::abs(j1);
+      auto scalej0 = (j0/jcur);
+      auto scalej1 = (j1/jnext);
+      return res*if_else(j0ltj1, scalej0, scalej1);
+    }
+    else
+    {
+      return cayley_extend_rev(sph_bessel_jn, n, z);
+    }
+  }
+
 }
