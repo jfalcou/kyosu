@@ -183,11 +183,15 @@ namespace kyosu
   }
 
   // TODO: Move to tag_invoke when EVE catch up on this front
-  template<typename Tag, eve::floating_scalar_value Type, unsigned int N>
-  KYOSU_FORCEINLINE constexpr auto tagged_dispatch(Tag const&, eve::as<cayley_dickson<Type,N>> const&) noexcept
+  template<typename Tag, concepts::cayley_dickson T>
+  KYOSU_FORCEINLINE constexpr auto tagged_dispatch(Tag const&, eve::as<T> const&) noexcept
   {
     eve::detail::callable_object<Tag> cst;
-    return cayley_dickson<Type,N>( cst(eve::as<Type>{}) );
+    auto val = cst( eve::as<as_real_type_t<T>>{} );
+    using val_t = std::remove_cvref_t<decltype(val)>;
+
+    if constexpr(!eve::floating_value<val_t>) return val;
+    else return as_cayley_dickson_n_t<eve::element_type_t<T>::static_size,val_t>(val);
   }
 
   template<typename Tag, typename T>
