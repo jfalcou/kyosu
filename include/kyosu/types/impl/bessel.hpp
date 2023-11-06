@@ -19,5 +19,3 @@
 #include <kyosu/types/impl/detail/bessel_y.hpp>
 #include <kyosu/types/impl/detail/bessel_h.hpp>
 #include <kyosu/types/impl/detail/bessel_k.hpp>
-
-#include <kyosu/types/impl/detail/cylseq.hpp>
