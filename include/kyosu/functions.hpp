@@ -115,7 +115,6 @@
 #include <kyosu/functions/kpart.hpp>
 #include <kyosu/functions/lambda.hpp>
 #include <kyosu/functions/lbeta.hpp>
-#include <kyosu/functions/ldexp.hpp>
 #include <kyosu/functions/ldiv.hpp>
 #include <kyosu/functions/lerp.hpp>
 #include <kyosu/functions/log.hpp>
@@ -174,11 +173,11 @@
 #include <kyosu/functions/sph_bessel_j0.hpp>
 #include <kyosu/functions/sph_bessel_j1.hpp>
 #include <kyosu/functions/sph_bessel_jn.hpp>
-// #include <kyosu/functions/sph_bessel_y0.hpp>
-// #include <kyosu/functions/sph_bessel_y1.hpp>
-// #include <kyosu/functions/sph_bessel_yn.hpp>
-// #include <kyosu/functions/sph_bessel_h1n.hpp>
-// #include <kyosu/functions/sph_bessel_h2n.hpp>
+#include <kyosu/functions/sph_bessel_h1n.hpp>
+#include <kyosu/functions/sph_bessel_h2n.hpp>
+#include <kyosu/functions/sph_bessel_y0.hpp>
+#include <kyosu/functions/sph_bessel_y1.hpp>
+#include <kyosu/functions/sph_bessel_yn.hpp>
 // #include <kyosu/functions/sph_bessel_k0.hpp>
 // #include <kyosu/functions/sph_bessel_k1.hpp>
 // #include <kyosu/functions/sph_bessel_kn.hpp>
