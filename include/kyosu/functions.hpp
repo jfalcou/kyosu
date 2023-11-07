@@ -178,9 +178,9 @@
 #include <kyosu/functions/sph_bessel_y0.hpp>
 #include <kyosu/functions/sph_bessel_y1.hpp>
 #include <kyosu/functions/sph_bessel_yn.hpp>
-// #include <kyosu/functions/sph_bessel_k0.hpp>
-// #include <kyosu/functions/sph_bessel_k1.hpp>
-// #include <kyosu/functions/sph_bessel_kn.hpp>
+#include <kyosu/functions/sph_bessel_k0.hpp>
+#include <kyosu/functions/sph_bessel_k1.hpp>
+#include <kyosu/functions/sph_bessel_kn.hpp>
 
 #include <kyosu/functions/sqr.hpp>
 #include <kyosu/functions/sqr_abs.hpp>
