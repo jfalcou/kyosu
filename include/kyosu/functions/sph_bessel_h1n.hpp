@@ -18,11 +18,10 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(sph_bessel_h1n_);
 
-    template<eve::ordered_value N, eve::floating_ordered_value T>
+    template<eve::integral_scalar_value N, eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& z) noexcept
     {
-      using e_t = eve::element_type_t<T>;
-      return complex(sph_bessel_jn(n, z), sph_bessel_yn(n, z));
+      return complex(eve::sph_bessel_jn(n, z), eve::sph_bessel_yn(n, z));
     }
 
     template<typename N, typename T>

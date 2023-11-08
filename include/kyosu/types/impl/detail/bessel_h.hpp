@@ -122,8 +122,8 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sph_bessel_h2n
   //===-------------------------------------------------------------------------------------------
-  template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_h2n>, int n, Z z) noexcept
+  template<eve::integral_scalar_value N, typename Z>
+  auto dispatch(eve::tag_of<kyosu::sph_bessel_h2n>, N n, Z z) noexcept
   {
     if constexpr(concepts::complex<Z>)
     {
@@ -174,7 +174,7 @@ namespace kyosu::_
   template<typename Z>
   auto dispatch(eve::tag_of<kyosu::sph_bessel_h2_0>, Z z) noexcept
   {
-    return sph_bessel_h1n(0, z);
+    return sph_bessel_h2n(0, z);
   }
 
   template<typename Z>

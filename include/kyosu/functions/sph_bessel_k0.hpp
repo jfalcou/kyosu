@@ -21,7 +21,6 @@ namespace kyosu::tags
     template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& z) noexcept
     {
-      callable_sph_bessel_k0 fn{};
       return eve::pio_2(eve::as(z))*exp(-z)/z;
     }
 
