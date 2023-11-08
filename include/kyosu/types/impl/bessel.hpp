@@ -32,7 +32,9 @@
 //! The computation scheme of \f$j_n\f$, \f$y_n\f$, \f$h_n^{(1)}\f$ and  \f$h_n^{(2)}\f$ follows the article of Liang-Wu Kai
 //! (On the computation of spherical Bessel functions of complex arguments, 
 //! Comput. Phys. Commun., 182 (3) (2011), pp. 663-668)).
-//! \f$K_n\f$ is computed from f$h_n^{(1)}\f$ using DLMF 10.47.13
+//! \f$k_n\f$ is computed from f$h_n^{(1)}\f$ using DLMF 10.47.13
+//!  * \f$i_n^{(1)}\f$ and \f$i_n^{(2)}\f$ are given by 10.47.12 	
+
   
 #include <kyosu/types/impl/detail/bessel_utils.hpp>
 

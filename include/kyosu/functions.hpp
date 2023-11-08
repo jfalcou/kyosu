@@ -167,9 +167,12 @@
 #include <kyosu/functions/sinhcosh.hpp>
 #include <kyosu/functions/slerp.hpp>
 
-// #include <kyosu/functions/sph_bessel_i0.hpp>
-// #include <kyosu/functions/sph_bessel_i1.hpp>
-// #include <kyosu/functions/sph_bessel_in.hpp>
+#include <kyosu/functions/sph_bessel_i1_0.hpp>
+#include <kyosu/functions/sph_bessel_i1_1.hpp>
+#include <kyosu/functions/sph_bessel_i2_0.hpp>
+#include <kyosu/functions/sph_bessel_i2_1.hpp>
+#include <kyosu/functions/sph_bessel_i1n.hpp>
+#include <kyosu/functions/sph_bessel_i2n.hpp>
 #include <kyosu/functions/sph_bessel_j0.hpp>
 #include <kyosu/functions/sph_bessel_j1.hpp>
 #include <kyosu/functions/sph_bessel_jn.hpp>
