@@ -12,28 +12,27 @@
 
 namespace kyosu::tags
 {
-  struct callable_sph_bessel_i2n: eve::elementwise
+  struct callable_sph_bessel_h2_1: eve::elementwise
   {
-    using callable_tag_type = callable_sph_bessel_i2n;
+    using callable_tag_type = callable_sph_bessel_h2_1;
 
-    KYOSU_DEFERS_CALLABLE(sph_bessel_i2n_);
+    KYOSU_DEFERS_CALLABLE(sph_bessel_h2_1_);
 
-    template<eve::ordered_value N, eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& z) noexcept
+    template<eve::floating_ordered_value T>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& z) noexcept
     {
-      auto fn = callable_sph_bessel_i2n{};
-      return fn(n, complex(z));
+      return complex(eve::sph_bessel_j1(z), -eve::sph_bessel_y1(z));
     }
 
-    template<typename N, typename T>
-    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
+    template<typename T>
+    KYOSU_FORCEINLINE auto operator()(T const& target1) const noexcept
+    -> decltype(eve::tag_invoke(*this, target1))
     {
-      return eve::tag_invoke(*this, target0, target1);
+      return eve::tag_invoke(*this, target1);
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_sph_bessel_i2n(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_sph_bessel_h2_1(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -43,9 +42,9 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var sph_bessel_i2n
-//!   @brief Computes the spherical Bessel functions
-//!   \f$ i_n^{(2)}(z) = i^{-n-1}y_n(iz)\f$.
+//!   @var sph_bessel_h2_1
+//!   @brief Computes the spherical Bessel/hankel functions of the third kind,
+//!   \f$ h_1^{(2)}(z) = j_1(z)-iy_1(z)\f$.
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -56,8 +55,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sph_bessel_i2n(int n, T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto sph_bessel_i2n(int n, T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sph_bessel_h2_1(int n, T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto sph_bessel_h2_1(int n, T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -67,12 +66,12 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns  \f$i_n^{(2)}(z)\f$.
+//!     * returns  \f$h_1^{(2)}(z)\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/sph_bessel_i2n.cpp}
+//!  @godbolt{doc/sph_bessel_h2_1.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_sph_bessel_i2n sph_bessel_i2n = {};
+inline constexpr tags::callable_sph_bessel_h2_1 sph_bessel_h2_1 = {};
 }

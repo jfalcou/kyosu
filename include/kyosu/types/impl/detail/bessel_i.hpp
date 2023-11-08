@@ -74,7 +74,7 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      return  sinhc(z)/z;
+      return  sinh(z)/z;
    }
     else
     {
@@ -90,9 +90,9 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      auto [sh, ch] = eve::sinhcosh(z);
+      auto [sh, ch] = sinhcosh(z);
       auto rz = rec(z);
-      return eve::fnma(sh, rz, ch)*rz;
+      return fnma(sh, rz, ch)*rz;
     }
     else
     {

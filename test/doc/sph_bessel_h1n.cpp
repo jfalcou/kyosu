@@ -4,43 +4,44 @@
 
 int main()
 {
-  auto z =  kyosu::complex(1.0, 1.0);
- for(int i=3; i < 10; ++i)
- {
-   std::cout << "i " << i << "-> " << kyosu::sph_bessel_h1n(i, z) << std::endl;
-   std::cout << "i " << i << "-> " << kyosu::sph_bessel_h1n(i, kyosu::conj(z)) << std::endl;
-//   std::cout << "i " << i << "-> " << kyosu::sph_bessel_h1n(i, 2.0) << std::endl;
- }
-//   size_t n = 12;
-//   using kyosu::cyl_bessel_yn;
-//   std::cout.precision(16);
-//   std::cout << std::scientific << std::endl;
-//   std::cout << "1.0             " << " -> " << cyl_bessel_yn(n,-1.0) << "\n";
-//   std::cout << "1+0i            " << " -> " << cyl_bessel_yn(n,kyosu::complex(-1.0, 0.0)) << "\n";
-//   std::cout << "15.0            " << " -> " << cyl_bessel_yn(n,15.0) << "\n";
-//   std::cout << "15+0i           " << " -> " << cyl_bessel_yn(n,kyosu::complex(15.0, 0.0)) << "\n";
-//   std::cout << "40.0            " << " -> " << cyl_bessel_yn(n,40.0) << "\n";
-//   std::cout << "40+0i           " << " -> " << cyl_bessel_yn(n,kyosu::complex(40.0, 0.0)) << "\n";
-//   std::cout << "60.0            " << " -> " << cyl_bessel_yn(n,60.0) << "\n";
-//   std::cout << "60+0i           " << " -> " << cyl_bessel_yn(n,kyosu::complex(60.0, 0.0)) << "\n";
+//   auto z =  kyosu::complex(1.0, 1.0);
+//  for(int i=3; i < 10; ++i)
+//  {
+//    std::cout << "i " << i << "-> " << kyosu::sph_bessel_h1n(i, z) << std::endl;
+//    std::cout << "i " << i << "-> " << kyosu::sph_bessel_h1n(i, kyosu::conj(z)) << std::endl;
+// //   std::cout << "i " << i << "-> " << kyosu::sph_bessel_h1n(i, 2.0) << std::endl;
+//  }
 
-//   eve::wide<double, eve::fixed<4>> z(1.0, 15.0, 40.0, 60.0);
-//   auto zz = kyosu::complex(z);
-//   std::cout << z  << "\n -> " << cyl_bessel_yn(n,z) << "\n";
-//   std::cout << zz << "\n -> " << kyosu::real(cyl_bessel_yn(n,zz)) << "\n";
+  size_t n = 3;
+  using kyosu::cyl_bessel_h1n;
+  std::cout.precision(16);
+  std::cout << std::scientific << std::endl;
+  std::cout << "1.0             " << " -> " << cyl_bessel_h1n(n,1.0) << "\n";
+  std::cout << "1+0i            " << " -> " << cyl_bessel_h1n(n,kyosu::complex(-1.0, 0.0)) << "\n";
+  std::cout << "15.0            " << " -> " << cyl_bessel_h1n(n,15.0) << "\n";
+  std::cout << "15+0i           " << " -> " << cyl_bessel_h1n(n,kyosu::complex(15.0, 0.0)) << "\n";
+  std::cout << "40.0            " << " -> " << cyl_bessel_h1n(n,40.0) << "\n";
+  std::cout << "40+0i           " << " -> " << cyl_bessel_h1n(n,kyosu::complex(40.0, 0.0)) << "\n";
+  std::cout << "60.0            " << " -> " << cyl_bessel_h1n(n,60.0) << "\n";
+  std::cout << "60+0i           " << " -> " << cyl_bessel_h1n(n,kyosu::complex(60.0, 0.0)) << "\n";
 
-//   std::cout << "1.0                 " << " -> " << cyl_bessel_yn(n,1.0) << "\n";
-//   std::cout << "1.0+36.0i           " << " -> " << cyl_bessel_yn(n,kyosu::complex(1.0, 36.0)) << "\n";
-//   std::cout << "1.0+36.0i+2.0j+1.5k " << " -> " << cyl_bessel_yn(n,kyosu::quaternion(1.0, 36.0, 2.0, 1.5)) << "\n";
+  eve::wide<double, eve::fixed<4>> z(1.0, 15.0, 40.0, 60.0);
+  auto zz = kyosu::complex(z);
+  std::cout << z  << "\n -> " << cyl_bessel_h1n(n,z) << "\n";
+  std::cout << zz << "\n -> " << kyosu::real(cyl_bessel_h1n(n,zz)) << "\n";
 
-
-//   eve::wide<double, eve::fixed<4>> z1(1.0, 2.0, 40.0, 0.0),  z2(36.0, 0.5, 0.0, 40.0);
-//   auto z0 = kyosu::complex(z1, z2);
-//   std::cout << z0 << " \n-> " << cyl_bessel_yn(n,z0) << "\n";
+  std::cout << "1.0                 " << " -> " << cyl_bessel_h1n(n,1.0) << "\n";
+  std::cout << "1.0+36.0i           " << " -> " << cyl_bessel_h1n(n,kyosu::complex(1.0, 36.0)) << "\n";
+  std::cout << "1.0+36.0i+2.0j+1.5k " << " -> " << cyl_bessel_h1n(n,kyosu::quaternion(1.0, 36.0, 2.0, 1.5)) << "\n";
 
 
-//   for(int i=75; i < 100; ++i)
-//     std::cout << "i " << i << " -> " << kyosu::sph_bessel_jn(i,kyosu::complex(1.0, 1.0)) << "\n";
+  eve::wide<double, eve::fixed<4>> z1(1.0, 2.0, 40.0, 0.0),  z2(36.0, 0.5, 0.0, 40.0);
+  auto z0 = kyosu::complex(z1, z2);
+  std::cout << z0 << " \n-> " << cyl_bessel_h1n(n,z0) << "\n";
+
+
+  for(int i=75; i < 100; ++i)
+    std::cout << "i " << i << " -> " << kyosu::sph_bessel_jn(i,kyosu::complex(1.0, 1.0)) << "\n";
 
 
   return 0;

@@ -30,12 +30,12 @@
 //! As in DMLF we restrict to non-negative order
 //!
 //! The computation scheme of \f$j_n\f$, \f$y_n\f$, \f$h_n^{(1)}\f$ and  \f$h_n^{(2)}\f$ follows the article of Liang-Wu Kai
-//! (On the computation of spherical Bessel functions of complex arguments, 
+//! (On the computation of spherical Bessel functions of complex arguments,
 //! Comput. Phys. Commun., 182 (3) (2011), pp. 663-668)).
 //! \f$k_n\f$ is computed from f$h_n^{(1)}\f$ using DLMF 10.47.13
-//!  * \f$i_n^{(1)}\f$ and \f$i_n^{(2)}\f$ are given by 10.47.12 	
+//!  * \f$i_n^{(1)}\f$ and \f$i_n^{(2)}\f$ are given by 10.47.12
 
-  
+
 #include <kyosu/types/impl/detail/bessel_utils.hpp>
 
 #include <kyosu/types/impl/detail/bessel_j.hpp>
@@ -44,9 +44,7 @@
 #include <kyosu/types/impl/detail/bessel_h.hpp>
 #include <kyosu/types/impl/detail/bessel_k.hpp>
 
-#include <kyosu/types/impl/detail/cylseq.hpp>
-
-//================================================================================ 
+//================================================================================
 // MIT License
 
 // Copyright (c) 2021 Jhonas Olivati de Sarro
@@ -68,4 +66,4 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-//================================================================================ 
+//================================================================================

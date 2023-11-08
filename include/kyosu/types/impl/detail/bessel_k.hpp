@@ -67,7 +67,7 @@ namespace kyosu::_
         else if (n%4 == 2) return complex(eve::mone(eve::as<u_t>()));
         else return complex(eve::zero(eve::as<u_t>()), eve::mone(eve::as<u_t>()));
       };
-      return -eve::pio_2(as<u_t>())*iton(n)*sph_bessel_h1n(complex(-imag(z), real(z)));
+      return -eve::pio_2(eve::as<u_t>())*iton(n)*sph_bessel_h1n(n, complex(-imag(z), real(z)));
     }
     else
     {

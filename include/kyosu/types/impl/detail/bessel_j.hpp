@@ -417,8 +417,8 @@ namespace kyosu::_
     }
   }
 
-  template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_jn>, int n, Z z) noexcept
+  template<eve::integral_scalar_value N, typename Z>
+  auto dispatch(eve::tag_of<kyosu::sph_bessel_jn>, N n, Z z) noexcept
   {
     if constexpr(concepts::complex<Z> )
     {
@@ -440,8 +440,8 @@ namespace kyosu::_
       std::vector < Z > jj(nn+1);
       jj[nn] =  kyosu::complex(u_t(0));
       jj[nn-1] =  eve::sqrtsmallestposval(eve::as<u_t>()); //kyosu::complex(u_t(1));
-      auto jnext =  kyosu::complex(u_t(0));
-      auto j     =   kyosu::complex(eve::sqrtsmallestposval(eve::as<u_t>()));//kyosu::complex(u_t(1));
+      Z jnext(kyosu::complex(u_t(0)));
+      Z j(kyosu::complex(eve::sqrtsmallestposval(eve::as<u_t>())));//kyosu::complex(u_t(1));
       auto init = j;
       auto jcur = jnext;
       auto res = j;

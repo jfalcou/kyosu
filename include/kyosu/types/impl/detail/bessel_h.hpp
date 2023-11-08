@@ -108,6 +108,21 @@ namespace kyosu::_
   }
 
   template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::sph_bessel_h1_0>, Z z) noexcept
+  {
+    return sph_bessel_h1n(0, z);
+  }
+
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::sph_bessel_h1_1>, Z z) noexcept
+  {
+    return sph_bessel_h1n(1, z);
+  }
+
+  //===-------------------------------------------------------------------------------------------
+  //  sph_bessel_h2n
+  //===-------------------------------------------------------------------------------------------
+  template<typename Z>
   auto dispatch(eve::tag_of<kyosu::sph_bessel_h2n>, int n, Z z) noexcept
   {
     if constexpr(concepts::complex<Z>)
@@ -154,5 +169,19 @@ namespace kyosu::_
       return cayley_extend_rev(sph_bessel_h2n, n, z);
     }
   }
+
+
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::sph_bessel_h2_0>, Z z) noexcept
+  {
+    return sph_bessel_h1n(0, z);
+  }
+
+  template<typename Z>
+  auto dispatch(eve::tag_of<kyosu::sph_bessel_h2_1>, Z z) noexcept
+  {
+    return sph_bessel_h2n(1, z);
+  }
+
 
 }

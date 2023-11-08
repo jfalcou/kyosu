@@ -121,7 +121,7 @@ namespace kyosu::_
   template<typename Z>
   auto dispatch(eve::tag_of<kyosu::sph_bessel_y0>, Z z) noexcept
   {
-    return cos(z)/z;
+    return -cos(z)/z;
   }
 
   //===-------------------------------------------------------------------------------------------

@@ -18,8 +18,8 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(sph_bessel_jn_);
 
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, int n, T const& v) noexcept { return eve::sph_bessel_jn(n, v); }
+    template<eve::integral_scalar_value N, eve::floating_ordered_value T>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v) noexcept { return eve::sph_bessel_jn(n, v); }
 
     template<typename N, typename T>
     KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1) const noexcept
