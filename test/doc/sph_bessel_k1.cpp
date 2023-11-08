@@ -23,6 +23,7 @@ int main()
 
   std::cout << "1.0                 " << " -> " << sph_bessel_k1(1.0) << "\n";
   std::cout << "1.0+36.0i           " << " -> " << sph_bessel_k1(kyosu::complex(1.0, 36.0)) << "\n";
+  std::cout << "1.0+36.0j           " << " -> " << sph_bessel_k1(kyosu::quaternion(1.0, 0.0, 36.0, 0.0)) << "\n";
   std::cout << "1.0+36.0i+2.0j+1.5k " << " -> " << sph_bessel_k1(kyosu::quaternion(1.0, 36.0, 2.0, 1.5)) << "\n";
 
 

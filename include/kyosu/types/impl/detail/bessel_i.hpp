@@ -74,7 +74,7 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      return  sinh(z)/z;
+      return sinhc(z);
    }
     else
     {

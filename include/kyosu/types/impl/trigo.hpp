@@ -264,4 +264,21 @@ namespace kyosu::_
       return cayley_extend(sinc, z);
     }
   }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::sinhc> const&, C const& z) noexcept
+  {
+    if constexpr(concepts::complex<C> )
+    {
+      auto s = kyosu::sinh(z);
+      using u_t = eve::underlying_type_t<C>;
+      return kyosu::if_else(kyosu::abs(z) < eve::eps(eve::as(u_t())), eve::one(eve::as(u_t())), s/z);
+    }
+    else
+    {
+      return cayley_extend(sinc, z);
+    }
+  }
+
 }

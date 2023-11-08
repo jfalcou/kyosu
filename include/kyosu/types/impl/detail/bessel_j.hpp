@@ -427,7 +427,8 @@ namespace kyosu::_
         auto st = eve::abs(eve::sin(eve::abs(arg(z))));
         auto r  = kyosu::abs(z);
         auto m = eve::maximum(eve::ceil((1.83+4.1*eve::pow(st, 0.33))*eve::pow(r, (0.91-0.43*eve::pow(st, 0.36)))+9*(1-eve::sqrt(st))));
-        return eve::max(n+1, int(m));
+        auto nn = (eve::any(is_real(z))) ? n+5 : n;
+        return eve::max(nn, int(inc(m)));
       };
 
       auto j0 = kyosu::sph_bessel_j0(z);
@@ -439,9 +440,9 @@ namespace kyosu::_
       auto nn = bd(n);
       std::vector < Z > jj(nn+1);
       jj[nn] =  kyosu::complex(u_t(0));
-      jj[nn-1] =  eve::sqrtsmallestposval(eve::as<u_t>()); //kyosu::complex(u_t(1));
+      jj[nn-1] =  eve::smallestposval(eve::as<u_t>());
       Z jnext(kyosu::complex(u_t(0)));
-      Z j(kyosu::complex(eve::sqrtsmallestposval(eve::as<u_t>())));//kyosu::complex(u_t(1));
+      Z j(kyosu::complex(eve::sqrtsmallestposval(eve::as<u_t>())));
       auto init = j;
       auto jcur = jnext;
       auto res = j;
