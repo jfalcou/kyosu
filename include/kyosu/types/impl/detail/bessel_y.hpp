@@ -93,7 +93,7 @@ namespace kyosu::_
     if (nn != 0)
     {
       int n = eve::abs(nn);
-      auto do_it =  [n, z, &y](auto &js){
+      auto do_it =  [n, z, &y](auto js){
         mkjs jj(n, z);
         for(int i=n; i >= 0 ; --i)  js[i] = jj();
         using u_t   =  eve::underlying_type_t<Z>;
