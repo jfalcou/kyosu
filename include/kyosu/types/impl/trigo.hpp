@@ -277,7 +277,7 @@ namespace kyosu::_
     }
     else
     {
-      return cayley_extend(sinc, z);
+      return cayley_extend(sinhc, z);
     }
   }
 
