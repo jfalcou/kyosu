@@ -18,7 +18,7 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      using e_t = as_real_t<Z>;
+      using e_t = as_real_type_t<Z>;
       using u_t = eve::underlying_type_t<e_t>;
       auto saz = kyosu::sqr_abs(z);
 
@@ -111,7 +111,7 @@ namespace kyosu::_
 
       if( eve::any(notdone) )
       {
-        notdone = next_interval(ascending_series_cyl_j0, notdone, saz <= as_real_t<Z>(144), r, z);
+        notdone = next_interval(ascending_series_cyl_j0, notdone, saz <= as_real_type_t<Z>(144), r, z);
         if( eve::any(notdone) )
         {
           last_interval(semiconvergent_series_cyl_j0, notdone, r, z);
@@ -135,7 +135,7 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      using e_t = as_real_t<Z>;
+      using e_t = as_real_type_t<Z>;
       using u_t = eve::underlying_type_t<e_t>;
       auto saz = kyosu::sqr_abs(z);
 
@@ -229,7 +229,7 @@ namespace kyosu::_
 
       if( eve::any(notdone) )
       {
-        notdone = next_interval(ascending_series_cyl_j1, notdone, saz <= as_real_t<Z>(144), r, z);
+        notdone = next_interval(ascending_series_cyl_j1, notdone, saz <= as_real_type_t<Z>(144), r, z);
         if( eve::any(notdone) )
         {
           last_interval(semiconvergent_series_cyl_j1, notdone, r, z);
@@ -267,7 +267,7 @@ namespace kyosu::_
       }
       else
       {
-        using e_t = as_real_t<Z>;
+        using e_t = as_real_type_t<Z>;
         using u_t = eve::underlying_type_t<e_t>;
         auto n = u_t(eve::abs(nn));
         auto az = kyosu::abs(z);
