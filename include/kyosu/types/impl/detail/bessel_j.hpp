@@ -6,6 +6,7 @@
 */
 //======================================================================================================================
 #pragma once
+#include <eve/module/math.hpp>
 
 namespace kyosu::_
 {
@@ -426,7 +427,8 @@ namespace kyosu::_
       auto bd = [z](int n){
         auto st = eve::abs(eve::sin(eve::abs(arg(z))));
         auto r  = kyosu::abs(z);
-        auto m = eve::maximum(eve::ceil((1.83+4.1*eve::pow(st, 0.33))*eve::pow(r, (0.91-0.43*eve::pow(st, 0.36)))+9*(1-eve::sqrt(st))));
+        auto m = eve::maximum(eve::ceil((u_t(1.83)+u_t(4.1)*eve::pow(st, u_t(0.33)))*
+                                        eve::pow(r, (u_t(0.91)-u_t(0.43)*eve::pow(st, u_t(0.36))))+9*(1-eve::sqrt(st))));
         auto nn = (eve::any(is_real(z))) ? n+5 : n;
         return eve::max(nn, int(inc(m)));
       };
@@ -438,9 +440,6 @@ namespace kyosu::_
 
       auto rz = kyosu::rec(z);
       auto nn = bd(n);
-      std::vector < Z > jj(nn+1);
-      jj[nn] =  kyosu::complex(u_t(0));
-      jj[nn-1] =  eve::smallestposval(eve::as<u_t>());
       Z jnext(kyosu::complex(u_t(0)));
       Z j(kyosu::complex(eve::sqrtsmallestposval(eve::as<u_t>())));
       auto init = j;
@@ -456,7 +455,8 @@ namespace kyosu::_
       auto j0ltj1 = kyosu::abs(j0) <= kyosu::abs(j1);
       auto scalej0 = (j0/jcur);
       auto scalej1 = (j1/jnext);
-      return res*if_else(j0ltj1, scalej0, scalej1);
+      res *= if_else(j0ltj1, scalej0, scalej1);
+      return if_else(is_eqz(z), Z{}, res);
     }
     else
     {

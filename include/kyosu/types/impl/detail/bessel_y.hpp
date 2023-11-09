@@ -93,7 +93,7 @@ namespace kyosu::_
     if (nn != 0)
     {
       int n = eve::abs(nn);
-      auto do_it =  [n, z, &y](auto js){
+      auto do_it =  [n, z, &y](auto &js){
         mkjs jj(n, z);
         for(int i=n; i >= 0 ; --i)  js[i] = jj();
         using u_t   =  eve::underlying_type_t<Z>;
@@ -142,11 +142,21 @@ namespace kyosu::_
   {
    if constexpr(concepts::complex<Z> )
     {
-      using u_t = eve::underlying_type_t<Z>;
+     using u_t = eve::underlying_type_t<Z>;
       auto imzge0 = eve::is_gez(imag(z));
       auto jn = sph_bessel_jn(n, z);
       auto i = complex(u_t(0), u_t(1));
-      auto res = if_else(imzge0,  jn-sph_bessel_h1n(n, z), sph_bessel_h2n(n, z)-jn);
+      Z res;
+      if (eve::any(imzge0))
+      {
+        auto z1 = if_else(imzge0, z, conj(z));
+        res = jn-sph_bessel_h1n(n, z1);
+      }
+      if (!eve::all(imzge0))
+      {
+        auto z2 = if_else(imzge0, conj(z), z);
+        res = if_else(imzge0,  res, sph_bessel_h2n(n, z2)-jn);
+      }
       return complex(-imag(res), real(res));
     }
     else
