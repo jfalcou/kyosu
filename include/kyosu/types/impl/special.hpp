@@ -23,7 +23,7 @@ namespace kyosu::_
       // 15 sig. digits for 0<=real(z)<=171
       // coeffs should sum to about g*g/2+23/24
       //
-      using r_t = eve::element_type_t<as_real_t<Z>>;
+      using r_t = eve::element_type_t<as_real_type_t<Z>>;
       auto  g=r_t(607)/r_t(128);
       // best results when 4<=g<=5
       constexpr int N = 15;
@@ -98,7 +98,7 @@ namespace kyosu::_
       // 15 sig. digits for 0<=real(z)<=171
       // coeffs should sum to about g*g/2+23/24
       //
-      using r_t = eve::element_type_t<as_real_t<Z>>;
+      using r_t = eve::element_type_t<as_real_type_t<Z>>;
       auto  g=r_t(607)/r_t(128);
       // best results when 4<=g<=5
       constexpr int N = 15;
@@ -165,7 +165,7 @@ namespace kyosu::_
       // 15 sig. digits for 0<=real(z)<=171
       // coeffs should sum to about g*g/2+23/24
       //
-      using r_t = eve::element_type_t<as_real_t<Z>>;
+      using r_t = eve::element_type_t<as_real_type_t<Z>>;
       auto  g=r_t(607)/r_t(128);
       // best results when 4<=g<=5
       constexpr int N = 15;
@@ -263,7 +263,7 @@ namespace kyosu::_
       // 15 sig. digits for 0<=real(z)<=171
       // coeffs should sum to about g*g/2+23/24
       //
-      using v_t = kyosu::as_real_t<Z>;
+      using v_t = kyosu::as_real_type_t<Z>;
       using real_t = eve::element_type_t<v_t>;
       auto k = real_t(kk);
       auto [rz, iz] = z;

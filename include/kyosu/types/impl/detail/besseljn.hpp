@@ -35,7 +35,7 @@ namespace kyosu::_
       }
       else
       {
-        using e_t = as_real_t<Z>;
+        using e_t = as_real_type_t<Z>;
         using u_t = eve::underlying_type_t<e_t>;
         auto n = u_t(eve::abs(nn));
         auto az = kyosu::abs(z);

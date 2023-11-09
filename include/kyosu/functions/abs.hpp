@@ -51,8 +51,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_t<T> abs(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T            abs(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_type_t<T>  abs(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T                  abs(T z) noexcept;
 //!   }
 //!   @endcode
 //!
