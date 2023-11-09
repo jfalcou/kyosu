@@ -123,6 +123,7 @@ $(document).ready(function(){initNavTree('namespacekyosu.html',''); initResizabl
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">kyosu Namespace Reference</div></div>
@@ -134,6 +135,12 @@ $(document).ready(function(){initNavTree('namespacekyosu.html',''); initResizabl
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main KYOSU namespace. </p>
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkyosu_1_1as__real.html">as_real</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lightweight type-wrapper of real value type.  <a href="structkyosu_1_1as__real.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ga1a12e2809e40c8011ec7702159c84b50"><td class="memTemplParams" colspan="2">template&lt;unsigned int Dim, typename... Ts&gt; </td></tr>
@@ -144,10 +151,10 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga715219c07991418c744f1fe1589ed407"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a> = typename as_cayley_dickson&lt; Ts... &gt;::type</td></tr>
 <tr class="memdesc:ga715219c07991418c744f1fe1589ed407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the best fitting Cayley-Dickson type from a series of types.  <br /></td></tr>
 <tr class="separator:ga715219c07991418c744f1fe1589ed407"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacfae066446178c7d3f6328aaeafcbf1d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:gacfae066446178c7d3f6328aaeafcbf1d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_gacfae066446178c7d3f6328aaeafcbf1d.html#gacfae066446178c7d3f6328aaeafcbf1d">as_real_t</a> = typename as_real&lt; T &gt;::type</td></tr>
-<tr class="memdesc:gacfae066446178c7d3f6328aaeafcbf1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the real type associated to a Cayley-Dickson-like type.  <br /></td></tr>
-<tr class="separator:gacfae066446178c7d3f6328aaeafcbf1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1f1ea0fcc1043d2205891dcbf891b309"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga1f1ea0fcc1043d2205891dcbf891b309"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_ga1f1ea0fcc1043d2205891dcbf891b309.html#ga1f1ea0fcc1043d2205891dcbf891b309">as_real_type_t</a> = typename as_real_type&lt; T &gt;::type</td></tr>
+<tr class="memdesc:ga1f1ea0fcc1043d2205891dcbf891b309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the real type associated to a Cayley-Dickson-like type.  <br /></td></tr>
+<tr class="separator:ga1f1ea0fcc1043d2205891dcbf891b309"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga642e4c9da3267bde80011f41e698ba76"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga642e4c9da3267bde80011f41e698ba76"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">complex_t</a> = <a class="el" href="group__traits_ga1a12e2809e40c8011ec7702159c84b50.html#ga1a12e2809e40c8011ec7702159c84b50">as_cayley_dickson_n_t</a>&lt; 2, T &gt;</td></tr>
 <tr class="memdesc:ga642e4c9da3267bde80011f41e698ba76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type alias for complex numbers.  <br /></td></tr>

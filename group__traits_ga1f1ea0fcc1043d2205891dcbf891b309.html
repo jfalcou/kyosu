@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: Traits</title>
+<title>kyosu: kyosu::as_real_type_t</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__traits.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__traits_ga1f1ea0fcc1043d2205891dcbf891b309.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,49 +121,38 @@ $(document).ready(function(){initNavTree('group__traits.html',''); initResizable
 </div>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">Traits</div></div>
-</div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkyosu_1_1as__real.html">kyosu::as_real&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lightweight type-wrapper of real value type.  <a href="structkyosu_1_1as__real.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:ga1a12e2809e40c8011ec7702159c84b50"><td class="memTemplParams" colspan="2">template&lt;unsigned int Dim, typename... Ts&gt; </td></tr>
-<tr class="memitem:ga1a12e2809e40c8011ec7702159c84b50"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_ga1a12e2809e40c8011ec7702159c84b50.html#ga1a12e2809e40c8011ec7702159c84b50">kyosu::as_cayley_dickson_n_t</a> = typename as_cayley_dickson_n&lt; Dim, Ts... &gt;::type</td></tr>
-<tr class="memdesc:ga1a12e2809e40c8011ec7702159c84b50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a Cayley-Dickson type of a given dimension.  <br /></td></tr>
-<tr class="separator:ga1a12e2809e40c8011ec7702159c84b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga715219c07991418c744f1fe1589ed407"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
-<tr class="memitem:ga715219c07991418c744f1fe1589ed407"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">kyosu::as_cayley_dickson_t</a> = typename as_cayley_dickson&lt; Ts... &gt;::type</td></tr>
-<tr class="memdesc:ga715219c07991418c744f1fe1589ed407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the best fitting Cayley-Dickson type from a series of types.  <br /></td></tr>
-<tr class="separator:ga715219c07991418c744f1fe1589ed407"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1f1ea0fcc1043d2205891dcbf891b309"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ga1f1ea0fcc1043d2205891dcbf891b309"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_ga1f1ea0fcc1043d2205891dcbf891b309.html#ga1f1ea0fcc1043d2205891dcbf891b309">kyosu::as_real_type_t</a> = typename as_real_type&lt; T &gt;::type</td></tr>
-<tr class="memdesc:ga1f1ea0fcc1043d2205891dcbf891b309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the real type associated to a Cayley-Dickson-like type.  <br /></td></tr>
-<tr class="separator:ga1f1ea0fcc1043d2205891dcbf891b309"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:gab76e6a5196c280967c692c2139d8301e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:gab76e6a5196c280967c692c2139d8301e"><td class="memTemplItemLeft" align="right" valign="top">constexpr unsigned int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_gab76e6a5196c280967c692c2139d8301e.html#gab76e6a5196c280967c692c2139d8301e">kyosu::dimension_v</a> = *implementation-defined*</td></tr>
-<tr class="memdesc:gab76e6a5196c280967c692c2139d8301e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the number of dimensions of the algebra containing a given type.  <br /></td></tr>
-<tr class="separator:gab76e6a5196c280967c692c2139d8301e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
+<a id="ga1f1ea0fcc1043d2205891dcbf891b309" name="ga1f1ea0fcc1043d2205891dcbf891b309"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1f1ea0fcc1043d2205891dcbf891b309">&#9670;&#160;</a></span>as_real_type_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__traits_ga1f1ea0fcc1043d2205891dcbf891b309.html#ga1f1ea0fcc1043d2205891dcbf891b309">kyosu::as_real_type_t</a> = typedef typename as_real_type&lt;T&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the real type associated to a Cayley-Dickson-like type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type to convert to a real type. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->
