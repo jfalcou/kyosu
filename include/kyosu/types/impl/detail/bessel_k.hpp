@@ -28,7 +28,10 @@ namespace kyosu::_
       auto cmi = -piotwo*i*exp_ipi(-u_t(n)/2);
       auto epio2 = exp_ipi(eve::half(eve::as<u_t>()));
       auto empio2 = exp_ipi(eve::mhalf(eve::as<u_t>()));
-      auto r =  if_else(eve::is_ltz(argz)
+      auto argzlt0 = eve::is_ltz(argz);
+//       auto z1 = if_else(argzlt0, z, zero(as(z)));
+//       auto z2 = if_else(argzlt0, zero(as(z)), z);
+      auto r =  if_else(argzlt0
                        , cpi*cyl_bessel_h1n(n, z*epio2)
                        , cmi*cyl_bessel_h2n(n, z*empio2));
       return if_else(is_eqz(z), complex(eve::inf(eve::as<u_t>())), r);
