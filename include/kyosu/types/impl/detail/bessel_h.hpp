@@ -147,7 +147,7 @@ namespace kyosu::_
         auto h0 = if_else(imzlt0, i*exp(miz), -i*exp(-miz))*rz;
         if(n == 0) return h0;
         auto h1 = if_else(imzlt0, (rz+i),(rz-i))*h0 ;
-        if(n == 1) return h1;
+        if(n == 1) return if_else(imzlt0,h1, -h1);
 
         auto h2 = h1;
         for(int i=1; i < n; ++i)
