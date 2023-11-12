@@ -26,10 +26,6 @@ namespace kyosu::tags
     {
       auto fn = callable_from_angle_axis{};
       return fn(angle, axis, normalize);
-//       using e_t = decltype(axis[0]+angle);
-//       auto q =  quaternion(e_t(0), e_t(axis[0]), e_t(axis[1]), e_t(axis[2]));
-//       auto [s, c] = eve::sincos(angle*eve::half(eve::as(angle)));
-//       return c+s*q;
     }
 
     template<eve::floating_ordered_value V,  typename  U, bool n>

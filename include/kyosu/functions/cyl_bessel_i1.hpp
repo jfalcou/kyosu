@@ -40,7 +40,7 @@ namespace kyosu
 //! @{
 //!   @var cyl_bessel_i1
 //!   @brief Computes  the modified Bessel function of the first kind,
-//!   \f$ I_1(x)= _iJ_1(ix) \f$ extended to the complex plane and cayley_dickson algebras.
+//!   \f$ I_1(x)= iJ_1(ix) \f$ extended to the complex plane and cayley_dickson algebras.
 //!
 //!   It is the solution of \f$ x^{2}y''+xy'+x^2y=0\f$ for which \f$ y(0) = 0\f$.
 //!

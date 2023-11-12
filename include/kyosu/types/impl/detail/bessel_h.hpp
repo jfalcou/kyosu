@@ -72,38 +72,6 @@ namespace kyosu::_
       {
         using u_t   =  eve::underlying_type_t<Z>;
         return eve::sign_alternate(u_t(n))*sph_bessel_h2n(n, -z);
- //        auto imzge0 = eve::is_gez(imag(z));
-//         using u_t   =  eve::underlying_type_t<Z>;
-//         auto i = complex(u_t(0), u_t(1));
-//         auto rz = rec(z);
-//         auto iz = complex(-ipart(z), real(z));
-//         auto h0 = -i*exp(iz)/z;
-//         if(n == 0) return h0;
-//         auto h1 = (rz-i)*h0;
-//         if(n == 1) return h1;
-
-//         auto br_imzge0 = [&h0, &h1, rz, n](){
-//           std::cout << "icitte" << std::endl;
-//           auto h2 = h1;
-//           for(int i=1; i < n; ++i)
-//           {
-//             auto f = (2*i+1)*rz;
-//             h2 = f*h1-h0;
-//             h0 = h1;
-//             h1 = h2;
-//           }
-//           return h2;
-//         };
-
-//         auto br_imzlt0 = [n, z](){
-//           std::cout << "latte" << std::endl;
-//           return eve::sign_alternate(u_t(n))*sph_bessel_h2n(n, -z);// 2*sph_bessel_jn(n, z)-sph_bessel_h2n(n, z);
-//         };
-
-//         auto res = br_imzge0();
-//         if (eve::all(imzge0)) return res;
-//         auto res1 = br_imzlt0();
-//         return if_else(imzge0, res, res1);
       }
     }
     else

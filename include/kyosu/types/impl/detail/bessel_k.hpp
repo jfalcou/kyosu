@@ -29,8 +29,6 @@ namespace kyosu::_
       auto epio2 = exp_ipi(eve::half(eve::as<u_t>()));
       auto empio2 = exp_ipi(eve::mhalf(eve::as<u_t>()));
       auto argzlt0 = eve::is_ltz(argz);
-//       auto z1 = if_else(argzlt0, z, zero(as(z)));
-//       auto z2 = if_else(argzlt0, zero(as(z)), z);
       auto r =  if_else(argzlt0
                        , cpi*cyl_bessel_h1n(n, z*epio2)
                        , cmi*cyl_bessel_h2n(n, z*empio2));
