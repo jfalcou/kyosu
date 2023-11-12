@@ -77,7 +77,6 @@ namespace kyosu::_
         auto Q = Qm;
         auto bds = bound_compute();
 
-        Z zero{};
         size_t im = 1;
         auto  bound_not_reached = u_t(im) <= bds;
         while (eve::any(bound_not_reached))
@@ -91,8 +90,8 @@ namespace kyosu::_
           }
           else
           {
-            P += if_else( bound_not_reached, Pm, zero);
-            Q += if_else( bound_not_reached, Qm, zero);
+            P += if_else( bound_not_reached, Pm, eve::zero);
+            Q += if_else( bound_not_reached, Qm, eve::zero);
           }
           bound_not_reached = u_t(++im) <= bds;
         }
@@ -192,7 +191,6 @@ namespace kyosu::_
           auto P = Pm;
           auto Q = Qm;
           auto bds = bound_compute();
-          auto zero = Z{};
           size_t im = 1;
           auto  bound_not_reached = u_t(im) <= bds;
 
@@ -208,8 +206,8 @@ namespace kyosu::_
             }
             else
             {
-              P += kyosu::if_else(bound_not_reached, Pm, zero);
-              Q += kyosu::if_else(bound_not_reached, Qm, zero);
+              P += kyosu::if_else(bound_not_reached, Pm, eve::zero);
+              Q += kyosu::if_else(bound_not_reached, Qm, eve::zero);
             }
             bound_not_reached = u_t(++im) <= bds;
           }
@@ -408,7 +406,7 @@ namespace kyosu::_
     {
       auto rz = rec(z);
       return if_else(kyosu::abs(z) < eve::eps(eve::as(real(z)))
-                    , eve::zero(eve::as(real(z)))
+                    , eve::zero
                     , (sinc(z)-cos(z))*rz
                     );
     }
@@ -456,7 +454,7 @@ namespace kyosu::_
       auto scalej0 = (j0/jcur);
       auto scalej1 = (j1/jnext);
       res *= if_else(j0ltj1, scalej0, scalej1);
-      return if_else(is_eqz(z), Z{}, res);
+      return if_else(is_eqz(z), eve::zero, res);
     }
     else
     {

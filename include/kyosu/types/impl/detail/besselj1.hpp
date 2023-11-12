@@ -74,7 +74,6 @@ namespace kyosu::_
           auto P = Pm;
           auto Q = Qm;
           auto bds = bound_compute();
-          auto zero = Z{};
           size_t im = 1;
           auto  bound_not_reached = u_t(im) <= bds;
 
@@ -90,8 +89,8 @@ namespace kyosu::_
             }
             else
             {
-              P += kyosu::if_else(bound_not_reached, Pm, zero);
-              Q += kyosu::if_else(bound_not_reached, Qm, zero);
+              P += kyosu::if_else(bound_not_reached, Pm, eve::zero);
+              Q += kyosu::if_else(bound_not_reached, Qm, eve::zero);
             }
             bound_not_reached = u_t(++im) <= bds;
           }
