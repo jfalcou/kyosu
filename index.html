@@ -197,13 +197,13 @@ quaternion from various parametrizations of \(\mathbb{R}^4\) or from \(\mathbb{R
 <p>TODO cayley_dickson&lt;N&gt; construction by a function.</p>
 <h2><a class="anchor" id="autotoc_md32"></a>
 Operators</h2>
-<p>Operators (as said before) <code>+</code>, <code>-</code>, <code>*</code> and <code>/</code> can be used in infix form and can mix cayley-dickson values of different dimensinalities. Of course the biggest dimensionlity is recovered in the output.</p>
+<p>Operators (as said before) <code>+</code>, <code>-</code>, <code>*</code> and <code>/</code> can be used in infix form and can mix cayley-dickson values of different dimensionalities. Of course the biggest dimensionlity is recovered in the output.</p>
 <p>Prefix forms are also provided as <code>add</code>, <code>sub</code>, <code>multiply</code> and <code>div</code>. Also plus and minus for unary versions.</p>
 <p>The left division sometimes necessary if the dimensionality is greater than 2 is given as <code>ldiv</code>.</p>
 <h2><a class="anchor" id="autotoc_md33"></a>
 Functions</h2>
-<p>Most <b>KYOSU</b> callables are usable with all cayley_dickson types. The exception being mainly special complex functions and rotation related quaternion usage.</p>
-<dl class="section warning"><dt>Warning</dt><dd>: <b>EVE</b> callables that correspond to mathematical functions that are only defined on a proper part of the real axis as, for example, <code>acos</code> DOES NOT ever provide the same result if called in <b>EVE</b> or <b>KYOSU</b> context.</dd></dl>
+<p>Most <b>KYOSU</b> callables are usable with all cayley_dickson types. The exceptions mainly being rotation related quaternion usage.</p>
+<dl class="section warning"><dt>Warning</dt><dd><b>EVE</b> callables that correspond to mathematical functions that are only defined on a proper part of the real axis as, for example, <code>acos</code> DOES NOT ever provide the same result if called in <b>EVE</b> or <b>KYOSU</b> context.</dd></dl>
 <p>eve::acos(2.0) wil returns a NaN value, but <a class="el" href="group__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6.html#ga46ff71e1e2cf6bbbeb771eeb0885f3b6" title="Computes the acosine of the argument.">kyosu::acos</a>(2.0) will return the pure imaginary complex number \(i\;\log(2+\sqrt{3})\)</p>
 <p>All these kinds of functions called with a floating value in the kyosu namespace will return a complex value.</p>
 <ul>
@@ -272,7 +272,13 @@ Functions</h2>
 <td class="markdownTableBodyNone"><a class="el" href="group__functions_gad65d1920bd1721b78982441aeb5b4036.html#gad65d1920bd1721b78982441aeb5b4036">tanh</a>   </td><td class="markdownTableBodyNone"><a class="el" href="group__complex_gac49e8cf76fe002ef3d3e480fb80217ff.html#gac49e8cf76fe002ef3d3e480fb80217ff">to_polar</a>   </td><td class="markdownTableBodyNone"><a class="el" href="group__functions_gaf57c0dd30eab1c6bf0a4c81c849307d5.html#gaf57c0dd30eab1c6bf0a4c81c849307d5">tgamma</a>   </td><td class="markdownTableBodyNone"><a class="el" href="group__functions_ga57a5e1064f03073d3e81144181f6ac71.html#ga57a5e1064f03073d3e81144181f6ac71">trunc</a>   </td><td class="markdownTableBodyNone"><a class="el" href="group__functions_gaf0517a14ea9458fd0698d804b465d366.html#gaf0517a14ea9458fd0698d804b465d366">zeta</a>   </td></tr>
 </table>
 <ul>
-<li><p class="startli">callables usable with quaternion complex and real only</p>
+<li><p class="startli">Bessel functions</p>
+<p class="startli">They deserve a separate list to avoid verbosity:</p><ul>
+<li>cylindrical Bessel functions: cyl_bessel_xxx are all defined for xxx being j0, j1, jn, y0, y1, yn, i0, i1, in, h1_0, h1_1, h1n, h2_0, h2_1, h2n, k1, k0, kn.</li>
+<li>spherical Bessel functions: sph_bessel_xxx are all defined for xxx being j0, j1, jn, y0, y1, yn, i1_0, i1_1, i1n, i2_0, i2_1, i2n, h1_0, h1_1, h1n, h2_0, h2_1 h2n, k1, k0, kn.</li>
+</ul>
+</li>
+<li><p class="startli">Callables usable with quaternion complex and real only</p>
 <p class="startli">These functions are related to \(\mathbb{R}^3\) rotations</p>
 </li>
 </ul>

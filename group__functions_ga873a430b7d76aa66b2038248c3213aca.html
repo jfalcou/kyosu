@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::cyl_bessel_yn</title>
+<title>kyosu: kyosu::sph_bessel_h1_1</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga873a430b7d76aa66b2038248c3213aca.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('group__functions_ga96400e65eaf1b63c5ab
 </div>
 
 <div class="contents">
-<a id="ga96400e65eaf1b63c5ab88ba5aff6d818" name="ga96400e65eaf1b63c5ab88ba5aff6d818"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga96400e65eaf1b63c5ab88ba5aff6d818">&#9670;&#160;</a></span>cyl_bessel_yn</h2>
+<a id="ga873a430b7d76aa66b2038248c3213aca" name="ga873a430b7d76aa66b2038248c3213aca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga873a430b7d76aa66b2038248c3213aca">&#9670;&#160;</a></span>sph_bessel_h1_1</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('group__functions_ga96400e65eaf1b63c5ab
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::cyl_bessel_yn = {}</td>
+          <td class="memname">kyosu::sph_bessel_h1_1 = {}</td>
         </tr>
       </table>
   </td>
@@ -142,15 +142,15 @@ $(document).ready(function(){initNavTree('group__functions_ga96400e65eaf1b63c5ab
 </table>
 </div><div class="memdoc">
 
-<p>Computes the modified Bessel functions of the second kind, \( Y_n(x)=\lim_{\alpha\to n}{{\frac {J_{\alpha  }(x)\cos(\alpha\pi)-J_{-\alpha }(x)}{\sin(\alpha\pi)}}}\), extended to the complex plane and cayley_dickson algebras. </p>
+<p>Computes the spherical Bessel/hankel functions of the third kind, \( h_1^{(1)}(z) = j_1(z)+iy_1(z)\). </p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt;                                <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(<span class="keywordtype">int</span> n, T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value N, eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T    <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(N n, T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(<span class="keywordtype">int</span> n, T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(<span class="keywordtype">int</span> n, T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga96400e65eaf1b63c5ab88ba5aff6d818_html_ga96400e65eaf1b63c5ab88ba5aff6d818"><div class="ttname"><a href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">kyosu::cyl_bessel_yn</a></div><div class="ttdeci">constexpr tags::callable_cyl_bessel_yn cyl_bessel_yn</div><div class="ttdoc">Computes the modified Bessel functions of the second kind, , extended to the complex plane and cayley...</div><div class="ttdef"><b>Definition:</b> cyl_bessel_yn.hpp:74</div></div>
+<div class="ttc" id="agroup__functions_ga873a430b7d76aa66b2038248c3213aca_html_ga873a430b7d76aa66b2038248c3213aca"><div class="ttname"><a href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">kyosu::sph_bessel_h1_1</a></div><div class="ttdeci">constexpr tags::callable_sph_bessel_h1_1 sph_bessel_h1_1</div><div class="ttdoc">Computes the spherical Bessel/hankel functions of the third kind, .</div><div class="ttdef"><b>Definition:</b> sph_bessel_h1_1.hpp:76</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> types.hpp:14</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -158,7 +158,7 @@ $(document).ready(function(){initNavTree('group__functions_ga96400e65eaf1b63c5ab
 </ul>
 <p><b>Return value</b></p>
 <ul>
-<li>returns \(Y_n(z)\).</li>
+<li>returns \(h_1^{(1)}(z)\).</li>
 </ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
@@ -167,38 +167,31 @@ $(document).ready(function(){initNavTree('group__functions_ga96400e65eaf1b63c5ab
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordtype">size_t</span> n = 12;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">kyosu::cyl_bessel_yn</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">kyosu::sph_bessel_h1_1</a>;</div>
 <div class="line">  std::cout.precision(16);</div>
 <div class="line">  std::cout &lt;&lt; std::scientific &lt;&lt; std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0             &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,-1.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1+0i            &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(-1.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;15.0            &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,15.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;15+0i           &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(15.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;40.0            &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,40.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;40+0i           &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(40.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;60.0            &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,60.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;60+0i           &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(60.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0             &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(1.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1+0i            &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(1.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;15.0            &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(15.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;15+0i           &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(15.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;40.0            &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(40.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;40+0i           &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(40.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;60.0            &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(60.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;60+0i           &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(60.0, 0.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  eve::wide&lt;double, eve::fixed&lt;4&gt;&gt; z(1.0, 15.0, 40.0, 60.0);</div>
 <div class="line">  <span class="keyword">auto</span> zz = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(z);</div>
-<div class="line">  std::cout &lt;&lt; z  &lt;&lt; <span class="stringliteral">&quot;\n -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,z) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; zz &lt;&lt; <span class="stringliteral">&quot;\n -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">kyosu::real</a>(<a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,zz)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; z  &lt;&lt; <span class="stringliteral">&quot;\n -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(z) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; zz &lt;&lt; <span class="stringliteral">&quot;\n -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">kyosu::real</a>(<a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(zz)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0                 &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,1.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0+36.0i           &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(1.0, 36.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0+36.0i+2.0j+1.5k &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,<a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">kyosu::quaternion</a>(1.0, 36.0, 2.0, 1.5)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0                 &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(1.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0+36.0i           &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(1.0, 36.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;1.0+36.0i+2.0j+1.5k &quot;</span> &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(<a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">kyosu::quaternion</a>(1.0, 36.0, 2.0, 1.5)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  eve::wide&lt;double, eve::fixed&lt;4&gt;&gt; z1(1.0, 2.0, 40.0, 0.0),  z2(36.0, 0.5, 0.0, 40.0);</div>
 <div class="line">  <span class="keyword">auto</span> z0 = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(z1, z2);</div>
-<div class="line">  std::cout &lt;&lt; z0 &lt;&lt; <span class="stringliteral">&quot; \n-&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(n,z0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=75; i &lt; 100; ++i)</div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;i &quot;</span> &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga96400e65eaf1b63c5ab88ba5aff6d818.html#ga96400e65eaf1b63c5ab88ba5aff6d818">cyl_bessel_yn</a>(i,<a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(1.0, 1.0)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; z0 &lt;&lt; <span class="stringliteral">&quot; \n-&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga873a430b7d76aa66b2038248c3213aca.html#ga873a430b7d76aa66b2038248c3213aca">sph_bessel_h1_1</a>(z0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_gaa9d12dd4e1420039046c737ddd3240be_html_gaa9d12dd4e1420039046c737ddd3240be"><div class="ttname"><a href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">kyosu::real</a></div><div class="ttdeci">constexpr tags::callable_real real</div><div class="ttdoc">Extracts the real part of a value.</div><div class="ttdef"><b>Definition:</b> real.hpp:83</div></div>
