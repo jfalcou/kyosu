@@ -106,7 +106,7 @@ Operators
 ---------
 
 Operators (as said before) `+`, `-`, `*` and `/` can be used in infix form and can mix cayley-dickson values of
- different dimensinalities. Of course the biggest dimensionlity is recovered in the output.
+ different dimensionalities. Of course the biggest dimensionlity is recovered in the output.
 
 Prefix forms are also provided as `add`, `sub`, `multiply` and `div`. Also plus and minus for unary versions.
 
@@ -115,10 +115,9 @@ The left division sometimes necessary if the dimensionality is greater than 2 is
 Functions
 ---------
 
-Most **KYOSU** callables are usable with all cayley_dickson types. The exception being mainly special
-complex functions and rotation related quaternion usage.
+Most **KYOSU** callables are usable with all cayley_dickson types. The exceptions mainly being rotation related quaternion usage.
 
-@warning: **EVE** callables that correspond to mathematical functions that
+@warning  **EVE** callables that correspond to mathematical functions that
           are only defined on a proper part of the real axis as, for example, `acos` DOES NOT ever provide the same result
           if called in **EVE** or **KYOSU** context.
 
@@ -163,8 +162,14 @@ complex functions and rotation related quaternion usage.
    | [sqr](@ref kyosu::sqr )                   | [sqr_abs](@ref kyosu::sqr_abs )         | [sqrt](@ref kyosu::sqrt )             | [tan](@ref kyosu::tan )        | [tanpi](@ref kyosu::tanpi )          |
    | [tanh](@ref kyosu::tanh )                 | [to_polar](@ref kyosu::to_polar )       | [tgamma](@ref kyosu::tgamma )         | [trunc](@ref kyosu::trunc )    | [zeta](@ref kyosu::zeta )            |
 
+  * Bessel functions
 
-  * callables usable with quaternion complex and real only
+     They deserve a separate list to avoid verbosity:
+
+     * cylindrical Bessel functions: cyl_bessel_xxx are all defined for xxx being j0, j1, jn, y0, y1, yn, i0, i1, in, h1_0, h1_1, h1n, h2_0, h2_1, h2n, k1, k0, kn.
+     * spherical   Bessel functions: sph_bessel_xxx are all defined for xxx being j0, j1, jn, y0, y1, yn, i1_0, i1_1, i1n, i2_0, i2_1, i2n, h1_0, h1_1, h1n, h2_0, h2_1 h2n, k1, k0, kn.
+
+  * Callables usable with quaternion complex and real only
 
     These functions are related to \f$\mathbb{R}^3\f$ rotations
 

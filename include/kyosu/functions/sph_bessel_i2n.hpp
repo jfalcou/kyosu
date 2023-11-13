@@ -12,23 +12,28 @@
 
 namespace kyosu::tags
 {
-  struct callable_cyl_bessel_i1: eve::elementwise
+  struct callable_sph_bessel_i2n: eve::elementwise
   {
-    using callable_tag_type = callable_cyl_bessel_i1;
+    using callable_tag_type = callable_sph_bessel_i2n;
 
-    KYOSU_DEFERS_CALLABLE(cyl_bessel_i1_);
+    KYOSU_DEFERS_CALLABLE(sph_bessel_i2n_);
 
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::cyl_bessel_i1(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
+    template<eve::ordered_value N, eve::floating_ordered_value T>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& z) noexcept
     {
-      return eve::tag_invoke(*this, target);
+      auto fn = callable_sph_bessel_i2n{};
+      return fn(n, complex(z));
+    }
+
+    template<typename N, typename T>
+    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1) const noexcept
+    -> decltype(eve::tag_invoke(*this, target0, target1))
+    {
+      return eve::tag_invoke(*this, target0, target1);
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_cyl_bessel_i1(T&&...)> operator()(T&&... x) const
+    eve::unsupported_call<callable_sph_bessel_i2n(T&&...)> operator()(T&&... x) const
     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
@@ -38,11 +43,9 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_i1
-//!   @brief Computes  the modified Bessel function of the first kind,
-//!   \f$ I_1(x)= iJ_1(ix) \f$ extended to the complex plane and cayley_dickson algebras.
-//!
-//!   It is the solution of \f$ x^{2}y''+xy'+x^2y=0\f$ for which \f$ y(0) = 0\f$.
+//!   @var sph_bessel_i2n
+//!   @brief Computes the spherical Bessel functions
+//!   \f$ i_n^{(2)}(z) = i^{-n-1}y_n(iz)\f$.
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -53,8 +56,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto cyl_bessel_i1(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T    cyl_bessel_i1(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sph_bessel_i2n(int n, T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto sph_bessel_i2n(int n, T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -64,12 +67,12 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns \f$I_1(z)\f$.
+//!     * returns  \f$i_n^{(2)}(z)\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/cyl_bessel_i1.cpp}
+//!  @godbolt{doc/sph_bessel_i2n.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_cyl_bessel_i1 cyl_bessel_i1 = {};
+inline constexpr tags::callable_sph_bessel_i2n sph_bessel_i2n = {};
 }

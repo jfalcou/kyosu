@@ -76,7 +76,6 @@ namespace kyosu::_
         auto Q = Qm;
         auto bds = bound_compute();
 
-        Z zero{};
         size_t im = 1;
         auto  bound_not_reached = u_t(im) <= bds;
         while (eve::any(bound_not_reached))
@@ -90,8 +89,8 @@ namespace kyosu::_
           }
           else
           {
-            P += if_else( bound_not_reached, Pm, zero);
-            Q += if_else( bound_not_reached, Qm, zero);
+            P += if_else( bound_not_reached, Pm, eve::zero);
+            Q += if_else( bound_not_reached, Qm, eve::zero);
           }
           bound_not_reached = u_t(++im) <= bds;
         }

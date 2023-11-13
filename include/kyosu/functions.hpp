@@ -163,8 +163,38 @@
 #include <kyosu/functions/sinpi.hpp>
 #include <kyosu/functions/sinpicospi.hpp>
 #include <kyosu/functions/sinh.hpp>
+#include <kyosu/functions/sinhc.hpp>
 #include <kyosu/functions/sinhcosh.hpp>
 #include <kyosu/functions/slerp.hpp>
+
+#include <kyosu/functions/sph_bessel_i1_0.hpp>
+#include <kyosu/functions/sph_bessel_i1_1.hpp>
+#include <kyosu/functions/sph_bessel_i1n.hpp>
+
+#include <kyosu/functions/sph_bessel_i2_0.hpp>
+#include <kyosu/functions/sph_bessel_i2_1.hpp>
+#include <kyosu/functions/sph_bessel_i2n.hpp>
+
+#include <kyosu/functions/sph_bessel_j0.hpp>
+#include <kyosu/functions/sph_bessel_j1.hpp>
+#include <kyosu/functions/sph_bessel_jn.hpp>
+
+#include <kyosu/functions/sph_bessel_h1_0.hpp>
+#include <kyosu/functions/sph_bessel_h1_1.hpp>
+#include <kyosu/functions/sph_bessel_h1n.hpp>
+
+#include <kyosu/functions/sph_bessel_h2_0.hpp>
+#include <kyosu/functions/sph_bessel_h2_1.hpp>
+#include <kyosu/functions/sph_bessel_h2n.hpp>
+
+#include <kyosu/functions/sph_bessel_y0.hpp>
+#include <kyosu/functions/sph_bessel_y1.hpp>
+#include <kyosu/functions/sph_bessel_yn.hpp>
+
+#include <kyosu/functions/sph_bessel_k0.hpp>
+#include <kyosu/functions/sph_bessel_k1.hpp>
+#include <kyosu/functions/sph_bessel_kn.hpp>
+
 #include <kyosu/functions/sqr.hpp>
 #include <kyosu/functions/sqr_abs.hpp>
 #include <kyosu/functions/sqrt.hpp>
