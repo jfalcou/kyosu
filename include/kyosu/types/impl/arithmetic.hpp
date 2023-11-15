@@ -12,6 +12,8 @@
 
 namespace kyosu::_
 {
+
+
   template<typename C>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::conj> const&, C const& c) noexcept
@@ -186,7 +188,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::rec> const&, C c) noexcept
   {
-    return conj(c)/sqr_abs(c);
+    return if_else(is_infinite(c), eve::zero, if_else(is_eqz(c), rec(real(c)), conj(c)/sqr_abs(c)));
   }
 
   template<typename C0, concepts::cayley_dickson C1>
@@ -546,4 +548,5 @@ namespace kyosu::_
       return (c0+ (c1+ ... + cs)) / (sizeof...(cs) + 2);
     }
   }
+
 }
