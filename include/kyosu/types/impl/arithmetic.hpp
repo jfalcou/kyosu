@@ -13,6 +13,29 @@
 namespace kyosu::_
 {
 
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::muli> const&, C const& c) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<C>)
+      return complex(-ipart(c), real(c));
+    else if constexpr(kyosu::concepts::quaternion<C>)
+      return quaternion(-ipart(c), real(c), -kpart(c), jpart(c));
+    else
+      return i(as(c))*c;
+  }
+
+  template<typename C>
+  KYOSU_FORCEINLINE constexpr
+  auto dispatch(eve::tag_of<kyosu::mulmi> const&, C const& c) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<C>)
+      return complex(ipart(c), -real(c));
+    else if constexpr(kyosu::concepts::quaternion<C>)
+      return quaternion(ipart(c), -real(c), kpart(c), -jpart(c));
+    else
+      return i(as(c))*c;
+  }
 
   template<typename C>
   KYOSU_FORCEINLINE constexpr
@@ -24,7 +47,7 @@ namespace kyosu::_
   template<typename C>
   KYOSU_FORCEINLINE constexpr auto dispatch(eve::tag_of<kyosu::abs> const&, C const& c) noexcept
   {
-    return kumi::apply(eve::hypot, c);
+    return kumi::apply(eve::pedantic(eve::hypot), c);
   }
 
  template<typename C>
@@ -41,8 +64,10 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::sqr_abs> const&, C const& c) noexcept
   {
+    auto anyinf = kumi::any_of(c, eve::is_infinite);
     auto squares = kumi::map([](auto const& e) { return e*e; }, c);
-    return kumi::sum( kumi::extract(squares,kumi::index<1>), get<0>(squares));
+    auto r = kumi::sum( kumi::extract(squares,kumi::index<1>), get<0>(squares));
+    return if_else(anyinf,  eve::inf(as(r)), r);
   }
 
   template<typename Mask, typename T, typename U>

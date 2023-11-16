@@ -136,6 +136,8 @@
 #include <kyosu/functions/minabs.hpp>
 #include <kyosu/functions/minmag.hpp>
 #include <kyosu/functions/minus.hpp>
+#include <kyosu/functions/muli.hpp>
+#include <kyosu/functions/mulmi.hpp>
 #include <kyosu/functions/nearest.hpp>
 #include <kyosu/functions/negmaxabs.hpp>
 #include <kyosu/functions/negminabs.hpp>

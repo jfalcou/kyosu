@@ -4,7 +4,7 @@
 
 int main()
 {
-  using kyosu::i;
+  using kyosu::mi;
   using kyosu::as;
   using kyosu::complex_t;
   using kyosu::quaternion_t;

@@ -8,38 +8,32 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::sqr_abs over real"
+TTS_CASE_WITH ( "Check kyosu::muli over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10))
               )
-(auto data)
+<typename T>(T data)
 {
-  TTS_EQUAL(kyosu::sqr_abs(data), eve::sqr_abs(data));
+  TTS_EQUAL(kyosu::muli(data), kyosu::i(kyosu::as<T>())*data);
 };
 
-TTS_CASE_WITH ( "Check kyosu::sqr_abs over complex"
+TTS_CASE_WITH ( "Check kyosu::muli over complex"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10))
               )
-(auto r, auto i)
+<typename T>(T r, T i)
 {
-  TTS_ULP_EQUAL(kyosu::sqr_abs(kyosu::complex(r,i)), r*r+i*i, 0.5);
-  auto inf = eve::inf(kyosu::as(r));
-  auto nan = eve::nan(kyosu::as(r));
-  TTS_IEEE_EQUAL(kyosu::sqr_abs(kyosu::complex(inf, nan)),  inf);
+  TTS_EQUAL(kyosu::muli(kyosu::complex(r,i)), kyosu::i(kyosu::as<T>())*kyosu::complex(r,i));
 };
 
-TTS_CASE_WITH ( "Check kyosu::sqr_abs over quaternion"
+TTS_CASE_WITH ( "Check kyosu::muli over quaternion"
               , kyosu::real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
-<typename T>(T r, T i, T j, T k)
+  <typename T>(T r, T i, T j, T k)
 {
   using type = kyosu::quaternion_t<T>;
-  TTS_ULP_EQUAL(kyosu::sqr_abs(type(r,i,j,k)), r*r+i*i+j*j+k*k, 2.0);
-  auto inf = eve::inf(kyosu::as(r));
-  auto nan = eve::nan(kyosu::as(r));
-  TTS_IEEE_EQUAL(kyosu::sqr_abs(type(r,inf,j,nan)), inf);
+  TTS_EQUAL(kyosu::muli(type(r,i,j,k)), kyosu::i(kyosu::as<T>())*type(r,i,j,k));
 };
