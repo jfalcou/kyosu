@@ -14,4 +14,5 @@
 #include <kyosu/constants/i.hpp>
 #include <kyosu/constants/j.hpp>
 #include <kyosu/constants/k.hpp>
+#include <kyosu/constants/mi.hpp>
 #include <kyosu/constants/cinf.hpp>
