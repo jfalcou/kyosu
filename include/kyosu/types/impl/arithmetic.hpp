@@ -34,7 +34,7 @@ namespace kyosu::_
     else if constexpr(kyosu::concepts::quaternion<C>)
       return quaternion(ipart(c), -real(c), kpart(c), -jpart(c));
     else
-      return i(as(c))*c;
+      return mi(as(c))*c;
   }
 
   template<typename C>
