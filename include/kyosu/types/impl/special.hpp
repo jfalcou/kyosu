@@ -464,9 +464,7 @@ namespace kyosu::_
       }
       else
       {
-        auto [rz, iz] = z;
-        auto tmp = erf(complex(-iz, rz));
-        return complex(imag(tmp), -real(tmp));
+        return mulmi(erf(muli(z)));
       }
     }
     else

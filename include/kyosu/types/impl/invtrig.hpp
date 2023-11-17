@@ -348,9 +348,7 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<C> )
     {
-      auto [r, i] = a0;
-      auto [r1, i1] = kyosu::asin(complex(-i, r));
-      return complex(i1, -r1); //      -(eve::i*asin(eve::i*a0));
+      return mulmi( kyosu::asin(muli(a0)));
     }
     else
     {
