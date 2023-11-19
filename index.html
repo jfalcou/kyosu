@@ -200,6 +200,7 @@ Operators</h2>
 <p>Operators (as said before) <code>+</code>, <code>-</code>, <code>*</code> and <code>/</code> can be used in infix form and can mix cayley-dickson values of different dimensionalities. Of course the biggest dimensionlity is recovered in the output.</p>
 <p>Prefix forms are also provided as <code>add</code>, <code>sub</code>, <code>multiply</code> and <code>div</code>. Also plus and minus for unary versions.</p>
 <p>The left division sometimes necessary if the dimensionality is greater than 2 is given as <code>ldiv</code>.</p>
+<p>The left multiplication to the left by i or -i (i*i=-1) can be done calling respectively muli and mulmi</p>
 <h2><a class="anchor" id="autotoc_md33"></a>
 Functions</h2>
 <p>Most <b>KYOSU</b> callables are usable with all cayley_dickson types. The exceptions mainly being rotation related quaternion usage.</p>
@@ -288,6 +289,14 @@ Functions</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><a class="el" href="group__quaternion_ga47b1fa117c5671882a31b65c997660d7.html#ga47b1fa117c5671882a31b65c997660d7">rot_angle</a>   </td><td class="markdownTableBodyNone"><a class="el" href="group__quaternion_gaa5964ee08fa64046a80d3908056a09c4.html#gaa5964ee08fa64046a80d3908056a09c4">rot_axis</a>   </td><td class="markdownTableBodyNone"><a class="el" href="group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a">rotate_vec</a>   </td></tr>
 </table>
+<ul>
+<li>Constant i, j, k and cinf are defined.<ul>
+<li>i(as&lt;Z&gt;()) returns a complex of the same underlying type as Z;</li>
+<li>j(as&lt;Z&gt;()) and k(as&lt;Z&gt;()) return a quaternion of the same underlying type as Z;</li>
+<li>cinf(as&lt;Z&gt;()) returns a complex with nan real part and inf imaginary part, that can be roughly taken as a complex-infinity, in the sense that abs is infinite and arg is undefinite (nan). </li>
+</ul>
+</li>
+</ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

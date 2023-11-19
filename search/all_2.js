@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['cayley_2ddickson_20functions_0',['Cayley-Dickson Functions',['../group__functions.html',1,'']]],
+  ['cayley_2ddickson_20constants_0',['Cayley-Dickson constants',['../group__functions.html',1,'']]],
   ['cayley_5fdickson_1',['cayley_dickson',['../namespacekyosu.html#aa68ce492637572925df645dcb9d7c3a9',1,'kyosu::cayley_dickson(T0, Ts...) -&gt; cayley_dickson&lt; T0, 1+sizeof...(Ts)&gt;'],['../namespacekyosu.html#acf9831abda678789de6f2a332351fee1',1,'kyosu::cayley_dickson(Tuple const &amp;) -&gt; cayley_dickson&lt; kumi::element_t&lt; 0, Tuple &gt;, kumi::size_v&lt; Tuple &gt; &gt;']]],
   ['ceil_2',['ceil',['../group__functions_ga8d6f64b6ed68055ef05917557d2e60b6.html#ga8d6f64b6ed68055ef05917557d2e60b6',1,'kyosu']]],
   ['commutator_3',['commutator',['../group__functions_gaa1c85fe49012f1d7bdabbfe0fe1abaf4.html#gaa1c85fe49012f1d7bdabbfe0fe1abaf4',1,'kyosu']]],

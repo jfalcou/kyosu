@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: Cayley-Dickson Functions</title>
+<title>kyosu: Cayley-Dickson constants</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -124,11 +124,11 @@ $(document).ready(function(){initNavTree('group__functions.html',''); initResiza
 <div class="header">
   <div class="summary">
 <a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">Cayley-Dickson Functions</div></div>
+  <div class="headertitle"><div class="title">Cayley-Dickson constants</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Functions performing computations over all caylet-dickson types complex, quaternions, octonions...  
+<p>non real constants  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -376,6 +376,9 @@ Variables</h2></td></tr>
 <tr class="memitem:gaf0240aea3dcf4428abd35906e94323e7"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_hypot&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gaf0240aea3dcf4428abd35906e94323e7.html#gaf0240aea3dcf4428abd35906e94323e7">kyosu::hypot</a> = {}</td></tr>
 <tr class="memdesc:gaf0240aea3dcf4428abd35906e94323e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the hypot operation.  <br /></td></tr>
 <tr class="separator:gaf0240aea3dcf4428abd35906e94323e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafdb3298b4657efe925df35dd5ded4694"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_i&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_gafdb3298b4657efe925df35dd5ded4694.html#gafdb3298b4657efe925df35dd5ded4694">kyosu::i</a> = {}</td></tr>
+<tr class="memdesc:gafdb3298b4657efe925df35dd5ded4694"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the complex number cinf i.e. <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex.">complex(nan, inf)</a> in the chosen type.  <br /></td></tr>
+<tr class="separator:gafdb3298b4657efe925df35dd5ded4694"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6d65485712648eb40b8dc0453d9c3baf"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_if_else&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf">kyosu::if_else</a> = {}</td></tr>
 <tr class="memdesc:ga6d65485712648eb40b8dc0453d9c3baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select a value between two arguments based on a logical mask.  <br /></td></tr>
 <tr class="separator:ga6d65485712648eb40b8dc0453d9c3baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -516,6 +519,12 @@ constexpr tags::callable_ipart&#160;</td><td class="memItemRight" valign="bottom
 <tr class="memitem:ga1b78fa57857ad714ce5f0e6e3ace5db9"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_minus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga1b78fa57857ad714ce5f0e6e3ace5db9.html#ga1b78fa57857ad714ce5f0e6e3ace5db9">kyosu::minus</a> = {}</td></tr>
 <tr class="memdesc:ga1b78fa57857ad714ce5f0e6e3ace5db9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the opposite value.  <br /></td></tr>
 <tr class="separator:ga1b78fa57857ad714ce5f0e6e3ace5db9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga73f404c38cce818ff489317901bbdf0e"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_muli&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">kyosu::muli</a> = {}</td></tr>
+<tr class="memdesc:ga73f404c38cce818ff489317901bbdf0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value of the parameter multiplied by i on the left side. For real complex and quaternion the computation is an optimization over the call to * operator.  <br /></td></tr>
+<tr class="separator:ga73f404c38cce818ff489317901bbdf0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ece8e5cfd2e2e5746a3a1c83280da2b"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_mulmi&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga8ece8e5cfd2e2e5746a3a1c83280da2b.html#ga8ece8e5cfd2e2e5746a3a1c83280da2b">kyosu::mulmi</a> = {}</td></tr>
+<tr class="memdesc:ga8ece8e5cfd2e2e5746a3a1c83280da2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value of the parameter multiplied by i on the left side. For real complex and quaternion the computation is an optimization over the call to * operator.  <br /></td></tr>
+<tr class="separator:ga8ece8e5cfd2e2e5746a3a1c83280da2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8febd271f0bc94c5fb1d12cd5644778b"><td class="memItemLeft" align="right" valign="top">constexpr tags::callable_nearest&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__functions_ga8febd271f0bc94c5fb1d12cd5644778b.html#ga8febd271f0bc94c5fb1d12cd5644778b">kyosu::nearest</a> = {}</td></tr>
 <tr class="memdesc:ga8febd271f0bc94c5fb1d12cd5644778b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the nearest value.  <br /></td></tr>
 <tr class="separator:ga8febd271f0bc94c5fb1d12cd5644778b"><td class="memSeparator" colspan="2">&#160;</td></tr>
