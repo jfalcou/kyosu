@@ -10,6 +10,7 @@
 #include <eve/module/core.hpp>
 #include <kyosu/concepts.hpp>
 #include <kyosu/functions.hpp>
+#include <kyosu/constants.hpp>
 #include <kyosu/types/traits.hpp>
 #include <kyosu/types/impl/arithmetic.hpp>
 #include <kyosu/types/impl/predicates.hpp>

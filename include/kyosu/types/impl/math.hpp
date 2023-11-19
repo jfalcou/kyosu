@@ -261,7 +261,7 @@ namespace kyosu::_
                           , complex(ii1, rr1)
                           );
       res = if_else(is_pure(z), eve::sqrt_2(eve::as(r))*complex( eve::half(eve::as(r)),  eve::half(eve::as(r)))*eve::sqrt(iz), res);
-      if (eve::any(is_not_finite(z))) [[unlikely]]
+      if (eve::any(is_not_finite(z)))
       {
         res = kyosu::if_else(rz == eve::minf(eve::as(rz))
                             , kyosu::if_else( eve::is_nan(iz), complex(iz, eve::minf(eve::as(rz)))

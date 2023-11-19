@@ -26,7 +26,6 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z>)
     {
-      auto muli = [](auto z){ auto [r, i] = z; return complex(-i, r); };
       return  cyl_bessel_jn(n, z)+muli(cyl_bessel_yn(n, z));
     }
     else
@@ -40,7 +39,6 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z>)
     {
-      auto muli = [](auto z){ auto [r, i] = z; return complex(-i, r); };
       return  cyl_bessel_jn(n, z)-muli(cyl_bessel_yn(n, z));
     }
     else
@@ -111,7 +109,7 @@ namespace kyosu::_
         using u_t   =  eve::underlying_type_t<Z>;
         auto i = complex(u_t(0), u_t(1));
         auto rz = rec(z);
-        auto miz = complex(ipart(z), -real(z));
+        auto miz = mulmi(z);
         auto h0 = if_else(imzlt0, i*exp(miz), -i*exp(-miz))*rz;
         if(n == 0) return h0;
         auto h1 = if_else(imzlt0, (rz+i),(rz-i))*h0 ;

@@ -12,3 +12,4 @@ namespace kyosu {}
 
 #include <kyosu/types.hpp>
 #include <kyosu/functions.hpp>
+#include <kyosu/constants.hpp>

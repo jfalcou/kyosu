@@ -16,7 +16,7 @@ namespace kyosu::_
   template<typename Z>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_i0>, Z z) noexcept
   {
-    return cyl_bessel_j0(complex(-ipart(z), real(z)));
+    return cyl_bessel_j0(muli(z));
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -27,8 +27,7 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      auto [r, i] = cyl_bessel_j1(complex(-ipart(z), real(z)));
-      return complex(i, -r);
+      return mulmi(cyl_bessel_j1(muli(z)));
     }
     else
     {
@@ -52,7 +51,7 @@ namespace kyosu::_
         else return complex(eve::zero(eve::as<e_t>()), eve::one(eve::as<e_t>()));
       };
       auto an =  eve::abs(n);
-      return miton(an)*cyl_bessel_jn(an,complex(-ipart(z), real(z)));
+      return miton(an)*cyl_bessel_jn(an,muli(z));
     }
     else
     {
@@ -115,7 +114,7 @@ namespace kyosu::_
         else if (n%4 == 2) return complex(eve::mone(eve::as<e_t>()));
         else return complex(eve::zero(eve::as<e_t>()), eve::mone(eve::as<e_t>()));
       };
-      return iton(-n)*sph_bessel_jn(n,complex(-ipart(z), real(z)));
+      return iton(-n)*sph_bessel_jn(n,muli(z));
     }
     else
     {
@@ -172,7 +171,7 @@ namespace kyosu::_
         else if (n%4 == 2) return complex(eve::mone(eve::as<e_t>()));
         else return complex(eve::zero(eve::as<e_t>()), eve::mone(eve::as<e_t>()));
       };
-      return iton(-n-1)*sph_bessel_yn(n,complex(-ipart(z), real(z)));
+      return iton(-n-1)*sph_bessel_yn(n,muli(z));
     }
     else
     {

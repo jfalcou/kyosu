@@ -112,6 +112,8 @@ Prefix forms are also provided as `add`, `sub`, `multiply` and `div`. Also plus 
 
 The left division sometimes necessary if the dimensionality is greater than 2 is given as `ldiv`.
 
+The left multiplication to the left by i or -i (i*i=-1) can be done calling respectively muli and mulmi
+
 Functions
 ---------
 
@@ -176,3 +178,9 @@ Most **KYOSU** callables are usable with all cayley_dickson types. The exception
     |           |            |            |
     |-----------|------------|------------|
     | [rot_angle](@ref kyosu::rot_angle) |  [rot_axis](@ref kyosu::rot_axis) | [rotate_vec](@ref kyosu::rotate_vec) |
+
+  * Constant i, j, k and cinf are defined.
+
+    * i(as<Z>()) returns a complex of the same underlying type as Z;
+    * j(as<Z>()) and k(as<Z>()) return a quaternion of the same underlying type as Z;
+    * cinf(as<Z>()) returns a complex with nan real part and inf imaginary part, that can be roughly taken as a complex-infinity, in the sense that abs is infinite and arg is undefinite (nan).

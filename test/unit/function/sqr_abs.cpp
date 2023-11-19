@@ -24,6 +24,9 @@ TTS_CASE_WITH ( "Check kyosu::sqr_abs over complex"
 (auto r, auto i)
 {
   TTS_ULP_EQUAL(kyosu::sqr_abs(kyosu::complex(r,i)), r*r+i*i, 0.5);
+  auto inf = eve::inf(kyosu::as(r));
+  auto nan = eve::nan(kyosu::as(r));
+  TTS_IEEE_EQUAL(kyosu::sqr_abs(kyosu::complex(inf, nan)),  inf);
 };
 
 TTS_CASE_WITH ( "Check kyosu::sqr_abs over quaternion"
@@ -36,4 +39,7 @@ TTS_CASE_WITH ( "Check kyosu::sqr_abs over quaternion"
 {
   using type = kyosu::quaternion_t<T>;
   TTS_ULP_EQUAL(kyosu::sqr_abs(type(r,i,j,k)), r*r+i*i+j*j+k*k, 2.0);
+  auto inf = eve::inf(kyosu::as(r));
+  auto nan = eve::nan(kyosu::as(r));
+  TTS_IEEE_EQUAL(kyosu::sqr_abs(type(r,inf,j,nan)), inf);
 };
