@@ -18,7 +18,7 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(cyl_bessel_jnu_);
 
-    template<eve::floating_ordered_value N, eve::floating_ordered_value T>
+    template<eve::floating_scalar_value N, eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, N nu, T const& v) noexcept
     {
       auto fnu = callable_cyl_bessel_jnu{};

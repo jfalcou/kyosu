@@ -17,15 +17,19 @@ namespace kyosu::_
   template<eve::floating_scalar_value N, typename Z>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_jnu>, N nn, Z z) noexcept
   {
+    std::cout << "icitte0" << std::endl;
     if constexpr(concepts::complex<Z> )
     {
+      std::cout << "icitte1" << std::endl;
       if(is_ltz(nu))
       {
+        std::cout << "icitte2 << std::endl;
         auto[s, c] = sinpicospi(z);
         return cyl_bessel_jnu(-nu, z)*s-cyl_bessel_ynu(-nu, z)*c;
       }
       else
       {
+        std::cout << "icitte3" << std::endl;
         return z+Z(nn);
       }
     }
