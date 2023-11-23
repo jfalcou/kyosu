@@ -6,7 +6,7 @@
 Efficient and SIMD-aware computation for complex, quaternions and octonions.
 
 Kyosu proposes unified treatment of Cayley-Dickson algebras on real numbers, for
-numerical comptations.
+numerical computations.
 
 Real numbers are implemented as float or double IEEE values and, as relying on
 EVE library can use SIMD entry as well .

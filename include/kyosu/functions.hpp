@@ -47,20 +47,24 @@
 #include <kyosu/functions/csc.hpp>
 #include <kyosu/functions/cscpi.hpp>
 #include <kyosu/functions/csch.hpp>
+
 #include <kyosu/functions/cyl_bessel_i0.hpp>
 #include <kyosu/functions/cyl_bessel_i1.hpp>
 #include <kyosu/functions/cyl_bessel_in.hpp>
 #include <kyosu/functions/cyl_bessel_j0.hpp>
 #include <kyosu/functions/cyl_bessel_j1.hpp>
 #include <kyosu/functions/cyl_bessel_jn.hpp>
+#include <kyosu/functions/cyl_bessel_jnu.hpp>
 #include <kyosu/functions/cyl_bessel_y0.hpp>
 #include <kyosu/functions/cyl_bessel_y1.hpp>
 #include <kyosu/functions/cyl_bessel_yn.hpp>
+#include <kyosu/functions/cyl_bessel_ynu.hpp>
 #include <kyosu/functions/cyl_bessel_h1n.hpp>
 #include <kyosu/functions/cyl_bessel_h2n.hpp>
 #include <kyosu/functions/cyl_bessel_k0.hpp>
 #include <kyosu/functions/cyl_bessel_k1.hpp>
 #include <kyosu/functions/cyl_bessel_kn.hpp>
+
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/deta.hpp>
 #include <kyosu/functions/digamma.hpp>
