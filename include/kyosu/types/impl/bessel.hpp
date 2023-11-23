@@ -38,11 +38,15 @@
 
 #include <kyosu/types/impl/detail/bessel_utils.hpp>
 
+// bessels of integral order
 #include <kyosu/types/impl/detail/bessel_j.hpp>
 #include <kyosu/types/impl/detail/bessel_i.hpp>
 #include <kyosu/types/impl/detail/bessel_y.hpp>
 #include <kyosu/types/impl/detail/bessel_h.hpp>
 #include <kyosu/types/impl/detail/bessel_k.hpp>
+// bessels of floating (real) order
+#include <kyosu/types/impl/detail/bessel_jr.hpp>
+#include <kyosu/types/impl/detail/bessel_yr.hpp>
 
 //================================================================================
 // MIT License
