@@ -19,22 +19,40 @@ namespace kyosu::_
   template<eve::floating_scalar_value N, typename Z>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_jnu>, N nu, Z z) noexcept
   {
+    std::cout << "icitte0" << std::endl;
     if constexpr(concepts::complex<Z> )
     {
+      std::cout << "icitte1" << std::endl;
       auto [j, y] = cb_jy(eve::abs(nu), z);
-      if(is_ltz(nu))
+      std::cout << "j " << j <<  " y " << y << std::endl; 
+      if(eve::is_ltz(nu))
       {
-        if (is_flint(nu))
+        std::cout << "icitte2" << std::endl;
+        if (eve::is_flint(nu))
+        {
+          std::cout << "icitte3" << std::endl;
           return cyl_bessel_jn(int(nu), z);
+        }
         else
         {
+          std::cout << "icitte4" << std::endl;
           auto [s, c] = sinpicospi(z);
           return j*s-y*c;
         }
       }
       else
       {
-        return j;
+        std::cout << "icitte5" << std::endl;
+        if (eve::is_flint(nu))
+        {
+          std::cout << "icitte6" << std::endl;
+          return cyl_bessel_jn(int(nu), z);
+        }
+        else
+        {
+          std::cout << "icitte7" << std::endl;
+          return j;
+        }
       }
     }
     else
