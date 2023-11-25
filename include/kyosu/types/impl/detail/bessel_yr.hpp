@@ -11,6 +11,7 @@
 
 namespace kyosu::_
 {
+
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_ynu
   //===-------------------------------------------------------------------------------------------
@@ -19,14 +20,34 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      if(is_ltz(nu))
+      auto doit = [nu, z](auto js, auto ys){
+        auto [j, y] = cb_jy(eve::abs(nu), z, js, ys);
+        return kumi::tuple{j, y};
+      };
+      auto [j, y] = with_alloca<Z>(int(nu)+1, doit);
+
+      if(eve::is_ltz(nu))
       {
-        auto[s, c] = sinpicospi(z);
-        return cyl_bessel_jnu(-nu, z)*s+cyl_bessel_ynu(-nu, z)*c;
+        if (eve::is_flint(nu))
+        {
+          return cyl_bessel_yn(int(nu), z);
+        }
+        else
+        {
+          auto [s, c] = sinpicospi(z);
+          return j*s+y*c;
+        }
       }
       else
       {
-        return z+Z(nu);
+        if (eve::is_flint(nu))
+        {
+          return cyl_bessel_yn(int(nu), z);
+        }
+        else
+        {
+          return y;
+        }
       }
     }
     else
@@ -34,37 +55,4 @@ namespace kyosu::_
       return cayley_extend_rev(cyl_bessel_ynu, nu, z);
     }
   }
-
-//   //===-------------------------------------------------------------------------------------------
-//   //  sph_bessel_yn
-//   //===-------------------------------------------------------------------------------------------
-//   template<typename Z>
-//   auto dispatch(eve::tag_of<kyosu::sph_bessel_yn>, int n, Z z) noexcept
-//   {
-//    if constexpr(concepts::complex<Z> )
-//     {
-//      using u_t = eve::underlying_type_t<Z>;
-//       auto imzge0 = eve::is_gez(imag(z));
-//       auto jn = sph_bessel_jn(n, z);
-//       auto i = complex(u_t(0), u_t(1));
-//       Z res;
-//       if (eve::any(imzge0))
-//       {
-//         auto z1 = if_else(imzge0, z, conj(z));
-//         res = jn-sph_bessel_h1n(n, z1);
-//       }
-//       if (!eve::all(imzge0))
-//       {
-//         auto z2 = if_else(imzge0, conj(z), z);
-//         res = if_else(imzge0,  res, sph_bessel_h2n(n, z2)-jn);
-//       }
-//       return complex(-imag(res), real(res));
-//     }
-//     else
-//     {
-//       return cayley_extend_rev(sph_bessel_yn, n, z);
-//     }
-//   }
-
-
 }
