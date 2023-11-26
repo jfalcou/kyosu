@@ -6,7 +6,9 @@
 */
 //======================================================================================================================
 #pragma once
-#include <kyosu/types/impl/detail/bessel_jyr.hpp>
+#include <kyosu/types/impl/detail/bessel_utils2.hpp>
+
+//#include <kyosu/types/impl/detail/bessel_jyr.hpp>
 #include <kyosu/details/with_alloca.hpp>
 #include <vector>
 
@@ -36,7 +38,7 @@ namespace kyosu::_
     auto twopi = eve::two_pi(as<u_t>());
     auto twoopi = eve::two_o_pi(as<u_t>());
     auto invpi = eve::inv_pi(as<u_t>());
-    auto cspv = cbrt(eve::smallestposval(as<u_t>())); 
+    auto cspv = cbrt(eve::smallestposval(as<u_t>()));
     auto az = abs(z);
     auto z1 = z;
     auto z2 = sqr(z);
@@ -176,15 +178,20 @@ namespace kyosu::_
 
       // now jv0 jv1 yv0 and yv1 had been computed
       // we make forward or backward recurrence
+      cjv[0] = cjv0;
+      cyv[0] = cyv0;
+      cjv[1] = cjv1;
+      cyv[1] = cyv1;
 
       if(n == 0)  return kumi::tuple{cjv0, cyv0};
       else if (n == 1) return kumi::tuple{cjv1, cyv1};
       else if (n >= 2)
       {
-//        std::vector<Z> cjv(n+1);
-        // az large compared to n : 4*n <  az
         auto rz = rec(z);
+
+
         auto forward = [n, v0, rz, cjv0, cjv1, &cjv](){
+          // az large compared to n : 4*n <  az
           auto cf0 = cjv0;
           auto cf1 = cjv1;
           auto cf = cf1;
@@ -197,67 +204,9 @@ namespace kyosu::_
           return cf;
         };
 
-        auto minus_log10_cyl_j_at_infinity = []( auto n, auto az ) {
-          // Auxiliary function to calculate -log( Jn(x->INF) ).
-          return u_t(0.5)*eve::log10(u_t(6.28)*n) - n*eve::log10(u_t(1.36)*az/n);
-        };
-
-        auto ini_for_br_1 = [minus_log10_cyl_j_at_infinity](auto az, auto mg)
-          {
-            // Starting point for backward recurrence
-            //  for when |Jnu(x)|~10e-mg
-            //  using the secant method.
-            auto n0 = inc(eve::ceil( u_t(1.1)*az));
-            auto f0 = minus_log10_cyl_j_at_infinity(n0, az) - mg;
-            auto n1 = n0 + 5;
-            auto f1 = minus_log10_cyl_j_at_infinity(n1, az) - mg;
-            auto nn = n1 - (n1 - n0)/oneminus(f0/f1);
-            auto f = minus_log10_cyl_j_at_infinity(nn, az) - mg;
-            auto test = eve::abs(nn - n1) > 1;
-            while ( eve::any(test) )
-            {
-              n0 = n1;
-              f0 = f1;
-              n1 = nn;
-              f1 = f;
-              nn = if_else(test, n1 - (n1 - n0)/oneminus(f0/f1), nn);
-              f =  if_else(test, minus_log10_cyl_j_at_infinity(nn, az) - mg, f);
-              test =  eve::abs(nn - n1) > 1;
-            }
-            return eve::trunc(nn);
-          };
-
-        auto ini_for_br_2 = [hlf, minus_log10_cyl_j_at_infinity](auto n, auto az, auto sd){
-          // Starting point for backward recurrence
-          //  for when Jnu(x) has sd significant digits
-          //  using the secant method.
-          auto hmp = hlf*sd;
-          auto ejn = minus_log10_cyl_j_at_infinity(n, az);
-          auto t = ejn <= hmp;
-          auto obj = if_else(t, sd, hmp+ejn);
-          auto n0  = if_else(t, eve::ceil(u_t(1.1)*az), u_t(n));
-          auto f0 = minus_log10_cyl_j_at_infinity(n0, az) - obj;
-          auto n1 = n0 + 5;
-          auto f1 = minus_log10_cyl_j_at_infinity(n1, az) - obj;
-          auto nn = n1 - (n1-n0)/oneminus(f0/f1);
-          auto f = minus_log10_cyl_j_at_infinity(nn, az) - obj;
-          auto test = eve::abs(nn - n1) >= 1;
-          while ( eve::any(test))
-          {
-            n0 = n1;
-            f0 = f1;
-            n1 = nn;
-            f1 = f;
-            nn = eve::if_else(test, n1 - (n1-n0)/(oneminus(f0/f1)), nn);
-            f  = eve::if_else(test, minus_log10_cyl_j_at_infinity(nn, az) - obj, f);
-            test = eve::abs(nn - n1) >= 1;
-          }
-          return eve::trunc(nn + 10);
-        };
-
-        auto backward = [v0, az, n, rz, cjv0, cjv1, ini_for_br_1, ini_for_br_2, &cjv](){
+        auto backward = [v0, az, n, rz, cjv0, cjv1, &cjv](){
           auto m1 = ini_for_br_1(az, u_t(200));
-          auto m2 = ini_for_br_2(n, az, u_t(15));
+          auto m2 = ini_for_br_2(u_t(n), az, u_t(15));
           auto m = eve::if_else( m1 >= n && eve::is_not_nan(m2), m2, m1);
           auto cf2 = Z(0);
           auto cf1 = complex(eve::sqrtsmallestposval(eve::as< u_t>()));
@@ -278,34 +227,18 @@ namespace kyosu::_
           return cjv[n];
         };
         auto  res_cjv =  (n <= (int)(quarter*az)) ? forward() : backward();
+        Z res_cyv;
 
-//         std::vector<Z> cyv(n+1);
-         Z res_cyv;
-//         std::vector<Z> cjv(n+1);
-//         cjv[n] = res_cjv;
-
-         cyv[0] = cyv0;
-         cyv[1] = cyv1;
-//         std::cout<< std::endl << "bessely(" << v0 << ") = " << cyv0 << std::endl;
-//         std::cout<< std::endl << "bessely(" << v0+1 << ") = " << cyv1 << std::endl;
         auto ya0 = kyosu::abs(cyv0);
         int lb = 0;
         auto cg0 = cyv0;
         auto cg1 = cyv1;
-        cjv[0] = cjv0;
-        cjv[1] = cjv1;
-//         std::cout << std::endl;
-//         std::cout << " cyv[" << 0 << "] = " << cyv[0] << std::endl;
-//         std::cout << " cyv[" << 1 << "] = " << cyv[1] << std::endl;
-//         std::cout << " cjv[" << 0 << "] = " << cjv[0] << std::endl;
-//         std::cout << " cjv[" << 1 << "] = " << cjv[1] << std::endl;
         for (int k=2; k<=n; ++k)
         {
           if(kyosu::abs(cjv[k-1]) > kyosu::abs(cjv[k-2]))
             cyv[k] = (cjv[k]*cyv[k-1]-2/(pi*z))/cjv[k-1];
           else
             cyv[k] = (cjv[k]*cyv[k-2]-4*dec(v0+k)/(pi*sqr(z)))/cjv[k-2];
-//          std::cout << " cyv[" << k << "] = " << cyv[k] << std::endl;
         }
         return kumi::tuple{res_cjv, cyv[n]};
       }
