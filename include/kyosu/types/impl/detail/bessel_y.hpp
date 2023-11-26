@@ -7,81 +7,11 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/types/impl/detail/bessel_j.hpp>
+#include <kyosu/types/impl/detail/bessel_jy.hpp>
 #include <kyosu/details/with_alloca.hpp>
 
 namespace kyosu::_
 {
-  //===-------------------------------------------------------------------------------------------
-  //===-------------------------------------------------------------------------------------------
-  //  utilities
-  //===-------------------------------------------------------------------------------------------
-  //===-------------------------------------------------------------------------------------------
-
-  template < typename Z> struct mkjs
-  {
-    mkjs(size_t n, Z z):
-      rz(kyosu::rec(z)),
-      rs(kyosu::_:: R(n, z)),
-      j(kyosu::cyl_bessel_jn(n, z)),
-      i(n-1){}
-
-    auto operator()(){
-      auto pj = j;
-      j = pj*rs;
-      rs = 2*(i--)*rz-kyosu::rec(rs);
-      return pj;
-    }
-
-    Z rz, rs, j, pj;
-    int i;
-  };
-
-  //===-------------------------------------------------------------------------------------------
-  //===-------------------------------------------------------------------------------------------
-  //  cylindrical bessel
-  //===-------------------------------------------------------------------------------------------
-  //===-------------------------------------------------------------------------------------------
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_y0
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_y0>, Z z) noexcept
-  {
-    using u_t   =  eve::underlying_type_t<Z>;
-    auto twoopi = eve::two_o_pi(eve::as<u_t>());
-    auto egamma = eve::egamma(eve::as<u_t>());
-    auto eps    = eve::eps(eve::as<u_t>());
-    auto bd = bound(z);
-    Z s{};
-    mkjs jj(2*bd-2, z);
-    auto sgn =  eve::sign_alternate(u_t(bd+1));
-    for (int k = bd-1; k >= 1; --k)
-    {
-      auto sk = sgn*jj()/k;
-      jj();
-      sgn = -sgn;
-      s+= sk;
-    }
-    return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), twoopi*((log(z/2)+egamma)*jj()-2*s));
-  }
-
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_y1
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_y1>, Z z) noexcept
-  {
-    using u_t   =  eve::underlying_type_t<Z>;
-    auto twoopi = eve::two_o_pi(eve::as<u_t>());
-    auto r1 = R(1, z);
-    auto y0 = cyl_bessel_y0(z);
-    auto recs1 = rec(r1)-twoopi/(z*cyl_bessel_j0(z)*y0);
-    return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), y0*recs1);
-  }
-
-
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_yn
   //===-------------------------------------------------------------------------------------------

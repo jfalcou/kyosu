@@ -64,6 +64,7 @@
 #include <kyosu/functions/cyl_bessel_k0.hpp>
 #include <kyosu/functions/cyl_bessel_k1.hpp>
 #include <kyosu/functions/cyl_bessel_kn.hpp>
+#include <kyosu/functions/cyl_bessel_jyn.hpp>
 
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/deta.hpp>
