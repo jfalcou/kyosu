@@ -309,15 +309,16 @@ namespace kyosu::_
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  bessel_jy
+  //  cb_jyn
   //===-------------------------------------------------------------------------------------------
   template<eve::integral_scalar_value N, typename Z, typename R>
-  auto bessel_jy(N nn, Z z, R& cjv, R& cyv) noexcept
+  auto cb_jyn(N nn, Z z, R& cjv, R& cyv) noexcept
   requires(concepts::complex<Z> || eve::floating_ordered_value<Z>)
   {
-    using e_t = as_real_type_t<Z>;
-    using u_t = eve::underlying_type_t<e_t>;
-    auto n = u_t(eve::abs(nn));
+    EVE_ASSERT(size(js) > n, "not enough room in js");
+    EVE_ASSERT(size(ys) > n, "not enough room in ys");
+    using u_t = eve::underlying_type_t<Z>;
+    auto n = eve::abs(nn);
     cjv[0] = cyl_bessel_j0(z);
     cyv[0] = cyl_bessel_y0(z);
     if ( is_eqz(nn) )
@@ -369,7 +370,7 @@ namespace kyosu::_
         auto cf2 = Z(0);
         auto cf1 = complex(eve::sqrtsmallestposval(eve::as< u_t>()));
         Z cf(cf2);
-        auto k = m;
+        int k = m;
         auto kgez = eve::is_gez(k);
         while (eve::any(kgez))
         {
@@ -433,8 +434,10 @@ namespace kyosu::_
       auto y = forwardy(z1);
       if (nn < 0)
       {
-        for(int i=3; i <= n; i+= 2) cjv[i] *= -1; //retablish sign for odd indices
-        for(int i=3; i <= n; i+= 2) cyv[i] *= -1; //retablish sign for odd indices
+        for(int i=3; i <= n; i+= 2){
+          cjv[i] *= -1; //retablish sign for odd indices
+          cyv[i] *= -1; //retablish sign for odd indices
+        }
         r = cjv[n];
         y = cyv[n];
       }
@@ -448,7 +451,7 @@ namespace kyosu::_
   template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_jyn>, N n, Z z, R& js, R& ys) noexcept
   {
-    return bessel_jy(n, z, js, ys);
+    return cb_jyn(n, z, js, ys);
   }
 
 }

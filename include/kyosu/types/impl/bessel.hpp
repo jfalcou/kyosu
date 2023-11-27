@@ -46,6 +46,7 @@
 #include <kyosu/types/impl/detail/bessel_k.hpp>
 #include <kyosu/types/impl/detail/bessel_jy.hpp>
 // bessels of floating (real) order
+#include <kyosu/types/impl/detail/bessel_jyr.hpp>
 #include <kyosu/types/impl/detail/bessel_jr.hpp>
 #include <kyosu/types/impl/detail/bessel_yr.hpp>
 
