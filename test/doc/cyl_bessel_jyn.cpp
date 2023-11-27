@@ -11,7 +11,7 @@ int main()
 //  using wz_t = kyosu::complex_t<w_t>;
   std::cout.precision(16);
   std::cout << std::scientific << std::endl;
-  int n = -5;
+  int n = 5;
   int sn = eve::sign(n);
   int nn = abs(n);
 //   std::vector<wz_t> js(n+1), ys(n+1);
@@ -20,7 +20,8 @@ int main()
 //   auto i = w_t{1.0e-50, 3.0};
 //  auto z = kyosu::complex(r, i);
 //  auto z = kyosu::complex(1.0e-50, 1.0e-50);
-  auto z = kyosu::complex(-2.0, 3.0);
+//  auto z = kyosu::complex(-2.0, 3.0);
+     auto z = eve::eps(eve::as<double>());
 //  auto z = 2.0;
   auto [jn, yn] =  cyl_bessel_jyn(n, z, js, ys);
   std::cout << "jn = " << jn << std::endl;

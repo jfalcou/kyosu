@@ -55,7 +55,7 @@ namespace kyosu::_
     auto ejn = minus_log10_cyl_j_at_infinity(n, az);
     auto t = ejn <= hmp;
     auto obj = eve::if_else(t, sd, hmp+ejn);
-    auto n0  = eve::if_else(t, eve::ceil(u_t(1.1)*az), n);
+    auto n0  = eve::if_else(t, eve::ceil(u_t(1.1)*az), u_t(n));
     auto f0 = minus_log10_cyl_j_at_infinity(n0, az) - obj;
     auto n1 = n0 + 5;
     auto f1 = minus_log10_cyl_j_at_infinity(n1, az) - obj;

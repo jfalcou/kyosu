@@ -22,11 +22,11 @@ namespace kyosu::_
     if constexpr(concepts::complex<Z> )
     {
       auto doit = [nu, z](auto js, auto ys){
-        auto [j, y] = cb_jy(eve::abs(nu), z, js, ys);
+        auto [j, y] = cb_jyr(eve::abs(nu), z, js, ys);
         return kumi::tuple{j, y};
       };
       auto [j, y] = with_alloca<Z>(int(nu)+1, doit);
-      
+
       if(eve::is_ltz(nu))
       {
         if (eve::is_flint(nu))
