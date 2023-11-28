@@ -21,24 +21,26 @@ auto f = [](auto n, auto z){
 
 int main()
 {
-  double n = 0.2;
-  auto z = kyosu::complex(1.0e-110, 1.0e-110);
-  f(n, z);
-  n = 0.2;
-  z = kyosu::complex(2.0, 3.0);
-  f(n, z);
-  n = 0.2;
-  z = kyosu::complex(-2.0, 3.0);
-  f(n, z);
-  n = 0.2;
-  z = kyosu::complex(20.0, 3.0);
-  f(n, z);
-  n = 0.2;
-  z = kyosu::complex(-20.0, 3.0);
-  f(n, z);
-  using w_t = eve::wide<double, eve::fixed<4>>;
-  auto wz = kyosu::complex(w_t(2.0, -2.0, 20.0, -20.0), w_t(3.0));
-  f(n, wz);
+//   double n = 0.2;
+//   auto z = kyosu::complex(1.0e-110, 1.0e-110);
+//   f(n, z);
+  {
+    double n = 0.2;
+    auto z = kyosu::complex(2.0, 3.0);
+    f(n, z);
+  }
+//   n = 0.2;
+//   z = kyosu::complex(-2.0, 3.0);
+//   f(n, z);
+//   n = 0.2;
+//   z = kyosu::complex(20.0, 3.0);
+//   f(n, z);
+//   n = 0.2;
+//   z = kyosu::complex(-20.0, 3.0);
+//   f(n, z);
+//   using w_t = eve::wide<double, eve::fixed<4>>;
+//   auto wz = kyosu::complex(w_t(2.0, -2.0, 20.0, -20.0), w_t(3.0));
+//   f(n, wz);
 
 //   n = 1.2;
 //   std::cout << "n " << n << " z " << z  << " -> " << cyl_bessel_jnu(n, z)<< "\n";
