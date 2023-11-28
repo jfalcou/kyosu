@@ -39,8 +39,8 @@ namespace kyosu::_
     auto z1 = if_else(isltzrz, -z, z);
     auto z2 = sqr(z);
 
-    const auto cone  = eve::one(as<Z>());
-    const auto cnan  = eve::nan(as<Z>());
+    const Z cone  = eve::one(as<Z>());
+    const Z cnan  = eve::nan(as<Z>());
 
     Z cjv0(cnan), cjv1(cnan), cyv0(cnan), cyv1(cnan);
 
@@ -136,7 +136,7 @@ namespace kyosu::_
         last_interval(br_gt12, notdone, r);
       }
     }
-    kumi::tie(cjv0, cjv1, cyv0, cyv1) = r;
+    kumi::tie(cjv0, cyv0, cjv1, cyv1) = r;
 
     if( eve::any(isltzrz) ) //treating real(z) < 0
     {
@@ -151,5 +151,4 @@ namespace kyosu::_
     }
     return kumi::tuple{cjv0, cyv0, cjv1, cyv1};
   }
-
 }
