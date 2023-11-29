@@ -18,7 +18,6 @@ namespace kyosu::_
   // cyl_bessel_j1
   // cyl_bessel_y0
   // cyl_bessel_y1
-  // cyl_bessel_jyn
   /////////////////////////////////
   // utilities
   // mkjs
@@ -26,7 +25,6 @@ namespace kyosu::_
   // cb_j1
   // cb_y0
   // cb_y1
-  // cbjyn
   ////////////////////////////////
 
 
@@ -283,9 +281,6 @@ namespace kyosu::_
   template<typename Z> KYOSU_FORCEINLINE
   auto cb_y0(Z z) noexcept
   {
-//      auto isltiz = eve::is_ltz(imag(z));
-//      std::cout << isltiz << std::endl;
-//     z = if_else(isltrz, -z, z);
     using u_t   =  eve::underlying_type_t<Z>;
     auto twoopi = eve::two_o_pi(eve::as<u_t>());
     auto egamma = eve::egamma(eve::as<u_t>());
@@ -303,8 +298,6 @@ namespace kyosu::_
       s+= sk;
     }
     return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), twoopi*((log(z/2)+egamma)*jj()-2*s));
-//    return r;
-//    return if_else(isltrz, -r, r);
   }
 
 
@@ -320,227 +313,6 @@ namespace kyosu::_
     auto y0 = cyl_bessel_y0(z);
     auto recs1 = rec(r1)-twoopi/(z*cyl_bessel_j0(z)*y0);
     return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), y0*recs1);
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cb_jn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
-  Z cb_jn(N nn, Z z)
-  {
-    if ( is_eqz(nn) )
-    {
-      return cb_j0(z);
-    }
-    else if (nn == 1)
-    {
-      return cb_j1(z);
-    }
-    else if ( nn == -1 )
-    {
-      return -cb_j1(z);
-    }
-    else
-    {
-      using e_t = as_real_type_t<Z>;
-      using u_t = eve::underlying_type_t<e_t>;
-      auto n = u_t(eve::abs(nn));
-      auto az = kyosu::abs(z);
-      auto j0 = cb_j0(z);
-      auto j1 = cb_j1(z);
-
-      auto forward = [n, j0, j1](auto z){
-         auto b0 = j0;
-         auto b1 = j1;
-        Z bn;
-        auto rz = rec(z);
-        for ( int k=1; k<n; ++k)
-        {
-          bn = 2*k*b1*rz-b0;
-          b0 = b1;
-          b1 = bn;
-        }
-        real(bn) = eve::if_else(is_pure(z), eve::zero, real(bn));
-        return bn;
-      };
-
-      auto backward = [az, n, j0, j1](auto z){
-        auto m1 = ini_for_br_1(az, e_t(200));
-        auto m2 = ini_for_br_2(n, az, e_t(15));
-        auto m = eve::if_else( m1 >= n && eve::is_not_nan(m2), m2, m1);
-        auto cf2 = Z(0);
-        auto cf1 = complex(eve::sqrtsmallestposval(eve::as< e_t>()));
-        Z cf(cf2);
-        Z bn(cf);
-        auto k = m;
-        auto kgez = eve::is_gez(k);
-        while (eve::any(kgez))
-        {
-          cf  = kyosu::if_else(kgez,  2*inc(k)*cf1*rec(z)-cf2, cf);
-          bn  = kyosu::if_else ( k == n, cf, bn);
-          cf2 = kyosu::if_else(kgez, cf1, cf2);
-          cf1 = kyosu::if_else(kgez, cf, cf1);
-          k = dec(k);
-          kgez = eve::is_gez(k);
-        }
-//         auto j0 = cyl_bessel_j0(z);
-//         auto j1 = cyl_bessel_j1(z);
-        bn *= eve::if_else ( sqr_abs(j0) > sqr_abs(j1), j0/cf, j1/cf2);
-
-        return bn;
-      };
-
-      auto srz = eve::signnz(real(z));
-      z *= srz;
-
-      auto r = kyosu::if_else(is_eqz(az), Z(0), eve::nan(eve::as(az)));
-      auto notdone = kyosu::is_nan(r);
-      if( eve::any(notdone) )
-      {
-        notdone = next_interval(forward, notdone, 4*n < az, r, z);
-        if( eve::any(notdone) )
-        {
-          last_interval(backward, notdone, r, z);
-        }
-      }
-      auto sgnaltern = [n](auto x){return eve::if_else(eve::is_ltz(x), eve::one, eve::sign_alternate(n));};
-      r = sgnaltern(srz)*sgnaltern(n)*r;
-      return nn < 0 ? r*eve::sign_alternate(u_t(nn)) : r;
-    }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cb_jyn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto cb_jyn(N nn, Z z, R& cjv, R& cyv) noexcept
-  requires(concepts::complex<Z> || eve::floating_ordered_value<Z>)
-  {
-    EVE_ASSERT(size(js) > n, "not enough room in js");
-    EVE_ASSERT(size(ys) > n, "not enough room in ys");
-    using u_t = eve::underlying_type_t<Z>;
-    auto n = eve::abs(nn);
-    cjv[0] = cyl_bessel_j0(z);
-    cyv[0] = cyl_bessel_y0(z);
-    if ( is_eqz(nn) )
-    {
-      return kumi::tuple{cjv[0], cyv[0]};
-    }
-    cjv[1] = cyl_bessel_j1(z);
-    cyv[1] = cyl_bessel_y1(z);
-    if (nn == 1)
-    {
-      return kumi::tuple{cjv[1], cyv[1]};
-    }
-    else if (nn == -1)
-    {
-      cjv[1] = -cjv[1];
-      cyv[1] = -cyv[1];
-      return kumi::tuple{cjv[1], cyv[1]};
-    }
-    else
-    {
-     auto az = kyosu::abs(z);
-      auto rz = rec(z);
-
-      auto forwardj = [n, rz, &cjv](auto z){
-        auto b0 = cjv[0];
-        auto b1 = cjv[1];
-        Z bn;
-        for ( int k=1; k<n; ++k)
-        {
-          bn = 2*k*b1*rz-b0;
-          cjv[k+1] = bn;
-          b0 = b1;
-          b1 = bn;
-        }
-        auto purez = is_pure(z);
-        if (eve::any(purez))
-        {
-          for ( int k=2; k<= n; ++k) real(cjv[k]) = eve::if_else(purez, eve::zero, real(cjv[k]));
-        }
-        return cjv[n];
-      };
-
-      auto backwardj = [az, nn, n, &cjv](auto z){
-        auto m1 = eve::maximum(ini_for_br_1(az, u_t(200)));
-        auto m2 = eve::maximum(ini_for_br_2(n, az, u_t(15)));
-        auto m = eve::if_else( m1 >= n && eve::is_not_nan(m2), m2, m1);
-        auto cf2 = Z(0);
-        auto cf1 = complex(eve::sqrtsmallestposval(eve::as<Z>()));
-        Z cf(cf2);
-        int k = m;
-        auto kgez = eve::is_gez(k);
-        while (eve::any(kgez))
-        {
-          cf  = kyosu::if_else(kgez,  2*inc(k)*cf1*rec(z)-cf2, cf);
-          if(k <= n && k > 1) cjv[k] = cf;
-          cf2 = kyosu::if_else(kgez, cf1, cf2);
-          cf1 = kyosu::if_else(kgez, cf, cf1);
-          k = dec(k);
-          kgez = eve::is_gez(k);
-        }
-        auto j0 = cjv[0];
-        auto j1 = cjv[1];;
-        auto fac = if_else ( sqr_abs(j0) > sqr_abs(j1), j0/cf, j1/cf2);
-
-        for(int k=2; k <= n; ++k)
-        {
-          cjv[k] *= fac;
-          cjv[k] = nn < 0 ? cjv[k]*eve::sign_alternate(u_t(n)) : cjv[k];
-          cjv[k] = if_else(eve::is_ltz(real(z)) && eve::is_odd(k), -cjv[k], cjv[k]);
-        }
-        return cjv[n];
-      };
-
-      auto forwardy = [az, n, nn, &cjv, &cyv](auto z){
-        using u_t   =  eve::underlying_type_t<Z>;
-        auto y = cyv[0];
-        if (nn != 0)
-        {
-          int n = eve::abs(nn);
-          using u_t   =  eve::underlying_type_t<Z>;
-          auto twoopi = eve::two_o_pi(eve::as<u_t>());
-          auto b = twoopi*rec(z);
-          for(int i=1; i <= n ; ++i)
-          {
-            y = fms(cjv[i], y, b)/cjv[i-1];
-            auto r = if_else(eve::is_gtz(real(z)) && is_real(z) && is_nan(y), complex(real(y)), y);
-            r = if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), r);
-            r = nn < 0 ? r*eve::sign_alternate(u_t(n)) : r;
-            cyv[i] = r;
-          }
-          return cyv[n];
-        }
-        else return y;
-      };
-      auto z1 = z;
-      auto srz = eve::signnz(real(z));
-      z *= srz; //real(z) is now positive
-
-      auto r = kyosu::if_else(is_eqz(az), Z(0), eve::nan(eve::as(az)));
-      auto notdone = kyosu::is_nan(r);
-      if( eve::any(notdone) )
-      {
-        notdone = next_interval(forwardj, notdone, 4*n < az, r, z);
-        if( eve::any(notdone) )
-        {
-          last_interval(backwardj, notdone, r, z);
-        }
-      }
-      for(int i=3; i <= n; i+= 2) cjv[i] *= srz; //retablish sign for odd indices
-      auto y = forwardy(z1);
-      if (nn < 0)
-      {
-        for(int i=3; i <= n; i+= 2){
-          cjv[i] *= -1; //retablish sign for odd indices
-          cyv[i] *= -1; //retablish sign for odd indices
-        }
-        r = cjv[n];
-        y = cyv[n];
-      }
-      return kumi::tuple{r, y};
-    }
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -605,59 +377,5 @@ namespace kyosu::_
     {
       return cayley_extend(cyl_bessel_y1, z);
     }
-  }
-
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_jn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_jn>, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto doit = [n, z](auto js, auto ys){
-        auto [j, _] = cb_jyn(eve::abs(n), z, js, ys);
-        return kumi::tuple{j, _};
-      };
-      auto [j, _] = with_alloca<Z>(eve::abs(n)+1, doit);
-      return j;
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_jn, n, z);
-    }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_yn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_yn>, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto doit =  [n, z](auto js,  auto ys)
-      {
-        auto [_, y] = cb_jyn(eve::abs(n), z, js, ys);
-        return kumi::tuple{_, y};
-      };
-      auto [_, y] = with_alloca<Z>(eve::abs(n)+1, doit);
-      return y;
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_yn, n, z);
-    }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_jyn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_jyn>, N n, Z z, R& js, R& ys) noexcept
-  requires(concepts::complex<Z>)
-  {
-    return cb_jyn(n, z, js, ys);
   }
 }
