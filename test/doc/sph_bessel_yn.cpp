@@ -32,7 +32,7 @@ int main()
   std::cout << z0 << " \n-> " << cyl_bessel_yn(n,z0) << "\n";
 
 
-  for(int i=75; i < 100; ++i)
+  for(int i=0; i <= 10; ++i)
     std::cout << "i " << i << " -> " << kyosu::sph_bessel_yn(i,kyosu::complex(1.0, 1.0)) << "\n";
 
 

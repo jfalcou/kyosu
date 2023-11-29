@@ -186,9 +186,9 @@
 // #include <kyosu/functions/sph_bessel_i2_1.hpp>
 // #include <kyosu/functions/sph_bessel_i2n.hpp>
 
-// #include <kyosu/functions/sph_bessel_j0.hpp>
-// #include <kyosu/functions/sph_bessel_j1.hpp>
-// #include <kyosu/functions/sph_bessel_jn.hpp>
+#include <kyosu/functions/sph_bessel_j0.hpp>
+#include <kyosu/functions/sph_bessel_j1.hpp>
+#include <kyosu/functions/sph_bessel_jn.hpp>
 
 // #include <kyosu/functions/sph_bessel_h1_0.hpp>
 // #include <kyosu/functions/sph_bessel_h1_1.hpp>
@@ -198,9 +198,9 @@
 // #include <kyosu/functions/sph_bessel_h2_1.hpp>
 // #include <kyosu/functions/sph_bessel_h2n.hpp>
 
-// #include <kyosu/functions/sph_bessel_y0.hpp>
-// #include <kyosu/functions/sph_bessel_y1.hpp>
-// #include <kyosu/functions/sph_bessel_yn.hpp>
+#include <kyosu/functions/sph_bessel_y0.hpp>
+#include <kyosu/functions/sph_bessel_y1.hpp>
+#include <kyosu/functions/sph_bessel_yn.hpp>
 
 // #include <kyosu/functions/sph_bessel_k0.hpp>
 // #include <kyosu/functions/sph_bessel_k1.hpp>
