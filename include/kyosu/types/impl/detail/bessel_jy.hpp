@@ -446,7 +446,7 @@ namespace kyosu::_
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_jy
+  //  cyl_bessel_jyn
   //===-------------------------------------------------------------------------------------------
   template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_jyn>, N n, Z z, R& js, R& ys) noexcept

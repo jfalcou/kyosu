@@ -18,15 +18,15 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(cyl_bessel_jy_);
 
-    template<eve::floating_scalar_value N, eve::floating_ordered_value T>
+    template<eve::floating_scalar_value N, eve::floating_ordered_value T, typename R>
     static KYOSU_FORCEINLINE auto deferred_call(auto, N nu, T const& v, R& js, R& ys) noexcept
-    requires(concepts::complex<decltype(js[0]) && concepts::complex<decltype(ys[0]))
+    requires(concepts::complex<decltype(js[0])> && concepts::complex<decltype(ys[0])>)
     {
       auto fnu = callable_cyl_bessel_jy{};
       return fnu(nu, complex(v), js, ys);
     }
 
-    template<typename N, typename T>
+    template<typename N, typename T, typename R>
     KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1, R& output1, R& output2) const noexcept
     -> decltype(eve::tag_invoke(*this, target0, target1, output1, output2))
     {
@@ -93,5 +93,5 @@ namespace kyosu
 //!  @godbolt{doc/cyl_bessel_jyr.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_cyl_bessel_jyr cyl_bessel_jyr = {};
+inline constexpr tags::callable_cyl_bessel_jy cyl_bessel_jy = {};
 }
