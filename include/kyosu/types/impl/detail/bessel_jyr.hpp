@@ -7,6 +7,7 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/types/impl/detail/bessel_utils2.hpp>
+#include <kyosu/types/impl/detail/bessel_jy.hpp>
 #include <kyosu/types/impl/detail/bessel_jyr01.hpp>
 #include <kyosu/details/with_alloca.hpp>
 #include <vector>
@@ -14,7 +15,7 @@
 namespace kyosu::_
 {
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_jyr
+  //  cb_jyr
   //===-------------------------------------------------------------------------------------------
   // here nu is always > 0 and z is at most complex
   template<eve::floating_scalar_value N, typename Z, typename R>
@@ -115,4 +116,17 @@ namespace kyosu::_
       return kumi::tuple{cjv[n], cyv[n]};
     }
   }
+
+  //===-------------------------------------------------------------------------------------------
+  //  cyl_bessel_jy
+  //===-------------------------------------------------------------------------------------------
+  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_jy>, N v, Z z, R& js, R& ys) noexcept
+  {
+    if (is_flint(v))
+      return cb_jyn(int(v), z, js, ys);
+    else
+      return cb_jyr(v, z, js, ys);
+  }
+
 }

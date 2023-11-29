@@ -39,16 +39,19 @@
 #include <kyosu/types/impl/detail/bessel_utils.hpp>
 
 // bessels of integral order
-#include <kyosu/types/impl/detail/bessel_j.hpp>
-#include <kyosu/types/impl/detail/bessel_i.hpp>
-#include <kyosu/types/impl/detail/bessel_y.hpp>
-#include <kyosu/types/impl/detail/bessel_h.hpp>
-#include <kyosu/types/impl/detail/bessel_k.hpp>
-#include <kyosu/types/impl/detail/bessel_jy.hpp>
-// bessels of floating (real) order
-#include <kyosu/types/impl/detail/bessel_jyr.hpp>
-#include <kyosu/types/impl/detail/bessel_jr.hpp>
-#include <kyosu/types/impl/detail/bessel_yr.hpp>
+#include <kyosu/types/impl/bessel/cb_jyn.hpp>
+
+
+// #include <kyosu/types/impl/detail/bessel_j.hpp>
+// #include <kyosu/types/impl/detail/bessel_i.hpp>
+// #include <kyosu/types/impl/detail/bessel_y.hpp>
+// #include <kyosu/types/impl/detail/bessel_h.hpp>
+// #include <kyosu/types/impl/detail/bessel_k.hpp>
+// #include <kyosu/types/impl/detail/bessel_jy.hpp>
+// // bessels of floating (real) order
+// #include <kyosu/types/impl/detail/bessel_jyr.hpp>
+// #include <kyosu/types/impl/detail/bessel_jr.hpp>
+// #include <kyosu/types/impl/detail/bessel_yr.hpp>
 
 //================================================================================
 // MIT License
