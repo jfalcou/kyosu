@@ -77,7 +77,7 @@ namespace kyosu::_
         //  Functions'.
         // good for abs(z) < 12
         auto eps2 = eve::sqr(eve::eps(eve::as<e_t>()));
-        auto j0 = complex(eve::one((eve::as<e_t>())));
+        auto j0 = eve::one((eve::as<Z>()));
         auto sm = j0;
         auto test = sqr_abs(sm) >= eps2*sqr_abs(j0);
         auto  m(eve::one(eve::as<e_t>()));
@@ -117,7 +117,7 @@ namespace kyosu::_
           };
       auto rz = rec(z);
       auto rz2= sqr(rz);
-      auto Pm = complex(e_t(pim[0]));
+      auto Pm = Z(pim[0]);
       auto Qm = rz*xim[0];
       auto P = Pm;
       auto Q = Qm;
