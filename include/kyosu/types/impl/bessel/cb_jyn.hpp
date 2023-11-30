@@ -146,8 +146,6 @@ namespace kyosu::_
       auto r = rsqrtpi*(c*(P-Q) + s*(P+Q))/(kyosu::sqrt(z));
       return r;
     };
-    auto izneg = eve::is_ltz(imag(z));
-    z = if_else(izneg, conj(z), z);
     auto rzneg = eve::is_ltz(real(z));
     z = if_else(rzneg, -z, z);
 
@@ -163,7 +161,6 @@ namespace kyosu::_
       }
     }
     imag(r) = eve::if_else(is_real(z), eve::zero, imag(r));
-    r = if_else(izneg, conj(r), r);
     return r;
   }
 
@@ -256,8 +253,6 @@ namespace kyosu::_
         return r;
       };
 
-    auto izneg = eve::is_ltz(imag(z));
-    z = if_else(izneg, conj(z), z);
     auto rzneg = eve::is_ltz(real(z));
     z = if_else(rzneg, -z, z);
 
@@ -274,7 +269,7 @@ namespace kyosu::_
     }
     real(r) = eve::if_else(is_pure(z), eve::zero, real(r));
     r = if_else(rzneg, -r, r);
-    return  if_else(izneg, conj(r), r);
+    return r;
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -283,16 +278,15 @@ namespace kyosu::_
   template<typename Z> KYOSU_FORCEINLINE
   auto cb_y0(Z z) noexcept
   {
-//      auto isltiz = eve::is_ltz(imag(z));
-//      std::cout << isltiz << std::endl;
-//     z = if_else(isltrz, -z, z);
+    auto rzlt0 = eve::is_ltz(real(z));
+    auto izgt0 = eve::is_gtz(imag(z));
+    z = if_else(rzlt0, -z, z);
     using u_t   =  eve::underlying_type_t<Z>;
     auto twoopi = eve::two_o_pi(eve::as<u_t>());
     auto egamma = eve::egamma(eve::as<u_t>());
     auto eps    = eve::eps(eve::as<u_t>());
     auto bd = bound(z);
     Z s{};
-    std::cout << 2*bd-2 << std::endl;
     mkjs jj(2*bd-2, z);
     auto sgn =  eve::sign_alternate(u_t(bd+1));
     for (int k = bd-1; k >= 1; --k)
@@ -302,7 +296,18 @@ namespace kyosu::_
       sgn = -sgn;
       s+= sk;
     }
-    return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), twoopi*((log(z/2)+egamma)*jj()-2*s));
+    auto r = if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), twoopi*((log(z/2)+egamma)*jj()-2*s));
+    if (eve::any(rzlt0))
+    {
+//       std::cout << "icitte" << std::endl;
+      auto sgn1 = eve::if_else(izgt0, u_t(1), u_t(-1));
+//       std::cout << "sgn1 " << sgn1 << std::endl;
+//       std::cout << "r " << r << std::endl;
+//       std::cout << "(r+2*muli(sgn1*cb_j0(z))) " << (r+2*muli(sgn1*cb_j0(z)))<< std::endl;
+//       std::cout << "(r-2*muli(sgn1*cb_j0(z))) " << (r-2*muli(sgn1*cb_j0(z)))<< std::endl;
+      r = if_else(rzlt0, (r+2*muli(sgn1*cb_j0(z))), r);
+    }
+      return r;
 //    return r;
 //    return if_else(isltrz, -r, r);
   }
