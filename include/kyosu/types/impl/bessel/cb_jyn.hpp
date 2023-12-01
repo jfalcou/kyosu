@@ -16,8 +16,10 @@ namespace kyosu::_
   // contains implementations of
   // cyl_bessel_j0
   // cyl_bessel_j1
+  // cyl_bessel_jn
   // cyl_bessel_y0
   // cyl_bessel_y1
+  // cyl_bessel_yn
   // cyl_bessel_jyn
   /////////////////////////////////
   // utilities
@@ -28,7 +30,11 @@ namespace kyosu::_
   // cb_y1
   // cbjyn
   ////////////////////////////////
-
+  // no heap allocation is done by these functions
+  // cyl_bessel_jyn computes all  j_i(z) and y_i(z) for 0 <= i <= n if n >= 0 (resp n <= i <= 0 if n <= 0)
+  // and put the result in two ranges that are to be allocated by the caller.
+  // call to cyl_bessel_jn and cyl_bessel_yn that need calling cyl_bessel_jyn do an internal quick allocaton
+  // on the stack using __builtin_alloca_with_align.
 
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
@@ -414,8 +420,8 @@ namespace kyosu::_
   auto cb_jyn(N nn, Z z, R& cjv, R& cyv) noexcept
   requires(concepts::complex<Z> || eve::floating_ordered_value<Z>)
   {
-    EVE_ASSERT(size(js) > n, "not enough room in js");
-    EVE_ASSERT(size(ys) > n, "not enough room in ys");
+    EVE_ASSERT(size(js) > n, "not room enough in js");
+    EVE_ASSERT(size(ys) > n, "not room enough in ys");
     using u_t = eve::underlying_type_t<Z>;
     auto n = eve::abs(nn);
     if (n <= 1)
@@ -442,12 +448,14 @@ namespace kyosu::_
     else
     {
       auto az = kyosu::abs(z);
-      auto rzlt0 = eve::is_ltz(real(z));
+      auto rzle0 = eve::is_lez(real(z));
       auto izgt0 = eve::is_gtz(imag(z));
-      z = if_else(rzlt0, -z, z);//real(z) is now positive
+      z = if_else(rzle0, -z, z);//real(z) is now positive
       auto rz = rec(z);
       cjv[0] = cyl_bessel_j0(z);
       cjv[1] = cyl_bessel_j1(z);
+      cyv[0] = cyl_bessel_y0(z);
+      cyv[1] = cyl_bessel_y1(z);
 
       auto forwardj = [n, rz, &cjv](auto z){
         auto bkm2 = cjv[0];
@@ -460,13 +468,6 @@ namespace kyosu::_
           bkm1 = bk;
           cjv[k] = bk;
         }
-//         for ( int k=1; k<n; ++k)
-//         {
-//           bn = 2*k*b1*rz-b0;
-//           cjv[k+1] = bn;
-//           b0 = b1;
-//           b1 = bn;
-//         }
         auto purez = is_pure(z);
         if (eve::any(purez))
         {
@@ -501,7 +502,7 @@ namespace kyosu::_
         return cjv[n];
       };
 
-      auto forwardy = [az, n, nn, &cjv, &cyv](auto z){
+      auto forwardy = [rz, az, n, nn, &cjv, &cyv](auto z){
         using u_t   =  eve::underlying_type_t<Z>;
         auto y = cyv[0];
         if (nn != 0)
@@ -509,24 +510,19 @@ namespace kyosu::_
           int n = eve::abs(nn);
           using u_t   =  eve::underlying_type_t<Z>;
           auto twoopi = eve::two_o_pi(eve::as<u_t>());
-          auto b = twoopi*rec(z);
+          auto b = twoopi*rz;
           for(int i=1; i <= n ; ++i)
           {
             y = fms(cjv[i], y, b)/cjv[i-1];
-            auto r = if_else(eve::is_gtz(real(z)) && is_real(z) && is_nan(y), complex(real(y)), y);
-            r = if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), r);
-            r = nn < 0 ? r*eve::sign_alternate(u_t(n)) : r;
+            auto r = if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), y); //r);
             cyv[i] = r;
           }
           return cyv[n];
         }
         else return y;
       };
-//       auto z1 = z;
-//       auto srz = eve::signnz(real(z));
-//       z *= srz; //real(z) is now positive
 
-
+      // compute j2...jn for real(z) > 0
       auto r = kyosu::if_else(is_eqz(az), Z(0), eve::nan(eve::as(az)));
       auto notdone = kyosu::is_nan(r);
       if( eve::any(notdone) )
@@ -537,18 +533,38 @@ namespace kyosu::_
           last_interval(backwardj, notdone, r, z);
         }
       }
-      for(int i=1; i <= n; i+= 2) cjv[i] = if_else(rzlt0, -cjv[i], cjv[i]); //retablish sign for jn odd indices
-      auto azne0 = is_nez(az);
-      for(int i=1; i <= n; ++i  ) cjv[i] = if_else(azne0, cjv[i], eve::zero);
+
+      // compute y2...yn for real(z) > 0
       auto y = forwardy(z);
-      if (nn < 0)
+
+      if (eve::any(rzle0))
+      {
+        // correct ys for real(z) < 0
+        auto sgn0 = u_t(1);
+        auto sgn1 = eve::if_else(izgt0, u_t(1), u_t(-1));
+        for(int i=2; i <= n; ++i  )
+        {
+          cyv[i] = if_else(rzle0, sgn0*(cyv[i]+2*muli(sgn1*cjv[i])), cyv[i]);
+          sgn0 = -sgn0;
+        }
+
+
+        // correct js for real(z) < 0
+        for(int i=1; i <= n; i+= 2) cjv[i] = if_else(rzle0, -cjv[i], cjv[i]); //retablish sign for jn odd indices
+
+        auto azne0 = is_nez(az);
+        for(int i=1; i <= n; ++i  ){
+          cjv[i] = if_else(azne0, cjv[i], eve::zero);
+          cyv[i] = if_else(azne0, cyv[i], eve::minf(as<Z>()));
+        }
+      }
+
+      if (nn < 0) //retablish sign for odd indices and negative order
       {
         for(int i=3; i <= n; i+= 2){
-          cjv[i] *= -1; //retablish sign for odd indices
-          cyv[i] *= -1; //retablish sign for odd indices
+          cjv[i] *= -1;
+          cyv[i] *= -1;
         }
-//         r = cjv[n];
-//         y = cyv[n];
       }
       return kumi::tuple{cjv[n], cyv[n]};
     }
@@ -617,7 +633,6 @@ namespace kyosu::_
       return cayley_extend(cyl_bessel_y1, z);
     }
   }
-
 
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_jn

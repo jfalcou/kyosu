@@ -61,7 +61,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
     TTS_IEEE_EQUAL(jnc, kyosu::conj(cyl_bessel_jn(i, cb)));
     TTS_EXPECT(eve::all(kyosu::is_real(cr)));
     TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
-    TTS_IEEE_EQUAL(cyl_bessel_jn(i, zer), i ? zer : one);
+    TTS_IEEE_EQUAL(cyl_bessel_jn(i, zer), i ? zer : one) << "i " << i << '\n';
     TTS_IEEE_EQUAL(jnc, eve::sign_alternate(u_t(i))*cyl_bessel_jn(-i, c)) << i << '\n';
   }
 };
