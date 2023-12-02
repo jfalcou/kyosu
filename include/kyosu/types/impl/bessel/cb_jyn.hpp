@@ -542,7 +542,7 @@ namespace kyosu::_
         // correct ys for real(z) < 0
         auto sgn0 = u_t(1);
         auto sgn1 = eve::if_else(izgt0, u_t(1), u_t(-1));
-        for(int i=2; i <= n; ++i  )
+        for(int i=0; i <= n; ++i  )
         {
           cyv[i] = if_else(rzle0, sgn0*(cyv[i]+2*muli(sgn1*cjv[i])), cyv[i]);
           sgn0 = -sgn0;
