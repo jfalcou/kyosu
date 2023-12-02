@@ -20,7 +20,6 @@ namespace kyosu::tags
 
     template<eve::integral_scalar_value N, eve::floating_ordered_value T, typename R>
     static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v, R& js, R& ys) noexcept
-    //    requires(concepts::complex<decltype(js[0])> && concepts::complex<decltype(ys[0])>)
     {
       auto fn = callable_cyl_bessel_h12n{};
       return fn(n, complex(v), js, ys);
