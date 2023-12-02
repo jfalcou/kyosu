@@ -6,8 +6,6 @@
 */
 //======================================================================================================================
 #pragma once
-#include <eve/module/math.hpp>
-#include <kyosu/types/impl/detail/bessel_utils2.hpp>
 #include <kyosu/details/with_alloca.hpp>
 
 namespace kyosu::_
@@ -25,7 +23,7 @@ namespace kyosu::_
   // utilities
   // cb_h12n
   /////////////////////////////////
-  // implementation is done from j and y functions
+  // implementation is done using j and y functions
 
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_h1_0
@@ -97,12 +95,14 @@ namespace kyosu::_
   template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
   auto cb_h12n(N n, Z z, R & h1s, R& h2s) noexcept
   {
+    cb_jyn(n, z, h1s, h2s);
     for(int i=0; i <= eve::abs(n+1); ++i)
     {
       auto miyst = muli(h2s[i]);
       h2s[i] = h1s[i]-miyst;
       h1s[i] += miyst;
     }
+    return kumi::tuple{h1s[n], h2s[n]};
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -137,13 +137,13 @@ namespace kyosu::_
     }
   }
 
-//   //===-------------------------------------------------------------------------------------------
-//   //  cyl_bessel_h12n
-//   //===-------------------------------------------------------------------------------------------
-//   template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R>
-//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_h12n>, N n, Z z, R& h1s, R& h2s) noexcept
-//   requires(concepts::complex<Z>)
-//   {
-//     return cb_h12n(n, z, js, ys);
-//   }
+  //===-------------------------------------------------------------------------------------------
+  //  cyl_bessel_h12n
+  //===-------------------------------------------------------------------------------------------
+  template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_h12n>, N n, Z z, R& h1s, R& h2s) noexcept
+  requires(concepts::complex<Z>)
+  {
+    return cb_h12n(n, z, h1s, h2s);
+  }
 }
