@@ -9,7 +9,7 @@
 #include <test.hpp>
 
 TTS_CASE_WITH ( "Check kyosu::cyl_bessel_y1 over real"
-              , kyosu::scalar_real_types
+              , kyosu::real_types
               , tts::generate(tts::randoms(-10,10),
                               tts::randoms(-10,10))
               )
