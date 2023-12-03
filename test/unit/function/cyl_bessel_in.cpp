@@ -61,16 +61,16 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
   auto zer =   kyosu::complex(T(0), T(0));
   auto one =   kyosu::complex(T(1), T(0));
 
-  using kyosu::cyl_bessel_jn;
+  using kyosu::cyl_bessel_in;
 
   for(int i=0; i < 10 ; ++i)
   {
-    auto jnc = cyl_bessel_jn(i, c);
-    TTS_IEEE_EQUAL(jnc, eve::sign_alternate(u_t(i))*cyl_bessel_jn(i, cm)) << "c " << c << "\n";
-    TTS_IEEE_EQUAL(jnc, kyosu::conj(cyl_bessel_jn(i, cb)));
+    auto inc = cyl_bessel_in(i, c);
+    TTS_IEEE_EQUAL(inc, eve::sign_alternate(u_t(i))*cyl_bessel_in(i, cm)) << "c " << c << "\n";
+    TTS_IEEE_EQUAL(inc, kyosu::conj(cyl_bessel_in(i, cb)));
     TTS_EXPECT(eve::all(kyosu::is_real(cr)));
     TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
-    TTS_IEEE_EQUAL(cyl_bessel_jn(i, zer), i ? zer : one) << "i " << i << '\n';
-    TTS_IEEE_EQUAL(jnc, eve::sign_alternate(u_t(i))*cyl_bessel_jn(-i, c)) << i << '\n';
+    TTS_IEEE_EQUAL(cyl_bessel_in(i, zer), i ? zer : one) << "i " << i << '\n';
+    TTS_IEEE_EQUAL(inc, cyl_bessel_in(-i, c)) << i << '\n';
   }
 };
