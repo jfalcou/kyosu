@@ -41,29 +41,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
 
-  //===-------------------------------------------------------------------------------------------
-  //  cb_kn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
-  Z cb_kn(N nn, Z z)
-  {
-      using u_t = eve::underlying_type_t<Z>;
-      auto argz = arg(z);
-      auto n =  eve::abs(nn);
-      auto piotwo = eve::pio_2(eve::as<u_t>());
-      auto i = complex(u_t(0), u_t(1));
-      auto cpi = piotwo*i*exp_ipi(u_t(n)/2);
-      auto cmi = -piotwo*i*exp_ipi(-u_t(n)/2);
-      auto epio2 = exp_ipi(eve::half(eve::as<u_t>()));
-      auto empio2 = exp_ipi(eve::mhalf(eve::as<u_t>()));
-      auto argzlt0 = eve::is_ltz(argz);
-      auto r =  if_else(argzlt0
-                       , cpi*cyl_bessel_h1n(n, z*epio2)
-                       , cmi*cyl_bessel_h2n(n, z*empio2));
-      return if_else(is_eqz(z), complex(eve::inf(eve::as<u_t>())), r);
-  }
-
-  //===-------------------------------------------------------------------------------------------
+//===-------------------------------------------------------------------------------------------
   //  cb_i0
   //===-------------------------------------------------------------------------------------------
   template<typename Z> KYOSU_FORCEINLINE
@@ -163,32 +141,14 @@ namespace kyosu::_
   {
     using u_t = eve::underlying_type_t<Z>;
     auto nn =  eve::abs(n);
-    cb_h12n(n, z, is, ks);
 
-      for(int i=0; i < nn; ++i)
-      {
-        is[i] = (is[i], ks[i])*u_t(0.5);
-      }
-
-      for(int ii=0; ii <= nn; ++ii)
-      {
-        using u_t = eve::underlying_type_t<Z>;
-        auto argz = arg(z);
-        auto piotwo = eve::pio_2(eve::as<u_t>());
-        auto i = complex(u_t(0), u_t(1));
-        auto cpi = piotwo*i*exp_ipi(u_t(ii)/2);
-        auto cmi = -piotwo*i*exp_ipi(-u_t(ii)/2);
-        auto epio2 = exp_ipi(eve::half(eve::as<u_t>()));
-        auto empio2 = exp_ipi(eve::mhalf(eve::as<u_t>()));
-        auto argzlt0 = eve::is_ltz(argz);
-        auto r =  if_else(argzlt0
-                         , cpi*cyl_bessel_h1n(n, z*epio2)
-                         , cmi*cyl_bessel_h2n(n, z*empio2));
-        ks[ii] = if_else(is_eqz(z), complex(eve::inf(eve::as<u_t>())), r);
-      }
-      return kumi::tuple{is[n], ks[n]};
+    for(int j=0; j <= nn; ++j)
+    {
+      is[j] = cb_in(j, z); 
+      ks[j] = cb_kn(j, z);
+    }
+    return kumi::tuple{is[n], ks[n]};
   }
-
 
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_i0
@@ -262,8 +222,7 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      using u_t =  eve::underlying_type_t<Z>;
-      return exp_ipi(-u_t(n)/2)*cb_jn(n, z*exp_ipi(u_t(n))/2);
+      return cb_in(n, z);
     }
     else
     {
@@ -279,27 +238,22 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      auto doit = [n, z](auto is, auto ks){
-        auto [_, kn] = cb_jik(n, z, is, ks);
-        return kumi::tuple{_, kn};
-      };
-      auto [_, kn] = with_alloca<Z>(eve::abs(n)+1, doit);
-      return kn;
+      return cb_kn(n, z);
     }
     else
     {
-      return cayley_extend_rev(cyl_bessel_in, n, z);
+      return cayley_extend_rev(cyl_bessel_kn, n, z);
     }
   }
 
 
-//   //===-------------------------------------------------------------------------------------------
-//   //  cyl_bessel_ikn
-//   //===-------------------------------------------------------------------------------------------
-//   template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R>
-//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_ikn>, N n, Z z, R& js, R& ys) noexcept
-//   requires(concepts::complex<Z>)
-//   {
-//     return cb_ikn(n, z, js, ys);
-//   }
+  //===-------------------------------------------------------------------------------------------
+  //  cyl_bessel_ikn
+  //===-------------------------------------------------------------------------------------------
+  template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_ikn>, N n, Z z, R& js, R& ys) noexcept
+  requires(concepts::complex<Z>)
+  {
+    return cb_ikn(n, z, js, ys);
+  }
 }
