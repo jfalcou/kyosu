@@ -42,7 +42,9 @@
 #include <kyosu/types/impl/bessel/cb_jyn.hpp>
 #include <kyosu/types/impl/bessel/sb_jyn.hpp>
 #include <kyosu/types/impl/bessel/cb_hn.hpp>
+#include <kyosu/types/impl/bessel/sb_hn.hpp>
 #include <kyosu/types/impl/bessel/cb_ikn.hpp>
+#include <kyosu/types/impl/bessel/sb_ikn.hpp>
 
 
 // #include <kyosu/types/impl/detail/bessel_j.hpp>
