@@ -59,13 +59,14 @@ namespace kyosu::_
   auto sb_i2n(N n, Z z, R & sis) noexcept
   {
     using e_t = as_real_type_t<Z>;
-    auto iton = [](N n){
-      if (n%4 == 0) return complex(eve::one(eve::as<e_t>()));
-      else if (n%4 == 1) return  complex(eve::zero(eve::as<e_t>()), eve::one(eve::as<e_t>()));
-      else if (n%4 == 2) return complex(eve::mone(eve::as<e_t>()));
-      else return complex(eve::zero(eve::as<e_t>()), eve::mone(eve::as<e_t>()));
+    auto riton = [](N n){
+      n =  n & N(3);
+      if (n == 0) return complex(eve::one(eve::as<e_t>()));
+      else if (n == 1) return  complex(eve::zero(eve::as<e_t>()), eve::mone(eve::as<e_t>()));
+      else if (n == 2) return complex(eve::mone(eve::as<e_t>()));
+      else return complex(eve::zero(eve::as<e_t>()), eve::one(eve::as<e_t>()));
     };
-    return rec(iton(n +1))*sph_bessel_yn(n,muli(z), sis);
+    return riton(n+1)*sph_bessel_yn(n,muli(z), sis);
   }
 
 
