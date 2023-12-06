@@ -28,6 +28,15 @@ namespace kyosu::_
   // sb_ikn
   ////////////////////////////////
 
+  template<typename T, eve::integral_scalar_value N>
+  auto riton(N n){
+    n = n & N(3);
+    if (n == 0) return complex(eve::one(eve::as<T>()));
+    else if (n == 1) return  complex(eve::zero(eve::as<T>()), eve::mone(eve::as<T>()));
+    else if (n == 2) return complex(eve::mone(eve::as<T>()));
+    else return complex(eve::zero(eve::as<T>()), eve::one(eve::as<T>()));
+  };
+
   template<typename Z> KYOSU_FORCEINLINE
   auto sb_i1_0(Z z) noexcept
   {
@@ -46,27 +55,14 @@ namespace kyosu::_
   auto sb_i2n(N n, Z z) noexcept
   {
     using e_t = as_real_type_t<Z>;
-    auto iton = [](N n){
-      if (n%4 == 0) return complex(eve::one(eve::as<e_t>()));
-      else if (n%4 == 1) return  complex(eve::zero(eve::as<e_t>()), eve::one(eve::as<e_t>()));
-      else if (n%4 == 2) return complex(eve::mone(eve::as<e_t>()));
-      else return complex(eve::zero(eve::as<e_t>()), eve::mone(eve::as<e_t>()));
-    };
-    return rec(iton(n+1))*sph_bessel_yn(n,muli(z));
+    return riton<e_t>(n+1)*sph_bessel_yn(n,muli(z));
   }
 
   template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
   auto sb_i2n(N n, Z z, R & sis) noexcept
   {
     using e_t = as_real_type_t<Z>;
-    auto riton = [](N n){
-      n =  n & N(3);
-      if (n == 0) return complex(eve::one(eve::as<e_t>()));
-      else if (n == 1) return  complex(eve::zero(eve::as<e_t>()), eve::mone(eve::as<e_t>()));
-      else if (n == 2) return complex(eve::mone(eve::as<e_t>()));
-      else return complex(eve::zero(eve::as<e_t>()), eve::one(eve::as<e_t>()));
-    };
-    return riton(n+1)*sph_bessel_yn(n,muli(z), sis);
+    return riton<e_t>(n+1)*sph_bessel_yn(n,muli(z), sis);
   }
 
 
@@ -90,13 +86,7 @@ namespace kyosu::_
     if constexpr(concepts::complex<Z> )
     {
       using e_t = as_real_type_t<Z>;
-      auto iton = [](N n){
-        if (n%4 == 0) return complex(eve::one(eve::as<e_t>()));
-        else if (n%4 == 1) return  complex(eve::zero(eve::as<e_t>()), eve::one(eve::as<e_t>()));
-        else if (n%4 == 2) return complex(eve::mone(eve::as<e_t>()));
-        else return complex(eve::zero(eve::as<e_t>()), eve::mone(eve::as<e_t>()));
-      };
-      return rec(iton(n))*sph_bessel_jn(n,muli(z));
+      return riton<e_t>(n)*sph_bessel_jn(n,muli(z));
     }
   }
 
@@ -104,13 +94,7 @@ namespace kyosu::_
   auto sb_i1n(N n, Z z, R & sys) noexcept
   {
     using e_t = as_real_type_t<Z>;
-    auto iton = [](N n){
-      if (n%4 == 0) return complex(eve::one(eve::as<e_t>()));
-      else if (n%4 == 1) return  complex(eve::zero(eve::as<e_t>()), eve::one(eve::as<e_t>()));
-      else if (n%4 == 2) return complex(eve::mone(eve::as<e_t>()));
-      else return complex(eve::zero(eve::as<e_t>()), eve::mone(eve::as<e_t>()));
-    };
-    return rec(iton(n))*sph_bessel_yn(n,muli(z), sys);
+    return riton<e_t>(n)*sph_bessel_yn(n,muli(z), sys);
   }
 
 
@@ -144,23 +128,12 @@ namespace kyosu::_
     return -eve::pio_2(eve::as<u_t>())*iton(n)*sph_bessel_h1n(n, complex(-imag(z), real(z)), sks);
   }
 
+
   template<typename Z, typename R1, typename R2> KYOSU_FORCEINLINE
   auto sb_ikn(int n, Z z, R1& sis, R2& sks) noexcept
   {
-    using u_t = eve::underlying_type_t<Z>;
-    auto iton = [](int n){
-      if (n%4 == 0) return complex(eve::one(eve::as<u_t>()));
-      else if (n%4 == 1) return  complex(eve::zero(eve::as<u_t>()), eve::one(eve::as<u_t>()));
-      else if (n%4 == 2) return complex(eve::mone(eve::as<u_t>()));
-      else return complex(eve::zero(eve::as<u_t>()), eve::mone(eve::as<u_t>()));
-    };
-    sph_bessel_h12n(n, complex(-imag(z), real(z)), sis, sks);
-    for(int i=0; i <= n; ++i)
-    {
-      auto fac = -eve::pio_2(eve::as<u_t>())*iton(n);
-      sis[i]*= fac;
-      sks[i]*= fac;
-    }
+    sb_i1n(n, z, sis);
+    sb_kn(n, z, sks);
     return kumi::tuple{sis[n], sks[n]};
   }
 
@@ -324,9 +297,9 @@ namespace kyosu::_
     return sb_kn(n, z, sks);
   }
 
-//   template<eve::integral_scalar_value N, typename Z, typename R1,  typename R2> KYOSU_FORCEINLINE
-//   auto dispatch(eve::tag_of<kyosu::sph_bessel_ikn>, N n, Z z, R1& sis, R2& sks) noexcept
-//   {
-//       return sb_ikn(n, z, sis, sks);
-//   }
+  template<eve::integral_scalar_value N, typename Z, typename R1,  typename R2> KYOSU_FORCEINLINE
+  auto dispatch(eve::tag_of<kyosu::sph_bessel_ikn>, N n, Z z, R1& sis, R2& sks) noexcept
+  {
+      return sb_ikn(n, z, sis, sks);
+  }
 }

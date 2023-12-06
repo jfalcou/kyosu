@@ -74,7 +74,7 @@
 
 // #include <kyosu/functions/cyl_bessel_jnu.hpp>
 // #include <kyosu/functions/cyl_bessel_ynu.hpp>
-// #include <kyosu/functions/cyl_bessel_jyr.hpp>
+#include <kyosu/functions/cyl_bessel_jyr.hpp>
 
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/deta.hpp>
@@ -210,6 +210,7 @@
 #include <kyosu/functions/sph_bessel_k0.hpp>
 #include <kyosu/functions/sph_bessel_k1.hpp>
 #include <kyosu/functions/sph_bessel_kn.hpp>
+#include <kyosu/functions/sph_bessel_ikn.hpp>
 
 
 #include <kyosu/functions/sqr.hpp>
