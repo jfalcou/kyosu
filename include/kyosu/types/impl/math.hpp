@@ -285,7 +285,7 @@ namespace kyosu::_
     }
   }
 
-  template<eve::floating_value T, typename ...Cs>
+  template<eve::floating_ordered_value T, typename ...Cs>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::lpnorm> const&, T const & p, Cs const &... zs) noexcept
   {
@@ -352,7 +352,7 @@ namespace kyosu::_
     else if constexpr((dimension_v<C0> <= 2) && (dimension_v<C1> <= 2))
     {
       r_t r;
-      if constexpr(eve::floating_value<C0> && kyosu::concepts::complex<C1>) // c1 is complex c0 is real
+      if constexpr(eve::floating_ordered_value<C0> && kyosu::concepts::complex<C1>) // c1 is complex c0 is real
       {
         auto [rc1, ic1] = c1;
         auto lgac0 = eve::log_abs(c0);
@@ -372,7 +372,7 @@ namespace kyosu::_
           r = kyosu::if_else(isposc0, r1, r2);
         }
       }
-      else if constexpr(eve::floating_value<C1> ) // c0 is complex c1 is real
+      else if constexpr(eve::floating_ordered_value<C1> ) // c0 is complex c1 is real
       {
         auto lc0 = kyosu::log_abs(c0);
         auto argc0 = kyosu::arg(c0);
@@ -400,11 +400,11 @@ namespace kyosu::_
     }
     else
     {
-      if constexpr(eve::floating_value<C1>) //c0 cayley c1 real
+      if constexpr(eve::floating_ordered_value<C1>) //c0 cayley c1 real
       {
         return cayley_extend(pow, c0, c1);
       }
-      else if  constexpr(eve::floating_value<C0>)//c1 cayley c0 real
+      else if  constexpr(eve::floating_ordered_value<C0>)//c1 cayley c0 real
       {
          return cayley_extend_rev(pow, c0, c1);
       }

@@ -191,7 +191,7 @@ namespace kyosu
     auto val = cst( eve::as<as_real_type_t<T>>{} );
     using val_t = std::remove_cvref_t<decltype(val)>;
 
-    if constexpr(!eve::floating_value<val_t>) return val;
+    if constexpr(!eve::floating_ordered_value<val_t>) return val;
     else return as_cayley_dickson_n_t<eve::element_type_t<T>::static_size,val_t>(val);
   }
 
