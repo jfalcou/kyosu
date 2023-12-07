@@ -139,7 +139,7 @@ namespace kyosu::_
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_jyv
+  //  cyl_bessel_jy
   //===-------------------------------------------------------------------------------------------
   template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_jy>, N v, Z z, R& js, R& ys) noexcept
@@ -147,42 +147,75 @@ namespace kyosu::_
     return cb_jy(v, z, js, ys);
   }
 
-//   //===-------------------------------------------------------------------------------------------
-//   //  cyl_bessel_jyv
-//   //===-------------------------------------------------------------------------------------------
-//   template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R>
-//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_jv>, N v, Z z, R & jv) noexcept
-//   {
-//      auto doit = [v, z, &jv](auto ys){
-//        auto [jvn, _] = cb_jyr(eve::abs(v), z, jv, ys);
-//        return kumi::tuple{jvn, _};
-//      };
-//      auto [jvn, _] = with_alloca<Z>(int(v)+1, doit);
-//      return  jvn;
-//   }
+  //===-------------------------------------------------------------------------------------------
+  //  cyl_bessel_j
+  //===-------------------------------------------------------------------------------------------
+  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_j>, N v, Z z, R & js) noexcept
+  {
+    auto n = int(abs(v))+1;
+    auto doit = [v, z, &js](auto ys){
+      auto [jvn, _] = cb_jy(v, z, js, ys);
+      return jvn;
+    };
+    return with_alloca<Z>(n+1, doit);
+  }
 
-//   //===-------------------------------------------------------------------------------------------
-//   //  cyl_bessel_jv
-//   //===-------------------------------------------------------------------------------------------
-//   template<eve::floating_scalar_value N, typename Z>
-//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_jv>, N v, Z z) noexcept
-//   {
-//     if constexpr(concepts::complex<Z> )
-//     {
-//       auto doit = [v, z](auto js, auto ys){
-//         auto [jv, yv] = cb_jyr(eve::abs(v), z, js, ys);
-//         return kumi::tuple{jv, yv};
-//       };
-//       auto n = int(v)
-//       auto [jv, yv] = with_alloca<Z>(n+1, doit);
-//       return  jv[n];
-//     }
-//     else
-//     {
-//       return cayley_extend_rev(cyl_bessel_jv, v, z);
-//     }
-//   }
+  //===-------------------------------------------------------------------------------------------
+  //  cyl_bessel_j
+  //===-------------------------------------------------------------------------------------------
+  template<eve::floating_scalar_value N, typename Z>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_j>, N v, Z z) noexcept
+  {
+    auto n = int(abs(v))+1;
+    if constexpr(concepts::complex<Z> )
+    {
+      auto doit = [v, z](auto js, auto ys){
+        auto [jv, _] = cb_jy(v, z, js, ys);
+        return jv;
+      };
+      return with_alloca<Z>(n+1, doit);
+    }
+    else
+    {
+      return cayley_extend_rev(cyl_bessel_j, v, z);
+    }
+  }
 
+  //===-------------------------------------------------------------------------------------------
+  //  cyl_bessel_y
+  //===-------------------------------------------------------------------------------------------
+  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_y>, N v, Z z, R & ys) noexcept
+  {
+    auto n = int(abs(v))+1;
+    auto doit = [v, z, &ys](auto js){
+      auto [_, yv] = cb_jy(v, z, js, ys);
+      return yv;
+    };
+    return with_alloca<Z>(n+1, doit);
+  }
+
+  //===-------------------------------------------------------------------------------------------
+  //  cyl_bessel_y
+  //===-------------------------------------------------------------------------------------------
+  template<eve::floating_scalar_value N, typename Z>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_y>, N v, Z z) noexcept
+  {
+    auto n = int(abs(v))+1;
+    if constexpr(concepts::complex<Z> )
+    {
+      auto doit = [v, z](auto js, auto ys){
+        auto [_, yv] = cb_jy(v, z, js, ys);
+        return yv;
+      };
+      return with_alloca<Z>(n+1, doit);
+    }
+    else
+    {
+      return cayley_extend_rev(cyl_bessel_y, v, z);
+    }
+  }
 
 
 }
