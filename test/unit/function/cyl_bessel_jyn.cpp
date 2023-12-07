@@ -28,8 +28,8 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
     {
       auto c = kyosu::complex(re[k], im[k]);
       kyosu::cyl_bessel_jyn(3, c, js, ys);
-      for(int i=0; i < 2; ++i)
-      {
+//       for(int i=0; i < 2; ++i)
+//       {
       int i = 0;
       TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_j0(c), js[0], 1.0e-7) << "i " << i  << " c "<< c << '\n';
       i = 1;
@@ -41,7 +41,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
       auto ref3 =  kyosu::complex_t<T>(reres3[k], imres3[k]);
       TTS_RELATIVE_EQUAL(ref3, js[3], 1.0e-7) << "i " << i  << " c "<< c << '\n';
 
-     }
+//     }
     }
   }
 };
