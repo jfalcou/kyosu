@@ -247,7 +247,7 @@ namespace kyosu::_
     using r_t = kyosu::as_cayley_dickson_t<C0,C1>;
     using er_t = decltype(kyosu::abs(r_t{}));
 
-    if constexpr(eve::floating_value<C1> || eve::floating_value<C0>)
+    if constexpr(eve::floating_ordered_value<C1> || eve::floating_ordered_value<C0>)
     {
       return kyosu::real(c0)*kyosu::real(c1);
     }
