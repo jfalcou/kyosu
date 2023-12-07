@@ -285,7 +285,7 @@ namespace kyosu::_
     }
   }
 
-  template<eve::floating_value T, typename ...Cs>
+  template<eve::floating_ordered_value T, typename ...Cs>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::lpnorm> const&, T const & p, Cs const &... zs) noexcept
   {
