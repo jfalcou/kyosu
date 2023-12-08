@@ -64,7 +64,7 @@ namespace kyosu::_
         auto cone  = Z{1};
         auto cii   = i(as<Z>());
 
-        auto forward = [n, v0, rz, cjv0, cjv1, &cjv](){
+        auto forward = [n, v0, rz, cjv0 = cjv0, cjv1 = cjv1, &cjv](){
           // az large compared to n : 4*n <  az
           auto cf0 = cjv0;
           auto cf1 = cjv1;
@@ -78,7 +78,7 @@ namespace kyosu::_
           return cf;
         };
 
-        auto backward = [czero, v0, az, n, rz, cjv0, cjv1, &cjv](){
+        auto backward = [czero, v0, az, n, rz, cjv0 = cjv0, cjv1 = cjv1, &cjv](){
           auto m1 = eve::maximum(ini_for_br_1(az, u_t(200)));
           auto m2 = eve::maximum(ini_for_br_2(u_t(n), az, u_t(15)));
           auto m = eve::if_else( m1 >= n && eve::is_not_nan(m2), m2, m1);

@@ -477,9 +477,10 @@ namespace kyosu::_
       auto backwardj = [az, nn, n, &cjv](auto z){
         auto j0 = cjv[0];
         auto j1 = cjv[1];;
-        auto m1 = eve::maximum(ini_for_br_1(az, u_t(200)));
-        auto m2 = eve::maximum(ini_for_br_2(n, az, u_t(15)));
-        auto m = eve::if_else( m1 >= n && eve::is_not_nan(m2), m2, m1);
+        auto m1 = ini_for_br_1(az, u_t(200));
+        auto m2 = ini_for_br_2(n, az, u_t(15));
+        auto m0 = eve::if_else( m1 >= n && eve::is_not_nan(m2), m2, m1);
+        auto m = eve::maximum(m0);
         auto cf2 = Z(0);
         auto cf1 = complex(eve::sqrtsmallestposval(eve::as<Z>()));
         Z cf(cf2);
@@ -487,10 +488,10 @@ namespace kyosu::_
         auto kgez = eve::is_gez(k);
         while (eve::any(kgez))
         {
-          cf  = kyosu::if_else(kgez,  2*inc(k)*cf1*rec(z)-cf2, cf);
+          cf  = kyosu::if_else(kgez&& k <= m0,  2*inc(k)*cf1*rec(z)-cf2, cf);
           if(k <= n && k > 1) cjv[k] = cf;
-          cf2 = kyosu::if_else(kgez, cf1, cf2);
-          cf1 = kyosu::if_else(kgez, cf, cf1);
+          cf2 = kyosu::if_else(kgez&& k <= m0, cf1, cf2);
+          cf1 = kyosu::if_else(kgez&& k <= m0, cf, cf1);
           k = dec(k);
           kgez = eve::is_gez(k);
         }
