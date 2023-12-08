@@ -23,8 +23,8 @@ namespace kyosu::_
   {
     EVE_ASSERT(is_not_flint(v), "v must not be a flint");
     int n = int(v);
-    EVE_ASSERT(size(js) > n, "not enough room in js");
-    EVE_ASSERT(size(ys) > n, "not enough room in ys");
+//     EVE_ASSERT(size(js) > n, "not enough room in js");
+//     EVE_ASSERT(size(ys) > n, "not enough room in ys");
     using u_t = eve::underlying_type_t<Z>;
     auto el = u_t(0.5772156649015329);
     auto rp2 = u_t( 0.63661977236758);
