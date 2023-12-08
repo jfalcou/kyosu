@@ -23,8 +23,8 @@ namespace kyosu::_
   {
     EVE_ASSERT(is_not_flint(v), "v must not be a flint");
     int n = int(v);
-    EVE_ASSERT(size(js) > n, "not enough room in js");
-    EVE_ASSERT(size(ys) > n, "not enough room in ys");
+    EVE_ASSERT(size(cjv) > n, "not enough room in js");
+    EVE_ASSERT(size(cyv) > n, "not enough room in ys");
     auto v0 = frac(v);  // v = n+v0 0 < v0 < 1 as v is not a flint
     // compute cjv0, cjv1, cyv0, cyv1;
     auto [cjv0, cyv0, cjv1, cyv1] = kyosu::_::cb_jyr01(v0, z);

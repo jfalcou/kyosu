@@ -22,8 +22,8 @@ namespace kyosu::_
   {
     int n = int(v);
     int an =  eve::abs(n);
-    EVE_ASSERT(size(js) > an, "not enough room in js");
-    EVE_ASSERT(size(ys) > an, "not enough room in ys");
+    EVE_ASSERT(size(cjv) > an, "not enough room in js");
+    EVE_ASSERT(size(cyv) > an, "not enough room in ys");
     if (eve::is_flint(v))
     {
       return cb_jyn(int(v), z, cjv, cyv);
