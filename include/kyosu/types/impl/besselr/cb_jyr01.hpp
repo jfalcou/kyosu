@@ -20,7 +20,7 @@ namespace kyosu::_
   template<eve::floating_scalar_value N, typename Z>
   auto cb_jyr01( N  v0, Z z) noexcept
   {
-    EVE_ASSERT(eve::is_gtz(v0) && eve::is_ltz(oneminus(v0)), "v0 is not in ]0, 1[");
+    EVE_ASSERT(eve::is_gtz(v0) && (v0 < N(1)), "v0 is not in ]0, 1[");
     auto v1 = inc(v0); // 1 < v1 < 2
 
     using u_t = eve::underlying_type_t<Z>;
