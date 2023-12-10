@@ -149,8 +149,8 @@ namespace kyosu::_
       cyv1 = if_else(isltzrz, cyv1*eipimv1+2*muli(real(eipimv1))*cjv1, cyv1);
       cjv0 = if_else(isltzrz, cjv0*eipiv0, cjv0);
       cjv1 = if_else(isltzrz, cjv1*eipiv1, cjv1);
-       if( eve::any(isltziz) ) //treating imag(z) < 0
-       {
+      if( eve::any(isltziz) ) //treating imag(z) < 0
+      {
         cyv0 = if_else(isltziz, conj(cyv0), cyv0);
         cyv1 = if_else(isltziz, conj(cyv1), cyv1);
         cjv0 = if_else(isltziz, conj(cjv0), cjv0);

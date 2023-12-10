@@ -73,7 +73,7 @@ namespace kyosu::_
   //  cyl_bessel_h12
   //===-------------------------------------------------------------------------------------------
   template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_h12n>, N n, Z z, R& h1s, R& h2s) noexcept
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_h12>, N n, Z z, R& h1s, R& h2s) noexcept
   requires(concepts::complex<Z>)
   {
     return cb_h12(n, z, h1s, h2s);
