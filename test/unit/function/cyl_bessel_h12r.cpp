@@ -86,7 +86,6 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_j over real"
         kyosu::cyl_bessel_h12(v1, c, h1s_03, h2s_03);
         auto refh1_03=  kyosu::complex_t<T>(reresh1_03[n][k], imresh1_03[n][k]);
         auto refh2_03=  kyosu::complex_t<T>(reresh2_03[n][k], imresh2_03[n][k]);
-//        std::cout << "refh1_03 = " << refh1_03 << std::endl;
         TTS_RELATIVE_EQUAL(refh1_03, h1s_03[n], 1.e-6) << "n " << n  << " k " << k  << " c "<< c << '\n';
         TTS_RELATIVE_EQUAL(refh2_03, h2s_03[n], 1.e-6) << "n " << n  << " k " << k  << " c "<< c << '\n';
       }

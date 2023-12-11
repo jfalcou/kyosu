@@ -12,24 +12,25 @@
 
 namespace kyosu::tags
 {
-  struct callable_cyl_bessel_j: eve::elementwise
+  struct callable_cyl_bessel_k: eve::elementwise
   {
-    using callable_tag_type = callable_cyl_bessel_j;
+    using callable_tag_type = callable_cyl_bessel_k;
 
-    KYOSU_DEFERS_CALLABLE(cyl_bessel_j_);
+    KYOSU_DEFERS_CALLABLE(cyl_bessel_k_);
 
     template<eve::floating_scalar_value N, eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, N nu, T const& v) noexcept
     {
-      auto fnu = callable_cyl_bessel_j{};
+      auto fnu = callable_cyl_bessel_k{};
       return fnu(nu, complex(v));
     }
 
+
     template<eve::floating_scalar_value N, eve::floating_ordered_value T, typename R>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N nu, T const& v, R& js) noexcept
+    static KYOSU_FORCEINLINE auto deferred_call(auto, N nu, T const& v, R& ks) noexcept
     {
-      auto fnu = callable_cyl_bessel_j{};
-      return fnu(nu, complex(v), js);
+      auto fnu = callable_cyl_bessel_k{};
+      return fnu(nu, complex(v), ks);
     }
 
     template<typename N, typename T>
@@ -47,8 +48,8 @@ namespace kyosu::tags
     }
 
     template<typename... T>
-    eve::unsupported_call<callable_cyl_bessel_j(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    eve::unsupported_call<callable_cyl_bessel_k(T&&...)> operator()(T&&... x) const
+      requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
 
@@ -57,14 +58,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_j
-//!   @brief Computes the Bessel functions of the first kind,
-//!   \f$ J_{\nu}(x)=\sum_{p=0}^{\infty}{\frac{(-1)^p}{p!\,\Gamma (p+\nu +1)}}
-//!   {\left({x \over 2}\right)}^{2p+\nu }\f$
-//!   extended to the complex plane and cayley_dickson values.
-//!
-//!   It is the solution of \f$ x^{2}y''+xy'+(x^2-\nu^2)y=0\f$ for which
-//!   \f$ y(0) = 0\f$ if \f$\nu \ne 0\f$ else \f$1\f$.
+//!   @var cyl_bessel_k
+//!   @brief Computes the Modified Bessel functions of the second kind.
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -76,10 +71,10 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<eve::floating_ordered_value, kyosu::concepts::cayley_dickson T>
-//!      constexpr auto cyl_bessel_j(N nu, T z) noexcept;
+//!      constexpr auto cyl_bessel_k(N nu, T z) noexcept;
 //!
 //!      template<eve::floating_ordered_value, eve::floating_ordered_value T>
-//!      constexpr T    cyl_bessel_j(N n, T z) noexcept;
+//!      constexpr T    cyl_bessel_k(N n, T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -90,12 +85,12 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns \f$J_\nu(z)\f$.
+//!     * returns \f$K_\nu(z)\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/cyl_bessel_j.cpp}
+//!  @godbolt{doc/cyl_bessel_k.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_cyl_bessel_j cyl_bessel_j = {};
+  inline constexpr tags::callable_cyl_bessel_k cyl_bessel_k = {};
 }

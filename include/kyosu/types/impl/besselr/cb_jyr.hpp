@@ -125,7 +125,6 @@ namespace kyosu::_
     {
       // v is not flint and is less than 0;
       cb_jy(-v, z, cjv, cyv);
-      auto [s, c] = sinpicospi(z);
       for(int i=0; i < an ; ++i)
       {
         auto [s, c] = sinpicospi(v);
