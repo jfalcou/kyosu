@@ -100,6 +100,7 @@ namespace kyosu::_
           }
           return cjv[n];
         };
+        
         // compute j_{v+i} i =  2...n
         Z r;
         auto notdone = eve::true_(as<Z>());
@@ -108,6 +109,7 @@ namespace kyosu::_
         {
           last_interval(backward, notdone, r);
         }
+        
         // compute y_{v+i} i =  2...n
         auto twoopiz = twoopi*rz;
         auto fouropisqz = 2*twoopiz*rz;
