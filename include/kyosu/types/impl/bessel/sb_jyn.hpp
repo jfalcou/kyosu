@@ -44,7 +44,7 @@ namespace kyosu::_
                   );
   }
 
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  template<eve::integral_scalar_value N, typename Z>
   auto sb_jn(N n, Z z) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;
@@ -136,7 +136,7 @@ namespace kyosu::_
     return -cos(z)/sqr(z)-sinc(z);
   }
 
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  template<eve::integral_scalar_value N, typename Z>
   auto sb_yn(N n, Z z) noexcept
   {
     auto rz = rec(z);
@@ -166,7 +166,7 @@ namespace kyosu::_
     return sys[n];
   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R1, typename R2> KYOSU_FORCEINLINE
+  template<eve::integral_scalar_value N, typename Z, typename R1, typename R2>
   auto sb_jyn(N n, Z z, R1 & sjs, R2& sys) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;

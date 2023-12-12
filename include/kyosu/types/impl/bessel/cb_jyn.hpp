@@ -42,7 +42,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
 
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  template<eve::integral_scalar_value N, typename Z>
   Z cb_jn(N nn, Z z);
 
   template < typename Z> struct mkjs
@@ -67,7 +67,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_j0
   //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
+  template<typename Z>
   auto cb_j0(Z z) noexcept
   {
     using e_t = as_real_type_t<Z>;
@@ -173,7 +173,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_j1
   //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
+  template<typename Z>
   auto cb_j1(Z z) noexcept
   {
     using e_t = as_real_type_t<Z>;
@@ -281,7 +281,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_y0
   //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
+  template<typename Z>
   auto cb_y0(Z z) noexcept
   {
     auto rzlt0 = eve::is_ltz(real(z));
@@ -315,7 +315,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_y1
   //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
+  template<typename Z>
   auto cb_y1(Z z) noexcept
   {
     using u_t   =  eve::underlying_type_t<Z>;
@@ -329,7 +329,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_jn
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  template<eve::integral_scalar_value N, typename Z>
   Z cb_jn(N nn, Z z)
   {
     if ( is_eqz(nn) )
@@ -414,7 +414,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_jyn
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, typename R1, typename R2> KYOSU_FORCEINLINE
+  template<eve::integral_scalar_value N, typename Z, typename R1, typename R2>
   auto cb_jyn(N nn, Z z, R1& cjv, R2& cyv) noexcept
   requires(concepts::complex<Z> || eve::floating_ordered_value<Z>)
   {
@@ -589,7 +589,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_j1
   //===-------------------------------------------------------------------------------------------
-  template<typename Z>
+  template<typename Z> KYOSU_FORCEINLINE
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_j1>, Z z) noexcept
   {
     if constexpr(concepts::complex<Z> )
@@ -605,7 +605,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_y0
   //===-------------------------------------------------------------------------------------------
-  template<typename Z>
+  template<typename Z> KYOSU_FORCEINLINE
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_y0>, Z z) noexcept
   {
     if constexpr(concepts::complex<Z> )
@@ -621,7 +621,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_y1
   //===-------------------------------------------------------------------------------------------
-  template<typename Z>
+  template<typename Z> KYOSU_FORCEINLINE
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_y1>, Z z) noexcept
   {
     if constexpr(concepts::complex<Z> )
@@ -637,7 +637,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_jn
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z>
+  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_jn>, N n, Z z) noexcept
   {
     if constexpr(concepts::complex<Z> )
@@ -701,7 +701,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_jyn
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R1, typename R2>
+  template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R1, typename R2> KYOSU_FORCEINLINE
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_jyn>, N n, Z z, R1& js, R2& ys) noexcept
   requires(concepts::complex<Z>)
   {
