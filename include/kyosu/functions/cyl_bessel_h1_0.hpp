@@ -21,7 +21,7 @@ namespace kyosu::tags
     template<eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
     {
-      auto fn = callable_cyl_bessel_h1_0{}; 
+      auto fn = callable_cyl_bessel_h1_0{};
       return fn(complex(v));
     }
 
@@ -55,7 +55,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto cyl_bessel_h1_0(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T    cyl_bessel_h1_0(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto cyl_bessel_h1_0(T z) noexcept;
 //!   }
 //!   @endcode
 //!

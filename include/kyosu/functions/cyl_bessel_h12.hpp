@@ -44,7 +44,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var cyl_bessel_h12
-//!   @brief Computes the Bessel functions of the third  kind \f$H^{(1)\f$ and \f$H^{(2)}\f$,
+//!   @brief Computes the Bessel functions of the third  kind \f$ H^{(1)} \f$ and \f$ H^{(2)} \f$,
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -67,17 +67,17 @@ namespace kyosu
 //!
 //!     * `n`: scalar floating order of the function.
 //!     * `z`: Value to process.
-//!     * `h1s: range able to contain int(nu)+1 complex values (of type complex_t<T> or Z respectively)
-//!     * `h2s: range able to contain int(nu)+1 complex values (of type complex_t<T> or Z respectively)
+//!     * `h1s: range able to contain  `n = int(abs(nu))+1` complex values (of type complex_t<T> or Z respectively)
+//!     * `h2s: range able to contain  `n = int(abs(nu))+1` complex values (of type complex_t<T> or Z respectively)
 //!
 //!   **Return value**
 //!
-//!     * returns the kumi pair \f$\{J_\nu(z), Y_\nu(z)\}f$.
+//!     * returns the kumi pair \f$ \{ H^{(1)}_\nu(z). H^{(2)}_\nu(z) \} \f$.
 //!
 //!   *Ouput values
 //!
-//!     * on output h1s contains the values of   \f$((H^{1}_{\vu_0+i})_{i = 0\cdot \vu}\f$, where \f$\vu_0\f$ is the fractional part of $\vu\f$
-//!     * on output h2s contains the values of   \f$((H^{2}_{\vu_0+i})_{i = 0\cdot \vu}\f$, where \f$\vu_0\f$ is the fractional part of $\vu\f$
+//!     * on output (if present) h1s and h2s contains the values of   \f$ (H^{(1\|2)}_{\nu_0+\epsilon i})_{i = 0 \cdots n} \f$
+//!       respectively,  where \f$ \nu_0 \f$ is the fractional part of \f$\nu\f$ and \f$\epsilon\f$ is the sign of  \f$ \nu\f$.
 //!
 //!  @groupheader{Example}
 //!

@@ -55,7 +55,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto cyl_bessel_h1_1(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T    cyl_bessel_h1_1(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto cyl_bessel_h1_1(T z) noexcept;
 //!   }
 //!   @endcode
 //!

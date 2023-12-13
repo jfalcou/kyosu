@@ -58,7 +58,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var cyl_bessel_h2
-//!   @brief Computes the Bessel functions of the third  kind \f$H^{(2)\f$ and \f$H^{(2)}\f$,
+//!   @brief Computes the Bessel functions of the third  kind \f$ H^{(2)}_\nu \f$,
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -87,16 +87,16 @@ namespace kyosu
 //!
 //!     * `nu`: scalar floating order of the function.
 //!     * `z`: Value to process.
-//!     * `h2s: range able to contain int(nu)+1 complex values (of type complex_t<T> or Z respectively)
+//!     * `h2s: range able to contain `n = int(abs(nu))+1` complex values (of type complex_t<T> or Z respectively)
 //!
 //!   **Return value**
 //!
-//!     * returns  \f$\{H^{(2)}_\nu(z)\}f$.
+//!     * returns  \f$H^{(2)}_\nu(z)\f$.
 //!
 //!   *Ouput values
 //!
-//!     * on output (if present) h2s contains the values of   \f$((H^{(2)}_{\vu_0+i})_{i = 0\cdot n}\f$;
-//!       where \f$\vu_0\f$ is the fractional part of $\vu\f$
+//!     * on output (if present) h2s contains the values of   \f$ (H^{(2)}_{\nu_0+\epsilon i})_{i = 0 \cdots n} \f$, 
+//!       where \f$ \nu_0 \f$ is the fractional part of \f$\nu\f$ and \f$\epsilon\f$ is the sign of  \f$ \nu\f$.
 //!
 //!  @groupheader{Example}
 //!

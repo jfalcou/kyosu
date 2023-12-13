@@ -73,7 +73,13 @@ namespace kyosu
 //!      constexpr auto cyl_bessel_i(N nu, T z) noexcept;
 //!
 //!      template<eve::floating_ordered_value, eve::floating_ordered_value T>
-//!      constexpr T    cyl_bessel_i(N n, T z) noexcept;
+//!      constexpr T    cyl_bessel_i(N nu, T z) noexcept;
+//!
+//!      template<eve::floating_ordered_value, kyosu::concepts::cayley_dickson T, Range R>
+//!      constexpr auto cyl_bessel_i(N nu, T z, R & is) noexcept;
+//!
+//!      template<eve::floating_ordered_value, eve::floating_ordered_value T, Range R>
+//!      constexpr T    cyl_bessel_i(N nu, T z, R& is) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -81,10 +87,16 @@ namespace kyosu
 //!
 //!     * `nu`: order of the function.
 //!     * `z`: Value to process.
+//!     * `is`: Ouput range able to contain `n = int(abs(nu))+1` complex values (of type complex_t<T> or Z respectively)
 //!
 //!   **Return value**
 //!
 //!     * returns \f$I_\nu(z)\f$.
+//!
+//!   *Ouput values
+//!
+//!     * on output (if present) 1s contains the values of   \f$ (I^{(1)}_{\nu_0+\epsilon i})_{i = 0 \cdots n} \f$;
+//!       where \f$ \nu_0 \f$ is the fractional part of \f$\nu\f$ and \f$\epsilon\f$ is the sign of  \f$ \nu\f$.
 //!
 //!  @groupheader{Example}
 //!
