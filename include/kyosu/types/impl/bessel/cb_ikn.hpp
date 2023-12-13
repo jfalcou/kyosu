@@ -256,8 +256,8 @@ namespace kyosu::_
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_ikn>, N n, Z z, R1& is, R2& ks) noexcept
   requires(concepts::complex<Z>)
   {
-    EVE_ASSERT(N(size(is)) > abs(n), "not room enough in is");
-    EVE_ASSERT(N(size(ks)) > abs(n), "not room enough in ks");
+    EVE_ASSERT(N(size(is)) > eve::abs(n), "not room enough in is");
+    EVE_ASSERT(N(size(ks)) > eve::abs(n), "not room enough in ks");
     return cb_ikn(n, z, is, ks);
   }
 }

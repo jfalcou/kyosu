@@ -54,7 +54,7 @@ namespace kyosu::_
         using u_t = eve::underlying_type_t<Z>;
         auto eps = 16*eve::eps(as<u_t>());
         auto twoopi = eve::two_o_pi(as<u_t>());
-        auto az = abs(z);
+        auto az = eve::abs(z);
         auto z1 = z;
         auto z2 = sqr(z);
         auto v1 = inc(v0); // 1 < v1 < 2
