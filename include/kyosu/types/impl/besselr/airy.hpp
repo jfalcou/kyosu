@@ -42,9 +42,14 @@ namespace kyosu::_
   template<typename Z> KYOSU_FORCEINLINE
   auto ai(Z z) noexcept
   {
+
     using u_t = eve::underlying_type_t<Z>;
     auto [sqzo3, zeta] = zet(z);
-    return eve::inv_pi(as(z))*sqzo3*cyl_bessel_k(eve::third(as<u_t>()), zeta);
+    auto r = eve::inv_pi(as(z))*sqzo3*cyl_bessel_k(eve::third(as<u_t>()), zeta);
+    return r;
+//    return if_else(eve::is_ltz(arg(z)), -r, r);
+//     return sqzo3*(cyl_bessel_i(eve::third(as<u_t>()), zeta)
+//                   +cyl_bessel_i(-eve::third(as<u_t>()), zeta));
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -55,12 +60,12 @@ namespace kyosu::_
   {
     using u_t = eve::underlying_type_t<Z>;
     auto [sqzo3, zeta] = zet(z);
-    std::cout << "z" << z << " sqzo3 "<< sqzo3 << " zeta "<< zeta << std::endl;
-    std::cout << "third " << eve::third(as<u_t>())  << std::endl;
-    std::cout << "cyl_bessel_i(eve::third(as<u_t>()), zeta) " << cyl_bessel_i(eve::third(as<u_t>()), zeta) << std::endl;
-    std::cout << "cyl_bessel_i(-eve::third(as<u_t>()), zeta) " << cyl_bessel_i(-eve::third(as<u_t>()), zeta) << std::endl;
-    return sqzo3*(cyl_bessel_i(eve::third(as<u_t>()), zeta)
-                  +cyl_bessel_i(-eve::third(as<u_t>()), zeta));
+//     std::cout << "z" << z << " sqzo3 "<< sqzo3 << " zeta "<< zeta << std::endl;
+//     std::cout << "third " << eve::third(as<u_t>())  << std::endl;
+//     std::cout << "cyl_bessel_i(eve::third(as<u_t>()), zeta) " << cyl_bessel_i(eve::third(as<u_t>()), zeta) << std::endl;
+//     std::cout << "cyl_bessel_i(-eve::third(as<u_t>()), zeta) " << cyl_bessel_i(-eve::third(as<u_t>()), zeta) << std::endl;
+    return sqzo3*(cyl_bessel_i(-eve::third(as<u_t>()), zeta)
+                  -cyl_bessel_i(eve::third(as<u_t>()), zeta));
   }
 
   //===-------------------------------------------------------------------------------------------
