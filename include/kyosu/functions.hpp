@@ -19,11 +19,6 @@
 #include <kyosu/functions/acotpi.hpp>
 #include <kyosu/functions/atanpi.hpp>
 #include <kyosu/functions/acoth.hpp>
-
-#include <kyosu/functions/airy.hpp>
-#include <kyosu/functions/airy_ai.hpp>
-#include <kyosu/functions/airy_bi.hpp>
-
 #include <kyosu/functions/arg.hpp>
 #include <kyosu/functions/acsc.hpp>
 #include <kyosu/functions/acscpi.hpp>

@@ -111,5 +111,3 @@
 #include <kyosu/types/impl/besselr/cb_jyr.hpp>
 #include <kyosu/types/impl/besselr/cb_h.hpp>
 #include <kyosu/types/impl/besselr/cb_ikr.hpp>
-// airy functions
-#include <kyosu/types/impl/besselr/airy.hpp>
