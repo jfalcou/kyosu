@@ -96,8 +96,8 @@ namespace kyosu::_
   auto cb_h12n(N n, Z z, R & h1s, R& h2s) noexcept
   {
     auto an = abs(n);
-    EVE_ASSERT(std::size(cjv) > size_t(an), "not room enough in js");
-    EVE_ASSERT(std::size(cyv) > size_t(an), "not room enough in ys");
+    EVE_ASSERT(std::size(h1s) > size_t(an), "not room enough in h1s");
+    EVE_ASSERT(std::size(h2s) > size_t(an), "not room enough in h2s");
     cb_jyn(n, z, h1s, h2s);
     for(int i=0; i <= an; ++i)
     {
