@@ -58,6 +58,7 @@ namespace kyosu::_
     v = eve::abs(v);  //k(-v, z) == K(v, z) DLMF 10.27.1
     using u_t = eve::underlying_type_t<Z>;
     auto n = int(v); //n>= 0
+    EVE_ASSERT(int(size(ks)) > n, "not enough room in h1s");
     auto v0 = v-n;
     auto vi = v0;
     for(int j=0; j <= n; ++j)

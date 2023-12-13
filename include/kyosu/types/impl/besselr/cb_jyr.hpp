@@ -22,8 +22,8 @@ namespace kyosu::_
   {
     int n = int(v);
     int an =  eve::abs(n);
-//     EVE_ASSERT(size(cjv) > an, "not enough room in js");
-//     EVE_ASSERT(size(cyv) > an, "not enough room in ys");
+    EVE_ASSERT(int(size(cjv)) > an, "not enough room in cjv");
+    EVE_ASSERT(int(size(cyv)) > an, "not enough room in cyv");
     if (eve::is_flint(v))
     {
       return cb_jyn(int(v), z, cjv, cyv);
@@ -100,7 +100,7 @@ namespace kyosu::_
           }
           return cjv[n];
         };
-        
+
         // compute j_{v+i} i =  2...n
         Z r;
         auto notdone = eve::true_(as<Z>());
@@ -109,7 +109,7 @@ namespace kyosu::_
         {
           last_interval(backward, notdone, r);
         }
-        
+
         // compute y_{v+i} i =  2...n
         auto twoopiz = twoopi*rz;
         auto fouropisqz = 2*twoopiz*rz;
@@ -142,8 +142,8 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_jy
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_jy>, N v, Z z, R& js, R& ys) noexcept
+  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R1, typename R2>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_jy>, N v, Z z, R1& js, R2& ys) noexcept
   {
     return cb_jy(v, z, js, ys);
   }
@@ -200,7 +200,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_y
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z> 
+  template<eve::floating_scalar_value N, typename Z>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_y>, N v, Z z) noexcept
   {
     auto n = int(abs(v))+1;

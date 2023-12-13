@@ -82,9 +82,10 @@ namespace kyosu::_
     return if_else(is_eqz(z), eve::zero, res);
   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
+  template<eve::integral_scalar_value N, typename Z, typename R> 
   auto sb_jn(N n, Z z, R & sjs) noexcept
   {
+    EVE_ASSERT(N(size(sjs)) > n, "not enough room in js");
     using u_t = eve::underlying_type_t<Z>;
     auto bd = [z](int n){
       auto st = eve::abs(eve::sin(eve::abs(arg(z))));

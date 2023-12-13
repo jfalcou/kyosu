@@ -418,10 +418,10 @@ namespace kyosu::_
   auto cb_jyn(N nn, Z z, R1& cjv, R2& cyv) noexcept
   requires(concepts::complex<Z> || eve::floating_ordered_value<Z>)
   {
-//     EVE_ASSERT(size(cjv) > nn, "not room enough in js");
-//     EVE_ASSERT(size(cyv) > nn, "not room enough in ys");
-    using u_t = eve::underlying_type_t<Z>;
     auto n = eve::abs(nn);
+    EVE_ASSERT(N(size(cjv)) > n, "not room enough in cjv");
+    EVE_ASSERT(N(size(cyv)) > n, "not room enough in cyv");
+    using u_t = eve::underlying_type_t<Z>;
     if (n <= 1)
     {
       cjv[0] = cyl_bessel_j0(z);

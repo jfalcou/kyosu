@@ -135,16 +135,18 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_ikn
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto cb_ikn(N n, Z z, R& is, R& ks) noexcept
+  template<eve::integral_scalar_value N, typename Z, typename R1, typename R2> KYOSU_FORCEINLINE
+  auto cb_ikn(N n, Z z, R1& is, R2& ks) noexcept
   requires(concepts::complex<Z> || eve::floating_ordered_value<Z>)
   {
     using u_t = eve::underlying_type_t<Z>;
     auto nn =  eve::abs(n);
+    EVE_ASSERT(N(size(is)) > nn, "not room enough in is");
+    EVE_ASSERT(N(size(ks)) > nn, "not room enough in ks");
 
-    for(int j=0; j <= nn; ++j)
+    for(N j=0; j <= nn; ++j)
     {
-      is[j] = cb_in(j, z); 
+      is[j] = cb_in(j, z);
       ks[j] = cb_kn(j, z);
     }
     return kumi::tuple{is[n], ks[n]};
@@ -250,10 +252,12 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_ikn
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_ikn>, N n, Z z, R& js, R& ys) noexcept
+  template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R1, typename R2>
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_ikn>, N n, Z z, R1& is, R2& ks) noexcept
   requires(concepts::complex<Z>)
   {
-    return cb_ikn(n, z, js, ys);
+    EVE_ASSERT(N(size(is)) > abs(n), "not room enough in is");
+    EVE_ASSERT(N(size(ks)) > abs(n), "not room enough in ks");
+    return cb_ikn(n, z, is, ks);
   }
 }
