@@ -81,7 +81,7 @@ namespace kyosu::_
         //  Chapter II, equation (3); or from Equation 9.1.12 of
         //  M. Abramowitz, I. A. Stegun 'Handbook of Mathematical
         //  Functions'.
-        // good for eve::abs(z) < 12
+        // good for abs(z) < 12
         auto eps2 = eve::sqr(eve::eps(eve::as<e_t>()));
         auto j0 = eve::one((eve::as<Z>()));
         auto sm = j0;
@@ -186,7 +186,7 @@ namespace kyosu::_
       //  Chapter II, equation (3); or from Equation 9.1.12 of
       //  M. Abramowitz, I. A. Stegun 'Handbook of Mathematical
       //  Functions'.
-      // good for eve::abs(z) < 12
+      // good for abs(z) < 12
       auto eps2 = sqr(eve::eps(eve::as<e_t>()));
       auto j1 = complex(eve::one((eve::as<e_t>())));
       auto sm = j1;
