@@ -45,7 +45,6 @@ namespace kyosu::_
 
     Z cjv0(cnan), cjv1(cnan), cyv0(cnan), cyv1(cnan);
 
-
     auto br_lt12 =  [&](){
       auto cjv01 = [quarter, hlf, cone, eps, z, z2](auto vl){
         auto cjvl = cone;

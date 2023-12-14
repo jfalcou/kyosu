@@ -65,7 +65,6 @@ namespace kyosu::_
     return riton<e_t>(n+1)*sph_bessel_yn(n,muli(z), sis);
   }
 
-
   template<typename Z> KYOSU_FORCEINLINE
   auto sb_i2_0(Z z) noexcept
   {
@@ -98,8 +97,6 @@ namespace kyosu::_
     return riton<e_t>(n)*sph_bessel_yn(n,muli(z), sys);
   }
 
-
-
   //===-------------------------------------------------------------------------------------------
   //  sb_kn
   //===-------------------------------------------------------------------------------------------
@@ -129,7 +126,6 @@ namespace kyosu::_
     };
     return -eve::pio_2(eve::as<u_t>())*iton(n)*sph_bessel_h1n(n, complex(-imag(z), real(z)), sks);
   }
-
 
   template<typename Z, typename R1, typename R2> KYOSU_FORCEINLINE
   auto sb_ikn(int n, Z z, R1& sis, R2& sks) noexcept

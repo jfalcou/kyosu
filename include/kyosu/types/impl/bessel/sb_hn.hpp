@@ -29,7 +29,6 @@ namespace kyosu::_
   // sb_h12n
   ////////////////////////////////
 
-
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
   //  spherical bessel of the third kind
@@ -60,7 +59,6 @@ namespace kyosu::_
     }
     return if_else(imzlt0, h2, eve::sign_alternate(u_t(n))*h2);
   }
-
 
   template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto sb_h1n(N n, Z z) noexcept
@@ -157,6 +155,5 @@ namespace kyosu::_
   {
     return sb_h2n(1, z);
   }
-
 
 }

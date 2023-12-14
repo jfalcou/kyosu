@@ -218,5 +218,4 @@ namespace kyosu::_
     }
   }
 
-
 }
