@@ -171,7 +171,7 @@ namespace kyosu::_
     }
     else
     {
-      return cakley_extend(sph_bessel_i2_0, z);
+      return cayley_extend(sph_bessel_i2_0, z);
     }
   }
 
@@ -184,7 +184,7 @@ namespace kyosu::_
     }
     else
     {
-      return cakley_extend(sph_bessel_i2_1, z);
+      return cayley_extend(sph_bessel_i2_1, z);
     }
   }
 
