@@ -28,7 +28,7 @@ namespace kyosu::_
   // sb_ikn
   ////////////////////////////////
 
-  template<typename T, eve::integral_scalar_value N>
+  template<typename T, eve::integral_scalar_value N> KYOSU_FORCEINLINE
   auto riton(N n){
     n = n & N(3);
     if (n == 0) return complex(eve::one(eve::as<T>()));

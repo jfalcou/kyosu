@@ -35,7 +35,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
 
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  template<eve::integral_scalar_value N, typename Z>
   auto sb_h2n(N n, Z z) noexcept
   {
     auto imzlt0 = eve::is_ltz(imag(z));
@@ -101,7 +101,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sph_bessel_h1n
   //===-------------------------------------------------------------------------------------------
-  template<typename Z>
+  template<typename Z> KYOSU_FORCEINLINE
   auto dispatch(eve::tag_of<kyosu::sph_bessel_h1n>, int n, Z z) noexcept
   {
     if constexpr(concepts::complex<Z>)
@@ -115,13 +115,13 @@ namespace kyosu::_
     }
   }
 
-  template<typename Z>
+  template<typename Z> KYOSU_FORCEINLINE
   auto dispatch(eve::tag_of<kyosu::sph_bessel_h1_0>, Z z) noexcept
   {
     return sb_h1_0(z);
   }
 
-  template<typename Z>
+  template<typename Z> KYOSU_FORCEINLINE
   auto dispatch(eve::tag_of<kyosu::sph_bessel_h1_1>, Z z) noexcept
   {
     return sb_h1_1(z);
@@ -130,7 +130,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sph_bessel_h2n
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z>
+  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto dispatch(eve::tag_of<kyosu::sph_bessel_h2n>, N n, Z z) noexcept
   {
     EVE_ASSERT(n >= 0, "spherical functions need positive order");
@@ -144,13 +144,13 @@ namespace kyosu::_
     }
   }
 
-  template<typename Z>
+  template<typename Z> KYOSU_FORCEINLINE
   auto dispatch(eve::tag_of<kyosu::sph_bessel_h2_0>, Z z) noexcept
   {
     return sb_h2n(0, z);
   }
 
-  template<typename Z>
+  template<typename Z> KYOSU_FORCEINLINE
   auto dispatch(eve::tag_of<kyosu::sph_bessel_h2_1>, Z z) noexcept
   {
     return sb_h2n(1, z);
