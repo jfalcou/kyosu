@@ -29,5 +29,12 @@ int main()
   eve::wide<double, eve::fixed<4>> z1(1.0, 2.0, 40.0, 0.0),  z2(36.0, 0.5, 0.0, 40.0);
   auto z0 = kyosu::complex(z1, z2);
   std::cout << z0 << " \n-> " << cyl_bessel_j1(z0) << "\n";
+
+  eve::wide<double, eve::fixed<8>> l(1.0, 15.0, 40.0, 60.0, eve::inf(eve::as<double>()),eve::minf(eve::as<double>()), eve::nan(eve::as<double>()), 0.0);
+  auto lims = kyosu::complex(l);
+  std::cout << " ==================== " << std::endl;
+  std::cout << lims << " \n -> \n" << cyl_bessel_j1(lims) << "\n";
+  std::cout << l    << " \n -> \n" << cyl_bessel_j1(l)    << "\n";
+
   return 0;
 }

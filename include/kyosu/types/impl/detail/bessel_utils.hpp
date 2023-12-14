@@ -18,7 +18,8 @@ namespace kyosu::_
   auto bound(Z const & z) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;
-    return int(eve::ceil(eve::maximum(abs(z)*u_t(1.1)+2)));
+    auto z1 = if_else(kyosu::is_not_finite(z), eve::zero, z);
+    return int(eve::ceil(eve::maximum(abs(z1)*u_t(1.1)+2)));
   }
 
   //===-------------------------------------------------------------------------------------------
