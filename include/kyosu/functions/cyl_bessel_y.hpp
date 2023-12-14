@@ -44,13 +44,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var cyl_bessel_y
-//!   @brief Computes the Bessel functions of the first kind,
-//!   \f$ J_{\nu}(x)=\sum_{p=0}^{\infty}{\frac{(-1)^p}{p!\,\Gamma (p+\nu +1)}}
-//!   {\left({x \over 2}\right)}^{2p+\nu }\f$
-//!   extended to the complex plane and cayley_dickson values.
-//!
-//!   It is the solution of \f$ x^{2}y''+xy'+(x^2-\nu^2)y=0\f$ for which
-//!   \f$ y(0) = 0\f$ if \f$\nu \ne 0\f$ else \f$1\f$.
+//!   @brief Computes the Bessel functions of the second kind,
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -76,7 +70,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns \f$J_\nu(z)\f$.
+//!     * returns \f$Y_\nu(z)\f$.
 //!
 //!  @groupheader{Example}
 //!

@@ -58,7 +58,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_k
+//!   @var  cyl_bessel_k
 //!   @brief Computes the Modified Bessel functions of the second kind.
 //!
 //!   @code

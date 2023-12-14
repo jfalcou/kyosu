@@ -201,7 +201,7 @@ namespace kyosu::_
     }
     else
     {
-      return cakley_extend(sph_bessel_i1_0, z);
+      return cayley_extend(sph_bessel_i1_0, z);
     }
   }
 
@@ -214,7 +214,7 @@ namespace kyosu::_
     }
     else
     {
-      return cakley_extend(sph_bessel_i1_1, z);
+      return cayley_extend(sph_bessel_i1_1, z);
     }
   }
 
@@ -227,7 +227,7 @@ namespace kyosu::_
     }
     else
     {
-      return cakley_extend_rev(sph_bessel_i1n, n, z);
+      return cayley_extend_rev(sph_bessel_i1n, n, z);
     }
   }
 
@@ -246,7 +246,7 @@ namespace kyosu::_
     }
     else
     {
-      return cakley_extend_rev(sph_bessel_i2n, n, z);
+      return cayley_extend_rev(sph_bessel_i2n, n, z);
     }
   }
 

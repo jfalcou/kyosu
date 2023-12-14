@@ -20,7 +20,6 @@ namespace kyosu::tags
 
     template<eve::integral_scalar_value N, eve::floating_ordered_value T, typename R>
     static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v, R& js, R& ys) noexcept
-    //    requires(concepts::complex<decltype(js[0])> && concepts::complex<decltype(ys[0])>)
     {
       auto fn = callable_cyl_bessel_ikn{};
       return fn(n, complex(v), js, ys);
@@ -44,8 +43,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_ikn
-//!   @brief Computes the Bessel functions of the second kind I and K,
+//!   @var  cyl_bessel_ikn
+//!   @brief Computes the Bessel functions of the second kind \f$I\f$ and \f$K \f$of integral order,
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -73,7 +72,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns the kumi pair \f$\{I_\nu(z), K_\nu(z)\}f$.
+//!     * returns the kumi pair \f$\{I_\nu(z), K_\nu(z)\}\f$.
 //!
 //!   *Ouput values
 //!

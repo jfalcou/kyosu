@@ -18,24 +18,24 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(cyl_bessel_ik_);
 
-    template<eve::floating_scalar_value N, eve::floating_ordered_value T, typename R>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N nu, T const& v, R& js, R& ys) noexcept
-    requires(concepts::complex<decltype(js[0])> && concepts::complex<decltype(ys[0])>)
+    template<eve::floating_scalar_value N, eve::floating_ordered_value T, typename R1, typename R2>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, N nu, T const& v, R1& is, R2& ks) noexcept
+    requires(concepts::complex<decltype(is[0])> && concepts::complex<decltype(ks[0])>)
     {
       auto fnu = callable_cyl_bessel_ik{};
-      return fnu(nu, complex(v), js, ys);
+      return fnu(nu, complex(v), is, ks);
     }
 
-    template<typename N, typename T, typename R>
-    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1, R& output1, R& output2) const noexcept
+    template<typename N, typename T, typename R1, typename R2>
+    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1, R1& output1, R2& output2) const noexcept
     -> decltype(eve::tag_invoke(*this, target0, target1, output1, output2))
     {
       return eve::tag_invoke(*this, target0, target1, output1, output2);
     }
 
-    template<typename... T>
-    eve::unsupported_call<callable_cyl_bessel_ik(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+//     template<typename... T>
+//     eve::unsupported_call<callable_cyl_bessel_ik(T&&...)> operator()(T&&... x) const
+//     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
   };
 }
 
@@ -44,14 +44,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_ikr
-//!   @brief Computes the Bessel functions of the first kind J and Y,
-//!   \f$ J_{\nu}(x)=\sum_{p=0}^{\infty}{\frac{(-1)^p}{p!\,\Gamma (p+\nu +1)}}
-//!   {\left({x \over 2}\right)}^{2p+\nu }\f$
-//!   extended to the complex plane.
-//!
-//!   It is the solution of \f$ x^{2}y''+xy'+(x^2-\nu^2)y=0\f$ for which
-//!   \f$ y(0) = 0\f$ if \f$\nu \ne 0\f$ else \f$1\f$.
+//!   @var  cyl_bessel_ik
+//!   @brief Computes the modified Bessel functions \f$I\f$ and \f$K\f$,
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -63,10 +57,10 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<eve::floating_scalar_ordered_value N, eve::floating_ordered_value T, complexRange R>
-//!      constexpr auto cyl_bessel_ikr(N nu, T z, R& js,  R& ys) noexcept;
+//!      constexpr auto cyl_bessel_ik(N nu, T z, R& js,  R& ys) noexcept;
 //!
 //!      template<eve::floating_scalar_ordered_value N, conceots::kyosu::complex Z, complexRange R>
-//!      constexpr T    cyl_bessel_ikr(N n, Z z, R& js,  R& ys) noexcept;
+//!      constexpr T    cyl_bessel_ik(N n, Z z, R& js,  R& ys) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -79,18 +73,19 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns the kumi pair \f$\{J_\nu(z), Y_\nu(z)\}f$ of complex values.
+//!     * returns the kumi pair \f$\{I_\nu(z), K_\nu(z)\}\f$ of complex values.
 //!
 //!   *Ouput values
 //!
-//!     * on output js contains the values of   \f$((J_{\nu_0+i})_{i = 0\cdot n}\f$
-//!     * on output ys contains the values of   \f$((Y_{\nu_0+i})_{i = 0\cdot n}\f$
+//!     * on output js contains the values of   \f$((I_{\nu_0+\epsilon i})_{i = 0\cdot n}\f$
+//!     * on output ys contains the values of   \f$((K_{\nu_0+\epsilon i})_{i = 0\cdot n}\f$
 //!
-//!        where \f$\nu_0\f$ is the fractional part of \f$\nu\f$ (\f$0 \le\nu_0\lt 0\f$ and \f$\nu = \nu_0+n\f$.
+//!        where \f$\nu_0\f$ is the fractional part of \f$\nu\f$, \f$\nu = \nu_0+\epsilon n\f$
+//!        and  \f$\epsilon\f$ is the sign of \f$\nu\f$ .
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/cyl_bessel_ikr.cpp}
+//!  @godbolt{doc/cyl_bessel_ik.cpp}
 //! @}
 //======================================================================================================================
 inline constexpr tags::callable_cyl_bessel_ik cyl_bessel_ik = {};

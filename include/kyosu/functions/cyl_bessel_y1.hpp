@@ -41,7 +41,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_y1
+//!   @var  cyl_bessel_y1
 //!   @brief Computes  the Bessel function of the second kind,
 //!   \f$ Y_1(x)=\lim_{\alpha\to 1}{{\frac {J_{\alpha  }(x)\cos(\alpha\pi)-J_{-\alpha }(x)}{\sin(\alpha\pi)}}}\f$,
 //!   extended to the complex plane and cayley_dickson algebras.

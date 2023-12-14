@@ -56,7 +56,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_jn
+//!   @var  cyl_bessel_jn
 //!   @brief Computes the Bessel functions of the first kind,
 //!   \f$ J_{n}(x)=\sum_{p=0}^{\infty}{\frac{(-1)^p}{p!\,\Gamma (p+n +1)}}
 //!   {\left({x \over 2}\right)}^{2p+n }\f$

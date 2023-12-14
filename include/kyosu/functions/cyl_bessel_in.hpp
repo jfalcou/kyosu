@@ -42,7 +42,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_in
+//!   @var  cyl_bessel_in
 //!   @brief Computes the modified Bessel functions of the first kind \f$I_{n}(x)=i^{-n}J_{n }(ix)\f$,
 //!   extended to the complex plane and cayley_dickson algebras.
 //!
@@ -69,7 +69,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns \f$J_n(z)\f$.
+//!     * returns \f$I_n(z)\f$.
 //!
 //!  @groupheader{Example}
 //!

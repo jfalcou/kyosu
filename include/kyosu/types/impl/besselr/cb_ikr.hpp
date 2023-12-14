@@ -51,9 +51,8 @@ namespace kyosu::_
   //  cb_kr n outputs
   //===-------------------------------------------------------------------------------------------
 
-   template<eve::floating_scalar_value N, typename Z, typename R>
+  template<eve::floating_scalar_value N, typename Z, typename R>
   auto cb_kr(N v, Z z, R& ks) noexcept
-  requires(concepts::complex<Z> || eve::floating_ordered_value<Z>)
   {
     v = eve::abs(v);  //k(-v, z) == K(v, z) DLMF 10.27.1
     using u_t = eve::underlying_type_t<Z>;
@@ -174,14 +173,15 @@ namespace kyosu::_
     }
   }
 
-
   //===-------------------------------------------------------------------------------------------
   //  cyl_bessel_ik
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R1, typename R2> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_k>, N v, Z z, R1 & is, R2& ks) noexcept
+  template<eve::floating_scalar_value N, typename Z, typename R1, typename R2> KYOSU_FORCEINLINE
+  auto dispatch(eve::tag_of<kyosu::cyl_bessel_ik>, N v, Z z, R1& is, R2& ks) noexcept
   {
-    return kumi::tuple{cb_ir(v, z, is), cb_kr(v, z, ks)};
+    auto in = cb_ir(v, z, is);
+    auto kn = cb_kr(v, z, ks);
+    return kumi::tuple{in, kn};
   }
 
 }

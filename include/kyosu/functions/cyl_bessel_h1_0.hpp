@@ -42,7 +42,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_h1_0
+//!   @var  cyl_bessel_h1_0
 //!   @brief Computes  the Bessel function of the third kind, \f$ H^{(1)}_0(x)\f$,
 //!
 //!   @code

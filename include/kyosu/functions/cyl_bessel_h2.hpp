@@ -57,7 +57,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_h2
+//!   @var  cyl_bessel_h2
 //!   @brief Computes the Bessel functions of the third  kind \f$ H^{(2)}_\nu \f$,
 //!
 //!   @code
@@ -95,7 +95,7 @@ namespace kyosu
 //!
 //!   *Ouput values
 //!
-//!     * on output (if present) h2s contains the values of   \f$ (H^{(2)}_{\nu_0+\epsilon i})_{i = 0 \cdots n} \f$, 
+//!     * on output (if present) h2s contains the values of   \f$ (H^{(2)}_{\nu_0+\epsilon i})_{i = 0 \cdots n} \f$,
 //!       where \f$ \nu_0 \f$ is the fractional part of \f$\nu\f$ and \f$\epsilon\f$ is the sign of  \f$ \nu\f$.
 //!
 //!  @groupheader{Example}
