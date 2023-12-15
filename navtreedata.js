@@ -25,11 +25,11 @@
 var NAVTREE =
 [
   [ "kyosu", "index.html", [
-    [ "Cayley-Dickson algebras", "index.html#autotoc_md29", null ],
-    [ "What does this implementation provide", "index.html#autotoc_md30", [
-      [ "Constructors", "index.html#autotoc_md31", null ],
-      [ "Operators", "index.html#autotoc_md32", null ],
-      [ "Functions", "index.html#autotoc_md33", null ]
+    [ "Cayley-Dickson algebras", "index.html#autotoc_md31", null ],
+    [ "What does this implementation provide", "index.html#autotoc_md32", [
+      [ "Constructors", "index.html#autotoc_md33", null ],
+      [ "Operators", "index.html#autotoc_md34", null ],
+      [ "Functions", "index.html#autotoc_md35", null ]
     ] ],
     [ "How-Tos", "usergroup0.html", null ],
     [ "Reference Documentation", "usergroup1.html", [

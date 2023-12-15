@@ -192,6 +192,12 @@ $(document).ready(function(){initNavTree('group__functions_ga658858c9e724f37a163
 <div class="line">  eve::wide&lt;double, eve::fixed&lt;4&gt;&gt; z1(1.0, 2.0, 40.0, 0.0),  z2(36.0, 0.5, 0.0, 40.0);</div>
 <div class="line">  <span class="keyword">auto</span> z0 = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(z1, z2);</div>
 <div class="line">  std::cout &lt;&lt; z0 &lt;&lt; <span class="stringliteral">&quot;\n -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga658858c9e724f37a163126c8e24b80e5.html#ga658858c9e724f37a163126c8e24b80e5">cyl_bessel_y1</a>(z0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">   eve::wide&lt;double, eve::fixed&lt;8&gt;&gt; l(1.0, 15.0, 40.0, 60.0, eve::inf(eve::as&lt;double&gt;()),eve::minf(eve::as&lt;double&gt;()), eve::nan(eve::as&lt;double&gt;()), 0.0);</div>
+<div class="line">   <span class="keyword">auto</span> lims = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(l);</div>
+<div class="line">   std::cout &lt;&lt; lims &lt;&lt; <span class="stringliteral">&quot; \n -&gt; \n&quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga658858c9e724f37a163126c8e24b80e5.html#ga658858c9e724f37a163126c8e24b80e5">kyosu::cyl_bessel_y1</a>(lims) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">   std::cout &lt;&lt; l    &lt;&lt; <span class="stringliteral">&quot; \n -&gt; \n&quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga658858c9e724f37a163126c8e24b80e5.html#ga658858c9e724f37a163126c8e24b80e5">cyl_bessel_y1</a>(l)    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_gae0cdc9d2dae205852268d4c5cdca6578_html_gae0cdc9d2dae205852268d4c5cdca6578"><div class="ttname"><a href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a></div><div class="ttdeci">constexpr tags::callable_complex complex</div><div class="ttdoc">Constructs a kyosu::complex.</div><div class="ttdef"><b>Definition:</b> to_complex.hpp:70</div></div>
