@@ -19,7 +19,10 @@ namespace kyosu::tags
     KYOSU_DEFERS_CALLABLE(cyl_bessel_in_);
 
     template<eve::ordered_value N, eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v) noexcept { return eve::cyl_bessel_in(n, v); }
+    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v) noexcept
+    {
+      return eve::cyl_bessel_in(n, v);
+    }
 
     template<typename N, typename T>
     KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1) const noexcept
@@ -39,7 +42,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_in
+//!   @var  cyl_bessel_in
 //!   @brief Computes the modified Bessel functions of the first kind \f$I_{n}(x)=i^{-n}J_{n }(ix)\f$,
 //!   extended to the complex plane and cayley_dickson algebras.
 //!
@@ -66,7 +69,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns \f$J_n(z)\f$.
+//!     * returns \f$I_n(z)\f$.
 //!
 //!  @groupheader{Example}
 //!

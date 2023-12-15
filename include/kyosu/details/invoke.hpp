@@ -36,7 +36,7 @@ namespace kyosu
   namespace concepts
   {
     template<typename T>
-    concept extractor = eve::callable<T> && requires(T t)
+    concept extractor = eve::callable_entity<T> && requires(T t)
     {
       { t.minimum_valid_index };
       { t.maximum_valid_index };

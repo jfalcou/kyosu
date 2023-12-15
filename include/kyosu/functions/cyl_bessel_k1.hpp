@@ -38,7 +38,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_k1
+//!   @var  cyl_bessel_k1
 //!   @brief Computes  the Bessel function of the second kind,
 //!   \f$ K_1(x)\lim_{\alpha\to 1}{\frac {\pi }{2}}{\frac {I_{-\alpha }(x)-I_{\alpha }(x)}{\sin \alpha \pi }}\f$ extended to the complex plane and cayley_dickson values.
 //!

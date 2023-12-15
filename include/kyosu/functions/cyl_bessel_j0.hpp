@@ -38,7 +38,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_j0
+//!   @var  cyl_bessel_j0
 //!   @brief Computes  the Bessel function of the first kind,
 //!   \f$ J_0(x)=\frac1{\pi }\int _{0}^{\pi}\cos(x\sin \tau)
 //!   \,\mathrm {d} \tau \f$ extended to the complex plane and cayley_dickson algebras.

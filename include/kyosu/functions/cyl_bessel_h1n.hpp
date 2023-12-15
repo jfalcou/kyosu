@@ -43,7 +43,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_h1n
+//!   @var  cyl_bessel_h1n
 //!   @brief Computes the Bessel/Hankel functions of the third kind,
 //!   \f$ H_n^{(1)}(z) = J_n(z)+iY_n(z)\f$.
 //!

@@ -128,7 +128,7 @@ namespace kyosu
   //====================================================================================================================
   template<typename... T>
   requires(concepts::cayley_dickson<T> || ... )
-  KYOSU_FORCEINLINE   constexpr auto tag_invoke(eve::callable auto const& f, auto, T&&... c) noexcept
+  KYOSU_FORCEINLINE   constexpr auto tag_invoke(eve::callable_entity auto const& f, auto, T&&... c) noexcept
                   ->  decltype(_::dispatch(f, KYOSU_FWD(c)...))
   {
     return _::dispatch(f, KYOSU_FWD(c)...);

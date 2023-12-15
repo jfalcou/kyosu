@@ -374,11 +374,7 @@ namespace kyosu::_
       }
       else if constexpr(eve::floating_ordered_value<C1> ) // c0 is complex c1 is real
       {
-        auto lc0 = kyosu::log_abs(c0);
-        auto argc0 = kyosu::arg(c0);
-        auto rho = eve::exp(lc0*c1);
-        auto theta = argc0*c1;
-        return rho*kyosu::exp_i(theta);
+        return exp(c1*log(c0));
       }
       else if constexpr( kyosu::concepts::complex<C0>)// c0 and c1 are complex
       {
@@ -406,7 +402,7 @@ namespace kyosu::_
       }
       else if  constexpr(eve::floating_ordered_value<C0>)//c1 cayley c0 real
       {
-         return cayley_extend_rev(pow, c0, c1);
+        return cayley_extend_rev(pow, c0, c1);
       }
       else
       {

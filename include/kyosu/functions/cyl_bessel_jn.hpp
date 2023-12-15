@@ -18,14 +18,31 @@ namespace kyosu::tags
 
     KYOSU_DEFERS_CALLABLE(cyl_bessel_jn_);
 
-    template<eve::ordered_value N, eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v) noexcept { return eve::cyl_bessel_jn(n, v); }
+    template<eve::integral_scalar_value N, eve::floating_ordered_value T>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v) noexcept
+    {
+      return eve::cyl_bessel_jn(n, v);
+    }
+
+    template<eve::integral_scalar_value N, eve::floating_ordered_value T, typename R>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v, R& js) noexcept
+    {
+      auto fn = callable_cyl_bessel_jn{};
+      return fn(n, v, js);
+    }
 
     template<typename N, typename T>
     KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1) const noexcept
     -> decltype(eve::tag_invoke(*this, target0, target1))
     {
       return eve::tag_invoke(*this, target0, target1);
+    }
+
+    template<typename N, typename T, typename R>
+    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1, R & target2) const noexcept
+    -> decltype(eve::tag_invoke(*this, target0, target1, target2))
+    {
+      return eve::tag_invoke(*this, target0, target1, target2);
     }
 
     template<typename... T>
@@ -39,7 +56,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_jn
+//!   @var  cyl_bessel_jn
 //!   @brief Computes the Bessel functions of the first kind,
 //!   \f$ J_{n}(x)=\sum_{p=0}^{\infty}{\frac{(-1)^p}{p!\,\Gamma (p+n +1)}}
 //!   {\left({x \over 2}\right)}^{2p+n }\f$

@@ -21,11 +21,25 @@ namespace kyosu::tags
     template<eve::integral_scalar_value N, eve::floating_ordered_value T>
     static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v) noexcept { return eve::sph_bessel_jn(n, v); }
 
-    template<typename N, typename T>
+    template<eve::integral_scalar_value N, eve::floating_ordered_value T, typename R>
+    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v, R& js) noexcept
+    {
+      auto fn = callable_sph_bessel_jn{};
+      return fn(n, v, js);
+    }
+
+     template<typename N, typename T>
     KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1) const noexcept
     -> decltype(eve::tag_invoke(*this, target0, target1))
     {
       return eve::tag_invoke(*this, target0, target1);
+    }
+
+    template<typename N, typename T, typename R>
+    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1, R & target2) const noexcept
+    -> decltype(eve::tag_invoke(*this, target0, target1, target2))
+    {
+      return eve::tag_invoke(*this, target0, target1, target2);
     }
 
     template<typename... T>

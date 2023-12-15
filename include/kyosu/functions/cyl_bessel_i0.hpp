@@ -38,7 +38,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_i0
+//!   @var  cyl_bessel_i0
 //!   @brief Computes  the modified Bessel function of the first kind \f$I_{0}(x)=J_{0}(ix)\f$
 //!   extended to the complex plane and cayley_dickson algebras.
 //!
