@@ -40,12 +40,13 @@ namespace kyosu::_
         cjv[1] = cjv1;
         cyv[1] = cyv1;
       }
-      if(n == 0)  {
-        return kumi::tuple{cjv0, cyv0};
+      if(n == 0)
+      {
+        return kumi::tuple{cjv[0], cyv[0]};
       }
       else if (n == 1)
       {
-        return kumi::tuple{cjv1, cyv1};
+        return kumi::tuple{cjv[1], cyv[1]};
       }
       else if (n >= 2)
       {
@@ -126,16 +127,24 @@ namespace kyosu::_
     else
     {
       // v is not flint and is less than 0;
+      // we use:
+      // J_{-v] = J_v(z) cos(v pi) - Y_v *sin(v pi)
+      // y_{-v] = J_v(z) sin(v pi) + Y_v *cos(v pi)
       cb_jy(-v, z, cjv, cyv);
-      for(int i=0; i < an ; ++i)
+      auto v0 = frac(-v);
+      auto [s, c] = sinpicospi(v0);
+      for(int i=0; i <= an ; ++i)
       {
-        auto [s, c] = sinpicospi(v);
-        auto a = cjv[i]*s;
-        auto b = cyv[i]*c;
-        cjv[i] = a-b;
-        cyv[i] = a+b;
+        auto aa = cjv[i]*c;
+        auto bb = cyv[i]*s;
+        auto cc = cjv[i]*s;
+        auto dd = cyv[i]*c;
+        cjv[i] = aa-bb; //mulmi(a-b);
+        cyv[i] = cc+dd;
+        s = -s;
+        c = -c;
       }
-      return kumi::tuple{cjv[n], cyv[n]};
+      return kumi::tuple{cjv[an], cyv[an]};
     }
   }
 
@@ -154,10 +163,10 @@ namespace kyosu::_
   template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_j>, N v, Z z, R & js) noexcept
   {
-    auto n = int(abs(v))+1;
-    auto doit = [v, z, &js](auto ys){
+    auto n = int(abs(v));
+    auto doit = [n, v, z, &js](auto ys){
       auto [jvn, _] = cb_jy(v, z, js, ys);
-      return jvn;
+      return js[n];
     };
     return with_alloca<Z>(n+1, doit);
   }
@@ -168,12 +177,12 @@ namespace kyosu::_
   template<eve::floating_scalar_value N, typename Z>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_j>, N v, Z z) noexcept
   {
-    auto n = int(abs(v))+1;
+    auto n = int(abs(v));
     if constexpr(concepts::complex<Z> )
     {
-      auto doit = [v, z](auto js, auto ys){
+      auto doit = [n, v, z](auto js, auto ys){
         auto [jv, _] = cb_jy(v, z, js, ys);
-        return jv;
+        return js[n];
       };
       return with_alloca<Z>(n+1, doit);
     }
@@ -203,7 +212,7 @@ namespace kyosu::_
   template<eve::floating_scalar_value N, typename Z>
   auto dispatch(eve::tag_of<kyosu::cyl_bessel_y>, N v, Z z) noexcept
   {
-    auto n = int(abs(v))+1;
+    auto n = int(abs(v));
     if constexpr(concepts::complex<Z> )
     {
       auto doit = [v, z](auto js, auto ys){

@@ -41,45 +41,15 @@ TTS_CASE_WITH ( "Check kyosu::airy_ai over real"
         , 0.0000000000000000e+00, -1.5188956587718155e-01, 2.1867029634299019e-02, 6.0030132776007987e-02
         , 3.9632838829414818e-02, 2.2033585182583651e-02, 1.3313384345125566e-02, 8.4631437627202440e-03};
 
-    auto z = kyosu::complex(0.0);
-    std::cout << kyosu::airy_ai(z) << std::endl;
     for(int i=0; i < 16; ++i)
     {
      auto c = kyosu::complex(re[i], im[i]);
      auto res = kyosu::complex(reres[i], imres[i]);
-//     std::cout << "i " << i << " c " << c << " arg(c) " << kyosu::arg(c) << " sqrt(c) "<< kyosu::sqrt(c) << std::endl;
      TTS_RELATIVE_EQUAL(kyosu::airy_ai(c), res, 1.0e-3) << i <<  " <- " << c << "arg " << kyosu::arg(c) << '\n';
-//     auto z = 2*kyosu::pow(c, T(1.5) )/3;
-//      auto kz = -kyosu::cyl_bessel_k(1/T(3), z)*kyosu::sqrt(c/3)/eve::pi(eve::as(c));
-//      std::cout << "kz " << kz << std::endl;
-//      TTS_RELATIVE_EQUAL(kz, res, 1.0e-4) << i <<  " <- " << c << '\n';
      TTS_RELATIVE_EQUAL(kyosu::airy_ai(re[i]), kyosu::real(kyosu::airy_ai(kyosu::complex(re[i], e_t(0.0)))), 1.0e-4)<< i <<  " -> " << re[i] << '\n';
      TTS_RELATIVE_EQUAL(kyosu::airy_ai(im[i]), kyosu::real(kyosu::airy_ai(kyosu::complex(im[i], e_t(0.0)))), 1.0e-4)<< i <<  " -> " << im[i] << '\n';
+     TTS_RELATIVE_EQUAL(kyosu::airy_ai(kyosu::conj(c)), kyosu::conj(res), 1.0e-3) << i <<  " <- " << c << "arg " << kyosu::arg(c) << '\n';
+
     }
   }
 };
-
-// TTS_CASE_WITH ( "Check kyosu::airy_ai over real"
-//               , kyosu::real_types
-//               , tts::generate(tts::randoms(-10,10),
-//                               tts::randoms(-10,10)
-//                              )
-//               )
-// <typename T>(T a0, T a1)
-// {
-//   using u_t = eve::underlying_type_t<T>;
-//   if constexpr(sizeof(u_t) == 8)
-//   {
-//     auto c =  kyosu::complex(a0, a1);
-//     auto cb=  kyosu::conj(c);
-// //     auto cr=  kyosu::complex(a0);
-// //     auto ci=  kyosu::complex(T(0), a1);
-//     using kyosu::airy_ai;
-//     auto j0c = airy_ai(c);
-//     TTS_EQUAL(j0c, kyosu::conj(airy_ai(cb))) << "c = " << c << '\n';
-// //     TTS_EXPECT(eve::all(kyosu::is_real(cr)));
-// //     TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
-// //     auto z =   kyosu::complex(T(0), T(0));
-// //     TTS_IEEE_EQUAL(airy_ai(z), kyosu::complex(airy_ai(T(0))));
-//   }
-// };

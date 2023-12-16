@@ -65,7 +65,6 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_i over real"
       auto vv = T(0.3);
       for (n = 0; n <= N; ++n)
       {
-       std::cout << "n = "<< n << " k = "<< k << std::endl;
         auto c = kyosu::complex(re[k], im[k]);
         kyosu::cyl_bessel_i(v1, c, is_03);
         auto refi_03=  kyosu::complex_t<T>(reresi_03[n][k], imresi_03[n][k]);
