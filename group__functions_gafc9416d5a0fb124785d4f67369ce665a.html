@@ -176,16 +176,22 @@ $(document).ready(function(){initNavTree('group__functions_gafc9416d5a0fb124785d
 <div class="line">  std::cout.precision(16);</div>
 <div class="line">  <span class="keyword">using </span>w_t = eve::wide&lt;double, eve::fixed&lt;2&gt;&gt;;</div>
 <div class="line">  <span class="keyword">auto</span> z = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(w_t(20.0, 1.5), w_t(0.0, 1.5));</div>
-<div class="line">  <span class="keyword">auto</span> v = 3.3;</div>
+<div class="line">  <span class="keyword">auto</span> v = -(2+1/3.0);</div>
+<div class="line">  <span class="keywordtype">int</span> nb = int(eve::abs(v)+1);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;z                    &quot;</span> &lt;&lt; z &lt;&lt; std::endl;</div>
-<div class="line">  std::vector&lt;<span class="keyword">decltype</span>(z)&gt; js(4);</div>
+<div class="line">  std::vector&lt;<span class="keyword">decltype</span>(z)&gt; js(nb);</div>
 <div class="line">  <a class="code hl_variable" href="group__functions_gafc9416d5a0fb124785d4f67369ce665a.html#gafc9416d5a0fb124785d4f67369ce665a">kyosu::cyl_bessel_j</a>(v, z, js);</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> n=0; n &lt;= 3; ++n)</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a> = eve::sign(v);</div>
+<div class="line">  <span class="keyword">auto</span> v0 =  eve::frac(v);</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> n=0; n &lt; nb; ++n)</div>
 <div class="line">  {</div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;js[&quot;</span> &lt;&lt; n &lt;&lt; <span class="stringliteral">&quot;] = &quot;</span> &lt;&lt; js[n] &lt;&lt; std::endl;</div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;js[&quot;</span> &lt;&lt; n &lt;&lt; <span class="stringliteral">&quot;]                    = &quot;</span> &lt;&lt; js[n] &lt;&lt; std::endl;</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;j(&quot;</span> &lt;&lt; v0 &lt;&lt; <span class="stringliteral">&quot;,  z) &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gafc9416d5a0fb124785d4f67369ce665a.html#gafc9416d5a0fb124785d4f67369ce665a">kyosu::cyl_bessel_j</a>(v0, z) &lt;&lt; std::endl;</div>
+<div class="line">    v0 += <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a>;</div>
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__functions_ga5354d486ec4fca0c8261639b8ccfffd7_html_ga5354d486ec4fca0c8261639b8ccfffd7"><div class="ttname"><a href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">kyosu::inc</a></div><div class="ttdeci">constexpr tags::callable_inc inc</div><div class="ttdoc">Increments the argument.</div><div class="ttdef"><b>Definition:</b> inc.hpp:72</div></div>
 <div class="ttc" id="agroup__functions_gae0cdc9d2dae205852268d4c5cdca6578_html_gae0cdc9d2dae205852268d4c5cdca6578"><div class="ttname"><a href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a></div><div class="ttdeci">constexpr tags::callable_complex complex</div><div class="ttdoc">Constructs a kyosu::complex.</div><div class="ttdef"><b>Definition:</b> to_complex.hpp:70</div></div>
 </div><!-- fragment --> 
 </div>
