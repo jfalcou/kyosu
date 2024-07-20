@@ -58,23 +58,23 @@ namespace kyosu
 //!   @endcode
 //!
 //!   **Parameter**
-//!
 //!     * `x`: floating or Cayley Dickinson value to process.
 //!
 //!   **Template Parameter**
-//!
 //!     * `U`: target type to convert to.
 //!
 //!   **Return value**
 //!
-//!        a value resulting of the conversion of each of its elements to type U.
+//!   The value resulting of the conversion of each of its elements to type U.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/convert.cpp}
-//! @}
 //======================================================================================================================
 inline constexpr auto convert = eve::functor<convert_t>;
+//======================================================================================================================
+//! @}
+//======================================================================================================================
 }
 
 namespace kyosu::_

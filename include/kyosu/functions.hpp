@@ -229,7 +229,7 @@
 // #include <kyosu/functions/zeta.hpp>
 
 //======================================================================================================================
-//! @brief Functions performing computations over quaternion complex or real elements only.
+// Functions performing computations over quaternion complex or real elements only.
 //======================================================================================================================
 
 #include <kyosu/functions/parts.hpp>

@@ -39,6 +39,9 @@ namespace kyosu
   //====================================================================================================================
   //! @addtogroup functions
   //! @{
+  //====================================================================================================================
+
+  //====================================================================================================================
   //!   @var real
   //!   @brief Extracts the real part of a value.
   //!
@@ -70,13 +73,10 @@ namespace kyosu
   //!  @groupheader{Example}
   //!
   //!  @godbolt{doc/real.cpp}
-  //! @}
   //====================================================================================================================
   inline constexpr auto real    = eve::functor<extractor<0>::parts_t>;
 
   //====================================================================================================================
-  //! @addtogroup functions
-  //! @{
   //!   @var ipart
   //!   @brief Extracts the imaginary part of a value.
   //!
@@ -115,8 +115,6 @@ namespace kyosu
   inline constexpr auto imag    = eve::functor<extractor<1>::parts_t>;
 
   //====================================================================================================================
-  //! @addtogroup functions
-  //! @{
   //!   @var jpart
   //!   @brief Extracts the \f$j\f$ part of a value.
   //!
@@ -153,8 +151,6 @@ namespace kyosu
   inline constexpr auto jpart   = eve::functor<extractor<2>::parts_t>;
 
   //====================================================================================================================
-  //! @addtogroup functions
-  //! @{
   //!   @var kpart
   //!   @brief Extracts the \f$k\f$  part of a value.
   //!
@@ -191,8 +187,6 @@ namespace kyosu
   inline constexpr auto kpart   = eve::functor<extractor<3>::parts_t>;
 
   //====================================================================================================================
-  //! @addtogroup functions
-  //! @{
   //!   @var lpart
   //!   @brief Extracts the \f$l\f$  part of a value.
   //!
@@ -230,9 +224,7 @@ namespace kyosu
   inline constexpr auto lpart   = eve::functor<extractor<4>::parts_t>;
 
   //====================================================================================================================
-  //! @addtogroup functions
-  //! @{
-  //!   @var lpart
+  //!   @var lipart
   //!   @brief Extracts the \f$li\f$  part of a value.
   //!
   //!   **Defined in Header**
@@ -269,9 +261,7 @@ namespace kyosu
   inline constexpr auto lipart  = eve::functor<extractor<5>::parts_t>;
 
   //====================================================================================================================
-  //! @addtogroup functions
-  //! @{
-  //!   @var lpart
+  //!   @var ljpart
   //!   @brief Extracts the \f$lj\f$  part of a value.
   //!
   //!   **Defined in Header**
@@ -308,9 +298,7 @@ namespace kyosu
   inline constexpr auto ljpart  = eve::functor<extractor<6>::parts_t>;
 
   //====================================================================================================================
-  //! @addtogroup functions
-  //! @{
-  //!   @var lpart
+  //!   @var lkpart
   //!   @brief Extracts the \f$lk\f$  part of a value.
   //!
   //!   **Defined in Header**
@@ -343,6 +331,10 @@ namespace kyosu
   //!  @groupheader{Example}
   //!
   //!  @godbolt{doc/lipart.cpp}
+  //====================================================================================================================
+
+  //====================================================================================================================
+  //! @}
   //====================================================================================================================
   inline constexpr auto lkpart  = eve::functor<extractor<7>::parts_t>;
 }

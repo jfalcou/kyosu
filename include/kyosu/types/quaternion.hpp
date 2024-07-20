@@ -19,12 +19,11 @@ namespace kyosu
   //! @brief Type alias for quaternion numbers
   //!
   //! Quaternion numbers are implemented as Cayley-dickson numbers of dimension 4.
-  //!
-  //! @}
   //====================================================================================================================
-
   template<typename T>
   using quaternion_t = as_cayley_dickson_n_t<4,T>;
-}
 
-//#include <kyosu/functions/to_quaternion.hpp>
+  //====================================================================================================================
+  //! @}
+  //====================================================================================================================
+}

@@ -28,9 +28,15 @@
 namespace kyosu
 {
   //====================================================================================================================
-  // cayley_dickson struct is the bare bone support class for complex, quaternion and above.
-  // It is built so that all operation over C, Q and other such algebra can be done in a streamlined fashion
-  // based on the Cayley–Dickson construction.
+  //! @addtogroup types
+  //! @{
+  //====================================================================================================================
+
+  //====================================================================================================================
+  //! @class cayley_dickson
+  //! @brief Cayley-Dickson algebra main abstraction
+  //! It is built so that all operation over C, Q and other such algebra can be done in a streamlined fashion
+  //! based on the Cayley–Dickson construction.
   //====================================================================================================================
   template<eve::floating_scalar_value Type, unsigned int N>
   requires(N> 1 && std::has_single_bit(N))
@@ -121,6 +127,10 @@ namespace kyosu
     data_type contents;
   };
 
+  //====================================================================================================================
+  //! @}
+  //====================================================================================================================
+
   template<std::size_t I, typename T, unsigned int N>
   constexpr auto& get(cayley_dickson<T,N>& c) noexcept { return kumi::get<I>(c.contents); }
 
@@ -164,6 +174,7 @@ namespace kyosu
 
   //====================================================================================================================
   //! @name Deduction Guides
+  //! @related cayley_dickson
   //! @{
   //====================================================================================================================
   /// Deduction guide for constructing from product type
