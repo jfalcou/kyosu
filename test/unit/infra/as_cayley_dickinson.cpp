@@ -122,3 +122,36 @@ TTS_CASE( "Check as_cayley_dickson_n<N,T> on SIMD non-reals")
   TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<8, wide<kyosu::octonion_t<float>    >> ), wide<kyosu::octonion_t<float> >);
   TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<8, wide<kyosu::octonion_t<double>   >> ), wide<kyosu::octonion_t<double>>);
 };
+
+TTS_CASE( "Check as_cayley_dickson_n<N,Ts...> with mixed SIMD types")
+{
+  using kyosu::complex_t;
+  using kyosu::quaternion_t;
+  using eve::wide;
+
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<float>>, wide<complex_t<float>>> ), wide<complex_t<float> >);
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<float>>, int           > )        , wide<complex_t<float> >);
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<float>>, std::int64_t  > )        , wide<complex_t<float> >);
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<float>>, float         > )        , wide<complex_t<float> >);
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<float>>, double        > )        , wide<complex_t<float> >);
+
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<float>>, wide<complex_t<float>>> ), wide<complex_t<float> >);
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, int            , wide<complex_t<float>>> )       , wide<complex_t<float> >);
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, std::int64_t   , wide<complex_t<float>>> )       , wide<complex_t<float> >);
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, float          , wide<complex_t<float>>> )       , wide<complex_t<float> >);
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, double         , wide<complex_t<float>>> )       , wide<complex_t<float> >);
+
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<double>>, wide<complex_t<double>>>) , wide<complex_t<double>> );
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<double>>, int           > )         , wide<complex_t<double>> );
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<double>>, std::int64_t  > )         , wide<complex_t<double>> );
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<double>>, float         > )         , wide<complex_t<double>> );
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<double>>, double        > )         , wide<complex_t<double>> );
+
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, wide<complex_t<double>>, wide<complex_t<double>>> ), wide<complex_t<double>> );
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, int         , wide<complex_t<double>>> )           , wide<complex_t<double>> );
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, std::int64_t, wide<complex_t<double>>> )           , wide<complex_t<double>> );
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, float       , wide<complex_t<double>>> )           , wide<complex_t<double>> );
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<2, double      , wide<complex_t<double>>> )           , wide<complex_t<double>> );
+
+  TTS_TYPE_IS((kyosu::as_cayley_dickson_n_t<4, wide<complex_t<double>>, quaternion_t<double>> ), wide<quaternion_t<double>> );
+};

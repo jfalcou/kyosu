@@ -7,10 +7,10 @@
 //======================================================================================================================
 #pragma once
 #include <concepts>
+#include <span>
 
 namespace kyosu::_
 {
-
   template<typename T, std::invocable<std::span<T>> F>
   decltype(auto) with_alloca(auto size, F f)
   {
@@ -28,8 +28,4 @@ namespace kyosu::_
     auto s2 = std::span(p2, size);
     return f(s1, s2);
   }
-
-
-
-
 }

@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kyosu/types/cayley_dickson.hpp>
-#include <eve/concept/value.hpp>
+#include <kyosu/types/traits.hpp>
 
 namespace kyosu
 {
@@ -18,7 +18,7 @@ namespace kyosu
   //! @typedef complex_t
   //! @brief Type alias for complex numbers
   //!
-  //! Complex numbers are implemented as Caley-dickson numbers of dimension 2.
+  //! Complex numbers are implemented as Cayley-dickson numbers of dimension 2.
   //!
   //! @}
   //====================================================================================================================

@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kyosu/types/cayley_dickson.hpp>
-#include <eve/concept/value.hpp>
+#include <kyosu/types/traits.hpp>
 
 namespace kyosu
 {
@@ -18,7 +18,7 @@ namespace kyosu
   //! @typedef quaternion_t
   //! @brief Type alias for quaternion numbers
   //!
-  //! Quaternion numbers are implemented as Caley-dickson numbers of dimension 4.
+  //! Quaternion numbers are implemented as Cayley-dickson numbers of dimension 4.
   //!
   //! @}
   //====================================================================================================================
@@ -27,4 +27,4 @@ namespace kyosu
   using quaternion_t = as_cayley_dickson_n_t<4,T>;
 }
 
-#include <kyosu/functions/to_quaternion.hpp>
+//#include <kyosu/functions/to_quaternion.hpp>

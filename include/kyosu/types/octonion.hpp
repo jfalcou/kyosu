@@ -8,8 +8,7 @@
 #pragma once
 
 #include <kyosu/types/cayley_dickson.hpp>
-#include <eve/concept/value.hpp>
-
+#include <kyosu/types/traits.hpp>
 namespace kyosu
 {
   //! @addtogroup types
@@ -17,7 +16,7 @@ namespace kyosu
   //! @typedef octonion_t
   //! @brief Type alias for octonion numbers
   //!
-  //! Octonion  numbers are implemented as Caley-dickson numbers of dimension 8.
+  //! Octonion  numbers are implemented as Cayley-dickson numbers of dimension 8.
   //!
   //! @}
   //====================================================================================================================

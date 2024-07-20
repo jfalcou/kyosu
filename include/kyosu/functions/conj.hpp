@@ -7,33 +7,22 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_conj: eve::elementwise
-  {
-    using callable_tag_type = callable_conj;
-
-    KYOSU_DEFERS_CALLABLE(conj_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return v; }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_conj(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct conj_t : eve::elementwise_callable<conj_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z z) const noexcept { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept { return KYOSU_CALL(v); }
+
+    KYOSU_CALLABLE_OBJECT(conj_t, conj_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -51,8 +40,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T conj(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T conj(T z) noexcept;
+//!      template<concepts::cayley_dickson T> constexpr T conj(T z) noexcept;
+//!      template<concepts::real T>           constexpr T conj(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -72,5 +61,18 @@ namespace kyosu
 //!  @godbolt{doc/conj.cpp}
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_conj conj = {};
+inline constexpr auto conj = eve::functor<conj_t>;
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto conj_(KYOSU_DELAY(), O const&, Z const& v) noexcept
+  {
+    if constexpr(concepts::cayley_dickson<Z>)
+    {
+      return Z{kumi::map_index([]<typename I>(I, auto m) { if constexpr(I::value>0) return -m; else return m;}, v)};
+    }
+    else return v;
+  }
 }
