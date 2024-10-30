@@ -34,8 +34,21 @@ TTS_CASE_WITH ( "Check kyosu::conj over quaternion"
                               , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
-<typename T>(T r, T i, T j, T k)
+(auto r, auto i, auto j, auto k)
 {
-  using type = kyosu::quaternion_t<T>;
-  TTS_EQUAL(kyosu::conj(type(r,i,j,k)), type(r,-i,-j,-k));
+  TTS_EQUAL(kyosu::conj(kyosu::quaternion(r,i,j,k)), kyosu::quaternion(r,-i,-j,-k));
+};
+
+TTS_CASE_WITH ( "Check kyosu::conj over octonion"
+              , kyosu::real_types
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              )
+              )
+<typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
+{
+  auto o  = kyosu::octonion_t<T>(r,i,j,k,l,li,lj,lk);
+  TTS_EQUAL(kyosu::conj(o), kyosu::octonion_t<T>(r,-i,-j,-k,-l,-li,-lj,-lk));
 };
