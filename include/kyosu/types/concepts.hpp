@@ -26,7 +26,7 @@ namespace kyosu::concepts
 
   /// General real concept
   template<typename T>
-  concept real = std::is_arithmetic_v<eve::element_type_t<T>>;
+  concept real = std::is_arithmetic_v<eve::element_type_t<std::remove_cvref_t<T>>>;
 
   template<typename T>
   concept scalar_real = real<T> && eve::scalar_value<T>;

@@ -5,48 +5,66 @@
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
+#include "kyosu/types/octonion.hpp"
+#include "tts/tools/typename.hpp"
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::ljpart over real"
+TTS_CASE_WITH ( "Check kyosu::real over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10))
               )
-(auto data)
+<typename T>(T data)
 {
-  TTS_EQUAL(kyosu::ljpart(data), eve::zero(eve::as(data)));
+  using real_t = kyosu::as_real_type_t<T>;
+  TTS_EQUAL(kyosu::real(data), data);
+
+  kyosu::real(data) = real_t{7.5};
+  TTS_EQUAL(kyosu::real(data), real_t{7.5});
 };
 
-TTS_CASE_WITH ( "Check kyosu::ljpart over complex"
+TTS_CASE_WITH ( "Check kyosu::real over complex"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10))
               )
 (auto r, auto i)
 {
-  TTS_EQUAL(kyosu::ljpart(kyosu::complex(r,i)), eve::zero(eve::as(r)));
+  auto data = kyosu::complex(r,i);
+  TTS_EQUAL(kyosu::real(data), r);
+
+  kyosu::real(data) = i;
+  TTS_EQUAL(kyosu::real(data), i);
+
 };
 
-TTS_CASE_WITH ( "Check kyosu::ljpart over quaternion"
+TTS_CASE_WITH ( "Check kyosu::real over quaternion"
               , kyosu::real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
-  <typename T>(T r, T i, T j, T k)
+(auto r, auto i, auto j, auto k)
 {
-  using type = kyosu::quaternion_t<T>;
-  TTS_EQUAL(kyosu::ljpart(type(r,i,j,k)), eve::zero(eve::as(r)));
+  auto data = kyosu::quaternion(r,i,j,k);
+  TTS_EQUAL(kyosu::real(data), r);
+
+  kyosu::real(data) = i;
+  TTS_EQUAL(kyosu::real(data), i);
 };
 
-TTS_CASE_WITH ( "Check kyosu::ljpart over octonion"
+TTS_CASE_WITH ( "Check kyosu::real over octonion"
               , kyosu::real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)
-                              , tts::randoms(-10,10), tts::randoms(-10,10)                              )
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              )
               )
-  <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
+<typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
-  using type = kyosu::octonion_t<T>;
-  TTS_EQUAL(kyosu::ljpart(type(r,i,j,k,l,li,lj,lk)), lj );
+  auto data = kyosu::octonion_t<T>(r,i,j,k,l,li,lj,lk);
+  TTS_EQUAL(kyosu::real(data), r);
+
+  kyosu::real(data) = i;
+  TTS_EQUAL(kyosu::real(data), i);
 };

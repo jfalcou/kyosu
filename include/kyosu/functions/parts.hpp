@@ -17,23 +17,20 @@ namespace kyosu
   template<std::ptrdiff_t Index>
   struct extractor
   {
-    template<typename Options>
-    struct parts_t : eve::callable<parts_t, Options>
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr decltype(auto) operator()(Z&& z) const noexcept
     {
-      template<concepts::cayley_dickson Z>
-      KYOSU_FORCEINLINE constexpr decltype(auto) operator()(Z&& z) const noexcept
-      {
-        return KYOSU_CALL(KYOSU_FWD(z), eve::index<Index>);
-      }
+      using type = eve::element_type_t<std::remove_cvref_t<Z>>;
+      if constexpr(Index < type::static_dimension)  return get<Index>(KYOSU_FWD(z));
+      else                                          return as_real_type_t<std::remove_cvref_t<Z>>{0};
+    }
 
-      template<concepts::real V>
-      KYOSU_FORCEINLINE constexpr decltype(auto) operator()(V&& v) const noexcept
-      {
-        return KYOSU_CALL(KYOSU_FWD(v), eve::index<Index>);
-      }
-
-      KYOSU_CALLABLE_OBJECT(parts_t, parts_);
-    };
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr decltype(auto) operator()(V&& v) const noexcept
+    {
+      using type = std::remove_cvref_t<V>;
+      if constexpr(Index == 0) return KYOSU_FWD(v); else  return type{0};
+    }
   };
 
   //====================================================================================================================
@@ -74,7 +71,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/real.cpp}
   //====================================================================================================================
-  inline constexpr auto real    = eve::functor<extractor<0>::parts_t>;
+  inline constexpr auto real    = extractor<0>{};
 
   //====================================================================================================================
   //!   @var ipart
@@ -109,10 +106,10 @@ namespace kyosu
   //!
   //!  @godbolt{doc/ipart.cpp}
   //====================================================================================================================
-  inline constexpr auto ipart   = eve::functor<extractor<1>::parts_t>;
+  inline constexpr auto ipart   = extractor<1>{};
 
   //! Alias for kyosu::ipart
-  inline constexpr auto imag    = eve::functor<extractor<1>::parts_t>;
+  inline constexpr auto imag    = extractor<1>{};
 
   //====================================================================================================================
   //!   @var jpart
@@ -148,7 +145,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/jpart.cpp}
   //====================================================================================================================
-  inline constexpr auto jpart   = eve::functor<extractor<2>::parts_t>;
+  inline constexpr auto jpart   = extractor<2>{};
 
   //====================================================================================================================
   //!   @var kpart
@@ -184,7 +181,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/kpart.cpp}
   //====================================================================================================================
-  inline constexpr auto kpart   = eve::functor<extractor<3>::parts_t>;
+  inline constexpr auto kpart   = extractor<3>{};
 
   //====================================================================================================================
   //!   @var lpart
@@ -221,7 +218,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/lpart.cpp}
   //====================================================================================================================
-  inline constexpr auto lpart   = eve::functor<extractor<4>::parts_t>;
+  inline constexpr auto lpart   = extractor<4>{};
 
   //====================================================================================================================
   //!   @var lipart
@@ -258,7 +255,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/lipart.cpp}
   //====================================================================================================================
-  inline constexpr auto lipart  = eve::functor<extractor<5>::parts_t>;
+  inline constexpr auto lipart  = extractor<5>{};
 
   //====================================================================================================================
   //!   @var ljpart
@@ -295,7 +292,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/lipart.cpp}
   //====================================================================================================================
-  inline constexpr auto ljpart  = eve::functor<extractor<6>::parts_t>;
+  inline constexpr auto ljpart  = extractor<6>{};
 
   //====================================================================================================================
   //!   @var lkpart
@@ -336,21 +333,5 @@ namespace kyosu
   //====================================================================================================================
   //! @}
   //====================================================================================================================
-  inline constexpr auto lkpart  = eve::functor<extractor<7>::parts_t>;
-}
-
-namespace kyosu::_
-{
-  template<typename Z, std::ptrdiff_t Index, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr decltype(auto) parts_(KYOSU_DELAY(), O const&, Z&& v, eve::index_t<Index>) noexcept
-  {
-    using type = std::remove_cvref_t<Z>;
-    if constexpr(concepts::cayley_dickson<type>)
-    {
-      if constexpr(Index < type::static_dimension)  return get<Index>(KYOSU_FWD(v));
-      else                                          return as_real_type_t<type>{0};
-    }
-    else if constexpr(Index == 0)                   return KYOSU_FWD(v);
-    else                                            return type{0};
-  }
+  inline constexpr auto lkpart  = extractor<7>{};
 }
