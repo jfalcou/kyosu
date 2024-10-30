@@ -24,7 +24,22 @@ TTS_CASE_WITH ( "Check behavior of arg on complex"
               )
 (auto r, auto i)
 {
+  using namespace kyosu;
   auto z  = kyosu::complex(r,i);
-  auto ref_args = 
-  TTS_EQUAL(kyosu::arg(z), );
+  auto ref_args = eve::atan2[eve::pedantic]( eve::sign(imag(z)) * kyosu::abs(pure(z)), real(z));
+  TTS_EQUAL(kyosu::arg(z), ref_args);
+};
+
+TTS_CASE_WITH ( "Check behavior of arg on quaternion"
+              , kyosu::real_types
+              , tts::generate ( tts::randoms(-10, 10), tts::randoms(-10,10)
+                              , tts::randoms(-10, 10), tts::randoms(-10,10)
+                              )
+              )
+(auto r, auto i, auto j, auto k)
+{
+  using namespace kyosu;
+  auto z  = kyosu::quaternion(r,i,j,k);
+  auto ref_args = eve::atan2[eve::pedantic]( eve::sign(imag(z)) * kyosu::abs(pure(z)), real(z));
+  TTS_EQUAL(kyosu::arg(z), ref_args);
 };

@@ -7,7 +7,6 @@
 //======================================================================================================================
 #pragma once
 
-#include "eve/module/core/regular/if_else.hpp"
 #include <kyosu/details/callable.hpp>
 
 namespace kyosu
@@ -67,7 +66,6 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
@@ -77,6 +75,7 @@ namespace kyosu::_
     using eve::if_else;
     using eve::is_positive;
     using eve::pedantic;
+    using eve::sign;
 
     if      constexpr(concepts::complex<Z>)         return atan2[pedantic]( imag(v), real(v));
     else if constexpr(concepts::cayley_dickson<Z>)  return atan2[pedantic]( sign(imag(v)) * abs(pure(v)), real(v));
