@@ -16,3 +16,4 @@
 #include <kyosu/constants/k.hpp>
 #include <kyosu/constants/mi.hpp>
 #include <kyosu/constants/cinf.hpp>
+#include <kyosu/constants/wrapped.hpp>
