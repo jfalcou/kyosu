@@ -19,7 +19,7 @@ namespace kyosu
   //====================================================================================================================
 
   /// Adds the real value `other` to `self` and returns the new value of `self`.
-  constexpr auto& operator+=(concepts::cayley_dickson auto& self, eve::value auto other) noexcept
+  constexpr auto& operator+=(concepts::cayley_dickson auto& self, concepts::real auto other) noexcept
   requires( requires {get<0>(self) += other;} )
   {
     get<0>(self) += other;
@@ -36,7 +36,7 @@ namespace kyosu
   }
 
   /// Substracts the real value `other` from `self` and returns the new value of `self`.
-  constexpr auto& operator-=(concepts::cayley_dickson auto& self, eve::value auto other) noexcept
+  constexpr auto& operator-=(concepts::cayley_dickson auto& self, concepts::real auto other) noexcept
   requires( requires {get<0>(self) -= other;} )
   {
     get<0>(self) -= other;
@@ -53,7 +53,7 @@ namespace kyosu
   }
 
   /// Multiplies `self` by the  real value `other`  and returns the new value of `self`.
-  constexpr auto& operator*=(concepts::cayley_dickson auto& self, eve::value auto other) noexcept
+  constexpr auto& operator*=(concepts::cayley_dickson auto& self, concepts::real auto other) noexcept
   requires( requires {get<0>(self) *= other;} )
   {
     kumi::for_each( [&](auto& s) { s *= other; }, self);
@@ -102,7 +102,7 @@ namespace kyosu
   }
 
   /// Divides `self` by the  real value `other` and returns the new value of `self`.
-  constexpr auto& operator/=(concepts::cayley_dickson auto& self, eve::value auto other) noexcept
+  constexpr auto& operator/=(concepts::cayley_dickson auto& self, concepts::real auto other) noexcept
   requires( requires {get<0>(self) /= other;} )
   {
     kumi::for_each( [&](auto& s) { s /= other; }, self);
