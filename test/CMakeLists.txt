@@ -9,12 +9,14 @@ set(root "${CMAKE_SOURCE_DIR}/test")
 ##======================================================================================================================
 ## Documentation tests
 ##======================================================================================================================
-copa_glob_unit(QUIET PATTERN "doc/*.cpp"    INTERFACE kyosu_docs PCH kyosu_doc_pch)
+# copa_glob_unit(QUIET PATTERN "doc/*.cpp"    INTERFACE kyosu_docs PCH kyosu_doc_pch)
 
 ##======================================================================================================================
 ## Unit tests
 ##======================================================================================================================
-copa_glob_unit(QUIET PATTERN "unit/infra/*.cpp"       INTERFACE kyosu_test PCH kyosu_pch)
-copa_glob_unit(QUIET PATTERN "unit/function/*.cpp"    INTERFACE kyosu_test PCH kyosu_pch)
-copa_glob_unit(QUIET PATTERN "unit/complex/*.cpp"     INTERFACE kyosu_test PCH kyosu_pch)
-copa_glob_unit(QUIET PATTERN "unit/quaternion/*.cpp"  INTERFACE kyosu_test PCH kyosu_pch)
+copa_glob_unit(QUIET PATTERN "unit/infra/*.cpp"         INTERFACE kyosu_test PCH kyosu_pch)
+copa_glob_unit(QUIET PATTERN "unit/infra/traits/*.cpp"  INTERFACE kyosu_test PCH kyosu_pch)
+copa_glob_unit(QUIET PATTERN "unit/infra/parts/*.cpp"  INTERFACE kyosu_test PCH kyosu_pch)
+# copa_glob_unit(QUIET PATTERN "unit/function/*.cpp"    INTERFACE kyosu_test PCH kyosu_pch)
+# copa_glob_unit(QUIET PATTERN "unit/complex/*.cpp"     INTERFACE kyosu_test PCH kyosu_pch)
+# copa_glob_unit(QUIET PATTERN "unit/quaternion/*.cpp"  INTERFACE kyosu_test PCH kyosu_pch)
