@@ -7,35 +7,23 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_arg: eve::elementwise
-  {
-    using callable_tag_type = callable_arg;
-
-    KYOSU_DEFERS_CALLABLE(arg_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
-      return eve::if_else(eve::is_positive(v), eve::zero, eve::pi(eve::as(v)));
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_arg(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/module/core/regular/if_else.hpp"
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct arg_t : eve::elementwise_callable<arg_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z z) const noexcept { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept { return KYOSU_CALL(v); }
+
+    KYOSU_CALLABLE_OBJECT(arg_t, arg_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -73,7 +61,25 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/arg.cpp}
+//======================================================================================================================
+  inline constexpr auto arg = eve::functor<arg_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_arg arg = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto arg_(KYOSU_DELAY(), O const&, Z const& v) noexcept
+  {
+    using eve::atan2;
+    using eve::if_else;
+    using eve::is_positive;
+    using eve::pedantic;
+
+    if      constexpr(concepts::complex<Z>)         return atan2[pedantic]( imag(v), real(v));
+    else if constexpr(concepts::cayley_dickson<Z>)  return atan2[pedantic]( sign(imag(v)) * abs(pure(v)), real(v));
+    else                                            return if_else(is_positive(v), eve::zero, eve::pi(eve::as(v)));
+  }
 }

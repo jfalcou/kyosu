@@ -21,9 +21,11 @@ TTS_CASE_WITH ( "Check kyosu::pure over complex"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10))
               )
-  <typename T>(T r, T i)
+(auto r, auto i)
 {
-  TTS_EQUAL(kyosu::pure(kyosu::complex(r,i)), kyosu::complex(T(0),i));
+  auto pz = kyosu::pure(kyosu::complex(r,i));
+  TTS_EQUAL(kyosu::real(pz), kyosu::zero(kyosu::as(r)));
+  TTS_EQUAL(kyosu::imag(pz), i);
 };
 
 TTS_CASE_WITH ( "Check kyosu::pure over quaternion"
@@ -32,10 +34,13 @@ TTS_CASE_WITH ( "Check kyosu::pure over quaternion"
                               , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
-  <typename T>(T r, T i, T j, T k)
+(auto r, auto i, auto j, auto k)
 {
-  using type = kyosu::quaternion_t<T>;
-  TTS_EQUAL(kyosu::pure(type(r,i,j,k)), type(T(0), i, j, k));
+  auto pq = kyosu::pure(kyosu::quaternion(r,i,j,k));
+  TTS_EQUAL(kyosu::real(pq), kyosu::zero(kyosu::as(r)));
+  TTS_EQUAL(kyosu::ipart(pq), i);
+  TTS_EQUAL(kyosu::jpart(pq), j);
+  TTS_EQUAL(kyosu::kpart(pq), k);
 };
 
 TTS_CASE_WITH ( "Check kyosu::pure over octonion"
@@ -45,8 +50,16 @@ TTS_CASE_WITH ( "Check kyosu::pure over octonion"
                               , tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)                              )
               )
-  <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
+<typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
   using type = kyosu::octonion_t<T>;
-  TTS_EQUAL(kyosu::pure(type(r,i,j,k,l,li,lj,lk)), type(T(0),i,j,k,l,li,lj,lk) );
+  auto po = kyosu::pure(type(r,i,j,k,l,li,lj,lk));
+  TTS_EQUAL(kyosu::real(po)   , kyosu::zero(kyosu::as(r)));
+  TTS_EQUAL(kyosu::ipart(po)  , i);
+  TTS_EQUAL(kyosu::jpart(po)  , j);
+  TTS_EQUAL(kyosu::kpart(po)  , k);
+  TTS_EQUAL(kyosu::lpart(po)  , l);
+  TTS_EQUAL(kyosu::lipart(po) ,li);
+  TTS_EQUAL(kyosu::ljpart(po) ,lj);
+  TTS_EQUAL(kyosu::lkpart(po) ,lk);
 };

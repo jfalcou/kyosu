@@ -7,8 +7,6 @@
 //======================================================================================================================
 #pragma once
 
-#include <eve/module/core.hpp>
-#include <eve/module/math.hpp>
 
 namespace kyosu::_
 {
@@ -35,22 +33,6 @@ namespace kyosu::_
       return quaternion(ipart(c), -real(c), kpart(c), -jpart(c));
     else
       return mi(as(c))*c;
-  }
-
-  template<typename C>
-  KYOSU_FORCEINLINE constexpr auto dispatch(eve::tag_of<kyosu::abs> const&, C const& c) noexcept
-  {
-    return kumi::apply(eve::pedantic(eve::hypot), c);
-  }
-
- template<typename C>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::arg> const&, C const& z) noexcept
-  {
-    if constexpr(kyosu::concepts::complex<C>)
-      return eve::pedantic(eve::atan2)(kyosu::imag(z), real(z));
-    else
-      return eve::pedantic(eve::atan2)(sign(ipart(z))*kyosu::abs(pure(z)), real(z));
   }
 
   template<typename C>
@@ -192,14 +174,6 @@ namespace kyosu::_
   auto dispatch(eve::tag_of<kyosu::oneminus> const&, C c) noexcept
   {
     return kyosu::inc(kyosu::minus(c));
-  }
-
-  template<typename C>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::pure> const&, C c) noexcept
-  {
-    real(c) = 0;
-    return c;
   }
 
   template<typename C>

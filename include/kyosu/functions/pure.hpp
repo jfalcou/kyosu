@@ -7,39 +7,22 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_pure
-  {
-    using callable_tag_type = callable_pure;
-
-    KYOSU_DEFERS_CALLABLE(pure_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::zero(eve::as(v)); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_pure(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct pure_t : eve::elementwise_callable<pure_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept { return KYOSU_CALL(v); }
+
+    KYOSU_CALLABLE_OBJECT(pure_t, pure_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -57,8 +40,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto  pure(T const& z)  noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T     pure(T const& z)  noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T pure(T const& z)  noexcept;
+//!      template<kyosu::real T>                     constexpr T pure(T const& z)  noexcept;
 //!   }
 //!   @endcode
 //!
@@ -74,9 +57,23 @@ namespace kyosu
 //!
 //!  @godbolt{doc/imag.cpp}
 //======================================================================================================================
-inline constexpr tags::callable_pure pure = {};
 
+  inline constexpr auto pure = eve::functor<pure_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto pure_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::cayley_dickson<Z>)
+    {
+      real(z) = 0;
+      return z;
+    }
+    else return Z{0};
+  }
 }

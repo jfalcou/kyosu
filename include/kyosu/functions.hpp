@@ -7,24 +7,37 @@
 //======================================================================================================================
 #pragma once
 
+#include <eve/module/core.hpp>
+#include <eve/module/math.hpp>
+
 //======================================================================================================================
 //! @defgroup functions Cayley-Dickson Functions
 //! @brief Functions performing computations over all caylet-dickson types complex, quaternions, octonions...
 //======================================================================================================================
-// #include <kyosu/functions/abs.hpp>
+
+//======================================================================================================================
+// Fundamental functions
+//=================================)=====================================================================================
+#include <kyosu/functions/parts.hpp>
+#include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/conj.hpp>
+#include <kyosu/functions/convert.hpp>
+#include <kyosu/functions/pure.hpp>
+
+//======================================================================================================================
+// Arithmetic and math
+//======================================================================================================================
 // #include <kyosu/functions/acos.hpp>
 // #include <kyosu/functions/acosh.hpp>
 // #include <kyosu/functions/acospi.hpp>
 // #include <kyosu/functions/acot.hpp>
 // #include <kyosu/functions/acotpi.hpp>
-
 // #include <kyosu/functions/airy.hpp>
 // #include <kyosu/functions/airy_ai.hpp>
 // #include <kyosu/functions/airy_bi.hpp>
-
 // #include <kyosu/functions/atanpi.hpp>
 // #include <kyosu/functions/acoth.hpp>
-// #include <kyosu/functions/arg.hpp>
+#include <kyosu/functions/arg.hpp>
 // #include <kyosu/functions/acsc.hpp>
 // #include <kyosu/functions/acscpi.hpp>
 // #include <kyosu/functions/acsch.hpp>
@@ -41,18 +54,15 @@
 // #include <kyosu/functions/beta.hpp>
 // #include <kyosu/functions/ceil.hpp>
 // #include <kyosu/functions/commutator.hpp>
-#include <kyosu/functions/conj.hpp>
 // #include <kyosu/functions/cos.hpp>
 // #include <kyosu/functions/cosh.hpp>
 // #include <kyosu/functions/cospi.hpp>
 // #include <kyosu/functions/cot.hpp>
 // #include <kyosu/functions/cotpi.hpp>
 // #include <kyosu/functions/coth.hpp>
-#include <kyosu/functions/convert.hpp>
 // #include <kyosu/functions/csc.hpp>
 // #include <kyosu/functions/cscpi.hpp>
 // #include <kyosu/functions/csch.hpp>
-
 // #include <kyosu/functions/cyl_bessel_j0.hpp>
 // #include <kyosu/functions/cyl_bessel_j1.hpp>
 // #include <kyosu/functions/cyl_bessel_jn.hpp>
@@ -60,7 +70,6 @@
 // #include <kyosu/functions/cyl_bessel_y1.hpp>
 // #include <kyosu/functions/cyl_bessel_yn.hpp>
 // #include <kyosu/functions/cyl_bessel_jyn.hpp>
-
 // #include <kyosu/functions/cyl_bessel_h1_0.hpp>
 // #include <kyosu/functions/cyl_bessel_h1_1.hpp>
 // #include <kyosu/functions/cyl_bessel_h1n.hpp>
@@ -68,7 +77,6 @@
 // #include <kyosu/functions/cyl_bessel_h2_1.hpp>
 // #include <kyosu/functions/cyl_bessel_h2n.hpp>
 // #include <kyosu/functions/cyl_bessel_h12n.hpp>
-
 // #include <kyosu/functions/cyl_bessel_i0.hpp>
 // #include <kyosu/functions/cyl_bessel_i1.hpp>
 // #include <kyosu/functions/cyl_bessel_in.hpp>
@@ -76,7 +84,6 @@
 // #include <kyosu/functions/cyl_bessel_k1.hpp>
 // #include <kyosu/functions/cyl_bessel_kn.hpp>
 // #include <kyosu/functions/cyl_bessel_ikn.hpp>
-
 // #include <kyosu/functions/cyl_bessel_j.hpp>
 // #include <kyosu/functions/cyl_bessel_y.hpp>
 // #include <kyosu/functions/cyl_bessel_jy.hpp>
@@ -86,7 +93,6 @@
 // #include <kyosu/functions/cyl_bessel_i.hpp>
 // #include <kyosu/functions/cyl_bessel_k.hpp>
 // #include <kyosu/functions/cyl_bessel_ik.hpp>
-
 // #include <kyosu/functions/dec.hpp>
 // #include <kyosu/functions/deta.hpp>
 // #include <kyosu/functions/digamma.hpp>
@@ -166,7 +172,6 @@
 // #include <kyosu/functions/pow_abs.hpp>
 // #include <kyosu/functions/powm1.hpp>
 // #include <kyosu/functions/proj.hpp>
-// #include <kyosu/functions/pure.hpp>
 // #include <kyosu/functions/radinpi.hpp>
 // #include <kyosu/functions/real.hpp>
 // #include <kyosu/functions/rec.hpp>
@@ -187,8 +192,6 @@
 // #include <kyosu/functions/sinhc.hpp>
 // #include <kyosu/functions/sinhcosh.hpp>
 // #include <kyosu/functions/slerp.hpp>
-
-
 // #include <kyosu/functions/sph_bessel_j0.hpp>
 // #include <kyosu/functions/sph_bessel_j1.hpp>
 // #include <kyosu/functions/sph_bessel_jn.hpp>
@@ -196,15 +199,12 @@
 // #include <kyosu/functions/sph_bessel_y1.hpp>
 // #include <kyosu/functions/sph_bessel_yn.hpp>
 // #include <kyosu/functions/sph_bessel_jyn.hpp>
-
 // #include <kyosu/functions/sph_bessel_h1_0.hpp>
 // #include <kyosu/functions/sph_bessel_h1_1.hpp>
 // #include <kyosu/functions/sph_bessel_h1n.hpp>
-
 // #include <kyosu/functions/sph_bessel_h2_0.hpp>
 // #include <kyosu/functions/sph_bessel_h2_1.hpp>
 // #include <kyosu/functions/sph_bessel_h2n.hpp>
-
 // #include <kyosu/functions/sph_bessel_i1_0.hpp>
 // #include <kyosu/functions/sph_bessel_i1_1.hpp>
 // #include <kyosu/functions/sph_bessel_i1n.hpp>
@@ -215,8 +215,6 @@
 // #include <kyosu/functions/sph_bessel_k1.hpp>
 // #include <kyosu/functions/sph_bessel_kn.hpp>
 // #include <kyosu/functions/sph_bessel_ikn.hpp>
-
-
 // #include <kyosu/functions/sqr.hpp>
 // #include <kyosu/functions/sqr_abs.hpp>
 // #include <kyosu/functions/sqrt.hpp>
@@ -232,7 +230,6 @@
 // Functions performing computations over quaternion complex or real elements only.
 //======================================================================================================================
 
-#include <kyosu/functions/parts.hpp>
 // #include <kyosu/functions/align.hpp>
 // #include <kyosu/functions/from_angle_axis.hpp>
 // #include <kyosu/functions/from_cylindrical.hpp>
