@@ -7,6 +7,8 @@
 //======================================================================================================================
 #pragma once
 
+#include "eve/concept/scalar.hpp"
+#include "eve/traits/same_lanes.hpp"
 #include <eve/traits/element_type.hpp>
 #include <type_traits>
 
@@ -19,9 +21,15 @@ namespace kyosu::concepts
     typename eve::element_type_t<std::remove_cvref_t<T>>::is_cayley_dickson;
   };
 
+  template<typename T>
+  concept scalar_cayley_dickson = cayley_dickson<T> && eve::scalar_value<T>;
+
   /// General real concept
   template<typename T>
   concept real = std::is_arithmetic_v<eve::element_type_t<T>>;
+
+  template<typename T>
+  concept scalar_real = real<T> && eve::scalar_value<T>;
 
   /// Complex number concept
   template<typename T>
