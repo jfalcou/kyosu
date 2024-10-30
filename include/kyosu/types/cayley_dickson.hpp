@@ -10,19 +10,7 @@
 #include <eve/eve.hpp>
 #include <kyosu/details/abi.hpp>
 #include <kyosu/types/concepts.hpp>
-// #include <kyosu/functions.hpp>
-// #include <kyosu/constants.hpp>
 #include <kyosu/types/traits.hpp>
-// #include <kyosu/types/impl/arithmetic.hpp>
-// #include <kyosu/types/impl/predicates.hpp>
-// #include <kyosu/types/impl/math.hpp>
-// #include <kyosu/types/impl/trigo.hpp>
-// #include <kyosu/types/impl/trigo_pi.hpp>
-// #include <kyosu/types/impl/invtrig.hpp>
-// #include <kyosu/types/impl/special.hpp>
-// #include <kyosu/types/impl/bessel.hpp>
-// #include <kyosu/types/impl/quaternion/specific.hpp>
-
 #include <bit>
 
 namespace kyosu
@@ -42,8 +30,8 @@ namespace kyosu
   requires(N> 1 && std::has_single_bit(N))
   struct cayley_dickson
   {
-    using underlying_type = Type;
-    using is_cayley_dickson  = void;
+    using underlying_type     = Type;
+    using is_cayley_dickson   = void;
 
     static constexpr auto static_dimension =  N;
 
@@ -136,41 +124,6 @@ namespace kyosu
 
   template<std::size_t I, typename T, unsigned int N>
   constexpr auto get(cayley_dickson<T,N> const& c) noexcept { return kumi::get<I>(c.contents); }
-
-  //====================================================================================================================
-  // Main function dispatchers
-  //====================================================================================================================
-  // template<typename... T>
-  // requires(concepts::cayley_dickson<T> || ... )
-  // KYOSU_FORCEINLINE   constexpr auto tag_invoke(eve::callable_entity auto const& f, auto, T&&... c) noexcept
-  //                 ->  decltype(_::dispatch(f, KYOSU_FWD(c)...))
-  // {
-  //   return _::dispatch(f, KYOSU_FWD(c)...);
-  // }
-
-  //====================================================================================================================
-  //  Tag invoke override for if_else - Outside so it can properly deals with the complicated parameters of if_else
-  //====================================================================================================================
-  // template<typename T, typename F>
-  // requires(concepts::cayley_dickson<T> || concepts::cayley_dickson<F>)
-  // KYOSU_FORCEINLINE constexpr auto  tag_invoke( eve::tag_of<kyosu::if_else> const& fn, auto, auto m
-  //                                             , T const& t, F const& f
-  //                                             ) noexcept
-  //               -> decltype(_::dispatch(fn, m, t, f))
-  // {
-  //   return _::dispatch(fn, m,t,f);
-  // }
-
-  // // TODO: Move to tag_invoke when EVE catch up on this front
-  // template<typename Tag, concepts::cayley_dickson T>
-  // KYOSU_FORCEINLINE constexpr auto tagged_dispatch(Tag const&, eve::as<T> const&) noexcept
-  // {
-  //   eve::detail::callable_object<Tag> cst;
-  //   auto val = cst( eve::as<as_real_type_t<T>>{} );
-  //   using val_t = std::remove_cvref_t<decltype(val)>;
-  //   if constexpr(!eve::floating_value<val_t>) return val;
-  //   else return as_cayley_dickson_n_t<eve::element_type_t<T>::static_dimension,val_t>(val);
-  // }
 
   //====================================================================================================================
   //! @name Deduction Guides
