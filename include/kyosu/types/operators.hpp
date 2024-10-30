@@ -16,7 +16,7 @@ namespace kyosu
   //! @{
   //====================================================================================================================
 
-  //! @brief Identity for Cayley-dickson value
+  //! @brief Identity for Cayley-Dickson value
   //! @related cayley_dickson
   template<concepts::cayley_dickson Z>
   constexpr auto operator+(Z const& z) noexcept
@@ -24,7 +24,7 @@ namespace kyosu
     return z;
   }
 
-  //! @brief Compute the negation of a given Cayley-dickson value
+  //! @brief Compute the negation of a given Cayley-Dickson value
   //! @related cayley_dickson
   template<concepts::cayley_dickson Z>
   constexpr auto operator-(Z const& z) noexcept
@@ -41,7 +41,7 @@ namespace kyosu
   //! @{
   //====================================================================================================================
 
-  //! @brief Returns the sum of a Cayley-dickson value and a real value in any order
+  //! @brief Returns the sum of a Cayley-Dickson value and a real value in any order
   //! @related cayley_dickson
   template<eve::value T1, eve::value T2>
   requires(concepts::cayley_dickson<T1> || concepts::cayley_dickson<T2>)
@@ -52,7 +52,7 @@ namespace kyosu
     return that += b;
   }
 
-  //! @brief  Returns the difference of two Cayley-dickson values
+  //! @brief  Returns the difference of two Cayley-Dickson values
   //! @related cayley_dickson
   template<eve::value T1, eve::value T2>
   requires(concepts::cayley_dickson<T1> || concepts::cayley_dickson<T2>)
@@ -63,7 +63,7 @@ namespace kyosu
     return that -= b;
   }
 
-  //! @brief Returns the product of two Cayley-dickson values
+  //! @brief Returns the product of two Cayley-Dickson values
   //! @related cayley_dickson
   template<eve::value T1, eve::value T2>
   requires(concepts::cayley_dickson<T1> && concepts::cayley_dickson<T2>)
@@ -79,7 +79,7 @@ namespace kyosu
   requires(concepts::cayley_dickson<T1> != concepts::cayley_dickson<T2>)
   as_cayley_dickson_t<T1,T2> operator*(T1 const& a, T2 const& b) noexcept
   {
-    // This is ok as the non cayley-dickson type is a scalar
+    // This is ok as the non cayley-Dickson type is a scalar
     if constexpr(concepts::cayley_dickson<T1>)
     {
       using type = as_cayley_dickson_t<T1,T2>;
@@ -94,7 +94,7 @@ namespace kyosu
     }
   }
 
-  //! @brief Returns the ration of two Cayley-dickson values
+  //! @brief Returns the ration of two Cayley-Dickson values
   //! @related cayley_dickson
   template<eve::value T1, eve::value T2>
   requires(concepts::cayley_dickson<T1> || concepts::cayley_dickson<T2>)
@@ -103,6 +103,24 @@ namespace kyosu
     using type = as_cayley_dickson_t<T1,T2>;
     type that{kyosu::convert(a,eve::as<eve::element_type_t<type>>())};
     return that /= b;
+  }
+
+  //! @brief Compares a Cayley-Dickson value and a real for equality
+  //! @related cayley_dickson
+  template<concepts::cayley_dickson T1, concepts::real T2>
+  constexpr auto operator==( T1 const& a, T2 b)
+  {
+    using type = as_cayley_dickson_t<T1,T2>;
+    return type{a}.contents == type{b}.contents;
+  }
+
+  //! @brief Compares a real and a Cayley-Dickson value for equality
+  //! @related cayley_dickson
+  template<concepts::real T1, concepts::cayley_dickson T2>
+  constexpr auto operator==( T1 const& a, T2 b)
+  {
+    using type = as_cayley_dickson_t<T1,T2>;
+    return type{a}.contents == type{b}.contents;
   }
 
   //====================================================================================================================
