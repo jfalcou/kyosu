@@ -10,7 +10,7 @@
 #include <kyosu/details/callable.hpp>
 #include <eve/module/math.hpp>
 
-namespace kyosu::detail
+namespace kyosu::_
 {
   template<typename Func> struct constant_t;
 
@@ -54,6 +54,6 @@ namespace kyosu
   using eve::false_;
 
   // Wrapping required
-  inline constexpr auto half = detail::as_constant<eve::half>;
-  inline constexpr auto pi   = detail::as_constant<eve::pi>;
+  inline constexpr auto half = _::as_constant<eve::half>;
+  inline constexpr auto pi   = _::as_constant<eve::pi>;
 }
