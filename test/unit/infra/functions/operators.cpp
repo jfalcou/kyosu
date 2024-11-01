@@ -172,7 +172,6 @@ TTS_CASE_TPL( "Check complex::operator*", kyosu::scalar_real_types)
   TTS_EQUAL((rv   * z_v1  ) , (wc_t{[&](auto i, auto){ return z_v1.get(i) * rv.get(i);}}));
 };
 
-#if defined KYOSU_IS_INFINITE
 TTS_CASE_TPL( "Check complex::operator/", kyosu::scalar_real_types)
 <typename T>(tts::type<T>)
 {
@@ -223,4 +222,3 @@ TTS_CASE_TPL( "Check complex::operator/", kyosu::scalar_real_types)
   TTS_RELATIVE_EQUAL((z_v1 / rv    ) , (wc_t{[&](auto i, auto){ return z_v1.get(i) / rv.get(i);}}), 1e-4);
   TTS_RELATIVE_EQUAL((rv   / z_v1  ) , (wc_t{[&](auto i, auto){ return rv.get(i)   / z_v1.get(i);}}), 1e-4);
 };
-#endif

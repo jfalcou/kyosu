@@ -7,37 +7,22 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_dist: eve::elementwise
-  {
-    using callable_tag_type = callable_dist;
-
-    KYOSU_DEFERS_CALLABLE(dist_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const& v0
-                                               , eve::floating_ordered_value auto const& v1) noexcept
-    {
-      return eve::dist(v0, v1);
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1 ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
-    {
-      return eve::tag_invoke(*this, target0, target1);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_dist(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct dist_t : eve::elementwise_callable<dist_t, Options>
+  {
+    template<eve::value Z0, eve::value Z1>
+    KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::abs(c0-c1))
+    {
+      return kyosu::abs(c0-c1);
+    }
+
+    KYOSU_CALLABLE_OBJECT(dist_t, dist_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -65,13 +50,15 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the distance between the two arguments computed as the absolute value of the arguments difference.
+//!     Returns the distance between the two arguments computed as the distolute value of the arguments difference.
 //!     Arguments can be a mix of floating or Cayley-Dicson values.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/dist.cpp}
+//======================================================================================================================
+  inline constexpr auto dist = eve::functor<dist_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_dist dist = {};
 }

@@ -9,6 +9,11 @@
 
 #include <eve/module/core.hpp>
 #include <kyosu/functions/conj.hpp>
+#include <kyosu/functions/if_else.hpp>
+#include <kyosu/functions/is_infinite.hpp>
+#include <kyosu/functions/is_eqz.hpp>
+#include <kyosu/functions/sqr_abs.hpp>
+#include <kyosu/functions/parts.hpp>
 
 namespace kyosu
 {

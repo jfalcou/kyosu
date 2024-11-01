@@ -7,10 +7,7 @@
 //======================================================================================================================
 #pragma once
 
-#include "eve/module/core/regular/if_else.hpp"
-#include "kyosu/types/cayley_dickson.hpp"
-#include "kyosu/types/concepts.hpp"
-#include "kyosu/types/traits.hpp"
+#include <kyosu/functions/convert.hpp>
 #include <kyosu/details/callable.hpp>
 
 namespace kyosu

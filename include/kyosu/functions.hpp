@@ -97,7 +97,7 @@
 // #include <kyosu/functions/dec.hpp>
 // #include <kyosu/functions/deta.hpp>
 // #include <kyosu/functions/digamma.hpp>
-// #include <kyosu/functions/dist.hpp>
+#include <kyosu/functions/dist.hpp>
 // #include <kyosu/functions/dot.hpp>
 // #include <kyosu/functions/erf.hpp>
 // #include <kyosu/functions/erfcx.hpp>
@@ -174,11 +174,10 @@
 // #include <kyosu/functions/powm1.hpp>
 // #include <kyosu/functions/proj.hpp>
 // #include <kyosu/functions/radinpi.hpp>
-// #include <kyosu/functions/real.hpp>
 // #include <kyosu/functions/rec.hpp>
 // #include <kyosu/functions/right_horner.hpp>
 // #include <kyosu/functions/right_reverse_horner.hpp>
-// #include <kyosu/functions/reldist.hpp>
+#include <kyosu/functions/reldist.hpp>
 // #include <kyosu/functions/reverse_horner.hpp>
 // #include <kyosu/functions/sec.hpp>
 // #include <kyosu/functions/secpi.hpp>

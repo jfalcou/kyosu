@@ -90,20 +90,6 @@ namespace kyosu::_
     }
   }
 
-  template<typename  C0, typename  C1>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::dist> const&, C0 const & c0, C1 const &  c1) noexcept
-  {
-    return kyosu::abs(c0-c1);
-  }
-
-  template<typename  C0, typename  C1>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::reldist> const&, C0 const & c0, C1 const & c1) noexcept
-  {
-    return kyosu::dist(c0, c1)/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
-  }
-
   template<typename  C0, typename  C1, eve::ordered_value T>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::lerp> const&, C0 const & c0, C1 const & c1, T const & t) noexcept

@@ -119,21 +119,21 @@ namespace tts
     return check;
   }
 
-  // template<kyosu::concepts::cayley_dickson T> double relative_distance(T const &l, T const &r)
-  // {
-  //   if(is_ieee_equal(l, r))
-  //     return 0.0;
-  //   else
-  //     return kyosu::reldist(l,r);
-  // }
+  template<kyosu::concepts::cayley_dickson T> double relative_distance(T const &l, T const &r)
+  {
+    if(is_ieee_equal(l, r))
+      return 0.0;
+    else
+      return kyosu::abs(l-r);
+  }
 
-  // template<kyosu::concepts::cayley_dickson T> double absolute_distance(T const &l, T const &r)
-  // {
-  //   if(is_ieee_equal(l, r))
-  //     return 0.0;
-  //   else
-  //     return kyosu::dist(l, r);
-  // }
+  template<kyosu::concepts::cayley_dickson T> double absolute_distance(T const &l, T const &r)
+  {
+    if(is_ieee_equal(l, r))
+      return 0.0;
+    else
+      return kyosu::dist(l, r);
+  }
 
   template<typename T, typename N>
   inline double ulp_distance(eve::wide<T, N> const &l, eve::wide<T, N> const &r)
