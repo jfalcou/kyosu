@@ -45,37 +45,6 @@ namespace kyosu::_
     return if_else(anyinf,  eve::inf(as(r)), r);
   }
 
-  template<typename Mask, typename T, typename U>
-  KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::if_else> const&, Mask const& m, T const& t, U const& f) noexcept
-  {
-    if constexpr(concepts::cayley_dickson<T> && concepts::cayley_dickson<U>)
-    {
-      using type  = as_cayley_dickson_t<T,U>;
-      using ret_t = eve::as_wide_as_t<type,Mask>;
-
-      return ret_t{ kumi::map ( [&](auto const& v, auto const& w) { return eve::if_else(m, v, w); }
-                              , kyosu::convert(t, eve::as_element<type>{})
-                              , kyosu::convert(f, eve::as_element<type>{})
-                              )
-                  };
-    }
-    else
-    {
-      auto parts = [&]()
-      {
-        auto cst = []<typename I>(auto x, I const&) { if constexpr(I::value == 0) return x; else return eve::zero; };
-        if      constexpr(!concepts::cayley_dickson<U>)
-          return kumi::map_index([&](auto i, auto const& e) { return eve::if_else(m, e, cst(f, i)); }, t);
-        else if constexpr(!concepts::cayley_dickson<T>)
-          return kumi::map_index([&](auto i, auto const& e) { return eve::if_else(m, cst(t, i), e); }, f);
-      }();
-
-      using type = eve::as_wide_as_t<std::conditional_t<!concepts::cayley_dickson<U>,T,U>,Mask>;
-      return type{parts};
-    }
-  }
-
   template<typename C>
   KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::ceil> const&, C const& c) noexcept

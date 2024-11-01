@@ -23,6 +23,7 @@
 #include <kyosu/functions/conj.hpp>
 #include <kyosu/functions/convert.hpp>
 #include <kyosu/functions/pure.hpp>
+#include <kyosu/functions/if_else.hpp>
 
 //======================================================================================================================
 // Arithmetic and math
@@ -122,7 +123,7 @@
 // #include <kyosu/functions/fsm.hpp>
 // #include <kyosu/functions/hypot.hpp>
 // #include <kyosu/functions/horner.hpp>
-// #include <kyosu/functions/if_else.hpp>
+
 // #include <kyosu/functions/inc.hpp>
 // #include <kyosu/functions/is_denormal.hpp>
 // #include <kyosu/functions/is_equal.hpp>

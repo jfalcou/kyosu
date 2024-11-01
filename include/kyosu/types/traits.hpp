@@ -127,6 +127,12 @@ namespace kyosu
   template<typename... Ts>
   using as_cayley_dickson_t = typename as_cayley_dickson<Ts...>::type;
 
+
+  template<auto Callable, typename... Ts>
+  using expected_result_t = as_cayley_dickson_n_t < std::max( {dimension_v<Ts>...} )
+                                                  , decltype( Callable( std::declval<as_real_type_t<Ts>>()...) )
+                                                  >;
+
   using eve::as;
 
   //====================================================================================================================
