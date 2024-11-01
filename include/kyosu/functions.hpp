@@ -12,7 +12,7 @@
 
 //======================================================================================================================
 //! @defgroup functions Cayley-Dickson Functions
-//! @brief Functions performing computations over all caylet-dickson types complex, quaternions, octonions...
+//! @brief Functions performing computations over all Cayley-Dickson types complex, quaternions, octonions...
 //======================================================================================================================
 
 //======================================================================================================================
@@ -24,6 +24,7 @@
 #include <kyosu/functions/convert.hpp>
 #include <kyosu/functions/pure.hpp>
 #include <kyosu/functions/if_else.hpp>
+#include <kyosu/functions/arg.hpp>
 
 //======================================================================================================================
 // Arithmetic and math
@@ -38,7 +39,6 @@
 // #include <kyosu/functions/airy_bi.hpp>
 // #include <kyosu/functions/atanpi.hpp>
 // #include <kyosu/functions/acoth.hpp>
-#include <kyosu/functions/arg.hpp>
 // #include <kyosu/functions/acsc.hpp>
 // #include <kyosu/functions/acscpi.hpp>
 // #include <kyosu/functions/acsch.hpp>
@@ -127,7 +127,7 @@
 // #include <kyosu/functions/inc.hpp>
 // #include <kyosu/functions/is_denormal.hpp>
 // #include <kyosu/functions/is_equal.hpp>
-// #include <kyosu/functions/is_eqz.hpp>
+#include <kyosu/functions/is_eqz.hpp>
 // #include <kyosu/functions/is_finite.hpp>
 // #include <kyosu/functions/is_infinite.hpp>
 // #include <kyosu/functions/is_imag.hpp>
