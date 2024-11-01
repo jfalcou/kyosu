@@ -37,16 +37,6 @@ namespace kyosu::_
 
   template<typename C>
   KYOSU_FORCEINLINE constexpr
-  auto dispatch(eve::tag_of<kyosu::sqr_abs> const&, C const& c) noexcept
-  {
-    auto anyinf = kumi::any_of(c, eve::is_infinite);
-    auto squares = kumi::map([](auto const& e) { return e*e; }, c);
-    auto r = kumi::sum( kumi::extract(squares,kumi::index<1>), get<0>(squares));
-    return if_else(anyinf,  eve::inf(as(r)), r);
-  }
-
-  template<typename C>
-  KYOSU_FORCEINLINE constexpr
   auto dispatch(eve::tag_of<kyosu::ceil> const&, C const& c) noexcept
   {
     return C{kumi::map([](auto const& e) { return eve::ceil(e); }, c)};

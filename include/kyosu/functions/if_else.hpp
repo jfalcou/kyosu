@@ -26,6 +26,13 @@ namespace kyosu
       return KYOSU_CALL(m,t,f);
     }
 
+    template<typename M, concepts::real T, concepts::real F>
+    KYOSU_FORCEINLINE constexpr auto
+    operator()(M const& m, T const& t, F const& f) const noexcept -> decltype(eve::if_else(m,t,f))
+    {
+      return eve::if_else(m,t,f);
+    }
+
     KYOSU_CALLABLE_OBJECT(if_else_t, if_else_);
   };
 

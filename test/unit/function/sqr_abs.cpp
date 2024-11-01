@@ -14,7 +14,7 @@ TTS_CASE_WITH ( "Check kyosu::sqr_abs over real"
               )
 (auto data)
 {
-  TTS_EQUAL(kyosu::sqr_abs(data), eve::sqr_abs(data));
+  TTS_EQUAL(kyosu::sqr_abs(data), eve::sqr(data));
 };
 
 TTS_CASE_WITH ( "Check kyosu::sqr_abs over complex"

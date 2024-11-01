@@ -217,7 +217,7 @@
 // #include <kyosu/functions/sph_bessel_kn.hpp>
 // #include <kyosu/functions/sph_bessel_ikn.hpp>
 // #include <kyosu/functions/sqr.hpp>
-// #include <kyosu/functions/sqr_abs.hpp>
+#include <kyosu/functions/sqr_abs.hpp>
 // #include <kyosu/functions/sqrt.hpp>
 // #include <kyosu/functions/tan.hpp>
 // #include <kyosu/functions/tanpi.hpp>
