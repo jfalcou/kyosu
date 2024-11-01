@@ -7,33 +7,22 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_is_infinite: eve::elementwise
-  {
-    using callable_tag_type = callable_is_infinite;
-
-    KYOSU_DEFERS_CALLABLE(is_infinite_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::is_infinite(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_is_infinite(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct is_infinite_t : eve::elementwise_callable<is_infinite_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return KYOSU_CALL(v); }
+
+    KYOSU_CALLABLE_OBJECT(is_infinite_t, is_infinite_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -67,7 +56,19 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/is_infinite.cpp}
+//======================================================================================================================
+  inline constexpr auto is_infinite = eve::functor<is_infinite_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_is_infinite is_infinite = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto is_infinite_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::cayley_dickson<Z>) return kumi::any_of(z, [](auto e) { return eve::is_infinite(e); });
+    else                                      return eve::is_infinite(z);
+  }
 }

@@ -129,7 +129,7 @@
 // #include <kyosu/functions/is_equal.hpp>
 #include <kyosu/functions/is_eqz.hpp>
 // #include <kyosu/functions/is_finite.hpp>
-// #include <kyosu/functions/is_infinite.hpp>
+#include <kyosu/functions/is_infinite.hpp>
 // #include <kyosu/functions/is_imag.hpp>
 // #include <kyosu/functions/is_nan.hpp>
 // #include <kyosu/functions/is_nez.hpp>
