@@ -125,23 +125,23 @@
 // #include <kyosu/functions/horner.hpp>
 
 // #include <kyosu/functions/inc.hpp>
-// #include <kyosu/functions/is_denormal.hpp>
+#include <kyosu/functions/is_denormal.hpp>
 // #include <kyosu/functions/is_equal.hpp>
 #include <kyosu/functions/is_eqz.hpp>
-// #include <kyosu/functions/is_finite.hpp>
+#include <kyosu/functions/is_finite.hpp>
 #include <kyosu/functions/is_infinite.hpp>
-// #include <kyosu/functions/is_imag.hpp>
-// #include <kyosu/functions/is_nan.hpp>
-// #include <kyosu/functions/is_nez.hpp>
-// #include <kyosu/functions/is_not_denormal.hpp>
+#include <kyosu/functions/is_imag.hpp>
+#include <kyosu/functions/is_nan.hpp>
+#include <kyosu/functions/is_nez.hpp>
+#include <kyosu/functions/is_not_denormal.hpp>
 // #include <kyosu/functions/is_not_equal.hpp>
-// #include <kyosu/functions/is_not_finite.hpp>
-// #include <kyosu/functions/is_not_infinite.hpp>
-// #include <kyosu/functions/is_not_nan.hpp>
-// #include <kyosu/functions/is_not_real.hpp>
-// #include <kyosu/functions/is_pure.hpp>
-// #include <kyosu/functions/is_real.hpp>
-// #include <kyosu/functions/is_unitary.hpp>
+#include <kyosu/functions/is_not_finite.hpp>
+#include <kyosu/functions/is_not_infinite.hpp>
+#include <kyosu/functions/is_not_nan.hpp>
+#include <kyosu/functions/is_not_real.hpp>
+#include <kyosu/functions/is_pure.hpp>
+#include <kyosu/functions/is_real.hpp>
+#include <kyosu/functions/is_unitary.hpp>
 // #include <kyosu/functions/lambda.hpp>
 // #include <kyosu/functions/lbeta.hpp>
 // #include <kyosu/functions/ldiv.hpp>
