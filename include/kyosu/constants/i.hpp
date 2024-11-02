@@ -8,7 +8,6 @@
 #pragma once
 
 #include <kyosu/details/callable.hpp>
-
 namespace kyosu
 {
   template<typename Options>
@@ -25,9 +24,8 @@ namespace kyosu
     requires(concepts::cayley_dickson<T>)
     KYOSU_FORCEINLINE constexpr T operator()(as<T> const& v) const { return KYOSU_CALL(v); }
 
-    template<typename T>
-    requires(concepts::real<T>)
-    KYOSU_FORCEINLINE constexpr complex_t<eve::as_floating_point_t<T>> operator()(as<T> const& v) const
+    template<concepts::real T>
+    KYOSU_FORCEINLINE constexpr auto operator()(as<T> const& v) const
     {
       return KYOSU_CALL(v);
     }
