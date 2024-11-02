@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct abs_t : eve::elementwise_callable<abs_t, Options>
+  struct abs_t : eve::elementwise_callable<abs_t, Options, eve::raw_option>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z z) const noexcept { return KYOSU_CALL(z); }
@@ -40,8 +40,13 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_type_t<T> abs(T z) noexcept;
-//!      template<kyosu::concepts::real T>           constexpr T                 abs(T z) noexcept;
+//!      //regular calls
+//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_type_t<T> abs(T z) noexcept;       // 1
+//!      template<kyosu::concepts::real T>           constexpr T                 abs(T z) noexcept;       // 1
+//!
+//!      // Semantic modifyiers
+//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_type_t<T> abs[raw](T z) noexcept;  // 2
+//!      template<kyosu::concepts::real T>           constexpr T                 abs[raw](T z) noexcept;  // 2
 //!   }
 //!   @endcode
 //!
@@ -51,14 +56,14 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   The modulus of its argument which always is a floating ordered value.
-//!   The modulus is the square root of the sum of the square of the absolute value of each component.
+//!    1. The  modulus of its parameter (always a floating ordered value).
+//!       The modulus is the square root of the sum of the squares of the absolute value of each component.
+//!    2. With the raw option no provision is made to enhance accuracy and avoid overflows
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/abs.cpp}
 //======================================================================================================================
-
   inline constexpr auto abs = eve::functor<abs_t>;
 //======================================================================================================================
 //! @}
@@ -70,7 +75,13 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto abs_(KYOSU_DELAY(), O const&, Z const& v) noexcept
   {
-    if constexpr(concepts::cayley_dickson<Z>) return eve::hypot[eve::pedantic](v);
-    else                                      return eve::abs(v);
+    if constexpr(concepts::cayley_dickson<Z>){
+      if constexpr(O::contains(eve::raw))
+        return eve::hypot(v); 
+      else
+        return eve::hypot[eve::pedantic](v);
+    }
+    else
+      return eve::abs(v);
   }
 }

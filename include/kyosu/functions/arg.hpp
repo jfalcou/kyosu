@@ -52,7 +52,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. Returns 0 or pi according to the non negativity of z.
+//!     1. Returns \f$0\f$ or \f$pi\f$ according to the non negativity of z( arg of minus zero is \f$\pi\f$.
 //!     2. Returns elementwise the argument of the complex number i.e. eve::atan2([kyosu::imag](@ref kyosu::imag )(z), [kyosu::real](@ref kyosu::real )(z)).
 //!     3. Returns \f$\mathrm{atan2}(\mathrm{sign}(z_1)|\underline{z}|, z_0)\f$ where \f$z_0\f$ is the real part of \f$z\f$,  \f$z_1\f$ is the ipart of \f$z\f$ and
 //!         \f$\underline{z}\f$ the [pure](@ref kyosu::imag ) part of \f$z\f$.
@@ -71,14 +71,8 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto arg_(KYOSU_DELAY(), O const&, Z const& v) noexcept
   {
-    using eve::atan2;
-    using eve::if_else;
-    using eve::is_positive;
-    using eve::pedantic;
-    using eve::sign;
-
-    if      constexpr(concepts::complex<Z>)         return atan2[pedantic]( imag(v), real(v));
-    else if constexpr(concepts::cayley_dickson<Z>)  return atan2[pedantic]( sign(imag(v)) * abs(pure(v)), real(v));
-    else                                            return if_else(is_positive(v), eve::zero, eve::pi(eve::as(v)));
+    if      constexpr(concepts::complex<Z>)        return  eve::atan2[ eve::pedantic]( imag(v), real(v));
+    else if constexpr(concepts::cayley_dickson<Z>) return  eve::atan2[ eve::pedantic](  eve::sign(imag(v))*abs(pure(v)), real(v));
+    else                                           return  eve::if_else( eve::is_positive(v), eve::zero, eve::pi(eve::as(v)));
   }
 }

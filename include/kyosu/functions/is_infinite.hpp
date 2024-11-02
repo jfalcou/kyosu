@@ -18,7 +18,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return KYOSU_CALL(v); }
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::is_infinite(v); }
 
     KYOSU_CALLABLE_OBJECT(is_infinite_t, is_infinite_);
   };
@@ -68,7 +68,6 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto is_infinite_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(concepts::cayley_dickson<Z>) return kumi::any_of(z, [](auto e) { return eve::is_infinite(e); });
-    else                                      return eve::is_infinite(z);
+    return kumi::any_of(z, [](auto e) { return eve::is_infinite(e); });
   }
 }
