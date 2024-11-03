@@ -55,8 +55,8 @@
 // #include <kyosu/functions/beta.hpp>
 // #include <kyosu/functions/ceil.hpp>
 // #include <kyosu/functions/commutator.hpp>
-// #include <kyosu/functions/cos.hpp>
-// #include <kyosu/functions/cosh.hpp>
+#include <kyosu/functions/cos.hpp>
+#include <kyosu/functions/cosh.hpp>
 // #include <kyosu/functions/cospi.hpp>
 // #include <kyosu/functions/cot.hpp>
 // #include <kyosu/functions/cotpi.hpp>
@@ -103,7 +103,7 @@
 // #include <kyosu/functions/erfcx.hpp>
 // #include <kyosu/functions/erfi.hpp>
 // #include <kyosu/functions/eta.hpp>
-// #include <kyosu/functions/exp.hpp>
+#include <kyosu/functions/exp.hpp>
 // #include <kyosu/functions/exp10.hpp>
 // #include <kyosu/functions/exp2.hpp>
 // #include <kyosu/functions/exp_i.hpp>
@@ -161,9 +161,9 @@
 // #include <kyosu/functions/maxmag.hpp>
 // #include <kyosu/functions/minabs.hpp>
 // #include <kyosu/functions/minmag.hpp>
-// #include <kyosu/functions/minus.hpp>
-// #include <kyosu/functions/muli.hpp>
-// #include <kyosu/functions/mulmi.hpp>
+#include <kyosu/functions/minus.hpp>
+#include <kyosu/functions/muli.hpp>
+#include <kyosu/functions/mulmi.hpp>
 // #include <kyosu/functions/nearest.hpp>
 // #include <kyosu/functions/negmaxabs.hpp>
 // #include <kyosu/functions/negminabs.hpp>
@@ -173,7 +173,7 @@
 // #include <kyosu/functions/pow_abs.hpp>
 // #include <kyosu/functions/powm1.hpp>
 // #include <kyosu/functions/proj.hpp>
-// #include <kyosu/functions/radinpi.hpp>
+#include <kyosu/functions/radinpi.hpp>
 // #include <kyosu/functions/rec.hpp>
 // #include <kyosu/functions/right_horner.hpp>
 // #include <kyosu/functions/right_reverse_horner.hpp>
