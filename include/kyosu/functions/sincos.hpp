@@ -8,29 +8,30 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/cosh.hpp>
+#include <kyosu/functions/sinhcosh.hpp>
+#include <kyosu/details/cayleyify.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct cos_t : eve::elementwise_callable<cos_t, Options>
+  struct sincos_t : eve::elementwise_callable<sincos_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr  kumi::tuple<Z, Z> operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::cos(v); }
+    KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
+    { return eve::sincos(v); }
 
-    KYOSU_CALLABLE_OBJECT(cos_t, cos_);
+    KYOSU_CALLABLE_OBJECT(sincos_t, sincos_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cos
-//!   @brief Computes the cosine of the argument.
+//!   @var sincos
+//!   @brief Computes simultaneously the sine and cosine of the argument.
 //!
 //!   @groupheader{Header file}
 //!
@@ -43,9 +44,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr T cos(T z) noexcept; //1
-//!      template<kyosu::concepts::complex T>        constexpr T cos(T z) noexcept; //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T cos(T z) noexcept; //3
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sincos(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto sincos(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -55,18 +55,13 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. Returns the cosine of the argument.
-//!
-//!     2. The behavior of this function is equivalent to `eve::cosh(i*z)`.
-//!
-//!     3.  Returns \f$\cosh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\cos(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!     Returns simultaneously  the sine and cosine of the argument.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/cos.cpp}
+//!  @godbolt{doc/sincos.cpp}
 //======================================================================================================================
-  inline constexpr auto cos = eve::functor<cos_t>;
+  inline constexpr auto sincos = eve::functor<sincos_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -75,15 +70,17 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cos_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto sincos_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr(concepts::complex<Z> )
     {
-      return cosh(Z(-kyosu::imag(z), kyosu::real(z)));
+      auto [sh, ch] = sinhcosh(Z(-kyosu::imag(z), kyosu::real(z)));
+      return kumi::tuple{Z(kyosu::imag(sh), -kyosu::real(sh)), ch};
+
     }
     else
     {
-      return cayley_extend(cos, z);
+      return cayley_extend2(sincos, z);
     }
   }
 }

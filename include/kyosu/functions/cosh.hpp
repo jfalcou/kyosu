@@ -10,6 +10,7 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/is_not_finite.hpp>
+#include <kyosu/details/cayleyify.hpp>
 
 namespace kyosu
 {
@@ -100,11 +101,11 @@ namespace kyosu::_
       auto r = c*ch;
       auto i = s*sh;
       i = eve::if_else(kyosu::is_eqz(kyosu::ipart(z)) || kyosu::is_real(z), eve::zero, i);
-      auto res = complex(r, i);
+      auto res = Z(r, i);
       if (eve::any(kyosu::is_not_finite(z)))
       {
-        res = eve::if_else(eve::is_infinite(rz) && eve::is_not_finite(iz), complex(eve::inf(eve::as(rz)), eve::nan(eve::as(rz))), res);
-        res = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz),        complex(eve::nan(eve::as(rz)), eve::nan(eve::as(rz))), res);
+        res = eve::if_else(eve::is_infinite(rz) && eve::is_not_finite(iz), Z(eve::inf(eve::as(rz)), eve::nan(eve::as(rz))), res);
+        res = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz),        Z(eve::nan(eve::as(rz)), eve::nan(eve::as(rz))), res);
       }
       return res;
     }

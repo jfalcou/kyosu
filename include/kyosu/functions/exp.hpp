@@ -8,6 +8,10 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
+#include <kyosu/details/cayleyify.hpp>
+#include <kyosu/functions/is_nan.hpp>
+#include <kyosu/functions/is_real.hpp>
+#include <kyosu/functions/is_not_finite.hpp>
 
 namespace kyosu
 {
@@ -96,8 +100,8 @@ namespace kyosu::_
       auto [s, c]   = eve::sincos(iz);
       auto rho = eve::if_else(is_nan(rz), eve::allbits, eve::exp(rz));
       auto res = eve::if_else(is_real(z) || rz == eve::minf(eve::as(rz)),
-                              complex(rho, eve::zero(eve::as(rho))),
-                              complex(rho*c, rho*s));
+                              Z(rho, eve::zero(eve::as(rho))),
+                              Z(rho*c, rho*s));
       return if_else(rz == eve::inf(eve::as(rz)) && eve::is_not_finite(iz), Z{rz, eve::nan(eve::as(iz))}, res);
     }
     else

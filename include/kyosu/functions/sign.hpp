@@ -8,12 +8,12 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/cosh.hpp>
+#include <kyosu/functions/is_nez.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct cos_t : eve::elementwise_callable<cos_t, Options>
+  struct sign_t : eve::elementwise_callable<sign_t, Options>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
@@ -21,16 +21,16 @@ namespace kyosu
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::cos(v); }
+    { return eve::sign(v); }
 
-    KYOSU_CALLABLE_OBJECT(cos_t, cos_);
+    KYOSU_CALLABLE_OBJECT(sign_t, sign_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cos
-//!   @brief Computes the cosine of the argument.
+//!   @var sign
+//!   @brief Computes tne normalized value z/abs(z) if z is not zero else 0.
 //!
 //!   @groupheader{Header file}
 //!
@@ -43,9 +43,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr T cos(T z) noexcept; //1
-//!      template<kyosu::concepts::complex T>        constexpr T cos(T z) noexcept; //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T cos(T z) noexcept; //3
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T sign(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T sign(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -55,18 +54,13 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. Returns the cosine of the argument.
-//!
-//!     2. The behavior of this function is equivalent to `eve::cosh(i*z)`.
-//!
-//!     3.  Returns \f$\cosh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\cos(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!     Returns the "sign" of the argument i.e. its normalized value.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/cos.cpp}
+//!  @godbolt{doc/sign.cpp}
 //======================================================================================================================
-  inline constexpr auto cos = eve::functor<cos_t>;
+  inline constexpr auto sign = eve::functor<sign_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -75,15 +69,8 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cos_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto sign_(KYOSU_DELAY(), O const&, Z c) noexcept
   {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cosh(Z(-kyosu::imag(z), kyosu::real(z)));
-    }
-    else
-    {
-      return cayley_extend(cos, z);
-    }
+    return kyosu::if_else(kyosu::is_nez(c), c/abs(c), eve::zero);
   }
 }
