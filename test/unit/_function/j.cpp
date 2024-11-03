@@ -17,9 +17,9 @@ TTS_CASE_WITH ( "Check kyosu::j"
 {
   using kyosu::as;
   using u_t = eve::underlying_type_t<T>;
-  TTS_EQUAL(kyosu::j(as(r)), kyosu::quaternion_t<u_t>(0, 0, 1, 0));
+  TTS_EQUAL(kyosu::j(as<u_t>()), kyosu::quaternion_t<u_t>(0, 0, 1, 0));
   auto c = kyosu::complex_t<T>(r, i);
   auto z = kyosu::quaternion_t<T>(r, i, j, k);
-  TTS_EQUAL(kyosu::j(as(c)), kyosu::quaternion_t<u_t>(0, 0, 1, 0));
-  TTS_EQUAL(kyosu::j(as(z)), kyosu::quaternion_t<u_t>(0, 0, 1, 0));
+  TTS_EQUAL(kyosu::j(eve::as_element(c)), kyosu::quaternion_t<u_t>(0, 0, 1, 0));
+  TTS_EQUAL(kyosu::j(eve::as_element(z)), kyosu::quaternion_t<u_t>(0, 0, 1, 0));
 };
