@@ -53,7 +53,7 @@
 // #include <kyosu/functions/atanh.hpp>
 // #include <kyosu/functions/average.hpp>
 // #include <kyosu/functions/beta.hpp>
-// #include <kyosu/functions/ceil.hpp>
+#include <kyosu/functions/ceil.hpp>
 // #include <kyosu/functions/commutator.hpp>
 #include <kyosu/functions/cos.hpp>
 #include <kyosu/functions/cosh.hpp>
@@ -113,12 +113,12 @@
 // #include <kyosu/functions/expx2.hpp>
 // #include <kyosu/functions/faddeeva.hpp>
 // #include <kyosu/functions/fam.hpp>
-// #include <kyosu/functions/floor.hpp>
+#include <kyosu/functions/floor.hpp>
 // #include <kyosu/functions/fma.hpp>
 // #include <kyosu/functions/fms.hpp>
 // #include <kyosu/functions/fnma.hpp>
 // #include <kyosu/functions/fnms.hpp>
-// #include <kyosu/functions/frac.hpp>
+#include <kyosu/functions/frac.hpp>
 // #include <kyosu/functions/from_polar.hpp>
 // #include <kyosu/functions/fsm.hpp>
 // #include <kyosu/functions/hypot.hpp>
@@ -164,7 +164,7 @@
 #include <kyosu/functions/minus.hpp>
 #include <kyosu/functions/muli.hpp>
 #include <kyosu/functions/mulmi.hpp>
-// #include <kyosu/functions/nearest.hpp>
+#include <kyosu/functions/nearest.hpp>
 // #include <kyosu/functions/negmaxabs.hpp>
 // #include <kyosu/functions/negminabs.hpp>
 // #include <kyosu/functions/oneminus.hpp>
@@ -223,7 +223,7 @@
 // #include <kyosu/functions/tanh.hpp>
 // #include <kyosu/functions/tgamma.hpp>
 // #include <kyosu/functions/to_polar.hpp>
-// #include <kyosu/functions/trunc.hpp>
+#include <kyosu/functions/trunc.hpp>
 // #include <kyosu/functions/zeta.hpp>
 
 //======================================================================================================================
