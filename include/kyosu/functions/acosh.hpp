@@ -9,6 +9,9 @@
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/details/cayleyify.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/acos.hpp>
+
 
 namespace kyosu
 {
@@ -20,8 +23,8 @@ namespace kyosu
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::acosh(v); }
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(acosh_t, acosh_);
 };
@@ -89,7 +92,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
     if constexpr(concepts::complex<Z> )
     {
@@ -100,7 +103,7 @@ namespace kyosu::_
       auto lez = eve::is_negative(i);;
       auto res = complex(-i, r);
       res = eve::if_else(lez, res, -res);
-      auto nani = is_nan(i);
+      auto nani = eve::is_nan(i);
       if (eve::any(nani))
         return eve::if_else(nani && eve::is_finite(r)
                            , complex(eve::nan(eve::as(r)), eve::nan(eve::as(r)))

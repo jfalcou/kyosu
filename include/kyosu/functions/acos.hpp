@@ -9,6 +9,10 @@
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/details/cayleyify.hpp>
+#include <kyosu/functions/is_real.hpp>
+#include <kyosu/functions/is_not_finite.hpp>
+#include <kyosu/functions/is_imag.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
@@ -20,11 +24,11 @@ namespace kyosu
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::acos(v); }
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(acos_t, acos_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -190,7 +194,7 @@ namespace kyosu::_
         not_treated = eve::logical_notand(zone4, not_treated);
         if (eve::any(not_treated))
         {
-          rtype aa = eve::sqrt(eve::inc(sqr(y)));
+          rtype aa = eve::sqrt(eve::inc(eve::sqr(y)));
           r = eve::if_else(not_treated, eve::pio_2(eve::as(x)), r);
           i = eve::if_else(not_treated, eve::half(eve::as(x))*eve::log1p(2*y*(y+aa)), i);
         }
@@ -228,12 +232,12 @@ namespace kyosu::_
         i = eve::if_else(test,y,i);
       }
       // use proper real results
-      r = eve::if_else(is_proper_real, proper_real,   r);
+      r = eve::if_else(is_proper_real, proper_real, r);
       i = eve::if_else(is_proper_real, eve::zero, i);
       // restore signs
       r = eve::if_else(ltzra0, eve::pi(eve::as(x))-r, r);
       i = eve::if_else(gtzia0, -i, i);
-      return complex(r, i);
+      return Z(r, i);
     }
     else
     {

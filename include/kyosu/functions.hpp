@@ -29,28 +29,28 @@
 //======================================================================================================================
 // Arithmetic and math
 //======================================================================================================================
-// #include <kyosu/functions/acos.hpp>
-// #include <kyosu/functions/acosh.hpp>
+#include <kyosu/functions/acos.hpp>
+#include <kyosu/functions/acosh.hpp>
 // #include <kyosu/functions/acospi.hpp>
-// #include <kyosu/functions/acot.hpp>
+#include <kyosu/functions/acot.hpp>
+#include <kyosu/functions/acoth.hpp>
 // #include <kyosu/functions/acotpi.hpp>
 // #include <kyosu/functions/airy.hpp>
 // #include <kyosu/functions/airy_ai.hpp>
 // #include <kyosu/functions/airy_bi.hpp>
 // #include <kyosu/functions/atanpi.hpp>
-// #include <kyosu/functions/acoth.hpp>
-// #include <kyosu/functions/acsc.hpp>
+#include <kyosu/functions/acsc.hpp>
 // #include <kyosu/functions/acscpi.hpp>
-// #include <kyosu/functions/acsch.hpp>
-// #include <kyosu/functions/asec.hpp>
+#include <kyosu/functions/acsch.hpp>
+#include <kyosu/functions/asec.hpp>
 // #include <kyosu/functions/asecpi.hpp>
-// #include <kyosu/functions/asech.hpp>
-// #include <kyosu/functions/asin.hpp>
+#include <kyosu/functions/asech.hpp>
+#include <kyosu/functions/asin.hpp>
 // #include <kyosu/functions/asinpi.hpp>
-// #include <kyosu/functions/asinh.hpp>
+#include <kyosu/functions/asinh.hpp>
 // #include <kyosu/functions/associator.hpp>
-// #include <kyosu/functions/atan.hpp>
-// #include <kyosu/functions/atanh.hpp>
+#include <kyosu/functions/atan.hpp>
+#include <kyosu/functions/atanh.hpp>
 // #include <kyosu/functions/average.hpp>
 // #include <kyosu/functions/beta.hpp>
 #include <kyosu/functions/ceil.hpp>

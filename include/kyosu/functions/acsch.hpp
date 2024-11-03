@@ -8,31 +8,31 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/atan.hpp>
+#include <kyosu/functions/asinh.hpp>
 #include <kyosu/functions/rec.hpp>
-
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct acot_t : eve::elementwise_callable<acot_t, Options>
+  struct acsch_t : eve::elementwise_callable<acsch_t, Options>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::acot(v); }
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
 
-    KYOSU_CALLABLE_OBJECT(acot_t, acot_);
+    KYOSU_CALLABLE_OBJECT(acsch_t, acsch_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var acot
-//!   @brief Computes the arc cotangent of the argument.
+//!   @var acsch
+//!   @brief Computes the inverse hyperbolic cosecant of the argument.
 //!
 //!   @groupheader{Header file}
 //!
@@ -45,9 +45,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acot(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T>        constexpr auto acot(T z) noexcept;  //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acot(T z) noexcept;  //3
+//!      template<eve::floating_ordered_value T>     constexpr auto acsch(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acsch(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -57,19 +56,15 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. A real type input z calls eve::acot(z); and so returns the same type as the input.
+//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
 //!
-//!   2. Returns elementwise the complex principal value
-//!      of the arc cotangent of the input as the arc tangent of the inverse of the input.
-//!
-//!   3. Returns \f$I_z \mathrm{acoth}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!   2. Returns elementwise \f$\mathop{\mathrm{asinh}}(1/z)\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/acot.cpp}
+//!  @godbolt{doc/acsch.cpp}
 //======================================================================================================================
-  inline constexpr auto acot = eve::functor<acot_t>;
+  inline constexpr auto acsch = eve::functor<acsch_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -78,8 +73,8 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acot_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto acsch_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-     return kyosu::atan(kyosu::rec(z));
+    return kyosu::asinh(kyosu::rec(z));
   }
 }
