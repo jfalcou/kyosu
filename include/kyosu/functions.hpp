@@ -179,9 +179,9 @@
 // #include <kyosu/functions/right_reverse_horner.hpp>
 #include <kyosu/functions/reldist.hpp>
 // #include <kyosu/functions/reverse_horner.hpp>
-// #include <kyosu/functions/sec.hpp>
+#include <kyosu/functions/sec.hpp>
 // #include <kyosu/functions/secpi.hpp>
-// #include <kyosu/functions/sech.hpp>
+#include <kyosu/functions/sech.hpp>
 #include <kyosu/functions/sign.hpp>
 #include <kyosu/functions/sin.hpp>
 #include <kyosu/functions/sinc.hpp>
