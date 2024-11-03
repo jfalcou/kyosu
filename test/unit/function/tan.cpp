@@ -13,13 +13,13 @@
 #    define HAS_BOOST
 #  endif
 
-TTS_CASE_WITH ( "Check kyosu::tanh over real"
+TTS_CASE_WITH ( "Check kyosu::tan over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10))
               )
 (auto data)
 {
-  TTS_ULP_EQUAL(kyosu::tanh(data), eve::tanh(data), 0.5);
+  TTS_ULP_EQUAL(kyosu::tan(data), eve::tan(data), 0.5);
 };
 
 #ifdef HAS_BOOST
@@ -31,7 +31,7 @@ auto cv(boost::math::quaternion<T> const &bq)
                               bq.R_component_3(), bq.R_component_4());
 }
 
-TTS_CASE_WITH ( "Check kyosu::tanh over quaternion"
+TTS_CASE_WITH ( "Check kyosu::tan over quaternion"
               , kyosu::simd_real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)
@@ -39,11 +39,12 @@ TTS_CASE_WITH ( "Check kyosu::tanh over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
+  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-7 : 1.e-3;
   using ke_t = kyosu::quaternion_t<T>;
   using bq_t = boost::math::quaternion<eve::element_type_t<T>>;
-  auto boost_tanh = [](auto x, auto y, auto z,  auto t){return cv(boost::math::tanh(bq_t(x, y, z, t))); };
-  ke_t e([&](auto n, auto){return boost_tanh(r.get(n), i.get(n), j.get(n), k.get(n)); });
+  auto boost_tan = [](auto x, auto y, auto z,  auto t){return cv(boost::math::tan(bq_t(x, y, z, t))); };
+  ke_t e([&](auto n, auto){return boost_tan(r.get(n), i.get(n), j.get(n), k.get(n)); });
   auto q = ke_t(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::tanh(q), e, 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::tan(q), e, prec);
 };
 #  endif

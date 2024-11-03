@@ -58,12 +58,12 @@
 #include <kyosu/functions/cos.hpp>
 #include <kyosu/functions/cosh.hpp>
 // #include <kyosu/functions/cospi.hpp>
-// #include <kyosu/functions/cot.hpp>
+#include <kyosu/functions/cot.hpp>
 // #include <kyosu/functions/cotpi.hpp>
-// #include <kyosu/functions/coth.hpp>
-// #include <kyosu/functions/csc.hpp>
+#include <kyosu/functions/coth.hpp>
+#include <kyosu/functions/csc.hpp>
 // #include <kyosu/functions/cscpi.hpp>
-// #include <kyosu/functions/csch.hpp>
+#include <kyosu/functions/csch.hpp>
 // #include <kyosu/functions/cyl_bessel_j0.hpp>
 // #include <kyosu/functions/cyl_bessel_j1.hpp>
 // #include <kyosu/functions/cyl_bessel_jn.hpp>
@@ -94,7 +94,7 @@
 // #include <kyosu/functions/cyl_bessel_i.hpp>
 // #include <kyosu/functions/cyl_bessel_k.hpp>
 // #include <kyosu/functions/cyl_bessel_ik.hpp>
-// #include <kyosu/functions/dec.hpp>
+#include <kyosu/functions/dec.hpp>
 // #include <kyosu/functions/deta.hpp>
 // #include <kyosu/functions/digamma.hpp>
 #include <kyosu/functions/dist.hpp>
@@ -124,7 +124,7 @@
 // #include <kyosu/functions/hypot.hpp>
 // #include <kyosu/functions/horner.hpp>
 
-// #include <kyosu/functions/inc.hpp>
+#include <kyosu/functions/inc.hpp>
 #include <kyosu/functions/is_denormal.hpp>
 // #include <kyosu/functions/is_equal.hpp>
 #include <kyosu/functions/is_eqz.hpp>
@@ -174,7 +174,7 @@
 // #include <kyosu/functions/powm1.hpp>
 // #include <kyosu/functions/proj.hpp>
 #include <kyosu/functions/radinpi.hpp>
-// #include <kyosu/functions/rec.hpp>
+#include <kyosu/functions/rec.hpp>
 // #include <kyosu/functions/right_horner.hpp>
 // #include <kyosu/functions/right_reverse_horner.hpp>
 #include <kyosu/functions/reldist.hpp>
@@ -218,9 +218,9 @@
 #include <kyosu/functions/sqr.hpp>
 #include <kyosu/functions/sqr_abs.hpp>
 #include <kyosu/functions/sqrt.hpp>
-// #include <kyosu/functions/tan.hpp>
+#include <kyosu/functions/tan.hpp>
 // #include <kyosu/functions/tanpi.hpp>
-// #include <kyosu/functions/tanh.hpp>
+#include <kyosu/functions/tanh.hpp>
 // #include <kyosu/functions/tgamma.hpp>
 // #include <kyosu/functions/to_polar.hpp>
 #include <kyosu/functions/trunc.hpp>
