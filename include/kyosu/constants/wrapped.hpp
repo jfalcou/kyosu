@@ -56,7 +56,6 @@ namespace kyosu
   // Wrapping required
   // from eve::core
   inline constexpr auto allbits                = _::as_constant<eve::allbits>;
-  inline constexpr auto as_value               = _::as_constant<eve::as_value>;
   inline constexpr auto bitincrement           = _::as_constant<eve::bitincrement>;
   inline constexpr auto eps                    = _::as_constant<eve::eps>;
   inline constexpr auto half                   = _::as_constant<eve::half>;

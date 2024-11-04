@@ -29,6 +29,8 @@ TTS_CASE_WITH ( "Check kyosu::dist over complex"
 {
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
+  TTS_RELATIVE_EQUAL(kyosu::dist(c0, r1), kyosu::abs(c0-r1), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::dist(r0, c1), kyosu::abs(r0-c1), 1e-7);
   TTS_RELATIVE_EQUAL(kyosu::dist(c0, c1), kyosu::abs(c0-c1), 1e-7);
 };
 

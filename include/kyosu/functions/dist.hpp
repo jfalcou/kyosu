@@ -14,10 +14,17 @@ namespace kyosu
   template<typename Options>
   struct dist_t : eve::elementwise_callable<dist_t, Options>
   {
-    template<eve::value Z0, eve::value Z1>
+    template<typename Z0, typename Z1>
+    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::abs(c0-c1))
     {
       return kyosu::abs(c0-c1);
+    }
+
+    template<concepts::real Z0, concepts::real Z1>
+    KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(eve::dist(c0,c1))
+    {
+      return eve::dist(c0,c1);
     }
 
     KYOSU_CALLABLE_OBJECT(dist_t, dist_);
