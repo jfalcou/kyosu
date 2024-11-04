@@ -9,6 +9,7 @@
 
 #include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
+#include <eve/module/special.hpp>
 
 //======================================================================================================================
 //! @defgroup functions Cayley-Dickson Functions
@@ -95,8 +96,8 @@
 // #include <kyosu/functions/cyl_bessel_k.hpp>
 // #include <kyosu/functions/cyl_bessel_ik.hpp>
 #include <kyosu/functions/dec.hpp>
-// #include <kyosu/functions/deta.hpp>
-// #include <kyosu/functions/digamma.hpp>
+#include <kyosu/functions/deta.hpp>
+#include <kyosu/functions/digamma.hpp>
 #include <kyosu/functions/dist.hpp>
 // #include <kyosu/functions/dot.hpp>
 // #include <kyosu/functions/erf.hpp>
@@ -111,7 +112,7 @@
 #include <kyosu/functions/expm1.hpp>
 #include <kyosu/functions/expmx2.hpp>
 #include <kyosu/functions/expx2.hpp>
-// #include <kyosu/functions/faddeeva.hpp>
+#include <kyosu/functions/faddeeva.hpp>
 // #include <kyosu/functions/fam.hpp>
 #include <kyosu/functions/floor.hpp>
 // #include <kyosu/functions/fma.hpp>
@@ -142,21 +143,21 @@
 #include <kyosu/functions/is_pure.hpp>
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/is_unitary.hpp>
-// #include <kyosu/functions/lambda.hpp>
+#include <kyosu/functions/lambda.hpp>
 // #include <kyosu/functions/lbeta.hpp>
 // #include <kyosu/functions/ldiv.hpp>
 // #include <kyosu/functions/lerp.hpp>
-// #include <kyosu/functions/log.hpp>
-// #include <kyosu/functions/log10.hpp>
-// #include <kyosu/functions/log1p.hpp>
-// #include <kyosu/functions/log_abs.hpp>
+#include <kyosu/functions/log.hpp>
+#include <kyosu/functions/log10.hpp>
+#include <kyosu/functions/log1p.hpp>
+#include <kyosu/functions/log_abs.hpp>
 // #include <kyosu/functions/log_abs_gamma.hpp>
 // #include <kyosu/functions/log_gamma.hpp>
-// #include <kyosu/functions/log2.hpp>
+#include <kyosu/functions/log2.hpp>
 // #include <kyosu/functions/lpnorm.hpp>
 // #include <kyosu/functions/lrising_factorial.hpp>
 // #include <kyosu/functions/rising_factorial.hpp>
-// #include <kyosu/functions/manhattan.hpp>
+#include <kyosu/functions/manhattan.hpp>
 // #include <kyosu/functions/maxabs.hpp>
 // #include <kyosu/functions/maxmag.hpp>
 // #include <kyosu/functions/minabs.hpp>

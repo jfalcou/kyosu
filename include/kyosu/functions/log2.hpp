@@ -8,13 +8,14 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/atanh.hpp>
+#include <kyosu/functions/if_else.hpp>
+#include <kyosu/functions/is_not_finite.hpp>
 #include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct atan_t : eve::elementwise_callable<atan_t, Options>
+  struct log2_t : eve::elementwise_callable<log2_t, Options>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
@@ -24,14 +25,14 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
     { return KYOSU_CALL(complex(v)); }
 
-    KYOSU_CALLABLE_OBJECT(atan_t, atan_);
+    KYOSU_CALLABLE_OBJECT(log2_t, log2_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var atan
-//!   @brief Computes the arctangent of the argument.
+//!   @var log2
+//!   @brief Computes the base 2 logarithm of the argument.
 //!
 //!   @groupheader{Header file}
 //!
@@ -44,9 +45,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto atan(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T>        constexpr auto atan(T z) noexcept;  //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto atan(T z) noexcept;  //3
+//!      template<eve::floating_ordered_value T>     constexpr complex_t<T> log2(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T log2(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -54,23 +54,16 @@ namespace kyosu
 //!
 //!     * `z`: Value to process.
 //!
-//! **Return value**
+//!   **Return value**
 //!
-//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
-//!
-//!   2. Returns the elementwise the complex principal value
-//!      of the arc tangent of the input in the range of a strip unbounded along the imaginary axis
-//!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
-//!      Special cases are handled as if the operation was implemented by \f$-i\; \mathrm{atanh}(z\; i)\f$.
-//!
-//!   3. Returns \f$ -I_z \mathrm{atanh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!   1.  a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!   2.  returns [log](@ref kyosu::log)(z)/log_2(as(z)).
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/atan.cpp}
+//!  @godbolt{doc/log2.cpp}
 //======================================================================================================================
-  inline constexpr auto atan = eve::functor<atan_t>;
+  inline constexpr auto log2 = eve::functor<log2_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -79,18 +72,26 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto atan_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-     if constexpr(concepts::complex<Z> )
+    if constexpr(kyosu::concepts::complex<Z>)
     {
-      // C99 definition here; atan(a0) = -i atanh(ia0):
-      auto [r, i] = a0;
-      auto [r1, i1] = kyosu::atanh(complex(-i, r));
-      return complex(i1, -r1);
+      auto [rz, iz] = z;
+      auto infty = eve::inf(eve::as(rz));
+      auto arg = [](auto z){ return eve::atan2[eve::pedantic](kyosu::imag(z), kyosu::real(z));};
+      auto argz = arg(z)*eve::invlog_2(eve::as(rz));
+      auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
+      auto la = eve::log2(absz);
+      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), complex(la), complex(la, argz));
+      if(eve::any(kyosu::is_not_finite(z)))
+      {
+        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), complex(infty, iz), r);
+      }
+      return r;
     }
     else
     {
-      return cayley_extend(atan, a0);
+      return cayley_extend(log2, z);
     }
   }
 }

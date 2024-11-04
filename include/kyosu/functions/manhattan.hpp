@@ -12,29 +12,22 @@
 namespace kyosu
 {
   template<typename Options>
-  struct dist_t : eve::elementwise_callable<dist_t, Options>
+  struct manhattan_t : eve::elementwise_callable<manhattan_t, Options>
   {
-    template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::abs(c0-c1))
+    template<eve::value Z0, eve::value ...Zs>
+    KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Zs... zs) const noexcept //-> decltype(kyosu::abs(z0 + ... + zs))
     {
-      return kyosu::abs(c0-c1);
+       return eve::manhattan(kumi::flatten(kumi::cat(z0, zs...)));
     }
 
-    template<concepts::real Z0, concepts::real Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(eve::dist(c0,c1))
-    {
-      return eve::dist(c0,c1);
-    }
-
-    KYOSU_CALLABLE_OBJECT(dist_t, dist_);
+    KYOSU_CALLABLE_OBJECT(manhattan_t, manhattan_);
   };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var dist
-//!   @brief Computes the distance between the two parameters.
+//!   @var manhattan
+//!   @brief Computes the relative distance between the two parameters.
 //!
 //!   **Defined in Header**
 //!
@@ -47,24 +40,24 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto dist(auto z0,  auto z1) noexcept;
+//!     constexpr auto manhattan(auto z0, auto z1) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0`, `z1`: Values to process.
+//!     * `z0`, `z1`: Value to process.
 //!
 //!   **Return value**
 //!
-//!     Returns the distance between the two arguments computed as the absolute value of the arguments difference.
-//!     Arguments can be a mix of floating or Cayley-Dickson values.
+//!     Returns the the relative distance computed as the absolute value of the arguments difference
+//!     divided by the maximum of their absolute values and 1.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/dist.cpp}
+//!  @godbolt{doc/manhattan.cpp}
 //======================================================================================================================
-  inline constexpr auto dist = eve::functor<dist_t>;
+  inline constexpr auto manhattan = eve::functor<manhattan_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================

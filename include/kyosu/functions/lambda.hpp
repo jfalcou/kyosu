@@ -8,13 +8,14 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/atanh.hpp>
 #include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/exp2.hpp>
+#include <kyosu/functions/deta.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct atan_t : eve::elementwise_callable<atan_t, Options>
+  struct lambda_t : eve::elementwise_callable<lambda_t, Options>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
@@ -24,16 +25,20 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
     { return KYOSU_CALL(complex(v)); }
 
-    KYOSU_CALLABLE_OBJECT(atan_t, atan_);
+    KYOSU_CALLABLE_OBJECT(lambda_t, lambda_);
 };
-
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var atan
-//!   @brief Computes the arctangent of the argument.
+//!   @var lambda
+//! @brief Callable object computing The Dirichlet \f$ \displaystyle \lambda(z) = \sum_0^\infty \frac{1}{(2n+1)^z}\f$
 //!
-//!   @groupheader{Header file}
+//! This function can be extended to the whole complex plane as \f$\lambda(z) = \zeta(z)(1-2^{-x})\f$
+//! (where \f$\zeta\f$ is the Riemann zeta function). It coincides with the serie where the serie converges.
+//! However for `z = 1` the result is \f$\infty\f$.
+//! The usual extension mechanism is used for general Cayley-dickson values.
+//!
+//!   **Defined in Header**
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -44,33 +49,24 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto atan(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T>        constexpr auto atan(T z) noexcept;  //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto atan(T z) noexcept;  //3
+//!      template<unsigned_scalar_value K, eve::ordered_value T>              constexpr auto lambda(T z) noexcept;  //1
+//!      template<unsigned_scalar_value K, kyosu::concepts::cayley-dickson T> constexpr auto lambda(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z`: Value to process.
+//!     * `z` : complex or real value to process.
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
-//!
-//!   2. Returns the elementwise the complex principal value
-//!      of the arc tangent of the input in the range of a strip unbounded along the imaginary axis
-//!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
-//!      Special cases are handled as if the operation was implemented by \f$-i\; \mathrm{atanh}(z\; i)\f$.
-//!
-//!   3. Returns \f$ -I_z \mathrm{atanh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!    Returns the Dirichlet sum \f$  \displaystyle \sum_0^\infty \frac{1}{(2n+1)^z}\f$
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/atan.cpp}
+//!  @godbolt{doc/lambda.cpp}
 //======================================================================================================================
-  inline constexpr auto atan = eve::functor<atan_t>;
+  inline constexpr auto lambda = eve::functor<lambda_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -79,18 +75,19 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto atan_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  KYOSU_FORCEINLINE constexpr auto lambda_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-     if constexpr(concepts::complex<Z> )
+    if constexpr(concepts::complex<Z> )
     {
-      // C99 definition here; atan(a0) = -i atanh(ia0):
-      auto [r, i] = a0;
-      auto [r1, i1] = kyosu::atanh(complex(-i, r));
-      return complex(i1, -r1);
+      auto zz=exp2(z);
+      auto k = (z-1)/(z-2);
+      auto r = if_else(z == complex(eve::one(eve::as(real(z)))), complex(eve::inf(eve::as(real(z)))), k*deta(1u, zz));
+      imag(r) = eve::if_else(is_real(z), eve::zero, imag(r));
+      return r;
     }
     else
     {
-      return cayley_extend(atan, a0);
+      return cayley_extend(cosh, z);
     }
   }
 }

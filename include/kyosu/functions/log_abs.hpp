@@ -6,37 +6,35 @@
 */
 //======================================================================================================================
 #pragma once
-
+#include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
+#include <kyosu/functions/sqr_abs.hpp>
+#include <kyosu/constants/wrapped.hpp>
+
 
 namespace kyosu
 {
   template<typename Options>
-  struct dist_t : eve::elementwise_callable<dist_t, Options>
+  struct log_abs_t : eve::elementwise_callable<log_abs_t, Options>
   {
-    template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::abs(c0-c1))
-    {
-      return kyosu::abs(c0-c1);
-    }
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
 
-    template<concepts::real Z0, concepts::real Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(eve::dist(c0,c1))
-    {
-      return eve::dist(c0,c1);
-    }
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::log_abs(v); }
 
-    KYOSU_CALLABLE_OBJECT(dist_t, dist_);
-  };
+    KYOSU_CALLABLE_OBJECT(log_abs_t, log_abs_);
+};
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var dist
-//!   @brief Computes the distance between the two parameters.
+//!   @var log_abs
+//!   @brief Computes the natural logarithm of the absolute value of the argument.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -47,25 +45,34 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto dist(auto z0,  auto z1) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto log_abs(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto log_abs(T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0`, `z1`: Values to process.
+//!     * `z`: Value to process.
 //!
 //!   **Return value**
 //!
-//!     Returns the distance between the two arguments computed as the absolute value of the arguments difference.
-//!     Arguments can be a mix of floating or Cayley-Dickson values.
+//!     Returns the `log(abs(z))`.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/dist.cpp}
+//!  @godbolt{doc/log_abs.cpp}
 //======================================================================================================================
-  inline constexpr auto dist = eve::functor<dist_t>;
+  inline constexpr auto log_abs = eve::functor<log_abs_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log_abs_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return kyosu::half(kyosu::as<as_real_type_t<Z>>())*eve::log(kyosu::sqr_abs(z));
+  }
 }
