@@ -8,16 +8,24 @@
 #pragma once
 
 #include <kyosu/details/callable.hpp>
+#include <kyosu/functions/dist.hpp>
 
 namespace kyosu
 {
   template<typename Options>
   struct reldist_t : eve::elementwise_callable<reldist_t, Options>
   {
-    template<eve::value Z0, eve::value Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::dist(c0,c1))
+    template<typename Z0, typename Z1>
+    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
+    KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::dist(c0, c1))
     {
       return dist(c0, c1)/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
+    }
+
+    template<concepts::real Z0, concepts::real Z1>
+    KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(eve::reldist(c0,c1))
+    {
+      return eve::reldist(c0,c1);
     }
 
     KYOSU_CALLABLE_OBJECT(reldist_t, reldist_);
@@ -29,7 +37,7 @@ namespace kyosu
 //!   @var reldist
 //!   @brief Computes the relative distance between the two parameters.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

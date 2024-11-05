@@ -36,7 +36,7 @@ namespace kyosu
 //!   @var dist
 //!   @brief Computes the distance between the two parameters.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

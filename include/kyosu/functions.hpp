@@ -55,7 +55,7 @@
 // #include <kyosu/functions/average.hpp>
 // #include <kyosu/functions/beta.hpp>
 #include <kyosu/functions/ceil.hpp>
-// #include <kyosu/functions/commutator.hpp>
+#include <kyosu/functions/commutator.hpp>
 #include <kyosu/functions/cos.hpp>
 #include <kyosu/functions/cosh.hpp>
 // #include <kyosu/functions/cospi.hpp>
