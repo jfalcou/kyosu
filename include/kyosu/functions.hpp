@@ -121,7 +121,7 @@
 // #include <kyosu/functions/fnma.hpp>
 // #include <kyosu/functions/fnms.hpp>
 #include <kyosu/functions/frac.hpp>
-// #include <kyosu/functions/from_polar.hpp>
+#include <kyosu/functions/from_polar.hpp>
 // #include <kyosu/functions/fsm.hpp>
 // #include <kyosu/functions/hypot.hpp>
 // #include <kyosu/functions/horner.hpp>
