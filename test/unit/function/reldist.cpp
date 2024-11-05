@@ -32,6 +32,8 @@ TTS_CASE_WITH ( "Check kyosu::reldist over complex"
   using kyosu::abs;
   auto one = eve::one(eve::as(r0));
   TTS_RELATIVE_EQUAL(kyosu::reldist(c0, c1), abs(c0-c1)/eve::max(abs(c0), abs(c1), one), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::reldist(r0, c1), abs(r0-c1)/eve::max(abs(r0), abs(c1), one), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::reldist(c0, r1), abs(c0-r1)/eve::max(abs(c0), abs(r1), one), 1e-7);
 };
 
 TTS_CASE_WITH ( "Check kyosu::reldist over quaternion"

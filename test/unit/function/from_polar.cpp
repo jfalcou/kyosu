@@ -15,9 +15,9 @@ TTS_CASE_WITH ( "Check kyosu::from_polar over real"
                              , tts::randoms(-10,10), tts::randoms(-10,10)
                              )
               )
-(auto rho, auto theta, auto , auto , auto , auto )
+(auto rho, auto theta, auto r, auto i, auto j, auto k)
 {
-  // auto iq = kyosu::sign(kyosu::quaternion(r,i,j,k));
-  // TTS_RELATIVE_EQUAL(kyosu::from_polar(rho, theta, iq), rho*kyosu::exp(theta*iq), 1.0e-5);
+  auto iq = kyosu::sign(kyosu::quaternion(r,i,j,k));
+ TTS_RELATIVE_EQUAL(kyosu::from_polar(rho, theta, iq), rho*kyosu::exp(theta*iq), 1.0e-5);
   TTS_RELATIVE_EQUAL(kyosu::from_polar(rho, theta),     rho*kyosu::exp_i(theta),  1.0e-5);
 };

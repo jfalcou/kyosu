@@ -15,7 +15,7 @@ namespace kyosu
   {
     template<typename Z0, typename Z1>
     requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept //-> decltype(z0+z1)
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept -> decltype(z0+z1)
     {
       return KYOSU_CALL(z0,z1);
     }

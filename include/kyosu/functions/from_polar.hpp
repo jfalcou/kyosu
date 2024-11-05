@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct from_polar_t : eve::elementwise_callable<from_polar_t, Options>
+  struct from_polar_t : eve::strict_elementwise_callable<from_polar_t, Options>
   {
     template<concepts::real Z0, concepts::real Z1, concepts::cayley_dickson Z2>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 r, Z1 t, Z2 iz) const noexcept -> decltype(r+t+iz)
