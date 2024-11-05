@@ -100,11 +100,11 @@
 #include <kyosu/functions/deta.hpp>
 #include <kyosu/functions/digamma.hpp>
 #include <kyosu/functions/dist.hpp>
-// #include <kyosu/functions/dot.hpp>
-// #include <kyosu/functions/erf.hpp>
-// #include <kyosu/functions/erfcx.hpp>
-// #include <kyosu/functions/erfi.hpp>
-// #include <kyosu/functions/eta.hpp>
+//#include <kyosu/functions/dot.hpp>
+#include <kyosu/functions/erf.hpp>
+#include <kyosu/functions/erfcx.hpp>
+#include <kyosu/functions/erfi.hpp>
+#include <kyosu/functions/eta.hpp>
 #include <kyosu/functions/exp.hpp>
 #include <kyosu/functions/exp10.hpp>
 #include <kyosu/functions/exp2.hpp>
@@ -223,10 +223,10 @@
 #include <kyosu/functions/tan.hpp>
 #include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
-// #include <kyosu/functions/tgamma.hpp>
+#include <kyosu/functions/tgamma.hpp>
 // #include <kyosu/functions/to_polar.hpp>
 #include <kyosu/functions/trunc.hpp>
-// #include <kyosu/functions/zeta.hpp>
+#include <kyosu/functions/zeta.hpp>
 
 //======================================================================================================================
 // Functions performing computations over quaternion complex or real elements only.

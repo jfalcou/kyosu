@@ -20,7 +20,7 @@ namespace kyosu
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
     { return eve::tgamma(v); }
 
     KYOSU_CALLABLE_OBJECT(tgamma_t, tgamma_);
