@@ -58,12 +58,12 @@
 #include <kyosu/functions/commutator.hpp>
 #include <kyosu/functions/cos.hpp>
 #include <kyosu/functions/cosh.hpp>
-// #include <kyosu/functions/cospi.hpp>
+#include <kyosu/functions/cospi.hpp>
 #include <kyosu/functions/cot.hpp>
-// #include <kyosu/functions/cotpi.hpp>
+#include <kyosu/functions/cotpi.hpp>
 #include <kyosu/functions/coth.hpp>
 #include <kyosu/functions/csc.hpp>
-// #include <kyosu/functions/cscpi.hpp>
+#include <kyosu/functions/cscpi.hpp>
 #include <kyosu/functions/csch.hpp>
 // #include <kyosu/functions/cyl_bessel_j0.hpp>
 // #include <kyosu/functions/cyl_bessel_j1.hpp>
@@ -181,14 +181,14 @@
 #include <kyosu/functions/reldist.hpp>
 // #include <kyosu/functions/reverse_horner.hpp>
 #include <kyosu/functions/sec.hpp>
-// #include <kyosu/functions/secpi.hpp>
+#include <kyosu/functions/secpi.hpp>
 #include <kyosu/functions/sech.hpp>
 #include <kyosu/functions/sign.hpp>
 #include <kyosu/functions/sin.hpp>
 #include <kyosu/functions/sinc.hpp>
 #include <kyosu/functions/sincos.hpp>
-// #include <kyosu/functions/sinpi.hpp>
-// #include <kyosu/functions/sinpicospi.hpp>
+#include <kyosu/functions/sinpi.hpp>
+#include <kyosu/functions/sinpicospi.hpp>
 #include <kyosu/functions/sinh.hpp>
 #include <kyosu/functions/sinhc.hpp>
 #include <kyosu/functions/sinhcosh.hpp>
@@ -220,7 +220,7 @@
 #include <kyosu/functions/sqr_abs.hpp>
 #include <kyosu/functions/sqrt.hpp>
 #include <kyosu/functions/tan.hpp>
-// #include <kyosu/functions/tanpi.hpp>
+#include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
 // #include <kyosu/functions/tgamma.hpp>
 // #include <kyosu/functions/to_polar.hpp>

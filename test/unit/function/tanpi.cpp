@@ -8,7 +8,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::cospi over quaternion"
+TTS_CASE_WITH ( "Check kyosu::tanpi over quaternion"
               , kyosu::simd_real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)
@@ -20,5 +20,5 @@ TTS_CASE_WITH ( "Check kyosu::cospi over quaternion"
   using u_t  = eve::underlying_type_t<T>;
   auto pi = eve::pi(eve::as<u_t>());
   auto q = ke_t(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::cospi(q), kyosu::cos(pi*q), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::tanpi(q), kyosu::tan(pi*q), 1e-3);
 };

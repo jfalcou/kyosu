@@ -16,7 +16,14 @@ TTS_CASE_WITH ( "Check kyosu::manhattan over real"
               )
 (auto r0, auto r1)
 {
-  TTS_EQUAL(kyosu::manhattan(r0, r1), eve::manhattan(r0, r1));
+   using e_t =  eve::element_type_t<decltype(r0)>;
+   std::cout <<  eve::manhattan(r0, eve::one(eve::as(r0))) << std::endl;
+   std::cout <<  kyosu::manhattan(r0, eve::one(eve::as(r0))) << std::endl;
+   std::cout <<  kyosu::manhattan(r0, eve::one(eve::as<e_t>())) << std::endl;
+   std::cout <<kyosu::manhattan(r0, kyosu::complex(r1))<< std::endl;
+//  TTS_EQUAL(kyosu::manhattan(r0, kyosu::complex(r1)), eve::manhattan(r0, r1));
+//  TTS_EQUAL(kyosu::manhattan(kyosu::complex(r0),  r1), eve::manhattan(r0, r1));
+  TTS_EQUAL(kyosu::manhattan(r0, r1)                , eve::manhattan(r0, r1));
 };
 
 TTS_CASE_WITH ( "Check kyosu::manhattan over complex"

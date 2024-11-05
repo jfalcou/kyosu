@@ -8,7 +8,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::dist over real"
+TTS_CASE_WITH ( "Check kyosu::commutator over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10)
                              ,tts::randoms(-10,10)
@@ -16,14 +16,10 @@ TTS_CASE_WITH ( "Check kyosu::dist over real"
               )
 (auto r0, auto r1)
 {
-  using e_t =  eve::element_type_t<decltype(r0)>;
-  e_t o(1);
-  TTS_EQUAL(eve::dist(r0, o),  eve::dist(r0, o));
-  TTS_EQUAL(kyosu::dist(r0, r1), eve::dist(r0, r1));
-  TTS_EQUAL(kyosu::dist(kyosu::complex(r0), r1), kyosu::dist(kyosu::complex(r0), kyosu::complex(r1)));
+  TTS_EQUAL(kyosu::commutator(r0, r1), eve::zero(eve::as(r0)));
 };
 
-TTS_CASE_WITH ( "Check kyosu::dist over complex"
+TTS_CASE_WITH ( "Check kyosu::commutator over complex"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10)
                              ,tts::randoms(-10,10), tts::randoms(-10,10)
@@ -33,12 +29,12 @@ TTS_CASE_WITH ( "Check kyosu::dist over complex"
 {
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
-  TTS_RELATIVE_EQUAL(kyosu::dist(c0, r1), kyosu::abs(c0-r1), 1e-7);
-  TTS_RELATIVE_EQUAL(kyosu::dist(r0, c1), kyosu::abs(r0-c1), 1e-7);
-  TTS_RELATIVE_EQUAL(kyosu::dist(c0, c1), kyosu::abs(c0-c1), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::commutator(c0, r1), eve::zero(eve::as(c0)), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::commutator(r0, c1), eve::zero(eve::as(c0)), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::commutator(c0, c1), eve::zero(eve::as(c0)), 1e-7);
 };
 
-TTS_CASE_WITH ( "Check kyosu::dist over quaternion"
+TTS_CASE_WITH ( "Check kyosu::commutator over quaternion"
               , kyosu::real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)
@@ -51,5 +47,5 @@ TTS_CASE_WITH ( "Check kyosu::dist over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::dist(q0, q1), kyosu::abs(q0-q1) , 1e-7);
+  TTS_EQUAL(kyosu::commutator(q0, q1), q0*q1-q1*q0);
 };
