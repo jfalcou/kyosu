@@ -6,18 +6,19 @@
 */
 //======================================================================================================================
 #pragma once
-#include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct commutator_t : eve::elementwise_callable<commutator_t, Options>
+  struct commutator_t : eve::strict_elementwise_callable<commutator_t, Options>
   {
     template<typename Z0, typename Z1>
     requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept -> decltype(z0+z1)
-    { return z0*z1-z1*z0; /*KYOSU_CALL(z0,z1);*/ }//ça marche mais c'est pas optimal
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept //-> decltype(z0+z1)
+    {
+      return KYOSU_CALL(z0,z1);
+    }
 
     template<concepts::real V0, concepts::real V1>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> decltype(v0+v1)
@@ -67,7 +68,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  //ça marche pas avec reel, complexe
+  //ï¿½a marche pas avec reel, complexe
   template<typename C0, typename C1, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto commutator_(KYOSU_DELAY(), O const&, C0 c0, C1 c1) noexcept
   {

@@ -13,11 +13,11 @@
 namespace kyosu
 {
   template<typename Options>
-  struct manhattan_t : eve::tuple_callable<manhattan_t, Options>
+  struct manhattan_t : eve::strict_tuple_callable<manhattan_t, Options>
   {
     template<eve::value Z0, eve::value ...Zs>
     requires( concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...) )
-      KYOSU_FORCEINLINE constexpr
+    KYOSU_FORCEINLINE constexpr
     auto operator()(Z0 z0, Zs... zs) const noexcept -> decltype(eve::manhattan(real(z0), real(zs)...))
     {
       return KYOSU_CALL(z0, zs...);
@@ -79,7 +79,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto manhattan_(KYOSU_DELAY(), O const&, Z0 const& z0, Zs const& ...zs) noexcept
   {
     if constexpr(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...) )
-      return eve::manhattan(kumi::flatten(kumi::cat(z0, zs...)));
+      return eve::manhattan(kumi::flatten(kumi::make_tuple(z0, zs...)));
     else
       return eve::manhattan(z0, zs...);
   }
