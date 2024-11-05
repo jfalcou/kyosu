@@ -8,29 +8,31 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/constants/wrapped.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/asec.hpp>
+#include <kyosu/functions/radinpi.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct radinpi_t : eve::elementwise_callable<radinpi_t, Options>
+  struct asecpi_t : eve::elementwise_callable<asecpi_t, Options>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::radinpi(v); }
+    KYOSU_FORCEINLINE constexpr  complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
 
-    KYOSU_CALLABLE_OBJECT(radinpi_t, radinpi_);
+    KYOSU_CALLABLE_OBJECT(asecpi_t, asecpi_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var radinpi
-//!   @brief Computes the parameter divided by \f$\pi\f$.
+//!   @var asecpi
+//!   @brief Computes the arc secant of the argument in \f$\pi\f$ multiples.
 //!
 //!   @groupheader{Header file}
 //!
@@ -43,8 +45,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_type_t<T> radinpi(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T                 radinpi(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto asecpi(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto asecpi(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -52,15 +54,17 @@ namespace kyosu
 //!
 //!     * `z`: Value to process.
 //!
-//!   **Return value**
+//! **Return value**
 //!
-//!     Returns  argument divided by \f$\pi\f$.
+//!   1. a real input z is treated as if kyosu::complex(z) was entered.
+//!
+//!   2. Returns kyosu::radinpi([kyosu::asec](@ref kyosu::asec)(z))
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/radinpi.cpp}
+//!  @godbolt{doc/asecpi.cpp}
 //======================================================================================================================
-  inline constexpr auto radinpi = eve::functor<radinpi_t>;
+  inline constexpr auto asecpi = eve::functor<asecpi_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -69,8 +73,8 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto radinpi_(KYOSU_DELAY(), O const&, Z a) noexcept
+  KYOSU_FORCEINLINE constexpr auto asecpi_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    return inv_pi(eve::as(a))*a;
+   return kyosu::radinpi(kyosu::asec(z));
   }
 }

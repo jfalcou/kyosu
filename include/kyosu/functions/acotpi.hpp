@@ -8,6 +8,9 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/acot.hpp>
+#include <kyosu/functions/radinpi.hpp>
 
 namespace kyosu
 {
@@ -19,8 +22,8 @@ namespace kyosu
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::acotpi(v); }
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(acotpi_t, acotpi_);
 };
