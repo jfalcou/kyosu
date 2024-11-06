@@ -125,7 +125,6 @@
 #include <kyosu/functions/fsm.hpp>
 #include <kyosu/functions/hypot.hpp>
 #include <kyosu/functions/horner.hpp>
-
 #include <kyosu/functions/inc.hpp>
 #include <kyosu/functions/is_denormal.hpp>
 #include <kyosu/functions/is_equal.hpp>
@@ -145,8 +144,8 @@
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/is_unitary.hpp>
 #include <kyosu/functions/lambda.hpp>
-// #include <kyosu/functions/lbeta.hpp>
-// #include <kyosu/functions/ldiv.hpp>
+#include <kyosu/functions/lbeta.hpp>
+#include <kyosu/functions/ldiv.hpp>
 // #include <kyosu/functions/lerp.hpp>
 #include <kyosu/functions/log.hpp>
 #include <kyosu/functions/log10.hpp>
