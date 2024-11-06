@@ -53,7 +53,7 @@
 #include <kyosu/functions/atan.hpp>
 #include <kyosu/functions/atanh.hpp>
 #include <kyosu/functions/atanpi.hpp>
-// #include <kyosu/functions/average.hpp>
+#include <kyosu/functions/average.hpp>
 // #include <kyosu/functions/beta.hpp>
 #include <kyosu/functions/ceil.hpp>
 #include <kyosu/functions/commutator.hpp>
