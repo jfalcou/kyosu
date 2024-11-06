@@ -75,7 +75,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z0,  typename ...Zs, eve::callable_options O>
+  template<typename Z0, typename ...Zs, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto manhattan_(KYOSU_DELAY(), O const& o, Z0 const& z0, Zs const& ...zs) noexcept
   {
     if constexpr(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...) )
