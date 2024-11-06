@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct manhattan_t : eve::strict_tuple_callable<manhattan_t, Options>
+  struct manhattan_t : eve::strict_tuple_callable<manhattan_t, Options, eve::pedantic_option>
   {
     template<eve::value Z0, eve::value ...Zs>
     requires( concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...) )
@@ -76,11 +76,11 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z0,  typename ...Zs, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto manhattan_(KYOSU_DELAY(), O const&, Z0 const& z0, Zs const& ...zs) noexcept
+  KYOSU_FORCEINLINE constexpr auto manhattan_(KYOSU_DELAY(), O const& o, Z0 const& z0, Zs const& ...zs) noexcept
   {
     if constexpr(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...) )
-      return eve::manhattan(kumi::flatten(kumi::make_tuple(z0, zs...)));
+      return eve::manhattan[o](kumi::flatten(kumi::make_tuple(z0, zs...)));
     else
-      return eve::manhattan(z0, zs...);
+      return eve::manhattan[o](z0, zs...);
   }
 }
