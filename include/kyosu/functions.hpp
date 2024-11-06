@@ -54,7 +54,7 @@
 #include <kyosu/functions/atanh.hpp>
 #include <kyosu/functions/atanpi.hpp>
 #include <kyosu/functions/average.hpp>
-// #include <kyosu/functions/beta.hpp>
+#include <kyosu/functions/beta.hpp>
 #include <kyosu/functions/ceil.hpp>
 #include <kyosu/functions/commutator.hpp>
 #include <kyosu/functions/cos.hpp>
@@ -100,7 +100,7 @@
 #include <kyosu/functions/deta.hpp>
 #include <kyosu/functions/digamma.hpp>
 #include <kyosu/functions/dist.hpp>
-//#include <kyosu/functions/dot.hpp>
+#include <kyosu/functions/dot.hpp>
 #include <kyosu/functions/erf.hpp>
 #include <kyosu/functions/erfcx.hpp>
 #include <kyosu/functions/erfi.hpp>
