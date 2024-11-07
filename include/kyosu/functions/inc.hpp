@@ -68,7 +68,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto inc_(KYOSU_DELAY(), O const&, Z c) noexcept
+  KYOSU_FORCEINLINE constexpr Z inc_(KYOSU_DELAY(), O const&, Z c) noexcept
   {
     real(c) = eve::inc(real(c));
     return c;

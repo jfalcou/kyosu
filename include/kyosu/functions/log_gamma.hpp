@@ -19,8 +19,8 @@ namespace kyosu
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::log_gamma(v); }
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(log_gamma_t, log_gamma_);
   };
@@ -67,7 +67,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto log_gamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  KYOSU_FORCEINLINE constexpr Z log_gamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
     if constexpr(concepts::complex<Z> )
     {

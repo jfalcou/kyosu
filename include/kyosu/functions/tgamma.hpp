@@ -9,6 +9,9 @@
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/dec.hpp>
+#include <kyosu/functions/pow.hpp>
+#include <kyosu/functions/sinpi.hpp>
 
 namespace kyosu
 {
@@ -68,7 +71,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto tgamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  constexpr auto tgamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
     if constexpr(concepts::complex<Z> )
     {

@@ -15,6 +15,7 @@
 #include <kyosu/functions/log_abs.hpp>
 #include <kyosu/functions/log.hpp>
 #include <kyosu/functions/is_eqz.hpp>
+#include <kyosu/functions/sqr.hpp>
 #include <kyosu/functions/convert.hpp>
 
 namespace kyosu

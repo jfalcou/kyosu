@@ -10,7 +10,7 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/inc.hpp>
 #include <kyosu/functions/minus.hpp>
-
+#include <iostream>
 
 namespace kyosu
 {
@@ -71,8 +71,8 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto oneminus_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr Z oneminus_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    kyosu::inc(kyosu::minus(z));
+    return kyosu::inc(-z);
   }
 }
