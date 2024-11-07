@@ -173,7 +173,7 @@
 #include <kyosu/functions/pow1p.hpp>
 #include <kyosu/functions/pow_abs.hpp>
 #include <kyosu/functions/powm1.hpp>
-// #include <kyosu/functions/proj.hpp>
+#include <kyosu/functions/proj.hpp>
 #include <kyosu/functions/radinpi.hpp>
 #include <kyosu/functions/rec.hpp>
 // #include <kyosu/functions/right_horner.hpp>
