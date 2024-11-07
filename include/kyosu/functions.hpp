@@ -155,8 +155,8 @@
 #include <kyosu/functions/log_gamma.hpp>
 #include <kyosu/functions/log2.hpp>
 #include <kyosu/functions/lpnorm.hpp>
-// #include <kyosu/functions/lrising_factorial.hpp>
-// #include <kyosu/functions/rising_factorial.hpp>
+#include <kyosu/functions/lrising_factorial.hpp>
+#include <kyosu/functions/rising_factorial.hpp>
 #include <kyosu/functions/manhattan.hpp>
 #include <kyosu/functions/maxabs.hpp>
 #include <kyosu/functions/maxmag.hpp>
