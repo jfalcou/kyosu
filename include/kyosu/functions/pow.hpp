@@ -20,19 +20,21 @@
 namespace kyosu
 {
   template<typename Options>
-  struct pow_t : eve::elementwise_callable<pow_t, Options>
+  struct pow_t : eve::strict_elementwise_callable<pow_t, Options>
   {
-    template<typename Z0, integral_value N>
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, N const & n) const noexcept
-    { return KYOSU_CALL(z0,n); }
 
     template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson Z0 || concepts::cayley_dickson Z0>)
+    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson <Z1>)
     KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
     { return KYOSU_CALL(z0,z1); }
 
+    template<concepts::real V0, eve::integral_value V1>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> decltype(v0+v1)
+    { return eve::pow(v0, v1); }
+
     template<concepts::real V0, concepts::real V1>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V0 v0, V1 v1) const noexcept
+    requires(!eve::integral_value<V1>)
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept ->complex_t<decltype(v0+v1)>
     { return KYOSU_CALL(complex(v0),v1); }
 
     KYOSU_CALLABLE_OBJECT(pow_t, pow_);
@@ -112,7 +114,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename C0,  typename C1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto pow_(KYOSU_DELAY(), O const&, C0 c0,  C1 c1) noexcept
+  constexpr auto pow_(KYOSU_DELAY(), O const&, C0 c0,  C1 c1) noexcept
   {
     using r_t = kyosu::as_cayley_dickson_t<C0,C1>;
     using er_t = eve::element_type_t<r_t>;
@@ -151,7 +153,7 @@ namespace kyosu::_
     else if constexpr((dimension_v<C0> <= 2) && (dimension_v<C1> <= 2))
     {
       r_t r;
-      if constexpr(eve::floating_ordered_value<C0> && kyosu::concepts::complex<C1>) // c1 is complex c0 is real
+      if constexpr(kyosu::concepts::real<C0> && kyosu::concepts::complex<C1>) // c1 is complex c0 is real
       {
         auto [rc1, ic1] = c1;
         auto lgac0 = eve::log_abs(c0);
@@ -166,12 +168,12 @@ namespace kyosu::_
         else
         {
           auto rho = eve::exp(eve::diff_of_prod(lgac0, rc1, ic1, eve::pi(eve::as(rc1))));
-          auto theta = eve::pedantic(eve::sum_of_prod)(eve::pi(eve::as(rc1)), rc1, ic1, lgac0);
+          auto theta = eve::sum_of_prod[eve::pedantic](eve::pi(eve::as(rc1)), rc1, ic1, lgac0);
           auto r2 = rho*kyosu::exp_i(theta);
           r = kyosu::if_else(isposc0, r1, r2);
         }
       }
-      else if constexpr(eve::floating_ordered_value<C1> ) // c0 is complex c1 is real
+      else if constexpr(kyosu::concepts::real<C1> ) // c0 is complex c1 is real
       {
         return exp(c1*log(c0));
       }
@@ -180,8 +182,8 @@ namespace kyosu::_
         auto  [rc1, ic1] = c1;
         auto lc0 = kyosu::log_abs(c0);
         auto argc0 = kyosu::arg(c0);
-        auto rho = eve::exp(eve::pedantic(eve::diff_of_prod)(lc0, rc1, ic1, argc0));
-        auto theta = eve::pedantic(eve::sum_of_prod)(argc0, rc1, ic1, lc0);
+        auto rho = eve::exp(eve::diff_of_prod[eve::pedantic](lc0, rc1, ic1, argc0));
+        auto theta = eve::sum_of_prod[eve::pedantic](argc0, rc1, ic1, lc0);
         r = rho*exp_i(theta);
         auto realc0 = is_real(c0);
         if(eve::any(realc0))
@@ -195,11 +197,11 @@ namespace kyosu::_
     }
     else
     {
-      if constexpr(eve::floating_ordered_value<C1>) //c0 cayley c1 real
+      if constexpr(kyosu::concepts::real<C1>) //c0 cayley c1 real
       {
         return cayley_extend(pow, c0, c1);
       }
-      else if  constexpr(eve::floating_ordered_value<C0>)//c1 cayley c0 real
+      else if  constexpr(kyosu::concepts::real<C0>)//c1 cayley c0 real
       {
         return cayley_extend_rev(pow, c0, c1);
       }
@@ -216,6 +218,6 @@ namespace kyosu::_
                               , r
                               );
       }
-    }   
+    }
   }
 }

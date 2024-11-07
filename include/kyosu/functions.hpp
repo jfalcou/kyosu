@@ -169,9 +169,9 @@
 #include <kyosu/functions/negmaxabs.hpp>
 #include <kyosu/functions/negminabs.hpp>
 #include <kyosu/functions/oneminus.hpp>
-// #include <kyosu/functions/pow.hpp>
+#include <kyosu/functions/pow.hpp>
 // #include <kyosu/functions/pow1p.hpp>
-// #include <kyosu/functions/pow_abs.hpp>
+#include <kyosu/functions/pow_abs.hpp>
 // #include <kyosu/functions/powm1.hpp>
 // #include <kyosu/functions/proj.hpp>
 #include <kyosu/functions/radinpi.hpp>

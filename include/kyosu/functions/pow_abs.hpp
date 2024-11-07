@@ -8,32 +8,39 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/to_complex.hpp>
-#include <kyosu/functions/tgamma.hpp>
+#include <kyosu/functions/pow.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct beta_t : eve::strict_elementwise_callable<beta_t, Options>
+  struct pow_abs_t : eve::strict_elementwise_callable<pow_abs_t, Options>
   {
     template<typename Z0, typename Z1>
     requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_t<Z0, Z1> operator()(Z0 const& z0, Z1 const & z1) const noexcept
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept //-> decltype(z0+z1)
     { return KYOSU_CALL(z0,z1); }
 
     template<concepts::real V0, concepts::real V1>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept ->  decltype(beta(complex(v0),v1))
-    { return beta(complex(v0),v1); }
+    requires(!eve::integral_value<V1>)
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept //-> decltype(v0+v1)
+    { return eve::pow_abs(v0,v1); }
 
-    KYOSU_CALLABLE_OBJECT(beta_t, beta_);
+    template<typename V0, eve::integral_value V1>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept //-> decltype(v0+v1)
+    { return eve::pow(eve::abs(v0),v1); }
+
+//     template<concepts::real V0, integral_value V1>
+//     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept //-> decltype(v0+v1)
+//     { return eve::pow_abs(v0,v1); }
+
+    KYOSU_CALLABLE_OBJECT(pow_abs_t, pow_abs_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var beta
-//!   @brief Computes the beta function: \f$\displaystyle \mathbf{B}(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$
-//!   for real or complex entries.
+//!   @var pow_abs
+//!   @brief Computes the  computing the pow_abs operation \f$|x|^y\f$.
 //!
 //!   @groupheader{Header file}
 //!
@@ -46,24 +53,24 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      auto beta(auto x, auto y) noexcept;
+//!     constexpr auto pow_abs(auto z0, auto z1) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `x`,`y` : Values to process. Can be a mix of cayley_dickson and real floating values.
+//!     * `z0`, `z1`: Values to process.
 //!
 //!   **Return value**
 //!
-//!     1.  If x and y are real typed values returns \f$\displaystyle \mathbf{B}(x,y) = \int_0^1 t^{x-1}(1-t)^{y-1}\mbox{d}t\f$
-//!     2.  \f$\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
+//!      the call is semantically equivalent to `kyosu::exp(log_abs(z0)*z1)` In particular if z1 is floating typed the
+//!      result is floating_typed, which is not the case of kyosu::pow(abs(z0), z1);
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/beta.cpp}
+//!  @godbolt{doc/pow_abs.cpp}
 //======================================================================================================================
-  inline constexpr auto beta = eve::functor<beta_t>;
+  inline constexpr auto pow_abs = eve::functor<pow_abs_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -72,9 +79,11 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z0, typename Z1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto beta_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
+  KYOSU_FORCEINLINE constexpr auto pow_abs_(KYOSU_DELAY(), O const&, Z0 c0, Z1 c1) noexcept
   {
-    auto y = z0 + z1;
-    return tgamma(z0)*tgamma(z1)/tgamma(y);
+    if constexpr(kyosu::concepts::real<Z1>)
+      return eve::pow(kyosu::sqr_abs(c0), c1*eve::half(eve::as(c1)));
+    else
+      return kyosu::pow(abs(c0), c1);
   }
 }
