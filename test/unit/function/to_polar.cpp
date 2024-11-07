@@ -8,7 +8,7 @@
 #include "test.hpp"
 #include <kyosu/kyosu.hpp>
 
-TTS_CASE_WITH ( "Check behavior of from_polar on wide"
+TTS_CASE_WITH ( "Check behavior of to_polar on wide"
               , kyosu::real_types
               , tts::generate( tts::randoms(-1.0, +1.0)
                              , tts::randoms(-1.0, +1.0)

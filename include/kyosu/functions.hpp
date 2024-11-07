@@ -223,7 +223,7 @@
 #include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
 #include <kyosu/functions/tgamma.hpp>
-// #include <kyosu/functions/to_polar.hpp>
+#include <kyosu/functions/to_polar.hpp>
 #include <kyosu/functions/trunc.hpp>
 #include <kyosu/functions/zeta.hpp>
 
