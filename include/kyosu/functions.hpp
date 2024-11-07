@@ -154,7 +154,7 @@
 #include <kyosu/functions/log_abs_gamma.hpp>
 #include <kyosu/functions/log_gamma.hpp>
 #include <kyosu/functions/log2.hpp>
-// #include <kyosu/functions/lpnorm.hpp>
+#include <kyosu/functions/lpnorm.hpp>
 // #include <kyosu/functions/lrising_factorial.hpp>
 // #include <kyosu/functions/rising_factorial.hpp>
 #include <kyosu/functions/manhattan.hpp>
