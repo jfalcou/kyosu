@@ -9,11 +9,14 @@
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/pow.hpp>
+#include <kyosu/functions/is_unitary.hpp>
+#include <kyosu/functions/conj.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct lerp_t : eve::strict_elementwise_callable<lerp_t, Options>
+  struct slerp_t : eve::strict_elementwise_callable<slerp_t, Options>
   {
     template<typename Z0, typename Z1, typename Z2>
     requires((concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)&& concepts::real<Z2>)
@@ -21,17 +24,17 @@ namespace kyosu
     { return KYOSU_CALL(z0,z1,z2); }
 
     template<concepts::real V0, concepts::real V1, concepts::real V2>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1, V2 v2) const noexcept -> decltype(v0+v1+v2)
-    { return eve::lerp(v0,v1,v2); }
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1, V2 v2) const noexcept -> decltype(complex(v0)+complex(v1)+v2)
+    { return KYOSU_CALL(complex(v0),complex(v1),v2); }
 
-    KYOSU_CALLABLE_OBJECT(lerp_t, lerp_);
+    KYOSU_CALLABLE_OBJECT(slerp_t, slerp_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var lerp
-//!   @brief  Computes the  linear interpolation.
+//!   @var slerp
+//!   @brief  Computes the  spherical interpolation between unitary quaternions.
 //!
 //!   @groupheader{Header file}
 //!
@@ -44,27 +47,25 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto lerp(auto z0, auto z1, floating_ordered_value t) noexcept;
+//!     constexpr auto slerp(auto z0, auto z1, floating_ordered_value t) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0`, `z1`: Values to process.
+//!     * `z0`, `z1`: unitary quaternions to process.
 //!     * `t`: floating value interpolation coefficient.
 //!
 //!   **Return value**
 //!
-//!    The value of the interpolation (or extrapolation)  between `z0` and `z1` is returned.
-//!    The call is semantically equivalent to `z0+t*(z1-z0)`.
-//!
-//!    @see slerp for better unitary quaternion (spheroidal) interpolation.
+//!    The value of the spherical interpolation (or extrapolation)  between `z0` and `z1` is returned.
+//!    The functions asserts if the quaternions are not unitary.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/lerp.cpp}
+//!  @godbolt{doc/slerp.cpp}
 //======================================================================================================================
-  inline constexpr auto lerp = eve::functor<lerp_t>;
+  inline constexpr auto slerp = eve::functor<slerp_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -72,10 +73,12 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename C0, typename C1, typename T, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto lerp_(KYOSU_DELAY(), O const&, C0 c0, C1 c1, T t) noexcept
+  template<typename Z1, typename Z2, typename T, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto slerp_(KYOSU_DELAY(), O const&, Z1 z1, Z2 z2, T t) noexcept
   {
-    using r_t = as_cayley_dickson_t<C0,C1,T>;
-    return r_t{kumi::map([&t](auto const& e, auto const & f) { return eve::lerp(e, f, t); }, r_t(c0), r_t(c1))};
+    EVE_ASSERT(eve::all(is_unitary(z1) && is_unitary(z2)), "quaternion parameters must be unitary");
+    auto gez = eve::is_gez(kyosu::dot(z1, z2));
+    auto mix = kyosu::if_else(gez, z2, -z2);
+    return z1*kyosu::pow(kyosu::conj(z1)*mix, t);
   }
 }

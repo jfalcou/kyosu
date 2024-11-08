@@ -39,4 +39,16 @@ namespace kyosu::_
     return kumi::tuple{ kyosu::real(c1) + kyosu::ipart(c1)*s
         , kyosu::real(c2) + kyosu::ipart(c2)*s};
   }
+
+  auto cayley_extend_rev2(auto f, auto z1, auto z2)
+  {
+    auto p = kyosu::pure(z2);
+    auto az2 = kyosu::abs(p);
+    using c_t = complex_t<decltype(az2)>;
+    auto [c1, c2] = f(z1, c_t(kyosu::real(z2), az2));
+    auto s = kyosu::sign(p);
+    return kumi::tuple{ kyosu::real(c1) + kyosu::ipart(c1)*s
+                      , kyosu::real(c2) + kyosu::ipart(c2)*s};
+  }
+
 }
