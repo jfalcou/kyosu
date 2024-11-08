@@ -48,12 +48,12 @@
 // #include <kyosu/functions/cyl_bessel_k.hpp>
 // #include <kyosu/functions/cyl_bessel_ik.hpp>
 
-// #include <kyosu/functions/sph_bessel_j0.hpp>
-// #include <kyosu/functions/sph_bessel_j1.hpp>
-// #include <kyosu/functions/sph_bessel_jn.hpp>
-// #include <kyosu/functions/sph_bessel_y0.hpp>
-// #include <kyosu/functions/sph_bessel_y1.hpp>
-// #include <kyosu/functions/sph_bessel_yn.hpp>
+#include <kyosu/functions/sph_bessel_j0.hpp>
+#include <kyosu/functions/sph_bessel_j1.hpp>
+#include <kyosu/functions/sph_bessel_jn.hpp>
+#include <kyosu/functions/sph_bessel_y0.hpp>
+#include <kyosu/functions/sph_bessel_y1.hpp>
+#include <kyosu/functions/sph_bessel_yn.hpp>
 // #include <kyosu/functions/sph_bessel_jyn.hpp>
 // #include <kyosu/functions/sph_bessel_h1_0.hpp>
 // #include <kyosu/functions/sph_bessel_h1_1.hpp>

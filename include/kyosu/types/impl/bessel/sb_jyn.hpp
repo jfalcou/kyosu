@@ -65,7 +65,7 @@ namespace kyosu::_
     auto rz = kyosu::rec(z);
     auto nn = bd(n);
     Z f0(eve::zero(as<Z>()));
-    Z f1(kyosu::complex(eve::sqrtsmallestposval(eve::as<Z>())));
+    Z f1(kyosu::complex(kyosu::sqrtsmallestposval(eve::as<Z>())));
     auto res = f1;
     for(int k=nn; k >= 0 ; --k)
     {
@@ -82,7 +82,7 @@ namespace kyosu::_
     return if_else(is_eqz(z), eve::zero, res);
   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R> 
+  template<eve::integral_scalar_value N, typename Z, typename R>
   auto sb_jn(N n, Z z, R & sjs) noexcept
   {
     EVE_ASSERT(N(size(sjs)) > n, "not enough room in js");
@@ -192,7 +192,7 @@ namespace kyosu::_
     auto rz = kyosu::rec(z);
     auto nn = bd(n);
     Z f0(eve::zero(as<Z>()));
-    Z f1(kyosu::complex(eve::sqrtsmallestposval(eve::as<Z>())));
+    Z f1(kyosu::complex(kyosu::sqrtsmallestposval(eve::as<Z>())));
     for(int k=nn; k >= 0 ; --k)
     {
       auto f = (2*k+3)*f1*rz-f0;
@@ -213,96 +213,9 @@ namespace kyosu::_
     return kumi::tuple{sjs[n], sys[n]};
   }
 
-  ////////////////////////////////////////////////////////////
-  // end utilities
-  ////////////////////////////////////////////////////////////
-
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_j0>, Z z) noexcept
-  {
-    return sb_j0(z);
-  }
-
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_j1>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_j1(z);
-    }
-    else
-    {
-      return cayley_extend(sph_bessel_j1, z);
-    }
-  }
-
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_jn>, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_jn(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(sph_bessel_jn, n, z);
-    }
-  }
-
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_jn>, N n, Z z, R& sjs) noexcept
-  {
-    return sb_jn(n, z, sjs);
-  }
-
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_y0>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-     return sb_y0(z);
-    }
-    else
-    {
-      return cayley_extend(sph_bessel_y0, z);
-    }
-  }
-
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_y1>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_y1(z);
-    }
-    else
-    {
-      return cayley_extend(sph_bessel_y1, z);
-    }
-  }
-
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_yn>, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_yn(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(sph_bessel_yn, n, z);
-    }
-  }
-
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_yn>, N n, Z z, R& sys) noexcept
-  {
-    return sb_yn(n, z, sys);
-  }
-
-  template<eve::integral_scalar_value N, typename Z, typename R1,  typename R2> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_jyn>, N n, Z z, R1& sjs, R2& sys) noexcept
-  {
-      return sb_jyn(n, z, sjs, sys);
-  }
+//   template<eve::integral_scalar_value N, typename Z, typename R1,  typename R2> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_jyn>, N n, Z z, R1& sjs, R2& sys) noexcept
+//   {
+//       return sb_jyn(n, z, sjs, sys);
+//   }
 }
