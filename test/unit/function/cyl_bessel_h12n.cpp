@@ -28,7 +28,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h12n over real"
     for (int k = 0; k < 1; ++k)
     {
       auto c = kyosu::complex(re[k], im[k]);
-      kyosu::cyl_bessel_h12n(3, c, h1s, h2s);
+      kyosu::cyl_bessel_h12n(3, c, std::span(h1s), std::span(h2s));
       int i = 0;
       TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h1_0(c), h1s[0], 1.0e-6) << "i " << i  << " c "<< c << '\n';
       TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h2_0(c), h2s[0], 1.0e-6) << "i " << i  << " c "<< c << '\n';
