@@ -13,7 +13,7 @@
 namespace kyosu::_
 {
   /////////////////////////////////
-  // contains implementations of
+  //needed by the implementations of
   // cyl_bessel_i0
   // cyl_bessel_i1
   // cyl_bessel_in
@@ -65,14 +65,14 @@ namespace kyosu::_
   template<typename Z> KYOSU_FORCEINLINE
   auto cb_k0(Z z) noexcept
   {
-    auto ipiotwo = muli(eve::pio_2(eve::as<Z>()));
+    auto ipiotwo = muli(kyosu::pio_2(eve::as<Z>()));
     auto argzlt0 = eve::is_ltz(arg(z));
     auto r = if_else(argzlt0
-                    , cyl_bessel_h1_0(muli(z))
-                    , -cyl_bessel_h2_0(mulmi(z))
+                    , cb_h1_0(muli(z))
+                    , -cb_h2_0(mulmi(z))
                     );
     r*= ipiotwo;
-    return if_else(is_eqz(z), complex(eve::inf(eve::as<Z>())), r);
+    return if_else(is_eqz(z), complex(kyosu::inf(eve::as<Z>())), r);
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -81,14 +81,14 @@ namespace kyosu::_
   template<typename Z> KYOSU_FORCEINLINE
   auto cb_k1(Z z) noexcept
   {
-    auto mpiotwo = -eve::pio_2(eve::as<Z>());
+    auto mpiotwo = -kyosu::pio_2(eve::as<Z>());
     auto argzlt0 = eve::is_ltz(arg(z));
     auto r = if_else(argzlt0
-                    , cyl_bessel_h1_1(muli(z))
-                    , cyl_bessel_h2_1(mulmi(z))
+                    , cb_h1_1(muli(z))
+                    , cb_h2_1(mulmi(z))
                     );
       r *= mpiotwo;
-      return if_else(is_eqz(z), complex(eve::inf(eve::as<Z>())), r);
+      return if_else(is_eqz(z), complex(kyosu::inf(eve::as<Z>())), r);
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ namespace kyosu::_
       else return complex(eve::zero(eve::as<e_t>()), eve::one(eve::as<e_t>()));
     };
     auto an =  eve::abs(n);
-    return miton(an)*cyl_bessel_jn(an,muli(z));
+    return miton(an)*cb_jn(an,muli(z));
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -125,136 +125,136 @@ namespace kyosu::_
     auto empio2 = exp_ipi(eve::mhalf(eve::as<u_t>()));
     auto argzlt0 = eve::is_ltz(argz);
     auto r =  if_else(argzlt0
-                     , cpi*cyl_bessel_h1n(n, z*epio2)
-                     , cmi*cyl_bessel_h2n(n, z*empio2));
+                     , cpi*cb_h1n(n, z*epio2)
+                     , cmi*cb_h2n(n, z*empio2));
     return if_else(is_eqz(z), complex(eve::inf(eve::as<u_t>())), r);
   }
 
   //===-------------------------------------------------------------------------------------------
   //  cb_ikn
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, typename R1, typename R2> KYOSU_FORCEINLINE
-  auto cb_ikn(N n, Z z, R1& is, R2& ks) noexcept
-  requires(concepts::complex<Z> || eve::floating_ordered_value<Z>)
+  template<eve::integral_scalar_value N, typename Z, std::size_t S> KYOSU_FORCEINLINE
+  auto cb_ikn(N n, Z z, std::span<Z, S> is, std::span<Z, S> ks) noexcept
+  requires(concepts::complex<Z> || concepts::real<Z>)
   {
     using u_t = eve::underlying_type_t<Z>;
     auto nn =  eve::abs(n);
     EVE_ASSERT(N(size(is)) > nn, "not room enough in is");
     EVE_ASSERT(N(size(ks)) > nn, "not room enough in ks");
-
-    for(N j=0; j <= nn; ++j)
+    auto sn = sign(n);
+    for(N j=0; j <= nn; j = j++)
     {
-      is[j] = cb_in(j, z);
-      ks[j] = cb_kn(j, z);
+      is[j] = cb_in(sn*j, z);
+      ks[j] = cb_kn(sn*j, z);
     }
-    return kumi::tuple{is[n], ks[n]};
+    return kumi::tuple{is[nn], ks[nn]};
   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_i0
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_i0>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_i0(z);
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_i0, z);
-    }
-  }
+//   //===-------------------------------------------------------------------------------------------
+//   //  cyl_bessel_i0
+//   //===-------------------------------------------------------------------------------------------
+//   template<typename Z>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_i0>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return cb_i0(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(cyl_bessel_i0, z);
+//     }
+//   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_i1
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_i1>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_i1(z);
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_i1, z);
-    }
-  }
+//   //===-------------------------------------------------------------------------------------------
+//   //  cyl_bessel_i1
+//   //===-------------------------------------------------------------------------------------------
+//   template<typename Z>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_i1>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return cb_i1(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(cyl_bessel_i1, z);
+//     }
+//   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_k0
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_k0>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_k0(z);
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_k0, z);
-    }
-  }
+//   //===-------------------------------------------------------------------------------------------
+//   //  cyl_bessel_k0
+//   //===-------------------------------------------------------------------------------------------
+//   template<typename Z>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_k0>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return cb_k0(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(cyl_bessel_k0, z);
+//     }
+//   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_k1
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_k1>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_k1(z);
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_k1, z);
-    }
-  }
+//   //===-------------------------------------------------------------------------------------------
+//   //  cyl_bessel_k1
+//   //===-------------------------------------------------------------------------------------------
+//   template<typename Z>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_k1>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return cb_k1(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(cyl_bessel_k1, z);
+//     }
+//   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_in
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_in>, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_in(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_in, n, z);
-    }
-  }
+//   //===-------------------------------------------------------------------------------------------
+//   //  cyl_bessel_in
+//   //===-------------------------------------------------------------------------------------------
+//   template<eve::integral_scalar_value N, typename Z>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_in>, N n, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return cb_in(n, z);
+//     }
+//     else
+//     {
+//       return cayley_extend_rev(cyl_bessel_in, n, z);
+//     }
+//   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_kn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_kn>, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_kn(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_kn, n, z);
-    }
-  }
+//   //===-------------------------------------------------------------------------------------------
+//   //  cyl_bessel_kn
+//   //===-------------------------------------------------------------------------------------------
+//   template<eve::integral_scalar_value N, typename Z>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_kn>, N n, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return cb_kn(n, z);
+//     }
+//     else
+//     {
+//       return cayley_extend_rev(cyl_bessel_kn, n, z);
+//     }
+//   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_ikn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R1, typename R2>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_ikn>, N n, Z z, R1& is, R2& ks) noexcept
-  requires(concepts::complex<Z>)
-  {
-    EVE_ASSERT(N(size(is)) > eve::abs(n), "not room enough in is");
-    EVE_ASSERT(N(size(ks)) > eve::abs(n), "not room enough in ks");
-    return cb_ikn(n, z, is, ks);
-  }
+//   //===-------------------------------------------------------------------------------------------
+//   //  cyl_bessel_ikn
+//   //===-------------------------------------------------------------------------------------------
+//   template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R1, typename R2>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_ikn>, N n, Z z, R1& is, R2& ks) noexcept
+//   requires(concepts::complex<Z>)
+//   {
+//     EVE_ASSERT(N(size(is)) > eve::abs(n), "not room enough in is");
+//     EVE_ASSERT(N(size(ks)) > eve::abs(n), "not room enough in ks");
+//     return cb_ikn(n, z, is, ks);
+//   }
 }
