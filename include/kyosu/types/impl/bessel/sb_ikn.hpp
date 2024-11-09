@@ -11,7 +11,7 @@ namespace kyosu::_
 {
 
   /////////////////////////////////
-  // contains implementations of
+  // needed by implementations of
   // sph_bessel_i0
   // sph_bessel_i1
   // sph_bessel_k0
@@ -158,148 +158,148 @@ namespace kyosu::_
     return  eve::pio_2(eve::as<u_t>())*exp(-z)*fma(rz, rz, rz);
   }
 
-  ////////////////////////////////////////////////////////////
-  // end utilities
-  ////////////////////////////////////////////////////////////
+//   ////////////////////////////////////////////////////////////
+//   // end utilities
+//   ////////////////////////////////////////////////////////////
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_i2_0>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_i2_0(z);
-    }
-    else
-    {
-      return cayley_extend(sph_bessel_i2_0, z);
-    }
-  }
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_i2_0>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return sb_i2_0(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(sph_bessel_i2_0, z);
+//     }
+//   }
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_i2_1>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_i2_1(z);
-    }
-    else
-    {
-      return cayley_extend(sph_bessel_i2_1, z);
-    }
-  }
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_i2_1>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return sb_i2_1(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(sph_bessel_i2_1, z);
+//     }
+//   }
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_i1_0>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_i1_0(z);
-    }
-    else
-    {
-      return cayley_extend(sph_bessel_i1_0, z);
-    }
-  }
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_i1_0>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return sb_i1_0(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(sph_bessel_i1_0, z);
+//     }
+//   }
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_i1_1>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_i1_1(z);
-    }
-    else
-    {
-      return cayley_extend(sph_bessel_i1_1, z);
-    }
-  }
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_i1_1>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return sb_i1_1(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(sph_bessel_i1_1, z);
+//     }
+//   }
 
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_i1n>, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_i1n(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(sph_bessel_i1n, n, z);
-    }
-  }
+//   template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_i1n>, N n, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return sb_i1n(n, z);
+//     }
+//     else
+//     {
+//       return cayley_extend_rev(sph_bessel_i1n, n, z);
+//     }
+//   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_i1n>, N n, Z z, R& sis) noexcept
-  {
-    return sb_i1n(n, z, sis);
-  }
+//   template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_i1n>, N n, Z z, R& sis) noexcept
+//   {
+//     return sb_i1n(n, z, sis);
+//   }
 
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_i2n>, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_i2n(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(sph_bessel_i2n, n, z);
-    }
-  }
+//   template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_i2n>, N n, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return sb_i2n(n, z);
+//     }
+//     else
+//     {
+//       return cayley_extend_rev(sph_bessel_i2n, n, z);
+//     }
+//   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_i2n>, N n, Z z, R& sis) noexcept
-  {
-    return sb_i2n(n, z, sis);
-  }
+//   template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_i2n>, N n, Z z, R& sis) noexcept
+//   {
+//     return sb_i2n(n, z, sis);
+//   }
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_k0>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-     return sb_k0(z);
-    }
-    else
-    {
-      return cayley_extend(sph_bessel_k0, z);
-    }
-  }
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_k0>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//      return sb_k0(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(sph_bessel_k0, z);
+//     }
+//   }
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_k1>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_k1(z);
-    }
-    else
-    {
-      return cayley_extend(sph_bessel_k1, z);
-    }
-  }
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_k1>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return sb_k1(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(sph_bessel_k1, z);
+//     }
+//   }
 
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_kn>, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_kn(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(sph_bessel_kn, n, z);
-    }
-  }
+//   template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_kn>, N n, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return sb_kn(n, z);
+//     }
+//     else
+//     {
+//       return cayley_extend_rev(sph_bessel_kn, n, z);
+//     }
+//   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_kn>, N n, Z z, R& sks) noexcept
-  {
-    return sb_kn(n, z, sks);
-  }
+//   template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_kn>, N n, Z z, R& sks) noexcept
+//   {
+//     return sb_kn(n, z, sks);
+//   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R1,  typename R2> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_ikn>, N n, Z z, R1& sis, R2& sks) noexcept
-  {
-      return sb_ikn(n, z, sis, sks);
-  }
+//   template<eve::integral_scalar_value N, typename Z, typename R1,  typename R2> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::sph_bessel_ikn>, N n, Z z, R1& sis, R2& sks) noexcept
+//   {
+//       return sb_ikn(n, z, sis, sks);
+//   }
 }

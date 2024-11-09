@@ -107,7 +107,7 @@
 #include <kyosu/types/impl/bessel/cb_hn.hpp>
 #include <kyosu/types/impl/bessel/sb_hn.hpp>
 #include <kyosu/types/impl/bessel/cb_ikn.hpp>
-// #include <kyosu/types/impl/bessel/sb_ikn.hpp>
+#include <kyosu/types/impl/bessel/sb_ikn.hpp>
 // // bessels of floating (real) order
 // #include <kyosu/types/impl/besselr/cb_jyr.hpp>
 // #include <kyosu/types/impl/besselr/cb_h.hpp>

@@ -15,14 +15,14 @@ namespace kyosu
   template<typename Options>
   struct sph_bessel_h2n_t : eve::strict_elementwise_callable<sph_bessel_h2n_t, Options>
   {
-    template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
-    { return KYOSU_CALL(z0,z1); }
+    template<eve::integral_scalar_value N, typename Z1>
+    requires( concepts::cayley_dickson<Z1>)
+    KYOSU_FORCEINLINE constexpr auto  operator()(N n, Z1 const & z1) const noexcept
+    { return KYOSU_CALL(n,z1); }
 
-    template<concepts::real V0, concepts::real V1>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V0 v0, V1 v1) const noexcept
-    { return KYOSU_CALL(v0,v1); }
+    template<eve::integral_scalar_value N, concepts::real V1>
+    KYOSU_FORCEINLINE constexpr auto operator()(N n, V1 v1) const noexcept
+    { return KYOSU_CALL(n, v1); }
 
     KYOSU_CALLABLE_OBJECT(sph_bessel_h2n_t, sph_bessel_h2n_);
 };
@@ -68,9 +68,16 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z0, typename Z1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sph_bessel_h2n_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
+  template<typename N, typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sph_bessel_h2n_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
   {
-    ICITTE
+    if constexpr(concepts::complex<Z>)
+    {
+      return sb_h2n(n, z);
+    }
+    else
+    {
+      return cayley_extend_rev(sph_bessel_h2n, n, z);
+    }
   }
 }

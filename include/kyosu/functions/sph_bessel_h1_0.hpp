@@ -19,8 +19,8 @@ namespace kyosu
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::sph_bessel_h1_0(v); }
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(sph_bessel_h1_0_t, sph_bessel_h1_0_);
 };
@@ -69,6 +69,6 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto sph_bessel_h1_0_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    ICITTE
+    return sb_h1_0(z);
   }
 }
