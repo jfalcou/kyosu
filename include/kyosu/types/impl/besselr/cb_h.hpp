@@ -11,7 +11,7 @@
 namespace kyosu::_
 {
   /////////////////////////////////
-  // contains implementations of
+  // needed by the implementations of
   // cyl_bessel_h1
   // cyl_bessel_h2
   // cyl_bessel_h12
@@ -41,44 +41,65 @@ namespace kyosu::_
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_h1
+  //  cb_h1
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_h1>, N n, Z z) noexcept
+  template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  auto cb_h1(N v, Z z) noexcept
   {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cyl_bessel_j(n, z)+muli(cyl_bessel_y(n, z));
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_h1n, n, z);
-    }
+    return cb_jr(v, z)+muli(cb_yr(v, z));
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_h2
+  //  cb_h2
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_h2>, N n, Z z) noexcept
+  template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  auto cb_h2(N v, Z z) noexcept
   {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cyl_bessel_j(n, z)-muli(cyl_bessel_y(n, z));
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_h1, n, z);
-    }
+     return cb_jr(v, z)-muli(cb_yr(v, z));
   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_h12
-  //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R1,  typename R2>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_h12>, N n, Z z, R1& h1s, R2& h2s) noexcept
-  requires(concepts::complex<Z>)
-  {
-    return cb_h12(n, z, h1s, h2s);
-  }
+
+
+
+  //  //===-------------------------------------------------------------------------------------------
+//   //  cyl_bessel_h1
+//   //===-------------------------------------------------------------------------------------------
+//   template<eve::floating_scalar_value N, typename Z>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_h1>, N n, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return cyl_bessel_j(n, z)+muli(cyl_bessel_y(n, z));
+//     }
+//     else
+//     {
+//       return cayley_extend_rev(cyl_bessel_h1n, n, z);
+//     }
+//   }
+
+//   //===-------------------------------------------------------------------------------------------
+//   //  cyl_bessel_h2
+//   //===-------------------------------------------------------------------------------------------
+//   template<eve::floating_scalar_value N, typename Z>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_h2>, N n, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return cyl_bessel_j(n, z)-muli(cyl_bessel_y(n, z));
+//     }
+//     else
+//     {
+//       return cayley_extend_rev(cyl_bessel_h1, n, z);
+//     }
+//   }
+
+//   //===-------------------------------------------------------------------------------------------
+//   //  cyl_bessel_h12
+//   //===-------------------------------------------------------------------------------------------
+//   template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R1,  typename R2>
+//   auto dispatch(eve::tag_of<kyosu::cyl_bessel_h12>, N n, Z z, R1& h1s, R2& h2s) noexcept
+//   requires(concepts::complex<Z>)
+//   {
+//     return cb_h12(n, z, h1s, h2s);
+//   }
 }

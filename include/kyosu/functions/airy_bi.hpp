@@ -6,30 +6,30 @@
 */
 //======================================================================================================================
 #pragma once
+#include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct sph_bessel_i2_1_t : eve::elementwise_callable<sph_bessel_i2_1_t, Options>
+  struct airy_bi_t : eve::elementwise_callable<airy_bi_t, Options>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return  KYOSU_CALL(complex(v)); }
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::airy_bi(v); }
 
-    KYOSU_CALLABLE_OBJECT(sph_bessel_i2_1_t, sph_bessel_i2_1_);
-  };
+    KYOSU_CALLABLE_OBJECT(airy_bi_t, airy_bi_);
+};
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var sph_bessel_i2_1
-//!   @brief Computes  the Bessel function,
-//!   \f$ i_1^{(2)}(z) = -y_1(iz)\f$ extended to the complex plane and cayley_dickson algebras.
+//!   @var airy_bi
+//!   @brief Computes the airy function \f$Bi\f$,
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -40,8 +40,9 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sph_bessel_i2_1(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T    sph_bessel_i2_1(T z) noexcept;
+//!      template<eve::floating_ordered_value T> constexpr auto airy_bi(T z) noexcept;
+//!
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto airy_bi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -51,13 +52,13 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns \f$i_1^{(2)}(z)\f$.
+//!     * returns  \f$\{Bi(z)\}f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/sph_bessel_i2_1.cpp}
+//!  @godbolt{doc/airy_bi.cpp}
 //======================================================================================================================
-  inline constexpr auto sph_bessel_i2_1 = eve::functor<sph_bessel_i2_1_t>;
+  inline constexpr auto airy_bi = eve::functor<airy_bi_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -66,15 +67,8 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sph_bessel_i2_1_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto airy_bi_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_i2_1(z);
-    }
-    else
-    {
-      return cayley_extend(sph_bessel_i2_1, z);
-    }
+    ICITTE
   }
 }

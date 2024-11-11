@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct cyl_bessel_h12n_t : eve::strict_elementwise_callable<cyl_bessel_h12n_t, Options>
+  struct cyl_bessel_ikn_t : eve::strict_elementwise_callable<cyl_bessel_ikn_t, Options>
   {
     template<eve::integral_scalar_value Z0, typename Z1, std::size_t S>
     requires(concepts::real<Z1> || concepts::cayley_dickson<Z1>)
@@ -25,14 +25,15 @@ namespace kyosu
       KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
     { return KYOSU_CALL(z0,z1); }
 
-    KYOSU_CALLABLE_OBJECT(cyl_bessel_h12n_t, cyl_bessel_h12n_);
+    KYOSU_CALLABLE_OBJECT(cyl_bessel_ikn_t, cyl_bessel_ikn_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var cyl_bessel_h12n
-//!   @brief Computes the Hankel functions of the first and second kind,
+//!   @var cyl_bessel_ikn
+//!   @brief Computes simultaneously the  modified Bessel functions of the first
+//!   and second kind of integer orders,
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -43,11 +44,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T constexpr auto cyl_bessel_h12n(int n, T z) noexcept;
-//!      template<kyosu::concepts::complex T constexpr auto cyl_bessel_h12n(int n, T z
+//!      template<kyosu::concepts::cayley_dickson T constexpr auto cyl_bessel_ikn(int n, T z) noexcept;
+//!      template<kyosu::concepts::complex T constexpr auto cyl_bessel_ikn(int n, T z
 //!                                                       , std::span<T> js, std::span<T> ys) noexcept;
-//!      template<kyosu::concepts::real T>          constexpr auto cyl_bessel_h12n(int n, T z) noexcept;
-//!      template<kyosu::concepts::real T>          constexpr auto cyl_bessel_h12n(int n, T z
+//!      template<kyosu::concepts::real T>          constexpr auto cyl_bessel_ikn(int n, T z) noexcept;
+//!      template<kyosu::concepts::real T>          constexpr auto cyl_bessel_ikn(int n, T z
 //!                                                       , std::span<T> js, std::span<T> ys) noexcept;
 //!   }
 //!   @endcode
@@ -58,17 +59,17 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns  a pair containing \f$h1n(z)\f$ and \f$h2n(z)\f$ and if the 'span' parameters are present
+//!     * returns  a pair containing \f$I_n(z)\f$ and \f$K_n(z)\f$ and if the 'span' parameters are present
 //!       ithey  must be sufficient to hold 'n+1' values each which are respectively
-//!        \$(h1_0(x), h1_1(x), ...,  h1_n(x))\f$ if 'n >= 0$ else \$(h1_0(x),h1_{-1}(x) ...,  h1_{-n}(x)\f)$ (for the same computation cost),
-//!       and  \$(h2_0(x), h2_1(x), ...,  h2_n(x))\f$ if 'n >= 0$ else \$(h2_0(x),h2_{-1}(x) ...,  h2_{-n}(x)\f)$ (for the same computation cost),
+//!        \$(i_0(x), i_1(x), ...,  i_n(x))\f$ if 'n >= 0$ else \$(i_0(x),i_{-1}(x) ...,  i_{-n}(x)\f)$ (for the same computation cost),
+//!       and  \$(k_0(x), k_1(x), ...,  k_n(x))\f$ if 'n >= 0$ else \$(k_0(x),k_{-1}(x) ...,  k_{-n}(x)\f)$ (for the same computation cost),
 //!       but use is restricted to real or complex entries..
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/cyl_bessel_h12n.cpp}
+//!  @godbolt{doc/cyl_bessel_ikn.cpp}
 //======================================================================================================================
-  inline constexpr auto cyl_bessel_h12n = eve::functor<cyl_bessel_h12n_t>;
+  inline constexpr auto cyl_bessel_ikn = eve::functor<cyl_bessel_ikn_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -78,25 +79,25 @@ namespace kyosu::_
 {
 
   template<typename N, typename Z, std::size_t S, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h12n_(KYOSU_DELAY(), O const&, N n, Z z
-                                                 , std::span<Z, S> h1s, std::span<Z, S> h2s) noexcept
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_ikn_(KYOSU_DELAY(), O const&, N n, Z z
+                                                 , std::span<Z, S> is, std::span<Z, S> ks) noexcept
   {
-    return cb_h12n(n, z, h1s, h2s);
+    return cb_ikn(n, z, is, ks);
   }
 
   template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h12n_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_ikn_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
   {
     if constexpr(concepts::complex<Z> )
     {
-      auto doit = [n, z](auto h1s, auto h2s){
-        return cb_h12n(n, z, h1s, h2s);
+      auto doit = [n, z](auto is, auto ks){
+        return cb_ikn(n, z, is, ks);
       };
       return with_alloca<Z>(eve::abs(n)+1, doit);
     }
     else
     {
-      return caley_extend_rev2(cyl_bessel_h12n, n, z);
+      return cayley_extend_rev2(cyl_bessel_ikn, n, z);
     }
   }
 }

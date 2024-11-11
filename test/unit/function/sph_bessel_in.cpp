@@ -63,7 +63,7 @@ TTS_CASE_WITH ( "Check kyosu::sph_bessel_i1n over real"
 };
 
 
-TTS_CASE_WITH ( "Check kyosu::sph_bessel_jn over real"
+TTS_CASE_WITH ( "Check kyosu::sph_bessel_inn over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10),
                               tts::randoms(-10,10)

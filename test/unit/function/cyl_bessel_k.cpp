@@ -64,7 +64,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k over real v =  2.3"
     for (int k = 0; k < 16; ++k)
     {
       auto c = kyosu::complex(re[k], im[k]);
-      kyosu::cyl_bessel_k(v1, c, ks_03);
+      kyosu::cyl_bessel_k(v1, c, std::span(ks_03));
       auto vv = T(-0.3);
       for (n = 0; n <= N; ++n)
       {
@@ -120,17 +120,13 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k over real"
     for (int k = 0; k < 16; ++k)
     {
       auto c = kyosu::complex(re[k], im[k]);
-      kyosu::cyl_bessel_k(v1, c, ks_03);
+      kyosu::cyl_bessel_k(v1, c, std::span(ks_03));
       auto vv = T(N+1.0/3);
       for (n = 0; n <= N; ++n)
       {
          auto refi_03=  kyosu::complex_t<T>(reresi_03[n][k], imresi_03[n][k]);
         TTS_RELATIVE_EQUAL(refi_03, ks_03[n], 1.e-6) << "n " << n  << " k " << k  << " c "<< c << " arg(c) "<< kyosu::arg(kyosu::conj(c)) << " < 1.57" << '\n';
         TTS_RELATIVE_EQUAL(refi_03,  kyosu::cyl_bessel_k(vv, c), 1.e-6);
-
-//         auto z = 2*kyosu::pow(c, T(1.5) )/3;
-//         std::cout << "c " << c << " z " << z << " -> " << kyosu::cyl_bessel_k(vv, z) << std::endl;
-//         vv = eve::dec(vv);
       }
     }
   }
@@ -156,7 +152,6 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k over real"
 
     constexpr int N = 0;
     T v1 = N+1.0/3;
-    std::cout << "v1 " << v1 << std::endl;
     auto n = int(v1);
     using vc_t = std::array<T, 16>;
     using a_t = std::array<vc_t, N+1>;
@@ -171,7 +166,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k over real"
     for (int k = 0; k < 16; ++k)
     {
       auto c = -kyosu::complex(re[k], im[k]);
-      kyosu::cyl_bessel_k(v1, c, ks_03);
+      kyosu::cyl_bessel_k(v1, c, std::span(ks_03));
       auto vv = T(N+1.0/3);
       for (n = 0; n <= N; ++n)
       {
@@ -203,7 +198,6 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k over real"
 
     constexpr int N = 0;
     T v1 = N-1.0/3;
-    std::cout << "v1 " << v1 << std::endl;
     auto n = int(v1);
     using vc_t = std::array<T, 16>;
     using a_t = std::array<vc_t, N+1>;
@@ -218,7 +212,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k over real"
     for (int k = 0; k < 16; ++k)
     {
       auto c = kyosu::complex(re[k], -im[k]);
-      kyosu::cyl_bessel_k(v1, c, ks_03);
+      kyosu::cyl_bessel_k(v1, c, std::span(ks_03));
       auto vv = T(N+1.0/3);
       for (n = 0; n <= N; ++n)
       {

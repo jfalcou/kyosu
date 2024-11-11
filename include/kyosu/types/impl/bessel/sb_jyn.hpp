@@ -212,10 +212,4 @@ namespace kyosu::_
     for(int i=2; i <= n ; ++i) sys[i] = dec(2*i)*sys[i-1]*rz-sys[i-2];
     return kumi::tuple{sjs[n], sys[n]};
   }
-
-//   template<eve::integral_scalar_value N, typename Z, typename R1,  typename R2> KYOSU_FORCEINLINE
-//   auto dispatch(eve::tag_of<kyosu::sph_bessel_jyn>, N n, Z z, R1& sjs, R2& sys) noexcept
-//   {
-//       return sb_jyn(n, z, sjs, sys);
-//   }
 }

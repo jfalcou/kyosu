@@ -15,10 +15,10 @@
 namespace kyosu::_
 {
   //===-------------------------------------------------------------------------------------------
-  //  cb_jy
+  //  cb_jyr
   //===-------------------------------------------------------------------------------------------
   template<eve::floating_scalar_value N, kyosu::concepts::complex  Z, typename R1,  typename R2>
-  auto cb_jy( N  v, Z z, R1& cjv, R2& cyv) noexcept
+  auto cb_jyr( N  v, Z z, R1& cjv, R2& cyv) noexcept
   {
     int n = int(v);
     int an =  eve::abs(n);
@@ -84,7 +84,7 @@ namespace kyosu::_
           auto m2 = eve::maximum(ini_for_br_2(u_t(n), az, u_t(15)));
           auto m = eve::if_else( m1 >= n && eve::is_not_nan(m2), m2, m1);
           auto cf2 = czero;
-          auto cf1 = eve::sqrtsmallestposval(eve::as<Z>());
+          auto cf1 = kyosu::sqrtsmallestposval(eve::as<Z>());
           auto cf = cf1;
           auto bn(cf2);
 
@@ -104,7 +104,7 @@ namespace kyosu::_
 
         // compute j_{v+i} i =  2...n
         Z r;
-        auto notdone = eve::true_(as<Z>());
+        auto notdone = kyosu::true_(as<Z>());
         notdone = next_interval(forward, notdone, 4*n <= az, r);
         if( eve::any(notdone) )
         {
@@ -130,7 +130,7 @@ namespace kyosu::_
       // we use:
       // J_{-v] = J_v(z) cos(v pi) - Y_v *sin(v pi)
       // y_{-v] = J_v(z) sin(v pi) + Y_v *cos(v pi)
-      cb_jy(-v, z, cjv, cyv);
+      cb_jyr(-v, z, cjv, cyv);
       auto v0 = frac(-v);
       auto [s, c] = sinpicospi(v0);
       for(int i=0; i <= an ; ++i)
@@ -148,83 +148,60 @@ namespace kyosu::_
     }
   }
 
+
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_jy
+  //  cb_yr just last
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R1, typename R2>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_jy>, N v, Z z, R1& js, R2& ys) noexcept
+  template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  auto cb_yr(N v, Z z) noexcept
   {
-    return cb_jy(v, z, js, ys);
+    auto n = int(abs(v));
+    auto doit = [n, v, z](auto js, auto ys){
+      auto [_, yn] = cb_jyr(v, z, js, ys);
+      return ys[n];
+    };
+    return with_alloca<Z>(n+1, doit);
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_j
+  //  cb_yr all
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_j>, N v, Z z, R & js) noexcept
+  template<eve::floating_scalar_value N, typename Z, std::size_t S> KYOSU_FORCEINLINE
+  auto cb_yr(N v, Z z, std::span<Z, S> ys) noexcept
   {
     auto n = int(abs(v));
-    auto doit = [n, v, z, &js](auto ys){
-      auto [jvn, _] = cb_jy(v, z, js, ys);
+    auto doit = [n, v, z](auto js, auto ys){
+      auto [_, yn] = cb_jyr(v, z, js, ys);
+      return ys[n];
+    };
+    return with_alloca<Z>(n+1, doit);
+  }
+
+  //===-------------------------------------------------------------------------------------------
+  //  cb_jr just last
+  //===-------------------------------------------------------------------------------------------
+  template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  auto cb_jr(N v, Z z) noexcept
+  {
+    auto n = int(abs(v));
+    auto doit = [n, v, z](auto js, auto ys){
+      auto [_, yv] = cb_jyr(v, z, js, ys);
       return js[n];
     };
     return with_alloca<Z>(n+1, doit);
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_j
+  //  cb_jr all
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_j>, N v, Z z) noexcept
+  template<eve::floating_scalar_value N, typename Z, std::size_t S> KYOSU_FORCEINLINE
+  auto cb_jr(N v, Z z, std::span<Z, S> js) noexcept
   {
     auto n = int(abs(v));
-    if constexpr(concepts::complex<Z> )
-    {
-      auto doit = [n, v, z](auto js, auto ys){
-        auto [jv, _] = cb_jy(v, z, js, ys);
-        return js[n];
-      };
-      return with_alloca<Z>(n+1, doit);
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_j, v, z);
-    }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_y
-  //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_y>, N v, Z z, R & ys) noexcept
-  {
-    auto n = int(abs(v))+1;
-    auto doit = [v, z, &ys](auto js){
-      auto [_, yv] = cb_jy(v, z, js, ys);
-      return yv;
+    auto doit = [n, v, z, &js](auto ys){
+      auto [_, yv] = cb_jyr(v, z, js, ys);
+      return js[n];
     };
     return with_alloca<Z>(n+1, doit);
   }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_y
-  //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_y>, N v, Z z) noexcept
-  {
-    auto n = int(abs(v));
-    if constexpr(concepts::complex<Z> )
-    {
-      auto doit = [v, z](auto js, auto ys){
-        auto [_, yv] = cb_jy(v, z, js, ys);
-        return yv;
-      };
-      return with_alloca<Z>(n+1, doit);
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_y, v, z);
-    }
-  }
-
 }
