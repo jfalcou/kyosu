@@ -88,7 +88,7 @@ namespace kyosu::_
     if constexpr(concepts::complex<Z> )
     {
       auto doit = [n, v, z](auto js, auto ys){
-        auto [_, yn] = cb_jy(v, z, js, ys);
+        auto [_, yn] = cb_jyr(v, z, js, ys);
         return ys[n];
       };
       return with_alloca<Z>(n+1, doit);
@@ -105,7 +105,7 @@ namespace kyosu::_
   {
     auto n = int(abs(v));
     auto doit = [n, v, z, &ys](auto js){
-      auto [ _, yn] = cb_jy(v, z, js, ys);
+      auto [ _, yn] = cb_jyr(v, z, js, ys);
       return ys[n];
     };
     return with_alloca<Z>(n+1, doit);

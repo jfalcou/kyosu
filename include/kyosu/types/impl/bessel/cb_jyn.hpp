@@ -416,13 +416,12 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_jyn
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, std::size_t S>
-  auto cb_jyn(N nn, Z z, std::span<Z, S> cjv, std::span<Z, S> cyv) noexcept
+  template<eve::integral_scalar_value N, typename Z, typename R1,  typename R2>
+  auto cb_jyn(N nn, Z z, R1& cjv, R2& cyv) noexcept
   requires(concepts::complex<Z> || concepts::real<Z>)
   {
     auto n = eve::abs(nn);
-    EVE_ASSERT(N(size(cjv)) > n, "not room enough in cjv");
-    EVE_ASSERT(N(size(cyv)) > n, "not room enough in cyv");
+    n = eve::min(n, N(cjv.size()), N(cyv.size()));
     using u_t = eve::underlying_type_t<Z>;
     if (n <= 1)
     {

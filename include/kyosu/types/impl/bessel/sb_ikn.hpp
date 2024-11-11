@@ -60,9 +60,10 @@ namespace kyosu::_
   }
 
   template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto sb_i2n(N n, Z z, R & sis) noexcept
+  auto sb_i2n(N n, Z z, R& sis) noexcept
   {
     using e_t = as_real_type_t<Z>;
+    n = eve::min(n+1, N(sis.size()));
     return riton<e_t>(n+1)*sph_bessel_yn(n,muli(z), sis);
   }
 
@@ -93,7 +94,7 @@ namespace kyosu::_
   template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
   auto sb_i1n(N n, Z z, R & sys) noexcept
   {
-    EVE_ASSERT(N(size(sys)) > n, "not enough room in sys");
+    n = eve::min(n, N(sys.size()));
     using e_t = as_real_type_t<Z>;
     return riton<e_t>(n)*sb_yn(n,muli(z), sys);
   }
@@ -117,7 +118,7 @@ namespace kyosu::_
   template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
   auto sb_kn(N n, Z z, R& sks) noexcept
   {
-    EVE_ASSERT(N(size(sks)) > n, "not enough room in sks");
+    n = eve::min(n, N(sks.size()));
     using u_t = eve::underlying_type_t<Z>;
     auto iton = [](int n){
       if (n%4 == 0) return complex(eve::one(eve::as<u_t>()));
@@ -128,11 +129,10 @@ namespace kyosu::_
     return -eve::pio_2(eve::as<u_t>())*iton(n)*b_h1n(n, complex(-imag(z), real(z)), sks);
   }
 
-  template<typename Z, typename R1, typename R2> KYOSU_FORCEINLINE
-  auto sb_ikn(int n, Z z, R1& sis, R2& sks) noexcept
+  template<typename Z, typename R1,  typename R2> KYOSU_FORCEINLINE
+  auto sb_ikn(int n, Z z, R1 & sis, R2& sks) noexcept
   {
-    EVE_ASSERT(N(size(sis)) > n, "not enough room in sis");
-    EVE_ASSERT(N(size(sks)) > n, "not enough room in sks");
+    n = eve::min(n, N(sks.size()),  N(sis.size()));
     sb_i1n(n, z, sis);
     sb_kn(n, z, sks);
     return kumi::tuple{sis[n], sks[n]};

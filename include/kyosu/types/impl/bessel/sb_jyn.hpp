@@ -85,7 +85,7 @@ namespace kyosu::_
   template<eve::integral_scalar_value N, typename Z, typename R>
   auto sb_jn(N n, Z z, R & sjs) noexcept
   {
-    EVE_ASSERT(N(size(sjs)) > n, "not enough room in js");
+    n = eve::min(n, N(sjs.size()));  
     using u_t = eve::underlying_type_t<Z>;
     auto bd = [z](int n){
       auto st = eve::abs(eve::sin(eve::abs(arg(z))));
@@ -95,7 +95,7 @@ namespace kyosu::_
       auto nn = (eve::any(is_real(z))) ? n+5 : n;
       return eve::max(nn, int(inc(m)));
     };
-
+    
     auto sj0 = sb_j0(z);
     sjs[0] = sj0;
     if (n == 0) return sjs[0];

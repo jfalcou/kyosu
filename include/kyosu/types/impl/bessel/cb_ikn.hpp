@@ -133,14 +133,13 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_ikn
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, std::size_t S> KYOSU_FORCEINLINE
-  auto cb_ikn(N n, Z z, std::span<Z, S> is, std::span<Z, S> ks) noexcept
+  template<eve::integral_scalar_value N, typename Z, typename R1, typename R2>
+  KYOSU_FORCEINLINE  auto cb_ikn(N n, Z z, R1& is, R2& ks) noexcept
   requires(concepts::complex<Z> || concepts::real<Z>)
   {
     using u_t = eve::underlying_type_t<Z>;
     auto nn =  eve::abs(n);
-    EVE_ASSERT(N(size(is)) > nn, "not room enough in is");
-    EVE_ASSERT(N(size(ks)) > nn, "not room enough in ks");
+    nn = eve::min(n, N(is.size()), N(ks.size()));
     auto sn = sign(n);
     for(N j=0; j <= nn; j = j++)
     {

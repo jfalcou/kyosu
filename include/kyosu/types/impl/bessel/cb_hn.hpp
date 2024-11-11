@@ -84,8 +84,7 @@ namespace kyosu::_
   auto cb_h12n(N n, Z z, R & h1s, R& h2s) noexcept
   {
     auto an = eve::abs(n);
-    EVE_ASSERT(std::size(h1s) > size_t(an), "not room enough in h1s");
-    EVE_ASSERT(std::size(h2s) > size_t(an), "not room enough in h2s");
+    an = eve::min(n, N(h1s.size()), N(h2s.size()));
     cb_jyn(n, z, h1s, h2s);
     for(int i=0; i <= an; ++i)
     {
