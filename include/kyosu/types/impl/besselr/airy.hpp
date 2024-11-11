@@ -10,7 +10,7 @@
 namespace kyosu::_
 {
   /////////////////////////////////
-  // contains implementations of
+  // needed by implementations of
   // airy_ai
   // airy_bi
   // airy
@@ -30,9 +30,8 @@ namespace kyosu::_
   auto zet(Z z) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;
-     auto sqz = sqrt(z);
-//    auto zeta = 2*sqz*z/3;
-     auto zeta = (pow(z, u_t(1.5))*2)/3;
+    auto sqz = sqrt(z);
+    auto zeta = (pow(z, u_t(1.5))*2)/3;
     return kumi::tuple{sqz/eve::sqrt_3(as(z)), zeta};
   }
 
@@ -55,19 +54,19 @@ namespace kyosu::_
       auto zet = 2*pow(z, u_t(1.5) )/3;
       auto argzetgtpio2 =  arg(zet) > eve::pio_2(eve::as< u_t>());
       auto sqtmz = sqrt(-z/3);
-      auto r = mulmi(invpi*sqtmz*cyl_bessel_k(third, zet));
+      auto r = mulmi(invpi*sqtmz*cb_kr(third, zet));
       r =  if_else(izgt0, r, conj(r));
       return if_else(argzetgtpio2, -r, r);
     };
     auto br_re_gt_0 = [third, invpi](auto z){
       auto zet = 2*pow(z, u_t(1.5) )/3;
       std::array<Z, 1> ks;
-      auto r = invpi*sqrt(z/3)*cyl_bessel_k(third, zet, ks);
+      auto r = invpi*sqrt(z/3)*cb_kr(third, zet, ks);
       return r;
     };
 
     auto notdone = eve::true_(as<Z>());
-    Z r = eve::nan(as<Z>());
+    Z r = kyosu::nan(as<Z>());
     auto re = real(z);
     if( eve::any(notdone) )
     {
@@ -99,16 +98,16 @@ namespace kyosu::_
 
     auto br_re_lt_0 = [third, invpi](auto z){
       auto zet = 2*pow(-z, u_t(1.5) )/3;
-      return (kyosu::cyl_bessel_j(-third, zet)-kyosu::cyl_bessel_j(third, zet))*sqrt(-z/3) ;
+      return (cb_jr(-third, zet)-cb_jr(third, zet))*sqrt(-z/3) ;
     };
 
     auto br_re_gt_0 = [third, invpi](auto z){
       auto zet = 2*pow(z, u_t(1.5) )/3;
-      return sqrt(z/3)*(cyl_bessel_i(third, zet)+cyl_bessel_i(-third, zet));
+      return sqrt(z/3)*(cb_ir(third, zet)+cb_ir(-third, zet));
     };
 
     auto notdone = eve::true_(as<Z>());
-    Z r = eve::nan(as<Z>());
+    Z r = kyosu::nan(as<Z>());
     auto re = real(z);
     if( eve::any(notdone) )
     {
@@ -139,51 +138,51 @@ namespace kyosu::_
     return kumi::tuple{ invpi(as<u_t>())*sqzo3*(im-ip),  sqzo3*(ip+im)};
   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  airy_ai
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::airy_ai>, Z z) noexcept
-  {
-    if constexpr(kyosu::concepts::complex<Z> )
-    {
-      return ai(z);
-    }
-    else
-    {
-      return cayley_extend(airy_ai, z);
-    }
-  }
+//   //===-------------------------------------------------------------------------------------------
+//   //  airy_ai
+//   //===-------------------------------------------------------------------------------------------
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::airy_ai>, Z z) noexcept
+//   {
+//     if constexpr(kyosu::concepts::complex<Z> )
+//     {
+//       return ai(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(airy_ai, z);
+//     }
+//   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  airy_bi
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::airy_bi>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return bi(z);
-    }
-    else
-    {
-      return cayley_extend(airy_bi, z);
-    }
-  }
+//   //===-------------------------------------------------------------------------------------------
+//   //  airy_bi
+//   //===-------------------------------------------------------------------------------------------
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::airy_bi>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return bi(z);
+//     }
+//     else
+//     {
+//       return cayley_extend(airy_bi, z);
+//     }
+//   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  airy
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::airy>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return aibi(z);
-    }
-    else
-    {
-      return cayley_extend2(airy, z);
-    }
-  }
+//   //===-------------------------------------------------------------------------------------------
+//   //  airy
+//   //===-------------------------------------------------------------------------------------------
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto dispatch(eve::tag_of<kyosu::airy>, Z z) noexcept
+//   {
+//     if constexpr(concepts::complex<Z> )
+//     {
+//       return aibi(z);
+//     }
+//     else
+//     {
+//       return cayley_extend2(airy, z);
+//     }
+//   }
 }

@@ -69,6 +69,13 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto airy_ai_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    ICITTE
+    if constexpr(kyosu::concepts::complex<Z> )
+    {
+      return ai(z);
+    }
+    else
+    {
+      return cayley_extend(airy_ai, z);
+    }
   }
 }

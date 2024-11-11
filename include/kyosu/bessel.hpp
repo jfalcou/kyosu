@@ -13,9 +13,9 @@
 #include <kyosu/math.hpp>
 #include <kyosu/details/bessel.hpp>
 
-// #include <kyosu/functions/airy.hpp>
-// #include <kyosu/functions/airy_ai.hpp>
-// #include <kyosu/functions/airy_bi.hpp>
+#include <kyosu/functions/airy.hpp>
+#include <kyosu/functions/airy_ai.hpp>
+#include <kyosu/functions/airy_bi.hpp>
 
 #include <kyosu/functions/cyl_bessel_j0.hpp>
 #include <kyosu/functions/cyl_bessel_j1.hpp>

@@ -15,11 +15,11 @@ namespace kyosu
   struct airy_t : eve::elementwise_callable<airy_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr kumi::tuple<Z, Z>operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
     { return eve::airy(v); }
 
     KYOSU_CALLABLE_OBJECT(airy_t, airy_);
@@ -69,6 +69,10 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto airy_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    ICITTE
+    using u_t = eve::underlying_type_t<Z>;
+    auto [sqzo3, zeta] = zet(z);
+    auto ip = cyl_bessel_i(eve::third(as<u_t>()), zeta);
+    auto im = cyl_bessel_i(-eve::third(as<u_t>()), zeta);
+    return kumi::tuple{ invpi(as<u_t>())*sqzo3*(im-ip),  sqzo3*(ip+im)};
   }
 }
