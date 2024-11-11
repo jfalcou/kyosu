@@ -86,7 +86,7 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      return cb_h2(v, z); //cyl_bessel_j(v, z)-muli(cyl_bessel_y(v, z));
+      return cb_h2r(v, z); //cyl_bessel_j(v, z)-muli(cyl_bessel_y(v, z));
     }
     else
     {

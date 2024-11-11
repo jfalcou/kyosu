@@ -122,8 +122,8 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_y over real"
     for (int k = 0; k < 16; ++k)
     {
       auto c = kyosu::complex(re[k], im[k]);
-      kyosu::cyl_bessel_jy(v1, c, h1s_1, h2s_1);
-      kyosu::cyl_bessel_jy(v2, c, h1s_2, h2s_2);
+      kyosu::cyl_bessel_jy(v1, c, std::span(h1s_1), std::span(h2s_1));
+      kyosu::cyl_bessel_jy(v2, c, std::span(h1s_2), std::span(h2s_2));
       auto ref2_3=  kyosu::complex_t<T>(reres2_3[k], imres2_3[k]);
       auto ref2_5=  kyosu::complex_t<T>(reres2_5[k], imres2_5[k]);
       auto ref3_3=  kyosu::complex_t<T>(reres3_3[k], imres3_3[k]);

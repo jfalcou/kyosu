@@ -82,7 +82,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto cyl_bessel_h12_(KYOSU_DELAY(), O const&, N n, Z z
                                                  , std::span<Z, S> h1s, std::span<Z, S> h2s) noexcept
   {
-    return cb_h12(n, z, h1s, h2s);
+    return cb_h12r(n, z, h1s, h2s);
   }
 
   template<typename N, typename Z, eve::callable_options O>
@@ -91,7 +91,7 @@ namespace kyosu::_
     if constexpr(concepts::complex<Z> )
     {
       auto doit = [n, z](auto h1s, auto h2s){
-        return cb_h12(n, z, h1s, h2s);
+        return cb_h12r(n, z, h1s, h2s);
       };
       return with_alloca<Z>(eve::abs(n)+1, doit);
     }

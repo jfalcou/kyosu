@@ -43,8 +43,8 @@ namespace kyosu::_
     auto cmi = piotwo*rec(f);
     auto argzlt0 = eve::is_ltz(argz);
     auto r =  if_else(argzlt0
-                     , cpi*cb_h1(v, muli(z))
-                     , cmi*cb_h2(v, mulmi(z))
+                     , cpi*cb_h1r(v, muli(z))
+                     , cmi*cb_h2r(v, mulmi(z))
                      );
     return if_else(is_eqz(z), complex(eve::inf(eve::as<u_t>())), r);
   }

@@ -81,7 +81,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto cyl_bessel_jy_(KYOSU_DELAY(), O const&, N n, Z z
                                                  , std::span<Z, S> js, std::span<Z, S> ys) noexcept
   {
-    return cb_jy(n, z, js, ys);
+    return cb_jyr(n, z, js, ys);
   }
 
   template<typename N, typename Z, eve::callable_options O>
@@ -90,7 +90,7 @@ namespace kyosu::_
     if constexpr(concepts::complex<Z> )
     {
       auto doit = [n, z](auto js, auto ys){
-        return cb_jy(n, z, js, ys);
+        return cb_jyr(n, z, js, ys);
       };
       return with_alloca<Z>(eve::abs(n)+1, doit);
     }
