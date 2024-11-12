@@ -66,7 +66,7 @@
 #include <kyosu/functions/csc.hpp>
 #include <kyosu/functions/cscpi.hpp>
 #include <kyosu/functions/csch.hpp>
-#include <kyosu/functions/cyl_bessel_j0.hpp>
+// #include <kyosu/functions/cyl_bessel_j0.hpp>
 // #include <kyosu/functions/cyl_bessel_j1.hpp>
 // #include <kyosu/functions/cyl_bessel_jn.hpp>
 // #include <kyosu/functions/cyl_bessel_y0.hpp>
@@ -176,10 +176,8 @@
 #include <kyosu/functions/proj.hpp>
 #include <kyosu/functions/radinpi.hpp>
 #include <kyosu/functions/rec.hpp>
-// #include <kyosu/functions/right_horner.hpp>
-// #include <kyosu/functions/right_reverse_horner.hpp>
 #include <kyosu/functions/reldist.hpp>
-// #include <kyosu/functions/reverse_horner.hpp>
+//#include <kyosu/functions/reverse_horner.hpp>
 #include <kyosu/functions/sec.hpp>
 #include <kyosu/functions/secpi.hpp>
 #include <kyosu/functions/sech.hpp>
@@ -226,6 +224,8 @@
 #include <kyosu/functions/to_polar.hpp>
 #include <kyosu/functions/trunc.hpp>
 #include <kyosu/functions/zeta.hpp>
+
+#include <kyosu/bessel.hpp>
 
 //======================================================================================================================
 // Functions performing computations over quaternion complex or real elements only.

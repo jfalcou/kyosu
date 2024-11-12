@@ -18,9 +18,9 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr kumi::tuple<Z, Z>operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
-    { return eve::airy(v); }
+//     template<concepts::real V>
+//     KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
+//     { return eve::airy(v); }
 
     KYOSU_CALLABLE_OBJECT(airy_t, airy_);
 };

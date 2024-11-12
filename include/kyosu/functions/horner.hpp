@@ -14,17 +14,26 @@
 namespace kyosu
 {
   template<typename Options>
-  struct horner_t : eve::strict_elementwise_callable<horner_t, Options>
+  struct horner_t : eve::strict_tuple_callable<horner_t, Options, eve::left_option, eve::right_option>
   {
     template<typename ...Zs>
     requires(concepts::cayley_dickson<Zs> || ...)
-      KYOSU_FORCEINLINE constexpr auto  operator()(Zs...zs) const noexcept -> decltype((zs + ...))
+      KYOSU_FORCEINLINE constexpr kyosu::as_cayley_dickson_t<Zs...> operator()(Zs...zs) const noexcept
 
     { return KYOSU_CALL(zs...); }
 
     template<concepts::real... Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(Vs... vs) const noexcept -> decltype((vs +...))
+    KYOSU_FORCEINLINE constexpr auto operator()(Vs... vs) const noexcept
     { return eve::horner(vs...); }
+
+    template<concepts::real V, concepts::real... Vs>
+    KYOSU_FORCEINLINE constexpr  auto operator()(V z, kumi::tuple<Vs...> tup ) const noexcept
+    { return eve::horner(z, tup); }
+
+    template<typename Z, typename ...Zs>
+    requires(concepts::cayley_dickson<Z> || (concepts::cayley_dickson<Zs> || ...))
+      KYOSU_FORCEINLINE constexpr  kyosu::as_cayley_dickson_t<Z, Zs...> operator()(Z z, kumi::tuple<Zs...> tup ) const noexcept
+    { return KYOSU_CALL(z, tup); }
 
     KYOSU_CALLABLE_OBJECT(horner_t, horner_);
 };
@@ -39,6 +48,7 @@ namespace kyosu
 //!   power order,  the Horner scheme evaluates the polynom \f$p\f$ at \f$x\f$ by :
 //!   \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
 //!   For non commutative cases it is a left-horner scheme: coefficients are at the left of the x powers).
+//!   using the right` samantic modifyier allows to use a right-horner scheme: coefficients are at the right of the x powers).
 //!
 //!   **Defined in header**
 //!
@@ -51,16 +61,19 @@ namespace kyosu
 //!   @code
 //!   namespace eve
 //!   {
-//!     template<auto T, auto C ...>  auto horner(T x, C ... coefs) noexcept;  //1
-//!     template< auto C, auto K> auto horner(T x, K tup) noexcept;            //2
+//!     template< auto T, auto C ...>  auto horner(T x, C ... coefs)       noexcept;                 //1
+//!     template< auto C, auto K>      auto horner(T x, K tup)             noexcept;                 //2
+//!
+//!     Semantic modifyiers
+//!     template<auto T, auto C ...>  auto horner[left](T x, C ... coefs)  noexcept;            //1
+//!     template<auto C, auto K>      auto horner[left]r(T x, K tup)       noexcept;            //2
+//!     template<auto T, auto C ...>  auto horner[right](T x, C ... coefs) noexcept;            //3
+//!     template<auto C, auto K>      auto horner[right]r(T x, K tup)      noexcept;            //3
 //!
 //!   }
 //!   @endcode
 //!
-//!   1. Polynom is evaluated at x the other inputs are the polynomial coefficients.
-//!   2. Polynom is evaluated at x the other input is a kumi tuple containing the coefficients
-//!
-//!   **Parameters**
+//!!   **Parameters**
 //!
 //!     * `x` :  real or cayley-dickson argument.
 //!
@@ -70,10 +83,15 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   The value of the polynom at  `x` is returned,  according to the formula:
-//!    \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
-//!   For non commutative cases it is a left-horner scheme. See [right_horner](@ref right_horner)
-//!   for the right scheme
+//!    1. Polynom is evaluated at x the other inputs are the polynomial coefficients.
+//!       The value of the polynom at  `x` is returned,  according to the formula:
+//!       \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
+//!       For non commutative cases it is a left-horner scheme.
+//!    2. Polynom is evaluated at x the other input is a kumi tuple containing the coefficients
+//!    3. the right modifyier is useful only when dealing wirh cayley-dickson non commutative algebras
+//!       The value of the polynom at  `x` is returned,  according to the formula:
+//!        \f$\displaystyle p(x) = (x (x (x a_0+a_1)+ ... )+a_{n-1})\f$.\n
+//!        Of course for real or complex entries left and right have no specific actions
 //!
 //!    **Notes**
 //!
@@ -99,18 +117,32 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, Z z, Zs... zs) noexcept
   {
     using r_t = kyosu::as_cayley_dickson_t<X, Z, Zs...>;
+    constexpr size_t N = sizeof...(Zs);
 
-      if constexpr( sizeof...(Zs) == 0 ) return r_t(z);
+    if constexpr( N == 0 ) return r_t(0);
+    else if constexpr( N == 1 ) return r_t(z);
+    else
+    {
+      r_t x = r_t(xx);
+      r_t  that(z);
+      if constexpr(O::contains(eve::right))
+      {
+        ((that = fma(x, that, zs)), ...);
+      }
       else
       {
-        auto x = r_t(xx);
-        r_t  that{0};
-
-        that = fma[o](that, x, z);
-        ((that = fma[o](that, x, zs)), ...);
-
-        return that;
+        ((that = fma(that, x, zs)), ...);
       }
-//    return eve::horner(kyosu::convert(zs, eve::as<r_t>())...);
+      return that;
+    }
   }
+
+  template<typename X, typename ... Zs, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, kumi::tuple<Zs...> tup) noexcept
+  {
+    using r_t = kyosu::as_cayley_dickson_t<Zs...>;
+    r_t x = convert(xx, eve::as_element<r_t>(xx));
+    return kumi::apply( [&](auto... m) { return horner[o](x, convert(m, eve::as_element<r_t>())...); }, tup);
+  }
+
 }

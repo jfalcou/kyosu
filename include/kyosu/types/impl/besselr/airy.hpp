@@ -111,13 +111,13 @@ namespace kyosu::_
     auto re = real(z);
     if( eve::any(notdone) )
     {
-      notdone = next_interval(br_im_eq_0, notdone, is_real(z), r, z);
+      notdone = eve::next_interval(br_im_eq_0, notdone, is_real(z), r, z);
       if( eve::any(notdone) )
       {
         notdone = next_interval(br_re_gt_0, notdone, eve::is_gtz(re), r, z);
         if( eve::any(notdone) )
         {
-          notdone = last_interval(br_re_lt_0, notdone, r, z);
+          notdone = eve::last_interval(br_re_lt_0, notdone, r, z);
         }
       }
     }
@@ -137,52 +137,4 @@ namespace kyosu::_
 
     return kumi::tuple{ invpi(as<u_t>())*sqzo3*(im-ip),  sqzo3*(ip+im)};
   }
-
-//   //===-------------------------------------------------------------------------------------------
-//   //  airy_ai
-//   //===-------------------------------------------------------------------------------------------
-//   template<typename Z> KYOSU_FORCEINLINE
-//   auto dispatch(eve::tag_of<kyosu::airy_ai>, Z z) noexcept
-//   {
-//     if constexpr(kyosu::concepts::complex<Z> )
-//     {
-//       return ai(z);
-//     }
-//     else
-//     {
-//       return cayley_extend(airy_ai, z);
-//     }
-//   }
-
-//   //===-------------------------------------------------------------------------------------------
-//   //  airy_bi
-//   //===-------------------------------------------------------------------------------------------
-//   template<typename Z> KYOSU_FORCEINLINE
-//   auto dispatch(eve::tag_of<kyosu::airy_bi>, Z z) noexcept
-//   {
-//     if constexpr(concepts::complex<Z> )
-//     {
-//       return bi(z);
-//     }
-//     else
-//     {
-//       return cayley_extend(airy_bi, z);
-//     }
-//   }
-
-//   //===-------------------------------------------------------------------------------------------
-//   //  airy
-//   //===-------------------------------------------------------------------------------------------
-//   template<typename Z> KYOSU_FORCEINLINE
-//   auto dispatch(eve::tag_of<kyosu::airy>, Z z) noexcept
-//   {
-//     if constexpr(concepts::complex<Z> )
-//     {
-//       return aibi(z);
-//     }
-//     else
-//     {
-//       return cayley_extend2(airy, z);
-//     }
-//   }
 }
