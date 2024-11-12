@@ -221,6 +221,7 @@
 #include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
 #include <kyosu/functions/tgamma.hpp>
+#include <kyosu/functions/to_cylindrical.hpp>
 #include <kyosu/functions/to_polar.hpp>
 #include <kyosu/functions/trunc.hpp>
 #include <kyosu/functions/zeta.hpp>
@@ -233,7 +234,7 @@
 
 // #include <kyosu/functions/from_angle_axis.hpp>
 #include <kyosu/functions/from_cylindrical.hpp>
-// #include <kyosu/functions/from_cylindricospherical.hpp>
+#include <kyosu/functions/from_cylindrospherical.hpp>
 // #include <kyosu/functions/from_euler.hpp>
 // #include <kyosu/functions/from_multipolar.hpp>
 // #include <kyosu/functions/from_rotation_matrix.hpp>
@@ -244,8 +245,8 @@
 // #include <kyosu/functions/rotate_vec.hpp>
 // #include <kyosu/functions/to_angle_axis.hpp>
 #include <kyosu/functions/to_complex.hpp>
-// #include <kyosu/functions/to_cylindrical.hpp>
-// #include <kyosu/functions/to_cylindrospherical.hpp>
+#include <kyosu/functions/to_cylindrical.hpp>
+#include <kyosu/functions/to_cylindrospherical.hpp>
 // #include <kyosu/functions/to_euler.hpp>
 // #include <kyosu/functions/to_multipolar.hpp>
 #include <kyosu/functions/to_quaternion.hpp>

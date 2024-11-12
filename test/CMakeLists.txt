@@ -20,5 +20,5 @@ copa_glob_unit(QUIET PATTERN "unit/infra/functions/*.cpp" INTERFACE kyosu_test P
 copa_glob_unit(QUIET PATTERN "unit/infra/parts/*.cpp"     INTERFACE kyosu_test PCH kyosu_pch)
 copa_glob_unit(QUIET PATTERN "unit/infra/traits/*.cpp"    INTERFACE kyosu_test PCH kyosu_pch)
 copa_glob_unit(QUIET PATTERN "unit/function/*.cpp"        INTERFACE kyosu_test PCH kyosu_pch)
-copa_glob_unit(QUIET PATTERN "unit/complex/*.cpp"     INTERFACE kyosu_test PCH kyosu_pch)
-# copa_glob_unit(QUIET PATTERN "unit/quaternion/*.cpp"  INTERFACE kyosu_test PCH kyosu_pch)
+copa_glob_unit(QUIET PATTERN "unit/complex/*.cpp"         INTERFACE kyosu_test PCH kyosu_pch)
+copa_glob_unit(QUIET PATTERN "unit/quaternion/*.cpp"      INTERFACE kyosu_test PCH kyosu_pch)
