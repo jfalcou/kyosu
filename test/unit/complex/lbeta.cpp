@@ -9,7 +9,7 @@
 #include <test.hpp>
 #include <complex>
 
-TTS_CASE_TPL( "Check log_abs_gamma", kyosu::scalar_real_types)
+TTS_CASE_TPL( "Check lbeta", kyosu::scalar_real_types)
 <typename T>(tts::type<T>)
 {
   using z_t = kyosu::complex_t<T>;
@@ -23,7 +23,7 @@ TTS_CASE_TPL( "Check log_abs_gamma", kyosu::scalar_real_types)
 };
 
 
-TTS_CASE_WITH ( "Check behavior of pow on wide"
+TTS_CASE_WITH ( "Check behavior of lbeta on wide"
               , kyosu::simd_real_types
               , tts::generate ( tts::randoms(0.1, 10)
                               , tts::randoms(0.1, 10)

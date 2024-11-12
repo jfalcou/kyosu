@@ -6,10 +6,10 @@
 */
 //======================================================================================================================
 #pragma once
-#include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/convert.hpp>
+#include <kyosu/functions/fma.hpp>
 
 namespace kyosu
 {
@@ -127,11 +127,11 @@ namespace kyosu::_
       r_t  that(z);
       if constexpr(O::contains(eve::right))
       {
-        ((that = fma(x, that, zs)), ...);
+        ((that = fma(x, that, r_t(zs))), ...);
       }
       else
       {
-        ((that = fma(that, x, zs)), ...);
+        ((that = fma(that, x, r_t(zs))), ...);
       }
       return that;
     }

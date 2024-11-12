@@ -72,8 +72,8 @@ TTS_CASE_TPL( "Check corner cases of erf", kyosu::real_types)
 //     if (i < 12)
 //       TTS_IEEE_EQUAL(erf(inputs[i]), results[i]) << "i =  " << i << " <- " << inputs[i] << "\n";
 //     else
-      TTS_RELATIVE_EQUAL(erf(inputs[i]), results[i], 1.0e-4) << "i =  " << i << "\n";
-    TTS_IEEE_EQUAL(erf(conj(inputs[i])), conj(erf(inputs[i]))) << "i =  " << i << "\n";
+    TTS_RELATIVE_EQUAL(kyosu::erf(inputs[i]), results[i], 1.0e-4) << "i =  " << i << "\n";
+    TTS_IEEE_EQUAL(kyosu::erf(conj(inputs[i])), conj(erf(inputs[i]))) << "i =  " << i << "\n";
   }
 };
 

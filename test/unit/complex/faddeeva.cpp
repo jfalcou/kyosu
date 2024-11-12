@@ -51,7 +51,7 @@ TTS_CASE_TPL( "Check faddeeva", kyosu::real_types)
       tcx(T(0.00000000000000e+00), T(0.00000000000000e+00) ),//8
       tcx(nan, nan )                                         //9
     };
-  using eve::conj;
+  using kyosu::conj;
   using kyosu::faddeeva;
   for(int i=0; i < 7; ++i)
   {

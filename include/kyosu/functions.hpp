@@ -232,7 +232,7 @@
 //======================================================================================================================
 
 // #include <kyosu/functions/from_angle_axis.hpp>
-// #include <kyosu/functions/from_cylindrical.hpp>
+#include <kyosu/functions/from_cylindrical.hpp>
 // #include <kyosu/functions/from_cylindricospherical.hpp>
 // #include <kyosu/functions/from_euler.hpp>
 // #include <kyosu/functions/from_multipolar.hpp>

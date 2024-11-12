@@ -10,6 +10,7 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/eta.hpp>
+#include <kyosu/functions/if_else.hpp>
 
 namespace kyosu
 {

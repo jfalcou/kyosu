@@ -18,9 +18,10 @@ TTS_CASE_WITH ( "Check kyosu::horner over real"
               )
 (auto r0, auto r1, auto r2, auto x)
 {
-  // kumi::tuple a{r0, r1, r2};
+  kumi::tuple a{r0, r1, r2};
   TTS_RELATIVE_EQUAL(kyosu::horner(x, r0, r1, r2), (r0*x+r1)*x+r2, 1e-7);
-  //  TTS_RELATIVE_EQUAL(kyosu::horner(x, a)         , (r0*x+r1)*x+r2, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0, r1, r2), (r0*x+r1)*x+r2, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, a)         , (r0*x+r1)*x+r2, 1e-7);
 };
 
 TTS_CASE_WITH ( "Check kyosu::horner over complex"
@@ -38,8 +39,9 @@ TTS_CASE_WITH ( "Check kyosu::horner over complex"
   auto c2 = kyosu::complex(r2,i2);
   auto x  = kyosu::complex(x0, x1);
   TTS_RELATIVE_EQUAL(kyosu::horner(x, c0, c1, c2), (c0*x+c1)*x+c2, 1e-7);
-  //  kumi::tuple c{c0, c1, c2};
-  //   TTS_RELATIVE_EQUAL(kyosu::horner(x, c)         , (c0*x+c1)*x+c2, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, c0, c1, c2), (c0*x+c1)*x+c2, 1e-7);
+//   kumi::tuple c{c0, c1, c2};
+//   TTS_RELATIVE_EQUAL(kyosu::horner(x, c)         , (c0*x+c1)*x+c2, 1e-7);
 
 };
 
@@ -66,7 +68,9 @@ TTS_CASE_WITH ( "Check kyosu::horner over quaternion"
   auto q2 = type(r2,i2,j2,k2);
   auto x  = type(x0,x1,x2,x3);
   TTS_RELATIVE_EQUAL(kyosu::horner(x, q0, q1, q2),  (q0*x+q1)*x+q2, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, q0, q1, q2),  x*(x*q0+q1)+q2, 1e-7);
 //   kumi::tuple a{q0, q1, q2};
-//   TTS_RELATIVE_EQUAL(kyosu::horner(x, a)         , (q0*x+q1)*x+q2, 1e-7);
+//   TTS_RELATIVE_EQUAL(kyosu::horner(x, a)            , (q0*x+q1)*x+q2, 1e-7);
+//   TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, a),  x*(x*q0+q1)+q2, 1e-7);
 
 };

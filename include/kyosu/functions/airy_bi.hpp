@@ -23,13 +23,15 @@ namespace kyosu
     { return eve::airy_bi(v); }
 
     KYOSU_CALLABLE_OBJECT(airy_bi_t, airy_bi_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var airy_bi
 //!   @brief Computes the airy function \f$Bi\f$,
+//!
+//!   **Defined in header**
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

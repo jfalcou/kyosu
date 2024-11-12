@@ -26,7 +26,7 @@ namespace kyosu
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return KYOSU_CALL(complex(v)); }
+    { return KYOSU_CALL(v); }
 
     KYOSU_CALLABLE_OBJECT(erfi_t, erfi_);
 };
@@ -76,7 +76,14 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto erfi_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(concepts::complex<Z> )
+    if constexpr(concepts::real<Z> )
+    {
+      auto over = eve::sqr(z) > 720;
+      auto r = eve::inf(eve::as(z))*eve::sign(z);
+      r = eve::if_else(over, r, -get<1>(kyosu::erf(complex(eve::zero(eve::as(z)), -z))));
+      return complex(r);
+    }
+    else if constexpr(concepts::complex<Z> )
     {
       auto realz = is_real(z);
       if (eve::all(realz))

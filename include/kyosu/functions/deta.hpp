@@ -9,18 +9,23 @@
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/oneminus.hpp>
+#include <kyosu/functions/pow.hpp>
+#include <kyosu/functions/tgamma.hpp>
+#include <kyosu/functions/dec.hpp>
+#include <kyosu/functions/exp2.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct deta_t : eve::elementwise_callable<deta_t, Options>
+  struct deta_t : eve::strict_elementwise_callable<deta_t, Options>
   {
     template<concepts::cayley_dickson Z, eve::unsigned_scalar_value K>
     KYOSU_FORCEINLINE constexpr Z operator()(K k, Z const& z) const noexcept
     { return KYOSU_CALL(k, z); }
 
     template<concepts::real V, eve::unsigned_scalar_value K>
-    KYOSU_FORCEINLINE constexpr V operator()(K k, V v) const noexcept
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(K k, V v) const noexcept
     { return  KYOSU_CALL(k, complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(deta_t, deta_);

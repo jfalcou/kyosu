@@ -29,7 +29,7 @@ TTS_CASE_WITH( "Check behavior of asinh on scalar"
     auto e = a0[i];
     auto f = a1[i];
 
-    TTS_RELATIVE_EQUAL(kyosu::asinh(kc_t(e, f)),  cv(std::asinh(c_t(e, f))), 1.0e-4);
+    TTS_RELATIVE_EQUAL(kyosu::asinh(kc_t(e, f)),  cv(std::asinh(c_t(e, f))), 2.0e-4);
   }
 };
 

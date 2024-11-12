@@ -10,6 +10,10 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/faddeeva.hpp>
+#include <kyosu/functions/horner.hpp>
+
+#include <string_view>
+#include <string>
 
 namespace kyosu
 {
@@ -206,9 +210,8 @@ namespace kyosu::_
 
       auto taylor = [mz2, z](){
         using r_t =  eve::element_type_t<real_t>;
-        kumi::result::generate_t<5, r_t> a{1.1283791670955125739, 0.37612638903183752464, 0.11283791670955125739
-            , 0.026866170645131251760, 0.0052239776254421878422};
-        return eve::reverse_horner(mz2, a)*z;
+        return kyosu::horner(mz2, 0.0052239776254421878422, 0.026866170645131251760, 0.11283791670955125739, 0.37612638903183752464
+                            , 1.1283791670955125739)*z;
       };
 
       if constexpr(eve::scalar_value<Z>)
