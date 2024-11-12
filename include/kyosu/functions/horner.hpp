@@ -141,7 +141,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, kumi::tuple<Zs...> tup) noexcept
   {
     using r_t = kyosu::as_cayley_dickson_t<Zs...>;
-    r_t x = convert(xx, eve::as_element<r_t>(xx));
+    r_t x = convert(xx, eve::as_element<r_t>());
     return kumi::apply( [&](auto... m) { return horner[o](x, convert(m, eve::as_element<r_t>())...); }, tup);
   }
 

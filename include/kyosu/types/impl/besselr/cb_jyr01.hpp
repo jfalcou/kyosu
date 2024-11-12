@@ -31,7 +31,7 @@ namespace kyosu::_
         std::cout <<r << std::endl;
         std::cout << " =-----------------= "<< std::endl;
 
-        //       r = kyosu::if_else(todo, f(ts...), r);
+        r = kyosu::if_else(todo, f(ts...), r);
         return eve::logical_notand(todo, notdone);
       };
     }

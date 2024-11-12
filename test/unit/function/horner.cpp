@@ -40,8 +40,8 @@ TTS_CASE_WITH ( "Check kyosu::horner over complex"
   auto x  = kyosu::complex(x0, x1);
   TTS_RELATIVE_EQUAL(kyosu::horner(x, c0, c1, c2), (c0*x+c1)*x+c2, 1e-7);
   TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, c0, c1, c2), (c0*x+c1)*x+c2, 1e-7);
-//   kumi::tuple c{c0, c1, c2};
-//   TTS_RELATIVE_EQUAL(kyosu::horner(x, c)         , (c0*x+c1)*x+c2, 1e-7);
+  kumi::tuple c{c0, c1, c2};
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, c)         , (c0*x+c1)*x+c2, 1e-7);
 
 };
 
