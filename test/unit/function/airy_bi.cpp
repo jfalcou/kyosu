@@ -48,17 +48,15 @@ TTS_CASE_WITH ( "Check kyosu::airy_bi"
   if constexpr(sizeof(u_t) == 8)
   {
     auto c =  kyosu::complex(a0, a1);
-//    auto cb=  kyosu::conj(c);
-//     auto cr=  kyosu::complex(a0);
-//     auto ci=  kyosu::complex(T(0), a1);
-//     using kyosu::airy_bi;
+    auto cb=  kyosu::conj(c);
+    auto cr=  kyosu::complex(a0);
+    auto ci=  kyosu::complex(T(0), a1);
+    using kyosu::airy_bi;
     auto j0c = kyosu::airy_bi(c);
-    std::cout << j0c << std::endl;
-//    TTS_EQUAL(j0c, kyosu::conj(kyosu::airy_bi(cb))) << "c = " << c << '\n';
-//     TTS_EXPECT(eve::all(kyosu::is_real(cr)));
-//     TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
-//     auto z =   kyosu::complex(T(0), T(0));
-//     TTS_IEEE_EQUAL(airy_bi(z), kyosu::complex(airy_bi(T(0))));
-    std::cout <<  kyosu::if_else(kyosu::abs(c) > 0, c, kyosu::inc(c));
+    TTS_EQUAL(j0c, kyosu::conj(kyosu::airy_bi(cb))) << "c = " << c << '\n';
+    TTS_EXPECT(eve::all(kyosu::is_real(cr)));
+    TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
+    auto z =   kyosu::complex(T(0), T(0));
+    TTS_IEEE_EQUAL(airy_bi(z), kyosu::complex(airy_bi(T(0))));
   }
 };

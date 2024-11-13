@@ -10,6 +10,37 @@
 #include <kyosu/details/with_alloca.hpp>
 #include <kyosu/functions/if_else.hpp>
 
+namespace ttts::detail
+{
+  template<typename T> struct typename_impl
+  {
+    static auto value() noexcept
+    {
+#if defined(_MSC_VER )
+      std::string_view data(__FUNCSIG__);
+      auto i = data.find('<') + 1,
+        j = data.find(">::value");
+      auto name = data.substr(i, j - i);
+#else
+      std::string_view data(__PRETTY_FUNCTION__);
+      auto i = data.find('=') + 2,
+        j = data.find_last_of(']');
+      auto name = data.substr(i, j - i);
+#endif
+      return std::string(name.data(), name.size());
+    }
+  };
+}
+
+namespace ttts
+{
+  /// Provide a string containing the name of the type `T` in readable form.
+  template<typename T> inline auto const typename_ = detail::typename_impl<T>::value();
+
+  /// Provide a string containing the name of the type of its parameter in readable form.
+  template<typename T> constexpr auto name(T const&){ return typename_<T>; }
+}
+
 namespace kyosu::_
 {
 
@@ -25,13 +56,16 @@ namespace kyosu::_
     {
       if(eve::any(todo))
       {
-        std::cout << " ================== "<< std::endl;
-        std::cout << (todo) << std::endl;
-        std::cout <<f(ts...) << std::endl;
-        std::cout <<r << std::endl;
-        std::cout << " =-----------------= "<< std::endl;
-
-        r = kyosu::if_else(todo, f(ts...), r);
+//         std::cout << ttts::name(todo)<< std::endl;
+//         std::cout << ttts::name(r) << std::endl;
+//         std::cout << ttts::name( f(ts...))<< std::endl;
+//         std::cout << " ================== "<< std::endl;
+//         std::cout << (todo) << std::endl;
+//         std::cout <<f(ts...) << std::endl;
+//         std::cout <<r << std::endl;
+//         std::cout << " =-----------------= "<< std::endl;
+        r = kumi::map([&todo](auto a, auto b) { return if_else(todo,a,b); }, f(ts...), r);
+//        r = kyosu::if_else(todo, f(ts...), r);
         return eve::logical_notand(todo, notdone);
       };
     }
@@ -48,7 +82,11 @@ namespace kyosu::_
     }
     else
     {
-      //     if(eve::any(todo))  r = kyosu::if_else(todo, f(ts...), r);
+//       std::cout << ttts::name(todo)<< std::endl;
+//       std::cout << ttts::name(r) << std::endl;
+//       std::cout << ttts::name( f(ts...))<< std::endl;
+      if(eve::any(todo)) r = kumi::map([&todo](auto a, auto b) { return if_else(todo,a,b); }, f(ts...), r);
+//r = kyosu::if_else(todo, f(ts...), r);
       return false_(as(r));
     }
   }

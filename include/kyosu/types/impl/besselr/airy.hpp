@@ -109,6 +109,8 @@ namespace kyosu::_
     auto notdone = eve::true_(as<Z>());
     Z r = kyosu::nan(as<Z>());
     auto re = real(z);
+    auto imlt0 = eve::is_ltz(imag(z));
+    z = if_else(imlt0, conj(z), z);
     if( eve::any(notdone) )
     {
       notdone = eve::next_interval(br_im_eq_0, notdone, is_real(z), r, z);
@@ -121,7 +123,7 @@ namespace kyosu::_
         }
       }
     }
-    return r;
+    return if_else(imlt0, conj(r), r);
   }
 
   //===-------------------------------------------------------------------------------------------

@@ -12,65 +12,66 @@
 namespace kyosu
 {
   template<typename Options>
-  struct from_cylindrical_t : eve::elementwise_callable<from_cylindrical_t, Options>
+  struct from_multipolar_t : eve::elementwise_callable<from_multipolar_t, Options>
   {
     template<concepts::real U ,concepts::real V,concepts::real W, concepts::real T>
-    KYOSU_FORCEINLINE constexpr auto operator()( V const& r
-                                               , U const & angle
-                                               , W const & h1
-                                               , T const & h2) const noexcept
+    KYOSU_FORCEINLINE constexpr auto operator()( V const & rho1
+                                               , U const & theta1
+                                               , W const & rho2
+                                               , T const & theta2) const noexcept
     -> quaternion_t<eve::common_value_t<V, U, W, T>>
     {
-      auto [sa, ca] = eve::sincos(angle);
-      return kyosu::quaternion(r*ca, r*sa, h1, h2);
+      auto [a0, a1] = kyosu::from_polar(rho1, theta1);
+      auto [a2, a3] = kyosu::from_polar(rho2, theta2);
+      return kyosu::quaternion(a0, a1, a2, a3);
     }
 
-    KYOSU_CALLABLE_OBJECT(from_cylindrical_t, from_cylindrical_);
+    KYOSU_CALLABLE_OBJECT(from_multipolar_t, from_multipolar_);
   };
-
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
-  //! @var from_cylindrical
+  //! @var from_multipolar
   //!
-  //! @brief Callable object computing a quaternion from its cylindrical representation.
+  //! @brief Callable object computing a quaternion from its multipolar representation.
   //!
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
-  //!  from a cylindrical representation of an \f$\mathbb{R}^2\f$ element.
+  //!  from a multipolar representation of an \f$\mathbb{R}^4\f$ element.
   //!
-  //! from_cylindrical first two inputs are the polar coordinates of the first \f$\mathbb{C}\f$
-  //! component of the quaternion.
-  //! The third and fourth inputs are placed into the third and fourth \f$\mathbb{R}\f$
-  //! components of the quaternion, respectively.
+  //!  from_multipolar  the two \f$\mathbb{C}\f$ components of the quaternion are given in polar coordinates
   //!
   //! **Defined in header**
   //!
   //!   @code
-  //!   #include kyosu/module/quaternion.hpp>`
+  //!   #include eve/module/quaternion.hpp>`
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace kyosu
+  //!   namespace eve
   //!   {
-  //!     auto from_cylindrical(auto r, auto angle, auto h1, auto h2) const noexcept;
+  //!     auto from_multipolar(auto rho1, auto theta1, auto rho2, auto theta2) noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!  * `r`, `angle`, `h1`, `h2`
+  //! `rho1`, `rho2`:  the moduli
+  //!
+  //! `theta1`, `theta2`: the angles in radian
   //!
   //! **Return value**
   //!
-  //! the quaternion value.
+  //! the quaternion value
   //!
-  //!  @groupheader{Example}
+  //! ---
   //!
-  //! @godbolt{doc/from_cylindrical.cpp}
+  //! #### Example
+  //!
+  //! @godbolt{doc/from_multipolar.cpp}
   //======================================================================================================================
-  inline constexpr auto from_cylindrical = eve::functor<from_cylindrical_t>;
+  inline constexpr auto from_multipolar = eve::functor<from_multipolar_t>;
   //======================================================================================================================
   //! @}
   //======================================================================================================================
