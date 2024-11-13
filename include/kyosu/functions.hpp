@@ -232,7 +232,7 @@
 // Functions performing computations over quaternion complex or real elements only.
 //======================================================================================================================
 
-// #include <kyosu/functions/from_angle_axis.hpp>
+#include <kyosu/functions/from_angle_axis.hpp>
 #include <kyosu/functions/from_cylindrical.hpp>
 #include <kyosu/functions/from_cylindrospherical.hpp>
 #include <kyosu/functions/from_euler.hpp>
@@ -243,7 +243,7 @@
 // #include <kyosu/functions/rot_angle.hpp>
 // #include <kyosu/functions/rot_axis.hpp>
 // #include <kyosu/functions/rotate_vec.hpp>
-// #include <kyosu/functions/to_angle_axis.hpp>
+#include <kyosu/functions/to_angle_axis.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/to_cylindrical.hpp>
 #include <kyosu/functions/to_cylindrospherical.hpp>
