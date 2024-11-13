@@ -65,7 +65,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     * returns \f$J_n(z)\f$,  and if the 'span' parameter is present it must be sufficient to hold 'n+1' values which are
-//!        \$(j_0(x), j_1(x), ...,  j_n(x))\f$ if 'n >= 0$ else \$(j_0(x),j_{-1}(x) ...,  j_{-n}(x)\f)$ (for the same computation cost), 
+//!        \f$(j_0(x), j_1(x), ...,  j_n(x))\f$ if 'n >= 0$ else \f$(j_0(x),j_{-1}(x) ...,  j_{-n}(x)\f$ (for the same computation cost),
 //!        but use is restricted to real or complex entries.
 //!
 //!  @groupheader{Example}

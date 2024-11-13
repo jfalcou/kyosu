@@ -30,7 +30,7 @@ namespace kyosu
 //! @{
 //!   @var sph_bessel_y1
 //!   @brief Computes the spherical Bessel function of the first kind,
-//!   \f$ y_1(x)= -\coz z/z^2 -\sin z/zf$
+//!   \f$ y_1(x)= -\coz z/z^2 -\sin z/z\f$
 //!   extended to the complex plane and cayley_dickson values.
 //!
 //!   @code

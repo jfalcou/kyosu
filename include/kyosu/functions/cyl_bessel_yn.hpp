@@ -65,7 +65,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     * returns \f$Y_n(z)\f$,  and if the 'span' parameter is present it must be sufficient to hold 'n+1' values which are
-//!       \$(y_0(x), y_1(x), ...,  y_n(x))\f$ if 'n >= 0$ else \$(y_0(x),y_{-1}(x) ...,  y_{-n}(x)\f)$ (for the same computation cost),
+//!       \f$(y_0(x), y_1(x), ...,  y_n(x))\f$ if 'n >= 0$ else \f$(y_0(x),y_{-1}(x) ...,  y_{-n}(x)\f$ (for the same computation cost),
 //!       but use is restricted to real or complex entries.
 //!//!
 //!  @groupheader{Example}

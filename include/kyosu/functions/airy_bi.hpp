@@ -54,7 +54,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns  \f$\{Bi(z)\}f$.
+//!     * returns  \f$Bi(z)\f$.
 //!
 //!  @groupheader{Example}
 //!

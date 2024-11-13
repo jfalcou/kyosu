@@ -52,7 +52,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns  \f$\{Ai(z)\}f$.
+//!     * returns  \f$Ai(z)\f$.
 //!
 //!  @groupheader{Example}
 //!
