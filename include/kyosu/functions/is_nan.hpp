@@ -23,6 +23,21 @@ namespace kyosu
     KYOSU_CALLABLE_OBJECT(is_nan_t, is_nan_);
   };
 
+//======================================================================================================================
+//! @addtogroup functions
+//! @{
+//!   @var is_nan
+//!   @brief test the parameter for nan
+//!   **Defined in Header**
+//!
+//!   @code
+//!   #include <kyosu/functions.hpp>
+//!   @endcode
+//!
+//!   @groupheader{Callable Signatures}
+//!
+//!   @code
+//!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_nan(T z) noexcept;
 //!      template<eve::floating_ordered_value T>     constexpr auto is_nan(T z) noexcept;

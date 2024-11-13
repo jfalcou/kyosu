@@ -23,7 +23,22 @@ namespace kyosu
     KYOSU_CALLABLE_OBJECT(is_nez_t, is_nez_);
   };
 
-//!   {
+//======================================================================================================================
+//! @addtogroup functions
+//! @{
+//!   @var is_nez
+//!   @brief test the parameter for non-equality to zero.
+//!
+//!   **Defined in Header**
+//!
+//!   @code
+//!   #include <kyosu/functions.hpp>
+//!   @endcode
+//!
+//!   @groupheader{Callable Signatures}
+//!
+//!   @code
+//!   namespace kyosu//!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_nez(T z) noexcept;
 //!      template<eve::floating_ordered_value T>     constexpr auto is_nez(T z) noexcept;
 //!   }

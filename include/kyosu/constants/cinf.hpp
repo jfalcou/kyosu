@@ -64,7 +64,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * always returns a complex scalar value i such that real(i) is NaN and imag(i) is \f$+\inf*\f.
+//!     * always returns a complex scalar value i such that real(i) is NaN and imag(i) is \f$+\inf*\f$.
 //!
 //!  @groupheader{Example}
 //!

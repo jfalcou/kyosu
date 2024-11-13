@@ -61,8 +61,8 @@ namespace kyosu
 //!
 //!     * returns  a pair containing \f$I_n(z)\f$ and \f$K_n(z)\f$ and if the 'span' parameters are present
 //!       ithey  must be sufficient to hold 'n+1' values each which are respectively
-//!        \$(i_0(x), i_1(x), ...,  i_n(x))\f$ if 'n >= 0$ else \$(i_0(x),i_{-1}(x) ...,  i_{-n}(x)\f)$ (for the same computation cost),
-//!       and  \$(k_0(x), k_1(x), ...,  k_n(x))\f$ if 'n >= 0$ else \$(k_0(x),k_{-1}(x) ...,  k_{-n}(x)\f)$ (for the same computation cost),
+//!        \$(i_0(x), i_1(x), ...,  i_n(x))\f$ if 'n >= 0$ else \$(i_0(x),i_{-1}(x) ...,  i_{-n}(x)\f$ (for the same computation cost),
+//!       and  \$(k_0(x), k_1(x), ...,  k_n(x))\f$ if 'n >= 0$ else \$(k_0(x),k_{-1}(x) ...,  k_{-n}(x)\f$ (for the same computation cost),
 //!       but use is restricted to real or complex entries..
 //!
 //!  @groupheader{Example}

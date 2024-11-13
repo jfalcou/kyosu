@@ -176,6 +176,7 @@
 // Functions performing computations over quaternion complex or real elements only.
 //======================================================================================================================
 
+#include <kyosu/functions/align.hpp>
 #include <kyosu/functions/from_angle_axis.hpp>
 #include <kyosu/functions/from_cylindrical.hpp>
 #include <kyosu/functions/from_cylindrospherical.hpp>

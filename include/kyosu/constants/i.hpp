@@ -37,7 +37,7 @@ namespace kyosu
 //! @addtogroup constants
 //! @{
 //!   @var i
-//!   @brief Computes the complex number \f$i$\f in the chosen type.
+//!   @brief Computes the complex number \f$i$\f$ in the chosen type.
 //!
 //!   **Defined in Header**
 //!
@@ -56,7 +56,7 @@ namespace kyosu
 //!   @endcode
 //!
 //!   **Parameters**
-//!   * `t` :  [Type wrapper](@ref eve::as) instance embedding the type of the constant.
+//!   * `t` :  Type wrapper instance embedding the type of the constant.
 //!
 //!   **Return value**
 //!

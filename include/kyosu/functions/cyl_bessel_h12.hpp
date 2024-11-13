@@ -61,8 +61,8 @@ namespace kyosu
 //!
 //!     * returns  a pair containing \f$h1n(z)\f$ and \f$h2n(z)\f$ and if the 'span' parameters are present
 //!       ithey  must be sufficient to hold 'n+1' values each which are respectively
-//!        \$(h1_0(x), h1_1(x), ...,  h1_n(x))\f$ if 'n >= 0$ else \$(h1_0(x),h1_{-1}(x) ...,  h1_{-n}(x)\f)$ (for the same computation cost),
-//!       and  \$(h2_0(x), h2_1(x), ...,  h2_n(x))\f$ if 'n >= 0$ else \$(h2_0(x),h2_{-1}(x) ...,  h2_{-n}(x)\f)$ (for the same computation cost),
+//!        \$(h1_0(x), h1_1(x), ...,  h1_n(x))\f$ if 'n >= 0$ else \$(h1_0(x),h1_{-1}(x) ...,  h1_{-n}(x)\f$ (for the same computation cost),
+//!       and  \$(h2_0(x), h2_1(x), ...,  h2_n(x))\f$ if 'n >= 0$ else \$(h2_0(x),h2_{-1}(x) ...,  h2_{-n}(x)\f$ (for the same computation cost),
 //!       but use is restricted to real or complex entries..
 //!
 //!  @groupheader{Example}

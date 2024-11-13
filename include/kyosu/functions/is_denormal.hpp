@@ -23,6 +23,22 @@ namespace kyosu
     KYOSU_CALLABLE_OBJECT(is_denormal_t, is_denormal_);
   };
 
+//======================================================================================================================
+//! @addtogroup functions
+//! @{
+//!   @var is_denormal
+//!   @brief test the parameter for denormality.
+//!
+//!   **Defined in Header**
+//!
+//!   @code
+//!   #include <kyosu/functions.hpp>
+//!   @endcode
+//!
+//!   @groupheader{Callable Signatures}
+//!
+//!   @code
+//!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_denormal(T z) noexcept;
 //!      template<eve::floating_ordered_value T>     constexpr auto is_denormal(T z) noexcept;
