@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct to_spherical_t : eve::elementwise_callable<to_spherical_t, Options>
+  struct to_semipolar_t : eve::elementwise_callable<to_semipolar_t, Options>
   {
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
@@ -24,7 +24,7 @@ namespace kyosu
     }
 
     template<concepts::cayley_dickson Z>
-    requires(dimension_v<Q> <= 4)
+    requires(dimension_v<Z> <= 4)
       KYOSU_FORCEINLINE constexpr auto operator()(Z  q) const noexcept
     {
       auto c0 = complex(real(q), imag(q));
@@ -38,14 +38,14 @@ namespace kyosu
         auto rho = kyosu::abs(q);
         auto c0 = complex(get<0>(q), get<1>(q));
         auto c1 = complex(get<2>(q), get<3>(q));
-        auto alpha = eve::pedantic(eve::atan2)(abs(c1), abs(c0));
+        auto alpha = eve::atan2[eve::pedantic](abs(c1), abs(c0));
         auto theta1 = arg(c0);
         auto theta2 = arg(c1);
         return kumi::tuple{rho, alpha, theta1, theta2};
       }
     }
 
-    KYOSU_CALLABLE_OBJECT(to_spherical_t, to_spherical_);
+    KYOSU_CALLABLE_OBJECT(to_semipolar_t, to_semipolar_);
   };
 
   //================================================================================================
@@ -87,7 +87,7 @@ namespace kyosu
   //!
   //! @godbolt{doc/to_semipolar.cpp}
   //================================================================================================
-  inline constexpr auto to_spherical = eve::functor<to_spherical_t>;
+  inline constexpr auto to_semipolar = eve::functor<to_semipolar_t>;
   //================================================================================================
   //!  @}
   //================================================================================================
