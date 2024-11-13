@@ -54,7 +54,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     auto from_angle_axis(auto angle,  auto axis, auto norming = normalize) const noexcept;
+  //!     auto from_angle_axis(auto angle, auto axis, auto norming) const noexcept;
   //!   }
   //!   @endcode
   //!
@@ -62,10 +62,10 @@ namespace kyosu
   //!
   //!  * `angle`: rotation angle in radian
   //!  * `axis`: rotation axis given by an std::span of dimension 3.
-  //!  * `normalize`: can be `assume_normalized` or `normalize`.
+  //!  * `norming`: can be `assume_normalized` or `normalize`.
   //!      - In the second case the axis is normalized before use.
   //!      - if the axis is already normalized using `assume_normalized` is more efficient,
-  //!        but the result is u.b. if it is not the case.
+  //!        but the result is undefined behavior if it is not the case.
   //!      - if the axis is null the axis is normalized as (1, 0, 0).
   //!
   //! **Return value**
