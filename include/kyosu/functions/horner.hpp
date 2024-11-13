@@ -33,7 +33,9 @@ namespace kyosu
     template<typename Z, typename ...Zs>
     requires(concepts::cayley_dickson<Z> || (concepts::cayley_dickson<Zs> || ...))
       KYOSU_FORCEINLINE constexpr  kyosu::as_cayley_dickson_t<Z, Zs...> operator()(Z z, kumi::tuple<Zs...> tup ) const noexcept
-    { return KYOSU_CALL(z, tup); }
+    {
+      return KYOSU_CALL(z, tup);
+    }
 
     KYOSU_CALLABLE_OBJECT(horner_t, horner_);
 };
@@ -140,7 +142,7 @@ namespace kyosu::_
   template<typename X, typename ... Zs, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, kumi::tuple<Zs...> tup) noexcept
   {
-    using r_t = kyosu::as_cayley_dickson_t<Zs...>;
+    using r_t = kyosu::as_cayley_dickson_t<X, Zs...>;
     r_t x = convert(xx, eve::as_element<r_t>());
     return kumi::apply( [&](auto... m) { return horner[o](x, convert(m, eve::as_element<r_t>())...); }, tup);
   }
