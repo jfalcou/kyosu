@@ -77,7 +77,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto slerp_(KYOSU_DELAY(), O const&, Z1 z1, Z2 z2, T t) noexcept
   {
     EVE_ASSERT(eve::all(is_unitary(z1) && is_unitary(z2)), "quaternion parameters must be unitary");
-    auto gez = eve::is_gez(kyosu::dot(z1, z2));
+    auto gez = eve::is_gez(real(kyosu::dot(z1, z2)));
     auto mix = kyosu::if_else(gez, z2, -z2);
     return z1*kyosu::pow(kyosu::conj(z1)*mix, t);
   }

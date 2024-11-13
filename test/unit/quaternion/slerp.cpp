@@ -30,7 +30,7 @@ TTS_CASE_WITH ( "Check behavior of slerp on"
   {
     auto z1 = kyosu::sign(q_t(a0, a1, a2, a3));
     auto z2 = kyosu::sign(q_t(a4, a5, a6, a7));
-    auto dz1z2 = kyosu::dot(z1, z2);
+    auto dz1z2 = kyosu::real(kyosu::dot(z1, z2));
     z2 = kyosu::if_else(eve::is_gez(dz1z2), z2, -z2);
     auto r1 = kyosu::slerp(z1, z2, e_t(0.0));
     auto t1 = kyosu::conj(z1)*z2;
