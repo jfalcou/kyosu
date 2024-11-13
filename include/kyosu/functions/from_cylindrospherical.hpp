@@ -18,7 +18,8 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr auto operator()(V const & t
                                                , U const & radius
                                                , W const & longitude
-                                               , T const & latitude) const noexcept -> quaternion_t<eve::common_value_t<V, U, W, T>>
+                                               , T const & latitude) const noexcept
+    -> quaternion_t<eve::common_value_t<V, U, W, T>>
     {
       auto [slat, clat] = eve::sincos(latitude);
       auto [slon, clon] = eve::sincos(longitude);
