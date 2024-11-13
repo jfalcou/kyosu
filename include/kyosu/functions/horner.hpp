@@ -26,7 +26,8 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr auto operator()(Vs... vs) const noexcept
     { return eve::horner(vs...); }
 
-    template<concepts::real V, concepts::real... Vs>
+    template<typename V, typename... Vs>
+    requires(concepts::cayley_dickson<V> && (concepts::cayley_dickson<Vs> && ...))
     KYOSU_FORCEINLINE constexpr  auto operator()(V z, kumi::tuple<Vs...> tup ) const noexcept
     { return eve::horner(z, tup); }
 
@@ -37,6 +38,12 @@ namespace kyosu
       return KYOSU_CALL(z, tup);
     }
 
+    template<concepts::real Z, concepts::real ...Zs>
+      KYOSU_FORCEINLINE constexpr  auto  operator()(Z z, kumi::tuple<Zs...> tup ) const noexcept
+    -> decltype(eve::horner(z, tup))
+    {
+      return eve::horner(z, tup);
+    }
     KYOSU_CALLABLE_OBJECT(horner_t, horner_);
 };
 
