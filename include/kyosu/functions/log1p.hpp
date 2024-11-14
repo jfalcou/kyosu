@@ -56,7 +56,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   1.  a real typed input z is treated as if complex(z) was entered.\n
+//!   1.  a real typed input z is treated as if `complex(z)` was entered.\n
 //!       For real and complex entries provision are made to get better precision near z = 0.
 //!
 //!   2.  returns [log](@ref kyosu::log)(1+z).

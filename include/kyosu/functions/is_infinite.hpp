@@ -29,7 +29,7 @@ namespace kyosu
 //!   @var is_infinite
 //!   @brief test if the parameter is infinite.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

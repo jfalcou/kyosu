@@ -29,7 +29,9 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var airy_ai
-//!   @brief Computes the airy function \f$Ai\f$,
+//!   @brief Computes the airy function \f$Ai\f$
+//!
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -40,8 +42,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T> constexpr auto airy_ai(T z) noexcept;
-//!
+//!      template<eve::floating_ordered_value T>     constexpr auto airy_ai(T z) noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto airy_ai(T z) noexcept;
 //!   }
 //!   @endcode

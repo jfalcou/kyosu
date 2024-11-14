@@ -28,7 +28,7 @@ namespace kyosu
 //! @{
 //!   @var is_nan
 //!   @brief test the parameter for nan
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

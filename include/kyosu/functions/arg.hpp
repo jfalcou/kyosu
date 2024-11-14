@@ -29,7 +29,7 @@ namespace kyosu
 //!   @var arg
 //!   @brief  argument.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

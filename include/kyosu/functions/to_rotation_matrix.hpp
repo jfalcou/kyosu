@@ -88,7 +88,7 @@ namespace kyosu
   //!  for instance I = 3, J = 2, K = 3 choose the ZYZ sequence.
   //!  the values of I, J, and K must be in {1, 2, 3} ans satisfy I != J && J != K.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`

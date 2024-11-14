@@ -47,7 +47,7 @@ namespace kyosu
   //!   @var quaternion
   //!   @brief Constructs a kyosu::quaternion_t instance
   //!
-  //!   **Defined in Header**
+  //!   @groupheader{Header file}
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>

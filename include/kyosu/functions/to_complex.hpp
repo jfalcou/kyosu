@@ -42,7 +42,7 @@ namespace kyosu
 //!   @var complex
 //!   @brief Constructs a kyosu::complex_t instance
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

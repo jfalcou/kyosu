@@ -21,9 +21,8 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return KYOSU_CALL(complex(v)); }
+    template<concepts::real V> V complex_t<V> operator()(V v) const noexcept
+    { return eve::acsch(z); }
 
     KYOSU_CALLABLE_OBJECT(acsch_t, acsch_);
 };
@@ -56,7 +55,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. A real type input z calls `eve::acsch(z)` and so returns the same type as input.
 //!
 //!   2. Returns elementwise `asinh(rec(z))`.
 //!

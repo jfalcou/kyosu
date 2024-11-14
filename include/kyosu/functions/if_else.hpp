@@ -39,7 +39,7 @@ namespace kyosu
 //!   @var if_else
 //!   @brief Select a value between two arguments based on a logical mask
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

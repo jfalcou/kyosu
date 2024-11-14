@@ -42,7 +42,7 @@ namespace kyosu
 //!   @var convert
 //!   @brief convert to a target type
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

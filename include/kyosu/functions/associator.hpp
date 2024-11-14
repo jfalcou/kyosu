@@ -34,7 +34,7 @@ namespace kyosu
 //!   @var associator
 //!   @brief Computes the associator of the three parameters.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

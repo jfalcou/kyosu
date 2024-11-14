@@ -29,7 +29,7 @@ namespace kyosu
 //!   @var abs
 //!   @brief Computes the absolute value of the parameter.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

@@ -8,6 +8,8 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
+#include <kyosu/constants/wrapped.hpp>
+#include <kyosu/functions/cyl_bessel_i.hpp>
 
 namespace kyosu
 {
@@ -18,9 +20,9 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr kumi::tuple<Z, Z>operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
 
-//     template<concepts::real V>
-//     KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
-//     { return eve::airy(v); }
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
+    { return eve::airy(v); }
 
     KYOSU_CALLABLE_OBJECT(airy_t, airy_);
 };
@@ -29,7 +31,9 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var airy
-//!   @brief Computes simultaneously the airy functions \f$Ai\f$ and \f$Bi\f$.
+//!   @brief Computes simultaneously the airy functions \f$ Ai \f$ and \f$ Bi \f$
+//!
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -40,8 +44,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T> constexpr auto airy(T z) noexcept;
-//!
+//!      template<eve::floating_ordered_value T>      constexpr auto airy(T z) noexcept;
 //!      template<kyosu::concepts::cayley_dickson T>  constexpr auto airy(T z) noexcept;
 //!   }
 //!   @endcode
@@ -52,10 +55,9 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns  a kumi pair containing \f$\{Ai(z)\}f$ and \f$\{Bi(z)\}f$.
+//!     * returns  a kumi pair containing \f$ Ai(z) \f$ and \f$ Bi(z) \f$.
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/airy.cpp}
 //======================================================================================================================
   inline constexpr auto airy = eve::functor<airy_t>;

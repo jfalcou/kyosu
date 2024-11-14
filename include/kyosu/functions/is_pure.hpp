@@ -29,7 +29,7 @@ namespace kyosu
 //!   @var is_pure
 //!   @brief test if the parameter is pure.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

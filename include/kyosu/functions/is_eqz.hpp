@@ -30,7 +30,7 @@ namespace kyosu
 //!   @var is_eqz
 //!   @brief test the parameter for equality to zero.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

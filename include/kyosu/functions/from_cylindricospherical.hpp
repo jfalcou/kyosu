@@ -42,7 +42,7 @@ namespace kyosu
   //!  This function therefore builds a quaternion from this representation, with the \f$\mathbb{R}^3\f$ component given
   //!  in usual \f$\mathbb{R}^3\f$ spherical coordinates.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`

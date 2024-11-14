@@ -29,7 +29,7 @@ namespace kyosu
 //!   @var is_nez
 //!   @brief test the parameter for non-equality to zero.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

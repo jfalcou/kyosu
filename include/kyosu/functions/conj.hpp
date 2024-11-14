@@ -29,7 +29,7 @@ namespace kyosu
 //!   @var conj
 //!   @brief Computes the conjugate value.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

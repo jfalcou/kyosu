@@ -29,7 +29,7 @@ namespace kyosu
 //!   @var is_denormal
 //!   @brief test the parameter for denormality.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

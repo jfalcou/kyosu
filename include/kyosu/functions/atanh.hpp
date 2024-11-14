@@ -56,7 +56,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if kyosu::complex(z) was entered.
+//!   1. a real input z is treated as if kyosu::`complex(z)` was entered.
 //!
 //!   2.  Returns the complex inverse hyperbolic tangent of z, in the range of a half-strip mathematically
 //!       unbounded along the real axis and in the interval  \f$i\times[-\pi/2, \pi/2]\f$ along

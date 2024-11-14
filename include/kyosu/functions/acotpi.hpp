@@ -56,7 +56,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if complex(z) was entered.
+//!   1. a real input z is treated as if `complex(z)` was entered.
 //!
 //!   2. Returns radinpi(acot(z))
 //!

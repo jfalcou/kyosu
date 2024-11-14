@@ -31,7 +31,7 @@ namespace kyosu
 //!   @var is_unitary
 //!   @brief test if the parameter is unitary (absolute value one).
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

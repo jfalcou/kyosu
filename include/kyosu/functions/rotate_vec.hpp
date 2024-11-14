@@ -55,7 +55,7 @@ namespace kyosu
   //!
   //! @brief Callable object rotating an \f$\mathbb{R}^3\f$ vector using a quaternion.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`

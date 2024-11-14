@@ -53,7 +53,7 @@ namespace kyosu
   //!
   //!  This function is the reciprocal of from_cylindrospherical.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`

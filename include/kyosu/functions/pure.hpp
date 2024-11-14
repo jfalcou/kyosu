@@ -29,7 +29,7 @@ namespace kyosu
 //!   @var pure
 //!   @brief Extracts the imaginary part of a value.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

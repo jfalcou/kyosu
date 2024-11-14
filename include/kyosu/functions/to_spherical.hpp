@@ -59,7 +59,7 @@ namespace kyosu
   //!
   //!  This function is the reciprocal of from_spherical
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`

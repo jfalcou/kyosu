@@ -42,7 +42,7 @@ namespace kyosu
   //!   @var real
   //!   @brief Extracts the real part of a value.
   //!
-  //!   **Defined in Header**
+  //!   @groupheader{Header file}
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>
@@ -77,7 +77,7 @@ namespace kyosu
   //!   @var ipart
   //!   @brief Extracts the imaginary part of a value.
   //!
-  //!   **Defined in Header**
+  //!   @groupheader{Header file}
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>
@@ -115,7 +115,7 @@ namespace kyosu
   //!   @var jpart
   //!   @brief Extracts the \f$j\f$ part of a value.
   //!
-  //!   **Defined in Header**
+  //!   @groupheader{Header file}
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>
@@ -151,7 +151,7 @@ namespace kyosu
   //!   @var kpart
   //!   @brief Extracts the \f$k\f$  part of a value.
   //!
-  //!   **Defined in Header**
+  //!   @groupheader{Header file}
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>
@@ -187,7 +187,7 @@ namespace kyosu
   //!   @var lpart
   //!   @brief Extracts the \f$l\f$  part of a value.
   //!
-  //!   **Defined in Header**
+  //!   @groupheader{Header file}
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>
@@ -224,7 +224,7 @@ namespace kyosu
   //!   @var lipart
   //!   @brief Extracts the \f$li\f$  part of a value.
   //!
-  //!   **Defined in Header**
+  //!   @groupheader{Header file}
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>
@@ -261,7 +261,7 @@ namespace kyosu
   //!   @var ljpart
   //!   @brief Extracts the \f$lj\f$  part of a value.
   //!
-  //!   **Defined in Header**
+  //!   @groupheader{Header file}
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>
@@ -298,7 +298,7 @@ namespace kyosu
   //!   @var lkpart
   //!   @brief Extracts the \f$lk\f$  part of a value.
   //!
-  //!   **Defined in Header**
+  //!   @groupheader{Header file}
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>

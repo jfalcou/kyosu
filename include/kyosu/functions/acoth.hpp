@@ -57,7 +57,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. A real type input z calls eve::acoth(z); and so returns the same type as the input.
+//!   1. a real typed input z is treated as if `complex(z)` was entered.
 //!
 //!   2. Returns elementwise the complex principal value
 //!      of the inverse hyperbolic cotangent of the input as the inverse hyperbolic tangent of the inverse of the input.

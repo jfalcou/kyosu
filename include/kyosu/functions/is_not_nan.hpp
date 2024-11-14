@@ -29,7 +29,7 @@ namespace kyosu
 //!   @var is_not_nan
 //!   @brief test if the parameter is not a Nan.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

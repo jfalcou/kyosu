@@ -59,7 +59,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real typed input z is treated as if complex(z) was entered.
+//!   1. a real typed input z is treated as if `complex(z)` was entered.
 //!
 //!   2. Returns elementwise the complex principal value of the arc cosine of the input.
 //!      Branch cuts exist outside the interval \f$[-1, +1]\f$ along the real axis.

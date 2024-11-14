@@ -40,7 +40,7 @@ namespace kyosu
   //!
   //!  from_multipolar  the two \f$\mathbb{C}\f$ components of the quaternion are given in polar coordinates
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`

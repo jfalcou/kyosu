@@ -43,11 +43,9 @@ namespace kyosu
   //! @{
   //! @var align
   //!
-  //! @brief Callable object computing a quaternion from its angle_axis representation.
+  //! @brief Callable object computing an unitary quaternion value representing a rotation that align v0 to v1.
   //!
-  //!  This function build an unitary quaternion from an angle value and a 3 dimensionnal axis vector
-  //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include kyosu/module/quaternion.hpp>`
@@ -72,12 +70,10 @@ namespace kyosu
   //! **Return value**
   //!
   //!   An unitary quaternion value representing a rotation that align v0 to v1.
-  //!
   //!   If v0 or v1 is a nullvector  the result is UB
   //!
   //!  @groupheader{Example}
-  //!
-  //! @godbolt{doc/align.cpp}
+  //!  @godbolt{doc/align.cpp}
   //================================================================================================
   inline constexpr auto align = eve::functor<align_t>;
   //================================================================================================

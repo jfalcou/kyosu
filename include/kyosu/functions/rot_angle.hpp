@@ -35,7 +35,7 @@ namespace kyosu
   //!
   //! @brief Callable object computing the normalized angle of rotation defined by a quaternion.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`

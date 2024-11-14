@@ -30,7 +30,7 @@ namespace kyosu
 //!   @var is_not_real
 //!   @brief test if the parameter is not_real.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

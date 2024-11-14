@@ -38,7 +38,7 @@ namespace kyosu
 //! However for `z = 1` the result is \f$\infty\f$.
 //! The usual extension mechanism is used for general Cayley-dickson values.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

@@ -29,7 +29,7 @@ namespace kyosu
 //!   @var is_imag
 //!   @brief test if the parameter real part is zero.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

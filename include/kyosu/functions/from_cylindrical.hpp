@@ -43,7 +43,7 @@ namespace kyosu
   //! The third and fourth inputs are placed into the third and fourth \f$\mathbb{R}\f$
   //! components of the quaternion, respectively.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include kyosu/module/quaternion.hpp>`

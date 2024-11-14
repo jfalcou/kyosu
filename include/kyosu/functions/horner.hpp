@@ -59,7 +59,7 @@ namespace kyosu
 //!   For non commutative cases it is a left-horner scheme: coefficients are at the left of the x powers).
 //!   using the right` samantic modifyier allows to use a right-horner scheme: coefficients are at the right of the x powers).
 //!
-//!   **Defined in header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <eve/module/polynomial.hpp>
