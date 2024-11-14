@@ -44,7 +44,7 @@ namespace kyosu
 //!   {
 //!      template<eve::floating_ordered_value T>     constexpr auto asin(T z) noexcept;  //1
 //!      template<kyosu::concepts::complex T>        constexpr auto asin(T z) noexcept;  //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acos(T z) noexcept;  //3
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto asin(T z) noexcept;  //3
 //!   }
 //!   @endcode
 //!
@@ -54,7 +54,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!   1. a real input z is treated as if complex(z) was entered.
 //!
 //!   2. Returns the elementwise the complex principal value
 //!      of the arc sine of the input in the range of a strip unbounded along the imaginary axis

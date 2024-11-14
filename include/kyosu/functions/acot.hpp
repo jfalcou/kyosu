@@ -57,13 +57,13 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. A real type input z calls eve::acot(z); and so returns the same type as the input.
+//!   1. A real type input z calls eve::acot(z) and so returns the same type as the input.
 //!
 //!   2. Returns elementwise the complex principal value
 //!      of the arc cotangent of the input as the arc tangent of the inverse of the input.
 //!
 //!   3. Returns \f$I_z \mathrm{acoth}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!         \f$\underline{z}\f$ is the [pure](@ref pure)  part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!
@@ -80,6 +80,6 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto acot_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-     return kyosu::atan(kyosu::rec(z));
+    return kyosu::atan(kyosu::rec(z));
   }
 }

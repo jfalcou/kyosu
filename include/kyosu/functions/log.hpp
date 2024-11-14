@@ -55,7 +55,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   1.  a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!   1.  a real typed input z is treated as if complex(z) was entered.
 //!
 //!   2. Returns elementwise the natural logarithm of the input
 //!      in the range of a strip in the interval \f$i\times[-\pi, \pi]\f$ along the imaginary axis

@@ -58,13 +58,13 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!   1. a real input z is treated as if `complex)(z)` was entered.
 //!
 //!   2. Returns the complex inverse hyperbolic cosine of z, in the range of a
 //!      strip unbounded along the imaginary axis and
 //!      in the interval \f$[0,\pi]\f$ along the real axis.
 //!
-//!      * for every z: kyosu::acosh( [kyosu::conj](@ref kyosu::conj)(z)) == kyosu::conj([kyosu::acosh](@ref kyosu::acosh)(z)
+//!      * for every z: acosh(conj(z)) ==conj(acosh(z))
 //!      * If z is \f$\pm0\f$, the result is \f$+0+i\pi/2\f$
 //!      * If z is \f$x+i\infty\f$ (for any finite x), the result is \f$\infty+i\pi/2\f$
 //!      * If z is \f$x+i NaN\f$ (for any finite non zero x), the result is \f$NaN+iNaN\f$.
@@ -97,7 +97,7 @@ namespace kyosu::_
     if constexpr(concepts::complex<Z> )
     {
       // acosh(a0) = +/-i acos(a0)
-      // Zhoosing the sign of multiplier to give real(acosh(a0)) >= 0
+      // Choosing the sign of multiplier to give real(acosh(a0)) >= 0
       // we have compatibility with C99.
       auto [r, i] = kyosu::acos(a0);
       auto lez = eve::is_negative(i);;

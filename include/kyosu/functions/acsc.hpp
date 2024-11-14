@@ -8,7 +8,7 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/asin.hpp> 
+#include <kyosu/functions/asin.hpp>
 #include <kyosu/functions/rec.hpp>
 #include <kyosu/functions/to_complex.hpp>
 
@@ -56,9 +56,9 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns elementwise \f$\mathop{\mathrm{asin}}(1/z)\f$.
+//!   2. Returns elementwise `asin(rec(z))`.
 //!
 //!  @groupheader{Example}
 //!

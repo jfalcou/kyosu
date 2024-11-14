@@ -59,12 +59,12 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!   1. a real typed input z is treated as if complex(z) was entered.
 //!
 //!   2. Returns elementwise the complex principal value of the arc cosine of the input.
 //!      Branch cuts exist outside the interval \f$[-1, +1]\f$ along the real axis.
 //!
-//!      * for every z: `kyosu::acos( [kyosu::conj](@ref kyosu::conj)(z) ) == kyosu::conj([kyosu::acos](@ref kyosu::acos)(z))`
+//!      * for every z: `acos(conj(z) ) == conj(acos(z))`
 //!      * If z is \f$\pm0\f$, the result is \f$\pi/2\f$
 //!      * If z is \f$i NaN\f$, the result is \f$\pi/2+ i NaN\f$
 //!      * If z is \f$x+i\infty\f$ (for any finite x), the result is \f$\pi/2-i\infty\f$

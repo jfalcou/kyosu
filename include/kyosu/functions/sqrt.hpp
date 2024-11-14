@@ -55,7 +55,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!     1. a real typed input z is treated as if complex(z) was entered.
 //!
 //!     2. Returns the elementwise the square root of z,
 //!        in the range of the right half-plane, including the imaginary axis (\f$[0, +\infty]\f$

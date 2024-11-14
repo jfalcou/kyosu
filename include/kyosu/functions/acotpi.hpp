@@ -56,9 +56,9 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!   1. a real input z is treated as if complex(z) was entered.
 //!
-//!   2. Returns kyosu::radinpi([kyosu::acot](@ref kyosu::acot)(z))
+//!   2. Returns radinpi(acot(z))
 //!
 //!  @groupheader{Example}
 //!
@@ -75,6 +75,6 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto acotpi_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    return kyosu::radinpi(kyosu::acot(z));
+    returnradinpi(kyosu::acot(z));
   }
 }

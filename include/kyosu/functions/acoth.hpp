@@ -60,7 +60,7 @@ namespace kyosu
 //!   1. A real type input z calls eve::acoth(z); and so returns the same type as the input.
 //!
 //!   2. Returns elementwise the complex principal value
-//!      of the ar hyperbolic cotangent of the input as the arc tangent of the inverse of the input.
+//!      of the inverse hyperbolic cotangent of the input as the inverse hyperbolic tangent of the inverse of the input.
 //!
 //!   3. Returns \f$I_z \mathrm{acot}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.

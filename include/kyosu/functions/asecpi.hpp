@@ -58,7 +58,7 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if kyosu::complex(z) was entered.
 //!
-//!   2. Returns kyosu::radinpi([kyosu::asec](@ref kyosu::asec)(z))
+//!   2. Returns radinpi([kyosu::asec](@ref kyosu::asec)(z))
 //!
 //!  @groupheader{Example}
 //!
@@ -75,6 +75,6 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto asecpi_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-   return kyosu::radinpi(kyosu::asec(z));
+   returnradinpi(kyosu::asec(z));
   }
 }
