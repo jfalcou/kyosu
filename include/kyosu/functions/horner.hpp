@@ -18,8 +18,7 @@ namespace kyosu
   {
     template<typename ...Zs>
     requires(concepts::cayley_dickson<Zs> || ...)
-      KYOSU_FORCEINLINE constexpr kyosu::as_cayley_dickson_t<Zs...> operator()(Zs...zs) const noexcept
-
+    KYOSU_FORCEINLINE constexpr kyosu::as_cayley_dickson_t<Zs...> operator()(Zs...zs) const noexcept
     { return KYOSU_CALL(zs...); }
 
     template<concepts::real... Vs>
@@ -33,19 +32,20 @@ namespace kyosu
 
     template<typename Z, typename ...Zs>
     requires(concepts::cayley_dickson<Z> || (concepts::cayley_dickson<Zs> || ...))
-      KYOSU_FORCEINLINE constexpr  kyosu::as_cayley_dickson_t<Z, Zs...> operator()(Z z, kumi::tuple<Zs...> tup ) const noexcept
+    KYOSU_FORCEINLINE constexpr  kyosu::as_cayley_dickson_t<Z, Zs...> operator()(Z z, kumi::tuple<Zs...> tup ) const noexcept
     {
       return KYOSU_CALL(z, tup);
     }
 
     template<concepts::real Z, concepts::real ...Zs>
-      KYOSU_FORCEINLINE constexpr  auto  operator()(Z z, kumi::tuple<Zs...> tup ) const noexcept
+    KYOSU_FORCEINLINE constexpr  auto  operator()(Z z, kumi::tuple<Zs...> tup ) const noexcept
     -> decltype(eve::horner(z, tup))
     {
       return eve::horner(z, tup);
     }
+
     KYOSU_CALLABLE_OBJECT(horner_t, horner_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -129,18 +129,18 @@ namespace kyosu::_
     constexpr size_t N = sizeof...(Zs);
 
     if constexpr( N == 0 ) return r_t(0);
-    else if constexpr( N == 1 ) return r_t(z);
+    else if constexpr( N == 1 ) return convert(z,as<r_t>{});
     else
     {
       r_t x = r_t(xx);
       r_t  that(z);
       if constexpr(O::contains(eve::right))
       {
-        ((that = fma(x, that, r_t(zs))), ...);
+        ((that = fma(x, that, convert(zs,as<r_t>{}))), ...);
       }
       else
       {
-        ((that = fma(that, x, r_t(zs))), ...);
+        ((that = fma(that, x, convert(zs,as<r_t>{}))), ...);
       }
       return that;
     }
