@@ -32,7 +32,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var acoth
-//!   @brief Computes the arg hyperbolic cotangent of the argument.
+//!   @brief Computes the inverse  hyperbolic cotangent of the argument.
 //!
 //!   @groupheader{Header file}
 //!

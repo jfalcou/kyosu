@@ -39,8 +39,8 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup constants
 //! @{
-//!   @var mi
-//!   @brief Computes the complex infinite defined as \f$NaN + i\inf\f$ in the chosen type.
+//!   @var cinf
+//!   @brief Computes the complex-infinite defined as \f$\textrm{NaN} + i\, \textrm{inf}\f$ in the chosen type.
 //!
 //!   **Defined in Header**
 //!
@@ -64,11 +64,11 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * always returns a complex scalar value i such that real(i) is NaN and imag(i) is \f$+\inf*\f$.
+//!     * always returns a complex  value such that real(i) is a NaN and imag(i) is \f$+\infty\f$.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/mi.cpp}
+//!  @godbolt{doc/cinf.cpp}
 //======================================================================================================================
   inline constexpr auto cinf = eve::functor<cinf_t>;
 //======================================================================================================================

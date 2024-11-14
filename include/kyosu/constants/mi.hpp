@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * always returns a complex scalar value i such that real(i) is null and imag(i) is -1.
+//!     * always returns a complex scalar value mi such that real(mi) is null and imag(i) is -1.
 //!
 //!  @groupheader{Example}
 //!

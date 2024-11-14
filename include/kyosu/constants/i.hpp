@@ -37,7 +37,7 @@ namespace kyosu
 //! @addtogroup constants
 //! @{
 //!   @var i
-//!   @brief Computes the complex number \f$i$\f$ in the chosen type.
+//!   @brief Computes the complex number \f$i\f$ in the chosen type.
 //!
 //!   **Defined in Header**
 //!

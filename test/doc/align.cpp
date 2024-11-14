@@ -14,7 +14,7 @@ int main()
   std::array<double, 3> v1{ 1.5, 2.0, -3.0};
   norm(v0);
   norm(v1);
-  auto q = kyosu::align(v0, v1);
+  auto q = kyosu::align(std::span(v0), std::span(v1));
   std::cout << " v0                " << v0[0] << ", " << v0[1] << ",  " <<  v0[2] << "\n";
   std::cout << " v1                " << v1[0] << ", " << v1[1] << ",  " <<  v1[2] << "\n";
   std::cout << " q                 " << q << std::endl;
