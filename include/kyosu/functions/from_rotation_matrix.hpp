@@ -16,7 +16,7 @@ namespace kyosu
   {
     template<typename M >
     KYOSU_FORCEINLINE constexpr auto operator()( M const& r) const noexcept
-    -> quaternion_t<decltype(r[0][0])>
+    //  -> quaternion_t<decltype(r[0][0])>
     {
       auto r11pr22 =  r[1][1] + r[2][2];
       auto qq0m1   =  r[0][0] + r11pr22;

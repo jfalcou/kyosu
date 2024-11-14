@@ -64,7 +64,7 @@ namespace kyosu::_
   auto sb_h1n(N n, Z z) noexcept
   {
     using u_t   =  eve::underlying_type_t<Z>;
-    return eve::sign_alternate(u_t(n))*sph_bessel_h2n(n, -z);
+    return eve::sign_alternate(u_t(n))*sb_h2n(n, -z);
   }
 
   template<typename Z> KYOSU_FORCEINLINE

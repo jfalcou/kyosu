@@ -16,8 +16,8 @@ namespace kyosu
   template<typename Options>
   struct to_rotation_matrix_t : eve::elementwise_callable<to_rotation_matrix_t, Options>
   {
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
+    template<concepts::real V, bool normalize>
+    KYOSU_FORCEINLINE constexpr auto operator()(V const& v, _::norming<normalize>) const noexcept
     {
       using m_t = std::array< std::array<V, 3>, 3>;
       return m_t{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
@@ -28,7 +28,7 @@ namespace kyosu
       KYOSU_FORCEINLINE constexpr auto operator()(Z  q, _::norming<normalize>) const noexcept
     {
       if constexpr(normalize) q = sign(q);
-      using e_t = as_real_type_t<Z>; 
+      using e_t = as_real_type_t<Z>;
       using m_t = std::array< std::array<e_t, 3>, 3>;
       if constexpr(kyosu::concepts::complex<Z>)
       {
@@ -74,7 +74,7 @@ namespace kyosu
     KYOSU_CALLABLE_OBJECT(to_rotation_matrix_t, to_rotation_matrix_);
   };
 
- 
+
   //================================================================================================
   //! @addtogroup quaternion
   //! @{

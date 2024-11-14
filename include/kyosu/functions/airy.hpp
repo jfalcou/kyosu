@@ -75,6 +75,6 @@ namespace kyosu::_
     auto [sqzo3, zeta] = zet(z);
     auto ip = cyl_bessel_i(eve::third(as<u_t>()), zeta);
     auto im = cyl_bessel_i(-eve::third(as<u_t>()), zeta);
-    return kumi::tuple{ invpi(as<u_t>())*sqzo3*(im-ip),  sqzo3*(ip+im)};
+    return kumi::tuple{inv_pi(as<u_t>())*sqzo3*(im-ip),  sqzo3*(ip+im)};
   }
 }

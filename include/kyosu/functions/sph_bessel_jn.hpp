@@ -21,8 +21,8 @@ namespace kyosu
       KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1, std::span<Z1, S> js) const noexcept
     { return KYOSU_CALL(z0,z1,js); }
 
-    template<typename Z0, typename Z1>
-    requires(eve::integral_scalar_value<Z0> || concepts::cayley_dickson<Z1>)
+    template<eve::integral_scalar_value Z0, concepts::cayley_dickson Z1>
+    //    requires(eve::integral_scalar_value<Z0> && concepts::cayley_dickson<Z1>)
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const & z1) const noexcept
     { return KYOSU_CALL(z0,z1); }
 

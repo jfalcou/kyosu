@@ -57,13 +57,13 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. A real type input z calls eve::asinh(z); and so returns the same type as input.
+//!   1. A real type input z calls eve::asinh(z) and so returns the same type as input.
 //!
 //!   2. Returns the complex inverse hyperbolic sine of z, with branch cuts outside the interval
 //!      \f$i\times[-\pi/2, \pi/2]\f$ along the imaginary axis.
 //!
-//!      * for every z: kyosu::asinh( [kyosu::conj](@ref kyosu::conj)(z)) == kyosu::conj([kyosu::asinh](@ref kyosu::asinh)(z)
-//!      * for every z: kyosu::asinh(-z) == -[kyosu::asinh](@ref kyosu::asinh)(z)
+//!      * for every z: `asinh(conj(z)) ==conj(asinh(z))`
+//!      * for every z: `asinh(-z) == -asinh(z)`
 //!      * If z is \f$+0\f$, the result is \f$+0\f$
 //!      * If z is \f$x+i \infty\f$ (for any positive finite x), the result is \f$+\infty+i \pi/2\f$
 //!      * If z is \f$x,NaN\f$ (for any finite x), the result is \f$NaN+ iNaN\f$

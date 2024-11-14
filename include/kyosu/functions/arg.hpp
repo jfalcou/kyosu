@@ -52,10 +52,10 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. Returns \f$0\f$ or \f$pi\f$ according to the non negativity of z( arg of minus zero is \f$\pi\f$.
-//!     2. Returns elementwise the argument of the complex number i.e. eve::atan2([kyosu::imag](@ref kyosu::imag )(z), [kyosu::real](@ref kyosu::real )(z)).
-//!     3. Returns \f$\mathrm{atan2}(\mathrm{sign}(z_1)|\underline{z}|, z_0)\f$ where \f$z_0\f$ is the real part of \f$z\f$,  \f$z_1\f$ is the ipart of \f$z\f$ and
-//!         \f$\underline{z}\f$ the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!     1. Returns \f$0\f$ or \f$\pi\f$ according to the non negativity of `z` (arg of minus zero is \f$\pi\f$).
+//!     2. Returns elementwise the argument of the complex number i.e. `eve::atan2[pedantic](imag(z),real(z))`.
+//!     3. Returns \f$\mathrm{atan2}(\mathrm{sign}(z_1)|\underline{z}|, z_0)\f$ where \f$z_0\f$ is the real part of \f$z\f$,  \f$z_1\f$ is the `ipart` of \f$z\f$ and
+//!         \f$\underline{z}\f$ the `pure` part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!

@@ -12,7 +12,7 @@ int main()
 
   std::cout << "Quaternion:  "<< "\n";
   q_t q0(1, 5, 2, 3);
-  auto m = to_rotation_matrix(q0);
+  auto m = to_rotation_matrix(q0, kyosu::normalize);
   std::cout << "q0 =  " << q0 << std::endl;
   std::cout << "to_rotation_matrix(q0) = \n";
   for(int i=0; i <3 ; ++i)

@@ -32,7 +32,7 @@ namespace kyosu::_
     using u_t = eve::underlying_type_t<Z>;
     auto sqz = sqrt(z);
     auto zeta = (pow(z, u_t(1.5))*2)/3;
-    return kumi::tuple{sqz/eve::sqrt_3(as(z)), zeta};
+    return kumi::tuple{sqz/kyosu::sqrt_3(as(z)), zeta};
   }
 
   //===-------------------------------------------------------------------------------------------

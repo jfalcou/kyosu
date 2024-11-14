@@ -58,7 +58,7 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if `complex(z)` was entered.
 //!
-//!   2. Returns elementwise \f$\mathop{\mathrm{acos}}(1/z)\f$.
+//!   2. Returns elementwise `acos(rec(z))`.
 //!
 //!  @groupheader{Example}
 //!

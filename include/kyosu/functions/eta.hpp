@@ -21,7 +21,7 @@ namespace kyosu
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
     { return KYOSU_CALL(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(eta_t, eta_);

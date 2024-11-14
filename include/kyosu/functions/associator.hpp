@@ -55,12 +55,12 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z0`, `z1`, z2`: Values to process. Can be a mix of complex and real floating values and complex values.
+//!     * `z0`, `z1`, z2`: Values to process. (Can be a mix of cayley-dickson and real floating values.
 //!
 //!   **Return value**
 //!
 //!     1.  Returns the difference z0*(z1*z2)-(z0*z1)*z2. (always exactly zero up to quaternion)
-//!     2.  Returns the difference z0*(z1*z2)-(z0*z1)*z2. (up to quaternions, non zero result is merely the floating point associativity default)
+//!     2.  Same,  but always do the computation. (up to quaternions, non zero result is merely the floating point associativity default)
 //!
 //!  @groupheader{Example}
 //!

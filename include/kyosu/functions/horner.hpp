@@ -136,11 +136,11 @@ namespace kyosu::_
       r_t  that(z);
       if constexpr(O::contains(eve::right))
       {
-        ((that = fma(x, that, convert(zs,as<r_t>{}))), ...);
+        ((that = fma(x, that, convert(zs,eve::as_element<r_t>{}))), ...);
       }
       else
       {
-        ((that = fma(that, x, convert(zs,as<r_t>{}))), ...);
+        ((that = fma(that, x, convert(zs,eve::as_element<r_t>{}))), ...);
       }
       return that;
     }

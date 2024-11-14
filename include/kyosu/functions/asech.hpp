@@ -8,7 +8,7 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/acosh.hpp> 
+#include <kyosu/functions/acosh.hpp>
 #include <kyosu/functions/rec.hpp>
 #include <kyosu/functions/to_complex.hpp>
 
@@ -58,7 +58,7 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if `complex(z)` was entered.
 //!
-//!   2. Returns elementwise \f$\mathop{\mathrm{acosh}}(1/z)\f$.
+//!   2. Returns elementwise `acosh(rec(z))`.
 //!
 //!  @groupheader{Example}
 //!

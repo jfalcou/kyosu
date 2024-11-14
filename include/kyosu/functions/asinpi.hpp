@@ -58,7 +58,7 @@ namespace kyosu
 //!
 //!   1. a real input z is treated as if `complex(z)` was entered.
 //!
-//!   2. Returns radinpi([kyosu::asin](@ref kyosu::asin)(z))
+//!   2. Returns `radinpi(asin(z))`
 //!
 //!  @groupheader{Example}
 //!
@@ -75,6 +75,6 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto asinpi_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-   returnradinpi(kyosu::asin(z));
+   return radinpi(kyosu::asin(z));
   }
 }

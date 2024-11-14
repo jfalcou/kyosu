@@ -22,7 +22,7 @@ namespace kyosu
 
     template<eve::integral_scalar_value N, concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(N n, V v) const noexcept
-    { return KYOSU_CALL(n,v); }
+    { return KYOSU_CALL(n,complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(sph_bessel_h1n_t, sph_bessel_h1n_);
 };
