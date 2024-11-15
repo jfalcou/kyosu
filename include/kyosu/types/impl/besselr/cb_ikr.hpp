@@ -130,4 +130,16 @@ namespace kyosu::_
       return cb_ir(mv, z)+kyosu::two_o_pi(as(z))*sinpi(mv)*cb_kr(mv, z);
     }
   }
+
+  //===-------------------------------------------------------------------------------------------
+  //  cb_ik
+  //===-------------------------------------------------------------------------------------------
+  template<eve::floating_scalar_value N, typename Z, typename R1, typename R2> KYOSU_FORCEINLINE
+  auto cb_ik(N v, Z z, R1& is, R2& ks) noexcept
+  {
+    auto in = cb_ir(v, z, is);
+    auto kn = cb_kr(v, z, ks);
+    return kumi::tuple{in, kn};
+  }
+
 }
