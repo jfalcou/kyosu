@@ -144,7 +144,7 @@
 #include <kyosu/functions/radinpi.hpp>
 #include <kyosu/functions/rec.hpp>
 #include <kyosu/functions/reldist.hpp>
-//#include <kyosu/functions/reverse_horner.hpp>
+#include <kyosu/functions/reverse_horner.hpp>
 #include <kyosu/functions/sec.hpp>
 #include <kyosu/functions/secpi.hpp>
 #include <kyosu/functions/sech.hpp>
