@@ -46,7 +46,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto average(auto z0, auto z1) noexcept;
+//!     constexpr auto pow1p(auto z0, auto z1) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -56,7 +56,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!      the call is semantically equivalent to `pow(inc(z))`
+//!      the call is semantically equivalent to `pow(inc(z0), z1)`
 //!
 //!  @groupheader{Example}
 //!

@@ -31,7 +31,7 @@ namespace kyosu
 //! @{
 //!   @var mulmi
 //!   @brief Computes the value of the parameter multiplied by i on the left side.
-//!   For real complex and quaternion the computation is an optimization over the call to * operator.
+//!   For real, complex and quaternion the computation is an optimization over the call to * operator.
 //!
 //!   @groupheader{Header file}
 //!
@@ -55,8 +55,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * Returns -i(as(z))*z; If z is floating point a complex is returned.
-//!       In the other cases the returned value as the same type as the input.
+//!     * Returns `-i(as(z))*z`. If z is floating point a complex is returned,
+//!       in the other cases the returned value has the same type as the input.
 //!
 //!  @groupheader{Example}
 //!

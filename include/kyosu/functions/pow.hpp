@@ -58,7 +58,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto pow(auto z0, auto z1) noexcept;               \\123
+//!     constexpr auto pow(auto z0, auto z1) noexcept;                \\123
 //!     constexpr auto pow(auto z0, eve::integral_value n)  noexcept; \\4
 //!   }
 //!   @endcode
@@ -97,10 +97,10 @@ namespace kyosu
 //!         * except where specified above, if any argument is NaN, NaN is returned
 //!
 //!      3. if any parameter as a dimensionality greater than 2, the call is semantically equivalent
-//!         to `kyosu::exp(z1*eve::log(z0))`
+//!         to `exp(z1*log(z0))`
 //!
 //!      4. pow can accept an integral typed second parameter,  in this case it is the russian peasant algorithm
-//!         that is used.
+//!         that is used (feasible as every monogen ideals are commutative).
 //!
 //!  @groupheader{Example}
 //!

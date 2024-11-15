@@ -59,9 +59,9 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     The value of the sum of the  values of the \f$\l_1\f$ norm of its arguments is returned.
+//!     The value of the sum of the  values (the\f$l_1\f$ norm) of the \f$l_1\f$ norm of its arguments is returned.
 //!
-//!  @note : This is NOT `lpnorm(1, x0, xs...)` which is \f$\l_1\f$ norm of \f$\l_2\f$ norm of its arguments.
+//!  @note This is NOT `lpnorm(1, x0, xs...)` which is the \f$l_1\f$ norm of \f$l_2\f$ norm of its arguments.
 //!
 //!  @groupheader{Example}
 //!
