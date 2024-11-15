@@ -8,11 +8,12 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
+#include <kyosu/functions/cyl_bessel_jy.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct cyl_bessel_h1_t : eve::elementwise_callable<cyl_bessel_h1_t, Options>
+  struct cyl_bessel_h1_t : eve::strict_elementwise_callable<cyl_bessel_h1_t, Options>
   {
     template<concepts::real NU, concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(NU v, Z const& z) const noexcept
@@ -23,7 +24,7 @@ namespace kyosu
     { return KYOSU_CALL(v, complex(z)); }
 
     KYOSU_CALLABLE_OBJECT(cyl_bessel_h1_t, cyl_bessel_h1_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -81,12 +82,13 @@ namespace kyosu
 
 namespace kyosu::_
 {
+
   template<typename NU, typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto cyl_bessel_h1_(KYOSU_DELAY(), O const&, NU v, Z z) noexcept
   {
     if constexpr(concepts::complex<Z> )
     {
-      return cb_jr(v, z)+muli(cb_yr(v, z));//cb_h1r(v, z); //cyl_bessel_j(v, z)+muli(cyl_bessel_y(v, z));
+      return cb_h1r(v, z);
     }
     else
     {

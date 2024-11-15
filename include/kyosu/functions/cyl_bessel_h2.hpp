@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct cyl_bessel_h2_t : eve::elementwise_callable<cyl_bessel_h2_t, Options>
+  struct cyl_bessel_h2_t : eve::strict_elementwise_callable<cyl_bessel_h2_t, Options>
   {
     template<concepts::real NU, concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(NU v, Z const& z) const noexcept
@@ -82,7 +82,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename NU, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h2_(KYOSU_DELAY(), NU v, O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h2_(KYOSU_DELAY(), O const&, NU v, Z z) noexcept
   {
     if constexpr(concepts::complex<Z> )
     {
