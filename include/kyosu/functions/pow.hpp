@@ -96,7 +96,7 @@ namespace kyosu
 //!         * pow(\f$+\infty\f$, y) returns \f$+\infty\f$ for any y greater than 0
 //!         * except where specified above, if any argument is NaN, NaN is returned
 //!
-//!      3. if any parameter as a dimensionnality greater than 2, the call is semantically equivalent
+//!      3. if any parameter as a dimensionality greater than 2, the call is semantically equivalent
 //!         to `kyosu::exp(z1*eve::log(z0))`
 //!
 //!      4. pow can accept an integral typed second parameter,  in this case it is the russian peasant algorithm

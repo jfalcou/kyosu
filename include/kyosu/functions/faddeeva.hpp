@@ -30,7 +30,8 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var faddeeva
-//!   @brief  Callable object computing \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex error func
+//!   @brief  Callable object computing \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex
+//!   complementary  error function.
 //!
 //!   @groupheader{Header file}
 //!
@@ -54,7 +55,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   Returns \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex error function
+//!   Returns \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex complementary error function
 //!
 //!  @groupheader{Example}
 //!
@@ -77,9 +78,9 @@ namespace kyosu::_
       using real_t = eve::element_type_t<v_t>;
       auto const   sqrtpi = eve::sqrt_pi(eve::as<real_t>());
       auto const iosqrtpi = complex(real_t(0), eve::rec(sqrtpi));
-      
+
       auto fexp =  [iosqrtpi, sqrtpi](auto z){//Fourier expansion approximation
-        
+
         constexpr real_t tauM = 12;
         constexpr real_t tauM2= 144;
         constexpr size_t  maxN = 23;
@@ -96,7 +97,7 @@ namespace kyosu::_
           FE += (aN[n-1]*dec(eve::sign_alternate(real_t(n))*z1)/(sqr(n*eve::pi(eve::as(tauM))) - z2));
         return  iosqrtpi*tauM2*z*FE;
       };
-      
+
       auto contfr = [iosqrtpi](auto z){ // the Laplace continued fraction approximation
         constexpr std::array<real_t, 11> bN = {5.5000, 5.0000, 4.5000, 4.0000, 3.5000,
                                                3.0000, 2.5000, 2.0000, 1.5000, 1.0000, 0.5000};
@@ -104,15 +105,15 @@ namespace kyosu::_
         for (int k = 1; k <= 10; ++k)  CF = bN[k]*rec(z - CF);
         return iosqrtpi*rec(z - CF);
       };
-      
+
       auto  small_z= [sqrtpi](auto z){
         auto zP2=sqr(z);
         auto  zP4=sqr(zP2);
         auto  zP6=zP2*zP4;
-        
+
         return (((6 - 6*zP2 + 3*zP4 - zP6)*(15*sqrtpi + complex(real_t(0), real_t(1))*z*(30 + 10*zP2 + 3*zP4)))/(90*sqrtpi));
       };
-      
+
       auto narr_band = [sqrtpi](auto z, auto aN, auto tauM){ // the narrow band
         real_t tauM2 = sqr(tauM);
         constexpr size_t  maxN = 23;
@@ -122,8 +123,8 @@ namespace kyosu::_
         for (size_t n = 1; n <= maxN; ++n) NB += (aN[n-1]*dec(eve::sign_alternate(real_t(n))*z1)/(sqr(n*eve::pi(eve::as(tauM))) - z2));
         return exp(-sqr(z)) - complex(real_t(0), real_t(1))*(dec(z1)/(tauM*z) - tauM2*z/sqrtpi*NB);
       };
-      
-      
+
+
       auto smallim = [narr_band, small_z](auto z){ // approximation at small imag(z)
         constexpr size_t  maxN = 23;
         constexpr std::array<real_t, maxN> aN12 = { //Fourier coefficients
@@ -138,7 +139,7 @@ namespace kyosu::_
           , 8.402542038611651e-05, 1.782626047239582e-05, 3.304894416742214e-06, 5.354300211460283e-07, 7.580461285556943e-08
           , 9.378563805151443e-09, 1.013969351293613e-09, 9.579902872635222e-11, 7.909429715194891e-12, 5.706594634502440e-13
           , 3.597962756907448e-14, 1.982367142666383e-15, 9.544634564831883e-17          };
-        
+
         auto x = real(z);
         auto ind_0 = abs(x)<5e-3;
         auto ind_poles = eve::false_(eve::as(x));
@@ -149,7 +150,7 @@ namespace kyosu::_
                                       )
                       , small_z(z));
       };
-      
+
       auto indneg  = eve::is_ltz(imag(z));
       z = if_else(indneg, conj(z), z);
       auto r = complex(eve::nan(eve::as(real(z))), eve::nan(eve::as(real(z)))); // nan case treated here
@@ -175,6 +176,5 @@ namespace kyosu::_
     {
       return cayley_extend(faddeeva, z);
     }
-  }   
+  }
 }
-

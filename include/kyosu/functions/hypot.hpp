@@ -44,7 +44,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<typename ... Ts> auto hypot(Ts ... zi ) const noexcept
+//!      template<typename ... Ts> auto hypot(Ts ... zi ) const noexcept                //1
+//!      template<typename ... Ts> auto hypot[eve::pedantic](Ts ... zi ) const noexcept //2
 //!   }
 //!   @endcode
 //!
@@ -54,7 +55,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     *  Returns \f$ \sqrt{\sum_{i = 0}^{n-1} |z_i|^2} \f$ where \f$n\f$ is the number of arguments.
+//!     1.  Returns \f$ \sqrt{\sum_{i = 0}^{n-1} |z_i|^2} \f$ where \f$n\f$ is the number of arguments.
+//!     2.  provisions are made to avoid overflow and to return \f$\infty\f$ as soon as a parameter is infinite.
 //!
 //!  @groupheader{Example}
 //!

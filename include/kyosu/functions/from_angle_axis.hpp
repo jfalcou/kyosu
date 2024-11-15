@@ -41,7 +41,7 @@ namespace kyosu
   //! @var from_angle_axis
   //!
   //! @brief Callable object computing an an unitary quaternion from an angle value
-  //! and a 3 dimensionnal axis vector
+  //! and a 3 dimensional axis vector
   //!
   //! @groupheader{Header file}
   //!

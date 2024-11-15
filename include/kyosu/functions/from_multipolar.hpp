@@ -38,7 +38,7 @@ namespace kyosu
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
   //!  from a multipolar representation of an \f$\mathbb{R}^4\f$ element.
   //!
-  //!  from_multipolar  the two \f$\mathbb{C}\f$ components of the quaternion are given in polar coordinates
+  //!  `from_multipolar` takes the two successive \f$\mathbb{C}\f$ components of the quaternion in polar coordinates
   //!
   //! @groupheader{Header file}
   //!

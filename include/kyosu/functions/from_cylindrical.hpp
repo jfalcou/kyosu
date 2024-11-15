@@ -38,7 +38,7 @@ namespace kyosu
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
   //!  from a cylindrical representation of an \f$\mathbb{R}^2\f$ element.
   //!
-  //! from_cylindrical first two inputs are the polar coordinates of the first \f$\mathbb{C}\f$
+  //! `from_cylindrical` first two inputs are the polar coordinates of the first \f$\mathbb{C}\f$
   //! component of the quaternion.
   //! The third and fourth inputs are placed into the third and fourth \f$\mathbb{R}\f$
   //! components of the quaternion, respectively.

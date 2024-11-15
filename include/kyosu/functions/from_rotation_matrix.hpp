@@ -52,7 +52,7 @@ namespace kyosu
   //! @brief Callable object computing a quaternion from its rotation_matrix representation.
   //!
   //!  This function returns a quaternion associated to the input rotation matrix m.
-  //!  If m is not a proper rotation 3x3 rotation matrix (i.e an orthogonal matrix with determinant 1)
+  //!  If m is not a proper 3x3 rotation matrix (i.e an orthogonal matrix with determinant 1)
   //!  the result is undefined.
   //!
   //! @groupheader{Header file}

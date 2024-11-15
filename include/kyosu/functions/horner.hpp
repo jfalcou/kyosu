@@ -54,10 +54,11 @@ namespace kyosu
 //!   @brief Implement the horner scheme to evaluate polynomials
 //!
 //!   If \f$(a_i)_{0\le i\le n-1}\f$ denotes the coefficients of the polynomial by decreasing
-//!   power order,  the Horner scheme evaluates the polynom \f$p\f$ at \f$x\f$ by :
+//!   power order, the Horner scheme evaluates the polynom \f$p\f$ at \f$x\f$ by :
 //!   \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
 //!   For non commutative cases it is a left-horner scheme: coefficients are at the left of the x powers).
-//!   using the right` samantic modifyier allows to use a right-horner scheme: coefficients are at the right of the x powers).
+//!
+//!   using the `right` semantic modifyier allows to use a right-horner scheme: coefficients are at the right of the x powers).
 //!
 //!   @groupheader{Header file}
 //!
@@ -85,9 +86,7 @@ namespace kyosu
 //!!   **Parameters**
 //!
 //!     * `x` :  real or cayley-dickson argument.
-//!
 //!     * `coefs...` :  real or cayley-dickson arguments. The coefficients by decreasing power order
-//!
 //!     * `tup` : kumi tuple containing The coefficients by decreasing power order.
 //!
 //!   **Return value**
@@ -97,10 +96,10 @@ namespace kyosu
 //!       \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
 //!       For non commutative cases it is a left-horner scheme.
 //!    2. Polynom is evaluated at x the other input is a kumi tuple containing the coefficients
-//!    3. the right modifyier is useful only when dealing wirh cayley-dickson non commutative algebras
+//!    3. the `right` modifyier is useful only when dealing wirh cayley-dickson non commutative algebras
 //!       The value of the polynom at  `x` is returned,  according to the formula:
 //!        \f$\displaystyle p(x) = (x (x (x a_0+a_1)+ ... )+a_{n-1})\f$.\n
-//!        Of course for real or complex entries left and right have no specific actions
+//!        Of course for real or complex entries `left` and `right` leads to the same result
 //!
 //!    **Notes**
 //!

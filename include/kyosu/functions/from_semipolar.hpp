@@ -40,11 +40,6 @@ namespace kyosu
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
   //!  from a polar representation of an \f$\mathbb{R}^2\f$ element.
   //!
-  //! from_semipolar first two inputs are the polar coordinates of the first \f$\mathbb{C}\f$
-  //! component of the quaternion.
-  //! The third and fourth inputs are placed into the third and fourth \f$\mathbb{R}\f$
-  //! components of the quaternion, respectively.
-  //!
   //! @groupheader{Header file}
   //!
   //!   @code
@@ -56,13 +51,13 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     auto from_semipolar(auto r, auto angle, auto h1, auto h2) const noexcept;
+  //!     auto from_semipolar(auto rho, auto alpha, auto theta1, auto theta2) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!  * `r`, angle`, `h1`, `h2`
+  //!  * `r`, `alpha`, `theta1`, `theta2`
   //!
   //! **Return value**
   //!
