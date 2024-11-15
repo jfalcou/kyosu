@@ -55,7 +55,8 @@ namespace kyosu
 //!   **Parameters**
 //!
 //!     * `k` : scalar unsigned value,  parameter of the sum.
-//!     * `z` : complex or real value to process.
+//!     * `z` : cayley_dickson or real value to process. ( a real input z is treated
+//!        as if a complex with 0 imaginary part was entered.
 //!
 //! **Return value**
 //!

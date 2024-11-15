@@ -55,7 +55,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     Returns the dot product of z0 and z1: z0*conj(z1).
-//!     Arguments can be a mix of floting or Cayley-Dickson values.
+//!     Arguments can be a mix of floating or Cayley-Dickson values.
 //!
 //!     `dot(z0, z0)` is always semantically equivalent to `sqr_abs(z0)`, but return a caley-dickson.
 //!
