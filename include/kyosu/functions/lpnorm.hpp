@@ -52,7 +52,7 @@ namespace kyosu
 //!   **Parameters**
 //!
 //!     * `p`:   : positive floating ordered value
-//!     * `zs...`: Values to process.
+//!     * `zs...`: real or Cayley-dickson values to process.
 //!
 //!   **Return value**
 //!

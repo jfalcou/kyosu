@@ -33,10 +33,10 @@ namespace kyosu
 //!   @var lambda
 //! @brief Callable object computing The Dirichlet \f$ \displaystyle \lambda(z) = \sum_0^\infty \frac{1}{(2n+1)^z}\f$
 //!
-//! This function can be extended to the whole complex plane as \f$\lambda(z) = \zeta(z)(1-2^{-x})\f$
+//! This function can be extended to the whole complex plane as \f$\lambda(z) = \zeta(z)(1-2^{-z})\f$
 //! (where \f$\zeta\f$ is the Riemann zeta function). It coincides with the serie where the serie converges.
 //! However for `z = 1` the result is \f$\infty\f$.
-//! The usual extension mechanism is used for general Cayley-dickson values.
+//! The usual extension mechanism is used for general Cayley-dickson input values.
 //!
 //!   @groupheader{Header file}
 //!
@@ -56,7 +56,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z` : complex or real value to process.
+//!     * `z` : cayley_dickson or real value to process.
 //!
 //! **Return value**
 //!

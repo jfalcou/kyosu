@@ -33,7 +33,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var lbeta
-//!   @brief Computes the natural logarithm of the lbeta function.
+//!   @brief Computes the natural logarithm of the `beta` function.
 //!
 //!   @groupheader{Header file}
 //!
@@ -56,7 +56,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!    `log(beta(x, y)`.
+//!    `log(beta(x, y))`.
 //!
 //!  @groupheader{Example}
 //!

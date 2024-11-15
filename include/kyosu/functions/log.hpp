@@ -63,21 +63,21 @@ namespace kyosu
 //!
 //!      * The function is continuous onto the branch cut  along the negative real axis,
 //!        taking into account the sign of imaginary part
-//!      * for every z: `kyosu::log(kyosu::conj(z)) == kyosu::conj(kyosu::log(z))`
+//!      * for every z: `log(conj(z)) == :conj(log(z))`
 //!      * If z is \f$-0\f$, the result is \f$-\infty+i \pi \f$
 //!      * If z is \f$+0\f$, the result is \f$-\infty\f$
-//!      * If z is \f$x+i \infty\f$ (for any finite x), the result is \f$+\infty+i \pi/2\f$
-//!      * If z is \f$x+i NaN\f$ (for any finite x), the result is \f$NaN+i NaN\f$
-//!      * If z is \f$-\infty+i y\f$ (for any finite positive y), the result is \f$+\infty+i \pi \f$
-//!      * If z is \f$+\infty+i y\f$ (for any finite positive y), the result is \f$+\infty\f$
-//!      * If z is \f$-\infty+i \infty\f$, the result is \f$+\infty+i 3\pi/4\f$
-//!      * If z is \f$+\infty+i \infty\f$, the result is \f$+\infty+i \pi/4\f$
-//!      * If z is \f$\pm\infty+i NaN\f$, the result is \f$+\infty+i NaN\f$
-//!      * If z is \f$NaN+i y\f$ (for any finite y), the result is \f$NaN+i NaN\f$
-//!      * If z is \f$NaN+i \infty\f$, the result is \f$+\infty+i NaN\f$
-//!      * If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
+//!      * If z is \f$x+i \infty\f$ (for any finite x), the result is \f$\infty+i \pi/2\f$
+//!      * If z is \f$x+i \textrm{NaN}\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
+//!      * If z is \f$-\infty+i y\f$ (for any finite positive y), the result is \f$\infty+i \pi \f$
+//!      * If z is \f$+\infty+i y\f$ (for any finite positive y), the result is \f$\infty\f$
+//!      * If z is \f$-\infty+i \infty\f$, the result is \f$\infty+i 3\pi/4\f$
+//!      * If z is \f$+\infty+i \infty\f$, the result is \f$\infty+i \pi/4\f$
+//!      * If z is \f$\pm\infty+i \textrm{NaN}\f$, the result is \f$\infty+i \textrm{NaN}\f$
+//!      * If z is \f$\textrm{NaN}+i y\f$ (for any finite y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
+//!      * If z is \f$\textrm{NaN}+i \infty\f$, the result is \f$\infty+i \textrm{NaN}\f$
+//!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!
-//!   3. `log(z)` is semantically equivalent to `log(abs(z))+sign(pure(z))*arg(z)`
+//!   3. `log(z)` is semantically equivalent to `log(abs(z)) + sign(pure(z)) * arg(z)`
 //!
 //!  @groupheader{Example}
 //!

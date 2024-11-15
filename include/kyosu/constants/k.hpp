@@ -51,8 +51,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_quaternion_t<underlying_type_t<T>>  k(as<T> z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr as_quaternion_t<underlying_type_t<T>>  k(as<T> z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto k(as<T> z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto k(as<T> z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * always returns a quaternion scalar value `k` such that all parts are null except the `kpart` whose value is one.
+//!     * always returns a quaternion value `k` such that all parts are null except the `kpart` whose value is one.
 //!
 //!  @groupheader{Example}
 //!

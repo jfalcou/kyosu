@@ -45,7 +45,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!   {  Regular call
+//!      Regular call
 //!      constexpr auto is_equal(auto z0, auto z1)          noexcept; //1
 //!
 //!      Semantic modifyier

@@ -53,8 +53,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_quaternion_t<underlying_type_t<T>>  j(as<T> z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr as_quaternion_t<underlying_type_t<T>>  j(as<T> z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> auto j(as<T> z) noexcept;
+//!      template<eve::floating_ordered_value T>     auto j(as<T> z) noexcept;
 //!   }
 //!   @endcode
 //!

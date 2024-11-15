@@ -56,6 +56,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!      \f$\displaystyle \log\left(\frac{\Gamma(a+x)}{\Gamma(a)}\right)\f$ is returned.
+//!      If all iputs are real typed they are reated as complex ones.
 //!
 //!  @groupheader{Example}
 //!
