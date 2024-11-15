@@ -18,14 +18,14 @@ namespace kyosu
   struct reverse_horner_t : eve::strict_elementwise_callable<reverse_horner_t, Options
                                                        , eve::left_option, eve::right_option>
   {
-    template<typename ...Zs>
-    requires(concepts::cayley_dickson<Zs> || ...)
-    KYOSU_FORCEINLINE constexpr kyosu::as_cayley_dickson_t<Zs...> operator()(Zs...zs) const noexcept
-    { return KYOSU_CALL(zs...); }
+    template<typename Z, typename ...Zs>
+    requires(concepts::cayley_dickson<Z> || (concepts::cayley_dickson<Zs> || ...))
+    KYOSU_FORCEINLINE constexpr kyosu::as_cayley_dickson_t<Zs...> operator()(Z z, Zs...zs) const noexcept
+    { return KYOSU_CALL(z, zs...); }
 
-    template<concepts::real... Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(Vs... vs) const noexcept
-    { return eve::reverse_horner(vs...); }
+    template<concepts::real V, concepts::real... Vs>
+    KYOSU_FORCEINLINE constexpr auto operator()(V v, Vs... vs) const noexcept
+    { return eve::reverse_horner(v, vs...); }
 
     template<typename Z, typename ...Zs>
     requires(concepts::cayley_dickson<Z> || (concepts::cayley_dickson<Zs> || ...))
@@ -131,13 +131,13 @@ namespace kyosu::_
     return horner[o](x, kumi::reverse(tup));
   }
 
-  template<typename X, typename Z, typename ... Zs, eve::callable_options O>
+  template<typename X,  typename ... Zs, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto reverse_horner_(KYOSU_DELAY(), O const& o
-                                                  , X xx, Z z, Zs... zs) noexcept
+                                                  , X xx, Zs... zs) noexcept
   {
-    using r_t = kyosu::as_cayley_dickson_t<X, Z, Zs...>;
+    using r_t = kyosu::as_cayley_dickson_t<X, Zs...>;
     auto x = convert(xx, eve::as_element<r_t>());
-    using t_t = kumi::result::generate_t<sizeof...(zs)+1, r_t>;
+    using t_t = kumi::result::generate_t<sizeof...(zs), r_t>;
     t_t tup{convert(zs, eve::as_element<r_t>())...};
     return reverse_horner[o](x, tup);
   }

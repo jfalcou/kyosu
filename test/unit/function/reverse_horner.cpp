@@ -37,37 +37,40 @@ TTS_CASE_WITH ( "Check kyosu::reverse_horner over complex"
   auto c1 = kyosu::complex(r1,i1);
   auto c2 = kyosu::complex(r2,i2);
   auto x  = kyosu::complex(x0, x1);
-// TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, c2, c1, c0), (c0*x+c1)*x+c2, 1e-7);
   kumi::tuple c{c2, c1, c0};
-  std::cout << kyosu::reverse_horner(x, c) << std::endl;
-//  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, c)         , (c0*x+c1)*x+c2, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, c)         , (c0*x+c1)*x+c2, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, c2, c1, c0), (c0*x+c1)*x+c2, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner[eve::right](x, c)         , (c0*x+c1)*x+c2, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner[eve::right](x, c2, c1, c0), (c0*x+c1)*x+c2, 1e-7);
 
 };
 
-// TTS_CASE_WITH ( "Check kyosu::reverse_horner over quaternion"
-//               , kyosu::real_types
-//               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
-//                               , tts::randoms(-10,10), tts::randoms(-10,10)
-//                               , tts::randoms(-10,10), tts::randoms(-10,10)
-//                               , tts::randoms(-10,10), tts::randoms(-10,10)
-//                               , tts::randoms(-10,10), tts::randoms(-10,10)
-//                               , tts::randoms(-10,10), tts::randoms(-10,10)
-//                               , tts::randoms(0, 1), tts::randoms(0, 1)
-//                               , tts::randoms(0, 1), tts::randoms(0, 1)
-//                               )
-//               )
-// <typename T>(T r0, T i0, T j0, T k0
-//             , T r1, T i1, T j1, T k1
-//             , T r2, T i2, T j2, T k2
-//             , T x0, T x1, T x2, T x3 )
-// {
-//   using type = kyosu::quaternion_t<T>;
-//   auto q0 = type(r0,i0,j0,k0);
-//   auto q1 = type(r1,i1,j1,k1);
-//   auto q2 = type(r2,i2,j2,k2);
-//   auto x  = type(x0,x1,x2,x3);
-// //  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, q2, q1, q0),  (q0*x+q1)*x+q2, 1e-7);
-//   kumi::tuple a{q2, q1, q0};
-//   TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, a)         , (q0*x+q1)*x+q2, 1e-7);
+TTS_CASE_WITH ( "Check kyosu::reverse_horner over quaternion"
+              , kyosu::real_types
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(0, 1), tts::randoms(0, 1)
+                              , tts::randoms(0, 1), tts::randoms(0, 1)
+                              )
+              )
+<typename T>(T r0, T i0, T j0, T k0
+            , T r1, T i1, T j1, T k1
+            , T r2, T i2, T j2, T k2
+            , T x0, T x1, T x2, T x3 )
+{
+  using type = kyosu::quaternion_t<T>;
+  auto q0 = type(r0,i0,j0,k0);
+  auto q1 = type(r1,i1,j1,k1);
+  auto q2 = type(r2,i2,j2,k2);
+  auto x  = type(x0,x1,x2,x3);
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, q2, q1, q0),  (q0*x+q1)*x+q2, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner[eve::right](x, q2, q1, q0),  x*(x*q0+q1)+q2, 1e-7);
+  kumi::tuple a{q2, q1, q0};
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, a)         , (q0*x+q1)*x+q2, 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner[eve::right](x, a),  x*(x*q0+q1)+q2, 1e-7);
 
-// };
+};
