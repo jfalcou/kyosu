@@ -46,10 +46,10 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!   {  Regular call
-//!      constexpr auto is_equal(auto z0, auto z1) noexcept;
+//!      constexpr auto is_equal(auto z0, auto z1)          noexcept; //1
 //!
-//!      Semantic modifyer
-//!      constexpr auto is_equal[numeric](auto z0, auto z1) noexcept;
+//!      Semantic modifyier
+//!      constexpr auto is_equal[numeric](auto z0, auto z1) noexcept; //2
 //!   }
 //!   @endcode
 //!
@@ -59,7 +59,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elemtwise true or false according the equality of the parameters
+//!     1. Returns elementwise true or false according the equality of the parameters
+//!     2. NaN values are considered equal
 //!
 //!  @groupheader{Example}
 //!

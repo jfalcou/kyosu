@@ -17,13 +17,13 @@ namespace kyosu
     template<typename T>
     static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
     {
-      if constexpr(concepts::cayley_dickson<T>) return T{0,0,0,1};
-      else                                      return quaternion_t<eve::as_floating_point_t<T>>{0,0,0,1};
+      using e_t =  eve::underlying_type_t<T>;
+      return quaternion(e_t(0),e_t(0),e_t(0),e_t(1));
     }
 
     template<typename T>
-    requires(concepts::cayley_dickson<T> && dimension_v<T> >= 4)
-    KYOSU_FORCEINLINE constexpr T operator()(as<T> const& v) const { return KYOSU_CALL(v); }
+    requires(concepts::cayley_dickson<T>)
+    KYOSU_FORCEINLINE constexpr auto operator()(as<T> const& v) const { return KYOSU_CALL(v); }
 
     template<concepts::real T>
     KYOSU_FORCEINLINE constexpr auto operator()(as<T> const& v) const
@@ -51,8 +51,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_complex_t<underlying_type_t<T>>  k(as<T> z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr as_complex_t<underlying_type_t<T>>  k(as<T> z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr as_quaternion_t<underlying_type_t<T>>  k(as<T> z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr as_quaternion_t<underlying_type_t<T>>  k(as<T> z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * always returns a quaternion scalar value j such that all parts are null except the jpart whose value is one.
+//!     * always returns a quaternion scalar value `k` such that all parts are null except the `kpart` whose value is one.
 //!
 //!  @groupheader{Example}
 //!

@@ -60,7 +60,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   A kyosu::complex value `z` such that kyosu::real(z) is 0 and kyosu::imag(z) is 1.
+//!   A kyosu::complex value `z` such that `real(z)` is 0 and `imag(z)` is 1.
 //!
 //!  @groupheader{Example}
 //!

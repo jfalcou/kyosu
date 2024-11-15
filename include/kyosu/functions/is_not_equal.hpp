@@ -15,7 +15,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct is_not_equal_t : eve::strict_elementwise_callable<is_not_equal_t, Options>
+  struct is_not_equal_t : eve::strict_elementwise_callable<is_not_equal_t, Options, eve::numeric_option>
   {
     template<typename Z0, typename Z1>
     requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
@@ -46,7 +46,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      constexpr auto is_not_equal(auto z0, auto z1) noexcept;
+//!      Regular call
+//!      constexpr auto is_not_equal(auto z0, auto z1)          noexcept; //1
+//!
+//!      Semantic modifyier
+//!      constexpr auto is_not_equal[numeric](auto z0, auto z1) noexcept; //2
 //!   }
 //!   @endcode
 //!
@@ -56,7 +60,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elemtwise true or false according to the inequality of the parameters
+//!     1. Returns elementwise false or true according the equality of the parameters
+//!     2. NaN values are considered equal
 //!
 //!  @groupheader{Example}
 //!

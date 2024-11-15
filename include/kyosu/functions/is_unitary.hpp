@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct is_unitary_t : eve::elementwise_callable<is_unitary_t, Options, eve::raw_option>
+  struct is_unitary_t : eve::elementwise_callable<is_unitary_t, Options, eve::raw_option, eve::pedantic_option>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept { return KYOSU_CALL(z); }
@@ -42,8 +42,13 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
+//!      Regular call
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_unitary(T z) noexcept;
 //!      template<eve::floating_ordered_value T>     constexpr auto is_unitary(T z) noexcept;
+//!
+//!      Semantic modifyier
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_unitary[pedantic](T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto is_unitary[pedantic](T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -53,9 +58,13 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise true if the element is of absolute value one.
+//!     1. Returns elementwise true if the element is of absolute value one (with some ulps laxism).
+//!     2. Insists on the norm being strictly equal to one.
 //!
-//!   @note As for now is_unitary accepts almost equality (will change when decorators will be at hand in kyosu)
+//!  @note normalization of cayley-dickson values is rarely perfect, so by default `is_unitary` tolerate
+//!     that the computed norm is `almost` equal to one. The rationale is that if one normalize a cayley-dickson
+//!     (using for example the `sign` function) he probably intends that `is_unitary`
+//!     has to return true on the result of the normalization.
 //!
 //!  @groupheader{Example}
 //!
@@ -73,7 +82,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto is_unitary_(KYOSU_DELAY(), O const&, Z c) noexcept
   {
     using ar_t = decltype(kyosu::sqr_abs(c));
-    if constexpr(O::contains(eve::raw))
+    if constexpr(O::contains(eve::pedantic))
     {
       return kyosu::sqr_abs(c) == eve::one(eve::as<ar_t>());
     }
