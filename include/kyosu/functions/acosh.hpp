@@ -67,15 +67,15 @@ namespace kyosu
 //!      * for every z: acosh(conj(z)) ==conj(acosh(z))
 //!      * If z is \f$\pm0\f$, the result is \f$+0+i\pi/2\f$
 //!      * If z is \f$x+i\infty\f$ (for any finite x), the result is \f$\infty+i\pi/2\f$
-//!      * If z is \f$x+i NaN\f$ (for any finite non zero x), the result is \f$NaN+iNaN\f$.
-//!      * If z is \f$i NaN\f$  the result is \f$NaN+i\pi/2\f$.
+//!      * If z is \f$x+i \textrm{NaN}\f$ (for any finite non zero x), the result is \f$\textrm{NaN}+i\textrm{NaN}\f$.
+//!      * If z is \f$i \textrm{NaN}\f$  the result is \f$\textrm{NaN}+i\pi/2\f$.
 //!      * If z is \f$-\infty,y\f$ (for any positive finite y), the result is \f$+\infty,\pi\f$
 //!      * If z is \f$+\infty,y\f$ (for any positive finite y), the result is \f$+\infty+i 0\f$
 //!      * If z is \f$-\infty+i \infty\f$, the result is \f$+\infty,3\pi/4\f$
-//!      * If z is \f$\pm\infty+i NaN\f$, the result is \f$+\infty+i NaN\f$
-//!      * If z is \f$NaN,y\f$ (for any finite y), the result is \f$NaN+i NaN\f$.
-//!      * If z is \f$NaN+i \infty\f$, the result is \f$+\infty+i NaN\f$
-//!      * If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
+//!      * If z is \f$\pm\infty+i \textrm{NaN}\f$, the result is \f$+\infty+i \textrm{NaN}\f$
+//!      * If z is \f$\textrm{NaN},y\f$ (for any finite y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+//!      * If z is \f$\textrm{NaN}+i \infty\f$, the result is \f$+\infty+i \textrm{NaN}\f$
+//!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!
 //!   3. Returns \f$\log(z+\sqrt{z+1}\sqrt{z-1})\f$.
 //!

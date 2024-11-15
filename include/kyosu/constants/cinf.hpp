@@ -64,7 +64,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * always returns a complex  value such that real(i) is a NaN and imag(i) is \f$+\infty\f$.
+//!     * always returns a cayley_dickson value such that real(i) is a NaN and imag(i) is \f$+\infty\f$ (the remaining parts being 0).
 //!
 //!  @groupheader{Example}
 //!

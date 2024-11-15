@@ -23,7 +23,7 @@ namespace kyosu
 
     template<concepts::real V0, concepts::real V1>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept ->  decltype(beta(complex(v0),v1))
-    { return beta(complex(v0),v1); }
+    { return beta(complex(v0),complex(v1)); }
 
     KYOSU_CALLABLE_OBJECT(beta_t, beta_);
 };
@@ -56,8 +56,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1.  If x and y are real typed values returns \f$\displaystyle \mathbf{B}(x,y) = \int_0^1 t^{x-1}(1-t)^{y-1}\mbox{d}t\f$
-//!     2.  \f$\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
+//!      \f$\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
+//!     If  `x` and `y` are real typed values they are treated as complex inputs.
 //!
 //!  @groupheader{Example}
 //!

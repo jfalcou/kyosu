@@ -64,25 +64,23 @@ namespace kyosu
 //!   2. Returns elementwise the complex principal value of the arc cosine of the input.
 //!      Branch cuts exist outside the interval \f$[-1, +1]\f$ along the real axis.
 //!
-//!      * for every z: `acos(conj(z) ) == conj(acos(z))`
+//!      * for every z: `acos(conj(z)) == conj(acos(z))`
 //!      * If z is \f$\pm0\f$, the result is \f$\pi/2\f$
-//!      * If z is \f$i NaN\f$, the result is \f$\pi/2+ i NaN\f$
+//!      * If z is \f$i \textrm{\textrm{NaN}}\f$, the result is \f$\pi/2+ i \textrm{\textrm{NaN}}\f$
 //!      * If z is \f$x+i\infty\f$ (for any finite x), the result is \f$\pi/2-i\infty\f$
-//!      * If z is \f$x+i NaN\f$ (for any nonzero finite x), the result is \f$NaN+i NaN\f$.
+//!      * If z is \f$x+i \textrm{\textrm{NaN}}\f$ (for any nonzero finite x), the result is \f$\textrm{\textrm{NaN}}+i \textrm{\textrm{NaN}}\f$.
 //!      * If z is \f$-\infty+i y\f$ (for any positive finite y), the result is \f$\pi-i\infty\f$
 //!      * If z is \f$+\infty+i y\f$ (for any positive finite y), the result is \f$+0-i\infty\f$
 //!      * If z is \f$-\infty+i +\infty\f$, the result is \f$3\pi/4-i\infty\f$
 //!      * If z is \f$\infty+i +\infty\f$, the result is \f$\pi/4-i\infty\f$
-//!      * If z is \f$\pm\infty+i NaN\f$, the result is \f$NaN \pm i\infty\f$ (the sign
+//!      * If z is \f$\pm\infty+i \textrm{\textrm{NaN}}\f$, the result is \f$\textrm{\textrm{NaN}} \pm i\infty\f$ (the sign
 //!        of the imaginary part is unspecified)
-//!      * If z is \f$NaN+i y\f$ (for any finite y), the result is \f$NaN+i NaN\f$
-//!      * If z is \f$NaN+i\infty\f$, the result is \f$NaN-i\infty\f$
-//!      * If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
+//!      * If z is \f$\textrm{\textrm{NaN}}+i y\f$ (for any finite y), the result is \f$\textrm{\textrm{NaN}}+i \textrm{\textrm{NaN}}\f$
+//!      * If z is \f$\textrm{\textrm{NaN}}+i\infty\f$, the result is \f$\textrm{\textrm{NaN}}-i\infty\f$
+//!      * If z is \f$\textrm{\textrm{NaN}}+i \textrm{\textrm{NaN}}\f$, the result is \f$\textrm{\textrm{NaN}}+i \textrm{\textrm{NaN}}\f$
 //!
 //!   3. Returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T cosh(T z) noexcept;
-//!   }
 //!
 //!  @groupheader{Example}
 //!

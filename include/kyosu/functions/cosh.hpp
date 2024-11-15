@@ -57,29 +57,28 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   2. Returns elementwise the complex value
-//!      of the hyperbolic cosine of the input.
+//!     1. returns `eve::cosh(z)`
 //!
-//!      * for every z: `kyosu::cosh(kyosu::conj(z)) == kyosu::conj(std::cosh(z))`
-//!      * for every z: `kyosu::cosh(-z)           == kyosu::cosh(z)`
-//!      *  If z is \f$0\f$, the result is \f$1\f$
-//!      *  If z is \f$i \infty\f$, the result is \f$NaN\f$
-//!      *  If z is \f$i NaN\f$, the result is \f$NaN\f$
-//!      *  If z is \f$x+i \infty\f$ (for any finite non-zero x), the result is \f$NaN+i NaN\f$
-//!      *  If z is \f$x+i NaN\f$ (for any finite non-zero x), the result is \f$NaN+i NaN\f$
-//!      *  If z is \f$\infty+i 0\f$, the result is \f$\infty+i 0\f$
-//!      *  If z is \f$\infty,y\f$ (for any finite non-zero y), the result is \f$\infty e^{iy}\f$
-//!      *  If z is \f$\infty+i \infty\f$, the result is \f$\pm \infty+i NaN\f$  (the sign of the real part is unspecified)
-//!      *  If z is \f$\infty+i NaN\f$, the result is \f$\infty+i NaN\f$
-//!      *  If z is \f$NaN\f$, the result is \f$NaN\f$
-//!      *  If z is \f$NaN+i y\f$ (for any finite non-zero y), the result is \f$NaN+i NaN\f$
-//!      *  If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
+//!     2. Returns elementwise the complex value of the hyperbolic cosine of the input.
 //!
-//!   3. Is semantically equivalent to (exp(z)+exp(-z))/2.
-
+//!        *  for every z: `cosh(conj(z)) == conj(cosh(z))`
+//!        *  for every z: `cosh(-z) == cosh(z)`
+//!        *  If z is \f$0\f$, the result is \f$1\f$
+//!        *  If z is \f$i \infty\f$, the result is \f$\textrm{NaN}\f$
+//!        *  If z is \f$i \textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$
+//!        *  If z is \f$x+i \infty\f$ (for any finite non-zero x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
+//!        *  If z is \f$x+i \textrm{NaN}\f$ (for any finite non-zero x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
+//!        *  If z is \f$\infty+i 0\f$, the result is \f$\infty+i 0\f$
+//!        *  If z is \f$\infty,y\f$ (for any finite non-zero y), the result is \f$\infty e^{iy}\f$
+//!        *  If z is \f$\infty+i \infty\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$  (the sign of the real part is unspecified)
+//!        *  If z is \f$\infty+i \textrm{NaN}\f$, the result is \f$\infty+i \textrm{NaN}\f$
+//!        *  If z is \f$\textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$
+//!        *  If z is \f$\textrm{NaN}+i y\f$ (for any finite non-zero y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
+//!        *  If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
+//!
+//!     3. Is semantically equivalent to `(exp(z)+exp(-z))/2`.
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/cosh.cpp}
 //======================================================================================================================
   inline constexpr auto cosh = eve::functor<cosh_t>;
