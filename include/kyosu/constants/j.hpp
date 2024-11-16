@@ -18,8 +18,8 @@ namespace kyosu
     template<typename T>
     static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
     {
-      using e_t =  eve::underlying_type_t<T>;
-      return quaternion(e_t(0),e_t(0),e_t(1),e_t(0));
+      if constexpr(concepts::cayley_dickson<T> && (dimension_v<T> > 2)) return T{0,0,1,0};
+      else                      return quaternion_t<eve::as_floating_point_t<eve::underlying_type_t<T>>>{0,0,1,0};
     }
 
     template<typename T>
@@ -64,7 +64,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * always returns a quaternion  value `j` such that all parts are null except the `jpart` whose value is one.
+//!     * always returns a cayley-dickson which has dimension at least 4 and  value `j` such
+//!       that all parts are null except the `jpart` whose value is one.
 //!
 //!  @groupheader{Example}
 //!
