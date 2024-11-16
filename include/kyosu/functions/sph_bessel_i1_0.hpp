@@ -30,7 +30,7 @@ namespace kyosu
 //! @{
 //!   @var sph_bessel_i1_0
 //!   @brief Computes  the Bessel function,
-//!   \f$ i_0^{(1)}(z) = j_n(iz)\f$ extended to the complex plane and cayley_dickson algebras.
+//!   \f$ i_0^{(1)}(z) = j_0(iz)\f$ extended to the complex plane and cayley_dickson algebras.
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

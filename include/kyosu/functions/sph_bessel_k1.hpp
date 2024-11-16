@@ -30,7 +30,7 @@ namespace kyosu
 //! @{
 //!   @var sph_bessel_k1
 //!   @brief Computes  the spherical Bessel function of the first kind,
-//!   \f$ k_1(x)= (\pi/2) e^{-z}(1/z+1/z^2)\f$ extended to the complex plane and cayley_dickson algebras.
+//!   \f$ k_1(z)= (\pi/2) e^{-z}(1/z+1/z^2)\f$ extended to the complex plane and cayley_dickson algebras.
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

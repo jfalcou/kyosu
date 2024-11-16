@@ -30,7 +30,7 @@ namespace kyosu
 //! @{
 //!   @var sph_bessel_j0
 //!   @brief Computes  the Bessel function of the first kind,
-//!   \f$ j_0(x)=\sin z/z \f$ extended to the complex plane and cayley_dickson algebras.
+//!   \f$ j_0(z)=\sin z/z \f$ extended to the complex plane and cayley_dickson algebras.
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>

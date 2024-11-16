@@ -58,15 +58,17 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `n`: scalar integral order
+//!     * `n`: scalar integral positive order
 //!     * `z`: Value to process.
-//!     * `js':  span allocated for 'n+1' values of type 'T'
+//!     * `js`:  span of values of type 'T'
 //!
 //!   **Return value**
 //!
-//!     * returns \f$J_n(z)\f$,  and if the 'span' parameter is present it must be sufficient to hold 'n+1' values which are
-//!        \f$(j_0(x), j_1(x), ...,  j_n(x))\f$ if 'n >= 0$ else \f$(j_0(x),j_{-1}(x) ...,  j_{-n}(x)\f$ (for the same computation cost),
-//!        but use is restricted to real or complex entries.
+//!     * returns \f$j_n(z)\f$
+//!
+//!   @note If the 'span' parameter is present it will contains on output values which are
+//!        \f$(j_0(x), j_1(x), ...,  j_m(x))\f$ where m+1 is the minimum between n+1 and size of the span.
+//!        This does not impact the computation cost, but up to now its use is restricted to real or complex entries.
 //!
 //!  @groupheader{Example}
 //!
@@ -97,10 +99,6 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto sph_bessel_jn_(KYOSU_DELAY(), O const&
                                                  , N n, Z z, std::span<Z, S> js) noexcept
   {
-    auto doit = [n, z, &js](auto ys){
-      sb_jyn(n, z, js, ys);
-    };
-    with_alloca<Z>(eve::abs(n)+1, doit);
-    return js[n];
+    return sb_jn(n, z, js);
   }
 }

@@ -55,7 +55,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns simultaneously  the hyperbolic sine and cosine of the argument.
+//!     Returns simultaneously  the hyperbolic [sine](@ref sinh) and [cosine](@ref cosh) of the argument.
 //!
 //!  @groupheader{Example}
 //!

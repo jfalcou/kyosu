@@ -60,7 +60,7 @@ namespace kyosu
 //!
 //!     * `n`: scalar integral order
 //!     * `z`: Value to process.
-//!     * `js':  span allocated for 'n+1' values of type 'T'
+//!     * `js`:  span allocated for 'n+1' values of type 'T'
 //!
 //!   **Return value**
 //!

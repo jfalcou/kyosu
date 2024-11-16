@@ -23,7 +23,6 @@
 #include <kyosu/functions/cyl_bessel_y0.hpp>
 #include <kyosu/functions/cyl_bessel_y1.hpp>
 #include <kyosu/functions/cyl_bessel_yn.hpp>
-#include <kyosu/functions/cyl_bessel_jyn.hpp>
 #include <kyosu/functions/cyl_bessel_h1_0.hpp>
 #include <kyosu/functions/cyl_bessel_h1_1.hpp>
 #include <kyosu/functions/cyl_bessel_h1n.hpp>
@@ -37,7 +36,6 @@
 #include <kyosu/functions/cyl_bessel_k0.hpp>
 #include <kyosu/functions/cyl_bessel_k1.hpp>
 #include <kyosu/functions/cyl_bessel_kn.hpp>
-#include <kyosu/functions/cyl_bessel_ikn.hpp>
 
 #include <kyosu/functions/cyl_bessel_j.hpp>
 #include <kyosu/functions/cyl_bessel_y.hpp>
@@ -55,7 +53,6 @@
 #include <kyosu/functions/sph_bessel_y0.hpp>
 #include <kyosu/functions/sph_bessel_y1.hpp>
 #include <kyosu/functions/sph_bessel_yn.hpp>
-#include <kyosu/functions/sph_bessel_jyn.hpp>
 #include <kyosu/functions/sph_bessel_h1_0.hpp>
 #include <kyosu/functions/sph_bessel_h1_1.hpp>
 #include <kyosu/functions/sph_bessel_h1n.hpp>
@@ -71,4 +68,3 @@
 #include <kyosu/functions/sph_bessel_k0.hpp>
 #include <kyosu/functions/sph_bessel_k1.hpp>
 #include <kyosu/functions/sph_bessel_kn.hpp>
-#include <kyosu/functions/sph_bessel_ikn.hpp>

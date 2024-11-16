@@ -55,7 +55,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns simultaneously  the sine and cosine of the argument.
+//!     Returns simultaneously  the [sine](@ref sin) and [cosine](@ref cos) of the argument.
 //!
 //!  @groupheader{Example}
 //!

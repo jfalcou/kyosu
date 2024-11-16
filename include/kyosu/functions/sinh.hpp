@@ -65,16 +65,16 @@ namespace kyosu
 //!      * for every z: `eve::sinh(kyosu::conj(z)) == kyosu::conj(std::sinh(z))`
 //!      * for every z: `kyosu::sinh(-z)           == -kyosu::sinh(z)`
 //!      * If z is \f$+0\f$, the result is \f$+0\f$
-//!      * If z is \f$i \infty\f$, the result is \f$i NaN\f$ (the sign of the real part is unspecified)
-//!      * If z is \f$i NaN\f$, the result is \f$NaN\f$
-//!      * If z is \f$x+i \infty\f$ (for any positive finite x), the result is \f$NaN+i NaN\f$
-//!      * If z is \f$x+i NaN\f$ (for any positive finite x), the result is \f$NaN+i NaN\f$
+//!      * If z is \f$i \infty\f$, the result is \f$i \textrm{NaN}\f$ (the sign of the real part is unspecified)
+//!      * If z is \f$i \textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$
+//!      * If z is \f$x+i \infty\f$ (for any positive finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
+//!      * If z is \f$x+i \textrm{NaN}\f$ (for any positive finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!      * If z is \f$+\infty\f$, the result is \f$+\infty\f$
 //!      * If z is \f$+\infty+i y\f$ (for any positive finite y), the result is \f$\infty\times e^{iy}\f$
-//!      * If z is \f$+\infty+i \infty\f$, the result is \f$\pm \infty+i NaN\f$ (the sign of the real part is unspecified)
-//!      * If z is \f$+\infty+i NaN\f$, the result is \f$\pm \infty+i NaN\f$ (the sign of the real part is unspecified)
-//!      * If z is \f$NaN\f$, the result is \f$NaN\f$
-//!      * If z is \f$NaN+i y\f$ (for any finite nonzero y), the result is \f$NaN+i NaN\f$
+//!      * If z is \f$+\infty+i \infty\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified)
+//!      * If z is \f$+\infty+i \textrm{NaN}\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified)
+//!      * If z is \f$\textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$
+//!      * If z is \f$\textrm{NaN}+i y\f$ (for any finite nonzero y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!
 //!   3. Is semantically equivalent to (exp(z)-exp(-z))/2.
 //!

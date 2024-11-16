@@ -13,7 +13,6 @@
 #    define HAS_BOOST
 #  endif
 
-#include <boost/math/quaternion.hpp>
 
 TTS_CASE_WITH ( "Check kyosu::sin over real"
               , kyosu::real_types

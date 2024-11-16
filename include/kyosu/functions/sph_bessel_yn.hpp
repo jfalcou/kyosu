@@ -36,8 +36,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var sph_bessel_yn
-//!   @brief Computes the modified Bessel functions of the second kind,
-//!   \f$ Y_n(x)=\lim_{\alpha\to n}{{\frac {J_{\alpha  }(x)\cos(\alpha\pi)-J_{-\alpha }(x)}{\sin(\alpha\pi)}}}\f$,
+//!   @brief Computes the spherical Bessel functions of the second kind,
 //!   extended to the complex plane and cayley_dickson algebras.
 //!
 //!   @code
@@ -60,14 +59,17 @@ namespace kyosu
 //!
 //!     * `n`: scalar integral order
 //!     * `z`: Value to process.
-//!     * `ys': span allocated for 'n+1' values of type 'T'
+//!     * `ys`: span of values of type 'T'
 //!
 //!   **Return value**
 //!
-//!     * returns \f$Y_n(z)\f$,  and if the 'span' parameter is present it must be sufficient to hold 'n+1' values which are
-//!       \f$(y_0(x), y_1(x), ...,  y_n(x))\f$ if 'n >= 0$ else \f$(y_0(x),y_{-1}(x) ...,  y_{-n}(x)\f$ (for the same computation cost),
-//!       but use is restricted to real or complex entries.
-//!//!
+//!     * returns \f$y_n(z)\f$.
+//!
+//!   @note If the 'span' parameter is present it will contains on output values which are
+//!       \f$(y_0(x), y_1(x), ...,  y_m(x))\f$ where m+1 is the minimum between n+1 and size of the span.
+//!        This does not impact the computation cost, but up to now its use is restricted to real or complex entries.
+//!
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sph_bessel_yn.cpp}
@@ -85,11 +87,7 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      auto doit = [n, z](auto js, auto ys){
-       auto [_, yn] =  sb_jyn(n, z, js, ys);
-        return yn;
-      };
-      return with_alloca<Z>(eve::abs(n)+1, doit);
+      return sb_yn(n, z);
     }
     else
     {
@@ -101,10 +99,6 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto sph_bessel_yn_(KYOSU_DELAY(), O const&, N n, Z z
                                                  , std::span<Z, S> ys) noexcept
   {
-    auto doit = [n, z, &ys](auto js){
-      sb_jyn(n, z, js, ys);
-    };
-    with_alloca<Z>(eve::abs(n)+1, doit);
-    return ys[n];
+    return sb_yn(n, z, ys);
   }
 }

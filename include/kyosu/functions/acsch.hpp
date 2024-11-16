@@ -10,7 +10,6 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/asinh.hpp>
 #include <kyosu/functions/rec.hpp>
-#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
@@ -74,6 +73,7 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto acsch_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    return kyosu::asinh(kyosu::rec(z));
+    Z r = kyosu::rec(z);
+    return kyosu::asinh(r);
   }
 }

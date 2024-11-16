@@ -52,19 +52,14 @@ namespace kyosu::_
     return fnma(sh, rz, ch)*rz;
   }
 
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
-  auto sb_i2n(N n, Z z) noexcept
-  {
-    using e_t = as_real_type_t<Z>;
-    return riton<e_t>(n+1)*sb_yn(n,muli(z));
-  }
-
   template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto sb_i2n(N n, Z z, R& sis) noexcept
+  auto sb_i2n(N n, Z z, R& si2s) noexcept
   {
     using e_t = as_real_type_t<Z>;
-    n = eve::min(n+1, N(sis.size()));
-    return riton<e_t>(n+1)*sph_bessel_yn(n,muli(z), sis);
+    auto m = eve::min(n+1, N(si2s.size()));
+    auto r = riton<e_t>(n+1)*sph_bessel_yn(n,muli(z), si2s);
+    for(N i = 0; i < m; ++i) si2s[i] = mulmi(si2s[i]);
+    return r;
   }
 
   template<typename Z> KYOSU_FORCEINLINE
@@ -91,12 +86,23 @@ namespace kyosu::_
     }
   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto sb_i1n(N n, Z z, R & sys) noexcept
+
+  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  auto sb_i2n(N n, Z z) noexcept
   {
-    n = eve::min(n, N(sys.size()));
+    if (n == 0) return sb_i2_0(z);
     using e_t = as_real_type_t<Z>;
-    return riton<e_t>(n)*sb_yn(n,muli(z), sys);
+    return riton<e_t>(n+1)*sb_yn(n,muli(z));
+  }
+
+  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
+  auto sb_i1n(N n, Z z, R & si1s) noexcept
+  {
+    auto m = eve::min(n+1, N(si1s.size()));
+    using e_t = as_real_type_t<Z>;
+    auto r = riton<e_t>(n)*sb_yn(n,muli(z), si1s);
+    for(N i = 1; i < m; ++i) si1s[i] = mulmi(si1s[i]);
+    return r;
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -132,10 +138,9 @@ namespace kyosu::_
   template<typename Z, typename R1,  typename R2> KYOSU_FORCEINLINE
   auto sb_ikn(int n, Z z, R1 & sis, R2& sks) noexcept
   {
-    n = eve::min(n, N(sks.size()),  N(sis.size()));
     sb_i1n(n, z, sis);
     sb_kn(n, z, sks);
-    return kumi::tuple{sis[n], sks[n]};
+    return kumi::tuple{ sb_i1n(n, z, sis),  sb_kn(n, z, sks)};
   }
 
   //===-------------------------------------------------------------------------------------------

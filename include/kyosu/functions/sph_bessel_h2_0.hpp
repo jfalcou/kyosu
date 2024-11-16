@@ -41,8 +41,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sph_bessel_h2_1(int n, T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto sph_bessel_h2_1(int n, T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sph_bessel_h2_0(int n, T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto sph_bessel_h2_0(int n, T z) noexcept;
 //!   }
 //!   @endcode
 //!

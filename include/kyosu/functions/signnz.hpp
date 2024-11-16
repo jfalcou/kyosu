@@ -30,7 +30,8 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var signnz
-//!   @brief Computes tne normalized value z/abs(z) if z is not zero else 0.
+//!   @brief Computes tne normalized value z/abs(z) if z is not zero else the sign of the real part
+//!     as a cayley_dickson.
 //!
 //!   @groupheader{Header file}
 //!
@@ -54,7 +55,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the "signnz" of the argument i.e. its normalized value,  and the sign of t
+//!     Returns the "signnz" of the argument i.e. its normalized value,  and the sign of
 //!     the real part if the input is zero.
 //!
 //!  @groupheader{Example}

@@ -50,26 +50,30 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto sph_bessel_i2n(int n, T z) noexcept;
-//!      template<kyosu::concepts::complex T>        constexpr auto sph_bessel_i2n(int n, T z, std::span<T> js)  noexcept;
+//!      template<kyosu::concepts::complex T>        constexpr auto sph_bessel_i2n(int n, T z, std::span<T> is)  noexcept;
 //!      template<kyosu::concepts::real T>           constexpr T    sph_bessel_i2n(int n, T z) noexcept;
-//!      template<kyosu::concepts::real T>           constexpr T    sph_bessel_i2n(int n, T z, std::span<T> js)) noexcept;
+//!      template<kyosu::concepts::real T>           constexpr T    sph_bessel_i2n(int n, T z, std::span<T> is)) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `n`: scalar integral order
+//!     * `n`: scalar integral positive order
 //!     * `z`: Value to process.
-//!     * `js':  span allocated for 'n+1' values of type 'T'
+//!     * `is`:  span allocated for 'n+1' values of type 'T'
 //!
 //!   **Return value**
 //!
-//!     * returns \f$J_n(z)\f$,  and if the 'span' parameter is present it must be sufficient to hold 'n+1' values which are
-//!        \f$(j_0(x), j_1(x), ...,  j_n(x))\f$ if 'n >= 0$ else \f$(j_0(x),j_{-1}(x) ...,  j_{-n}(x)\f$ (for the same computation cost),
-//!        but use is restricted to real or complex entries.
+//!     * returns \f$J_n(z)\f$
+//!
+//! @warning if the 'span' parameter is present it must be sufficient to hold \f$|n|+1\f$ values which are
+//!   \f$(i^{(2)}_0(x), i^{(2)}_1(x), ...,  i^{(2)}_n(x))\f$  (for the same computation cost),\n
+//!   but the use is then restricted to real or complex entries.\n
+//!   If the span is insufficient to hold
+//!   the \f$ n+1 \f$ values but say only \f$ m \lt n+1 \f$,  the call will silently return
+//!   \f$ i^{(2)}_{m-1}(z) \f$ and is will only contain the \f$ m \f$ first entries.
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/sph_bessel_i2n.cpp}
 //======================================================================================================================
   inline constexpr auto sph_bessel_i2n = eve::functor<sph_bessel_i2n_t>;

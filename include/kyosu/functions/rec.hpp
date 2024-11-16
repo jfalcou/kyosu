@@ -74,6 +74,6 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto rec_(KYOSU_DELAY(), O const&, Z c) noexcept
   {
-    return if_else(is_infinite(c), eve::zero, if_else(is_eqz(c), eve::rec(real(c)), conj(c)/sqr_abs(c)));
+    return if_else(is_infinite(c), eve::zero, if_else(is_eqz(c), Z(eve::rec(real(c))), conj(c)/sqr_abs(c)));
   }
 }
