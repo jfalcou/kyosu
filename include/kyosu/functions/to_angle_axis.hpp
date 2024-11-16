@@ -41,7 +41,7 @@ namespace kyosu
   //!
   //! @brief Callable object computing the angle and axis coordinates from a quaternion.
   //!
-  //!  This function is the reciprocal of from_angle_axis
+  //!  This function is the reciprocal of `from_angle_axis`
   //!
   //! @groupheader{Header file}
   //!

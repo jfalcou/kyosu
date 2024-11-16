@@ -51,7 +51,7 @@ namespace kyosu
   //!
   //! @brief Callable object computing the cylindrospherical coordinates from a quaternion.
   //!
-  //!  This function is the reciprocal of from_cylindrospherical.
+  //!  This function is the reciprocal of `from_cylindrospherical`.
   //!
   //! @groupheader{Header file}
   //!

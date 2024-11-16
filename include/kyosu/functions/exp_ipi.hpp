@@ -84,7 +84,7 @@ namespace kyosu::_
     }
     else
     {
-      const auto ipi = muli(pi(eve::as_element<Z>()));
+      const auto ipi = muli(kyosu::pi(eve::as_element<Z>()));
       return kyosu::exp(ipi*z);
     }
   }

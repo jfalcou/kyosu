@@ -51,11 +51,12 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z`: Value to to_polarrement.
+//!     * `z`: Value to put in polar coordinates.
 //!
 //!   **Return value**
 //!
-//!     Returns  its argument plus 1.
+//!     Returns  The kumi tuple `{rho, theta}`. for real and commplex and `{rho, theta, I}` for other cayley-dickson
+//!     where \f$\textrm{I}\f$ is pure and \f$\textrm{I}^2 = -1 \f$
 //!
 //!  @groupheader{Example}
 //!

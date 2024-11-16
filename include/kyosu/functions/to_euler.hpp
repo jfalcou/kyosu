@@ -135,7 +135,7 @@ namespace kyosu
   //!  are used to choose the euler order.
   //!
   //!  for instance I = 3, J = 2, K = 3 choose the ZYZ sequence.
-  //!  the values of I, J, and K must be in {1, 2, 3} ans satisfy I != J && J != K.
+  //!  the values of I, J, and K must be in {1, 2, 3} and satisfy `I != J && J != K`.
   //!
   //! @groupheader{Header file}
   //!
@@ -157,7 +157,7 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  * `q` the rotation quaternion (not necesseraly normalized)
-  //!  * `a1`, `a2`, `a3`: the axis parameters to be chosen between X_,  Y_, Z_ (two consecutive axis cannot be the same)
+  //!  * `a1`, `a2`, `a3`: the axis parameters to be chosen between X_,  Y_, Z_ (two consecutive axes cannot be the same)
   //!  *                    depending of the euler order
   //!
   //!  **Template parameters**

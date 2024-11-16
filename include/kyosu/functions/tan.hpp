@@ -59,7 +59,7 @@ namespace kyosu
 //!
 //!     2. The behavior of this function is equivalent to \f$-i\tanh(i\; z)\f$.
 //!
-//!     3. Returns \f$-I_z\,; \tanh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\tan(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!     3. Returns \f$-I_z\, \tanh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\tan(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{Example}

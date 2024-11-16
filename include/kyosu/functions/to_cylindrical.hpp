@@ -49,7 +49,7 @@ namespace kyosu
   //!
   //! @brief Callable object computing the cylindrical coordinates to a quaternion.
   //!
-  //!  This function is the reciprocal of from_cylindrical
+  //!  This function is the reciprocal of `from_cylindrical`
   //!
   //! @groupheader{Header file}
   //!

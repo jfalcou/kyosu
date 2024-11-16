@@ -14,10 +14,10 @@
 namespace kyosu
 {
   template<typename Options>
-  struct to_rotation_matrix_t : eve::elementwise_callable<to_rotation_matrix_t, Options>
+  struct to_rotation_matrix_t : eve::elementwise_callable<to_rotation_matrix_t, Options, assume_unitary_option>
   {
     template<concepts::real V, bool normalize>
-    KYOSU_FORCEINLINE constexpr auto operator()(V const& v, _::norming<normalize>) const noexcept
+    KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
     {
       using m_t = std::array< std::array<V, 3>, 3>;
       return m_t{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
@@ -25,9 +25,9 @@ namespace kyosu
 
     template<concepts::cayley_dickson Z, bool normalize>
     requires(dimension_v<Z> <= 4)
-      KYOSU_FORCEINLINE constexpr auto operator()(Z  q, _::norming<normalize>) const noexcept
+      KYOSU_FORCEINLINE constexpr auto operator()(Z  q) const noexcept
     {
-      if constexpr(normalize) q = sign(q);
+      if constexpr(!O::contains(assume_unitary) q = sign(q);
       using e_t = as_real_type_t<Z>;
       using m_t = std::array< std::array<e_t, 3>, 3>;
       if constexpr(kyosu::concepts::complex<Z>)
@@ -82,11 +82,7 @@ namespace kyosu
   //!
   //! @brief Callable object computing a quaternion from its to_rotation_matrix representation.
   //!
-  //!  This function build rotation_matrix angles from a quaternion. Template parameters I, J, K of type int
-  //!  are used to choose the rotation_matrix order.
-  //!
-  //!  for instance I = 3, J = 2, K = 3 choose the ZYZ sequence.
-  //!  the values of I, J, and K must be in {1, 2, 3} ans satisfy I != J && J != K.
+  //!  This function build rotation_matrix angles from a quaternion.
   //!
   //! @groupheader{Header file}
   //!
@@ -100,14 +96,14 @@ namespace kyosu
   //!   namespace eve
   //!   {
   //!       auto to_rotation_matrix(auto q) const noexcept;
-  //!       auto to_rotation_matrix(auto q, assume_normalized) const noexcept;
+  //!       auto to_rotation_matrix[assume_unitary](auto q) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
   //!  * `q`  quaternion representing the rotation
-  //!  * `assume_normalized`: suppose that q is already normalized
+  //!  * `assume_unitary`: assumes that q is already normalized
   //!
   //!
   //!
