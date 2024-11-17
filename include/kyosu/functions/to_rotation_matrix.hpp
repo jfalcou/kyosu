@@ -27,7 +27,7 @@ namespace kyosu
     requires(dimension_v<Z> <= 4)
       KYOSU_FORCEINLINE constexpr auto operator()(Z  q) const noexcept
     {
-      if constexpr(!O::contains(assume_unitary) q = sign(q);
+      if constexpr(!Options::contains(assume_unitary)) q = sign(q);
       using e_t = as_real_type_t<Z>;
       using m_t = std::array< std::array<e_t, 3>, 3>;
       if constexpr(kyosu::concepts::complex<Z>)
