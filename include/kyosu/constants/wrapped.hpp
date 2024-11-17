@@ -27,13 +27,18 @@ namespace kyosu::_
       return  constant_t<Func<decltype(new_traits)>>{new_traits};
     }
 
-    using base_callable::operator();
+    template<concepts::real T>
+    EVE_FORCEINLINE constexpr T operator()(as<T> const& v) const
+    requires( requires(base_callable const& b){ b(v); } )
+    {
+      return base_callable::operator()(v);
+    }
 
     template<concepts::cayley_dickson T>
-    requires( requires(base_callable const& b){ b(as<as_real_type_t<T>>{}); } )
     EVE_FORCEINLINE constexpr T operator()(as<T> const& v) const
+    requires( requires(base_callable const& b){ b(as_real<T>{}); } )
     {
-      return T{base_callable::operator()(as<as_real_type_t<T>>{})};
+      return T{base_callable::operator()(as_real<T>{})};
     }
 
     KYOSU_CALLABLE_OBJECT(constant_t, constant_);
