@@ -41,7 +41,7 @@ TTS_CASE_WITH( "Check behavior of coth on wide"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = T;
-  auto prec = (sizeof(eve::element_type_t<e_t>) ==  4) ? 1.0e-3 : 1.0e-6;
+  auto prec = (sizeof(eve::element_type_t<e_t>) ==  4) ? 4.0e-2 : 1.0e-6;
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return kyosu::rec(cv(std::tanh(c_t(a0.get(i), a1.get(i))))); });

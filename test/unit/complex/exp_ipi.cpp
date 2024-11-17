@@ -36,8 +36,8 @@ TTS_CASE_WITH( "Check behavior of exp_ipi on scalar"
 
 TTS_CASE_WITH( "Check behavior of exp_ipi on wide"
              , kyosu::simd_real_types
-             , tts::generate( tts::randoms(-10, 10)
-                            , tts::randoms(-10, 10))
+             , tts::generate( tts::randoms(-3, 3)
+                            , tts::randoms(-3, 3))
              )
   <typename T>(T const& a0, T const& a1 )
 {

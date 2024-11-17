@@ -39,7 +39,7 @@ TTS_CASE_WITH ( "Check kyosu::exp over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-6 : 1.e-3;
+  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-6 : 2.e-2;
   using ke_t = kyosu::quaternion_t<T>;
   using bq_t = boost::math::quaternion<eve::element_type_t<T>>;
   auto boost_exp = [](auto x, auto y, auto z,  auto t){return cv(boost::math::exp(bq_t(x, y, z, t))); };

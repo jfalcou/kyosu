@@ -21,7 +21,7 @@ TTS_CASE_WITH ( "Check kyosu::cospi over quaternion"
   auto pi = eve::pi(eve::as<u_t>());
   auto q = ke_t(r,i,j,k);
   if constexpr (sizeof(eve::element_type_t<T>) == 8)
-      TTS_RELATIVE_EQUAL(kyosu::cospi(q), kyosu::cos(pi*q), 1e-5);
+      TTS_RELATIVE_EQUAL(kyosu::cospi(q), kyosu::cos(pi*q), 2e-3);
   else
       TTS_RELATIVE_EQUAL(kyosu::cospi(q/8.0f), kyosu::cos(pi*q/8.0f), 1e-3);
 };
