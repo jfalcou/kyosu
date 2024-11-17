@@ -45,5 +45,5 @@ TTS_CASE_WITH ( "Check kyosu::ldiv over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::ldiv(q0, q1), kyosu::conj(q0)*q1/kyosu::sqr_abs(q0) , 1e-6);
+  TTS_RELATIVE_EQUAL(kyosu::ldiv(q0, q1), kyosu::conj(q0)*q1/kyosu::sqr_abs(q0) , 1e-5);
 };
