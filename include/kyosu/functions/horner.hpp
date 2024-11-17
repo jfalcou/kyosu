@@ -18,26 +18,31 @@ namespace kyosu
                                                , eve::left_option, eve::right_option>
   {
     template<typename ...Zs>
-    requires(concepts::cayley_dickson<Zs> || ...)
-    KYOSU_FORCEINLINE constexpr kyosu::as_cayley_dickson_t<Zs...> operator()(Zs...zs) const noexcept
-    { return KYOSU_CALL(zs...); }
+    requires(concepts::cayley_dickson<Zs> || ... )
+    struct result : kyosu::as_cayley_dickson<Zs...>
+    {};
 
-    template<concepts::real... Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(Vs... vs) const noexcept
-    { return eve::horner(vs...); }
+    template<typename Z, typename... Zs>
+    requires(concepts::cayley_dickson<Zs> || ... || concepts::cayley_dickson<Z>)
+    struct result<Z, kumi::tuple<Zs...>> : kyosu::as_cayley_dickson<Z,Zs...>
+    {};
 
-    template<typename Z, typename ...Zs>
-    requires(concepts::cayley_dickson<Z> || (concepts::cayley_dickson<Zs> || ...))
-    KYOSU_FORCEINLINE constexpr  kyosu::as_cayley_dickson_t<Z, Zs...> operator()(Z z, kumi::tuple<Zs...> tup ) const noexcept
+    template<typename... Zs>
+    requires(concepts::cayley_dickson<Zs> || ... )
+    KYOSU_FORCEINLINE constexpr typename result<Zs...>::type operator()(Zs const&... zs ) const noexcept
     {
-      return KYOSU_CALL(z, tup);
+      return KYOSU_CALL(zs...);
     }
 
+    template<concepts::real... Vs>
+    KYOSU_FORCEINLINE constexpr auto operator()(Vs... vs) const noexcept -> decltype(eve::horner(vs...))
+    { return eve::horner(vs...); }
+
     template<concepts::real Z, concepts::real ...Zs>
-    KYOSU_FORCEINLINE constexpr  auto  operator()(Z z, kumi::tuple<Zs...> tup ) const noexcept
-    -> decltype(eve::horner(z, tup))
+    KYOSU_FORCEINLINE constexpr auto operator()(Z z, kumi::tuple<Zs...> const& t ) const noexcept
+                                -> decltype(eve::horner(z,t))
     {
-      return eve::horner(z, tup);
+      return eve::horner(z, t);
     }
 
     KYOSU_CALLABLE_OBJECT(horner_t, horner_);

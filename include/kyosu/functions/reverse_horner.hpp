@@ -18,28 +18,32 @@ namespace kyosu
   struct reverse_horner_t : eve::strict_elementwise_callable<reverse_horner_t, Options
                                                        , eve::left_option, eve::right_option>
   {
-    template<typename Z, typename ...Zs>
-    requires(concepts::cayley_dickson<Z> || (concepts::cayley_dickson<Zs> || ...))
-    KYOSU_FORCEINLINE constexpr kyosu::as_cayley_dickson_t<Zs...> operator()(Z z, Zs...zs) const noexcept
-    { return KYOSU_CALL(z, zs...); }
+    template<typename ...Zs>
+    requires(concepts::cayley_dickson<Zs> || ... )
+    struct result : kyosu::as_cayley_dickson<Zs...>
+    {};
 
-    template<concepts::real V, concepts::real... Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(V v, Vs... vs) const noexcept
-    { return eve::reverse_horner(v, vs...); }
+    template<typename Z, typename... Zs>
+    requires(concepts::cayley_dickson<Zs> || ... || concepts::cayley_dickson<Z>)
+    struct result<Z, kumi::tuple<Zs...>> : kyosu::as_cayley_dickson<Z,Zs...>
+    {};
 
-    template<typename Z, typename ...Zs>
-    requires(concepts::cayley_dickson<Z> || (concepts::cayley_dickson<Zs> || ...))
-    KYOSU_FORCEINLINE constexpr  auto  operator()(Z z, kumi::tuple<Zs...> tup ) const noexcept
-    //    -> kyosu::as_cayley_dickson_t<Z, Zs...>
+    template<typename... Zs>
+    requires(concepts::cayley_dickson<Zs> || ... )
+    KYOSU_FORCEINLINE constexpr typename result<Zs...>::type operator()(Zs const&... zs ) const noexcept
     {
-      return KYOSU_CALL(z, tup);
+      return KYOSU_CALL(zs...);
     }
 
+    template<concepts::real... Vs>
+    KYOSU_FORCEINLINE constexpr auto operator()(Vs... vs) const noexcept -> decltype(eve::reverse_horner(vs...))
+    { return eve::reverse_horner(vs...); }
+
     template<concepts::real Z, concepts::real ...Zs>
-    KYOSU_FORCEINLINE constexpr  auto  operator()(Z z, kumi::tuple<Zs...> tup ) const noexcept
-    -> decltype(eve::reverse_horner(z, tup))
+    KYOSU_FORCEINLINE constexpr auto operator()(Z z, kumi::tuple<Zs...> const& t ) const noexcept
+                                -> decltype(eve::reverse_horner(z,t))
     {
-      return eve::reverse_horner(z, tup);
+      return eve::reverse_horner(z, t);
     }
 
     KYOSU_CALLABLE_OBJECT(reverse_horner_t, reverse_horner_);
