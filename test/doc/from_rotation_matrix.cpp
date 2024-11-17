@@ -14,7 +14,7 @@ int main()
   std::cout << "Quaternion:  "<< "\n";
   q_t q0(1, 5, 2, 3);
   q0 = kyosu::sign(q0); //normalization is optional
-  auto m = to_rotation_matrix(q0, kyosu::normalize);
+  auto m = to_rotation_matrix(q0);
   std::cout << "q0 =  " << q0 << std::endl;
   std::cout << "m = to_rotation_matrix(q0) = \n";
   for(int i=0; i <3 ; ++i)

@@ -16,16 +16,16 @@ namespace kyosu
   template<typename Options>
   struct to_rotation_matrix_t : eve::elementwise_callable<to_rotation_matrix_t, Options, assume_unitary_option>
   {
-    template<concepts::real V, bool normalize>
-    KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr auto operator()(V const&) const noexcept
     {
       using m_t = std::array< std::array<V, 3>, 3>;
       return m_t{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
     }
 
-    template<concepts::cayley_dickson Z, bool normalize>
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr auto operator()(Z  q) const noexcept
     requires(dimension_v<Z> <= 4)
-      KYOSU_FORCEINLINE constexpr auto operator()(Z  q) const noexcept
     {
       if constexpr(!Options::contains(assume_unitary)) q = sign(q);
       using e_t = as_real_type_t<Z>;
