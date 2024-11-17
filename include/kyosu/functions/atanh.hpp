@@ -78,8 +78,13 @@ namespace kyosu
 //!
 //!   3. Returns \f$(\log(1+z)-\log(1-z))/2\f$.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: atanh](https://en.cppreference.com/w/cpp/numeric/complex/atanh)
+//!   *  [Wolfram MathWorld: Inverse Hyperbolic Tangent](https://mathworld.wolfram.com/InverseHyperbolicTangent.html)
+//!   *  [Wikipedia: Inverse hyperbolic functions](https://en.wikipedia.org/wiki/Inverse_hyperbolic_functions)
+//!   *  [DLMF: Inverse hyperbolic functions](https://dlmf.nist.gov/4.37)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/atanh.cpp}
 //======================================================================================================================
   inline constexpr auto atanh = eve::functor<atanh_t>;

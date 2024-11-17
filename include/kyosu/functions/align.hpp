@@ -37,7 +37,7 @@ namespace kyosu
 
     KYOSU_CALLABLE_OBJECT(align_t, align_);
   };
-
+  // TO BE DECORATED
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -56,7 +56,8 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     auto align(auto v1, auto v2, auto norming) const noexcept;
+  //!     auto align(auto v1, auto v2)                 const noexcept;
+  //!     auto align[assume_unitary](auto v1, auto v2) const noexcept;
   //!   }
   //!   @endcode
   //!
@@ -64,13 +65,14 @@ namespace kyosu
   //!
   //!  * `v0`:  span of 3 elements
   //!  * `v1`:  span of 3 elements
-  //!  * norming: can be assume_normalized or normalize. In the second case axis is normalized.
-  //!                if axis is already normalized use of assume_normalized is more efficient.
   //!
-  //! **Return value**
+   //! **Return value**
   //!
-  //!   An unitary quaternion value representing a rotation that align v0 to v1.
-  //!   If v0 or v1 is a nullvector  the result is UB
+  //!   An unitary quaternion value representing a rotation that align `v0` to `v1`.
+  //!   If `v0` or `v01` is a nullvector  the result is one as a quaternion.
+  //!
+  //!  @note  by default  `v0` and  `v1` are not assumed unitary (vectors of norm 1). If it is the case
+  //!             the decorator `assume_unitary` can be used.
   //!
   //!  @groupheader{Example}
   //!  @godbolt{doc/align.cpp}

@@ -65,8 +65,13 @@ namespace kyosu
 //!   3. Returns \f$-I_z \mathrm{asinh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: complex acos](https://en.cppreference.com/w/cpp/numeric/complex/asin)
+//!   *  [Wolfram MathWorld: InverseSine](https://mathworld.wolfram.com/InverseSine.html)
+//!   *  [Wikipedia:Inverse trigonometric functions ](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions)
+//!   *  [DLMF:Inverse trigonometric functions](https://dlmf.nist.gov/4.23)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/asin.cpp}
 //======================================================================================================================
   inline constexpr auto asin = eve::functor<asin_t>;

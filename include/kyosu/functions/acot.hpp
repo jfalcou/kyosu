@@ -65,8 +65,12 @@ namespace kyosu
 //!   3. Returns \f$I_z \mathrm{acoth}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref pure)  part of \f$z\f$.
 //!
-//!  @groupheader{Example}
 //!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Inverse Cotangent](https://mathworld.wolfram.com/InverseCotangent.html)
+//!   *  [DLMF: Inverse trigonometric functions](https://dlmf.nist.gov/4.23)
+//!
+//!  @groupheader{Example}
 //!  @godbolt{doc/acot.cpp}
 //======================================================================================================================
   inline constexpr auto acot = eve::functor<acot_t>;

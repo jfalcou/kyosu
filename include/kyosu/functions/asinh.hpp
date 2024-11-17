@@ -65,20 +65,25 @@ namespace kyosu
 //!      * for every z: `asinh(conj(z)) ==conj(asinh(z))`
 //!      * for every z: `asinh(-z) == -asinh(z)`
 //!      * If z is \f$+0\f$, the result is \f$+0\f$
-//!      * If z is \f$x+i \infty\f$ (for any positive finite x), the result is \f$+\infty+i \pi/2\f$
-//!      * If z is \f$x,NaN\f$ (for any finite x), the result is \f$NaN+ iNaN\f$
-//!      * If z is \f$+\infty+ iy\f$ (for any positive finite y), the result is \f$+\infty+i 0\f$
-//!      * If z is \f$+\infty+i \infty\f$, the result is \f$+\infty+ i\pi/4\f$
-//!      * If z is \f$+\infty+ iNaN\f$, the result is \f$+\infty+ iNaN\f$
-//!      * If z is \f$NaN+i 0\f$, the result is \f$NaN+i 0\f$
-//!      * If z is \f$NaN+ iy\f$ (for any finite nonzero y), the result is \f$NaN+ iNaN\f$
-//!      * If z is \f$NaN+i \infty\f$, the result is \f$\pm \infty+ iNaN\f$ (the sign of the real part is unspecified)
-//!      * If z is \f$NaN+ iNaN\f$, the result is \f$NaN+ iNaN\f$
+//!      * If z is \f$x+i \infty\f$ (for any positive finite x), the result is \f$\infty+i \pi/2\f$
+//!      * If z is \f$x, \textrm{NaN}\f$ (for any finite x), the result is \f$ \textrm{NaN}+ i \textrm{NaN}\f$
+//!      * If z is \f$\infty+ iy\f$ (for any positive finite y), the result is \f$\infty+i 0\f$
+//!      * If z is \f$\infty+i \infty\f$, the result is \f$\infty+ i\pi/4\f$
+//!      * If z is \f$\infty+ i \textrm{NaN}\f$, the result is \f$\infty+ i \textrm{NaN}\f$
+//!      * If z is \f$ \textrm{NaN}+i 0\f$, the result is \f$ \textrm{NaN}+i 0\f$
+//!      * If z is \f$ \textrm{NaN}+ iy\f$ (for any finite nonzero y), the result is \f$ \textrm{NaN}+ i \textrm{NaN}\f$
+//!      * If z is \f$ \textrm{NaN}+i \infty\f$, the result is \f$\pm \infty+ i \textrm{NaN}\f$ (the sign of the real part is unspecified)
+//!      * If z is \f$ \textrm{NaN}+ i \textrm{NaN}\f$, the result is \f$ \textrm{NaN}+ i \textrm{NaN}\f$
 //!
 //!   3. Returns \f$\log(z+\sqrt{1+z^2})\f$.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: asinh](https://en.cppreference.com/w/cpp/numeric/complex/asinh)
+//!   *  [Wolfram MathWorld: Inverse Hyperbolic Sine](https://mathworld.wolfram.com/InverseHyperbolicSine.html)
+//!   *  [Wikipedia: Inverse hyperbolic functions](https://en.wikipedia.org/wiki/Inverse_hyperbolic_functions)
+//!   *  [DLMF: Inverse hyperbolic functions](https://dlmf.nist.gov/4.37)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/asinh.cpp}
 //======================================================================================================================
   inline constexpr auto asinh = eve::functor<asinh_t>;

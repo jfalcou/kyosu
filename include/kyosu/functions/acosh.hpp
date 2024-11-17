@@ -79,8 +79,13 @@ namespace kyosu
 //!
 //!   3. Returns \f$\log(z+\sqrt{z+1}\sqrt{z-1})\f$.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: complex acosh](https://en.cppreference.com/w/cpp/numeric/complex/acosh)
+//!   *  [Wolfram MathWorld: Inverse Hyperbolic Cosine](https://mathworld.wolfram.com/InverseHyperbolicCosine.html)
+//!   *  [Wikipedia: Inverse hyperbolic functions](https://en.wikipedia.org/wiki/Inverse_hyperbolic_functions)
+//!   *  [DLMF: Inverse Hyperbolic functions](https://dlmf.nist.gov/4.37)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/acosh.cpp}
 //======================================================================================================================
   inline constexpr auto acosh = eve::functor<acosh_t>;

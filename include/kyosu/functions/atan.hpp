@@ -66,6 +66,12 @@ namespace kyosu
 //!   3. Returns \f$ -I_z \mathrm{atanh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: atan](https://en.cppreference.com/w/cpp/numeric/complex/atan)
+//!   *  [Wolfram MathWorld: Inverse Tangent](https://mathworld.wolfram.com/InverseTangent.html)
+//!   *  [Wikipedia: Inverse trigonometric functions](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions)
+//!   *  [DLMF: Inverse trigonometric functions](https://dlmf.nist.gov/4.23)
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/atan.cpp}

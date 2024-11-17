@@ -57,11 +57,14 @@ namespace kyosu
 //! **Return value**
 //!
 //!   1. a real input z is treated as if `complex(z)` was entered.
-//!
 //!   2. Returns elementwise `acosh(rec(z))`.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Inverse Hyperbolic Secant](https://mathworld.wolfram.com/InverseHyperbolicSecant.html)
+//!   *  [Wikipedia: Inverse hyperbolic functions](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions)
+//!   *  [DLMF: Inverse hyperbolic function](https://dlmf.nist.gov/4.37)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/asech.cpp}
 //======================================================================================================================
   inline constexpr auto asech = eve::functor<asech_t>;

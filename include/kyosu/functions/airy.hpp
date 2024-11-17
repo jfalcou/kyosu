@@ -57,6 +57,11 @@ namespace kyosu
 //!
 //!     * returns  a kumi pair containing \f$ Ai(z) \f$ and \f$ Bi(z) \f$.
 //!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Airy Functions](https://mathworld.wolfram.com/AiryFunctions.html)
+//!   *  [Wikipedia: Airy function](https://en.wikipedia.org/wiki/Airy_function)
+//!   *  [DLMF: Airy and Related Functions](https://dlmf.nist.gov/9)
+//!
 //!  @groupheader{Example}
 //!  @godbolt{doc/airy.cpp}
 //======================================================================================================================

@@ -65,8 +65,12 @@ namespace kyosu
 //!   3. Returns \f$I_z \mathrm{acot}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Inverse Hyperbolic Cotangent](https://mathworld.wolfram.com/InverseHyperbolicCotangent.html)
+//!   *  [Wikipedia: Inverse hyperbolic functions](https://en.wikipedia.org/wiki/Inverse_hyperbolic_functions)
+//!   *  [DLMF: Inverse hyperbolic functions](https://dlmf.nist.gov/4.37)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/acoth.cpp}
 //======================================================================================================================
   inline constexpr auto acoth = eve::functor<acoth_t>;

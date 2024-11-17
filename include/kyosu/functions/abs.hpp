@@ -61,7 +61,6 @@ namespace kyosu
 //!    2. With the raw option no provision is made to enhance accuracy and avoid overflows
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/abs.cpp}
 //======================================================================================================================
   inline constexpr auto abs = eve::functor<abs_t>;
@@ -77,7 +76,7 @@ namespace kyosu::_
   {
     if constexpr(concepts::cayley_dickson<Z>){
       if constexpr(O::contains(eve::raw))
-        return eve::hypot(v); 
+        return eve::hypot(v);
       else
         return eve::hypot[eve::pedantic](v);
     }

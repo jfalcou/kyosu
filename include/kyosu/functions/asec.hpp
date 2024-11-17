@@ -57,11 +57,14 @@ namespace kyosu
 //! **Return value**
 //!
 //!   1. a real input z is treated as if `complex(z)` was entered.
-//!
 //!   2. Returns elementwise `acos(rec(z))`.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Inverse Secant](https://mathworld.wolfram.com/InverseSecant.html)
+//!   *  [Wikipedia: Inverse trigonometric functions](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions)
+//!   *  [DLMF: Inverse trigonometric functions](https://dlmf.nist.gov/4.23)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/asec.cpp}
 //======================================================================================================================
   inline constexpr auto asec = eve::functor<asec_t>;

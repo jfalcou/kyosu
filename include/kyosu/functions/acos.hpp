@@ -82,6 +82,11 @@ namespace kyosu
 //!   3. Returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: complex acos](https://en.cppreference.com/w/cpp/numeric/complex/acos)
+//!   *  [Wolfram MathWorld: Inverse Cosine](https://mathworld.wolfram.com/InverseCosine.html)
+//!   *  [Wikipedia: Arc cosinus](https://fr.wikipedia.org/wiki/Arc_cosinus)
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/acos.cpp}
