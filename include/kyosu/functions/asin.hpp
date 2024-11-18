@@ -8,7 +8,6 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <iostream>
 
 namespace kyosu
 {
@@ -123,9 +122,7 @@ namespace kyosu::_
       rtype tr = eve::sqrt(eve::sqr(xp1) + yy);//hypot for pedantic ?
       rtype ts = eve::sqrt(eve::sqr(xm1) + yy);//hypot for pedantic ?
       rtype a = eve::average(tr, ts);
-      rtype b = eve::clamp(x/a, eve::mone(as(b)), eve::one(as(b)));
-      std::cout << "a" << a << std::endl;
-      std::cout << "b" << b << std::endl;
+      rtype b = eve::if_else(eve::is_nan(a), eve::allbits, eve::clamp(x/a, eve::mone(as(b)), eve::one(as(b))));
       //compute r for b >  b_crossover
       rtype apx = a + x;
       r = eve::if_else(lexone,
@@ -143,13 +140,10 @@ namespace kyosu::_
                         eve::log1p(am1 + eve::sqrt(am1*(eve::inc(a)))),
                         eve::log(a + eve::sqrt(eve::dec(eve::sqr(a))))
                        );
-      std::cout << "i" << i << " --- " << std::defaultfloat << i<< std::endl;
-      std::cout << "r" << r << std::endl;
       // i is computed
       //compute for exception zone
       if (eve::any(not_in_safe_zone))
       {
-        std::cout << "not safe" << std::endl;
         auto zone1 =  (y <= eve::eps(eve::as(a0r))*eve::abs(xm1));
         if (eve::any(eve::logical_and(zone1, not_in_safe_zone)))
         {
@@ -195,7 +189,6 @@ namespace kyosu::_
       }
       if (eve::any(is_not_finite(a0)))
       {
-        std::cout << "not finite" << std::endl;
         auto nanx = eve::is_nan(x);
         auto nany = eve::is_nan(y);
         auto infx = (x == eve::inf(eve::as(a0r))) ;
