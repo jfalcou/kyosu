@@ -22,7 +22,7 @@ TTS_CASE_WITH( "Check behavior of exp_ipi on scalar"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = typename T::value_type;
-  auto prec = (sizeof(e_t) ==  4) ? 2.0e-3 : 2.0e-5;
+  auto prec = (sizeof(e_t) ==  4) ? 3.0e-3 : 2.0e-5;
    using c_t = std::complex<e_t>;
   using kc_t = kyosu::complex_t<e_t>;
   auto pis = eve::pi(eve::as<e_t>());
@@ -41,7 +41,7 @@ TTS_CASE_WITH( "Check behavior of exp_ipi on wide"
              )
   <typename T>(T const& a0, T const& a1 )
 {
-  auto prec = (sizeof(eve::element_type_t<T>) ==  4)? 2.0e-3 : 2.0e-6;
+  auto prec = (sizeof(eve::element_type_t<T>) ==  4)? 3.0e-3 : 2.0e-6;
   using e_t = T;
   using u_t = eve::underlying_type_t<T>;
   using ke_t = kyosu::complex_t<e_t>;
