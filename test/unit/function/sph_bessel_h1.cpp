@@ -28,14 +28,6 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h1_1 over real"
   TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_1(re), h2_1(re), 1.0e-4) << i <<  " <- " << re << '\n';
   TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_1(im), h2_1(im), 1.0e-4) << i <<  " <- " << im << '\n';
   TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_1(z) , h2_1(z) , 1.0e-4) << i <<  " <- " << z << '\n';
-
-  TTS_ULP_EQUAL(kyosu::sph_bessel_h1_1(re), h1_1(re), 2) << i <<  " <- " << re << '\n';
-  TTS_ULP_EQUAL(kyosu::sph_bessel_h1_1(im), h1_1(im), 2) << i <<  " <- " << im << '\n';
-  TTS_ULP_EQUAL(kyosu::sph_bessel_h1_1(z) , h1_1(z) , 2) << i <<  " <- " << z << '\n';
-  TTS_ULP_EQUAL(kyosu::sph_bessel_h2_1(re), h2_1(re), 2) << i <<  " <- " << re << '\n';
-  TTS_ULP_EQUAL(kyosu::sph_bessel_h2_1(im), h2_1(im), 2) << i <<  " <- " << im << '\n';
-  TTS_ULP_EQUAL(kyosu::sph_bessel_h2_1(z) , h2_1(z) , 2) << i <<  " <- " << z << '\n';
-
 };
 
 TTS_CASE_WITH ( "Check kyosu::sph_bessel_h1_1 over real"

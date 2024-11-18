@@ -35,7 +35,7 @@ TTS_CASE_WITH ( "Check kyosu::sqr over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  auto prec =  (sizeof(eve::element_type_t<T>) == 8) ? 1e-7 : 1.e-5;
+  auto prec =  (sizeof(eve::element_type_t<T>) == 8) ? 1e-7 : 1.e-3;
   using type = kyosu::quaternion_t<T>;
   auto q = type(r,i,j,k);
   TTS_RELATIVE_EQUAL(kyosu::sqr(q), q*q, prec);

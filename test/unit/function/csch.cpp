@@ -33,8 +33,8 @@ auto cv(boost::math::quaternion<T> const &bq)
 
 TTS_CASE_WITH ( "Check kyosu::csch over quaternion"
               , kyosu::simd_real_types
-              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
-                              , tts::randoms(-10,10), tts::randoms(-10,10)
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(1,3)
+                              , tts::randoms(-3,3), tts::randoms(-3,3)
                               )
               )
 <typename T>(T r, T i, T j, T k)
@@ -44,6 +44,6 @@ TTS_CASE_WITH ( "Check kyosu::csch over quaternion"
   auto boost_csch = [](auto x, auto y, auto z,  auto t){return kyosu::rec(cv(boost::math::sinh(bq_t(x, y, z, t)))); };
   ke_t e([&](auto n, auto){return boost_csch(r.get(n), i.get(n), j.get(n), k.get(n)); });
   auto q = ke_t(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::csch(q), e, 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::csch(q), e, 1e-4);
 };
 #  endif

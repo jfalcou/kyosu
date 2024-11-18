@@ -105,7 +105,6 @@ TTS_CASE_TPL( "Check asinh lilits", kyosu::real_types)
 
   for(int i=9; i < 10; ++i)
   {
-    std::cout << "i " << i << std::endl;
     TTS_IEEE_EQUAL(kyosu::asinh(inputs[i]), expected[i]);
     TTS_IEEE_EQUAL(kyosu::asinh(-inputs[i]), -kyosu::asinh(inputs[i]));
     TTS_IEEE_EQUAL(kyosu::asinh(kyosu::conj(inputs[i])), kyosu::conj(expected[i]));
