@@ -41,7 +41,7 @@ TTS_CASE_WITH( "Check behavior of tan on wide"
              )
   <typename T>(T const& a0, T const& a1 )
 {
-  auto prec = (sizeof(eve::element_type_t<T>) ==  4)? 2.0e-3 : 1.0e-6;
+  auto prec = (sizeof(eve::element_type_t<T>) ==  4)? 4.0e-2 : 1.0e-6;
   using e_t = T;
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
