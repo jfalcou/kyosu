@@ -19,7 +19,7 @@ TTS_CASE_WITH ( "Check kyosu::horner over real"
   (auto r0, auto r1, auto r2, auto x)
 {
   kumi::tuple a{r0, r1, r2};
-  auto prec = sizeof(eve::element_type_t<decltype(r0)> == 8 ?  1e-7 : 1.e-3;
+  auto prec = sizeof(eve::element_type_t<decltype(r0)>) == 8 ?  1e-7 : 1.e-3;
   TTS_RELATIVE_EQUAL(kyosu::horner(x, r0, r1, r2), (r0*x+r1)*x+r2, 1e-7);
   TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0, r1, r2), (r0*x+r1)*x+r2, prec);
   TTS_RELATIVE_EQUAL(kyosu::horner(x, a)         , (r0*x+r1)*x+r2, prec);
