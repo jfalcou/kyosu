@@ -15,6 +15,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h1_0 over real"
               )
 <typename T>(T a0, T a1)
 {
+  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-4 : 1.e-3;
   using u_t = eve::underlying_type_t<T>;
   auto i = kyosu::complex(u_t(0), u_t(1));
   auto h1_0 = [i](auto z){ return kyosu::sph_bessel_j0(z)+i*kyosu::sph_bessel_y0(z) ; };

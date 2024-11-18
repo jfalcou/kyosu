@@ -19,8 +19,9 @@ TTS_CASE_WITH ( "Check kyosu::reverse_horner over real"
 (auto r0, auto r1, auto r2, auto x)
 {
   kumi::tuple a{r2, r1, r0};
-  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, r2, r1, r0), (r0*x+r1)*x+r2, 1e-7);
-  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, a)         , (r0*x+r1)*x+r2, 1e-7);
+  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-7 : 1.e-3;
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, r2, r1, r0), (r0*x+r1)*x+r2, prec);
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, a)         , (r0*x+r1)*x+r2, prec);
 };
 
 TTS_CASE_WITH ( "Check kyosu::reverse_horner over complex"

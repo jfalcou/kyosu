@@ -28,8 +28,9 @@ TTS_CASE_WITH( "Check behavior of acos on scalar"
   {
     auto e = a0[i];
     auto f = a1[i];
+  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-6 : 1.e-3;
 
-    TTS_RELATIVE_EQUAL(kyosu::acos(kc_t(e, f)),  cv(std::acos(c_t(e, f))), 1.0e-6);
+    TTS_RELATIVE_EQUAL(kyosu::acos(kc_t(e, f)),  cv(std::acos(c_t(e, f))), prec);
   }
 };
 

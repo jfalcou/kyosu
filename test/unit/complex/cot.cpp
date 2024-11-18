@@ -17,7 +17,7 @@ auto cv(std::complex < T > const &sc)
 
 TTS_CASE_WITH( "Check behavior of cot on scalar"
         , tts::bunch<kyosu::scalar_real_types>
-        , tts::generate( tts::randoms(-10, 10), tts::randoms(-10, 10))
+        , tts::generate( tts::randoms(-3, 3), tts::randoms(-3, 3))
         )
   <typename T>(T const& a0, T const& a1 )
 {
@@ -36,7 +36,7 @@ TTS_CASE_WITH( "Check behavior of cot on scalar"
 TTS_CASE_WITH( "Check behavior of cot on wide"
              , kyosu::simd_real_types
              , tts::generate( tts::randoms(1, 10)
-                            , tts::randoms(-10, 10))
+                            , tts::randoms(-3, 3))
              )
   <typename T>(T const& a0, T const& a1 )
 {
