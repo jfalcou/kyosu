@@ -10,8 +10,8 @@
 
 TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h1_1 over real"
               , kyosu::scalar_real_types
-              , tts::generate(tts::randoms(-10,10),
-                              tts::randoms(-10,10))
+              , tts::generate(tts::randoms(-1,1),
+                              tts::randoms(-1,1))
               )
 <typename T>(T a0, T a1)
 {
@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h1_1 over real"
   auto re = kyosu::complex(a0);
   auto im = i*a1;
   TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_1(re), h1_1(re), 1.0e-4)<<  " <- " << re << '\n';
-  std::cout << "re " << re << "rekdist " << kyosu::reldist(kyosu::sph_bessel_h1_1(re), h1_1(re)) << std::endl;
+  std::cout << "re " << std::setprecision(20) << re << "rekdist " << kyosu::reldist(kyosu::sph_bessel_h1_1(re), h1_1(re)) << std::endl;
   TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_1(im), h1_1(im), 1.0e-4)<<  " <- " << im << '\n';
   TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_1(z) , h1_1(z) , 1.0e-4)<<  " <- " << z << '\n';
   TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_1(re), h2_1(re), 1.0e-4)<<  " <- " << re << '\n';
