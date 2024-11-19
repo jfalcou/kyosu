@@ -41,7 +41,7 @@ TTS_CASE_WITH( "Check behavior of acos on wide"
              )
   <typename T>(T const& a0, T const& a1 )
 {
-  auto prec = sizeof(eve::element_type_t<decltype(r)>) == 8 ?  1e-6 : 1.e-3;
+  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-6 : 1.e-3;
   using e_t = T;
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
