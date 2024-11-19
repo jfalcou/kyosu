@@ -121,10 +121,7 @@ namespace tts
 
   template<kyosu::concepts::cayley_dickson T> double relative_distance(T const &l, T const &r)
   {
-    if(is_ieee_equal(l, r))
-      return 0.0;
-    else
-      return kyosu::abs(l-r);
+    return kyosu::reldist(l, r);
   }
 
   template<kyosu::concepts::cayley_dickson T> double absolute_distance(T const &l, T const &r)

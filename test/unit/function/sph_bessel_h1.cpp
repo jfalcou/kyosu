@@ -22,13 +22,12 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h1_1 over real"
   auto z = kyosu::complex(a0, a1);
   auto re = kyosu::complex(a0);
   auto im = i*a1;
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_1(re), h1_1(re), 1.0e-4)<<  " <- " << re << '\n';
-  std::cout << "re " << std::setprecision(20) << re << "rekdist " << kyosu::reldist(kyosu::sph_bessel_h1_1(re), h1_1(re)) << std::endl;
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_1(im), h1_1(im), 1.0e-4)<<  " <- " << im << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_1(z) , h1_1(z) , 1.0e-4)<<  " <- " << z << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_1(re), h2_1(re), 1.0e-4)<<  " <- " << re << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_1(im), h2_1(im), 1.0e-4)<<  " <- " << im << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_1(z) , h2_1(z) , 1.0e-4)<<  " <- " << z << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_1(re), h1_1(re), 1.0e-4);
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_1(im), h1_1(im), 1.0e-4);
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_1(z) , h1_1(z) , 1.0e-4);
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_1(re), h2_1(re), 1.0e-4);
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_1(im), h2_1(im), 1.0e-4);
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_1(z) , h2_1(z) , 1.0e-4);
 };
 
 TTS_CASE_WITH ( "Check kyosu::sph_bessel_h1_1 over real"
