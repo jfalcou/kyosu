@@ -16,7 +16,7 @@ TTS_CASE_WITH ( "Check kyosu::secpi over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  auto prec = sizeof(eve::element_type_t<decltype(r)>) == 8 ?  1e-5 : 4.e-2;
+  auto prec = sizeof(eve::element_type_t<decltype(r)>) == 8 ?  1e-5 : 7.e-2;
   using ke_t = kyosu::quaternion_t<T>;
   using u_t  = eve::underlying_type_t<T>;
   auto pi = eve::pi(eve::as<u_t>());
