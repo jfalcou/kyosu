@@ -25,7 +25,7 @@ namespace kyosu
       auto r = d/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
       if (Options::contains(eve::numeric))
       {
-        return if_else (kyosu::is_eqz(c0-c1) || (kyosu::is_nan(c0) && kyosu::is_nan(c1)),  zero,  r);
+        return if_else (kyosu::is_equal(c0, c1) || (kyosu::is_nan(c0) && kyosu::is_nan(c1)),  zero,  r);
       }
       else
       {
@@ -40,7 +40,7 @@ namespace kyosu
       auto r = d/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
       if (Options::contains(eve::numeric))
       {
-        return if_else (is_eqz(d) || (is_nan(c0) && is_nan(c1)),  zero,  r);
+        return if_else (is_equal(c0, c1) || (is_nan(c0) && is_nan(c1)),  zero,  r);
       }
       else
       {
