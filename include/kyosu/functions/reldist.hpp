@@ -21,7 +21,7 @@ namespace kyosu
     requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::dist(c0, c1))
     {
-      auto d = dist(c0, c1)
+      auto d = dist(c0, c1);
       auto r = d/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
       if (Options::contains(eve::numeric))
       {
@@ -36,7 +36,7 @@ namespace kyosu
     template<concepts::real Z0, concepts::real Z1>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(eve::reldist(c0,c1))
     {
-      auto d = dist(c0, c1)
+      auto d = dist(c0, c1);
       auto r = d/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
       if (Options::contains(eve::numeric))
       {
