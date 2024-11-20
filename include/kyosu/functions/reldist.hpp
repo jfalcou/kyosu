@@ -9,6 +9,8 @@
 
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/dist.hpp>
+#include <kyosu/functions/is_eqz.hpp>
+#include <kyosu/functions/is_nan.hpp>
 
 namespace kyosu
 {
@@ -22,7 +24,7 @@ namespace kyosu
       auto r = dist(c0, c1)/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
       if (Options::contains(eve::numeric))
       {
-        return if_else ((c0 == c1) || (is_nan(c0) && is_nan(c1)),  zero,  r);
+        return if_else (kyosu::is_eqz(c0-c1) || (kyosu::is_nan(c0) && kyosu::is_nan(c1)),  zero,  r);
       }
       else
       {
