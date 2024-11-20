@@ -34,7 +34,8 @@ TTS_CASE_WITH ( "Check kyosu::sph_bessel_y1 over real"
               )
 <typename T>(T a0, T a1)
 {
-  auto c =  kyosu::complex(a0, a1);
+ auto prec = 1.0e-6;
+ auto c =  kyosu::complex(a0, a1);
   auto cb=  kyosu::conj(c);
   auto cm=  -c;
   auto cr=  kyosu::complex(a0);
