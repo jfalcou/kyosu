@@ -22,7 +22,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::dist(c0, c1))
     {
       auto d = dist(c0, c1)
-      auto r = r/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
+      auto r = d/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
       if (Options::contains(eve::numeric))
       {
         return if_else (kyosu::is_eqz(c0-c1) || (kyosu::is_nan(c0) && kyosu::is_nan(c1)),  zero,  r);
@@ -37,7 +37,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(eve::reldist(c0,c1))
     {
       auto d = dist(c0, c1)
-      auto r = r/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
+      auto r = d/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
       if (Options::contains(eve::numeric))
       {
         return if_else (is_eqz(d) || (is_nan(c0) && is_nan(c1)),  zero,  r);
