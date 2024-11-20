@@ -111,7 +111,7 @@ namespace kyosu
   constexpr auto operator==( T1 const& a, T2 b)
   {
     using type = as_cayley_dickson_t<T1,T2>;
-    return type{a}.contents == type{b}.contents;
+    return type{a} == type{b};
   }
 
   //! @brief Compares a real and a Cayley-Dickson value for equality
@@ -120,7 +120,7 @@ namespace kyosu
   constexpr auto operator==( T1 const& a, T2 b)
   {
     using type = as_cayley_dickson_t<T1,T2>;
-    return type{a}.contents == type{b}.contents;
+    return type{a} == type{b};
   }
 
   //====================================================================================================================
