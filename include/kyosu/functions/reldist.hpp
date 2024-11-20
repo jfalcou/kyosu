@@ -13,19 +13,35 @@
 namespace kyosu
 {
   template<typename Options>
-  struct reldist_t : eve::strict_elementwise_callable<reldist_t, Options>
+  struct reldist_t : eve::strict_elementwise_callable<reldist_t, Options, eve::numeric_option>
   {
     template<typename Z0, typename Z1>
     requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::dist(c0, c1))
     {
-      return dist(c0, c1)/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
+      auto r = dist(c0, c1)/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
+      if (Options::contains(eve::numeric))
+      {
+        return if_else ((c0 == c1) || (is_nan(c0) && is_nan(c1)),  zero,  r);
+      }
+      else
+      {
+        return r;
+      }
     }
 
     template<concepts::real Z0, concepts::real Z1>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(eve::reldist(c0,c1))
     {
-      return eve::reldist(c0,c1);
+      auto r = dist(c0, c1)/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
+      if (Options::contains(eve::numeric))
+      {
+        return if_else ((c0 == c1) || (is_nan(c0) && is_nan(c1)),  zero,  r);
+      }
+      else
+      {
+        return r;
+      }
     }
 
     KYOSU_CALLABLE_OBJECT(reldist_t, reldist_);
