@@ -26,7 +26,7 @@ TTS_CASE_WITH ( "Check kyosu::atanpi over quaternion"
   auto lr = kyosu::atanpi(r);
   auto lc = kyosu::atanpi(c);
   auto lq = kyosu::atanpi(q);
-  TTS_RELATIVE_EQUAL(kyosu::tanpi(lr), kyosu::complex(r), 1e-5);
-  TTS_RELATIVE_EQUAL(kyosu::tanpi(lc), c, 1e-3);
-  TTS_RELATIVE_EQUAL(kyosu::tanpi(lq), q, 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::tanpi(lr), kyosu::complex(r), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::tanpi(lc), c, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::tanpi(lq), q, tts::prec<T>());
 };

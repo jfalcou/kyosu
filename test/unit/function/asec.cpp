@@ -26,7 +26,7 @@ TTS_CASE_WITH ( "Check kyosu::asec over quaternion"
   auto lr = kyosu::asec(r);
   auto lc = kyosu::asec(c);
   auto lq = kyosu::asec(q);
-  TTS_RELATIVE_EQUAL(kyosu::sec(lr), kyosu::complex(r), 1e-3);
-  TTS_RELATIVE_EQUAL(kyosu::sec(lc), c, 1e-3);
-  TTS_RELATIVE_EQUAL(kyosu::sec(lq), q, 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::sec(lr), kyosu::complex(r), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sec(lc), c, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sec(lq), q, tts::prec<T>());
 };

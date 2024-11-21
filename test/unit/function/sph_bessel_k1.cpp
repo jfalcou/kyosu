@@ -24,9 +24,9 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k1 over real"
     auto rz = kyosu::rec(z);
     return  eve::pio_2(eve::as<u_t>())*kyosu::exp(-z)*kyosu::fma(rz, rz, rz);
   };
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k1(re), k1(re), 1.0e-4) << i <<  " <- " << re << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k1(im), k1(im), 1.0e-4) << i <<  " <- " << im << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k1(z) , k1(z) , 1.0e-4) << i <<  " <- " << z << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k1(re), k1(re), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k1(im), k1(im), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k1(z) , k1(z) , tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::sph_bessel_k1 over real"
@@ -43,7 +43,7 @@ TTS_CASE_WITH ( "Check kyosu::sph_bessel_k1 over real"
   auto ci=  kyosu::complex(T(0), a1);
   using kyosu::sph_bessel_k1;
   auto k1c = sph_bessel_k1(c);
-  TTS_EQUAL(k1c, kyosu::conj(sph_bessel_k1(cb)));
+  TTS_IEEE_EQUAL(k1c, kyosu::conj(sph_bessel_k1(cb)));
   TTS_EXPECT(eve::all(kyosu::is_real(cr)));
   TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
   auto z =   kyosu::complex(T(0), T(0));

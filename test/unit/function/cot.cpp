@@ -44,6 +44,6 @@ TTS_CASE_WITH ( "Check kyosu::cot over quaternion"
   auto boost_cot = [](auto x, auto y, auto z,  auto t){return kyosu::rec(cv(boost::math::tan(bq_t(x, y, z, t)))); };
   ke_t e([&](auto n, auto){return boost_cot(r.get(n), i.get(n), j.get(n), k.get(n)); });
   auto q = ke_t(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::cot(q), e, 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::cot(q), e, tts::prec<T>());
 };
 #  endif

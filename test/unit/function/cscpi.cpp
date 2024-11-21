@@ -21,7 +21,7 @@ TTS_CASE_WITH ( "Check kyosu::cscpi over quaternion"
   auto pi = eve::pi(eve::as<u_t>());
   auto q = ke_t(r,i,j,k);
  if constexpr (sizeof(eve::element_type_t<T>) == 8)
-      TTS_RELATIVE_EQUAL(kyosu::cscpi(q), kyosu::csc(pi*q), 1e-5);
+      TTS_RELATIVE_EQUAL(kyosu::cscpi(q), kyosu::csc(pi*q), tts::prec<T>());
   else
-      TTS_RELATIVE_EQUAL(kyosu::cscpi(q/8.0f), kyosu::csc(pi*q/8.0f), 1e-3);
+      TTS_RELATIVE_EQUAL(kyosu::cscpi(q/8.0f), kyosu::csc(pi*q/8.0f), tts::prec<T>());
 };

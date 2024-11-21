@@ -80,5 +80,5 @@ TTS_CASE_WITH ( "Check kyosu::associator over octonion"
   auto q0 = type(r0,i0,j0,k0,l0,li0,lj0,lk0);
   auto q1 = type(r1,i1,j1,k1,l1,li1,lj1,lk1);
   auto q2 = type(r2,i2,j2,k2,l2,li2,lj2,lk2);
-  TTS_RELATIVE_EQUAL(kyosu::associator(q0, q1, q2), (q0*q1)*q2-q0*(q1*q2), 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::associator(q0, q1, q2), (q0*q1)*q2-q0*(q1*q2), tts::prec<T>());
 };

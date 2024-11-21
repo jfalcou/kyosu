@@ -16,8 +16,9 @@ TTS_CASE_WITH ( "Check kyosu::pow over real"
               )
 (auto r0, auto r1)
 {
-  TTS_RELATIVE_EQUAL(kyosu::pow(r0, r1), kyosu::exp(kyosu::log(r0)*r1), 1.0e-5);
-  TTS_RELATIVE_EQUAL(kyosu::pow(r0, 4),  kyosu::sqr(kyosu::sqr(r0)), 1.0e-5);
+  using T =  decltype(r0);
+  TTS_RELATIVE_EQUAL(kyosu::pow(r0, r1), kyosu::exp(kyosu::log(r0)*r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::pow(r0, 4),  kyosu::sqr(kyosu::sqr(r0)), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::pow over complex"
@@ -28,11 +29,12 @@ TTS_CASE_WITH ( "Check kyosu::pow over complex"
               )
 (auto r0, auto i0, auto r1, auto i1)
 {
+  using T =  decltype(r0);
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
-  TTS_RELATIVE_EQUAL(kyosu::pow(c0, c1), kyosu::exp(kyosu::log(c0)*c1), 1e-3);
-  TTS_RELATIVE_EQUAL(kyosu::pow(r0, c1), kyosu::exp(kyosu::log(r0)*c1), 1e-3);
-  TTS_RELATIVE_EQUAL(kyosu::pow(c0, r1), kyosu::exp(kyosu::log(c0)*r1), 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::pow(c0, c1), kyosu::exp(kyosu::log(c0)*c1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::pow(r0, c1), kyosu::exp(kyosu::log(r0)*c1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::pow(c0, r1), kyosu::exp(kyosu::log(c0)*r1), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::pow over quaternion"
@@ -48,5 +50,5 @@ TTS_CASE_WITH ( "Check kyosu::pow over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::pow(q0, q1),  kyosu::exp(kyosu::log(q0)*q1), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::pow(q0, q1),  kyosu::exp(kyosu::log(q0)*q1), tts::prec<T>());
 };

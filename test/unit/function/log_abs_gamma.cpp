@@ -16,7 +16,7 @@ TTS_CASE_WITH ( "Check kyosu::tgamma over quaternion"
               )
 <typename T>(T a0, T a1, T a2, T a3)
 {
-  auto prec = sizeof(eve::element_type_t<T>) == 4 ? 1.0e-3 : 1.0e-6;
+  auto prec = sizeof(eve::element_type_t<T>) == 4 ? tts::prec<T>() : 1.0e-6;
   using ce_t = kyosu::complex_t<T>;
   using qe_t = kyosu::quaternion_t<T>;
 

@@ -16,8 +16,9 @@ TTS_CASE_WITH ( "Check kyosu::pow_abs over real"
               )
 (auto r0, auto r1)
 {
+  using T =  decltype(r0);
   TTS_EQUAL(kyosu::pow_abs(r0, r1), eve::pow_abs(r0, r1));
-  TTS_RELATIVE_EQUAL(kyosu::pow_abs(r0, 4),  kyosu::sqr(kyosu::sqr(r0)), 1.0e-5);
+  TTS_RELATIVE_EQUAL(kyosu::pow_abs(r0, 4),  kyosu::sqr(kyosu::sqr(r0)), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::pow_abs over complex"
