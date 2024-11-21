@@ -1,0 +1,337 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>kyosu: kyosu::cayley_dickson&lt; Type, N &gt; Class Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="godbolt.js"></script>
+<script type="text/javascript" src="fragment.js"></script>
+<script type="text/javascript" src="paragraph.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeParagraphLink.init()
+  DoxygenAwesomeFragmentCopyButton.init()
+  SendToGodbolt.init("kyosu:eve","clang1600","-O3 -std=c++20 -DNDEBUG")
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="color.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/jfalcou/kyosu" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<!-- BEGIN TITLEAREA-->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr  style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">kyosu<span id="projectnumber">&#160;v0.1.0</span>
+   </div>
+   <div id="projectbrief">Complex Without Complexes</div>
+  </td>
+ </tr>
+   <tr><td colspan="2" style="padding: 20px 0px 0px 0px;">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('structkyosu_1_1cayley__dickson.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="structkyosu_1_1cayley__dickson-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">kyosu::cayley_dickson&lt; Type, N &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__types.html">Types</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such algebra can be done in a streamlined fashion based on the Cayley–Dickson construction.  
+ <a href="structkyosu_1_1cayley__dickson.html#details">More...</a></p>
+
+<p><code>#include &lt;kyosu/types/cayley_dickson.hpp&gt;</code></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;eve::floating_scalar_value Type, unsigned int N&gt;<br />
+requires (N&gt; 1 &amp;&amp; std::has_single_bit(N))<br />
+class kyosu::cayley_dickson&lt; Type, N &gt;</div><p>Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such algebra can be done in a streamlined fashion based on the Cayley–Dickson construction. </p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a855e307f5821528acf3b6d850194192f"><td class="memItemLeft" align="right" valign="top"><a id="a855e307f5821528acf3b6d850194192f" name="a855e307f5821528acf3b6d850194192f"></a>
+constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>cayley_dickson</b> () noexcept</td></tr>
+<tr class="memdesc:a855e307f5821528acf3b6d850194192f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Cayley-Dickson constructor. <br /></td></tr>
+<tr class="separator:a855e307f5821528acf3b6d850194192f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63cdca83bd6fc29440cda63ddfe5adbe"><td class="memTemplParams" colspan="2"><a id="a63cdca83bd6fc29440cda63ddfe5adbe" name="a63cdca83bd6fc29440cda63ddfe5adbe"></a>
+template&lt;unsigned int M&gt; <br />
+requires (M &gt; 1 &amp;&amp; M == N/2) (N&gt;1)</td></tr>
+<tr class="memitem:a63cdca83bd6fc29440cda63ddfe5adbe"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cayley_dickson</b> (<a class="el" href="structkyosu_1_1cayley__dickson.html">cayley_dickson</a>&lt; Type, M &gt; const &amp;a) noexcept</td></tr>
+<tr class="memdesc:a63cdca83bd6fc29440cda63ddfe5adbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a Cayley-Dickson instance from an Cayley-Dickson of smaller dimension. <br /></td></tr>
+<tr class="separator:a63cdca83bd6fc29440cda63ddfe5adbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c4327d55ac69eb2aaab94dc67e2a9a2"><td class="memTemplParams" colspan="2"><a id="a0c4327d55ac69eb2aaab94dc67e2a9a2" name="a0c4327d55ac69eb2aaab94dc67e2a9a2"></a>
+template&lt;unsigned int M&gt; <br />
+requires (M &gt; 1 &amp;&amp; M == N/2)</td></tr>
+<tr class="memitem:a0c4327d55ac69eb2aaab94dc67e2a9a2"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cayley_dickson</b> (<a class="el" href="structkyosu_1_1cayley__dickson.html">cayley_dickson</a>&lt; Type, M &gt; const &amp;a, <a class="el" href="structkyosu_1_1cayley__dickson.html">cayley_dickson</a>&lt; Type, M &gt; const &amp;b) noexcept</td></tr>
+<tr class="memdesc:a0c4327d55ac69eb2aaab94dc67e2a9a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a Cayley-Dickson instance by aggregating two Cayley-Dickson of smaller dimension. <br /></td></tr>
+<tr class="separator:a0c4327d55ac69eb2aaab94dc67e2a9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af069b92c2823b95253da132c6eb2c880"><td class="memItemLeft" align="right" valign="top"><a id="af069b92c2823b95253da132c6eb2c880" name="af069b92c2823b95253da132c6eb2c880"></a>
+constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>cayley_dickson</b> (kumi::sized_product_type&lt; N &gt; auto const &amp;vs)</td></tr>
+<tr class="memdesc:af069b92c2823b95253da132c6eb2c880"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a Cayley-Dickson instance from a properly sized product_type. <br /></td></tr>
+<tr class="separator:af069b92c2823b95253da132c6eb2c880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af70b4a76c4af0caf051ff4eae883d552"><td class="memTemplParams" colspan="2"><a id="af70b4a76c4af0caf051ff4eae883d552" name="af70b4a76c4af0caf051ff4eae883d552"></a>
+template&lt;std::convertible_to&lt; Type &gt; T&gt; </td></tr>
+<tr class="memitem:af70b4a76c4af0caf051ff4eae883d552"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cayley_dickson</b> (T v) noexcept</td></tr>
+<tr class="memdesc:af70b4a76c4af0caf051ff4eae883d552"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a Cayley-Dickson from a real value. <br /></td></tr>
+<tr class="separator:af70b4a76c4af0caf051ff4eae883d552"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dfbf380ec69333a9ae2e655ae0e61e1"><td class="memTemplParams" colspan="2"><a id="a8dfbf380ec69333a9ae2e655ae0e61e1" name="a8dfbf380ec69333a9ae2e655ae0e61e1"></a>
+template&lt;std::convertible_to&lt; Type &gt; T0, std::convertible_to&lt; Type &gt;... Ts&gt; <br />
+requires ( (1+sizeof...(Ts)) &lt;= static_dimension )</td></tr>
+<tr class="memitem:a8dfbf380ec69333a9ae2e655ae0e61e1"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cayley_dickson</b> (T0 v0, Ts... vs) noexcept</td></tr>
+<tr class="memdesc:a8dfbf380ec69333a9ae2e655ae0e61e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a Cayley-Dickson instance from a sequences of real values. <br /></td></tr>
+<tr class="separator:a8dfbf380ec69333a9ae2e655ae0e61e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5212a7e8767444e76d7c054347716619"><td class="memItemLeft" align="right" valign="top"><a id="a5212a7e8767444e76d7c054347716619" name="a5212a7e8767444e76d7c054347716619"></a>
+KYOSU_FORCEINLINE auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator++</b> () noexcept</td></tr>
+<tr class="memdesc:a5212a7e8767444e76d7c054347716619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-incrementation operator. <br /></td></tr>
+<tr class="separator:a5212a7e8767444e76d7c054347716619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2375cc6d41964418f819e04a5aee14cf"><td class="memItemLeft" align="right" valign="top"><a id="a2375cc6d41964418f819e04a5aee14cf" name="a2375cc6d41964418f819e04a5aee14cf"></a>
+KYOSU_FORCEINLINE auto&#160;</td><td class="memItemRight" valign="bottom"><b>operator++</b> (int) noexcept</td></tr>
+<tr class="memdesc:a2375cc6d41964418f819e04a5aee14cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post-incrementation operator. <br /></td></tr>
+<tr class="separator:a2375cc6d41964418f819e04a5aee14cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a348e923f3719df8b571cbbd1719177f2"><td class="memItemLeft" align="right" valign="top"><a id="a348e923f3719df8b571cbbd1719177f2" name="a348e923f3719df8b571cbbd1719177f2"></a>
+KYOSU_FORCEINLINE auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator--</b> () noexcept</td></tr>
+<tr class="memdesc:a348e923f3719df8b571cbbd1719177f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-decrementation operator. <br /></td></tr>
+<tr class="separator:a348e923f3719df8b571cbbd1719177f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb849412f206b0f7ba1e48f4de76ca39"><td class="memItemLeft" align="right" valign="top"><a id="abb849412f206b0f7ba1e48f4de76ca39" name="abb849412f206b0f7ba1e48f4de76ca39"></a>
+KYOSU_FORCEINLINE auto&#160;</td><td class="memItemRight" valign="bottom"><b>operator--</b> (int) noexcept</td></tr>
+<tr class="memdesc:abb849412f206b0f7ba1e48f4de76ca39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post-decrementation operator. <br /></td></tr>
+<tr class="separator:abb849412f206b0f7ba1e48f4de76ca39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a6c080be2b335177498e805eb36254a"><td class="memTemplParams" colspan="2"><a id="a7a6c080be2b335177498e805eb36254a" name="a7a6c080be2b335177498e805eb36254a"></a>
+template&lt;concepts::cayley_dickson T&gt; <br />
+requires (T::static_dimension&lt;N)</td></tr>
+<tr class="memitem:a7a6c080be2b335177498e805eb36254a"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="structkyosu_1_1cayley__dickson.html">cayley_dickson</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator=</b> (T const &amp;a) noexcept</td></tr>
+<tr class="memdesc:a7a6c080be2b335177498e805eb36254a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a smaller Cayley-Dickson to another. <br /></td></tr>
+<tr class="separator:a7a6c080be2b335177498e805eb36254a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="related" name="related"></a>
+Related Functions</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p>(Note that these are not member functions.) </p>
+</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Deduction Guides</div></td></tr>
+<tr class="memitem:aa0be302941e24075875f2ff22e1bc866"><td class="memTemplParams" colspan="2"><a id="aa0be302941e24075875f2ff22e1bc866" name="aa0be302941e24075875f2ff22e1bc866"></a>
+template&lt;kumi::product_type Tuple&gt; </td></tr>
+<tr class="memitem:aa0be302941e24075875f2ff22e1bc866"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cayley_dickson</b> (Tuple const &amp;) -&gt; <a class="el" href="structkyosu_1_1cayley__dickson.html">cayley_dickson</a>&lt; kumi::element_t&lt; 0, Tuple &gt;, kumi::size_v&lt; Tuple &gt; &gt;</td></tr>
+<tr class="memdesc:aa0be302941e24075875f2ff22e1bc866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deduction guide for constructing from product type. <br /></td></tr>
+<tr class="separator:aa0be302941e24075875f2ff22e1bc866"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa72548959abb0145c1eef8e8cf2928b4"><td class="memTemplParams" colspan="2"><a id="aa72548959abb0145c1eef8e8cf2928b4" name="aa72548959abb0145c1eef8e8cf2928b4"></a>
+template&lt;typename T0 , std::convertible_to&lt; T0 &gt;... Ts&gt; </td></tr>
+<tr class="memitem:aa72548959abb0145c1eef8e8cf2928b4"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cayley_dickson</b> (T0, Ts...) -&gt; <a class="el" href="structkyosu_1_1cayley__dickson.html">cayley_dickson</a>&lt; T0, 1+sizeof...(Ts)&gt;</td></tr>
+<tr class="memdesc:aa72548959abb0145c1eef8e8cf2928b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deduction guide for constructing from sequence of values. <br /></td></tr>
+<tr class="separator:aa72548959abb0145c1eef8e8cf2928b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Compound Assignment Operators</div></td></tr>
+<tr class="memitem:ae63ee48e9508d712beb22e125d596276"><td class="memItemLeft" align="right" valign="top"><a id="ae63ee48e9508d712beb22e125d596276" name="ae63ee48e9508d712beb22e125d596276"></a>
+constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator+=</b> (concepts::cayley_dickson auto &amp;self, concepts::real auto other) noexcept</td></tr>
+<tr class="memdesc:ae63ee48e9508d712beb22e125d596276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the real value <code>other</code> to <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:ae63ee48e9508d712beb22e125d596276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a127b8375b7ef7d42f5044ebc5770da1a"><td class="memTemplParams" colspan="2"><a id="a127b8375b7ef7d42f5044ebc5770da1a" name="a127b8375b7ef7d42f5044ebc5770da1a"></a>
+template&lt;concepts::cayley_dickson Self, concepts::cayley_dickson Other&gt; </td></tr>
+<tr class="memitem:a127b8375b7ef7d42f5044ebc5770da1a"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator+=</b> (Self &amp;self, Other const &amp;other) noexcept</td></tr>
+<tr class="memdesc:a127b8375b7ef7d42f5044ebc5770da1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the Cayley-dickson value <code>other</code> to <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:a127b8375b7ef7d42f5044ebc5770da1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab15d8bbe6f7602cf1f7b7c0ac4744bb2"><td class="memItemLeft" align="right" valign="top"><a id="ab15d8bbe6f7602cf1f7b7c0ac4744bb2" name="ab15d8bbe6f7602cf1f7b7c0ac4744bb2"></a>
+constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator-=</b> (concepts::cayley_dickson auto &amp;self, concepts::real auto other) noexcept</td></tr>
+<tr class="memdesc:ab15d8bbe6f7602cf1f7b7c0ac4744bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substracts the real value <code>other</code> from <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:ab15d8bbe6f7602cf1f7b7c0ac4744bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a715044a74f36e890e0fa86f68e60c2d1"><td class="memTemplParams" colspan="2"><a id="a715044a74f36e890e0fa86f68e60c2d1" name="a715044a74f36e890e0fa86f68e60c2d1"></a>
+template&lt;concepts::cayley_dickson Self, concepts::cayley_dickson Other&gt; </td></tr>
+<tr class="memitem:a715044a74f36e890e0fa86f68e60c2d1"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator-=</b> (Self &amp;self, Other const &amp;other) noexcept</td></tr>
+<tr class="memdesc:a715044a74f36e890e0fa86f68e60c2d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Substracts the Cayley-dickson value <code>other</code> from <code>self</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:a715044a74f36e890e0fa86f68e60c2d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f0dd77597800b916c4cebc5e0634cde"><td class="memItemLeft" align="right" valign="top"><a id="a5f0dd77597800b916c4cebc5e0634cde" name="a5f0dd77597800b916c4cebc5e0634cde"></a>
+constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator*=</b> (concepts::cayley_dickson auto &amp;self, concepts::real auto other) noexcept</td></tr>
+<tr class="memdesc:a5f0dd77597800b916c4cebc5e0634cde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies <code>self</code> by the real value <code>other</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:a5f0dd77597800b916c4cebc5e0634cde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb7201475d4bac42ec931f542a0c24f"><td class="memTemplParams" colspan="2"><a id="a7fb7201475d4bac42ec931f542a0c24f" name="a7fb7201475d4bac42ec931f542a0c24f"></a>
+template&lt;concepts::cayley_dickson Self, concepts::cayley_dickson Other&gt; </td></tr>
+<tr class="memitem:a7fb7201475d4bac42ec931f542a0c24f"><td class="memTemplItemLeft" align="right" valign="top">constexpr Self &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator*=</b> (Self &amp;self, Other const &amp;other) noexcept</td></tr>
+<tr class="memdesc:a7fb7201475d4bac42ec931f542a0c24f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies <code>self</code> by the Cayley-dickson value <code>other</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:a7fb7201475d4bac42ec931f542a0c24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f4c360cf0019deefa476acf571c387"><td class="memItemLeft" align="right" valign="top"><a id="a30f4c360cf0019deefa476acf571c387" name="a30f4c360cf0019deefa476acf571c387"></a>
+constexpr auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator/=</b> (concepts::cayley_dickson auto &amp;self, concepts::real auto other) noexcept</td></tr>
+<tr class="memdesc:a30f4c360cf0019deefa476acf571c387"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides <code>self</code> by the real value <code>other</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:a30f4c360cf0019deefa476acf571c387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29ff75dcd5392b350f8775c8d0fc331a"><td class="memTemplParams" colspan="2"><a id="a29ff75dcd5392b350f8775c8d0fc331a" name="a29ff75dcd5392b350f8775c8d0fc331a"></a>
+template&lt;concepts::cayley_dickson Self, concepts::cayley_dickson Other&gt; </td></tr>
+<tr class="memitem:a29ff75dcd5392b350f8775c8d0fc331a"><td class="memTemplItemLeft" align="right" valign="top">constexpr Self &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator/=</b> (Self &amp;self, Other const &amp;other) noexcept</td></tr>
+<tr class="memdesc:a29ff75dcd5392b350f8775c8d0fc331a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides <code>self</code> by the Cayley-dickson value <code>other</code> and returns the new value of <code>self</code>. <br /></td></tr>
+<tr class="separator:a29ff75dcd5392b350f8775c8d0fc331a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Streaming Operators</div></td></tr>
+<tr class="memitem:aa04abd1c7dc72a48f17d1453a59e1e6f"><td class="memTemplParams" colspan="2"><a id="aa04abd1c7dc72a48f17d1453a59e1e6f" name="aa04abd1c7dc72a48f17d1453a59e1e6f"></a>
+template&lt;concepts::cayley_dickson CD&gt; </td></tr>
+<tr class="memitem:aa04abd1c7dc72a48f17d1453a59e1e6f"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&lt;&lt;</b> (std::ostream &amp;os, CD const &amp;z)</td></tr>
+<tr class="memdesc:aa04abd1c7dc72a48f17d1453a59e1e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream insertion for Cayley-dickson based types. <br /></td></tr>
+<tr class="separator:aa04abd1c7dc72a48f17d1453a59e1e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">User-defined Literals</div></td></tr>
+<tr class="memitem:a1a8dfb5ebec66f24fce04469de86120b"><td class="memItemLeft" align="right" valign="top"><a id="a1a8dfb5ebec66f24fce04469de86120b" name="a1a8dfb5ebec66f24fce04469de86120b"></a>
+constexpr <a class="el" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&quot;&quot;_i</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:a1a8dfb5ebec66f24fce04469de86120b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76" title="Type alias for complex numbers.">kyosu::complex_t&lt;double&gt;</a> with real part zero and imaginary part <code>d</code> <br /></td></tr>
+<tr class="separator:a1a8dfb5ebec66f24fce04469de86120b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f6fc5aa16208b342059eabb36dbf8a5"><td class="memItemLeft" align="right" valign="top"><a id="a9f6fc5aa16208b342059eabb36dbf8a5" name="a9f6fc5aa16208b342059eabb36dbf8a5"></a>
+constexpr <a class="el" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&quot;&quot;_if</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:a9f6fc5aa16208b342059eabb36dbf8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76" title="Type alias for complex numbers.">kyosu::complex_t&lt;float&gt;</a> with real part zero and imaginary part <code>d</code> <br /></td></tr>
+<tr class="separator:a9f6fc5aa16208b342059eabb36dbf8a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc2491a56ef3c5cb615ddf96eb265510"><td class="memItemLeft" align="right" valign="top"><a id="abc2491a56ef3c5cb615ddf96eb265510" name="abc2491a56ef3c5cb615ddf96eb265510"></a>
+constexpr <a class="el" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&quot;&quot;_j</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:abc2491a56ef3c5cb615ddf96eb265510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;double&gt;</a> with all parts zero and \(j\) part equals to <code>d</code> <br /></td></tr>
+<tr class="separator:abc2491a56ef3c5cb615ddf96eb265510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a032f8a8437b972416acb47c33b144556"><td class="memItemLeft" align="right" valign="top"><a id="a032f8a8437b972416acb47c33b144556" name="a032f8a8437b972416acb47c33b144556"></a>
+constexpr <a class="el" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&quot;&quot;_jf</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:a032f8a8437b972416acb47c33b144556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;float&gt;</a> with all parts zero and \(j\) part equals to <code>d</code> <br /></td></tr>
+<tr class="separator:a032f8a8437b972416acb47c33b144556"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab81a5e9b87e5ca0c50cf8e6eb56217c5"><td class="memItemLeft" align="right" valign="top"><a id="ab81a5e9b87e5ca0c50cf8e6eb56217c5" name="ab81a5e9b87e5ca0c50cf8e6eb56217c5"></a>
+constexpr <a class="el" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&quot;&quot;_k</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:ab81a5e9b87e5ca0c50cf8e6eb56217c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;double&gt;</a> with all parts zero and \(k\) part equals to <code>d</code> <br /></td></tr>
+<tr class="separator:ab81a5e9b87e5ca0c50cf8e6eb56217c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a810e99156f3dfbd5d36030c0b585a9f7"><td class="memItemLeft" align="right" valign="top"><a id="a810e99156f3dfbd5d36030c0b585a9f7" name="a810e99156f3dfbd5d36030c0b585a9f7"></a>
+constexpr <a class="el" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&quot;&quot;_kf</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:a810e99156f3dfbd5d36030c0b585a9f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;float&gt;</a> with all parts zero and \(k\) part equals to <code>d</code> <br /></td></tr>
+<tr class="separator:a810e99156f3dfbd5d36030c0b585a9f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Unary Operators</div></td></tr>
+<tr class="memitem:a18cec006320794126c85b238a68fc91c"><td class="memTemplParams" colspan="2"><a id="a18cec006320794126c85b238a68fc91c" name="a18cec006320794126c85b238a68fc91c"></a>
+template&lt;concepts::cayley_dickson Z&gt; </td></tr>
+<tr class="memitem:a18cec006320794126c85b238a68fc91c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator+</b> (Z const &amp;z) noexcept</td></tr>
+<tr class="memdesc:a18cec006320794126c85b238a68fc91c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identity for Cayley-Dickson value. <br /></td></tr>
+<tr class="separator:a18cec006320794126c85b238a68fc91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3032325260646fe3f0832b076a2b146a"><td class="memTemplParams" colspan="2"><a id="a3032325260646fe3f0832b076a2b146a" name="a3032325260646fe3f0832b076a2b146a"></a>
+template&lt;concepts::cayley_dickson Z&gt; </td></tr>
+<tr class="memitem:a3032325260646fe3f0832b076a2b146a"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator-</b> (Z const &amp;z) noexcept</td></tr>
+<tr class="memdesc:a3032325260646fe3f0832b076a2b146a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the negation of a given Cayley-Dickson value. <br /></td></tr>
+<tr class="separator:a3032325260646fe3f0832b076a2b146a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Binary Operators</div></td></tr>
+<tr class="memitem:a3ee8e2fe476ebb1011c476e093227822"><td class="memTemplParams" colspan="2"><a id="a3ee8e2fe476ebb1011c476e093227822" name="a3ee8e2fe476ebb1011c476e093227822"></a>
+template&lt;eve::value T1, eve::value T2&gt; </td></tr>
+<tr class="memitem:a3ee8e2fe476ebb1011c476e093227822"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator+</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+<tr class="memdesc:a3ee8e2fe476ebb1011c476e093227822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sum of a Cayley-Dickson value and a real value in any order. <br /></td></tr>
+<tr class="separator:a3ee8e2fe476ebb1011c476e093227822"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36ef300ed76ad52be7293d1a1fac8331"><td class="memTemplParams" colspan="2"><a id="a36ef300ed76ad52be7293d1a1fac8331" name="a36ef300ed76ad52be7293d1a1fac8331"></a>
+template&lt;eve::value T1, eve::value T2&gt; </td></tr>
+<tr class="memitem:a36ef300ed76ad52be7293d1a1fac8331"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator-</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+<tr class="memdesc:a36ef300ed76ad52be7293d1a1fac8331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the difference of two Cayley-Dickson values. <br /></td></tr>
+<tr class="separator:a36ef300ed76ad52be7293d1a1fac8331"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb59110f4a618933f413b3c409ae8e6"><td class="memTemplParams" colspan="2"><a id="a2fb59110f4a618933f413b3c409ae8e6" name="a2fb59110f4a618933f413b3c409ae8e6"></a>
+template&lt;eve::value T1, eve::value T2&gt; </td></tr>
+<tr class="memitem:a2fb59110f4a618933f413b3c409ae8e6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator*</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+<tr class="memdesc:a2fb59110f4a618933f413b3c409ae8e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the product of two Cayley-Dickson values. <br /></td></tr>
+<tr class="separator:a2fb59110f4a618933f413b3c409ae8e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abccb6441a9eaf55aec6a7aea780bd145"><td class="memTemplParams" colspan="2"><a id="abccb6441a9eaf55aec6a7aea780bd145" name="abccb6441a9eaf55aec6a7aea780bd145"></a>
+template&lt;eve::value T1, eve::value T2&gt; </td></tr>
+<tr class="memitem:abccb6441a9eaf55aec6a7aea780bd145"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__traits_ga715219c07991418c744f1fe1589ed407.html#ga715219c07991418c744f1fe1589ed407">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator/</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+<tr class="memdesc:abccb6441a9eaf55aec6a7aea780bd145"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the ration of two Cayley-Dickson values. <br /></td></tr>
+<tr class="separator:abccb6441a9eaf55aec6a7aea780bd145"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a561363de989d2101775d8b85655ea08e"><td class="memTemplParams" colspan="2"><a id="a561363de989d2101775d8b85655ea08e" name="a561363de989d2101775d8b85655ea08e"></a>
+template&lt;concepts::cayley_dickson T1, concepts::real T2&gt; </td></tr>
+<tr class="memitem:a561363de989d2101775d8b85655ea08e"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (T1 const &amp;a, T2 b)</td></tr>
+<tr class="memdesc:a561363de989d2101775d8b85655ea08e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a Cayley-Dickson value and a real for equality. <br /></td></tr>
+<tr class="separator:a561363de989d2101775d8b85655ea08e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a561363de989d2101775d8b85655ea08e"><td class="memTemplParams" colspan="2"><a id="a561363de989d2101775d8b85655ea08e" name="a561363de989d2101775d8b85655ea08e"></a>
+template&lt;concepts::real T1, concepts::cayley_dickson T2&gt; </td></tr>
+<tr class="memitem:a561363de989d2101775d8b85655ea08e"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (T1 const &amp;a, T2 b)</td></tr>
+<tr class="memdesc:a561363de989d2101775d8b85655ea08e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a real and a Cayley-Dickson value for equality. <br /></td></tr>
+<tr class="separator:a561363de989d2101775d8b85655ea08e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.20-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li><li class="navelem"><a class="el" href="structkyosu_1_1cayley__dickson.html">cayley_dickson</a></li>
+  </ul>
+</div>
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</body>
+</html>
