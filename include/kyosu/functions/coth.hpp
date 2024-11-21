@@ -6,42 +6,33 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_coth: eve::elementwise
-  {
-    using callable_tag_type = callable_coth;
-
-    KYOSU_DEFERS_CALLABLE(coth_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::coth(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_coth(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/tanh.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct coth_t : eve::elementwise_callable<coth_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::coth(v); }
+
+    KYOSU_CALLABLE_OBJECT(coth_t, coth_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var coth
 //!   @brief Computes the hyperbolic cotangent of the argument.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -68,7 +59,25 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/coth.cpp}
+//======================================================================================================================
+  inline constexpr auto coth = eve::functor<coth_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_coth coth = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto coth_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      return kyosu::rec(kyosu::tanh(z));
+    }
+    else
+    {
+      return cayley_extend(coth, z);
+    }
+  }
 }

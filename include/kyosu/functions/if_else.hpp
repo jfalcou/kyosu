@@ -7,40 +7,39 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_if_else: eve::elementwise
-  {
-    using callable_tag_type = callable_if_else;
-
-    KYOSU_DEFERS_CALLABLE(if_else_);
-
-    template<eve::floating_ordered_value T, eve::floating_ordered_value U>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, auto c, T const& t, U u) noexcept { return eve::if_else(c, t, u); }
-
-    KYOSU_FORCEINLINE
-    auto operator()(auto const& m, auto const& t, auto const& f) const noexcept -> decltype(eve::tag_invoke(*this,m,t,f))
-    {
-      return eve::tag_invoke(*this, m, t, f);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_if_else(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/functions/convert.hpp>
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct if_else_t : eve::callable<if_else_t, Options>
+  {
+    template<typename M, typename T, typename F>
+    requires( concepts::cayley_dickson<T> || concepts::cayley_dickson<F>)
+    KYOSU_FORCEINLINE constexpr expected_result_t<eve::if_else,M,T,F>
+    operator()(M const& m, T const& t, F const& f) const noexcept
+    {
+      return KYOSU_CALL(m,t,f);
+    }
+
+    template<typename M, typename T, typename F>
+    KYOSU_FORCEINLINE constexpr auto
+    operator()(M const& m, T const& t, F const& f) const noexcept -> decltype(eve::if_else(m,t,f))
+    {
+      return eve::if_else(m,t,f);
+    }
+
+    KYOSU_CALLABLE_OBJECT(if_else_t, if_else_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var if_else
 //!   @brief Select a value between two arguments based on a logical mask
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -67,7 +66,42 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/if_else.cpp}
+//======================================================================================================================
+inline constexpr auto if_else = eve::functor<if_else_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_if_else if_else = {};
+}
+
+namespace kyosu::_
+{
+  template<typename M, typename Z1, typename Z2, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto if_else_(KYOSU_DELAY(), O const& o, M const& m, Z1 const& t, Z2 const& f) noexcept
+  {
+    if constexpr(concepts::cayley_dickson<Z1> && concepts::cayley_dickson<Z2>)
+    {
+      using type  = as_cayley_dickson_t<Z1,Z2>;
+      using ret_t = eve::as_wide_as_t<type,M>;
+
+      return ret_t{ kumi::map ( [&](auto const& v, auto const& w) { return eve::if_else(m, v, w); }
+                              , kyosu::convert(t, eve::as_element<type>{})
+                              , kyosu::convert(f, eve::as_element<type>{})
+                              )
+                  };
+    }
+    else
+    {
+      auto parts = [&]()
+      {
+        auto cst = []<typename I>(auto x, I const&) { if constexpr(I::value == 0) return x; else return eve::zero; };
+
+        if      constexpr(!concepts::cayley_dickson<Z2>)
+          return kumi::map_index([&](auto i, auto e) { return eve::if_else(m, e, cst(f, i)); }, t);
+        else if constexpr(!concepts::cayley_dickson<Z1>)
+          return kumi::map_index([&](auto i, auto e) { return eve::if_else(m, cst(t, i), e); }, f);
+      }();
+
+      return eve::as_wide_as_t<std::conditional_t<!concepts::cayley_dickson<Z2>,Z1,Z2>,M>{parts};
+    }
+  }
 }

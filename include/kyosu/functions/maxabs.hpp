@@ -6,44 +6,36 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_maxabs: eve::elementwise
-  {
-    using callable_tag_type = callable_maxabs;
-
-    KYOSU_DEFERS_CALLABLE(maxabs_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const&... vs) noexcept
-    {
-      return eve::maxabs(vs...);
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const&... targets ) const noexcept
-    -> decltype(eve::tag_invoke(*this, targets...))
-    {
-      return eve::tag_invoke(*this, targets...);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_maxabs(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/abs.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct maxabs_t : eve::strict_elementwise_callable<maxabs_t, Options, eve::numeric_option, eve::pedantic_option>
+  {
+    template<typename Z0, typename ...Zs>
+    requires(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs>|| ...))
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0  const & z0, Zs const & ... zs) const noexcept
+    -> decltype(eve::maxabs(real(z0), real(zs)...))
+    { return KYOSU_CALL(z0,zs...); }
+
+    template<concepts::real V0, concepts::real... Vs>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs... vs) const noexcept -> decltype( eve::maxabs(v0, vs...))
+    { return eve::maxabs[Options()](v0,vs...); }
+
+    KYOSU_CALLABLE_OBJECT(maxabs_t, maxabs_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var maxabs
 //!   @brief Callable object computing the maxabs operation.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -69,7 +61,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/maxabs.cpp}
+//======================================================================================================================
+  inline constexpr auto maxabs = eve::functor<maxabs_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_maxabs maxabs = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z0, typename... ZS, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto maxabs_(KYOSU_DELAY(), O const& o, Z0 z0, ZS... zs) noexcept
+  {
+    return eve::max[o](kyosu::abs(z0), kyosu::abs(zs)...);
+  }
 }

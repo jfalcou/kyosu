@@ -16,7 +16,11 @@ TTS_CASE_WITH ( "Check kyosu::dist over real"
               )
 (auto r0, auto r1)
 {
+  using e_t =  eve::element_type_t<decltype(r0)>;
+  e_t o(1);
+  TTS_EQUAL(eve::dist(r0, o),  eve::dist(r0, o));
   TTS_EQUAL(kyosu::dist(r0, r1), eve::dist(r0, r1));
+  TTS_EQUAL(kyosu::dist(kyosu::complex(r0), r1), kyosu::dist(kyosu::complex(r0), kyosu::complex(r1)));
 };
 
 TTS_CASE_WITH ( "Check kyosu::dist over complex"
@@ -29,6 +33,8 @@ TTS_CASE_WITH ( "Check kyosu::dist over complex"
 {
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
+  TTS_RELATIVE_EQUAL(kyosu::dist(c0, r1), kyosu::abs(c0-r1), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::dist(r0, c1), kyosu::abs(r0-c1), 1e-7);
   TTS_RELATIVE_EQUAL(kyosu::dist(c0, c1), kyosu::abs(c0-c1), 1e-7);
 };
 

@@ -194,7 +194,7 @@ namespace kyosu::_
   {
     if constexpr(kyosu::concepts::complex<Z>)
     {
-      ipart(z) = eve::to_nearest(eve::rem)(ipart(z), 2*eve::pi(eve::as(ipart(z))));
+      ipart(z) = eve::rem[eve::to_nearest](ipart(z), 2*eve::pi(eve::as(ipart(z))));
       return z;
     }
     else  return z;

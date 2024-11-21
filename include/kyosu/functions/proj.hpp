@@ -6,36 +6,25 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_proj: eve::elementwise
-  {
-    using callable_tag_type = callable_proj;
-
-    KYOSU_DEFERS_CALLABLE(proj_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept {
-      return eve::if_else(eve::is_not_finite(v), eve::inf(eve::as(v)), v);
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_proj(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct proj_t : eve::elementwise_callable<proj_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return if_else(eve::is_infinite(v), eve::inf(as(v)), v); }
+
+    KYOSU_CALLABLE_OBJECT(proj_t, proj_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -43,7 +32,7 @@ namespace kyosu
 //!   @brief Callable object computing proj(x), the projection of the cayley_dickson number
 //!   z onto the (hyper) Riemann sphere
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -66,14 +55,40 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     *  For most z, proj(z)==z, but all infinities, even the numbers where one component
-//!       is infinite and the other is NaN, become positive real\n
-//!       infinity, (inf, 0...) or (inf, -0...).\n
-//!       The sign of the pure (zero) components are the signs of the components of pure(z).
+//!        is infinite and the other is NaN, become positive real\n
+//!        infinity, (inf, 0...) or (inf, -0...).\n
+//!        The sign of the pure (zero) components are the signs of the components of pure(z).
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/proj.cpp}
+//======================================================================================================================
+  inline constexpr auto proj = eve::functor<proj_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_proj proj = {};
+}
+
+namespace kyosu::_
+{
+  template<typename C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto proj_(KYOSU_DELAY(), O const&, C c) noexcept
+  {
+    using real_t = eve::as<as_real_type_t<C>>;
+    if constexpr (kyosu::concepts::complex<C>)
+      return if_else(is_infinite(c)
+                    , complex(eve::inf(real_t{}), eve::copysign(eve::zero(real_t{}), imag(c)))
+                    , c);
+    else
+    {
+      auto isinf = is_infinite(c);
+      auto tmp = eve::if_else(isinf, eve::inf(real_t{}), real(c));
+      auto setpure = [isinf](auto & x){
+        x = eve::if_else(isinf, eve::copysign(eve::zero(real_t{}), x), x);
+      };
+      kumi::for_each(setpure,  c);
+      real(c) = tmp;
+      return c;
+    }
+  }
 }

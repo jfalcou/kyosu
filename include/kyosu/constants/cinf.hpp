@@ -7,49 +7,45 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-#include <kyosu/types/complex.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_cinf : eve::elementwise
-  {
-    using callable_tag_type = callable_cinf;
-
-    KYOSU_DEFERS_CALLABLE(i_);
-
-    template<eve::value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, as<T> const& ) noexcept
-    requires(concepts::cayley_dickson<T> || eve::floating_ordered_value<T>)
-    {
-      using u_t = eve::underlying_type_t<T>;
-      return kyosu::complex(eve::nan(as<u_t>()),eve::inf(as<u_t>()));
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_abs(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct cinf_t : eve::constant_callable<cinf_t, Options>
+  {
+    template<typename T>
+    static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
+    {
+      using t_t = eve::as_floating_point_t<eve::underlying_type_t<T>>;
+
+      if constexpr(concepts::cayley_dickson<T>) return T{eve::nan(as<t_t>()),eve::inf(as<t_t>())};
+      else                                      return complex_t<T>{eve::nan(as<t_t>()),eve::inf(as<t_t>())};
+    }
+
+    template<typename T>
+    requires(concepts::cayley_dickson<T>)
+    KYOSU_FORCEINLINE constexpr T operator()(as<T> const& v) const { return KYOSU_CALL(v); }
+
+    template<concepts::real T>
+    KYOSU_FORCEINLINE constexpr auto operator()(as<T> const& v) const
+    {
+      return KYOSU_CALL(v);
+    }
+
+    EVE_CALLABLE_OBJECT(cinf_t, cinf_);
+  };
+
 //======================================================================================================================
-//! @addtogroup functions
+//! @addtogroup constants
 //! @{
-//!   @var i
-//!   @brief Computes the complex number cinf i.e. complex(nan, inf) in the chosen type.
+//!   @var cinf
+//!   @brief Computes the complex-infinite defined as \f$\textrm{NaN} + i\, \textrm{inf}\f$ in the chosen type.
 //!
 //!   **Defined in Header**
 //!
 //!   @code
-//!   #include <kyosu/functions.hpp>
+//!   #include <kyosu/constants.hpp>
 //!   @endcode
 //!
 //!   @groupheader{Callable Signatures}
@@ -57,8 +53,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_complex_t<underlying_type_t<T>>  cinf(as<T> z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr és_complex_t<underlying_type_t<T>>  cinf(as<T> z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr as_complex_t<eve::as_floating_point_t<T>> cinf(as<T> z) noexcept;
+//!      template<kyosu::real T>     constexpr as_complex_t<eve::as_floating_point_t<T>> cinf(as<T> z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -68,12 +64,14 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * always returns a complex scalar value cinf such that real(cinf) is a Nan  and imag(cinf) is Inf.
+//!     * always returns a cayley_dickson value such that real(i) is a NaN and imag(i) is \f$+\infty\f$ (the remaining parts being 0).
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/i.cpp}
+//!  @godbolt{doc/cinf.cpp}
+//======================================================================================================================
+  inline constexpr auto cinf = eve::functor<cinf_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_cinf cinf = {};
 }

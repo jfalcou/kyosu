@@ -8,8 +8,8 @@ int main()
   using kyosu::complex_t;
   using kyosu::quaternion_t;
 
-  std::cout << "Real:        ";
-  std::cout << 72.9f << " -> " << rot_angle(72.9f) << "\n";
+//   std::cout << "Real:        ";
+//   std::cout << 72.9f << " -> " << rot_angle(72.9f) << "\n";
 
   std::cout << "Complex:     ";
   std::cout << kyosu::complex_t<float>(3.5f,-2.9f) << " -> " << rot_angle(kyosu::complex_t<float>(3.5f,-2.9f)) << "\n";

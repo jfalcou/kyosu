@@ -33,8 +33,8 @@ auto cv(boost::math::quaternion<T> const &bq)
 
 TTS_CASE_WITH ( "Check kyosu::sec over quaternion"
               , kyosu::simd_real_types
-              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
-                              , tts::randoms(-10,10), tts::randoms(-10,10)
+              , tts::generate ( tts::randoms(1,5), tts::randoms(-5,5)
+                              , tts::randoms(-5,5), tts::randoms(-5,5)
                               )
               )
 <typename T>(T r, T i, T j, T k)

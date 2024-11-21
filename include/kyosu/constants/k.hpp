@@ -7,48 +7,43 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-#include <kyosu/types/complex.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_k : eve::elementwise
-  {
-    using callable_tag_type = callable_k;
-
-    KYOSU_DEFERS_CALLABLE(k_);
-
-    template<eve::value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, as<T> const& ) noexcept
-    requires(concepts::cayley_dickson<T> || eve::floating_ordered_value<T>)
-    {
-      using u_t = eve::underlying_type_t<T>;
-      return kyosu::quaternion(u_t(0),u_t(0), u_t(0), u_t(1)); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_abs(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct k_t : eve::constant_callable<k_t, Options>
+  {
+    template<typename T>
+    static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
+    {
+      if constexpr(concepts::cayley_dickson<T> && (dimension_v<T> > 2)) return T{0,0,0,1};
+      else                      return quaternion_t<eve::as_floating_point_t<eve::underlying_type_t<T>>>{0,0,0,1};
+    }
+
+    template<typename T>
+    requires(concepts::cayley_dickson<T>)
+    KYOSU_FORCEINLINE constexpr auto operator()(as<T> const& v) const { return KYOSU_CALL(v); }
+
+    template<concepts::real T>
+    KYOSU_FORCEINLINE constexpr auto operator()(as<T> const& v) const
+    {
+      return KYOSU_CALL(v);
+    }
+
+    EVE_CALLABLE_OBJECT(k_t, k_);
+  };
+
 //======================================================================================================================
-//! @addtogroup functions
+//! @addtogroup constants
 //! @{
-//!   @var i
+//!   @var k
 //!   @brief Computes the complex number k i.e. quaternion(0, 0, 0, 1) in the chosen type.
 //!
 //!   **Defined in Header**
 //!
 //!   @code
-//!   #include <kyosu/functions.hpp>
+//!   #include <kyosu/constants.hpp>
 //!   @endcode
 //!
 //!   @groupheader{Callable Signatures}
@@ -56,8 +51,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_complex_t<underlying_type_t<T>>  k(as<T> z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr és_complex_t<underlying_type_t<T>>  k(as<T> z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto k(as<T> z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto k(as<T> z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -67,12 +62,15 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * always returns a quaternion scalar value k such that all parts are null exceptthe k part whose value is one.
+//!     * always returns a cayley-dickson which has dimension at least 4 and  value `j` such
+//!       that all parts are null except the `jpart` whose value is one.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/i.cpp}
+//!  @godbolt{doc/k.cpp}
+//======================================================================================================================
+  inline constexpr auto k = eve::functor<k_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_k k = {};
 }

@@ -1,48 +1,40 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_lrising_factorial : eve::elementwise
-  {
-    using callable_tag_type = callable_lrising_factorial;
-
-    KYOSU_DEFERS_CALLABLE(lrising_factorial_);
-
-    template<eve::ordered_value T1, eve::ordered_value T2>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T1 const& v, T2 const& w) noexcept {
-      auto fn = callable_lrising_factorial{};
-      return fn(complex(v), complex(w)); }
-
-    template<typename T1, typename T2>
-    KYOSU_FORCEINLINE auto operator()(T1 const& target1, T2 const& target2) const noexcept -> decltype(eve::tag_invoke(*this, target1, target2))
-    {
-      return eve::tag_invoke(*this, target1, target2);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_lrising_factorial(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/rising_factorial.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct lrising_factorial_t : eve::strict_elementwise_callable<lrising_factorial_t, Options>
+  {
+    template<typename Z0, typename Z1>
+    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
+      KYOSU_FORCEINLINE constexpr as_cayley_dickson_t<Z0, Z1> operator()(Z0 const& z0, Z1 const & z1) const noexcept
+    { return  kyosu::log(rising_factorial(z0, z1)); }
+
+    template<concepts::real V0, concepts::real V1>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept ->  decltype(eve::lrising_factorial(complex(v0),v1))
+    { return eve::lrising_factorial(v0,v1); }
+
+    KYOSU_CALLABLE_OBJECT(lrising_factorial_t, lrising_factorial_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var lrising_factorial
-//!   @brief Computes the lrising_factorial function: \f$\log\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
+//!   @brief Computes the natural logarithm of the rising_factorial function
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -53,22 +45,25 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      auto lrising_factorial(auto x,auto y) noexcept;
+//!      auto lrising_factorial(auto x, auto y) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `x`,`y` : Values to process.
+//!     * `x`,`y` : Values to process. Can be a mix of cayley_dickson and real floating values.
 //!
 //!   **Return value**
 //!
-//!   @brief Computes the logarithm of rising Factorial i.e. \f$\log\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
+//!      \f$\displaystyle \log\left(\frac{\Gamma(a+x)}{\Gamma(a)}\right)\f$ is returned.
+//!      If all iputs are real typed they are reated as complex ones.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/lrising_factorial.cpp}
+//======================================================================================================================
+  inline constexpr auto lrising_factorial = eve::functor<lrising_factorial_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_lrising_factorial lrising_factorial = {};
 }

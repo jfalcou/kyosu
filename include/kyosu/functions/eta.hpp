@@ -1,44 +1,32 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_eta : eve::elementwise
-  {
-    using callable_tag_type = callable_eta;
-
-    KYOSU_DEFERS_CALLABLE(eta_);
-
-    template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      auto fn = callable_eta{};
-      return fn(complex(v));
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const & target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_eta(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/deta.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct eta_t : eve::elementwise_callable<eta_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
+
+    KYOSU_CALLABLE_OBJECT(eta_t, eta_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -46,7 +34,7 @@ namespace kyosu
 //!   @brief Computes the Dirichlet sum \f$ \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\f$.
 //!   Sometimes this function is for obvious reasons called the alternative \f$\zeta\f$ function .
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -73,7 +61,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/eta.cpp}
+//======================================================================================================================
+  inline constexpr auto eta = eve::functor<eta_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_eta eta = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto eta_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return deta(1u, z);
+  }
 }

@@ -7,61 +7,47 @@
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-#include <kyosu/types/impl/quaternion/axis.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_rotate_vec: eve::elementwise
-  {
-    using callable_tag_type = callable_rotate_vec;
-
-    KYOSU_DEFERS_CALLABLE(rotate_vec_);
-
-    template<eve::floating_ordered_value V, typename U, bool normalize>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const &
-                                               , U const & v
-                                               , _::norming<normalize>) noexcept
-    {
-      return v;
-    }
-
-    template<eve::floating_ordered_value V, typename U>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const &
-                                               , U const & v
-                                               ) noexcept
-    {
-      return v;
-    }
-
-    template<typename T0, typename T1, bool normalize>
-    KYOSU_FORCEINLINE auto operator()( T0 const& target0
-                                     , T1 const& target1
-                                     , _::norming<normalize>) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1, _::norming<normalize>()))
-    {
-      return eve::tag_invoke(*this, target0, target1, _::norming<normalize>());
-    }
-
-    template<typename T0, typename T1>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0,
-                                      T1 const& target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1, _::norming<true>()))
-    {
-      return eve::tag_invoke(*this, target0, target1, _::norming<true>{} );
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_rotate_vec(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/arg.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct rotate_vec_t : eve::elementwise_callable<rotate_vec_t, Options>
+  {
+//     template<concepts::real V>
+//     KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
+//     {
+//       auto z = eve::zero(eve::as(v));
+//       return kumi::tuple{eve::abs(v), eve::arg(v), z, z};
+//     }
+
+    template<concepts::cayley_dickson Z, concepts::real T, std::size_t S, bool normalize>
+    requires(dimension_v<Z> <= 4)
+      KYOSU_FORCEINLINE constexpr auto operator()(Z const& q,  std::span<T, S> v
+                                                 , _::norming<normalize>) const noexcept
+    {
+      using e_t = as_real_type_t<Z>;
+      using v_t = decltype(v[0]+e_t());
+      std::array<v_t, 3> w, wp;
+      using a_t = decltype(kyosu::abs(q));
+      a_t fac(2);
+      if constexpr(normalize) fac *= kyosu::rec(kyosu::sqr_abs(q));
+      auto [r, i, j, k] = q;
+      w[0] = eve::fma(r, v[0], eve::diff_of_prod(j, v[2], k, v[1]));
+      w[1] = eve::fma(r, v[1], eve::diff_of_prod(k, v[0], i, v[2]));
+      w[2] = eve::fma(r, v[2], eve::diff_of_prod(i, v[1], j, v[0]));
+
+      wp[0] = eve::fam(v[0], fac, eve::diff_of_prod(j, w[2], k, w[1]));
+      wp[1] = eve::fam(v[1], fac, eve::diff_of_prod(k, w[0], i, w[2]));
+      wp[2] = eve::fam(v[2], fac, eve::diff_of_prod(i, w[1], j, w[0]));
+      return wp;
+    }
+
+    KYOSU_CALLABLE_OBJECT(rotate_vec_t, rotate_vec_);
+  };
+
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -69,7 +55,7 @@ namespace kyosu
   //!
   //! @brief Callable object rotating an \f$\mathbb{R}^3\f$ vector using a quaternion.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -99,8 +85,9 @@ namespace kyosu
   //! #### Example
   //!
   //! @godbolt{doc/rotate_vec.cpp}
-  //!
+  //================================================================================================
+  inline constexpr auto rotate_vec = eve::functor<rotate_vec_t>;
+  //================================================================================================
   //!  @}
   //================================================================================================
-  inline constexpr tags::callable_rotate_vec rotate_vec = {};
 }

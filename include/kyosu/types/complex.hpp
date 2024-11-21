@@ -8,21 +8,25 @@
 #pragma once
 
 #include <kyosu/types/cayley_dickson.hpp>
-#include <eve/concept/value.hpp>
+#include <kyosu/types/traits.hpp>
 
 namespace kyosu
 {
   //====================================================================================================================
   //! @addtogroup types
   //! @{
+  //====================================================================================================================
+
+  //====================================================================================================================
   //! @typedef complex_t
   //! @brief Type alias for complex numbers
   //!
-  //! Complex numbers are implemented as Caley-dickson numbers of dimension 2.
-  //!
+  //! Complex numbers are implemented as Cayley-dickson numbers of dimension 2.
+  //====================================================================================================================
+  template<eve::floating_value T>
+  using complex_t = as_cayley_dickson_n_t<2,T>;
+
+  //====================================================================================================================
   //! @}
   //====================================================================================================================
-
-  template<typename T>
-  using complex_t = as_cayley_dickson_n_t<2,T>;
 }

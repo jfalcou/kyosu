@@ -6,47 +6,34 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <kyosu/functions/to_complex.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_exp_i: eve::elementwise
-  {
-    using callable_tag_type = callable_exp_i;
-
-    KYOSU_DEFERS_CALLABLE(exp_i_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      const auto ii = kyosu::complex(T(0), T(1));
-      return kyosu::exp(ii*v);
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_exp_i(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/exp.hpp>
+#include <kyosu/functions/muli.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct exp_i_t : eve::elementwise_callable<exp_i_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(v); }
+
+    KYOSU_CALLABLE_OBJECT(exp_i_t, exp_i_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var exp_i
 //!   @brief Computes the exponential of i times the argument
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -57,8 +44,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexp_ir T exp_i(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexp_ir T exp_i(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T exp_i(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T exp_i(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -73,7 +60,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/exp_i.cpp}
+//======================================================================================================================
+  inline constexpr auto exp_i = eve::functor<exp_i_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_exp_i exp_i = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto exp_i_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return kyosu::exp(muli(z));
+  }
 }

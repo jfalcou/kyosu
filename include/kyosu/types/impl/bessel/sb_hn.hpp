@@ -10,7 +10,7 @@
 namespace kyosu::_
 {
   /////////////////////////////////
-  // contains implementations of
+  // needed in implementations of
   // sph_bessel_h1_0
   // sph_bessel_h1_1
   // sph_bessel_h2_0
@@ -64,7 +64,7 @@ namespace kyosu::_
   auto sb_h1n(N n, Z z) noexcept
   {
     using u_t   =  eve::underlying_type_t<Z>;
-    return eve::sign_alternate(u_t(n))*sph_bessel_h2n(n, -z);
+    return eve::sign_alternate(u_t(n))*sb_h2n(n, -z);
   }
 
   template<typename Z> KYOSU_FORCEINLINE
@@ -83,7 +83,7 @@ namespace kyosu::_
   auto sb_h1n(int n, Z z) noexcept
   {
     using u_t   =  eve::underlying_type_t<Z>;
-    return eve::sign_alternate(u_t(n))*sph_bessel_h2n(n, -z);
+    return eve::sign_alternate(u_t(n))*sb_h2n(n, -z);
   }
 
   template<typename Z> KYOSU_FORCEINLINE
@@ -97,63 +97,4 @@ namespace kyosu::_
   {
      return -sb_h2_1(-z);
  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  sph_bessel_h1n
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_h1n>, int n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z>)
-    {
-      EVE_ASSERT(n >= 0, "spherical functions need positive order");
-      return sb_h1n(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(sph_bessel_h1n, n, z);
-    }
-  }
-
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_h1_0>, Z z) noexcept
-  {
-    return sb_h1_0(z);
-  }
-
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_h1_1>, Z z) noexcept
-  {
-    return sb_h1_1(z);
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  sph_bessel_h2n
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_h2n>, N n, Z z) noexcept
-  {
-    EVE_ASSERT(n >= 0, "spherical functions need positive order");
-    if constexpr(concepts::complex<Z>)
-    {
-      return sb_h2n(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(sph_bessel_h2n, n, z);
-    }
-  }
-
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_h2_0>, Z z) noexcept
-  {
-    return sb_h2n(0, z);
-  }
-
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::sph_bessel_h2_1>, Z z) noexcept
-  {
-    return sb_h2n(1, z);
-  }
-
 }

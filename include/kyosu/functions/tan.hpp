@@ -6,42 +6,33 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_tan: eve::elementwise
-  {
-    using callable_tag_type = callable_tan;
-
-    KYOSU_DEFERS_CALLABLE(tan_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::tan(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_tan(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/tanh.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct tan_t : eve::elementwise_callable<tan_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::tan(v); }
+
+    KYOSU_CALLABLE_OBJECT(tan_t, tan_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var tan
 //!   @brief Computes the tangent of the argument.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -68,13 +59,32 @@ namespace kyosu
 //!
 //!     2. The behavior of this function is equivalent to \f$-i\tanh(i\; z)\f$.
 //!
-//!     3. Returns \f$-I_z\,; \tanh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\tan(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!     3. Returns \f$-I_z\, \tanh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\tan(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/tan.cpp}
+//======================================================================================================================
+  inline constexpr auto tan = eve::functor<tan_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_tan tan = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto tan_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      auto t = kyosu::tanh(Z(-kyosu::imag(z), kyosu::real(z)));
+      return Z(kyosu::imag(t), -kyosu::real(t));
+    }
+    else
+    {
+      return cayley_extend(tan, z);
+    }
+  }
 }

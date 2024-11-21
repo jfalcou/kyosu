@@ -1,48 +1,40 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_rising_factorial : eve::elementwise
-  {
-    using callable_tag_type = callable_rising_factorial;
-
-    KYOSU_DEFERS_CALLABLE(rising_factorial_);
-
-    template<eve::ordered_value T1, eve::ordered_value T2>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T1 const& v, T2 const& w) noexcept {
-      auto fn = callable_rising_factorial{};
-      return fn(complex(v), complex(w)); }
-
-    template<typename T1, typename T2>
-    KYOSU_FORCEINLINE auto operator()(T1 const& target1, T2 const& target2) const noexcept -> decltype(eve::tag_invoke(*this, target1, target2))
-    {
-      return eve::tag_invoke(*this, target1, target2);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_rising_factorial(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/tgamma.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct rising_factorial_t : eve::strict_elementwise_callable<rising_factorial_t, Options>
+  {
+    template<typename Z0, typename Z1>
+    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_t<Z0, Z1> operator()(Z0 const& z0, Z1 const & z1) const noexcept
+    { return kyosu::if_else(is_eqz(z1), one, tgamma(z0+z1)/tgamma(z0));; }
+
+    template<concepts::real V0, concepts::real V1>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept ->  decltype(eve::rising_factorial(complex(v0),v1))
+    { return eve::rising_factorial(v0,v1); }
+
+    KYOSU_CALLABLE_OBJECT(rising_factorial_t, rising_factorial_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var rising_factorial
-//!   @brief Computes the rising_factorial function: \f$\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
+//!   @brief Computes the rising_factorial function: \f$\displaystyle \frac{\Gamma(a+x)}{\Gamma(a)}\f$
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -53,22 +45,24 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      constexpr auto rising_factorial(auto x,auto y) noexcept;
+//!      auto rising_factorial(auto x, auto y) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `x`,`y` : Values to process.
+//!     * `x`,`y` : Values to process. Can be a mix of cayley_dickson and real floating values.
 //!
 //!   **Return value**
 //!
-//!   @brief Computes the rising Factorial i.e. \f$\frac{\Gamma(x+y)}{\Gamma(x)}\f$.
+//!      \f$\displaystyle \frac{\Gamma(a+x)}{\Gamma(a)}\f$ is returned.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/rising_factorial.cpp}
+//======================================================================================================================
+  inline constexpr auto rising_factorial = eve::functor<rising_factorial_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_rising_factorial rising_factorial = {};
 }

@@ -1,43 +1,32 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_erfcx : eve::elementwise
-  {
-    using callable_tag_type = callable_erfcx;
-
-    KYOSU_DEFERS_CALLABLE(erfcx_);
-
-    template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      return eve::erfcx(v);
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_erfcx(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/faddeeva.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct erfcx_t : eve::elementwise_callable<erfcx_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::erfcx(v); }
+
+    KYOSU_CALLABLE_OBJECT(erfcx_t, erfcx_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -45,7 +34,7 @@ namespace kyosu
 //!   @brief Computes the normalized complementary error function
 //!   \f$ \displaystyle \mbox{erfcx}(x) = e^{x^2} \mbox{erfc}(x)\f$.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -74,7 +63,31 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/erfcx.cpp}
+//======================================================================================================================
+  inline constexpr auto erfcx = eve::functor<erfcx_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_erfcx erfcx = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto erfcx_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      auto realz = is_real(z);
+      if (eve::all(realz))
+        return complex(eve::erfcx(real(z)));
+      else  if (eve::none(realz))
+        return faddeeva(complex(-imag(z), real(z)));
+      else
+        return if_else(realz, complex(eve::erfcx(real(z))), faddeeva(complex(-imag(z), real(z))));
+    }
+    else
+    {
+      return cayley_extend(erfcx, z);
+    }
+  }
 }

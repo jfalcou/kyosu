@@ -11,7 +11,7 @@ int main()
   int nb = int(eve::abs(v)+1);
   std::cout << "z                    " << z << std::endl;
   std::vector<decltype(z)> js(nb);
-  kyosu::cyl_bessel_j(v, z, js);
+  kyosu::cyl_bessel_j(v, z, std::span(js));
   auto inc = eve::sign(v);
   auto v0 =  eve::frac(v);
   for(int n=0; n < nb; ++n)

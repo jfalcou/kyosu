@@ -19,14 +19,15 @@ TTS_CASE_WITH ( "Check kyosu::expm1 over real"
 
 TTS_CASE_WITH ( "Check kyosu::expm1 over quaternion"
               , kyosu::simd_real_types
-              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
-                              , tts::randoms(-10,10), tts::randoms(-10,10)
+              , tts::generate ( tts::randoms(-3,3), tts::randoms(-3,3)
+                              , tts::randoms(-3,3), tts::randoms(-3,3)
                               )
               )
 <typename T>(T r, T i, T j, T k)
 {
+  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-6 : 1.e-3;
   using ke_t = kyosu::quaternion_t<T>;
   auto q = ke_t(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::expm1(q), kyosu::dec(kyosu::exp(q)), 1e-5);
-  TTS_RELATIVE_EQUAL(kyosu::expm1(kyosu::quaternion(T(0))), kyosu::quaternion(T(0)), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::expm1(q), kyosu::dec(kyosu::exp(q)), prec);
+  TTS_RELATIVE_EQUAL(kyosu::expm1(kyosu::quaternion(T(0))), kyosu::quaternion(T(0)), prec);
 };

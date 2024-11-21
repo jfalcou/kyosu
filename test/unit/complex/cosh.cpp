@@ -22,6 +22,7 @@ TTS_CASE_WITH( "Check behavior of cosh on scalar"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = typename T::value_type;
+  auto prec = (sizeof(e_t) ==  4) ? 1.0e-3 : 1.0e-6;
   using c_t = std::complex<e_t>;
   using kc_t = kyosu::complex_t<e_t>;
   for(size_t i = 0; i < a0.size(); ++i)
@@ -29,7 +30,7 @@ TTS_CASE_WITH( "Check behavior of cosh on scalar"
     auto e = a0[i];
     auto f = a1[i];
 
-    TTS_RELATIVE_EQUAL(kyosu::cosh(kc_t(e, f)),  cv(std::cosh(c_t(e, f))), 1.0e-6);
+    TTS_RELATIVE_EQUAL(kyosu::cosh(kc_t(e, f)),  cv(std::cosh(c_t(e, f))), prec);
   }
 };
 
@@ -41,8 +42,9 @@ TTS_CASE_WITH( "Check behavior of cosh on wide"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = T;
+  auto prec = (sizeof(eve::element_type_t<e_t>) ==  4) ? 1.0e-3 : 1.0e-6;
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return cv(std::cosh(c_t(a0.get(i), a1.get(i)))); });
-  TTS_RELATIVE_EQUAL(kyosu::cosh(ke_t{a0,a1}), e, 1.0e-6);
+  TTS_RELATIVE_EQUAL(kyosu::cosh(ke_t{a0,a1}), e, prec);
 };

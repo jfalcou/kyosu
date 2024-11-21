@@ -6,46 +6,35 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_acscpi: eve::elementwise
-  {
-    using callable_tag_type = callable_acscpi;
-
-    KYOSU_DEFERS_CALLABLE(acscpi_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      auto fn = callable_acscpi{};
-      return fn(complex(v));
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_acscpi(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/acsc.hpp>
+#include <kyosu/functions/radinpi.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct acscpi_t : eve::elementwise_callable<acscpi_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr  complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
+
+    KYOSU_CALLABLE_OBJECT(acscpi_t, acscpi_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var acscpi
 //!   @brief Computes the arc cosecant of the argume!nt in \f$\pi\f$ multiples.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -67,14 +56,25 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!   1. a real input z is treated as if `complex(z)` was entered.
 //!
-//!   2. Returns Returns kyosu::radinpi([kyosu::csc](@ref kyosu::acsc)(z))
+//!   2. Returns `radinpi(acsc(z))`
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/acscpi.cpp}
+//======================================================================================================================
+  inline constexpr auto acscpi = eve::functor<acscpi_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_acscpi acscpi = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acscpi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return radinpi(kyosu::acsc(z));
+  }
 }

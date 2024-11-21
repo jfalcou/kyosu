@@ -62,7 +62,7 @@ namespace kyosu
 #endif
 
   template<concepts::cayley_dickson T>
-  inline constexpr auto dimension_v<T> = eve::element_type_t<std::remove_cvref_t<T>>::static_size;
+  inline constexpr auto dimension_v<T> = eve::element_type_t<std::remove_cvref_t<T>>::static_dimension;
 
   template<typename T>                  struct as_real_type                          { using type = T; };
   template<typename T,unsigned int Dim> struct as_real_type<cayley_dickson<T,Dim>>   { using type = T; };
@@ -91,7 +91,6 @@ namespace kyosu
   {};
 
 #if !defined(KYOSU_DOXYGEN_INVOKED)
-
   template<unsigned int Dim, typename... Ts>
   requires( Dim > 1 && !requires(Ts... ts) { eve::add( std::declval<_::sema_t<Ts>>()...); } )
   struct  as_cayley_dickson_n<Dim, Ts...> {};
@@ -128,26 +127,29 @@ namespace kyosu
   template<typename... Ts>
   using as_cayley_dickson_t = typename as_cayley_dickson<Ts...>::type;
 
+
+  template<auto Callable, typename... Ts>
+  using expected_result_t = as_cayley_dickson_n_t < std::max( {dimension_v<Ts>...} )
+                                                  , decltype( Callable( std::declval<as_real_type_t<Ts>>()...) )
+                                                  >;
+
   using eve::as;
 
   //====================================================================================================================
   //! @struct as_real
   //! @brief Lightweight type-wrapper of real value type
   //!
-  //! Wraps the real type associed to `T` into a constexpr, trivially constructible empty class to optimize passing type
-  //! parameters via object instead of via template parameters.
+  //! Wraps the real type associated to `T` into a constexpr, trivially constructible empty class to optimize passing
+  //! type parameters via object instead of via template parameters.
   //!
   //! @tparam T Type to wrap
   //====================================================================================================================
-  template<typename T> struct as_real
+  template<typename T>
+  struct as_real : as<as_real_type_t<T>>
   {
-    using type        = as_real_type_t<T>;
-    using target_type = eve::as<type>;
-
-    constexpr as_real()          noexcept {}
-    constexpr as_real(T const&)  noexcept {}
+    constexpr           as_real()          noexcept {}
+    explicit constexpr  as_real(T const&)  noexcept {}
   };
-
   //====================================================================================================================
   //!  @}
   //====================================================================================================================

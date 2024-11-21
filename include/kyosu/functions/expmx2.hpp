@@ -6,42 +6,34 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_expmx2: eve::elementwise
-  {
-    using callable_tag_type = callable_expmx2;
-
-    KYOSU_DEFERS_CALLABLE(expmx2_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::expmx2(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_expmx2(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/exp.hpp>
+#include <kyosu/functions/sqr.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct expmx2_t : eve::elementwise_callable<expmx2_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::expmx2(v); }
+
+    KYOSU_CALLABLE_OBJECT(expmx2_t, expmx2_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var expmx2
 //!   @brief Computes the exponential of the opposite of the squared argument.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -68,7 +60,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/expmx2.cpp}
+//======================================================================================================================
+  inline constexpr auto expmx2 = eve::functor<expmx2_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_expmx2 expmx2 = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto expmx2_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return kyosu::exp(-sqr(z));
+  }
 }

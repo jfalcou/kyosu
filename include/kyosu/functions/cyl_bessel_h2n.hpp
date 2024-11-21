@@ -6,40 +6,27 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/bessel.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_cyl_bessel_h2n: eve::elementwise
-  {
-    using callable_tag_type = callable_cyl_bessel_h1n;
-
-    KYOSU_DEFERS_CALLABLE(cyl_bessel_h2n_);
-
-    template<eve::ordered_value N, eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& z) noexcept
-    {
-      using e_t = eve::element_type_t<T>;
-      return complex(cyl_bessel_jn(n, z), -cyl_bessel_yn(n, z));
-    }
-
-    template<typename N, typename T>
-    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
-    {
-      return eve::tag_invoke(*this, target0, target1);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_cyl_bessel_h2n(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct cyl_bessel_h2n_t : eve::strict_elementwise_callable<cyl_bessel_h2n_t, Options>
+  {
+    template<typename Z0, typename Z1>
+    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
+    { return KYOSU_CALL(z0,z1); }
+
+    template<concepts::real V0, concepts::real V1>
+    KYOSU_FORCEINLINE constexpr complex_t<V1> operator()(V0 v0, V1 v1) const noexcept
+    { return KYOSU_CALL(v0,v1); }
+
+    KYOSU_CALLABLE_OBJECT(cyl_bessel_h2n_t, cyl_bessel_h2n_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -72,7 +59,25 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/cyl_bessel_h2n.cpp}
+//======================================================================================================================
+  inline constexpr auto cyl_bessel_h2n = eve::functor<cyl_bessel_h2n_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_cyl_bessel_h2n cyl_bessel_h2n = {};
+}
+
+namespace kyosu::_
+{
+  template<typename N, typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h2n_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      return cyl_bessel_jn(n, z)-muli(cyl_bessel_yn(n, z));
+    }
+    else
+    {
+      return cayley_extend_rev(cyl_bessel_h1n, n, z);
+    }
+  }
 }

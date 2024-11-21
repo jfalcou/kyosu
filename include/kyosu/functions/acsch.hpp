@@ -6,47 +6,34 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
-#include <kyosu/functions/to_complex.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_acsch: eve::elementwise
-  {
-    using callable_tag_type = callable_acsch;
-
-    KYOSU_DEFERS_CALLABLE(acsch_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      auto fn = callable_acsch{};
-      return fn(complex(v));
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_acsch(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/asinh.hpp>
+#include <kyosu/functions/rec.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct acsch_t : eve::elementwise_callable<acsch_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
+
+    KYOSU_CALLABLE_OBJECT(acsch_t, acsch_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var acsch
 //!   @brief Computes the inverse hyperbolic cosecant of the argument.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -68,14 +55,26 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!   1. A real type input z calls `eve::acsch(z)` and so returns the same type as input.
 //!
-//!   2. Returns elementwise \f$\mathop{\mathrm{asinh}}(1/z)\f$.
+//!   2. Returns elementwise `asinh(rec(z))`.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/acsch.cpp}
+//======================================================================================================================
+  inline constexpr auto acsch = eve::functor<acsch_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_acsch acsch = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acsch_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    Z r = kyosu::rec(z);
+    return kyosu::asinh(r);
+  }
 }

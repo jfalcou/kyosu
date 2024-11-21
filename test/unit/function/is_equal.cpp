@@ -29,7 +29,6 @@ TTS_CASE_WITH ( "Check kyosu::is_equal over complex"
 {
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
-  using kyosu::abs;
   TTS_EQUAL(kyosu::is_equal(c0, c1), (r0 == r1) && (i0 == i1));
 };
 
@@ -46,6 +45,5 @@ TTS_CASE_WITH ( "Check kyosu::is_equal over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  using kyosu::abs;
   TTS_EQUAL(kyosu::is_equal(q0, q1),  (r0 == r1) && (i0 == i1) &&  (j0 == j1) && (k0 == k1));
 };

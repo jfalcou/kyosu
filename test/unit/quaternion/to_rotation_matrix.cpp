@@ -27,14 +27,14 @@ TTS_CASE_WITH ( "Check behavior of to_rotation_matrix on wide"
                              , tts::randoms(0.5, +1.0)
                              )
               )
-  <typename T>(T const& a0, T const& a1, T const& a2, T const& a3 )
+<typename T>(T const& a0, T const& a1, T const& a2, T const& a3 )
 {
   using e_t =  eve::element_type_t<T> ;
   using wq_t = eve::wide<kyosu::quaternion_t<e_t>, eve::cardinal_t<T>>;
   std::array<T, 3> v{T(1), T(2), T(3)};
   auto q = kyosu::sign(wq_t(a0, a1, a2, a3));
   wq_t qv(0, v[0], v[1], v[2]);
-  auto m = kyosu::to_rotation_matrix(q, kyosu::assume_normalized);
+  auto m = kyosu::to_rotation_matrix[kyosu::assume_unitary](q);
   auto refq = q*qv*kyosu::conj(q);
   auto res  = prod(m, v);
   std::array<T, 3> ref{kyosu::ipart(refq), kyosu::jpart(refq), kyosu::kpart(refq)};

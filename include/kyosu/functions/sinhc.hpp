@@ -6,42 +6,33 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_sinhc: eve::elementwise
-  {
-    using callable_tag_type = callable_sinhc;
-
-    KYOSU_DEFERS_CALLABLE(sinhc_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::sinhc(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_sinhc(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/details/cayleyify.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct sinhc_t : eve::elementwise_callable<sinhc_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::sinhc(v); }
+
+    KYOSU_CALLABLE_OBJECT(sinhc_t, sinhc_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var sinhc
 //!   @brief Computes the hyperbolic sine cardinal of the argument.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -68,7 +59,27 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sinhc.cpp}
+//======================================================================================================================
+  inline constexpr auto sinhc = eve::functor<sinhc_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_sinhc sinhc = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sinhc_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      auto s = kyosu::sinh(z);
+      using u_t = eve::underlying_type_t<Z>;
+      return kyosu::if_else(kyosu::abs(z) < eve::eps(eve::as(u_t())), eve::one(eve::as(u_t())), s/z);
+    }
+    else
+    {
+      return cayley_extend(sinhc, z);
+    }
+  }
 }

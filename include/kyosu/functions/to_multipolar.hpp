@@ -7,51 +7,52 @@
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
+#include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/arg.hpp>
 
-namespace kyosu::tags
+namespace kyosu
 {
-  struct callable_to_multipolar: eve::elementwise
+  template<typename Options>
+  struct to_multipolar_t : eve::elementwise_callable<to_multipolar_t, Options>
   {
-    using callable_tag_type = callable_to_multipolar;
-
-    KYOSU_DEFERS_CALLABLE(to_multipolar_);
-
-    template<eve::floating_ordered_value V>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & v) noexcept
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
       return kumi::tuple{eve::abs(v), eve::arg(v), z, z};
     }
 
-    template<typename T0>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0))
+    template<concepts::cayley_dickson Z>
+    requires(dimension_v<Z> <= 4)
+      KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
     {
-      return eve::tag_invoke(*this, target0);
+      auto c0 = complex(real(q), imag(q));
+      if constexpr(kyosu::concepts::complex<Z>)
+      {
+        auto z =  eve::zero(eve::as(abs(c0)));
+        return kumi::tuple{abs(c0), arg(c0), z, z};
+      }
+      else
+      {
+        auto c1 = complex(jpart(q), kpart(q));
+        return kumi::tuple{abs(c0), arg(c0), abs(c1), arg(c1)};
+      }
     }
 
-    template<typename... T>
-    eve::unsupported_call<callable_to_multipolar(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    KYOSU_CALLABLE_OBJECT(to_multipolar_t, to_multipolar_);
   };
-}
 
-namespace kyosu
-{
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
   //! @var to_multipolar
   //!
-  //! @brief Callable object computing the multipolar coordinates from a quaternion.
+  //! @brief Callable object computing the multipolar coordinates to a quaternion.
   //!
   //!  This function is the reciprocal of from_multipolar
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -72,16 +73,15 @@ namespace kyosu
   //!
   //! **Return value**
   //!
-  //!  a tuple containing in this order `rho1`, `theta1`, `rho2` `theta2`:  the moduli
-  //!  and  the angles in radian of the multipolar \f$\mathbb{R}^4\f$ coordinates
+  //!   a tuple containing in this order `rho1`, `theta1`, `h1`, `h2`:  the components
+  //!   of the multipolar parametrisation of \f$\mathbb{R}^4\f$ coordinates
   //!
-  //! ---
-  //!
-  //! #### Example
+  //!  @groupheader{Example}
   //!
   //! @godbolt{doc/to_multipolar.cpp}
-  //!
+  //================================================================================================
+  inline constexpr auto to_multipolar = eve::functor<to_multipolar_t>;
+  //================================================================================================
   //!  @}
   //================================================================================================
-  inline constexpr tags::callable_to_multipolar to_multipolar = {};
 }

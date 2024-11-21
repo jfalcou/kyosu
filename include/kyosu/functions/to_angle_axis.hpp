@@ -7,40 +7,33 @@
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_to_angle_axis: eve::elementwise
-  {
-    using callable_tag_type = callable_to_angle_axis;
-
-    KYOSU_DEFERS_CALLABLE(to_angle_axis_);
-
-    template<eve::floating_ordered_value V>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & v) noexcept
-    {
-      return kumi::tuple{V(0), std::array<V, 3>{V(1), V(0), V(0)}};
-    }
-
-    template<typename T0>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0))
-    {
-      return eve::tag_invoke(*this, target0);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_to_angle_axis(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/arg.hpp>
+#include <kyosu/types/impl/quaternion/axis.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct to_angle_axis_t : eve::elementwise_callable<to_angle_axis_t, Options>
+  {
+    template<typename Q>
+    requires((concepts::cayley_dickson<Q> && dimension_v<Q> <= 4) || concepts::real<Q>)
+      KYOSU_FORCEINLINE constexpr auto operator()(Q  q0) const noexcept
+    {
+      auto q = quaternion(sign(q0));
+      using e_t = std::decay_t<decltype(real(q))>;
+      auto ap = kyosu::abs(pure(q));
+      auto invn = eve::rec(ap);
+      invn = eve::if_else(eve::is_infinite(invn), eve::zero, invn);
+      std::array<e_t, 3> v{kyosu::ipart(q)*invn, kyosu::jpart(q)*invn, kyosu::kpart(q)*invn};
+      auto a =  2*eve::atan2[eve::pedantic](ap, kyosu::real(q));
+      return kumi::tuple{a, v};
+    }
+
+    KYOSU_CALLABLE_OBJECT(to_angle_axis_t, to_angle_axis_);
+  };
+
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -48,9 +41,9 @@ namespace kyosu
   //!
   //! @brief Callable object computing the angle and axis coordinates from a quaternion.
   //!
-  //!  This function is the reciprocal of from_angle_axis
+  //!  This function is the reciprocal of `from_angle_axis`
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -74,13 +67,12 @@ namespace kyosu
   //!  a tuple an angle of rotation and a vector of \f$\mathbb{R}^3\f$
   //!  representing the direction of the rotation axis.
   //!
-  //! ---
-  //!
   //! #### Example
   //!
   //! @godbolt{doc/to_angle_axis.cpp}
-  //!
+  //================================================================================================
+  inline constexpr auto to_angle_axis = eve::functor<to_angle_axis_t>;
+  //================================================================================================
   //!  @}
   //================================================================================================
-  inline constexpr tags::callable_to_angle_axis to_angle_axis = {};
 }

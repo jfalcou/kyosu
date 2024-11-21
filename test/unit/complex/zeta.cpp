@@ -19,10 +19,9 @@ TTS_CASE_WITH("Check behavior of zeta on wide"
   using eve::as;
   using kyosu::real;
   using kyosu::zeta;
-  using v_t = eve::element_type_t<T>;
 
 #if defined(__cpp_lib_math_special_functions)
-//  TTS_RELATIVE_EQUAL(real(zeta(a0)), map([](auto e) -> v_t { return std::riemann_zeta(v_t(e)); }, a0), 01.0e-4);
+  using v_t = eve::element_type_t<T>;
   TTS_ULP_EQUAL(real(zeta(T(0))), T(std::riemann_zeta(v_t(0))), 0.5);
   TTS_ULP_EQUAL(real(zeta(T(-0.0))), T(std::riemann_zeta(v_t(-0.0))), 0.5);
   TTS_ULP_EQUAL(real(zeta(T(1.5))), T(std::riemann_zeta(v_t(1.5))), 2.5);

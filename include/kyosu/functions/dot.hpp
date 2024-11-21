@@ -6,45 +6,34 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_dot: eve::elementwise
-  {
-    using callable_tag_type = callable_dot;
-
-    KYOSU_DEFERS_CALLABLE(dot_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const& v0
-                                               , eve::floating_ordered_value auto const& v1) noexcept
-    {
-      return eve::dot(v0, v1);
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1 ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
-    {
-      return eve::tag_invoke(*this, target0, target1);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_dot(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct dot_t : eve::strict_elementwise_callable<dot_t, Options>
+  {
+    template<typename Z0, typename Z1>
+    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept -> as_cayley_dickson_t<Z0, Z1>
+    { return KYOSU_CALL(z0,z1); }
+
+    template<concepts::real V0, concepts::real V1>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> decltype(v0*v1)
+    { return v0*v1; }
+
+    KYOSU_CALLABLE_OBJECT(dot_t, dot_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var dot
 //!   @brief Computes elementwise the dot product of the coordinates of the corresponding element.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -65,15 +54,26 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the dot product of z0 and z1. If z0 and z1 are floating point this is equivalent to z0*z1.
-//!     Arguments can be a mix of floting or Cayley-Dicson values.
+//!     Returns the dot product of z0 and z1: z0*conj(z1).
+//!     Arguments can be a mix of floating or Cayley-Dickson values.
 //!
-//!     `dot(z0, z0)` is always semantically equivalent to `sqr_abs(z0)`.
+//!     `dot(z0, z0)` is always semantically equivalent to `sqr_abs(z0)`, but return a caley-dickson.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/dot.cpp}
+//======================================================================================================================
+  inline constexpr auto dot = eve::functor<dot_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_dot dot = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z0, typename Z1, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
+  {
+    return z0*conj(z1);
+  }
 }

@@ -6,45 +6,34 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/bessel.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_cyl_bessel_ikn: eve::elementwise
-  {
-    using callable_tag_type = callable_cyl_bessel_ikn;
-
-    KYOSU_DEFERS_CALLABLE(cyl_bessel_ikn_);
-
-    template<eve::integral_scalar_value N, eve::floating_ordered_value T, typename R>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v, R& js, R& ys) noexcept
-    {
-      auto fn = callable_cyl_bessel_ikn{};
-      return fn(n, complex(v), js, ys);
-    }
-
-    template<typename N, typename T, typename R>
-    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1, R& output1, R& output2) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1, output1, output2))
-    {
-      return eve::tag_invoke(*this, target0, target1, output1, output2);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_cyl_bessel_ikn(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/bessel.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct cyl_bessel_ikn_t : eve::strict_elementwise_callable<cyl_bessel_ikn_t, Options>
+  {
+    template<eve::integral_scalar_value Z0, typename Z1, std::size_t S>
+    requires(concepts::real<Z1> || concepts::cayley_dickson<Z1>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1, std::span<Z1, S> js, std::span<Z1, S> ys) const noexcept
+    { return KYOSU_CALL(z0,z1,js,ys); }
+
+    template<eve::integral_scalar_value Z0, typename Z1>
+    requires(concepts::real<Z1> || concepts::cayley_dickson<Z1>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
+    { return KYOSU_CALL(z0,z1); }
+
+    KYOSU_CALLABLE_OBJECT(cyl_bessel_ikn_t, cyl_bessel_ikn_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var  cyl_bessel_ikn
-//!   @brief Computes the Bessel functions of the second kind \f$I\f$ and \f$K \f$of integral order,
+//!   @var cyl_bessel_ikn
+//!   @brief Computes simultaneously the  modified Bessel functions of the first
+//!   and second kind of integer orders,
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -55,34 +44,60 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::integral_scalar_value N, eve::floating_ordered_value T, complexRange R>
-//!      constexpr auto cyl_bessel_ikn(N n, T z, R& js,  R& ys) noexcept;
-//!
-//!      template<eve::integral_scalar_value N, conceots::kyosu::complex Z, complexRange R>
-//!      constexpr T    cyl_bessel_ikn(N n, Z z, R& js,  R& ys) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T constexpr auto cyl_bessel_ikn(int n, T z) noexcept;
+//!      template<kyosu::concepts::complex T constexpr auto cyl_bessel_ikn(int n, T z
+//!                                                       , std::span<T> js, std::span<T> ys) noexcept;
+//!      template<kyosu::concepts::real T>          constexpr auto cyl_bessel_ikn(int n, T z) noexcept;
+//!      template<kyosu::concepts::real T>          constexpr auto cyl_bessel_ikn(int n, T z
+//!                                                       , std::span<T> js, std::span<T> ys) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `n`: scalar integral order of the function.
 //!     * `z`: Value to process.
-//!     * `is: range able to contain int(nu)+1 complex values (of type complex_t<T> or Z respectively)
-//!     * `ks: range able to contain int(nu)+1 complex values (of type complex_t<T> or Z respectively)
 //!
 //!   **Return value**
 //!
-//!     * returns the kumi pair \f$\{I_\nu(z), K_\nu(z)\}\f$.
-//!
-//!   *Ouput values
-//!
-//!     * on output is contains the values of   \f$((I_{0+i})_{i = 0\cdot n}\f$
-//!     * on output ks contains the values of   \f$((K_{0+i})_{i = 0\cdot n}\f$
+//!     * returns  a pair containing \f$I_n(z)\f$ and \f$K_n(z)\f$ and if the 'span' parameters are present
+//!       ithey  must be sufficient to hold 'n+1' values each which are respectively
+//!        \$(i_0(x), i_1(x), ...,  i_n(x))\f$ if 'n >= 0$ else \$(i_0(x),i_{-1}(x) ...,  i_{-n}(x)\f$ (for the same computation cost),
+//!       and  \$(k_0(x), k_1(x), ...,  k_n(x))\f$ if 'n >= 0$ else \$(k_0(x),k_{-1}(x) ...,  k_{-n}(x)\f$ (for the same computation cost),
+//!       but use is restricted to real or complex entries..
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/cyl_bessel_ikn.cpp}
+//======================================================================================================================
+  inline constexpr auto cyl_bessel_ikn = eve::functor<cyl_bessel_ikn_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_cyl_bessel_ikn cyl_bessel_ikn = {};
+}
+
+namespace kyosu::_
+{
+
+  template<typename N, typename Z, std::size_t S, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_ikn_(KYOSU_DELAY(), O const&, N n, Z z
+                                                 , std::span<Z, S> is, std::span<Z, S> ks) noexcept
+  {
+    return cb_ikn(n, z, is, ks);
+  }
+
+  template<typename N, typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_ikn_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      auto doit = [n, z](auto is, auto ks){
+        return cb_ikn(n, z, is, ks);
+      };
+      return with_alloca<Z>(eve::abs(n)+1, doit);
+    }
+    else
+    {
+      return cayley_extend_rev2(cyl_bessel_ikn, n, z);
+    }
+  }
 }

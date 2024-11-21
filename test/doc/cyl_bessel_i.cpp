@@ -10,7 +10,7 @@ int main()
   auto v = 3.3;
   std::cout << "z                    " << z << std::endl;
   std::vector<decltype(z)> is(4);
-  kyosu::cyl_bessel_i(v, z, is);
+  kyosu::cyl_bessel_i(v, z, std::span(is));
   for(int n=0; n <= 3; ++n)
   {
     std::cout << "is[" << n << "] = " << is[n] << std::endl;

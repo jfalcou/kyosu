@@ -1,96 +1,81 @@
-//==================================================================================================
+//======================================================================================================================
 /*
-  KYOSU - Expressive Vector Engine
-  Copyright: KYOSU Project Contributors
+  Kyosu - Complex Without Complexes
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_to_polar: eve::elementwise
-  {
-    using callable_tag_type = callable_to_polar;
-
-    KYOSU_DEFERS_CALLABLE(to_polar_);
-
-    template<eve::floating_ordered_value V>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & v) noexcept
-    {
-      auto z = eve::zero(eve::as(v));
-      return kumi::tuple{eve::abs(v), eve::arg(v)};
-    }
-
-    template<typename T0>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0))
-    {
-      return eve::tag_invoke(*this, target0);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_to_polar(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/functions/pure.hpp>
 
 namespace kyosu
 {
-  //================================================================================================
-  //! @addtogroup complex
-  //! @{
-  //! @var to_polar
-  //!
-  //! @brief Callable object computing the polar coordinates from a complex.
-  //!
-  //!  This function is the reciprocal of from_polar
-  //!
-  //! **Defined in header**
-  //!
-  //!   @code
-  //!   #include eve/module/quaternion.hpp>`
-  //!   @endcode
-  //!
-  //!   @groupheader{Callable Signatures}
-  //!
-  //!   @code
-  //!   namespace eve
-  //!   {
-  //!      template<eve::floating_ordered_value T>              constexpr auto arg(T z) noexcept;  //1
-  //!      template<kyosu::concepts::complex T>        constexpr auto atan(T z) noexcept;  //2
-  //!      template<kyosu::concepts::cayley_dickson T> constexpr auto argy(T z) noexcept;  //3
-  //!   }
-  //!   @endcode
-  //!
-  //! **Parameters**
-  //!
-  //!  `q`: cayley dickson value
-  //!
-  //! **Return value**
-  //!
-  //!    1. a tuple containing `rho`, 'theta':  the absolute value
-  //!      and  the argument in radian of the real input (\f$0\f$ or\f$\pi\f$).
-  //!
-  //!    2. a tuple containing `rho`, 'theta':  the modulus
-  //!      and  the argument in radian of the complex  input.
-  //!
-  //!    3. a tuple containing `rho`, 'theta'  the modulus
-  //!      and  the argument in radian of the cayley input and a square root of -1 iz such
-  //!       that `z = rho*exp(iz*theta). The leading coefficient of ìz` is chosen non-negative.`
-  //!
-  //! ---
-  //!
-  //! #### Example
-  //!
-  //! @godbolt{doc/to_polar.cpp}
-  //!
-  //!  @}
-  //================================================================================================
-  inline constexpr tags::callable_to_polar to_polar = {};
+  template<typename Options>
+  struct to_polar_t : eve::elementwise_callable<to_polar_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr auto operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
+
+    KYOSU_CALLABLE_OBJECT(to_polar_t, to_polar_);
+};
+
+//======================================================================================================================
+//! @addtogroup functions
+//! @{
+//!   @var to_polar
+//!   @brief To_Polarrements the argument.
+//!
+//!   @groupheader{Header file}
+//!
+//!   @code
+//!   #include <kyosu/functions.hpp>
+//!   @endcode
+//!
+//!   @groupheader{Callable Signatures}
+//!
+//!   @code
+//!   namespace kyosu
+//!   {
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T to_polar(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr T to_polar(T z) noexcept;
+//!   }
+//!   @endcode
+//!
+//!   **Parameters**
+//!
+//!     * `z`: Value to put in polar coordinates.
+//!
+//!   **Return value**
+//!
+//!     Returns  The kumi tuple `{rho, theta}`. for real and commplex and `{rho, theta, I}` for other cayley-dickson
+//!     where \f$\textrm{I}\f$ is pure and \f$\textrm{I}^2 = -1 \f$
+//!
+//!  @groupheader{Example}
+//!
+//!  @godbolt{doc/to_polar.cpp}
+//======================================================================================================================
+  inline constexpr auto to_polar = eve::functor<to_polar_t>;
+//======================================================================================================================
+//! @}
+//======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto to_polar_(KYOSU_DELAY(), O const&, C c) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<C>)
+      return kumi::tuple{kyosu::abs(c),  kyosu::arg(c)};
+    else
+      return kumi::tuple{kyosu::abs(c),  kyosu::arg(c), sign(ipart(c))*sign(pure(c))};
+  }
 }

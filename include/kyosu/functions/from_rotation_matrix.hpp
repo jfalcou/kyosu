@@ -1,26 +1,22 @@
 //==================================================================================================
 /*
-  KYOSU - Expressive Vector Engine
-  Copyright: KYOSU Project Contributors
+  KYOSU - Complex Without Complexes
+  Copyright: KYOSU Project Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
 
-namespace kyosu::tags
+namespace kyosu
 {
-  struct callable_from_rotation_matrix: eve::elementwise
+  template<typename Options>
+  struct from_rotation_matrix_t : eve::elementwise_callable<from_rotation_matrix_t, Options>
   {
-    using callable_tag_type = callable_from_rotation_matrix;
-
-    KYOSU_DEFERS_CALLABLE(from_rotation_matrix_);
-
-    template<typename M>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , M const & r) noexcept
+    template<typename M >
+    KYOSU_FORCEINLINE constexpr auto operator()( M const& r) const noexcept
+    //  -> quaternion_t<decltype(r[0][0])>
     {
       auto r11pr22 =  r[1][1] + r[2][2];
       auto qq0m1   =  r[0][0] + r11pr22;
@@ -45,22 +41,9 @@ namespace kyosu::tags
       return quaternion(q0, q1, q2, q3);
     }
 
-    template<typename T0>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0))
-    {
-      return eve::tag_invoke(*this, target0);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_from_rotation_matrix(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    KYOSU_CALLABLE_OBJECT(from_rotation_matrix_t, from_rotation_matrix_);
   };
-}
 
-namespace kyosu
-{
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -69,10 +52,10 @@ namespace kyosu
   //! @brief Callable object computing a quaternion from its rotation_matrix representation.
   //!
   //!  This function returns a quaternion associated to the input rotation matrix m.
-  //!  If m is not a proper rotation 3x3 rotation matrix (i.e an orthogonal matrix with determinant 1)
+  //!  If m is not a proper 3x3 rotation matrix (i.e an orthogonal matrix with determinant 1)
   //!  the result is undefined.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -106,7 +89,9 @@ namespace kyosu
   //!  @groupheader{Example}
   //!
   //! @godbolt{doc/from_rotation_matrix.cpp}
-  //!  @}
-  //================================================================================================
-  inline constexpr tags::callable_from_rotation_matrix from_rotation_matrix = {};
+  //======================================================================================================================
+  inline constexpr auto from_rotation_matrix = eve::functor<from_rotation_matrix_t>;
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }

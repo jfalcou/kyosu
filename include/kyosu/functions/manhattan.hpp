@@ -7,43 +7,38 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_manhattan: eve::elementwise
-  {
-    using callable_tag_type = callable_manhattan;
-
-    KYOSU_DEFERS_CALLABLE(manhattan_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const&... vs) noexcept
-    {
-      return eve::manhattan(vs...);
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const&... targets ) const noexcept
-    -> decltype(eve::tag_invoke(*this, targets...))
-    {
-      return eve::tag_invoke(*this, targets...);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_manhattan(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct manhattan_t : eve::strict_tuple_callable<manhattan_t, Options, eve::pedantic_option>
+  {
+    template<eve::value Z0, eve::value ...Zs>
+    requires( concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...) )
+    KYOSU_FORCEINLINE constexpr
+    auto operator()(Z0 z0, Zs... zs) const noexcept -> decltype(eve::manhattan(real(z0), real(zs)...))
+    {
+      return KYOSU_CALL(z0, zs...);
+    }
+
+    template<concepts::real T0, concepts::real... Ts>
+    auto operator()(T0 t0, Ts... ts) const noexcept -> decltype( eve::manhattan(t0, ts...))
+    {
+      return eve::manhattan(t0, ts...);
+    }
+
+    KYOSU_CALLABLE_OBJECT(manhattan_t, manhattan_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var manhattan
-//!   @brief Callable object computing the manhattan operation.
+//!   @brief Computes the sum of the absolute values of all terms of all the parameters.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -54,22 +49,38 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<typename ... Ts> auto manhattan(Ts ... zi ) const noexcept
+//!     constexpr auto manhattan(auto z0, auto ...zs) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `zi...`: Values to process.
+//!     * `z0`, `...zs`: Value to process.
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise  the sum of the absolute values of all elements of each zi.
+//!     The value of the sum of the  values (the\f$l_1\f$ norm) of the \f$l_1\f$ norm of its arguments is returned.
+//!
+//!  @note This is NOT `lpnorm(1, x0, xs...)` which is the \f$l_1\f$ norm of \f$l_2\f$ norm of its arguments.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/manhattan.cpp}
+//======================================================================================================================
+  inline constexpr auto manhattan = eve::functor<manhattan_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_manhattan manhattan = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z0, typename ...Zs, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto manhattan_(KYOSU_DELAY(), O const& o, Z0 const& z0, Zs const& ...zs) noexcept
+  {
+    if constexpr(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...) )
+      return eve::manhattan[o](kumi::flatten(kumi::make_tuple(z0, zs...)));
+    else
+      return eve::manhattan[o](z0, zs...);
+  }
 }

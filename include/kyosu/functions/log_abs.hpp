@@ -6,47 +6,35 @@
 */
 //======================================================================================================================
 #pragma once
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/sqr_abs.hpp>
+#include <kyosu/constants/wrapped.hpp>
 
-#include <kyosu/details/invoke.hpp>
-#include <kyosu/functions/to_complex.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_log_abs: eve::elementwise
-  {
-    using callable_tag_type = callable_log_abs;
-
-    KYOSU_DEFERS_CALLABLE(log_abs_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      auto fn = callable_log_abs{};
-      return fn( kyosu::complex(v, T(0)));
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_log_abs(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
 
 namespace kyosu
 {
+  template<typename Options>
+  struct log_abs_t : eve::elementwise_callable<log_abs_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::log_abs(v); }
+
+    KYOSU_CALLABLE_OBJECT(log_abs_t, log_abs_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var log_abs
 //!   @brief Computes the natural logarithm of the absolute value of the argument.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -73,7 +61,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/log_abs.cpp}
+//======================================================================================================================
+  inline constexpr auto log_abs = eve::functor<log_abs_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_log_abs log_abs = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log_abs_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return kyosu::half(kyosu::as<as_real_type_t<Z>>())*eve::log(kyosu::sqr_abs(z));
+  }
 }

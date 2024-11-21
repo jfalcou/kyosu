@@ -6,44 +6,35 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_maxmag: eve::elementwise
-  {
-    using callable_tag_type = callable_maxmag;
-
-    KYOSU_DEFERS_CALLABLE(maxmag_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const&... vs) noexcept
-    {
-      return eve::maxmag(vs...);
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const&... targets ) const noexcept
-    -> decltype(eve::tag_invoke(*this, targets...))
-    {
-      return eve::tag_invoke(*this, targets...);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_maxmag(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/sqr_abs.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct maxmag_t : eve::strict_elementwise_callable<maxmag_t, Options>
+  {
+    template<typename Z0, typename ...Zs>
+    requires(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...))
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Zs const & ...zs) const noexcept -> decltype(z0 + (zs +...))
+    { return KYOSU_CALL(z0,zs...); }
+
+    template<concepts::real V0, concepts::real ...Vs>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs ... vs) const noexcept -> decltype(eve::maxmag(v0,vs...))
+    { return eve::maxmag(v0,vs...); }
+
+    KYOSU_CALLABLE_OBJECT(maxmag_t, maxmag_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var maxmag
 //!   @brief Callable object computing the maxmag operation.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -69,7 +60,31 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/maxmag.cpp}
+//======================================================================================================================
+  inline constexpr auto maxmag = eve::functor<maxmag_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_maxmag maxmag = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z0, typename Z1, typename ... Zs, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto maxmag_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1, Zs ... zs) noexcept
+  {
+    if constexpr(sizeof...(zs) == 0)
+    {
+      auto az0 = kyosu::sqr_abs(z0);
+      auto az1 = kyosu::sqr_abs(z1);
+      auto tmp = kyosu::if_else(eve::is_not_greater_equal(az0, az1), z1, z0);
+      return kyosu::if_else(eve::is_not_greater_equal(az1, az0), z0, tmp);
+    }
+    else
+    {
+      using r_t = kyosu::as_cayley_dickson_t<Z0, Z1, Zs...>;
+      r_t that(maxmag(z0, z1));
+      ((that = maxmag(that, zs)), ...);
+      return that;
+    }
+  }
 }

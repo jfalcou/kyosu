@@ -6,42 +6,35 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_cosh: eve::elementwise
-  {
-    using callable_tag_type = callable_cosh;
-
-    KYOSU_DEFERS_CALLABLE(cosh_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::cosh(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_cosh(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/is_real.hpp>
+#include <kyosu/functions/is_not_finite.hpp>
+#include <kyosu/details/cayleyify.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct cosh_t : eve::elementwise_callable<cosh_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::cosh(v); }
+
+    KYOSU_CALLABLE_OBJECT(cosh_t, cosh_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var cosh
 //!   @brief Computes the hyperbolic cosine of the argument.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -64,31 +57,60 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   2. Returns elementwise the complex value
-//!      of the hyperbolic cosine of the input.
+//!     1. returns `eve::cosh(z)`
 //!
-//!      * for every z: `kyosu::cosh(kyosu::conj(z)) == kyosu::conj(std::cosh(z))`
-//!      * for every z: `kyosu::cosh(-z)           == kyosu::cosh(z)`
-//!      *  If z is \f$0\f$, the result is \f$1\f$
-//!      *  If z is \f$i \infty\f$, the result is \f$NaN\f$
-//!      *  If z is \f$i NaN\f$, the result is \f$NaN\f$
-//!      *  If z is \f$x+i \infty\f$ (for any finite non-zero x), the result is \f$NaN+i NaN\f$
-//!      *  If z is \f$x+i NaN\f$ (for any finite non-zero x), the result is \f$NaN+i NaN\f$
-//!      *  If z is \f$\infty+i 0\f$, the result is \f$\infty+i 0\f$
-//!      *  If z is \f$\infty,y\f$ (for any finite non-zero y), the result is \f$\infty e^{iy}\f$
-//!      *  If z is \f$\infty+i \infty\f$, the result is \f$\pm \infty+i NaN\f$  (the sign of the real part is unspecified)
-//!      *  If z is \f$\infty+i NaN\f$, the result is \f$\infty+i NaN\f$
-//!      *  If z is \f$NaN\f$, the result is \f$NaN\f$
-//!      *  If z is \f$NaN+i y\f$ (for any finite non-zero y), the result is \f$NaN+i NaN\f$
-//!      *  If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
+//!     2. Returns elementwise the complex value of the hyperbolic cosine of the input.
 //!
-//!   3. Is semantically equivalent to (exp(z)+exp(-z))/2.
-
+//!        *  for every z: `cosh(conj(z)) == conj(cosh(z))`
+//!        *  for every z: `cosh(-z) == cosh(z)`
+//!        *  If z is \f$0\f$, the result is \f$1\f$
+//!        *  If z is \f$i \infty\f$, the result is \f$\textrm{NaN}\f$
+//!        *  If z is \f$i \textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$
+//!        *  If z is \f$x+i \infty\f$ (for any finite non-zero x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
+//!        *  If z is \f$x+i \textrm{NaN}\f$ (for any finite non-zero x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
+//!        *  If z is \f$\infty+i 0\f$, the result is \f$\infty+i 0\f$
+//!        *  If z is \f$\infty,y\f$ (for any finite non-zero y), the result is \f$\infty e^{iy}\f$
+//!        *  If z is \f$\infty+i \infty\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$  (the sign of the real part is unspecified)
+//!        *  If z is \f$\infty+i \textrm{NaN}\f$, the result is \f$\infty+i \textrm{NaN}\f$
+//!        *  If z is \f$\textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$
+//!        *  If z is \f$\textrm{NaN}+i y\f$ (for any finite non-zero y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
+//!        *  If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
+//!
+//!     3. Is semantically equivalent to `(exp(z)+exp(-z))/2`.
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/cosh.cpp}
+//======================================================================================================================
+  inline constexpr auto cosh = eve::functor<cosh_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_cosh cosh = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cosh_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      auto [rz, iz] = z;
+      auto [s, c]   = eve::sincos(iz);
+      auto [sh, ch] = eve::sinhcosh(rz);
+      auto r = c*ch;
+      auto i = s*sh;
+      i = eve::if_else(kyosu::is_eqz(kyosu::ipart(z)) || kyosu::is_real(z), eve::zero, i);
+      auto res = Z(r, i);
+      if (eve::any(kyosu::is_not_finite(z)))
+      {
+        res = eve::if_else(eve::is_infinite(rz) && eve::is_not_finite(iz), Z(eve::inf(eve::as(rz)), eve::nan(eve::as(rz))), res);
+        res = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz),        Z(eve::nan(eve::as(rz)), eve::nan(eve::as(rz))), res);
+      }
+      return res;
+    }
+    else
+    {
+      return cayley_extend(cosh, z);
+    }
+  }
 }

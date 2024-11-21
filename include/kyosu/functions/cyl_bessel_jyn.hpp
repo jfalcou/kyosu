@@ -6,52 +6,33 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/bessel.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_cyl_bessel_jyn: eve::elementwise
-  {
-    using callable_tag_type = callable_cyl_bessel_jyn;
-
-    KYOSU_DEFERS_CALLABLE(cyl_bessel_jyn_);
-
-    template<eve::integral_scalar_value N, eve::floating_ordered_value T, typename R>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& v, R& js, R& ys) noexcept
-    //    requires(concepts::complex<decltype(js[0])> && concepts::complex<decltype(ys[0])>)
-    {
-      auto fn = callable_cyl_bessel_jyn{};
-      return fn(n, complex(v), js, ys);
-    }
-
-    template<typename N, typename T, typename R>
-    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1, R& output1, R& output2) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1, output1, output2))
-    {
-      return eve::tag_invoke(*this, target0, target1, output1, output2);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_cyl_bessel_jyn(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/bessel.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct cyl_bessel_jyn_t : eve::strict_elementwise_callable<cyl_bessel_jyn_t, Options>
+  {
+    template<eve::integral_scalar_value Z0, typename Z1, std::size_t S>
+    requires(concepts::real<Z1> || concepts::cayley_dickson<Z1>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1, std::span<Z1, S> js, std::span<Z1, S> ys) const noexcept
+    { return KYOSU_CALL(z0,z1,js,ys); }
+
+    template<eve::integral_scalar_value Z0, typename Z1>
+    requires(concepts::real<Z1> || concepts::cayley_dickson<Z1>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
+    { return KYOSU_CALL(z0,z1); }
+
+    KYOSU_CALLABLE_OBJECT(cyl_bessel_jyn_t, cyl_bessel_jyn_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var cyl_bessel_jyn
-//!   @brief Computes the Bessel functions of the first kind J and Y,
-//!   \f$ J_{\nu}(x)=\sum_{p=0}^{\infty}{\frac{(-1)^p}{p!\,\Gamma (p+\nu +1)}}
-//!   {\left({x \over 2}\right)}^{2p+\nu }\f$
-//!   extended to the complex plane.
-//!
-//!   It is the solution of \f$ x^{2}y''+xy'+(x^2-\nu^2)y=0\f$ for which
-//!   \f$ y(0) = 0\f$ if \f$\nu \ne 0\f$ else \f$1\f$.
+//!   @brief Computes the simultaneous Bessel functions of the first and second kind,
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -62,34 +43,60 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::integral_scalar_value N, eve::floating_ordered_value T, complexRange R>
-//!      constexpr auto cyl_bessel_jyn(N n, T z, R& js,  R& ys) noexcept;
-//!
-//!      template<eve::integral_scalar_value N, conceots::kyosu::complex Z, complexRange R>
-//!      constexpr T    cyl_bessel_jyn(N n, Z z, R& js,  R& ys) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T constexpr auto cyl_bessel_jyn(int n, T z) noexcept;
+//!      template<kyosu::concepts::complex T constexpr auto cyl_bessel_jyn(int n, T z
+//!                                                       , std::span<T> js, std::span<T> ys) noexcept;
+//!      template<kyosu::concepts::real T>          constexpr auto cyl_bessel_jyn(int n, T z) noexcept;
+//!      template<kyosu::concepts::real T>          constexpr auto cyl_bessel_jyn(int n, T z
+//!                                                       , std::span<T> js, std::span<T> ys) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `n`: scalar integral order of the function.
 //!     * `z`: Value to process.
-//!     * `js: range able to contain int(nu)+1 complex values (of type complex_t<T> or Z respectively)
-//!     * `ys: range able to contain int(nu)+1 complex values (of type complex_t<T> or Z respectively)
 //!
 //!   **Return value**
 //!
-//!     * returns the kumi pair \f$\{J_\nu(z), Y_\nu(z)\}f$.
-//!
-//!   *Ouput values
-//!
-//!     * on output js contains the values of   \f$((J_{0+i})_{i = 0\cdot n}\f$
-//!     * on output ys contains the values of   \f$((Y_{0+i})_{i = 0\cdot n}\f$
+//!     * returns  a pair containing \f$J_n(z)\f$ and \f$Y_n(z)\f$ and if the 'span' parameters are present
+//!       ithey  must be sufficient to hold 'n+1' values each which are respectively
+//!        \$(j_0(x), j_1(x), ...,  j_n(x))\f$ if 'n >= 0$ else \$(j_0(x),j_{-1}(x) ...,  j_{-n}(x)\f$ (for the same computation cost),
+//!       and  \$(y_0(x), y_1(x), ...,  y_n(x))\f$ if 'n >= 0$ else \$(y_0(x),y_{-1}(x) ...,  y_{-n}(x)\f$ (for the same computation cost),
+//!       but use is restricted to real or complex entries..
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/cyl_bessel_jyn.cpp}
+//======================================================================================================================
+  inline constexpr auto cyl_bessel_jyn = eve::functor<cyl_bessel_jyn_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_cyl_bessel_jyn cyl_bessel_jyn = {};
+}
+
+namespace kyosu::_
+{
+
+  template<typename N, typename Z, std::size_t S, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_jyn_(KYOSU_DELAY(), O const&, N n, Z z
+                                                 , std::span<Z, S> js, std::span<Z, S> ys) noexcept
+  {
+    return cb_jyn(n, z, js, ys);
+  }
+
+  template<typename N, typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_jyn_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      auto doit = [n, z](auto js, auto ys){
+        return cb_jyn(n, z, js, ys);
+      };
+      return with_alloca<Z>(eve::abs(n)+1, doit);
+    }
+    else
+    {
+      return cayley_extend_rev2(cyl_bessel_jyn, n, z);
+    }
+  }
 }

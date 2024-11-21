@@ -1,29 +1,24 @@
 //==================================================================================================
 /*
-  KYOSU - Expressive Vector Engine
-  Copyright: KYOSU Project Contributors
+  KYOSU - Complex Without Complexes
+  Copyright: KYOSU Project Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
 
-namespace kyosu::tags
+namespace kyosu
 {
-  struct callable_from_cylindrospherical: eve::elementwise
+  template<typename Options>
+  struct from_cylindricospherical_t : eve::elementwise_callable<from_cylindricospherical_t, Options>
   {
-    using callable_tag_type = callable_from_cylindrospherical;
-
-    KYOSU_DEFERS_CALLABLE(from_cylindrospherical_);
-
-    template<eve::floating_ordered_value V,  eve::floating_ordered_value U,  eve::floating_ordered_value W,  eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & t
+    template<concepts::real U ,concepts::real V,concepts::real W, concepts::real T>
+    KYOSU_FORCEINLINE constexpr auto operator()(V const & t
                                                , U const & radius
                                                , W const & longitude
-                                               , T const & latitude) noexcept
+                                               , T const & latitude) const noexcept -> quaternion_t<eve::common_value_t<V, U, W, T>>
     {
       auto [slat, clat] = eve::sincos(latitude);
       auto [slon, clon] = eve::sincos(longitude);
@@ -31,25 +26,9 @@ namespace kyosu::tags
       return kyosu::quaternion(t, f*clon, f*slon, radius*slat);
     }
 
-    template<typename T0, typename T1, typename T2, typename T3>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0,
-                                      T1 const& target1,
-                                      T2 const& target2,
-                                      T3 const& target3
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0,  target1,  target2,  target3))
-    {
-      return eve::tag_invoke(*this, target0,  target1,  target2,  target3);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_from_cylindrospherical(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    KYOSU_CALLABLE_OBJECT(from_cylindricospherical_t, from_cylindricospherical_);
   };
-}
 
-namespace kyosu
-{
  //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -63,7 +42,7 @@ namespace kyosu
   //!  This function therefore builds a quaternion from this representation, with the \f$\mathbb{R}^3\f$ component given
   //!  in usual \f$\mathbb{R}^3\f$ spherical coordinates.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -92,8 +71,9 @@ namespace kyosu
   //! #### Example
   //!
   //! @godbolt{doc/from_cylindrospherical.cpp}
-  //!
-  //!  @}
   //================================================================================================
-  inline constexpr tags::callable_from_cylindrospherical from_cylindrospherical = {};
+  inline constexpr auto from_cylindricospherical = eve::functor<from_cylindricospherical_t>;
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }

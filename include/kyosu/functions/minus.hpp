@@ -6,42 +6,32 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_minus: eve::elementwise
-  {
-    using callable_tag_type = callable_minus;
-
-    KYOSU_DEFERS_CALLABLE(minus_);
-
-    template<eve::value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return -v; }
-    // there is no other implementation
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_minus(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct minus_t : eve::elementwise_callable<minus_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::minus(v); }
+
+    KYOSU_CALLABLE_OBJECT(minus_t, minus_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var minus
 //!   @brief Computes the opposite value.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -68,7 +58,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/minus.cpp}
+//======================================================================================================================
+  inline constexpr auto minus = eve::functor<minus_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_minus minus = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto minus_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return -z;
+  }
 }

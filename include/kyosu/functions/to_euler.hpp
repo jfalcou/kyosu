@@ -7,61 +7,123 @@
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-#include <kyosu/types/impl/quaternion/axis.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_to_euler: eve::elementwise
-  {
-    using callable_tag_type = callable_to_euler;
-
-    KYOSU_DEFERS_CALLABLE(to_euler_);
-
-    template<eve::floating_ordered_value V,
-             int I,  int J,  int K, bool Extrinsic>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                             , V const & v
-                                             , _::axis<I>
-                                             , _::axis<J>
-                                             , _::axis<K>
-                                             , _::ext<Extrinsic>
-                                             ) noexcept
-    requires(I != J && J != K)
-    {
-      return  kumi::tuple{eve::zero(eve::as<V>()), eve::zero(eve::as<V>()), eve::zero(eve::as<V>())};
-    }
-
-    template<typename T0, int I,  int J,  int K, bool Extrinsic>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0
-                                     , _::axis<I>
-                                     , _::axis<J>
-                                     , _::axis<K>
-                                     , _::ext<Extrinsic>
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0
-                               , _::axis<I>{}
-                               , _::axis<J>{}
-                               , _::axis<K>{}
-                               , _::ext<Extrinsic>{}
-                               ))
-    {
-      return eve::tag_invoke(*this, target0
-                            , _::axis<I>{}
-                            , _::axis<J>{}
-                            , _::axis<K>{}
-                            , _::ext<Extrinsic>{} );
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_to_euler(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/arg.hpp>
+#include <kyosu/types/impl/quaternion/axis.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct to_euler_t : eve::elementwise_callable<to_euler_t, Options>
+  {
+    template<typename Q, int II,  int JJ,  int KK, bool Extrinsic>
+    requires((concepts::cayley_dickson<Q> && dimension_v<Q> <= 4) || concepts::real<Q>)
+      KYOSU_FORCEINLINE constexpr auto operator()(Q  q0
+                                                 , _::axis<II>
+                                                 , _::axis<JJ>
+                                                 , _::axis<KK>
+                                                 , _::ext<Extrinsic>) const noexcept
+    //   -> kumi::tuple<as_real_t<Q>, as_real_t<Q>, as_real_t<Q>>
+    {
+      using e_t =  std::remove_reference_t<decltype(real(Q()))>;
+      auto q = quaternion(q0);
+      std::array<e_t, 4> aq{real(q), ipart(q), jpart(q), kpart(q)};
+      constexpr bool is_proper = II == KK; //Proper Euler angles else Tait-Bryan
+
+      auto prepare = [&](){
+        if constexpr(Extrinsic)
+        {
+          constexpr int K = 6-II-JJ;
+          constexpr int I = II;
+          constexpr int J = JJ;
+          int sign = (I-J)*(J-K)*(K-I)/2; // even (+1) permutation or odd (-1);
+
+          auto a = aq[0];
+          auto b = aq[I];
+          auto c = aq[J];
+          auto d = aq[K]*sign;
+          if constexpr(!is_proper)
+          {
+            a -= aq[J];
+            b += aq[K]*sign;
+            c += aq[0];
+            d -= aq[I];
+          }
+          return kumi::tuple{a, b, c, d, sign};
+        }
+        else
+        {
+          constexpr int I = KK;
+          constexpr int J = JJ;
+          constexpr int K = 6-I-J;
+          int sign = (I-J)*(J-K)*(K-I)/2; // even (+1) permutation or odd (-1);
+
+          auto a = aq[0];
+          auto b = aq[I];
+          auto c = aq[J];
+          auto d = aq[K]*sign;
+          if constexpr(!is_proper)
+          {
+            a -= aq[J];
+            b += aq[K]*sign;
+            c += aq[0];
+            d -= aq[I];
+          }
+          return kumi::tuple{a, b, c, d, sign};
+        }
+      };
+      auto [a, b, c, d, sign] = prepare();
+      auto a2pb2 = eve::sqr(a)+eve::sqr(b);
+      auto n2 = a2pb2+eve::sqr(c)+eve::sqr(d);
+      auto theta1 = eve::acos(eve::dec(2*a2pb2/n2));
+      auto eps = 1e-7;
+      auto pi  = eve::pi(eve::as<e_t>());
+      auto twopi = eve::two_pi(eve::as<e_t>());
+      auto mpi = -pi;
+      auto is_safe1 = eve::abs(theta1) >= eps;
+      auto is_safe2 = eve::abs(theta1 - pi) >= eps;
+      auto is_safe = is_safe1 && is_safe2;
+
+      auto hp = eve::atan2(b, a);
+      auto hm = eve::atan2(-d, c);
+
+      auto theta0 = hp + hm;
+      auto theta2 = hp - hm;
+
+      if constexpr(!Extrinsic)
+      {
+        theta0 = eve::if_else(!is_safe, eve::zero, theta0);
+        theta2 = eve::if_else(!is_safe1, 2*hp, theta2);
+        theta2 = eve::if_else(!is_safe2, -2*hm, theta2);
+      }
+      else
+      {
+        theta2 = eve::if_else(!is_safe, eve::zero, theta2);
+        theta0 = eve::if_else(!is_safe1, 2*hp, theta0);
+        theta0 = eve::if_else(!is_safe2, 2*hm, theta0);
+      }
+      theta0 += eve::if_else(theta0 < mpi, twopi, eve::zero);
+      theta0 -= eve::if_else(theta0 >  pi, twopi, eve::zero);
+      theta1 += eve::if_else(theta1 < mpi, twopi, eve::zero);
+      theta1 -= eve::if_else(theta1 >  pi, twopi, eve::zero);
+      theta2 += eve::if_else(theta2 < mpi, twopi, eve::zero);
+      theta2 -= eve::if_else(theta2 >  pi, twopi, eve::zero);
+
+      // for Tait-Bryan thetas
+      if(!is_proper)
+      {
+        theta2 *= sign;
+        theta1 -= pi / 2;
+      }
+      if constexpr(!Extrinsic) std::swap(theta0, theta2);
+
+      return kumi::tuple{theta0, theta1, theta2};
+    }
+
+    KYOSU_CALLABLE_OBJECT(to_euler_t, to_euler_);
+  };
+
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -73,9 +135,9 @@ namespace kyosu
   //!  are used to choose the euler order.
   //!
   //!  for instance I = 3, J = 2, K = 3 choose the ZYZ sequence.
-  //!  the values of I, J, and K must be in {1, 2, 3} ans satisfy I != J && J != K.
+  //!  the values of I, J, and K must be in {1, 2, 3} and satisfy `I != J && J != K`.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -95,7 +157,7 @@ namespace kyosu
   //! **Parameters**
   //!
   //!  * `q` the rotation quaternion (not necesseraly normalized)
-  //!  * `a1`, `a2`, `a3`: the axis parameters to be chosen between X_,  Y_, Z_ (two consecutive axis cannot be the same)
+  //!  * `a1`, `a2`, `a3`: the axis parameters to be chosen between X_,  Y_, Z_ (two consecutive axes cannot be the same)
   //!  *                    depending of the euler order
   //!
   //!  **Template parameters**
@@ -115,9 +177,10 @@ namespace kyosu
   //!    In case of singularity the first angle is 0.
   //!
   //!  @groupheader{Example}
-  //!
-  //! @godbolt{doc/to_euler.cpp}
+  //!  @godbolt{doc/to_euler.cpp}
+  //================================================================================================
+  inline constexpr auto to_euler = eve::functor<to_euler_t>;
+  //================================================================================================
   //!  @}
   //================================================================================================
-  inline constexpr tags::callable_to_euler to_euler = {};
 }

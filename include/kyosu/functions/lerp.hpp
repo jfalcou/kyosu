@@ -6,46 +6,34 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_lerp: eve::elementwise
-  {
-    using callable_tag_type = callable_lerp;
-
-    KYOSU_DEFERS_CALLABLE(lerp_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const& v0
-                                               , eve::floating_ordered_value auto const& v1
-                                              ,  eve::floating_ordered_value auto const& t) noexcept
-    {
-      return eve::lerp(v0, v1, t);
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1, auto const & target2) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1, target2))
-    {
-      return eve::tag_invoke(*this, target0, target1, target2);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_lerp(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct lerp_t : eve::strict_elementwise_callable<lerp_t, Options>
+  {
+    template<typename Z0, typename Z1, typename Z2>
+    requires((concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)&& concepts::real<Z2>)
+    KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const & z1, Z2 const & z2) const noexcept -> decltype(z0+z1+z2)
+    { return KYOSU_CALL(z0,z1,z2); }
+
+    template<concepts::real V0, concepts::real V1, concepts::real V2>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1, V2 v2) const noexcept -> decltype(v0+v1+v2)
+    { return eve::lerp(v0,v1,v2); }
+
+    KYOSU_CALLABLE_OBJECT(lerp_t, lerp_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var lerp
 //!   @brief  Computes the  linear interpolation.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -75,7 +63,19 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/lerp.cpp}
+//======================================================================================================================
+  inline constexpr auto lerp = eve::functor<lerp_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_lerp lerp = {};
+}
+
+namespace kyosu::_
+{
+  template<typename C0, typename C1, typename T, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto lerp_(KYOSU_DELAY(), O const&, C0 c0, C1 c1, T t) noexcept
+  {
+    using r_t = as_cayley_dickson_t<C0,C1,T>;
+    return r_t{kumi::map([&t](auto const& e, auto const & f) { return eve::lerp(e, f, t); }, r_t(c0), r_t(c1))};
+  }
 }

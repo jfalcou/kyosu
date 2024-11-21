@@ -6,39 +6,26 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/bessel.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_cyl_bessel_h2_0: eve::elementwise
-  {
-    using callable_tag_type = callable_cyl_bessel_h2_0;
-
-    KYOSU_DEFERS_CALLABLE(cyl_bessel_h2_0_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      auto fn = callable_cyl_bessel_h2_0{};
-      return fn(complex(v));
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_cyl_bessel_h2_0(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct cyl_bessel_h2_0_t : eve::elementwise_callable<cyl_bessel_h2_0_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
+
+
+    KYOSU_CALLABLE_OBJECT(cyl_bessel_h2_0_t, cyl_bessel_h2_0_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -69,7 +56,25 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/cyl_bessel_h2_0.cpp}
+//======================================================================================================================
+  inline constexpr auto cyl_bessel_h2_0 = eve::functor<cyl_bessel_h2_0_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_cyl_bessel_h2_0 cyl_bessel_h2_0 = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h2_0_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z>)
+    {
+      return cb_h2_0(z);
+    }
+    else
+    {
+      return cayley_extend(cyl_bessel_h2_0, z);
+    }
+  }
 }

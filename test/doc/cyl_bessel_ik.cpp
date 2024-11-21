@@ -11,7 +11,7 @@ int main()
   auto v = 3.3;
   std::cout << "z                    " << z << std::endl;
   std::vector<kyosu::complex_t<w_t>> is(4), ks(4);
-  kyosu::cyl_bessel_ik(v, z, is, ks);
+  kyosu::cyl_bessel_ik(v, z, std::span(is), std::span(ks));
   for(int n=0; n <= 3; ++n)
   {
     std::cout << "is[" << n << "] = " << is[n] << std::endl;

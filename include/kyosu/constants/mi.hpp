@@ -7,48 +7,43 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-#include <kyosu/types/complex.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_mi : eve::elementwise
-  {
-    using callable_tag_type = callable_mi;
-
-    KYOSU_DEFERS_CALLABLE(mi_);
-
-    template<eve::value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, as<T> const& ) noexcept
-    requires(concepts::cayley_dickson<T> || eve::floating_ordered_value<T>)
-    {
-      using u_t = eve::underlying_type_t<T>;
-      return kyosu::complex(u_t(0),u_t(-1)); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_abs(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct mi_t : eve::constant_callable<mi_t, Options>
+  {
+    template<typename T>
+    static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
+    {
+      if constexpr(concepts::cayley_dickson<T>) return T{0,-1};
+      else                                      return complex_t<eve::as_floating_point_t<T>>{0,-1};
+    }
+
+    template<typename T>
+    requires(concepts::cayley_dickson<T>)
+    KYOSU_FORCEINLINE constexpr T operator()(as<T> const& v) const { return KYOSU_CALL(v); }
+
+    template<concepts::real T>
+    KYOSU_FORCEINLINE constexpr auto operator()(as<T> const& v) const
+    {
+      return KYOSU_CALL(v);
+    }
+
+    EVE_CALLABLE_OBJECT(mi_t, i_);
+  };
+
 //======================================================================================================================
-//! @addtogroup functions
+//! @addtogroup constants
 //! @{
-//!   @var i
-//!   @brief Computes the complex number mi i.e. complex(0, -1) in the chosen type,  the conjugate of i.
+//!   @var mi
+//!   @brief Computes the complex number \f$-i\f$ in the chosen type.
 //!
 //!   **Defined in Header**
 //!
 //!   @code
-//!   #include <kyosu/functions.hpp>
+//!   #include <kyosu/constants.hpp>
 //!   @endcode
 //!
 //!   @groupheader{Callable Signatures}
@@ -56,8 +51,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_complex_t<underlying_type_t<T>>  mi(as<T> z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr és_complex_t<underlying_type_t<T>>  mi(as<T> z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr as_complex_t<underlying_type_t<T>> mi(as<T> z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr as_complex_t<underlying_type_t<T>> mi(as<T> z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -67,12 +62,14 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * always returns a complex scalar value mi such that real(i) is null and imag(i) is minus one.
+//!     * always returns a complex scalar value mi such that real(mi) is null and imag(i) is -1.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/i.cpp}
+//!  @godbolt{doc/mi.cpp}
+//======================================================================================================================
+  inline constexpr auto mi = eve::functor<mi_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_mi mi = {};
 }

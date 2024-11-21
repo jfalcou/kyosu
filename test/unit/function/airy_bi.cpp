@@ -36,27 +36,27 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_j0 over real"
   }
 };
 
-// TTS_CASE_WITH ( "Check kyosu::airy_bi over real"
-//               , kyosu::real_types
-//               , tts::generate(tts::randoms(-10,10),
-//                               tts::randoms(-10,10)
-//                              )
-//               )
-// <typename T>(T a0, T a1)
-// {
-//   using u_t = eve::underlying_type_t<T>;
-//   if constexpr(sizeof(u_t) == 8)
-//   {
-//     auto c =  kyosu::complex(a0, a1);
-//     auto cb=  kyosu::conj(c);
-// //     auto cr=  kyosu::complex(a0);
-// //     auto ci=  kyosu::complex(T(0), a1);
-//     using kyosu::airy_bi;
-//     auto j0c = airy_bi(c);
-//     TTS_EQUAL(j0c, kyosu::conj(airy_bi(cb))) << "c = " << c << '\n';
-// //     TTS_EXPECT(eve::all(kyosu::is_real(cr)));
-// //     TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
-// //     auto z =   kyosu::complex(T(0), T(0));
-// //     TTS_IEEE_EQUAL(airy_bi(z), kyosu::complex(airy_bi(T(0))));
-//   }
-// };
+TTS_CASE_WITH ( "Check kyosu::airy_bi"
+              , kyosu::real_types
+              , tts::generate(tts::randoms(-10,10),
+                              tts::randoms(-10,10)
+                             )
+              )
+<typename T>(T a0, T a1)
+{
+  using u_t = eve::underlying_type_t<T>;
+  if constexpr(sizeof(u_t) == 8)
+  {
+    auto c =  kyosu::complex(a0, a1);
+    auto cb=  kyosu::conj(c);
+    auto cr=  kyosu::complex(a0);
+    auto ci=  kyosu::complex(T(0), a1);
+    using kyosu::airy_bi;
+    auto j0c = kyosu::airy_bi(c);
+    TTS_EQUAL(j0c, kyosu::conj(kyosu::airy_bi(cb))) << "c = " << c << '\n';
+    TTS_EXPECT(eve::all(kyosu::is_real(cr)));
+    TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
+    auto z =   kyosu::complex(T(0), T(0));
+    TTS_IEEE_EQUAL(airy_bi(z), kyosu::complex(airy_bi(T(0))));
+  }
+};

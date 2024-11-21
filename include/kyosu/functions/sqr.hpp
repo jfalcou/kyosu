@@ -6,41 +6,32 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_sqr: eve::elementwise
-  {
-    using callable_tag_type = callable_sqr;
-
-    KYOSU_DEFERS_CALLABLE(sqr_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return v*v; }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_sqr(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct sqr_t : eve::elementwise_callable<sqr_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::sqr(v); }
+
+    KYOSU_CALLABLE_OBJECT(sqr_t, sqr_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var sqr
 //!   @brief Computes the square value.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -67,7 +58,31 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sqr.cpp}
+//======================================================================================================================
+  inline constexpr auto sqr = eve::functor<sqr_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_sqr sqr = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sqr_(KYOSU_DELAY(), O const&, Z c) noexcept
+  {
+    if constexpr(kyosu::dimension_v<Z> <= 2)
+    {
+      return c*c;
+    }
+    else
+    {
+      auto squares = kumi::map_index([]<typename I>(I, auto const& m)
+                                     { constexpr auto sgn = (I::value == 0)-(I::value > 0);
+                                       return sgn*m*m; }, c);
+      auto r = kumi::sum( squares, 0);
+      auto a =  2*real(c);
+      real(c) = 0;
+      return r+a*c;
+    }    
+  }
 }

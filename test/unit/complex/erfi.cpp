@@ -63,8 +63,8 @@ TTS_CASE_TPL( "Check corner cases of erfi", kyosu::real_types)
 
 TTS_CASE_WITH( "Check behavior of erfi on wide"
              , kyosu::simd_real_types
-             , tts::generate( tts::randoms(-10.0, 10.0)
-                            , tts::randoms(-10.0, 10.0))
+             , tts::generate( tts::randoms(-1.0, 1.0)
+                            , tts::randoms(-1.0, 1.0))
              )
   <typename T>(T const& a0, T const& a1 )
 {

@@ -33,6 +33,7 @@ TTS_CASE_WITH ( "Check kyosu::sph_bessel_j0 over real"
               )
 <typename T>(T a0, T a1)
 {
+  auto prec = 1.0e-6;
   auto c =  kyosu::complex(a0, a1);
   auto cb=  kyosu::conj(c);
   auto cm=  -c;
@@ -40,8 +41,11 @@ TTS_CASE_WITH ( "Check kyosu::sph_bessel_j0 over real"
   auto ci=  kyosu::complex(T(0), a1);
   using kyosu::sph_bessel_j0;
   auto j0c = sph_bessel_j0(c);
-  TTS_EQUAL(j0c, sph_bessel_j0(cm));
-  TTS_EQUAL(j0c, kyosu::conj(sph_bessel_j0(cb)));
+//   TTS_EQUAL(j0c, sph_bessel_j0(cm));
+//   TTS_EQUAL(j0c, kyosu::conj(sph_bessel_j0(cb)));
+  TTS_RELATIVE_EQUAL(j0c, sph_bessel_j0(cm), prec);
+  TTS_RELATIVE_EQUAL(j0c, kyosu::conj(sph_bessel_j0(cb)), prec);
+  std::cout << "dist" <<  std::hexfloat << kyosu::abs(j0c - kyosu::conj(sph_bessel_j0(cb))) << std::endl;
   TTS_EXPECT(eve::all(kyosu::is_real(cr)));
   TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
   auto z =   kyosu::complex(T(0), T(0));

@@ -6,41 +6,35 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_oneminus: eve::elementwise
-  {
-    using callable_tag_type = callable_oneminus;
-
-    KYOSU_DEFERS_CALLABLE(oneminus_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::oneminus(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_oneminus(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/inc.hpp>
+#include <kyosu/functions/minus.hpp>
+#include <iostream>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct oneminus_t : eve::elementwise_callable<oneminus_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::oneminus(v); }
+
+    KYOSU_CALLABLE_OBJECT(oneminus_t, oneminus_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var oneminus
 //!   @brief Computes the value one minus the argument.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -67,7 +61,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/oneminus.cpp}
+//======================================================================================================================
+  inline constexpr auto oneminus = eve::functor<oneminus_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_oneminus oneminus = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr Z oneminus_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return kyosu::inc(-z);
+  }
 }

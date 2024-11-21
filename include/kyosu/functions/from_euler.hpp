@@ -1,36 +1,31 @@
 //==================================================================================================
 /*
-  KYOSU - Expressive Vector Engine
-  Copyright: KYOSU Project Contributors
+  KYOSU - Complex Without Complexes
+  Copyright: KYOSU Project Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-#include <kyosu/types/impl/quaternion/axis.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
+#include <kyosu/types/impl/quaternion/axis.hpp>
 
-namespace kyosu::tags
+namespace kyosu
 {
-  struct callable_from_euler: eve::elementwise
+  template<typename Options>
+  struct from_euler_t : eve::elementwise_callable<from_euler_t, Options>
   {
-    using callable_tag_type = callable_from_euler;
-
-    KYOSU_DEFERS_CALLABLE(from_euler_);
-
-    template<eve::floating_ordered_value U,
-             eve::floating_ordered_value V,
-             eve::floating_ordered_value W, int I,  int J,  int K, bool Extrinsic>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , U const & v1
+    template<concepts::real U,
+             concepts::real V,
+             concepts::real W, int I,  int J, int K, bool Extrinsic>
+    KYOSU_FORCEINLINE constexpr auto operator()( U const & v1
                                                , V const & v2
                                                , W const & v3
                                                , _::axis<I>
                                                , _::axis<J>
                                                , _::axis<K>
-                                               , _::ext<Extrinsic>
-                                               ) noexcept
+                                               , _::ext<Extrinsic>) const noexcept
+    -> quaternion_t<eve::common_value_t<U, V, W>>
     requires(I != J && J != K)
     {
       using e_t = decltype(v1+v2+v3);
@@ -59,37 +54,10 @@ namespace kyosu::tags
         return q;
       }
     }
-    template<typename T0, typename T1, typename T2, int I,  int J,  int K, bool Extrinsic>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0,
-                                      T1 const& target1,
-                                      T2 const& target2
-                                     , _::axis<I>
-                                     , _::axis<J>
-                                     , _::axis<K>
-                                     , _::ext<Extrinsic>
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0,  target1,  target2
-                               , _::axis<I>{}
-                               , _::axis<J>{}
-                               , _::axis<K>{}
-                               , _::ext<Extrinsic>{}
-                               ))
-    {
-      return eve::tag_invoke(*this, target0, target1, target2
-                            , _::axis<I>{}
-                            , _::axis<J>{}
-                            , _::axis<K>{}
-                            , _::ext<Extrinsic>{} );
-    }
 
-    template<typename... T>
-    eve::unsupported_call<callable_from_euler(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    KYOSU_CALLABLE_OBJECT(from_euler_t, from_euler_);
   };
-}
 
-namespace kyosu
-{
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -103,7 +71,7 @@ namespace kyosu
   //!  for instance I = 3, J = 2, K = 3 choose the ZYZ sequence.
   //!  the values of I, J, and K must be in {1, 2, 3} ans satisfy I != J && J != K.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -145,7 +113,9 @@ namespace kyosu
   //!  @groupheader{Example}
   //!
   //! @godbolt{doc/from_euler.cpp}
-  //!  @}
-  //================================================================================================
-  inline constexpr tags::callable_from_euler from_euler = {};
+  //======================================================================================================================
+  inline constexpr auto from_euler = eve::functor<from_euler_t>;
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }

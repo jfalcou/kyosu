@@ -6,41 +6,33 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_radinpi: eve::elementwise
-  {
-    using callable_tag_type = callable_radinpi;
-
-    KYOSU_DEFERS_CALLABLE(radinpi_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return T(0); }//eve::radinpi(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_radinpi(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/constants/wrapped.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct radinpi_t : eve::elementwise_callable<radinpi_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::radinpi(v); }
+
+    KYOSU_CALLABLE_OBJECT(radinpi_t, radinpi_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var radinpi
 //!   @brief Computes the parameter divided by \f$\pi\f$.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -67,7 +59,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/radinpi.cpp}
+//======================================================================================================================
+  inline constexpr auto radinpi = eve::functor<radinpi_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_radinpi radinpi = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto radinpi_(KYOSU_DELAY(), O const&, Z a) noexcept
+  {
+    return inv_pi(eve::as(a))*a;
+  }
 }

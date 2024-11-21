@@ -1,56 +1,35 @@
 //==================================================================================================
 /*
-  KYOSU - Expressive Vector Engine
-  Copyright: KYOSU Project Contributors
+  KYOSU - Complex Without Complexes
+  Copyright: KYOSU Project Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
 
-namespace kyosu::tags
+namespace kyosu
 {
-  struct callable_from_spherical: eve::elementwise
+  template<typename Options>
+  struct from_spherical_t : eve::elementwise_callable<from_spherical_t, Options>
   {
-    using callable_tag_type = callable_from_spherical;
-
-    KYOSU_DEFERS_CALLABLE(from_spherical_);
-
-    template<eve::floating_ordered_value V,  eve::floating_ordered_value U,  eve::floating_ordered_value W,  eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & rho
+    template<concepts::real U ,concepts::real V,concepts::real W, concepts::real T>
+    KYOSU_FORCEINLINE constexpr auto operator()( V const & rho
                                                , U const & theta
                                                , W const & phi1
-                                               , T const & phi2) noexcept
+                                               , T const & phi2) const noexcept -> quaternion_t<eve::common_value_t<V, U, W, T>>
     {
-      auto [st, ct] = eve::sincos(theta);
+      auto [st, ct]   = eve::sincos(theta);
       auto [sp1, cp1] = eve::sincos(phi1);
       auto [sp2, cp2] = eve::sincos(phi2);
       auto f = cp1*cp2;
       return rho*quaternion(ct*f, st*f, sp1*cp2, sp2);
     }
 
-    template<typename T0, typename T1, typename T2, typename T3>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0,
-                                      T1 const& target1,
-                                      T2 const& target2,
-                                      T3 const& target3
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0,  target1,  target2,  target3))
-    {
-      return eve::tag_invoke(*this, target0,  target1,  target2,  target3);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_from_spherical(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    KYOSU_CALLABLE_OBJECT(from_spherical_t, from_spherical_);
   };
-}
 
-namespace kyosu
-{
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -65,7 +44,7 @@ namespace kyosu
   //!  The first of these, theta has a natural range of \f$-\pi\f$ to \f$+\pi\f$, and the other two have natural
   //!  ranges of \f$-\pi/2\f$ to \f$+\pi/2\f$ (as is the case with the usual spherical coordinates in \f$\mathbb{R}^3\f$).
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -89,13 +68,12 @@ namespace kyosu
   //!
   //! the quaternion value
   //!
-  //! ---
-  //!
   //! #### Example
   //!
   //! @godbolt{doc/from_spherical.cpp}
-  //!
-  //!  @}
-  //================================================================================================
-  inline constexpr tags::callable_from_spherical from_spherical = {};
+  //======================================================================================================================
+  inline constexpr auto from_spherical = eve::functor<from_spherical_t>;
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }

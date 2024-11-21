@@ -6,44 +6,39 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_negminabs: eve::elementwise
-  {
-    using callable_tag_type = callable_negminabs;
-
-    KYOSU_DEFERS_CALLABLE(negminabs_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const&... vs) noexcept
-    {
-      return eve::negminabs(vs...);
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const&... targets ) const noexcept
-    -> decltype(eve::tag_invoke(*this, targets...))
-    {
-      return eve::tag_invoke(*this, targets...);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_negminabs(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/minabs.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct negminabs_t : eve::strict_elementwise_callable<negminabs_t, Options,
+                                                        eve::numeric_option, eve::pedantic_option>
+  {
+    template<typename Z0, typename ...Zs>
+    requires(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs>|| ...))
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0  const & z0, Zs const & ... zs) const noexcept
+    -> decltype(eve::negminabs(real(z0), real(zs)...))
+    {
+      return eve::minus(minabs[Options()](z0, zs...));
+    }
+
+    template<concepts::real V0, concepts::real... Vs>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs... vs) const noexcept
+    -> decltype( eve::negminabs(v0, vs...))
+    { return eve::negminabs[Options()](v0,vs...); }
+
+    KYOSU_CALLABLE_OBJECT(negminabs_t, negminabs_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var negminabs
 //!   @brief Callable object computing the negminabs operation.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -64,12 +59,14 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise  the negminimum of the absolute values of the parameters.
+//!     Returns elementwise  the negated minimum of the absolute values of the parameters.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/negminabs.cpp}
+//======================================================================================================================
+  inline constexpr auto negminabs = eve::functor<negminabs_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_negminabs negminabs = {};
 }

@@ -6,39 +6,27 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/bessel.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_sph_bessel_h2n: eve::elementwise
-  {
-    using callable_tag_type = callable_sph_bessel_h2n;
-
-    KYOSU_DEFERS_CALLABLE(sph_bessel_h2n_);
-
-    template<eve::integral_scalar_value N, eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& z) noexcept
-    {
-      return complex(eve::sph_bessel_jn(n, z), -eve::sph_bessel_yn(n, z));
-    }
-
-    template<typename N, typename T>
-    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
-    {
-      return eve::tag_invoke(*this, target0, target1);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_sph_bessel_h2n(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct sph_bessel_h2n_t : eve::strict_elementwise_callable<sph_bessel_h2n_t, Options>
+  {
+    template<eve::integral_scalar_value N, typename Z1>
+    requires( concepts::cayley_dickson<Z1>)
+    KYOSU_FORCEINLINE constexpr auto  operator()(N n, Z1 const & z1) const noexcept
+    { return KYOSU_CALL(n,z1); }
+
+    template<eve::integral_scalar_value N, concepts::real V1>
+    KYOSU_FORCEINLINE constexpr auto operator()(N n, V1 v1) const noexcept
+    { return KYOSU_CALL(n, v1); }
+
+    KYOSU_CALLABLE_OBJECT(sph_bessel_h2n_t, sph_bessel_h2n_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -71,7 +59,25 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sph_bessel_h2n.cpp}
+//======================================================================================================================
+  inline constexpr auto sph_bessel_h2n = eve::functor<sph_bessel_h2n_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_sph_bessel_h2n sph_bessel_h2n = {};
+}
+
+namespace kyosu::_
+{
+  template<typename N, typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sph_bessel_h2n_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z>)
+    {
+      return sb_h2n(n, z);
+    }
+    else
+    {
+      return cayley_extend_rev(sph_bessel_h2n, n, z);
+    }
+  }
 }

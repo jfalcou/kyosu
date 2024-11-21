@@ -6,44 +6,43 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-namespace kyosu::tags
-{
-  struct callable_pow_abs: eve::elementwise
-  {
-    using callable_tag_type = callable_pow_abs;
-
-    KYOSU_DEFERS_CALLABLE(pow_abs_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::ordered_value auto const& v0
-                                               , eve::ordered_value auto const& v1) noexcept
-    {
-      return eve::pow(kyosu::abs(v0), v1);
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
-    {
-      return eve::tag_invoke(*this, target0, target1);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_pow_abs(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/pow.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct pow_abs_t : eve::strict_elementwise_callable<pow_abs_t, Options>
+  {
+    template<typename Z0, typename Z1>
+    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept //-> decltype(z0+z1)
+    { return KYOSU_CALL(z0,z1); }
+
+    template<concepts::real V0, concepts::real V1>
+    requires(!eve::integral_value<V1>)
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept //-> decltype(v0+v1)
+    { return eve::pow_abs(v0,v1); }
+
+    template<typename V0, eve::integral_value V1>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept //-> decltype(v0+v1)
+    { return eve::pow(eve::abs(v0),v1); }
+
+//     template<concepts::real V0, integral_value V1>
+//     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept //-> decltype(v0+v1)
+//     { return eve::pow_abs(v0,v1); }
+
+    KYOSU_CALLABLE_OBJECT(pow_abs_t, pow_abs_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var pow_abs
 //!   @brief Computes the  computing the pow_abs operation \f$|x|^y\f$.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -70,7 +69,21 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/pow_abs.cpp}
+//======================================================================================================================
+  inline constexpr auto pow_abs = eve::functor<pow_abs_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_pow_abs pow_abs = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z0, typename Z1, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto pow_abs_(KYOSU_DELAY(), O const&, Z0 c0, Z1 c1) noexcept
+  {
+    if constexpr(kyosu::concepts::real<Z1>)
+      return eve::pow(kyosu::sqr_abs(c0), c1*eve::half(eve::as(c1)));
+    else
+      return kyosu::pow(abs(c0), c1);
+  }
 }

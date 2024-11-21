@@ -1,55 +1,33 @@
 //==================================================================================================
 /*
-  KYOSU - Expressive Vector Engine
-  Copyright: KYOSU Project Contributors
+  KYOSU - Complex Without Complexes
+  Copyright: KYOSU Project Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
-#include <kyosu/functions/from_polar.hpp>
 
-namespace kyosu::tags
+namespace kyosu
 {
-  struct callable_from_multipolar: eve::elementwise
+  template<typename Options>
+  struct from_multipolar_t : eve::elementwise_callable<from_multipolar_t, Options>
   {
-    using callable_tag_type = callable_from_multipolar;
-
-    KYOSU_DEFERS_CALLABLE(from_multipolar_);
-
-    template<eve::floating_ordered_value V,  eve::floating_ordered_value U,  eve::floating_ordered_value W,  eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & rho1
+    template<concepts::real U ,concepts::real V,concepts::real W, concepts::real T>
+    KYOSU_FORCEINLINE constexpr auto operator()( V const & rho1
                                                , U const & theta1
                                                , W const & rho2
-                                               , T const & theta2) noexcept
+                                               , T const & theta2) const noexcept
+    -> quaternion_t<eve::common_value_t<V, U, W, T>>
     {
       auto [a0, a1] = kyosu::from_polar(rho1, theta1);
       auto [a2, a3] = kyosu::from_polar(rho2, theta2);
       return kyosu::quaternion(a0, a1, a2, a3);
     }
 
-    template<typename T0, typename T1, typename T2, typename T3>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0,
-                                      T1 const& target1,
-                                      T2 const& target2,
-                                      T3 const& target3
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0,  target1,  target2,  target3))
-    {
-      return eve::tag_invoke(*this, target0,  target1,  target2,  target3);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_from_multipolar(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    KYOSU_CALLABLE_OBJECT(from_multipolar_t, from_multipolar_);
   };
-}
-
-namespace kyosu
-{
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -60,9 +38,9 @@ namespace kyosu
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
   //!  from a multipolar representation of an \f$\mathbb{R}^4\f$ element.
   //!
-  //!  from_multipolar  the two \f$\mathbb{C}\f$ components of the quaternion are given in polar coordinates
+  //!  `from_multipolar` takes the two successive \f$\mathbb{C}\f$ components of the quaternion in polar coordinates
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -92,8 +70,9 @@ namespace kyosu
   //! #### Example
   //!
   //! @godbolt{doc/from_multipolar.cpp}
-  //!
-  //!  @}
-  //================================================================================================
-  inline constexpr tags::callable_from_multipolar from_multipolar = {};
+  //======================================================================================================================
+  inline constexpr auto from_multipolar = eve::functor<from_multipolar_t>;
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }

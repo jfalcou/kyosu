@@ -6,42 +6,34 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_sincos: eve::elementwise
-  {
-    using callable_tag_type = callable_sincos;
-
-    KYOSU_DEFERS_CALLABLE(sincos_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::sincos(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_sincos(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/sinhcosh.hpp>
+#include <kyosu/details/cayleyify.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct sincos_t : eve::elementwise_callable<sincos_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr  kumi::tuple<Z, Z> operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
+    { return eve::sincos(v); }
+
+    KYOSU_CALLABLE_OBJECT(sincos_t, sincos_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var sincos
 //!   @brief Computes simultaneously the sine and cosine of the argument.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -63,12 +55,32 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns simultaneously  the sine and cosine of the argument.
+//!     Returns simultaneously  the [sine](@ref sin) and [cosine](@ref cos) of the argument.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sincos.cpp}
+//======================================================================================================================
+  inline constexpr auto sincos = eve::functor<sincos_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_sincos sincos = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sincos_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      auto [sh, ch] = sinhcosh(Z(-kyosu::imag(z), kyosu::real(z)));
+      return kumi::tuple{Z(kyosu::imag(sh), -kyosu::real(sh)), ch};
+
+    }
+    else
+    {
+      return cayley_extend2(sincos, z);
+    }
+  }
 }

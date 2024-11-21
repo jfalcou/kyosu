@@ -6,39 +6,25 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/bessel.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_sph_bessel_h2_0: eve::elementwise
-  {
-    using callable_tag_type = callable_sph_bessel_h2_0;
-
-    KYOSU_DEFERS_CALLABLE(sph_bessel_h2_0_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& z) noexcept
-    {
-      return complex(eve::sph_bessel_j1(z), -eve::sph_bessel_y1(z));
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target1))
-    {
-      return eve::tag_invoke(*this, target1);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_sph_bessel_h2_0(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct sph_bessel_h2_0_t : eve::elementwise_callable<sph_bessel_h2_0_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(complex(v)); }
+
+    KYOSU_CALLABLE_OBJECT(sph_bessel_h2_0_t, sph_bessel_h2_0_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -55,8 +41,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sph_bessel_h2_1(int n, T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto sph_bessel_h2_1(int n, T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sph_bessel_h2_0(int n, T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto sph_bessel_h2_0(int n, T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -71,7 +57,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sph_bessel_h2_1.cpp}
+//======================================================================================================================
+  inline constexpr auto sph_bessel_h2_0 = eve::functor<sph_bessel_h2_0_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_sph_bessel_h2_0 sph_bessel_h2_0 = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sph_bessel_h2_0_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return sb_h2n(0, z);
+  }
 }

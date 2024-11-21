@@ -6,55 +6,32 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/bessel.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_cyl_bessel_k: eve::elementwise
-  {
-    using callable_tag_type = callable_cyl_bessel_k;
-
-    KYOSU_DEFERS_CALLABLE(cyl_bessel_k_);
-
-    template<eve::floating_scalar_value N, eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N nu, T const& v) noexcept
-    {
-      auto fnu = callable_cyl_bessel_k{};
-      return fnu(nu, complex(v));
-    }
-
-
-    template<eve::floating_scalar_value N, eve::floating_ordered_value T, typename R>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N nu, T const& v, R& ks) noexcept
-    {
-      auto fnu = callable_cyl_bessel_k{};
-      return fnu(nu, complex(v), ks);
-    }
-
-    template<typename N, typename T>
-    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
-    {
-      return eve::tag_invoke(*this, target0, target1);
-    }
-
-    template<typename N, typename T, typename R>
-    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1, R & out0) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1, out0))
-    {
-      return eve::tag_invoke(*this, target0, target1, out0);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_cyl_bessel_k(T&&...)> operator()(T&&... x) const
-      requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct cyl_bessel_k_t : eve::strict_elementwise_callable<cyl_bessel_k_t, Options>
+  {
+    template<concepts::real NU, typename Z, std::size_t S>
+    requires(concepts::real<Z> || concepts::cayley_dickson<Z>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(NU const& nu, Z const & z, std::span<Z, S> ks) const noexcept
+    { return KYOSU_CALL(nu,z,ks); }
+
+    template<concepts::real NU, concepts::cayley_dickson Z>
+    requires(eve::scalar_value<NU>)
+    KYOSU_FORCEINLINE constexpr Z operator()(NU nu, Z const& z) const noexcept
+    { return KYOSU_CALL(nu, z); }
+
+    template<concepts::real NU, concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(NU nu, V v) const noexcept
+    { return  KYOSU_CALL(nu, complex(v)); }
+
+    KYOSU_CALLABLE_OBJECT(cyl_bessel_k_t, cyl_bessel_k_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -90,7 +67,32 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/cyl_bessel_k.cpp}
+//======================================================================================================================
+  inline constexpr auto cyl_bessel_k = eve::functor<cyl_bessel_k_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-  inline constexpr tags::callable_cyl_bessel_k cyl_bessel_k = {};
+}
+
+namespace kyosu::_
+{
+ template<typename NU, typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_k_(KYOSU_DELAY(), O const&, NU v, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      return cb_kr(v, z);
+    }
+    else
+    {
+      return cayley_extend_rev(cyl_bessel_i, v, z);
+    }
+  }
+
+  template<typename NU, typename Z, std::size_t S, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_k_(KYOSU_DELAY(), O const&, NU v , Z z,
+                                                 std::span<Z, S> ks) noexcept
+  {
+    return cb_kr(v, z, ks);
+  }
 }

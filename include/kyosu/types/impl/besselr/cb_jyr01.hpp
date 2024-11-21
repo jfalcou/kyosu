@@ -8,10 +8,89 @@
 #pragma once
 #include <kyosu/types/impl/detail/bessel_utils2.hpp>
 #include <kyosu/details/with_alloca.hpp>
-#include <vector>
+#include <kyosu/functions/if_else.hpp>
+
+namespace ttts::detail
+{
+  template<typename T> struct typename_impl
+  {
+    static auto value() noexcept
+    {
+#if defined(_MSC_VER )
+      std::string_view data(__FUNCSIG__);
+      auto i = data.find('<') + 1,
+        j = data.find(">::value");
+      auto name = data.substr(i, j - i);
+#else
+      std::string_view data(__PRETTY_FUNCTION__);
+      auto i = data.find('=') + 2,
+        j = data.find_last_of(']');
+      auto name = data.substr(i, j - i);
+#endif
+      return std::string(name.data(), name.size());
+    }
+  };
+}
+
+namespace ttts
+{
+  /// Provide a string containing the name of the type `T` in readable form.
+  template<typename T> inline auto const typename_ = detail::typename_impl<T>::value();
+
+  /// Provide a string containing the name of the type of its parameter in readable form.
+  template<typename T> constexpr auto name(T const&){ return typename_<T>; }
+}
 
 namespace kyosu::_
 {
+
+  template <typename F, typename L, typename L1, typename R, typename ...Ts>
+  auto lnext_interval(F const & f, L notdone, L1 test, R& r, Ts ... ts) noexcept
+  {
+    auto todo = eve::logical_and(notdone, test);
+    if constexpr(eve::scalar_value<R>)
+    {
+      if(todo) { r =  f(ts...); return false_(as(todo)); }
+    }
+    else
+    {
+      if(eve::any(todo))
+      {
+//         std::cout << ttts::name(todo)<< std::endl;
+//         std::cout << ttts::name(r) << std::endl;
+//         std::cout << ttts::name( f(ts...))<< std::endl;
+//         std::cout << " ================== "<< std::endl;
+//         std::cout << (todo) << std::endl;
+//         std::cout <<f(ts...) << std::endl;
+//         std::cout <<r << std::endl;
+//         std::cout << " =-----------------= "<< std::endl;
+        r = kumi::map([&todo](auto a, auto b) { return if_else(todo,a,b); }, f(ts...), r);
+//        r = kyosu::if_else(todo, f(ts...), r);
+        return eve::logical_notand(todo, notdone);
+      };
+    }
+    return  eve::logical_notand(todo, notdone);
+  }
+
+  template <typename F, typename L, typename R, typename ...Ts>
+  auto llast_interval(F const & f, L todo, R& r, Ts ... ts) noexcept
+  {
+    if constexpr(eve::scalar_value<R>)
+    {
+      if(todo){ r = f(ts...); return false_(as(r));}
+      return false_(as(r));
+    }
+    else
+    {
+//       std::cout << ttts::name(todo)<< std::endl;
+//       std::cout << ttts::name(r) << std::endl;
+//       std::cout << ttts::name( f(ts...))<< std::endl;
+      if(eve::any(todo)) r = kumi::map([&todo](auto a, auto b) { return if_else(todo,a,b); }, f(ts...), r);
+//r = kyosu::if_else(todo, f(ts...), r);
+      return false_(as(r));
+    }
+  }
+
   //===-------------------------------------------------------------------------------------------
   //  cb_jyr01
   //  this internal routine computes jv0 jv1 yv0 and yv1 with v0 in ]0, 1[ and v1 = v0+1
@@ -20,7 +99,7 @@ namespace kyosu::_
   template<eve::floating_scalar_value N, typename Z>
   auto cb_jyr01( N  v0, Z z) noexcept
   {
-    EVE_ASSERT(eve::is_gtz(v0) && (v0 < N(1)), "v0 is not in ]0, 1[");
+//    EVE_ASSERT(eve::is_gtz(v0) && (v0 < N(1)), "v0 is not in ]0, 1[");
     auto v1 = inc(v0); // 1 < v1 < 2
 
     using u_t = eve::underlying_type_t<Z>;
@@ -33,15 +112,15 @@ namespace kyosu::_
     const auto twoopi = eve::two_o_pi(as<u_t>());
     const auto invpi = eve::inv_pi(as<u_t>());
 
-    auto az = abs(z);
+    auto az = kyosu::abs(z);
     auto isltzrz = eve::is_ltz(real(z));
     auto isltziz = eve::is_ltz(imag(z));
     z =       if_else(isltzrz, -z, z);
     z =       if_else(isltziz&&isltzrz, conj(z), z);
     auto z2 = sqr(z);
 
-    const Z cone  = eve::one(as<Z>());
-    const Z cnan  = eve::nan(as<Z>());
+    const Z cone  = kyosu::one(as<Z>());
+    const Z cnan  = kyosu::nan(as<Z>());
 
     Z cjv0(cnan), cjv1(cnan), cyv0(cnan), cyv1(cnan);
 
@@ -127,13 +206,13 @@ namespace kyosu::_
     };
 
     auto r = kumi::tuple{cjv0, cyv0, cyv1, cjv1};
-    auto notdone = eve::true_(as<Z>());
+    auto notdone = kyosu::true_(as<Z>());
     if( eve::any(notdone) )
     {
-      notdone = next_interval(br_lt12, notdone, az <= u_t(12), r);
+      notdone = lnext_interval(br_lt12, notdone, az <= u_t(12), r);
       if( eve::any(notdone) )
       {
-        last_interval(br_gt12, notdone, r);
+        llast_interval(br_gt12, notdone, r);
       }
     }
     kumi::tie(cjv0, cyv0, cjv1, cyv1) = r;

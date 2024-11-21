@@ -1,50 +1,40 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_log_abs_gamma : eve::elementwise
-  {
-    using callable_tag_type = callable_log_abs_gamma;
-
-    KYOSU_DEFERS_CALLABLE(log_abs_gamma_);
-
-    template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      auto fn = callable_log_abs_gamma{};
-      return fn(complex(v));
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_log_abs_gamma(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/log_abs.hpp>
+#include <kyosu/functions/tgamma.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct log_abs_gamma_t : eve::elementwise_callable<log_abs_gamma_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return  KYOSU_CALL(complex(v)); }
+
+    KYOSU_CALLABLE_OBJECT(log_abs_gamma_t, log_abs_gamma_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var log_abs_gamma
 //!   @brief Computes the log of the modulus of the \f$\Gamma\f$ function of the parameter.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -70,7 +60,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/log_abs_gamma.cpp}
+//======================================================================================================================
+  inline constexpr auto log_abs_gamma = eve::functor<log_abs_gamma_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_log_abs_gamma log_abs_gamma = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log_abs_gamma_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return log_abs(tgamma(z));
+  }
 }

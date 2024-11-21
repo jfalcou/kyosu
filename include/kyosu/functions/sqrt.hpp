@@ -6,47 +6,33 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
-#include <eve/module/math.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_sqrt: eve::elementwise
-  {
-    using callable_tag_type = callable_sqrt;
-
-    KYOSU_DEFERS_CALLABLE(sqrt_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      auto asq = eve::sqrt(eve::abs(v));
-      return if_else(eve::is_gez(v), complex(asq, T(0)), complex(T(0), asq));
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_sqrt(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
 
 namespace kyosu
 {
+  template<typename Options>
+  struct sqrt_t : eve::elementwise_callable<sqrt_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return  KYOSU_CALL(complex(v)); }
+
+    KYOSU_CALLABLE_OBJECT(sqrt_t, sqrt_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var sqrt
 //!   @brief Computes a square root value.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -69,7 +55,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. a real typed input z is treated as if [kyosu::complex](@ref kyosu::complex)(z) was entered.
+//!     1. a real typed input z is treated as if `complex(z)` was entered.
 //!
 //!     2. Returns the elementwise the square root of z,
 //!        in the range of the right half-plane, including the imaginary axis (\f$[0, +\infty]\f$
@@ -93,7 +79,65 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sqrt.cpp}
+//======================================================================================================================
+  inline constexpr auto sqrt = eve::functor<sqrt_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_sqrt sqrt = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sqrt_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<Z>)
+    {
+      //always compute the sqrt of the complex with positive imaginary part
+      //then conjugate if necessary
+      auto [rz, iz] = z;
+      auto negimag = eve::is_negative(iz);
+      auto x = eve::abs(rz);
+      auto y = eve::abs(iz);
+      auto iaz = eve::if_else(negimag, -iz, iz); // always >= 0 or -Nan
+      auto gtxy = (x > y);
+      auto gezrz = eve::is_gez(rz);
+      auto r = eve::if_else(gtxy, y/x, x/y);
+      auto rr= eve::sqrt(eve::inc(eve::sqr(r)));
+      auto sqrtx = eve::sqrt(x);
+      auto w = eve::if_else(gtxy,
+                            sqrtx*eve::sqrt(eve::half(eve::as(r))*eve::inc(rr)),
+                            eve::sqrt(y)*eve::sqrt(eve::half(eve::as(r))*(r+rr)));
+      auto is_real_z = kyosu::is_real(z);
+
+      auto rr1 = eve::if_else(is_real_z, sqrtx, w);
+      auto ii1 = eve::if_else(is_real_z, eve::zero, iaz*eve::half(eve::as(r))/w);
+      Z res = kyosu::if_else(gezrz
+                          , Z(rr1, ii1)
+                          , Z(ii1, rr1)
+                          );
+      res = if_else(is_pure(z), eve::sqrt_2(eve::as(r))*Z( eve::half(eve::as(r)),  eve::half(eve::as(r)))*eve::sqrt(iz), res);
+      if (eve::any(is_not_finite(z)))
+      {
+        res = kyosu::if_else(rz == eve::minf(eve::as(rz))
+                            , kyosu::if_else( eve::is_nan(iz), Z(iz, eve::minf(eve::as(rz)))
+                                            , Z(eve::zero(eve::as(rz)), eve::inf(eve::as(rz))))
+                            , res
+                            );
+        res = kyosu::if_else(rz == eve::inf(eve::as(rz))
+                            , if_else( eve::is_nan(iz), Z(eve::inf(eve::as(rz)), iz)
+                                     , Z( eve::inf(eve::as(rz)), eve::zero(eve::as(rz)) ))
+                            , res
+                            );
+        res = kyosu::if_else(eve::is_nan(rz), Z(rz, rz), res);
+        auto infty = eve::inf(eve::as(iaz));
+        res = kyosu::if_else(iaz == infty,  Z(infty, infty), res);
+      }
+      return if_else(negimag, kyosu::conj(res), res);
+    }
+    else
+    {
+      return cayley_extend(sqrt, z);
+    }
+  }
 }

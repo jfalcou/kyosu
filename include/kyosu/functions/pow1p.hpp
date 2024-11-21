@@ -6,44 +6,36 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-namespace kyosu::tags
-{
-  struct callable_pow1p: eve::elementwise
-  {
-    using callable_tag_type = callable_pow1p;
-
-    KYOSU_DEFERS_CALLABLE(pow1p_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const& v0
-                                               , eve::floating_ordered_value auto const& v1) noexcept
-    {
-      return eve::pow1p(v0, v1);
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
-    {
-      return eve::tag_invoke(*this, target0, target1);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_pow1p(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct pow1p_t : eve::strict_elementwise_callable<pow1p_t, Options>
+  {
+    template<typename Z0, typename Z1>
+    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
+    -> decltype(kyosu::pow(kyosu::inc(z0), z1))
+    { return kyosu::pow(kyosu::inc(z0), z1); }
+
+    template<concepts::real V0, concepts::real V1>
+    KYOSU_FORCEINLINE constexpr auto  operator()(V0 v0, V1 v1) const noexcept
+    -> decltype(eve::pow1p(v0,v1))
+    { return eve::pow1p(v0,v1); }
+
+    KYOSU_CALLABLE_OBJECT(pow1p_t, pow1p_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var pow1p
 //!   @brief Computes the  computing the pow1p operation \f$(x+1)^y\f$.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -54,7 +46,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto average(auto z0, auto z1) noexcept;
+//!     constexpr auto pow1p(auto z0, auto z1) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -64,12 +56,14 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!      the call is semantically equivalent to `pow(inc(z))`
+//!      the call is semantically equivalent to `pow(inc(z0), z1)`
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/pow1p.cpp}
+//======================================================================================================================
+  inline constexpr auto pow1p = eve::functor<pow1p_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_pow1p pow1p = {};
 }

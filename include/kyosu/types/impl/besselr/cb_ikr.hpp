@@ -10,12 +10,14 @@
 #include <kyosu/types/impl/bessel/cb_jyn.hpp>
 #include <kyosu/types/impl/besselr/cb_jyr01.hpp>
 #include <kyosu/details/with_alloca.hpp>
-#include <vector>
+#include <kyosu/functions/cyl_bessel_j.hpp>
+#include <kyosu/functions/cyl_bessel_h1.hpp>
+#include <kyosu/functions/cyl_bessel_h2.hpp>
 
 namespace kyosu::_
 {
   /////////////////////////////////
-  // contains implementations of
+  // needed for the implementations of
   // cyl_bessel_i
   // cyl_bessel_k
   // cyl_bessel_ik
@@ -41,8 +43,8 @@ namespace kyosu::_
     auto cmi = piotwo*rec(f);
     auto argzlt0 = eve::is_ltz(argz);
     auto r =  if_else(argzlt0
-                     , cpi*cyl_bessel_h1(v, muli(z))
-                     , cmi*cyl_bessel_h2(v, mulmi(z))
+                     , cpi*cb_h1r(v, muli(z))
+                     , cmi*cb_h2r(v, mulmi(z))
                      );
     return if_else(is_eqz(z), complex(eve::inf(eve::as<u_t>())), r);
   }
@@ -100,7 +102,7 @@ namespace kyosu::_
       auto spv = eve::sinpi(mvi);
       for(size_t l=0; l <= an; ++l)
       {
-        is[l] += eve::two_o_pi(as(z))*spv*cb_kr(mvi, z);
+        is[l] += kyosu::two_o_pi(as(z))*spv*cb_kr(mvi, z);
         mvi = inc(mvi);
         spv = -spv;
       }
@@ -125,59 +127,15 @@ namespace kyosu::_
     else
     {
       auto mv = -v;
-      return cb_ir(mv, z)+eve::two_o_pi(as(z))*sinpi(mv)*cb_kr(mv, z);
+      return cb_ir(mv, z)+kyosu::two_o_pi(as(z))*sinpi(mv)*cb_kr(mv, z);
     }
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_i
-  //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_i>, N v, Z z, R & is) noexcept
-  {
-    return cb_ir(v, z, is);
-  }
-
-  template<eve::floating_scalar_value N, kyosu::concepts::complex Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_i>, N v, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_ir(v, z);
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_i, v, z);
-    }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_k
-  //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, kyosu::concepts::complex Z, typename R> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_k>, N v, Z z, R & ks) noexcept
-  {
-    return cb_kr(v, z, ks);
-  }
-
-  template<eve::floating_scalar_value N, kyosu::concepts::complex Z>  KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_k>, N v, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_kr(v, z);
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_k, v, z);
-    }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_ik
+  //  cb_ik
   //===-------------------------------------------------------------------------------------------
   template<eve::floating_scalar_value N, typename Z, typename R1, typename R2> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_ik>, N v, Z z, R1& is, R2& ks) noexcept
+  auto cb_ik(N v, Z z, R1& is, R2& ks) noexcept
   {
     auto in = cb_ir(v, z, is);
     auto kn = cb_kr(v, z, ks);

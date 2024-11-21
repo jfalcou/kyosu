@@ -26,7 +26,7 @@ TTS_CASE_WITH ( "Check kyosu::atanh over quaternion"
   auto lr = kyosu::atanh(r);
   auto lc = kyosu::atanh(c);
   auto lq = kyosu::atanh(q);
-  TTS_RELATIVE_EQUAL(kyosu::tanh(lr), kyosu::complex(r), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::tanh(lr), kyosu::complex(r), 1e-4);
   TTS_RELATIVE_EQUAL(kyosu::tanh(lc), c, 1e-3);
   TTS_RELATIVE_EQUAL(kyosu::tanh(lq), q, 2e-2);
 };

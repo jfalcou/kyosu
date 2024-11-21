@@ -6,46 +6,35 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_is_equal: eve::elementwise
-  {
-    using callable_tag_type = callable_is_equal;
-
-    KYOSU_DEFERS_CALLABLE(is_equal_);
-
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::value auto const& v0
-                                               , eve::value auto const& v1) noexcept
-    {
-      return v0 == v1;
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1 ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
-    {
-      return eve::tag_invoke(*this, target0, target1);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_is_equal(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/is_nan.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct is_equal_t : eve::strict_elementwise_callable<is_equal_t, Options, eve::numeric_option>
+  {
+    template<typename Z0, typename Z1>
+    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept -> eve::as_logical_t<decltype(z0 + z1)>
+    { return KYOSU_CALL(z0,z1); }
+
+    template<concepts::real V0, concepts::real V1>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> eve::as_logical_t<decltype(v0+ v1)>
+    { return eve::is_equal[Options()](v0, v1); }
+
+    KYOSU_CALLABLE_OBJECT(is_equal_t, is_equal_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var is_equal
 //!   @brief retuen true if and only if the two parameters are equal.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -56,7 +45,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      constexpr auto is_equal(auto z0, auto z1) noexcept;
+//!      Regular call
+//!      constexpr auto is_equal(auto z0, auto z1)          noexcept; //1
+//!
+//!      Semantic modifyier
+//!      constexpr auto is_equal[numeric](auto z0, auto z1) noexcept; //2
 //!   }
 //!   @endcode
 //!
@@ -66,12 +59,28 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elemtwise true or false according the equality of the parameters
+//!     1. Returns elementwise true or false according the equality of the parameters
+//!     2. NaN values are considered equal
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/is_equal.cpp}
+//======================================================================================================================
+  inline constexpr auto is_equal = eve::functor<is_equal_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_is_equal is_equal = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z0, typename Z1, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto is_equal_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
+  -> eve::as_logical_t<decltype(z0+ z1)>
+  {
+    if constexpr(O::contains(eve::numeric))
+      return (z0 == z1) || (is_nan(z0) && is_nan(z1));
+    else
+      return z0 == z1;
+  }
 }

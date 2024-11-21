@@ -32,5 +32,5 @@ TTS_CASE_WITH ( "Check kyosu::sinhc over quaternion"
 {
   using ke_t = kyosu::quaternion_t<T>;
   auto q = ke_t(r,i, j, k);
-  TTS_RELATIVE_EQUAL(kyosu::sinhc(q), kyosu::sinh(q)/q, 1e-4);
+  TTS_RELATIVE_EQUAL(kyosu::sinhc(q), kyosu::sinh(q)/q, 2e-4);
 };

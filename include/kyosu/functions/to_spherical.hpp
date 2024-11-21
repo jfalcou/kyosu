@@ -7,41 +7,49 @@
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
+#include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/arg.hpp>
 
-namespace kyosu::tags
+namespace kyosu
 {
-  struct callable_to_spherical: eve::elementwise
+  template<typename Options>
+  struct to_spherical_t : eve::elementwise_callable<to_spherical_t, Options>
   {
-    using callable_tag_type = callable_to_spherical;
-
-    KYOSU_DEFERS_CALLABLE(to_spherical_);
-
-    template<eve::floating_ordered_value V>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & v) noexcept
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
       return kumi::tuple{eve::abs(v), eve::arg(v), z, z};
     }
 
-    template<typename T0>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0))
+    template<concepts::cayley_dickson Q>
+    requires(dimension_v<Q> <= 4)
+      KYOSU_FORCEINLINE constexpr auto operator()(Q  q) const noexcept
     {
-      return eve::tag_invoke(*this, target0);
+      if constexpr(kyosu::concepts::complex<Q>)
+      {
+        auto c0 = complex(real(q), imag(q));
+        auto z =  eve::zero(eve::as(abs(c0)));
+        return kumi::tuple{abs(c0), arg(c0), z, z};
+      }
+      else
+      {
+        auto rho = kyosu::abs(q);
+        auto phi2 = eve::asin(kpart(q)/rho);
+        kpart(q) = 0;
+        auto rho1 = kyosu::abs(q);
+        auto phi1 = eve::asin(jpart(q)/rho1);
+        jpart(q) = 0;
+        auto rho2 = kyosu::abs(q);
+        auto theta= eve::asin(ipart(q)/rho2);
+        return kumi::tuple{rho, theta, phi1, phi2};
+      }
     }
 
-    template<typename... T>
-    eve::unsupported_call<callable_to_spherical(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    KYOSU_CALLABLE_OBJECT(to_spherical_t, to_spherical_);
   };
-}
 
-namespace kyosu
-{
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -51,7 +59,7 @@ namespace kyosu
   //!
   //!  This function is the reciprocal of from_spherical
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -80,8 +88,9 @@ namespace kyosu
   //! #### Example
   //!
   //! @godbolt{doc/to_spherical.cpp}
-  //!
+  //================================================================================================
+  inline constexpr auto to_spherical = eve::functor<to_spherical_t>;
+  //================================================================================================
   //!  @}
   //================================================================================================
-  inline constexpr tags::callable_to_spherical to_spherical = {};
 }

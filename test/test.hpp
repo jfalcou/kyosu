@@ -97,6 +97,13 @@ namespace tts
     using types_list = typename make<T>::type;
   };
 
+  template<typename T>
+  inline bool compare_equal(eve::logical<T> const &l, eve::logical<T> const &r)
+  {
+    if constexpr(eve::simd_value<T>)  return eve::all(l == r);
+    else                              return l == r;
+  }
+
   template<kyosu::concepts::cayley_dickson T> inline bool is_ieee_equal(T const &l, T const &r)
   {
     return kumi::all_of(kumi::map( [](auto a, auto b) { return tts::is_ieee_equal(a,b); }, l, r));
@@ -114,10 +121,7 @@ namespace tts
 
   template<kyosu::concepts::cayley_dickson T> double relative_distance(T const &l, T const &r)
   {
-    if(is_ieee_equal(l, r))
-      return 0.0;
-    else
-      return kyosu::reldist(l,r);
+    return kyosu::reldist[eve::numeric](l, r);
   }
 
   template<kyosu::concepts::cayley_dickson T> double absolute_distance(T const &l, T const &r)
@@ -178,7 +182,7 @@ namespace tts
       // Compute a recognizable filler
       for(std::ptrdiff_t i=data.size();i<these.size();++i)
       {
-        p_t filler = eve::Constant<p_t, static_cast<p_t>(0xDEADBEEFBABE0000)>() + p_t(i);
+        p_t filler = eve::constant<p_t, static_cast<p_t>(0xDEADBEEFBABE0000)>() + p_t(i);
         these.set(i, eve::bit_cast(filler,eve::as<v_t>()) );
       }
 

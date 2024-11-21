@@ -6,44 +6,32 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/bessel.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_airy_ai: eve::elementwise
-  {
-    using callable_tag_type = callable_airy_ai;
-
-    KYOSU_DEFERS_CALLABLE(airy_ai_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      return eve::airy_ai(v);
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const & target0) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0))
-    {
-      return eve::tag_invoke(*this, target0);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_airy_ai(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct airy_ai_t : eve::elementwise_callable<airy_ai_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::airy_ai(v); }
+
+    KYOSU_CALLABLE_OBJECT(airy_ai_t, airy_ai_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var airy_ai
-//!   @brief Computes the airy function \f$Ai\f$,
+//!   @brief Computes the airy function \f$Ai\f$
+//!
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -54,8 +42,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T> constexpr auto airy_ai(T z) noexcept;
-//!
+//!      template<eve::floating_ordered_value T>     constexpr auto airy_ai(T z) noexcept;
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto airy_ai(T z) noexcept;
 //!   }
 //!   @endcode
@@ -66,12 +53,30 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns  \f$\{Ai(z)\}f$.
+//!     * returns  \f$Ai(z)\f$.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/airy_ai.cpp}
+//======================================================================================================================
+  inline constexpr auto airy_ai = eve::functor<airy_ai_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_airy_ai airy_ai = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto airy_ai_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<Z> )
+    {
+      return ai(z);
+    }
+    else
+    {
+      return cayley_extend(airy_ai, z);
+    }
+  }
 }

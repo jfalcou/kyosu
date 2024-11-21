@@ -14,7 +14,7 @@ TTS_CASE_WITH ( "Check kyosu::is_not_real over not_real"
               )
 (auto data)
 {
-  TTS_EQUAL(kyosu::is_not_real(data), eve::is_not_real(data));
+  TTS_EQUAL(kyosu::is_not_real(data), eve::false_((eve::as(data))));
 };
 
 TTS_CASE_WITH ( "Check kyosu::is_not_real over complex"

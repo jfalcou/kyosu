@@ -1,53 +1,43 @@
 //======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
-  Copyright : KYOSU Contributors & Maintainers
+  Copyright: KYOSU Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
 #pragma once
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/erf.hpp>
+#include <kyosu/functions/muli.hpp>
+#include <kyosu/functions/mulmi.hpp>
 
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/math.hpp>
 
-namespace kyosu::tags
-{
-  struct callable_erfi : eve::elementwise
-  {
-    using callable_tag_type = callable_erfi;
-
-    KYOSU_DEFERS_CALLABLE(erfi_);
-
-    template<eve::ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      auto over = eve::sqr(v) > 720;
-      auto r = eve::inf(eve::as(v))*eve::sign(v);
-      r = eve::if_else(over,  r, -get<1>(kyosu::erf(complex(eve::zero(eve::as(v)), -v))));
-      return complex(r);
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const & target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_erfi(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
 
 namespace kyosu
 {
+  template<typename Options>
+  struct erfi_t : eve::elementwise_callable<erfi_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(v); }
+
+    KYOSU_CALLABLE_OBJECT(erfi_t, erfi_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var erfi
 //!   @brief Callable object computing The imaginary error function \f$ \displaystyle \mathrm{erfi}(z) = -i\mathrm{erf}(iz)\f$
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -74,7 +64,40 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/erfi.cpp}
+//======================================================================================================================
+  inline constexpr auto erfi = eve::functor<erfi_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_erfi erfi = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto erfi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z> )
+    {
+      auto over = eve::sqr(z) > 720;
+      auto r = eve::inf(eve::as(z))*eve::sign(z);
+      r = eve::if_else(over, r, -get<1>(kyosu::erf(complex(eve::zero(eve::as(z)), -z))));
+      return complex(r);
+    }
+    else if constexpr(concepts::complex<Z> )
+    {
+      auto realz = is_real(z);
+      if (eve::all(realz))
+      {
+        return kyosu::erfi(real(z));
+      }
+      else
+      {
+        return mulmi(erf(muli(z)));
+      }
+    }
+    else
+    {
+      return cayley_extend(erfi, z);
+    }
+  }
 }

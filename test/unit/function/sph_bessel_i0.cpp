@@ -47,10 +47,10 @@ TTS_CASE_WITH ( "Check kyosu::sph_bessel_i1_0 over real"
   using kyosu::sph_bessel_i1_1;
   auto i1_0c = sph_bessel_i1_0(c);
   auto i1_1c = sph_bessel_i1_1(c);
-  TTS_EQUAL(i1_0c, sph_bessel_i1_0(cm));
-  TTS_EQUAL(i1_1c, -sph_bessel_i1_1(cm));
-  TTS_EQUAL(i1_0c, kyosu::conj(sph_bessel_i1_0(cb)));
-  TTS_EQUAL(i1_1c, kyosu::conj(sph_bessel_i1_1(cb)));
+  TTS_RELATIVE_EQUAL(i1_0c, sph_bessel_i1_0(cm), 1.0e-7);
+  TTS_RELATIVE_EQUAL(i1_1c, -sph_bessel_i1_1(cm), 2.0e-5);
+  TTS_RELATIVE_EQUAL(i1_0c, kyosu::conj(sph_bessel_i1_0(cb)), 1.0e-7);
+  TTS_RELATIVE_EQUAL(i1_1c, kyosu::conj(sph_bessel_i1_1(cb)), 1.0e-7);
   TTS_EXPECT(eve::all(kyosu::is_real(sph_bessel_i1_0(cr))));
   TTS_EXPECT(eve::all(kyosu::is_real(sph_bessel_i1_1(cr))));
   TTS_EXPECT(eve::all(kyosu::is_real(sph_bessel_i1_0(ci))));

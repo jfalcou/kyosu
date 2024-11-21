@@ -1,54 +1,33 @@
 //==================================================================================================
 /*
-  KYOSU - Expressive Vector Engine
-  Copyright: KYOSU Project Contributors
+  KYOSU - Complex Without Complexes
+  Copyright: KYOSU Project Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
 
-namespace kyosu::tags
+namespace kyosu
 {
-  struct callable_from_cylindrical: eve::elementwise
+  template<typename Options>
+  struct from_cylindrical_t : eve::elementwise_callable<from_cylindrical_t, Options>
   {
-    using callable_tag_type = callable_from_cylindrical;
-
-    KYOSU_DEFERS_CALLABLE(from_cylindrical_);
-
-    template<eve::floating_ordered_value V,  eve::floating_ordered_value U,  eve::floating_ordered_value W,  eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & r
+    template<concepts::real U ,concepts::real V,concepts::real W, concepts::real T>
+    KYOSU_FORCEINLINE constexpr auto operator()( V const& r
                                                , U const & angle
                                                , W const & h1
-                                               , T const & h2) noexcept
+                                               , T const & h2) const noexcept
+    -> quaternion_t<eve::common_value_t<V, U, W, T>>
     {
-      using e_t = decltype(r+angle+h1+h2);
       auto [sa, ca] = eve::sincos(angle);
       return kyosu::quaternion(r*ca, r*sa, h1, h2);
     }
 
-    template<typename T0, typename T1, typename T2, typename T3>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0,
-                                      T1 const& target1,
-                                      T2 const& target2,
-                                      T3 const& target3
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0,  target1,  target2,  target3))
-    {
-      return eve::tag_invoke(*this, target0,  target1,  target2,  target3);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_from_cylindrical(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    KYOSU_CALLABLE_OBJECT(from_cylindrical_t, from_cylindrical_);
   };
-}
 
-namespace kyosu
-{
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -59,12 +38,12 @@ namespace kyosu
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
   //!  from a cylindrical representation of an \f$\mathbb{R}^2\f$ element.
   //!
-  //! from_cylindrical first two inputs are the polar coordinates of the first \f$\mathbb{C}\f$
+  //! `from_cylindrical` first two inputs are the polar coordinates of the first \f$\mathbb{C}\f$
   //! component of the quaternion.
   //! The third and fourth inputs are placed into the third and fourth \f$\mathbb{R}\f$
   //! components of the quaternion, respectively.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include kyosu/module/quaternion.hpp>`
@@ -90,7 +69,9 @@ namespace kyosu
   //!  @groupheader{Example}
   //!
   //! @godbolt{doc/from_cylindrical.cpp}
-  //!  @}
-  //================================================================================================
-  inline constexpr tags::callable_from_cylindrical from_cylindrical = {};
+  //======================================================================================================================
+  inline constexpr auto from_cylindrical = eve::functor<from_cylindrical_t>;
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }

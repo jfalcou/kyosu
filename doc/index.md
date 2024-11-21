@@ -4,6 +4,10 @@ Kyosu
 **KYOSU** is an unified implementation of the complex, quaternions, octonions and more generally all
 \f$\mathbb{R}\f$-Cayley-Dickson algebras in an SIMD aware context provided by **EVE**
 
+\note If you are not interested in quite exotics features as quaternion or octonion, but only in real and complex **KYOSU**
+is still a library that provides a set of ~150 functions that can be used with real and complex in scalar or simd form
+with no abstraction penalty. The list of them can be seen below.
+
 The Cayley-Dickson construction scheme defines a new algebra as a Cartesian product of an algebra with itself,
  with multiplication defined in a specific way (different from the componentwise multiplication)
  and an involution known as conjugation.
@@ -171,7 +175,7 @@ Most **KYOSU** callables are usable with all cayley_dickson types. The exception
      * cylindrical Bessel functions: cyl_bessel_xxx are all defined for xxx being j0, j1, jn, y0, y1, yn, i0, i1, in, h1_0, h1_1, h1n, h2_0, h2_1, h2n, k1, k0, kn.
      * spherical   Bessel functions: sph_bessel_xxx are all defined for xxx being j0, j1, jn, y0, y1, yn, i1_0, i1_1, i1n, i2_0, i2_1, i2n, h1_0, h1_1, h1n, h2_0, h2_1 h2n, k1, k0, kn.
 
-  * Callables usable with quaternion complex and real only
+  * Callables usable with quaternion, complex and real only
 
     These functions are related to \f$\mathbb{R}^3\f$ rotations
 
@@ -181,6 +185,6 @@ Most **KYOSU** callables are usable with all cayley_dickson types. The exception
 
   * Constant i, j, k and cinf are defined.
 
-    * i(as<Z>()) returns a complex of the same underlying type as Z;
-    * j(as<Z>()) and k(as<Z>()) return a quaternion of the same underlying type as Z;
-    * cinf(as<Z>()) returns a complex with nan real part and inf imaginary part, that can be roughly taken as a complex-infinity, in the sense that abs is infinite and arg is undefinite (nan).
+    * [i(as<Z>())](@ref kyosu::i) returns at least a complex of the same underlying type as Z or a value of the Z type;
+    * [j(as<Z>())](@ref kyosu::j) and [k(as<Z>())](@ref kyosu::k) return a least a quaternion of the same underlying type as Z or a value of the Z type;
+    * cinf(as<Z>()) returns at least a complex with nan real part and inf imaginary part, that can be roughly taken as a complex-infinity, in the sense that abs is infinite and arg is undefinite (nan), or a value of the Z type.

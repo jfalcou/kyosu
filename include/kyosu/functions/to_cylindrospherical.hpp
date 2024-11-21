@@ -7,41 +7,43 @@
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
+#include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/arg.hpp>
 
-namespace kyosu::tags
+namespace kyosu
 {
-  struct callable_to_cylindrospherical: eve::elementwise
+  template<typename Options>
+  struct to_cylindrospherical_t : eve::elementwise_callable<to_cylindrospherical_t, Options>
   {
-    using callable_tag_type = callable_to_cylindrospherical;
-
-    KYOSU_DEFERS_CALLABLE(to_cylindrospherical_);
-
-    template<eve::floating_ordered_value V>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & v) noexcept
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
       return kumi::tuple{v, z, z, z};
     }
 
-    template<typename T0>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0))
+    template<concepts::cayley_dickson Z>
+    requires(dimension_v<Z> <= 4)
+    KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
     {
-      return eve::tag_invoke(*this, target0);
+      auto q0 = real(q);
+      if constexpr(kyosu::concepts::complex<Z>)
+      {
+        auto z =  eve::zero(eve::as(q0));
+        return kumi::tuple{q0, ipart(q), z, z};
+      }
+      else
+      {
+        auto lon =  eve::atan2[eve::pedantic](jpart(q), ipart(q));
+        auto lat =  eve::atan2[eve::pedantic](kpart(q)*eve::sin(lon),jpart(q));
+        return kumi::tuple{q0, abs(pure(q)), lon, lat};
+      }
     }
 
-    template<typename... T>
-    eve::unsupported_call<callable_to_cylindrospherical(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
+    KYOSU_CALLABLE_OBJECT(to_cylindrospherical_t, to_cylindrospherical_);
   };
-}
 
-namespace kyosu
-{
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -49,9 +51,9 @@ namespace kyosu
   //!
   //! @brief Callable object computing the cylindrospherical coordinates from a quaternion.
   //!
-  //!  This function is the reciprocal of from_cylindrospherical.
+  //!  This function is the reciprocal of `from_cylindrospherical`.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -80,8 +82,9 @@ namespace kyosu
   //! #### Example
   //!
   //! @godbolt{doc/to_cylindrospherical.cpp}
-  //!
+  //================================================================================================
+  inline constexpr auto to_cylindrospherical = eve::functor<to_cylindrospherical_t>;
+  //================================================================================================
   //!  @}
   //================================================================================================
-  inline constexpr tags::callable_to_cylindrospherical to_cylindrospherical = {};
 }

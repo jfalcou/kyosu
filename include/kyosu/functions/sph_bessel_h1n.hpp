@@ -6,39 +6,27 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/bessel.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_sph_bessel_h1n: eve::elementwise
-  {
-    using callable_tag_type = callable_sph_bessel_h1n;
-
-    KYOSU_DEFERS_CALLABLE(sph_bessel_h1n_);
-
-    template<eve::integral_scalar_value N, eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N n, T const& z) noexcept
-    {
-      return complex(eve::sph_bessel_jn(n, z), eve::sph_bessel_yn(n, z));
-    }
-
-    template<typename N, typename T>
-    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
-    {
-      return eve::tag_invoke(*this, target0, target1);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_sph_bessel_h1n(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct sph_bessel_h1n_t : eve::strict_elementwise_callable<sph_bessel_h1n_t, Options>
+  {
+    template<eve::integral_scalar_value N, typename Z>
+    requires(concepts::cayley_dickson<Z> || concepts::cayley_dickson<Z>)
+    KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z) const noexcept
+    { return KYOSU_CALL(n,z); }
+
+    template<eve::integral_scalar_value N, concepts::real V>
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(N n, V v) const noexcept
+    { return KYOSU_CALL(n,complex(v)); }
+
+    KYOSU_CALLABLE_OBJECT(sph_bessel_h1n_t, sph_bessel_h1n_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -71,7 +59,25 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sph_bessel_h1n.cpp}
+//======================================================================================================================
+  inline constexpr auto sph_bessel_h1n = eve::functor<sph_bessel_h1n_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_sph_bessel_h1n sph_bessel_h1n = {};
+}
+
+namespace kyosu::_
+{
+  template<typename N, typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sph_bessel_h1n_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z>)
+    {
+      return sb_h1n(n, z);
+    }
+    else
+    {
+      return cayley_extend_rev(sph_bessel_h1n, n, z);
+    }
+  }
 }

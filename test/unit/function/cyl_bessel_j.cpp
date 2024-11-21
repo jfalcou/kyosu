@@ -8,7 +8,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k over real"
+TTS_CASE_WITH ( "Check kyosu::cyl_bessel_j"
               , kyosu::scalar_real_types
               , tts::generate(tts::randoms(-10,10))
               )
@@ -51,7 +51,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k over real"
     for (int k = 0; k < 16; ++k)
     {
       auto c = kyosu::complex(re[k], im[k]);
-      kyosu::cyl_bessel_j(v1, c, is_03);
+      kyosu::cyl_bessel_j(v1, c, std::span(is_03));
       auto vv = T(N+1.0/3);
       for (n = 0; n <= N; ++n)
       {
@@ -64,7 +64,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k over real"
 };
 
 
-TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k over real"
+TTS_CASE_WITH ( "Check kyosu::cyl_bessel_j"
               , kyosu::scalar_real_types
               , tts::generate(tts::randoms(-10,10))
               )
@@ -106,7 +106,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k over real"
     for (int k = 0; k < 16; ++k)
     {
       auto c = kyosu::complex(re[k], im[k]);
-      kyosu::cyl_bessel_j(v1, c, is_03);
+      kyosu::cyl_bessel_j(v1, c, std::span(is_03));
       auto vv = -T(N+1.0/3);
       for (n = 0; n <= N; ++n)
       {

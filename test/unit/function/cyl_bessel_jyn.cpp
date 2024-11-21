@@ -27,9 +27,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
     for (int k = 0; k < 16; ++k)
     {
       auto c = kyosu::complex(re[k], im[k]);
-      kyosu::cyl_bessel_jyn(3, c, js, ys);
-//       for(int i=0; i < 2; ++i)
-//       {
+      kyosu::cyl_bessel_jyn(3, c, std::span(js), std::span(ys));
       int i = 0;
       TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_j0(c), js[0], 1.0e-7) << "i " << i  << " c "<< c << '\n';
       i = 1;
@@ -40,8 +38,6 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
       i = 3;
       auto ref3 =  kyosu::complex_t<T>(reres3[k], imres3[k]);
       TTS_RELATIVE_EQUAL(ref3, js[3], 1.0e-7) << "i " << i  << " c "<< c << '\n';
-
-//     }
     }
   }
 };
@@ -66,12 +62,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
     for (int k = 0; k < 16; ++k)
     {
       auto c = kyosu::complex(re[k], im[k]);
-      kyosu::cyl_bessel_jyn(3, c, js, ys);
-
-      for(int i=0; i <= 3 ; ++i)
-      {
-        std::cout << "ys[" << i << "] = "<< ys[i] << std::endl;
-      }
+      kyosu::cyl_bessel_jyn(3, c, std::span(js), std::span(ys));
       int i = 0;
       TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_j0(c), js[0], 1.0e-6) << "i " << i  << " c "<< c << '\n';
       i = 1;
@@ -82,7 +73,6 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
       i = 3;
       auto ref3 =  kyosu::complex_t<T>(reres3[k], imres3[k]);
       TTS_RELATIVE_EQUAL(ref3, ys[3], 1.0e-6) << "i " << i  << " c "<< c << '\n';
-
     }
   }
 };

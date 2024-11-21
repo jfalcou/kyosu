@@ -1,55 +1,35 @@
 //==================================================================================================
 /*
-  KYOSU - Expressive Vector Engine
-  Copyright: KYOSU Project Contributors
+  KYOSU - Complex Without Complexes
+  Copyright: KYOSU Project Contributors & Maintainers
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
 #include <kyosu/functions/to_quaternion.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_from_semipolar: eve::elementwise
-  {
-    using callable_tag_type = callable_from_semipolar;
-
-    KYOSU_DEFERS_CALLABLE(from_semipolar_);
-
-    template<eve::floating_ordered_value V,  eve::floating_ordered_value U,  eve::floating_ordered_value W,  eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & rho
-                                               , U const & alpha
-                                               , W const & theta1
-                                               , T const & theta2) noexcept
-    {
-      auto [st1, ct1] = eve::sincos(theta1);
-      auto [st2, ct2] = eve::sincos(theta2);
-      auto [sa, ca] = eve::sincos(alpha);
-      return rho*kyosu::quaternion(ca*ct1, ca*st1, sa*ct2, sa*st2);
-    }
-
-    template<typename T0, typename T1, typename T2, typename T3>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0,
-                                      T1 const& target1,
-                                      T2 const& target2,
-                                      T3 const& target3
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0,  target1,  target2,  target3))
-    {
-      return eve::tag_invoke(*this, target0,  target1,  target2,  target3);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_from_semipolar(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
 
 namespace kyosu
 {
+  template<typename Options>
+  struct from_semipolar_t : eve::elementwise_callable<from_semipolar_t, Options>
+  {
+    template<concepts::real U ,concepts::real V,concepts::real W, concepts::real T>
+    KYOSU_FORCEINLINE constexpr auto operator()( V const & rho
+                                               , U const & alpha
+                                               , W const & theta1
+                                               , T const & theta2) const noexcept
+    -> quaternion_t<eve::common_value_t<V, U, W, T>>
+    {
+      auto [st1, ct1] = eve::sincos(theta1);
+      auto [st2, ct2] = eve::sincos(theta2);
+      auto [sa, ca]   = eve::sincos(alpha);
+      return rho*kyosu::quaternion(ca*ct1, ca*st1, sa*ct2, sa*st2);
+    }
+
+    KYOSU_CALLABLE_OBJECT(from_semipolar_t, from_semipolar_);
+  };
+
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -60,12 +40,7 @@ namespace kyosu
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
   //!  from a polar representation of an \f$\mathbb{R}^2\f$ element.
   //!
-  //! from_semipolar first two inputs are the polar coordinates of the first \f$\mathbb{C}\f$
-  //! component of the quaternion.
-  //! The third and fourth inputs are placed into the third and fourth \f$\mathbb{R}\f$
-  //! components of the quaternion, respectively.
-  //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include kyosu/module/quaternion.hpp>`
@@ -76,13 +51,13 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     auto from_semipolar(auto r, auto angle, auto h1, auto h2) const noexcept;
+  //!     auto from_semipolar(auto rho, auto alpha, auto theta1, auto theta2) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!  * `r`, angle`, `h1`, `h2`
+  //!  * `r`, `alpha`, `theta1`, `theta2`
   //!
   //! **Return value**
   //!
@@ -91,7 +66,9 @@ namespace kyosu
   //!  @groupheader{Example}
   //!
   //! @godbolt{doc/from_semipolar.cpp}
-  //!  @}
-  //================================================================================================
-  inline constexpr tags::callable_from_semipolar from_semipolar = {};
+  //======================================================================================================================
+  inline constexpr auto from_semipolar = eve::functor<from_semipolar_t>;
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }

@@ -6,44 +6,35 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_minmag: eve::elementwise
-  {
-    using callable_tag_type = callable_minmag;
-
-    KYOSU_DEFERS_CALLABLE(minmag_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const&... vs) noexcept
-    {
-      return eve::minmag(vs...);
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const&... targets ) const noexcept
-    -> decltype(eve::tag_invoke(*this, targets...))
-    {
-      return eve::tag_invoke(*this, targets...);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_minmag(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/sqr_abs.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct minmag_t : eve::strict_elementwise_callable<minmag_t, Options>
+  {
+    template<typename Z0, typename ...Zs>
+    requires(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...))
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Zs const & ...zs) const noexcept -> decltype(z0 + (zs +...))
+    { return KYOSU_CALL(z0,zs...); }
+
+    template<concepts::real V0, concepts::real ...Vs>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs... vs) const noexcept -> decltype(eve::minmag(v0,vs...))
+    { return eve::minmag(v0,vs...); }
+
+    KYOSU_CALLABLE_OBJECT(minmag_t, minmag_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var minmag
 //!   @brief Callable object computing the minmag operation.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -69,7 +60,31 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/minmag.cpp}
+//======================================================================================================================
+  inline constexpr auto minmag = eve::functor<minmag_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_minmag minmag = {};
+}
+
+namespace kyosu::_
+{
+  template<typename C0, typename C1, typename ... Cs,  eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto minmag_(KYOSU_DELAY(), O const&, C0 c0, C1 c1, Cs... cs) noexcept
+  {
+    if constexpr(sizeof...(cs) == 0)
+    {
+      auto ac0 = kyosu::sqr_abs(c0);
+      auto ac1 = kyosu::sqr_abs(c1);
+      auto tmp = kyosu::if_else(eve::is_not_greater_equal(ac1, ac0), c1, c0);
+      return kyosu::if_else(eve::is_not_greater_equal(ac0, ac1), c0, tmp);
+    }
+    else
+    {
+      using r_t = kyosu::as_cayley_dickson_t<C0, C1, Cs...>;
+      r_t that(minmag(c0, c1));
+      ((that = minmag(that, cs)), ...);
+      return that;
+    }
+  }
 }

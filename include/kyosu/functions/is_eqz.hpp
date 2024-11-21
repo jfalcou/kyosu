@@ -7,40 +7,30 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_is_eqz: eve::elementwise
-  {
-    using callable_tag_type = callable_is_eqz;
-
-    KYOSU_DEFERS_CALLABLE(is_eqz_);
-
-    template<eve::value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return v == T(0); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_is_eqz(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct is_eqz_t : eve::elementwise_callable<is_eqz_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::is_eqz(v); }
+
+    KYOSU_CALLABLE_OBJECT(is_eqz_t, is_eqz_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var is_eqz
 //!   @brief test the parameter for equality to zero.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -67,7 +57,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/is_eqz.cpp}
+//======================================================================================================================
+  inline constexpr auto is_eqz = eve::functor<is_eqz_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_is_eqz is_eqz = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto is_eqz_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return z == eve::zero(as(z));
+  }
 }

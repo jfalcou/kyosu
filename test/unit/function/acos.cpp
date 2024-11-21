@@ -26,7 +26,7 @@ TTS_CASE_WITH ( "Check kyosu::acos over quaternion"
   auto lr = kyosu::acos(r);
   auto lc = kyosu::acos(c);
   auto lq = kyosu::acos(q);
-  TTS_RELATIVE_EQUAL(kyosu::cos(lr), kyosu::complex(r), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::cos(lr), ce_t(r), 1e-5);
   TTS_RELATIVE_EQUAL(kyosu::cos(lc), c, 1e-3);
   TTS_RELATIVE_EQUAL(kyosu::cos(lq), q, 1e-3);
 };

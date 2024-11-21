@@ -6,41 +6,30 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_is_not_nan: eve::elementwise
-  {
-    using callable_tag_type = callable_is_not_nan;
-
-    KYOSU_DEFERS_CALLABLE(is_not_nan_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::is_not_nan(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_is_not_nan(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct is_not_nan_t : eve::elementwise_callable<is_not_nan_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::is_not_nan(v); }
+
+    KYOSU_CALLABLE_OBJECT(is_not_nan_t, is_not_nan_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var is_not_nan
 //!   @brief test if the parameter is not a Nan.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -49,7 +38,6 @@ namespace kyosu
 //!   @groupheader{Callable Signatures}
 //!
 //!   @code
-//!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_not_nan(T z) noexcept;
 //!      template<eve::floating_ordered_value T>     constexpr auto is_not_nan(T z) noexcept;
@@ -67,7 +55,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/is_not_nan.cpp}
+//======================================================================================================================
+  inline constexpr auto is_not_nan = eve::functor<is_not_nan_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_is_not_nan is_not_nan = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto is_not_nan_(KYOSU_DELAY(), O const&, Z c) noexcept
+  {
+    return kumi::all_of(c, [](auto const& e) { return eve::is_not_nan(e); });
+  }
 }

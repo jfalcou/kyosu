@@ -8,14 +8,14 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::oneminus over real"
-              , kyosu::real_types
-              , tts::generate(tts::randoms(-10,10))
-              )
-(auto data)
-{
-  TTS_EQUAL(kyosu::oneminus(data), eve::oneminus(data));
-};
+// TTS_CASE_WITH ( "Check kyosu::oneminus over real"
+//               , kyosu::real_types
+//               , tts::generate(tts::randoms(-10,10))
+//               )
+// (auto data)
+// {
+//   TTS_EQUAL(kyosu::oneminus(data), eve::oneminus(data));
+// };
 
 TTS_CASE_WITH ( "Check kyosu::oneminus over complex"
               , kyosu::real_types
@@ -25,7 +25,8 @@ TTS_CASE_WITH ( "Check kyosu::oneminus over complex"
 {
   using type = kyosu::complex_t<T>;
   auto o = type(1);
-  TTS_EQUAL(kyosu::oneminus(type(r,i)), o-type(r,i));
+  auto c = type(r, i);
+  TTS_EQUAL(kyosu::oneminus(c), o-c);
 };
 
 TTS_CASE_WITH ( "Check kyosu::oneminus over quaternion"

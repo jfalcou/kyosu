@@ -45,7 +45,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
     for(int i=0; i < 16; ++i)
     {
       auto c = kyosu::complex(re[i], im[i]);
-      kyosu::cyl_bessel_jn(n, c, js);
+      kyosu::cyl_bessel_jn(n, c, std::span(js));
 
       for(int k=0; k <= n; ++k)
       {

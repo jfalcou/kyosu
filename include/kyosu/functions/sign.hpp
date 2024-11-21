@@ -6,44 +6,33 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_sign: eve::elementwise
-  {
-    using callable_tag_type = callable_sign;
-
-    KYOSU_DEFERS_CALLABLE(sign_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept
-    {
-      return eve::sign(v);
-    }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_sign(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/is_nez.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct sign_t : eve::elementwise_callable<sign_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::sign(v); }
+
+    KYOSU_CALLABLE_OBJECT(sign_t, sign_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var sign
 //!   @brief Computes tne normalized value z/abs(z) if z is not zero else 0.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -70,7 +59,18 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sign.cpp}
+//======================================================================================================================
+  inline constexpr auto sign = eve::functor<sign_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_sign sign = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sign_(KYOSU_DELAY(), O const&, Z c) noexcept
+  {
+    return kyosu::if_else(kyosu::is_nez(c), c/abs(c), eve::zero);
+  }
 }

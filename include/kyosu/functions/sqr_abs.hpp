@@ -7,40 +7,29 @@
 //======================================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_sqr_abs: eve::elementwise
-  {
-    using callable_tag_type = callable_sqr_abs;
-
-    KYOSU_DEFERS_CALLABLE(sqr_abs_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return eve::sqr_abs(v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_sqr_abs(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct sqr_abs_t : eve::elementwise_callable<sqr_abs_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z z) const noexcept { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept { return KYOSU_CALL(v); }
+
+    KYOSU_CALLABLE_OBJECT(sqr_abs_t, sqr_abs_);
+  };
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var sqr_abs
-//!   @brief Computes the squared absolute value of the parameter.
+//!   @brief Computes the squared sqr_absolute value of the parameter.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -67,7 +56,25 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sqr_abs.cpp}
+//======================================================================================================================
+  inline constexpr auto sqr_abs = eve::functor<sqr_abs_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_sqr_abs sqr_abs = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sqr_abs_(KYOSU_DELAY(), O const&, Z const& v) noexcept
+  {
+    if constexpr(concepts::cayley_dickson<Z>)
+    {
+      auto anyinf = kumi::any_of(v, eve::is_infinite);
+      auto squares = kumi::map([](auto const& e) { return e*e; }, v);
+      auto r = kumi::sum( kumi::extract(squares,kumi::index<1>), get<0>(squares));
+      return if_else(anyinf,  eve::inf(as(r)), r);
+    }
+    else return eve::sqr(v);
+  }
 }

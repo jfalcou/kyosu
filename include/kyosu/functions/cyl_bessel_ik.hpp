@@ -6,46 +6,33 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-#include <eve/module/bessel.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_cyl_bessel_ik: eve::elementwise
-  {
-    using callable_tag_type = callable_cyl_bessel_ik;
-
-    KYOSU_DEFERS_CALLABLE(cyl_bessel_ik_);
-
-    template<eve::floating_scalar_value N, eve::floating_ordered_value T, typename R1, typename R2>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, N nu, T const& v, R1& is, R2& ks) noexcept
-    requires(concepts::complex<decltype(is[0])> && concepts::complex<decltype(ks[0])>)
-    {
-      auto fnu = callable_cyl_bessel_ik{};
-      return fnu(nu, complex(v), is, ks);
-    }
-
-    template<typename N, typename T, typename R1, typename R2>
-    KYOSU_FORCEINLINE auto operator()(N const & target0, T const& target1, R1& output1, R2& output2) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1, output1, output2))
-    {
-      return eve::tag_invoke(*this, target0, target1, output1, output2);
-    }
-
-//     template<typename... T>
-//     eve::unsupported_call<callable_cyl_bessel_ik(T&&...)> operator()(T&&... x) const
-//     requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/bessel.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct cyl_bessel_ik_t : eve::strict_elementwise_callable<cyl_bessel_ik_t, Options>
+  {
+    template<concepts::real NU, typename Z, std::size_t S>
+    requires(concepts::real<Z> || concepts::cayley_dickson<Z>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(NU const& v, Z const & z, std::span<Z, S> js, std::span<Z, S> ys) const noexcept
+    { return KYOSU_CALL(v,z,js,ys); }
+
+    template<concepts::real NU, typename Z>
+    requires(concepts::real<Z> || concepts::cayley_dickson<Z>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(NU const& v, Z const & z) const noexcept
+    { return KYOSU_CALL(v,z); }
+
+    KYOSU_CALLABLE_OBJECT(cyl_bessel_ik_t, cyl_bessel_ik_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var  cyl_bessel_ik
-//!   @brief Computes the modified Bessel functions \f$I\f$ and \f$K\f$,
+//!   @var cyl_bessel_ik
+//!   @brief Computes the simultaneous Bessel functions of the first and second kind,
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -56,37 +43,60 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_scalar_ordered_value N, eve::floating_ordered_value T, complexRange R>
-//!      constexpr auto cyl_bessel_ik(N nu, T z, R& js,  R& ys) noexcept;
-//!
-//!      template<eve::floating_scalar_ordered_value N, conceots::kyosu::complex Z, complexRange R>
-//!      constexpr T    cyl_bessel_ik(N n, Z z, R& js,  R& ys) noexcept;
+//!      template<kyosu::concepts::cayley_dickson T constexpr auto cyl_bessel_ik(int n, T z) noexcept;
+//!      template<kyosu::concepts::complex T constexpr auto cyl_bessel_ik(int n, T z
+//!                                                       , std::span<T> js, std::span<T> ys) noexcept;
+//!      template<kyosu::concepts::real T>          constexpr auto cyl_bessel_ik(int n, T z) noexcept;
+//!      template<kyosu::concepts::real T>          constexpr auto cyl_bessel_ik(int n, T z
+//!                                                       , std::span<T> js, std::span<T> ys) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `nu`: scalar order of the function not necessarily integral.
 //!     * `z`: Value to process.
-//!     * `js: range able to contain int(nu)+1 complex values (of type complex_t<T> or Z respectively)
-//!     * `ys: range able to contain int(nu)+1 complex values (of type complex_t<T> or Z respectively)
 //!
 //!   **Return value**
 //!
-//!     * returns the kumi pair \f$\{I_\nu(z), K_\nu(z)\}\f$ of complex values.
-//!
-//!   *Ouput values
-//!
-//!     * on output js contains the values of   \f$((I_{\nu_0+\epsilon i})_{i = 0\cdot n}\f$
-//!     * on output ys contains the values of   \f$((K_{\nu_0+\epsilon i})_{i = 0\cdot n}\f$
-//!
-//!        where \f$\nu_0\f$ is the fractional part of \f$\nu\f$, \f$\nu = \nu_0+\epsilon n\f$
-//!        and  \f$\epsilon\f$ is the sign of \f$\nu\f$ .
+//!     * returns  a pair containing \f$J_n(z)\f$ and \f$Y_n(z)\f$ and if the 'span' parameters are present
+//!       ithey  must be sufficient to hold 'n+1' values each which are respectively
+//!        \$(j_0(x), j_1(x), ...,  j_n(x))\f$ if 'n >= 0$ else \$(j_0(x),j_{-1}(x) ...,  j_{-n}(x)\f$ (for the same computation cost),
+//!       and  \$(y_0(x), y_1(x), ...,  y_n(x))\f$ if 'n >= 0$ else \$(y_0(x),y_{-1}(x) ...,  y_{-n}(x)\f$ (for the same computation cost),
+//!       but use is restricted to real or complex entries..
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/cyl_bessel_ik.cpp}
+//======================================================================================================================
+  inline constexpr auto cyl_bessel_ik = eve::functor<cyl_bessel_ik_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_cyl_bessel_ik cyl_bessel_ik = {};
+}
+
+namespace kyosu::_
+{
+
+  template<typename N, typename Z, std::size_t S, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_ik_(KYOSU_DELAY(), O const&, N n, Z z
+                                                 , std::span<Z, S> js, std::span<Z, S> ys) noexcept
+  {
+    return cb_ik(n, z, js, ys);
+  }
+
+  template<typename N, typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cyl_bessel_ik_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      auto doit = [n, z](auto js, auto ys){
+        return cb_ik(n, z, js, ys);
+      };
+      return with_alloca<Z>(eve::abs(n)+1, doit);
+    }
+    else
+    {
+      return cayley_extend_rev2(cyl_bessel_ik, n, z);
+    }
+  }
 }

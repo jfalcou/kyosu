@@ -7,39 +7,27 @@
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_rot_angle: eve::elementwise
-  {
-    using callable_tag_type = callable_rot_angle;
-
-    KYOSU_DEFERS_CALLABLE(rot_angle_);
-
-    template<eve::floating_ordered_value V>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & v) noexcept
-    {
-      return eve::zero(eve::as(v));
-    }
-
-    template<typename T0>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0))
-    {
-      return eve::tag_invoke(*this, target0);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_rot_angle(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/functions/to_quaternion.hpp>
+#include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/arg.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct rot_angle_t : eve::elementwise_callable<rot_angle_t, Options>
+  {
+
+    template<concepts::cayley_dickson Z>
+    requires(dimension_v<Z> <= 4)
+      KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
+    {
+      return 2*eve::atan2[eve::pedantic](kyosu::abs(kyosu::pure(q)), kyosu::real(q));
+    }
+
+    KYOSU_CALLABLE_OBJECT(rot_angle_t, rot_angle_);
+  };
+
+
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
@@ -47,7 +35,7 @@ namespace kyosu
   //!
   //! @brief Callable object computing the normalized angle of rotation defined by a quaternion.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -75,8 +63,9 @@ namespace kyosu
   //! #### Example
   //!
   //! @godbolt{doc/rot_angle.cpp}
-  //!
+  //================================================================================================
+  inline constexpr auto rot_angle = eve::functor<rot_angle_t>;
+  //================================================================================================
   //!  @}
   //================================================================================================
-  inline constexpr tags::callable_rot_angle rot_angle = {};
 }

@@ -9,11 +9,14 @@
 #include <eve/module/math.hpp>
 #include <kyosu/types/impl/detail/bessel_utils2.hpp>
 #include <kyosu/details/with_alloca.hpp>
+#include <kyosu/core.hpp>
+#include <kyosu/math.hpp>
+
 
 namespace kyosu::_
 {
   /////////////////////////////////
-  // contains implementations of
+  // needed in implementations of
   // cyl_bessel_j0
   // cyl_bessel_j1
   // cyl_bessel_jn
@@ -83,7 +86,7 @@ namespace kyosu::_
         //  Functions'.
         // good for abs(z) < 12
         auto eps2 = eve::sqr(eve::eps(eve::as<e_t>()));
-        auto j0 = eve::one((eve::as<Z>()));
+        auto j0 = kyosu::one((eve::as<Z>()));
         auto sm = j0;
         auto test = sqr_abs(sm) >= eps2*sqr_abs(j0);
         auto  m(eve::one(eve::as<e_t>()));
@@ -320,8 +323,8 @@ namespace kyosu::_
     using u_t   =  eve::underlying_type_t<Z>;
     auto twoopi = eve::two_o_pi(eve::as<u_t>());
     auto r1 = R(1, z);
-    auto y0 = cyl_bessel_y0(z);
-    auto recs1 = rec(r1)-twoopi/(z*cyl_bessel_j0(z)*y0);
+    auto y0 = cb_y0(z);
+    auto recs1 = rec(r1)-twoopi/(z*cb_j0(z)*y0);
     return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), y0*recs1);
   }
 
@@ -413,24 +416,23 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_jyn
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, typename R1, typename R2>
+  template<eve::integral_scalar_value N, typename Z, typename R1,  typename R2>
   auto cb_jyn(N nn, Z z, R1& cjv, R2& cyv) noexcept
-  requires(concepts::complex<Z> || eve::floating_ordered_value<Z>)
+  requires(concepts::complex<Z> || concepts::real<Z>)
   {
     auto n = eve::abs(nn);
-    EVE_ASSERT(N(size(cjv)) > n, "not room enough in cjv");
-    EVE_ASSERT(N(size(cyv)) > n, "not room enough in cyv");
+    n = eve::min(n, N(cjv.size()), N(cyv.size()));
     using u_t = eve::underlying_type_t<Z>;
     if (n <= 1)
     {
-      cjv[0] = cyl_bessel_j0(z);
-      cyv[0] = cyl_bessel_y0(z);
+      cjv[0] = cb_j0(z);
+      cyv[0] = cb_y0(z);
       if ( is_eqz(nn) )
       {
         return kumi::tuple{cjv[0], cyv[0]};
       }
-      cjv[1] = cyl_bessel_j1(z);
-      cyv[1] = cyl_bessel_y1(z);
+      cjv[1] = cb_j1(z);
+      cyv[1] = cb_y1(z);
       if (nn == 1)
       {
         return kumi::tuple{cjv[1], cyv[1]};
@@ -449,10 +451,10 @@ namespace kyosu::_
       auto izgt0 = eve::is_gtz(imag(z));
       z = if_else(rzle0, -z, z);//real(z) is now positive
       auto rz = rec(z);
-      cjv[0] = cyl_bessel_j0(z);
-      cjv[1] = cyl_bessel_j1(z);
-      cyv[0] = cyl_bessel_y0(z);
-      cyv[1] = cyl_bessel_y1(z);
+      cjv[0] = cb_j0(z);
+      cjv[1] = cb_j1(z);
+      cyv[0] = cb_y0(z);
+      cyv[1] = cb_y1(z);
 
       auto forwardj = [n, rz, &cjv](auto z){
         auto bkm2 = cjv[0];
@@ -481,7 +483,7 @@ namespace kyosu::_
         auto m0 = eve::if_else( m1 >= n && eve::is_not_nan(m2), m2, m1);
         auto m = eve::maximum(m0);
         auto cf2 = Z(0);
-        auto cf1 = complex(eve::sqrtsmallestposval(eve::as<Z>()));
+        auto cf1 = complex(kyosu::sqrtsmallestposval(eve::as<Z>()));
         Z cf(cf2);
         int k = m;
         auto kgez = eve::is_gez(k);
@@ -552,7 +554,7 @@ namespace kyosu::_
         auto azne0 = is_nez(az);
         for(int i=1; i <= n; ++i  ){
           cjv[i] = if_else(azne0, cjv[i], eve::zero);
-          cyv[i] = if_else(azne0, cyv[i], eve::minf(as<Z>()));
+          cyv[i] = if_else(azne0, cyv[i], kyosu::minf(as<Z>()));
         }
       }
 
@@ -565,143 +567,5 @@ namespace kyosu::_
       }
       return kumi::tuple{cjv[n], cyv[n]};
     }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_j0
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_j0>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_j0(z);
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_j0, z);
-    }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_j1
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_j1>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_j1(z);
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_j1, z);
-    }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_y0
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_y0>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_y0(z);
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_y0, z);
-    }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_y1
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_y1>, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_y1(z);
-    }
-    else
-    {
-      return cayley_extend(cyl_bessel_y1, z);
-    }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_jn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_jn>, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_jn(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_jn, n, z);
-    }
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_jn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, typename R>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_jn>, N n, Z z, R& js) noexcept
-  //  requires(eve::floating_ordered_value<Z> || concepts::complex<Z>)
-  {
-    auto doit = [n, z, &js](auto ys){
-      cb_jyn(n, z, js, ys);
-    };
-    with_alloca<Z>(eve::abs(n)+1, doit);
-    return js[n];
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_yn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_yn>, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto doit = [n, z](auto js, auto ys){
-       auto [_, yn] =  cb_jyn(n, z, js, ys);
-        return yn;
-      };
-      return with_alloca<Z>(eve::abs(n)+1, doit);
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_yn, n, z);
-    }
-  }
-
-   //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_yn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, typename R>
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_yn>, N n, Z z, R& ys) noexcept
-  requires(eve::floating_ordered_value<Z> || concepts::complex<Z>)
-  {
-    auto doit = [n, z, &ys](auto js){
-      cb_jyn(n, z, js, ys);
-    };
-    with_alloca<Z>(eve::abs(n)+1, doit);
-    return ys[n];
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  //  cyl_bessel_jyn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, kyosu::concepts::complex Z, typename R1, typename R2> KYOSU_FORCEINLINE
-  auto dispatch(eve::tag_of<kyosu::cyl_bessel_jyn>, N n, Z z, R1& js, R2& ys) noexcept
-  requires(concepts::complex<Z>)
-  {
-    return cb_jyn(n, z, js, ys);
   }
 }

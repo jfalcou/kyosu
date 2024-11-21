@@ -7,47 +7,39 @@
 //==================================================================================================
 #pragma once
 
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_rot_axis: eve::elementwise
-  {
-    using callable_tag_type = callable_rot_axis;
-
-    KYOSU_DEFERS_CALLABLE(rot_axis_);
-
-    template<eve::floating_ordered_value V>
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , V const & v) noexcept
-    {
-      return std::array<V, 3>{1, 0, 0};
-    }
-
-    template<typename T0>
-    KYOSU_FORCEINLINE auto operator()(T0 const& target0
-                                     ) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0))
-    {
-      return eve::tag_invoke(*this, target0);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_rot_axis(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/functions/to_quaternion.hpp>
+#include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/arg.hpp>
 
 namespace kyosu
 {
-  //================================================================================================
+  template<typename Options>
+  struct rot_axis_t : eve::elementwise_callable<rot_axis_t, Options>
+  {
+
+    template<concepts::cayley_dickson Z>
+    requires(dimension_v<Z> <= 4)
+      KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
+    {
+    using e_t = as_real_type_t<Z>;
+    auto invn = eve::rec(kyosu::abs(kyosu::pure(q)));
+    invn = eve::if_else(eve::is_nan(invn), eve::zero, invn);
+    std::array<e_t, 3> v{kyosu::ipart(q)*invn, kyosu::jpart(q)*invn, kyosu::kpart(q)*invn};
+    return v;
+
+    }
+
+    KYOSU_CALLABLE_OBJECT(rot_axis_t, rot_axis_);
+  };
+
+ //================================================================================================
   //! @addtogroup quaternion
   //! @{
   //! @var rot_axis
   //!
   //! @brief Callable object computing the normalized axis of rotation defined by a quaternion.
   //!
-  //! **Defined in header**
+  //! @groupheader{Header file}
   //!
   //!   @code
   //!   #include eve/module/quaternion.hpp>`
@@ -76,8 +68,9 @@ namespace kyosu
   //! #### Example
   //!
   //! @godbolt{doc/rot_axis.cpp}
-  //!
+  //================================================================================================
+  inline constexpr auto rot_axis = eve::functor<rot_axis_t>;
+  //================================================================================================
   //!  @}
   //================================================================================================
-  inline constexpr tags::callable_rot_axis rot_axis = {};
 }

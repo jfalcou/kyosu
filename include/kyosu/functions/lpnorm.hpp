@@ -6,38 +6,27 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_lpnorm: eve::elementwise
-  {
-    using callable_tag_type = callable_lpnorm;
-
-    KYOSU_DEFERS_CALLABLE(lpnorm_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const& p
-                                               , eve::floating_ordered_value auto const&... vs) noexcept
-    {
-      return eve::lpnorm(p, vs...);
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const&... targets ) const noexcept
-    -> decltype(eve::tag_invoke(*this, targets...))
-    {
-      return eve::tag_invoke(*this, targets...);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_lpnorm(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct lpnorm_t : eve::strict_elementwise_callable<lpnorm_t, Options>
+  {
+    template<typename P, typename Z1, typename ...Zs>
+    requires(concepts::real<P>, concepts::cayley_dickson<Z1> || (concepts::cayley_dickson<Zs> || ...))
+    KYOSU_FORCEINLINE constexpr auto  operator()(P p, Z1 const & z1, Zs const & ...zs) const noexcept -> decltype(eve::lpnorm(p, real(z1), real(zs)...))
+    { return KYOSU_CALL(p,z1,zs...); }
+
+    template<concepts::real P, concepts::real V1, concepts::real ...Vs>
+    KYOSU_FORCEINLINE constexpr auto operator()(P p, V1 v1, Vs... vs) const noexcept -> decltype(eve::lpnorm(p, real(v1), real(vs)...))
+    { return eve::lpnorm(p,v1,vs...); }
+
+    KYOSU_CALLABLE_OBJECT(lpnorm_t, lpnorm_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -45,7 +34,7 @@ namespace kyosu
 //!   @brief Callable object computing the lpnorm operation \f$ \left(\sum_{i = 0}^n
 //! |x_i|^p\right)^{\frac1p} \f$.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -63,7 +52,7 @@ namespace kyosu
 //!   **Parameters**
 //!
 //!     * `p`:   : positive floating ordered value
-//!     * `zs...`: Values to process.
+//!     * `zs...`: real or Cayley-dickson values to process.
 //!
 //!   **Return value**
 //!
@@ -72,7 +61,20 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/lpnorm.cpp}
+//======================================================================================================================
+  inline constexpr auto lpnorm = eve::functor<lpnorm_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_lpnorm lpnorm = {};
+}
+
+namespace kyosu::_
+{
+  template<typename P, typename Z1, typename ... Zs, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto lpnorm_(KYOSU_DELAY(), O const&, P p, Z1 z1, Zs... zs) noexcept
+  -> decltype(eve::lpnorm(p, real(z1), real(zs)...))
+  {
+    if constexpr(sizeof...(zs) == 0) return kyosu::abs(z1);
+    else  return eve::lpnorm(p,  kyosu::abs(z1), kyosu::abs(zs)...);
+  }
 }

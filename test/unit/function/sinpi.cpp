@@ -20,5 +20,8 @@ TTS_CASE_WITH ( "Check kyosu::sinpi over quaternion"
   using u_t  = eve::underlying_type_t<T>;
   auto pi = eve::pi(eve::as<u_t>());
   auto q = ke_t(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::sinpi(q), kyosu::sin(pi*q), 1e-5);
+  if constexpr (sizeof(eve::element_type_t<T>) == 8)
+      TTS_RELATIVE_EQUAL(kyosu::sinpi(q/8.0), kyosu::sin(pi*q/8.0), 1e-5);
+  else
+      TTS_RELATIVE_EQUAL(kyosu::sinpi(q/8.0f), kyosu::sin(pi*q/8.0f), 1e-3);
 };

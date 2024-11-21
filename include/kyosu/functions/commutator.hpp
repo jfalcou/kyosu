@@ -6,44 +6,34 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-namespace kyosu::tags
-{
-  struct callable_commutator: eve::elementwise
-  {
-    using callable_tag_type = callable_commutator;
-
-    KYOSU_DEFERS_CALLABLE(commutator_);
-
-    static KYOSU_FORCEINLINE auto deferred_call(auto
-                                               , eve::floating_ordered_value auto const& v0
-                                               , eve::floating_ordered_value auto const& v1) noexcept
-    {
-      return eve::zero(eve::as(v0+v1));
-    }
-
-    KYOSU_FORCEINLINE auto operator()(auto const& target0, auto const& target1) const noexcept
-    -> decltype(eve::tag_invoke(*this, target0, target1))
-    {
-      return eve::tag_invoke(*this, target0, target1);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_commutator(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include <kyosu/details/callable.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct commutator_t : eve::strict_elementwise_callable<commutator_t, Options>
+  {
+    template<typename Z0, typename Z1>
+    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept -> decltype(z0+z1)
+    {
+      return KYOSU_CALL(z0,z1);
+    }
+
+    template<concepts::real V0, concepts::real V1>
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> decltype(v0+v1)
+    { return eve::zero(eve::as<decltype(v0+v1)>()); }
+
+    KYOSU_CALLABLE_OBJECT(commutator_t, commutator_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var commutator
 //!   @brief Computes the commutator of the two parameters.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -69,7 +59,28 @@ namespace kyosu
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/commutator.cpp}
+//======================================================================================================================
+  inline constexpr auto commutator = eve::functor<commutator_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_commutator commutator = {};
+}
+
+namespace kyosu::_
+{
+  //�a marche pas avec reel, complexe
+  template<typename C0, typename C1, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto commutator_(KYOSU_DELAY(), O const&, C0 c0, C1 c1) noexcept
+  {
+    constexpr size_t dC0 = dimension_v<C0>;
+    constexpr size_t dC1 = dimension_v<C1>;
+    if constexpr((dC0 < 4 && dC1 < 4) || (dC0 == 1 || dC1 == 1))
+    {
+      return  eve::zero(eve::as<decltype(c0+c1)>());
+    }
+    else
+    {
+      return c0*c1 - c1*c0;
+    }
+  }
 }

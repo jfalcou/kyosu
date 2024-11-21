@@ -6,42 +6,34 @@
 */
 //======================================================================================================================
 #pragma once
-
-#include <kyosu/details/invoke.hpp>
-
-namespace kyosu::tags
-{
-  struct callable_muli: eve::elementwise
-  {
-    using callable_tag_type = callable_muli;
-
-    KYOSU_DEFERS_CALLABLE(muli_);
-
-    template<eve::floating_ordered_value T>
-    static KYOSU_FORCEINLINE auto deferred_call(auto, T const& v) noexcept { return complex(T(0), v); }
-
-    template<typename T>
-    KYOSU_FORCEINLINE auto operator()(T const& target) const noexcept -> decltype(eve::tag_invoke(*this, target))
-    {
-      return eve::tag_invoke(*this, target);
-    }
-
-    template<typename... T>
-    eve::unsupported_call<callable_muli(T&&...)> operator()(T&&... x) const
-    requires(!requires { eve::tag_invoke(*this, KYOSU_FWD(x)...); }) = delete;
-  };
-}
+#include "eve/traits/as_logical.hpp"
+#include <kyosu/details/callable.hpp>
+#include <kyosu/constants/i.hpp>
 
 namespace kyosu
 {
+  template<typename Options>
+  struct muli_t : eve::elementwise_callable<muli_t, Options>
+  {
+    template<concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    { return KYOSU_CALL(z); }
+
+    template<concepts::real V>
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return KYOSU_CALL(v); }
+
+    KYOSU_CALLABLE_OBJECT(muli_t, muli_);
+};
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var muli
 //!   @brief Computes the value of the parameter multiplied by i on the left side.
-//!   For real complex and quaternion the computation is an optimization over the call to * operator.
+//!   For real, complex and quaternion the computation is an optimization over the call to * operator.
 //!
-//!   **Defined in Header**
+//!   @groupheader{Header file}
 //!
 //!   @code
 //!   #include <kyosu/functions.hpp>
@@ -63,13 +55,29 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * Returns i(as(z))*z; If z is floating point a complex is returned.
-//!       In the other cases the returned value as the same type as the input.
+//!     * Returns `i(as(z))*z` If z is floating point a complex is returned,
+//!       in the other cases the returned value as the same type as the input.
 //!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/muli.cpp}
+//======================================================================================================================
+  inline constexpr auto muli = eve::functor<muli_t>;
+//======================================================================================================================
 //! @}
 //======================================================================================================================
-inline constexpr tags::callable_muli muli = {};
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto muli_(KYOSU_DELAY(), O const&, Z c) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<Z>)
+      return Z(-ipart(c), real(c));
+    else if constexpr(kyosu::concepts::quaternion<Z>)
+      return Z(-ipart(c), real(c), -kpart(c), jpart(c));
+    else
+      return kyosu::i(as(c))*c;
+  }
 }

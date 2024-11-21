@@ -29,7 +29,6 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_yn over real"
   }
 };
 
-
 TTS_CASE_WITH ( "Check kyosu::cyl_bessel_yn over real"
               , kyosu::scalar_real_types
               , tts::generate(tts::randoms(-10,10))
@@ -46,7 +45,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_yn over real"
     for(int i=0; i < 16; ++i)
     {
       auto c = kyosu::complex(re[i], im[i]);
-      kyosu::cyl_bessel_yn(n, c, ys);
+      kyosu::cyl_bessel_yn(n, c, std::span(ys));
 
       for(int k=0; k <= n; ++k)
       {
