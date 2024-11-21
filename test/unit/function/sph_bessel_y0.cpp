@@ -21,9 +21,9 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_y0 over real"
   auto re = kyosu::complex(a0);
   auto im = i*a1;
   auto y0 = [](auto z){return -kyosu::cos(z)/z; };
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_y0(re), y0(re), 1.0e-4) << i <<  " <- " << re << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_y0(im), y0(im), 1.0e-4) << i <<  " <- " << im << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_y0(z) , y0(z) , 1.0e-4) << i <<  " <- " << z << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_y0(re), y0(re), tts::prec<T>()) << i <<  " <- " << re << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_y0(im), y0(im), tts::prec<T>()) << i <<  " <- " << im << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_y0(z) , y0(z) , tts::prec<T>()) << i <<  " <- " << z << '\n';
 };
 
 TTS_CASE_WITH ( "Check kyosu::sph_bessel_y0 over real"
@@ -34,7 +34,6 @@ TTS_CASE_WITH ( "Check kyosu::sph_bessel_y0 over real"
               )
 <typename T>(T a0, T a1)
 {
-  // auto prec = 1.0e-6;
   auto c =  kyosu::complex(a0, a1);
   auto cb=  kyosu::conj(c);
   auto cm=  -c;

@@ -39,7 +39,6 @@ TTS_CASE_WITH ( "Check kyosu::sinc over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  // auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-6 : 6.e-2;
   using ke_t = kyosu::quaternion_t<T>;
   using bq_t = boost::math::quaternion<eve::element_type_t<T>>;
   auto boost_sinc = [](auto x, auto y, auto z,  auto t){return cv(boost::math::sin(bq_t(x, y, z, t))/bq_t(x, y, z, t)); };

@@ -45,10 +45,10 @@ TTS_CASE_WITH ( "Check kyosu::airy_ai over real"
     {
      auto c = kyosu::complex(re[i], im[i]);
      auto res = kyosu::complex(reres[i], imres[i]);
-     TTS_RELATIVE_EQUAL(kyosu::airy_ai(c), res, 1.0e-2) << i <<  " <- " << c << "arg " << kyosu::arg(c) << '\n';
-     TTS_RELATIVE_EQUAL(kyosu::airy_ai(re[i]), kyosu::real(kyosu::airy_ai(kyosu::complex(re[i], e_t(0.0)))), 1.0e-4)<< i <<  " -> " << re[i] << '\n';
-     TTS_RELATIVE_EQUAL(kyosu::airy_ai(im[i]), kyosu::real(kyosu::airy_ai(kyosu::complex(im[i], e_t(0.0)))), 1.0e-4)<< i <<  " -> " << im[i] << '\n';
-     TTS_RELATIVE_EQUAL(kyosu::airy_ai(kyosu::conj(c)), kyosu::conj(res), 1.0e-2) << i <<  " <- " << c << "arg " << kyosu::arg(c) << '\n';
+     TTS_RELATIVE_EQUAL(kyosu::airy_ai(c), res, tts::prec<T>(1.0e-3,  2.0e-4)) << i <<  " <- " << c << "arg " << kyosu::arg(c) << '\n';
+     TTS_RELATIVE_EQUAL(kyosu::airy_ai(re[i]), kyosu::real(kyosu::airy_ai(kyosu::complex(re[i], e_t(0.0)))), tts::prec<T>())<< i <<  " -> " << re[i] << '\n';
+     TTS_RELATIVE_EQUAL(kyosu::airy_ai(im[i]), kyosu::real(kyosu::airy_ai(kyosu::complex(im[i], e_t(0.0)))), tts::prec<T>())<< i <<  " -> " << im[i] << '\n';
+     TTS_RELATIVE_EQUAL(kyosu::airy_ai(kyosu::conj(c)), kyosu::conj(res), tts::prec<T>(1.0e-3,  2.0e-4)) << i <<  " <- " << c << "arg " << kyosu::arg(c) << '\n';
 
     }
   }

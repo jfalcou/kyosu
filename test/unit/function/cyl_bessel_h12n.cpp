@@ -30,17 +30,17 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h12n over real"
       auto c = kyosu::complex(re[k], im[k]);
       kyosu::cyl_bessel_h12n(3, c, std::span(h1s), std::span(h2s));
       int i = 0;
-      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h1_0(c), h1s[0], 1.0e-6) << "i " << i  << " c "<< c << '\n';
-      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h2_0(c), h2s[0], 1.0e-6) << "i " << i  << " c "<< c << '\n';
+      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h1_0(c), h1s[0], tts::prec<T>()) << "i " << i  << " c "<< c << '\n';
+      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h2_0(c), h2s[0], tts::prec<T>()) << "i " << i  << " c "<< c << '\n';
       i = 1;
-      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h1_1(c), h1s[1], 1.0e-6) << "i " << i  << " c "<< c << '\n';
-      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h2_1(c), h2s[1], 1.0e-6) << "i " << i  << " c "<< c << '\n';
+      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h1_1(c), h1s[1], tts::prec<T>()) << "i " << i  << " c "<< c << '\n';
+      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h2_1(c), h2s[1], tts::prec<T>()) << "i " << i  << " c "<< c << '\n';
       i = 2;
       auto ref2 =  kyosu::complex_t<T>(reres2[k], imres2[k]);
-      TTS_RELATIVE_EQUAL(ref2, h1s[2], 1.0e-6) << "i " << i  << " c "<< c << '\n';
+      TTS_RELATIVE_EQUAL(ref2, h1s[2], tts::prec<T>()) << "i " << i  << " c "<< c << '\n';
       i = 3;
       auto ref3 =  kyosu::complex_t<T>(reres3[k], imres3[k]);
-      TTS_RELATIVE_EQUAL(ref3, h1s[3], 1.0e-6) << "i " << i  << " c "<< c << '\n';
+      TTS_RELATIVE_EQUAL(ref3, h1s[3], tts::prec<T>()) << "i " << i  << " c "<< c << '\n';
 
     }
   }

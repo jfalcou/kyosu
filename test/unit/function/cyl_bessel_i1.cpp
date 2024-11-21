@@ -26,7 +26,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_i1 over real"
     {
       auto c = kyosu::complex(re[i], im[i]);
       auto res = kyosu::complex(reres[i], imres[i]);
-      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_i1(c), res, 1.0e-7) << i <<  " <- " << c << '\n';
+      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_i1(c), res, tts::prec<T>()) << i <<  " <- " << c << '\n';
     }
   }
 };

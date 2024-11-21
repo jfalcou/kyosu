@@ -28,7 +28,6 @@ TTS_CASE_WITH ( "Check kyosu::powm1 over complex"
 (auto r0, auto i0, auto r1, auto i1)
 {
   using T =  decltype(r0);
-  // auto prec = sizeof(eve::element_type_t<decltype(r0)>) == 4 ? 1.e3 : 1e-6;
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
   TTS_RELATIVE_EQUAL(kyosu::powm1(c0, c1), kyosu::dec(kyosu::pow(c0, c1)), tts::prec<T>());
@@ -46,7 +45,6 @@ TTS_CASE_WITH ( "Check kyosu::powm1 over quaternion"
               )
 <typename T>(T r0, T i0, T j0, T k0, T r1, T i1, T j1, T k1)
 {
-  // auto prec = sizeof(eve::element_type_t<decltype(r0)>) == 4 ? 1.e3 : 1e-6;
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);

@@ -21,9 +21,9 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_k1 over real"
   auto re = kyosu::complex(a0);
   auto im = i*a1;
   auto k0 = [](auto z){ return  eve::pio_2(eve::as<u_t>())*kyosu::exp(-z)/z; };
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k0(re), k0(re), 1.0e-4) << i <<  " <- " << re << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k0(im), k0(im), 1.0e-4) << i <<  " <- " << im << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k0(z) , k0(z) , 1.0e-4) << i <<  " <- " << z << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k0(re), k0(re), tts::prec<T>()) << i <<  " <- " << re << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k0(im), k0(im), tts::prec<T>()) << i <<  " <- " << im << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_k0(z) , k0(z) , tts::prec<T>()) << i <<  " <- " << z << '\n';
 };
 
 TTS_CASE_WITH ( "Check kyosu::sph_bessel_k0 over real"

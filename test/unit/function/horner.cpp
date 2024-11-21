@@ -20,7 +20,6 @@ TTS_CASE_WITH ( "Check kyosu::horner over real"
 {
   using T = decltype(r0);
   kumi::tuple a{r0, r1, r2};
-  // auto prec = sizeof(eve::element_type_t<decltype(r0)>) == 8 ?  1e-7 : 1.e-3;
   TTS_RELATIVE_EQUAL(kyosu::horner(x, r0, r1, r2), (r0*x+r1)*x+r2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0, r1, r2), (r0*x+r1)*x+r2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::horner(x, a)         , (r0*x+r1)*x+r2, tts::prec<T>());
@@ -70,7 +69,6 @@ TTS_CASE_WITH ( "Check kyosu::horner over quaternion"
   auto q1 = type(r1,i1,j1,k1);
   auto q2 = type(r2,i2,j2,k2);
   auto x  = type(x0,x1,x2,x3);
-  // auto prec = sizeof(eve::element_type_t<decltype(r0)>) == 8 ?  1e-7 : 1.e-3;
   TTS_RELATIVE_EQUAL(kyosu::horner(x, q0, q1, q2),  (q0*x+q1)*x+q2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, q0, q1, q2),  x*(x*q0+q1)+q2, tts::prec<T>());
   kumi::tuple a{q0, q1, q2};

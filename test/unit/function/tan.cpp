@@ -39,7 +39,6 @@ TTS_CASE_WITH ( "Check kyosu::tan over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  // auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-7 : 1.e-3;
   using ke_t = kyosu::quaternion_t<T>;
   using bq_t = boost::math::quaternion<eve::element_type_t<T>>;
   auto boost_tan = [](auto x, auto y, auto z,  auto t){return cv(boost::math::tan(bq_t(x, y, z, t))); };

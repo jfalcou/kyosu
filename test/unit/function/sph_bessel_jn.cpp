@@ -24,7 +24,7 @@ TTS_CASE_WITH ( "Check kyosu::sph_bessel_jn over real"
     {
       auto c = kyosu::complex(re[i], im[i]);
       auto res = kyosu::complex(reres[i], imres[i]);
-      TTS_RELATIVE_EQUAL(kyosu::sph_bessel_jn(3, c), res, 1.0e-7) << i <<  " <- " << c << '\n';
+      TTS_RELATIVE_EQUAL(kyosu::sph_bessel_jn(3, c), res, tts::prec<T>()) << i <<  " <- " << c << '\n';
     }
   }
 };

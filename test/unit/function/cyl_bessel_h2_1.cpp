@@ -27,7 +27,7 @@ std::array<T, 16> imres{2.3270002447946945e+02, 2.5546359367357779e-04, -1.00777
     {
       auto c = kyosu::complex(re[i], im[i]);
       auto res = kyosu::complex(reres[i], imres[i]);
-      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h2_1(c), res, 1.0e-4) << i <<  " <- " << c << '\n';
+      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_h2_1(c), res, tts::prec<T>()) << i <<  " <- " << c << '\n';
     }
   }
 };
