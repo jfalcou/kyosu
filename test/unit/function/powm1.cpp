@@ -27,6 +27,7 @@ TTS_CASE_WITH ( "Check kyosu::powm1 over complex"
               )
 (auto r0, auto i0, auto r1, auto i1)
 {
+  using T =  decltype(r0);
   // auto prec = sizeof(eve::element_type_t<decltype(r0)>) == 4 ? 1.e3 : 1e-6;
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);

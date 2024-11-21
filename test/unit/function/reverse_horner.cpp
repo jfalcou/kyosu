@@ -18,6 +18,7 @@ TTS_CASE_WITH ( "Check kyosu::reverse_horner over real"
               )
 (auto r0, auto r1, auto r2, auto x)
 {
+  using T =  decltype(r0);
   kumi::tuple a{r2, r1, r0};
   // auto prec = sizeof(eve::element_type_t<decltype(r0)>) == 8 ?  1e-7 : 1.e-3;
   TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, r2, r1, r0), (r0*x+r1)*x+r2, tts::prec<T>());
@@ -34,6 +35,7 @@ TTS_CASE_WITH ( "Check kyosu::reverse_horner over complex"
               )
 (auto r0, auto i0, auto r1, auto i1, auto r2, auto i2, auto x0, auto x1)
 {
+  using T =  decltype(r0);
   // auto prec = sizeof(eve::element_type_t<decltype(r0)>) == 8 ?  1e-7 : 1.e-3;
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
