@@ -30,7 +30,7 @@ TTS_CASE_WITH( "Check behavior of log2 on scalar"
     auto f = a1[i];
     auto std_log2 = [](auto x){return std::log(x)*eve::invlog_2(eve::as<e_t>()); };
 
-    TTS_RELATIVE_EQUAL(kyosu::log2(kc_t(e, f)),  cv(std_log2(c_t(e, f))), 1.0e-6);
+    TTS_RELATIVE_EQUAL(kyosu::log2(kc_t(e, f)),  cv(std_log2(c_t(e, f))), tts::prec<T>());
   }
 };
 
@@ -46,5 +46,5 @@ TTS_CASE_WITH( "Check behavior of log2 on wide"
   using c_t = std::complex<eve::element_type_t<e_t>>;
   auto std_log2 = [](auto x, auto y){return cv(std::log(c_t(x, y)))*eve::invlog_2(eve::as(x)); };
   ke_t e([&](auto i, auto){return std_log2(a0.get(i), a1.get(i)); });
-  TTS_RELATIVE_EQUAL(kyosu::log2(ke_t{a0,a1}), e, 1.0e-6);
+  TTS_RELATIVE_EQUAL(kyosu::log2(ke_t{a0,a1}), e, tts::prec<T>());
 };

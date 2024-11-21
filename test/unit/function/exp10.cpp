@@ -27,8 +27,8 @@ TTS_CASE_WITH ( "Check kyosu::exp10 over quaternion"
 {
   using ce_t = kyosu::complex_t<T>;
   auto c = ce_t(r,i);
-  TTS_RELATIVE_EQUAL(kyosu::exp10(c), kyosu::exp(eve::log_10(eve::as<T>())*c), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::exp10(c), kyosu::exp(eve::log_10(eve::as<T>())*c), tts::prec<T>());
   using qe_t = kyosu::quaternion_t<T>;
   auto q = qe_t(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::exp10(q), kyosu::exp(eve::log_10(eve::as<T>())*q), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::exp10(q), kyosu::exp(eve::log_10(eve::as<T>())*q), tts::prec<T>());
 };

@@ -45,5 +45,5 @@ TTS_CASE_WITH ( "Check kyosu::minabs over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::minabs(q0, q1), eve::min(kyosu::abs(q0), kyosu::abs(q1)), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::minabs(q0, q1), eve::min(kyosu::abs(q0), kyosu::abs(q1)), tts::prec<T>());
 };

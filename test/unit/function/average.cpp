@@ -30,9 +30,9 @@ TTS_CASE_WITH ( "Check kyosu::average over complex"
 {
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
-  TTS_RELATIVE_EQUAL(kyosu::average(c0, c1), (c0+c1)*T(0.5), 1e-5);
-  TTS_RELATIVE_EQUAL(kyosu::average(c0, c1, r1), (c0+c1+r1)/T(3), 1e-5);
-  TTS_RELATIVE_EQUAL(kyosu::average(r0, c1, r1), (r0+c1+r1)/T(3), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::average(c0, c1), (c0+c1)*T(0.5), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::average(c0, c1, r1), (c0+c1+r1)/T(3), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::average(r0, c1, r1), (r0+c1+r1)/T(3), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::average over quaternion"

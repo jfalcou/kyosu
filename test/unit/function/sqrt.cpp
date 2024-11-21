@@ -17,7 +17,7 @@ TTS_CASE_WITH ( "Check kyosu::sqrt over real"
   auto asq = eve::sqrt(eve::abs(v));
   TTS_RELATIVE_EQUAL(kyosu::sqrt(v),  kyosu::if_else(eve::is_gez(v)
                                                     , kyosu::complex(asq, T(0))
-                                                    , kyosu::complex(T(0), asq)), 1.0e-5);
+                                                    , kyosu::complex(T(0), asq)), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::sqrt over complex"
@@ -26,8 +26,9 @@ TTS_CASE_WITH ( "Check kyosu::sqrt over complex"
               )
 (auto r, auto i)
 {
+  using T =  decltype(r);
   auto c = kyosu::complex(r,i);
-  TTS_RELATIVE_EQUAL(kyosu::sqr(kyosu::sqrt(c)), c, 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::sqr(kyosu::sqrt(c)), c, tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::sqrt over quaternion"
@@ -40,5 +41,5 @@ TTS_CASE_WITH ( "Check kyosu::sqrt over quaternion"
 {
   using type = kyosu::quaternion_t<T>;
   auto q = type(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::sqr((kyosu::sqrt(q))), q, 1e-4);
+  TTS_RELATIVE_EQUAL(kyosu::sqr((kyosu::sqrt(q))), q, tts::prec<T>());
 };

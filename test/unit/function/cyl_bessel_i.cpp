@@ -69,7 +69,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_i over real"
         kyosu::cyl_bessel_i(v1, c, std::span(is_03));
         auto refi_03=  kyosu::complex_t<T>(reresi_03[n][k], imresi_03[n][k]);
         TTS_RELATIVE_EQUAL(refi_03, is_03[n], 1.e-6) << "n " << n  << " k " << k  << " c "<< c << " arg(c) "<< kyosu::arg(kyosu::conj(c)) << " < 1.57" << '\n';
-        TTS_RELATIVE_EQUAL(refi_03,  kyosu::cyl_bessel_i(vv, c), 1.0e-6);
+        TTS_RELATIVE_EQUAL(refi_03,  kyosu::cyl_bessel_i(vv, c), tts::prec<T>());
         vv = eve::inc(vv);
       }
     }
@@ -142,7 +142,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_i over real negative order"
       {
         auto refi_03 =  kyosu::complex_t<T>(reresi_03[n][k], imresi_03[n][k]);
         auto cbi = kyosu::cyl_bessel_i(vv, c);
-        TTS_RELATIVE_EQUAL(refi_03, cbi, 1.0e-6)<< " c "<< c << '\n';
+        TTS_RELATIVE_EQUAL(refi_03, cbi, tts::prec<T>())<< " c "<< c << '\n';
         TTS_RELATIVE_EQUAL(refi_03, is_03[n], 1.e-6) << "n " << n  << " k " << k  << " c "<< c << " arg(c) "<< kyosu::arg(kyosu::conj(c)) << " < 1.57" << '\n';
         vv = eve::dec(vv);
       }

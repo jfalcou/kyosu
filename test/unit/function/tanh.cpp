@@ -39,12 +39,11 @@ TTS_CASE_WITH ( "Check kyosu::tanh over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-7 : 1.e-3;
   using ke_t = kyosu::quaternion_t<T>;
   using bq_t = boost::math::quaternion<eve::element_type_t<T>>;
   auto boost_tanh = [](auto x, auto y, auto z,  auto t){return cv(boost::math::tanh(bq_t(x, y, z, t))); };
   ke_t e([&](auto n, auto){return boost_tanh(r.get(n), i.get(n), j.get(n), k.get(n)); });
   auto q = ke_t(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::tanh(q), e, prec);
+  TTS_RELATIVE_EQUAL(kyosu::tanh(q), e, tts::prec<T>());
 };
 #  endif

@@ -29,13 +29,13 @@ TTS_CASE_WITH ( "Check kyosu::sph_bessel_i1n over complex"
       {
         auto c = kyosu::complex(re[i], im[i]);
         auto res0 = kyosu::complex(reres0[i], imres0[i]);
-        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i1n(0, c), res0, 1.0e-7) << i <<  " <- " << c << '\n';
-        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i1n(0, c), kyosu::sph_bessel_i1_0(c), 1.0e-7) << i <<  " <- " << c << '\n';
+        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i1n(0, c), res0, tts::prec<T>()) << i <<  " <- " << c << '\n';
+        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i1n(0, c), kyosu::sph_bessel_i1_0(c), tts::prec<T>()) << i <<  " <- " << c << '\n';
         auto res1 = kyosu::complex(reres1[i], imres1[i]);
-        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i1n(1, c), res1, 1.0e-7) << i <<  " <- " << c << '\n';
-        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i1n(1, c), kyosu::sph_bessel_i1_1(c), 1.0e-7) << i <<  " <- " << c << '\n';
+        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i1n(1, c), res1, tts::prec<T>()) << i <<  " <- " << c << '\n';
+        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i1n(1, c), kyosu::sph_bessel_i1_1(c), tts::prec<T>()) << i <<  " <- " << c << '\n';
         auto res6 = kyosu::complex(reres6[i], imres6[i]);
-        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i1n(6, c), res6, 1.0e-7) << i <<  " <- " << c << '\n';
+        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i1n(6, c), res6, tts::prec<T>()) << i <<  " <- " << c << '\n';
       }
     }
     {
@@ -50,13 +50,13 @@ TTS_CASE_WITH ( "Check kyosu::sph_bessel_i1n over complex"
       {
         auto c = kyosu::complex(re[i], im[i]);
         auto res0 = kyosu::complex(reres0[i], imres0[i]);
-        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i2n(0, c), res0, 1.0e-7) << i <<  " <- " << c << '\n';
-        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i2n(0, c), kyosu::sph_bessel_i2_0(c), 1.0e-7) << i <<  " <- " << c << '\n';
+        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i2n(0, c), res0, tts::prec<T>()) << i <<  " <- " << c << '\n';
+        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i2n(0, c), kyosu::sph_bessel_i2_0(c), tts::prec<T>()) << i <<  " <- " << c << '\n';
         auto res1 = kyosu::complex(reres1[i], imres1[i]);
-        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i2n(1, c), res1, 1.0e-7) << i <<  " <- " << c << '\n';
-        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i2n(1, c), kyosu::sph_bessel_i2_1(c), 1.0e-7) << i <<  " <- " << c << '\n';
+        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i2n(1, c), res1, tts::prec<T>()) << i <<  " <- " << c << '\n';
+        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i2n(1, c), kyosu::sph_bessel_i2_1(c), tts::prec<T>()) << i <<  " <- " << c << '\n';
         auto res6 = kyosu::complex(reres6[i], imres6[i]);
-        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i2n(6, c), res6, 1.0e-7) << i <<  " <- " << c << '\n';
+        TTS_RELATIVE_EQUAL(kyosu::sph_bessel_i2n(6, c), res6, tts::prec<T>()) << i <<  " <- " << c << '\n';
       }
     }
   }

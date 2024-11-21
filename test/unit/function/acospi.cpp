@@ -26,7 +26,7 @@ TTS_CASE_WITH ( "Check kyosu::acospi over quaternion"
   auto lr = kyosu::acospi(r);
   auto lc = kyosu::acospi(c);
   auto lq = kyosu::acospi(q);
-  TTS_RELATIVE_EQUAL(kyosu::cospi(lr), ce_t(r), 1e-5);
-  TTS_RELATIVE_EQUAL(kyosu::cospi(lc), c, 1e-3);
-  TTS_RELATIVE_EQUAL(kyosu::cospi(lq), q, 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::cospi(lr), ce_t(r), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::cospi(lc), c, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::cospi(lq), q, tts::prec<T>());
 };

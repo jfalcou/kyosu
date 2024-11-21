@@ -22,18 +22,18 @@ TTS_CASE_WITH ( "Check behavior of to_polar on wide"
     auto  q = kyosu::quaternion(a0, a1, a2, a3);
     auto [r, t, iz] = kyosu::to_polar(q);
     auto q1 = kyosu::from_polar(r, t, iz);
-    TTS_RELATIVE_EQUAL(q, q1, 1.0e-5);
+    TTS_RELATIVE_EQUAL(q, q1, tts::prec<T>());
   }
   {
     auto  c = kyosu::complex(a0, a1);
     auto [r1, t1] = kyosu::to_polar(c);
     auto c1 = kyosu::from_polar(r1, t1);
-    TTS_RELATIVE_EQUAL(c, c1, 1.0e-5);
+    TTS_RELATIVE_EQUAL(c, c1, tts::prec<T>());
   }
   {
     auto [r1, t1] = kyosu::to_polar(a0);
     auto c1 = kyosu::from_polar(r1, t1);
-    TTS_RELATIVE_EQUAL(kyosu::complex(a0), c1, 1.0e-5);
+    TTS_RELATIVE_EQUAL(kyosu::complex(a0), c1, tts::prec<T>());
   }
 
 

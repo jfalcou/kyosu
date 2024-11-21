@@ -57,7 +57,7 @@ TTS_CASE_TPL( "Check corner cases of erfi", kyosu::real_types)
   using kyosu::conj;
   for(int i=0; i < N; ++i)
   {
-    TTS_RELATIVE_EQUAL(kyosu::erfi(inputs[i]), results[i], 1.0e-4) << "i " << i << " -> " << inputs[i] <<"\n";
+    TTS_RELATIVE_EQUAL(kyosu::erfi(inputs[i]), results[i], tts::prec<T>()) << "i " << i << " -> " << inputs[i] <<"\n";
   }
 };
 
@@ -72,6 +72,6 @@ TTS_CASE_WITH( "Check behavior of erfi on wide"
   auto ez = kyosu::erfi(z);
   for(int i = 0; i !=  eve::cardinal_v<T>; ++i)
   {
-    TTS_RELATIVE_EQUAL(ez.get(i), kyosu::erfi(z.get(i)), 1.0e-4);
+    TTS_RELATIVE_EQUAL(ez.get(i), kyosu::erfi(z.get(i)), tts::prec<T>());
   }
 };

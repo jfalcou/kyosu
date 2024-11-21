@@ -24,7 +24,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_yn over real"
     {
       auto c = kyosu::complex(re[i], im[i]);
       auto res = kyosu::complex(reres[i], imres[i]);
-      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_yn(3, c), res, 1.0e-6) << i <<  " <- " << c << '\n';
+      TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_yn(3, c), res, tts::prec<T>()) << i <<  " <- " << c << '\n';
     }
   }
 };
@@ -49,7 +49,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_yn over real"
 
       for(int k=0; k <= n; ++k)
       {
-        TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_yn(k, c), ys[k], 1.0e-7) << k <<  " <- " << c << '\n';
+        TTS_RELATIVE_EQUAL(kyosu::cyl_bessel_yn(k, c), ys[k], tts::prec<T>()) << k <<  " <- " << c << '\n';
       }
     }
   }

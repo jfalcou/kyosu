@@ -20,5 +20,5 @@ TTS_CASE_WITH ( "Check kyosu::tanpi over quaternion"
   using u_t  = eve::underlying_type_t<T>;
   auto pi = eve::pi(eve::as<u_t>());
   auto q = ke_t(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::tanpi(q), kyosu::tan(pi*q), 1e-3);
+  TTS_RELATIVE_EQUAL(kyosu::tanpi(q), kyosu::tan(pi*q), tts::prec<T>());
 };

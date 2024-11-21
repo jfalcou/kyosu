@@ -52,5 +52,5 @@ TTS_CASE_WITH ( "Check kyosu::manhattan over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::manhattan(q0, q1), eve::manhattan(r0, i0, j0, k0, r1, i1, j1, k1 ), 1e-5);
+  TTS_RELATIVE_EQUAL(kyosu::manhattan(q0, q1), eve::manhattan(r0, i0, j0, k0, r1, i1, j1, k1 ), tts::prec<T>());
 };

@@ -40,12 +40,11 @@ TTS_CASE_WITH ( "Check kyosu::sin over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-6 : 6.e-2;
   using ke_t = kyosu::quaternion_t<T>;
   using bq_t = boost::math::quaternion<eve::element_type_t<T>>;
   auto boost_sin = [](auto x, auto y, auto z,  auto t){return cv(boost::math::sin(bq_t(x, y, z, t))); };
   ke_t e([&](auto n, auto){return boost_sin(r.get(n), i.get(n), j.get(n), k.get(n)); });
   auto q = ke_t(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::sin(q), e, prec);
+  TTS_RELATIVE_EQUAL(kyosu::sin(q), e, tts::prec<T>());
 };
 #  endif

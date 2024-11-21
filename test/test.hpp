@@ -11,7 +11,7 @@
 #include <tts/tts.hpp>
 
 //==================================================================================================
-// EVE Specific testing overloads
+// EVE Speci1fic testing overloads
 //==================================================================================================
 #include <eve/arch/fundamental_cardinal.hpp>
 #include <eve/module/core.hpp>
@@ -162,6 +162,15 @@ namespace tts
     return max_ulp;
   }
 
+  template <typename T> inline double constexpr prec()
+  {
+    if constexpr( sizeof(eve::element_type_t<T>) == 4) return 1.0e-3; else return 1.0e-6;
+  }
+
+  template <typename T> inline double constexpr prec(double f,  double d)
+  {
+    if constexpr( sizeof(eve::element_type_t<T>) == 4) return f; else return d;
+  }
 
   //================================================================================================
   // Poison wide data when using sub-sized types

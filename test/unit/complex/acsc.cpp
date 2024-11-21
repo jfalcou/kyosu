@@ -22,7 +22,7 @@ TTS_CASE_WITH ( "Check behavior of acsc on scalar"
     for(auto f : a1)
     {
       auto z = kyosu::complex(e, f);
-      TTS_RELATIVE_EQUAL(kyosu::acsc(z),  kyosu::asin(kyosu::rec(z)), 1.0e-50);
+      TTS_RELATIVE_EQUAL(kyosu::acsc(z),  kyosu::asin(kyosu::rec(z)), tts::prec<T>());
     }
   }
 };
@@ -35,5 +35,5 @@ TTS_CASE_WITH( "Check behavior of acsc on wide"
   <typename T>(T const& a0, T const&  a1)
 {
   auto z = kyosu::complex(a0, a1);
-  TTS_RELATIVE_EQUAL(kyosu::acsc(z), kyosu::asin(kyosu::rec(z)), 1.0e-5);
+  TTS_RELATIVE_EQUAL(kyosu::acsc(z), kyosu::asin(kyosu::rec(z)), tts::prec<T>());
 };

@@ -28,7 +28,7 @@ TTS_CASE_WITH( "Check behavior of log10 on scalar"
   {
     auto e = a0[i];
     auto f = a1[i];
-    TTS_RELATIVE_EQUAL(kyosu::log10(kc_t(e, f)),  cv(std::log10(c_t(e, f))), 1.0e-6);
+    TTS_RELATIVE_EQUAL(kyosu::log10(kc_t(e, f)),  cv(std::log10(c_t(e, f))), tts::prec<T>());
   }
 };
 
@@ -44,5 +44,5 @@ TTS_CASE_WITH( "Check behavior of log10 on wide"
   using c_t = std::complex<eve::element_type_t<e_t>>;
   auto std_log10 = [](auto x, auto y){return cv(std::log10(c_t(x, y))); };
   ke_t e([&](auto i, auto){return std_log10(a0.get(i), a1.get(i)); });
-  TTS_RELATIVE_EQUAL(kyosu::log10(ke_t{a0,a1}), e, 1.0e-6);
+  TTS_RELATIVE_EQUAL(kyosu::log10(ke_t{a0,a1}), e, tts::prec<T>());
 };

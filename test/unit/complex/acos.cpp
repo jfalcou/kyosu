@@ -28,9 +28,8 @@ TTS_CASE_WITH( "Check behavior of acos on scalar"
   {
     auto e = a0[i];
     auto f = a1[i];
-  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-6 : 1.e-3;
 
-    TTS_RELATIVE_EQUAL(kyosu::acos(kc_t(e, f)),  cv(std::acos(c_t(e, f))), prec);
+    TTS_RELATIVE_EQUAL(kyosu::acos(kc_t(e, f)),  cv(std::acos(c_t(e, f))), tts::prec<e_t>());
   }
 };
 
@@ -41,12 +40,11 @@ TTS_CASE_WITH( "Check behavior of acos on wide"
              )
   <typename T>(T const& a0, T const& a1 )
 {
-  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-6 : 1.e-3;
   using e_t = T;
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return cv(std::acos(c_t(a0.get(i), a1.get(i)))); });
-  TTS_RELATIVE_EQUAL(kyosu::acos(ke_t{a0,a1}), e, prec);
+  TTS_RELATIVE_EQUAL(kyosu::acos(ke_t{a0,a1}), e, tts::prec<T>());
 };
 
 TTS_CASE_TPL( "Check acos lilits", kyosu::real_types)
