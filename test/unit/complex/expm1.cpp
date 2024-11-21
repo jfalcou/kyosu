@@ -22,14 +22,13 @@ TTS_CASE_WITH( "Check behavior of exp on scalar"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = typename T::value_type;
-  auto prec = (sizeof(e_t) ==  4) ? 1.0e-2 : 1.0e-6;
   using c_t = std::complex<e_t>;
   using kc_t = kyosu::complex_t<e_t>;
   for(size_t i = 0; i < a0.size(); ++i)
   {
     auto e = a0[i];
     auto f = a1[i];
-    TTS_RELATIVE_EQUAL(kyosu::expm1(kc_t(e, f)),  kyosu::dec(cv(std::exp(c_t(e, f)))), prec);
+    TTS_RELATIVE_EQUAL(kyosu::expm1(kc_t(e, f)),  kyosu::dec(cv(std::exp(c_t(e, f)))), tts::prec<T>());
   }
 };
 

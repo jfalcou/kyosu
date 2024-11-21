@@ -19,7 +19,6 @@ TTS_CASE_WITH ( "Check behavior of rising_factorial on wide"
               )
 <typename T>(T const& a0, T const& a1, T const& a2, T const& a3 )
 {
-  auto prec = (sizeof(eve::element_type_t<T>) ==  4)? 1.0e-2 : 1.0e-6;
   using e_t = T;
   using z_t = kyosu::complex_t<T>;
  auto tcx = [](auto r,  auto i){return kyosu::complex(T(r), T(i)); };
@@ -28,18 +27,18 @@ TTS_CASE_WITH ( "Check behavior of rising_factorial on wide"
 
   auto rf =  [](auto x,  auto a){return kyosu::tgamma(a+x)/kyosu::tgamma(x); };
 
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, b) , rf(a, b),prec);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, tcx(2, 0)), a*(a+1), prec);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, tcx(3, 0)), a*(a+1)*(a+2),  prec);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(kyosu::abs(a0), b)   , rf(kyosu::abs(a0), b), prec);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(-kyosu::abs(a0), b)   , rf(-kyosu::abs(a0), b), prec);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(b, kyosu::abs(a0))   ,  rf(b, kyosu::abs(a0)), prec);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, 3u)   , kyosu::rising_factorial(a, e_t(3)),  prec);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, 2u)   , kyosu::rising_factorial(a, e_t(2)),  prec);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, -2)   , kyosu::rising_factorial(a, e_t(-2)),  prec);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(0, 0), tcx(0, 0)), tcx(1, 0), prec);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(1, 0), tcx(0, 0)), tcx(1, 0), prec);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(1, 3), tcx(0, 0)), tcx(1, 0), prec);
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, b) , rf(a, b),tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, tcx(2, 0)), a*(a+1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, tcx(3, 0)), a*(a+1)*(a+2),  tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(kyosu::abs(a0), b)   , rf(kyosu::abs(a0), b), tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(-kyosu::abs(a0), b)   , rf(-kyosu::abs(a0), b), tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(b, kyosu::abs(a0))   ,  rf(b, kyosu::abs(a0)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, 3u)   , kyosu::rising_factorial(a, e_t(3)),  tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, 2u)   , kyosu::rising_factorial(a, e_t(2)),  tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, -2)   , kyosu::rising_factorial(a, e_t(-2)),  tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(0, 0), tcx(0, 0)), tcx(1, 0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(1, 0), tcx(0, 0)), tcx(1, 0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(1, 3), tcx(0, 0)), tcx(1, 0), tts::prec<T>());
 
   using eve::as;
   auto inf = eve::inf(as<e_t>());

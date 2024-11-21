@@ -22,14 +22,13 @@ TTS_CASE_WITH( "Check behavior of exp on scalar"
   <typename T>(T const& a0, T const& a1 )
 {
   using e_t = typename T::value_type;
-  auto prec = (sizeof(e_t) ==  4) ? 1.0e-3 : 1.0e-6;
   using c_t = std::complex<e_t>;
   using kc_t = kyosu::complex_t<e_t>;
   for(size_t i = 0; i < a0.size(); ++i)
   {
     auto e = a0[i];
     auto f = a1[i];
-    TTS_RELATIVE_EQUAL(kyosu::exp(kc_t(e, f)),  cv(std::exp(c_t(e, f))), prec);
+    TTS_RELATIVE_EQUAL(kyosu::exp(kc_t(e, f)),  cv(std::exp(c_t(e, f))), tts::prec<T>());
   }
 };
 
@@ -40,13 +39,12 @@ TTS_CASE_WITH( "Check behavior of exp on wide"
              )
   <typename T>(T const& a0, T const& a1 )
 {
-  auto prec = (sizeof(eve::element_type_t<T>) == 4) ? 2.0e-3 :1e-6;
   using e_t = T;
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   auto std_exp = [](auto x, auto y){return cv(std::exp(c_t(x, y))); };
   ke_t e([&](auto i, auto){return std_exp(a0.get(i), a1.get(i)); });
-  TTS_RELATIVE_EQUAL(kyosu::exp(ke_t{a0,a1}), e, prec);
+  TTS_RELATIVE_EQUAL(kyosu::exp(ke_t{a0,a1}), e, tts::prec<T>());
 };
 
 TTS_CASE_TPL( "Check corner cases of exp", kyosu::scalar_real_types)

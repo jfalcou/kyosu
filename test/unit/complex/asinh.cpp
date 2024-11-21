@@ -27,8 +27,8 @@ TTS_CASE_WITH( "Check behavior of asinh on scalar"
   using kc_t = kyosu::complex_t<e_t>;
   for(size_t i = 0; i < a0.size(); ++i)
   {
-//       std::cout << i << "-> " << std::hexfloat << std::setprecision(20) <<  a0[i] << std::endl;
-//       std::cout << i << "-> " << std::hexfloat << std::setprecision(20) <<  a1[i] << std::endl;
+//       std::cout << i << "-> " << std::hexfloat << std::settts::prec<T>()ision(20) <<  a0[i] << std::endl;
+//       std::cout << i << "-> " << std::hexfloat << std::settts::prec<T>()ision(20) <<  a1[i] << std::endl;
       auto e = a0[i];
       auto f = a1[i];
       TTS_RELATIVE_EQUAL(kyosu::asinh(kc_t(e, f)),  cv(std::asinh(c_t(e, f))), 2.0e-4) << " <- " << kc_t(e, f) << '\n';
