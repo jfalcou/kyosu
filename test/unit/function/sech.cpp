@@ -39,12 +39,12 @@ TTS_CASE_WITH ( "Check kyosu::sech over quaternion"
               )
 <typename T>(T r, T i, T j, T k)
 {
-  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-6 : 61.e-3;
+  // auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-6 : 61.e-3;
   using ke_t = kyosu::quaternion_t<T>;
   using bq_t = boost::math::quaternion<eve::element_type_t<T>>;
   auto boost_sech = [](auto x, auto y, auto z,  auto t){return kyosu::rec(cv(boost::math::cosh(bq_t(x, y, z, t)))); };
   ke_t e([&](auto n, auto){return boost_sech(r.get(n), i.get(n), j.get(n), k.get(n)); });
   auto q = ke_t(r,i,j,k);
-  TTS_RELATIVE_EQUAL(kyosu::sech(q), e, prec);
+  TTS_RELATIVE_EQUAL(kyosu::sech(q), e, tts::prec<T>());
 };
 #  endif

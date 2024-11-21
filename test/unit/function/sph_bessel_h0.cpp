@@ -15,7 +15,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h1_0 over real"
               )
 <typename T>(T a0, T a1)
 {
-  auto prec = sizeof(eve::element_type_t<T>) == 8 ?  1e-4 : 1.e-3;
+  // auto prec = sizeof(eve::element_type_t<T>) == 8 ?  tts::prec<T>() : 1.e-3;
   using u_t = eve::underlying_type_t<T>;
   auto i = kyosu::complex(u_t(0), u_t(1));
   auto h1_0 = [i](auto z){ return kyosu::sph_bessel_j0(z)+i*kyosu::sph_bessel_y0(z) ; };
@@ -23,12 +23,12 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h1_0 over real"
   auto z = kyosu::complex(a0, a1);
   auto re = kyosu::complex(a0);
   auto im = i*a1;
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_0(re), h1_0(re), prec) << i <<  " <- " << re << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_0(im), h1_0(im), prec) << i <<  " <- " << im << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_0(z) , h1_0(z) , prec) << i <<  " <- " << z << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_0(re), h2_0(re), prec) << i <<  " <- " << re << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_0(im), h2_0(im), prec) << i <<  " <- " << im << '\n';
-  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_0(z) , h2_0(z) , prec) << i <<  " <- " << z << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_0(re), h1_0(re), tts::prec<T>()) << i <<  " <- " << re << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_0(im), h1_0(im), tts::prec<T>()) << i <<  " <- " << im << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h1_0(z) , h1_0(z) , tts::prec<T>()) << i <<  " <- " << z << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_0(re), h2_0(re), tts::prec<T>()) << i <<  " <- " << re << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_0(im), h2_0(im), tts::prec<T>()) << i <<  " <- " << im << '\n';
+  TTS_RELATIVE_EQUAL(kyosu::sph_bessel_h2_0(z) , h2_0(z) , tts::prec<T>()) << i <<  " <- " << z << '\n';
 };
 
 TTS_CASE_WITH ( "Check kyosu::sph_bessel_h1_0 over real"
