@@ -15,15 +15,14 @@
 namespace kyosu
 {
   template<typename Options>
-  struct to_euler_t : eve::elementwise_callable<to_euler_t, Options>
+  struct to_euler_t : eve::callable<to_euler_t, Options, extrinsic_option, intrinsic_option>
   {
-    template<typename Q, int II,  int JJ,  int KK, bool Extrinsic>
+    template<typename Q, int II,  int JJ,  int KK>
     requires((concepts::cayley_dickson<Q> && dimension_v<Q> <= 4) || concepts::real<Q>)
       KYOSU_FORCEINLINE constexpr auto operator()(Q  q0
                                                  , _::axis<II>
                                                  , _::axis<JJ>
-                                                 , _::axis<KK>
-                                                 , _::ext<Extrinsic>) const noexcept
+                                                 , _::axis<KK>) const noexcept
     //   -> kumi::tuple<as_real_t<Q>, as_real_t<Q>, as_real_t<Q>>
     {
       using e_t =  std::remove_reference_t<decltype(real(Q()))>;
@@ -32,7 +31,7 @@ namespace kyosu
       constexpr bool is_proper = II == KK; //Proper Euler angles else Tait-Bryan
 
       auto prepare = [&](){
-        if constexpr(Extrinsic)
+        if constexpr(Options::contains(extrinsic))
         {
           constexpr int K = 6-II-JJ;
           constexpr int I = II;
@@ -91,7 +90,7 @@ namespace kyosu
       auto theta0 = hp + hm;
       auto theta2 = hp - hm;
 
-      if constexpr(!Extrinsic)
+      if constexpr(!Options::contains(extrinsic))
       {
         theta0 = eve::if_else(!is_safe, eve::zero, theta0);
         theta2 = eve::if_else(!is_safe1, 2*hp, theta2);
@@ -116,7 +115,7 @@ namespace kyosu
         theta2 *= sign;
         theta1 -= pi / 2;
       }
-      if constexpr(!Extrinsic) std::swap(theta0, theta2);
+      if constexpr(!Options::contains(extrinsic)) std::swap(theta0, theta2);
 
       return kumi::tuple{theta0, theta1, theta2};
     }
@@ -150,7 +149,16 @@ namespace kyosu
   //!   {
   //!      template < int I, int J, int K >
   //!      auto to_euler(auto q, axis<I> const & a1, axis<J> const & a2, axis<K> const & a3) noexcept
+  //!      requires(I != J && J != K)                                                                              //1
+  //!
+  //!      template < int I, int J, int K >
+  //!      auto to_euler[extrinsic](auto q, axis<I> const & a1, axis<J> const & a2, axis<K> const & a3) noexcept   //1
   //!      requires(I != J && J != K)
+  //!
+  //!      template < int I, int J, int K >
+  //!      auto to_euler[intrinsic](auto q, axis<I> const & a1, axis<J> const & a2, axis<K> const & a3) noexcept   //2
+  //!      requires(I != J && J != K)
+  //!
   //!   }
   //!   @endcode
   //!
@@ -162,19 +170,18 @@ namespace kyosu
   //!
   //!  **Template parameters**
   //!
-  //!     * I, J, K: actual parameters can be chosen between axis values X_,  Y_, Z_ from
+  //!     * I, J, K: actual parameters can be chosen between axis values X_, Y_, Z_ from
   //!                 which I, J and K are deduced
-  //!
-  //!
-  //!   The computation method is taken from the article: "Quaternion to Euler angles conversion: A
-  //!   direct, general and computationally efficient method". PLoS ONE
-  //!   17(11): e0276302. https://doi.org/10.1371/journal pone 0276302.
-  //!   Evandro Bernardes, and Stephane Viollet
   //!
   //! **Return value**
   //!
-  //!    kumi tuple of the three euler angles in radian.
-  //!    In case of singularity the first angle is 0.
+  //!  1.  kumi tuple of the three euler angles in radian.   In case of singularity the first angle is 0.
+  //!     [extrinsic](https://en.wikipedia.org/wiki/Euler_angles) rotation order is used
+  //!  2. Same but in the [intrinsic](https://en.wikipedia.org/wiki/Euler_angles) way
+  //!
+  //!  @groupheader{External references}
+  //!   *  [HAL: Quaternion to Euler angles conversion](https://amu.hal.science/hal-03848730/document)
+  //!   *  [Wikipedia: Euler angles](https://en.wikipedia.org/wiki/Euler_angles)
   //!
   //!  @groupheader{Example}
   //!  @godbolt{doc/to_euler.cpp}

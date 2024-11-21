@@ -28,10 +28,10 @@ TTS_CASE_WITH ( "Check behavior of align on wide"
   std::array<T, 3> v0{a0, a1, a2};
   std::array<T, 3> v1{a3, a1, -a2};
 
-  auto q =  kyosu::align(std::span(v0), std::span(v1), kyosu::normalize);
+  auto q =  kyosu::align(std::span(v0), std::span(v1));
    norm(v0);
    norm(v1);
-   auto qv0 = kyosu::rotate_vec(q, std::span(v0), kyosu::normalize);
+   auto qv0 = kyosu::rotate_vec(q, std::span(v0));
   TTS_RELATIVE_EQUAL(qv0[0], v1[0], 1.0e-4);
   TTS_RELATIVE_EQUAL(qv0[1], v1[1], 1.0e-4);
   TTS_RELATIVE_EQUAL(qv0[2], v1[2], 1.0e-4);

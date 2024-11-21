@@ -95,23 +95,21 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!       auto to_rotation_matrix(auto q) const noexcept;
-  //!       auto to_rotation_matrix[assume_unitary](auto q) const noexcept;
+  //!       auto to_rotation_matrix(auto q) const noexcept;                   //1
+  //!       auto to_rotation_matrix[assume_unitary](auto q) const noexcept;   //2
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
   //!  * `q`  quaternion representing the rotation
-  //!  * `assume_unitary`: assumes that q is already normalized
-  //!
-  //!
   //!
   //! **Return value**
   //!
-  //!   compute the rotation matrix associated to the quaternion.
+  //!   1.  compute the rotation matrix associated to the quaternion.
+  //!   2.  with `assume_unitary`, assumes that `q` is already normalized
   //!
-  //!   if T is the element type of q,  returns an std::array<std::array<T, 3>, 3> containing
+  //!   if `T` is the element type of `q`,  returns an `std::array<std::array<T, 3>, 3>` containing
   //!   the 9 coefficients of the rotation matrix
   //!
   //! @note use this function if you really need the rotation matrix,  but to rotate vectors

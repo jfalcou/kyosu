@@ -13,18 +13,17 @@
 namespace kyosu
 {
   template<typename Options>
-  struct from_euler_t : eve::elementwise_callable<from_euler_t, Options>
+  struct from_euler_t : eve::elementwise_callable<from_euler_t, Options, extrinsic_option, intrinsic_option>
   {
     template<concepts::real U,
              concepts::real V,
-             concepts::real W, int I,  int J, int K, bool Extrinsic>
+             concepts::real W, int I,  int J, int K>
     KYOSU_FORCEINLINE constexpr auto operator()( U const & v1
                                                , V const & v2
                                                , W const & v3
                                                , _::axis<I>
                                                , _::axis<J>
-                                               , _::axis<K>
-                                               , _::ext<Extrinsic>) const noexcept
+                                               , _::axis<K>) const noexcept
     -> quaternion_t<eve::common_value_t<U, V, W>>
     requires(I != J && J != K)
     {
@@ -39,7 +38,7 @@ namespace kyosu
       get<0>(qs[1]) = cb;
       get<J>(qs[1]) = sb;
       get<0>(qs[2]) = cc;
-      if constexpr(!Extrinsic)
+      if constexpr(!Options::contains(extrinsic))
       {
         get<K>(qs[0]) = sa;
         get<I>(qs[2]) = sc;
@@ -84,9 +83,19 @@ namespace kyosu
   //!   {
   //!      template < int I, int J, int K > auto from_euler(auto a, auto b, auto c
   //!                                                      , axis<I> a1, axis<J> a2, axis<K> a3
-  //!                                                      , ext e
   //!                                                      ) const noexcept;
-  //!      requires(I != J && J != K)
+  //!      requires(I != J && J != K)                                                           //1
+  //!
+  //!      template < int I, int J, int K > auto from_euler[extrinsic](auto a, auto b, auto c
+  //!                                                      , axis<I> a1, axis<J> a2, axis<K> a3
+  //!                                                      ) const noexcept;
+  //!      requires(I != J && J != K)                                                           //1
+  //!
+  //!      template < int I, int J, int K > auto from_euler[intrinsic](auto a, auto b, auto c
+  //!                                                      , axis<I> a1, axis<J> a2, axis<K> a3
+  //!                                                      ) const noexcept;
+  //!      requires(I != J && J != K)                                                           //2
+  //!   }
   //!   }
   //!   @endcode
   //!
@@ -94,21 +103,17 @@ namespace kyosu
   //!
   //!  * `a`, `b`, `c`: the angles in radian
   //!  * `a1`, `a2`, `a3` the axis parameters to be chosen between X_,  Y_, Z_ (two consecutive axis cannot be the same)
-  //!  * `e': allows to choose between extrinsic or intrinsic representations.
   //!
   //!  **Template parameters**
   //!
   //!     * I, J, K: are on call deduced from the axis parameters
   //!
-  //!
-  //!   The computation method is taken from the article: "Quaternion to Euler angles conversion: A
-  //!   direct, general and computationally efficient method". PLoS ONE
-  //!   17(11): e0276302. https://doi.org/10.1371/journal pone 0276302.
-  //!   Evandro Bernardes, and Stephane Viollet
-  //!
   //! **Return value**
   //!
-  //!    quaternion representing the rotation
+  //!   1. quaternion representing the rotation.
+  //!      [extrinsic](https://en.wikipedia.org/wiki/Euler_angles) rotation scheme is used
+  //!   2. Same but the [intrinsic](https://en.wikipedia.org/wiki/Euler_angles) way is used
+  //!      to i, terpret the angles.
   //!
   //!  @groupheader{Example}
   //!
