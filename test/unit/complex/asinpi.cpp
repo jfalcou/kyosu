@@ -22,7 +22,7 @@ TTS_CASE_WITH( "Check behavior of asinpi on scalar"
      auto e = a0[i];
      auto f = a1[i];
      auto z = kyosu::complex(e, f);
-     TTS_RELATIVE_EQUAL(kyosu::asinpi(z),  inv_pi*kyosu::asin(z), 1.0e-6);
+     TTS_RELATIVE_EQUAL(kyosu::asinpi(z),  inv_pi*kyosu::asin(z), tts::prec<T>());
   }
 };
 
@@ -35,5 +35,5 @@ TTS_CASE_WITH( "Check behavior of asinpi on wide"
 {
   auto inv_pi = eve::inv_pi(eve::as(a0));
   auto z = kyosu::complex(a0, a1);
-  TTS_RELATIVE_EQUAL(kyosu::asinpi(z), inv_pi*kyosu::asin(z), 1.0e-6);
+  TTS_RELATIVE_EQUAL(kyosu::asinpi(z), inv_pi*kyosu::asin(z), tts::prec<T>());
 };

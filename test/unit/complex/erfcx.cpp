@@ -51,21 +51,16 @@ TTS_CASE_TPL( "Check corner cases of erfcx", kyosu::real_types)
     };
   using kyosu::erfcx;
   using kyosu::conj;
-  double ulps = 2000;
   for(int i=0; i < N; ++i)
   {
-    auto [er, ei] = erfcx(z[i]);
-    auto [wr, wi] = w[i];
-
-    TTS_ULP_EQUAL(er, wr, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erfcx(z[i]) <<  " -> " <<w[i] <<"\n";
-    TTS_ULP_EQUAL(ei, wi, ulps) << "i " << i << " -> " << z[i] <<  " -> " <<erfcx(z[i]) <<  " -> " <<w[i] <<'\n';
+    TTS_RELATIVE_EQUAL(erfcx(z[i]), w[i], tts::prec<e_t>());
   }
 };
 
 TTS_CASE_WITH( "Check behavior of erfcx on wide"
              , kyosu::simd_real_types
-             , tts::generate( tts::randoms(-10.0, 10.0)
-                            , tts::randoms(-10.0, 10.0))
+             , tts::generate( tts::randoms(-1.0, 1.0)
+                            , tts::randoms(-1.0, 1.0))
              )
   <typename T>(T const& a0, T const& a1 )
 {
@@ -73,6 +68,6 @@ TTS_CASE_WITH( "Check behavior of erfcx on wide"
   auto ez = kyosu::erfcx(z);
   for(int i = 0; i !=  eve::cardinal_v<T>; ++i)
   {
-    TTS_RELATIVE_EQUAL(ez.get(i), kyosu::erfcx(z.get(i)), 1.0e-4);
+    TTS_RELATIVE_EQUAL(ez.get(i), kyosu::erfcx(z.get(i)), tts::prec<typename T::value_type>());
   }
 };

@@ -27,15 +27,9 @@ TTS_CASE_WITH( "Check behavior of asinh on scalar"
   using kc_t = kyosu::complex_t<e_t>;
   for(size_t i = 0; i < a0.size(); ++i)
   {
-//       std::cout << i << "-> " << std::hexfloat << std::settts::prec<T>()ision(20) <<  a0[i] << std::endl;
-//       std::cout << i << "-> " << std::hexfloat << std::settts::prec<T>()ision(20) <<  a1[i] << std::endl;
-      auto e = a0[i];
-      auto f = a1[i];
-      TTS_RELATIVE_EQUAL(kyosu::asinh(kc_t(e, f)),  cv(std::asinh(c_t(e, f))), 2.0e-4) << " <- " << kc_t(e, f) << '\n';
-//     std::cout << kyosu::asinh(kc_t(6.1797333550897855694e-11,  a1[i])) <<  '\n';
-//      std::cout << kyosu::asinh(kc_t(6.0e-11,  - 1.3558288)) <<  '\n';
-//      std::cout << kyosu::asinh(kc_t(e, f))                  <<  '\n';
-//    }
+    auto e = a0[i];
+    auto f = a1[i];
+    TTS_RELATIVE_EQUAL(kyosu::asinh(kc_t(e, f)),  cv(std::asinh(c_t(e, f))), tts::prec<e_t>()) << " <- " << kc_t(e, f) << '\n';
   }
 };
 
@@ -50,7 +44,7 @@ TTS_CASE_WITH( "Check behavior of asinh on wide"
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return cv(std::asinh(c_t(a0.get(i), a1.get(i)))); });
-  TTS_RELATIVE_EQUAL(kyosu::asinh(ke_t{a0,a1}), e, 5.0e-4);
+  TTS_RELATIVE_EQUAL(kyosu::asinh(ke_t{a0,a1}), e, tts::prec<T>());
 };
 
 TTS_CASE_TPL( "Check asinh lilits", kyosu::real_types)

@@ -28,7 +28,7 @@ TTS_CASE_WITH( "Check behavior of log on scalar"
   {
     auto e = a0[i];
     auto f = a1[i];
-    TTS_RELATIVE_EQUAL(kyosu::log(kc_t(e, f)),  cv(std::log(c_t(e, f))), 1.0e-6);
+    TTS_RELATIVE_EQUAL(kyosu::log(kc_t(e, f)),  cv(std::log(c_t(e, f))), tts::prec<T>());
   }
 };
 
@@ -44,7 +44,7 @@ TTS_CASE_WITH( "Check behavior of log on wide"
   using c_t = std::complex<eve::element_type_t<e_t>>;
   auto std_log = [](auto x, auto y){return cv(std::log(c_t(x, y))); };
   ke_t e([&](auto i, auto){return std_log(a0.get(i), a1.get(i)); });
-  TTS_RELATIVE_EQUAL(kyosu::log(ke_t{a0,a1}), e, 1.0e-6);
+  TTS_RELATIVE_EQUAL(kyosu::log(ke_t{a0,a1}), e, tts::prec<T>());
 };
 
 TTS_CASE_TPL( "Check corner cases of log", kyosu::scalar_real_types)

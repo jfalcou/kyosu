@@ -96,6 +96,6 @@ TTS_CASE_TPL( "Check corner cases of exp", kyosu::scalar_real_types)
     TTS_IEEE_EQUAL(exp(conj(inputs[i])), conj(exp(inputs[i])));
   }
   auto e = eve::euler(as<T>());
-  TTS_RELATIVE_EQUAL(kyosu::exp(c_t{one, zer}),   (c_t{e, zer}), 1.0e-7);
-  TTS_RELATIVE_EQUAL(kyosu::exp(c_t{zer, zer}),   (c_t{one, zer}), 1.0e-7);
+  TTS_RELATIVE_EQUAL(kyosu::exp(c_t{one, zer}),   (c_t{e, zer}), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::exp(c_t{zer, zer}),   (c_t{one, zer}), tts::prec<T>());
 };

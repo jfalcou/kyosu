@@ -22,7 +22,7 @@ TTS_CASE_WITH ( "Check behavior of atanpi on scalar"
   for(size_t i = 0; i < a0.size(); ++i)
   {
     auto z = kyosu::complex(a0[i], a1[i]);
-    TTS_RELATIVE_EQUAL(kyosu::atanpi(z),  inv_pi*kyosu::atan(z), 1.0e-5);
+    TTS_RELATIVE_EQUAL(kyosu::atanpi(z),  inv_pi*kyosu::atan(z), tts::prec<T>());
   }
 };
 
@@ -35,5 +35,5 @@ TTS_CASE_WITH( "Check behavior of atan on wide"
 {
   auto inv_pi = eve::inv_pi(eve::as(a0));
   auto z = kyosu::complex(a0, a1);
-  TTS_RELATIVE_EQUAL(kyosu::atanpi(z), inv_pi*kyosu::atan(z), 1.0e-5);
+  TTS_RELATIVE_EQUAL(kyosu::atanpi(z), inv_pi*kyosu::atan(z), tts::prec<T>());
 };

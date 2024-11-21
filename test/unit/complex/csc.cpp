@@ -28,7 +28,7 @@ TTS_CASE_WITH( "Check behavior of csc on scalar"
   {
     auto e = a0[i];
     auto f = a1[i];
-    TTS_RELATIVE_EQUAL(kyosu::csc(kc_t(e, f)),  kyosu::rec(cv(std::sin(c_t(e, f)))), 1.0e-6);
+    TTS_RELATIVE_EQUAL(kyosu::csc(kc_t(e, f)),  kyosu::rec(cv(std::sin(c_t(e, f)))), tts::prec<T>());
   }
 };
 

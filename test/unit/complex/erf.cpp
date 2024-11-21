@@ -72,7 +72,7 @@ TTS_CASE_TPL( "Check corner cases of erf", kyosu::real_types)
 //     if (i < 12)
 //       TTS_IEEE_EQUAL(erf(inputs[i]), results[i]) << "i =  " << i << " <- " << inputs[i] << "\n";
 //     else
-    TTS_RELATIVE_EQUAL(kyosu::erf(inputs[i]), results[i], 1.0e-4) << "i =  " << i << "\n";
+    TTS_RELATIVE_EQUAL(kyosu::erf(inputs[i]), results[i], tts::prec<T>()) << "i =  " << i << "\n";
     TTS_IEEE_EQUAL(kyosu::erf(conj(inputs[i])), conj(erf(inputs[i]))) << "i =  " << i << "\n";
   }
 };
@@ -228,6 +228,6 @@ TTS_CASE_WITH( "Check behavior of erf on wide"
   auto ez = kyosu::erf(z);
   for(int i = 0; i !=  eve::cardinal_v<T>; ++i)
   {
-    TTS_RELATIVE_EQUAL(ez.get(i), kyosu::erf(z.get(i)), 1.0e-4);
+    TTS_RELATIVE_EQUAL(ez.get(i), kyosu::erf(z.get(i)), tts::prec<T>());
   }
 };

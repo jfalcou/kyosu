@@ -55,7 +55,7 @@ TTS_CASE_TPL( "Check faddeeva", kyosu::real_types)
   using kyosu::faddeeva;
   for(int i=0; i < 7; ++i)
   {
-    TTS_RELATIVE_EQUAL(faddeeva(inputs[i]), results[i], 1.0e-4)  << "i " << i << " -> " << inputs[i] <<  " -> " <<faddeeva(inputs[i])<<"\n";
+    TTS_RELATIVE_EQUAL(faddeeva(inputs[i]), results[i], tts::prec<T>())  << "i " << i << " -> " << inputs[i] <<  " -> " <<faddeeva(inputs[i])<<"\n";
   }
   for(int i=7; i < N; ++i)
   {

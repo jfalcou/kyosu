@@ -28,8 +28,7 @@ TTS_CASE_WITH( "Check behavior of asin on scalar"
   {
     auto e = a0[i];
     auto f = a1[i];
-
-    TTS_RELATIVE_EQUAL(kyosu::asin(kc_t(e, f)),  cv(std::asin(c_t(e, f))), 2.0e-4);
+    TTS_RELATIVE_EQUAL(kyosu::asin(kc_t(e, f)),  cv(std::asin(c_t(e, f))), tts::prec<e_t>())  << '\n';
   }
 };
 
@@ -44,7 +43,7 @@ TTS_CASE_WITH( "Check behavior of asin on wide"
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return cv(std::asin(c_t(a0.get(i), a1.get(i)))); });
-  TTS_RELATIVE_EQUAL(kyosu::asin(ke_t{a0,a1}), e, 1.0e-3);
+  TTS_RELATIVE_EQUAL(kyosu::asin(ke_t{a0,a1}), e, tts::prec<T>());
 };
 
 

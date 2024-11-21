@@ -45,16 +45,16 @@ TTS_CASE_WITH ( "Check behavior of rising_factorial on wide"
   auto minf = eve::minf(as<e_t>());
   auto nan = eve::nan(as<e_t>());
 
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(inf, 0), tcx(0, 0)), tcx(1, 0), 1.0e-5);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(minf, 0), tcx(0, 0)), tcx(1, 0), 1.0e-5);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(nan, 0), tcx(0, 0)), tcx(1, 0), 1.0e-5);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(nan, 1), tcx(0, 0)), tcx(1, 0), 1.0e-5);
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(0, 0),  tcx(0, 0)), tcx(1, 0), 1.0e-5);
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(inf, 0), tcx(0, 0)), tcx(1, 0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(minf, 0), tcx(0, 0)), tcx(1, 0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(nan, 0), tcx(0, 0)), tcx(1, 0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(nan, 1), tcx(0, 0)), tcx(1, 0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(0, 0),  tcx(0, 0)), tcx(1, 0), tts::prec<T>());
   z_t i = tcx(0, 1);
   z_t o = tcx(1, 0);
-  TTS_RELATIVE_EQUAL(kyosu::rising_factorial(i, i),      tcx(0.133408195318916183621, +0.06139167700318597540461), 1.0e-5);
-  TTS_RELATIVE_EQUAL(kyosu::rising_factorial(i, T(0.5)), tcx(0.60672961239287904055952, +0.7925599369551407652246), 1.0e-5);
-  TTS_RELATIVE_EQUAL(kyosu::rising_factorial(i, o), i, 1.0e-5);
-  TTS_RELATIVE_EQUAL(kyosu::rising_factorial(o, T(0.5)), tcx(0.88622692545275801364908, 0), 1.0e-5);
-  TTS_RELATIVE_EQUAL(kyosu::rising_factorial(i, 2*i),    tcx(0.00533756125402432030171473451274, +0.024348078097112309674412896870731), 1.0e-5);
+  TTS_RELATIVE_EQUAL(kyosu::rising_factorial(i, i),      tcx(0.133408195318916183621, +0.06139167700318597540461), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::rising_factorial(i, T(0.5)), tcx(0.60672961239287904055952, +0.7925599369551407652246), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::rising_factorial(i, o), i, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::rising_factorial(o, T(0.5)), tcx(0.88622692545275801364908, 0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::rising_factorial(i, 2*i),    tcx(0.00533756125402432030171473451274, +0.024348078097112309674412896870731), tts::prec<T>());
 };

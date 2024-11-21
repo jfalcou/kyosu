@@ -29,7 +29,7 @@ TTS_CASE_WITH( "Check behavior of log1p on scalar"
     auto e = a0[i];
     auto f = a1[i];
 
-    TTS_RELATIVE_EQUAL(kyosu::log1p(kc_t(e, f)),  cv(std::log(c_t(e+1, f))), 1.0e-6);
+    TTS_RELATIVE_EQUAL(kyosu::log1p(kc_t(e, f)),  cv(std::log(c_t(e+1, f))), tts::prec<T>());
   }
 };
 
