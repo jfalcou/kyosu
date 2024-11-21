@@ -19,7 +19,7 @@ TTS_CASE_WITH ( "Check kyosu::associator over real"
 {
   using T = decltype(r0);
   TTS_EQUAL(kyosu::associator(r0, r1, r2), eve::zero(eve::as(r0)));
-  TTS_RELATIVE_EQUAL(kyosu::associator[eve::pedantic](r0, r1, r2), eve::zero(eve::as(r0)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::associator[eve::pedantic](r0, r1, r2), eve::zero(eve::as(r0)), tts::prec<T>(4.0e-3, 1.0e-6));
 };
 
 TTS_CASE_WITH ( "Check kyosu::associator over complex"

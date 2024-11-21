@@ -22,7 +22,7 @@ TTS_CASE_WITH( "Check behavior of acospi on scalar"
     auto e = a0[i];
     auto f = a1[i];
     auto z = kyosu::complex(e, f);
-    TTS_RELATIVE_EQUAL(kyosu::acospi(z),  inv_pi*kyosu::acos(z), tts::prec<T>());
+    TTS_RELATIVE_EQUAL(kyosu::acospi(z),  inv_pi*kyosu::acos(z), tts::prec<e_t>());
   }
 };
 

@@ -29,7 +29,7 @@ TTS_CASE_WITH( "Check behavior of acos on scalar"
     auto e = a0[i];
     auto f = a1[i];
 
-    TTS_RELATIVE_EQUAL(kyosu::acos(kc_t(e, f)),  cv(std::acos(c_t(e, f))), tts::prec<T>());
+    TTS_RELATIVE_EQUAL(kyosu::acos(kc_t(e, f)),  cv(std::acos(c_t(e, f))), tts::prec<e_t>());
   }
 };
 

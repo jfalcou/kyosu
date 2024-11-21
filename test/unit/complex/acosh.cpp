@@ -29,7 +29,7 @@ TTS_CASE_WITH( "Check behavior of acosh on scalar"
     auto e = a0[i];
     auto f = a1[i];
 
-    TTS_RELATIVE_EQUAL(kyosu::acosh(kc_t(e, f)),  cv(std::acosh(c_t(e, f))),tts::prec<T>());
+    TTS_RELATIVE_EQUAL(kyosu::acosh(kc_t(e, f)),  cv(std::acosh(c_t(e, f))),tts::prec<e_t>());
   }
 };
 
@@ -44,7 +44,7 @@ TTS_CASE_WITH( "Check behavior of acosh on wide"
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return cv(std::acosh(c_t(a0.get(i), a1.get(i)))); });
-  TTS_RELATIVE_EQUAL(kyosu::acosh(ke_t{a0,a1}), e, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acosh(ke_t{a0,a1}), e, tts::prec<e_t>());
 };
 
 TTS_CASE_TPL( "Check acosh lilits", kyosu::real_types)
