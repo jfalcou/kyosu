@@ -12,7 +12,7 @@ int main()
   auto q = kyosu::from_angle_axis(theta, std::span(ax), kyosu::normalize);
   std::cout << " v                " << v[0] << ", " << v[1] << ",  " <<  v[2] << ")\n";
   std::cout << " q                " << q << std::endl;
-  auto rv = kyosu::rotate_vec(q, std::span<double, 3>(v), kyosu::normalize);
+  auto rv = kyosu::rotate_vec(q, std::span<double, 3>(v));
   std::cout << " rotate_vec(q, v) " << " -> (" << rv[0] << ", " << rv[1] << ",  " << rv[2] << ")\n";
 
   return 0;
