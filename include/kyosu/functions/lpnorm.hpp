@@ -18,7 +18,10 @@ namespace kyosu
     template<typename P, typename Z1, typename ...Zs>
     requires(concepts::real<P>, concepts::cayley_dickson<Z1> || (concepts::cayley_dickson<Zs> || ...))
     KYOSU_FORCEINLINE constexpr auto  operator()(P p, Z1 const & z1, Zs const & ...zs) const noexcept -> decltype(eve::lpnorm(p, real(z1), real(zs)...))
-    { return KYOSU_CALL(p,z1,zs...); }
+    {
+      if constexpr(sizeof...(zs) == 0) return kyosu::abs(z1);
+      else  return eve::lpnorm(p,  kyosu::abs(z1), kyosu::abs(zs)...);
+    }
 
     template<concepts::real P, concepts::real V1, concepts::real ...Vs>
     KYOSU_FORCEINLINE constexpr auto operator()(P p, V1 v1, Vs... vs) const noexcept -> decltype(eve::lpnorm(p, real(v1), real(vs)...))
@@ -66,15 +69,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename P, typename Z1, typename ... Zs, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto lpnorm_(KYOSU_DELAY(), O const&, P p, Z1 z1, Zs... zs) noexcept
-  -> decltype(eve::lpnorm(p, real(z1), real(zs)...))
-  {
-    if constexpr(sizeof...(zs) == 0) return kyosu::abs(z1);
-    else  return eve::lpnorm(p,  kyosu::abs(z1), kyosu::abs(zs)...);
-  }
 }

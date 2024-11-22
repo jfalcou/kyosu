@@ -19,14 +19,34 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(kyosu::concepts::complex<Z>)
+      {
+        auto [rz, iz] = z;
+        auto infty = eve::inf(eve::as(rz));
+        auto arg = [](auto z){ return eve::atan2[eve::pedantic](kyosu::imag(z), kyosu::real(z));};
+        auto argz = arg(z)*eve::invlog_2(eve::as(rz));
+        auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
+        auto la = eve::log2(absz);
+        auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), complex(la), complex(la, argz));
+        if(eve::any(kyosu::is_not_finite(z)))
+        {
+          r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), complex(infty, iz), r);
+        }
+        return r;
+      }
+      else
+      {
+        return kyosu::_::cayley_extend(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
     { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(log2_t, log2_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -67,31 +87,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(kyosu::concepts::complex<Z>)
-    {
-      auto [rz, iz] = z;
-      auto infty = eve::inf(eve::as(rz));
-      auto arg = [](auto z){ return eve::atan2[eve::pedantic](kyosu::imag(z), kyosu::real(z));};
-      auto argz = arg(z)*eve::invlog_2(eve::as(rz));
-      auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
-      auto la = eve::log2(absz);
-      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), complex(la), complex(la, argz));
-      if(eve::any(kyosu::is_not_finite(z)))
-      {
-        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), complex(infty, iz), r);
-      }
-      return r;
-    }
-    else
-    {
-      return cayley_extend(log2, z);
-    }
-  }
 }

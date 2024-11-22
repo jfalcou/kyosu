@@ -20,7 +20,7 @@ namespace kyosu
     template<typename Z0, typename Z1>
     requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
       KYOSU_FORCEINLINE constexpr as_cayley_dickson_t<Z0, Z1>  operator()(Z0 const& z0, Z1 const & z1) const noexcept
-    { return KYOSU_CALL(z0,z1); }
+    { return kyosu::log(kyosu::beta(z0, z1)); }
 
     template<concepts::real V0, concepts::real V1>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> decltype(complex(v0)+v1)
@@ -66,13 +66,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z0, typename Z1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto lbeta_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
-  {
-    return kyosu::log(kyosu::beta(z0, z1));
-  }
 }
