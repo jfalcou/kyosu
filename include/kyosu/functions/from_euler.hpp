@@ -113,7 +113,7 @@ namespace kyosu
   //!   1. quaternion representing the rotation.
   //!      [extrinsic](https://en.wikipedia.org/wiki/Euler_angles) rotation scheme is used
   //!   2. Same but the [intrinsic](https://en.wikipedia.org/wiki/Euler_angles) way is used
-  //!      to i, terpret the angles.
+  //!      to interpret the angles.
   //!
   //!  @groupheader{Example}
   //!
