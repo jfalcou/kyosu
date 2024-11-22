@@ -26,7 +26,7 @@ namespace kyosu
 
     template<concepts::real V0, concepts::real V1, concepts::real V2>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1, V2 v2) const noexcept -> decltype(complex(v0)+complex(v1)+v2)
-    { return KYOSU_CALL(complex(v0),complex(v1),v2); }
+    { return (*this)(complex(v0),complex(v1),v2); }
 
     KYOSU_CALLABLE_OBJECT(slerp_t, slerp_);
 };

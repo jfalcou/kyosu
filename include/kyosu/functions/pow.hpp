@@ -36,7 +36,7 @@ namespace kyosu
     template<concepts::real V0, concepts::real V1>
     requires(!eve::integral_value<V1>)
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept ->complex_t<decltype(v0+v1)>
-    { return KYOSU_CALL(complex(v0),v1); }
+    { return (*this)(complex(v0),v1); }
 
     KYOSU_CALLABLE_OBJECT(pow_t, pow_);
 };

@@ -23,7 +23,7 @@ namespace kyosu
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return  KYOSU_CALL(complex(v)); }
+    { return  (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(log_abs_gamma_t, log_abs_gamma_);
   };

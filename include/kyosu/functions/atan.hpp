@@ -18,14 +18,26 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        // C99 definition here; atan(z) = -i atanh(i*z):
+        auto [r, i] = z;
+        auto [r1, i1] = kyosu::atanh(complex(-i, r));
+        return complex(i1, -r1);
+      }
+      else
+      {
+        return kyosu::_::cayley_extend(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return KYOSU_CALL(complex(v)); }
+    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(atan_t, atan_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -80,23 +92,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto atan_(KYOSU_DELAY(), O const&, Z a0) noexcept
-  {
-     if constexpr(concepts::complex<Z> )
-    {
-      // C99 definition here; atan(a0) = -i atanh(ia0):
-      auto [r, i] = a0;
-      auto [r1, i1] = kyosu::atanh(complex(-i, r));
-      return complex(i1, -r1);
-    }
-    else
-    {
-      return cayley_extend(atan, a0);
-    }
-  }
 }
