@@ -68,16 +68,3 @@ inline constexpr auto conj = eve::functor<conj_t>;
 //! @}
 //======================================================================================================================
 }
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto conj_(KYOSU_DELAY(), O const&, Z const& v) noexcept
-  {
-    if constexpr(concepts::cayley_dickson<Z>)
-    {
-      return Z{kumi::map_index([]<typename I>(I, auto m) { if constexpr(I::value>0) return -m; else return m;}, v)};
-    }
-    else return v;
-  }
-}

@@ -67,12 +67,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto eta_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    return deta(1u, z);
-  }
-}

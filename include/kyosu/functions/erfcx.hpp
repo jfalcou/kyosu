@@ -84,25 +84,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto erfcx_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto realz = is_real(z);
-      if (eve::all(realz))
-        return complex(eve::erfcx(real(z)));
-      else  if (eve::none(realz))
-        return faddeeva(complex(-imag(z), real(z)));
-      else
-        return if_else(realz, complex(eve::erfcx(real(z))), faddeeva(complex(-imag(z), real(z))));
-    }
-    else
-    {
-      return cayley_extend(erfcx, z);
-    }
-  }
-}

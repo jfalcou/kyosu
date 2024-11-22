@@ -64,12 +64,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto floor_(KYOSU_DELAY(), O const&, Z c) noexcept
-  {
-    return Z{kumi::map([](auto const& e) { return eve::floor(e); }, c)};
-  }
-}

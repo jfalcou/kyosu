@@ -76,19 +76,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cos_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cosh(Z(-kyosu::imag(z), kyosu::real(z)));
-    }
-    else
-    {
-      return cayley_extend(cos, z);
-    }
-  }
-}

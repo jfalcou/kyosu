@@ -69,12 +69,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto asinpi_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-   return radinpi(kyosu::asin(z));
-  }
-}
