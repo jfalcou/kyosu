@@ -7,6 +7,7 @@
 //==================================================================================================
 #include "test.hpp"
 #include <kyosu/kyosu.hpp>
+#include <kyosu/details/decorators.hpp>
 
 
 TTS_CASE_WITH ( "Check behavior of rotate_vec on wide"
@@ -19,15 +20,15 @@ TTS_CASE_WITH ( "Check behavior of rotate_vec on wide"
   <typename T>(T const& a0, T const& a1, T const& a2)
 {
   {
-    auto z = kyosu::from_euler(a0, a1, a2, kyosu::Z_, kyosu::X_, kyosu::Z_, kyosu::extrinsic);
-    auto [t1, t2, t3] = kyosu::to_euler(z, kyosu::Z_, kyosu::X_, kyosu::Z_, kyosu::extrinsic);
+    auto z = kyosu::from_euler(a0, a1, a2, kyosu::Z_, kyosu::X_, kyosu::Z_);
+    auto [t1, t2, t3] = kyosu::to_euler(z, kyosu::Z_, kyosu::X_, kyosu::Z_);
     TTS_RELATIVE_EQUAL(t1, a0, 1.0e-4);
     TTS_RELATIVE_EQUAL(t2, a1, 1.0e-4);
     TTS_RELATIVE_EQUAL(t3, a2, 1.0e-4);
   }
   {
-    auto z = kyosu::from_euler(a0, a1, a2, kyosu::Z_, kyosu::X_, kyosu::Z_, kyosu::intrinsic);
-    auto [t1, t2, t3] = kyosu::to_euler(z, kyosu::Z_, kyosu::X_, kyosu::Z_, kyosu::intrinsic);
+    auto z = kyosu::from_euler[kyosu::intrinsic](a0, a1, a2, kyosu::Z_, kyosu::X_, kyosu::Z_);
+    auto [t1, t2, t3] = kyosu::to_euler[kyosu::intrinsic](z, kyosu::Z_, kyosu::X_, kyosu::Z_);
     TTS_RELATIVE_EQUAL(t1, a0, 1.0e-4);
     TTS_RELATIVE_EQUAL(t2, a1, 1.0e-4);
     TTS_RELATIVE_EQUAL(t3, a2, 1.0e-4);

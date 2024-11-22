@@ -14,18 +14,17 @@
 namespace kyosu
 {
   template<typename Options>
-  struct from_angle_axis_t : eve::strict_elementwise_callable<from_angle_axis_t, Options>
+  struct from_angle_axis_t : eve::strict_elementwise_callable<from_angle_axis_t, Options, assume_unitary_option>
   {
 
-    template< concepts::real V, concepts::real T, std::size_t S, bool n>
+    template< concepts::real V, concepts::real T, std::size_t S>
     KYOSU_FORCEINLINE constexpr auto operator()( V  angle
-                                               , std::span<T, S> axis
-                                               , _::norming<n>) const noexcept
+                                               , std::span<T, S> axis) const noexcept
     -> quaternion_t<eve::common_value_t<V, T>>
     {
       using e_t = eve::common_value_t<T, V>;
       auto q =  quaternion(e_t(0), e_t(axis[0]), e_t(axis[1]), e_t(axis[2]));
-      if constexpr(n){
+      if constexpr(!Options::contains(assume_unitary)){
         q = if_else(is_eqz(q), quaternion(e_t(0), e_t(1)), sign(q));
       }
       auto [s, c] = eve::sincos(angle*eve::half(eve::as(angle)));
@@ -54,7 +53,8 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     auto from_angle_axis(auto angle, auto axis, auto norming) const noexcept;
+  //!     auto from_angle_axis(auto angle, auto axis) const noexcept;
+  //!     auto from_angle_axis[assume_unitary](auto angle, auto axis) const noexcept;
   //!   }
   //!   @endcode
   //!
@@ -62,18 +62,15 @@ namespace kyosu
   //!
   //!  * `angle`: rotation angle in radian
   //!  * `axis`: rotation axis given by an std::span of dimension 3.
-  //!  * `norming`: can be `assume_normalized` or `normalize`.
-  //!      - In the second case the axis is normalized before use.
-  //!      - if the axis is already normalized using `assume_normalized` is more efficient,
-  //!        but the result is undefined behavior if it is not the case.
-  //!      - if the axis is null the axis is normalized as (1, 0, 0).
   //!
   //! **Return value**
   //!
-  //! the quaternion value representing the rotation.
+  //!   1. the quaternion value representing the rotation.
+  //!      (if the axis is null the axis is normalized as (1, 0, 0)).
+  //!   2. with `assume_unitary` the axis is NOT normalized before use,
+  //!        but the result is undefined if it is not the case.
   //!
-  //!  @groupheader{Example}
-  //!
+  //! @groupheader{Example}
   //! @godbolt{doc/from_angle_axis.cpp}
   //======================================================================================================================
   inline constexpr auto from_angle_axis = eve::functor<from_angle_axis_t>;

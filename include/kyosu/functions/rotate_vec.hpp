@@ -14,26 +14,19 @@
 namespace kyosu
 {
   template<typename Options>
-  struct rotate_vec_t : eve::elementwise_callable<rotate_vec_t, Options>
+  struct rotate_vec_t : eve::elementwise_callable<rotate_vec_t, Options, assume_unitary_option>
   {
-//     template<concepts::real V>
-//     KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
-//     {
-//       auto z = eve::zero(eve::as(v));
-//       return kumi::tuple{eve::abs(v), eve::arg(v), z, z};
-//     }
 
-    template<concepts::cayley_dickson Z, concepts::real T, std::size_t S, bool normalize>
+    template<concepts::cayley_dickson Z, concepts::real T, std::size_t S>
     requires(dimension_v<Z> <= 4)
-      KYOSU_FORCEINLINE constexpr auto operator()(Z const& q,  std::span<T, S> v
-                                                 , _::norming<normalize>) const noexcept
+      KYOSU_FORCEINLINE constexpr auto operator()(Z const& q,  std::span<T, S> v) const noexcept
     {
       using e_t = as_real_type_t<Z>;
       using v_t = decltype(v[0]+e_t());
       std::array<v_t, 3> w, wp;
       using a_t = decltype(kyosu::abs(q));
       a_t fac(2);
-      if constexpr(normalize) fac *= kyosu::rec(kyosu::sqr_abs(q));
+      if constexpr(!Options::contains(assume_unitary)) fac *= kyosu::rec(kyosu::sqr_abs(q));
       auto [r, i, j, k] = q;
       w[0] = eve::fma(r, v[0], eve::diff_of_prod(j, v[2], k, v[1]));
       w[1] = eve::fma(r, v[1], eve::diff_of_prod(k, v[0], i, v[2]));
@@ -67,23 +60,21 @@ namespace kyosu
   //!   namespace eve
   //!   {
   //!     auto rotate_vec(auto q, auto v) const noexcept;
+  //!     auto rotate_vec[assume_unitary](auto q, auto v) const noexcept
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
   //!  `q`:   quaternion value defining the rotation.
-  //!
   //!  `v`:   span of 3 elements to rotate.
   //!
   //! **Return value**
   //!
-  //!   the span rotated by q
-  //!
-  //! ---
+  //!   1. the span rotated by q
+  //!   2.  with `assume_unitary`, assumes that `q` is already normalized
   //!
   //! #### Example
-  //!
   //! @godbolt{doc/rotate_vec.cpp}
   //================================================================================================
   inline constexpr auto rotate_vec = eve::functor<rotate_vec_t>;

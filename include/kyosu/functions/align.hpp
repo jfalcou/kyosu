@@ -13,19 +13,18 @@
 namespace kyosu
 {
   template<typename Options>
-  struct align_t : eve::elementwise_callable<align_t, Options>
+  struct align_t : eve::elementwise_callable<align_t, Options, assume_unitary_option>
   {
 
-    template<concepts::real T, concepts::real U, std::size_t S, bool normalize>
+    template<concepts::real T, concepts::real U, std::size_t S>
     requires(S >= 3)
       KYOSU_FORCEINLINE constexpr auto operator()( std::span<T, S> v0
-                                                 , std::span<U, S> v1
-                                                , _::norming<normalize>) const noexcept
+                                                 , std::span<U, S> v1) const noexcept
     {
       auto qv0 = quaternion(eve::zero(eve::as(v0[0])), v0[0], v0[1], v0[2]);
       auto qv1 = quaternion(eve::zero(eve::as(v1[0])), v1[0], v1[1], v1[2]);
       auto v1v0 = qv1*qv0;
-      if constexpr(normalize)
+      if constexpr(!Options::contains(assume_unitary))
       {
         return sign(oneminus(sign(v1v0)));
       }
@@ -37,7 +36,6 @@ namespace kyosu
 
     KYOSU_CALLABLE_OBJECT(align_t, align_);
   };
-  // TO BE DECORATED
   //================================================================================================
   //! @addtogroup quaternion
   //! @{
