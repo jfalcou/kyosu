@@ -25,7 +25,7 @@ namespace kyosu
           return eve::if_else(abs(ciz) < eve::pio_4(eve::as(b))
                              , eve::dec(ciz), -eve::sqr(siz)/(eve::inc(ciz)));
         };
-        auto r = eve::fma(expm1(rz), ciz, cosm1(iz));
+        auto r = eve::fma(eve::expm1(rz), ciz, cosm1(iz));
         auto i = eve::exp(rz)*siz;
         r = eve::if_else(rz == eve::inf(eve::as(rz)) && eve::is_not_finite(iz), rz, r);
         return  complex(r, eve::if_else(kyosu::is_real(z), eve::zero, i));
