@@ -28,7 +28,7 @@ namespace kyosu
 
     template<concepts::real V0, concepts::real V1>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> eve::as_logical_t<decltype(v0+ v1)>
-    { return eve::is_equal[Options()](v0, v1); }
+    { return eve::is_equal[this->options()](v0, v1); }
 
     KYOSU_CALLABLE_OBJECT(is_equal_t, is_equal_);
   };

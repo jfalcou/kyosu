@@ -16,12 +16,19 @@ namespace kyosu
   struct muli_t : eve::elementwise_callable<muli_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& c) const noexcept
+    {
+      if constexpr(kyosu::concepts::complex<Z>)
+        return Z(-ipart(c), real(c));
+      else if constexpr(kyosu::concepts::quaternion<Z>)
+        return Z(-ipart(c), real(c), -kpart(c), jpart(c));
+      else
+        return kyosu::i(as(c))*c;
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return KYOSU_CALL(v); }
+    { return complex(zero(as(v)), v); }
 
     KYOSU_CALLABLE_OBJECT(muli_t, muli_);
 };
@@ -66,18 +73,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto muli_(KYOSU_DELAY(), O const&, Z c) noexcept
-  {
-    if constexpr(kyosu::concepts::complex<Z>)
-      return Z(-ipart(c), real(c));
-    else if constexpr(kyosu::concepts::quaternion<Z>)
-      return Z(-ipart(c), real(c), -kpart(c), jpart(c));
-    else
-      return kyosu::i(as(c))*c;
-  }
 }

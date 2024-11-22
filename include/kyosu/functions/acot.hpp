@@ -22,8 +22,8 @@ namespace kyosu
     {    return kyosu::atan(kyosu::rec(z)); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::acot(v); }
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
+    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(acot_t, acot_);
 };

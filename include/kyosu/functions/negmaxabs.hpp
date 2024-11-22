@@ -20,12 +20,12 @@ namespace kyosu
     requires(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs>|| ...))
       KYOSU_FORCEINLINE constexpr auto  operator()(Z0  const & z0, Zs const & ... zs) const noexcept
     -> decltype(eve::negmaxabs(real(z0), real(zs)...))
-    {  return eve::minus(kyosu::maxabs[Options()](z0, zs...)); }
+    {  return eve::minus(kyosu::maxabs[this->options()](z0, zs...)); }
 
     template<concepts::real V0, concepts::real... Vs>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs... vs) const noexcept
     -> decltype( eve::negmaxabs(v0, vs...))
-    { return eve::negmaxabs[Options()](v0,vs...); }
+    { return eve::negmaxabs[this->options()](v0,vs...); }
 
     KYOSU_CALLABLE_OBJECT(negmaxabs_t, negmaxabs_);
   };

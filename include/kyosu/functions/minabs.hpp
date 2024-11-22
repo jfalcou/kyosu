@@ -20,12 +20,12 @@ namespace kyosu
     requires(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...))
     KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Zs const & ... zs) const noexcept
     -> decltype(eve::minabs(real(z0), real(zs)...))
-    { return KYOSU_CALL(z0,zs...); }
+    { return eve::sqrt(eve::min[this->options()](kyosu::sqr_abs(z0), kyosu::sqr_abs(zs)...)); }
 
     template<concepts::real V0, concepts::real ... Vs>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs ...vs) const noexcept
     -> decltype( eve::minabs(v0, vs...))
-    { return eve::minabs[Options()](v0,vs...); }
+    { return eve::minabs[this->options()](v0,vs...); }
 
     KYOSU_CALLABLE_OBJECT(minabs_t, minabs_);
 };
@@ -67,13 +67,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z0, typename ... Zs, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto minabs_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
-  {
-    return eve::min[o](kyosu::abs(z0), kyosu::abs(zs)...);
-  }
 }
