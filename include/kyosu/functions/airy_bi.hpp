@@ -18,9 +18,9 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
       if constexpr(kyosu::concepts::complex<Z> )
-        return _::ai(z);
+        return _::bi(z);
       else
-        return kyosu::_::cayley_extend(_::bi, z);
+        return kyosu::_::cayley_extend(*this, z);
     }
 
     template<concepts::real V>

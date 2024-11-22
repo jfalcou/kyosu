@@ -26,7 +26,7 @@ namespace kyosu
 
     template<concepts::real V, eve::unsigned_scalar_value K>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(K k, V v) const noexcept
-    { return  KYOSU_CALL(k, complex(v)); }
+    { return (*this)(k, complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(deta_t, deta_);
   };

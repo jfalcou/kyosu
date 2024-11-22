@@ -19,7 +19,28 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        auto [rz, iz] = z;
+        auto [s, c]   = eve::sincos(iz);
+        auto [sh, ch] = eve::sinhcosh(rz);
+        auto r = c*ch;
+        auto i = s*sh;
+        i = eve::if_else(kyosu::is_eqz(kyosu::ipart(z)) || kyosu::is_real(z), eve::zero, i);
+        auto res = Z(r, i);
+        if (eve::any(kyosu::is_not_finite(z)))
+        {
+          res = eve::if_else(eve::is_infinite(rz) && eve::is_not_finite(iz), Z(eve::inf(eve::as(rz)), eve::nan(eve::as(rz))), res);
+          res = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz),        Z(eve::nan(eve::as(rz)), eve::nan(eve::as(rz))), res);
+        }
+        return res;
+      }
+      else
+      {
+        return cayley_extend(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -85,32 +106,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cosh_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto [rz, iz] = z;
-      auto [s, c]   = eve::sincos(iz);
-      auto [sh, ch] = eve::sinhcosh(rz);
-      auto r = c*ch;
-      auto i = s*sh;
-      i = eve::if_else(kyosu::is_eqz(kyosu::ipart(z)) || kyosu::is_real(z), eve::zero, i);
-      auto res = Z(r, i);
-      if (eve::any(kyosu::is_not_finite(z)))
-      {
-        res = eve::if_else(eve::is_infinite(rz) && eve::is_not_finite(iz), Z(eve::inf(eve::as(rz)), eve::nan(eve::as(rz))), res);
-        res = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz),        Z(eve::nan(eve::as(rz)), eve::nan(eve::as(rz))), res);
-      }
-      return res;
-    }
-    else
-    {
-      return cayley_extend(cosh, z);
-    }
-  }
 }
