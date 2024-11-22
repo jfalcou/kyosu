@@ -20,7 +20,12 @@ namespace kyosu
     template<typename Z0, typename Z1>
     requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
     KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept -> eve::as_logical_t<decltype(z0 + z1)>
-    { return KYOSU_CALL(z0,z1); }
+    {
+      if constexpr(Options::contains(eve::numeric))
+        return (z0 != z1) || (is_not_nan(z0) && is_not_nan(z1));
+      else
+        return z0 != z1;
+    }
 
     template<concepts::real V0, concepts::real V1>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept ->  eve::as_logical_t<decltype(v0 + v1)>
@@ -71,17 +76,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z0, typename Z1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto is_not_equal_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
-  -> eve::as_logical_t<decltype(z0+ z1)>
-  {
-    if constexpr(O::contains(eve::numeric))
-      return (z0 != z1) || (is_not_nan(z0) && is_not_nan(z1));
-    else
-      return z0 != z1;
-  }
 }
