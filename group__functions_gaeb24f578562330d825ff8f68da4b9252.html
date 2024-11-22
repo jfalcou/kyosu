@@ -147,23 +147,21 @@ $(document).ready(function(){initNavTree('group__functions_gaeb24f578562330d825f
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">from_angle_axis</a>(<span class="keyword">auto</span> angle, <span class="keyword">auto</span> axis, <span class="keyword">auto</span> norming) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">from_angle_axis</a>(<span class="keyword">auto</span> angle, <span class="keyword">auto</span> axis) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">from_angle_axis</a>[assume_unitary](<span class="keyword">auto</span> angle, <span class="keyword">auto</span> axis) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaeb24f578562330d825ff8f68da4b9252_html_gaeb24f578562330d825ff8f68da4b9252"><div class="ttname"><a href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr auto from_angle_axis</div><div class="ttdoc">Callable object computing an an unitary quaternion from an angle value and a 3 dimensional axis vecto...</div><div class="ttdef"><b>Definition:</b> from_angle_axis.hpp:79</div></div>
+<div class="ttc" id="agroup__functions_gaeb24f578562330d825ff8f68da4b9252_html_gaeb24f578562330d825ff8f68da4b9252"><div class="ttname"><a href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr auto from_angle_axis</div><div class="ttdoc">Callable object computing an an unitary quaternion from an angle value and a 3 dimensional axis vecto...</div><div class="ttdef"><b>Definition:</b> from_angle_axis.hpp:76</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>angle</code>: rotation angle in radian</li>
 <li><code>axis</code>: rotation axis given by an std::span of dimension 3.</li>
-<li><code>norming</code>: can be <code>assume_normalized</code> or <code>normalize</code>.<ul>
-<li>In the second case the axis is normalized before use.</li>
-<li>if the axis is already normalized using <code>assume_normalized</code> is more efficient, but the result is undefined behavior if it is not the case.</li>
-<li>if the axis is null the axis is normalized as (1, 0, 0).</li>
-</ul>
-</li>
 </ul>
 <p><b>Return value</b></p>
-<p>the quaternion value representing the rotation.</p>
+<ol type="1">
+<li>the quaternion value representing the rotation. (if the axis is null the axis is normalized as (1, 0, 0)).</li>
+<li>with <code>assume_unitary</code> the axis is NOT normalized before use, but the result is undefined if it is not the case.</li>
+</ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -182,14 +180,14 @@ $(document).ready(function(){initNavTree('group__functions_gaeb24f578562330d825f
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- theta = &quot;</span> &lt;&lt; theta &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- axis  = (&quot;</span> &lt;&lt; ax[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt;  ax[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt;  ax[2] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>(theta,  std::span(ax), kyosu::normalize);</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>(theta, std::span(ax), kyosu::normalize) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>(theta,  std::span(ax));</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>(theta, std::span(ax)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  <span class="keyword">auto</span> [aa, axx] = <a class="code hl_variable" href="group__quaternion_ga31804ee3fdb4a806efea330cf1e20898.html#ga31804ee3fdb4a806efea330cf1e20898">kyosu::to_angle_axis</a>(q);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt;theta = &quot;</span> &lt;&lt; aa &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; axis  = (&quot;</span> &lt;&lt; axx[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt;  axx[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt;  axx[2] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">  std::array&lt;double, 3&gt; azz{0., 0., 0.};</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>(theta,  std::span(azz), kyosu::normalize) &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__functions_gaeb24f578562330d825ff8f68da4b9252.html#gaeb24f578562330d825ff8f68da4b9252">kyosu::from_angle_axis</a>(theta,  std::span(azz)) &lt;&lt; std::endl;</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__quaternion_ga31804ee3fdb4a806efea330cf1e20898_html_ga31804ee3fdb4a806efea330cf1e20898"><div class="ttname"><a href="group__quaternion_ga31804ee3fdb4a806efea330cf1e20898.html#ga31804ee3fdb4a806efea330cf1e20898">kyosu::to_angle_axis</a></div><div class="ttdeci">constexpr auto to_angle_axis</div><div class="ttdoc">Callable object computing the angle and axis coordinates from a quaternion.</div><div class="ttdef"><b>Definition:</b> to_angle_axis.hpp:74</div></div>

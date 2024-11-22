@@ -148,18 +148,20 @@ $(document).ready(function(){initNavTree('group__quaternion_ga77eff7a7e881497c34
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
 <div class="line">{</div>
-<div class="line">    <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0">to_rotation_matrix</a>(<span class="keyword">auto</span> q) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
-<div class="line">    <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0">to_rotation_matrix</a>[assume_unitary](<span class="keyword">auto</span> q) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0">to_rotation_matrix</a>(<span class="keyword">auto</span> q) <span class="keyword">const</span> <span class="keyword">noexcept</span>;                   <span class="comment">//1</span></div>
+<div class="line">    <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0">to_rotation_matrix</a>[assume_unitary](<span class="keyword">auto</span> q) <span class="keyword">const</span> <span class="keyword">noexcept</span>;   <span class="comment">//2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__quaternion_ga77eff7a7e881497c34bc74d948cf82b0_html_ga77eff7a7e881497c34bc74d948cf82b0"><div class="ttname"><a href="group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0">kyosu::to_rotation_matrix</a></div><div class="ttdeci">constexpr auto to_rotation_matrix</div><div class="ttdoc">Callable object computing a quaternion from its to_rotation_matrix representation.</div><div class="ttdef"><b>Definition:</b> to_rotation_matrix.hpp:124</div></div>
+<div class="ttc" id="agroup__quaternion_ga77eff7a7e881497c34bc74d948cf82b0_html_ga77eff7a7e881497c34bc74d948cf82b0"><div class="ttname"><a href="group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0">kyosu::to_rotation_matrix</a></div><div class="ttdeci">constexpr auto to_rotation_matrix</div><div class="ttdoc">Callable object computing a quaternion from its to_rotation_matrix representation.</div><div class="ttdef"><b>Definition:</b> to_rotation_matrix.hpp:122</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>q</code> quaternion representing the rotation</li>
-<li><code>assume_unitary</code>: assumes that q is already normalized</li>
 </ul>
 <p><b>Return value</b></p>
-<p>compute the rotation matrix associated to the quaternion.</p>
-<p>if T is the element type of q, returns an std::array&lt;std::array&lt;T, 3&gt;, 3&gt; containing the 9 coefficients of the rotation matrix</p>
+<ol type="1">
+<li>compute the rotation matrix associated to the quaternion.</li>
+<li>with <code>assume_unitary</code>, assumes that <code>q</code> is already normalized</li>
+</ol>
+<p>if <code>T</code> is the element type of <code>q</code>, returns an <code>std::array&lt;std::array&lt;T, 3&gt;, 3&gt;</code> containing the 9 coefficients of the rotation matrix</p>
 <dl class="section note"><dt>Note</dt><dd>use this function if you really need the rotation matrix, but to rotate vectors prefer the function rot_vec that directly uses the quaternion.</dd></dl>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>

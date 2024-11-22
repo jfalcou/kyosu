@@ -151,25 +151,35 @@ $(document).ready(function(){initNavTree('group__quaternion_ga3f3485eda1a78b4bb9
 <div class="line">{</div>
 <div class="line">   <span class="keyword">template</span> &lt; <span class="keywordtype">int</span> I, <span class="keywordtype">int</span> J, <span class="keywordtype">int</span> K &gt; <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">from_euler</a>(<span class="keyword">auto</span> a, <span class="keyword">auto</span> b, <span class="keyword">auto</span> c</div>
 <div class="line">                                                   , axis&lt;I&gt; a1, axis&lt;J&gt; a2, axis&lt;K&gt; a3</div>
-<div class="line">                                                   , ext e</div>
 <div class="line">                                                   ) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">requires</span>(I != J &amp;&amp; J != K)</div>
+<div class="line">   <span class="keyword">requires</span>(I != J &amp;&amp; J != K)                                                           <span class="comment">//1</span></div>
+<div class="line"> </div>
+<div class="line">   template &lt; int I, int J, int K &gt; <span class="keyword">auto</span> from_euler[extrinsic](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b, <span class="keyword">auto</span> c</div>
+<div class="line">                                                   , axis&lt;I&gt; a1, axis&lt;J&gt; a2, axis&lt;K&gt; a3</div>
+<div class="line">                                                   ) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">requires</span>(I != J &amp;&amp; J != K)                                                           <span class="comment">//1</span></div>
+<div class="line"> </div>
+<div class="line">   template &lt; int I, int J, int K &gt; <span class="keyword">auto</span> from_euler[intrinsic](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b, <span class="keyword">auto</span> c</div>
+<div class="line">                                                   , axis&lt;I&gt; a1, axis&lt;J&gt; a2, axis&lt;K&gt; a3</div>
+<div class="line">                                                   ) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">requires</span>(I != J &amp;&amp; J != K)                                                           <span class="comment">//2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7_html_ga3f3485eda1a78b4bb970df61c7b602d7"><div class="ttname"><a href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">kyosu::from_euler</a></div><div class="ttdeci">constexpr auto from_euler</div><div class="ttdoc">Callable object computing a quaternion from its euler representation.</div><div class="ttdef"><b>Definition:</b> from_euler.hpp:117</div></div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7_html_ga3f3485eda1a78b4bb970df61c7b602d7"><div class="ttname"><a href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">kyosu::from_euler</a></div><div class="ttdeci">constexpr auto from_euler</div><div class="ttdoc">Callable object computing a quaternion from its euler representation.</div><div class="ttdef"><b>Definition:</b> from_euler.hpp:122</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>a</code>, <code>b</code>, <code>c</code>: the angles in radian</li>
 <li><code>a1</code>, <code>a2</code>, <code>a3</code> the axis parameters to be chosen between X_, Y_, Z_ (two consecutive axis cannot be the same)</li>
-<li>&lsquo;e&rsquo;: allows to choose between extrinsic or intrinsic representations.</li>
 </ul>
 <p><b>Template parameters</b></p>
 <ul>
 <li>I, J, K: are on call deduced from the axis parameters</li>
 </ul>
-<p>The computation method is taken from the article: "Quaternion to Euler angles conversion: A
-  direct, general and computationally efficient method". PLoS ONE 17(11): e0276302. <a href="https://doi.org/10.1371/journal">https://doi.org/10.1371/journal</a> pone 0276302. Evandro Bernardes, and Stephane Viollet</p>
 <p><b>Return value</b></p>
-<p>quaternion representing the rotation</p>
+<ol type="1">
+<li>quaternion representing the rotation. <a href="https://en.wikipedia.org/wiki/Euler_angles">extrinsic</a> rotation scheme is used</li>
+<li>Same but the <a href="https://en.wikipedia.org/wiki/Euler_angles">intrinsic</a> way is used to interpret the angles.</li>
+</ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -180,7 +190,7 @@ $(document).ready(function(){initNavTree('group__quaternion_ga3f3485eda1a78b4bb9
 <div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">kyosu::from_euler</a>;</div>
 <div class="line">  <span class="keyword">using </span>kyosu::X_;</div>
 <div class="line">  <span class="keyword">using </span>kyosu::Z_;</div>
-<div class="line">  <span class="keyword">using </span>kyosu::extrinsic;</div>
+<div class="line">  <span class="keyword">using </span>kyosu::Y_;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> psi  = eve::pio_3(eve::as(0.0));</div>
 <div class="line">  <span class="keyword">auto</span> theta= eve::pio_4(eve::as(0.0));</div>
@@ -189,8 +199,10 @@ $(document).ready(function(){initNavTree('group__quaternion_ga3f3485eda1a78b4bb9
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- psi   &quot;</span> &lt;&lt; psi &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- theta &quot;</span> &lt;&lt; theta &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- phi   &quot;</span> &lt;&lt; phi&lt;&lt; std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; from_euler(psi, theta, phi, X_, Z_, X_, extrinsic) &quot;</span></div>
-<div class="line">            &lt;&lt; <a class="code hl_variable" href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">kyosu::from_euler</a>(psi, theta, phi, X_, Z_, X_, extrinsic) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; from_euler(psi, theta, phi, X_, Z_, Y_) &quot;</span></div>
+<div class="line">            &lt;&lt; <a class="code hl_variable" href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">kyosu::from_euler</a>(psi, theta, phi, X_, Z_, Y_) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; from_euler[intrinsic](psi, theta, phi, Y_, Z_, Y_) &quot;</span></div>
+<div class="line">            &lt;&lt; <a class="code hl_variable" href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">kyosu::from_euler</a>[kyosu::intrinsic](psi, theta, phi, Y_, Z_, Y_) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
