@@ -18,11 +18,26 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(kyosu::concepts::complex<Z>)
+      {
+        auto [rz, iz] = muli(z);
+        auto [s, c]   = eve::sinpicospi(iz);
+        auto rho = eve::exp(rz*eve::pi(eve::as(rz)));
+        return eve::if_else(kyosu::is_real(z) || rz == eve::minf(eve::as(rz)),
+                            kyosu::complex(rho, eve::zero(eve::as(rho))),
+                            kyosu::complex(rho*c, rho*s)
+                           );
+      }
+      else
+      {
+        return kyosu::_::cayley_extend(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return  KYOSU_CALL(v); }
+    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(exp_ipi_t, exp_ipi_);
 };
@@ -65,27 +80,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto exp_ipi_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(kyosu::concepts::complex<Z>)
-    {
-      auto [rz, iz] = muli(z);
-      auto [s, c]   = eve::sinpicospi(iz);
-      auto rho = eve::exp(rz*eve::pi(eve::as(rz)));
-      return eve::if_else(kyosu::is_real(z) || rz == eve::minf(eve::as(rz)),
-                          kyosu::complex(rho, eve::zero(eve::as(rho))),
-                          kyosu::complex(rho*c, rho*s)
-                         );
-    }
-    else
-    {
-      const auto ipi = muli(kyosu::pi(eve::as_element<Z>()));
-      return kyosu::exp(ipi*z);
-    }
-  }
 }

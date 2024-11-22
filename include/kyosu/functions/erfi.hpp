@@ -22,11 +22,27 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        if (eve::all(is_real(z)))
+          return (*this)(real(z));
+        else
+          return mulmi(erf(muli(z)));
+      }
+      else
+      {
+        return kyosu::_::cayley_extend(*this, z);
+      }
+    }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return KYOSU_CALL(v); }
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V z) const noexcept
+    {
+      auto over = eve::sqr(z) > 720;
+      auto r = eve::inf(eve::as(z))*eve::sign(z);
+      r = complex(eve::if_else(over, r, -imag(kyosu::erf(complex(eve::zero(eve::as(z)), -z)))));
+    }
 
     KYOSU_CALLABLE_OBJECT(erfi_t, erfi_);
 };
@@ -69,35 +85,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto erfi_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::real<Z> )
-    {
-      auto over = eve::sqr(z) > 720;
-      auto r = eve::inf(eve::as(z))*eve::sign(z);
-      r = eve::if_else(over, r, -get<1>(kyosu::erf(complex(eve::zero(eve::as(z)), -z))));
-      return complex(r);
-    }
-    else if constexpr(concepts::complex<Z> )
-    {
-      auto realz = is_real(z);
-      if (eve::all(realz))
-      {
-        return kyosu::erfi(real(z));
-      }
-      else
-      {
-        return mulmi(erf(muli(z)));
-      }
-    }
-    else
-    {
-      return cayley_extend(erfi, z);
-    }
-  }
 }
