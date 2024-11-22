@@ -26,7 +26,7 @@ namespace kyosu
       if constexpr(concepts::complex<Z> )
       {
         if (eve::all(is_real(z)))
-          return (*this)(real(z));
+          return complex((*this)(real(z)));
         else
           return mulmi(erf(muli(z)));
       }
@@ -41,7 +41,8 @@ namespace kyosu
     {
       auto over = eve::sqr(z) > 720;
       auto r = eve::inf(eve::as(z))*eve::sign(z);
-      r = complex(eve::if_else(over, r, -imag(kyosu::erf(complex(eve::zero(eve::as(z)), -z)))));
+      r = eve::if_else(over, r, -imag(kyosu::erf(complex(eve::zero(eve::as(z)), -z))));
+      return complex(r);
     }
 
     KYOSU_CALLABLE_OBJECT(erfi_t, erfi_);
