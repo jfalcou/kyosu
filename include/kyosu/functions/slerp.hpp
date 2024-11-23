@@ -21,13 +21,13 @@ namespace kyosu
   {
     template<typename Z0, typename Z1, typename Z2>
     requires((concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)&& concepts::real<Z2>)
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const & z1, Z2 const & z2) const noexcept
+    KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1, Z2  z2) const noexcept
     -> decltype(z0+z1+z2)
     {
       if constexpr(!Options::contains(assume_unitary))
       {
-        z0 = signnz(z0);
-        z1 = signnz(z1);
+        z0 = kyosu::signnz(z0);
+        z1 = kyosu::signnz(z1);
       }
       auto gez = eve::is_gez(real(kyosu::dot(z0, z1)));
       auto mix = kyosu::if_else(gez, z1, -z1);
