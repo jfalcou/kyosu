@@ -25,7 +25,7 @@ namespace kyosu
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::sqr_abs(v); }
+    { return eve::sqr(v); }
 
     KYOSU_CALLABLE_OBJECT(sqr_abs_t, sqr_abs_);
   };
