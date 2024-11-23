@@ -33,8 +33,8 @@ namespace kyosu
     }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::atan(v); }
 
     KYOSU_CALLABLE_OBJECT(atan_t, atan_);
   };
