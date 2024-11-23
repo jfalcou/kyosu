@@ -15,7 +15,7 @@ namespace kyosu
   struct sqr_abs_t : eve::elementwise_callable<sqr_abs_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z z) const noexcept
+    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z v) const noexcept
     {
       auto anyinf = kumi::any_of(v, eve::is_infinite);
       auto squares = kumi::map([](auto const& e) { return e*e; }, v);
