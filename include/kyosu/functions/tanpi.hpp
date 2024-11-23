@@ -8,7 +8,7 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/mulmi.hpp>
 
 namespace kyosu
 {
@@ -17,7 +17,26 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        auto machin = [](auto z){
+          auto [rz, iz] = z+z;
+          auto [s, c] = eve::sinpicospi(iz);
+          auto [sh, ch] = eve::sinhcosh(eve::pi(eve::as(rz))*rz);
+          auto tmp = c+ch;
+          auto rr = eve::if_else(kyosu::is_imag(z), eve::zero, sh/tmp);
+          auto ii = eve::if_else(kyosu::is_real(z),eve:: zero, s/tmp);
+          return kyosu::if_else(eve::is_infinite(rz), kyosu::complex(sign(rz)), kyosu::complex(rr, ii));
+        };
+        auto r = machin(kyosu::complex(-kyosu::imag(z), kyosu::real(z)));
+        return mulmi(r);
+      }
+      else
+      {
+        return kyosu::_::cayley_extend(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -64,30 +83,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto tanpi_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto machin = [](auto z){
-        auto [rz, iz] = z+z;
-        auto [s, c] = eve::sinpicospi(iz);
-        auto [sh, ch] = eve::sinhcosh(eve::pi(eve::as(rz))*rz);
-        auto tmp = c+ch;
-        auto rr = eve::if_else(kyosu::is_imag(z), eve::zero, sh/tmp);
-        auto ii = eve::if_else(kyosu::is_real(z),eve:: zero, s/tmp);
-        return kyosu::if_else(eve::is_infinite(rz), kyosu::complex(sign(rz)), kyosu::complex(rr, ii));
-      };
-      auto r = machin(kyosu::complex(-kyosu::imag(z), kyosu::real(z)));
-      return kyosu::complex(kyosu::imag(r), -kyosu::real(r));
-    }
-    else
-    {
-      return cayley_extend(tanpi, z);
-    }
-  }
 }
