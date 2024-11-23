@@ -15,8 +15,23 @@ namespace kyosu
   struct sqr_t : eve::elementwise_callable<sqr_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    KYOSU_FORCEINLINE constexpr Z operator()(Z c) const noexcept
+    {
+      if constexpr(kyosu::dimension_v<Z> <= 2)
+      {
+        return c*c;
+      }
+      else
+      {
+        auto squares = kumi::map_index([]<typename I>(I, auto const& m)
+                                       { constexpr auto sgn = (I::value == 0)-(I::value > 0);
+                                         return sgn*m*m; }, c);
+        auto r = kumi::sum( squares, 0);
+        auto a =  2*real(c);
+        real(c) = 0;
+        return r+a*c;
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -63,26 +78,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sqr_(KYOSU_DELAY(), O const&, Z c) noexcept
-  {
-    if constexpr(kyosu::dimension_v<Z> <= 2)
-    {
-      return c*c;
-    }
-    else
-    {
-      auto squares = kumi::map_index([]<typename I>(I, auto const& m)
-                                     { constexpr auto sgn = (I::value == 0)-(I::value > 0);
-                                       return sgn*m*m; }, c);
-      auto r = kumi::sum( squares, 0);
-      auto a =  2*real(c);
-      real(c) = 0;
-      return r+a*c;
-    }    
-  }
 }

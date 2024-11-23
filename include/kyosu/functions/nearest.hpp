@@ -16,7 +16,7 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    { return Z{kumi::map([](auto const& e) { return eve::nearest(e); }, z)}; }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -64,13 +64,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto nearest_(KYOSU_DELAY(), O const&, Z c) noexcept
-  {
-    return Z{kumi::map([](auto const& e) { return eve::nearest(e); }, c)};
-  }
 }

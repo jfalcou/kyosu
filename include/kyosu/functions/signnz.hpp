@@ -16,8 +16,8 @@ namespace kyosu
   struct signnz_t : eve::elementwise_callable<signnz_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& c) const noexcept
+    {    return kyosu::if_else(kyosu::is_nez(c), c/abs(c), Z(eve::signnz(real(c))));; }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -66,13 +66,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto signnz_(KYOSU_DELAY(), O const&, Z c) noexcept
-  {
-    return kyosu::if_else(kyosu::is_nez(c), c/abs(c), Z(eve::signnz(real(c))));
-  }
 }

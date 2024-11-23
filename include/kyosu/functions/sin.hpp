@@ -10,6 +10,8 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/sinh.hpp>
 #include <kyosu/details/cayleyify.hpp>
+#include <kyosu/functions/muli.hpp>
+#include <kyosu/functions/mulmi.hpp>
 
 namespace kyosu
 {
@@ -18,7 +20,12 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+        return muli(kyosu::sinh(Z(mulmi(z))));
+      else
+        return kyosu::_::cayley_extend(*this, z);
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -72,21 +79,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sin_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto s = kyosu::sinh(Z(-kyosu::imag(z), kyosu::real(z)));
-      return Z(kyosu::imag(s), -kyosu::real(s));
-    }
-    else
-    {
-      return cayley_extend(sin, z);
-    }
-  }
 }

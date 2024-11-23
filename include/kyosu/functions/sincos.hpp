@@ -9,6 +9,8 @@
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/sinhcosh.hpp>
+#include <kyosu/functions/muli.hpp>
+#include <kyosu/functions/mulmi.hpp>
 #include <kyosu/details/cayleyify.hpp>
 
 namespace kyosu
@@ -18,7 +20,18 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr  kumi::tuple<Z, Z> operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        auto [sh, ch] = sinhcosh(muli(z));
+        return kumi::tuple{mulmi(sh), ch};
+
+      }
+      else
+      {
+        return kyosu::_::cayley_extend2(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept

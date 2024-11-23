@@ -15,10 +15,15 @@ namespace kyosu
   struct pure_t : eve::elementwise_callable<pure_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept { return KYOSU_CALL(z); }
+    KYOSU_FORCEINLINE constexpr Z operator()(Z z) const noexcept
+    {
+      real(z) = 0;
+      return z;
+    }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept { return KYOSU_CALL(v); }
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return V{0}; }
 
     KYOSU_CALLABLE_OBJECT(pure_t, pure_);
   };
@@ -62,18 +67,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto pure_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::cayley_dickson<Z>)
-    {
-      real(z) = 0;
-      return z;
-    }
-    else return Z{0};
-  }
 }
