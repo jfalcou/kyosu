@@ -24,13 +24,13 @@ namespace kyosu
     template<eve::floating_value T>
     KYOSU_FORCEINLINE constexpr complex_t<T> operator()(T r)  const noexcept
     {
-      return as_cayley_dickson_n_t<2,T>(v, R{0});
+      return as_cayley_dickson_n_t<2,T>(r, T{0});
     }
 
     template<eve::floating_value R, eve::floating_value I>
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_n_t<2,R,I> operator()(R r,I i) const noexcept
     {
-      return return as_cayley_dickson_n_t<2,R,I>{r, i};
+      return as_cayley_dickson_n_t<2,R,I>{r, i};
     }
 
     KYOSU_CALLABLE_OBJECT(make_complex_t, make_complex_);
