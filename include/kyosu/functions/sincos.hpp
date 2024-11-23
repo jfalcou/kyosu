@@ -79,21 +79,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sincos_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto [sh, ch] = sinhcosh(Z(-kyosu::imag(z), kyosu::real(z)));
-      return kumi::tuple{Z(kyosu::imag(sh), -kyosu::real(sh)), ch};
-
-    }
-    else
-    {
-      return cayley_extend2(sincos, z);
-    }
-  }
-}

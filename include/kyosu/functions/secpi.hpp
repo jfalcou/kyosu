@@ -66,12 +66,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto secpi_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    return kyosu::rec(kyosu::cospi(z));
-  }
-}
