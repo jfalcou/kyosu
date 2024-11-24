@@ -31,8 +31,8 @@ namespace kyosu
     { return eve::pow_abs(v0,v1); }
 
     template<typename V0, eve::integral_value V1>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> decltype(abs(v0)+v1)
-    { return eve::pow(eve::abs(v0),v1); }
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> decltype(kyosu::abs(v0)+v1)
+    { return eve::pow(kyosu::abs(v0),v1); }
 
     KYOSU_CALLABLE_OBJECT(pow_abs_t, pow_abs_);
 };
