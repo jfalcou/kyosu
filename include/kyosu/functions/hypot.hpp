@@ -18,11 +18,11 @@ namespace kyosu
     template<typename Z0, typename ...Zs>
     requires(concepts::cayley_dickson<Z0>  || (concepts::cayley_dickson<Zs> || ...))
     KYOSU_FORCEINLINE constexpr auto  operator()(Z0 z0, Zs ... zs) const noexcept -> decltype(eve::hypot(real(z0), real(zs)...))
-    { return KYOSU_CALL(z0,zs...); }
+    {       return eve::hypot[this->options()](kumi::flatten(kumi::make_tuple(z0, zs...))); }
 
     template<concepts::real V0, concepts::real... Vs>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs... vs) const noexcept -> decltype( eve::manhattan(v0, vs...))
-    { return eve::hypot(v0,vs...); }
+    { return eve::hypot[this->options()](v0,vs...); }
 
     KYOSU_CALLABLE_OBJECT(hypot_t, hypot_);
 };
@@ -66,16 +66,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z0, typename... Zs, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto hypot_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
-  {
-   if constexpr(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...) )
-      return eve::hypot[o](kumi::flatten(kumi::make_tuple(z0, zs...)));
-    else
-      return eve::hypot[o](z0, zs...);
-  }
 }

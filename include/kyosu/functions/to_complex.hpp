@@ -16,21 +16,21 @@ namespace kyosu
   struct make_complex_t : eve::callable<make_complex_t, Options>
   {
     template<concepts::complex Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& v) const noexcept
     {
-      return KYOSU_CALL(z);
+     return v;
     }
 
     template<eve::floating_value T>
     KYOSU_FORCEINLINE constexpr complex_t<T> operator()(T r)  const noexcept
     {
-      return KYOSU_CALL(r);
+      return as_cayley_dickson_n_t<2,T>(r, T{0});
     }
 
     template<eve::floating_value R, eve::floating_value I>
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_n_t<2,R,I> operator()(R r,I i) const noexcept
     {
-      return KYOSU_CALL(r,i);
+      return as_cayley_dickson_n_t<2,R,I>{r, i};
     }
 
     KYOSU_CALLABLE_OBJECT(make_complex_t, make_complex_);
@@ -76,20 +76,4 @@ inline constexpr auto complex = eve::functor<make_complex_t>;
 //====================================================================================================================
 //! @}
 //====================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename R, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto make_complex_(KYOSU_DELAY(), O const&, R v) noexcept
-  {
-    if constexpr(eve::floating_value<R>)  return as_cayley_dickson_n_t<2,R>(v, R{0});
-    else                                  return v;
-  }
-
-  template<typename R, typename I, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto make_complex_(KYOSU_DELAY(), O const&, R r, I i) noexcept
-  {
-    return as_cayley_dickson_n_t<2,R,I>{r, i};
-  }
 }

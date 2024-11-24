@@ -86,6 +86,7 @@
 #include <kyosu/functions/rec.hpp>
 #include <kyosu/functions/reldist.hpp>
 #include <kyosu/functions/sign.hpp>
+#include <kyosu/functions/signnz.hpp>
 #include <kyosu/functions/slerp.hpp>
 #include <kyosu/functions/sqr.hpp>
 #include <kyosu/functions/sqr_abs.hpp>

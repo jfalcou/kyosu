@@ -15,10 +15,16 @@ namespace kyosu
   struct arg_t : eve::elementwise_callable<arg_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z z) const noexcept { return KYOSU_CALL(z); }
+    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z v) const noexcept
+    {
+      if constexpr(concepts::complex<Z>) return eve::atan2[ eve::pedantic](imag(v), real(v));
+      else                               return eve::atan2[ eve::pedantic](eve::sign(imag(v))*abs(pure(v)), real(v));
+    }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept { return KYOSU_CALL(v); }
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept {
+      return eve::if_else(eve::is_positive(v), eve::zero, eve::pi(eve::as(v)));
+    }
 
     KYOSU_CALLABLE_OBJECT(arg_t, arg_);
   };
@@ -65,14 +71,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto arg_(KYOSU_DELAY(), O const&, Z const& v) noexcept
-  {
-    if      constexpr(concepts::complex<Z>)        return  eve::atan2[ eve::pedantic]( imag(v), real(v));
-    else if constexpr(concepts::cayley_dickson<Z>) return  eve::atan2[ eve::pedantic](  eve::sign(imag(v))*abs(pure(v)), real(v));
-    else                                           return  eve::if_else( eve::is_positive(v), eve::zero, eve::pi(eve::as(v)));
-  }
 }

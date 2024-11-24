@@ -8,6 +8,7 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
+#include <kyosu/details/cayleyify.hpp>
 #include <kyosu/functions/asin.hpp>
 #include <kyosu/functions/muli.hpp>
 #include <kyosu/functions/mulmi.hpp>
@@ -19,7 +20,16 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        return mulmi( kyosu::asin(muli(z)));
+      }
+      else
+      {
+        return kyosu::_::cayley_extend((*this), z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -90,20 +100,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto asinh_(KYOSU_DELAY(), O const&, Z a0) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return mulmi( kyosu::asin(muli(a0)));
-    }
-    else
-    {
-      return cayley_extend(asinh, a0);
-    }
-  }
 }

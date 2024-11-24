@@ -19,11 +19,25 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {    if constexpr(kyosu::concepts::complex<Z>)
+         {
+           auto m = kyosu::inc(z);
+           auto arg = [](auto zz){ return eve::atan2[eve::pedantic](kyosu::imag(zz), kyosu::real(zz));};
+           auto theta = eve::if_else((kyosu::is_real(m) && eve::is_nltz(kyosu::real(m))), eve::zero, arg(m)) ;
+           auto rz =  kyosu::real(z);
+           auto iz2 =  eve::sqr(kyosu::imag(z));
+           auto r = eve::half(eve::as(theta))*eve::log1p(rz*(rz+2)+iz2);
+           return complex(r, theta);
+         }
+      else
+      {
+        return kyosu::_::cayley_extend(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return KYOSU_CALL(complex(v)); }
+    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(log1p_t, log1p_);
 };
@@ -71,24 +85,3 @@ namespace kyosu
 //======================================================================================================================
 }
 
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto log1p_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(kyosu::concepts::complex<Z>)
-    {
-      auto m = kyosu::inc(z);
-      auto arg = [](auto zz){ return eve::atan2[eve::pedantic](kyosu::imag(zz), kyosu::real(zz));};
-      auto theta = eve::if_else((kyosu::is_real(m) && eve::is_nltz(kyosu::real(m))), eve::zero, arg(m)) ;
-      auto rz =  kyosu::real(z);
-      auto iz2 =  eve::sqr(kyosu::imag(z));
-      auto r = eve::half(eve::as(theta))*eve::log1p(rz*(rz+2)+iz2);
-      return complex(r, theta);
-    }
-    else
-    {
-      return cayley_extend(log1p, z);
-    }
-  }
-}

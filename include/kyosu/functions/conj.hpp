@@ -15,10 +15,12 @@ namespace kyosu
   struct conj_t : eve::elementwise_callable<conj_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z z) const noexcept { return KYOSU_CALL(z); }
+    KYOSU_FORCEINLINE constexpr Z operator()(Z z) const noexcept
+    { return Z{kumi::map_index([]<typename I>(I, auto m) { if constexpr(I::value>0) return -m; else return m;}, z)};}
+
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept { return KYOSU_CALL(v); }
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept { return v; }
 
     KYOSU_CALLABLE_OBJECT(conj_t, conj_);
   };
@@ -65,17 +67,4 @@ inline constexpr auto conj = eve::functor<conj_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto conj_(KYOSU_DELAY(), O const&, Z const& v) noexcept
-  {
-    if constexpr(concepts::cayley_dickson<Z>)
-    {
-      return Z{kumi::map_index([]<typename I>(I, auto m) { if constexpr(I::value>0) return -m; else return m;}, v)};
-    }
-    else return v;
-  }
 }

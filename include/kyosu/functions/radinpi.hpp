@@ -16,8 +16,8 @@ namespace kyosu
   struct radinpi_t : eve::elementwise_callable<radinpi_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& a) const noexcept
+    { return inv_pi(eve::as(a))*a; }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -64,13 +64,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto radinpi_(KYOSU_DELAY(), O const&, Z a) noexcept
-  {
-    return inv_pi(eve::as(a))*a;
-  }
 }

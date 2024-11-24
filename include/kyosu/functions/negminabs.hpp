@@ -21,13 +21,13 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr auto  operator()(Z0  const & z0, Zs const & ... zs) const noexcept
     -> decltype(eve::negminabs(real(z0), real(zs)...))
     {
-      return eve::minus(minabs[Options()](z0, zs...));
+      return eve::minus(minabs[this->options()](z0, zs...));
     }
 
     template<concepts::real V0, concepts::real... Vs>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs... vs) const noexcept
     -> decltype( eve::negminabs(v0, vs...))
-    { return eve::negminabs[Options()](v0,vs...); }
+    { return eve::negminabs[this->options()](v0,vs...); }
 
     KYOSU_CALLABLE_OBJECT(negminabs_t, negminabs_);
   };

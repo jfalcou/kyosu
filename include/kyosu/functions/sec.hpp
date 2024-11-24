@@ -8,6 +8,8 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
+#include <kyosu/functions/rec.hpp>
+#include <kyosu/functions/cos.hpp>
 
 namespace kyosu
 {
@@ -16,7 +18,7 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    { return kyosu::rec(kyosu::cos(z)); }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -63,13 +65,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sec_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    return kyosu::rec(kyosu::cos(z));
-  }
 }

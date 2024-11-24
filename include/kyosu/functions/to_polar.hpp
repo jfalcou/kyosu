@@ -22,7 +22,7 @@ namespace kyosu
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
-    { return KYOSU_CALL(complex(v)); }
+    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(to_polar_t, to_polar_);
 };

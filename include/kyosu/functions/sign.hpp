@@ -6,9 +6,9 @@
 */
 //======================================================================================================================
 #pragma once
-#include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/is_nez.hpp>
+#include <kyosu/functions/abs.hpp>
 
 namespace kyosu
 {
@@ -16,8 +16,8 @@ namespace kyosu
   struct sign_t : eve::elementwise_callable<sign_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& c) const noexcept
+    {     return kyosu::if_else(kyosu::is_nez(c), c/abs(c), eve::zero); }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -64,13 +64,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sign_(KYOSU_DELAY(), O const&, Z c) noexcept
-  {
-    return kyosu::if_else(kyosu::is_nez(c), c/abs(c), eve::zero);
-  }
 }

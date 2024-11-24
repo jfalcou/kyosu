@@ -17,7 +17,47 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr  kumi::tuple<Z, Z> operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        auto [rz, iz] = z;
+        iz *= eve::pi(eve::as(iz));
+        auto [s, c]   = eve::sinpicospi(rz);
+        auto [sh, ch] = eve::sinhcosh(iz);
+        auto rc = c*ch;
+        auto ic = eve::if_else(kyosu::is_imag(z) || kyosu::is_real(z), eve::zero, -s*sh);
+        if (eve::any(kyosu::is_not_finite(z)))
+        {
+          rc = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::inf(eve::as(rc)), rc);
+          ic = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::allbits, ic);
+          rc = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, rc);
+          ic = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, ic);
+        }
+        auto cpi = kyosu::complex(rc, ic);
+        auto  arz = -kyosu::imag(z);
+        auto  aiz =  kyosu::real(z);
+        arz*= eve::pi(eve::as(arz));
+        auto [as, ac]   = eve::sinpicospi(aiz);
+        auto [ash, ach] = eve::sinhcosh(arz);
+        auto rs = ac*ash;
+        auto is = as*ach;
+        if (eve::any(kyosu::is_not_finite(z)))
+        {
+          rs = eve::if_else(eve::is_infinite(aiz) && eve::is_not_finite(arz), arz, rs);
+          is = eve::if_else(eve::is_infinite(aiz) && eve::is_nan(arz), iz, is);
+          rs = eve::if_else(eve::is_nan(aiz), arz, rs);
+          is = eve::if_else(eve::is_nan(aiz), arz, is);
+          is = eve::if_else(eve::is_eqz(aiz), eve::zero, is);
+          rs = eve::if_else(eve::is_eqz(arz), eve::zero, rs);
+        }
+        auto spi = kyosu::complex(is, -rs);
+        return kumi::tuple{spi, cpi};
+      }
+      else
+      {
+        return kyosu::_::cayley_extend2(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
@@ -64,51 +104,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sinpicospi_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto [rz, iz] = z;
-      iz *= eve::pi(eve::as(iz));
-      auto [s, c]   = eve::sinpicospi(rz);
-      auto [sh, ch] = eve::sinhcosh(iz);
-      auto rc = c*ch;
-      auto ic = eve::if_else(kyosu::is_imag(z) || kyosu::is_real(z), eve::zero, -s*sh);
-      if (eve::any(kyosu::is_not_finite(z)))
-      {
-        rc = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::inf(eve::as(rc)), rc);
-        ic = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::allbits, ic);
-        rc = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, rc);
-        ic = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, ic);
-      }
-      auto cpi = kyosu::complex(rc, ic);
-      auto  arz = -kyosu::imag(z);
-      auto  aiz =  kyosu::real(z);
-      arz*= eve::pi(eve::as(arz));
-      auto [as, ac]   = eve::sinpicospi(aiz);
-      auto [ash, ach] = eve::sinhcosh(arz);
-      auto rs = ac*ash;
-      auto is = as*ach;
-      if (eve::any(kyosu::is_not_finite(z)))
-      {
-        rs = eve::if_else(eve::is_infinite(aiz) && eve::is_not_finite(arz), arz, rs);
-        is = eve::if_else(eve::is_infinite(aiz) && eve::is_nan(arz), iz, is);
-        rs = eve::if_else(eve::is_nan(aiz), arz, rs);
-        is = eve::if_else(eve::is_nan(aiz), arz, is);
-        is = eve::if_else(eve::is_eqz(aiz), eve::zero, is);
-        rs = eve::if_else(eve::is_eqz(arz), eve::zero, rs);
-      }
-      auto spi = kyosu::complex(is, -rs);
-      return kumi::tuple{spi, cpi};
-    }
-    else
-    {
-      return cayley_extend2(sinpicospi, z);
-    }
-  }
 }

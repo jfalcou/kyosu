@@ -9,7 +9,7 @@
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/cosh.hpp>
-
+#include <kyosu/functions/muli.hpp>
 namespace kyosu
 {
   template<typename Options>
@@ -17,7 +17,12 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+        return cosh(muli(z));
+      else
+        return kyosu::_::cayley_extend(*this, z);
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -70,20 +75,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cos_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cosh(Z(-kyosu::imag(z), kyosu::real(z)));
-    }
-    else
-    {
-      return cayley_extend(cos, z);
-    }
-  }
 }

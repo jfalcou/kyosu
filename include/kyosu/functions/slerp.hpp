@@ -21,12 +21,23 @@ namespace kyosu
   {
     template<typename Z0, typename Z1, typename Z2>
     requires((concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)&& concepts::real<Z2>)
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const & z1, Z2 const & z2) const noexcept -> decltype(z0+z1+z2)
-    { return KYOSU_CALL(z0,z1,z2); }
+    KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1, Z2  z2) const noexcept
+    -> decltype(z0+z1+z2)
+    {
+      if constexpr(!Options::contains(assume_unitary))
+      {
+        z0 = kyosu::signnz(z0);
+        z1 = kyosu::signnz(z1);
+      }
+      auto gez = eve::is_gez(real(kyosu::dot(z0, z1)));
+      auto mix = kyosu::if_else(gez, z1, -z1);
+      return z1*kyosu::pow(kyosu::conj(z1)*mix, z2);
+    }
 
     template<concepts::real V0, concepts::real V1, concepts::real V2>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1, V2 v2) const noexcept -> decltype(complex(v0)+complex(v1)+v2)
-    { return KYOSU_CALL(complex(v0),complex(v1),v2); }
+    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1, V2 v2) const noexcept
+    -> decltype(complex(v0)+complex(v1)+v2)
+    { return (*this)(complex(v0),complex(v1),v2); }
 
     KYOSU_CALLABLE_OBJECT(slerp_t, slerp_);
 };
@@ -72,20 +83,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z1, typename Z2, typename T, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto slerp_(KYOSU_DELAY(), O const&, Z1 z1, Z2 z2, T t) noexcept
-  {
-    if constexpr(!O::contains(assume_unitary))
-    {
-      z1 = signnz(z1);
-      z2 = signnz(z2);
-    }
-    auto gez = eve::is_gez(real(kyosu::dot(z1, z2)));
-    auto mix = kyosu::if_else(gez, z2, -z2);
-    return z1*kyosu::pow(kyosu::conj(z1)*mix, t);
-  }
 }

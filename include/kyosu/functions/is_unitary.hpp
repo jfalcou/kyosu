@@ -15,7 +15,20 @@ namespace kyosu
   struct is_unitary_t : eve::elementwise_callable<is_unitary_t, Options, eve::raw_option, eve::pedantic_option>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept { return KYOSU_CALL(z); }
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& c) const noexcept
+    {
+      using ar_t = decltype(kyosu::sqr_abs(c));
+      if constexpr(Options::contains(eve::pedantic))
+      {
+        return kyosu::sqr_abs(c) == eve::one(eve::as<ar_t>());
+      }
+      else
+      {
+        // almost is used to encompass the fact that normalization of cayley_dickson can suffer
+        // rounding errors. Use raw if you don't need this behavior.
+        return eve::is_equal[eve::almost](kyosu::sqr_abs(c), eve::one(eve::as<ar_t>()));
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::abs(v) == eve::one(eve::as(v)); }
@@ -74,23 +87,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto is_unitary_(KYOSU_DELAY(), O const&, Z c) noexcept
-  {
-    using ar_t = decltype(kyosu::sqr_abs(c));
-    if constexpr(O::contains(eve::pedantic))
-    {
-      return kyosu::sqr_abs(c) == eve::one(eve::as<ar_t>());
-    }
-    else
-    {
-      // almost is used to encompass the fact that normalization of cayley_dickson can suffer
-      // rounding errors. Whhen available use raw if you don't accept this behavior.
-      return eve::is_equal[eve::almost](kyosu::sqr_abs(c), eve::one(eve::as<ar_t>()));
-    }
-  }
 }

@@ -18,7 +18,19 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        auto r = kyosu::tanpi(z);
+        r = kyosu::if_else(kyosu::is_infinite(r), eve::zero, kyosu::rec(r));
+        r = kyosu::if_else(kyosu::is_real(z) && eve::is_flint(kyosu::real(z)*2) && eve::is_not_flint(kyosu::real(z)), eve::zero, r);
+        return  kyosu::if_else(kyosu::is_real(z), kyosu::complex(kyosu::real(r)), r);
+      }
+      else
+      {
+        return kyosu::_::cayley_extend(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -65,23 +77,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cotpi_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto r = kyosu::tanpi(z);
-      r = kyosu::if_else(kyosu::is_infinite(r), eve::zero, kyosu::rec(r));
-      r = kyosu::if_else(kyosu::is_real(z) && eve::is_flint(kyosu::real(z)*2) && eve::is_not_flint(kyosu::real(z)), eve::zero, r);
-      return  kyosu::if_else(kyosu::is_real(z), kyosu::complex(kyosu::real(r)), r);
-    }
-    else
-    {
-      return cayley_extend(cotpi, z);
-    }
-  }
 }

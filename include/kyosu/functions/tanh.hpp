@@ -16,7 +16,23 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        auto zz = z+z;
+        auto [rz, iz] = zz;
+        auto [s, c] = eve::sincos(iz);
+        auto [sh, ch] = eve::sinhcosh(rz);
+        auto tmp = c+ch;
+        auto rr = eve::if_else(eve::is_eqz(kyosu::real(z)), eve::zero, sh/tmp);
+        auto ii = eve::if_else(kyosu::is_real(z), eve::zero, s/tmp);
+        return kyosu::if_else(eve::is_infinite(rz), Z(eve::sign(rz)), Z(rr, ii));
+      }
+      else
+      {
+        return kyosu::_::cayley_extend(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
@@ -82,27 +98,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto tanh_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-       auto zz = z+z;
-      auto [rz, iz] = zz;
-      auto [s, c] = eve::sincos(iz);
-      auto [sh, ch] = eve::sinhcosh(rz);
-      auto tmp = c+ch;
-      auto rr = eve::if_else(eve::is_eqz(kyosu::real(z)), eve::zero, sh/tmp);
-      auto ii = eve::if_else(kyosu::is_real(z), eve::zero, s/tmp);
-      return kyosu::if_else(eve::is_infinite(rz), Z(eve::sign(rz)), Z(rr, ii));
-    }
-    else
-    {
-      return cayley_extend(tanh, z);
-    }
-  }
 }

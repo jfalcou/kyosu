@@ -20,11 +20,11 @@ namespace kyosu
     requires(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs>|| ...))
       KYOSU_FORCEINLINE constexpr auto  operator()(Z0  const & z0, Zs const & ... zs) const noexcept
     -> decltype(eve::maxabs(real(z0), real(zs)...))
-    { return KYOSU_CALL(z0,zs...); }
+    {  return eve::sqrt(eve::max[this->options()](kyosu::sqr_abs(z0), kyosu::sqr_abs(zs)...)); }
 
     template<concepts::real V0, concepts::real... Vs>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs... vs) const noexcept -> decltype( eve::maxabs(v0, vs...))
-    { return eve::maxabs[Options()](v0,vs...); }
+    { return eve::maxabs[this->options()](v0,vs...); }
 
     KYOSU_CALLABLE_OBJECT(maxabs_t, maxabs_);
   };
@@ -66,13 +66,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z0, typename... ZS, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto maxabs_(KYOSU_DELAY(), O const& o, Z0 z0, ZS... zs) noexcept
-  {
-    return eve::max[o](kyosu::abs(z0), kyosu::abs(zs)...);
-  }
 }

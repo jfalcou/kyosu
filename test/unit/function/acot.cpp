@@ -28,5 +28,5 @@ TTS_CASE_WITH ( "Check kyosu::acot over quaternion"
   auto lq = kyosu::acot(q);
   TTS_RELATIVE_EQUAL(kyosu::cot(lr), r, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::cot(lc), c, tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::cot(lq), q, 2e-2);
+  TTS_RELATIVE_EQUAL(kyosu::cot(lq), q, tts::prec<T>());
 };

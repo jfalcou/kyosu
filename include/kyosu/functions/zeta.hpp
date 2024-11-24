@@ -19,11 +19,23 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        auto zz=exp2(z);
+        auto k = zz/(zz-2);
+        auto g = if_else(z == Z(1), complex(eve::nan(eve::as(real(z)))), k*eta(z));
+        return if_else(real(z) == eve::inf(eve::as(real(z))), complex(eve::one(eve::as(real(z)))), g);
+      }
+      else
+      {
+        return kyosu::_::cayley_extend(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return KYOSU_CALL(complex(v)); }
+    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(zeta_t, zeta_);
 };

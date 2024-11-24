@@ -18,11 +18,11 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    { return kyosu::exp(muli(z)); }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return KYOSU_CALL(v); }
+    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(exp_i_t, exp_i_);
 };
@@ -65,13 +65,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto exp_i_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    return kyosu::exp(muli(z));
-  }
 }
