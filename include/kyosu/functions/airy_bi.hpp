@@ -20,7 +20,7 @@ namespace kyosu
       if constexpr(kyosu::concepts::complex<Z> )
         return _::bi(z);
       else
-        return kyosu::_::cayley_extend(*this, z);
+        return _::cayley_extend(*this, z);
     }
 
     template<concepts::real V>

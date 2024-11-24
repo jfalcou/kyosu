@@ -15,14 +15,20 @@ namespace kyosu
   template<typename Options>
   struct cyl_bessel_h2n_t : eve::strict_elementwise_callable<cyl_bessel_h2n_t, Options>
   {
-    template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
-    { return KYOSU_CALL(z0,z1); }
+    template<eve::integral_scalar_value N, concepts::cayley_dickson Z>
+    KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z) const noexcept
+    {
+      if constexpr(concepts::complex<Z> )
+        return cyl_bessel_jn(n, z)-muli(cyl_bessel_yn(n, z));
+      else
+        return _::cayley_extend_rev(*this, n, z);
+    }
 
-    template<concepts::real V0, concepts::real V1>
-    KYOSU_FORCEINLINE constexpr complex_t<V1> operator()(V0 v0, V1 v1) const noexcept
-    { return KYOSU_CALL(v0,v1); }
+    template<eve::integral_scalar_value N, concepts::real V>
+    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(N n, V z) const noexcept
+    {
+      return eve::cyl_bessel_jn(n, z)-muli(eve::cyl_bessel_yn(n, z));
+    }
 
     KYOSU_CALLABLE_OBJECT(cyl_bessel_h2n_t, cyl_bessel_h2n_);
 };
@@ -64,20 +70,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h2n_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cyl_bessel_jn(n, z)-muli(cyl_bessel_yn(n, z));
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_h1n, n, z);
-    }
-  }
 }

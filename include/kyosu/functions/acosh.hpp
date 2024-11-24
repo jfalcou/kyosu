@@ -20,7 +20,29 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        // acosh(a0) = +/-i acos(a0)
+        // Choosing the sign of multiplier to give real(acosh(a0)) >= 0
+        // we have compatibility with C99.
+        auto [r, i] = kyosu::acos(z);
+        auto lez = eve::is_negative(i);;
+        auto res = complex(-i, r);
+        res = eve::if_else(lez, res, -res);
+        auto nani = eve::is_nan(i);
+        if (eve::any(nani))
+          return eve::if_else(nani && eve::is_finite(r)
+                             , complex(eve::nan(eve::as(r)), eve::nan(eve::as(r)))
+                             , res);
+        else
+          return res;
+      }
+      else
+      {
+        return _::cayley_extend(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
@@ -92,33 +114,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const&, Z a0) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      // acosh(a0) = +/-i acos(a0)
-      // Choosing the sign of multiplier to give real(acosh(a0)) >= 0
-      // we have compatibility with C99.
-      auto [r, i] = kyosu::acos(a0);
-      auto lez = eve::is_negative(i);;
-      auto res = complex(-i, r);
-      res = eve::if_else(lez, res, -res);
-      auto nani = eve::is_nan(i);
-      if (eve::any(nani))
-        return eve::if_else(nani && eve::is_finite(r)
-                           , complex(eve::nan(eve::as(r)), eve::nan(eve::as(r)))
-                           , res);
-      else
-        return res;
-    }
-    else
-    {
-      return cayley_extend(acosh, a0);
-    }
-  }
 }

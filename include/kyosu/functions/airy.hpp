@@ -6,7 +6,6 @@
 */
 //======================================================================================================================
 #pragma once
-#include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/constants/wrapped.hpp>
 #include <kyosu/functions/cyl_bessel_i.hpp>
@@ -18,7 +17,26 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr kumi::tuple<Z, Z>operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
+    {     using u_t = eve::underlying_type_t<Z>;
+      if constexpr(concepts::complex<Z>)
+      {
+        auto zet = [](auto z) {
+          using u_t = eve::underlying_type_t<Z>;
+          auto sqz = sqrt(z);
+          auto zeta = (pow(z, u_t(1.5))*2)/3;
+          return kumi::tuple{sqz/kyosu::sqrt_3(as(z)), zeta};
+        };
+
+        auto [sqzo3, zeta] = zet(z);
+        auto ip = cyl_bessel_i(eve::third(as<u_t>()), zeta);
+        auto im = cyl_bessel_i(-eve::third(as<u_t>()), zeta);
+        return kumi::tuple{inv_pi(as<u_t>())*sqzo3*(im-ip),  sqzo3*(ip+im)};
+      }
+      else
+      {
+        return _::cayley_extend2(*this, z);
+      }
+    }
 
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
@@ -69,17 +87,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto airy_(KYOSU_DELAY(), O const&, Z z) noexcept
-  {
-    using u_t = eve::underlying_type_t<Z>;
-    auto [sqzo3, zeta] = zet(z);
-    auto ip = cyl_bessel_i(eve::third(as<u_t>()), zeta);
-    auto im = cyl_bessel_i(-eve::third(as<u_t>()), zeta);
-    return kumi::tuple{inv_pi(as<u_t>())*sqzo3*(im-ip),  sqzo3*(ip+im)};
-  }
 }

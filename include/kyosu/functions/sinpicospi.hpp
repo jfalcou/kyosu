@@ -55,7 +55,7 @@ namespace kyosu
       }
       else
       {
-        return kyosu::_::cayley_extend2(*this, z);
+        return _::cayley_extend2(*this, z);
       }
     }
 
