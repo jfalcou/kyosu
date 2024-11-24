@@ -20,7 +20,7 @@ namespace kyosu
       KYOSU_FORCEINLINE constexpr auto  operator()(NU const& v, Z const & z,
                                                    std::span<Z, S> h1s, std::span<Z, S> h2s) const noexcept
     {   return _::cb_h12r(v, z, h1s, h2s); }
-
+    
     template<concepts::real NU, concepts::cayley_dickson Z>
     requires(eve::scalar_value<NU> && (concepts::real<Z> || concepts::cayley_dickson<Z>))
       KYOSU_FORCEINLINE constexpr auto  operator()(NU const& v, Z const & z) const noexcept
@@ -35,7 +35,7 @@ namespace kyosu
       else
         return caley_extend_rev2(*this, v, z);
     }
-
+    
     KYOSU_CALLABLE_OBJECT(cyl_bessel_h12_t, cyl_bessel_h12_);
   };
 
