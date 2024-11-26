@@ -29,9 +29,9 @@ namespace kyosu
       }
     }
 
-    template<eve::integral_scalar_value N, concepts::real V1>
-    KYOSU_FORCEINLINE constexpr auto operator()(N n, V1 v1) const noexcept
-    { return (*this)(n, v1); }
+    template<eve::integral_scalar_value N, concepts::real V>
+    KYOSU_FORCEINLINE constexpr auto operator()(N n, V v) const noexcept
+    { return (*this)(n, complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(sph_bessel_h2n_t, sph_bessel_h2n_);
 };
@@ -74,4 +74,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
