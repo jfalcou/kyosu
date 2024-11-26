@@ -16,7 +16,7 @@ namespace kyosu
   struct sph_bessel_h1n_t : eve::strict_elementwise_callable<sph_bessel_h1n_t, Options>
   {
     template<eve::integral_scalar_value N, typename Z>
-    requires(concepts::cayley_dickson<Z> || concepts::cayley_dickson<Z>)
+    requires(concepts::cayley_dickson<Z>)
     KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z) const noexcept
     {
       if constexpr(concepts::complex<Z>)
@@ -31,7 +31,7 @@ namespace kyosu
 
     template<eve::integral_scalar_value N, concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(N n, V v) const noexcept
-    { return KYOSU_CALL(n,complex(v)); }
+    { return (*this)(n,complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(sph_bessel_h1n_t, sph_bessel_h1n_);
 };
