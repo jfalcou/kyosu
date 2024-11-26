@@ -43,7 +43,7 @@ namespace kyosu
 
     template<eve::integral_scalar_value V0, concepts::real V1>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept
-    { return KYOSU_CALL(v0,complex(v1)); }
+    { return (*this)(v0,complex(v1)); }
 
     KYOSU_CALLABLE_OBJECT(sph_bessel_kn_t, sph_bessel_kn_);
 };
