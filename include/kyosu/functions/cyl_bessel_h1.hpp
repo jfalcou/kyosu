@@ -26,7 +26,7 @@ namespace kyosu
 
     template<concepts::real NU, concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(NU v, V z) const noexcept
-    { return KYOSU_CALL(v, complex(z)); }
+    { return (*this)(v, complex(z)); }
 
     KYOSU_CALLABLE_OBJECT(cyl_bessel_h1_t, cyl_bessel_h1_);
   };
