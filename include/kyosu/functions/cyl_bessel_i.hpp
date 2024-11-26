@@ -17,7 +17,7 @@ namespace kyosu
     template<concepts::real NU, typename Z, std::size_t S>
     requires(concepts::real<Z> || concepts::cayley_dickson<Z>)
       KYOSU_FORCEINLINE constexpr auto  operator()(NU const& v, Z const & z, std::span<Z, S> is) const noexcept
-    {   return cb_ir(v, z, is); }
+    {   return _::cb_ir(v, z, is); }
 
     template<concepts::real NU, concepts::cayley_dickson Z>
     requires(eve::scalar_value<NU>)
