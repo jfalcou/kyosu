@@ -6,7 +6,6 @@
 */
 //======================================================================================================================
 #pragma once
-#include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/details/cayleyify.hpp>
 #include <kyosu/functions/is_nan.hpp>

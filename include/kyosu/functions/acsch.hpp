@@ -6,7 +6,6 @@
 */
 //======================================================================================================================
 #pragma once
-#include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/asinh.hpp>
 #include <kyosu/functions/rec.hpp>
