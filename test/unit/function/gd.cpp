@@ -24,5 +24,5 @@ TTS_CASE_WITH ( "Check kyosu::gd over real"
 <typename T>(T a0, T a1)
 {
   kyosu::complex_t<T> data(a0, a1);
-  TTS_RELATIVE_EQUAL(kyosu::tanh(kyosu::gd(data/2)), kyosu::tan(kyosu::gd(data)/2), tts::prec<T>(1.0e-1, 3.0e-3));
+  TTS_RELATIVE_EQUAL(kyosu::agd( kyosu::gd(data)), data,  tts::prec<T>());
 };
