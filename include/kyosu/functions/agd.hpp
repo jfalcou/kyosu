@@ -8,8 +8,9 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/rec.hpp>
+#include <kyosu/functions/log.hpp>
 #include <kyosu/functions/tan.hpp>
+#include <kyosu/constants/wrapped.hpp>
 
 namespace kyosu
 {
@@ -20,14 +21,9 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
       if constexpr(concepts::complex<Z> )
-      {
-        auto [rz, iz] = z;
-        return complex(eve::atanh(eve::sin(rz)/eve::cosh(iz)), eve::atanh(eve::sinh(iz)/eve::cos(rz)));
-      }
+        return kyosu::log(kyosu::tan(z*kyosu::half(as(z))+kyosu::pio_4(as(z))));
       else
-      {
         return kyosu::_::cayley_extend(*this, z);
-      }
     }
 
     template<concepts::real V>
