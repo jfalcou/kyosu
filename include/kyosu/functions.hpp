@@ -36,6 +36,7 @@
 #include <kyosu/functions/acot.hpp>
 #include <kyosu/functions/acoth.hpp>
 #include <kyosu/functions/acotpi.hpp>
+#include <kyosu/functions/agd.hpp>
 #include <kyosu/functions/atanpi.hpp>
 #include <kyosu/functions/acsc.hpp>
 #include <kyosu/functions/acscpi.hpp>
@@ -90,6 +91,7 @@
 #include <kyosu/functions/frac.hpp>
 #include <kyosu/functions/from_polar.hpp>
 #include <kyosu/functions/fsm.hpp>
+#include <kyosu/functions/gd.hpp>
 #include <kyosu/functions/hypot.hpp>
 #include <kyosu/functions/horner.hpp>
 #include <kyosu/functions/inc.hpp>
