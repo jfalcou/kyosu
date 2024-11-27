@@ -20,7 +20,7 @@ namespace kyosu
     {
       auto z =  kyosu::if_else(b(x), one(as(x)), zero);
       if constexpr(Options::contains(eve::condition_key))
-        return  mask_op(this->option[eve::condition_key], eve::detail::return_2nd, x, z);
+        return  mask_op(this->options()[eve::condition_key], eve::detail::return_2nd, x, z);
       else
         return z;
     }
