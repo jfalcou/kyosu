@@ -18,16 +18,26 @@ namespace kyosu
     template<concepts::real NU, typename Z, std::size_t S>
     requires(concepts::real<Z> || concepts::cayley_dickson<Z>)
       KYOSU_FORCEINLINE constexpr auto  operator()(NU const& v, Z const & z,
-                                                   std::span<Z, S> js, std::span<Z, S> ys) const noexcept
-    { return KYOSU_CALL(v,z,js,ys); }
-
+                                                   std::span<Z, S> h1s, std::span<Z, S> h2s) const noexcept
+    {   return _::cb_h12r(v, z, h1s, h2s); }
+    
     template<concepts::real NU, concepts::cayley_dickson Z>
     requires(eve::scalar_value<NU> && (concepts::real<Z> || concepts::cayley_dickson<Z>))
       KYOSU_FORCEINLINE constexpr auto  operator()(NU const& v, Z const & z) const noexcept
-    { return KYOSU_CALL(v,z); }
-
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        auto doit = [v, z](auto h1s, auto h2s){
+          return _::cb_h12r(v, z, h1s, h2s);
+        };
+        return with_alloca<Z>(eve::abs(v)+1, doit);
+      }
+      else
+        return caley_extend_rev2(*this, v, z);
+    }
+    
     KYOSU_CALLABLE_OBJECT(cyl_bessel_h12_t, cyl_bessel_h12_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -80,31 +90,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-
-  template<typename N, typename Z, std::size_t S, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h12_(KYOSU_DELAY(), O const&, N n, Z z
-                                                 , std::span<Z, S> h1s, std::span<Z, S> h2s) noexcept
-  {
-    return cb_h12r(n, z, h1s, h2s);
-  }
-
-  template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h12_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto doit = [n, z](auto h1s, auto h2s){
-        return cb_h12r(n, z, h1s, h2s);
-      };
-      return with_alloca<Z>(eve::abs(n)+1, doit);
-    }
-    else
-    {
-      return caley_extend_rev2(cyl_bessel_h12, n, z);
-    }
-  }
 }

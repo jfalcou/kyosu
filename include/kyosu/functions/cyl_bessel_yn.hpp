@@ -17,16 +17,35 @@ namespace kyosu
   {
     template<eve::integral_scalar_value Z0, typename Z1, std::size_t S>
     requires(concepts::real<Z1> || concepts::cayley_dickson<Z1>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1, std::span<Z1, S> ys) const noexcept
-    { return KYOSU_CALL(z0,z1,ys); }
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& n, Z1 const & z, std::span<Z1, S> ys) const noexcept
+    {
+      auto doit = [n, z, &ys](auto js){
+        _::cb_jyn(n, z, js, ys);
+      };
+      _::with_alloca<Z1>(eve::abs(n)+1, doit);
+      return ys[n];
+    }
 
     template<eve::integral_scalar_value Z0, concepts::cayley_dickson Z1>
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
-    { return KYOSU_CALL(z0,z1); }
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& n, Z1 const & z) const noexcept
+    {
+      if constexpr(concepts::complex<Z1> )
+      {
+        auto doit = [n, z](auto js, auto ys){
+          auto [_, yn] =  _::cb_jyn(n, z, js, ys);
+          return yn;
+        };
+        return _::with_alloca<Z1>(eve::abs(n)+1, doit);
+      }
+      else
+      {
+        return _::cayley_extend_rev(*this, n, z);
+      }
+    }
 
     template<eve::integral_scalar_value V0, concepts::real V1>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept
-    { return KYOSU_CALL(v0,v1); }
+    { return eve::cyl_bessel_yn(v0,v1); }
 
     KYOSU_CALLABLE_OBJECT(cyl_bessel_yn_t, cyl_bessel_yn_);
 };
@@ -75,35 +94,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_yn_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto doit = [n, z](auto js, auto ys){
-       auto [_, yn] =  cb_jyn(n, z, js, ys);
-        return yn;
-      };
-      return with_alloca<Z>(eve::abs(n)+1, doit);
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_yn, n, z);
-    }
-  }
-
-  template<typename N, typename Z, std::size_t S, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_yn_(KYOSU_DELAY(), O const&, N n, Z z
-                                                 , std::span<Z, S> ys) noexcept
-  {
-    auto doit = [n, z, &ys](auto js){
-      cb_jyn(n, z, js, ys);
-    };
-    with_alloca<Z>(eve::abs(n)+1, doit);
-    return ys[n];
-  }
 }

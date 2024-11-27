@@ -24,10 +24,10 @@ namespace kyosu
       }
       else
       {
-        return kyosu::_::cayley_extend(*this, z);
+        return _::cayley_extend(*this, z);
       }
     }
-    
+
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
     { return eve::coth(v); }
@@ -74,4 +74,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-

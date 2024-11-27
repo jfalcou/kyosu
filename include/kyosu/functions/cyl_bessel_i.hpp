@@ -16,17 +16,26 @@ namespace kyosu
   {
     template<concepts::real NU, typename Z, std::size_t S>
     requires(concepts::real<Z> || concepts::cayley_dickson<Z>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(NU const& nu, Z const & z, std::span<Z, S> js) const noexcept
-    { return KYOSU_CALL(nu,z,js); }
+      KYOSU_FORCEINLINE constexpr auto  operator()(NU const& v, Z const & z, std::span<Z, S> is) const noexcept
+    {   return _::cb_ir(v, z, is); }
 
     template<concepts::real NU, concepts::cayley_dickson Z>
     requires(eve::scalar_value<NU>)
-    KYOSU_FORCEINLINE constexpr Z operator()(NU nu, Z const& z) const noexcept
-    { return KYOSU_CALL(nu, z); }
+    KYOSU_FORCEINLINE constexpr Z operator()(NU v, Z const& z) const noexcept
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        return _::cb_ir(v, z);
+      }
+      else
+      {
+        return _::cayley_extend_rev(*this, v, z);
+      }
+    }
 
     template<concepts::real NU, concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(NU nu, V v) const noexcept
-    { return  KYOSU_CALL(nu, complex(v)); }
+    { return  (*this)(nu, complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(cyl_bessel_i_t, cyl_bessel_i_);
 };
@@ -71,28 +80,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename NU, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_i_(KYOSU_DELAY(), O const&, NU v, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_ir(v, z);
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_i, v, z);
-    }
-  }
-
-  template<typename NU, typename Z, std::size_t S, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_i_(KYOSU_DELAY(), O const&, NU v , Z z,
-                                                 std::span<Z, S> is) noexcept
-  {
-    return cb_ir(v, z, is);
-  }
-
 }

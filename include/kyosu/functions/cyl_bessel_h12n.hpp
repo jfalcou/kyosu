@@ -17,13 +17,25 @@ namespace kyosu
   {
     template<eve::integral_scalar_value Z0, typename Z1, std::size_t S>
     requires(concepts::real<Z1> || concepts::cayley_dickson<Z1>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1, std::span<Z1, S> js, std::span<Z1, S> ys) const noexcept
-    { return KYOSU_CALL(z0,z1,js,ys); }
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& n, Z1 const & z, std::span<Z1, S> h1s, std::span<Z1, S> h2s) const noexcept
+    { return _::cb_h12n(n, z, h1s, h2s); }
 
     template<eve::integral_scalar_value Z0, typename Z1>
     requires(concepts::real<Z1> || concepts::cayley_dickson<Z1>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
-    { return KYOSU_CALL(z0,z1); }
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& n, Z1 const & z) const noexcept
+    {
+      if constexpr(concepts::complex<Z1> )
+      {
+        auto doit = [n, z](auto h1s, auto h2s){
+          return _::cb_h12n(n, z, h1s, h2s);
+        };
+        return with_alloca<Z1>(eve::abs(n)+1, doit);
+      }
+      else
+      {
+        return caley_extend_rev2(*this, n, z);
+      }
+    }
 
     KYOSU_CALLABLE_OBJECT(cyl_bessel_h12n_t, cyl_bessel_h12n_);
 };
@@ -72,31 +84,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-
-  template<typename N, typename Z, std::size_t S, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h12n_(KYOSU_DELAY(), O const&, N n, Z z
-                                                 , std::span<Z, S> h1s, std::span<Z, S> h2s) noexcept
-  {
-    return cb_h12n(n, z, h1s, h2s);
-  }
-
-  template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h12n_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto doit = [n, z](auto h1s, auto h2s){
-        return cb_h12n(n, z, h1s, h2s);
-      };
-      return with_alloca<Z>(eve::abs(n)+1, doit);
-    }
-    else
-    {
-      return caley_extend_rev2(cyl_bessel_h12n, n, z);
-    }
-  }
 }

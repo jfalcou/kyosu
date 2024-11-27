@@ -24,7 +24,7 @@ namespace kyosu
       if constexpr(concepts::complex<Z> )
         return muli(kyosu::sinh(Z(mulmi(z))));
       else
-        return kyosu::_::cayley_extend(*this, z);
+        return _::cayley_extend(*this, z);
     }
 
     template<concepts::real V>

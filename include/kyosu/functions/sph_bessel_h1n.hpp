@@ -16,13 +16,22 @@ namespace kyosu
   struct sph_bessel_h1n_t : eve::strict_elementwise_callable<sph_bessel_h1n_t, Options>
   {
     template<eve::integral_scalar_value N, typename Z>
-    requires(concepts::cayley_dickson<Z> || concepts::cayley_dickson<Z>)
+    requires(concepts::cayley_dickson<Z>)
     KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z) const noexcept
-    { return KYOSU_CALL(n,z); }
+    {
+      if constexpr(concepts::complex<Z>)
+      {
+        return _::sb_h1n(n, z);
+      }
+      else
+      {
+        return _::cayley_extend_rev(*this, n, z);
+      }
+    }
 
     template<eve::integral_scalar_value N, concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(N n, V v) const noexcept
-    { return KYOSU_CALL(n,complex(v)); }
+    { return (*this)(n,complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(sph_bessel_h1n_t, sph_bessel_h1n_);
 };
@@ -64,20 +73,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sph_bessel_h1n_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z>)
-    {
-      return sb_h1n(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(sph_bessel_h1n, n, z);
-    }
-  }
 }

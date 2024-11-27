@@ -16,11 +16,21 @@ namespace kyosu
   {
     template<concepts::real NU, concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(NU v, Z const& z) const noexcept
-    { return KYOSU_CALL(v, z); }
+    {
+
+      if constexpr(concepts::complex<Z> )
+      {
+        return _::cb_h2r(v, z);
+      }
+      else
+      {
+        return _::cayley_extend_rev(*this, v, z);
+      }
+    }
 
     template<concepts::real NU, concepts::real V>
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(NU v, V z) const noexcept
-    { return KYOSU_CALL(v, complex(z)); }
+    { return (*this)(v, complex(z)); }
 
     KYOSU_CALLABLE_OBJECT(cyl_bessel_h2_t, cyl_bessel_h2_);
 };
@@ -78,20 +88,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename NU, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_h2_(KYOSU_DELAY(), O const&, NU v, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return cb_h2r(v, z);
-    }
-    else
-    {
-      return cayley_extend_rev(cyl_bessel_h1, v, z);
-    }
-  }
 }

@@ -15,19 +15,26 @@ namespace kyosu
   template<typename Options>
   struct sph_bessel_yn_t : eve::strict_elementwise_callable<sph_bessel_yn_t, Options>
   {
-    template<eve::integral_scalar_value Z0, typename Z1, std::size_t S>
-    requires(concepts::real<Z1> || concepts::cayley_dickson<Z1>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1, std::span<Z1, S> ys) const noexcept
-    { return KYOSU_CALL(z0,z1,ys); }
+    template<eve::integral_scalar_value N, typename Z, std::size_t S>
+    requires(eve::integral_scalar_value<N> || concepts::cayley_dickson<Z>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z, std::span<Z, S> ys) const noexcept
+    {
+      return sb_yn(n, z, ys);
+    }
 
-    template<eve::integral_scalar_value Z0, typename Z1>
-    requires( concepts::cayley_dickson<Z1>)
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
-    { return KYOSU_CALL(z0,z1); }
+    template<eve::integral_scalar_value N, typename Z>
+    requires( concepts::cayley_dickson<Z>)
+    KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z) const noexcept
+    {
+      if constexpr(concepts::complex<Z> )
+        return _::sb_yn(n, z);
+      else
+        return _::cayley_extend_rev(*this, n, z);
+    }
 
     template<eve::integral_scalar_value V0, concepts::real V1>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept
-    { return KYOSU_CALL(v0,v1); }
+    { return eve::sph_bessel_yn(v0,v1); }
 
     KYOSU_CALLABLE_OBJECT(sph_bessel_yn_t, sph_bessel_yn_);
 };
@@ -78,27 +85,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-  template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sph_bessel_yn_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      return sb_yn(n, z);
-    }
-    else
-    {
-      return cayley_extend_rev(sph_bessel_yn, n, z);
-    }
-  }
-
-  template<typename N, typename Z, std::size_t S, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sph_bessel_yn_(KYOSU_DELAY(), O const&, N n, Z z
-                                                 , std::span<Z, S> ys) noexcept
-  {
-    return sb_yn(n, z, ys);
-  }
 }

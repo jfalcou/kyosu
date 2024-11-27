@@ -17,16 +17,28 @@ namespace kyosu
   {
     template<concepts::real NU, typename Z, std::size_t S>
     requires(concepts::real<Z> || concepts::cayley_dickson<Z>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(NU const& v, Z const & z, std::span<Z, S> js, std::span<Z, S> ys) const noexcept
-    { return KYOSU_CALL(v,z,js,ys); }
+      KYOSU_FORCEINLINE constexpr auto  operator()(NU const& v, Z const & z, std::span<Z, S> is, std::span<Z, S> ks) const noexcept
+    { return _::cb_ik(v, z, is, ks); }
 
     template<concepts::real NU, typename Z>
     requires(concepts::real<Z> || concepts::cayley_dickson<Z>)
       KYOSU_FORCEINLINE constexpr auto  operator()(NU const& v, Z const & z) const noexcept
-    { return KYOSU_CALL(v,z); }
+    {
+      if constexpr(concepts::complex<Z> )
+      {
+        auto doit = [v, z](auto js, auto ys){
+          return _::cb_ik(v, z, js, ys);
+        };
+        return with_alloca<Z>(eve::abs(eve::floor(v))+1, doit);
+      }
+      else
+      {
+        return _::cayley_extend_rev2(*this, v, z);
+      }
+    }
 
     KYOSU_CALLABLE_OBJECT(cyl_bessel_ik_t, cyl_bessel_ik_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -72,31 +84,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-
-  template<typename N, typename Z, std::size_t S, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_ik_(KYOSU_DELAY(), O const&, N n, Z z
-                                                 , std::span<Z, S> js, std::span<Z, S> ys) noexcept
-  {
-    return cb_ik(n, z, js, ys);
-  }
-
-  template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cyl_bessel_ik_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
-  {
-    if constexpr(concepts::complex<Z> )
-    {
-      auto doit = [n, z](auto js, auto ys){
-        return cb_ik(n, z, js, ys);
-      };
-      return with_alloca<Z>(eve::abs(n)+1, doit);
-    }
-    else
-    {
-      return cayley_extend_rev2(cyl_bessel_ik, n, z);
-    }
-  }
 }
