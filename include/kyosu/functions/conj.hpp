@@ -58,8 +58,12 @@ namespace kyosu
 //!
 //!     For real inputs the call reduces to identity.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: complex conj](https://en.cppreference.com/w/cpp/numeric/complex/conj)
+//!   *  [Wolfram MathWorld: complex conjugate](https://mathworld.wolfram.com/ComplexConjugate.html)
+//!   *  [Wikipedia:complex conjugate](https://en.wikipedia.org/wiki/Complex_conjugate)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/conj.cpp}
 //======================================================================================================================
 

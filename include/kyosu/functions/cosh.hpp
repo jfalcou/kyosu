@@ -99,6 +99,11 @@ namespace kyosu
 //!
 //!     3. Is semantically equivalent to `(exp(z)+exp(-z))/2`.
 //!
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: complex cosh](https://en.cppreference.com/w/cpp/numeric/complex/cosh)
+//!   *  [Wolfram MathWorld: Hyperbolic Cosine](https://mathworld.wolfram.com/HyperbolicCosine.html)
+//!   *  [Wikipedia: hyperbolic functions](https://en.wikipedia.org/wiki/Hyperbolic_functions)
+//!
 //!  @groupheader{Example}
 //!  @godbolt{doc/cosh.cpp}
 //======================================================================================================================

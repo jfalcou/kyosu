@@ -56,6 +56,10 @@ namespace kyosu
 //!
 //!     Returns the difference z0*z1-z1*z0.
 //!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Commutator](https://mathworld.wolfram.com/Commutator.html)
+//!   *  [Wikipedia: Commutator](https://en.wikipedia.org/wiki/Commutator)
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/commutator.cpp}

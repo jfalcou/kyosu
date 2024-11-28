@@ -65,6 +65,9 @@ namespace kyosu
 //!
 //!     Returns the hyperbolic cotangent of the argument.
 //!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Hyperbolic Cotangent](https://mathworld.wolfram.com/HyperbolicCotangent.html)
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/coth.cpp}

@@ -65,6 +65,10 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     * always returns a cayley_dickson value such that real(i) is a NaN and imag(i) is \f$+\infty\f$ (the remaining parts being 0).
+//!       This is meant to represent a quantity with infinite magnitude, but undetermined complex phase.
+//!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: complex infinity](https://reference.wolfram.com/language/ref/ComplexInfinity.html)
 //!
 //!  @groupheader{Example}
 //!

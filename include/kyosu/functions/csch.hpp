@@ -57,6 +57,9 @@ namespace kyosu
 //!
 //!     Returns the hyperbolic cosecant of the argument.
 //!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Hyperbolic Cosecant](https://mathworld.wolfram.com/HyperbolicCosecant.html)
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/csch.cpp}

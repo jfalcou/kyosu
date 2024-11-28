@@ -66,8 +66,10 @@ namespace kyosu
 //!
 //!     Returns the cotangent of the argument.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Cotangent](https://mathworld.wolfram.com/Cotangent.html)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/cot.cpp}
 //======================================================================================================================
   inline constexpr auto cot = eve::functor<cot_t>;
