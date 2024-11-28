@@ -14,7 +14,7 @@ TTS_CASE_WITH ( "Check kyosu::chi over real"
               )
 <typename T>(T data)
 {
-  auto b =  [](auto z){return kyosu::abs(z) < 5;};
+  auto b =  [](auto z){return kyosu::abs(z) < 4;};
   TTS_RELATIVE_EQUAL(kyosu::chi(data, b), eve::chi(data, b), tts::prec<T>());
 };
 
@@ -27,5 +27,5 @@ TTS_CASE_WITH ( "Check kyosu::chi over real"
   auto b =  [](auto z){return kyosu::abs(z) < 5;};
   kyosu::complex_t<T> data(a0, a1);
   TTS_RELATIVE_EQUAL(kyosu::chi(data, b), kyosu::complex(eve::chi(kyosu::abs(data), b)), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::chi[kyosu::real(data) < 3] (data, b), kyosu::complex(eve::chi[kyosu::real(data) < 3](kyosu::abs(data), b)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::chi[kyosu::real(data) < 3] (data, b), kyosu::complex(eve::chi[kyosu::real(data) < 3](kyosu::abs(data), b)), tts::prec<T>()) << data << '\n';
 };
