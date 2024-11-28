@@ -63,7 +63,7 @@ namespace kyosu
 //!     Returns 1 in the type of z if belongs(x) evaluate to true else 0.
 //!
 //!  @groupheader{External references}
-//!   *  [wikipedia](https://en.wikipedia.org/wiki/Indicator_function)
+//!   *  [wikipedia: indicator function](https://en.wikipedia.org/wiki/Indicator_function)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/chi.cpp}
