@@ -1,9 +1,24 @@
 var searchData=
 [
-  ['pow_0',['pow',['../group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f',1,'kyosu']]],
-  ['pow1p_1',['pow1p',['../group__functions_gaae9065f698fe37841a85e340a16af948.html#gaae9065f698fe37841a85e340a16af948',1,'kyosu']]],
-  ['pow_5fabs_2',['pow_abs',['../group__functions_ga764d5554dc7ce3cac3302591c4d75947.html#ga764d5554dc7ce3cac3302591c4d75947',1,'kyosu']]],
-  ['powm1_3',['powm1',['../group__functions_ga047b3d79d00d4907df04ec98f2a0fada.html#ga047b3d79d00d4907df04ec98f2a0fada',1,'kyosu']]],
-  ['proj_4',['proj',['../group__functions_gae97bce0027166d1321885e92abb15836.html#gae97bce0027166d1321885e92abb15836',1,'kyosu']]],
-  ['pure_5',['pure',['../group__functions_ga6a75cd107789510275cb469d917ea79b.html#ga6a75cd107789510275cb469d917ea79b',1,'kyosu']]]
+  ['octonion_5ft_0',['octonion_t',['../group__types_gaa3272e84862798bbb6561c13620c165b.html#gaa3272e84862798bbb6561c13620c165b',1,'kyosu']]],
+  ['oneminus_1',['oneminus',['../group__functions_gae8a89a63722b9cdec2f2d4daf58bf025.html#gae8a89a63722b9cdec2f2d4daf58bf025',1,'kyosu']]],
+  ['operator_22_22_5fi_2',['operator&quot;&quot;_i',['../structkyosu_1_1cayley__dickson.html#a1a8dfb5ebec66f24fce04469de86120b',1,'kyosu::cayley_dickson']]],
+  ['operator_22_22_5fif_3',['operator&quot;&quot;_if',['../structkyosu_1_1cayley__dickson.html#a9f6fc5aa16208b342059eabb36dbf8a5',1,'kyosu::cayley_dickson']]],
+  ['operator_22_22_5fj_4',['operator&quot;&quot;_j',['../structkyosu_1_1cayley__dickson.html#abc2491a56ef3c5cb615ddf96eb265510',1,'kyosu::cayley_dickson']]],
+  ['operator_22_22_5fjf_5',['operator&quot;&quot;_jf',['../structkyosu_1_1cayley__dickson.html#a032f8a8437b972416acb47c33b144556',1,'kyosu::cayley_dickson']]],
+  ['operator_22_22_5fk_6',['operator&quot;&quot;_k',['../structkyosu_1_1cayley__dickson.html#ab81a5e9b87e5ca0c50cf8e6eb56217c5',1,'kyosu::cayley_dickson']]],
+  ['operator_22_22_5fkf_7',['operator&quot;&quot;_kf',['../structkyosu_1_1cayley__dickson.html#a810e99156f3dfbd5d36030c0b585a9f7',1,'kyosu::cayley_dickson']]],
+  ['operator_2a_8',['operator*',['../namespacekyosu.html#af7fa5d0155efedf57849689480afd0e6',1,'kyosu::operator*()'],['../structkyosu_1_1cayley__dickson.html#a2fb59110f4a618933f413b3c409ae8e6',1,'kyosu::cayley_dickson::operator*(T1 const &amp;a, T2 const &amp;b) noexcept']]],
+  ['operator_2a_3d_9',['operator*=',['../structkyosu_1_1cayley__dickson.html#a5f0dd77597800b916c4cebc5e0634cde',1,'kyosu::cayley_dickson::operator*=(concepts::cayley_dickson auto &amp;self, concepts::real auto other) noexcept'],['../structkyosu_1_1cayley__dickson.html#a7fb7201475d4bac42ec931f542a0c24f',1,'kyosu::cayley_dickson::operator*=(Self &amp;self, Other const &amp;other) noexcept']]],
+  ['operator_2b_10',['operator+',['../structkyosu_1_1cayley__dickson.html#a3ee8e2fe476ebb1011c476e093227822',1,'kyosu::cayley_dickson::operator+(T1 const &amp;a, T2 const &amp;b) noexcept'],['../structkyosu_1_1cayley__dickson.html#a18cec006320794126c85b238a68fc91c',1,'kyosu::cayley_dickson::operator+(Z const &amp;z) noexcept']]],
+  ['operator_2b_2b_11',['operator++',['../structkyosu_1_1cayley__dickson.html#a5212a7e8767444e76d7c054347716619',1,'kyosu::cayley_dickson::operator++() noexcept'],['../structkyosu_1_1cayley__dickson.html#a2375cc6d41964418f819e04a5aee14cf',1,'kyosu::cayley_dickson::operator++(int) noexcept']]],
+  ['operator_2b_3d_12',['operator+=',['../structkyosu_1_1cayley__dickson.html#a127b8375b7ef7d42f5044ebc5770da1a',1,'kyosu::cayley_dickson::operator+=(Self &amp;self, Other const &amp;other) noexcept'],['../structkyosu_1_1cayley__dickson.html#ae63ee48e9508d712beb22e125d596276',1,'kyosu::cayley_dickson::operator+=(concepts::cayley_dickson auto &amp;self, concepts::real auto other) noexcept']]],
+  ['operator_2d_13',['operator-',['../structkyosu_1_1cayley__dickson.html#a36ef300ed76ad52be7293d1a1fac8331',1,'kyosu::cayley_dickson::operator-(T1 const &amp;a, T2 const &amp;b) noexcept'],['../structkyosu_1_1cayley__dickson.html#a3032325260646fe3f0832b076a2b146a',1,'kyosu::cayley_dickson::operator-(Z const &amp;z) noexcept']]],
+  ['operator_2d_2d_14',['operator--',['../structkyosu_1_1cayley__dickson.html#a348e923f3719df8b571cbbd1719177f2',1,'kyosu::cayley_dickson::operator--() noexcept'],['../structkyosu_1_1cayley__dickson.html#abb849412f206b0f7ba1e48f4de76ca39',1,'kyosu::cayley_dickson::operator--(int) noexcept']]],
+  ['operator_2d_3d_15',['operator-=',['../structkyosu_1_1cayley__dickson.html#ab15d8bbe6f7602cf1f7b7c0ac4744bb2',1,'kyosu::cayley_dickson::operator-=(concepts::cayley_dickson auto &amp;self, concepts::real auto other) noexcept'],['../structkyosu_1_1cayley__dickson.html#a715044a74f36e890e0fa86f68e60c2d1',1,'kyosu::cayley_dickson::operator-=(Self &amp;self, Other const &amp;other) noexcept']]],
+  ['operator_2f_16',['operator/',['../structkyosu_1_1cayley__dickson.html#abccb6441a9eaf55aec6a7aea780bd145',1,'kyosu::cayley_dickson']]],
+  ['operator_2f_3d_17',['operator/=',['../structkyosu_1_1cayley__dickson.html#a30f4c360cf0019deefa476acf571c387',1,'kyosu::cayley_dickson::operator/=(concepts::cayley_dickson auto &amp;self, concepts::real auto other) noexcept'],['../structkyosu_1_1cayley__dickson.html#a29ff75dcd5392b350f8775c8d0fc331a',1,'kyosu::cayley_dickson::operator/=(Self &amp;self, Other const &amp;other) noexcept']]],
+  ['operator_3c_3c_18',['operator&lt;&lt;',['../structkyosu_1_1cayley__dickson.html#aa04abd1c7dc72a48f17d1453a59e1e6f',1,'kyosu::cayley_dickson']]],
+  ['operator_3d_19',['operator=',['../structkyosu_1_1cayley__dickson.html#a7a6c080be2b335177498e805eb36254a',1,'kyosu::cayley_dickson']]],
+  ['operator_3d_3d_20',['operator==',['../structkyosu_1_1cayley__dickson.html#a561363de989d2101775d8b85655ea08e',1,'kyosu::cayley_dickson::operator==(T1 const &amp;a, T2 b)'],['../structkyosu_1_1cayley__dickson.html#a561363de989d2101775d8b85655ea08e',1,'kyosu::cayley_dickson::operator==(T1 const &amp;a, T2 b)']]]
 ];
