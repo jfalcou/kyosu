@@ -6,7 +6,6 @@
 */
 //======================================================================================================================
 #pragma once
-#include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/convert.hpp>
@@ -67,7 +66,7 @@ namespace kyosu
 //!   @groupheader{Header file}
 //!
 //!   @code
-//!   #include <eve/module/polynomial.hpp>
+//!   #include <kyosu/functions.hpp>
 //!   @endcode
 //!
 //!   @groupheader{Callable Signatures}

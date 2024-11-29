@@ -64,7 +64,7 @@ namespace kyosu
 //!   @groupheader{Header file}
 //!
 //!   @code
-//!   #include <eve/module/polynomial.hpp>
+//!   #include <kyosu/functions.hpp>
 //!   @endcode
 //!
 //!   @groupheader{Callable Signatures}

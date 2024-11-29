@@ -45,7 +45,7 @@ namespace kyosu
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include eve/module/quaternion.hpp>`
+  //!   #include kyosu/quaternion.hpp>`
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
