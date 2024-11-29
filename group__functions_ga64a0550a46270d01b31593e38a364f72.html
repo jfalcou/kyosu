@@ -149,14 +149,18 @@ $(document).ready(function(){initNavTree('group__functions_ga64a0550a46270d01b31
 <div class="line">{</div>
 <div class="line">   <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga64a0550a46270d01b31593e38a364f72.html#ga64a0550a46270d01b31593e38a364f72">beta</a>(<span class="keyword">auto</span> x, <span class="keyword">auto</span> y) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga64a0550a46270d01b31593e38a364f72_html_ga64a0550a46270d01b31593e38a364f72"><div class="ttname"><a href="group__functions_ga64a0550a46270d01b31593e38a364f72.html#ga64a0550a46270d01b31593e38a364f72">kyosu::beta</a></div><div class="ttdeci">constexpr auto beta</div><div class="ttdoc">Computes the beta function:  for real or complex entries.</div><div class="ttdef"><b>Definition:</b> beta.hpp:69</div></div>
+<div class="ttc" id="agroup__functions_ga64a0550a46270d01b31593e38a364f72_html_ga64a0550a46270d01b31593e38a364f72"><div class="ttname"><a href="group__functions_ga64a0550a46270d01b31593e38a364f72.html#ga64a0550a46270d01b31593e38a364f72">kyosu::beta</a></div><div class="ttdeci">constexpr auto beta</div><div class="ttdoc">Computes the beta function:  for real or complex entries.</div><div class="ttdef"><b>Definition:</b> beta.hpp:72</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>x</code>,<code>y</code> : Values to process. Can be a mix of <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> and real floating values.</li>
+<li><code>x</code>,<code>y</code> : Values to process. Can be a mix of Cayley_dickson and real floating values.</li>
 </ul>
 <p><b>Return value</b></p>
 <p>\(\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\) is returned. If <code>x</code> and <code>y</code> are real typed values they are treated as complex inputs.</p>
+<h2 class="groupheader">External references </h2>
+<ul>
+<li><a href="https://mathworld.wolfram.com/BetaFunction.html">Wolfram MathWorld: Beta Function</a></li>
+</ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

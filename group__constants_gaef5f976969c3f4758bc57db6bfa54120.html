@@ -150,7 +150,7 @@ $(document).ready(function(){initNavTree('group__constants_gaef5f976969c3f4758bc
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> as_complex_t&lt;eve::as_floating_point_t&lt;T&gt;&gt; <a class="code hl_variable" href="group__constants_gaef5f976969c3f4758bc57db6bfa54120.html#gaef5f976969c3f4758bc57db6bfa54120">cinf</a>(as&lt;T&gt; z) <span class="keyword">noexcept</span>;</div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::real T&gt;     <span class="keyword">constexpr</span> as_complex_t&lt;eve::as_floating_point_t&lt;T&gt;&gt; <a class="code hl_variable" href="group__constants_gaef5f976969c3f4758bc57db6bfa54120.html#gaef5f976969c3f4758bc57db6bfa54120">cinf</a>(as&lt;T&gt; z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__constants_gaef5f976969c3f4758bc57db6bfa54120_html_gaef5f976969c3f4758bc57db6bfa54120"><div class="ttname"><a href="group__constants_gaef5f976969c3f4758bc57db6bfa54120.html#gaef5f976969c3f4758bc57db6bfa54120">kyosu::cinf</a></div><div class="ttdeci">constexpr auto cinf</div><div class="ttdoc">Computes the complex-infinite defined as  in the chosen type.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:73</div></div>
+<div class="ttc" id="agroup__constants_gaef5f976969c3f4758bc57db6bfa54120_html_gaef5f976969c3f4758bc57db6bfa54120"><div class="ttname"><a href="group__constants_gaef5f976969c3f4758bc57db6bfa54120.html#gaef5f976969c3f4758bc57db6bfa54120">kyosu::cinf</a></div><div class="ttdeci">constexpr auto cinf</div><div class="ttdoc">Computes the complex-infinite defined as  in the chosen type.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:77</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -158,7 +158,11 @@ $(document).ready(function(){initNavTree('group__constants_gaef5f976969c3f4758bc
 </ul>
 <p><b>Return value</b></p>
 <ul>
-<li>always returns a <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> value such that <a class="el" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be" title="Extracts the real part of a value.">real(i)</a> is a NaN and <a class="el" href="group__functions.html#gaff94a2685c6d030458b388a4a4079efe" title="Alias for kyosu::ipart.">imag(i)</a> is \(+\infty\) (the remaining parts being 0).</li>
+<li>always returns a <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> value such that <a class="el" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be" title="Extracts the real part of a value.">real(i)</a> is a NaN and <a class="el" href="group__functions.html#gaff94a2685c6d030458b388a4a4079efe" title="Alias for kyosu::ipart.">imag(i)</a> is \(+\infty\) (the remaining parts being 0). This is meant to represent a quantity with infinite magnitude, but undetermined complex phase.</li>
+</ul>
+<h2 class="groupheader">External references </h2>
+<ul>
+<li><a href="https://reference.wolfram.com/language/ref/ComplexInfinity.html">Wolfram MathWorld: complex infinity</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
