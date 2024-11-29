@@ -67,8 +67,12 @@ namespace kyosu
 //!     3.  Returns \f$\cosh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\cos(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: complex cos](https://en.cppreference.com/w/cpp/numeric/complex/cos)
+//!   *  [Wolfram MathWorld: Cosine](https://mathworld.wolfram.com/Cosine.html)
+//!   *  [Wikipedia: cosinus](https://fr.wikipedia.org/wiki/cosinus)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/cos.cpp}
 //======================================================================================================================
   inline constexpr auto cos = eve::functor<cos_t>;

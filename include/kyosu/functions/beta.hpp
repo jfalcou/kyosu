@@ -55,12 +55,15 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `x`,`y` : Values to process. Can be a mix of cayley_dickson and real floating values.
+//!     * `x`,`y` : Values to process. Can be a mix of Cayley_dickson and real floating values.
 //!
 //!   **Return value**
 //!
 //!      \f$\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
 //!     If  `x` and `y` are real typed values they are treated as complex inputs.
+//!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Beta Function](https://mathworld.wolfram.com/BetaFunction.html)
 //!
 //!  @groupheader{Example}
 //!

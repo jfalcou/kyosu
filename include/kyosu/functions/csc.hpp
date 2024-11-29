@@ -57,6 +57,9 @@ namespace kyosu
 //!
 //!     Returns the cosecant of the argument.
 //!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Cosecant](https://mathworld.wolfram.com/Cosecant.html)
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/csc.cpp}
