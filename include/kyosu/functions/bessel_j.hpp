@@ -25,14 +25,25 @@ namespace kyosu
         if constexpr(eve::integral_scalar_value<N>)
         {
           if constexpr(Options::contains(eve::spherical))
-            return (*this)[this->options().drop(eve::spherical)](n+eve::half(eve::as(real(z))), z)*sqrt(pio_2(as(real(z)))*rec(z));
+          {
+//             auto fac = sqrt(pio_2(as(real(z)))*rec(z));
+//             auto v = n+eve::half(eve::as(real(z)));
+//             return (*this)[this->options().drop(eve::spherical)](v, z)*fac;
+            return _::sb_jn(n, z);
+          }
           else
             return _::cb_jn(n, z);
         }
-        else
+        else if constexpr( eve::floating_scalar_value<Z>)
         {
           if constexpr(Options::contains(eve::spherical))
-            return (*this)[this->options().drop(eve::spherical)](n+eve::half(eve::as(real(n))), z)*sqrt(pio_2(as(real(z)))*rec(z));
+          {
+             auto fac = sqrt(pio_2(as(real(z)))*rec(z));
+             auto v = n+eve::half(eve::as(real(z)));
+             auto r = _::cb_jr(v, z);
+             return r*fac;
+             //return (*this)[this->options().drop(eve::spherical)](n+eve::half(eve::as(real(n))), z)*sqrt(pio_2(as(real(z)))*rec(z));
+          }
           else
             return _::cb_jr(n, z);
         }
@@ -41,41 +52,41 @@ namespace kyosu
         return _::cayley_extend_rev(*this, n, z);
     }
 
-     template<eve::scalar_value N, typename Z>
-    requires(concepts::real<Z> || concepts::complex<Z>, std::size_t S)
+     template<eve::scalar_value N, typename Z, std::size_t S>
+    requires(concepts::real<Z> || concepts::complex<Z>)
       KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z, std::span<Z, S> js) const noexcept
     {
       if constexpr(Options::contains(eve::spherical))
         return (*this)[this->options().drop(eve::spherical)](n+eve::half(eve::as(real(z))), z)*sqrt(pio_2(as(real(z)))*rec(z));
       else if constexpr(eve::integral_scalar_value<N>)
       {
-        std::size_t an = eve::abs(n); 
+        std::size_t an = eve::abs(n);
         if (S > n)
         {
           auto doit = [n, z, &js](auto ys){
             _::cb_jyn(n, z, js, ys);
           };
-          _::with_alloca<Z1>(eve::abs(n)+1, doit);
+          _::with_alloca<Z>(eve::abs(n)+1, doit);
           return js[n];
         }
         else // js is not sufficiently allocated
         {
-          (*this)(S-1, z, js); 
-          return _::cb_jn(n, z); 
+          (*this)(S-1, z, js);
+          return _::cb_jn(n, z);
         }
       }
       else
       {
-        std::size_t an = eve::abs(int(n)); 
+        std::size_t an = eve::abs(int(n));
         if (S > an)
-        {    
-          return _::cb_jr(v, z, js);
+        {
+          return _::cb_jr(n, z, js);
         }
         else
         {
-          (*this)(S-1, z, js); 
-          return _::cb_jr(n, z); 
-        } 
+          (*this)(S-1, z, js);
+          return _::cb_jr(n, z);
+        }
     }
   }
 
