@@ -13,12 +13,12 @@
 namespace kyosu
 {
   template<typename Options>
-  struct chi_t : eve::elementwise_callable<chi_t, Options>
+  struct chi_t : eve::strict_elementwise_callable<chi_t, Options>
   {
     template<concepts::cayley_dickson Z, typename B>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& x, B const & b) const noexcept
     {
-      auto z =  kyosu::if_else(b(x), one(as(x)), zero);
+      auto z = kyosu::if_else(b(x), one(as(x)), zero);
       if constexpr(Options::contains(eve::condition_key))
         return  mask_op(this->options()[eve::condition_key], eve::detail::return_2nd, x, z);
       else
