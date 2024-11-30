@@ -34,12 +34,14 @@ namespace kyosu
           else
             return _::cb_jn(n, z);
         }
-        else if constexpr( eve::floating_scalar_value<Z>)
+        else if constexpr( eve::floating_scalar_value<N>)
         {
           if constexpr(Options::contains(eve::spherical))
           {
              auto fac = sqrt(pio_2(as(real(z)))*rec(z));
-             auto v = n+eve::half(eve::as(real(z)));
+             auto v = n+eve::half(eve::as_element(real(z)));
+             std::cout << ttts::name(v) << std::endl;
+             std::cout << ttts::name(z) << std::endl;
              auto r = _::cb_jr(v, z);
              return r*fac;
              //return (*this)[this->options().drop(eve::spherical)](n+eve::half(eve::as(real(n))), z)*sqrt(pio_2(as(real(z)))*rec(z));
