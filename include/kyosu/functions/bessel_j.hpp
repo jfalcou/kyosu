@@ -10,6 +10,7 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/bessel.hpp>
 
+
 namespace kyosu
 {
 
@@ -26,10 +27,13 @@ namespace kyosu
         {
           if constexpr(Options::contains(eve::spherical))
           {
-//             auto fac = sqrt(pio_2(as(real(z)))*rec(z));
-//             auto v = n+eve::half(eve::as(real(z)));
-//             return (*this)[this->options().drop(eve::spherical)](v, z)*fac;
-            return _::sb_jn(n, z);
+            if (eve::is_ltz(n))
+            {
+              using u_t = eve::underlying_type_t<Z>;
+              return _::sb_jr(u_t(n), z);
+            }
+            else
+              return _::sb_jn(n, z);
           }
           else
             return _::cb_jn(n, z);
@@ -37,15 +41,7 @@ namespace kyosu
         else if constexpr( eve::floating_scalar_value<N>)
         {
           if constexpr(Options::contains(eve::spherical))
-          {
-             auto fac = sqrt(pio_2(as(real(z)))*rec(z));
-             auto v = n+eve::half(eve::as_element(real(z)));
-             std::cout << ttts::name(v) << std::endl;
-             std::cout << ttts::name(z) << std::endl;
-             auto r = _::cb_jr(v, z);
-             return r*fac;
-             //return (*this)[this->options().drop(eve::spherical)](n+eve::half(eve::as(real(n))), z)*sqrt(pio_2(as(real(z)))*rec(z));
-          }
+            return _::sb_jr(n, z);
           else
             return _::cb_jr(n, z);
         }
@@ -54,57 +50,33 @@ namespace kyosu
         return _::cayley_extend_rev(*this, n, z);
     }
 
-     template<eve::scalar_value N, typename Z, std::size_t S>
+    template<eve::scalar_value N, typename Z, std::size_t S>
     requires(concepts::real<Z> || concepts::complex<Z>)
       KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z, std::span<Z, S> js) const noexcept
     {
-      if constexpr(Options::contains(eve::spherical))
-        return (*this)[this->options().drop(eve::spherical)](n+eve::half(eve::as(real(z))), z)*sqrt(pio_2(as(real(z)))*rec(z));
-      else if constexpr(eve::integral_scalar_value<N>)
+      if constexpr(eve::integral_scalar_value<N>)
       {
-        std::size_t an = eve::abs(n);
-        if (S > n)
+        if constexpr(Options::contains(eve::spherical))
         {
-          auto doit = [n, z, &js](auto ys){
-            _::cb_jyn(n, z, js, ys);
-          };
-          _::with_alloca<Z>(eve::abs(n)+1, doit);
-          return js[n];
+          if (eve::is_ltz(n))
+          {
+            using u_t = eve::underlying_type_t<Z>;
+            return _::sb_jr(u_t(n), z, js);
+          }
+          else
+            return _::sb_jn(n, z, js);
         }
-        else // js is not sufficiently allocated
-        {
-          (*this)(S-1, z, js);
-          return _::cb_jn(n, z);
-        }
+        else
+          return _::cb_jn(n, z, js);
       }
       else
       {
-        std::size_t an = eve::abs(int(n));
-        if (S > an)
-        {
-          return _::cb_jr(n, z, js);
-        }
+        if constexpr(Options::contains(eve::spherical))
+          return _::sb_jr(n, z, js);
         else
-        {
-          (*this)(S-1, z, js);
-          return _::cb_jr(n, z);
-        }
+          return _::cb_jr(n, z, js);
+      }
     }
-  }
-
-//     template<typename Z0, typename Z1>
-//     requires(eve::integral_scalar_value<Z0> && concepts::cayley_dickson<Z1>)
-//     KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& n, Z1 const & z) const noexcept
-//     {
-//       if constexpr(concepts::complex<Z1> )
-//         return _::cb_jn(n, z);
-//       else
-//         return _::cayley_extend_rev(*this, n, z);
-//     }
-
-//     template<eve::integral_scalar_value V0, concepts::real V1>
-//     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept
-//     { return eve::bessel_jn(v0,v1); }
 
     KYOSU_CALLABLE_OBJECT(bessel_j_t, bessel_j_);
   };
@@ -125,10 +97,14 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T> constexpr auto bessel_j(N n, T z)            noexcept; //1
-//!      template<eve;scalar_value N, kyosu::concepts::real T>           constexpr T    bessel_j(N n, T z)            noexcept; //1
-//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T> constexpr auto bessel_j[spherical](N n, T z) noexcept; //2
-//!      template<eve;scalar_value N, kyosu::concepts::real T>           constexpr T    bessel_j[spherical](N n, T z) noexcept; //2
+//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_j(N n, T z)                                 noexcept; //1
+//!      template<eve;scalar_value N, kyosu::concepts::real T>              constexpr T    bessel_j(N n, T z)                                 noexcept; //1
+//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_j(N n, T z, std::span<Z, S> cjs)            noexcept; //2
+//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_j(N n, T z, std::span<Z, S> cjs)            noexcept; //2
+//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_j[spherical](N n, T z)                      noexcept; //3
+//!      template<eve;scalar_value N, kyosu::concepts::real T>              constexpr T    bessel_j[spherical](N n, T z)                      noexcept; //3
+//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_j[spherical](N n, T z, std::span<Z, S> sjs) noexcept; //4
+//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_j[spherical](N n, T z, std::span<Z, S> sjs) noexcept; //4
 //!   }
 //!   @endcode
 //!
@@ -139,11 +115,19 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. returns \f$\J_n\f$(z) (cylindical).
-//!     2. returns \f$\j_n\f$(z) (spherical).
+//!     1. returns \f$J_n\f$(z) (cylindrical).
+//!     2. Same as 1,  but cjs is filled by the lesser orders.
+//!     3. returns \f$j_n\f$(z) (spherical).
+//!     4. Same as 3,  but sjs is filled by the lesser orders.
+//!
+//!  @note
+//!    * Let \f$ i =  \lfloor |n| \rfloor \f$ and \f$ j=|n|-i\f$. If \f$n\f$ is
+//!        positive the lesser order are \f$(\pm j, \pm(j+1), \dots,  \pm(j+i)) \f$
+//!        with \f$+\f$ sign if \f$n\f$ is positive and  \f$-\f$ sign if \f$n\f$ is negative.
+//!    * The span parameters are filled according the minimum of their allocated size and \f$i\f$.
+//!    * `cylindical` option can be used and its result is identical to the regular call (no option).
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/bessel_j.cpp}
 //======================================================================================================================
   inline constexpr auto bessel_j = eve::functor<bessel_j_t>;

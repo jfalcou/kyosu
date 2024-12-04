@@ -48,16 +48,20 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_j"
     };
 
     std::vector<kyosu::complex_t<T>> is_03(N+2);
+    std::vector<kyosu::complex_t<T>> is_03b(N+2);
     for (int k = 0; k < 16; ++k)
     {
       auto c = kyosu::complex(re[k], im[k]);
       kyosu::cyl_bessel_j(v1, c, std::span(is_03));
+      kyosu::bessel_j(v1, c, std::span(is_03));
       auto vv = T(N+1.0/3);
       for (n = 0; n <= N; ++n)
       {
          auto refi_03=  kyosu::complex_t<T>(reresi_03[n][k], imresi_03[n][k]);
         TTS_RELATIVE_EQUAL(refi_03, is_03[n], 1.e-2) << "n " << n  << " k " << k  << " c "<< c << " arg(c) "<< kyosu::arg(kyosu::conj(c)) << " < 1.57" << '\n';
+        TTS_RELATIVE_EQUAL(refi_03, is_03b[n], 1.e-2) << "n " << n  << " k " << k  << " c "<< c << " arg(c) "<< kyosu::arg(kyosu::conj(c)) << " < 1.57" << '\n';
         TTS_RELATIVE_EQUAL(refi_03,  kyosu::cyl_bessel_j(vv, c), 1.e-2) << "n " << n  << " k " << k  << " c "<< c <<'\n';
+
       }
     }
   }
