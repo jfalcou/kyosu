@@ -174,9 +174,9 @@ TTS_CASE_WITH ( "Check kyosu::sph_bessel_jn over real"
       TTS_IEEE_EQUAL(jnc, eve::sign_alternate(u_t(i))*sph_bessel_jn(i, cm)) << "c " << c << "\n";
       TTS_IEEE_EQUAL(jnc, kyosu::conj(sph_bessel_jn(i, cb)));
       TTS_IEEE_EQUAL(jnc, kyosu::bessel_j[eve::spherical](i, c));
-//      TTS_IEEE_EQUAL(kyosu::bessel_j[eve::spherical](v, c), kyosu::bessel_j(v+0.5, c)*fac);
-      std::cout << kyosu::bessel_j[eve::spherical](v, c) << std::endl;
-      std::cout << kyosu::bessel_j(v+0.5, c)*fac << std::endl;
+      TTS_IEEE_EQUAL(kyosu::bessel_j[eve::spherical](v, c), kyosu::bessel_j(v+0.5, c)*fac);
+//       std::cout << kyosu::bessel_j[eve::spherical](v, c) << std::endl;
+//       std::cout << kyosu::bessel_j(v+0.5, c)*fac << std::endl;
       TTS_EXPECT(eve::all(kyosu::is_real(cr)));
       TTS_EXPECT(eve::all(kyosu::is_pure(ci)));
       TTS_IEEE_EQUAL(sph_bessel_jn(i, zer), i ? zer : one) << i << '\n';

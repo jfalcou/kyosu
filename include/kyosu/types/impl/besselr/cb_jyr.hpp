@@ -88,7 +88,7 @@ namespace kyosu::_
           auto cf = cf1;
           auto bn(cf2);
 
-          for (int k=m; k>=0; --k)
+          for (int k=m; k>=2; --k)
           {
             cf = u_t(2)*inc(v0+u_t(k))*cf1*rz-cf2;
             if (k <= n) cjv[k] = cf;
@@ -96,7 +96,7 @@ namespace kyosu::_
             cf1 = cf;
           }
           auto cs = if_else(abs(cjv0) > abs(cjv1), cjv0/cf, cjv1/cf2);
-          for (int k=0; k<=n; ++k) {
+          for (int k=2; k<=n; ++k) {
             cjv[k] *= cs; ;
           }
           return cjv[n];
@@ -148,6 +148,20 @@ namespace kyosu::_
     }
   }
 
+  //===-------------------------------------------------------------------------------------------
+  //  cb_yr all
+  //===-------------------------------------------------------------------------------------------
+  template<eve::floating_scalar_value N, typename Z, std::size_t S> KYOSU_FORCEINLINE
+  auto cb_yr(N v, Z z, std::span<Z, S> vys) noexcept
+  {
+    auto n = int(abs(v));
+    auto doit = [n, v, z, &vys](auto js, auto ys){
+      auto [_, yn] = cb_jyr(v, z, js, ys);
+      for(int i = 0; i < size(vys); ++i) vys[i] = ys[i];
+      return yn;
+    };
+    return with_alloca<Z>(n+1, doit);
+  }
 
   //===-------------------------------------------------------------------------------------------
   //  cb_yr just last
@@ -155,27 +169,26 @@ namespace kyosu::_
   template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto cb_yr(N v, Z z) noexcept
   {
-    auto n = int(abs(v));
-    auto doit = [n, v, z](auto js, auto ys){
-      auto [_, yn] = cb_jyr(v, z, js, ys);
-      return ys[n];
-    };
-    return with_alloca<Z>(n+1, doit);
+    std::array<Z, 0> dummy;
+    return cb_yr(v, z, std::span(dummy));
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cb_yr all
+  //  cb_jr all
   //===-------------------------------------------------------------------------------------------
   template<eve::floating_scalar_value N, typename Z, std::size_t S> KYOSU_FORCEINLINE
-  auto cb_yr(N v, Z z, std::span<Z, S> ys) noexcept
+  auto cb_jr(N v, Z z, std::span<Z, S> vjs) noexcept
   {
     auto n = int(abs(v));
-    auto doit = [n, v, z](auto js, auto ys){
-      auto [_, yn] = cb_jyr(v, z, js, ys);
-      return ys[n];
+    auto doit = [n, v, z, &vjs](auto js, auto ys){
+      auto [jn, _] = cb_jyr(v, z, js, ys);
+      for(int i = 0; i < size(vjs); ++i) vjs[i] = js[i];
+      return jn;
     };
+
     return with_alloca<Z>(n+1, doit);
   }
+
 
   //===-------------------------------------------------------------------------------------------
   //  cb_jr just last
@@ -183,25 +196,8 @@ namespace kyosu::_
   template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto cb_jr(N v, Z z) noexcept
   {
-    auto n = int(abs(v));
-    auto doit = [n, v, z](auto js, auto ys){
-      auto [_, yv] = cb_jyr(v, z, js, ys);
-      return js[n];
-    };
-    return with_alloca<Z>(n+1, doit);
+    std::array<Z, 0> dummy;
+    return cb_jr(v, z, std::span(dummy));
   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  cb_jr all
-  //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z, std::size_t S> KYOSU_FORCEINLINE
-  auto cb_jr(N v, Z z, std::span<Z, S> js) noexcept
-  {
-    auto n = int(abs(v));
-    auto doit = [n, v, z, &js](auto ys){
-      auto [_, yv] = cb_jyr(v, z, js, ys);
-      return js[n];
-    };
-    return with_alloca<Z>(n+1, doit);
-  }
 }

@@ -329,7 +329,7 @@ namespace kyosu::_
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cb_jn
+  //  cb_jn just last
   //===-------------------------------------------------------------------------------------------
   template<eve::integral_scalar_value N, typename Z>
   Z cb_jn(N nn, Z z)
@@ -412,6 +412,8 @@ namespace kyosu::_
       return nn < 0 ? r*eve::sign_alternate(u_t(nn)) : r;
     }
   }
+
+
 
   //===-------------------------------------------------------------------------------------------
   //  cb_jyn
@@ -566,6 +568,28 @@ namespace kyosu::_
         }
       }
       return kumi::tuple{cjv[n], cyv[n]};
+    }
+  }
+
+  //===-------------------------------------------------------------------------------------------
+  //  cb_jn all possible up to js size or n
+  //===-------------------------------------------------------------------------------------------
+  template<eve::integral_scalar_value N, typename Z, std::size_t S>
+  Z cb_jn(N n, Z z, std::span<Z, S>js)
+  {
+    std::size_t an = eve::abs(n);
+    if (size(js) > an)
+    {
+      auto doit = [n, z, &js](auto ys){
+        _::cb_jyn(n, z, js, ys);
+      };
+      _::with_alloca<Z>(an+1, doit);
+      return js[n];
+    }
+    else // js is not sufficiently allocated
+    {
+      cb_jn(size(js)-1, z, js);
+      return _::cb_jn(n, z);
     }
   }
 }
