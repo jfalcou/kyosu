@@ -143,7 +143,8 @@ Most **KYOSU** callables are usable with all cayley_dickson types. The exception
    | [acotpi](@ref kyosu::acotpi )             | [atanpi](@ref kyosu::atanpi )           | [acoth](@ref kyosu::acoth )           | [arg](@ref kyosu::arg )        | [acsc](@ref kyosu::acsc )            |
    | [acscpi](@ref kyosu::acscpi )             | [acsch](@ref kyosu::acsch )             | [asec](@ref kyosu::asec )             | [asecpi](@ref kyosu::asecpi )  | [asech](@ref kyosu::asech )          |
    | [asin](@ref kyosu::asin )                 | [asinpi](@ref kyosu::asinpi )           | [asinh](@ref kyosu::asinh )           | [atan](@ref kyosu::atan )      | [atanh](@ref kyosu::atanh )          |
-   | [average](@ref kyosu::average )           | [beta](@ref kyosu::beta )               | [ceil](@ref kyosu::ceil )             | [conj](@ref kyosu::conj )      | [cos](@ref kyosu::cos )              |
+   | [average](@ref kyosu::average )           | [beta](@ref kyosu::beta )               | [ceil](@ref kyosu::ceil )             | [chi](@ref kyosu::chi )        | [conj](@ref kyosu::conj )            |
+   | [cos](@ref kyosu::cos )                   |                                         |                                       |                                |                                      |
    | [cosh](@ref kyosu::cosh )                 | [cospi](@ref kyosu::cospi )             | [cot](@ref kyosu::cot )               | [cotpi](@ref kyosu::cotpi )    | [coth](@ref kyosu::coth )            |
    | [convert](@ref kyosu::convert )           | [csc](@ref kyosu::csc )                 | [cscpi](@ref kyosu::cscpi )           | [csch](@ref kyosu::csch )      | [dec](@ref kyosu::dec )              |
    | [deta](@ref kyosu::deta )                 | [digamma](@ref kyosu::digamma )         | [dist](@ref kyosu::dist )             | [dot](@ref kyosu::dot )        | [erf](@ref kyosu::erf )              |
@@ -162,7 +163,7 @@ Most **KYOSU** callables are usable with all cayley_dickson types. The exception
    | [manhattan](@ref kyosu::manhattan )       | [minus](@ref kyosu::minus )             | [nearest](@ref kyosu::nearest )     | [oneminus](@ref kyosu::oneminus )| [pow](@ref kyosu::pow )              |
    | [pow1p](@ref kyosu::pow1p )               | [pow_abs](@ref kyosu::pow_abs )         | [powm1](@ref kyosu::powm1 )           | [proj](@ref kyosu::proj )      | [pure](@ref kyosu::imag )            |
    | [radinpi](@ref kyosu::radinpi )           | [real](@ref kyosu::real )               | [rec](@ref kyosu::rec )               | [reldist](@ref kyosu::reldist )| [reverse_horner](@ref kyosu::reverse_horner ) |
-   | [right_horner](@ref kyosu::right_horner ) | [right_reverse_horner](@ref kyosu::right_reverse_horner ) | [rising_factorial](@ref kyosu::rising_factorial ) | [sec](@ref kyosu::sec )| [secpi](@ref kyosu::secpi ) |
+   | [rising_factorial](@ref kyosu::rising_factorial ) | [sec](@ref kyosu::sec )| [secpi](@ref kyosu::secpi ) |
    | [sech](@ref kyosu::sech )                 | [sign](@ref kyosu::sign )               | [sin](@ref kyosu::sin )               | [sinc](@ref kyosu::sinc )      | [sincos](@ref kyosu::sincos )        |
    | [sinpi](@ref kyosu::sinpi )               | [sinpicospi](@ref kyosu::sinpicospi )   | [sinh](@ref kyosu::sinh )      | [sinhcosh](@ref kyosu::sinhcosh )     | [slerp](@ref kyosu::slerp )          |
    | [sqr](@ref kyosu::sqr )                   | [sqr_abs](@ref kyosu::sqr_abs )         | [sqrt](@ref kyosu::sqrt )             | [tan](@ref kyosu::tan )        | [tanpi](@ref kyosu::tanpi )          |
