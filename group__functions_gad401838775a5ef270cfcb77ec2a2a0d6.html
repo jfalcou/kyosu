@@ -166,7 +166,29 @@ $(document).ready(function(){initNavTree('group__functions_gad401838775a5ef270cf
 <li>returns a pair containing \(h1n(z)\) and \(h2n(z)\) and if the 'span' parameters are present ithey must be sufficient to hold 'n+1' values each which are respectively $(h1_0(x), h1_1(x), ..., h1_n(x)) \( if &#39;n &gt;= 0$ else \$(h1_0(x),h1_{-1}(x) ...,  h1_{-n}(x)\) (for the same computation cost), and $(h2_0(x), h2_1(x), ..., h2_n(x)) \( if &#39;n &gt;= 0$ else \$(h2_0(x),h2_{-1}(x) ...,  h2_{-n}(x)\) (for the same computation cost), but use is restricted to real or complex entries..</li>
 </ul>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  std::cout.precision(16);</div>
+<div class="line">  <span class="keyword">using </span>w_t = eve::wide&lt;double, eve::fixed&lt;2&gt;&gt;;</div>
+<div class="line">  <span class="keyword">auto</span> z = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(w_t(20.0, 1.5), w_t(0.0, 1.5));</div>
+<div class="line">  <span class="keyword">auto</span> v = 3.3;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;z                    &quot;</span> &lt;&lt; z &lt;&lt; std::endl;</div>
+<div class="line">  std::vector&lt;<span class="keyword">decltype</span>(z)&gt; h1(4), h2(4);</div>
+<div class="line">  <a class="code hl_variable" href="group__functions_ga270b8ac2d250b8abc40eb9198c8ba2ac.html#ga270b8ac2d250b8abc40eb9198c8ba2ac">kyosu::cyl_bessel_h12</a>(v, z, std::span(h1), std::span(h2));</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> n=0; n &lt;= 3; ++n)</div>
+<div class="line">  {</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;h1[&quot;</span> &lt;&lt; n &lt;&lt; <span class="stringliteral">&quot;] = &quot;</span> &lt;&lt; h1[n] &lt;&lt; std::endl;</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;h2[&quot;</span> &lt;&lt; n &lt;&lt; <span class="stringliteral">&quot;] = &quot;</span> &lt;&lt; h2[n] &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__functions_ga270b8ac2d250b8abc40eb9198c8ba2ac_html_ga270b8ac2d250b8abc40eb9198c8ba2ac"><div class="ttname"><a href="group__functions_ga270b8ac2d250b8abc40eb9198c8ba2ac.html#ga270b8ac2d250b8abc40eb9198c8ba2ac">kyosu::cyl_bessel_h12</a></div><div class="ttdeci">constexpr auto cyl_bessel_h12</div><div class="ttdoc">Computes the Hankel functions of the first and second kind,.</div><div class="ttdef"><b>Definition:</b> cyl_bessel_h12.hpp:88</div></div>
+<div class="ttc" id="agroup__functions_gae0cdc9d2dae205852268d4c5cdca6578_html_gae0cdc9d2dae205852268d4c5cdca6578"><div class="ttname"><a href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a></div><div class="ttdeci">constexpr auto complex</div><div class="ttdoc">Constructs a kyosu::complex_t instance.</div><div class="ttdef"><b>Definition:</b> to_complex.hpp:75</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
