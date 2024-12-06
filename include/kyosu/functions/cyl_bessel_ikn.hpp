@@ -17,11 +17,11 @@ namespace kyosu
     template<eve::integral_scalar_value Z0, typename Z1, std::size_t S>
     requires(concepts::real<Z1> || concepts::cayley_dickson<Z1>)
       KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1, std::span<Z1, S> is, std::span<Z1, S> ks) const noexcept
-    {   return _::cb_ikn(n, z, is, ks); }
+    {   return _::cb_ikn(z0, z1, is, ks); }
 
-    template<eve::integral_scalar_value Z0, typename Z1>
-    requires(concepts::real<Z1> || concepts::cayley_dickson<Z1>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
+    template<eve::integral_scalar_value Z0, typename Z>
+    requires(concepts::real<Z> || concepts::cayley_dickson<Z>)
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& n, Z const & z) const noexcept
     {
       if constexpr(concepts::complex<Z> )
       {
