@@ -28,7 +28,6 @@ namespace kyosu::_
     return fac*r;
   }
 
-
   //===-------------------------------------------------------------------------------------------
   //  sb_jr just last
   //===-------------------------------------------------------------------------------------------
@@ -39,4 +38,27 @@ namespace kyosu::_
     return sb_jr(n, z, std::span(dummy));
   }
 
+
+   //===-------------------------------------------------------------------------------------------
+  //  sb_yr all
+  //===-------------------------------------------------------------------------------------------
+  template<eve::floating_scalar_value N, typename Z, std::size_t S> KYOSU_FORCEINLINE
+  auto sb_yr(N n, Z z, std::span<Z, S> vys) noexcept
+  {
+    auto fac = sqrt(pio_2(as(real(z)))*rec(z));
+    auto v = n+eve::half(eve::as<eve::underlying_type_t<Z>>());
+    auto r = _::cb_yr(v, z, vys);
+    for(int i = 0; i < size(vys); ++i) vys[i]*= fac;
+    return fac*r;
+  }
+
+  //===-------------------------------------------------------------------------------------------
+  //  sb_yr just last
+  //===-------------------------------------------------------------------------------------------
+  template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  auto sb_yr(N n, Z z) noexcept
+  {
+    std::array<Z, 0> dummy;
+    return sb_yr(n, z, std::span(dummy));
+  }
 }
