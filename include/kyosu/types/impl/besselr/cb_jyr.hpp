@@ -88,7 +88,7 @@ namespace kyosu::_
           auto cf = cf1;
           auto bn(cf2);
 
-          for (int k=m; k>=2; --k)
+          for (int k=m; k>=0; --k)
           {
             cf = u_t(2)*inc(v0+u_t(k))*cf1*rz-cf2;
             if (k <= n) cjv[k] = cf;
@@ -96,7 +96,7 @@ namespace kyosu::_
             cf1 = cf;
           }
           auto cs = if_else(abs(cjv0) > abs(cjv1), cjv0/cf, cjv1/cf2);
-          for (int k=2; k<=n; ++k) {
+          for (int k=0; k<=n; ++k) {
             cjv[k] *= cs; ;
           }
           return cjv[n];
