@@ -92,7 +92,7 @@ namespace kyosu::_
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cb_in
+  //  cb_in just last
   //===-------------------------------------------------------------------------------------------
   template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto cb_in(N n, Z z) noexcept
@@ -109,7 +109,7 @@ namespace kyosu::_
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cb_kn
+  //  cb_kn just last
   //===-------------------------------------------------------------------------------------------
   template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto cb_kn(N n, Z z) noexcept
@@ -131,7 +131,7 @@ namespace kyosu::_
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cb_ikn
+  //  cb_ikn suppose allocatied is and ks
   //===-------------------------------------------------------------------------------------------
   template<eve::integral_scalar_value N, typename Z, typename R1, typename R2>
   KYOSU_FORCEINLINE  auto cb_ikn(N n, Z z, R1& is, R2& ks) noexcept
@@ -139,7 +139,7 @@ namespace kyosu::_
   {
     using u_t = eve::underlying_type_t<Z>;
     auto nn =  eve::abs(n);
-    nn = eve::min(n, N(is.size()), N(ks.size()));
+//    nn = eve::min(n, N(is.size()), N(ks.size()));
     auto sn = sign(n);
     for(N j=0; j <= nn; j = j++)
     {
@@ -148,4 +148,48 @@ namespace kyosu::_
     }
     return kumi::tuple{is[nn], ks[nn]};
   }
+
+  //===-------------------------------------------------------------------------------------------
+  //  cb_in all possible up to ris size or n
+  //===-------------------------------------------------------------------------------------------
+  template<eve::integral_scalar_value N, typename Z, std::size_t S>
+  Z cb_in(N n, Z z, std::span<Z, S> ris)
+  {
+    using e_t = as_real_type_t<Z>;
+    auto miton = [](N n){
+      if (n%4 == 0) return complex(eve::one(eve::as<e_t>()));
+      else if (n%4 == 1) return  complex(eve::zero(eve::as<e_t>()), eve::mone(eve::as<e_t>()));
+      else if (n%4 == 2) return complex(eve::mone(eve::as<e_t>()));
+      else return complex(eve::zero(eve::as<e_t>()), eve::one(eve::as<e_t>()));
+    };
+    auto an =  eve::abs(n);
+    auto jn = bessel_jn(an, muli(z), ris);
+    auto nn = min(size(ris), an);
+    for(int i=1; i < nn; ++i) ris[i]*= miton(i);
+    return jn*miton(n);
+  }
+
+
+  //===-------------------------------------------------------------------------------------------
+  //  cb_kn all possible up to ris size or n
+  //===-------------------------------------------------------------------------------------------
+ //  template<eve::integral_scalar_value N, typename Z, std::size_t S>
+//   Z cb_kn(N n, Z z, std::span<Z, S> rks)
+//   {
+//     using u_t = eve::underlying_type_t<Z>;
+//     auto argz = arg(z);
+//     n =  eve::abs(n);
+//     auto piotwo = eve::pio_2(eve::as<u_t>());
+//     auto cpi =  piotwo*muli(exp_ipi(u_t(n)/2));
+//     auto cmi = -piotwo*muli(exp_ipi(-u_t(n)/2));
+//     auto epio2  = exp_ipi(eve::half(eve::as<u_t>()));
+//     auto empio2 = exp_ipi(eve::mhalf(eve::as<u_t>()));
+//     auto argzlt0 = eve::is_ltz(argz);
+//     auto r =  if_else(argzlt0
+//                      , cpi*cb_h1n(n, z*epio2)
+//                      , cmi*cb_h2n(n, z*empio2));
+//     return if_else(is_eqz(z), complex(eve::inf(eve::as<u_t>())), r);
+//   }
+ 
+
 }

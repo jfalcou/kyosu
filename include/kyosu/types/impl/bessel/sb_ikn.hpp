@@ -163,4 +163,19 @@ namespace kyosu::_
     auto rz = rec(z);
     return  eve::pio_2(eve::as<u_t>())*exp(-z)*fma(rz, rz, rz);
   }
+
+  ///////////////////////////////////////////////////////////////////////
+  // new
+  ///////////////////////////////////////////////////////////////////////
+
+  template<int Kind, eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  auto sb_in(N n, Z z) noexcept
+  {
+    if constexpr(Kind == 1)
+      return sb_i1n(n, z);
+    else
+      return sb_i2n(n, z);
+  }
+
+
 }
