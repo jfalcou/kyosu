@@ -617,4 +617,22 @@ namespace kyosu::_
     return cb_yn(n, z, dummy);
   }
 
+  //===-------------------------------------------------------------------------------------------
+  //  cb_jyna all possible up to js and ys size or n
+  //===-------------------------------------------------------------------------------------------
+  template<eve::integral_scalar_value N, typename Z, std::size_t S1, std::size_t S2>
+  Z cb_jyna(N n, Z z, std::span<Z, S1> rjs, std::span<Z, S2> rys )
+  {
+    std::size_t an = eve::abs(n);
+    auto doit = [an, n, z, &rjs, &rys](auto js, auto ys){
+      auto [jn, yn] = _::cb_jyn(n, z, js, ys);
+      for(int i = 0; i < min(size(rjs), an+1); ++i) rjs[i] = js[i];
+      for(int i = 0; i < min(size(rys), an+1); ++i) rys[i] = ys[i]; 
+      return kumi::tuple{jn, yn};
+    };
+    return _::with_alloca<Z>(an+1, doit);
+  }
+
+
+  
 }

@@ -178,6 +178,8 @@
 
 #include <kyosu/functions/bessel_j.hpp>
 #include <kyosu/functions/bessel_y.hpp>
+#include <kyosu/functions/bessel_h.hpp>
+#include <kyosu/functions/bessel_i.hpp>
 
 //======================================================================================================================
 // Functions performing computations over quaternion complex or real elements only.
