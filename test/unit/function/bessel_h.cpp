@@ -8,7 +8,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h1n integral positive order"
+TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h1n over real"
               , kyosu::scalar_real_types
               , tts::generate(tts::randoms(-10,10))
               )
@@ -78,7 +78,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h1n integral positive order"
 };
 
 
-TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h2n integral negative order"
+TTS_CASE_WITH ( "Check kyosu::cyl_bessel_h2n over real"
               , kyosu::scalar_real_types
               , tts::generate(tts::randoms(-10,10))
               )
