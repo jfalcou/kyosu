@@ -627,12 +627,12 @@ namespace kyosu::_
     auto doit = [an, n, z, &rjs, &rys](auto js, auto ys){
       auto [jn, yn] = _::cb_jyn(n, z, js, ys);
       for(int i = 0; i < min(size(rjs), an+1); ++i) rjs[i] = js[i];
-      for(int i = 0; i < min(size(rys), an+1); ++i) rys[i] = ys[i]; 
+      for(int i = 0; i < min(size(rys), an+1); ++i) rys[i] = ys[i];
       return kumi::tuple{jn, yn};
     };
     return _::with_alloca<Z>(an+1, doit);
   }
 
 
-  
+
 }
