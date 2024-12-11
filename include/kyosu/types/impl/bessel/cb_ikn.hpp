@@ -9,7 +9,7 @@
 #include <eve/module/math.hpp>
 #include <kyosu/types/impl/detail/bessel_utils2.hpp>
 #include <kyosu/details/with_alloca.hpp>
-
+#include <kyosu/types/impl/bessel/cb_hn.hpp>
 namespace kyosu::_
 {
   /////////////////////////////////
@@ -125,8 +125,8 @@ namespace kyosu::_
     auto empio2 = exp_ipi(eve::mhalf(eve::as<u_t>()));
     auto argzlt0 = eve::is_ltz(argz);
     auto r =  if_else(argzlt0
-                     , cpi*cb_h1n(n, z*epio2)
-                     , cmi*cb_h2n(n, z*empio2));
+                     , cpi*cb_hn<1>(n, z*epio2)
+                     , cmi*cb_hn<2>(n, z*empio2));
     return if_else(is_eqz(z), complex(eve::inf(eve::as<u_t>())), r);
   }
 
@@ -190,6 +190,6 @@ namespace kyosu::_
 //                      , cmi*cb_h2n(n, z*empio2));
 //     return if_else(is_eqz(z), complex(eve::inf(eve::as<u_t>())), r);
 //   }
- 
+
 
 }

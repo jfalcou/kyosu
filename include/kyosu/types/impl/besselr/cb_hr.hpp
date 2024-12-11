@@ -78,18 +78,19 @@ namespace kyosu::_
   }
 
   template<int Kind, eve::floating_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto cb_hn(N v, Z z, R& hs) noexcept
+  auto cb_hr(N v, Z z, R& hs) noexcept
   {
     auto an =  std::size_t(eve::abs(v));
     auto doit = [an, v, z, &hs](auto js, auto ys){
       auto [jv, yv] = _::cb_jyr(v, z, js, ys);
       if constexpr(Kind == 1)
       {
-        for(int i = 0; i < min(size(hs), an+1); ++i) hs[i] = js[i]+muli+ys[i];
+        for(int i = 0; i < min(size(hs), an+1); ++i) hs[i] = js[i]+muli(ys[i]);
         return jv+muli(yv);
       }
-      else{
-        for(int i = 0; i < min(size(hs), an+1); ++i) hs[i] = js[i]+muli-ys[i];
+      else
+      {
+        for(int i = 0; i < min(size(hs), an+1); ++i) hs[i] = js[i]+muli(ys[i]);
         return jv-muli(yv);
       }
     };

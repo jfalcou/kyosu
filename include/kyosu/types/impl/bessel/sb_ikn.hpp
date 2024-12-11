@@ -177,5 +177,4 @@ namespace kyosu::_
       return sb_i2n(n, z);
   }
 
-
 }
