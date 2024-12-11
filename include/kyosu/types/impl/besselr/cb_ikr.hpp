@@ -59,15 +59,14 @@ namespace kyosu::_
     v = eve::abs(v);  //k(-v, z) == K(v, z) DLMF 10.27.1
     using u_t = eve::underlying_type_t<Z>;
     auto n = int(v); //n>= 0
-    EVE_ASSERT(int(size(ks)) > n, "not enough room in h1s");
     auto v0 = v-n;
     auto vi = v0;
-    for(int j=0; j <= n; ++j)
+    for(int j=0; j < eve::min(size_t(n+1), size(ks)); ++j)
     {
       ks[j] = cb_kr(vi, z);
       vi = inc(vi);
     }
-    return ks[n];
+    return cb_kr(v, z);
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -81,21 +80,30 @@ namespace kyosu::_
     {
       auto argzpos = eve::is_gtz(kyosu::arg(z));
       z = if_else(argzpos, conj(z), z);
-      cyl_bessel_j(v, muli(z), is);
+      auto jv = cb_jr(v, muli(z), is);
       auto n = int(v); // >=  0
       auto v0 = v-n;
       auto vi = v0;
-      for(int i=0; i <= n ; ++i)
+      auto nn= eve::min(n+1, size(is));
+      for(int i=0; i < nn ; ++i)
       {
         auto fac = exp_ipi(-vi/2);
         vi =  inc(vi);
         is[i]*= fac;
         is[i] = if_else(argzpos, conj(is[i]), is[i]);
       }
-      return is[n];
+      if (nn > n)
+        return is[n];
+      else
+      {
+        auto fac = exp_ipi(-v/2);
+        jv*= fac;
+        return if_else(argzpos, conj(jv), jv);
+      }
     }
     else
     {
+      //pas correct ici si is trop petit
       size_t an = eve::abs(int(v));
       cb_ir(-v, z, is);
       auto mvi = frac(-v);
