@@ -15,15 +15,13 @@ namespace kyosu
 {
 
   template<typename Options>
-  struct bessel_k_t : eve::strict_elementwise_callable<bessel_k_t, Options, eve::spherical_option, eve::cylindrical_option,
-                                                       kind_1_option, kind_2_option>
+  struct bessel_k_t : eve::strict_elementwise_callable<bessel_k_t, Options, eve::spherical_option, eve::cylindrical_option>
   {
     template<eve::scalar_value N, typename Z>
     requires(concepts::real<Z> || concepts::cayley_dickson<Z>)
       KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z) const noexcept
     {
-      constexpr auto Kind = Options::contains(kind_2) ? 2 : 1;
-      if constexpr(concepts::complex<Z> )
+       if constexpr(concepts::complex<Z> )
       {
         if constexpr(eve::integral_scalar_value<N>)
         {
@@ -32,7 +30,7 @@ namespace kyosu
             if (eve::is_ltz(n))
             {
               using u_t = eve::underlying_type_t<Z>;
-              return _::sb_kr<Kind>(u_t(n), z);
+              return _::sb_kr(u_t(n), z);
             }
             else
               return _::sb_kn(n, z);
@@ -43,7 +41,7 @@ namespace kyosu
         else if constexpr( eve::floating_scalar_value<N>)
         {
           if constexpr(Options::contains(eve::spherical))
-            return _::sb_kr<Kind>(n, z);
+            return _::sb_kr(n, z);
           else
             return _::cb_kr(n, z);
         }
@@ -64,7 +62,7 @@ namespace kyosu
           if (eve::is_ltz(n))
           {
             using u_t = eve::underlying_type_t<Z>;
-            return _::sb_kr<Kind>(u_t(n), z, is);
+            return _::sb_kr(u_t(n), z, is);
           }
           else
             return _::sb_kn(n, z, is);
@@ -75,7 +73,7 @@ namespace kyosu
       else
       {
         if constexpr(Options::contains(eve::spherical))
-          return _::sb_kr<Kind>(n, z, is);
+          return _::sb_kr(n, z, is);
         else
           return _::cb_kr(n, z, is);
       }

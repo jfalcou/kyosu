@@ -50,7 +50,7 @@ namespace kyosu::_
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cb_kr n outputs
+  //  cb_kr all possible outputs
   //===-------------------------------------------------------------------------------------------
 
   template<eve::floating_scalar_value N, typename Z, typename R>
@@ -58,15 +58,15 @@ namespace kyosu::_
   {
     v = eve::abs(v);  //k(-v, z) == K(v, z) DLMF 10.27.1
     using u_t = eve::underlying_type_t<Z>;
-    auto n = int(v); //n>= 0
+    auto n = std::size_t(v); //n>= 0
     auto v0 = v-n;
     auto vi = v0;
     for(int j=0; j < eve::min(size_t(n+1), size(ks)); ++j)
     {
       ks[j] = cb_kr(vi, z);
-      vi = inc(vi);
+      vi = eve::inc(vi);
     }
-    return cb_kr(v, z);
+    return cb_kr(v0+n, z);
   }
 
  //===-------------------------------------------------------------------------------------------

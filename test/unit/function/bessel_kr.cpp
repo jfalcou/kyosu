@@ -12,7 +12,7 @@ TTS_CASE_WITH ( "Check kyosu::bessel_kr over real positive order"
               , kyosu::scalar_real_types
               , tts::generate(tts::randoms(-10,10))
               )
-<typename T>(T )
+  <typename T>(T )
 {
   if constexpr(sizeof(T) == 8)
   {
@@ -60,9 +60,13 @@ TTS_CASE_WITH ( "Check kyosu::bessel_kr over real positive order"
     auto v0 = T(1.0/3.0);
     auto h =  eve::half(eve::as(v0));
     using eve::spherical;
+    using c_t = kyosu::complex_t<T>;
+    std::array<c_t, 5> ks;
     for(int j=0; j <= 15; ++j)
     {
       auto c = kyosu::complex(re[j], im[j]);
+      auto iv = kyosu::bessel_k(v0+(N-1), c, std::span(ks));
+      TTS_RELATIVE_EQUAL(iv, kyosu::bessel_k(v0+(N-1), c), tts::prec<T>());
       auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c)))*kyosu::rec(c));
       for(int i=0; i < N; ++i)
       {
@@ -73,7 +77,9 @@ TTS_CASE_WITH ( "Check kyosu::bessel_kr over real positive order"
         TTS_RELATIVE_EQUAL(kyosu::bessel_k(-v,c), res, tts::prec<T>());
         TTS_RELATIVE_EQUAL(kyosu::bessel_k[spherical](v, c), kyosu::bessel_k(v+h, c)*fac, tts::prec<T>());
         TTS_RELATIVE_EQUAL(kyosu::bessel_k[spherical](-v, c), kyosu::bessel_k(-v+h, c)*fac, tts::prec<T>());
+        if(i < 5)
+          if (j!= 8) TTS_RELATIVE_EQUAL(kyosu::bessel_k(v, c), ks[i], tts::prec<T>()) << i << " -- " <<  j <<  " -- "<< c << " v " << v << '\n';
       }
     }
- }
+  }
 };
