@@ -57,13 +57,17 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_yn over real"
   imresN16[i] = a_t{-9.3512033033284969e-01,5.8311250840495488e-01,-2.5038103542925777e-01,3.7134179753687346e-01,2.6119761767669547e+00,-2.0186362242221358e+02,2.5820346727696640e+04,-3.4834091902578406e+07,0.0000000000000000e+00,3.6898513824160453e+06,-5.9946876501059469e+03,1.1581835582418138e+02,-7.2894095558941636e+00,8.0923232259914468e-01,-7.0789766434117996e-02,1.5672646539923257e-01,};
   using eve::spherical;
   auto h =  eve::half(eve::as<T>());
+  using c_t = kyosu::complex_t<T>;
+  std::array<c_t, 5> ys;
   for(int j=0; j <= 15; ++j)
   {
     auto c = kyosu::complex(re[j], im[j]);
+    auto yN = kyosu::bessel_y(N-1, c, std::span(ys));
+    TTS_RELATIVE_EQUAL(yN, kyosu::bessel_y(N-1, c), tts::prec<T>());
     auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c)))*kyosu::rec(c));
     for(int i=0; i < N; ++i)
     {
-//      std::cout<< "i " << i  << "j " << j  << " c[" << i << "] = " << c << std::endl;
+      //      std::cout<< "i " << i  << "j " << j  << " c[" << i << "] = " << c << std::endl;
       auto res = kyosu::complex(reresN16[i][j], imresN16[i][j]);
       if( ((i < 7) || (sizeof(T) == 8 ) || kyosu::is_not_real(c)) ) // The limitation of these tests with float is due to some overflow pbs when z is real
       {
@@ -72,6 +76,8 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_yn over real"
         TTS_RELATIVE_EQUAL(kyosu::bessel_y(-i, c), eve::sign_alternate(i)*res, tts::prec<T>());
       }
       TTS_RELATIVE_EQUAL(kyosu::bessel_y[spherical](-i, c), kyosu::bessel_y(-i+h, c)*fac, tts::prec<T>());
+      if(i < 5)
+        if( j != 8) TTS_RELATIVE_EQUAL(kyosu::bessel_y(i, c), ys[i], tts::prec<T>()) << i << " -- " <<  j <<  " -- "<< c << '\n';
     }
   }
 };
