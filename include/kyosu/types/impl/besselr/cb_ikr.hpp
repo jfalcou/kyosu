@@ -69,53 +69,46 @@ namespace kyosu::_
     return cb_kr(v, z);
   }
 
-  //===-------------------------------------------------------------------------------------------
+ //===-------------------------------------------------------------------------------------------
   //  cb_ir n outputs
   //===-------------------------------------------------------------------------------------------
   template<eve::floating_scalar_value N, typename Z, typename R>
-  auto cb_ir(N v, Z z, R& is) noexcept
+  Z cb_ir(N v, Z z, R& cis) noexcept
   {
-    //DLMF 10.27.6 with conjugation for arg(z) > 0
-    if (v > 0)
-    {
-      auto argzpos = eve::is_gtz(kyosu::arg(z));
-      z = if_else(argzpos, conj(z), z);
-      auto jv = cb_jr(v, muli(z), is);
-      auto n = int(v); // >=  0
-      auto v0 = v-n;
-      auto vi = v0;
-      auto nn= eve::min(n+1, size(is));
-      for(int i=0; i < nn ; ++i)
+    size_t an = eve::abs(int(v));
+    auto doit =  [an, v, &z, &cis](auto is){
+      //DLMF 10.27.6 with conjugation for arg(z) > 0
+      if (v > 0)
       {
-        auto fac = exp_ipi(-vi/2);
-        vi =  inc(vi);
-        is[i]*= fac;
-        is[i] = if_else(argzpos, conj(is[i]), is[i]);
+        auto argzpos = eve::is_gtz(kyosu::arg(z));
+        z = if_else(argzpos, conj(z), z);
+        cb_jr(v, muli(z), is);
+        auto v0 = v-an;
+        auto vi = v0;
+        for(int i=0; i <= an ; ++i)
+        {
+          auto fac = exp_ipi(-vi/2);
+          vi =  inc(vi);
+          is[i]*= fac;
+          is[i] = if_else(argzpos, conj(is[i]), is[i]);
+        }
       }
-      if (nn > n)
-        return is[n];
       else
       {
-        auto fac = exp_ipi(-v/2);
-        jv*= fac;
-        return if_else(argzpos, conj(jv), jv);
+        cb_ir(-v, z, is);
+        auto mvi = frac(-v);
+        auto spv = eve::sinpi(mvi);
+        for(size_t l=0; l <= an; ++l)
+        {
+          is[l] += kyosu::two_o_pi(as(z))*spv*cb_kr(mvi, z);
+          mvi = inc(mvi);
+          spv = -spv;
+        }
       }
-    }
-    else
-    {
-      //pas correct ici si is trop petit
-      size_t an = eve::abs(int(v));
-      cb_ir(-v, z, is);
-      auto mvi = frac(-v);
-      auto spv = eve::sinpi(mvi);
-      for(size_t l=0; l <= an; ++l)
-      {
-        is[l] += kyosu::two_o_pi(as(z))*spv*cb_kr(mvi, z);
-        mvi = inc(mvi);
-        spv = -spv;
-      }
+      for(int i=0; i < eve::min(size(cis), an+1); ++i) cis[i] = is[i];
       return is[an];
-    }
+    };
+    return with_alloca<Z>(an+1, doit);
   }
 
   //===-------------------------------------------------------------------------------------------
