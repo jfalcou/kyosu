@@ -64,9 +64,13 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
 
   using eve::spherical;
   auto h =  eve::half(eve::as<T>());
+  using c_t = kyosu::complex_t<T>;
+  std::array<c_t, 5> hs;
   for(int j=0; j <= 15; ++j)
   {
     auto c = kyosu::complex(re[j], im[j]);
+    auto hN = kyosu::bessel_h(N-1, c, std::span(js));
+    TTS_RELATIVE_EQUAL(hN, kyosu::bessel_h(N-1, c), tts::prec<T>());
     auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c)))*kyosu::rec(c));
     for(int i=0; i < N; ++i)
     {
@@ -76,6 +80,7 @@ TTS_CASE_WITH ( "Check kyosu::cyl_bessel_jn over real"
       TTS_RELATIVE_EQUAL(kyosu::bessel_j(-i, c), eve::sign_alternate(i)*res, tts::prec<T>());
       TTS_RELATIVE_EQUAL(kyosu::bessel_j[spherical](i, c), kyosu::bessel_j(i+h, c)*fac, tts::prec<T>());
       TTS_RELATIVE_EQUAL(kyosu::bessel_j[spherical](-i, c), kyosu::bessel_j(-i+h, c)*fac, tts::prec<T>());
+      TTS_RELATIVE_EQUAL(kyosu::bessel_h(i, c), hs[i], tts::prec<T>()) << i << " -- " <<  j <<  " -- "<< c << '\n';
     }
   }
 };

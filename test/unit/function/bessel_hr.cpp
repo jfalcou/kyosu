@@ -23,7 +23,7 @@ TTS_CASE_WITH ( "Check kyosu::bessel_hr over real positive order first kind"
     a_t im{8.0000000000000000e+00, -7.0000000000000000e+00, 6.0000000000000000e+00, -5.0000000000000000e+00, 4.0000000000000000e+00, -3.0000000000000000e+00, 2.0000000000000000e+00, -1.0000000000000000e+00, -0.0000000000000000e+00, 1.0000000000000000e+00, -2.0000000000000000e+00, 3.0000000000000000e+00, -4.0000000000000000e+00, 5.0000000000000000e+00, -6.0000000000000000e+00, 7.0000000000000000e+00};
     aN_t reresN16;
     aN_t imresN16;
-    //res are taken from octave 9.2.0 besselj outputs
+    //res are taken from octave 9.2.0 besselh outputs
     int i=0;
     reresN16[i] = a_t{1.4592745005761237e-05,3.5072795151919706e+01,7.3352783961249236e-04,-4.7049943134827863e+01,1.0242147499438968e-03,-3.9203110014578639e+00,-6.6828582150730481e-02,1.7391034227246114e+00,5.8501480583737409e-01,1.7891510294989266e-01,2.5802712856302996e+00,1.6115533951545476e-02,-1.2095976609063673e+01,-9.3243347193101096e-04,-1.0353865856090871e+02,-2.3537668719273835e-04,};
     imresN16[i] = a_t{-8.4648103620906269e-05,3.0245703282366736e+02,3.9271258847814179e-06,1.4039989968151970e+01,6.5703630981507402e-03,-7.7813978484722766e+00,2.0184694363190515e-02,-1.6377141213582707e+00,-1.2133448538831417e+00,-1.5862309536715846e-01,2.6624314493685595e+00,1.1837222855275161e-02,1.5394934001850938e+01,1.9117728141976376e-03,-5.7484294823231480e+01,-6.7457374883424218e-05,};
@@ -60,10 +60,14 @@ TTS_CASE_WITH ( "Check kyosu::bessel_hr over real positive order first kind"
     auto v0 = T(1.0/3.0);
     auto h =  eve::half(eve::as(v0));
     using eve::spherical;
+    using c_t = kyosu::complex_t<T>;
+    std::array<c_t, 5> hs;
     for(int j=0; j <= 15; ++j)
     {
       auto c = kyosu::complex(re[j], im[j]);
-      auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c)))*kyosu::rec(c));
+      auto hv = kyosu::bessel_h(v0+N-1, c, std::span(hs));
+      TTS_RELATIVE_EQUAL(hv, kyosu::bessel_h(v0+(N-1), c), tts::prec<T>());
+       auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c)))*kyosu::rec(c));
       for(int i=0; i < N; ++i)
       {
         auto res = kyosu::complex(reresN16[i][j], imresN16[i][j]);
@@ -71,6 +75,7 @@ TTS_CASE_WITH ( "Check kyosu::bessel_hr over real positive order first kind"
         //       std::cout<< "j " << j  << " c[" << j << "] = " << c << " i " << i << " v " << v << std::endl;
         TTS_RELATIVE_EQUAL(kyosu::bessel_h(v, c), res, tts::prec<T>());
         TTS_RELATIVE_EQUAL(kyosu::bessel_h[spherical](v, c), kyosu::bessel_h(v+h, c)*fac, tts::prec<T>());
+        if (i < 5) TTS_RELATIVE_EQUAL(kyosu::bessel_h(v, c), hs[i], tts::prec<T>()) << i << " -- " <<  j <<  " -- "<< c << '\n';
       }
     }
  }
@@ -90,7 +95,7 @@ TTS_CASE_WITH ( "Check kyosu::bessel_hr over real positive order second kind"
   a_t im{8.0000000000000000e+00, -7.0000000000000000e+00, 6.0000000000000000e+00, -5.0000000000000000e+00, 4.0000000000000000e+00, -3.0000000000000000e+00, 2.0000000000000000e+00, -1.0000000000000000e+00, -0.0000000000000000e+00, 1.0000000000000000e+00, -2.0000000000000000e+00, 3.0000000000000000e+00, -4.0000000000000000e+00, 5.0000000000000000e+00, -6.0000000000000000e+00, 7.0000000000000000e+00};
   aN_t reresN16;
   aN_t imresN16;
-  //res are taken from octave 9.2.0 besselj outputs
+  //res are taken from octave 9.2.0 besselh outputs
   int i=0; //0  -3.333e-01
   reresN16[i] = a_t{5.6180744753631052e+02,1.9134982242364628e-04,-6.6801657845416145e+01,1.6580782600501935e-03,-1.8655932281281185e+01,-1.1035884047036020e-02,9.3510401606779969e-01,-2.4074733650494051e-01,5.8501480583737409e-01,1.8637335471938534e+00,6.5299192284034066e-02,3.8026228294002218e-01,1.5458555674241878e-03,-4.6747620796876376e+01,-6.5488234528677820e-04,-1.0525271173742377e+02,};
   imresN16[i] = a_t{-5.3027323452680434e+02,1.6043676300228429e-04,-1.0129757428658570e+02,-1.4242564801839452e-03,8.0380183560714791e+00,-1.7756053559100392e-02,3.9603394956222089e+00,1.2258861597207744e-01,1.2133448538831417e+00,-6.4551052152940325e-02,3.6338500820839482e-03,-8.2829726838211197e+00,-6.2400547045694896e-03,-9.3696695058438326e+00,-2.9187925183355340e-04,2.7904732975689751e+02,};
@@ -128,11 +133,14 @@ TTS_CASE_WITH ( "Check kyosu::bessel_hr over real positive order second kind"
   using eve::spherical;
   auto v0 = T(1.0/3.0);
   auto h =  eve::half(eve::as(v0));
+  using c_t = kyosu::complex_t<T>;
+  std::array<c_t, 5> hs;
   for(int j=0; j <= 15; ++j)
   {
     auto c = kyosu::complex(re[j], im[j]);
+    auto hv = kyosu::bessel_h[kind_2](v0+N-1, c, std::span(hs));
+    TTS_RELATIVE_EQUAL(hv, kyosu::bessel_h[kind_2](v0+(N-1), c), tts::prec<T>());
     auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c)))*kyosu::rec(c));
-
     for(int i=0; i < N; ++i)
     {
       auto res = kyosu::complex(reresN16[i][j], imresN16[i][j]);
@@ -141,6 +149,8 @@ TTS_CASE_WITH ( "Check kyosu::bessel_hr over real positive order second kind"
       if( ((i < 7) || (sizeof(T) == 8 ) || kyosu::is_not_real(c)) ) // The limitation of these tests with float is due to some overflow pbs when z is real
       TTS_RELATIVE_EQUAL(kyosu::bessel_h[kind_2](v, c), res, tts::prec<T>());
       TTS_RELATIVE_EQUAL(kyosu::bessel_h[kind_2][spherical](v, c), kyosu::bessel_h[kind_2](v+h, c)*fac, tts::prec<T>());
+      if (i < 5)
+        if (j!= 8) TTS_RELATIVE_EQUAL(kyosu::bessel_h[kind_2](v, c), hs[i], tts::prec<T>()) << i << " -- " <<  j <<  " -- "<< c << '\n';
     }
   }
 };
