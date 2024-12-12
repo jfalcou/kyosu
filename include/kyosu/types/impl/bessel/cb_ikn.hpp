@@ -162,9 +162,9 @@ namespace kyosu::_
       else if (n%4 == 2) return complex(eve::mone(eve::as<e_t>()));
       else return complex(eve::zero(eve::as<e_t>()), eve::one(eve::as<e_t>()));
     };
-    auto an =  eve::abs(n);
-    auto jn = bessel_jn(an, muli(z), ris);
-    auto nn = min(size(ris), an);
+    std::size_t an =  eve::abs(n);
+    auto jn = cb_jn(an, muli(z), ris);
+    auto nn = eve::min(size(ris), an);
     for(int i=1; i < nn; ++i) ris[i]*= miton(i);
     return jn*miton(n);
   }
