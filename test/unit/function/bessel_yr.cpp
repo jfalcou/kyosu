@@ -61,9 +61,13 @@ TTS_CASE_WITH ( "Check kyosu::bessel_yr over real positive order"
     auto v0 = T(1.0/3.0);
     auto h =  eve::half(eve::as(v0));
     using eve::spherical;
+    using c_t = kyosu::complex_t<T>;
+    std::array<c_t, 5> ys;
     for(int j=0; j <= 15; ++j)
     {
       auto c = kyosu::complex(re[j], im[j]);
+      auto yv = kyosu::bessel_y(v0+(N-1), c, std::span(ys));
+      TTS_RELATIVE_EQUAL(yv, kyosu::bessel_y(v0+(N-1), c), tts::prec<T>());
       auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c)))*kyosu::rec(c));
       for(int i=0; i < N; ++i)
       {
@@ -72,6 +76,7 @@ TTS_CASE_WITH ( "Check kyosu::bessel_yr over real positive order"
         //       std::cout<< "j " << j  << " c[" << j << "] = " << c << " i " << i << " v " << v << std::endl;
         TTS_RELATIVE_EQUAL(kyosu::bessel_y(v, c), res, tts::prec<T>());
         TTS_RELATIVE_EQUAL(kyosu::bessel_y[spherical](v, c), kyosu::bessel_y(v+h, c)*fac, tts::prec<T>());
+        if (i < 5) TTS_RELATIVE_EQUAL(kyosu::bessel_y(v, c), ys[i], tts::prec<T>()) << i << " -- " <<  j <<  " -- "<< c << '\n';
       }
     }
  }
@@ -128,9 +133,13 @@ TTS_CASE_WITH ( "Check kyosu::bessel_yr over real negative order"
   using eve::spherical;
   auto v0 = T(-1.0/3.0);
   auto h =  eve::half(eve::as(v0));
+  using c_t = kyosu::complex_t<T>;
+  std::array<c_t, 5> ys;
   for(int j=0; j <= 15; ++j)
   {
     auto c = kyosu::complex(re[j], im[j]);
+    auto yv = kyosu::bessel_y(v0-(N-1), c, std::span(ys));
+    TTS_RELATIVE_EQUAL(yv, kyosu::bessel_y(v0-(N-1), c), tts::prec<T>());
     auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c)))*kyosu::rec(c));
 
     for(int i=0; i < N; ++i)
@@ -141,6 +150,8 @@ TTS_CASE_WITH ( "Check kyosu::bessel_yr over real negative order"
       if( ((i < 7) || (sizeof(T) == 8 ) || kyosu::is_not_real(c)) ) // The limitation of these tests with float is due to some overflow pbs when z is real
         TTS_RELATIVE_EQUAL(kyosu::bessel_y(v, c), res, tts::prec<T>());
       TTS_RELATIVE_EQUAL(kyosu::bessel_y[spherical](v, c), kyosu::bessel_y(v+h, c)*fac, tts::prec<T>());
+      if(i < 5)
+        if (j!= 8) TTS_RELATIVE_EQUAL(kyosu::bessel_y(v, c), ys[i], tts::prec<T>()) << i << " -- " <<  j <<  " -- "<< c << " v " << v << '\n';
     }
   }
 };
