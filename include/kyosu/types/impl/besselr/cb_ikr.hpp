@@ -10,9 +10,6 @@
 #include <kyosu/types/impl/bessel/cb_jyn.hpp>
 #include <kyosu/types/impl/besselr/cb_jyr01.hpp>
 #include <kyosu/details/with_alloca.hpp>
-#include <kyosu/functions/cyl_bessel_j.hpp>
-#include <kyosu/functions/cyl_bessel_h1.hpp>
-#include <kyosu/functions/cyl_bessel_h2.hpp>
 
 namespace kyosu::_
 {
@@ -122,7 +119,7 @@ namespace kyosu::_
       auto argzpos = eve::is_gtz(kyosu::arg(z));
       z = if_else(argzpos, conj(z), z);
       auto fac = exp_ipi(-v/2);
-      auto r = fac*cyl_bessel_j(v,kyosu::muli(z));
+      auto r = fac*cb_jr(v,kyosu::muli(z));
       return if_else(argzpos, conj(r), r);
     }
     else

@@ -8,7 +8,6 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/constants/wrapped.hpp>
-#include <kyosu/functions/cyl_bessel_i.hpp>
 
 namespace kyosu
 {
@@ -28,8 +27,8 @@ namespace kyosu
         };
 
         auto [sqzo3, zeta] = zet(z);
-        auto ip = cyl_bessel_i(eve::third(as<u_t>()), zeta);
-        auto im = cyl_bessel_i(-eve::third(as<u_t>()), zeta);
+        auto ip = bessel_i(eve::third(as<u_t>()), zeta);
+        auto im = bessel_i(-eve::third(as<u_t>()), zeta);
         return kumi::tuple{inv_pi(as<u_t>())*sqzo3*(im-ip),  sqzo3*(ip+im)};
       }
       else

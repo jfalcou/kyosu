@@ -7,9 +7,6 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/with_alloca.hpp>
-#include <kyosu/functions/cyl_bessel_jn.hpp>
-#include <kyosu/functions/cyl_bessel_yn.hpp>
-#include <kyosu/functions/cyl_bessel_jyn.hpp>
 
 namespace kyosu::_
 {
