@@ -97,11 +97,11 @@ namespace kyosu::_
       auto [jn, yn] = _::cb_jyn(n, z, js, ys);
       if constexpr(Kind == 1)
       {
-        for(int i = 0; i < min(size(hs), an+1); ++i) hs[i] = js[i]+muli+ys[i];
+        for(int i = 0; i < eve::min(size(hs), an+1); ++i) hs[i] = js[i]+muli+ys[i];
         return jn+muli(yn);
       }
       else{
-        for(int i = 0; i < min(size(hs), an+1); ++i) hs[i] = js[i]+muli-ys[i];
+        for(int i = 0; i < eve::min(size(hs), an+1); ++i) hs[i] = js[i]+muli-ys[i];
         return jn-muli(yn);
       }
     };

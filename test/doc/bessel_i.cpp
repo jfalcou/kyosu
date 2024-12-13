@@ -10,14 +10,13 @@ int main()
   auto v = -(2+1/3.0);
   int nb = int(eve::abs(v)+1);
   std::cout << "z                    " << z << std::endl;
-  std::vector<decltype(z)> js(nb);
-  kyosu::cyl_bessel_y(v, z, std::span(js));
+  std::vector<decltype(z)> is(nb);
+  kyosu::bessel_y(v, z, std::span(is));
   auto inc = eve::sign(v);
   auto v0 =  eve::frac(v);
   for(int n=0; n < nb; ++n)
   {
-    std::cout << "js[" << n << "]              = " << js[n] << std::endl;
-    std::cout << "j(" << v0 << ",  z)          = " << kyosu::cyl_bessel_y(v0, z) << std::endl;
+    std::cout << "is[" << n << "]              = " << is[n] << std::endl;
     std::cout << "bessel_y[cylindrical](v0, z) = " << kyosu::bessel_y(v0, z) << std::endl;
     v0 += inc;
   }

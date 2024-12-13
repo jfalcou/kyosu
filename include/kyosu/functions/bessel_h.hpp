@@ -123,7 +123,7 @@ namespace kyosu
 //!
 //!     1. returns \f$H_n\f$(z) (cylindrical first kind).
 //!     2. Same as 1,  but cis is filled by the lesser orders.
-//!     3. returns \f$j_n\f$(z) (spherical).
+//!     3. returns \f$h_n\f$(z) (spherical).
 //!     4. Same as 3,  but sis is filled by the lesser orders.
 //!     5. Same as 1., 2., 3., 4. but returns second kind Hankel functions values.
 //!     6. Same as 1., 2., 3., 4. but returns second kind spherical Hankel functions values.
