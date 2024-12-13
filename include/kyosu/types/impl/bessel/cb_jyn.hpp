@@ -16,15 +16,6 @@
 namespace kyosu::_
 {
   /////////////////////////////////
-  // needed in implementations of
-  // cyl_bessel_j0
-  // cyl_bessel_j1
-  // cyl_bessel_jn
-  // cyl_bessel_y0
-  // cyl_bessel_y1
-  // cyl_bessel_yn
-  // cyl_bessel_jyn
-  /////////////////////////////////
   // utilities
   // mkjs
   // cb_j0
@@ -32,12 +23,8 @@ namespace kyosu::_
   // cb_y0
   // cb_y1
   // cbjyn
-  ////////////////////////////////
-  // no heap allocation is done by these functions
-  // cyl_bessel_jyn computes all  j_i(z) and y_i(z) for 0 <= i <= n if n >= 0 (resp n <= i <= 0 if n <= 0)
-  // and put the result in two ranges that are to be allocated by the caller.
-  // call to cyl_bessel_jn and cyl_bessel_yn that need calling cyl_bessel_jyn do an internal quick allocaton
-  // on the stack using __builtin_alloca_with_align.
+  // cbjyna
+  /////////////////////////////////
 
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------

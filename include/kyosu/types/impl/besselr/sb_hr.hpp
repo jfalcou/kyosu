@@ -10,11 +10,7 @@
 #include <kyosu/types/impl/besselr/cb_jyr.hpp>
 namespace kyosu::_
 {
-  /////////////////////////////////
-  // needed by the implementations of
-  // sph_bessel_h1
-  // sph_bessel_h2
-  // sph_bessel_h12
+
   /////////////////////////////////
   // utilities
   // sb_h12r
@@ -33,11 +29,11 @@ namespace kyosu::_
     if constexpr(Kind == 1)
       return sb_jr(v, z)+muli(sb_yr(v, z));
     else
-      return sb_jr(v, z)-muli(sb_yr(v, z));     
+      return sb_jr(v, z)-muli(sb_yr(v, z));
   }
 
 
-  
+
   //===-------------------------------------------------------------------------------------------
   //  sb_h12r
   //===-------------------------------------------------------------------------------------------

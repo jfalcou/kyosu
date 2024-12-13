@@ -11,11 +11,6 @@
 namespace kyosu::_
 {
   /////////////////////////////////
-  // needed by the implementations of
-  // cyl_bessel_h1
-  // cyl_bessel_h2
-  // cyl_bessel_h12
-  /////////////////////////////////
   // utilities
   // cb_h12r
   // cb_h1r

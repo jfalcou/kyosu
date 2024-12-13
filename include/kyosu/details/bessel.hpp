@@ -32,7 +32,7 @@
 //!
 //! spherical functions
 //!
-//! As in DMLF we restrict the implementation to non-negative integral orders
+//! Contrarily to DMLF we do not restrict the implementation to non-negative integral orders
 //!
 //! The computation scheme of \f$j_n\f$, \f$y_n\f$, \f$h_n^{(1)}\f$ and  \f$h_n^{(2)}\f$
 //! follows the article of Liang-Wu Kai (On the computation of spherical Bessel functions of complex arguments,
@@ -62,45 +62,41 @@
 //!
 //! spherical functions
 //!
-//!  Following DLMF 10.47 spherical functions are only implemented for integral non negative orders.
+//! Contrarily to DMLF we do not restrict the implementation to non-negative integral orders
+//! Non-integral and negative orders are computed via their relation to cylindrical
 //!
 //!======================================================================================================================
 //!
 //!  Rationale of the interface
 //!
-//!  the functions are all named [cyl, sph]_bessel_xxx xxx designing the chosen bessel function(s).
+//!  the functions are all named bessel_x x designing the chosen bessel function(s) i.e. j, i, h, k.
+//!   * the options `cylindrical` and `spherical` are always available.
+//!   * the options `kind_1` and `kind_2` are also available for some functions : i.e.
+//!  no option means  `cylindrical` and `kind_1`
+//!
 //!  The choice not to make order an simd parameter is driven by two causes
 //!
 //!    * The complexity involved in the merging of test on order and on evaluation arguments preclude the
 //!      SIMD expected performances
 //!    * many bessel functions of arithmetic range order (with step one) can be computed with almost no additionnal cost
 //!      provided that the returned value is complex (scalar or simd). So for each possible call another is provided
-//!      allowing additionnal output parameters, the rule being that if aaa_bessel_xxx(n, z, output) is called:
+//!      allowing additionnal output parameters, the rule being that if bessel_x(n, z, output) is called:
 //!
-//!        * the caller must provide output as a random access range of kyosu::complex allocated to receive
-//!          N = int(trunc(abs(n)+1)) values.
+//!        * the caller must provide output as a std::span of kyosu::complex allocated to receive N values
+//!           values.
 //!        * These values will be the same as the result of calling :
-//!          `for (int i = 0; i <= N;  ++i) output[i] = aaa_bessel_xxx(n0+sgn*i, z)`
+//!          `for (int i = 0; i < N;  ++i) output[i] = bessel_x(n0+sgn*i, z)`
 //!          where n0 is the fractionnal part of n and sgn is the sign of n.
 //!
 //!    * Moreover jy and ik functions can be computed together and two ouput parameters can be used
 //!
-//!  values of xxx
-//!
-//!   * one parameter
-//!      j0 j1 i0 i1 y0 y1 k0 k1 h10 h11 h20 h21 only admit the z parameter which can be any cayley-dickson type
-//!   * two parameters or three parameters
-//!      * jn in yn kn h1n h2n  the first one is the integer order, the second  z which can be any cayley-dickson type
-//!      * j  i  y  k  h1  h2   the first one is the floating order, the second  z which can be any cayley-dickson type
-//!      * if present the third parameter will be the output parameter as described above and z must be floating or complex
-//!   * two parameters or four parameters
-//!      * jyn  ikn h12n the first one is the integer order, the second  z which can be any cayley-dickson type
-//!      * jy   ik  h12 the first one is the floating order, the second  z which can be any cayley-dickson type
-//!      * if present the third and fourth parameter will be the output parameters as described above
-//!        and z must be floating or complex
+//!======================================================================================================================
+
 
 #include <kyosu/types/impl/detail/bessel_utils.hpp>
-
+// These files only contain implementation details and do not contain any function
+// belonging to the user interface
+//
 // bessels of integral order
 #include <kyosu/types/impl/bessel/cb_jyn.hpp>
 #include <kyosu/types/impl/bessel/sb_jyn.hpp>

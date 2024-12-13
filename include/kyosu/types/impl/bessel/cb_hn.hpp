@@ -11,16 +11,6 @@
 namespace kyosu::_
 {
   /////////////////////////////////
-  // needed for implementations of
-  // cyl_bessel_h1_0
-  // cyl_bessel_h1_1
-  // cyl_bessel_h1n
-  // cyl_bessel_h2_0
-  // cyl_bessel_h2_1
-  // cyl_bessel_h2n
-  // cyl_bessel_h12n
-  // cyl_bessel_k0
-  /////////////////////////////////
   // utilities
   // cb_h12n
   // cb_h1_0
@@ -32,29 +22,29 @@ namespace kyosu::_
   /////////////////////////////////
   // implementation is done using j and y functions
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto cb_h1_0(Z z) noexcept
-  {
-    return  cb_j0(z)+muli(cb_y0(z));
-  }
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto cb_h1_0(Z z) noexcept
+//   {
+//     return  cb_j0(z)+muli(cb_y0(z));
+//   }
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto cb_h2_0(Z z) noexcept
-  {
-    return cb_j0(z)-muli(cb_y0(z));
-  }
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto cb_h2_0(Z z) noexcept
+//   {
+//     return cb_j0(z)-muli(cb_y0(z));
+//   }
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto cb_h1_1(Z z) noexcept
-  {
-    return   cb_j1(z)+muli(cb_y1(z));
-  }
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto cb_h1_1(Z z) noexcept
+//   {
+//     return   cb_j1(z)+muli(cb_y1(z));
+//   }
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto cb_h2_1(Z z) noexcept
-  {
-    return  cb_j1(z)-muli(cb_y1(z));
-  }
+//   template<typename Z> KYOSU_FORCEINLINE
+//   auto cb_h2_1(Z z) noexcept
+//   {
+//     return  cb_j1(z)-muli(cb_y1(z));
+//   }
 
 
 //   template<typename Z> KYOSU_FORCEINLINE
