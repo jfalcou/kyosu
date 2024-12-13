@@ -101,13 +101,13 @@ namespace kyosu
 //!   {
 //!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_h(N n, T z)                                       noexcept; //1
 //!      template<eve;scalar_value N, kyosu::concepts::real T>              constexpr T    bessel_h(N n, T z)                                       noexcept; //1
-//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_h(N n, T z, std::span<Z, S> cis)                  noexcept; //2
-//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_h(N n, T z, std::span<Z, S> cis)                  noexcept; //2
+//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_h(N n, T z, std::span<Z, S> chs)                  noexcept; //2
+//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_h(N n, T z, std::span<Z, S> chs)                  noexcept; //2
 //!
 //!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_h[spherical](N n, T z)                            noexcept; //3
 //!      template<eve;scalar_value N, kyosu::concepts::real T>              constexpr T    bessel_h[spherical](N n, T z)                            noexcept; //3
-//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_h[spherical](N n, T z, std::span<Z, S> sis)       noexcept; //4
-//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_h[spherical](N n, T z, std::span<Z, S> sis)       noexcept; //4
+//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_h[spherical](N n, T z, std::span<Z, S> shs)       noexcept; //4
+//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_h[spherical](N n, T z, std::span<Z, S> shs)       noexcept; //4
 //!
 //!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_h[kind_2](/*any previous overloads*/)             noexcept; //5
 //!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_h[kind_2][spherical](/*any previous overloads*/)  noexcept; //6
@@ -118,13 +118,14 @@ namespace kyosu
 //!
 //!     * `n`: scalar  order (integral or floating)
 //!     * `z`: Value to process.
+//!     * `shs`, `chs`  : std::span of T
 //!
 //!   **Return value**
 //!
 //!     1. returns \f$H_n\f$(z) (cylindrical first kind).
-//!     2. Same as 1,  but cis is filled by the lesser orders.
+//!     2. Same as 1,  but chs is filled by the lesser orders.
 //!     3. returns \f$h_n\f$(z) (spherical).
-//!     4. Same as 3,  but sis is filled by the lesser orders.
+//!     4. Same as 3,  but shs is filled by the lesser orders.
 //!     5. Same as 1., 2., 3., 4. but returns second kind Hankel functions values.
 //!     6. Same as 1., 2., 3., 4. but returns second kind spherical Hankel functions values.
 //!
@@ -134,6 +135,11 @@ namespace kyosu
 //!        with \f$+\f$ sign if \f$n\f$ is positive and  \f$-\f$ sign if \f$n\f$ is negative.
 //!    * The span parameters are filled according the minimum of their allocated size and \f$i\f$.
 //!    * `cylindical` and `kind_1` options can be used and their results are identical to the regular call (no option).
+//!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Hankel Function](https://mathworld.wolfram.com/HankelFunction.html)
+//!   *  [Wikipedia: Bessel function](https://en.wikipedia.org/wiki/Bessel_function)
+//!   *  [DLMF: Bessel functions](https://dlmf.nist.gov/10.2)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/bessel_h.cpp}

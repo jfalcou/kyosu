@@ -113,12 +113,13 @@ namespace kyosu
 //!
 //!     * `n`: scalar  order (integral or floating)
 //!     * `z`: Value to process.
+//!     * `sis`, `cis`  : std::span of T
 //!
 //!   **Return value**
 //!
-//!     1. returns \f$J_n\f$(z) (cylindrical).
+//!     1. returns \f$K_n\f$(z) (cylindrical).
 //!     2. Same as 1,  but cis is filled by the lesser orders.
-//!     3. returns \f$j_n\f$(z) (spherical).
+//!     3. returns \f$k_n\f$(z) (spherical).
 //!     4. Same as 3,  but sis is filled by the lesser orders.
 //!
 //!  @note
@@ -127,6 +128,12 @@ namespace kyosu
 //!        with \f$+\f$ sign if \f$n\f$ is positive and  \f$-\f$ sign if \f$n\f$ is negative.
 //!    * The span parameters are filled according the minimum of their allocated size and \f$i\f$.
 //!    * `cylindical` option can be used and its result is identical to the regular call (no option).
+//!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Modified Bessel Function of the second Kind](https://mathworld.wolfram.com/BesselFunctionoftheSecondKind.html)
+//!   *  [Wolfram MathWorld: Modified Spherical Bessel Function of the second Kind](https://mathworld.wolfram.com/SphericalBesselFunctionoftheSecondKind.html)
+//!   *  [Wikipedia: Bessel function](https://en.wikipedia.org/wiki/Bessel_function)
+//!   *  [DLMF: Modified Bessel functions](https://dlmf.nist.gov/10.25)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/bessel_k.cpp}

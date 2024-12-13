@@ -99,12 +99,12 @@ namespace kyosu
 //!   {
 //!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_y(N n, T z)                                 noexcept; //1
 //!      template<eve;scalar_value N, kyosu::concepts::real T>              constexpr T    bessel_y(N n, T z)                                 noexcept; //1
-//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_y(N n, T z, std::span<Z, S> cjs)            noexcept; //2
-//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_y(N n, T z, std::span<Z, S> cjs)            noexcept; //2
+//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_y(N n, T z, std::span<Z, S> cys)            noexcept; //2
+//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_y(N n, T z, std::span<Z, S> cys)            noexcept; //2
 //!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_y[spherical](N n, T z)                      noexcept; //3
 //!      template<eve;scalar_value N, kyosu::concepts::real T>              constexpr T    bessel_y[spherical](N n, T z)                      noexcept; //3
-//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_y[spherical](N n, T z, std::span<Z, S> sjs) noexcept; //4
-//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_y[spherical](N n, T z, std::span<Z, S> sjs) noexcept; //4
+//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_y[spherical](N n, T z, std::span<Z, S> sys) noexcept; //4
+//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_y[spherical](N n, T z, std::span<Z, S> sys) noexcept; //4
 //!   }
 //!   @endcode
 //!
@@ -112,13 +112,14 @@ namespace kyosu
 //!
 //!     * `n`: scalar  order (integral or floating)
 //!     * `z`: Value to process.
+//!     * `sys`, `cys`  : std::span of T
 //!
 //!   **Return value**
 //!
-//!     1. returns \f$J_n\f$(z) (cylindrical).
-//!     2. Same as 1,  but cjs is filled by the lesser orders.
-//!     3. returns \f$j_n\f$(z) (spherical).
-//!     4. Same as 3,  but sjs is filled by the lesser orders.
+//!     1. returns \f$Y_n\f$(z) (cylindrical).
+//!     2. Same as 1,  but cys is filled by the lesser orders.
+//!     3. returns \f$y_n\f$(z) (spherical).
+//!     4. Same as 3,  but sys is filled by the lesser orders.
 //!
 //!  @note
 //!    * Let \f$ i =  \lfloor |n| \rfloor \f$ and \f$ j=|n|-i\f$. If \f$n\f$ is
@@ -126,6 +127,12 @@ namespace kyosu
 //!        with \f$+\f$ sign if \f$n\f$ is positive and  \f$-\f$ sign if \f$n\f$ is negative.
 //!    * The span parameters are filled according the minimum of their allocated size and \f$i\f$.
 //!    * `cylindical` option can be used and its result is identical to the regular call (no option).
+//!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Bessel Function of the Second Kind](https://mathworld.wolfram.com/BesselFunctionoftheSecondKind.html)
+//!   *  [Wolfram MathWorld: Spherical Bessel Function of the Second Kind](https://mathworld.wolfram.com/SphericalBesselFunctionoftheSecondKind.html)
+//!   *  [Wikipedia: Bessel function](https://en.wikipedia.org/wiki/Bessel_function)
+//!   *  [DLMF: Bessel functions](https://dlmf.nist.gov/10.2)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/bessel_y.cpp}

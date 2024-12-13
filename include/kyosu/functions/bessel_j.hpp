@@ -112,6 +112,7 @@ namespace kyosu
 //!
 //!     * `n`: scalar  order (integral or floating)
 //!     * `z`: Value to process.
+//!     * `sjs`, `cjs`  : std::span of T
 //!
 //!   **Return value**
 //!
@@ -126,6 +127,12 @@ namespace kyosu
 //!        with \f$+\f$ sign if \f$n\f$ is positive and  \f$-\f$ sign if \f$n\f$ is negative.
 //!    * The span parameters are filled according the minimum of their allocated size and \f$i\f$.
 //!    * `cylindical` option can be used and its result is identical to the regular call (no option).
+//!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Bessel Function of the First Kind](https://mathworld.wolfram.com/BesselFunctionoftheFirstKind.html)
+//!   *  [Wolfram MathWorld: Spherical Bessel Function of the First Kind](https://mathworld.wolfram.com/SphericalBesselFunctionoftheFirstKind.html)
+//!   *  [Wikipedia: Bessel function](https://en.wikipedia.org/wiki/Bessel_function)
+//!   *  [DLMF: Bessel functions](https://dlmf.nist.gov/10.2)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/bessel_j.cpp}
