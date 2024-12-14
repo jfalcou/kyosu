@@ -98,8 +98,12 @@ namespace kyosu
 //!
 //!   3. `log(z)` is semantically equivalent to `log(abs(z)) + sign(pure(z)) * arg(z)`
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Logarithm](https://mathworld.wolfram.com/Logarithm.html)
+//!   *  [DLMF: Logarithm](https://dlmf.nist.gov/4.2)
+//!   *  [Wikipedia: Logarithm](https://en.wikipedia.org/wiki/Logarithm)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/log.cpp}
 //======================================================================================================================
   inline constexpr auto log = eve::functor<log_t>;

@@ -69,6 +69,9 @@ namespace kyosu
 //!       The modulus is the square root of the sum of the squares of the absolute value of each component.
 //!    2. With the raw option no provision is made to enhance accuracy and avoid overflows
 //!
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: complex abs](https://en.cppreference.com/w/cpp/numeric/complex/abs)
+//!
 //!  @groupheader{Example}
 //!  @godbolt{doc/abs.cpp}
 //======================================================================================================================

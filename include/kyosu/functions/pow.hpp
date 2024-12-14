@@ -101,6 +101,10 @@ namespace kyosu
 //!      4. pow can accept an integral typed second parameter,  in this case it is the russian peasant algorithm
 //!         that is used (feasible as every monogen ideals are commutative).
 //!
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: complex pow](https://en.cppreference.com/w/cpp/numeric/complex/pow)
+//!   *  [Wolfram MathWorld: Power](https://mathworld.wolfram.com/Power.html)
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/pow.cpp}

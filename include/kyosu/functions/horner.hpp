@@ -109,9 +109,10 @@ namespace kyosu
 //!        *  If x is scalar, the polynomials are all computed at the same point
 //!        *  If x is simd, the nth polynomial is computed on the nth value of x
 //!
+//!  @groupheader{External references}
+//!   *  [Wikipedia: Horner's method](https://en.wikipedia.org/wiki/Horner%27s_method)
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/horner.cpp}
 //======================================================================================================================
   inline constexpr auto horner = eve::functor<horner_t>;

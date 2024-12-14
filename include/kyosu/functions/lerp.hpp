@@ -62,6 +62,9 @@ namespace kyosu
 //!
 //!    @see slerp for better unitary quaternion (spheroidal) interpolation.
 //!
+//!  @groupheader{External references}
+//!   *  [Wikipedia: Linear interpolation](https://en.wikipedia.org/wiki/Linear_interpolation)
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/lerp.cpp}

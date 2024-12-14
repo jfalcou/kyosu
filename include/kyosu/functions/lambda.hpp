@@ -74,8 +74,11 @@ namespace kyosu
 //!
 //!    Returns the Dirichlet sum \f$  \displaystyle \sum_0^\infty \frac{1}{(2n+1)^z}\f$
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Dirichlet lambda](https://mathworld.wolfram.com/DirichletLambdaFunction.html)
+//!   *  [Wikipedia: Dirichlet series](https://en.wikipedia.org/wiki/Dirichlet_series)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/lambda.cpp}
 //======================================================================================================================
   inline constexpr auto lambda = eve::functor<lambda_t>;

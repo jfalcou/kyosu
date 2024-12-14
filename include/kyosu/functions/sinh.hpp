@@ -103,6 +103,11 @@ namespace kyosu
 //!
 //!   3. Is semantically equivalent to (exp(z)-exp(-z))/2.
 //!
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: complex sinh](https://en.cppreference.com/w/cpp/numeric/complex/sinh)
+//!   *  [Wolfram MathWorld: Hyperbolic Sine](https://mathworld.wolfram.com/HyperbolicSine.html)
+//!   *  [Wikipedia: hyperbolic functions](https://en.wikipedia.org/wiki/Hyperbolic_functions)
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sinh.cpp}

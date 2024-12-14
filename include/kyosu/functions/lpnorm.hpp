@@ -60,8 +60,10 @@ namespace kyosu
 //!
 //!     Returns \f$ \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \f$.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wikipedia: Error Function](https://en.wikipedia.org/wiki/Lp_space)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/lpnorm.cpp}
 //======================================================================================================================
   inline constexpr auto lpnorm = eve::functor<lpnorm_t>;

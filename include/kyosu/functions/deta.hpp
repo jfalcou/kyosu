@@ -61,8 +61,10 @@ namespace kyosu
 //!
 //!   Returns the Dirichlet sum \f$  \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\f$
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wikipedia: Dirichlet series](https://en.wikipedia.org/wiki/Dirichlet_series)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/deta.cpp}
 //======================================================================================================================
   inline constexpr auto deta = eve::functor<deta_t>;

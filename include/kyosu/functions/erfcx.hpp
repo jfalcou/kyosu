@@ -74,8 +74,10 @@ namespace kyosu
 //!
 //!   2. The value of the normalized complementary error function is returned.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wikipedia: Error function](https://en.wikipedia.org/wiki/Error_function)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/erfcx.cpp}
 //======================================================================================================================
   inline constexpr auto erfcx = eve::functor<erfcx_t>;

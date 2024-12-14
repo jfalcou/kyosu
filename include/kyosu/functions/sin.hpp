@@ -70,8 +70,12 @@ namespace kyosu
 //!       where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!        \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: complex sin](https://en.cppreference.com/w/cpp/numeric/complex/sin)
+//!   *  [Wolfram MathWorld: Sinine](https://mathworld.wolfram.com/Sine.html)
+//!   *  [Wikipedia: sinus](https://fr.wikipedia.org/wiki/sinus)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/sin.cpp}
 //======================================================================================================================
   inline constexpr auto sin = eve::functor<sin_t>;

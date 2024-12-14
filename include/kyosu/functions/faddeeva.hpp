@@ -56,8 +56,11 @@ namespace kyosu
 //!
 //!   Returns \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex complementary error function
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [DLMF: Error Functions](https://dlmf.nist.gov/7.21)
+//!   *  [Wikipedia: Faddeeva function](https://en.wikipedia.org/wiki/Faddeeva_function)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/faddeeva.cpp}
 //======================================================================================================================
   inline constexpr auto faddeeva = eve::functor<faddeeva_t>;

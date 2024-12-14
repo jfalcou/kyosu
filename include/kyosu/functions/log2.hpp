@@ -78,8 +78,10 @@ namespace kyosu
 //!   1.  a real typed input z is treated as if `complex(z)` was entered.
 //!   2.  returns [log](@ref kyosu::log)(z)/log_2(as(z)).
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wikipedia: Binary Logarithm](https://en.wikipedia.org/wiki/Binary_logarithm)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/log2.cpp}
 //======================================================================================================================
   inline constexpr auto log2 = eve::functor<log2_t>;

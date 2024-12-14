@@ -77,8 +77,12 @@ namespace kyosu
 //!
 //!   Returns the imaginary error function \f$ \displaystyle \mathrm{erfi}(z) = -i\mathrm{erf}(iz)\f$
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Erfi](https://mathworld.wolfram.com/Erfi.html)
+//!   *  [DLMF](https://dlmf.nist.gov/7.1)
+//!   *  [Wikipedia: Error Function](https://en.wikipedia.org/wiki/Error_function)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/erfi.cpp}
 //======================================================================================================================
   inline constexpr auto erfi = eve::functor<erfi_t>;
