@@ -62,8 +62,12 @@ namespace kyosu
 //!
 //!   * The value of the error function is returned.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Erf](https://mathworld.wolfram.com/Erf.html)
+//!   *  [DLMF: Error Functions](https://dlmf.nist.gov/7.2#i)
+//!   *  [Wikipedia: Error Function](https://en.wikipedia.org/wiki/Error_function)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/erf.cpp}
 //======================================================================================================================
   inline constexpr auto erf = eve::functor<erf_t>;

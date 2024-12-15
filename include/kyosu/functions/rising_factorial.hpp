@@ -56,8 +56,11 @@ namespace kyosu
 //!
 //!      \f$\displaystyle \frac{\Gamma(a+x)}{\Gamma(a)}\f$ is returned.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Rising Factorial](https://mathworld.wolfram.com/RisingFactorial.html)
+//!   *  [Wikipedia: Error Function](https://en.wikipedia.org/wiki/Falling_and_rising_factorials)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/rising_factorial.cpp}
 //======================================================================================================================
   inline constexpr auto rising_factorial = eve::functor<rising_factorial_t>;

@@ -63,8 +63,10 @@ namespace kyosu
 //!
 //!  @note This is NOT `lpnorm(1, x0, xs...)` which is the \f$l_1\f$ norm of \f$l_2\f$ norm of its arguments.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: L1 norm](https://mathworld.wolfram.com/L1-Norm.html)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/manhattan.cpp}
 //======================================================================================================================
   inline constexpr auto manhattan = eve::functor<manhattan_t>;

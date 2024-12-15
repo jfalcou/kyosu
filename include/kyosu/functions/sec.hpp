@@ -56,8 +56,10 @@ namespace kyosu
 //!
 //!    Returns the secant of the argument.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld](https://mathworld.wolfram.com/Secant.html)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/sec.cpp}
 //======================================================================================================================
   inline constexpr auto sec = eve::functor<sec_t>;

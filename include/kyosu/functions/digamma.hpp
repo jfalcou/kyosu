@@ -57,8 +57,10 @@ namespace kyosu
 //!
 //!     The value of the Digamma function: \f$\frac{\Gamma'(z)}{\Gamma(z)}\f$ is returned.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wikipedia: Digamma function](https://en.wikipedia.org/wiki/Digamma_function)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/digamma.cpp}
 //======================================================================================================================
   inline constexpr auto digamma = eve::functor<digamma_t>;

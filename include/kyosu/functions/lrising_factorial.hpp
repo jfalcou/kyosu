@@ -57,8 +57,11 @@ namespace kyosu
 //!      \f$\displaystyle \log\left(\frac{\Gamma(a+x)}{\Gamma(a)}\right)\f$ is returned.
 //!      If all iputs are real typed they are reated as complex ones.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Rising Factorial](https://mathworld.wolfram.com/RisingFactorial.html)
+//!   *  [Wikipedia: Error Function](https://en.wikipedia.org/wiki/Falling_and_rising_factorials)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/lrising_factorial.cpp}
 //======================================================================================================================
   inline constexpr auto lrising_factorial = eve::functor<lrising_factorial_t>;

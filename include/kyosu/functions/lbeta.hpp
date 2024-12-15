@@ -57,8 +57,10 @@ namespace kyosu
 //!
 //!    `log(beta(x, y))`.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Beta Function](https://mathworld.wolfram.com/BetaFunction.html)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/lbeta.cpp}
 //======================================================================================================================
   inline constexpr auto lbeta = eve::functor<lbeta_t>;

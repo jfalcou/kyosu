@@ -65,7 +65,6 @@ namespace kyosu
 //!   *  [Wolfram MathWorld: Beta Function](https://mathworld.wolfram.com/BetaFunction.html)
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/beta.cpp}
 //======================================================================================================================
   inline constexpr auto beta = eve::functor<beta_t>;

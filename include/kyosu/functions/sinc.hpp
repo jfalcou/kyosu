@@ -66,8 +66,11 @@ namespace kyosu
 //!
 //!     Returns the sine cardinal of the argument.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wikipedia](https://fr.wikipedia.org/wiki/Sinus_cardinal)
+//!   *  [Wolfram MathWorld](https://mathworld.wolfram.com/SineCardinalFunction.html)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/sinc.cpp}
 //======================================================================================================================
   inline constexpr auto sinc = eve::functor<sinc_t>;

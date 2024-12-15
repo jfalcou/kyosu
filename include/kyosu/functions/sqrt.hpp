@@ -75,6 +75,11 @@ namespace kyosu
 //!
 //!     2. Returns a square root of z.
 //!
+//!  @groupheader{External references}
+//!   *  [C++ standard reference: complex cosh](https://en.cppreference.com/w/cpp/numeric/complex/sqrt)
+//!   *  [Wolfram MathWorld: Square Root](https://mathworld.wolfram.com/SquareRoot.html)
+//!   *  [Wikipedia: Square root](https://en.wikipedia.org/wiki/Square_root)
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/sqrt.cpp}

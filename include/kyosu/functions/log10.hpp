@@ -75,9 +75,11 @@ namespace kyosu
 //!   1.  a real typed input z is treated as if `complex(z)` was entered.
 //!   2.  returns [log](@ref kyosu::log)(z)/log_10(as(z)).
 //!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Common Logarithm](https://mathworld.wolfram.com/CommonLogarithm.html)
+//!   *  [Wikipedia: Logarithm](https://en.wikipedia.org/wiki/Logarithm)
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/log10.cpp}
 //======================================================================================================================
   inline constexpr auto log10 = eve::functor<log10_t>;
