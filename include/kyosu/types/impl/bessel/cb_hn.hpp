@@ -74,10 +74,6 @@ namespace kyosu::_
     return kumi::tuple{h1s[n], h2s[n]};
   }
 
-  ///////////////////////////////////////////////////////////////
-  //new
-  ///////////////////////////////////////////////////////////////
-
   template<int Kind, typename Z> KYOSU_FORCEINLINE
   auto cb_hn(int n, Z z) noexcept
   {

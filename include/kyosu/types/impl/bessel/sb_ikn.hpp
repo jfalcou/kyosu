@@ -57,20 +57,6 @@ namespace kyosu::_
     return r;
   }
 
-//   template<typename Z> KYOSU_FORCEINLINE
-//   auto sb_i2_0(Z z) noexcept
-//   {
-//     return cosh(z)/z;
-//   }
-
-//   template<typename Z> KYOSU_FORCEINLINE
-//   auto sb_i2_1(Z z) noexcept
-//   {
-//     auto [sh, ch] = sinhcosh(z);
-//     auto rz = rec(z);
-//     return fnma(ch, rz, sh)*rz;
-//   }
-
   template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto sb_i1n(N n, Z z) noexcept
   {
@@ -80,7 +66,6 @@ namespace kyosu::_
       return riton<e_t>(n)*sb_jn(n,muli(z));
     }
   }
-
 
   template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto sb_i2n(N n, Z z) noexcept

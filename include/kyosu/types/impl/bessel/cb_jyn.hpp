@@ -66,7 +66,6 @@ namespace kyosu::_
 
     auto ascending_series_cyl_j0 = [](auto z)
       {
-//        std::cout << "ascending_series_cyl_j0" << std::endl;
         // Ascending Series from G. N. Watson 'A treatise on the
         //  theory of Bessel functions', 2ed, Cambridge, 1996,
         //  Chapter II, equation (3); or from Equation 9.1.12 of
@@ -93,7 +92,6 @@ namespace kyosu::_
     auto semiconvergent_series_cyl_j0 = [saz](auto z) {
       auto bound_compute = [saz]()
       {
-//        std::cout << "semiconvergent_series_cyl_j0" << std::endl;
         auto bds = eve::if_else(saz < 50*50, e_t(10), e_t(8));
         bds = eve::if_else(saz < 35*35, e_t(12), bds);
         bds = eve::if_else(saz < 12*12, e_t(0),  bds);
@@ -600,8 +598,7 @@ namespace kyosu::_
   template<eve::integral_scalar_value N, typename Z>
   auto cb_yn(N n, Z z) noexcept
   {
-    std::span<Z, 0> dummy;
-    return cb_yn(n, z, dummy);
+    return cb_yn(n, z, std::span<Z, 0>());
   }
 
   //===-------------------------------------------------------------------------------------------
