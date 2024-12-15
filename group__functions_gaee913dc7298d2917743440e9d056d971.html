@@ -155,7 +155,7 @@ $(document).ready(function(){initNavTree('group__functions_gaee913dc7298d2917743
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__traits_ga1f1ea0fcc1043d2205891dcbf891b309.html#ga1f1ea0fcc1043d2205891dcbf891b309">as_real_type_t&lt;T&gt;</a> <a class="code hl_variable" href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">abs</a>[raw](T z) <span class="keyword">noexcept</span>;  <span class="comment">// 2</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::real T&gt;           <span class="keyword">constexpr</span> T                 <a class="code hl_variable" href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">abs</a>[raw](T z) <span class="keyword">noexcept</span>;  <span class="comment">// 2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaee913dc7298d2917743440e9d056d971_html_gaee913dc7298d2917743440e9d056d971"><div class="ttname"><a href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">kyosu::abs</a></div><div class="ttdeci">constexpr auto abs</div><div class="ttdoc">Computes the absolute value of the parameter.</div><div class="ttdef"><b>Definition:</b> abs.hpp:75</div></div>
+<div class="ttc" id="agroup__functions_gaee913dc7298d2917743440e9d056d971_html_gaee913dc7298d2917743440e9d056d971"><div class="ttname"><a href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">kyosu::abs</a></div><div class="ttdeci">constexpr auto abs</div><div class="ttdoc">Computes the absolute value of the parameter.</div><div class="ttdef"><b>Definition:</b> abs.hpp:78</div></div>
 <div class="ttc" id="agroup__traits_ga1f1ea0fcc1043d2205891dcbf891b309_html_ga1f1ea0fcc1043d2205891dcbf891b309"><div class="ttname"><a href="group__traits_ga1f1ea0fcc1043d2205891dcbf891b309.html#ga1f1ea0fcc1043d2205891dcbf891b309">kyosu::as_real_type_t</a></div><div class="ttdeci">typename as_real_type&lt; T &gt;::type as_real_type_t</div><div class="ttdoc">Compute the real type associated to a Cayley-Dickson-like type.</div><div class="ttdef"><b>Definition:</b> traits.hpp:80</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
@@ -167,6 +167,10 @@ $(document).ready(function(){initNavTree('group__functions_gaee913dc7298d2917743
 <li>The modulus of its parameter (always a floating ordered value). The modulus is the square root of the sum of the squares of the absolute value of each component.</li>
 <li>With the raw option no provision is made to enhance accuracy and avoid overflows</li>
 </ol>
+<h2 class="groupheader">External references </h2>
+<ul>
+<li><a href="https://en.cppreference.com/w/cpp/numeric/complex/abs">C++ standard reference: complex abs</a></li>
+</ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

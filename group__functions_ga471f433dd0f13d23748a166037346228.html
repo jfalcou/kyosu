@@ -160,7 +160,7 @@ $(document).ready(function(){initNavTree('group__functions_ga471f433dd0f13d23748
 <div class="line">  <span class="keyword">template</span>&lt;auto C, auto K&gt;      <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga471f433dd0f13d23748a166037346228.html#ga471f433dd0f13d23748a166037346228">reverse_horner</a>[right]r(T x, K tup)      <span class="keyword">noexcept</span>; <span class="comment">//3</span></div>
 <div class="line"> </div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga471f433dd0f13d23748a166037346228_html_ga471f433dd0f13d23748a166037346228"><div class="ttname"><a href="group__functions_ga471f433dd0f13d23748a166037346228.html#ga471f433dd0f13d23748a166037346228">kyosu::reverse_horner</a></div><div class="ttdeci">constexpr auto reverse_horner</div><div class="ttdoc">Implement the reverse_horner scheme to evaluate polynomials.</div><div class="ttdef"><b>Definition:</b> reverse_horner.hpp:121</div></div>
+<div class="ttc" id="agroup__functions_ga471f433dd0f13d23748a166037346228_html_ga471f433dd0f13d23748a166037346228"><div class="ttname"><a href="group__functions_ga471f433dd0f13d23748a166037346228.html#ga471f433dd0f13d23748a166037346228">kyosu::reverse_horner</a></div><div class="ttdeci">constexpr auto reverse_horner</div><div class="ttdoc">Implement the reverse_horner scheme to evaluate polynomials.</div><div class="ttdef"><b>Definition:</b> reverse_horner.hpp:122</div></div>
 </div><!-- fragment --><p>! <b>Parameters</b> </p><pre class="fragment"> * `x` :  real or cayley-dickson argument.
 
  * `coefs...` :  real or cayley-dickson arguments. The coefficients by increasing power order
@@ -179,6 +179,10 @@ $(document).ready(function(){initNavTree('group__functions_ga471f433dd0f13d23748
 <p>If the coefficients are simd values of cardinal N, this means you simultaneously compute the values of N polynomials.</p><ul>
 <li>If x is scalar, the polynomials are all computed at the same point</li>
 <li>If x is simd, the nth polynomial is computed on the nth value of x</li>
+</ul>
+<h2 class="groupheader">External references </h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Horner%27s_method">Wikipedia: Horner's method</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
