@@ -57,8 +57,11 @@ namespace kyosu
 //!
 //!     Returns \f$\Gamma(z)\f$.
 //!
-//!  @groupheader{Example}
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Gamma Function](https://mathworld.wolfram.com/GammaFunction.html)
+//!   *  [Wikipedia: Gamma function](https://en.wikipedia.org/wiki/Gamma_function)
 //!
+//!  @groupheader{Example}
 //!  @godbolt{doc/tgamma.cpp}
 //======================================================================================================================
   inline constexpr auto tgamma = eve::functor<tgamma_t>;
