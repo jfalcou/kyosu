@@ -84,7 +84,8 @@ namespace kyosu::_
   template<eve::integral_scalar_value N, typename Z>
   auto sb_jn(N n, Z z) noexcept
   {
-    return sb_jn(n, z,  std::span<Z, 0>());
+    auto dummy = std::span<Z, 0>(); 
+    return sb_jn(n, z, dummy);
   }
 
   template<typename Z> KYOSU_FORCEINLINE

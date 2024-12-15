@@ -598,7 +598,8 @@ namespace kyosu::_
   template<eve::integral_scalar_value N, typename Z>
   auto cb_yn(N n, Z z) noexcept
   {
-    return cb_yn(n, z, std::span<Z, 0>());
+    auto dummy =  std::span<Z, 0>();
+    return cb_yn(n, z, dummy);
   }
 
   //===-------------------------------------------------------------------------------------------

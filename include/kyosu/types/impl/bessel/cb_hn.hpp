@@ -22,40 +22,6 @@ namespace kyosu::_
   /////////////////////////////////
   // implementation is done using j and y functions
 
-//   template<typename Z> KYOSU_FORCEINLINE
-//   auto cb_h1_0(Z z) noexcept
-//   {
-//     return  cb_j0(z)+muli(cb_y0(z));
-//   }
-
-//   template<typename Z> KYOSU_FORCEINLINE
-//   auto cb_h2_0(Z z) noexcept
-//   {
-//     return cb_j0(z)-muli(cb_y0(z));
-//   }
-
-//   template<typename Z> KYOSU_FORCEINLINE
-//   auto cb_h1_1(Z z) noexcept
-//   {
-//     return   cb_j1(z)+muli(cb_y1(z));
-//   }
-
-//   template<typename Z> KYOSU_FORCEINLINE
-//   auto cb_h2_1(Z z) noexcept
-//   {
-//     return  cb_j1(z)-muli(cb_y1(z));
-//   }
-
-
-//   template<typename Z> KYOSU_FORCEINLINE
-//   auto cb_h2n(int n, Z z) noexcept
-//   {
-// //    auto [j, y] = cyl_bessel_jyn(n, z);
-//     auto  j = cyl_bessel_jn(n, z);
-//     auto  y = cyl_bessel_yn(n, z);
-//     return j-muli(y);
-//   }
-
   //===-------------------------------------------------------------------------------------------
   //  cb_h12n
   //===-------------------------------------------------------------------------------------------

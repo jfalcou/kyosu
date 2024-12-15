@@ -8,11 +8,10 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_TPL( "Check kyosu::cyl_bessel_h1n integral positive order"
+TTS_CASE_TPL( "Check kyosu::bessel_h1n integral positive order"
               , kyosu::scalar_real_types
-              , tts::generate(tts::randoms(-10,10))
               )
-<typename T>(T )
+<typename T>(tts::type<T>)
 {
   auto constexpr N = 11;
   using a_t  = std::array<T, 16 >;
@@ -78,11 +77,10 @@ TTS_CASE_TPL( "Check kyosu::cyl_bessel_h1n integral positive order"
 };
 
 
-TTS_CASE_TPL ( "Check kyosu::cyl_bessel_h2n integral negative order"
+TTS_CASE_TPL ( "Check kyosu::bessel_h2n integral negative order"
               , kyosu::scalar_real_types
-              , tts::generate(tts::randoms(-10,10))
               )
-<typename T>(T )
+<typename T>(tts::type<T>)
 {
   auto constexpr N = 11;
   using a_t  = std::array<T, 16 >;

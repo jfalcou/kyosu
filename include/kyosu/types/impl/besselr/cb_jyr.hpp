@@ -170,7 +170,8 @@ namespace kyosu::_
   template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto cb_yr(N v, Z z) noexcept
   {
-    return cb_yr(v, z,  std::span<Z, 0>());
+    auto dummy = std::span<Z, 0>();
+    return cb_yr(v, z,  dummy);
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -197,7 +198,8 @@ namespace kyosu::_
   template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto cb_jr(N v, Z z) noexcept
   {
-    return cb_jr(v, z,  std::span<Z, 0>());
+    auto dummy = std::span<Z, 0>();
+      return cb_jr(v, z,  dummy);
   }
 
 }

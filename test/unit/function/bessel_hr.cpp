@@ -10,9 +10,8 @@
 
 TTS_CASE_TPL ( "Check kyosu::bessel_hr over real positive order first kind"
               , kyosu::scalar_real_types
-              , tts::generate(tts::randoms(-10,10))
               )
-<typename T>(T )
+<typename T>(tts::type<T>)
 {
   if constexpr(sizeof(T) == 8)
   {
@@ -84,9 +83,8 @@ TTS_CASE_TPL ( "Check kyosu::bessel_hr over real positive order first kind"
 
 TTS_CASE_TPL ( "Check kyosu::bessel_hr over real positive order second kind"
               , kyosu::scalar_real_types
-              , tts::generate(tts::randoms(-10,10))
               )
-<typename T>(T )
+<typename T>(tts::type<T>)
 {
   auto constexpr N = 11;
   using a_t  = std::array<T, 16 >;
