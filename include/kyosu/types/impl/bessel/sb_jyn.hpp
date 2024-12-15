@@ -84,7 +84,7 @@ namespace kyosu::_
   template<eve::integral_scalar_value N, typename Z>
   auto sb_jn(N n, Z z) noexcept
   {
-    auto dummy = std::span<Z, 0>(); 
+    auto dummy = std::span<Z, 0>();
     return sb_jn(n, z, dummy);
   }
 
@@ -125,7 +125,8 @@ namespace kyosu::_
   template<eve::integral_scalar_value N, typename Z>
   auto sb_yn(N n, Z z) noexcept
   {
-    return sb_yn(n, z, std::span<Z, 0>());
+    auto dummy = std::span<Z, 0>();
+    return sb_yn(n, z, dummy);
   }
 
   template<eve::integral_scalar_value N, typename Z, typename R1, typename R2>
