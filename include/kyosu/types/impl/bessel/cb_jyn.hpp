@@ -16,15 +16,6 @@
 namespace kyosu::_
 {
   /////////////////////////////////
-  // needed in implementations of
-  // cyl_bessel_j0
-  // cyl_bessel_j1
-  // cyl_bessel_jn
-  // cyl_bessel_y0
-  // cyl_bessel_y1
-  // cyl_bessel_yn
-  // cyl_bessel_jyn
-  /////////////////////////////////
   // utilities
   // mkjs
   // cb_j0
@@ -32,12 +23,8 @@ namespace kyosu::_
   // cb_y0
   // cb_y1
   // cbjyn
-  ////////////////////////////////
-  // no heap allocation is done by these functions
-  // cyl_bessel_jyn computes all  j_i(z) and y_i(z) for 0 <= i <= n if n >= 0 (resp n <= i <= 0 if n <= 0)
-  // and put the result in two ranges that are to be allocated by the caller.
-  // call to cyl_bessel_jn and cyl_bessel_yn that need calling cyl_bessel_jyn do an internal quick allocaton
-  // on the stack using __builtin_alloca_with_align.
+  // cbjyna
+  /////////////////////////////////
 
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
@@ -329,7 +316,7 @@ namespace kyosu::_
   }
 
   //===-------------------------------------------------------------------------------------------
-  //  cb_jn
+  //  cb_jn just last
   //===-------------------------------------------------------------------------------------------
   template<eve::integral_scalar_value N, typename Z>
   Z cb_jn(N nn, Z z)
@@ -413,15 +400,14 @@ namespace kyosu::_
     }
   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  cb_jyn
-  //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, typename R1,  typename R2>
+
+  template<eve::integral_scalar_value N, typename Z, typename R1, typename R2>
   auto cb_jyn(N nn, Z z, R1& cjv, R2& cyv) noexcept
   requires(concepts::complex<Z> || concepts::real<Z>)
   {
     auto n = eve::abs(nn);
-    n = eve::min(n, N(cjv.size()), N(cyv.size()));
+    EVE_ASSERT(N(size(cjv)) > n, "not room enough in cjv");
+    EVE_ASSERT(N(size(cyv)) > n, "not room enough in cyv");
     using u_t = eve::underlying_type_t<Z>;
     if (n <= 1)
     {
@@ -568,4 +554,70 @@ namespace kyosu::_
       return kumi::tuple{cjv[n], cyv[n]};
     }
   }
+
+  //===-------------------------------------------------------------------------------------------
+  //  cb_jn all possible up to js size or n
+  //===-------------------------------------------------------------------------------------------
+  template<eve::integral_scalar_value N, typename Z, std::size_t S>
+  Z cb_jn(N n, Z z, std::span<Z, S>js)
+  {
+    std::size_t an = eve::abs(n);
+    if (size(js) > an)
+    {
+      auto doit = [an, n, z, &js](auto ys){
+        _::cb_jyn(n, z, js, ys);
+      };
+      _::with_alloca<Z>(an+1, doit);
+      return js[an];
+    }
+    else // js is not sufficiently allocated
+    {
+      cb_jn(size(js)-1, z, js);
+      return _::cb_jn(n, z);
+    }
+  }
+
+  //===-------------------------------------------------------------------------------------------
+  //  cb_yn all possible up to ys size or n
+  //===-------------------------------------------------------------------------------------------
+  template<eve::integral_scalar_value N, typename Z, std::size_t S>
+  Z cb_yn(N n, Z z, std::span<Z, S> rys)
+  {
+    std::size_t an = eve::abs(n);
+    auto doit = [an, n, z, &rys](auto js, auto ys){
+      _::cb_jyn(n, z, js, ys);
+      for(int i = 0; i < size(rys); ++i) rys[i] = ys[i];
+      return ys[an];
+    };
+    return _::with_alloca<Z>(an+1, doit);
+  }
+
+  //===-------------------------------------------------------------------------------------------
+  //  cb_yn just last
+  //===-------------------------------------------------------------------------------------------
+  template<eve::integral_scalar_value N, typename Z>
+  auto cb_yn(N n, Z z) noexcept
+  {
+    auto dummy =  std::span<Z, 0>();
+    return cb_yn(n, z, dummy);
+  }
+
+  //===-------------------------------------------------------------------------------------------
+  //  cb_jyna all possible up to js and ys size or n
+  //===-------------------------------------------------------------------------------------------
+  template<eve::integral_scalar_value N, typename Z, std::size_t S1, std::size_t S2>
+  Z cb_jyna(N n, Z z, std::span<Z, S1> rjs, std::span<Z, S2> rys )
+  {
+    std::size_t an = eve::abs(n);
+    auto doit = [an, n, z, &rjs, &rys](auto js, auto ys){
+      auto [jn, yn] = _::cb_jyn(n, z, js, ys);
+      for(int i = 0; i < min(size(rjs), an+1); ++i) rjs[i] = js[i];
+      for(int i = 0; i < min(size(rys), an+1); ++i) rys[i] = ys[i];
+      return kumi::tuple{jn, yn};
+    };
+    return _::with_alloca<Z>(an+1, doit);
+  }
+
+
+
 }

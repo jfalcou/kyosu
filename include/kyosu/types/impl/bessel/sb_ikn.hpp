@@ -12,15 +12,8 @@ namespace kyosu::_
 {
 
   /////////////////////////////////
-  // needed by implementations of
-  // sph_bessel_i0
-  // sph_bessel_i1
-  // sph_bessel_k0
-  // sph_bessel_k1
-  // sph_bessel_ikn
-  /////////////////////////////////
   // utilities
-  // sb_i1_0
+  // riton
   // sb_i1_1
   // sb_i2_0
   // sb_i2_1
@@ -38,18 +31,20 @@ namespace kyosu::_
     else return complex(eve::zero(eve::as<T>()), eve::one(eve::as<T>()));
   };
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto sb_i1_0(Z z) noexcept
+  template<int Kind, typename Z> KYOSU_FORCEINLINE
+  auto sb_i_0(Z z) noexcept
   {
-    return sinhc(z);
+    if constexpr(Kind == 2) return cosh(z)/z;
+    else  return sinhc(z);
   }
 
-  template<typename Z> KYOSU_FORCEINLINE
-  auto sb_i1_1(Z z) noexcept
+  template<int Kind, typename Z> KYOSU_FORCEINLINE
+  auto sb_i_1(Z z) noexcept
   {
     auto [sh, ch] = sinhcosh(z);
     auto rz = rec(z);
-    return fnma(sh, rz, ch)*rz;
+    if constexpr(Kind == 2)  return fnma(ch, rz, sh)*rz;
+    else return fnma(sh, rz, ch)*rz;
   }
 
   template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
@@ -57,23 +52,9 @@ namespace kyosu::_
   {
     using e_t = as_real_type_t<Z>;
     auto m = eve::min(n+1, N(si2s.size()));
-    auto r = riton<e_t>(n+1)*sph_bessel_yn(n,muli(z), si2s);
+    auto r = riton<e_t>(n+1)*bessel_yn(n,muli(z), si2s);
     for(N i = 0; i < m; ++i) si2s[i] = mulmi(si2s[i]);
     return r;
-  }
-
-  template<typename Z> KYOSU_FORCEINLINE
-  auto sb_i2_0(Z z) noexcept
-  {
-    return cosh(z)/z;
-  }
-
-  template<typename Z> KYOSU_FORCEINLINE
-  auto sb_i2_1(Z z) noexcept
-  {
-    auto [sh, ch] = sinhcosh(z);
-    auto rz = rec(z);
-    return fnma(ch, rz, sh)*rz;
   }
 
   template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
@@ -85,7 +66,6 @@ namespace kyosu::_
       return riton<e_t>(n)*sb_jn(n,muli(z));
     }
   }
-
 
   template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
   auto sb_i2n(N n, Z z) noexcept
@@ -106,11 +86,34 @@ namespace kyosu::_
   }
 
   //===-------------------------------------------------------------------------------------------
+  //  sb_k0
+  //===-------------------------------------------------------------------------------------------
+  template<typename Z> KYOSU_FORCEINLINE
+  auto sb_k0(Z z) noexcept
+  {
+    using u_t = eve::underlying_type_t<Z>;
+    return eve::pio_2(eve::as<u_t>())*exp(-z)/z;
+  }
+
+  //===-------------------------------------------------------------------------------------------
+  //  sb_k1
+  //===-------------------------------------------------------------------------------------------
+  template<typename Z>
+  auto sb_k1(Z z) noexcept
+  {
+    using u_t = eve::underlying_type_t<Z>;
+    auto rz = rec(z);
+    return  eve::pio_2(eve::as<u_t>())*exp(-z)*fma(rz, rz, rz);
+  }
+
+  //===-------------------------------------------------------------------------------------------
   //  sb_kn
   //===-------------------------------------------------------------------------------------------
   template<typename Z> KYOSU_FORCEINLINE
   auto sb_kn(int n, Z z) noexcept
   {
+    if (n == 0) return sb_k0(z);
+    if (n == 1) return sb_k1(z);
     using u_t = eve::underlying_type_t<Z>;
     auto iton = [](int n){
       if (n%4 == 0) return complex(eve::one(eve::as<u_t>()));
@@ -143,24 +146,13 @@ namespace kyosu::_
     return kumi::tuple{ sb_i1n(n, z, sis),  sb_kn(n, z, sks)};
   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  sb_k0
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE
-  auto sb_k0(Z z) noexcept
+  template<int Kind, eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE
+  auto sb_in(N n, Z z) noexcept
   {
-    using u_t = eve::underlying_type_t<Z>;
-    return eve::pio_2(eve::as<u_t>())*exp(-z)/z;
+    if constexpr(Kind == 2)
+      return sb_i2n(n, z);
+    else
+      return sb_i1n(n, z);
   }
 
-  //===-------------------------------------------------------------------------------------------
-  //  sb_k1
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z>
-  auto sb_k1(Z z) noexcept
-  {
-    using u_t = eve::underlying_type_t<Z>;
-    auto rz = rec(z);
-    return  eve::pio_2(eve::as<u_t>())*exp(-z)*fma(rz, rz, rz);
-  }
 }

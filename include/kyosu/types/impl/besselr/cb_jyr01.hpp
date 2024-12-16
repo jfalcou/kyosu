@@ -56,16 +56,7 @@ namespace kyosu::_
     {
       if(eve::any(todo))
       {
-//         std::cout << ttts::name(todo)<< std::endl;
-//         std::cout << ttts::name(r) << std::endl;
-//         std::cout << ttts::name( f(ts...))<< std::endl;
-//         std::cout << " ================== "<< std::endl;
-//         std::cout << (todo) << std::endl;
-//         std::cout <<f(ts...) << std::endl;
-//         std::cout <<r << std::endl;
-//         std::cout << " =-----------------= "<< std::endl;
         r = kumi::map([&todo](auto a, auto b) { return if_else(todo,a,b); }, f(ts...), r);
-//        r = kyosu::if_else(todo, f(ts...), r);
         return eve::logical_notand(todo, notdone);
       };
     }
@@ -82,11 +73,7 @@ namespace kyosu::_
     }
     else
     {
-//       std::cout << ttts::name(todo)<< std::endl;
-//       std::cout << ttts::name(r) << std::endl;
-//       std::cout << ttts::name( f(ts...))<< std::endl;
       if(eve::any(todo)) r = kumi::map([&todo](auto a, auto b) { return if_else(todo,a,b); }, f(ts...), r);
-//r = kyosu::if_else(todo, f(ts...), r);
       return false_(as(r));
     }
   }
@@ -97,8 +84,10 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   // here nu is always > 0 and z is at most complex
   template<eve::floating_scalar_value N, typename Z>
-  auto cb_jyr01( N  v0, Z z) noexcept
+  auto cb_jyr01( N  v, Z z) noexcept
   {
+    using u_t =  eve::underlying_type_t<Z>;
+    auto v0 = u_t(v);
 //    EVE_ASSERT(eve::is_gtz(v0) && (v0 < N(1)), "v0 is not in ]0, 1[");
     auto v1 = inc(v0); // 1 < v1 < 2
 

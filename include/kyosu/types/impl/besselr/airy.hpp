@@ -134,8 +134,8 @@ namespace kyosu::_
   {
     using u_t = eve::underlying_type_t<Z>;
     auto [sqzo3, zeta] = zet(z);
-    auto ip = cyl_bessel_i(eve::third(as<u_t>()), zeta);
-    auto im = cyl_bessel_i(-eve::third(as<u_t>()), zeta);
+    auto ip = bessel_i(eve::third(as<u_t>()), zeta);
+    auto im = bessel_i(-eve::third(as<u_t>()), zeta);
 
     return kumi::tuple{ invpi(as<u_t>())*sqzo3*(im-ip),  sqzo3*(ip+im)};
   }
