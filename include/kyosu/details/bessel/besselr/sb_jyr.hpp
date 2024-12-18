@@ -10,7 +10,6 @@
 #include <kyosu/details/bessel/besseln/cb_jyn.hpp>
 #include <kyosu/details/bessel/besselr/cb_jyr01.hpp>
 #include <kyosu/details/with_alloca.hpp>
-#include <vector>
 
 namespace kyosu::_
 {

@@ -10,37 +10,6 @@
 #include <kyosu/details/with_alloca.hpp>
 #include <kyosu/functions/if_else.hpp>
 
-// namespace ttts::detail
-// {
-//   template<typename T> struct typename_impl
-//   {
-//     static auto value() noexcept
-//     {
-// #if defined(_MSC_VER )
-//       std::string_view data(__FUNCSIG__);
-//       auto i = data.find('<') + 1,
-//         j = data.find(">::value");
-//       auto name = data.substr(i, j - i);
-// #else
-//       std::string_view data(__PRETTY_FUNCTION__);
-//       auto i = data.find('=') + 2,
-//         j = data.find_last_of(']');
-//       auto name = data.substr(i, j - i);
-// #endif
-//       return std::string(name.data(), name.size());
-//     }
-//   };
-// }
-
-// namespace ttts
-// {
-//   /// Provide a string containing the name of the type `T` in readable form.
-//   template<typename T> inline auto const typename_ = detail::typename_impl<T>::value();
-
-//   /// Provide a string containing the name of the type of its parameter in readable form.
-//   template<typename T> constexpr auto name(T const&){ return typename_<T>; }
-// }
-
 namespace kyosu::_
 {
 
