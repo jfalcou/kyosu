@@ -7,7 +7,7 @@
 //======================================================================================================================
 #pragma once
 #include <eve/module/math.hpp>
-#include <kyosu/types/impl/detail/bessel_utils2.hpp>
+#include <kyosu/details/bessel/bessel_utils2.hpp>
 
 namespace kyosu::_
 {

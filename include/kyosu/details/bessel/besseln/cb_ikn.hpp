@@ -7,9 +7,9 @@
 //======================================================================================================================
 #pragma once
 #include <eve/module/math.hpp>
-#include <kyosu/types/impl/detail/bessel_utils2.hpp>
+#include <kyosu/details/bessel/bessel_utils2.hpp>
 #include <kyosu/details/with_alloca.hpp>
-#include <kyosu/types/impl/bessel/cb_hn.hpp>
+#include <kyosu/details/bessel/besseln/cb_hn.hpp>
 namespace kyosu::_
 {
   /////////////////////////////////

@@ -8,8 +8,7 @@
 #pragma once
 #include "eve/traits/as_logical.hpp"
 #include <kyosu/details/callable.hpp>
-#include <kyosu/bessel.hpp>
-
+#include <kyosu/details/bessel.hpp>
 
 namespace kyosu
 {

@@ -8,7 +8,7 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/constants/wrapped.hpp>
-#include <kyosu/types/impl/besselr/cb_ikr.hpp>
+#include <kyosu/details/bessel/besselr/cb_ikr.hpp>
 
 
 namespace kyosu

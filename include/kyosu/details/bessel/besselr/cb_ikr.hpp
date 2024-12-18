@@ -6,9 +6,9 @@
 */
 //======================================================================================================================
 #pragma once
-#include <kyosu/types/impl/detail/bessel_utils2.hpp>
-#include <kyosu/types/impl/bessel/cb_jyn.hpp>
-#include <kyosu/types/impl/besselr/cb_jyr01.hpp>
+#include <kyosu/details/bessel/bessel_utils2.hpp>
+#include <kyosu/details/bessel/besseln/cb_jyn.hpp>
+#include <kyosu/details/bessel/besselr/cb_jyr01.hpp>
 #include <kyosu/details/with_alloca.hpp>
 
 namespace kyosu::_
