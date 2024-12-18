@@ -8,7 +8,6 @@
 #pragma once
 
 #include <kyosu/details/callable.hpp>
-#include <eve/module/math.hpp>
 
 namespace kyosu::_
 {

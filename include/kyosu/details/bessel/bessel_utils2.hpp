@@ -7,7 +7,6 @@
 //======================================================================================================================
 #pragma once
 #include <type_traits>
-#include <eve/module/core.hpp>
 
 namespace kyosu::_
 {

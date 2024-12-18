@@ -10,6 +10,7 @@
 #include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
 #include <eve/module/special.hpp>
+#include <eve/module/bessel.hpp>
 
 //======================================================================================================================
 //! @defgroup functions Cayley-Dickson Functions

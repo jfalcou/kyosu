@@ -6,7 +6,6 @@
 */
 //======================================================================================================================
 #pragma once
-#include <eve/module/math.hpp>
 #include <kyosu/details/bessel/bessel_utils2.hpp>
 
 namespace kyosu::_

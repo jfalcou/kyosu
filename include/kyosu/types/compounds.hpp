@@ -7,7 +7,6 @@
 //======================================================================================================================
 #pragma once
 
-#include <eve/module/core.hpp>
 #include <kyosu/functions/conj.hpp>
 #include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/is_infinite.hpp>
