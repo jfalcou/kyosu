@@ -6,12 +6,8 @@
 */
 //======================================================================================================================
 #pragma once
-#include <eve/module/math.hpp>
-#include <kyosu/types/impl/detail/bessel_utils2.hpp>
+#include <kyosu/details/bessel/bessel_utils2.hpp>
 #include <kyosu/details/with_alloca.hpp>
-#include <kyosu/core.hpp>
-#include <kyosu/math.hpp>
-
 
 namespace kyosu::_
 {
@@ -31,6 +27,18 @@ namespace kyosu::_
   //  utilities
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
+
+
+  //===-------------------------------------------------------------------------------------------
+  // bound
+  //===-------------------------------------------------------------------------------------------
+  template<typename Z>
+  auto bound(Z const & z) noexcept
+  {
+    using u_t = eve::underlying_type_t<Z>;
+    auto z1 = if_else(kyosu::is_not_finite(z), eve::zero, z);
+    return int(eve::ceil(eve::maximum(abs(z1)*u_t(1.1)+2)));
+  }
 
   template<eve::integral_scalar_value N, typename Z>
   Z cb_jn(N nn, Z z);

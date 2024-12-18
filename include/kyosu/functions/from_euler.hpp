@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kyosu/functions/to_quaternion.hpp>
-#include <kyosu/types/impl/quaternion/axis.hpp>
+#include <kyosu/details/axis.hpp>
 
 namespace kyosu
 {

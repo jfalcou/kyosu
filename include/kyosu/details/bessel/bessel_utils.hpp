@@ -7,21 +7,9 @@
 //======================================================================================================================
 #pragma once
 #include <type_traits>
-#include <vector>
+//#include <vector>
 namespace kyosu::_
 {
-
-  //===-------------------------------------------------------------------------------------------
-  // bound
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z>
-  auto bound(Z const & z) noexcept
-  {
-    using u_t = eve::underlying_type_t<Z>;
-    auto z1 = if_else(kyosu::is_not_finite(z), eve::zero, z);
-    return int(eve::ceil(eve::maximum(abs(z1)*u_t(1.1)+2)));
-  }
-
   //===-------------------------------------------------------------------------------------------
   // R use lentz
   //===-------------------------------------------------------------------------------------------
@@ -153,51 +141,4 @@ namespace kyosu::_
     auto r = lentz_b(re, eve::eps(eve::as<u_t>()));
     return r;
   }
-
-  template<typename Z>
-  inline auto Rs(size_t n, Z z) noexcept
-  // compute the ratio Jn(i, z)/Jn(i+1, z)J for i = n-1:-1:0
-  {
-    std::vector<Z> rs(n);
-    using u_t = eve::underlying_type_t<Z>;
-    if (is_eqz(n)) return rs;
-    Z r{}, s{};
-    auto rz = rec(z);
-    rs[n-1] = R(n, z);
-    for(int i=n-1; i >= 1; --i)
-    {
-      rs[i-1] = 2*i*rz-rec(rs[i]);
-    }
-    return rs;
-  }
-
-
-  template<typename Z>
-  inline auto Js(size_t n, Z z) noexcept
-  // compute  Jn(i, z) for i = n:-1:0
-  {
-    auto rs = Rs(n+1, z);
-    std::vector<Z> js(n+1);
-    js[n] = cyl_bessel_jn(n, z);
-    for(int i=n-1; i >= 0; --i)
-    {
-      js[i] = js[i+1]*rs[i];
-    }
-    return js;
-  }
-
-
-
-  template<typename Z>
-  inline auto arg_adjust(Z z) noexcept
-  // modify ipart of z modulo 2*pi fit in ]-pi +pi]
-  {
-    if constexpr(kyosu::concepts::complex<Z>)
-    {
-      ipart(z) = eve::rem[eve::to_nearest](ipart(z), 2*eve::pi(eve::as(ipart(z))));
-      return z;
-    }
-    else  return z;
-  }
-
 }

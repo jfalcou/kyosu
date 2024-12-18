@@ -10,7 +10,7 @@
 #include <kyosu/functions/to_quaternion.hpp>
 #include <kyosu/functions/abs.hpp>
 #include <kyosu/functions/arg.hpp>
-#include <kyosu/types/impl/quaternion/axis.hpp>
+#include <kyosu/details/axis.hpp>
 
 namespace kyosu
 {

@@ -6,15 +6,10 @@
 */
 //======================================================================================================================
 #pragma once
-#include <eve/module/core.hpp>
-#include <eve/module/math.hpp>
-#include <eve/module/special.hpp>
-#include <eve/module/bessel.hpp>
 #include <kyosu/details/cayleyify.hpp>
 #include <complex>
 //!======================================================================================================================
-//! Up to now bessel functions  are only implemented here for scalar orders
-//!
+//! Up to now complex bessel functions are only implemented for scalar orders (integral or floating)
 //!======================================================================================================================
 //!
 //! Integral orders
@@ -85,31 +80,36 @@
 //!        * the caller must provide output as a std::span of kyosu::complex allocated to receive N values
 //!           values.
 //!        * These values will be the same as the result of calling :
-//!          `for (int i = 0; i < N;  ++i) output[i] = bessel_x(n0+sgn*i, z)`
+//!          `for (int i = 0; i < min(N, ceil(abs(n)+1));  ++i) output[i] = bessel_x(n0+sgn*i, z)`
 //!          where n0 is the fractionnal part of n and sgn is the sign of n.
+//!          However,  even if N is less than  ceil(abs(n)+1) the function will return the order n value at z.
 //!
 //!    * Moreover jy and ik functions can be computed together and two ouput parameters can be used
 //!
 //!======================================================================================================================
+//!
+//!  @warning although float and double versions for the underlying type are available, it is common
+//!  to obtain poor precision with float based computations.
+//!======================================================================================================================
 
 
-#include <kyosu/types/impl/detail/bessel_utils.hpp>
+#include <kyosu/details/bessel/bessel_utils.hpp>
 // These files only contain implementation details and do not contain any function
 // belonging to the user interface
 //
 // bessels of integral order
-#include <kyosu/types/impl/bessel/cb_jyn.hpp>
-#include <kyosu/types/impl/bessel/sb_jyn.hpp>
-#include <kyosu/types/impl/bessel/cb_hn.hpp>
-#include <kyosu/types/impl/bessel/sb_hn.hpp>
-#include <kyosu/types/impl/bessel/cb_ikn.hpp>
-#include <kyosu/types/impl/bessel/sb_ikn.hpp>
+#include <kyosu/details/bessel/besseln/cb_jyn.hpp>
+#include <kyosu/details/bessel/besseln/sb_jyn.hpp>
+#include <kyosu/details/bessel/besseln/cb_hn.hpp>
+#include <kyosu/details/bessel/besseln/sb_hn.hpp>
+#include <kyosu/details/bessel/besseln/cb_ikn.hpp>
+#include <kyosu/details/bessel/besseln/sb_ikn.hpp>
 // bessels of floating (real) order
-#include <kyosu/types/impl/besselr/cb_jyr.hpp>
-#include <kyosu/types/impl/besselr/cb_hr.hpp>
-#include <kyosu/types/impl/besselr/cb_ikr.hpp>
-#include <kyosu/types/impl/besselr/sb_jyr.hpp>
-#include <kyosu/types/impl/besselr/sb_hr.hpp>
-#include <kyosu/types/impl/besselr/sb_ikr.hpp>
-// // airy functions
-#include <kyosu/types/impl/besselr/airy.hpp>
+#include <kyosu/details/bessel/besselr/cb_jyr.hpp>
+#include <kyosu/details/bessel/besselr/cb_hr.hpp>
+#include <kyosu/details/bessel/besselr/cb_ikr.hpp>
+#include <kyosu/details/bessel/besselr/sb_jyr.hpp>
+#include <kyosu/details/bessel/besselr/sb_hr.hpp>
+#include <kyosu/details/bessel/besselr/sb_ikr.hpp>
+// airy functions
+#include <kyosu/details/bessel/besselr/airy.hpp>
