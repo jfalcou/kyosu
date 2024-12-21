@@ -102,6 +102,11 @@ namespace kyosu
 //!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_h(N n, T z, std::span<Z, S> chs)                  noexcept; //2
 //!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_h(N n, T z, std::span<Z, S> chs)                  noexcept; //2
 //!
+//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_h[cylindrical](N n, T z)                          noexcept; //1
+//!      template<eve;scalar_value N, kyosu::concepts::real T>              constexpr T    bessel_h[cylindrical](N n, T z)                          noexcept; //1
+//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_h[cylindrical](N n, T z, std::span<Z, S> shs)     noexcept; //2
+//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_h[cylindrical](N n, T z, std::span<Z, S> shs)     noexcept; //2
+//!
 //!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_h[spherical](N n, T z)                            noexcept; //3
 //!      template<eve;scalar_value N, kyosu::concepts::real T>              constexpr T    bessel_h[spherical](N n, T z)                            noexcept; //3
 //!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_h[spherical](N n, T z, std::span<Z, S> shs)       noexcept; //4
