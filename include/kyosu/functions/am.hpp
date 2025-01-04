@@ -115,9 +115,9 @@ namespace kyosu::_
     if (eve::all(is_real(u))) return kyosu::complex(eve::am(kyosu::real(u), m));
 
     auto [phi, psi] = u;
-    auto [s,c,d] = eve::jacobi_elliptic[eve::eccentric][eve::threshold = tol](phi, m);
-    auto mc = eve::oneminus(m);
-    auto [s1,c1,d1] = eve::jacobi_elliptic[eve::eccentric][eve::threshold = tol](psi,mc);
+    auto [s,c,d] = eve::jacobi_elliptic[eve::threshold = tol](phi, m);
+    auto mc = eve::sqrt(eve::oneminus(eve::sqr(m)));
+    auto [s1,c1,d1] = eve::jacobi_elliptic[eve::threshold = tol](psi,mc);
     auto x0 = s*d1;
     auto x1 = c*c1;
     auto y  = s1*d;

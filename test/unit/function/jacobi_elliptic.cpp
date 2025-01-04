@@ -29,9 +29,7 @@ TTS_CASE_TPL ( "Check jacobi_elliptic over complex"
   for(int i=0; i < 7; ++i)
   {
     c_t z(phi[i], phi[6-i]);
-    std::cout << "i " << i << std::setprecision(15) << " z " << z << " m " << m[i] << std::endl;
-    auto [sn, cn, dn] = kyosu::jacobi_elliptic(z, m[i]);
-    std::cout << "dn " << dn << std::endl;
+    auto [sn, cn, dn] = kyosu::jacobi_elliptic(z, eve::sqrt(m[i]));
     TTS_RELATIVE_EQUAL(sn, kyosu::complex(rsn[i], isn[i]), pr);
     TTS_RELATIVE_EQUAL(cn, kyosu::complex(rcn[i], icn[i]), pr);
     TTS_RELATIVE_EQUAL(dn, kyosu::complex(rdn[i], idn[i]), pr);

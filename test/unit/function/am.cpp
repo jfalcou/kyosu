@@ -25,7 +25,7 @@ TTS_CASE_TPL ( "Check jacobi_elliptic over complex"
   for(int i=0; i < 6; ++i)
   {
     c_t z(phi[i], phi[6-i]);
-    auto amp = kyosu::am(z, m[i]);
+    auto amp = kyosu::am(z, eve::sqrt(m[i]));
     TTS_RELATIVE_EQUAL(amp, kyosu::complex(ramp[i], iamp[i]), pr);
   }
 };

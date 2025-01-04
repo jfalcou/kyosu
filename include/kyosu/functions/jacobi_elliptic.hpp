@@ -8,7 +8,6 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <eve/module/elliptic/jacobi_elliptic.hpp>
-#include <kyosu/functions/sqr.hpp>
 
 namespace kyosu
 {
@@ -110,17 +109,17 @@ namespace kyosu::_
     m =  eve::abs(m);
     if (O::contains(eve::modular)) m = eve::sin(m);
     else if (O::contains(eve::eccentric)) m = eve::sqrt(m);
-
     auto [phi, psi] = u;
-    auto [s,c,d] = eve::jacobi_elliptic[eve::eccentric][eve::threshold = tol](phi, m);
+    auto [s,c,d] = eve::jacobi_elliptic[eve::threshold = tol](phi, m);
     if (eve::all(is_real(u))) return eve::zip(kyosu::complex(s), kyosu::complex(c), kyosu::complex(d));
-
-    auto mc = eve::oneminus(m);
-    auto [s1,c1,d1] = eve::jacobi_elliptic[eve::eccentric][eve::threshold = tol](psi,mc);
-    auto idelta = kyosu::rec(kyosu::sqr(c1) + m*kyosu::sqr(s)*kyosu::sqr(s1));
-    auto sn = complex(s*d1, c*d*s1*c1)*idelta;
-    auto cn = complex(c*c1, -s*d*s1*d1)*idelta;
-    auto dn = if_else(u == one(as(u)), kyosu::one(as(u)), complex(d*c1*d1, -m*s*c*s1)*idelta);
+    auto m2 = eve::sqr(m);
+    auto mc = eve::sqrt(eve::oneminus(m2));
+    auto [s1,c1,d1] = eve::jacobi_elliptic[eve::threshold = tol](psi,mc);
+    auto idelta = kyosu::rec(eve::fam(eve::sqr(c1), m2, eve::sqr(s*s1)));
+    auto ds1 = d*s1;
+    auto sn = complex(s*d1, c*ds1*c1)*idelta;
+    auto cn = complex(c*c1, -s*ds1*d1)*idelta;
+    auto dn = complex(d*c1*d1, -m2*s*c*s1)*idelta;
     return eve::zip(sn, cn, dn);
   }
 }
