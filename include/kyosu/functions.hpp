@@ -73,6 +73,7 @@
 #include <kyosu/functions/digamma.hpp>
 #include <kyosu/functions/dist.hpp>
 #include <kyosu/functions/dot.hpp>
+#include <kyosu/functions/elliptic_fe.hpp>
 #include <kyosu/functions/erf.hpp>
 #include <kyosu/functions/erfcx.hpp>
 #include <kyosu/functions/erfi.hpp>
