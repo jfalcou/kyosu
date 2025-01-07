@@ -75,7 +75,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!      1. return the jacobian amplitude function. Take care that the meaning of the second parameters
+//!      1. return the elliptic incomplete functions or first and second kind. Tafe care that the meaning of the second parameters
 //!         depends on the option used (see note below).
 //!
 //! @note
@@ -86,10 +86,10 @@ namespace kyosu
 //!   Thus, they can be used interchangeably up to roundings errors by giving the right option.
 //!
 //!  @groupheader{External references}
-//!   *  [C++ standard reference: am](https://en.cppreference.com/w/cpp/numeric/special_functions/am)
-//!   *  [DLMF: Jacobi Amplitude](https://dlmf.nist.gov/22.16)
-//!   *  [Wolfram MathWorld: Jacobi Amplitude](https://mathworld.wolfram.com/JacobiAmplitude.html)
-//!   *  [Wikipedia: Jacobi elliptic functions](https://en.wikipedia.org/wiki/Jacobi_elliptic_functions)
+//!   *  [DLMF: Legendre-F¢s Integrals](https://dlmf.nist.gov/19.2#ii)-A
+//!   *  [Wolfram MathWorld: Jacobi Amplitude](https://functions.wolfram.com/EllipticIntegrals/EllipticF/)
+//!   *  [Wolfram MathWorld: Jacobi Amplitude](https://functions.wolfram.com/EllipticIntegrals/EllipticE/)
+//!   *  [Wikipedia: Elliptic integral](https://en.wikipedia.org/wiki/Elliptic_integral)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/elliptic_fe.cpp}
@@ -117,54 +117,18 @@ namespace kyosu::_
     if (eve::all(is_real(u))) return eve::zip(kyosu::complex(eve::ellint_1/*[eve::threshold = tol]*/(phi, m)),
                                               kyosu::complex(eve::ellint_2/*[eve::threshold = tol]*/(phi, m)));
     auto m2 = eve::sqr(m);
-    std::cout << std::setprecision(15) << std::scientific << "m  "<< m << std::endl;
+    auto thresh = eve::eps(eve::as(phi));
+    phi =  if_else(eve::abs(phi) < thresh, thresh, phi); //avoiding singularity at 0
 
-// % to avoid singularity of COT(phi) at zero add EPS
-// I = find (abs(phi) < eps);
-// phi(I) = eps;
-// I = [];
-    auto thresh = eve::eps(eve::as(phi)); //eve::sqr(eve::eps(as(phi)));
-    phi =  if_else(eve::abs(phi) < thresh, thresh, phi);
-
-// % finding the roots of the equation
-// % X^2 - (cot(phi)^2+m*sinh(psi)^2*csc(phi)^2-1+m)X - (1-m)*cot(phi)^2 = 0
-// b = -(cot(phi).^2 + m.*sinh(psi).^2.*csc(phi).^2-1+m);
-// c = -(1-m).*cot(phi).^2;
     auto b = -(eve::sqr(eve::cot(phi)) + m2*eve::sqr(eve::sinh(psi)*eve::csc(phi))-1+m2); //*eve::half(eve::as(phi));
     auto c = -(1-m2)*eve::sqr(eve::cot(phi));
-    std::cout << "b     " << b << std::endl;
-    std::cout << "c     " << c << std::endl;
-// X1 = -b/2 + sqrt(b.^2/4-c);
-// I = find(X1>=0);
     auto X1 = -b/2+eve::sqrt(eve::sqr(b)/4-c);
-    std::cout << "X1 "<< X1 << std::endl;
-// if length(I) ~= length(u)
-//     X2 = -b/2 - sqrt(b.^2/4-c);
-//     J = find(X2>=0);
-// end
-
-// if( ~isempty(I) )
-//     lambda(I) = acot( sqrt(X1(I)) );
-//     mu(I)     = atan( sqrt(1./m(I).*(tan(phi(I)).^2.*cot(lambda(I)).^2 - 1)) );
-// end
     auto lambda = eve::acot(eve::sqrt(X1));
     auto mu     = eve::atan( rec(m)*eve::sqrt(eve::dec(eve::sqr(tan(phi)*eve::cot(lambda)))));
-//     std::cout << "lambda " << lambda << std::endl;
-//     std::cout << "mu     " << mu     << std::endl;
-// if( ~isempty(J) )
-//     lambda(J) = acot( sqrt(X2(J)) );
-//     mu(J)     = atan( sqrt(1./m(J).*(tan(phi(J)).^2.*cot(lambda(J)).^2 - 1)) );
-// end
 
-// % change of variables taking into account periodicity ceil to the right
-// lambda = (-1).^floor(phi/pi*2).*lambda + pi*ceil(phi/pi-0.5+eps);
-// mu     = sign(psi).*real(mu);
+    //  change of variables taking into account periodicity ceil to the right
     lambda = eve::sign_alternate(eve::floor(2*phi*eve::inv_pi(eve::as(phi))))*lambda+eve::pi(eve::as(phi))*eve::ceil(phi/eve::pi(eve::as(phi))-eve::half(eve::as(phi))+eve::eps(eve::as(phi)));
     mu     = eve::sign(psi)*mu;
-//     std::cout << "--lambda " << lambda << std::endl;
-//     std::cout << "--mu     " << mu     << std::endl;
-    // [F1(:),E1(:)] = elliptic12(lambda, m, tol);
-// [F2(:),E2(:)] = elliptic12(mu, 1-m, tol);
     auto mc = eve::sqrt(eve::oneminus(m2));
     lambda =  if_else(is_real(u), phi, lambda);
     auto f1 = eve::ellint_1/*[eve::threshold = tol]*/(lambda, m);
@@ -173,44 +137,26 @@ namespace kyosu::_
     auto e2 = eve::ellint_2/*[eve::threshold = tol]*/(mu, mc);
     f1 = if_else(is_imag(u), zero, f1);
     e2 = if_else(is_eqz(mu), zero, e2);
-    std::cout << "f1     " << f1     << std::endl;
-    std::cout << "e1     " << e1     << std::endl;
-    std::cout << "f2     " << f2     << std::endl;
-    std::cout << "mu     " << mu     << std::endl;
-    std::cout << "mc     " << mc     << std::endl;
-    std::cout << "e2     " << e2     << std::endl;
 
-// % complex values of elliptic integral of the first kind
-// Fi = F1 + sqrt(-1)*F2;
     auto f = kyosu::complex(f1, f2);
-// % some calucation optimiziation
-// sin_lam = sin(lambda); cos_lam = cos(lambda);
-// sin_mu = sin(mu); cos_mu = cos(mu);
+
     auto [sin_lam, cos_lam] = eve::sincos(lambda);
     auto [sin_mu , cos_mu ] = eve::sincos(mu);
-// b1 = m.*sin_lam.*cos_lam.*sin_mu.^2.*sqrt(1-m.*sin_lam.^2);
-// b2 = sin_mu.*cos_mu.*(1-m.*sin_lam.^2).*sqrt(1-(1-m).*sin_mu.^2);
-// b3 = cos_mu.^2 + m.*sin_lam.^2.*sin_mu.^2;
     auto sin_mu2 = eve::sqr(sin_mu);
     auto sin_lam2 = eve::sqr(sin_lam);
     auto b1 = m2*sin_lam*cos_lam*sin_mu2*eve::sqrt(eve::oneminus(m2*sin_lam2));
     auto b2 = sin_mu*cos_mu*(1-m2*sin_lam2)*eve::sqrt(1-oneminus(m2)*sin_mu2);
     auto b3 = eve::sqr(cos_mu) + m2*sin_lam2*sin_mu2;
-    std::cout << "b1     " << b1     << std::endl;
-    std::cout << "b2     " << b2     << std::endl;
-    std::cout << "b3     " << b3     << std::endl;
-
-// % complex values of elliptic integral of the second kind
-// Ei(:) = (b1 + sqrt(-1)*b2)./b3;
-// Ei(:) = Ei(:) + E1(:) + sqrt(-1)*(-E2(:) + F2(:));
     auto e =  kyosu::complex(b1, b2)/b3;
-    std::cout << "e " << e << std::endl;
-    e = e + kyosu::complex(e1, if_else(is_real(u), zero, f2-e2));
+    e += kyosu::complex(e1, if_else(is_real(u), zero, f2-e2));
     kyosu::real(e) =  if_else(is_imag(u), zero, real(e));
-    std::cout << "-- e " << e << std::endl;
-// [K,Ee] = ellipke(m);
-// % complex values of zeta function
-// Zi(:) = Ei(:) - Ee(:)./K(:).*Fi(:);
+
+    auto test = eve::maxabs(phi, psi) < eve::eps(eve::as(kyosu::real(u)));
+    if (eve::any(test))
+    {
+      f = if_else(test, u, f);
+      e = if_else(test, u, e);
+    }
     return eve::zip(f, e);
   }
 }
