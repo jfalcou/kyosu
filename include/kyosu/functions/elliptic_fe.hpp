@@ -10,6 +10,7 @@
 #include <kyosu/functions/jacobi_elliptic.hpp>
 #include <eve/module/elliptic/ellint_1.hpp>
 #include <eve/module/elliptic/ellint_2.hpp>
+#include <iomanip>
 
 namespace kyosu
 {
@@ -116,13 +117,13 @@ namespace kyosu::_
     if (eve::all(is_real(u))) return eve::zip(kyosu::complex(eve::ellint_1/*[eve::threshold = tol]*/(phi, m)),
                                               kyosu::complex(eve::ellint_2/*[eve::threshold = tol]*/(phi, m)));
     auto m2 = eve::sqr(m);
-    std::cout << "m  "<< m << std::endl;
+    std::cout << std::setprecision(15) << std::scientific << "m  "<< m << std::endl;
 
 // % to avoid singularity of COT(phi) at zero add EPS
 // I = find (abs(phi) < eps);
 // phi(I) = eps;
 // I = [];
-    auto thresh = eve::sqr(eve::eps(as(phi)));
+    auto thresh = eve::eps(eve::as(phi)); //eve::sqr(eve::eps(as(phi)));
     phi =  if_else(eve::abs(phi) < thresh, thresh, phi);
 
 // % finding the roots of the equation
@@ -194,7 +195,7 @@ namespace kyosu::_
     auto sin_lam2 = eve::sqr(sin_lam);
     auto b1 = m2*sin_lam*cos_lam*sin_mu2*eve::sqrt(eve::oneminus(m2*sin_lam2));
     auto b2 = sin_mu*cos_mu*(1-m2*sin_lam2)*eve::sqrt(1-oneminus(m2)*sin_mu2);
-    auto b3 = eve::sqr(cos_mu) + m*sin_lam2*sin_mu2;
+    auto b3 = eve::sqr(cos_mu) + m2*sin_lam2*sin_mu2;
     std::cout << "b1     " << b1     << std::endl;
     std::cout << "b2     " << b2     << std::endl;
     std::cout << "b3     " << b3     << std::endl;
