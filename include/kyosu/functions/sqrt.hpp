@@ -8,6 +8,7 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/is_pure.hpp>
 
 namespace kyosu
 {
@@ -120,7 +121,7 @@ namespace kyosu::_
                           , Z(rr1, ii1)
                           , Z(ii1, rr1)
                           );
-      res = if_else(is_pure(z), eve::sqrt_2(eve::as(r))*Z( eve::half(eve::as(r)),  eve::half(eve::as(r)))*eve::sqrt(iz), res);
+      res = if_else(is_pure(z), eve::sqrt_2(eve::as(r))*Z( eve::half(eve::as(r)),  eve::half(eve::as(r)))*eve::sqrt(y), res);
       if (eve::any(is_not_finite(z)))
       {
         res = kyosu::if_else(rz == eve::minf(eve::as(rz))

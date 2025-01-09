@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct fnma_t : eve::strict_elementwise_callable<fnma_t, Options>
+  struct fnma_t : eve::elementwise_callable<fnma_t, Options>
   {
     template<typename Z0, typename Z1, typename Z2>
     requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1> || concepts::cayley_dickson<Z2>)

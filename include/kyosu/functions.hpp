@@ -74,6 +74,8 @@
 #include <kyosu/functions/dist.hpp>
 #include <kyosu/functions/dot.hpp>
 #include <kyosu/functions/elliptic_fe.hpp>
+#include <kyosu/functions/ellint_rc.hpp>
+#include <kyosu/functions/ellint_rf.hpp>
 #include <kyosu/functions/erf.hpp>
 #include <kyosu/functions/erfcx.hpp>
 #include <kyosu/functions/erfi.hpp>
