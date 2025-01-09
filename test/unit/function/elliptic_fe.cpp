@@ -28,7 +28,6 @@ TTS_CASE_TPL ( "Check elliptic_ke over complex"
   {
     c_t z(phi[i], phi[6-i]);
     auto [f, e] = kyosu::elliptic_fe(z, eve::sqrt(m[i]));
-    std::cout << std::setprecision(15) << "i " << i << " z " << z << " m " << m[i] << " f " << f << " e " << e << std::endl;
     TTS_RELATIVE_EQUAL(f, kyosu::complex(ref[i], imf[i]), pr);
     TTS_RELATIVE_EQUAL(e, kyosu::complex(ree[i], ime[i]), pr);
   }

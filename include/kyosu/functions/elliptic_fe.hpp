@@ -10,7 +10,6 @@
 #include <kyosu/functions/jacobi_elliptic.hpp>
 #include <eve/module/elliptic/ellint_1.hpp>
 #include <eve/module/elliptic/ellint_2.hpp>
-#include <iomanip>
 
 namespace kyosu
 {
@@ -19,10 +18,10 @@ namespace kyosu
   struct elliptic_fe_t : eve::strict_elementwise_callable<elliptic_fe_t, Options, eve::modular_option,
                                                  eve::eccentric_option, eve::threshold_option>
   {
-    template<concepts::real T0, concepts::real T1>
+    template<eve::floating_value T0, eve::floating_value T1>
     constexpr KYOSU_FORCEINLINE
-    auto operator()(T0 a, T1 b) const noexcept
-    { return (*this)(kyosu::complex(a), b); }
+    T0 operator()(T0 a, T1 b) const noexcept
+    { return eve::zip(eve::ellint_1(a, b), eve::ellint_2(a, b)); }
 
     template<concepts::complex T0, concepts::real T1>
     constexpr KYOSU_FORCEINLINE
@@ -105,58 +104,63 @@ namespace kyosu::_
   template<typename Z, typename M, eve::callable_options O>
    constexpr auto elliptic_fe_(KYOSU_DELAY(), O const& o, Z u, M m)  noexcept -> decltype(eve::zip(Z(), Z()))
   {
+    if constexpr(!std::same_as<eve::underlying_type_t<Z>, eve::underlying_type_t<M>>)
+      return elliptic_fe[o](u, eve::convert(m, as<eve::underlying_type_t<Z>>()));
+    else
+    {
 //     auto tol = [&](){
 //       if constexpr (O::contains(eve::threshold)) return o[eve::threshold].value(m);
 //       else return eve::epsilon(eve::maximum(eve::abs(m)));
 //     }();
-    m =  eve::abs(m);
-    if (O::contains(eve::modular)) m = eve::sin(m);
-    else if (O::contains(eve::eccentric)) m = eve::sqrt(m);
-    auto [phi, psi] = u;
+      m =  eve::abs(m);
+      if (O::contains(eve::modular)) m = eve::sin(m);
+      else if (O::contains(eve::eccentric)) m = eve::sqrt(m);
+      auto [phi, psi] = u;
 
-    if (eve::all(is_real(u))) return eve::zip(kyosu::complex(eve::ellint_1/*[eve::threshold = tol]*/(phi, m)),
-                                              kyosu::complex(eve::ellint_2/*[eve::threshold = tol]*/(phi, m)));
-    auto m2 = eve::sqr(m);
-    auto thresh = eve::eps(eve::as(phi));
-    phi =  if_else(eve::abs(phi) < thresh, thresh, phi); //avoiding singularity at 0
+      if (eve::all(is_real(u))) return eve::zip(kyosu::complex(eve::ellint_1/*[eve::threshold = tol]*/(phi, m)),
+                                                kyosu::complex(eve::ellint_2/*[eve::threshold = tol]*/(phi, m)));
+      auto m2 = eve::sqr(m);
+      auto thresh = eve::eps(eve::as(phi));
+      phi =  if_else(eve::abs(phi) < thresh, thresh, phi); //avoiding singularity at 0
 
-    auto b = -(eve::sqr(eve::cot(phi)) + m2*eve::sqr(eve::sinh(psi)*eve::csc(phi))-1+m2); //*eve::half(eve::as(phi));
-    auto c = -(1-m2)*eve::sqr(eve::cot(phi));
-    auto X1 = -b/2+eve::sqrt(eve::sqr(b)/4-c);
-    auto lambda = eve::acot(eve::sqrt(X1));
-    auto mu     = eve::atan( rec(m)*eve::sqrt(eve::dec(eve::sqr(tan(phi)*eve::cot(lambda)))));
+      auto b = -(eve::sqr(eve::cot(phi)) + m2*eve::sqr(eve::sinh(psi)*eve::csc(phi))-1+m2); //*eve::half(eve::as(phi));
+      auto c = -(1-m2)*eve::sqr(eve::cot(phi));
+      auto X1 = -b/2+eve::sqrt(eve::sqr(b)/4-c);
+      auto lambda = eve::acot(eve::sqrt(X1));
+      auto mu     = eve::atan( rec(m)*eve::sqrt(eve::dec(eve::sqr(tan(phi)*eve::cot(lambda)))));
 
-    //  change of variables taking into account periodicity ceil to the right
-    lambda = eve::sign_alternate(eve::floor(2*phi*eve::inv_pi(eve::as(phi))))*lambda+eve::pi(eve::as(phi))*eve::ceil(phi/eve::pi(eve::as(phi))-eve::half(eve::as(phi))+eve::eps(eve::as(phi)));
-    mu     = eve::sign(psi)*mu;
-    auto mc = eve::sqrt(eve::oneminus(m2));
-    lambda =  if_else(is_real(u), phi, lambda);
-    auto f1 = eve::ellint_1/*[eve::threshold = tol]*/(lambda, m);
-    auto e1 = eve::ellint_2/*[eve::threshold = tol]*/(lambda, m);
-    auto f2 = eve::ellint_1/*[eve::threshold = tol]*/(mu, mc);
-    auto e2 = eve::ellint_2/*[eve::threshold = tol]*/(mu, mc);
-    f1 = if_else(is_imag(u), zero, f1);
-    e2 = if_else(is_eqz(mu), zero, e2);
+      //  change of variables taking into account periodicity ceil to the right
+      lambda = eve::sign_alternate(eve::floor(2*phi*eve::inv_pi(eve::as(phi))))*lambda+eve::pi(eve::as(phi))*eve::ceil(phi/eve::pi(eve::as(phi))-eve::half(eve::as(phi))+eve::eps(eve::as(phi)));
+      mu     = eve::sign(psi)*mu;
+      auto mc = eve::sqrt(eve::oneminus(m2));
+      lambda =  if_else(is_real(u), phi, lambda);
+      auto f1 = eve::ellint_1/*[eve::threshold = tol]*/(lambda, m);
+      auto e1 = eve::ellint_2/*[eve::threshold = tol]*/(lambda, m);
+      auto f2 = eve::ellint_1/*[eve::threshold = tol]*/(mu, mc);
+      auto e2 = eve::ellint_2/*[eve::threshold = tol]*/(mu, mc);
+      f1 = if_else(is_imag(u), zero, f1);
+      e2 = if_else(is_eqz(mu), zero, e2);
 
-    auto f = kyosu::complex(f1, f2);
+      auto f = kyosu::complex(f1, f2);
 
-    auto [sin_lam, cos_lam] = eve::sincos(lambda);
-    auto [sin_mu , cos_mu ] = eve::sincos(mu);
-    auto sin_mu2 = eve::sqr(sin_mu);
-    auto sin_lam2 = eve::sqr(sin_lam);
-    auto b1 = m2*sin_lam*cos_lam*sin_mu2*eve::sqrt(eve::oneminus(m2*sin_lam2));
-    auto b2 = sin_mu*cos_mu*(1-m2*sin_lam2)*eve::sqrt(1-oneminus(m2)*sin_mu2);
-    auto b3 = eve::sqr(cos_mu) + m2*sin_lam2*sin_mu2;
-    auto e =  kyosu::complex(b1, b2)/b3;
-    e += kyosu::complex(e1, if_else(is_real(u), zero, f2-e2));
-    kyosu::real(e) =  if_else(is_imag(u), zero, real(e));
+      auto [sin_lam, cos_lam] = eve::sincos(lambda);
+      auto [sin_mu , cos_mu ] = eve::sincos(mu);
+      auto sin_mu2 = eve::sqr(sin_mu);
+      auto sin_lam2 = eve::sqr(sin_lam);
+      auto b1 = m2*sin_lam*cos_lam*sin_mu2*eve::sqrt(eve::oneminus(m2*sin_lam2));
+      auto b2 = sin_mu*cos_mu*(1-m2*sin_lam2)*eve::sqrt(1-oneminus(m2)*sin_mu2);
+      auto b3 = eve::sqr(cos_mu) + m2*sin_lam2*sin_mu2;
+      auto e =  kyosu::complex(b1, b2)/b3;
+      e += kyosu::complex(e1, if_else(is_real(u), zero, f2-e2));
+      kyosu::real(e) =  if_else(is_imag(u), zero, real(e));
 
-    auto test = eve::maxabs(phi, psi) < eve::eps(eve::as(kyosu::real(u)));
-    if (eve::any(test))
-    {
-      f = if_else(test, u, f);
-      e = if_else(test, u, e);
+      auto test = eve::maxabs(phi, psi) < eve::eps(eve::as(kyosu::real(u)));
+      if (eve::any(test))
+      {
+        f = if_else(test, u, f);
+        e = if_else(test, u, e);
+      }
+      return eve::zip(f, e);
     }
-    return eve::zip(f, e);
   }
 }

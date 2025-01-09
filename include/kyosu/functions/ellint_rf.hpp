@@ -11,24 +11,23 @@
 #include <kyosu/functions/sqrt.hpp>
 #include <kyosu/functions/fma.hpp>
 #include <kyosu/functions/fnma.hpp>
-#include <iostream>
 
 namespace kyosu
 {
 
   template<typename Options>
-  struct ellint_rf_t : eve::strict_elementwise_callable<ellint_rf_t, Options, eve::threshold_option>
+  struct ellint_rf_t : eve::elementwise_callable<ellint_rf_t, Options, eve::threshold_option>
   {
-    template<concepts::real T0, concepts::real T1, concepts::real T2>
+    template<eve::floating_value T0, eve::floating_value T1,  eve::floating_value T2>
     constexpr KYOSU_FORCEINLINE
     auto operator()(T0 a, T1 b, T2 c) const noexcept
-    { return (*this)(kyosu::complex(a), b, c); }
+    { return eve::ellint_rf(a, b, c); }
 
     template<concepts::complex T0, concepts::complex T1, concepts::complex T2>
     constexpr KYOSU_FORCEINLINE
     auto operator()(T0 a, T1 b, T2 c) const noexcept
+    requires(concepts::complex<T0> || concepts::complex<T1> || concepts::complex<T2>)
     { return KYOSU_CALL(a, b, c); }
-
 
     KYOSU_CALLABLE_OBJECT(ellint_rf_t, ellint_rf_);
   };

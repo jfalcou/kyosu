@@ -6,6 +6,7 @@
 */
 //======================================================================================================================
 #pragma once
+#include <eve/module/elliptic/ellint_rc.hpp>
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/maxabs.hpp>
 #include <kyosu/functions/sqrt.hpp>
@@ -13,24 +14,23 @@
 #include <kyosu/functions/fnma.hpp>
 #include <kyosu/functions/maxabs.hpp>
 #include <kyosu/functions/reverse_horner.hpp>
-#include <iostream>
 
 namespace kyosu
 {
 
   template<typename Options>
-  struct ellint_rc_t : eve::strict_elementwise_callable<ellint_rc_t, Options, eve::threshold_option>
+  struct ellint_rc_t : eve::elementwise_callable<ellint_rc_t, Options, eve::threshold_option>
   {
-    template<concepts::real T0, concepts::real T1>
+    template<eve::floating_value T0, eve::floating_value T1>
     constexpr KYOSU_FORCEINLINE
     auto operator()(T0 a, T1 b) const noexcept
-    { return (*this)(kyosu::complex(a), b); }
+    { return eve::ellint_rc(a, b); }
 
-    template<concepts::complex T0, concepts::complex T1>
+    template<typename T0, typename T1>
     constexpr KYOSU_FORCEINLINE
     auto operator()(T0 a, T1 b) const noexcept
+    requires(concepts::complex<T0> || concepts::complex<T1>)
     { return KYOSU_CALL(a, b); }
-
 
     KYOSU_CALLABLE_OBJECT(ellint_rc_t, ellint_rc_);
   };
