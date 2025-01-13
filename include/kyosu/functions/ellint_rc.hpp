@@ -130,7 +130,7 @@ namespace kyosu::_
       // Taylor series expansion to the 7th order
       return kyosu::reverse_horner(s, r_t(1.0), r_t(0.0), r_t(3.0/10.0), r_t(1.0/7.0), r_t(3.0/8.0), r_t(9.0/22.0), r_t(159.0/208.0), r_t(9.0/8.0))/kyosu::sqrt(an);
     };
-    auto test = eve::any(is_real(yy) && eve::is_ltz(kyosu::real(yy)));// compute Cauchy principal value
+    auto test = eve::any(is_real(yy) && eve::is_ltz(kyosu::real(yy)));// compute Cauchy principal value on the cut
     if (eve::any(test))
     {
       auto fac = kyosu::sqrt(xx/(xx-yy));

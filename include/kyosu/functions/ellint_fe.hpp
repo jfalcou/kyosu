@@ -15,7 +15,7 @@ namespace kyosu
 {
 
   template<typename Options>
-  struct elliptic_fe_t : eve::strict_elementwise_callable<elliptic_fe_t, Options, eve::modular_option,
+  struct ellint_fe_t : eve::strict_elementwise_callable<ellint_fe_t, Options, eve::modular_option,
                                                  eve::eccentric_option, eve::threshold_option>
   {
     template<eve::floating_value T0, eve::floating_value T1>
@@ -29,13 +29,13 @@ namespace kyosu
     { return KYOSU_CALL(a, b); }
 
 
-    KYOSU_CALLABLE_OBJECT(elliptic_fe_t, elliptic_fe_);
+    KYOSU_CALLABLE_OBJECT(ellint_fe_t, ellint_fe_);
   };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var  elliptic_fe
+//!   @var  ellint_fe
 //!   @brief Computes Jacobi's Amplitude function.
 //!
 //!   @code
@@ -48,16 +48,16 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      // Regular overload
-//!       constexpr Z       elliptic_fe( real<Z>   z, real<U> m)               noexcept; //1
-//!       constexpr auto    elliptic_fe(complex<Z> z, real<U> m)               noexcept; //1
+//!       constexpr Z       ellint_fe( real<Z>   z, real<U> m)               noexcept; //1
+//!       constexpr auto    ellint_fe(complex<Z> z, real<U> m)               noexcept; //1
 //!
 //!      //Semantic modifiers
-//!      constexpr Z    elliptic_fe[modular]( real<Z>      z, real<U> alpha)   noexcept; //1
-//!      constexpr auto elliptic_fe[modular](complex<Z>    z, real<U> alpha)   noexcept; //1
-//!      constexpr Z    elliptic_fe[eccentric]( real<Z>    z, real<U> m)       noexcept; //1
-//!      constexpr auto elliptic_fe[eccentric](complex<Z>  z, real<U> m)       noexcept; //1
-//!      constexpr auto elliptic_fe[threshold = tol]( real<Z>   z, real<U> k)  noexcept; //1
-//!      constexpr auto elliptic_fe[threshold = tol](complex<Z> z, real<U> k)  noexcept; //1
+//!      constexpr Z    ellint_fe[modular]( real<Z>      z, real<U> alpha)   noexcept; //1
+//!      constexpr auto ellint_fe[modular](complex<Z>    z, real<U> alpha)   noexcept; //1
+//!      constexpr Z    ellint_fe[eccentric]( real<Z>    z, real<U> m)       noexcept; //1
+//!      constexpr auto ellint_fe[eccentric](complex<Z>  z, real<U> m)       noexcept; //1
+//!      constexpr auto ellint_fe[threshold = tol]( real<Z>   z, real<U> k)  noexcept; //1
+//!      constexpr auto ellint_fe[threshold = tol](complex<Z> z, real<U> k)  noexcept; //1
 //!   }
 //!   @endcode
 //!
@@ -91,9 +91,9 @@ namespace kyosu
 //!   *  [Wikipedia: Elliptic integral](https://en.wikipedia.org/wiki/Elliptic_integral)
 //!
 //!  @groupheader{Example}
-//!  @godbolt{doc/elliptic_fe.cpp}
+//!  @godbolt{doc/ellint_fe.cpp}
 //======================================================================================================================
-  inline constexpr auto elliptic_fe = eve::functor<elliptic_fe_t>;
+  inline constexpr auto ellint_fe = eve::functor<ellint_fe_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -102,10 +102,10 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, typename M, eve::callable_options O>
-   constexpr auto elliptic_fe_(KYOSU_DELAY(), O const& o, Z u, M m)  noexcept -> decltype(eve::zip(Z(), Z()))
+   constexpr auto ellint_fe_(KYOSU_DELAY(), O const& o, Z u, M m)  noexcept -> decltype(eve::zip(Z(), Z()))
   {
     if constexpr(!std::same_as<eve::underlying_type_t<Z>, eve::underlying_type_t<M>>)
-      return elliptic_fe[o](u, eve::convert(m, as<eve::underlying_type_t<Z>>()));
+      return ellint_fe[o](u, eve::convert(m, as<eve::underlying_type_t<Z>>()));
     else
     {
 //     auto tol = [&](){
