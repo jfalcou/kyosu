@@ -11,7 +11,7 @@ int main()
   auto m = w_t(0.5);
 //   auto z = kyosu::complex(0.0, 1.0);
 //   auto m =0.5;
-  auto [f, e] =  kyosu::elliptic_fe(z, eve::sqrt(m));
+  auto [f, e] =  kyosu::ellint_fe(z, eve::sqrt(m));
   std::cout << " z               " << z  << std::endl;
   std::cout << " m               " << m  << std::endl;
   std::cout << "f                " << f << std::endl;

@@ -9,7 +9,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_TPL ( "Check elliptic_ke over complex"
+TTS_CASE_TPL ( "Check ellint_fe over complex"
              , kyosu::scalar_real_types
              )
   <typename T>(tts::type<T>)
@@ -27,7 +27,7 @@ TTS_CASE_TPL ( "Check elliptic_ke over complex"
   for(int i=0; i <= 6; ++i)
   {
     c_t z(phi[i], phi[6-i]);
-    auto [f, e] = kyosu::elliptic_fe(z, eve::sqrt(m[i]));
+    auto [f, e] = kyosu::ellint_fe(z, eve::sqrt(m[i]));
     TTS_RELATIVE_EQUAL(f, kyosu::complex(ref[i], imf[i]), pr);
     TTS_RELATIVE_EQUAL(e, kyosu::complex(ree[i], ime[i]), pr);
   }
