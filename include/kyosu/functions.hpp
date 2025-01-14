@@ -75,6 +75,7 @@
 #include <kyosu/functions/dot.hpp>
 #include <kyosu/functions/ellint_fe.hpp>
 #include <kyosu/functions/ellint_rc.hpp>
+#include <kyosu/functions/ellint_rd.hpp>
 #include <kyosu/functions/ellint_rf.hpp>
 #include <kyosu/functions/ellint_rj.hpp>
 #include <kyosu/functions/erf.hpp>
