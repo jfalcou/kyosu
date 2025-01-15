@@ -54,18 +54,14 @@ namespace kyosu
 //!   namespace eve
 //!   {
 //!      // Regular overload
-//!      constexpr auto ellint_rj(floating_value auto x, floating_value auto y,
-//!                               floating_value auto z, floating_value auto p)                          noexcept; // 1
+//!      constexpr auto ellint_rj(auto x, auto y, auto z, auto p)                          noexcept; // 1
 //!
 //!      // semantic modifier
-//!      constexpr auto ellint_rj[threshold = tol](floating_value auto x, floating_value auto y,
-//!                                                floating_value auto z, floating_value auto p)         noexcept; // 1
+//!      constexpr auto ellint_rj[threshold = tol](auto x, auto y, auto z, auto p)         noexcept; // 1
 //!
 //!      // Lanes masking
-//!      constexpr auto ellint_rj[conditional_expr auto c](floating_value auto x, floating_value auto y,
-//!                                                        floating_value auto z, floating_value auto p) noexcept; // 2
-//!      constexpr auto ellint_rj[logical_value auto m](floating_value auto x, floating_value auto y,
-//!                                                     floating_value auto z, floating_value auto p)    noexcept; // 2
+//!      constexpr auto ellint_rj[conditional_expr auto c](auto x, auto y, auto z, auto p) noexcept; // 2
+//!      constexpr auto ellint_rj[logical_value auto m](auto x, auto y, auto z, auto p)    noexcept; // 2
 //!   }
 //!   @endcode
 //!
@@ -81,12 +77,10 @@ namespace kyosu
 //!     1. the value of the \f$\mathbf{R}_\mathbf{J}\f$ Carlson elliptic integral:
 //!        \f$ \frac32 \int_{0}^{\infty}
 //!        \scriptstyle(t+p)^{-1}[(t+x)(t+y)(t+z)]^{-1/2}\;\mathrm{d}t\f$ is returned with relative error less in magnitude than tol
-//!        (default to `eps(as<T>())`),  under one of these condition:
-//!        -  `x`, `y` and  `z` must have nonnegative real part and at most one
-//!            of them be 0, while `real(p) > 0`.
-//!        -  if `p` ìs not 0 and \f$|arg(p)| < \pi\f$, either `x`, `y` and  `z` real and nonnegative and at most one of them be 0,
-//!        -  two of the variables `x`, `y` and  `z` nonzero and conjugate complex with phase less in magnitude than  \f$\pi\f$ and the
-//!           third variable be real and nonnegative.
+//!        (default to [eps](@ref eve::eps)),
+//!        The integral is well defined if `x`, `y`, `z` lie in the
+//!        complex plane cut along the nonpositive real axis,
+//!        with the exception that at at most one of `x`, `y`, `z` can be 0.
 //!     2. [The operation is performed conditionnaly](@ref conditional)
 //!
 //!  @groupheader{External references}

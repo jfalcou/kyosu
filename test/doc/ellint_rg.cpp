@@ -6,8 +6,8 @@ using wide_t = eve::wide <double, eve::fixed<4>>;
 using r_t = double;
 wide_t re1 = { 3.0, 2.0, 1.0, 0.5};
 wide_t im1 = { 2.0, -1.0,  -5.0, 0.0};
-wide_t re2 = { 0.0, 1.0, 2.0, 3.0};
-wide_t im2 = { 1.0 , -4.0,  -2.0, 0.0};
+wide_t re2 = { 0.0, 1.0, 4.0, 3.0};
+wide_t im2 = { 1.0 , -4.0,  0.0, 0.0};
 wide_t re3 = { 0.1, -1.0, 2.0, 4.0};
 wide_t im3 = { 2.0 , -4.0,  -3.0, 0.0};
 auto p = kyosu::complex_t<wide_t>(re1, im1);
@@ -20,7 +20,7 @@ int main()
   std::cout << "<- q = " << q << "\n";
   std::cout << "<- r = " << r << "\n";
 
-   std::cout << "-> ellint_rf(p, q, r)                = " << kyosu::ellint_rf(p, q, r) << "\n";
-   std::cout << "-> ellint_rf[ignore_last(2)](p, q, r)= " << kyosu::ellint_rf[eve::ignore_last(2)](p, q, r) << "\n";
-   std::cout << "-> ellint_rf[q != 4.0](p, q, r)    = " << kyosu::ellint_rf[q != 4.0](p, q, r) << "\n";
+   std::cout << "-> ellint_rg(p, q, r)                = " << kyosu::ellint_rg(p, q, r) << "\n";
+   std::cout << "-> ellint_rg[ignore_last(2)](p, q, r)= " << kyosu::ellint_rg[eve::ignore_last(2)](p, q, r) << "\n";
+   std::cout << "-> ellint_rg[q != 4.0](p, q, r)      = " << kyosu::ellint_rg[q != 4.0](p, q, r) << "\n";
 }

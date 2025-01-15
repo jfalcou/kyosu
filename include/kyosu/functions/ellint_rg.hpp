@@ -54,8 +54,7 @@ namespace kyosu
 //!   namespace eve
 //!   {
 //!      // Regular overload
-//!      constexpr auto ellint_rg(real auto x, real auto y, real auto z)                 noexcept; // 1
-//!      constexpr auto ellint_rg(complex auto x, complex auto y, complex auto z)        noexcept; // 1
+//!      constexpr auto ellint_rg(auto x, auto y, auto z)                 noexcept; // 1
 //!
 //!      // Lanes masking
 //!      constexpr auto ellint_rg[conditional_expr auto c](/*all previous overloads*/)   noexcept; // 2
@@ -72,10 +71,10 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     1. the value of the \f$\mathbf{R}_\mathbf{G}\f$ Carlson elliptic integral:
-//!       \f$\frac1{4\pi} \int_{0}^{2\pi}\int_{0}^{\pi}
-//!       \scriptstyle\sqrt{x\sin^2\theta\cos^2\phi
-//!       +y\sin^2\theta\sin^2\phi
-//!       +z\cos^2\theta} \scriptstyle\;\mathrm{d}\theta\;\mathrm{d}\phi\f$ is returned:
+//!       \f$\frac14 \int_{0}^{\infty}[(t+x)(t+y)(t+z)]^{-1/2}\left(\frac{x}{t+x}+\frac{y}{t+y}+\frac{z}{t+z}\right)t\;\mathrm{d}t\f$
+//!       is returned.
+//!       All of x, y, z may be 0 and those that are nonzero must lie in the complex plane cut
+//!       along the nonpositive real axis
 //!     2. [The operation is performed conditionnaly](@ref conditional)
 //!
 //!  @groupheader{External references}

@@ -49,7 +49,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `z0`, `z1...`: Values to process. Can be a mix of complex and real floating values and complex values.
+//!     * `z0`, `z1...`: Values to process. Can be a mix of complex and real floating values.
 //!
 //!   **Return value**
 //!

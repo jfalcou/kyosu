@@ -20,7 +20,7 @@ int main()
   std::cout << "<- q = " << q << "\n";
   std::cout << "<- r = " << r << "\n";
 
-   std::cout << "-> ellint_rf(p, q, r)                = " << kyosu::ellint_rf(p, q, r) << "\n";
-   std::cout << "-> ellint_rf[ignore_last(2)](p, q, r)= " << kyosu::ellint_rf[eve::ignore_last(2)](p, q, r) << "\n";
-   std::cout << "-> ellint_rf[q != 4.0](p, q, r)    = " << kyosu::ellint_rf[q != 4.0](p, q, r) << "\n";
+   std::cout << "-> ellint_rd(p, q, r)                = " << kyosu::ellint_rd(p, q, r) << "\n";
+   std::cout << "-> ellint_rd[ignore_last(2)](p, q, r)= " << kyosu::ellint_rd[eve::ignore_last(2)](p, q, r) << "\n";
+   std::cout << "-> ellint_rd[q != 4.0](p, q, r)    = " << kyosu::ellint_rd[q != 4.0](p, q, r) << "\n";
 }

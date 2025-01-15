@@ -53,30 +53,28 @@ namespace kyosu
 //!   namespace eve
 //!   {
 //!      // Regular overload
-//!      constexpr auto ellint_rf(floating_value auto x, floating_value auto y, floating_value auto z)   noexcept; // 1
+//!      constexpr auto ellint_rf(auto x, auto y, auto z)                           noexcept; // 1
 //!
 //!      // Lanes masking
-//!      constexpr auto ellint_rf[conditional_expr auto c](floating_value auto x, floating_value auto y,
-//!                                                        floating_value auto z)                        noexcept; // 2
-//!      constexpr auto ellint_rf[logical_value auto m](floating_value auto x, floating_value auto y,
-//!                                                     floating_value auto z)                           noexcept; // 2
+//!      constexpr auto ellint_rf[conditional_expr auto c](auto x, auto y, auto z) noexcept; // 2
+//!      constexpr auto ellint_rf[logical_value auto m](auto x, auto y, auto z)    noexcept; // 2
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `x`, `y`, `z`:  [floating values](@ref eve::floating_value).
-//!                       All those arguments must be non-negative and at most one zero or the
-//!                       the result is NaN.
+//!     * `x`, `y`, `z`:  Can be a mix of complex and real floating values.
 //!     * `c`: [Conditional expression](@ref eve::conditional_expr) masking the operation.
 //!     * `m`: [Logical value](@ref eve::logical_value) masking the operation.
 //!
 //!   **Return value**
 //!
 //!     1. the value of the \f$\mathbf{R}_\mathbf{F}\f$ Carlson elliptic integral:
-//!       \f$  \mathbf{R}_\mathbf{F}(x, y) =
-//!       \frac32 \int_{0}^{\infty} \scriptstyle[(t+x)(t+y)]^{-1/2}
-//!       (t+z)^{-3/2}\scriptstyle\;\mathrm{d}t\f$.  is returned
+//!       \f$ \frac32 \int_{0}^{\infty} \scriptstyle[(t+x)(t+y)(t+z)]^{-1/2}\scriptstyle\;\mathrm{d}t\f$.
+//!       is returned.
+//!        The integral is well defined if `x`, `y`, `z` lie in the
+//!        complex plane cut along the nonpositive real axis,
+//!        with the exception that  one of `x`, `y`, `z` must be non 0
 //!     2. [The operation is performed conditionnaly](@ref conditional)
 //!
 //!  @groupheader{External references}
@@ -99,7 +97,7 @@ namespace kyosu::_
     using r_t = eve::underlying_type_t<T>;
     auto tol = [&](){
       if constexpr (O::contains(eve::threshold)) return o[eve::threshold].value(x);
-      else return eve::eps(eve::as(real(x)));
+      else return eve::eps(eve::as<r_t>());
     }();
     T    xn   = x;
     T    yn   = y;
@@ -107,17 +105,16 @@ namespace kyosu::_
     T    an   = kyosu::average(x, y, z);
     T    a0   = an;
     r_t epsi = eve::pow_abs(3 *tol, -eve::rec(r_t(6)));
-    r_t q  = epsi * kyosu::maxabs(an - xn, an - yn, an - zn);
+    auto q  = epsi * kyosu::maxabs(an - xn, an - yn, an - zn);
     r_t fn = eve::one(eve::as<r_t>());
 
     // duplication
-    unsigned k  = 1;
-    r_t hf = half(as(real(x)));
-    for( ; k < 30; ++k )
+    r_t hf = half(as<r_t>());
+    for(unsigned k = 1 ; k < 30; ++k )
     {
-      T root_x = kyosu::sqrt(xn);
-      T root_y = kyosu::sqrt(yn);
-      T root_z = kyosu::sqrt(zn);
+      auto root_x = kyosu::sqrt(xn);
+      auto root_y = kyosu::sqrt(yn);
+      auto root_z = kyosu::sqrt(zn);
       root_x = if_else(real(root_x) < 0, -root_x, root_x);
       root_y = if_else(real(root_y) < 0, -root_y, root_y);
       root_z = if_else(real(root_z) < 0, -root_z, root_z);
@@ -130,15 +127,15 @@ namespace kyosu::_
       fn *= r_t(4);
       if( eve::all(q < kyosu::abs(an)) ) break;
     }
-    T denom = kyosu::rec(an * fn);
-    T xx    = (a0 - x) * denom;
-    T yy    = (a0 - y) * denom;
-    T zz    = -xx - yy;
+    auto denom = kyosu::rec(an * fn);
+    auto xx    = (a0 - x) * denom;
+    auto yy    = (a0 - y) * denom;
+    auto zz    = -xx - yy;
 
     // Taylor series expansion to the 7th order
-    T p  = xx * yy;
-    T e2 = kyosu::fnma(zz, zz, p);
-    T e3 = p * zz;
+    auto p  = xx * yy;
+    auto e2 = kyosu::fnma(zz, zz, p);
+    auto e3 = p * zz;
     constexpr r_t c0 = r_t(1/14.0);
     constexpr r_t c1 = r_t(3/104.0);
     constexpr r_t c2 = r_t(-1/10.0);

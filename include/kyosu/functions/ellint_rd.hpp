@@ -39,8 +39,8 @@ namespace kyosu
 //! @{
 //!   @var ellint_rd
 //!   @brief Computes the Carlson's elliptic integral
-//!   \f$ \mathbf{R}_\mathbf{J}(x, y) = \frac32 \int_{0}^{\infty}
-//!   \scriptstyle(t+p)^{-1}[(t+x)(t+y)(t+z)]^{-1/2}\scriptstyle\;\mathrm{d}t\f$.
+//!   \f$ \mathbf{R}_\mathbf{D}(x, y) = \frac32 \int_{0}^{\infty}
+//!        \scriptstyle[(t+x)(t+y)]^{-1/2}(t+z)^{-3/2}\;\mathrm{d}t\f$.
 //!
 //!   @groupheader{Header file}
 //!
@@ -54,39 +54,33 @@ namespace kyosu
 //!   namespace eve
 //!   {
 //!      // Regular overload
-//!      constexpr auto ellint_rd(floating_value auto x, floating_value auto y,
-//!                               floating_value auto z)                          noexcept; // 1
+//!      constexpr auto ellint_rd( auto x,  auto y, auto z)                        noexcept; // 1
 //!
 //!      // semantic modifier
-//!      constexpr auto ellint_rd[threshold = tol](floating_value auto x, floating_value auto y,
-//!                                                floating_value auto z)         noexcept; // 1
+//!      constexpr auto ellint_rd[threshold = tol](auto x, auto y, auto z)         noexcept; // 1
 //!
 //!      // Lanes masking
-//!      constexpr auto ellint_rd[conditional_expr auto c](floating_value auto x, floating_value auto y,
-//!                                                        floating_value auto z) noexcept; // 2
-//!      constexpr auto ellint_rd[logical_value auto m](floating_value auto x, floating_value auto y,
-//!                                                     floating_value auto z)    noexcept; // 2
+//!      constexpr auto ellint_rd[conditional_expr auto c](auto x, auto y, auto z) noexcept; // 2
+//!      constexpr auto ellint_rd[logical_value auto m](auto x, auto y, auto z)    noexcept; // 2
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `x`, `y`, `z`: [floating real arguments](@ref eve::floating_value).
+//!     * `x`, `y`, `z`: Can be a mix of complex and real floating values. `z` must be non zero
 //!     * `p`:  [floating real arguments](@ref eve::floating_value).
 //!     * `c`: [Conditional expression](@ref eve::conditional_expr) masking the operation.
 //!     * `m`: [Logical value](@ref eve::logical_value) masking the operation.
 //!
 //!   **Return value**
 //!
-//!     1. the value of the \f$\mathbf{R}_\mathbf{J}\f$ Carlson elliptic integral:
-//!        \f$ \frac32 \int_{0}^{\infty}
-//!        \scriptstyle(t+p)^{-1}[(t+x)(t+y)(t+z)]^{-1/2}\;\mathrm{d}t\f$ is returned with relative error less in magnitude than tol
-//!        (default to `eps(as<T>())`),  under one of these condition:
-//!        -  `x`, `y` and  `z` must have nonnegative real part and at most one
-//!            of them be 0, while `real(p) > 0`.
-//!        -  if `p` ìs not 0 and \f$|arg(p)| < \pi\f$, either `x`, `y` and  `z` real and nonnegative and at most one of them be 0,
-//!        -  two of the variables `x`, `y` and  `z` nonzero and conjugate complex with phase less in magnitude than  \f$\pi\f$ and the
-//!           third variable be real and nonnegative.
+//!     1. the value of the \f$\mathbf{R}_\mathbf{D}\f$ Carlson elliptic integral:
+//!        \f$ \frac32 \int_{0}^{\infty}\scriptstyle[(t+x)(t+y)]^{-1/2}(t+z)^{-3/2}\;\mathrm{d}t\f$
+//!        is returned with relative error less in magnitude than tol
+//!        (tol default to [eps](@ref eve::eps)).
+//!        The integral is well defined if `x`, `y`, `z` lie in the
+//!        complex plane cut along the nonpositive real axis,
+//!        with the exception that at z must be non 0
 //!     2. [The operation is performed conditionnaly](@ref conditional)
 //!
 //!  @groupheader{External references}
@@ -94,7 +88,7 @@ namespace kyosu
 //!   *  [Wolfram MathWorld: Elliptic Integral](https://mathworld.wolfram.com/CarlsonEllipticIntegrals.html)
 //!
 //!  @groupheader{Example}
-//!  @godbolt{doc/elliptic/ellint_rd.cpp}
+//!  @godbolt{doc/ellint_rd.cpp}
 //================================================================================================
   inline constexpr auto ellint_rd = eve::functor<ellint_rd_t>;
 //================================================================================================
