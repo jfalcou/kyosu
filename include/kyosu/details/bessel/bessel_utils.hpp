@@ -95,7 +95,7 @@ namespace kyosu::_
       D = kyosu::rec(D);
       delta = C*D;
       f = f * delta;
-    } while(eve::any((kyosu::abs(kyosu::dec(delta)) > terminator) && --counter));
+    } while(eve::any((kyosu::abs(kyosu::dec(delta)) > terminator)) && --counter);
     g.reset();
     return f;
   }
