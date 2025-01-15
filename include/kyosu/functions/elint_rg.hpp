@@ -1,0 +1,104 @@
+//======================================================================================================================
+/*
+  Kyosu - Complex Without Complexes
+  Copyright: KYOSU Contributors & Maintainers
+  SPDX-License-Identifier: BSL-1.0
+*/
+//======================================================================================================================
+#pragma once
+#include <eve/module/elliptic/ellint_rj.hpp>
+#include <kyosu/details/callable.hpp>
+#include <kyosu/functions/ellint_rf.hpp>
+#include <kyosu/functions/ellint_rd.hpp>
+
+namespace kyosu
+{
+
+  template<typename Options>
+  struct ellint_rg_t : eve::elementwise_callable<ellint_rg_t, Options, eve::threshold_option>
+  {
+    template<eve::floating_value T0, eve::floating_value T1,
+             eve::floating_value T2>
+    constexpr KYOSU_FORCEINLINE
+    auto operator()(T0 a, T1 b, T2 c) const noexcept
+    { return eve::ellint_rg(a, b, c); }
+
+    template<concepts::complex T0, concepts::complex T1, concepts::complex T2, >
+    constexpr KYOSU_FORCEINLINE
+    auto operator()(T0 a, T1 b, T2 c) const noexcept
+    requires(concepts::complex<T0> || concepts::complex<T1> || concepts::complex<T2>)
+    { return KYOSU_CALL(a, b, c); }
+
+    KYOSU_CALLABLE_OBJECT(ellint_rg_t, ellint_rg_);
+  };
+
+//================================================================================================
+//! @addtogroup functions
+//! @{
+//!   @var ellint_rg
+//!   @brief Computes the Carlson's elliptic integral
+//!   \f$ \mathbf{R}_\mathbf{G}(x, y) = \frac1{4\pi} \int_{0}^{2\pi}\int_{0}^{\pi}
+//!   \scriptstyle\sqrt{x\sin^2\theta\cos^2\phi
+//!   +y\sin^2\theta\sin^2\phi
+//!   +z\cos^2\theta} \scriptstyle\;\mathrm{d}\theta\;\mathrm{d}\phi\f$
+//!
+//!   @groupheader{Header file}
+//!
+//!   @code
+//!   #include <kyosu/kyosu.hpp>
+//!   @endcode
+//!
+//!   @groupheader{Callable Signatures}
+//!
+//!   @code
+//!   namespace eve
+//!   {
+//!      // Regular overload
+//!      constexpr auto ellint_rg(real auto x, real auto y, real auto z)                 noexcept; // 1
+//!      constexpr auto ellint_rg(complex auto x, complex auto y, complex auto z)        noexcept; // 1
+//!
+//!      // Lanes masking
+//!      constexpr auto ellint_rg[conditional_expr auto c](/*all previous overloads*/)   noexcept; // 2
+//!      constexpr auto ellint_rg[logical_value auto m](/*all previous overloads*/)      noexcept; // 2
+//!   }
+//!   @endcode
+//!
+//!   **Parameters**
+//!
+//!     * `x`, `y`, `z`:  complex or real arguments.
+//!     * `c`: [Conditional expression](@ref eve::conditional_expr) masking the operation.
+//!     * `m`: [Logical value](@ref eve::logical_value) masking the operation.
+//!
+//!   **Return value**
+//!
+//!     1. the value of the \f$\mathbf{R}_\mathbf{G}\f$ Carlson elliptic integral:
+//!       \f$\frac1{4\pi} \int_{0}^{2\pi}\int_{0}^{\pi}
+//!       \scriptstyle\sqrt{x\sin^2\theta\cos^2\phi
+//!       +y\sin^2\theta\sin^2\phi
+//!       +z\cos^2\theta} \scriptstyle\;\mathrm{d}\theta\;\mathrm{d}\phi\f$ is returned:
+//!     2. [The operation is performed conditionnaly](@ref conditional)
+//!
+//!  @groupheader{External references}
+//!   *  [DLMF: Elliptic Integrals](https://dlmf.nist.gov/19.2)
+//!   *  [Wolfram MathWorld: Elliptic Integral](https://mathworld.wolfram.com/CarlsonEllipticIntegrals.html)
+//!
+//!
+//!  @groupheader{Example}
+//!  @godbolt{doc/ellint_rg.cpp}
+//================================================================================================
+  inline constexpr auto ellint_rg = eve::functor<ellint_rg_t>;
+//================================================================================================
+//! @}
+}
+namespace kyosu::_
+{
+  template<typename T, eve::callable_options O >
+  constexpr auto ellint_rg_(KYOSU_DELAY(), O const& o, T x, T y, T z) noexcept
+  {
+    eve::swap_if(x < y, x, y);
+    eve::swap_if(x < z, x, z);
+    eve::swap_if(y > z, y, z);
+    // now all(x >= z) and all(z >= y)
+    return average(z*ellint_rf[o](x,y,z)-(x-z)*(y-z)*ellint_rd[o](x, y, z)*eve::third(as<r_t>()), kyosu::sqrt(x*y/z));
+  }
+}
