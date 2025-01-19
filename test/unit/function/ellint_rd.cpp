@@ -8,6 +8,8 @@
 #include <iomanip>
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
+// the values tested are those contained in the original Carlson article
+// computation of elliptic integrals, Bille C. Carlson arXiv:math/9409227
 
 TTS_CASE_TPL ( "Check ellint_rj over complex"
              , kyosu::scalar_real_types

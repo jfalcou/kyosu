@@ -108,17 +108,13 @@ namespace kyosu::_
       return ellint_fe[o](u, eve::convert(m, as<eve::underlying_type_t<Z>>()));
     else
     {
-//     auto tol = [&](){
-//       if constexpr (O::contains(eve::threshold)) return o[eve::threshold].value(m);
-//       else return eve::epsilon(eve::maximum(eve::abs(m)));
-//     }();
       m =  eve::abs(m);
       if (O::contains(eve::modular)) m = eve::sin(m);
       else if (O::contains(eve::eccentric)) m = eve::sqrt(m);
       auto [phi, psi] = u;
 
-      if (eve::all(is_real(u))) return eve::zip(kyosu::complex(eve::ellint_1/*[eve::threshold = tol]*/(phi, m)),
-                                                kyosu::complex(eve::ellint_2/*[eve::threshold = tol]*/(phi, m)));
+      if (eve::all(is_real(u))) return eve::zip(kyosu::complex(eve::ellint_1[o](phi, m)),
+                                                kyosu::complex(eve::ellint_2[o](phi, m)));
       auto m2 = eve::sqr(m);
       auto thresh = eve::eps(eve::as(phi));
       phi =  if_else(eve::abs(phi) < thresh, thresh, phi); //avoiding singularity at 0
@@ -130,14 +126,15 @@ namespace kyosu::_
       auto mu     = eve::atan( rec(m)*eve::sqrt(eve::dec(eve::sqr(tan(phi)*eve::cot(lambda)))));
 
       //  change of variables taking into account periodicity ceil to the right
-      lambda = eve::sign_alternate(eve::floor(2*phi*eve::inv_pi(eve::as(phi))))*lambda+eve::pi(eve::as(phi))*eve::ceil(phi/eve::pi(eve::as(phi))-eve::half(eve::as(phi))+eve::eps(eve::as(phi)));
+      lambda = eve::sign_alternate(eve::floor(2*phi*eve::inv_pi(eve::as(phi))))*lambda+
+        eve::pi(eve::as(phi))*eve::ceil(phi/eve::pi(eve::as(phi))-eve::half(eve::as(phi))+eve::eps(eve::as(phi)));
       mu     = eve::sign(psi)*mu;
       auto mc = eve::sqrt(eve::oneminus(m2));
       lambda =  if_else(is_real(u), phi, lambda);
-      auto f1 = eve::ellint_1/*[eve::threshold = tol]*/(lambda, m);
-      auto e1 = eve::ellint_2/*[eve::threshold = tol]*/(lambda, m);
-      auto f2 = eve::ellint_1/*[eve::threshold = tol]*/(mu, mc);
-      auto e2 = eve::ellint_2/*[eve::threshold = tol]*/(mu, mc);
+      auto f1 = eve::ellint_1[o](lambda, m);
+      auto e1 = eve::ellint_2[o](lambda, m);
+      auto f2 = eve::ellint_1[o](mu, mc);
+      auto e2 = eve::ellint_2[o](mu, mc);
       f1 = if_else(is_imag(u), zero, f1);
       e2 = if_else(is_eqz(mu), zero, e2);
 
