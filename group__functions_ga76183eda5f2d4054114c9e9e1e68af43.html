@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::sqrt</title>
+<title>kyosu: kyosu::ellint_rc</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga76183eda5f2d4054114c9e9e1e68af43.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,8 +121,8 @@ $(document).ready(function(){initNavTree('group__functions_ga6f78a4312ac7bd38e25
 </div>
 
 <div class="contents">
-<a id="ga6f78a4312ac7bd38e25d0b09b18fe3e6" name="ga6f78a4312ac7bd38e25d0b09b18fe3e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6f78a4312ac7bd38e25d0b09b18fe3e6">&#9670;&#160;</a></span>sqrt</h2>
+<a id="ga76183eda5f2d4054114c9e9e1e68af43" name="ga76183eda5f2d4054114c9e9e1e68af43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga76183eda5f2d4054114c9e9e1e68af43">&#9670;&#160;</a></span>ellint_rc</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('group__functions_ga6f78a4312ac7bd38e25
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::sqrt = eve::functor&lt;sqrt_t&gt;</td>
+          <td class="memname">kyosu::ellint_rc = eve::functor&lt;ellint_rc_t&gt;</td>
         </tr>
       </table>
   </td>
@@ -141,76 +141,60 @@ $(document).ready(function(){initNavTree('group__functions_ga6f78a4312ac7bd38e25
 </table>
 </div><div class="memdoc">
 
-<p>Computes a square root value. </p>
+<p>Computes the Carlson's elliptic integral  \(  \mathbf{R}_\mathbf{C}(x, y) =
+  \frac12 \int_{0}^{\infty} \scriptstyle(t+x)^{-1/2}(t+y)]^{-1}\;\mathrm{d}t\). </p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/module/elliptic.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;        <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(T z) <span class="keyword">noexcept</span>; <span class="comment">//3</span></div>
+<div class="line">   <span class="comment">// Regular overload</span></div>
+<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga76183eda5f2d4054114c9e9e1e68af43.html#ga76183eda5f2d4054114c9e9e1e68af43">ellint_rc</a>(<span class="keyword">auto</span> x, <span class="keyword">auto</span> y)                           <span class="keyword">noexcept</span>; <span class="comment">// 1</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Lanes masking</span></div>
+<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga76183eda5f2d4054114c9e9e1e68af43.html#ga76183eda5f2d4054114c9e9e1e68af43">ellint_rc</a>[conditional_expr <span class="keyword">auto</span> c](<span class="keyword">auto</span> x, <span class="keyword">auto</span> y)  <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
+<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga76183eda5f2d4054114c9e9e1e68af43.html#ga76183eda5f2d4054114c9e9e1e68af43">ellint_rc</a>[logical_value <span class="keyword">auto</span> m](<span class="keyword">auto</span> x, <span class="keyword">auto</span> y)     <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6_html_ga6f78a4312ac7bd38e25d0b09b18fe3e6"><div class="ttname"><a href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdoc">Computes a square root value.</div><div class="ttdef"><b>Definition:</b> sqrt.hpp:88</div></div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
+<div class="ttc" id="agroup__functions_ga76183eda5f2d4054114c9e9e1e68af43_html_ga76183eda5f2d4054114c9e9e1e68af43"><div class="ttname"><a href="group__functions_ga76183eda5f2d4054114c9e9e1e68af43.html#ga76183eda5f2d4054114c9e9e1e68af43">kyosu::ellint_rc</a></div><div class="ttdeci">constexpr auto ellint_rc</div><div class="ttdoc">Computes the Carlson's elliptic integral  .</div><div class="ttdef"><b>Definition:</b> ellint_rc.hpp:88</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code>: Value to for which square root is computed.</li>
+<li><code>x</code>, <code>y</code>: Can be a mix of complex and real floating values. <code>x</code>, <code>y</code> must be non zero and have phase less in magnitude than \(\pi\), with the exception that <code>x</code> may be 0.</li>
+<li><code>c</code>: Conditional expression masking the operation.</li>
+<li><code>m</code>: Logical value masking the operation.</li>
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>a real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered.</li>
-<li>Returns the elementwise the square root of z, in the range of the right half-plane, including the imaginary axis ( \([0, +\infty]\) along the real axis and \([-\infty, +\infty]\) along the imaginary axis.)<ul>
-<li>The function is continuous onto the branch cut taking into account the sign of imaginary part</li>
-<li>eve::sqrt(kyosu::conj(z)) == <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">kyosu::conj(kyosu::sqrt(z))</a></li>
-<li>If z is \(\pm0\), the result is \(+0\)</li>
-<li>If z is \(x+i \infty\), the result is \(\infty+i \infty\) even if x is \(NaN\)</li>
-<li>If z is \(x,NaN\), the result is \(NaN,NaN\) (unless x is \(\pm\infty\))</li>
-<li>If z is \(-\infty+i y\), the result is \(+0+i \infty\) for finite positive y</li>
-<li>If z is \(+\infty+i y\), the result is \(+\infty+i 0\) for finite positive y</li>
-<li>If z is \(-\infty+i NaN\), the result is \(NaN \pm i \infty\) (sign of imaginary part unspecified)</li>
-<li>If z is \(+\infty+i NaN\), the result is \(+\infty+i NaN\)</li>
-<li>If z is \(NaN+i y\), the result is \(NaN+i NaN\)</li>
-<li>If z is \(NaN+i NaN\), the result is \(NaN+i NaN\)</li>
-</ul>
-</li>
-</ol>
-<ol type="1">
-<li>Returns a square root of z.</li>
+<li>the value of the Carlson degenerate elliptic integral:  \(\mathbf{R}_\mathbf{C}(x, y) = \frac12 \int_{0}^{\infty}
+      \scriptstyle(t+x)^{-1/2}(t+y)^{-1}\scriptstyle\;\mathrm{d}t\) is returned.</li>
+<li>The operation is performed conditionally</li>
 </ol>
 <h2 class="groupheader">External references </h2>
 <ul>
-<li><a href="https://en.cppreference.com/w/cpp/numeric/complex/sqrt">C++ standard reference: complex cosh</a></li>
-<li><a href="https://mathworld.wolfram.com/SquareRoot.html">Wolfram MathWorld: Square Root</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Square_root">Wikipedia: Square root</a></li>
+<li><a href="https://dlmf.nist.gov/19.2">DLMF: Elliptic Integrals</a></li>
+<li><a href="https://mathworld.wolfram.com/CarlsonEllipticIntegrals.html">Wolfram MathWorld: Elliptic Integral</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="comment">// revision 1</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/module/elliptic.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using </span>wide_t = eve::wide &lt;double, eve::fixed&lt;4&gt;&gt;;</div>
+<div class="line"><span class="keyword">using </span>r_t = double;</div>
+<div class="line">wide_t ref1 = { 3.0, 2.0, 1.0, 0.5};</div>
+<div class="line">wide_t imf1 = { 2.0, -1.0,  -5.0, 0.0};</div>
+<div class="line">wide_t ref2 = { 0.0, 1.0, 2.0, 3.0};</div>
+<div class="line">wide_t imf2 = { 1.0f , -4.0,  -2.0, 0.0};</div>
+<div class="line"><span class="keyword">auto</span> pf = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_t&gt;</a>(ref1, imf1);</div>
+<div class="line"><span class="keyword">auto</span> qf = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_t&gt;</a>(ref2, imf2);</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">kyosu::sqrt</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;&lt;- pf = &quot;</span> &lt;&lt; pf &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;&lt;- qf = &quot;</span> &lt;&lt; qf &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; 72.9f &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(72.9f) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; ellint_rc(pf, qf)                = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga76183eda5f2d4054114c9e9e1e68af43.html#ga76183eda5f2d4054114c9e9e1e68af43">kyosu::ellint_rc</a>(pf, qf) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kyosu::complex_t&lt;float&gt;(3.5f,-2.9f) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;float&gt;</a>(3.5f,-2.9f)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kyosu::quaternion_t&lt;double&gt;(1.,2.,3.,4.) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(<a class="code hl_typedef" href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t&lt;double&gt;</a>(1.,2.,3.,4.)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;SIMD:        &quot;</span>;</div>
-<div class="line">  <span class="keyword">using </span>wc_t = eve::wide&lt;kyosu::complex_t&lt;double&gt;, eve::fixed&lt;2&gt;&gt;;</div>
-<div class="line">  std::cout &lt;&lt; wc_t(kyosu::complex_t&lt;double&gt;(1.3,-3.7)) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6">sqrt</a>(wc_t(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;double&gt;</a>(1.3,-3.7))) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition:</b> quaternion.hpp:24</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
 </div><!-- fragment --> 
 </div>
