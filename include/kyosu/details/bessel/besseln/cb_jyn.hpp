@@ -304,7 +304,7 @@ namespace kyosu::_
     if (eve::any(rzlt0))
     {
       auto sgn1 = eve::if_else(izgt0, u_t(1), u_t(-1));
-      r = if_else(rzlt0, (r+2*muli(sgn1*cb_j0(z))), r);
+      r = if_else(rzlt0, (r+2*muli(sgn1*_::cb_j0(z))), r);
     }
     return r;
   }
@@ -318,8 +318,8 @@ namespace kyosu::_
     using u_t   =  eve::underlying_type_t<Z>;
     auto twoopi = eve::two_o_pi(eve::as<u_t>());
     auto r1 = R(1, z);
-    auto y0 = cb_y0(z);
-    auto recs1 = rec(r1)-twoopi/(z*cb_j0(z)*y0);
+    auto y0 = kyosu::_::cb_y0(z);
+    auto recs1 = rec(r1)-twoopi/(z* kyosu::_::cb_j0(z)*y0);
     return if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), y0*recs1);
   }
 
@@ -331,15 +331,15 @@ namespace kyosu::_
   {
     if ( is_eqz(nn) )
     {
-      return cb_j0(z);
+      return  kyosu::_::cb_j0(z);
     }
     else if (nn == 1)
     {
-      return cb_j1(z);
+      return  kyosu::_::cb_j1(z);
     }
     else if ( nn == -1 )
     {
-      return -cb_j1(z);
+      return - kyosu::_::cb_j1(z);
     }
     else
     {
@@ -351,8 +351,8 @@ namespace kyosu::_
       auto srz = eve::signnz(real(z));
       z *= srz;
 
-      auto j0 = cb_j0(z);
-      auto j1 = cb_j1(z);
+      auto j0 =  kyosu::_::cb_j0(z);
+      auto j1 =  kyosu::_::cb_j1(z);
 
       auto forward = [n, j0, j1](auto z){
          auto b0 = j0;
@@ -419,14 +419,14 @@ namespace kyosu::_
     using u_t = eve::underlying_type_t<Z>;
     if (n <= 1)
     {
-      cjv[0] = cb_j0(z);
-      cyv[0] = cb_y0(z);
+      cjv[0] = kyosu::_::cb_j0(z);
+      cyv[0] = kyosu::_::cb_y0(z);
       if ( is_eqz(nn) )
       {
         return kumi::tuple{cjv[0], cyv[0]};
       }
-      cjv[1] = cb_j1(z);
-      cyv[1] = cb_y1(z);
+      cjv[1] = kyosu::_::cb_j1(z);
+      cyv[1] = kyosu::_::cb_y1(z);
       if (nn == 1)
       {
         return kumi::tuple{cjv[1], cyv[1]};
@@ -445,10 +445,10 @@ namespace kyosu::_
       auto izgt0 = eve::is_gtz(imag(z));
       z = if_else(rzle0, -z, z);//real(z) is now positive
       auto rz = rec(z);
-      cjv[0] = cb_j0(z);
-      cjv[1] = cb_j1(z);
-      cyv[0] = cb_y0(z);
-      cyv[1] = cb_y1(z);
+      cjv[0] =  kyosu::_::cb_j0(z);
+      cjv[1] =  kyosu::_::cb_j1(z);
+      cyv[0] =  kyosu::_::cb_y0(z);
+      cyv[1] =  kyosu::_::cb_y1(z);
 
       auto forwardj = [n, rz, &cjv](auto z){
         auto bkm2 = cjv[0];
@@ -607,7 +607,7 @@ namespace kyosu::_
   auto cb_yn(N n, Z z) noexcept
   {
     auto dummy =  std::span<Z, 0>();
-    return cb_yn(n, z, dummy);
+    return  _::cb_yn(n, z, dummy);
   }
 
   //===-------------------------------------------------------------------------------------------

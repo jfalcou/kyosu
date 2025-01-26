@@ -9,7 +9,6 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/inc.hpp>
 #include <kyosu/functions/minus.hpp>
-#include <iostream>
 
 namespace kyosu
 {

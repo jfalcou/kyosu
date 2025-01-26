@@ -115,7 +115,7 @@ namespace kyosu::_
       auto argzpos = eve::is_gtz(kyosu::arg(z));
       z = if_else(argzpos, conj(z), z);
       auto fac = exp_ipi(-v/2);
-      auto r = fac*cb_jr(v,kyosu::muli(z));
+      auto r = fac*_::cb_jr(v,kyosu::muli(z));
       return if_else(argzpos, conj(r), r);
     }
     else

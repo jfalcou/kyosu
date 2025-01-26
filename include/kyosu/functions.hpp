@@ -38,6 +38,7 @@
 #include <kyosu/functions/acoth.hpp>
 #include <kyosu/functions/acotpi.hpp>
 #include <kyosu/functions/agd.hpp>
+#include <kyosu/functions/am.hpp>
 #include <kyosu/functions/atanpi.hpp>
 #include <kyosu/functions/acsc.hpp>
 #include <kyosu/functions/acscpi.hpp>
@@ -72,6 +73,12 @@
 #include <kyosu/functions/digamma.hpp>
 #include <kyosu/functions/dist.hpp>
 #include <kyosu/functions/dot.hpp>
+#include <kyosu/functions/ellint_fe.hpp>
+#include <kyosu/functions/ellint_rc.hpp>
+#include <kyosu/functions/ellint_rd.hpp>
+#include <kyosu/functions/ellint_rf.hpp>
+#include <kyosu/functions/ellint_rg.hpp>
+#include <kyosu/functions/ellint_rj.hpp>
 #include <kyosu/functions/erf.hpp>
 #include <kyosu/functions/erfcx.hpp>
 #include <kyosu/functions/erfi.hpp>
@@ -115,6 +122,7 @@
 #include <kyosu/functions/is_pure.hpp>
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/is_unitary.hpp>
+#include <kyosu/functions/jacobi_elliptic.hpp>
 #include <kyosu/functions/lambda.hpp>
 #include <kyosu/functions/lbeta.hpp>
 #include <kyosu/functions/ldiv.hpp>

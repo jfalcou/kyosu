@@ -92,7 +92,7 @@ namespace kyosu
 //!
 //!     * `coefs...` :  real or cayley-dickson arguments. The coefficients by increasing power order
 //!
-//!     * `tup` : kumi tuple containing The coefficients by decreasing power order.
+//!     * `tup` : kumi tuple containing The coefficients by increasing power order.
 //!
 //!   **Return value**
 //!
