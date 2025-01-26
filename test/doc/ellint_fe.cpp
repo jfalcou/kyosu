@@ -9,8 +9,6 @@ int main()
   using w_t = eve::wide<double, eve::fixed<4>>;
   auto z = kyosu::complex(w_t(2.0, 1.0, 1.0, 0.0 ), w_t(1.0, 1.0, 0.0, 1.0));
   auto m = w_t(0.5);
-//   auto z = kyosu::complex(0.0, 1.0);
-//   auto m =0.5;
   auto [f, e] =  kyosu::ellint_fe(z, eve::sqrt(m));
   std::cout << " z               " << z  << std::endl;
   std::cout << " m               " << m  << std::endl;

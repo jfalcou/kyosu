@@ -17,8 +17,5 @@ int main()
   std::cout << "<- qf = " << qf << "\n";
 
    std::cout << "-> ellint_rc(pf, qf)                = " << kyosu::ellint_rc(pf, qf) << "\n";
-//   std::cout << "-> ellint_rc[ignore_last(2)](pf, qf)= " << kyosu::ellint_rc[eve::ignore_last(2)](pf, qf) << "\n";
-//   std::cout << "-> ellint_rc[qf != 4.0f](pf, qf)    = " << kyosu::ellint_rc[qf != 4.0f](pf, qf) << "\n";
-//std::cout << kyosu::horner(pf, r_t(1.0), r_t(0.0), r_t(3.0/10.0), r_t(1.0/7.0), r_t(3.0/8.0), r_t(9.0/22.0), r_t(159.0/208.0), r_t(9.0/8.0)) << std::endl;
 
 }
