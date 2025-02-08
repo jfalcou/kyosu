@@ -37,6 +37,7 @@
 #include <kyosu/functions/acot.hpp>
 #include <kyosu/functions/acoth.hpp>
 #include <kyosu/functions/acotpi.hpp>
+#include <kyosu/functions/add.hpp>
 #include <kyosu/functions/agd.hpp>
 #include <kyosu/functions/am.hpp>
 #include <kyosu/functions/atanpi.hpp>

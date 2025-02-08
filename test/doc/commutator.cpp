@@ -46,6 +46,12 @@ int main()
   std::cout << kyosu::commutator(e0, q1) << std::endl;
   std::cout << kyosu::commutator(c0, wq1) << std::endl;
   std::cout << kyosu::commutator(we0, q1) << std::endl;
+  std::cout << kyosu::commutator(c0, q1) << std::endl;
+  std::cout << kyosu::commutator[kyosu::real(c0) > 3](c0, q1) << std::endl;
+  std::cout << kyosu::commutator[kyosu::real(c0) < 3](c0, q1) << std::endl;
+  std::cout << kyosu::commutator(c0, e1) << std::endl;
+  std::cout << kyosu::commutator[e1 > 3](e1, c0) << std::endl;
+  std::cout << kyosu::commutator[e1 < 3](e1, c0 ) << std::endl;
 
   return 0;
 }
