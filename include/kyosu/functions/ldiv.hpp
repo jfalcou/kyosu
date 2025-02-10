@@ -48,7 +48,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var ldiv
-//!   @brief Computes the left division of the two parameters.
+//!   @brief Computes the left division of the product of the arguments but the first
 //!
 //!   @groupheader{Header file}
 //!
@@ -61,18 +61,19 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto ldiv(auto z0, auto z1) noexcept;
+//!     constexpr auto ldiv(auto z0, auto zto zs...) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0`, `z1`: Values to process.
+//!     * `z0`, `z1`, `zs...`: Values to process.
 //!
 //!   **Return value**
 //!
-//!     Returns the left division  of the two arguments. This function not equivalent to z1/z0 as soon as multiplication
+//!      - For two arguments Returns the left division  of the two arguments. This function not equivalent to z1/z0 as soon as multiplication
 //!     is not commutative (i.e. for general Cayley-Dickson values with dimensionality strictly above 2).
+//!      - For  more arguments the left division of the product of the arguments but the first, by the first is returned.
 //!
 //!  @groupheader{Example}
 //!
