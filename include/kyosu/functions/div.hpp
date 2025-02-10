@@ -12,14 +12,14 @@
 namespace kyosu
 {
   template<typename Options>
-  struct add_t : eve::strict_tuple_callable<add_t, Options>
+  struct div_t : eve::strict_tuple_callable<div_t, Options>
   {
-    template<typename... Ts>       struct result        { using type = expected_result_t<eve::add,Ts...>; };
-    template<concepts::real... Ts> struct result<Ts...> { using type = eve::common_value_t<Ts...>; };
+    template<typename... Ts>       struct result       { using type = expected_result_t<eve::add,Ts...>; };
+    template<concepts::real... Ts> struct result<Ts...>{ using type = eve::common_value_t<Ts...>; };
 
     template<typename T0, typename T1, typename... Ts>
     requires(eve::same_lanes_or_scalar<T0, T1, Ts...>)
-    EVE_FORCEINLINE expected_result_t<eve::add,T0,T1,Ts...> constexpr operator()(T0 t0, T1 t1, Ts...ts) const noexcept
+    EVE_FORCEINLINE expected_result_t<eve::div,T0,T1,Ts...> constexpr operator()(T0 t0, T1 t1, Ts...ts) const noexcept
     {
       return KYOSU_CALL(t0,t1,ts...);
     }
@@ -28,7 +28,7 @@ namespace kyosu
     requires(eve::same_lanes_or_scalar<T0, T1, Ts...>)
       EVE_FORCEINLINE eve::common_value_t<T0,T1,Ts...> constexpr operator()(T0 t0, T1 t1, Ts...ts) const noexcept
     {
-      return eve::add(t0, t1, ts...);
+      return eve::div(t0, t1, ts...);
     }
 
     template<kumi::non_empty_product_type Tup>
@@ -37,16 +37,15 @@ namespace kyosu
     kumi::apply_traits_t<result,Tup>
     operator()(Tup const& t) const noexcept requires(kumi::size_v<Tup> >= 2) { return KYOSU_CALL(t); }
 
-    KYOSU_CALLABLE_OBJECT(add_t, add_);
-
+    KYOSU_CALLABLE_OBJECT(div_t, div_);
   };
 
 
 //======================================================================================================================
-//! @addtogroup functions
+//! @divtogroup functions
 //! @{
-//!   @var add
-//!   @brief `tuple_callable` computing the sum of its arguments.
+//!   @var div
+//!   @brief `tuple_callable` computing the division of its first argument with the product of the others.
 //!
 //!   @groupheader{Header file}
 //!
@@ -60,12 +59,12 @@ namespace kyosu
 //!   namespace eve
 //!   {
 //!      // Regular overloads
-//!      constexpr auto add(auto ... xs)                                              noexcept; // 1
-//!      constexpr auto add(kumi::non_empty_product_type auto const& tup)             noexcept; // 2
+//!      constexpr auto div(auto ... xs)                                              noexcept; // 1
+//!      constexpr auto div(kumi::non_empty_product_type auto const& tup)             noexcept; // 2
 //!
 //!      // Lanes masking
-//!      constexpr auto add[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 3
-//!      constexpr auto add[logical_value auto m](/*any of the above overloads*/)     noexcept; // 3
+//!      constexpr auto div[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 3
+//!      constexpr auto div[logical_value auto m](/*any of the above overloads*/)     noexcept; // 3
 //!
 //!   }
 //!   @endcode
@@ -77,14 +76,14 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!    1. The value of the sum of the arguments is returned.
-//!    2. The value of the sum of the tuple elements is returned.
+//!    1. The value of the division of its first argument with the product of the others.
+//!    2. same on 1. the tuple elements.
 //!    3. [The operation is performed conditionnaly](@ref conditional)
 //!
 //!  @groupheader{Example}
-//!  @godbolt{doc/add.cpp}
+//!  @godbolt{doc/div.cpp}
 //======================================================================================================================
-  inline constexpr auto add = eve::functor<add_t>;
+  inline constexpr auto div = eve::functor<div_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -92,17 +91,17 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<eve::callable_options O, typename... Ts>
-  EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), O const&, Ts const&... vs) noexcept
+  template<eve::callable_options O, typename T0, typename... Ts>
+  EVE_FORCEINLINE constexpr auto div_(KYOSU_DELAY(), O const&, T0 const& v0, Ts const&... vs) noexcept
   {
-    return (vs + ... );
+    return v0/(vs * ... );
   }
 
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
-  EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
+  EVE_FORCEINLINE constexpr auto div_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
   {
-    expected_result_t<eve::add,T0,Ts...> that(v0);
-    ((that = add(that,vs)),...);
+    expected_result_t<eve::div,T0,Ts...> that(v0);
+    ((that = div(that,vs)),...);
     return eve::detail::mask_op(cond, eve::detail::return_2nd, v0, that);
   }
 }

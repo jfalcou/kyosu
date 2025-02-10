@@ -73,6 +73,7 @@
 #include <kyosu/functions/deta.hpp>
 #include <kyosu/functions/digamma.hpp>
 #include <kyosu/functions/dist.hpp>
+#include <kyosu/functions/div.hpp>
 #include <kyosu/functions/dot.hpp>
 #include <kyosu/functions/ellint_fe.hpp>
 #include <kyosu/functions/ellint_rc.hpp>
@@ -144,6 +145,7 @@
 #include <kyosu/functions/minabs.hpp>
 #include <kyosu/functions/minmag.hpp>
 #include <kyosu/functions/minus.hpp>
+#include <kyosu/functions/mul.hpp>
 #include <kyosu/functions/muli.hpp>
 #include <kyosu/functions/mulmi.hpp>
 #include <kyosu/functions/nearest.hpp>
@@ -175,6 +177,7 @@
 #include <kyosu/functions/sqr.hpp>
 #include <kyosu/functions/sqr_abs.hpp>
 #include <kyosu/functions/sqrt.hpp>
+#include <kyosu/functions/sub.hpp>
 #include <kyosu/functions/tan.hpp>
 #include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
@@ -193,7 +196,6 @@
 #include <kyosu/functions/airy.hpp>
 #include <kyosu/functions/airy_ai.hpp>
 #include <kyosu/functions/airy_bi.hpp>
-//#include <kyosu/bessel.hpp>
 
 //======================================================================================================================
 // Functions performing computations over quaternion complex or real elements only.

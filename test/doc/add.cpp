@@ -15,9 +15,9 @@ int main()
   using wq_t = eve::wide<kyosu::quaternion_t<float>, eve::fixed<2>>;
 
   std::cout << "Real:        "<< "\n";
-  e_t e0(1);
+  e_t e0(3);
   e_t e1(2);
-  std::cout << e0 << ", " << e1 << " -> "  << add(e0, e1) << "\n";
+  std::cout << e0 << ", " << e1 << " -> "  << kyosu::add(e0, e1) << "\n";
   std::cout << e0 << ", " << e0 << " -> "  << add(e0, e0) << "\n";
   we_t we0(e0);
   we_t we1(e1);
@@ -53,5 +53,7 @@ int main()
 
   std::cout << c0 <<  " == " <<  e0 << " == " << kyosu::add[e0 > 32](c0, e0) << std::endl;
   std::cout << c0 <<  " == " <<  e0 << " == " << kyosu::add[e0 <  32](c0, e0) << std::endl;
+  kumi::tuple s{c0, c0, c1};
+  std::cout <<  "kyosu::add( kumi::tuple s{c0, c0, c1}) == " << kyosu::add(s) << std::endl;
   return 0;
 }
