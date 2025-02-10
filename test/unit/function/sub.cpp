@@ -50,7 +50,7 @@ TTS_CASE_WITH ( "Check kyosu::sub over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::sub(q0, q1), (q0-q1) , 1e-7);
-  TTS_RELATIVE_EQUAL(kyosu::sub(q0, q1, r0), (q0-q1-r0) , 1e-7);
-  TTS_RELATIVE_EQUAL(kyosu::sub(kumi::tuple{q0, q1, r0}), (q0-q1-r0) , 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::sub(q0, q1), (q0-q1) , tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sub(q0, q1, r0), (q0-q1-r0) , tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sub(kumi::tuple{q0, q1, r0}), (q0-q1-r0) , tts::prec<T>());
 };
