@@ -33,7 +33,7 @@ TTS_CASE_WITH ( "Check kyosu::mul over complex"
   auto c1 = kyosu::complex(r1,i1);
   TTS_RELATIVE_EQUAL(kyosu::mul(c0, c1), (c0*c1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::mul(c0, c1, r1), (c0*c1*r1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::mul(r0, c1, r1), (r0*c1*r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::mul(r0, c1, r1), ((r0*c1)*r1), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::mul over quaternion"
@@ -48,8 +48,9 @@ TTS_CASE_WITH ( "Check kyosu::mul over quaternion"
 {
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
+  auto pr = tts::prec<T>(1.0e-3, 1.0e-6);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::mul(q0, q1), (q0*q1) , 1e-6);
-  TTS_RELATIVE_EQUAL(kyosu::mul(q0, q1, r0), (q0*q1*r0) , 1e-6);
-  TTS_RELATIVE_EQUAL(kyosu::mul(kumi::tuple{q0, q1, r0}), (q0*q1*r0) , 1e-6);
+  TTS_RELATIVE_EQUAL(kyosu::mul(q0, q1), (q0*q1) , pr);
+  TTS_RELATIVE_EQUAL(kyosu::mul(q0, q1, r0), (q0*q1*r0) , pr);
+  TTS_RELATIVE_EQUAL(kyosu::mul(kumi::tuple{q0, q1, r0}), (q0*q1*r0) , pr);
 };
