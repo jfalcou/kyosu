@@ -72,7 +72,6 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  //�a marche pas avec reel, complexe
   template<typename C0, typename C1, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto commutator_(KYOSU_DELAY(), O const&, C0 c0, C1 c1) noexcept
   {
