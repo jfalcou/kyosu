@@ -8,7 +8,7 @@
 #pragma once
 
 #include <eve/concept/scalar.hpp>
-#include <eve/traits/same_lanes.hpp>
+#include <eve/concept/same_lanes.hpp>
 #include <eve/traits/element_type.hpp>
 #include <type_traits>
 
