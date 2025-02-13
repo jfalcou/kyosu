@@ -7,10 +7,14 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
+#include <kyosu/functions/dec.hpp>
+#include <kyosu/functions/is_flint.hpp>
+#include <kyosu/functions/nearest.hpp>
 #include <kyosu/functions/sinpi.hpp>
 #include <kyosu/functions/oneminus.hpp>
 #include <kyosu/functions/exp.hpp>
 #include <kyosu/functions/log.hpp>
+#include <kyosu/functions/pow.hpp>
 
 namespace kyosu
 {
@@ -73,66 +77,68 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  constexpr auto tgamma_(KYOSU_DELAY(), O const&, Z z) noexcept
+  constexpr auto tgamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
     if constexpr(concepts::complex<Z> )
     {
+      // 15 sig. digits for 0<=real(z)<=171
+      // coeffs should sum to about g*g/2+23/24
+      //
       using r_t = eve::element_type_t<as_real_type_t<Z>>;
-//      auto  g=r_t(607)/r_t(128);
-      using u_t = eve::underlying_type_t<Z>;
-      constexpr auto hf = eve::half(eve::as<u_t>());
+      auto  g=r_t(607)/r_t(128);
+      // best results when 4<=g<=5
+      constexpr int N = 15;
+      std::array<r_t, N>  c =
+        {  0.99999999999999709182,
+           57.156235665862923517,
+           -59.597960355475491248,
+           14.136097974741747174,
+           -0.49191381609762019978,
+           .33994649984811888699e-4,
+           .46523628927048575665e-4,
+           -.98374475304879564677e-4,
+           .15808870322491248884e-3,
+           -.21026444172410488319e-3,
+           .21743961811521264320e-3,
+           -.16431810653676389022e-3,
+           .84418223983852743293e-4,
+           -.26190838401581408670e-4,
+           .36899182659531622704e-5
+        };
 
-      auto br_gthf = [](auto z){
-        u_t log_sqrt_2Pi = 0.91893853320467274177;
-        u_t g = 4.7421875;
-        Z z_m_0p5 = z - 0.5;
-        Z z_pg_m0p5 = z_m_0p5 + g;
-        Z zm1 = z - 1.0;
-        const u_t c[15] = {0.99999999999999709182,
-                           57.156235665862923517,
-                           -59.597960355475491248,
-                           14.136097974741747174,
-                           -0.49191381609762019978,
-                           0.33994649984811888699E-4,
-                           0.46523628927048575665E-4,
-                           -0.98374475304879564677E-4,
-                           0.15808870322491248884E-3,
-                           -0.21026444172410488319E-3,
-                           0.21743961811521264320E-3,
-                           -0.16431810653676389022E-3,
-                           0.84418223983852743293E-4,
-                           -0.26190838401581408670E-4,
-                           0.36899182659531622704E-5};
+      //Num Recipes used g=5 with 7 terms
+      //for a less effective approximation
 
-        Z sum(c[0]);
-        for (int i = 1 ; i < 15 ; ++i) sum += c[i]/(zm1 + i);
-        auto u = z_pg_m0p5 - z_m_0p5*kyosu::log(z_pg_m0p5) - log_sqrt_2Pi;
-        return sum*kyosu::exp(-u);
-      };
-
-      auto br_lehf = [br_gthf](auto z){
-        auto x = real(z);
-        auto n = eve::nearest(x);
-        auto eps = z - n;
-        auto r = eve::pi(as<u_t>())/(kyosu::sinpi(eps)*br_gthf(kyosu::oneminus(z)));
-        return kyosu::if_else(eve::is_even(n), r, -r);
-      };
-
-      auto r = kyosu::nan(as<Z>());
-      auto notdone = is_nan(r);
-      if( eve::any(notdone) )
-      {
-        notdone = next_interval(br_gthf, notdone, real(z) > hf, r, z);
-        if( eve::any(notdone) )
-        {
-          last_interval(br_lehf, notdone, r, z);
-        }
+      auto negra0 = eve::is_negative(real(a0));
+      auto z = if_else(negra0, -a0, a0);
+      z = kyosu::dec(z);
+      auto zh = z+eve::half(eve::as<r_t>());
+      auto zgh=zh+g;
+      //trick for avoiding FP overflow above z=141
+      auto zp=kyosu::pow(zgh,(zh*eve::half(eve::as<r_t>())));
+      auto ss = Z{};
+      for(int pp = N-1; pp >= 1; --pp){
+        ss+= c[pp]/(z+pp);
       }
-      return r;
+      auto sq2pi = r_t(2.5066282746310005024157652848110);
+      auto f=(sq2pi*(c[0]+ss))*((zp*exp(-zgh))*zp);
+      auto o = eve::one(eve::as<r_t>());
+      f = if_else(is_eqz(z) || z == o, o, f);
+      //adjust for negative real parts
+      auto reala0 = is_real(a0);
+      if(eve::any(negra0))
+      {
+        f = if_else(negra0, rec(-eve::inv_pi(eve::as(real(a0)))*a0*f*sinpi(a0)), eve::zero);
+        f = if_else (negra0 && reala0 && eve::is_flint(real(a0)), complex(eve::nan(eve::as(sq2pi)), eve::inf(eve::as(sq2pi))), f);
+      }
+      f = if_else (reala0, complex(eve::tgamma(real(a0))), f);
+      f = if_else (eve::is_nan(real(f)), complex(eve::nan(eve::as(sq2pi)), eve::inf(eve::as(sq2pi))), f);
+      f = if_else (is_eqz(a0), complex(eve::inf(eve::as(g))*eve::signnz[eve::pedantic](real(a0))), f);
+      return f;
     }
     else
     {
-      return cayley_extend(tgamma, z);
+      return cayley_extend(tgamma, a0);
     }
   }
 }
