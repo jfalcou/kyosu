@@ -184,17 +184,11 @@ namespace kyosu::_
       else if constexpr( kyosu::concepts::complex<C0>)// c0 and c1 are complex
       {
         auto  [rc1, ic1] = c1;
-        auto lc0 = kyosu::log_abs(c0);
+        auto lc0 = kyosu::log_abs[eve::pedantic](c0);
         auto argc0 = kyosu::arg(c0);
         auto rho = eve::exp(eve::diff_of_prod[eve::pedantic](lc0, rc1, ic1, argc0));
         auto theta = eve::sum_of_prod[eve::pedantic](argc0, rc1, ic1, lc0);
-        r = rho*exp_i(theta);
-        auto realc0 = is_real(c0);
-        if(eve::any(realc0))
-        {
-          auto rr = kyosu::pow(real(c0), c1);
-          r = kyosu::if_else(realc0, rr, r);
-        }
+        r = kyosu::if_else(is_eqz(rho), rho, rho*exp_i(theta));
       }
       r = kyosu::if_else(kyosu::is_eqz(c1), eve::one(eve::as<u_t>()), r);
       return r;

@@ -7,36 +7,30 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/sqr_abs.hpp>
-#include <kyosu/constants/wrapped.hpp>
-
 
 namespace kyosu
 {
   template<typename Options>
-  struct log_abs_t : eve::elementwise_callable<log_abs_t, Options,  eve::pedantic_option>
+  struct is_cinf_t : eve::elementwise_callable<is_cinf_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
-      if (Options::contains(eve::pedantic))
-        return  eve::log(kyosu::abs(z));
-      else
-        return kyosu::half(kyosu::as<as_real_type_t<Z>>())*eve::log(kyosu::sqr_abs(z));
+//      return  eve::is_nan(kyosu::real(z)) && eve::is_pinf(kyosu::imag(z));
+      return  kyosu::is_nan(z) && kyosu::is_infinite(z);
     }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::log_abs(v); }
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::false_(eve::as(v)); }
 
-    KYOSU_CALLABLE_OBJECT(log_abs_t, log_abs_);
-};
+    KYOSU_CALLABLE_OBJECT(is_cinf_t, is_cinf_);
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var log_abs
-//!   @brief Computes the natural logarithm of the absolute value of the argument.
+//!   @var is_cinf
+//!   @brief test if the parameter is a `cinf`.
 //!
 //!   @groupheader{Header file}
 //!
@@ -49,12 +43,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto log_abs(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto log_abs(T z) noexcept;
-//!
-//!      // Semantic modifyiers
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto log_abs[pedantic](T z) noexcept;
-//!
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_cinf(T z) noexcept; /1
+//!      template<eve::floating_ordered_value T>     constexpr auto is_cinf(T z) noexcept; /2
 //!   }
 //!   @endcode
 //!
@@ -64,14 +54,18 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns  `log(abs(z))`.
-//!     Use pedantic if your entries can have absolute values greater than sqrt(valmax).
+//!     Returns elementwise true if it has both an infinite AND a NaN part.
+//!     This is meant to represent a quantity with infinite magnitude, but undetermined complex phase.
+//!     This is always false for real entries.
+//!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: complex infinity](https://reference.wolfram.com/language/ref/ComplexInfinity.html)
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/log_abs.cpp}
+//!  @godbolt{doc/is_cinf.cpp}
 //======================================================================================================================
-  inline constexpr auto log_abs = eve::functor<log_abs_t>;
+  inline constexpr auto is_cinf = eve::functor<is_cinf_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
