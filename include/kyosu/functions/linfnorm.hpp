@@ -44,10 +44,6 @@ namespace kyosu
       else
         return eve::maxabs(v1,vs...); }
 
-//     template<eve::floating_value V1, eve::floating_value ...Vs>
-//     KYOSU_FORCEINLINE constexpr auto operator()(V1 v1, Vs... vs) const noexcept -> decltype(eve::maxabs(v1, vs...))
-//     { return eve::maxabs(v1,vs...); }
-
     KYOSU_CALLABLE_OBJECT(linfnorm_t, linfnorm_);
 };
 
