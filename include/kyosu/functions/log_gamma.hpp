@@ -7,11 +7,15 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
+#include <kyosu/functions/sinpi.hpp>
+#include <kyosu/functions/oneminus.hpp>
+#include <kyosu/functions/exp.hpp>
+#include <kyosu/functions/log.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct log_gamma_t : eve::elementwise_callable<log_gamma_t, Options>
+  struct log_gamma_t : eve::strict_elementwise_callable<log_gamma_t, Options>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
@@ -21,14 +25,15 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
     { return (*this)(complex(v)); }
 
+
     KYOSU_CALLABLE_OBJECT(log_gamma_t, log_gamma_);
-  };
+};
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var log_gamma
-//!   @brief Computes the log of the \f$\Gamma\f$ function.
+//!   @brief Computes \f$\Gamma(z)\f$r.
 //!
 //!   @groupheader{Header file}
 //!
@@ -41,7 +46,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      constexpr auto  log_gamma(T z) noexcept;
+//!      constexpr T  log_gamma(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -51,10 +56,13 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns \f$\log(\Gamma(z))\f$. If z is floating the result is as if `complex(z)` was used in the call.
+//!     Returns \f$\Gamma(z)\f$.
+//!
+//!  @groupheader{External references}
+//!   *  [Wolfram MathWorld: Gamma Function](https://mathworld.wolfram.com/GammaFunction.html)
+//!   *  [Wikipedia: Gamma function](https://en.wikipedia.org/wiki/Gamma_function)
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/log_gamma.cpp}
 //======================================================================================================================
   inline constexpr auto log_gamma = eve::functor<log_gamma_t>;
@@ -66,7 +74,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr Z log_gamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  constexpr auto log_gamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
     if constexpr(concepts::complex<Z> )
     {

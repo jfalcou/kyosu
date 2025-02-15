@@ -7,10 +7,14 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/dec.hpp>
-#include <kyosu/functions/pow.hpp>
+#include <kyosu/functions/is_flint.hpp>
+#include <kyosu/functions/nearest.hpp>
 #include <kyosu/functions/sinpi.hpp>
+#include <kyosu/functions/oneminus.hpp>
+#include <kyosu/functions/exp.hpp>
+#include <kyosu/functions/log.hpp>
+#include <kyosu/functions/pow.hpp>
 
 namespace kyosu
 {
@@ -107,11 +111,11 @@ namespace kyosu::_
 
       auto negra0 = eve::is_negative(real(a0));
       auto z = if_else(negra0, -a0, a0);
-      z = dec(z);
+      z = kyosu::dec(z);
       auto zh = z+eve::half(eve::as<r_t>());
       auto zgh=zh+g;
       //trick for avoiding FP overflow above z=141
-      auto zp=pow(zgh,(zh*eve::half(eve::as<r_t>())));
+      auto zp=kyosu::pow(zgh,(zh*eve::half(eve::as<r_t>())));
       auto ss = Z{};
       for(int pp = N-1; pp >= 1; --pp){
         ss+= c[pp]/(z+pp);

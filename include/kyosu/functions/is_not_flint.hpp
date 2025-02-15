@@ -7,36 +7,30 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/sqr_abs.hpp>
-#include <kyosu/constants/wrapped.hpp>
-
+#include <kyosu/functions/is_not_real.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct log_abs_t : eve::elementwise_callable<log_abs_t, Options,  eve::pedantic_option>
+  struct is_not_flint_t : eve::elementwise_callable<is_not_flint_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
-      if (Options::contains(eve::pedantic))
-        return  eve::log(kyosu::abs(z));
-      else
-        return kyosu::half(kyosu::as<as_real_type_t<Z>>())*eve::log(kyosu::sqr_abs(z));
+      return kyosu::is_not_real(z) || eve::is_not_flint(real(z));
     }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::log_abs(v); }
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::is_not_flint(v); }
 
-    KYOSU_CALLABLE_OBJECT(log_abs_t, log_abs_);
-};
+    KYOSU_CALLABLE_OBJECT(is_not_flint_t, is_not_flint_);
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var log_abs
-//!   @brief Computes the natural logarithm of the absolute value of the argument.
+//!   @var is_not_flint
+//!   @brief test the parameter is not a flint.
 //!
 //!   @groupheader{Header file}
 //!
@@ -49,12 +43,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto log_abs(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto log_abs(T z) noexcept;
-//!
-//!      // Semantic modifyiers
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto log_abs[pedantic](T z) noexcept;
-//!
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_not_flint(T z) noexcept;
+//!      template<eve::floating_ordered_value T>     constexpr auto is_not_flint(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -64,14 +54,13 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns  `log(abs(z))`.
-//!     Use pedantic if your entries can have absolute values greater than sqrt(valmax).
+//!     Returns elementwise true is the element is not a floating integer .
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/log_abs.cpp}
+//!  @godbolt{doc/is_not_flint.cpp}
 //======================================================================================================================
-  inline constexpr auto log_abs = eve::functor<log_abs_t>;
+  inline constexpr auto is_not_flint = eve::functor<is_not_flint_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================

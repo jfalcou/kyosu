@@ -32,5 +32,6 @@ int main()
   auto wz =  wc_t(complex_t<double>(1.3,-3.7));
   std::cout << "cinf(as(wz)) " << " -> " << kyosu::cinf(as(wz)) << "\n";
 
+
   return 0;
 }
