@@ -123,6 +123,23 @@ namespace kyosu
     return type{a} == type{b};
   }
 
+  //! @brief Compares a Cayley-Dickson value and a real for inequality
+  //! @related cayley_dickson
+  template<concepts::cayley_dickson T1, concepts::real T2>
+  constexpr auto operator!=( T1 const& a, T2 b)
+  {
+    using type = as_cayley_dickson_t<T1,T2>;
+    return type{a} != type{b};
+  }
+
+  //! @brief Compares a real and a Cayley-Dickson value for inequality
+  //! @related cayley_dickson
+  template<concepts::real T1, concepts::cayley_dickson T2>
+  constexpr auto operator!=( T1 const& a, T2 b)
+  {
+    using type = as_cayley_dickson_t<T1,T2>;
+    return type{a} != type{b};
+  }
   //====================================================================================================================
   //! @}
   //====================================================================================================================
