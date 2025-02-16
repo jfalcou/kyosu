@@ -29,64 +29,45 @@ TTS_CASE_TPL ( "Check hyper 2F1"
                  r_t(0.292430451098607,0), r_t(4.26012617974386,-2.13613053370195), r_t(3.25898889914176,0), r_t(0.784430166457414,0), r_t(-332.644427109075,-224.988297978431),
                  r_t(23.6353087752502,25.8503131412853), r_t(-210.714285714285,-5.1610115106924e-14), r_t(-20190.0135825192,0), r_t(-20236927.9546885,1.15423160805968e-100)};
     r_t r(nan);
-    auto i = 0;
-     std::cout << std::setprecision(15);
     // a0 a1 or b0 negatives integers
     r = kyosu::hypergeometric(0.5, kumi::tuple{-2.0, 1.0}, kumi::tuple{-3.5});
-    std::cout << "hypergeometric(0.5, kumi::tuple{-2.0,1.0}, kumi::tuple{-3.5}) " << r << " <- "<< i << " -> " <<  res[i++]  << std::endl;//0
     TTS_RELATIVE_EQUAL(r, res[0], pr);
     r =  kyosu:: hypergeometric(0.5, kumi::tuple{1.0, -2.0}, kumi::tuple{-3.5});
-    std::cout << "hypergeometric(0.5, kumi::tuple{1.0, -2.0}, kumi::tuple{-3.5}) "<< r << " <- "<< i << " -> " <<  res[i++]  << std::endl;//1
     TTS_RELATIVE_EQUAL(r, res[1], pr);
     r = kyosu::hypergeometric(0.5, kumi::tuple{2.0,1.0}, kumi::tuple{-3.0});
-    std::cout << "hypergeometric(0.5, kumi::tuple{2.0,1.0}, kumi::tuple{-3.0}) "  << r << " <- "<< i << " -> " <<  res[i++]  << std::endl;//2
     TTS_RELATIVE_EQUAL(r, res[2], pr);
     r =  kyosu:: hypergeometric(0.5, kumi::tuple{1.0, 2.0}, kumi::tuple{-3.0});
-    std::cout << "hypergeometric(0.5, kumi::tuple{1.0, 2.0}, kumi::tuple{-3.0}) "  << r << " <- "<< i << " -> " <<  res[i++]  << std::endl;//3
     TTS_RELATIVE_EQUAL(r, res[3], pr);
     r = kyosu::hypergeometric(0.5, kumi::tuple{-2.0,1.0}, kumi::tuple{-3.0});
-    std::cout << "hypergeometric(0.5, kumi::tuple{2.0,1.0}, kumi::tuple{-3.0}) "   << r << " <- "<< i << " -> " <<  res[i++]  << std::endl;//4
     TTS_RELATIVE_EQUAL(r, res[4], pr);
     r =  kyosu:: hypergeometric(0.5, kumi::tuple{1.5, -2.0}, kumi::tuple{-3.5});
-    std::cout << "hypergeometric(0.5, kumi::tuple{1.5, -2.0}, kumi::tuple{-3.5}) " << r << " <- "<< i << " -> " <<  res[i++]  << std::endl;//5
     TTS_RELATIVE_EQUAL(r, res[5], pr);
     r =  kyosu:: hypergeometric(0.5, kumi::tuple{-1.0, -2.0}, kumi::tuple{-3.0});
-    std::cout << "hypergeometric(0.5, kumi::tuple{-1.0, -2.0}, kumi::tuple{-3.0}) "<< r << " <- "<< i << " -> " <<  res[i++]  << std::endl;//6
     TTS_RELATIVE_EQUAL(r, res[6], pr);
     r =  kyosu::hypergeometric(0.5, kumi::tuple{2.0, 1.0}, kumi::tuple{3.5});
-    std::cout << "hypergeometric(0.5, kumi::tuple{2.0, 1.0}, kumi::tuple{3.5}) "   << r << " <- "<< i << " -> " <<  res[i++]  << std::endl;//7
     TTS_RELATIVE_EQUAL(r, res[7], pr);
     r =  kyosu::hypergeometric(-3.0, kumi::tuple{2.0, 1.0}, kumi::tuple{3.5});
-    std::cout << "hypergeometric(-3.0, kumi::tuple{2.0, 1.0}, kumi::tuple{3.5}) "  << r << " <- "<< i << " -> " <<  res[i++]  << std::endl;//8
     TTS_RELATIVE_EQUAL(r, res[8], pr);
     r =  kyosu::hypergeometric(30.0, kumi::tuple{1.0, 2.0}, kumi::tuple{3.5});
-    std::cout << "hypergeometric(30.0, kumi::tuple{1.0, 2.0}, kumi::tuple{3.5}) "  << r << " <- "<< i << " -> " <<  res[i++]  << std::endl;//9
     TTS_RELATIVE_EQUAL(r, res[9], pr);
     r =  kyosu::hypergeometric(-5.0, kumi::tuple{2.0, 1.0}, kumi::tuple{3.5});
-    std::cout << "hypergeometric(-5.0, kumi::tuple{1.0, 2.0}, kumi::tuple{3.5}) "  << r  << " <- "<< i << " -> " <<  res[i++] << std::endl;//10
     TTS_RELATIVE_EQUAL(r, res[10], pr);
     r =  kyosu::hypergeometric(1.04, kumi::tuple{1.0, 2.0}, kumi::tuple{3.5});
-    std::cout << "hypergeometric(1.04, kumi::tuple{1.0, 2.0}, kumi::tuple{3.5}) "  << r << " <- "<< i << " -> " <<  res[i++] <<  std::endl;//11
     TTS_RELATIVE_EQUAL(r, res[11], pr);
     r =  kyosu::hypergeometric(0.96, kumi::tuple{1.0, 2.0}, kumi::tuple{3.5});
-    std::cout << "hypergeometric(0.96, kumi::tuple{1.0, 2.0}, kumi::tuple{3.5}) "  << r << " <- "<< i << " -> " <<  res[i++] << std::endl;//12
     TTS_RELATIVE_EQUAL(r, res[12], pr);
     r =  kyosu::hypergeometric(-0.5, kumi::tuple{1.0, 2.0}, kumi::tuple{3.5});
-    std::cout << "hypergeometric(0.96, kumi::tuple{1.0, 2.0}, kumi::tuple{3.5}) "  << r << " <- "<< i << " -> " <<  res[i++] << std::endl;//13
     TTS_RELATIVE_EQUAL(r, res[13], pr);
     r =  kyosu::hypergeometric(0.4-1.2*I, kumi::tuple{-20.4, -20.4}, kumi::tuple{-20.4});
-    std::cout << "hypergeometric(0.4-1.2*I, kumi::tuple{-20.4, -20.4}, kumi::tuple{-20.4) "  << r << " <- "<< i << " -> " <<  res[i++] << std::endl;//14
     TTS_RELATIVE_EQUAL(r, res[14], pr);
     r =  kyosu::hypergeometric(0.4-1.2*I, kumi::tuple{-20.4, -12.1}, kumi::tuple{-20.4});
-    std::cout << std::setprecision(15) << "hypergeometric(0.4-2.0*I, kumi::tuple{-20.4, -12.1}, kumi::tuple{-20.4) "  << r << " <- "<< i << " -> " <<  res[i++] << std::endl;//15
     TTS_RELATIVE_EQUAL(r, res[15], pr);
     r =  kyosu::hypergeometric(1.04, kumi::tuple{1.0, -2.5}, kumi::tuple{-3.5});
-    std::cout << std::setprecision(15) << "hypergeometric(1.04, kumi::tuple{1.0, -2.5}, kumi::tuple{-3.5) "  << r << " <- "<< i << " -> " <<  res[i++] << std::endl;//16
     TTS_RELATIVE_EQUAL(r, res[16], pr);
     r =  kyosu::hypergeometric(-1.0, kumi::tuple{-10.8, -10.8}, kumi::tuple{-0.4});
-    std::cout << std::setprecision(15) << "hypergeometric(-1.0, kumi::tuple{-10.8, -10.8}, kumi::tuple{-0.4) "  << r << " <- "<< i << " -> " <<  res[i++] << std::endl;//17
+    TTS_RELATIVE_EQUAL(r, res[17], pr);
     r =  kyosu::hypergeometric(1.000001-1e-307*I, kumi::tuple{-10.4, -10.4}, kumi::tuple{-4.4});
-    std::cout << std::setprecision(15) << "hypergeometric(1.000001-1e-307*I, kumi::tuple{-10.4, -10.4}, kumi::tuple{-4.4}) "  << r << " <- "<< i << " -> " <<  res[i++] << std::endl;//18
     TTS_RELATIVE_EQUAL(r, res[18], pr);
   }
+  TTS_EQUAL(0, 0);
 };
