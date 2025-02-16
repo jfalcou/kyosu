@@ -20,7 +20,6 @@ TTS_CASE_TPL ( "Check hyper 2F1"
   using r_t = kyosu::cayley_dickson<T, 2>;
   r_t I = r_t(0.0, 1.0);
   r_t cinf = kyosu::cinf(eve::as<r_t>());
-  TTS_RELATIVE_EQUAL(0, 0, pr);
   if constexpr(sizeof(T) == 8)
   {
    {
@@ -111,11 +110,6 @@ TTS_CASE_TPL ( "Check hyper 2F1"
           -0.094543453005056519816f-0.0128699542349234016572936919f*I,
           0.2924304510986073277883f+0*I,
           4.26012617974385730373092f -2.136130533701953350f*I};
-//       eve::wide z{-3.0f, 30.0f, -5.0f, 1.04f};
-//       eve::wide a{2.0f, 1.0f, 1.0f, 1.0f};
-//       eve::wide b{1.0f,  2.0f,  2.0f,  2.0f};
-//       eve::wide c{ 3.5f,  3.5f,  3.5f,  3.5f};
-//       eve::wide res{3.25898889914176f + 0*I, 0.784430166457414f + 0*I, -332.644427109329f - 224.988297979129f*I, 23.6353087752503f + 25.8503131412842f*I};
       auto r =  kyosu::hypergeometric(z, kumi::tuple{a, b}, kumi::tuple{c});
       TTS_RELATIVE_EQUAL(r, res, pr);
     }
