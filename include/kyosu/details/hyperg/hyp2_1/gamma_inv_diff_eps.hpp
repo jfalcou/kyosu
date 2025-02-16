@@ -6,7 +6,6 @@
 */
 //======================================================================================================================
 #pragma once
-#include <iostream>
 
 namespace kyosu::_
 {
@@ -66,10 +65,6 @@ namespace kyosu::_
     }
     else //simd
     {
-      std::cout << "in gamma_ratio_diff_small_eps simd" << std::endl;
-      std::cout << "notdone " << notdone << std::endl;
-      std::cout << "z       " << z << std::endl;
-      std::cout << "eps     " << eps<< std::endl;
 
        r_t epspz = z + eps;
       auto x = real(z);
@@ -85,12 +80,10 @@ namespace kyosu::_
 //      auto notdone = kyosu::is_nan(r);
 
       auto br_gt01 = [&](){  //    kyosu::linfnorm(eps) > u_t(0.1))
-        std::cout << "in br_gt01" << std::endl;
         return   (kyosu::tgamma_inv (z) - kyosu::tgamma_inv (epspz))/eps;
       };
 
       auto br_epspzneqz = [&](){// (epspz != z)
-        std::cout << "in br_epspzneqz" << std::endl;
 
 
         auto br_is_z_negative_integer = [&](){
@@ -128,7 +121,6 @@ namespace kyosu::_
       auto is_z_and_epspz_negative_integers = is_z_negative_integer && is_epspz_negative_integer;
 
       auto br_is_z_and_epspz_negative_integers =  [&](){// (is_z_negative_integer && is_epspz_negative_integer)
-        std::cout << "in br_is_z_and_epspz_negative_integers" << std::endl;
 
         auto an = if_else(is_z_and_epspz_negative_integers, eve::abs(real(z)), zero);
         auto f = eve::factorial(an);
@@ -136,7 +128,6 @@ namespace kyosu::_
       };
 
       auto br_final =  [&](){
-        std::cout << "in br_final" << std::endl;
         return gamma_ratio_diff_small_eps(z,eps, notdone)*kyosu::tgamma_inv(epspz);
       };
 

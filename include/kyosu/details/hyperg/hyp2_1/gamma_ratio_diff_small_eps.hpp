@@ -7,14 +7,12 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/functions/is_not_equal.hpp>>
-#include <iostream>
 
 namespace kyosu::_
 {
 
   auto  gamma_ratio_diff_small_eps(auto z, auto eps, auto notdone) -> decltype(z+eps)
   {
-       std::cout << "in gamma_ratio_diff_small_eps" << std::endl;
     using r_t = decltype(z+eps);
     using u_t = eve::underlying_type_t<r_t>;
     constexpr u_t g = 4.7421875;
@@ -108,7 +106,6 @@ namespace kyosu::_
 
 
       auto br_0 = [&](auto test){
-       std::cout << "in br_0" << std::endl;
         r_t  sum_num = kyosu::zero(kyosu::as<r_t>());
         r_t  sum_den(c[0]);
         for (int i = 1; i < 15; ++i)
@@ -133,8 +130,6 @@ namespace kyosu::_
       };
 
       auto br_1 = [&](auto test, auto rr){
-        std::cout << "in br_1" << notdone << std::endl;
-        std::cout << "in br_1" << (notdone && !test) << std::endl;
         if (eve::none(notdone && !test)) return rr;
         auto [s, c]   = kyosu::sinpicospi(eps);
         auto term     = s*kyosu::cotpi(z-n);

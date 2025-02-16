@@ -10,7 +10,6 @@
 #include <kyosu/constants/fnan.hpp>
 #include <kyosu/functions/is_fnan.hpp>
 #include <kyosu/details/hyperg/hyp2_1.hpp>
-#include <iostream>
 
 namespace kyosu::_
 {
@@ -82,7 +81,6 @@ namespace kyosu::_
       u_t abs_zm1 =kyosu::abs(zm1);
       if (abs_zm1 < thresh)
       {
-        std::cout << "i4" << std::endl;
         auto r = hyp_ps_one (a,b,c,-zm1);
         return r;
       }
@@ -102,7 +100,6 @@ namespace kyosu::_
       for (unsigned int i = 0 ; i < 5 ; i++)
       {
         const u_t R = R_tab[i];
-        std::cout << "i5 " << R << std::endl;
         if (abs_z <= R)
         {
           return hyp_ps_zero (a,b,c,z);
@@ -115,26 +112,20 @@ namespace kyosu::_
       for (unsigned int i = 0 ; i < 5 ; i++)
       {
         const u_t R = R_tab[i];
-        std::cout << "i6 " << R << std::endl;
         if (abs_z_inv <= R) {
-           std::cout << "i6.1 " << std::endl;
           return hyp_ps_infinity (a,b,c,z,kyosu::true_(eve::as<r_t>()));
         }
         if (is_cmb_small && (abs_zm1_over_z <= R))
         {
-           std::cout << "i6.2 " << std::endl;
           return kyosu::pow(-zm1,-a)*hyp_ps_infinity (a,c-b,c,z/zm1,kyosu::true_(eve::as<r_t>()));
         }
         if (are_abc_small && (abs_zm1 <= R)){
-           std::cout << "i6.3 " << std::endl;
            return hyp_ps_one (a,b,c,-zm1);
         }
         if (are_a_cmb_c_small && (abs_zm1_inv <= R)){
-            std::cout << "i6.4 " << std::endl;
           return kyosu::pow(-zm1,-a)*hyp_ps_one (a,c-b,c,-1.0/zm1);
         }
       }
-      std::cout << "i7 " << std::endl;
       return hyp_ps_cp_rest (a,b,c,z, notdone);
     }
     else //simd
@@ -198,7 +189,6 @@ namespace kyosu::_
       };
 
       auto br_notcab_and_ab = [&](auto test){//if !cab_condition && ab_condition
-         std::cout << " br_notcab_and_ab " << std::endl;
          auto aa = if_else(test, a, kyosu::inc(b));
         auto cc = if_else(test, c, kyosu::dec(a+b));
         auto rr = kyosu::pow(-zm1,cc-aa-b)*hyperg2_1_internal(z,cc-b,cc-aa,c, notdone);
@@ -212,7 +202,6 @@ namespace kyosu::_
       };
 
       auto br_rest = [&](){
-        std ::cout << "dans br_rest" << std::endl;
         auto abs_zm1 = abs(zm1);
         auto abs_z_inv         = eve::rec[eve::pedantic](abs_z);
         auto abs_z_over_zm1    = abs_z/abs_zm1;
@@ -224,23 +213,18 @@ namespace kyosu::_
         auto are_a_cmb_c_small = are_ac_small && is_cmb_small;
 
         auto br_R1 = [&](auto test, auto RR){ //(abs_z <= RR)
-          std ::cout << "dans br_R1" << RR << std::endl;
           auto zt = kyosu::if_else(test, z, zero);
           auto r =  hyp_ps_zero(a,b,c,z,notdone);
           return r;
         };
 
         auto br_R2 = [&](auto test, auto RR){ //(is_cmb_small && (abs_z_over_zm1 <= RR))
-          std ::cout << "dans br_R2" << RR << std::endl;
           auto zt = kyosu::if_else(test, z, zero);
           auto notdone1 = notdone;
           return kyosu::pow(-zm1,-a)*hyp_ps_zero(a,c-b,c,zt/dec(zt),notdone);
         };
 
         auto br_R3 = [&](auto test, auto RR){ // (abs_z_inv <= R)
-           std ::cout << "dans br_R3 " << RR << std::endl;
-           std ::cout << "notdone " << notdone << std::endl;
-           std ::cout << "test    " << test    << std::endl;
            auto zt =  kyosu::if_else(test, z, kyosu::nan(as(z)));
            auto rr = hyp_ps_infinity(a,b,c,zt,notdone && test);
            notdone =  notdone && !test;
@@ -250,27 +234,22 @@ namespace kyosu::_
 
         // y-passe-t-on jamais ?
         auto br_R4 = [&](auto test, auto RR){ // (is_cmb_small && (abs_zm1_over_z <= R))
-          std ::cout << "dans br_R4" << RR << std::endl;
            auto z_over_zm1t =  kyosu::if_else(test,  z_over_zm1, u_t(0.5));
           auto bb =  kyosu::if_else(test, b, b);
           return pow (-zm1,-a)*hyp_ps_infinity (a,c-bb,c,z_over_zm1t,notdone);
         };
 
         auto br_R5 = [&](auto test, auto RR){ // (are_abc_small && (abs_zm1 <= R))
-          std ::cout << "dans br_R5" << RR << std::endl;
           auto zm1t =  kyosu::if_else(test, zm1, u_t(0.4));
           return hyp_ps_one(a,b,c,-zm1t);
         };
 
         auto br_R6 = [&](auto test, auto RR){ // (are_a_cmb_c_small && (abs_zm1_inv <= R))
-          std ::cout << "dans br_R6" << RR << std::endl;
           auto zm1t =  kyosu::if_else(test, zm1, u_t(3.0));
           return hyp_ps_one (a,b,c,-kyosu::rec(zm1t));
         };
 
        auto br_last = [&](){
-          std ::cout << "dans br_last"  << std::endl;
-          std::cout << "br_last notdone : " << notdone << std::endl;
          notdone = kyosu::false_(eve::as(notdone));
           return hyp_ps_cp_rest (a,b,c,z, notdone);
         };
@@ -330,7 +309,6 @@ namespace kyosu::_
           }
           if( eve::any(notdone) )
           {
-            std::cout << "br_last" << std::endl;
             last_interval(br_last, notdone, r);
           }
         }
@@ -356,9 +334,7 @@ namespace kyosu::_
               notdone = next_interval(br_notcab_and_ab, notdone, t6, r, t6);
               if( eve::any(notdone) )
               {
-                std ::cout << "avant br_rest" << notdone << std::endl;
                 notdone = next_interval(br_rest, notdone, notdone, r);
-                std ::cout << "apres br_rest" << notdone << std::endl;
                 notdone = eve::false_(as(notdone));
                 return r;
               }
