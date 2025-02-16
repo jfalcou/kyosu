@@ -54,7 +54,7 @@ namespace kyosu::_
       }
       else
       {
-       const int n0 = -eve::nearest(real(a_mc_p1));
+        const int n0 = -eve::nearest(real(a_mc_p1));
         const auto is_eps_non_zero = (one_meps-m != oneminus(m));
         const auto is_n0_here = (n0 >= 0) && (n0 < m);
 
@@ -121,6 +121,7 @@ namespace kyosu::_
     }
     else
     {
+      std::cout << "in b_sum_init_ps_infinity simd" << std::endl;
 
       const r_t phase(eve::sign_alternate(m));
       r_t cma(c - a);
@@ -137,6 +138,8 @@ namespace kyosu::_
       for (int i = 1 ; i <= mm ; ++i) gamma_inv_one_meps_mm *= if_else(i <= m, one_meps - i, one);
 
       auto br_eps_gt =  [&](){//if (inf_norm_eps > 0.1)
+        std::cout << "in br_eps_gt" << std::endl;
+
 
          auto gamma_inv_eps_pm_p1 = phase*sinpi(eps)/(pi_eps_pm*gamma_inv_one_meps_mm);
         auto prod1 = gamma_inv_cma*gamma_inv_eps_pa_pm*gamma_inv_one_meps;
@@ -156,6 +159,11 @@ namespace kyosu::_
       };
 
       auto br_eps_le =  [&](){//if (inf_norm_eps <=  0.1)
+        std::cout << "in br_eps_le" << std::endl;
+        std::cout << " notdone " << notdone << std::endl;
+        std::cout << "inf_norm_eps <=  0.1 " << (inf_norm_eps <=  0.1) << std::endl;
+        std::cout << "eps " << eps << std::endl;
+        std::cout << "z " << z << std::endl;
 
         auto n0 = -eve::nearest(real(a_mc_p1));
         auto is_eps_non_zero = (one_meps-m != oneminus(m));
@@ -167,6 +175,7 @@ namespace kyosu::_
         auto prod_eps_pa_mc_p1_n0 = if_else(is_n0_here, r_t(1), zero);
         auto prod_eps_pa_mc_p1 = kyosu::one(as<r_t>());
         auto sum = kyosu::zero(as<r_t>());
+
         for (int n = 0 ; n < mm ; ++n)
         {
           auto a_pn = a + n;
@@ -185,6 +194,7 @@ namespace kyosu::_
           }
         }
 
+        std::cout << "in br_eps_le 1" << std::endl;
 
         auto gamma_inv_eps_pm_p1 = if_else(is_eps_non_zero, (phase*kyosu::sinpi(eps)/(pi_eps_pm*gamma_inv_one_meps_mm)), gamma_inv_mp1);
         auto sum_term = if_else(is_eps_non_zero, kyosu::expm1(sum)/eps, sum);
@@ -195,15 +205,26 @@ namespace kyosu::_
         auto z_term = if_else(is_eps_non_zero, kyosu::expm1(eps*mlogmz)/eps, mlogmz);
         auto gamma_inv_a_pm = kyosu::tgamma_inv (a_pm);
         auto gamma_prod1 = gamma_inv_cma*gamma_inv_eps_pa_pm;
+        std::cout << "avant gamma_inv_eps" << std::endl;
+
         auto prod1 = gamma_prod1*gamma_inv_mp1*(gamma_inv_diff_eps(kyosu::one(as<r_t>()), eps, notdone)*prod_eps_pa_mc_p1 - gamma_inv_one_meps*prod_diff_eps);
+        std::cout << "apres gamma_inv_eps " << std::endl;
         auto prod_2a = gamma_prod1*gamma_inv_diff_eps(inc(m),eps, notdone);
+        std::cout << "apres gamma_inv_eps 2" << std::endl;
+        std::cout << "a_pm " << a_pm << std::endl;
+        std::cout << "eps " << eps   << std::endl;
+        std::cout << "notdone " << notdone  << std::endl;
         auto prod_2b = gamma_inv_cma*gamma_inv_eps_pm_p1*gamma_inv_diff_eps (a_pm,eps, notdone);
+        std::cout << "apres gamma_inv_eps3" << std::endl;
         auto gide = gamma_inv_diff_eps(cma,-eps, notdone);
-        auto gg = gamma_inv_eps_pm_p1*gamma_inv_a_pm;
+        std::cout << "apres gamma_inv_eps4" << std::endl;
+         auto gg = gamma_inv_eps_pm_p1*gamma_inv_a_pm;
         auto gz = gamma_inv_cma_meps*z_term;
         auto prod_2c = gamma_inv_eps_pm_p1*gamma_inv_a_pm*(gamma_inv_diff_eps(cma,-eps, notdone) + gamma_inv_cma_meps*z_term);
+        std::cout << "apres gamma_inv_eps5" << std::endl;
 
 
+       std::cout << "in br_eps_le 2" << std::endl;
 
          auto prod2 = prod_eps_pa_mc_p1*(prod_2a - prod_2b - prod_2c);
          auto res = gamma_c*prod_a*(prod1 + prod2);
@@ -234,22 +255,23 @@ namespace kyosu::_
           }
 
           auto res_default = gamma_c*(prod1 - prod2)/eps;
-          if constexpr(kyosu::concepts::real<r_t>)
-          return real(if_else(finite, res, res_default));
-          else
-            return if_else(finite, res, res_default);
+          std::cout << "in br_eps_le fin" << std::endl;
+          return if_else(finite, res, res_default);
         }
       };
 
       auto r = kyosu::nan(as<r_t>());
-      auto notdone = kyosu::is_nan(r);
+      //     auto notdone = kyosu::is_nan(r);
+       std::cout << "notdone avant gt" << notdone << std::endl;
       if( eve::any(notdone) )
       {
         auto gt = inf_norm_eps > u_t(0.1);
         notdone = next_interval(br_eps_gt, notdone, gt, r);
+        std::cout << "notdone apres gt" << notdone << std::endl;
         if( eve::any(notdone) )
         {
-          last_interval(br_eps_le, notdone, r);
+          notdone = next_interval(br_eps_le, notdone, !gt, r);
+          std::cout << "notdone apres le" << notdone << std::endl;
         }
       }
       return r;

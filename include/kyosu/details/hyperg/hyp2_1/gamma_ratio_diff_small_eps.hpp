@@ -7,12 +7,14 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/functions/is_not_equal.hpp>>
+#include <iostream>
 
 namespace kyosu::_
 {
 
   auto  gamma_ratio_diff_small_eps(auto z, auto eps, auto notdone) -> decltype(z+eps)
   {
+       std::cout << "in gamma_ratio_diff_small_eps" << std::endl;
     using r_t = decltype(z+eps);
     using u_t = eve::underlying_type_t<r_t>;
     constexpr u_t g = 4.7421875;
@@ -105,7 +107,8 @@ namespace kyosu::_
       auto zero_eps =  is_eqz(eps);
 
 
-      auto br_0 = [&](){
+      auto br_0 = [&](auto test){
+       std::cout << "in br_0" << std::endl;
         r_t  sum_num = kyosu::zero(kyosu::as<r_t>());
         r_t  sum_den(c[0]);
         for (int i = 1; i < 15; ++i)
@@ -129,36 +132,41 @@ namespace kyosu::_
         }
       };
 
-      auto br_1 = [&](){
+      auto br_1 = [&](auto test, auto rr){
+        std::cout << "in br_1" << notdone << std::endl;
+        std::cout << "in br_1" << (notdone && !test) << std::endl;
+        if (eve::none(notdone && !test)) return rr;
         auto [s, c]   = kyosu::sinpicospi(eps);
         auto term     = s*kyosu::cotpi(z-n);
-        auto t1_eps_z = (c + term)*gamma_ratio_diff_small_eps(kyosu::oneminus(z),-eps, notdone);
+        auto t1_eps_z = (c + term)*gamma_ratio_diff_small_eps(kyosu::oneminus(z),-eps, notdone && !test);
         auto s_eps_o2 = kyosu::sinpi(hf*eps);
         auto t2_eps_z = (2.0*sqr(s_eps_o2) - term)/eps;
         auto t_eps_z  = t1_eps_z + t2_eps_z;
         auto r        =  t_eps_z/kyosu::oneminus(eps*t_eps_z);
-        if (eve::none(zero_eps)) return r;
+        if (eve::none(zero_eps) )
+        {
+          return r;
+        }
         else
         {
-          return if_else(zero_eps
-                        , gamma_ratio_diff_small_eps(kyosu::oneminus(z),zero(as<r_t>()), notdone) - eve::pi(eve::as<u_t>())*kyosu::cotpi(z-n)
+          return if_else(zero_eps && notdone
+                        , gamma_ratio_diff_small_eps(kyosu::oneminus(z),zero(as<r_t>()), notdone && !test) - eve::pi(eve::as<u_t>())*kyosu::cotpi(z-n)
                         , r
                         );
         }
       };
 
       auto r       = kyosu::cinf(kyosu::as<r_t>());
-//      auto notdone = kyosu::is_nan(r);
-      auto test1(kyosu::is_not_equal(z, n) || eve::is_gtz(n)); // z is negative integer
-      auto test2(kyosu::is_not_equal(eps_pz, m) || eve::is_gtz(m)); //z+eps is negative integer
+      auto test1(kyosu::is_not_equal(z, n) || eve::is_gtz(n)); // z is not negative integer
+      auto test2(kyosu::is_not_equal(eps_pz, m) || eve::is_gtz(m)); //z+eps is not negative integer
       notdone = notdone || (test2 && test1);
-      if( eve::any(notdone) )
+      if( eve::any(notdone ) )
       {
         auto test = eve::is_greater_equal(x, hf) || eve::is_greater_equal(eps_px, hf);
-        notdone = next_interval(br_0, notdone, test, r);
+        notdone = next_interval(br_0, notdone, test && notdone, r, test && notdone);
         if( eve::any(notdone) )
         {
-          last_interval(br_1, notdone, r);
+          notdone = next_interval(br_1, notdone, !test && notdone, r, !test && notdone, r);
         }
       }
       return r;

@@ -97,6 +97,7 @@ namespace kyosu::_
     }
     else
     {
+      std::cout << "in hyp_ps_infinity simd " << std::endl;
       auto tol = eve::eps(as<u_t>());
 
       auto m = eve::nearest(real(b - a));
@@ -137,9 +138,13 @@ namespace kyosu::_
         imag(A_term) = if_else(kyosu::is_real(a) && kyosu::is_real(b) && kyosu::is_real(c), zero, imag(A_term));
         A_sum = A_term;
       }
+      std::cout << "in hyp_ps_infinity simd A_term" << std::endl;
+
+      std::cout << "in hyp_ps_infinity avant B_first_term" << std::endl;
 
       auto pow_z_inv_m = kyosu::pow (z_inv,m);
       auto B_first_term = B_sum_init_ps_infinity(a,c,gamma_c,gamma_inv_cma,gamma_inv_one_meps,gamma_inv_eps_pa_pm,z,m,eps, notdone);
+      std::cout << "in hyp_ps_infinity apres B_first_term" << std::endl;
 
       B_first_term*= pow_z_inv_m;
       auto prod_B = pow_z_inv_m;
@@ -165,6 +170,7 @@ namespace kyosu::_
       auto min_n = eve::max(min_n_calc(cv_poly1_der_tab), min_n_calc(cv_poly2_der_tab));
       auto possible_false_cv = kyosu::false_(kyosu::as<r_t>());
       auto maxit = 500;
+      std ::cout << "hyp_ps_infinity avant coucle " <<  std::endl;
 
       for(int n = 0;  n < maxit; ++n)
       {
@@ -197,7 +203,9 @@ namespace kyosu::_
                                           , eve::is_gtz(dcv_calc(cv_poly1_der_tab,u_t(n))) || eve::is_gtz(dcv_calc (cv_poly2_der_tab,u_t(n)))
                                           , possible_false_cv);
       }
-      return if_else(kyosu::is_eqz(eps)
+     std ::cout << "hyp_ps_infinity apres coucle " << std::endl;
+
+       return if_else(kyosu::is_eqz(eps)
                     , (phase*pow_mz_ma*(A_sum + B_sum))
                     , (A_sum + B_sum)*phase*pow_mz_ma*pi_eps/sinpi(eps)
                     );

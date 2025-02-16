@@ -83,15 +83,15 @@ TTS_CASE_TPL ( "Check hyper 2F1"
       TTS_RELATIVE_EQUAL(r, res, pr);
 
 
-//       auto r0 =  kyosu::hypergeometric(z.get(0), kumi::tuple{a.get(0), b.get(0)}, kumi::tuple{c.get(0)});
-//       TTS_RELATIVE_EQUAL(r0, res.get(0), pr);
-//       auto r1 =  kyosu::hypergeometric(z.get(1), kumi::tuple{a.get(1), b.get(1)}, kumi::tuple{c.get(1)});
-//       TTS_RELATIVE_EQUAL(r1, res.get(1), pr);
-//       auto r2 =  kyosu::hypergeometric(z.get(2), kumi::tuple{a.get(2), b.get(2)}, kumi::tuple{c.get(2)});
-//       TTS_RELATIVE_EQUAL(r2, res.get(2), pr);
-//       auto r3 =  kyosu::hypergeometric(z.get(3), kumi::tuple{a.get(3), b.get(3)}, kumi::tuple{c.get(3)});
-//       TTS_RELATIVE_EQUAL(r3, res.get(3), pr);
-     }
+// //       auto r0 =  kyosu::hypergeometric(z.get(0), kumi::tuple{a.get(0), b.get(0)}, kumi::tuple{c.get(0)});
+// //       TTS_RELATIVE_EQUAL(r0, res.get(0), pr);
+// //       auto r1 =  kyosu::hypergeometric(z.get(1), kumi::tuple{a.get(1), b.get(1)}, kumi::tuple{c.get(1)});
+// //       TTS_RELATIVE_EQUAL(r1, res.get(1), pr);
+// //       auto r2 =  kyosu::hypergeometric(z.get(2), kumi::tuple{a.get(2), b.get(2)}, kumi::tuple{c.get(2)});
+// //       TTS_RELATIVE_EQUAL(r2, res.get(2), pr);
+// //       auto r3 =  kyosu::hypergeometric(z.get(3), kumi::tuple{a.get(3), b.get(3)}, kumi::tuple{c.get(3)});
+// //       TTS_RELATIVE_EQUAL(r3, res.get(3), pr);
+      }
 
   }
 //   else

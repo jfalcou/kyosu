@@ -9,7 +9,7 @@
 
 namespace kyosu::_
 {
-  auto hyp_ps_cp_rest(auto a, auto b, auto c, auto z) noexcept
+  auto hyp_ps_cp_rest(auto a, auto b, auto c, auto z, auto notdone) noexcept
   {
     using r_t = decltype(a+b+c+z);
     using u_t = eve::underlying_type_t<r_t>;
@@ -61,10 +61,10 @@ namespace kyosu::_
       r_t inca = kyosu::inc(a);
       r_t incb = kyosu::inc(b);
       r_t incc = kyosu::inc(c);
-      r_t hyp_ps_z0  = kyosu::if_else(is_abs_z_small, hyp_ps_zero (a,b,c,z0),  hyp_ps_infinity (a,b,c,z0));
+      r_t hyp_ps_z0  = kyosu::if_else(is_abs_z_small, hyp_ps_zero (a,b,c,z0, notdone),  hyp_ps_infinity (a,b,c,z0, notdone));
       r_t dhyp_ps_z0 = kyosu::if_else(is_abs_z_small
                                      , hyp_ps_zero (inca, incb, incc, z0)
-                                     , hyp_ps_infinity (inca, incb, incc, z0)
+                                     , hyp_ps_infinity (inca, incb, incc, z0, notdone)
                                      )*a*b/c;
 
 
