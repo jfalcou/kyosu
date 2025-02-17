@@ -12,6 +12,8 @@
 #include <kyosu/details/hyperg/hyp0_2.hpp>
 #include <kyosu/details/hyperg/hyp1_0.hpp>
 #include <kyosu/details/hyperg/hyp1_1.hpp>
+#include <kyosu/details/hyperg/hyp1_2.hpp>
+
 #include <kyosu/details/hyperg/hyp2_0.hpp>
 #include <kyosu/details/hyperg/hyp2_1.hpp>
 
