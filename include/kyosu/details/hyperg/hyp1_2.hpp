@@ -14,7 +14,7 @@ namespace kyosu::_
 {
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
-  //   hypergeometric 1F1
+  //   hypergeometric 1F2
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
   template<typename Z,
@@ -80,7 +80,7 @@ namespace kyosu::_
 
     if( eve::any(notdone) )
     {
-      notdone = next_interval(br_conegint, notdone, abnegint, r);
+      notdone = next_interval(br_conegint, notdone, conegint, r);
       if( eve::any(notdone) )
       {
         notdone = next_interval(br_anegint, notdone, anegint, r);
