@@ -192,11 +192,4 @@ namespace kyosu::_
       return r;
     }
   }
-
-//   auto hyp_ps_one(auto a, auto b, auto c, auto one_minus_z)
-//   {
-//     using r_t = decltype(a+b+c+one_minus_z);
-//     return hyp_ps_one(a, b, c, one_minus_z, kyosu::true_(eve::as<r_t>()));
-//   }
-
 }
