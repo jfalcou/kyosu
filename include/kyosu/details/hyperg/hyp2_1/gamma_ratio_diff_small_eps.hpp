@@ -18,8 +18,8 @@ namespace kyosu::_
     constexpr u_t g = 4.7421875;
     constexpr u_t hf = eve::half(eve::as<u_t>());
     // |eps| must be less than 0.1
-    EVE_ASSERT(eve::all(kyosu::abs(eps) < 0.1), "One must have |eps| < 0.1");
     eps = if_else(notdone, eps, zero);
+    EVE_ASSERT(eve::all(kyosu::abs(eps) < 0.1), "One must have |eps| < 0.1");
     constexpr u_t c[15] = {0.99999999999999709182,
                            57.156235665862923517,
                            -59.597960355475491248,
