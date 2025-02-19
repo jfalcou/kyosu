@@ -191,7 +191,6 @@ namespace kyosu::_
         auto sum_term = if_else(is_eps_non_zero, kyosu::expm1(sum)/eps, sum);
         auto prod_diff_eps = prod_eps_pa_mc_p1_n0 + prod_a_mc_p1*sum_term;
 
-//        z-= kyosu::i(eve::as(z))*2.22507e-307;
         auto mlogmz = -kyosu::log(-z);
         auto z_term = if_else(is_eps_non_zero, kyosu::expm1(eps*mlogmz)/eps, mlogmz);
         auto gamma_inv_a_pm = kyosu::tgamma_inv (a_pm);
@@ -241,7 +240,6 @@ namespace kyosu::_
       };
 
       auto r = kyosu::nan(as<r_t>());
-      //     auto notdone = kyosu::is_nan(r);
       if( eve::any(notdone) )
       {
         auto gt = inf_norm_eps > u_t(0.1);
@@ -254,14 +252,4 @@ namespace kyosu::_
       return r;
     }
   }
-
-//   auto B_sum_init_ps_infinity (auto a, auto c, auto gamma_c, auto gamma_inv_cma,
-//           auto gamma_inv_one_meps, auto gamma_inv_eps_pa_pm, auto z, auto m, auto eps) noexcept
-//   {
-//     using r_t = decltype(a+c+z+gamma_c+gamma_inv_cma+gamma_inv_one_meps+gamma_inv_eps_pa_pm+m+eps);
-//     return B_sum_init_ps_infinity (a, c, gamma_c, gamma_inv_cma,
-//                                    gamma_inv_one_meps, gamma_inv_eps_pa_pm, z, m, eps, kyosu::true_(eve::as<r_t>()));
-//   }
-
-
 }

@@ -77,7 +77,6 @@ namespace kyosu::_
       auto z_neg_int_distance = kyosu::linfnorm(z + kyosu::abs(n));
       auto epspz_neg_int_distance = kyosu::linfnorm(epspz + kyosu::abs(m));
       auto r       = kyosu::nan(kyosu::as<r_t>());
-//      auto notdone = kyosu::is_nan(r);
 
       auto br_gt01 = [&](){  //    kyosu::linfnorm(eps) > u_t(0.1))
         return   (kyosu::tgamma_inv (z) - kyosu::tgamma_inv (epspz))/eps;
@@ -143,7 +142,6 @@ namespace kyosu::_
             if( eve::any(notdone) )
             {
               notdone = last_interval(br_final, notdone, r);
-//              notdone = kyosu::false_(eve::as<r_t>());
             }
           }
         }
@@ -151,11 +149,4 @@ namespace kyosu::_
       return r;
     }
   }
-
-//   auto  gamma_inv_diff_eps(auto z, auto eps) -> decltype(z+eps)
-//   {
-//     using r_t =  decltype(z+eps);
-//     return gamma_inv_diff_eps(z, eps, kyosu::true_(eve::as<r_t>()));
-//   }
-
 }

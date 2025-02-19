@@ -182,15 +182,7 @@ namespace kyosu::_
         auto prod2 = eps_pm_p1_pn*n_p1;
         auto prod3 = a_pm_pn*a_mc_p1_pm_pn;
         z_inv = z_inv+ kyosu::i(eve::as(z_inv))*2.4723e-310;//////////////
-//         if (n == 0)
-//         {
-//         }
         B_term = z_inv*(B_term*prod1/prod2 + B_extra_term*(prod3/n_pm_p1 - a_pm_pn - a_mc_p1_pm_pn - eps + prod1/n_p1)/(eps_pm_p1_pn*n_p1_meps));
-//         if (n == 0)
-//         {
-
-
-//         }
         B_sum += B_term;
         B_extra_term *= z_inv*prod3/(n_pm_p1*n_p1_meps);
         if (eve::all(!possible_false_cv &&  (kyosu::linfnorm (B_term) <= B_prec))) break;
@@ -206,11 +198,4 @@ namespace kyosu::_
 
     }
   }
-
-//   auto hyp_ps_infinity (auto a, auto b, auto c, auto z) noexcept
-//   {
-//     using r_t = decltype(a+b+c+z);
-//     return hyp_ps_infinity(a, b, c, z, kyosu::true_(eve::as<r_t>()));
-//   }
-
 }

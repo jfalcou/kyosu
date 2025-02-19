@@ -140,7 +140,6 @@ namespace kyosu::_
       };
 
       auto r = kyosu::nan(as<r_t>());
-//      auto notdone = is_nan(r);
       if( eve::any(notdone) )
       {
         notdone = next_interval(br_gt, notdone, inf_norm_eps > u_t(0.1), r);
