@@ -10,10 +10,10 @@
 #include <kyosu/details/hyperg/hyp0_0.hpp>
 #include <kyosu/details/hyperg/hyp0_1.hpp>
 #include <kyosu/details/hyperg/hyp0_2.hpp>
-
 #include <kyosu/details/hyperg/hyp1_0.hpp>
 #include <kyosu/details/hyperg/hyp1_1.hpp>
 #include <kyosu/details/hyperg/hyp2_0.hpp>
+#include <kyosu/details/hyperg/hyp2_1.hpp>
 
 
 namespace kyosu
@@ -25,6 +25,7 @@ namespace kyosu
     constexpr KYOSU_FORCEINLINE
     auto operator()(Z z, T1 a, T2 b) const noexcept
     {
+
       if constexpr(concepts::real<Z>)
         return _::hyperg(kyosu::complex(z), a, b);
       else
