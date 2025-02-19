@@ -20,14 +20,15 @@ TTS_CASE_TPL ( "Check hyper 2F0"
   using r_t = kyosu::cayley_dickson<T, 2>;
   r_t r;
   r_t res[] = {r_t(1.0, 0.0),
-               r_t(eve::nan(eve::as<T>()), 0),
+               r_t(0.548563416668060, 0.377068308602826), //eve::nan(eve::as<T>()), 0),
                r_t(0.52, 0.0),
                r_t(169, 0.0),
-               r_t(121, 0.0)};
+               r_t(121, 0.0),
+               r_t(1.04166637647907, 8.34584913683906e-8)};
   int i = 0;
   r =  kyosu::hypergeometric(r_t(0.0), kumi::tuple{r_t(-2.0), r_t(1.0)}, kumi::tuple{});
   TTS_RELATIVE_EQUAL(r, res[i++], pr);
-  r =  kyosu::hypergeometric(r_t(0.4), kumi::tuple{r_t(-20.4), r_t(1.0)}, kumi::tuple{});
+  r =  kyosu::hypergeometric(r_t(10.0), kumi::tuple{r_t(1.5), r_t(0.2)}, kumi::tuple{});
   TTS_RELATIVE_EQUAL(r, res[i++], pr);
   r =  kyosu::hypergeometric(r_t(0.4), kumi::tuple{r_t(-2.0), r_t(1.0)}, kumi::tuple{});
   TTS_RELATIVE_EQUAL(r, res[i++], pr);

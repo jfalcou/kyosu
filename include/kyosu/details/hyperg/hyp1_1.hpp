@@ -43,7 +43,7 @@ namespace kyosu::_
       r_t a1(1), s(1);
       for (size_t j=1; j <= n; ++j)
       {
-        a1*=(kyosu::dec(a+j)/(kyosu::dec(b+j)*j))*zz;
+        a1*=(kyosu::dec(aa+j)/(kyosu::dec(b+j)*j))*zz;
         s += a1;
       }
       return s;

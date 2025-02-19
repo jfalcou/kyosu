@@ -132,6 +132,7 @@
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/is_unitary.hpp>
 #include <kyosu/functions/jacobi_elliptic.hpp>
+#include <kyosu/functions/kummer.hpp>
 #include <kyosu/functions/lambda.hpp>
 #include <kyosu/functions/lbeta.hpp>
 #include <kyosu/functions/ldiv.hpp>

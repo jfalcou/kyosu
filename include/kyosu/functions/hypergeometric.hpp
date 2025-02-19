@@ -73,8 +73,18 @@ namespace kyosu
 //!          analytic continuation can be used to extend the computation to the whole complex plane
 //!        * if \f$p > q + 1\f$: the series converges only for \f$z = 0\f$ unless the
 //!          summation stops, an \f$a_i\f$ or \f$b_i\f$ being a non positive flint and the polynomial is so defined everywhere.
+//!          However, the function has an analytic continuation  \f${}_2F_0\f$ is computed using tricomi function which itself
+//!          is expressed using\f${}_1F_1\f$
 //!
-//!        Up to now the only implemented functions are for size of a and b between 0 and 2,  except \f${}_2F_0\f$ \f${}_2F_1\f$ and \f${}_2F_2\f$
+//!        Up to now the only implemented functions are for size of a and b between 0 and 2.
+//!
+//!   @note hypergeometric functons are a kind of jungle. As kyosu and eve only use standard floating types as base of calculation,
+//!         overflows or lack of precision along large computation can degrade the accuracy of some results.
+//!         - These fonctions always return complex outputs even if entries are all real ones.
+//!         - The uses of float-based inputs and computations are ok, but discouraged as overflows or lack of precision are much greater
+//!           than double-based ones.
+//!         - receiving a `fnan` ouput generally means than the computation did not work well.
+//!         - receiving a `cnan` ouput generally means than the function is not defined here and that is a singularity.
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/hypergeometric.cpp}
