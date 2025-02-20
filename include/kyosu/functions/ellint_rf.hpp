@@ -82,7 +82,7 @@ namespace kyosu
 //!   *  [Wolfram MathWorld: Elliptic Integral](https://mathworld.wolfram.com/CarlsonEllipticIntegrals.html)
 //!
 //!  @groupheader{Example}
-//!  @godbolt{doc/elliptic/ellint_rf.cpp}
+//!  @godbolt{doc/ellint_rf.cpp}
 //================================================================================================
   inline constexpr auto ellint_rf = eve::functor<ellint_rf_t>;
 //================================================================================================
