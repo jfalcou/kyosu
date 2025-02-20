@@ -45,7 +45,7 @@ namespace kyosu
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var tricomi_
+//!   @var tricomi
 //!   @brief Computes the tricomi function \f$U\f$ also called confluent hypergeometric
 //!   function of the second kind
 //!
@@ -70,8 +70,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!        Returns the value at z of the confluent hypergeometric function of the second kind
-//!        with `a` and `b` parameters
+//!     Returns the value at z of the confluent hypergeometric function of the second kind
+//!     with `a` and `b` parameters
 //!
 //!  @groupheader{External references}
 //!   *  [DLMF: Kummer Functions](https://dlmf.nist.gov/13.2)
