@@ -132,6 +132,7 @@
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/is_unitary.hpp>
 #include <kyosu/functions/jacobi_elliptic.hpp>
+#include <kyosu/functions/kummer.hpp>
 #include <kyosu/functions/lambda.hpp>
 #include <kyosu/functions/lbeta.hpp>
 #include <kyosu/functions/ldiv.hpp>
@@ -192,6 +193,7 @@
 #include <kyosu/functions/tgamma_inv.hpp>
 #include <kyosu/functions/to_cylindrical.hpp>
 #include <kyosu/functions/to_polar.hpp>
+#include <kyosu/functions/tricomi.hpp>
 #include <kyosu/functions/trunc.hpp>
 #include <kyosu/functions/zeta.hpp>
 
