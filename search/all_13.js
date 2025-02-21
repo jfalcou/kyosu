@@ -15,6 +15,7 @@ var searchData=
   ['to_5fsemipolar_12',['to_semipolar',['../group__quaternion_ga3519a64d1cbe848507cc57a05b5ed1b3.html#ga3519a64d1cbe848507cc57a05b5ed1b3',1,'kyosu']]],
   ['to_5fspherical_13',['to_spherical',['../group__quaternion_gad7e50e38859bb508a816fdd9d63d7b0a.html#gad7e50e38859bb508a816fdd9d63d7b0a',1,'kyosu']]],
   ['traits_14',['Traits',['../group__traits.html',1,'']]],
-  ['trunc_15',['trunc',['../group__functions_ga57a5e1064f03073d3e81144181f6ac71.html#ga57a5e1064f03073d3e81144181f6ac71',1,'kyosu']]],
-  ['types_16',['Types',['../group__types.html',1,'']]]
+  ['tricomi_15',['tricomi',['../group__functions_ga34f7e8374cc3db60329a3673e46c96f8.html#ga34f7e8374cc3db60329a3673e46c96f8',1,'kyosu']]],
+  ['trunc_16',['trunc',['../group__functions_ga57a5e1064f03073d3e81144181f6ac71.html#ga57a5e1064f03073d3e81144181f6ac71',1,'kyosu']]],
+  ['types_17',['Types',['../group__types.html',1,'']]]
 ];

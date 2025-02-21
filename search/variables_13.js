@@ -14,5 +14,6 @@ var searchData=
   ['to_5frotation_5fmatrix_11',['to_rotation_matrix',['../group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0',1,'kyosu']]],
   ['to_5fsemipolar_12',['to_semipolar',['../group__quaternion_ga3519a64d1cbe848507cc57a05b5ed1b3.html#ga3519a64d1cbe848507cc57a05b5ed1b3',1,'kyosu']]],
   ['to_5fspherical_13',['to_spherical',['../group__quaternion_gad7e50e38859bb508a816fdd9d63d7b0a.html#gad7e50e38859bb508a816fdd9d63d7b0a',1,'kyosu']]],
-  ['trunc_14',['trunc',['../group__functions_ga57a5e1064f03073d3e81144181f6ac71.html#ga57a5e1064f03073d3e81144181f6ac71',1,'kyosu']]]
+  ['tricomi_14',['tricomi',['../group__functions_ga34f7e8374cc3db60329a3673e46c96f8.html#ga34f7e8374cc3db60329a3673e46c96f8',1,'kyosu']]],
+  ['trunc_15',['trunc',['../group__functions_ga57a5e1064f03073d3e81144181f6ac71.html#ga57a5e1064f03073d3e81144181f6ac71',1,'kyosu']]]
 ];
