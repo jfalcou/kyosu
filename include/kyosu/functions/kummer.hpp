@@ -8,7 +8,6 @@
 #pragma once
 
 #include <kyosu/details/hyperg/hyp1_1.hpp>
-#include <iostream>
 
 namespace kyosu
 {
