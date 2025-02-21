@@ -4,7 +4,7 @@
 
 int main()
 {
-  using kyosu::is_not_cinf;
+  using kyosu::is_cinf;
   using kyosu::complex_t;
   using kyosu::quaternion_t;
   using eve::as;
