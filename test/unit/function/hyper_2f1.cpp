@@ -24,10 +24,11 @@ TTS_CASE_TPL ( "Check hyper 2F1"
     std::cout << I << std::endl;
 //    std::cout << tts::name(r_t()) << std::endl;
     auto nan = eve::nan(eve::as<T>());
-    r_t res[] = {r_t(1.34285714285714, 0), r_t(1.34285714285714), r_t(nan, nan), r_t(nan, nan), r_t(1.41666666666667,0), r_t(1.53571428571429,0),
+    r_t res[] = {r_t(1.34285714285714, 0), r_t(1.34285714285714), kyosu::cinf(eve::as<r_t>()), kyosu::cinf(eve::as<r_t>()), r_t(1.41666666666667,0), r_t(1.53571428571429,0),
                  r_t(0.666666666666667,0), r_t(1.43805509807655,0), r_t(0.399423339498422,0), r_t(-0.0945434530050565,-0.0128699542349234),
                  r_t(0.292430451098607,0), r_t(4.26012617974386,-2.13613053370195), r_t(3.25898889914176,0), r_t(0.784430166457414,0), r_t(-332.644427109075,-224.988297978431),
-                 r_t(23.6353087752502,25.8503131412853), r_t(-210.714285714285,-5.1610115106924e-14), r_t(-20190.0135825192,0), r_t(-20236927.9546885,1.15423160805968e-100)};
+                 r_t(23.6353087752502,25.8503131412853), r_t(-210.714285714285,-5.1610115106924e-14), r_t(-20190.0135825192,0), r_t(-20236927.9546885,1.15423160805968e-100),
+                 r_t(1.0, 0.0), r_t(-1.0, 0.0)};
     r_t r(nan);
     // a0 a1 or b0 negatives integers
     r = kyosu::hypergeometric(0.5, kumi::tuple{-2.0, 1.0}, kumi::tuple{-3.5});
@@ -68,6 +69,12 @@ TTS_CASE_TPL ( "Check hyper 2F1"
     TTS_RELATIVE_EQUAL(r, res[17], pr);
     r =  kyosu::hypergeometric(1.000001-1e-307*I, kumi::tuple{-10.4, -10.4}, kumi::tuple{-4.4});
     TTS_RELATIVE_EQUAL(r, res[18], pr);
+    r =  kyosu::hypergeometric(0.25, kumi::tuple{0.0, 2.0}, kumi::tuple{1.5});
+    TTS_RELATIVE_EQUAL(r, res[19], pr);
+    r =  kyosu::hypergeometric(1.0, kumi::tuple{-3.0, 5.0}, kumi::tuple{1.5});
+    TTS_RELATIVE_EQUAL(r, res[20], pr);
+
+
   }
   TTS_EQUAL(0, 0);
 };

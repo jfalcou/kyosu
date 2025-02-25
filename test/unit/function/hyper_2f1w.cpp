@@ -31,10 +31,13 @@ TTS_CASE_TPL ( "Check hyper 2F1"
                  r_t(1.1172786872818116653, -0.01890970717512781),
                  r_t(0.08945210258112101, -0.160349515471060001),
                  r_t(205698.58578614875114764, 3338237.860363822376580),
-                 r_t(-7.9608516398905606382595, -13.660975125299382850) };
-    rw_t r(nan);
+                 r_t(-7.9608516398905606382595, -13.660975125299382850),
+                 r_t(1.0, 0.0),
+                 r_t(-1.0, 0.0)};
+    rw_t r;
+    r_t  rs;
     std::cout << std::setprecision(15);
-    r = kyosu::hypergeometric(wd_t(0.5), kumi::tuple{-2.0, 1.0}, kumi::tuple{-3.5});
+   r = kyosu::hypergeometric(wd_t(0.5), kumi::tuple{-2.0, 1.0}, kumi::tuple{-3.5});
     TTS_RELATIVE_EQUAL(r, rw_t(res[0]), pr);
     r =  kyosu:: hypergeometric(wd_t(0.5), kumi::tuple{1.0, -2.0}, kumi::tuple{-3.5});
     TTS_RELATIVE_EQUAL(r, rw_t(res[1]), pr);
@@ -62,9 +65,14 @@ TTS_CASE_TPL ( "Check hyper 2F1"
     TTS_RELATIVE_EQUAL(r, rw_t(res[12]), pr);
     r =  kyosu::hypergeometric(-wd_t(0.5), kumi::tuple{1.0, 2.0}, kumi::tuple{3.5});
     TTS_RELATIVE_EQUAL(r, rw_t(res[13]), pr);
+
+    rs =  kyosu::hypergeometric(r_t(0.4-1.2*I), kumi::tuple{-20.4, -20.4}, kumi::tuple{-20.4});
+    TTS_RELATIVE_EQUAL(rs, res[14], pr);
+    std::cout << "rs " << rs <<  " ==  " << res[14] << std::endl;
     r =  kyosu::hypergeometric(rw_t(0.4-1.2*I), kumi::tuple{-20.4, -20.4}, kumi::tuple{-20.4});
     TTS_RELATIVE_EQUAL(r, rw_t(res[14]), pr);
-    r =  kyosu::hypergeometric(rw_t(0.4-1.2*I), kumi::tuple{-20.4, -12.1}, kumi::tuple{-20.4});
+    std::cout << "r " << r.get(0) <<  " ==  " << res[14] << std::endl;
+   r =  kyosu::hypergeometric(rw_t(0.4-1.2*I), kumi::tuple{-20.4, -12.1}, kumi::tuple{-20.4});
     TTS_RELATIVE_EQUAL(r, rw_t(res[15]), pr);
     r =  kyosu::hypergeometric(rw_t(1.04), kumi::tuple{1.0, -2.5}, kumi::tuple{-3.5});
     TTS_RELATIVE_EQUAL(r, rw_t(res[16]), pr);
@@ -80,6 +88,10 @@ TTS_CASE_TPL ( "Check hyper 2F1"
     TTS_RELATIVE_EQUAL(r, rw_t(res[21]), pr);
     r =  kyosu::hypergeometric(rw_t(-2.0*I), kumi::tuple{1.2*I, -12.1*I}, kumi::tuple{-2.4});
     TTS_RELATIVE_EQUAL(r, rw_t(res[22]), pr);
+    r =  kyosu::hypergeometric(rw_t(0.25), kumi::tuple{0.0, 2.0}, kumi::tuple{1.5});
+    TTS_RELATIVE_EQUAL(r, rw_t(res[23]), pr);
+    r =  kyosu::hypergeometric(rw_t(1.0), kumi::tuple{-3.0, 5.0}, kumi::tuple{1.5});
+    TTS_RELATIVE_EQUAL(r, rw_t(res[24]), pr);
   }
   TTS_EQUAL(0, 0);
 };
