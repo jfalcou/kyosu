@@ -14,8 +14,9 @@
 namespace kyosu
 {
   template<typename Options>
-  struct tchebytchev_t : eve::strict_elementwise_callable<tchebytchev_t, Options
-                                                          , eve::successor_option, eve::kind_1_option, eve::kind_2_option>
+  struct legendre_t : eve::strict_elementwise_callable<legendre_t, Options
+                                                       , eve::successor_option, eve::p_kind_option, eve::q_kind_option
+                                                  , eve::condon_shortley_option, eve::associated_option, eve::spherical_option>
   {
     template<concepts::real N, concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr auto  operator()(N nn, Z zz) const noexcept -> decltype(nn+zz)
@@ -24,15 +25,20 @@ namespace kyosu
       using u_t = eve::underlying_type_t<r_t>;
       auto n = r_t(nn);
       auto z = r_t(zz);
-      if constexpr(!Options::contains(kind_2))
+      if constexpr(Options::contains(eve::q_kind))
       {
-        auto r = kyosu::hypergeometric(oneminus(z)*eve::half(eve::as<u_t>()), kumi::tuple{-n, n}, kumi::tuple{u_t(0.5)});
-        return if_else(is_real(z), complex(real(r)), r);
+        auto np3o2 = n+u_t(1.5);
+        auto np1 = kyosu::inc(n);
+        auto hf = eve::half(eve::as<u_t>());
+        auto gam1_5 =  u_t(2.658680776358274);
+        auto r = hypergeometric(rec(sqr(z)), kumi::tuple{inc(n*hf), np1*hf}, kumi::tuple{np3o2});
+        r = gam1_5*kyosu::tgamma(np1)*r*kyosu::tgamma_inv(np3o2)*kyosu::pow(2*z, -kyosu::inc(n));
+        return r; //if_else(is_real(z), complex(real(r)), r);
       }
       else
       {
-        auto r = kyosu::inc(n)*hypergeometric(oneminus(z)*eve::half(eve::as<u_t>()), kumi::tuple{-n, n+2}, kumi::tuple{u_t(1.5)});
-        return if_else(is_real(z), complex(real(r)), r);
+       auto r = kyosu::hypergeometric(oneminus(z)*eve::half(eve::as<u_t>()), kumi::tuple{-n, n+1}, kumi::tuple{u_t(1.0)});
+       return if_else(is_real(z), complex(real(r)), r);
       }
     }
 
@@ -41,32 +47,32 @@ namespace kyosu
     { return (*this)(n, complex(z)); }
 
 
-    // Recurrence relation for Tchebytchev polynomials:
-   template<concepts::cayley_dickson Z,  concepts::cayley_dickson T>
-    KYOSU_FORCEINLINE constexpr auto  operator()( Z z, T tn, T tnm1) const noexcept -> decltype(z+tn)
-    {
-      return complex(2*z*tn-tnm1);
-    }
+//     // Recurrence relation for Legendre polynomials:
+//    template<concepts::cayley_dickson Z,  concepts::cayley_dickson T>
+//     KYOSU_FORCEINLINE constexpr auto  operator()( Z z, T tn, T tnm1) const noexcept -> decltype(z+tn)
+//     {
+//       return complex(2*z*tn-tnm1);
+//     }
 
-      template<concepts::real Z, concepts::real T>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z z, T tn,  T tnm1) const noexcept -> decltype(complex(z+tn))
-        requires(Options::contains(eve::successor))
-    {
-      return (*this)[eve::successor](complex(z), tn, tnm1);
-    }
+//       template<concepts::real Z, concepts::real T>
+//     KYOSU_FORCEINLINE constexpr auto operator()(Z z, T tn,  T tnm1) const noexcept -> decltype(complex(z+tn))
+//         requires(Options::contains(eve::successor))
+//     {
+//       return (*this)[eve::successor](complex(z), tn, tnm1);
+//     }
 
 
-    KYOSU_CALLABLE_OBJECT(tchebytchev_t, tchebytchev_);
+    KYOSU_CALLABLE_OBJECT(legendre_t, legendre_);
   };
 
 
 //================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var tchebytchev
-//!   @brief Computes the value of the Tchebytchev polynomial of order `n` at `z`:
+//!   @var legendre
+//!   @brief Computes the value of the Legendre polynomial of order `n` at `z`:
 //!
-//!    * The Tchebytchev polynomial of order n is given by \f$ \displaystyle \mbox{T}_{n}(x)
+//!    * The Legendre polynomial of order n is given by \f$ \displaystyle \mbox{T}_{n}(x)
 //!      = \cos(n\arccos(x))\f$
 //!
 //!   @groupheader{Header file}
@@ -81,17 +87,17 @@ namespace kyosu
 //!   namespace eve
 //!   {
 //!      // Regular overload
-//!      auto constexpr tchebytchev(kyosu::concepts::real auto n, kyosu::concepts::cayley_dickson auto z) noexcept; // 1
-//!      auto constexpr tchebytchev(kyosu::concepts::real auto n, kyosu::concepts::real auto z)           noexcept; // 1
+//!      auto constexpr legendre(kyosu::concepts::real auto n, kyosu::concepts::cayley_dickson auto z) noexcept; // 1
+//!      auto constexpr legendre(kyosu::concepts::real auto n, kyosu::concepts::real auto z)           noexcept; // 1
 //!
 //!      // Lanes masking
-//!      constexpr auto tchebytchev[conditional_expr auto c](/* any previous overload */)                 noexcept; // 2
-//!      constexpr auto tchebytchev[logical_value auto m](/* any previous overload */)                    noexcept; // 2
+//!      constexpr auto legendre[conditional_expr auto c](/* any previous overload */)                 noexcept; // 2
+//!      constexpr auto legendre[logical_value auto m](/* any previous overload */)                    noexcept; // 2
 //!
 //!      // Semantic options
-//!      constexpr auto tchebytchev[kind_1](/* any previous overload */)                                  noexcept; // 1
-//!      constexpr auto tchebytchev[kind_2](i/* any previous overload */)                                 noexcept; // 3
-//!      constexpr auto tchebytchev[successor]( kyosu::concepts::cayley_dickson auto z,
+//!      constexpr auto legendre[p_kind](/* any previous overload */)                                  noexcept; // 1
+//!      constexpr auto legendre[q_kind](i/* any previous overload */)                                 noexcept; // 3
+//!      constexpr auto legendre[successor]( kyosu::concepts::cayley_dickson auto z,
 //!                                                           kyosu::cayley_dickson auto tn,
 //!                                                           kyosu::cayley_dickson auto tnm1)            noexcept; // 4
 //!   }
@@ -107,7 +113,7 @@ namespace kyosu
 //!
 //!      1.The value of the polynomial at `z` is returned.
 //!      2. [The operation is performed conditionnaly](@ref conditional).
-//!      3. evaluates the nth polynomial of tchebytchev of second kind
+//!      3. evaluates the nth polynomial of legendre of second kind
 //!         \f$ \displaystyle U_n(z) =  \frac{\sin(n\arccos z)}{\sin(\arccos z)}\f$.
 //!      4. computes the value of \f$T_{n+1}(z)\f$ knowing the values tn = \f$T_n(z)\f$ and
 //!         tnm1 = \f$T_{n-1}(z)\f$,
@@ -120,9 +126,9 @@ namespace kyosu
 //!   *  [Wolfram MathWorld: second kind](https://mathworld.wolfram.com/ChebyshevPolynomialoftheSecondKind.html)
 //!
 //!   @groupheader{Example}
-//!   @godbolt{doc/polynomial/regular/tchebytchev.cpp}
+//!   @godbolt{doc/polynomial/regular/legendre.cpp}
 //================================================================================================
-  inline constexpr auto tchebytchev = eve::functor<tchebytchev_t>;
+  inline constexpr auto legendre = eve::functor<legendre_t>;
 //================================================================================================
 //! @}
 //================================================================================================
