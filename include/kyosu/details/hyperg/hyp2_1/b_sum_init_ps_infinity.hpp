@@ -6,8 +6,6 @@
 */
 //======================================================================================================================
 #pragma once
-#include <iostream>
-#include <iomanip>
 
 namespace kyosu::_
 {
@@ -16,8 +14,6 @@ namespace kyosu::_
                                auto gamma_inv_one_meps, auto gamma_inv_eps_pa_pm, auto z, auto m,
                                auto eps, auto notdone) noexcept
   {
-    //std::cout<< std::setprecision(15) << "(" << a<< ", "<< c<< ", "<< gamma_c<< ", "<< gamma_inv_cma << ", "<;
-    //std::cout<< gamma_inv_cma << ", "<<<<  gamma_inv_one_meps<< ", "<< gamma_inv_eps_pa_pm<< ", "<< z<< ", "<< m<< ", "<< eps << ") " << std::endl;
 
     using r_t = decltype(a+c+z+gamma_c+gamma_inv_cma+gamma_inv_one_meps+gamma_inv_eps_pa_pm+m+eps);
     using u_t = eve::underlying_type_t<r_t>;

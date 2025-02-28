@@ -40,7 +40,6 @@ namespace kyosu::_
       }
       else
       {
-        std::cout << "hyp_ps_zero else" << std::endl;
         auto  dcv_tab = dcv_poly_calc(a,b,c,z);
         const int min_n = min_n_calc (dcv_tab);
         bool possible_false_cv = true;
@@ -81,7 +80,6 @@ namespace kyosu::_
       };
 
       auto br_else =  [&](){
-        std::cout << "hyp_ps_zero else" << std::endl;
         auto term = kyosu::one(as<r_t>());
         auto sum = term;
         auto  dcv_tab = dcv_poly_calc(a,b,c,z);
@@ -101,7 +99,6 @@ namespace kyosu::_
       };
 
       auto r = kyosu::nan(as<r_t>());
- //      auto notdone = kyosu::is_nan(r);
       if( eve::any(notdone) )
       {
         notdone = next_interval(br_negint, notdone, tab, r, min_na_nb, tab);

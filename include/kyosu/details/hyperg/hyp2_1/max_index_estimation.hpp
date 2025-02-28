@@ -21,10 +21,10 @@ namespace kyosu::_
     auto re_b = real(b);
     auto re_c = real(c);
 
-    auto dcv0 = 2.0*((re_a*mod_b2 + re_b*mod_a2)*mod_z2 - re_c - mod_c2);
-    auto dcv1 = 2.0*(eve::dec((mod_a2 + mod_b2 + 4.0*re_a*re_b)*mod_z2) - 4*re_c - mod_c2);
-    auto dcv2 = 6.0*(eve::dec((re_a + re_b)*mod_z2 - re_c));
-    auto dcv3 = 4.0*eve::dec(mod_z2);
+    auto dcv0 = 2*((re_a*mod_b2 + re_b*mod_a2)*mod_z2 - re_c - mod_c2);
+    auto dcv1 = 2*(eve::dec((mod_a2 + mod_b2 + 4*re_a*re_b)*mod_z2) - 4*re_c - mod_c2);
+    auto dcv2 = 6*(eve::dec((re_a + re_b)*mod_z2 - re_c));
+    auto dcv3 = 4*eve::dec(mod_z2);
     return kumi::tuple{dcv0,dcv1,dcv2,dcv3};
   }
 
