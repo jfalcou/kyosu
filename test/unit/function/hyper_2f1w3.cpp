@@ -22,9 +22,7 @@ TTS_CASE_TPL ( "Check hyper 2F1"
   r_t cinf = kyosu::cinf(eve::as<r_t>());
   if constexpr(sizeof(T) == 8)
   {
-  std::cout << cinf << std::endl;
-  std::cout << I    << std::endl;
-   {
+    {
       eve::wide z{0.5, 0.5, 0.5, 0.5};
       eve::wide a{-2.0, 1.0, 2.0, 1.5};
       eve::wide b{1.0, -2.0, 1.0, 2.0};
