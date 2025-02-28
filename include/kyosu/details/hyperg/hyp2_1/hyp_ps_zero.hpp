@@ -40,6 +40,7 @@ namespace kyosu::_
       }
       else
       {
+        std::cout << "hyp_ps_zero else" << std::endl;
         auto  dcv_tab = dcv_poly_calc(a,b,c,z);
         const int min_n = min_n_calc (dcv_tab);
         bool possible_false_cv = true;
@@ -80,16 +81,18 @@ namespace kyosu::_
       };
 
       auto br_else =  [&](){
+        std::cout << "hyp_ps_zero else" << std::endl;
         auto term = kyosu::one(as<r_t>());
         auto sum = term;
         auto  dcv_tab = dcv_poly_calc(a,b,c,z);
         auto min_n = min_n_calc(dcv_tab);
-        auto possible_false_cv = kyosu::false_(kyosu::as<r_t>());
+        auto possible_false_cv = kyosu::true_(kyosu::as<r_t>())&& !notdone;
         for(int n = 0;  n < maxit; ++n)
         {
           term *= z*(a+n)*(b+n)/(eve::inc(n)*(c+n));
           sum += term;
-          if (eve::all(!possible_false_cv &&  (kyosu::linfnorm (term) <=  eve::eps(as<u_t>())))) return sum;
+          auto terminated = (!possible_false_cv &&  (kyosu::linfnorm (term) <=  eve::eps(as<u_t>()))) || !notdone;
+          if (eve::all(terminated)) return sum;
           possible_false_cv = kyosu::if_else(possible_false_cv && (n >= min_n)
                                             , eve::is_gtz(dcv_calc(dcv_tab,u_t(n)))
                                             , possible_false_cv);

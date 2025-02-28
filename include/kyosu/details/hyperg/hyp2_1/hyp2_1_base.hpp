@@ -27,9 +27,8 @@ namespace kyosu::_
     auto re_a = real(a);
     auto re_b = real(b);
     auto re_c = real(c);
-    auto ab_condition = (re_b <= re_a);
+    auto ab_condition = (re_b >= re_a);
     auto cab_condition = (re_c >= re_a + re_b);
-    //   eve::swap_if(ab_condition, a, b); // now we_always have re_b >=  re_a
 
     std::cout<< std::endl << "new call" << std::endl;
     std::cout << "z " << z << std::endl;
@@ -48,7 +47,8 @@ namespace kyosu::_
 
     if constexpr(eve::scalar_value<r_t>)
     {
-
+      static  int i = 0;
+      std::cout << "scalar calnum : " << i++ << std::endl;
       const int na = eve::nearest(re_a);
       const int nb = eve::nearest(re_b);
       const int nc = eve::nearest(re_c);
@@ -92,13 +92,16 @@ namespace kyosu::_
 
 //       auto  ab_condition = (re_b >= re_a);
 //       auto cab_condition = (re_c >= re_a + re_b);
+      std::cout << " (!ab_condition || !cab_condition) " <<  (!ab_condition || !cab_condition) << std::endl;
       if (!cab_condition || !ab_condition)
       {
 
         if (!ab_condition && cab_condition)
         {
-          std::cout << "6.1 "<< std::endl;
-          return hyperg2_1_internal(z, b, a, c, notdone, r);
+          std::cout << "6.1 scalar "<< std::endl;
+          r = hyperg2_1_internal(z, b, a, c, notdone, r);
+          std::cout << "6.1 apres "<< r << std::endl;
+          return r;
         }
         else if (!cab_condition && ab_condition)
         {
@@ -107,7 +110,7 @@ namespace kyosu::_
         }
         else
         {
-          std::cout << "6.2 "<< std::endl;
+          std::cout << "6.3 "<< std::endl;
           return pow(-zm1,c-a-b)*hyperg2_1_internal(z, c-a,c-b,c, notdone, r);
         }
       }
@@ -137,6 +140,10 @@ namespace kyosu::_
         const u_t R = R_tab[i];
         if (abs_z <= R) {
           std::cout << "8 "<< R << std::endl;
+    std::cout << "z " << z << std::endl;
+    std::cout << "a " << a << std::endl;
+    std::cout << "b " << b << std::endl;
+    std::cout << "c " << c << std::endl;
           return hyp_ps_zero (a,b,c,z);
         }
         if (is_cmb_small && (abs_z_over_zm1 <= R))
@@ -151,7 +158,9 @@ namespace kyosu::_
         if (abs_z_inv <= R)
         {
            std::cout << "10 "<< R << std::endl;
-          return hyp_ps_infinity (a,b,c,z,kyosu::true_(eve::as<r_t>()));
+           r = hyp_ps_infinity (a,b,c,z,notdone);
+           std::cout << "10 apres "<< r << std::endl;
+           return r;
         }
         if (is_cmb_small && (abs_zm1_over_z <= R))
         {
@@ -172,6 +181,8 @@ namespace kyosu::_
     }
     else //simd
     {
+      static  int i = 0;
+      std::cout << "simd calnum : " << i++ << std::endl;
 
       auto na = eve::nearest(re_a);
       auto nb = eve::nearest(re_b);
@@ -216,7 +227,7 @@ namespace kyosu::_
         auto pb  = kyosu::if_else(test, b, c-b);
         auto fac = kyosu::if_else(test, one, kyosu::pow (-zm1,-a));
         auto zz  = kyosu::if_else(test, z, z_over_zm1);
-        return if_else(notdone && test, hyp_ps_zero(a, pb, c, zz, notdone)*fac, r);
+        return if_else(notdone && test, hyp_ps_zero(a, pb, c, zz, notdone && test)*fac, r);
       };
 
       auto br_b_neg_int =  [&](){ //(is_b_neg_int)
@@ -226,7 +237,7 @@ namespace kyosu::_
         auto pb  = kyosu::if_else(test, b, c-a);
         auto fac = kyosu::if_else(test, one, kyosu::pow (-zm1,-b));
         auto zz  = kyosu::if_else(test, z, z_over_zm1);
-        return if_else(notdone && test,  hyp_ps_zero(pa, pb, c, zz, notdone)*fac, r);
+        return if_else(notdone && test,  hyp_ps_zero(pa, pb, c, zz, notdone && test)*fac, r);
       };
 
       auto br_cab_and_notab = [&](auto test){//if cab_condition && !ab_condition
@@ -250,7 +261,7 @@ namespace kyosu::_
       auto br_small_zm1 = [&](auto test, auto zm1){ // zm1 < thresh
         std::cout << "7 "<< std::endl;
        auto tzm1 = kyosu::if_else(test, zm1,  thresh/2);
-        r = if_else(notdone, hyp_ps_one (a,b,c,-tzm1), r);
+        r = if_else(notdone&& test, hyp_ps_one (a,b,c,-tzm1), r);
         return r;
       };
 
@@ -266,9 +277,14 @@ namespace kyosu::_
         auto are_a_cmb_c_small = are_ac_small && is_cmb_small;
 
         auto br_R1 = [&](auto test, auto RR){ //(abs_z <= RR)
-          std::cout << "8 "<< RR << std::endl;
+          std::cout << "8 "<< RR << " " << r << notdone << std::endl;
+    std::cout << "z " << z << std::endl;
+    std::cout << "a " << a << std::endl;
+    std::cout << "b " << b << std::endl;
+    std::cout << "c " << c << std::endl;
           auto zt = kyosu::if_else(test, z, zero);
-          auto r =  hyp_ps_zero(a,b,c,z,notdone);
+          r =  if_else(test && notdone, hyp_ps_zero(a,b,c,z,test && notdone&&test), r);
+          std::cout << "8 apres "<< r << std::endl;
           return r;
         };
 
@@ -276,42 +292,46 @@ namespace kyosu::_
           std::cout << "9 "<< RR << notdone <<  r << std::endl;
           auto zt = kyosu::if_else(test, z, zero);
           r = if_else( notdone&&test, kyosu::pow(-zm1,-a)*hyp_ps_zero(a,c-b,c,zt/dec(zt),notdone&&test), r);
-          std::cout << "9b "<< r << notdone <<  r << std::endl;
+          std::cout << "10 apres"<< r << notdone <<  r << std::endl;
           return r;
         };
 
         auto br_R3 = [&](auto test, auto RR){ // (abs_z_inv <= R)
           std::cout << "10 "<< RR << std::endl;
           auto zt =  kyosu::if_else(test, z, kyosu::nan(as(z)));
-          auto rr = hyp_ps_infinity(a,b,c,zt,notdone && test);
-          notdone =  notdone && !test;
-          return rr;
+          r = if_else(notdone&&test, hyp_ps_infinity(a,b,c,zt,notdone && test), r);
+          std::cout << "10 apres"<< r << notdone <<  r << std::endl;
+          return r;
         };
 
         // y-passe-t-on jamais ?
         auto br_R4 = [&](auto test, auto RR){ // (is_cmb_small && (abs_zm1_over_z <= R))
           std::cout << "11 "<< RR << std::endl;
           auto z_over_zm1t =  kyosu::if_else(test,  z_over_zm1, u_t(0.5));
-          auto bb =  kyosu::if_else(test, b, b);
-          return pow (-zm1,-a)*hyp_ps_infinity (a,c-bb,c,z_over_zm1t,notdone && test);
+//          auto bb =  kyosu::if_else(test, b, b);
+          r = if_else(notdone&&test, pow (-zm1,-a)*hyp_ps_infinity (a,c-b,c,z_over_zm1t,notdone && test), r);
+          return r;
         };
 
         auto br_R5 = [&](auto test, auto RR){ // (are_abc_small && (abs_zm1 <= R))
           std::cout << "12 "<< RR << std::endl;
           auto zm1t =  kyosu::if_else(test, zm1, u_t(0.4));
-          return hyp_ps_one(a,b,c,-zm1t);
+          r = if_else(notdone && test, hyp_ps_one(a,b,c,-zm1t), r);
+          return r;
         };
 
         auto br_R6 = [&](auto test, auto RR){ // (are_a_cmb_c_small && (abs_zm1_inv <= R))
           std::cout << "13 "<< RR << std::endl;
           auto zm1t =  kyosu::if_else(test, zm1, u_t(3.0));
-          return hyp_ps_one (a,b,c,-kyosu::rec(zm1t));
+          r = if_else(notdone && test, hyp_ps_one(a,b,c,-kyosu::rec(zm1t)), r);
+          return r;
         };
 
        auto br_last = [&](){
 //         notdone = kyosu::false_(eve::as(notdone));
          std::cout << "14 "<< std::endl;
-         return hyp_ps_cp_rest (a,b,c,z, notdone);
+         r = if_else(notdone, hyp_ps_cp_rest (a,b,c,z, notdone), r);
+         return r;
         };
 
         if( eve::any(notdone) )
@@ -402,8 +422,6 @@ namespace kyosu::_
                   if( eve::any(notdone) )
                   {
                     notdone = next_interval(br_rest, notdone, notdone, r);
-                    notdone = eve::false_(as(notdone));
-                    return r;
                   }
                 }
               }
@@ -411,6 +429,7 @@ namespace kyosu::_
           }
         }
       }
+      std::cout << "sortie simd " << r << notdone << std::endl;
       return r;
     }
   }

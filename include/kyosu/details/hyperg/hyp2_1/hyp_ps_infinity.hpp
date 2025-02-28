@@ -6,11 +6,19 @@
 */
 //======================================================================================================================
 #pragma once
+#include <iostream>
 
 namespace kyosu::_
 {
   auto hyp_ps_infinity (auto a, auto b, auto c, auto z, auto notdone) noexcept
   {
+    //std::cout<< std::endl << "hyp_ps_infinity" << std::endl;
+    //std::cout << "z " << z << std::endl;
+    //std::cout << "a " << a << std::endl;
+    //std::cout << "b " << b << std::endl;
+    //std::cout << "c " << c << std::endl;
+    //std::cout << "notdone " << notdone << std::endl<< std::endl;
+
     using r_t = decltype(a+b+c+z);
     using u_t = eve::underlying_type_t<r_t>;
     if constexpr(eve::scalar_value<r_t>)
@@ -51,6 +59,7 @@ namespace kyosu::_
 
       const r_t pow_z_inv_m = kyosu::pow (z_inv,m);
       r_t B_first_term = B_sum_init_ps_infinity (a,c,Gamma_c,Gamma_inv_cma,Gamma_inv_one_meps,Gamma_inv_eps_pa_pm,z,m,eps,kyosu::true_(eve::as<r_t>()));
+      //std::cout <<  "B_first_term " <<  B_first_term << std::endl;
       B_first_term *= pow_z_inv_m;
 
       r_t prod_B = pow_z_inv_m;
@@ -88,11 +97,15 @@ namespace kyosu::_
         const r_t prod1 = eps_pa_pm_pn*eps_pa_mc_p1_pm_pn;
         const r_t prod2 = eps_pm_p1_pn*n_p1,prod3 = a_pm_pn*a_mc_p1_pm_pn;
         B_term = z_inv*(B_term*prod1/prod2 + B_extra_term*(prod3/n_pm_p1 - a_pm_pn - a_mc_p1_pm_pn - eps + prod1/n_p1)/(eps_pm_p1_pn*n_p1_meps));
+        //std::cout << "B_term " << B_term << std::endl;
         B_sum += B_term;
         B_extra_term *= z_inv*prod3/(n_pm_p1*n_p1_meps);
         if (possible_false_cv && (n >= min_n)) possible_false_cv = (dcv_calc (cv_poly1_der_tab, u_t(n)) > 0) || (dcv_calc (cv_poly2_der_tab, u_t(n)) > 0);
         n++;
       }
+      //std::cout << "kyosu::is_eqz(eps))" << kyosu::is_eqz(eps) << std::endl;
+      //std::cout << "A_sum " << A_sum << std::endl;
+      //std::cout << "B_sum " << B_sum << std::endl;
       return (kyosu::is_eqz(eps)) ? (phase*pow_mz_ma*(A_sum + B_sum)) : ((A_sum + B_sum)*phase*pow_mz_ma*Pi_eps/kyosu::sinpi(eps));
     }
     else
