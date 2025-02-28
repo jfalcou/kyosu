@@ -173,7 +173,34 @@ $(document).ready(function(){initNavTree('group__functions_gae9b1ce4a87f3f7e687f
 <li><a href="https://mathworld.wolfram.com/CarlsonEllipticIntegrals.html">Wolfram MathWorld: Elliptic Integral</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="comment">// revision 1</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/module/elliptic.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using </span>wide_t = eve::wide &lt;double, eve::fixed&lt;4&gt;&gt;;</div>
+<div class="line"><span class="keyword">using </span>r_t = double;</div>
+<div class="line">wide_t re1 = { 3.0, 2.0, 1.0, 0.5};</div>
+<div class="line">wide_t im1 = { 2.0, -1.0,  -5.0, 0.0};</div>
+<div class="line">wide_t re2 = { 0.0, 1.0, 2.0, 3.0};</div>
+<div class="line">wide_t im2 = { 1.0 , -4.0,  -2.0, 0.0};</div>
+<div class="line">wide_t re3 = { 0.1, -1.0, 2.0, 4.0};</div>
+<div class="line">wide_t im3 = { 2.0 , -4.0,  -3.0, 0.0};</div>
+<div class="line"><span class="keyword">auto</span> p = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_t&gt;</a>(re1, im1);</div>
+<div class="line"><span class="keyword">auto</span> q = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_t&gt;</a>(re2, im2);</div>
+<div class="line"><span class="keyword">auto</span> r = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_t&gt;</a>(re3, im3);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;&lt;- p = &quot;</span> &lt;&lt; p &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;&lt;- q = &quot;</span> &lt;&lt; q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;&lt;- r = &quot;</span> &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; ellint_rf(p, q, r)                = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae9b1ce4a87f3f7e687f3ee2e04e7385d.html#gae9b1ce4a87f3f7e687f3ee2e04e7385d">kyosu::ellint_rf</a>(p, q, r) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; ellint_rf[ignore_last(2)](p, q, r)= &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae9b1ce4a87f3f7e687f3ee2e04e7385d.html#gae9b1ce4a87f3f7e687f3ee2e04e7385d">kyosu::ellint_rf</a>[eve::ignore_last(2)](p, q, r) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; ellint_rf[q != 4.0](p, q, r)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae9b1ce4a87f3f7e687f3ee2e04e7385d.html#gae9b1ce4a87f3f7e687f3ee2e04e7385d">kyosu::ellint_rf</a>[q != 4.0](p, q, r) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

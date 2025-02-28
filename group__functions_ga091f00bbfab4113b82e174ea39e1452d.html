@@ -189,7 +189,22 @@ $(document).ready(function(){initNavTree('group__functions_ga091f00bbfab4113b82e
 <li><a href="https://en.wikipedia.org/wiki/Jacobi_elliptic_functions">Wikipedia: Jacobi elliptic functions</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordtype">double</span> pio_2 =  eve::pio_2(eve::as&lt;double&gt;());</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;am(2.0, 0.5)            &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga091f00bbfab4113b82e174ea39e1452d.html#ga091f00bbfab4113b82e174ea39e1452d">kyosu::am</a>(2.0, 0.5)                 &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;am(2.0, 0.9)            &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga091f00bbfab4113b82e174ea39e1452d.html#ga091f00bbfab4113b82e174ea39e1452d">kyosu::am</a>(2.0, 0.9)                 &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;am[modular](2.0, pio_2)   &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga091f00bbfab4113b82e174ea39e1452d.html#ga091f00bbfab4113b82e174ea39e1452d">kyosu::am</a>[eve::modular](2.0, pio_2) &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;am[modular](2.0, 0.5)   &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga091f00bbfab4113b82e174ea39e1452d.html#ga091f00bbfab4113b82e174ea39e1452d">kyosu::am</a>[eve::modular](2.0, 0.5) &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;am[eccentric](2.0, 0.5) &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga091f00bbfab4113b82e174ea39e1452d.html#ga091f00bbfab4113b82e174ea39e1452d">kyosu::am</a>[eve::eccentric](2.0, 0.5) &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;am[eccentric](2.0, 0.9) &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga091f00bbfab4113b82e174ea39e1452d.html#ga091f00bbfab4113b82e174ea39e1452d">kyosu::am</a>[eve::eccentric](2.0, 0.9) &lt;&lt; std::endl;</div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
