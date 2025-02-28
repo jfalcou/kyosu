@@ -11,7 +11,6 @@ namespace kyosu::_
 {
   auto hyp_ps_infinity (auto a, auto b, auto c, auto z, auto notdone) noexcept
   {
-
     using r_t = decltype(a+b+c+z);
     using u_t = eve::underlying_type_t<r_t>;
     if constexpr(eve::scalar_value<r_t>)
@@ -191,12 +190,10 @@ namespace kyosu::_
                                           , eve::is_gtz(dcv_calc(cv_poly1_der_tab,u_t(n))) || eve::is_gtz(dcv_calc (cv_poly2_der_tab,u_t(n)))
                                           , possible_false_cv);
       }
-
        return if_else(kyosu::is_eqz(eps)
                     , (phase*pow_mz_ma*(A_sum + B_sum))
                     , (A_sum + B_sum)*phase*pow_mz_ma*pi_eps/sinpi(eps)
                     );
-
     }
   }
 }

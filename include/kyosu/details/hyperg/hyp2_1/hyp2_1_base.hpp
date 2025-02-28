@@ -75,8 +75,6 @@ namespace kyosu::_
         return (azm1lt1) ? (hyp_ps_zero (a,b,c,z)) : (pow (-zm1,-b)*hyp_ps_zero (b,c-a,c,z_over_zm1));
       }
 
-//       auto  ab_condition = (re_b >= re_a);
-//       auto cab_condition = (re_c >= re_a + re_b);
       if (!cab_condition || !ab_condition)
       {
 
@@ -163,9 +161,6 @@ namespace kyosu::_
       auto  abs_z          = kyosu::abs(z);
       auto  abs_z_over_zm1 = kyosu::abs(z_over_zm1);
 
-//       r_t r = r_t(kyosu::fnan(eve::as<u_t>()));
-//       r = kyosu::if_else(kyosu::is_eqz(z), one, r);
-
       auto br_c_neg_int =  [&](){
         auto t1 = is_a_neg_int && (nc < na);
         auto t2 = is_b_neg_int && (nc < nb);
@@ -235,13 +230,13 @@ namespace kyosu::_
         auto are_abc_small     = are_ac_small && (kyosu::linfnorm(b) < five);
         auto are_a_cmb_c_small = are_ac_small && is_cmb_small;
 
-        auto br_R1 = [&](auto test, auto RR){ //(abs_z <= RR)
+        auto br_R1 = [&](auto test, auto RR){ // (abs_z <= RR)
           auto zt = kyosu::if_else(test, z, zero);
           r =  if_else(test && notdone, hyp_ps_zero(a,b,c,z,test && notdone&&test), r);
           return r;
         };
 
-        auto br_R2 = [&](auto test, auto RR){ //(is_cmb_small && (abs_z_over_zm1 <= RR))
+        auto br_R2 = [&](auto test, auto RR){ // (is_cmb_small && (abs_z_over_zm1 <= RR))
           auto zt = kyosu::if_else(test, z, zero);
           r = if_else( notdone&&test, kyosu::pow(-zm1,-a)*hyp_ps_zero(a,c-b,c,zt/dec(zt),notdone&&test), r);
           return r;
@@ -253,10 +248,8 @@ namespace kyosu::_
           return r;
         };
 
-        // y-passe-t-on jamais ?
         auto br_R4 = [&](auto test, auto RR){ // (is_cmb_small && (abs_zm1_over_z <= R))
           auto z_over_zm1t =  kyosu::if_else(test,  z_over_zm1, u_t(0.5));
-//          auto bb =  kyosu::if_else(test, b, b);
           r = if_else(notdone&&test, pow (-zm1,-a)*hyp_ps_infinity (a,c-b,c,z_over_zm1t,notdone && test), r);
           return r;
         };
@@ -274,7 +267,6 @@ namespace kyosu::_
         };
 
        auto br_last = [&](){
-//         notdone = kyosu::false_(eve::as(notdone));
          r = if_else(notdone, hyp_ps_cp_rest (a,b,c,z, notdone), r);
          return r;
         };
@@ -378,13 +370,6 @@ namespace kyosu::_
     }
   }
 
-
-//   template < typename Z>
-//   EVE_FORCEINLINE Z hyperg2_1_internal(Z z, Z aa , Z bb, Z cc) noexcept
-//   {
-//     return hyperg2_1_internal(z, aa ,bb, cc, kyosu::true_(eve::as<Z>()));
-//   }
-
   template<typename Z,
            kumi::sized_product_type<2> T1,
            kumi::sized_product_type<1> T2>
@@ -401,7 +386,6 @@ namespace kyosu::_
     z = if_else(is_real(z) && eve::is_greater(real(z), eve::one(kyosu::as_real(z))),
                 r_t(real(z), eve::mzero(kyosu::as_real(z))), z);
     r_t r = r_t(kyosu::fnan(eve::as<u_t>()));
-//    r = kyosu::if_else(kyosu::is_eqz(z), one, r);
     auto notdone = kyosu::true_(eve::as<r_t>());
     return hyperg2_1_internal(z, a, b, c, notdone, r);
   }

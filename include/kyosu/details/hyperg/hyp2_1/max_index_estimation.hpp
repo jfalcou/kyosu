@@ -6,7 +6,7 @@
 */
 //======================================================================================================================
 #pragma once
-#include <eve/module/math.hpp>>
+#include <eve/module/math.hpp>
 
 namespace kyosu::_
 {
