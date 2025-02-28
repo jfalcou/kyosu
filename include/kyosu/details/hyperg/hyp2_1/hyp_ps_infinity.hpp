@@ -190,12 +190,10 @@ namespace kyosu::_
                                           , eve::is_gtz(dcv_calc(cv_poly1_der_tab,u_t(n))) || eve::is_gtz(dcv_calc (cv_poly2_der_tab,u_t(n)))
                                           , possible_false_cv);
       }
-
        return if_else(kyosu::is_eqz(eps)
                     , (phase*pow_mz_ma*(A_sum + B_sum))
                     , (A_sum + B_sum)*phase*pow_mz_ma*pi_eps/sinpi(eps)
                     );
-
     }
   }
 }

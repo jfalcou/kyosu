@@ -189,6 +189,7 @@
 #include <kyosu/functions/tan.hpp>
 #include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
+#include <kyosu/functions/tchebytchev.hpp>
 #include <kyosu/functions/tgamma.hpp>
 #include <kyosu/functions/tgamma_inv.hpp>
 #include <kyosu/functions/to_cylindrical.hpp>

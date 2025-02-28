@@ -22,7 +22,7 @@ TTS_CASE_TPL ( "Check hyper 2F1"
   r_t cinf = kyosu::cinf(eve::as<r_t>());
   if constexpr(sizeof(T) == 8)
   {
-   {
+    {
       eve::wide z{0.5, 0.5, 0.5, 0.5};
       eve::wide a{-2.0, 1.0, 2.0, 1.5};
       eve::wide b{1.0, -2.0, 1.0, 2.0};
@@ -79,6 +79,22 @@ TTS_CASE_TPL ( "Check hyper 2F1"
                     -7.9608516398905606382595 -13.660975125299382850*I };
       auto r =  kyosu::hypergeometric(z, kumi::tuple{a, b}, kumi::tuple{c});
       TTS_RELATIVE_EQUAL(r, res, pr);
+    }
+
+    {
+      auto hf = 0.5;
+      eve::wide z{ 19.0, 25.0, 21.5, 10000.0, 0.5, -1.5, 0.1, -1.0};
+      eve::wide n{ 4.0, 5.0, 6.0, 7.0, 0.0, 1.0, 2.0, 3.0};
+      eve::wide a(n*hf);
+      eve::wide b{(n+1)*hf};
+      eve::wide c{n*hf+1.5};
+      auto zz = -kyosu::rec(z*z);
+      auto r =  kyosu::hypergeometric(zz, kumi::tuple{a, b}, kumi::tuple{c});
+      for(int i=0; i < eve::cardinal_v<decltype(z)> ; ++i)
+      {
+        auto rr = kyosu::hypergeometric(zz.get(i), kumi::tuple{a.get(i), b.get(i)}, kumi::tuple{c.get(i)});
+        TTS_RELATIVE_EQUAL(r.get(i), rr, pr) << "i" << i << "\n";
+      }
     }
   }
   else
@@ -139,5 +155,22 @@ TTS_CASE_TPL ( "Check hyper 2F1"
       auto r =  kyosu::hypergeometric(z, kumi::tuple{a, b}, kumi::tuple{c});
       TTS_RELATIVE_EQUAL(r, res, pr);
     }
+
+    {
+      auto hf = 0.5f;
+      eve::wide z{ 19.0f, 25.0f, 21.5f, 10000.0f, 0.5f, -1.5f, 0.1f, -1.0f};
+      eve::wide n{ 4.0f, 5.0f, 6.0f, 7.0f, 0.0f, 1.0f, 2.0f, 3.0f};
+      eve::wide a(n*hf);
+      eve::wide b{(n+1)*hf};
+      eve::wide c{n*hf+1.5f};
+      auto zz = -kyosu::rec(z*z);
+      auto r =  kyosu::hypergeometric(zz, kumi::tuple{a, b}, kumi::tuple{c});
+      for(int i=0; i < eve::cardinal_v<decltype(z)> ; ++i)
+      {
+        auto rr = kyosu::hypergeometric(zz.get(i), kumi::tuple{a.get(i), b.get(i)}, kumi::tuple{c.get(i)});
+        TTS_RELATIVE_EQUAL(r.get(i), rr, pr) << "i" << i << "\n";
+      }
+    }
+
   }
 };

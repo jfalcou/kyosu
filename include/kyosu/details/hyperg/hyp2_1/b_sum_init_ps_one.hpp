@@ -45,7 +45,7 @@ namespace kyosu::_
       {
         u_t gamma_inv_mp1(1);
         r_t prod_ab = 1.0;
-        for (int n = 0 ; n < m ; n++){ //replace with rising_factorial and gamma_inv ?
+        for (int n = 0 ; n < m ; n++){
           gamma_inv_mp1 /= inc(n);
           prod_ab *= (a + n)*(b + n);
         }

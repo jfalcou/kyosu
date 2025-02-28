@@ -84,12 +84,13 @@ namespace kyosu::_
         auto sum = term;
         auto  dcv_tab = dcv_poly_calc(a,b,c,z);
         auto min_n = min_n_calc(dcv_tab);
-        auto possible_false_cv = kyosu::false_(kyosu::as<r_t>());
+        auto possible_false_cv = kyosu::true_(kyosu::as<r_t>())&& !notdone;
         for(int n = 0;  n < maxit; ++n)
         {
           term *= z*(a+n)*(b+n)/(eve::inc(n)*(c+n));
           sum += term;
-          if (eve::all(!possible_false_cv &&  (kyosu::linfnorm (term) <=  eve::eps(as<u_t>())))) return sum;
+          auto terminated = (!possible_false_cv &&  (kyosu::linfnorm (term) <=  eve::eps(as<u_t>()))) || !notdone;
+          if (eve::all(terminated)) return sum;
           possible_false_cv = kyosu::if_else(possible_false_cv && (n >= min_n)
                                             , eve::is_gtz(dcv_calc(dcv_tab,u_t(n)))
                                             , possible_false_cv);
@@ -98,7 +99,6 @@ namespace kyosu::_
       };
 
       auto r = kyosu::nan(as<r_t>());
- //      auto notdone = kyosu::is_nan(r);
       if( eve::any(notdone) )
       {
         notdone = next_interval(br_negint, notdone, tab, r, min_na_nb, tab);
