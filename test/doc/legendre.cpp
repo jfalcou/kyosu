@@ -29,5 +29,6 @@ int main()
    std::cout << i << " -> legendre[q_kind](0.0, xd.get(i))              = " << kyosu::legendre[eve::q_kind](0.0, xd.get(i)) << "\n\n";
  }
 
-
+ kyosu::complex_t <decltype(xd)> z(1.0);
+ std::cout << kyosu::complex(z) << std::endl;
 }

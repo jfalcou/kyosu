@@ -21,6 +21,7 @@
 #include <kyosu/constants/wrapped.hpp>
 #include <eve/module/core.hpp>
 
+#include <kyosu/details/hyperg/hyp2_1/is_negint.hpp>
 #include <kyosu/details/hyperg/hyp2_1/gamma_ratio_diff_small_eps.hpp>
 #include <kyosu/details/hyperg/hyp2_1/gamma_inv_diff_eps.hpp>
 #include <kyosu/details/hyperg/hyp2_1/a_sum_init.hpp>

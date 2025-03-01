@@ -23,17 +23,25 @@
 namespace kyosu
 {
   template<typename Options>
-  struct hypergeometric_t : eve::strict_elementwise_callable<hypergeometric_t, Options>
+  struct hypergeometric_t : eve::strict_elementwise_callable<hypergeometric_t, Options, kyosu::regularized_option>
   {
     template<typename Z, kumi::product_type T1,  kumi::product_type T2>
     constexpr KYOSU_FORCEINLINE
     auto operator()(Z z, T1 a, T2 b) const noexcept
     {
-
-      if constexpr(concepts::real<Z>)
-        return _::hyperg(kyosu::complex(z), a, b);
+      if constexpr(!Options::contains(kyosu::regularized))
+      {
+        if constexpr(concepts::real<Z>)
+          return _::hyperg(kyosu::complex(z), a, b);
+        else
+          return _::hyperg(z, a, b);      }
       else
-        return _::hyperg(z, a, b);
+      {
+        if constexpr(concepts::real<Z>)
+          return _::hyperg(kyosu::complex(z), a, b, kyosu::regularized);
+        else
+          return _::hyperg(z, a, b, kyosu::regularized);
+      }
     }
   };
 

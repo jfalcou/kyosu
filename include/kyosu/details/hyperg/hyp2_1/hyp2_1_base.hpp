@@ -390,5 +390,27 @@ namespace kyosu::_
     return hyperg2_1_internal(z, a, b, c, notdone, r);
   }
 
+  template<typename Z,
+           kumi::sized_product_type<2> T1,
+           kumi::sized_product_type<1> T2>
+
+  auto hyperg(Z z0, T1 aa , T2 bb, decltype(kyosu::regularized) )
+    noexcept -> decltype(kumi::get<0>(T1())+kumi::get<0>(T2())+z0)
+  {
+    using r_t = decltype(kumi::get<0>(T1())+kumi::get<0>(T2())+z0);
+    using u_t = eve::underlying_type_t<r_t>;
+    r_t a(kumi::get<0>(aa));
+    r_t b(kumi::get<1>(aa));
+    r_t c(kumi::get<0>(bb));
+    //if c is a negative integer the value is computed by continuity.
+    c = if_else(is_negint(c), eve::next(real(c)), c);
+    r_t z(z0);
+    // next line to ensure the right cut in complex plane
+    z = if_else(is_real(z) && eve::is_greater(real(z), eve::one(kyosu::as_real(z))),
+                r_t(real(z), eve::mzero(kyosu::as_real(z))), z);
+    r_t r = r_t(kyosu::fnan(eve::as<u_t>()));
+    auto notdone = kyosu::true_(eve::as<r_t>());
+    return hyperg2_1_internal(z, a, b, c, notdone, r)*tgamma_inv(c);
+  }
 
 }
