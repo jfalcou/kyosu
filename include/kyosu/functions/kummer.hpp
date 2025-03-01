@@ -126,7 +126,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var kummer
-//!   @brief Computes the Kmmer function (confluent hypergeometric function of the first kind) \f$M\f$ (which is
+//!   @brief Computes the Kummer function (confluent hypergeometric function of the first kind) \f$M\f$ (which is
 //!    an other name for the hypergeometric function \f${}_1F_1\f$) and it regularized version \f$\mathbf{M}\f$.
 //!
 //!   **Defined in Header**
