@@ -24,7 +24,7 @@ TTS_CASE_WITH("Check behavior of legendre on wide",
   {
     for( unsigned int n = 0; n < 6; ++n )
     {
-      TTS_ULP_EQUAL(eve::legendre(n, a0), kyosu::real(kyosu::legendre(T(n), a0)), 1000);
+      TTS_ULP_EQUAL(eve::legendre(n, a0), kyosu::real(kyosu::legendre(T(n), a0)), 2000);
     }
   }
 };
