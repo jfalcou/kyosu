@@ -10,6 +10,7 @@
 #include <test.hpp>
 #include <eve/wide.hpp>
 #include <iostream>
+#include <iomanip>
 
 TTS_CASE_TPL ( "Check kummer"
              , kyosu::scalar_real_types
@@ -22,7 +23,7 @@ TTS_CASE_TPL ( "Check kummer"
   r_t res[] = {r_t(1.0, 0.0),
                r_t(-0.1269693745281, 0),
                r_t(0.07950472902909, 0.0),
-               cinf,
+               kyosu::cinf(eve::as<r_t>()),
                r_t(2.68, 0.0),
                r_t(0.07950472902909934, 0.0),
                r_t(-136.227503222143526977, 41.13766180660205530874),
@@ -56,7 +57,7 @@ TTS_CASE_TPL ( "Check kummer"
     r =  kyosu::kummer[regularized](r_t(2.4), r_t(-20.4), r_t(2.0));
     TTS_RELATIVE_EQUAL(r, res[2]*kyosu::tgamma_inv(2.0), pr);
     r =  kyosu::kummer[regularized](r_t(2.4), r_t(-20.4), r_t(-2.0));
-    TTS_RELATIVE_EQUAL(r, r_t(319.6), pr);
+    TTS_RELATIVE_EQUAL(r, r_t(119.59970305378, 0.0), pr);
     r =  kyosu::kummer[regularized](r_t(2.4), r_t(-2), r_t(-4.0));
     TTS_RELATIVE_EQUAL(r, res[4]*kyosu::tgamma_inv(-2.0), pr);
     r =  kyosu::kummer[regularized](r_t(2.4), r_t(-20.4), r_t(2.0));
