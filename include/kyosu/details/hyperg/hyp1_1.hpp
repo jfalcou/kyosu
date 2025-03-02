@@ -88,4 +88,17 @@ namespace kyosu::_
       return r;
     }
   }
+
+
+  template<typename Z,
+           kumi::sized_product_type<1> T1,
+           kumi::sized_product_type<1> T2>
+  KYOSU_FORCEINLINE  auto
+  hyperg(Z z, T1 aa , T2 cc, decltype(kyosu::regularized))
+  {
+    using r_t = decltype(kumi::get<0>(aa)+kumi::get<0>(cc)+z);
+    r_t c(kumi::get<0>(cc));
+    c = if_else(is_negint(c), eve::next(real(c)), c);
+    return  hyperg(z, aa, kumi::tuple{c})*tgamma_inv(c);
+  }
 }

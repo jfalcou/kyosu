@@ -29,7 +29,7 @@ namespace kyosu
     constexpr KYOSU_FORCEINLINE
     auto operator()(Z z, T1 a, T2 b) const noexcept
     {
-      if constexpr(!Options::contains(kyosu::regularized))
+      if constexpr(!Options::contains(kyosu::regularized) || T2::empty())
       {
         if constexpr(concepts::real<Z>)
           return _::hyperg(kyosu::complex(z), a, b);
@@ -62,7 +62,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto hypergeometric(auto z, auto a, auto b) noexcept;
+//!      //regular call
+//!     constexpr auto hypergeometric(auto z, auto a, auto b)              noexcept; // 1;
+//!
+//!      // Semantic modifyiers
+//!     constexpr auto hypergeometric[regularized](auto z, auto a, auto b) noexcept; // 2
 //!   }
 //!   @endcode
 //!
@@ -74,23 +78,25 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the value at z of the hypergeometric function
-//!     \f${}_pF_q(a_1, \dots, a_p; b_1,\dots, b_p; z) = \sum_{k = 0}^\infty \frac{(a_1)_k\dots (a_p]_k}{(b_1)_k\dots (b_q]_k}\frac{z^k}{k!}\f$.
-//!     * if \f$p < q + 1\f$: the series converges absolutely for \f$z\in \mathbb{C}\f$,
-//!     * if \f$p = q + 1\f$: the series converges absolutely for \f$|z| < 1\f$ and diverges for \f$|z| > 1\f$, but
+//!     1. Returns the value at z of the hypergeometric function
+//!       \f${}_pF_q(a_1, \dots, a_p; b_1,\dots, b_p; z) = \sum_{k = 0}^\infty \frac{(a_1)_k\dots (a_p]_k}{(b_1)_k\dots (b_q]_k}\frac{z^k}{k!}\f$.
+//!       * if \f$p < q + 1\f$: the series converges absolutely for \f$z\in \mathbb{C}\f$,
+//!       * if \f$p = q + 1\f$: the series converges absolutely for \f$|z| < 1\f$ and diverges for \f$|z| > 1\f$, but
 //!          analytic continuation can be used to extend the computation to the whole complex plane
-//!     * if \f$p > q + 1\f$: the series converges only for \f$z = 0\f$ unless the
+//!       * if \f$p > q + 1\f$: the series converges only for \f$z = 0\f$ unless the
 //!          summation stops, an \f$a_i\f$ or \f$b_i\f$ being a non positive flint and the polynomial is so defined everywhere.
+//!     2. With the regularized option the result is divided by the product of the \f$\Gamma(b_i)\f$ extended to the elements of the `b` tuple.
 //!
-//!     Up to now the only implemented functions are for size of a and b tuples running from 0 to 2.
+//!     Up to now the only implemented functions are for size of `a` and `b` tuples running from 0 to 2.
 //!
-//!   @note hypergeometric functons are a kind of jungle. As kyosu and eve only use standard floating types as base of calculation,
-//!         overflows or lack of precision along large computation can degrade the accuracy of some results.
-//!         - These fonctions always return complex outputs even if entries are all real ones.
-//!         - The uses of float-based inputs and computations are ok, but discouraged as overflows or lack of precision are much greater
-//!           than double-based ones.
-//!         - receiving a `fnan` ouput generally means than the computation did not work well.
-//!         - receiving a `cnan` ouput generally means than the function is not defined here and that point is a singularity.
+//!   @note hypergeometric functons are a kind of jungle. As **KYOSU** and **EVE** only use standard floating types as base of computations,
+//!         overflows or lack of precision along large computation or huge values can degrade the accuracy of some results.
+//!         Moreover:
+//!          - These fonctions always return complex outputs even if entries are all real ones.
+//!          - The uses of float-based inputs and computations are ok, but discouraged as overflows or lack of precision are much greater
+//!            than double-based ones.
+//!          - receiving a `fnan` ouput generally means than the computation did not end well.
+//!          - receiving a `cinf` ouput generally means than the function is not defined here and that point is a singularity.
 //!
 //!  @groupheader{External references}
 //!   *  [DLMF: Kummer Functions](https://dlmf.nist.gov/13.2)

@@ -9,6 +9,7 @@
 #include <kyosu/constants/cinf.hpp>
 #include <kyosu/functions/linfnorm.hpp>
 #include <kyosu/functions/is_not_flint.hpp>
+#include <kyosu/details/hyperg/is_negint.hpp>
 
 
 namespace kyosu::_
@@ -60,7 +61,7 @@ namespace kyosu::_
     r_t r =  kyosu::nan(eve::as<r_t>());
     r = if_else(is_eqz(z), one, r);
     auto notdone = kyosu::is_nan(r);
-    auto a_notnegint = is_not_flint(a) || eve::is_nlez(real(a));
+    auto a_notnegint = !is_negint(a);
     notdone = notdone || a_notnegint;
 
     if( eve::any(notdone) )
@@ -74,4 +75,15 @@ namespace kyosu::_
     return r;
   }
 
+  template<typename Z,
+           kumi::sized_product_type<0> T1,
+           kumi::sized_product_type<1> T2>
+  KYOSU_FORCEINLINE  auto
+  hyperg(Z z, T1, T2 cc, decltype(kyosu::regularized) )
+  {
+    using r_t = decltype(kumi::get<0>(T2())+z);
+    r_t c(kumi::get<0>(cc));
+    c = if_else(is_negint(c), eve::next(real(c)), c);
+    return  hyperg(z, c)*tgamma_inv(c);
+  }
 }
