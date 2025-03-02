@@ -30,7 +30,7 @@ namespace kyosu
   [[maybe_unused]] inline constexpr auto regularized     = ::rbr::flag(regularized_mode{});
   [[maybe_unused]] inline constexpr auto type_1          = ::rbr::flag(type_1_mode{});
   [[maybe_unused]] inline constexpr auto type_2          = ::rbr::flag(type_2_mode{});
-  [[maybe_unused]] inline constexpr auto type_3          = ::rbr::flag(type_2_mode{});
+  [[maybe_unused]] inline constexpr auto type_3          = ::rbr::flag(type_3_mode{});
 
 
   struct assume_unitary_option : eve::detail::exact_option<assume_unitary>      {};

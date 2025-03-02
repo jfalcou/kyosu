@@ -25,40 +25,18 @@ TTS_CASE_WITH("Check behavior of legendre on wide",
     for( unsigned int n = 0; n < 6; ++n )
     {
       TTS_ULP_EQUAL(eve::legendre(n, a0), kyosu::real(kyosu::legendre(T(n), a0)), 1000);
-//      TTS_ULP_EQUAL(eve::legendre(T(n), T(1), a0), kyosu::real(kyosu::legendre(T(n), T(1), a0)), 1000);
-
-//       std::cout << eve::legendre(n, a0) << std::endl;
-//       std::cout << kyosu::legendre(T(n), a0) << std::endl;
-      std::cout << kyosu::legendre(T(n), T(0), a0) << std::endl;
-      std::cout << kyosu::legendre(T(n), T(-1), a0) << std::endl;
-      std::cout << kyosu::legendre(T(n), T(-2), a0) << std::endl;
-//       std::cout << eve::legendre[eve::q_kind](n, a0) << std::endl;
-//       std::cout << kyosu::legendre[eve::q_kind](T(n), a0) << std::endl;
-//        std::cout << kyosu::legendre[eve::q_kind](3.0, 4.0) << std::endl;
-//        std::cout <<   eve::legendre[eve::q_kind](3.0, 4.0) << std::endl;
-//        std::cout <<  kyosu::hypergeometric(kyosu::rec(kyosu::sqr(4.0)), kumi::tuple{3.0, 3.5}, kumi::tuple{4.5});
     }
   }
 };
 
-// TTS_CASE_WITH("Check behavior of successor(legendre)",
-//               eve::test::simd::ieee_reals,
-//               tts::generate(tts::between(-1.0, 1.0)))
-// <typename T>(T const& a0)
-// {
-//   auto t3 = eve::legendre(3, a0);
-//   auto t4 = eve::legendre(4, a0);
-//   auto t5 = eve::legendre(5, a0);
-//   TTS_ULP_EQUAL(eve::legendre[eve::successor](a0, t4, t3), t5, 64);
-//   using eve::kind_2;
-//   auto u3 = eve::legendre[kind_2](3, a0);
-//   auto u4 = eve::legendre[kind_2](4, a0);
-//   auto u5 = eve::legendre[kind_2](5, a0);
-//   TTS_ULP_EQUAL(eve::legendre[eve::successor](a0, u4, u3), u5, 300);
-// };
-// #else
-// TTS_CASE("Check return types of legendre")
-// {
-//   TTS_PASS("SKipping due to no reference available");
-// };
-// #endif
+TTS_CASE_WITH("Check behavior of successor(legendre)",
+               kyosu::real_types,
+              tts::generate(tts::between(-1.0, 1.0)))
+<typename T>(T const& a0)
+{
+  auto pr = tts::prec<T>(1.0e-3, 1.0e-7);
+  auto t3 = kyosu::legendre(3.0, a0);
+  auto t4 = kyosu::legendre(4.0, a0);
+  auto t5 = kyosu::legendre(5.0, a0);
+  TTS_RELATIVE_EQUAL(kyosu::legendre[eve::successor](4.0, a0, t4, t3), t5, pr);
+};

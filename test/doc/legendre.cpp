@@ -10,25 +10,20 @@ int main()
 //  kyosu::wide n1{0, -1.0, -2.0, -3.0, -4.0, -5.0, -6.0, -7.0};
   double x(0.5);
 
-  std::cout << "<- xd                                   = " << xd << '\n';
-  std::cout << "<- n                                    = " << n  << '\n';
-  std::cout << "<- x                                    = " << x  << '\n';
+  std::cout << "<- xd                                         = " << xd << '\n';
+  std::cout << "<- n                                          = " << n  << '\n';
+  std::cout << "<- x                                          = " << x  << '\n';
+  auto ln   = kyosu::legendre(n, x);
+  auto lnp1 = kyosu::legendre(n+1, x);
+  auto lnp2 = kyosu::legendre(n+2, x);
+  std::cout << "-> legendre(n, x)                             = " << ln << '\n';
+  std::cout << "-> legendre(n+1, x)                           = " << lnp1 << '\n';
+  std::cout << "-> legendre(n+2, x)                           = " << lnp2 << '\n';
+  std::cout << "-> legendre[eve::successor](n+1, x, lnp1, ln) = " << kyosu::legendre(n+1, x, lnp1, ln) << '\n';
+  std::cout << "-> legendre[eve::ignore_last(2)](n, xd)       = " << kyosu::legendre[eve::ignore_last(2)](n, xd) << '\n';
+  std::cout << "-> legendre[n > 3](n, xd)                     = " << kyosu::legendre[n >  3](n, xd) << '\n';
+  std::cout << "-> legendre(3.0, xd)                          = " << kyosu::legendre(3.0, xd) << '\n';
+  std::cout << "-> legendre(n, 2.0)                           = " << kyosu::legendre(n, 2.0) << '\n';
+  std::cout << "-> legendre(n, x)                             = " << kyosu::legendre(n, x)   << '\n';
 
-  std::cout << "-> legendre(n, xd)                      = " << kyosu::legendre(n, xd) << '\n';
-  std::cout << "-> legendre[eve::ignore_last(2)](n, xd) = " << kyosu::legendre[eve::ignore_last(2)](n, xd) << '\n';
-  std::cout << "-> legendre[n > 3](n, xd)               = " << kyosu::legendre[n >  3](n, xd) << '\n';
-  std::cout << "-> legendre(3.0, xd)                    = " << kyosu::legendre(3.0, xd) << '\n';
-  std::cout << "-> legendre(n, 2.0)                     = " << kyosu::legendre(n, 2.0) << '\n';
-  std::cout << "-> legendre(n, x)                       = " << kyosu::legendre(n, x)   << '\n';
-  std::cout << "-> legendre[q_kind](n, xd)              = " << kyosu::legendre[eve::q_kind](n, xd) << "\n\n";
-  std::cout << "-> legendre[q_kind](0.0, xd)            = " << kyosu::legendre[eve::q_kind](0.0, xd) << "\n\n";
-
-
- for(int i=0; i < 8 ; ++i)
- {
-   std::cout << i << " -> legendre[q_kind](0.0, xd.get(i))              = " << kyosu::legendre[eve::q_kind](0.0, xd.get(i)) << "\n\n";
- }
-
- kyosu::complex_t <decltype(xd)> z(1.0);
- std::cout << kyosu::complex(z) << std::endl;
 }
