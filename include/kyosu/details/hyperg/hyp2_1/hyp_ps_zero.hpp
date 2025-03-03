@@ -118,11 +118,4 @@ namespace kyosu::_
       return r;
     }
   }
-
-
-  auto hyp_ps_zero (auto a, auto b, auto c, auto z) noexcept
-  {
-    using r_t = decltype(a+b+c+z);
-    return hyp_ps_zero(a, b, c, z, kyosu::true_(eve::as<r_t>()));
-  }
 }
