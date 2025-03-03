@@ -8,6 +8,7 @@
 #pragma once
 
 #include <kyosu/details/hyperg/hyp1_1.hpp>
+#include <kyosu/functions/tgamma_inv.hpp>
 
 namespace kyosu
 {
@@ -31,6 +32,7 @@ namespace kyosu
         constexpr size_t Maxit = 100000;
         auto anegint = kyosu::is_flint(a) && eve::is_lez(real(a));
         auto bnegint = kyosu::is_flint(b) && eve::is_lez(real(b));
+        b = if_else(bnegint, eve::next(real(b)), b);
         auto abnegint = (anegint && !bnegint) || (bnegint && anegint && (real(b) < real(a)));
         auto anegintnotb = anegint && !bnegint;
 
@@ -44,33 +46,11 @@ namespace kyosu
           r_t a1(1), s(kyosu::tgamma_inv(bz));
           for (size_t j=1; j <= n; ++j)
           {
-            a1*=(kyosu::dec(a+j)/(kyosu::dec(bz+j)*j))*zz;
+            a1*=(kyosu::dec(a+j)/(kyosu::dec(bz+j)*j))*z;
             s += a1;
           }
           return s;
         };
-
-        auto br_bnegint =  [&](auto test1){
-          auto z = kyosu::if_else(test1, zz, zero);
-          auto cinf =  kyosu::cinf(as(b));
-          auto num = a;
-          auto den = kyosu::tgamma(b); //if_else(eve::is_lez(real(b)), tgamma(b));
-          auto s1 = num/den;
-          auto spred = kyosu::zero(eve::as(s1));
-          auto smallp = kyosu::false_(as<r_t>());
-
-          for(int j=1; j <Maxit ; ++j)
-          {
-            num = kyosu::dec(a+j)*z;
-            den = j*if_else(eve::is_lez(eve::dec(real(b)+j)), cinf, dec(b+j));
-            spred = s1;
-            s1 = s1+num/den;
-            auto small = (j > real(-b)) && (kyosu::linfnorm[kyosu::flat](spred-s1) < kyosu::linfnorm[kyosu::flat](spred)*tol);
-            if (eve::all(small && smallp)) return s1;
-          }
-          return if_else(smallp, s1, allbits);
-        };
-
 
         auto br_regular =  [&](auto test){
           auto z = kyosu::if_else(test,  zz, zero);
@@ -105,11 +85,7 @@ namespace kyosu
             notdone = next_interval(br_anegintnotb, notdone, anegintnotb, r);
             if( eve::any(notdone) )
             {
-              notdone = next_interval(br_bnegint, notdone, bnegint, r, bnegint);
-              if( eve::any(notdone) )
-              {
-                notdone = last_interval(br_regular, notdone, r, notdone);
-              }
+              notdone = last_interval(br_regular, notdone, r, notdone);
             }
           }
           return r;
@@ -126,7 +102,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var kummer
-//!   @brief Computes the Kmmer function (confluent hypergeometric function of the first kind) \f$M\f$ (which is
+//!   @brief Computes the Kummer function (confluent hypergeometric function of the first kind) \f$M\f$ (which is
 //!    an other name for the hypergeometric function \f${}_1F_1\f$) and it regularized version \f$\mathbf{M}\f$.
 //!
 //!   **Defined in Header**

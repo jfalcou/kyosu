@@ -9,6 +9,7 @@
 #include <kyosu/functions/linfnorm.hpp>
 #include <kyosu/constants/wrapped.hpp>
 #include <kyosu/functions/is_flint.hpp>
+#include <kyosu/details/hyperg/is_negint.hpp>
 
 namespace kyosu::_
 {
@@ -23,7 +24,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE  auto
   hyperg(Z zz, T1 aa , T2 bb)
   {
-    using r_t = decltype(kumi::get<0>(aa)+kumi::get<0>(bb)+zz);
+    using r_t = decltype(kumi::get<0>(aa)+kumi::get<0>(bb)+kumi::get<1>(aa)+kumi::get<1>(bb)+zz);
     r_t a = kumi::get<0>(aa);
     r_t b = kumi::get<1>(aa);
     r_t c = kumi::get<0>(bb);
@@ -98,5 +99,19 @@ namespace kyosu::_
       }
       return r;
     }
+  }
+
+  template<typename Z,
+           kumi::sized_product_type<2> T1,
+           kumi::sized_product_type<2> T2>
+  KYOSU_FORCEINLINE  auto
+  hyperg(Z z, T1 aa , T2 bb, decltype(kyosu::regularized))
+  {
+    using r_t = decltype(kumi::get<0>(aa)+kumi::get<0>(bb)+kumi::get<1>(aa)+kumi::get<1>(bb)+z);
+    r_t c = kumi::get<0>(bb);
+    r_t d = kumi::get<1>(bb);
+    c = if_else(is_negint(c), eve::next(real(c)), c);
+    d = if_else(is_negint(d), eve::next(real(d)), d);
+    return  hyperg(z, aa, kumi::tuple{c, d})*tgamma_inv(d)*tgamma_inv(c);
   }
 }

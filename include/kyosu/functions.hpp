@@ -136,6 +136,7 @@
 #include <kyosu/functions/lambda.hpp>
 #include <kyosu/functions/lbeta.hpp>
 #include <kyosu/functions/ldiv.hpp>
+#include <kyosu/functions/legendre.hpp>
 #include <kyosu/functions/lerp.hpp>
 #include <kyosu/functions/log.hpp>
 #include <kyosu/functions/log10.hpp>
