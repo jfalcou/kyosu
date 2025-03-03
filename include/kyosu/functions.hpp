@@ -104,6 +104,7 @@
 #include <kyosu/functions/from_polar.hpp>
 #include <kyosu/functions/fsm.hpp>
 #include <kyosu/functions/gd.hpp>
+#include <kyosu/functions/gegenbauer.hpp>
 #include <kyosu/functions/hypergeometric.hpp>
 #include <kyosu/functions/hypot.hpp>
 #include <kyosu/functions/horner.hpp>

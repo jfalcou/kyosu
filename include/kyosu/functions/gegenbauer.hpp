@@ -8,7 +8,7 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/hypergeometric.hpp>
-#include <kyosu/functions/hyperg/is_negint.hpp>
+#include <kyosu/details/hyperg/is_negint.hpp>
 #include <kyosu/functions/tgamma.hpp>
 #include <kyosu/functions/tgamma_inv.hpp>
 
@@ -21,22 +21,26 @@ namespace kyosu
     template<concepts::cayley_dickson N, concepts::cayley_dickson L, concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr auto  operator()(N nn, L ll, Z zz) const noexcept -> decltype(nn+ll+zz)
     {
-      using r_t = decltype(nn+zz);
+      using r_t = decltype(nn+ll+zz);
       using u_t = eve::underlying_type_t<r_t>;
+      constexpr auto hf = eve::half(eve::as<u_t>());
       auto n = r_t(nn);
       auto l = r_t(ll);
       auto l2 = 2*l;
       auto z = r_t(zz);
-      n = if_else(is_negint(n+1), eve::next(real(n)), n);
-      l = if_else(is_negint(l1+1), eve::next(real(l)), l);
-      auto hf = eve::half(eve::as<u_t>());
+      n = if_else(_::is_negint(n+1), eve::next(real(n)), n);
+      l = if_else(_::is_negint(l+1), eve::next(real(l)), l);
+      auto a = kumi::tuple{-n, n+l2};
+      auto b = kumi::tuple{l+hf};
       auto fac = kyosu::tgamma(n+2*l)*kyosu::tgamma_inv(l2)*kyosu::tgamma_inv(n+1);
-      auto r = kyosu::inc(n)*hypergeometric(oneminus(z)*hf), kumi::tuple{-n, n+l2}, kumi::tuple{l+hf});
+      auto hyp = hypergeometric(oneminus(z)*hf, a, b);
+      auto r = kyosu::if_else(kyosu::is_nan(fac) || is_nan(hyp), kyosu::cinf(eve::as<r_t>()), hyp*fac);
+      return r;
     }
 
-    template<concepts::real N, concepts::real N, concepts::real Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(N n,, L ll, Z z) const noexcept -> decltype(n+l+complex(z))
-    { return (*this)(n, l, complex(z)); }
+    template<concepts::real N, concepts::real L, concepts::real Z>
+    KYOSU_FORCEINLINE constexpr auto operator()(N n, L l, Z z) const noexcept -> decltype(n+l+complex(z))
+    { return (*this)(complex(n), complex(l), complex(z)); }
 
 
     KYOSU_CALLABLE_OBJECT(gegenbauer_t, gegenbauer_);
@@ -74,7 +78,7 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `n`,  lambda, `z` :  real or cayley_dickson. 
+//!     * `n`,  lambda, `z` :  real or cayley_dickson.
 //!
 //!    **Return value**
 //!
