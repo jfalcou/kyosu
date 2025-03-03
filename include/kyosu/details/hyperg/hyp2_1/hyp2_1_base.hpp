@@ -36,115 +36,115 @@ namespace kyosu::_
     u_t thresh   = u_t(1.0e-5);
     u_t spv      = 10*eve::smallestposval(eve::as<u_t>());
 
-    if constexpr(eve::scalar_value<r_t>)
-    {
-      static  int i = 0;
-      const int na = eve::nearest(re_a);
-      const int nb = eve::nearest(re_b);
-      const int nc = eve::nearest(re_c);
-      auto  is_a_neg_int = (a == na) && (na <= 0);
-      auto  is_b_neg_int = (b == nb) && (nb <= 0);
-      auto  is_c_neg_int = (c == nc) && (nc <= 0);
-      const r_t zm1 = dec(z);
-      auto azm1lt1 = kyosu::abs(zm1) < one(as<u_t>());
-       r_t z_over_zm1 = z/zm1;
-      // if c is a negative integer, unless a or b is so and (the) one is strictly greater than c the result is a cinf
-      if (is_c_neg_int)
-      {
-        if (is_a_neg_int && (nc < na))
-        {
-          return (azm1lt1) ? (hyp_ps_zero (a,b,c,z)) : (pow (-zm1,-a)*hyp_ps_zero (a,c-b,c,z_over_zm1));
-        }
-        else if (is_b_neg_int && (nc < nb))
-        {
-          return (azm1lt1) ? (hyp_ps_zero (a,b,c,z)) : (pow (-zm1,-b)*hyp_ps_zero (b,c-a,c,z_over_zm1));
-        }
-        else
-        {
-          return cinf;
-        }
-      }
+//     if constexpr(eve::scalar_value<r_t>)
+//     {
+//       static  int i = 0;
+//       const int na = eve::nearest(re_a);
+//       const int nb = eve::nearest(re_b);
+//       const int nc = eve::nearest(re_c);
+//       auto  is_a_neg_int = (a == na) && (na <= 0);
+//       auto  is_b_neg_int = (b == nb) && (nb <= 0);
+//       auto  is_c_neg_int = (c == nc) && (nc <= 0);
+//       const r_t zm1 = dec(z);
+//       auto azm1lt1 = kyosu::abs(zm1) < one(as<u_t>());
+//        r_t z_over_zm1 = z/zm1;
+//       // if c is a negative integer, unless a or b is so and (the) one is strictly greater than c the result is a cinf
+//       if (is_c_neg_int)
+//       {
+//         if (is_a_neg_int && (nc < na))
+//         {
+//           return (azm1lt1) ? (hyp_ps_zero (a,b,c,z)) : (pow (-zm1,-a)*hyp_ps_zero (a,c-b,c,z_over_zm1));
+//         }
+//         else if (is_b_neg_int && (nc < nb))
+//         {
+//           return (azm1lt1) ? (hyp_ps_zero (a,b,c,z)) : (pow (-zm1,-b)*hyp_ps_zero (b,c-a,c,z_over_zm1));
+//         }
+//         else
+//         {
+//           return cinf;
+//         }
+//       }
 
-      if (is_a_neg_int)
-      {
-       return (azm1lt1) ? (hyp_ps_zero (a,b,c,z)) : (pow (-zm1,-a)*hyp_ps_zero (a,c-b,c,z_over_zm1));
-      }
-      else if (is_b_neg_int)
-      {
-        const r_t z_over_zm1 = z/zm1;
-        return (azm1lt1) ? (hyp_ps_zero (a,b,c,z)) : (pow (-zm1,-b)*hyp_ps_zero (b,c-a,c,z_over_zm1));
-      }
+//       if (is_a_neg_int)
+//       {
+//        return (azm1lt1) ? (hyp_ps_zero (a,b,c,z)) : (pow (-zm1,-a)*hyp_ps_zero (a,c-b,c,z_over_zm1));
+//       }
+//       else if (is_b_neg_int)
+//       {
+//         const r_t z_over_zm1 = z/zm1;
+//         return (azm1lt1) ? (hyp_ps_zero (a,b,c,z)) : (pow (-zm1,-b)*hyp_ps_zero (b,c-a,c,z_over_zm1));
+//       }
 
-      if (!cab_condition || !ab_condition)
-      {
+//       if (!cab_condition || !ab_condition)
+//       {
 
-        if (!ab_condition && cab_condition)
-        {
-          r = hyperg2_1_internal(z, b, a, c, notdone, r);
-          return r;
-        }
-        else if (!cab_condition && ab_condition)
-        {
-           return kyosu::pow(-zm1,c-a-b)*hyperg2_1_internal(z, c-b, c-a, c, notdone, r);
-        }
-        else
-        {
-          return pow(-zm1,c-a-b)*hyperg2_1_internal(z, c-a,c-b,c, notdone, r);
-        }
-      }
+//         if (!ab_condition && cab_condition)
+//         {
+//           r = hyperg2_1_internal(z, b, a, c, notdone, r);
+//           return r;
+//         }
+//         else if (!cab_condition && ab_condition)
+//         {
+//            return kyosu::pow(-zm1,c-a-b)*hyperg2_1_internal(z, c-b, c-a, c, notdone, r);
+//         }
+//         else
+//         {
+//           return pow(-zm1,c-a-b)*hyperg2_1_internal(z, c-a,c-b,c, notdone, r);
+//         }
+//       }
 
-      u_t abs_zm1 =kyosu::abs(zm1);
-      if (abs_zm1 < thresh)
-      {
-        auto rr = hyp_ps_one (a,b,c,-zm1);
-        return rr;
-      }
+//       u_t abs_zm1 =kyosu::abs(zm1);
+//       if (abs_zm1 < thresh)
+//       {
+//         auto rr = hyp_ps_one (a,b,c,-zm1);
+//         return rr;
+//       }
 
-      u_t abs_z                = kyosu::abs(z);
-      u_t abs_z_inv            = kyosu::rec(abs_z);
-      u_t abs_z_over_zm1       = abs_z/abs_zm1;
-      u_t abs_zm1_inv          = kyosu::rec(abs_zm1);
-      u_t abs_zm1_over_z       = kyosu::rec(abs_z_over_zm1);
-      auto are_ac_small  = (kyosu::linfnorm (a) < five) && (kyosu::linfnorm (c) < five);
-      auto is_cmb_small = (kyosu::linfnorm (c-b) < five);
-      auto are_abc_small = are_ac_small && (kyosu::linfnorm (b) < five);
-      auto are_a_cmb_c_small = are_ac_small && is_cmb_small;
+//       u_t abs_z                = kyosu::abs(z);
+//       u_t abs_z_inv            = kyosu::rec(abs_z);
+//       u_t abs_z_over_zm1       = abs_z/abs_zm1;
+//       u_t abs_zm1_inv          = kyosu::rec(abs_zm1);
+//       u_t abs_zm1_over_z       = kyosu::rec(abs_z_over_zm1);
+//       auto are_ac_small  = (kyosu::linfnorm (a) < five) && (kyosu::linfnorm (c) < five);
+//       auto is_cmb_small = (kyosu::linfnorm (c-b) < five);
+//       auto are_abc_small = are_ac_small && (kyosu::linfnorm (b) < five);
+//       auto are_a_cmb_c_small = are_ac_small && is_cmb_small;
 
-      constexpr u_t R_tab[5] = {u_t(0.5),u_t(0.6),u_t(0.7),u_t(0.8),u_t(0.9)};
+//       constexpr u_t R_tab[5] = {u_t(0.5),u_t(0.6),u_t(0.7),u_t(0.8),u_t(0.9)};
 
-      for (unsigned int i = 0 ; i < 5 ; i++)
-      {
-        const u_t R = R_tab[i];
-        if (abs_z <= R) {
-          return hyp_ps_zero (a,b,c,z);
-        }
-        if (is_cmb_small && (abs_z_over_zm1 <= R))
-        {
-          return kyosu::pow(-zm1,-a)*hyp_ps_zero (a,c-b,c,z/zm1);
-        }
-      }
-      for (unsigned int i = 0 ; i < 5 ; i++)
-      {
-        const u_t R = R_tab[i];
-        if (abs_z_inv <= R)
-        {
-           r = hyp_ps_infinity(a,b,c,z,notdone);
-           return r;
-        }
-        if (is_cmb_small && (abs_zm1_over_z <= R))
-        {
-           return kyosu::pow(-zm1,-a)*hyp_ps_infinity (a,c-b,c,z/zm1,kyosu::true_(eve::as<r_t>()));
-        }
-        if (are_abc_small && (abs_zm1 <= R)){
-          return hyp_ps_one (a,b,c,-zm1);
-        }
-        if (are_a_cmb_c_small && (abs_zm1_inv <= R)){
-          return kyosu::pow(-zm1,-a)*hyp_ps_one (a,c-b,c,-rec(zm1));
-        }
-      }
-      return hyp_ps_cp_rest (a,b,c,z, notdone);
-    }
-    else //simd
+//       for (unsigned int i = 0 ; i < 5 ; i++)
+//       {
+//         const u_t R = R_tab[i];
+//         if (abs_z <= R) {
+//           return hyp_ps_zero (a,b,c,z);
+//         }
+//         if (is_cmb_small && (abs_z_over_zm1 <= R))
+//         {
+//           return kyosu::pow(-zm1,-a)*hyp_ps_zero (a,c-b,c,z/zm1);
+//         }
+//       }
+//       for (unsigned int i = 0 ; i < 5 ; i++)
+//       {
+//         const u_t R = R_tab[i];
+//         if (abs_z_inv <= R)
+//         {
+//            r = hyp_ps_infinity(a,b,c,z,notdone);
+//            return r;
+//         }
+//         if (is_cmb_small && (abs_zm1_over_z <= R))
+//         {
+//            return kyosu::pow(-zm1,-a)*hyp_ps_infinity (a,c-b,c,z/zm1,kyosu::true_(eve::as<r_t>()));
+//         }
+//         if (are_abc_small && (abs_zm1 <= R)){
+//           return hyp_ps_one (a,b,c,-zm1);
+//         }
+//         if (are_a_cmb_c_small && (abs_zm1_inv <= R)){
+//           return kyosu::pow(-zm1,-a)*hyp_ps_one (a,c-b,c,-rec(zm1));
+//         }
+//       }
+//       return hyp_ps_cp_rest (a,b,c,z, notdone);
+//     }
+//     else //simd
     {
       static  int i = 0;
 
