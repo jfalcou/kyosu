@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::kummer</title>
+<title>kyosu: kyosu::legendre</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga83edd56ee60fedf9154fe07bad9cc580.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga2b61f0670b8c56dca241b1a1482a934b.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,8 +121,8 @@ $(document).ready(function(){initNavTree('group__functions_ga83edd56ee60fedf9154
 </div>
 
 <div class="contents">
-<a id="ga83edd56ee60fedf9154fe07bad9cc580" name="ga83edd56ee60fedf9154fe07bad9cc580"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga83edd56ee60fedf9154fe07bad9cc580">&#9670;&#160;</a></span>kummer</h2>
+<a id="ga2b61f0670b8c56dca241b1a1482a934b" name="ga2b61f0670b8c56dca241b1a1482a934b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2b61f0670b8c56dca241b1a1482a934b">&#9670;&#160;</a></span>legendre</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('group__functions_ga83edd56ee60fedf9154
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::kummer = eve::functor&lt;kummer_t&gt;</td>
+          <td class="memname">kyosu::legendre = eve::functor&lt;legendre_t&gt;</td>
         </tr>
       </table>
   </td>
@@ -141,55 +141,57 @@ $(document).ready(function(){initNavTree('group__functions_ga83edd56ee60fedf9154
 </table>
 </div><div class="memdoc">
 
-<p>Computes the Kummer function (confluent hypergeometric function of the first kind) \(M\) (which is an other name for the hypergeometric function \({}_1F_1\)) and it regularized version \(\mathbf{M}\). </p>
-<p><b>Defined in Header</b></p>
+<p>Computes the value of the Legendre and associated Legendre functions of order <code>n</code> ( and 'm<code>) at</code>x`: </p>
+<p>For positive integer <code>n</code> the standard legendre functions are polynomials:</p><ul>
+<li>The Legendre polynomial of order n is given by \(\displaystyle \mbox{L}_{n}(x)
+     = \frac{e^x}{n!}\frac{d^n}{dx^n}(x^ne^{-x})\).</li>
+</ul>
+<p>However the function legendre must and can be called with real or complex parameters.</p>
+<h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
 <div class="line">{</div>
-<div class="line">   <span class="comment">//regular call</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga83edd56ee60fedf9154fe07bad9cc580.html#ga83edd56ee60fedf9154fe07bad9cc580">kummer</a>(<span class="keyword">auto</span> z, <span class="keyword">auto</span> a, <span class="keyword">auto</span> b) <span class="keyword">noexcept</span>;             <span class="comment">//1</span></div>
+<div class="line">   <span class="comment">// Regular overload</span></div>
+<div class="line">   <span class="keyword">auto</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="group__functions_ga2b61f0670b8c56dca241b1a1482a934b.html#ga2b61f0670b8c56dca241b1a1482a934b">legendre</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1real.html">kyosu::concepts::real</a> <span class="keyword">auto</span> n, <a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a> <span class="keyword">auto</span> z) <span class="keyword">noexcept</span>; <span class="comment">// 1</span></div>
+<div class="line">   <span class="keyword">auto</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="group__functions_ga2b61f0670b8c56dca241b1a1482a934b.html#ga2b61f0670b8c56dca241b1a1482a934b">legendre</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1real.html">kyosu::concepts::real</a> <span class="keyword">auto</span> n, <a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1real.html">kyosu::concepts::real</a> <span class="keyword">auto</span> z)           <span class="keyword">noexcept</span>; <span class="comment">// 1</span></div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">// Semantic modifyiers</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga83edd56ee60fedf9154fe07bad9cc580.html#ga83edd56ee60fedf9154fe07bad9cc580">kummer</a>[regularized](<span class="keyword">auto</span> z, <span class="keyword">auto</span> a, <span class="keyword">auto</span> b) <span class="keyword">noexcept</span>;<span class="comment">//2</span></div>
+<div class="line">   <span class="comment">// Lanes masking</span></div>
+<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga2b61f0670b8c56dca241b1a1482a934b.html#ga2b61f0670b8c56dca241b1a1482a934b">legendre</a>[conditional_expr <span class="keyword">auto</span> c](<span class="comment">/* any previous overload */</span>)                 <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
+<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga2b61f0670b8c56dca241b1a1482a934b.html#ga2b61f0670b8c56dca241b1a1482a934b">legendre</a>[logical_value <span class="keyword">auto</span> m](<span class="comment">/* any previous overload */</span>)                    <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
 <div class="line"> </div>
-<div class="line"> </div>
+<div class="line">   <span class="comment">// Semantic options</span></div>
+<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga2b61f0670b8c56dca241b1a1482a934b.html#ga2b61f0670b8c56dca241b1a1482a934b">legendre</a>[successor](integral_value <span class="keyword">auto</span> n,</div>
+<div class="line">                                      <a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a> <span class="keyword">auto</span> z,</div>
+<div class="line">                                      <a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a> <span class="keyword">auto</span> pn,</div>
+<div class="line">                                      <a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a> <span class="keyword">auto</span> pnm1)                  <span class="keyword">noexcept</span>; <span class="comment">// 3</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga83edd56ee60fedf9154fe07bad9cc580_html_ga83edd56ee60fedf9154fe07bad9cc580"><div class="ttname"><a href="group__functions_ga83edd56ee60fedf9154fe07bad9cc580.html#ga83edd56ee60fedf9154fe07bad9cc580">kyosu::kummer</a></div><div class="ttdeci">constexpr auto kummer</div><div class="ttdoc">Computes the Kummer function (confluent hypergeometric function of the first kind)  (which is an othe...</div><div class="ttdef"><b>Definition:</b> kummer.hpp:148</div></div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
+<div class="ttc" id="aconceptkyosu_1_1concepts_1_1cayley__dickson_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a></div><div class="ttdoc">General Cayley-dickson concept.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:19</div></div>
+<div class="ttc" id="aconceptkyosu_1_1concepts_1_1real_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1real.html">kyosu::concepts::real</a></div><div class="ttdoc">General real concept.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:29</div></div>
+<div class="ttc" id="agroup__functions_ga2b61f0670b8c56dca241b1a1482a934b_html_ga2b61f0670b8c56dca241b1a1482a934b"><div class="ttname"><a href="group__functions_ga2b61f0670b8c56dca241b1a1482a934b.html#ga2b61f0670b8c56dca241b1a1482a934b">kyosu::legendre</a></div><div class="ttdeci">constexpr auto legendre</div><div class="ttdoc">Computes the value of the Legendre and associated Legendre functions of order n ( and 'm) atx`:</div><div class="ttdef"><b>Definition:</b> legendre.hpp:116</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>a</code>, <code>b</code>, <code>z</code>: real or complex inputs.</li>
+<li><code>n</code> : integral positive arguments.</li>
+<li><code>z</code> : <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> or real argument</li>
+<li><code>pn</code>, <code>pnm1</code> : <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> arguments</li>
+<li><code>c</code>: Conditional expression masking the operation.</li>
+<li><code>m</code>: Logical value masking the operation.</li>
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>Returns the value at <code>z</code> of the Kummer function with <code>a</code> and <code>b</code> parameters. The call <code><a class="el" href="group__functions_ga83edd56ee60fedf9154fe07bad9cc580.html#ga83edd56ee60fedf9154fe07bad9cc580" title="Computes the Kummer function (confluent hypergeometric function of the first kind)  (which is an othe...">kummer(z, a, b)</a></code> is equivalent to <code>hypergeometric(z, kumi::tuple{a}, kumi::tuple{b})</code></li>
-<li>With the regularized options, returns the value at <code>z</code> of the Regularized Kummer function \(\mathbf{M}\), i.e. \(M\) divided by \(\Gamma(b)\), well defined even if <code>b</code> is a negative integer.</li>
+<li>The value of the Legendre polynomial of order <code>n</code> at <code>z</code> is returned.</li>
+<li>The operation is performed conditionnaly.</li>
+<li>The <code>successor</code> option implements the three term recurrence relation for the (associated) Legendre functions, \(\displaystyle \mbox{P}_{l+1} =
+        \left((2l+1)\mbox{P}_{l}(x)-l\mbox{P}_{l-1}(x)\right)/(l+1)\).</li>
 </ol>
 <h2 class="groupheader">External references </h2>
 <ul>
-<li><a href="https://dlmf.nist.gov/13.2">DLMF: Kummer Functions</a></li>
-<li><a href="https://mathworld.wolfram.com/ConfluentHypergeometricFunctionoftheSecondKind.html">Wolfram MathWorld:Confluent Hypergeometric Function of the Second Kind</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Confluent_hypergeometric_function">Wikipedia: Confluent hypergeometric function</a></li>
+<li><a href="https://dlmf.nist.gov/18.3">DLMF: Classical Orthogonal Polynomials</a></li>
+<li><a href="https://en.cppreference.com/w/cpp/numeric/special_functions/legendre">C++ standard reference: legendre</a></li>
+<li><a href="https://mathworld.wolfram.com/LegendrePolynomial.html">Wolfram MathWorld: Legendre Polynomial</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line"> <span class="keyword">auto</span> I = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(0.0, 1.0);</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kummer(2.0, 1, 1.5)               &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga83edd56ee60fedf9154fe07bad9cc580.html#ga83edd56ee60fedf9154fe07bad9cc580">kyosu::kummer</a>(2.0, 1, 1.5)              &lt;&lt; std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kummer(2.0, 1, I)                 &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga83edd56ee60fedf9154fe07bad9cc580.html#ga83edd56ee60fedf9154fe07bad9cc580">kyosu::kummer</a>(2.0, 1, I)                &lt;&lt; std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kummer[regularized](2.0, 1, 1.5)  &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga83edd56ee60fedf9154fe07bad9cc580.html#ga83edd56ee60fedf9154fe07bad9cc580">kyosu::kummer</a>[kyosu::regularized](2.0, 1, 1.5) &lt;&lt; std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kummer[regularized](2.0, 1, I)    &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga83edd56ee60fedf9154fe07bad9cc580.html#ga83edd56ee60fedf9154fe07bad9cc580">kyosu::kummer</a>[kyosu::regularized](2.0, 1, I)   &lt;&lt; std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kummer[regularized](0.5, -2.0,-1.0)  &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga83edd56ee60fedf9154fe07bad9cc580.html#ga83edd56ee60fedf9154fe07bad9cc580">kyosu::kummer</a>[kyosu::regularized](1.0, 2.0, -3.0)   &lt;&lt; std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kummer[regularized](0.5, -2.0,-1.0)  &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga83edd56ee60fedf9154fe07bad9cc580.html#ga83edd56ee60fedf9154fe07bad9cc580">kyosu::kummer</a>[kyosu::regularized](1.0, 2.0, -3.001)   &lt;&lt; std::endl;</div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__functions_gae0cdc9d2dae205852268d4c5cdca6578_html_gae0cdc9d2dae205852268d4c5cdca6578"><div class="ttname"><a href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a></div><div class="ttdeci">constexpr auto complex</div><div class="ttdoc">Constructs a kyosu::complex_t instance.</div><div class="ttdef"><b>Definition:</b> to_complex.hpp:75</div></div>
-</div><!-- fragment --> 
+<div class="fragment"></div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
