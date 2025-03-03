@@ -20,60 +20,60 @@ namespace kyosu::_
     const u_t pi = eve::pi(eve::as<u_t>());
     const auto inf_norm_eps = kyosu::linfnorm(eps);
 
-    if constexpr(eve::scalar_value<r_t>)
-    {
-       const int phase = eve::sign_alternate(m);
-      const r_t a_pm = a + m;
-      const r_t b_pm = b + m;
-      const r_t one_meps = kyosu::oneminus(eps);
-      const r_t pi_eps_pm = pi*(eps + m);
+//     if constexpr(eve::scalar_value<r_t>)
+//     {
+//        const int phase = eve::sign_alternate(m);
+//       const r_t a_pm = a + m;
+//       const r_t b_pm = b + m;
+//       const r_t one_meps = kyosu::oneminus(eps);
+//       const r_t pi_eps_pm = pi*(eps + m);
 
-      r_t gamma_inv_one_meps_mm = gamma_inv_one_meps;
-      for (int i = 1 ; i <= m ; ++i) gamma_inv_one_meps_mm *= one_meps - i;
+//       r_t gamma_inv_one_meps_mm = gamma_inv_one_meps;
+//       for (int i = 1 ; i <= m ; ++i) gamma_inv_one_meps_mm *= one_meps - i;
 
-      if (inf_norm_eps > u_t(0.1))
-      {
+//       if (inf_norm_eps > u_t(0.1))
+//       {
 
-        const r_t gamma_inv_eps_pm_p1 = phase*kyosu::sinpi(eps)/(pi_eps_pm*gamma_inv_one_meps_mm);
-        r_t prod1 = gamma_inv_one_meps*gamma_inv_eps_pa_pm*gamma_inv_eps_pb_pm;
-        for (int n = 0 ; n < m ; n++) prod1 *= (a + n)*(b + n)/inc(n);
-        const r_t prod2 = kyosu::tgamma_inv (a)*kyosu::tgamma_inv (b)*gamma_inv_eps_pm_p1*kyosu::pow (one_minus_z,eps);
-        r_t res = gamma_c*(prod1 - prod2)/eps;
-        return res;
-      }
-      else
-      {
-        u_t gamma_inv_mp1(1);
-        r_t prod_ab = 1.0;
-        for (int n = 0 ; n < m ; n++){
-          gamma_inv_mp1 /= inc(n);
-          prod_ab *= (a + n)*(b + n);
-        }
+//         const r_t gamma_inv_eps_pm_p1 = phase*kyosu::sinpi(eps)/(pi_eps_pm*gamma_inv_one_meps_mm);
+//         r_t prod1 = gamma_inv_one_meps*gamma_inv_eps_pa_pm*gamma_inv_eps_pb_pm;
+//         for (int n = 0 ; n < m ; n++) prod1 *= (a + n)*(b + n)/inc(n);
+//         const r_t prod2 = kyosu::tgamma_inv (a)*kyosu::tgamma_inv (b)*gamma_inv_eps_pm_p1*kyosu::pow (one_minus_z,eps);
+//         r_t res = gamma_c*(prod1 - prod2)/eps;
+//         return res;
+//       }
+//       else
+//       {
+//         u_t gamma_inv_mp1(1);
+//         r_t prod_ab = 1.0;
+//         for (int n = 0 ; n < m ; n++){
+//           gamma_inv_mp1 /= inc(n);
+//           prod_ab *= (a + n)*(b + n);
+//         }
 
-        const auto is_eps_non_zero = (one_meps-m != eve::oneminus(m));
-        const r_t gamma_inv_eps_pm_p1 = (is_eps_non_zero) ? (phase*kyosu::sinpi(eps)/(pi_eps_pm*gamma_inv_one_meps_mm)) : (gamma_inv_mp1);
-        const r_t gamma_inv_a_pm = kyosu::tgamma_inv (a_pm),gamma_inv_b_pm = kyosu::tgamma_inv (b_pm);
-        const r_t z_term = (is_eps_non_zero) ? (expm1 (eps*kyosu::log (one_minus_z))/eps) : (kyosu::log (one_minus_z));
+//         const auto is_eps_non_zero = (one_meps-m != eve::oneminus(m));
+//         const r_t gamma_inv_eps_pm_p1 = (is_eps_non_zero) ? (phase*kyosu::sinpi(eps)/(pi_eps_pm*gamma_inv_one_meps_mm)) : (gamma_inv_mp1);
+//         const r_t gamma_inv_a_pm = kyosu::tgamma_inv (a_pm),gamma_inv_b_pm = kyosu::tgamma_inv (b_pm);
+//         const r_t z_term = (is_eps_non_zero) ? (expm1 (eps*kyosu::log (one_minus_z))/eps) : (kyosu::log (one_minus_z));
 
-        const r_t prod1 = gamma_inv_eps_pa_pm*gamma_inv_eps_pb_pm*(gamma_inv_mp1*gamma_inv_diff_eps (r_t(1),-eps, true) + gamma_inv_diff_eps (r_t(m+1),eps, true));
-        const r_t prod2 = gamma_inv_eps_pm_p1*(gamma_inv_eps_pb_pm*gamma_inv_diff_eps (a_pm,eps, true) + gamma_inv_a_pm*gamma_inv_diff_eps (b_pm,eps, true));
-        const r_t prod3 = gamma_inv_a_pm*gamma_inv_b_pm*gamma_inv_eps_pm_p1*z_term;
+//         const r_t prod1 = gamma_inv_eps_pa_pm*gamma_inv_eps_pb_pm*(gamma_inv_mp1*gamma_inv_diff_eps (r_t(1),-eps, true) + gamma_inv_diff_eps (r_t(m+1),eps, true));
+//         const r_t prod2 = gamma_inv_eps_pm_p1*(gamma_inv_eps_pb_pm*gamma_inv_diff_eps (a_pm,eps, true) + gamma_inv_a_pm*gamma_inv_diff_eps (b_pm,eps, true));
+//         const r_t prod3 = gamma_inv_a_pm*gamma_inv_b_pm*gamma_inv_eps_pm_p1*z_term;
 
-        const r_t res = gamma_c*prod_ab*(prod1 - prod2 - prod3);
-        if (kyosu::is_finite (res))
-          return res;
-        else
-        {
-          const r_t gamma_inv_eps_pm_p1 = phase*kyosu::sinpi(eps)/(pi_eps_pm*gamma_inv_one_meps_mm);
-          r_t prod1 = gamma_inv_one_meps*gamma_inv_eps_pa_pm*gamma_inv_eps_pb_pm;
-          for (int n = 0 ; n < m ; n++) prod1 *= (a + n)*(b + n)/eve::inc(n);
-          const r_t prod2 = kyosu::tgamma_inv (a)*kyosu::tgamma_inv (b)*gamma_inv_eps_pm_p1*pow (one_minus_z,eps);
-          const r_t res_default = gamma_c*(prod1 - prod2)/eps;
-          return res_default;
-        }
-      }
-    }
-    else
+//         const r_t res = gamma_c*prod_ab*(prod1 - prod2 - prod3);
+//         if (kyosu::is_finite (res))
+//           return res;
+//         else
+//         {
+//           const r_t gamma_inv_eps_pm_p1 = phase*kyosu::sinpi(eps)/(pi_eps_pm*gamma_inv_one_meps_mm);
+//           r_t prod1 = gamma_inv_one_meps*gamma_inv_eps_pa_pm*gamma_inv_eps_pb_pm;
+//           for (int n = 0 ; n < m ; n++) prod1 *= (a + n)*(b + n)/eve::inc(n);
+//           const r_t prod2 = kyosu::tgamma_inv (a)*kyosu::tgamma_inv (b)*gamma_inv_eps_pm_p1*pow (one_minus_z,eps);
+//           const r_t res_default = gamma_c*(prod1 - prod2)/eps;
+//           return res_default;
+//         }
+//       }
+//     }
+//     else
     {
 
       auto phase = eve::sign_alternate(m);

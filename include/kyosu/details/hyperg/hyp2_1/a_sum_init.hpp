@@ -15,22 +15,22 @@ namespace kyosu::_
   {
     using r_t = decltype(m+eps+gamma_inv_one_meps);
 
-    if constexpr(eve::scalar_value<r_t>)
-    {
-      const r_t one_meps = kyosu::oneminus(eps);
-      if (one_meps-m != oneminus(m))
-      {
-        r_t gamma_inv_one_meps_mm = gamma_inv_one_meps;
-        for (int i = 1 ; i <= m ; ++i) gamma_inv_one_meps_mm *= one_meps - i;
-        return gamma_inv_one_meps_mm/eps;
-      }
-      else
-      {
-        auto rm =  real(m);
-        return r_t(eve::sign_alternate(rm)*eve::factorial(dec(rm)));
-      }
-    }
-    else //simd
+//     if constexpr(eve::scalar_value<r_t>)
+//     {
+//       const r_t one_meps = kyosu::oneminus(eps);
+//       if (one_meps-m != oneminus(m))
+//       {
+//         r_t gamma_inv_one_meps_mm = gamma_inv_one_meps;
+//         for (int i = 1 ; i <= m ; ++i) gamma_inv_one_meps_mm *= one_meps - i;
+//         return gamma_inv_one_meps_mm/eps;
+//       }
+//       else
+//       {
+//         auto rm =  real(m);
+//         return r_t(eve::sign_alternate(rm)*eve::factorial(dec(rm)));
+//       }
+//     }
+//     else //simd
     {
       r_t  one_meps(kyosu::oneminus(eps));
       auto br_diff = [&](){
