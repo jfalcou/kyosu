@@ -8,7 +8,6 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/hypergeometric.hpp>
-#include <kyosu/functions/acos.hpp>
 #include <kyosu/functions/cos.hpp>
 
 namespace kyosu
