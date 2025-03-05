@@ -179,7 +179,7 @@ namespace kyosu::_
   }
 }
 
-#include <kyosu/details/tgamma_impl.hpp>
+//#include <kyosu/details/tgamma_impl.hpp>
 #include <kyosu/functions/hypergeometric.hpp>
 
 namespace kyosu::_

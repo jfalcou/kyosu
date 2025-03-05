@@ -31,7 +31,7 @@ namespace kyosu::_
     r_t eps_pa_pm = eps_pa + m;
     r_t eps_pb_pm = eps_pb + m;
     r_t pi_eps = eve::pi(eve::as<u_t>())*eps;
-    r_t gamma_c(kyosu::_::tgamma_impl(c));
+    r_t gamma_c(kyosu::tgamma(c));
     r_t gamma_inv_eps_pa_pm = kyosu::tgamma_inv (eps_pa_pm);
     r_t gamma_inv_eps_pb_pm = kyosu::tgamma_inv (eps_pb_pm);
     r_t gamma_prod = gamma_c*gamma_inv_eps_pa_pm*gamma_inv_eps_pb_pm;
