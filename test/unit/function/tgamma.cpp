@@ -31,7 +31,7 @@ TTS_CASE_WITH ( "Check kyosu::tgamma over quaternion"
   TTS_RELATIVE_EQUAL(cpl(c), kyosu::pi(eve::as(c)), tts::prec<T>());
   TTS_RELATIVE_EQUAL(cpl(q), kyosu::pi(eve::as(q)), tts::prec<T>());
 
-  TTS_RELATIVE_EQUAL(real(kyosu::tgamma(kyosu::r), T(2.0)), eve::tgamma(r, T(2.0)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::real(kyosu::tgamma(r, T(2.0))), eve::gamma_p(r, T(2.0)), tts::prec<T>());
 
 
 };

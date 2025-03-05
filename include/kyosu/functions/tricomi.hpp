@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kyosu/details/hyperg/hyp1_1.hpp>
-#include <kyosu/details/tgamma_impl.hpp>
+#include <kyosu/functions/tgamma.hpp>
 #include <kyosu/functions/tgamma_inv.hpp>
 
 namespace kyosu
@@ -32,8 +32,8 @@ namespace kyosu
         r_t ombb = oneminus(bb);
         r_t incaambb = inc(aa-bb);
 
-        auto f1 = _::tgamma_impl(dec(bb))*tgamma_inv(aa);
-        auto f2 = _::tgamma_impl(ombb)*tgamma_inv(inc(aa-bb));
+        auto f1 = kyosu::tgamma(dec(bb))*tgamma_inv(aa);
+        auto f2 = kyosu::tgamma(ombb)*tgamma_inv(inc(aa-bb));
         auto p  = pow(z, ombb);
 
         return f1*p*_::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb})+

@@ -21,8 +21,8 @@ namespace kyosu::_
   template<typename Z>
   constexpr auto tgamma_impl(Z a0) noexcept
   {
-    if constexpr(concepts::complex<Z> )
-    {
+ //    if constexpr(concepts::complex<Z> )
+//     {
       // 15 sig. digits for 0<=real(z)<=171
       // coeffs should sum to about g*g/2+23/24
       //
@@ -77,11 +77,11 @@ namespace kyosu::_
       f = if_else (eve::is_nan(real(f)), complex(eve::nan(eve::as(sq2pi)), eve::inf(eve::as(sq2pi))), f);
       f = if_else (is_eqz(a0), complex(eve::inf(eve::as(g))*eve::signnz[eve::pedantic](real(a0))), f);
       return f;
-    }
-    else
-    {
-      return cayley_extend(tgamma, a0);
-    }
+//    }
+//     else
+//     {
+//       return cayley_extend(tgamma, a0);
+//     }
   }
 
 }
