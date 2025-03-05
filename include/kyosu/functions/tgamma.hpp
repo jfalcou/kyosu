@@ -179,8 +179,8 @@ namespace kyosu::_
   }
 }
 
-//#include <kyosu/details/tgamma_impl.hpp>
 #include <kyosu/functions/hypergeometric.hpp>
+//included here to avoid circular reference
 
 namespace kyosu::_
 {
