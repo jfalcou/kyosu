@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::tchebytchev</title>
+<title>kyosu: kyosu::gegenbauer</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_gaa9f722bb0464e73b3697841b8553a200.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga412622d8d82163636c5ddd2a18db2c69.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,8 +121,8 @@ $(document).ready(function(){initNavTree('group__functions_gaa9f722bb0464e73b369
 </div>
 
 <div class="contents">
-<a id="gaa9f722bb0464e73b3697841b8553a200" name="gaa9f722bb0464e73b3697841b8553a200"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa9f722bb0464e73b3697841b8553a200">&#9670;&#160;</a></span>tchebytchev</h2>
+<a id="ga412622d8d82163636c5ddd2a18db2c69" name="ga412622d8d82163636c5ddd2a18db2c69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga412622d8d82163636c5ddd2a18db2c69">&#9670;&#160;</a></span>gegenbauer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('group__functions_gaa9f722bb0464e73b369
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::tchebytchev = eve::functor&lt;tchebytchev_t&gt;</td>
+          <td class="memname">kyosu::gegenbauer = eve::functor&lt;gegenbauer_t&gt;</td>
         </tr>
       </table>
   </td>
@@ -141,52 +141,34 @@ $(document).ready(function(){initNavTree('group__functions_gaa9f722bb0464e73b369
 </table>
 </div><div class="memdoc">
 
-<p>Computes the value of the Tchebytchev polynomial of order <code>n</code> at <code>z</code>: </p>
-<ul>
-<li>The Tchebytchev polynomial of order n is given by \( \displaystyle \mbox{T}_{n}(x)
-     = \cos(n\arccos(x))\)</li>
-</ul>
+<p>Computes the value of the Gegenbauer function of order \(n\) and parameter \(\lambda\), \(C^{(\lambda)}_n(z)\) at <code>z</code>. If \(n\) is an integer the function is a polynomial of degree \(n\). </p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
 <div class="line">{</div>
 <div class="line">   <span class="comment">// Regular overload</span></div>
-<div class="line">   <span class="keyword">auto</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">tchebytchev</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1real.html">kyosu::concepts::real</a> <span class="keyword">auto</span> n, <a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a> <span class="keyword">auto</span> z) <span class="keyword">noexcept</span>; <span class="comment">// 1</span></div>
-<div class="line">   <span class="keyword">auto</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">tchebytchev</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1real.html">kyosu::concepts::real</a> <span class="keyword">auto</span> n, <a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1real.html">kyosu::concepts::real</a> <span class="keyword">auto</span> z)           <span class="keyword">noexcept</span>; <span class="comment">// 1</span></div>
+<div class="line">   <span class="keyword">auto</span> <span class="keyword">constexpr</span> <a class="code hl_variable" href="group__functions_ga412622d8d82163636c5ddd2a18db2c69.html#ga412622d8d82163636c5ddd2a18db2c69">gegenbauer</a>( <span class="keyword">auto</span> n, <span class="keyword">auto</span> lambda, <span class="keyword">auto</span> z) <span class="keyword">noexcept</span>; <span class="comment">// 1</span></div>
 <div class="line"> </div>
 <div class="line">   <span class="comment">// Lanes masking</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">tchebytchev</a>[conditional_expr <span class="keyword">auto</span> c](<span class="comment">/* any previous overload */</span>)                 <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">tchebytchev</a>[logical_value <span class="keyword">auto</span> m](<span class="comment">/* any previous overload */</span>)                    <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
+<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga412622d8d82163636c5ddd2a18db2c69.html#ga412622d8d82163636c5ddd2a18db2c69">gegenbauer</a>[conditional_expr <span class="keyword">auto</span> c](<span class="comment">/* any previous overload */</span>)                 <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
+<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga412622d8d82163636c5ddd2a18db2c69.html#ga412622d8d82163636c5ddd2a18db2c69">gegenbauer</a>[logical_value <span class="keyword">auto</span> m](<span class="comment">/* any previous overload */</span>)                    <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">// Semantic options</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">tchebytchev</a>[kind_1](<span class="comment">/* any previous overload */</span>)                                  <span class="keyword">noexcept</span>; <span class="comment">// 1</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">tchebytchev</a>[kind_2](<a class="code hl_variable" href="group__constants_gafdb3298b4657efe925df35dd5ded4694.html#gafdb3298b4657efe925df35dd5ded4694">i</a><span class="comment">/* any previous overload */</span>)                                 <span class="keyword">noexcept</span>; <span class="comment">// 3</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">tchebytchev</a>[successor]( <a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a> <span class="keyword">auto</span> z,</div>
-<div class="line">                                                        <a class="code hl_class" href="structkyosu_1_1cayley__dickson.html">kyosu::cayley_dickson</a> <span class="keyword">auto</span> tn,</div>
-<div class="line">                                                        <a class="code hl_class" href="structkyosu_1_1cayley__dickson.html">kyosu::cayley_dickson</a> <span class="keyword">auto</span> tnm1)            <span class="keyword">noexcept</span>; <span class="comment">// 4</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aconceptkyosu_1_1concepts_1_1cayley__dickson_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a></div><div class="ttdoc">General Cayley-dickson concept.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:19</div></div>
-<div class="ttc" id="aconceptkyosu_1_1concepts_1_1real_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1real.html">kyosu::concepts::real</a></div><div class="ttdoc">General real concept.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:29</div></div>
-<div class="ttc" id="agroup__constants_gafdb3298b4657efe925df35dd5ded4694_html_gafdb3298b4657efe925df35dd5ded4694"><div class="ttname"><a href="group__constants_gafdb3298b4657efe925df35dd5ded4694.html#gafdb3298b4657efe925df35dd5ded4694">kyosu::i</a></div><div class="ttdeci">constexpr auto i</div><div class="ttdoc">Computes the complex number  in the chosen type.</div><div class="ttdef"><b>Definition:</b> i.hpp:69</div></div>
-<div class="ttc" id="agroup__functions_gaa9f722bb0464e73b3697841b8553a200_html_gaa9f722bb0464e73b3697841b8553a200"><div class="ttname"><a href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">kyosu::tchebytchev</a></div><div class="ttdeci">constexpr auto tchebytchev</div><div class="ttdoc">Computes the value of the Tchebytchev polynomial of order n at z:</div><div class="ttdef"><b>Definition:</b> tchebytchev.hpp:124</div></div>
-<div class="ttc" id="astructkyosu_1_1cayley__dickson_html"><div class="ttname"><a href="structkyosu_1_1cayley__dickson.html">kyosu::cayley_dickson</a></div><div class="ttdoc">Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...</div><div class="ttdef"><b>Definition:</b> cayley_dickson.hpp:32</div></div>
+<div class="ttc" id="agroup__functions_ga412622d8d82163636c5ddd2a18db2c69_html_ga412622d8d82163636c5ddd2a18db2c69"><div class="ttname"><a href="group__functions_ga412622d8d82163636c5ddd2a18db2c69.html#ga412622d8d82163636c5ddd2a18db2c69">kyosu::gegenbauer</a></div><div class="ttdeci">constexpr auto gegenbauer</div><div class="ttdoc">Computes the value of the Gegenbauer function of order  and parameter ,  at z. If  is an integer the ...</div><div class="ttdef"><b>Definition:</b> gegenbauer.hpp:96</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>n</code> : integral positive arguments. (note that negative values return a NaN)</li>
-<li><code>x</code> : real floating argument.</li>
+<li><code>n</code>, lambda, <code>z</code> : real or <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a>.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>1.The value of the polynomial at <code>z</code> is returned.</p><ol type="1">
+<p>1.The value of the function at <code>z</code> is returned.</p><ol type="1">
 <li>The operation is performed conditionnaly.</li>
-<li>evaluates the nth polynomial of tchebytchev of second kind \( \displaystyle U_n(z) =  \frac{\sin(n\arccos z)}{\sin(\arccos z)}\).</li>
-<li>computes the value of \(T_{n+1}(z)\) knowing the values tn = \(T_n(z)\) and tnm1 = \(T_{n-1}(z)\), This call can be used to create a sequence of values evaluated at the same <code>z</code> and for rising <code>n</code>.</li>
 </ol>
 <h2 class="groupheader">External references </h2>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Chebyshev_polynomials">Wikipedia: Chebyshev_polynomials</a></li>
-<li><a href="https://mathworld.wolfram.com/ChebyshevPolynomialoftheFirstKind.html">Wolfram MathWorld: first kind</a></li>
-<li><a href="https://mathworld.wolfram.com/ChebyshevPolynomialoftheSecondKind.html">Wolfram MathWorld: second kind</a></li>
+<li><a href="https://functions.wolfram.com/Polynomials/GegenbauerC3/02/">Wolfram MathWorld: GegenbauerC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Gegenbauer_polynomials">Wikipedia: Gegenbauer polynomials</a></li>
+<li><a href="https://dlmf.nist.gov/15.9">DLMF: Gegenbauer Function</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"></div><!-- fragment --> 
