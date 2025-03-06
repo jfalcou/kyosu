@@ -9,6 +9,7 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/sinpi.hpp>
 #include <kyosu/constants/wrapped.hpp>
+#include <eve/module/special/regular/tgamma.hpp>
 
 namespace kyosu
 {
@@ -24,7 +25,7 @@ namespace kyosu
     {
       return if_else(eve::is_flint(v) && eve::is_lez(v)
                     , eve::zero(as(v))*eve::sign_alternate(v)
-                    , eve::rec[eve::pedantic](tgamma(v)));
+                    , eve::rec[eve::pedantic](eve::tgamma(v)));
     }
 
     KYOSU_CALLABLE_OBJECT(tgamma_inv_t, tgamma_inv_);

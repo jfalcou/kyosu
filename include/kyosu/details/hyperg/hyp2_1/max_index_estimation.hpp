@@ -42,7 +42,7 @@ namespace kyosu::_
     auto test = eve::is_gez(delta);
     auto sqrtdelta = if_else(test, eve::sqrt(delta), zero);
     auto largest_root = if_else(test, -(c2 + sqrtdelta)/three_c3, zero);
-    return eve::max(ceil(largest_root),eve::zero(eve::as(c1)));
+    return eve::max(eve::ceil(largest_root),eve::zero(eve::as(c1)));
   }
 
 }

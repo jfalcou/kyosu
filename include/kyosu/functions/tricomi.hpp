@@ -32,8 +32,8 @@ namespace kyosu
         r_t ombb = oneminus(bb);
         r_t incaambb = inc(aa-bb);
 
-        auto f1 = tgamma(dec(bb))*tgamma_inv(aa);
-        auto f2 = tgamma(ombb)*tgamma_inv(inc(aa-bb));
+        auto f1 = kyosu::tgamma(dec(bb))*tgamma_inv(aa);
+        auto f2 = kyosu::tgamma(ombb)*tgamma_inv(inc(aa-bb));
         auto p  = pow(z, ombb);
 
         return f1*p*_::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb})+

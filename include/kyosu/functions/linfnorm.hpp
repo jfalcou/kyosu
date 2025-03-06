@@ -8,6 +8,7 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/maxabs.hpp>
 #include <kyosu/details/decorators.hpp>
 
 namespace kyosu
