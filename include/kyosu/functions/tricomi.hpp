@@ -10,6 +10,7 @@
 #include <kyosu/details/hyperg/hyp1_1.hpp>
 #include <kyosu/functions/tgamma.hpp>
 #include <kyosu/functions/tgamma_inv.hpp>
+#include <iostream>
 
 namespace kyosu
 {
@@ -25,11 +26,12 @@ namespace kyosu
       else
       {
         using r_t = decltype(z+a+b);
-        using u_t = eve::underlying_type_t<Z>;
-        auto constexpr opsqrteps = 1+eve::sqrteps(as<u_t>());
+        using u_t =  eve::underlying_type_t<r_t>;
+        auto sqreps = eve::sqr(eve::eps(eve::as<u_t>()));
         r_t zz(z);
         r_t aa(a);
         r_t bb(b);
+        bb = if_else(kyosu::is_flint(bb), r_t(real(bb), sqreps), bb);
         r_t ombb = oneminus(bb);
         r_t incaambb = inc(aa-bb);
 
