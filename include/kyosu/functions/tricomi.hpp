@@ -27,17 +27,22 @@ namespace kyosu
       {
         using r_t = decltype(z+a+b);
         using u_t =  eve::underlying_type_t<r_t>;
-        auto sqreps = eve::sqr(eve::eps(eve::as<u_t>()));
+        auto opeps = 1+eve::eps(eve::as<u_t>())*10;
         r_t zz(z);
         r_t aa(a);
         r_t bb(b);
-        bb = if_else(kyosu::is_flint(bb), r_t(real(bb), sqreps), bb);
+        bb = if_else(kyosu::is_flint(bb), r_t(real(bb)*opeps), bb);
         r_t ombb = oneminus(bb);
         r_t incaambb = inc(aa-bb);
 
         auto f1 = kyosu::tgamma(dec(bb))*tgamma_inv(aa);
         auto f2 = kyosu::tgamma(ombb)*tgamma_inv(inc(aa-bb));
         auto p  = pow(z, ombb);
+//         std::cout << "f1 " << f1 << std::endl;
+//         std::cout << "f2 " << f2 << std::endl;
+//         std::cout << "p  " << p  << std::endl;
+//         std::cout << "h1 " << _::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb}) << std::endl;
+//         std::cout << "h2 " << _::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb}) << std::endl;
         return f1*p*_::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb})+
           f2*_::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb});
       }
