@@ -28,7 +28,7 @@ namespace kyosu
         r_t zz(z);
         r_t aa(a);
         r_t bb(b);
-        bb = if_else(is_flint(bb), r_t(eve::prev(real(bb)), imag(bb)), bb);
+//        bb = if_else(is_flint(bb), r_t(eve::prev(real(bb)), imag(bb)), bb);
         r_t ombb = oneminus(bb);
         r_t incaambb = inc(aa-bb);
 
@@ -71,7 +71,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     Returns the value at z of the confluent hypergeometric function of the second kind
-//!     with `a` and `b` parameters
+//!     with `a` and `b` parameters and non integral `b`
 //!
 //!  @groupheader{External references}
 //!   *  [DLMF: Kummer Functions](https://dlmf.nist.gov/13.2)

@@ -20,7 +20,7 @@ TTS_CASE_TPL ( "Check hyper 2F0"
   using r_t = kyosu::cayley_dickson<T, 2>;
   r_t r;
   r_t res[] = {r_t(1.0, 0.0),
-               r_t(0.548563416668060, 0.377068308602826), //eve::nan(eve::as<T>()), 0),
+               kyosu::cinf(eve::as<r_t>()),
                r_t(0.52, 0.0),
                r_t(169, 0.0),
                r_t(121, 0.0),

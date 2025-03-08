@@ -107,10 +107,9 @@ namespace kyosu
 //!   * \f${}_0F_0(z, \{\}, \{\})\f$ is merely \f$e^z\f$.
 //!   * \f${}_1F_0(z, \{a\}, \{\}\f$ is merely \f$ (1-z)^{-a}\f$
 //!   * \f${}_0F_1(z, \{\}, \{b\})\f$, \f${}_0F_2(z, \{\}, \{b_0, b_1\})\f$,  \f${}_1F_1(z, \{a\}, \{b\})\f$, \f${}_1F_2(z, \{a\}, \{b_0, b_1\})\f$
-//!      and \f${}_2F_2(z, \{a_0, a_1\}, \{b_0, b_1\})\f$ are always computed using the standard serie definition.
-//!   * The serie defining \f${}_2F_0(z, \{a_0, a_1\}, \{\})\f$ is generally never convergent (but at zero). the call however
-//!     returns the asymptotic solution of the same differential equation verified by the formal serie,  obtained using
-//!     the Tricomi function.
+//!      and \f${}_2F_2(z, \{a_0, a_1\}, \{b_0, b_1\})\f$ are always computed using the standard serie definition, it implies that their results are only correct
+//!      for small values of `|z|`. 
+//!   * The serie defining \f${}_2F_0(z, \{a_0, a_1\}, \{\})\f$ is generally never convergent (but at zero) except when a component of `a` is a nonpositive integer.
 //!   * Implementation of \f${}_2F_1(z, \{a_0, a_1\}, \{b\})\f$ which is the proper hypergeometric function is mainly inspired by the article :
 //!     Fast computation of the Gauss hypergeometric function with all its parameters complex with application to the
 //!     Poschl-Teller-Ginocchio potential wave functions by N. Michel and M.V. Stoitsov, adapted to perform SIMD calls
