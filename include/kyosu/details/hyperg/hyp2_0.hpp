@@ -54,8 +54,9 @@ namespace kyosu::_
     };
 
     auto br_rest = [&](){
-      auto minvz = -kyosu::rec(z);
-      return tricomi(-rec(z), a1, kyosu::inc(a1-a2))*kyosu::pow(minvz, a1);
+      return kyosu::cinf(kyosu::as<r_t>());
+//       auto minvz = -kyosu::rec(z);
+//       return tricomi(-rec(z), a1, kyosu::inc(a1-a2))*kyosu::pow(minvz, a1);
     };
 
     r_t r =  kyosu::nan(eve::as<r_t>());
