@@ -11,7 +11,7 @@
 #include <eve/wide.hpp>
 #include <iostream>
 
-TTS_CASE_TPL ( "Check hyper 0f2"
+TTS_CASE_TPL ( "Check tricomi "
              , kyosu::scalar_real_types
              )
   <typename T>(tts::type<T>)
@@ -27,11 +27,9 @@ TTS_CASE_TPL ( "Check hyper 0f2"
                  r_t(0.075192911520, 0.0),
                  r_t(0.010338915008, 0.08232684012981332521971),
                  r_t(4.4195931497672e18, -1.1367863689312e19),
-  };
-
+    };
     r_t r(cinf);
     std::cout << std::setprecision(15);
-    // a0 a1 or b0 negatives integers
     r = kyosu::tricomi(2.0, 1, I);
     TTS_RELATIVE_EQUAL(r, res[0], pr);
     r = kyosu::tricomi(2.0, 1.0, 1.5);
@@ -42,5 +40,5 @@ TTS_CASE_TPL ( "Check hyper 0f2"
     TTS_RELATIVE_EQUAL(r, res[3], pr);
     r = kyosu::tricomi(0.4-1.2*I, -20.4, -20.4);
     TTS_RELATIVE_EQUAL(r, res[4], pr);
-   }
+  }
 };
