@@ -153,7 +153,7 @@ $(document).ready(function(){initNavTree('group__functions_ga6882759ffa560bc8645
 <div class="line">   <span class="comment">// Semantic modifyiers</span></div>
 <div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga6882759ffa560bc8645093bcad7fe7f5.html#ga6882759ffa560bc8645093bcad7fe7f5">hypergeometric</a>[regularized](<span class="keyword">auto</span> z, <span class="keyword">auto</span> a, <span class="keyword">auto</span> b) <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga6882759ffa560bc8645093bcad7fe7f5_html_ga6882759ffa560bc8645093bcad7fe7f5"><div class="ttname"><a href="group__functions_ga6882759ffa560bc8645093bcad7fe7f5.html#ga6882759ffa560bc8645093bcad7fe7f5">kyosu::hypergeometric</a></div><div class="ttdeci">constexpr auto hypergeometric</div><div class="ttdoc">Computes the hypergeometric function  for .</div><div class="ttdef"><b>Definition:</b> hypergeometric.hpp:121</div></div>
+<div class="ttc" id="agroup__functions_ga6882759ffa560bc8645093bcad7fe7f5_html_ga6882759ffa560bc8645093bcad7fe7f5"><div class="ttname"><a href="group__functions_ga6882759ffa560bc8645093bcad7fe7f5.html#ga6882759ffa560bc8645093bcad7fe7f5">kyosu::hypergeometric</a></div><div class="ttdeci">constexpr auto hypergeometric</div><div class="ttdoc">Computes the hypergeometric function  for .</div><div class="ttdef"><b>Definition:</b> hypergeometric.hpp:120</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -189,14 +189,15 @@ $(document).ready(function(){initNavTree('group__functions_ga6882759ffa560bc8645
 <ul>
 <li>\({}_0F_0(z, \{\}, \{\})\) is merely \(e^z\).</li>
 <li>\({}_1F_0(z, \{a\}, \{\}\) is merely \( (1-z)^{-a}\)</li>
-<li>\({}_0F_1(z, \{\}, \{b\})\), \({}_0F_2(z, \{\}, \{b_0, b_1\})\), \({}_1F_1(z, \{a\}, \{b\})\), \({}_1F_2(z, \{a\}, \{b_0, b_1\})\) and \({}_2F_2(z, \{a_0, a_1\}, \{b_0, b_1\})\) are always computed using the standard serie definition.</li>
-<li>The serie defining \({}_2F_0(z, \{a_0, a_1\}, \{\})\) is generally never convergent (but at zero). the call however returns the asymptotic solution of the same differential equation verified by the formal serie, obtained using the Tricomi function.</li>
+<li>\({}_0F_1(z, \{\}, \{b\})\), \({}_0F_2(z, \{\}, \{b_0, b_1\})\), \({}_1F_1(z, \{a\}, \{b\})\), \({}_1F_2(z, \{a\}, \{b_0, b_1\})\) and \({}_2F_2(z, \{a_0, a_1\}, \{b_0, b_1\})\) are always computed using the standard serie definition, it implies that their results are only correct for small values of <code>|z|</code>.</li>
+<li>The serie defining \({}_2F_0(z, \{a_0, a_1\}, \{\})\) is generally never convergent (but at zero) except when a component of <code>a</code> is a nonpositive integer.</li>
 <li>Implementation of \({}_2F_1(z, \{a_0, a_1\}, \{b\})\) which is the proper hypergeometric function is mainly inspired by the article : Fast computation of the Gauss hypergeometric function with all its parameters complex with application to the Poschl-Teller-Ginocchio potential wave functions by N. Michel and M.V. Stoitsov, adapted to perform SIMD calls</li>
 </ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iomanip&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
@@ -221,6 +222,7 @@ $(document).ready(function(){initNavTree('group__functions_ga6882759ffa560bc8645
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;hypergeometric[regularized](2.0, kumi::tuple{1.4, 1.0}, kumi::tuple{2.0}) &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga6882759ffa560bc8645093bcad7fe7f5.html#ga6882759ffa560bc8645093bcad7fe7f5">kyosu::hypergeometric</a>[kyosu::regularized](2.0, kumi::tuple{1.4, 1.0}, kumi::tuple{2.0})&lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;hypergeometric[regularized](2.0, kumi::tuple{1.4}, kumi::tuple{2.5,-1.6}) &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga6882759ffa560bc8645093bcad7fe7f5.html#ga6882759ffa560bc8645093bcad7fe7f5">kyosu::hypergeometric</a>[kyosu::regularized](2.0,kumi::tuple{1.4}, kumi::tuple{2.5,-1.6}) &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;hypergeometric[regularized](0.5, kumi::tuple{-5.0, 2.5}, kumi::tuple{-3.0}) &quot;</span>&lt;&lt; <a class="code hl_variable" href="group__functions_ga6882759ffa560bc8645093bcad7fe7f5.html#ga6882759ffa560bc8645093bcad7fe7f5">kyosu::hypergeometric</a>[kyosu::regularized](0.5,kumi::tuple{-5.0, 2.5}, kumi::tuple{-3.0}) &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_gae0cdc9d2dae205852268d4c5cdca6578_html_gae0cdc9d2dae205852268d4c5cdca6578"><div class="ttname"><a href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a></div><div class="ttdeci">constexpr auto complex</div><div class="ttdoc">Constructs a kyosu::complex_t instance.</div><div class="ttdef"><b>Definition:</b> to_complex.hpp:75</div></div>
