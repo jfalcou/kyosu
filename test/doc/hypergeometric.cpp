@@ -1,6 +1,7 @@
 #include <kyosu/kyosu.hpp>
 #include <eve/wide.hpp>
 #include <iostream>
+#include <iomanip>
 
 int main()
 {
@@ -25,5 +26,6 @@ auto I = kyosu::complex(0.0, 1.0);
   std::cout << "hypergeometric[regularized](2.0, kumi::tuple{1.4, 1.0}, kumi::tuple{2.0}) "<< kyosu::hypergeometric[kyosu::regularized](2.0, kumi::tuple{1.4, 1.0}, kumi::tuple{2.0})<< std::endl;
   std::cout << "hypergeometric[regularized](2.0, kumi::tuple{1.4}, kumi::tuple{2.5,-1.6}) "<< kyosu::hypergeometric[kyosu::regularized](2.0,kumi::tuple{1.4}, kumi::tuple{2.5,-1.6}) << std::endl;
   std::cout << "hypergeometric[regularized](0.5, kumi::tuple{-5.0, 2.5}, kumi::tuple{-3.0}) "<< kyosu::hypergeometric[kyosu::regularized](0.5,kumi::tuple{-5.0, 2.5}, kumi::tuple{-3.0}) << std::endl;
+
   return 0;
 }

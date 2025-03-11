@@ -24,8 +24,8 @@ namespace kyosu::_
   hyperg(Z zz, T1 bb , T2 aa)
   {
     using r_t = decltype(kumi::get<0>(aa)+kumi::get<0>(bb)+zz);
-    r_t a = kumi::get<0>(bb);
-    r_t b = kumi::get<0>(aa);
+    r_t a(kumi::get<0>(bb));
+    r_t b(kumi::get<0>(aa));
     using u_t = eve::underlying_type_t<r_t>;
     auto tol = eve::eps(eve::as<u_t>());
     constexpr size_t Maxit = 100000;
