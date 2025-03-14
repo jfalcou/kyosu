@@ -20,8 +20,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct tgamma_t : eve::elementwise_callable<tgamma_t, Options, kyosu::incomplete_option
-                                              , eve::lower_option, eve::upper_option>
+  struct tgamma_t : eve::elementwise_callable<tgamma_t, Options>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr auto operator()(Z const& z) const noexcept
@@ -30,24 +29,6 @@ namespace kyosu
     template<concepts::real V>
     KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
     { return eve::tgamma(v); }
-
-    template<concepts::cayley_dickson Z, typename T>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z z, T x) const noexcept
-    {
-      using r_t = decltype(z+x);
-      return KYOSU_CALL(r_t(z), r_t(x));
-    }
-
-    template<concepts::real V, concepts::real T >
-    KYOSU_FORCEINLINE constexpr V operator()(V v, T x ) const noexcept
-    {
-      if constexpr(Options::contains(eve::lower))
-        return eve::gamma_p(v, x);
-      else if constexpr(Options::contains(eve::upper))
-        return eve::tgamma(v) - eve::gamma_p(v, x);
-      else
-        return eve::gamma_p(v, x);
-    }
 
     KYOSU_CALLABLE_OBJECT(tgamma_t, tgamma_);
 };
@@ -72,12 +53,6 @@ namespace kyosu
 //!   {
 //!      // regular calls
 //!      constexpr T  tgamma(T z) noexcept;                                                      // 1
-//!      constexpr T  tgamma(T z, T x) noexcept;                                                 // 2
-//!
-//!      // Semantic modifyers
-//!      constexpr T  tgamma[lower](T z, T x) noexcept;                                          // 2
-//!      constexpr T  tgamma[upper](T z, T x) noexcept;                                          // 3
-//!    é constexpr T  tgamma[normalized](/*any previous two parameters overloads*/)   noexcept;  // 4
 //!   }
 //!   @endcode
 //!
@@ -88,13 +63,6 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     1. Returns \f$\Gamma(z)\f$.
-//!     2. The value of the lower incomplete \f$\Gamma\f$ function:
-//!        \f$\displaystyle \int_0^{x} t^{z-1}e^{-t}\mbox{d}t\f$ is returned.
-//!     3. The value of the upper incomplete \f$\Gamma\f$ function:
-//!        \f$\displaystyle \int_{x}^{\infty} t^{z-1}e^{-t}\mbox{d}t\f$ is returned.
-//!     4. The value of the normalized incomplete gamma function (i.e devided by \f$Gamma(z)\f$ is returned.
-//!
-//!  @note the extension to the complex plane is done using the confluent hypergeometric function \f${}_1F_1\f$.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Gamma Function](https://mathworld.wolfram.com/GammaFunction.html)
@@ -175,33 +143,6 @@ namespace kyosu::_
     else
     {
       return cayley_extend(tgamma, a0);
-    }
-  }
-}
-
-#include <kyosu/functions/hypergeometric.hpp>
-//included here to avoid circular reference
-
-namespace kyosu::_
-{
-  template<typename Z, eve::callable_options O>
-  constexpr auto tgamma_(KYOSU_DELAY(), O const&, Z a, Z x) noexcept
-  {
-    if constexpr(O::contains(eve::upper))
-    {
-      auto r = kyosu::rec(a)*kyosu::pow(x, a)*kyosu::hypergeometric(-x, kumi::tuple{a}, kumi::tuple{inc(a)});
-      if constexpr(O::contains(kyosu::regularized))
-        return r*tgamma_inv(a);
-      else
-        return r;
-    }
-    else
-    {
-      auto r = kyosu::tgamma(a)-rec(a)*kyosu::pow(x, a)*kyosu::hypergeometric(-x, kumi::tuple{a}, kumi::tuple{inc(a)});
-      if constexpr(O::contains(kyosu::regularized))
-        return kyosu::oneminus(kyosu::rec(a)*kyosu::pow(x, a)*kyosu::hypergeometric(-x, kumi::tuple{a}, kumi::tuple{inc(a)}));
-      else
-        return kyosu::tgamma(a) - kyosu::rec(a)*kyosu::pow(x, a)*kyosu::hypergeometric(-x, kumi::tuple{a}, kumi::tuple{inc(a)});
     }
   }
 }
