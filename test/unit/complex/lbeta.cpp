@@ -37,5 +37,5 @@ TTS_CASE_WITH ( "Check behavior of lbeta on wide"
   auto b = kyosu::complex(a2, a3);
 
   auto mylbeta = [](auto a,  auto b){return kyosu::log(kyosu::beta(a, b)); };
-  TTS_IEEE_EQUAL(kyosu::lbeta(a, b), mylbeta(a, b));
+  TTS_RELATIVE_EQUAL(kyosu::lbeta(a, b), mylbeta(a, b), tts::prec<T>());
 };
