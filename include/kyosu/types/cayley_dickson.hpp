@@ -139,7 +139,16 @@ namespace kyosu
   cayley_dickson(T0,Ts... ) -> cayley_dickson<T0,1+sizeof...(Ts)>;
   //====================================================================================================================
   //! @}
-  //====================================================================================================================
+  //====================================================================================================================  
+}
+
+namespace kyosu::_ 
+{
+  template<typename T, unsigned int N>
+  inline constexpr unsigned int rank<cayley_dickson<T,N>> = N;
+
+  template<typename T, unsigned int N, typename L>
+  inline constexpr unsigned int rank<eve::wide<cayley_dickson<T,N>,L>> = N;
 }
 
 #if !defined(KYOSU_DOXYGEN_INVOKED)
