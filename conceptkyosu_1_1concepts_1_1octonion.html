@@ -133,9 +133,9 @@ $(document).ready(function(){initNavTree('conceptkyosu_1_1concepts_1_1octonion.h
 <div class="textblock"><p>Octonion concept. </p>
 </div><h2 class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1octonion.html">kyosu::concepts::octonion</a> =  <a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">cayley_dickson&lt;T&gt;</a> &amp;&amp; eve::element_type_t&lt;std::remove_cvref_t&lt;T&gt;&gt;::static_dimension == 8</div>
-<div class="ttc" id="aconceptkyosu_1_1concepts_1_1cayley__dickson_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a></div><div class="ttdoc">General Cayley-dickson concept.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:19</div></div>
-<div class="ttc" id="aconceptkyosu_1_1concepts_1_1octonion_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1octonion.html">kyosu::concepts::octonion</a></div><div class="ttdoc">Octonion concept.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:44</div></div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1octonion.html">kyosu::concepts::octonion</a> =  <a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">cayley_dickson&lt;T&gt;</a> &amp;&amp; _::rank&lt;std::remove_cvref_t&lt;T&gt;&gt; == 8</div>
+<div class="ttc" id="aconceptkyosu_1_1concepts_1_1cayley__dickson_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a></div><div class="ttdoc">General Cayley-dickson concept.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:32</div></div>
+<div class="ttc" id="aconceptkyosu_1_1concepts_1_1octonion_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1octonion.html">kyosu::concepts::octonion</a></div><div class="ttdoc">Octonion concept.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:54</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
