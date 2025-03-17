@@ -15,4 +15,3 @@
 #include <kyosu/types/quaternion.hpp>
 #include <kyosu/types/octonion.hpp>
 #include <kyosu/types/literals.hpp>
-#include <kyosu/types/complexify.hpp>
