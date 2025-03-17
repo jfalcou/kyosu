@@ -16,13 +16,12 @@ namespace kyosu
   template<typename Options>
   struct acoth_t : eve::elementwise_callable<acoth_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    {      return kyosu::atanh(kyosu::rec(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify<Z> operator()(Z const& z) const noexcept
+    {
+      if constexpr(concepts::real<Z>) return (*this)(complex(z));
+      else                            return kyosu::atanh(kyosu::rec(z));
+    }
 
     KYOSU_CALLABLE_OBJECT(acoth_t, acoth_);
 };
@@ -44,9 +43,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acoth(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T>        constexpr auto acoth(T z) noexcept;  //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acoth(T z) noexcept;  //3
+//!     constexpr complexify_t<Z> acoth(concepts::cayley_dickson_like auto z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -56,12 +53,11 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real typed input z is treated as if `complex(z)` was entered.
-//!
-//!   2. Returns elementwise the complex principal value
+//!   - A real typed input z is treated as if `complex(z)` was entered.
+//!   - For complex input, returns elementwise the complex principal value
 //!      of the inverse hyperbolic cotangent of the input as the inverse hyperbolic tangent of the inverse of the input.
 //!
-//!   3. Returns \f$I_z \mathrm{acot}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!   - For general cayley_dickson input, returns \f$I_z \mathrm{acot}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{External references}
@@ -77,4 +73,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-

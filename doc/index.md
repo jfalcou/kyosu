@@ -137,6 +137,14 @@ Most **KYOSU** callables are usable with all cayley_dickson types. The exception
     Most **EVE** arithmetic and math functions are provided. In particular, real analytic functions of one variable
     can be quite naturally extended using the polar form described above from a mere complex implementation.
 
+    The extension scheme is the following for a function f(z) defined on complex input z.
+    If c is an arbitrary cayley_dickson entry:
+     1. compute \f$v=f(\Re(c)+ i |\underline{c}|)\f$, where  \f$\Re(c)\f$ is the real part of
+        \f$c\f$ and \f$\underline{c}\f$ its pure part.
+     2. The result is then \f$\Re(v)+I_c\Im(v)\f$ where \f$I_c = \frac{\underline{c}}{|\underline{c}|}\f$ and \f$\Im(v)\f$
+        is the imaginary part of the complex  \f$v\f$
+
+
    |              |               |                 |            |                 |
    |--------------|---------------|-----------------|------------|-----------------|
    | [abs](@ref kyosu::abs )                   | [acos](@ref kyosu::acos )               | [acosh](@ref kyosu::acosh )           | [acospi](@ref kyosu::acospi )  | [acot](@ref kyosu::acot )            |
@@ -163,7 +171,7 @@ Most **KYOSU** callables are usable with all cayley_dickson types. The exception
    | [manhattan](@ref kyosu::manhattan )       | [minus](@ref kyosu::minus )             | [nearest](@ref kyosu::nearest )     | [oneminus](@ref kyosu::oneminus )| [pow](@ref kyosu::pow )              |
    | [pow1p](@ref kyosu::pow1p )               | [pow_abs](@ref kyosu::pow_abs )         | [powm1](@ref kyosu::powm1 )           | [proj](@ref kyosu::proj )      | [pure](@ref kyosu::imag )            |
    | [radinpi](@ref kyosu::radinpi )           | [real](@ref kyosu::real )               | [rec](@ref kyosu::rec )               | [reldist](@ref kyosu::reldist )| [reverse_horner](@ref kyosu::reverse_horner ) |
-   | [rising_factorial](@ref kyosu::rising_factorial ) | [sec](@ref kyosu::sec )| [secpi](@ref kyosu::secpi ) |
+   | [rising_factorial](@ref kyosu::rising_factorial ) | [sec](@ref kyosu::sec )         | [secpi](@ref kyosu::secpi )           |||
    | [sech](@ref kyosu::sech )                 | [sign](@ref kyosu::sign )               | [sin](@ref kyosu::sin )               | [sinc](@ref kyosu::sinc )      | [sincos](@ref kyosu::sincos )        |
    | [sinpi](@ref kyosu::sinpi )               | [sinpicospi](@ref kyosu::sinpicospi )   | [sinh](@ref kyosu::sinh )      | [sinhcosh](@ref kyosu::sinhcosh )     | [slerp](@ref kyosu::slerp )          |
    | [sqr](@ref kyosu::sqr )                   | [sqr_abs](@ref kyosu::sqr_abs )         | [sqrt](@ref kyosu::sqrt )             | [tan](@ref kyosu::tan )        | [tanpi](@ref kyosu::tanpi )          |
