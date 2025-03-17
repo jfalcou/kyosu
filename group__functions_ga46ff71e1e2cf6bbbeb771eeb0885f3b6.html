@@ -147,21 +147,18 @@ $(document).ready(function(){initNavTree('group__functions_ga46ff71e1e2cf6bbbeb7
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6.html#ga46ff71e1e2cf6bbbeb771eeb0885f3b6">acos</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;        <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7859bd9f30d2ef73a22fc8d114faea47.html#ga7859bd9f30d2ef73a22fc8d114faea47">atan</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6.html#ga46ff71e1e2cf6bbbeb771eeb0885f3b6">acos</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
+<div class="line">  <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6.html#ga46ff71e1e2cf6bbbeb771eeb0885f3b6">acos</a>(concepts::cayley_dickson_like autoT z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6_html_ga46ff71e1e2cf6bbbeb771eeb0885f3b6"><div class="ttname"><a href="group__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6.html#ga46ff71e1e2cf6bbbeb771eeb0885f3b6">kyosu::acos</a></div><div class="ttdeci">constexpr auto acos</div><div class="ttdoc">Computes the arc cosine of the argument.</div><div class="ttdef"><b>Definition:</b> acos.hpp:93</div></div>
-<div class="ttc" id="agroup__functions_ga7859bd9f30d2ef73a22fc8d114faea47_html_ga7859bd9f30d2ef73a22fc8d114faea47"><div class="ttname"><a href="group__functions_ga7859bd9f30d2ef73a22fc8d114faea47.html#ga7859bd9f30d2ef73a22fc8d114faea47">kyosu::atan</a></div><div class="ttdeci">constexpr auto atan</div><div class="ttdoc">Computes the arctangent of the argument.</div><div class="ttdef"><b>Definition:</b> atan.hpp:90</div></div>
+<div class="ttc" id="agroup__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6_html_ga46ff71e1e2cf6bbbeb771eeb0885f3b6"><div class="ttname"><a href="group__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6.html#ga46ff71e1e2cf6bbbeb771eeb0885f3b6">kyosu::acos</a></div><div class="ttdeci">constexpr auto acos</div><div class="ttdoc">Computes the arc cosine of the argument.</div><div class="ttdef"><b>Definition:</b> acos.hpp:91</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<ol type="1">
-<li>a real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered.</li>
-<li>Returns elementwise the complex principal value of the arc cosine of the input. Branch cuts exist outside the interval \([-1, +1]\) along the real axis.<ul>
+<ul>
+<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered.</li>
+<li>For complex input, returns elementwise the complex principal value of the arc cosine of the input. Branch cuts exist outside the interval \([-1, +1]\) along the real axis.<ul>
 <li>for every z: <code><a class="el" href="group__functions_ga46ff71e1e2cf6bbbeb771eeb0885f3b6.html#ga46ff71e1e2cf6bbbeb771eeb0885f3b6" title="Computes the arc cosine of the argument.">acos(conj(z))</a> == <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">conj(acos(z))</a></code></li>
 <li>If z is \(\pm0\), the result is \(\pi/2\)</li>
 <li>If z is \(i \textrm{NaN}\), the result is \(\pi/2+ i \textrm{NaN}\)</li>
@@ -177,8 +174,8 @@ $(document).ready(function(){initNavTree('group__functions_ga46ff71e1e2cf6bbbeb7
 <li>If z is \(\textrm{NaN}+i \textrm{NaN}\), the result is \(\textrm{NaN}+i \textrm{NaN}\)</li>
 </ul>
 </li>
-<li>Returns \(I_z \mathrm{acosh}(z)\) where \(I_z = \frac{\underline{z}}{|\underline{z}|}\) and \(\underline{z}\) is the <a class="el" href="group__functions.html#gaff94a2685c6d030458b388a4a4079efe">pure</a> part of \(z\).</li>
-</ol>
+<li>For general <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a>, returns \(I_z \mathrm{acosh}(z)\) where \(I_z = \frac{\underline{z}}{|\underline{z}|}\) and \(\underline{z}\) is the <a class="el" href="group__functions.html#gaff94a2685c6d030458b388a4a4079efe">pure</a> part of \(z\).</li>
+</ul>
 <h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://en.cppreference.com/w/cpp/numeric/complex/acos">C++ standard reference: complex acos</a></li>

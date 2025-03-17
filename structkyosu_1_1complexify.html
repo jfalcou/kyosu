@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::chi</title>
+<title>kyosu: kyosu::complexify&lt; T &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_gadd25d1bb731bca5707029ce3573b9fe3.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structkyosu_1_1complexify.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -120,77 +120,34 @@ $(document).ready(function(){initNavTree('group__functions_gadd25d1bb731bca57070
 </div>
 </div>
 
+<div class="header">
+  <div class="summary">
+<a href="structkyosu_1_1complexify-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">kyosu::complexify&lt; T &gt; Struct Template Reference</div></div>
+</div><!--header-->
 <div class="contents">
-<a id="gadd25d1bb731bca5707029ce3573b9fe3" name="gadd25d1bb731bca5707029ce3573b9fe3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gadd25d1bb731bca5707029ce3573b9fe3">&#9670;&#160;</a></span>chi</h2>
 
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">kyosu::chi = eve::functor&lt;chi_t&gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>compute the cayley dickson type associated to a floating type or any other type.  
+ <a href="structkyosu_1_1complexify.html#details">More...</a></p>
 
-<p>Computes the gudermanian of the argument. </p>
-<h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
-</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
-<div class="line">{</div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gadd25d1bb731bca5707029ce3573b9fe3.html#gadd25d1bb731bca5707029ce3573b9fe3">chi</a>(value <span class="keyword">auto</span> z, <span class="keyword">auto</span> belongs)                              <span class="keyword">noexcept</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__functions_gadd25d1bb731bca5707029ce3573b9fe3_html_gadd25d1bb731bca5707029ce3573b9fe3"><div class="ttname"><a href="group__functions_gadd25d1bb731bca5707029ce3573b9fe3.html#gadd25d1bb731bca5707029ce3573b9fe3">kyosu::chi</a></div><div class="ttdeci">constexpr auto chi</div><div class="ttdoc">Computes the gudermanian of the argument.</div><div class="ttdef"><b>Definition:</b> chi.hpp:70</div></div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
-</div><!-- fragment --><p><b>Parameters</b></p>
-<ul>
-<li><code>z</code>: Value to inspect.</li>
-<li><code>belongs</code>: predicate function</li>
-</ul>
-<p><b>Return value</b></p>
-<p>Returns 1 in the type of z if belongs(x) evaluate to true else 0.</p>
-<h2 class="groupheader">External references </h2>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Indicator_function">wikipedia: indicator function</a></li>
-</ul>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  eve::wide re = {2.0, -4.0, -10.0, 0.0};</div>
-<div class="line">  eve::wide im = {0.0, -1.0, 0.0, 5.0};</div>
-<div class="line">  <span class="keyword">auto</span> c =  <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(re, im);</div>
-<div class="line">  <span class="keyword">auto</span> belongs =  [](<span class="keyword">auto</span> v) {<span class="keywordflow">return</span> <a class="code hl_variable" href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">kyosu::abs</a>(v) &gt; 8.0 || v == 2.0; };</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- c                              = &quot;</span> &lt;&lt; c &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; chi(c, belongs)                = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gadd25d1bb731bca5707029ce3573b9fe3.html#gadd25d1bb731bca5707029ce3573b9fe3">kyosu::chi</a>(c, belongs) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; chi[real(c) &gt; -2](c, belongs)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gadd25d1bb731bca5707029ce3573b9fe3.html#gadd25d1bb731bca5707029ce3573b9fe3">kyosu::chi</a>[<a class="code hl_variable" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">kyosu::real</a>(c) &gt; -2](c, belongs) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaa9d12dd4e1420039046c737ddd3240be_html_gaa9d12dd4e1420039046c737ddd3240be"><div class="ttname"><a href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be">kyosu::real</a></div><div class="ttdeci">constexpr auto real</div><div class="ttdoc">Extracts the real part of a value.</div><div class="ttdef"><b>Definition:</b> parts.hpp:74</div></div>
-<div class="ttc" id="agroup__functions_gae0cdc9d2dae205852268d4c5cdca6578_html_gae0cdc9d2dae205852268d4c5cdca6578"><div class="ttname"><a href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a></div><div class="ttdeci">constexpr auto complex</div><div class="ttdoc">Constructs a kyosu::complex_t instance.</div><div class="ttdef"><b>Definition:</b> to_complex.hpp:75</div></div>
-<div class="ttc" id="agroup__functions_gaee913dc7298d2917743440e9d056d971_html_gaee913dc7298d2917743440e9d056d971"><div class="ttname"><a href="group__functions_gaee913dc7298d2917743440e9d056d971.html#gaee913dc7298d2917743440e9d056d971">kyosu::abs</a></div><div class="ttdeci">constexpr auto abs</div><div class="ttdoc">Computes the absolute value of the parameter.</div><div class="ttdef"><b>Definition:</b> abs.hpp:72</div></div>
-</div><!-- fragment --> 
-</div>
-</div>
-</div><!-- contents -->
+<p><code>#include &lt;kyosu/types/traits.hpp&gt;</code></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+struct kyosu::complexify&lt; T &gt;</div><p>compute the cayley dickson type associated to a floating type or any other type. </p>
+<p>if the type is an eve::floating_value return the complex type associated else let the type as is.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type to wrap </td></tr>
+  </table>
+  </dd>
+</dl>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li>
+    <li class="navelem"><a class="el" href="namespacekyosu.html">kyosu</a></li><li class="navelem"><a class="el" href="structkyosu_1_1complexify.html">complexify</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->
