@@ -18,13 +18,14 @@ namespace kyosu
   template<typename Options>
   struct acos_t : eve::elementwise_callable<acos_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr auto operator()(Z const& z) const noexcept -> complexify_t<Z>
+    {
+      if constexpr(concepts::real<Z>)
+        return (*this)(complex(z));
+      else
+        return  KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(acos_t, acos_);
   };
@@ -46,9 +47,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acos(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T>        constexpr auto atan(T z) noexcept;  //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acos(T z) noexcept;  //3
+//!     constexpr complexify_t<Z> acos(concepts::cayley_dickson_like autoT z) noexcept; 
 //!   }
 //!   @endcode
 //!
@@ -58,9 +57,8 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real typed input z is treated as if `complex(z)` was entered.
-//!
-//!   2. Returns elementwise the complex principal value of the arc cosine of the input.
+//!   - A real typed input z is treated as if `complex(z)` was entered.
+//!   - For complex input, returns elementwise the complex principal value of the arc cosine of the input.
 //!      Branch cuts exist outside the interval \f$[-1, +1]\f$ along the real axis.
 //!
 //!      * for every z: `acos(conj(z)) == conj(acos(z))`
@@ -78,7 +76,7 @@ namespace kyosu
 //!      * If z is \f$\textrm{NaN}+i\infty\f$, the result is \f$\textrm{NaN}-i\infty\f$
 //!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!
-//!   3. Returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!   - For genral cayley_dickson, returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{External references}

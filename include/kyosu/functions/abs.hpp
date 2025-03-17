@@ -14,19 +14,15 @@ namespace kyosu
   template<typename Options>
   struct abs_t : eve::elementwise_callable<abs_t, Options, eve::raw_option>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z v) const noexcept
     {
-      if constexpr(Options::contains(eve::raw))
+      if constexpr(concepts::real <Z>)
+        return eve::abs(v);
+      else if constexpr(Options::contains(eve::raw))
         return eve::hypot(v);
       else
         return eve::hypot[eve::pedantic](v);
-    }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    {
-      return eve::abs(v);
     }
 
     KYOSU_CALLABLE_OBJECT(abs_t, abs_);
@@ -50,12 +46,10 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      //regular calls
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_type_t<T> abs(T z) noexcept;       // 1
-//!      template<kyosu::concepts::real T>           constexpr T                 abs(T z) noexcept;       // 1
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs(T z) noexcept;       // 1
 //!
 //!      // Semantic modifyiers
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_type_t<T> abs[raw](T z) noexcept;  // 2
-//!      template<kyosu::concepts::real T>           constexpr T                 abs[raw](T z) noexcept;  // 2
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[raw](T z) noexcept;  // 2
 //!   }
 //!   @endcode
 //!
