@@ -16,7 +16,6 @@ TTS_CASE_TPL( "Check acos lilits", kyosu::real_types)
   using z_t = kyosu::complex_t<T>;
   auto tcx = [](auto r,  auto i){return kyosu::complex(T(r), T(i)); };
   z_t inf(eve::inf(eve::as<e_t>()), 0);
-//  z_t nan(eve::nan(eve::as<e_t>()), eve::nan(eve::as<e_t>()));
   z_t one = tcx(1, 0);
   z_t zer = tcx(0, 0);
   z_t two = tcx(2, 0);

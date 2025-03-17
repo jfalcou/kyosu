@@ -80,9 +80,8 @@ namespace kyosu
 //!
 //!     1. Returns the value at z of the hypergeometric function
 //!       \f${}_pF_q(a_1, \dots, a_p; b_1,\dots, b_p; z) = \sum_{k = 0}^\infty \frac{(a_1)_k\dots (a_p]_k}{(b_1)_k\dots (b_q]_k}\frac{z^k}{k!}\f$.
-//!       * if \f$p < q + 1\f$: the series converges absolutely for \f$z\in \mathbb{C}\f$,
-//!       * if \f$p = q + 1\f$: the series converges absolutely for \f$|z| < 1\f$ and diverges for \f$|z| > 1\f$, but
-//!          analytic continuation can be used to extend the computation to the whole complex plane
+//!       * if \f$p < q + 1\f$: the series converges absolutely for \f$z\in \mathbb{C}\f$, but can be very hard to compute accurately
+//!       * if \f$p = q + 1\f$: the series converges absolutely for \f$|z| < 1\f$ and diverges for \f$|z| > 1\f$,
 //!       * if \f$p > q + 1\f$: the series converges only for \f$z = 0\f$ unless the
 //!          summation stops, an \f$a_i\f$ or \f$b_i\f$ being a non positive flint and the polynomial is so defined everywhere.
 //!     2. With the regularized option the result is divided by the product of the \f$\Gamma(b_i)\f$ extended to the elements of the `b` tuple.
@@ -90,7 +89,7 @@ namespace kyosu
 //!     Up to now the only implemented functions are for size of `a` and `b` tuples running from 0 to 2.
 //!
 //!   @note hypergeometric functons are a kind of jungle. As **KYOSU** and **EVE** only use standard floating types as base of computations,
-//!         overflows or lack of precision along large computation or huge values can degrade the accuracy of some results.
+//!         overflows or lack of precision along large computation or huge values can degrade the accuracy.
 //!         Moreover:
 //!          - These fonctions always return complex outputs even if entries are all real ones.
 //!          - The uses of float-based inputs and computations are ok, but discouraged as overflows or lack of precision are much greater
@@ -108,7 +107,7 @@ namespace kyosu
 //!   * \f${}_1F_0(z, \{a\}, \{\}\f$ is merely \f$ (1-z)^{-a}\f$
 //!   * \f${}_0F_1(z, \{\}, \{b\})\f$, \f${}_0F_2(z, \{\}, \{b_0, b_1\})\f$,  \f${}_1F_1(z, \{a\}, \{b\})\f$, \f${}_1F_2(z, \{a\}, \{b_0, b_1\})\f$
 //!      and \f${}_2F_2(z, \{a_0, a_1\}, \{b_0, b_1\})\f$ are always computed using the standard serie definition, it implies that their results are only correct
-//!      for small values of `|z|`. 
+//!      for small values of `|z|`.
 //!   * The serie defining \f${}_2F_0(z, \{a_0, a_1\}, \{\})\f$ is generally never convergent (but at zero) except when a component of `a` is a nonpositive integer.
 //!   * Implementation of \f${}_2F_1(z, \{a_0, a_1\}, \{b\})\f$ which is the proper hypergeometric function is mainly inspired by the article :
 //!     Fast computation of the Gauss hypergeometric function with all its parameters complex with application to the

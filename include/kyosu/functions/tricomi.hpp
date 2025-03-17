@@ -25,19 +25,19 @@ namespace kyosu
       else
       {
         using r_t = decltype(z+a+b);
+        using u_t = eve::underlying_type_t<Z>;
+        auto constexpr opsqrteps = 1+eve::sqrteps(as<u_t>());
         r_t zz(z);
         r_t aa(a);
         r_t bb(b);
-//        bb = if_else(is_flint(bb), r_t(eve::prev(real(bb)), imag(bb)), bb);
         r_t ombb = oneminus(bb);
         r_t incaambb = inc(aa-bb);
 
         auto f1 = kyosu::tgamma(dec(bb))*tgamma_inv(aa);
         auto f2 = kyosu::tgamma(ombb)*tgamma_inv(inc(aa-bb));
         auto p  = pow(z, ombb);
-
         return f1*p*_::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb})+
-               f2*_::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb});
+          f2*_::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb});
       }
     }
   };
