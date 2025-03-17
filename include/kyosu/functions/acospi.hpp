@@ -16,13 +16,9 @@ namespace kyosu
   template<typename Options>
   struct acospi_t : eve::elementwise_callable<acospi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     { return radinpi(kyosu::acos(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(acospi_t, acospi_);
 };
@@ -44,8 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acospi(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acospi(T z) noexcept;  //2
+//!     constexpr complexify_t<Z> acospi(concepts::cayley_dickson_like auto z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -55,12 +50,10 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if `complex(z)` was entered.
-//!
-//!   2. Returns radinpi(acos(z))
+//!  - A real input z is treated as if `complex(z)` was entered.
+//!  - Returns radinpi(acos(z))
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/acospi.cpp}
 //======================================================================================================================
   inline constexpr auto acospi = eve::functor<acospi_t>;

@@ -17,10 +17,12 @@ namespace kyosu
   template<typename Options>
   struct acosh_t : eve::elementwise_callable<acosh_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
+      if constexpr(concepts::real<Z>)
+        return (*this)(complex(z));
+      else if constexpr(concepts::complex<Z> )
       {
         // acosh(a0) = +/-i acos(a0)
         // Choosing the sign of multiplier to give real(acosh(a0)) >= 0
@@ -43,10 +45,6 @@ namespace kyosu
       }
     }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
-
     KYOSU_CALLABLE_OBJECT(acosh_t, acosh_);
 };
 
@@ -67,9 +65,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acosh(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T>        constexpr auto acosh(T z) noexcept;  //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acosh(T z) noexcept;  //3
+//!     constexpr complexify_t<Z> acosh(concepts::cayley_dickson_like auto z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -79,9 +75,8 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if `complex(z)` was entered.
-//!
-//!   2. Returns the complex inverse hyperbolic cosine of z, in the range of a
+//!   - A real input z is treated as if `complex(z)` was entered.
+//!   - For complex input, returns the complex inverse hyperbolic cosine of z, in the range of a
 //!      strip unbounded along the imaginary axis and
 //!      in the interval \f$[0,\pi]\f$ along the real axis.
 //!
@@ -98,7 +93,7 @@ namespace kyosu
 //!      * If z is \f$\textrm{NaN}+i \infty\f$, the result is \f$+\infty+i \textrm{NaN}\f$
 //!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!
-//!   3. Returns \f$\log(z+\sqrt{z+1}\sqrt{z-1})\f$.
+//!   - For general cayley_dickson input, returns \f$\log(z+\sqrt{z+1}\sqrt{z-1})\f$.
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: complex acosh](https://en.cppreference.com/w/cpp/numeric/complex/acosh)
