@@ -19,7 +19,7 @@ namespace kyosu
   struct acos_t : eve::elementwise_callable<acos_t, Options>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z const& z) const noexcept -> complexify_t<Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       if constexpr(concepts::real<Z>)
         return (*this)(complex(z));
@@ -76,7 +76,7 @@ namespace kyosu
 //!      * If z is \f$\textrm{NaN}+i\infty\f$, the result is \f$\textrm{NaN}-i\infty\f$
 //!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!
-//!   - For genral cayley_dickson, returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!   - For general cayley_dickson, returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{External references}
