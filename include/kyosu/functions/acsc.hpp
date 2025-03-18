@@ -16,6 +16,7 @@ namespace kyosu
   template<typename Options>
   struct acsc_t : eve::elementwise_callable<acsc_t, Options>
   {
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       if constexpr(concepts::real<Z>)
