@@ -47,7 +47,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr complexify_t<Z> acos(concepts::cayley_dickson_like autoT z) noexcept;
+//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acos(Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -76,7 +76,7 @@ namespace kyosu
 //!      * If z is \f$\textrm{NaN}+i\infty\f$, the result is \f$\textrm{NaN}-i\infty\f$
 //!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!
-//!   - For general cayley_dickson, returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!   - For general cayley_dickson input, returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{External references}
