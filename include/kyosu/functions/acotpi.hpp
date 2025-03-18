@@ -44,8 +44,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acotpi(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acotpi(T z) noexcept;  //2
+//!      template<eve::floating_ordered_value T>     constexpr T acotpi(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T acotpi(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!

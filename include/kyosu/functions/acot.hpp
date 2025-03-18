@@ -44,8 +44,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acot(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acot(T z) noexcept;  //2
+//!      template<eve::floating_ordered_value T>     constexpr T acot(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T acot(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -55,8 +55,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. A real type input z calls eve::acot(z) and so returns the same type as the input.
-//!
+//!   1. A real typed input z calls eve::acot(z) and so returns the same type as the input.
 //!   2. For cayley-dickson input
 //!
 //!      - For complex input, returns elementwise the complex principal value

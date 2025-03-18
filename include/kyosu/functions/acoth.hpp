@@ -43,7 +43,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr complexify_t<Z> acoth(concepts::cayley_dickson_like auto z) noexcept;
+//!     constexpr template<concepts::cayley_dickson_like Z> complexify_t<Z> acoth(Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -57,8 +57,7 @@ namespace kyosu
 //!   - For complex input, returns elementwise the complex principal value
 //!      of the inverse hyperbolic cotangent of the input as the inverse hyperbolic tangent of the inverse of the input.
 //!
-//!   - For general cayley_dickson input, returns \f$I_z \mathrm{acot}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!   - For general cayley_dickson input, the call is equivalent to `atanh(rec(z))`.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Inverse Hyperbolic Cotangent](https://mathworld.wolfram.com/InverseHyperbolicCotangent.html)
