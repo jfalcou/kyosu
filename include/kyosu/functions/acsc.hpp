@@ -55,8 +55,8 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   - A real input z is treated as if `complex(z)` was entered.
-//!   - 2. For general cayley_dickson input, returns elementwise `asin(rec(z))`.
+//!   1. a real input z is treated as if `complex(z)` was entered.
+//!   2. Returns elementwise `asin(rec(z))`.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Inverse Cosecant](https://mathworld.wolfram.com/InverseCosecant.html)
