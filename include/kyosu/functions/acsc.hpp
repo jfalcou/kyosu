@@ -20,9 +20,9 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       if constexpr(concepts::real<Z>)
-        return  kyosu::asin(kyosu::rec(z));
+        return (*this)(complex(z));
       else
-        return  KYOSU_CALL(z);
+        return  kyosu::asin(kyosu::rec(z));
     }
 
     KYOSU_CALLABLE_OBJECT(acsc_t, acsc_);
@@ -45,8 +45,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acsc(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acsc(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<Z> acsc(T z) noexcept;
 //!   }
 //!   @endcode
 //!
