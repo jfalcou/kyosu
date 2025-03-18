@@ -17,7 +17,7 @@ namespace kyosu
   struct acoth_t : eve::elementwise_callable<acoth_t, Options>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify<Z> operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       if constexpr(concepts::real<Z>) return (*this)(complex(z));
       else                            return kyosu::atanh(kyosu::rec(z));
