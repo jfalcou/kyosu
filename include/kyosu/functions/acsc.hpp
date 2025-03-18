@@ -45,7 +45,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<Z> acsc(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acsc(Z z) noexcept;
 //!   }
 //!   @endcode
 //!
