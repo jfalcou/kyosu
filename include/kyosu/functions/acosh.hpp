@@ -65,7 +65,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr template<concepts::cayley_dickson_like Z> complexify_t<Z> acosh(Z z) noexcept;
+//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acosh(Z z) noexcept;
 //!   }
 //!   @endcode
 //!
