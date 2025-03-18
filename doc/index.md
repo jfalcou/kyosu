@@ -152,6 +152,7 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
     Moreover some functions are defined that does not pertain to **EVE** because they do not return real results for real entries.
     (For instance [erfi](@ref kyosu::erfi)).
 
+<<<<<<< HEAD
    |                                                   |                                                   |                                                   |                                                   |
    |---------------------------------------------------|---------------------------------------------------|---------------------------------------------------|---------------------------------------------------|
    |[abs](@ref kyosu::abs)                             |[acos](@ref kyosu::acos)                           |[acosh](@ref kyosu::acosh)                         |[acospi](@ref kyosu::acospi)                       |
