@@ -16,13 +16,9 @@ namespace kyosu
   template<typename Options>
   struct acscpi_t : eve::elementwise_callable<acscpi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    {     return radinpi(kyosu::acsc(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr  complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    { return radinpi(kyosu::acsc(z)); }
 
     KYOSU_CALLABLE_OBJECT(acscpi_t, acscpi_);
 };
@@ -31,7 +27,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var acscpi
-//!   @brief Computes the arc cosecant of the argume!nt in \f$\pi\f$ multiples.
+//!   @brief Computes the arc cosecant of the argument in \f$\pi\f$ multiples.
 //!
 //!   @groupheader{Header file}
 //!
@@ -44,8 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acscpi(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acscpi(T z) noexcept;  //2
+//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acscpi(Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -55,9 +50,8 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if `complex(z)` was entered.
-//!
-//!   2. Returns `radinpi(acsc(z))`
+//!   - A real input z is treated as if `complex(z)` was entered.
+//!   - Returns `radinpi(acsc(z))`
 //!
 //!  @groupheader{Example}
 //!

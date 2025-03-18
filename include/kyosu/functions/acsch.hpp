@@ -15,13 +15,14 @@ namespace kyosu
   template<typename Options>
   struct acsch_t : eve::elementwise_callable<acsch_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return asinh(rec(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    {
+      if constexpr(concepts::real<Z>)
+        return (*this)(complex(z));
+      else
+        return asinh(rec(z));
+    }
 
     KYOSU_CALLABLE_OBJECT(acsch_t, acsch_);
 };
@@ -43,8 +44,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acsch(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acsch(T z) noexcept;  //2
+//!     template<kyosu::concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acsch(Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -54,9 +54,8 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. A real type input z calls `eve::acsch(z)` and so returns the same type as input.
-//!
-//!   2. Returns elementwise `asinh(rec(z))`.
+//!   - A real type input z calls `eve::acsch(z)` and so returns the same type as input.
+//!   - Returns elementwise `asinh(rec(z))`.
 //!
 //!  @groupheader{Example}
 //!
@@ -67,4 +66,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
