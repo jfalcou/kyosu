@@ -44,9 +44,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acot(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T>        constexpr auto acot(T z) noexcept;  //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acot(T z) noexcept;  //3
+//!      template<eve::floating_ordered_value T>     constexpr T acot(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T acot(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -56,14 +55,13 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. A real type input z calls eve::acot(z) and so returns the same type as the input.
+//!   1. A real typed input z calls eve::acot(z) and so returns the same type as the input.
+//!   2. For cayley-dickson input
 //!
-//!   2. Returns elementwise the complex principal value
-//!      of the arc cotangent of the input as the arc tangent of the inverse of the input.
-//!
-//!   3. Returns \f$I_z \mathrm{acoth}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!      - For complex input, returns elementwise the complex principal value
+//!        of the arc cotangent of the input as the arc tangent of the inverse of the input.
+//!      - For other general cayley_dickson input, returns \f$I_z \mathrm{acoth}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref pure)  part of \f$z\f$.
-//!
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Inverse Cotangent](https://mathworld.wolfram.com/InverseCotangent.html)

@@ -21,8 +21,8 @@ namespace kyosu
     {  return radinpi(kyosu::acot(z)); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
+    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
+    { return eve::acotpi(v); }
 
     KYOSU_CALLABLE_OBJECT(acotpi_t, acotpi_);
 };
@@ -44,8 +44,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto acotpi(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto acotpi(T z) noexcept;  //2
+//!      template<eve::floating_ordered_value T>     constexpr T acotpi(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T acotpi(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -55,8 +55,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if `complex(z)` was entered.
-//!
+//!   1. A real type input z calls eve::acotpi(z) and so returns the same type as the input.
 //!   2. Returns radinpi(acot(z))
 //!
 //!  @groupheader{Example}
