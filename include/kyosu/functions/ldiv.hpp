@@ -18,13 +18,21 @@ namespace kyosu
     template<typename... Ts>       struct result       { using type = expected_result_t<eve::add,Ts...>; };
     template<concepts::real... Ts> struct result<Ts...>{ using type = eve::common_value_t<Ts...>; };
 
-    template< concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1
-            , concepts::cayley_dickson_like... Ts
-            >
+    template<typename T0, typename T1, typename... Ts>
     requires(eve::same_lanes_or_scalar<T0, T1, Ts...>)
-    EVE_FORCEINLINE auto constexpr operator()(T0 t0, T1 t1, Ts...ts) const noexcept
+    EVE_FORCEINLINE expected_result_t<eve::div,T0,T1,Ts...> constexpr operator()(T0 t0, T1 t1, Ts...ts) const noexcept
     {
       return KYOSU_CALL(t0,t1,ts...);
+    }
+
+    template<concepts::real T0, concepts::real... Ts>
+    requires(eve::same_lanes_or_scalar<T0, Ts...>)
+      EVE_FORCEINLINE eve::common_value_t<T0,Ts...> constexpr operator()(T0 t0, Ts...ts) const noexcept
+    {
+      if constexpr(sizeof...(Ts) == 0)
+        return eve::rec(t0);
+      else
+        return eve::rec(t0)*(ts * ... );
     }
 
     template<kumi::non_empty_product_type Tup>
@@ -87,6 +95,7 @@ namespace kyosu::_
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
   EVE_FORCEINLINE constexpr auto ldiv_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
   {
+//    expected_result_t<eve::div,T0,Ts...> that(v0);
     auto that = ldiv(v0, vs...);
     return eve::detail::mask_op(cond, eve::detail::return_2nd, v0, that);
   }
