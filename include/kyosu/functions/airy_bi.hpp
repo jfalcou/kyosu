@@ -13,18 +13,16 @@ namespace kyosu
   template<typename Options>
   struct airy_bi_t : eve::elementwise_callable<airy_bi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(kyosu::concepts::complex<Z> )
+      if constexpr(concepts::real<Z>)
+        return eve::airy_bi(z);
+      else if constexpr(kyosu::concepts::complex<Z> )
         return _::bi(z);
       else
         return _::cayley_extend(*this, z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::airy_bi(v); }
 
     KYOSU_CALLABLE_OBJECT(airy_bi_t, airy_bi_);
   };
@@ -46,8 +44,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto airy_bi(T z) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto airy_bi(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto airy_bi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -57,7 +54,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns  \f$Bi(z)\f$.
+//!     -  A real type input z calls [eve::airy_bi(z)](@ref eve::airy_bi).
+//!     -  returns \f$ Bi(z) \f$.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Airy Functions](https://mathworld.wolfram.com/AiryFunctions.html)

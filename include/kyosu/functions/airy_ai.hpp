@@ -13,18 +13,16 @@ namespace kyosu
   template<typename Options>
   struct airy_ai_t : eve::elementwise_callable<airy_ai_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(kyosu::concepts::complex<Z> )
+      if constexpr(concepts::real<Z>)
+        return eve::airy_ai(z);
+      else if constexpr(kyosu::concepts::complex<Z> )
         return _::ai(z);
       else
         return _::cayley_extend(*this, z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::airy_ai(v); }
 
     KYOSU_CALLABLE_OBJECT(airy_ai_t, airy_ai_);
 };
@@ -46,8 +44,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto airy_ai(T z) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto airy_ai(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T airy_ai(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -57,7 +54,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns  \f$Ai(z)\f$.
+//!     - A real type input z calls [eve::airy(z)](@ref eve::airy_ai).
+//!     - returns  \f$Ai(z)\f$.
 //!
 //!  @groupheader{Example}
 //!

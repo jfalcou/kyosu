@@ -16,18 +16,16 @@ namespace kyosu
   template<typename Options>
   struct agd_t : eve::elementwise_callable<agd_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
+      if constexpr(concepts::real<Z>)
+         return (*this)(complex(z));
+      else if constexpr(concepts::complex<Z> )
         return kyosu::log(kyosu::tan(z*kyosu::half(as(z))+kyosu::pio_4(as(z))));
       else
         return kyosu::_::cayley_extend(*this, z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(agd_t, agd_);
 };
@@ -49,8 +47,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T agd(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T agd(T z) noexcept;
+//!     template<kyosu::concepts::cayley_dickson_like Z> constexpr complexify_t<Z> agd(Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -60,7 +57,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the inverse gudermanian of the argument.
+//!     - A real typed input z is treated as if `complex(z)` was entered.
+//!     - For complex input, returns the inverse gudermanian of the argument.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Inverse Gudermannian](https://mathworld.wolfram.com/Gudermannian.html)

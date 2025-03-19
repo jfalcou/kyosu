@@ -16,11 +16,14 @@ namespace kyosu
   template<typename Options>
   struct airy_t : eve::elementwise_callable<airy_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr kumi::tuple<Z, Z>operator()(Z const& z) const noexcept
-    {     using u_t = eve::underlying_type_t<Z>;
-      if constexpr(concepts::complex<Z>)
+    {
+      if constexpr(concepts::real<Z>)
+        return eve::airy(z);
+      else if constexpr(concepts::complex<Z>)
       {
+        using u_t = eve::underlying_type_t<Z>;
         auto zet = [](auto z) {
           using u_t = eve::underlying_type_t<Z>;
           auto sqz = sqrt(z);
@@ -38,10 +41,6 @@ namespace kyosu
         return _::cayley_extend2(*this, z);
       }
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
-    { return eve::airy(v); }
 
     KYOSU_CALLABLE_OBJECT(airy_t, airy_);
 };
@@ -63,8 +62,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>      constexpr auto airy(T z) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T>  constexpr auto airy(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr kumi::tuple<T, T> airy(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -74,7 +72,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * returns  a kumi pair containing \f$ Ai(z) \f$ and \f$ Bi(z) \f$.
+//!     -  A real type input z calls [eve::airy(z)](@ref eve::airy).
+//!     -  returns a kumi pair containing \f$ Ai(z) \f$ and \f$ Bi(z) \f$.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Airy Functions](https://mathworld.wolfram.com/AiryFunctions.html)
