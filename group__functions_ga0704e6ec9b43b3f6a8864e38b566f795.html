@@ -147,11 +147,10 @@ $(document).ready(function(){initNavTree('group__functions_ga0704e6ec9b43b3f6a88
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga0704e6ec9b43b3f6a8864e38b566f795.html#ga0704e6ec9b43b3f6a8864e38b566f795">acot</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;        <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga0704e6ec9b43b3f6a8864e38b566f795.html#ga0704e6ec9b43b3f6a8864e38b566f795">acot</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga0704e6ec9b43b3f6a8864e38b566f795.html#ga0704e6ec9b43b3f6a8864e38b566f795">acot</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga0704e6ec9b43b3f6a8864e38b566f795.html#ga0704e6ec9b43b3f6a8864e38b566f795">acot</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga0704e6ec9b43b3f6a8864e38b566f795.html#ga0704e6ec9b43b3f6a8864e38b566f795">acot</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga0704e6ec9b43b3f6a8864e38b566f795_html_ga0704e6ec9b43b3f6a8864e38b566f795"><div class="ttname"><a href="group__functions_ga0704e6ec9b43b3f6a8864e38b566f795.html#ga0704e6ec9b43b3f6a8864e38b566f795">kyosu::acot</a></div><div class="ttdeci">constexpr auto acot</div><div class="ttdoc">Computes the arc cotangent of the argument.</div><div class="ttdef"><b>Definition:</b> acot.hpp:75</div></div>
+<div class="ttc" id="agroup__functions_ga0704e6ec9b43b3f6a8864e38b566f795_html_ga0704e6ec9b43b3f6a8864e38b566f795"><div class="ttname"><a href="group__functions_ga0704e6ec9b43b3f6a8864e38b566f795.html#ga0704e6ec9b43b3f6a8864e38b566f795">kyosu::acot</a></div><div class="ttdeci">constexpr auto acot</div><div class="ttdoc">Computes the arc cotangent of the argument.</div><div class="ttdef"><b>Definition:</b> acot.hpp:73</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -159,9 +158,12 @@ $(document).ready(function(){initNavTree('group__functions_ga0704e6ec9b43b3f6a88
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>A real type input z calls eve::acot(z) and so returns the same type as the input.</li>
-<li>Returns elementwise the complex principal value of the arc cotangent of the input as the arc tangent of the inverse of the input.</li>
-<li>Returns \(I_z \mathrm{acoth}(z I_z)\) where \(I_z = \frac{\underline{z}}{|\underline{z}|}\) and \(\underline{z}\) is the <a class="el" href="group__functions_ga6a75cd107789510275cb469d917ea79b.html#ga6a75cd107789510275cb469d917ea79b">pure</a> part of \(z\).</li>
+<li>A real typed input z calls eve::acot(z) and so returns the same type as the input.</li>
+<li>For cayley-dickson input<ul>
+<li>For complex input, returns elementwise the complex principal value of the arc cotangent of the input as the arc tangent of the inverse of the input.</li>
+<li>For other general <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> input, returns \(I_z \mathrm{acoth}(z I_z)\) where \(I_z = \frac{\underline{z}}{|\underline{z}|}\) and \(\underline{z}\) is the <a class="el" href="group__functions_ga6a75cd107789510275cb469d917ea79b.html#ga6a75cd107789510275cb469d917ea79b">pure</a> part of \(z\).</li>
+</ul>
+</li>
 </ol>
 <h2 class="groupheader">External references </h2>
 <ul>
