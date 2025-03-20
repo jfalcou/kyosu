@@ -15,13 +15,14 @@ namespace kyosu
   template<typename Options>
   struct atanh_t : eve::elementwise_callable<atanh_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    {
+      if constexpr(eve::floating_value<Z> )
+        return  (*this)(complex(z));
+      else
+        return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(atanh_t, atanh_);
 };
