@@ -19,8 +19,10 @@ namespace kyosu
     {
       if constexpr(concepts::real<Z> )
         return eve::cos(z);
-      else
+      else if constexpr(concepts::complex<Z> )
         return cosh(muli(z));
+      else
+        return _::cayley_extend(*this, z);
     }
 
     KYOSU_CALLABLE_OBJECT(cos_t, cos_);
