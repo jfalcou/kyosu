@@ -16,13 +16,14 @@ namespace kyosu
   template<typename Options>
   struct atanpi_t : eve::elementwise_callable<atanpi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return radinpi(kyosu::atan(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v));; }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    {
+      if constexpr(eve::floating_value<Z>)
+        return (*this)(complex(z));
+      else if constexpr(concepts::complex<Z> )
+        return radinpi(kyosu::atan(z));
+    }
 
     KYOSU_CALLABLE_OBJECT(atanpi_t, atanpi_);
 };
@@ -44,8 +45,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto atanpi(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto atanpi(T z) noexcept;  //2
+//!     template<kyosu::concepts::cayley_dickson T> constexpr complexify_t<T> atanpi(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -54,10 +54,8 @@ namespace kyosu
 //!     * `z`: Value to process.
 //!
 //! **Return value**
-//!
-//!   1. a real input z is treated as if `complex(z)` was entered.
-//!
-//!   2. Returns `radinpi(atan(z))`
+//!   - A real typed input z is treated as if `complex(z)` was entered.
+//!   - Returns `radinpi(atan(z))`
 //!
 //!  @groupheader{Example}
 //!

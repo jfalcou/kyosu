@@ -15,10 +15,12 @@ namespace kyosu
   template<typename Options>
   struct atan_t : eve::elementwise_callable<atan_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
+      if constexpr(eve::floating_value<Z>)
+        return (*this)(complex(z));
+      else if constexpr(concepts::complex<Z> )
       {
         // C99 definition here; atan(z) = -i atanh(i*z):
         auto [r, i] = z;
@@ -30,10 +32,6 @@ namespace kyosu
         return _::cayley_extend(*this, z);
       }
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::atan(v); }
 
     KYOSU_CALLABLE_OBJECT(atan_t, atan_);
   };
@@ -55,9 +53,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto atan(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T>        constexpr auto atan(T z) noexcept;  //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto atan(T z) noexcept;  //3
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto atan(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -67,14 +63,13 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if `complex(z)` was entered.
-//!
-//!   2. Returns the elementwise the complex principal value
+//!    - A real typed input is treated as if `complex(z)` was entered.
+//!    - For complex input, reurns the elementwise the complex principal value
 //!      of the arc tangent of the input in the range of a strip unbounded along the imaginary axis
 //!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
 //!      Special cases are handled as if the operation was implemented by \f$-i\; \mathrm{atanh}(z\; i)\f$.
 //!
-//!   3. Returns \f$ -I_z \mathrm{atanh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!    - For general cayley_dickson input,returns \f$ -I_z \mathrm{atanh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
 //!  @groupheader{External references}
