@@ -45,6 +45,8 @@ TTS_CASE_WITH( "Check behavior of acos on wide"
   using c_t = std::complex<eve::element_type_t<e_t>>;
   ke_t e([&](auto i, auto){return cv(std::acos(c_t(a0.get(i), a1.get(i)))); });
   TTS_RELATIVE_EQUAL(kyosu::acos(ke_t{a0,a1}), e, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acos[a0 > a1](ke_t{a0,a1}), kyosu::if_else(a0 > a1, kyosu::acos(ke_t{a0,a1}), ke_t{a0,a1}), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acos[a0 > a1](a0)         , kyosu::if_else(a0 > a1, kyosu::acos(a0), a0), tts::prec<T>());
 };
 
 TTS_CASE_TPL( "Check acos lilits", kyosu::real_types)
