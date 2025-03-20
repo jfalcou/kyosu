@@ -16,16 +16,17 @@ namespace kyosu
   template<typename Options>
   struct asech_t : eve::elementwise_callable<asech_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    {    return kyosu::acosh(kyosu::rec(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    {
+      if constexpr(concepts::real<Z>)
+        return (*this)(complex(z));
+      else
+        return  kyosu::acosh(kyosu::rec(z));
+    }
 
     KYOSU_CALLABLE_OBJECT(asech_t, asech_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -44,8 +45,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto asech(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto asech(T z) noexcept;  //2
+//!      template<eve::floating_ordered_value T>          constexpr T asech(T z) noexcept;  //1
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T asech(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -55,7 +56,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if `complex(z)` was entered.
+//!   1. A real typed input z is treated as if `complex(z)` was entered.
 //!   2. Returns elementwise `acosh(rec(z))`.
 //!
 //!  @groupheader{External references}
@@ -71,4 +72,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
