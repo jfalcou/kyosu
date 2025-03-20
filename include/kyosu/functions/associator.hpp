@@ -14,16 +14,28 @@ namespace kyosu
   template<typename Options>
   struct associator_t : eve::strict_elementwise_callable<associator_t, Options, eve::pedantic_option>
   {
-    template<typename Z0, typename Z1, typename Z2>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1> ||concepts::cayley_dickson<Z2>)
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1, Z2 const & z2) const noexcept -> decltype(z0+z1+z2)
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like Z2>
+    requires(eve::same_lanes_or_scalar<Z0, Z1, Z2>)
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& c0, Z1 const & c1, Z2 const & c2) const
+      noexcept -> decltype(c0+c1+c2)
     {
-      return KYOSU_CALL(z0,z1,z2);
+      if constexpr(Options::contains(eve::pedantic))
+        return (c0*c1)*c2 - c0*(c1*c2);
+      else
+      {
+        constexpr size_t dZ0 = dimension_v<Z0>;
+        constexpr size_t dZ1 = dimension_v<Z1>;
+        constexpr size_t dZ2 = dimension_v<Z2>;
+        if constexpr((dZ0 < 8 && dZ1 < 8 && dZ2 < 8) || (dZ0 == 1 || dZ1 == 1 || dZ2 == 1))
+        {
+          return zero(as<decltype(c0+c1+c2)>());
+        }
+        else
+        {
+          return (c0*c1)*c2 - c0*(c1*c2);
+        }
+      }
     }
-
-    template<concepts::real V0, concepts::real V1, concepts::real V2>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1, V2 v2) const noexcept -> decltype(v0+v1+v2)
-    { return KYOSU_CALL(v0,v1,v2); }
 
     KYOSU_CALLABLE_OBJECT(associator_t, associator_);
 };
@@ -46,10 +58,10 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     Regular call
-//!     constexpr auto associator(auto z0, auto z1, auto z2) noexcept;
+//!     constexpr auto associator(auto z0, auto z1, auto z2) noexcept;           //1
 //!
 //!     Semantic modifyier
-//!     constexpr auto associator[pedantic](auto z0, auto z1, auto z2) noexcept;
+//!     constexpr auto associator[pedantic](auto z0, auto z1, auto z2) noexcept; //2
 //!   }
 //!   @endcode
 //!
@@ -60,7 +72,8 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     1.  Returns the difference z0*(z1*z2)-(z0*z1)*z2. (always exactly zero up to quaternion)
-//!     2.  Same,  but always do the computation. (up to quaternions, non zero result is merely the floating point associativity default)
+//!     2.  Same,  but always do the computation. (up to quaternions, non zero result is merely the
+//!         floating point associativity rounding error)
 //!
 //!  @groupheader{External references}
 //!   *  [Wikipedia: Associator](https://en.wikipedia.org/wiki/Associator)
@@ -72,30 +85,4 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
-}
-
-namespace kyosu::_
-{
-
-  template<typename C0, typename C1, typename C2, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto associator_(KYOSU_DELAY(), O const&
-                                              , C0 c0, C1 c1, C2 c2) noexcept
-  {
-    if constexpr(O::contains(eve::pedantic))
-       return (c0*c1)*c2 - c0*(c1*c2);
-    else
-    {
-      constexpr size_t dC0 = dimension_v<C0>;
-      constexpr size_t dC1 = dimension_v<C1>;
-      constexpr size_t dC2 = dimension_v<C2>;
-      if constexpr((dC0 < 8 && dC1 < 8 && dC2 < 8) || (dC0 == 1 || dC1 == 1 || dC2 == 1))
-      {
-        return zero(as<decltype(c0+c1+c2)>());
-      }
-      else
-      {
-        return (c0*c1)*c2 - c0*(c1*c2);
-      }
-    }
-  }
 }
