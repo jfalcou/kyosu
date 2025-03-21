@@ -16,9 +16,11 @@ namespace kyosu
   template<typename Options>
   struct cosh_t : eve::elementwise_callable<cosh_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
+      if constexpr(eve::floating_value<Z>)
+        return eve::cosh(z);
       if constexpr(concepts::complex<Z> )
       {
         auto [rz, iz] = z;
@@ -41,10 +43,6 @@ namespace kyosu
       }
     }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::cosh(v); }
-
     KYOSU_CALLABLE_OBJECT(cosh_t, cosh_);
 };
 
@@ -65,9 +63,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr T cosh(T z) noexcept; //1
-//!      template<kyosu::concepts::complex T>        constexpr T cosh(T z) noexcept; //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T cosh(T z) noexcept; //3
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T cosh(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -77,9 +73,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. returns `eve::cosh(z)`
-//!
-//!     2. Returns elementwise the complex value of the hyperbolic cosine of the input.
+//!     - returns the hyperbolic cosine of the argument.
+//!     - For complex input, returns elementwise the complex value of the hyperbolic cosine of the input.
 //!
 //!        *  for every z: `cosh(conj(z)) == conj(cosh(z))`
 //!        *  for every z: `cosh(-z) == cosh(z)`
@@ -95,8 +90,7 @@ namespace kyosu
 //!        *  If z is \f$\textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$
 //!        *  If z is \f$\textrm{NaN}+i y\f$ (for any finite non-zero y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!        *  If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
-//!
-//!     3. Is semantically equivalent to `(exp(z)+exp(-z))/2`.
+//!     - This is semantically equivalent to `(exp(z)+exp(-z))/2`.
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: complex cosh](https://en.cppreference.com/w/cpp/numeric/complex/cosh)

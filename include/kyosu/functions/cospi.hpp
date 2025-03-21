@@ -14,9 +14,11 @@ namespace kyosu
   template<typename Options>
   struct cospi_t : eve::elementwise_callable<cospi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
+      if constexpr(eve::floating_value<Z>)
+        return eve::cospi(z);
       if constexpr(concepts::complex<Z> )
       {
         auto [rz, iz] = z;
@@ -40,10 +42,6 @@ namespace kyosu
       }
     }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::cospi(v); }
-
     KYOSU_CALLABLE_OBJECT(cospi_t, cospi_);
 };
 
@@ -64,8 +62,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T cospi(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T cospi(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T cospi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
