@@ -16,14 +16,10 @@ namespace kyosu
   template<typename Options>
   struct lbeta_t : eve::strict_elementwise_callable<lbeta_t, Options>
   {
-    template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-      KYOSU_FORCEINLINE constexpr as_cayley_dickson_t<Z0, Z1>  operator()(Z0 const& z0, Z1 const & z1) const noexcept
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_t<complexify_t<Z0>, complexify_t<Z1>>
+    operator()(Z0 const& z0, Z1 const & z1) const noexcept
     { return kyosu::log(kyosu::beta(z0, z1)); }
-
-    template<concepts::real V0, concepts::real V1>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> decltype(complex(v0)+v1)
-    { return (*this)(complex(v0),v1); }
 
     KYOSU_CALLABLE_OBJECT(lbeta_t, lbeta_);
 };
