@@ -16,13 +16,14 @@ namespace kyosu
   template<typename Options>
   struct asec_t : eve::elementwise_callable<asec_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return kyosu::acos(kyosu::rec(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    {
+      if constexpr(concepts::real<Z>)
+        return (*this)(complex(z));
+      else
+        return  kyosu::acos(kyosu::rec(z));
+    }
 
     KYOSU_CALLABLE_OBJECT(asec_t, asec_);
 };
@@ -44,8 +45,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto asec(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto asec(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto asec(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -55,8 +55,8 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if `complex(z)` was entered.
-//!   2. Returns elementwise `acos(rec(z))`.
+//!   - A real typed input z is treated as if `complex(z)` was entered.
+//!   - For complex input, returns elementwise `acos(rec(z))`.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Inverse Secant](https://mathworld.wolfram.com/InverseSecant.html)
