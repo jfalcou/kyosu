@@ -19,16 +19,15 @@ namespace kyosu
   struct am_t : eve::strict_elementwise_callable<am_t, Options, eve::modular_option,
                                                  eve::eccentric_option, eve::threshold_option>
   {
-    template<concepts::real T0, concepts::real T1>
+    template<concepts::complex_like T0, concepts::real T1>
     constexpr KYOSU_FORCEINLINE
-    auto operator()(T0 a, T1 b) const noexcept
-    { return (*this)(kyosu::complex(a), b); }
-
-    template<concepts::complex T0, concepts::real T1>
-    constexpr KYOSU_FORCEINLINE
-    auto operator()(T0 a, T1 b) const noexcept
-    { return KYOSU_CALL(a, b); }
-
+    auto operator()(T0 a, T1 b) const noexcept -> complexify_t<decltype(a+b)>
+    {
+      if constexpr(concepts::real<T0>)
+        return (*this)(kyosu::complex(a), b);
+      else
+        return KYOSU_CALL(a, b);
+    }
 
     KYOSU_CALLABLE_OBJECT(am_t, am_);
   };
@@ -49,16 +48,12 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      // Regular overload
-//!       constexpr Z       am( real<Z>   z, real<U> m)               noexcept; //1
-//!       constexpr auto    am(complex<Z> z, real<U> m)               noexcept; //1
+//!      template <complex_like Z, floating_value U> constexpr auto am(Z z, U m)               noexcept; //1
 //!
 //!      //Semantic modifiers
-//!      constexpr Z    am[modular]( real<Z>      z, real<U> alpha)   noexcept; //1
-//!      constexpr auto am[modular](complex<Z>    z, real<U> alpha)   noexcept; //1
-//!      constexpr Z    am[eccentric]( real<Z>    z, real<U> m)       noexcept; //1
-//!      constexpr auto am[eccentric](complex<Z>  z, real<U> m)       noexcept; //1
-//!      constexpr auto am[threshold = tol]( real<Z>   z, real<U> k)  noexcept; //1
-//!      constexpr auto am[threshold = tol](complex<Z> z, real<U> k)  noexcept; //1
+//!      template <complex_like Z, floating_value U> constexpr auto am[modular](Z z, U alpha)  noexcept; //1
+//!      template <complex_like Z, floating_value U> constexpr auto am[eccentric](Z z, U k)    noexcept; //1
+//!      constexpr auto am[threshold = tol](/*any previous overload*/)                         noexcept; //1
 //!   }
 //!   @endcode
 //!
@@ -72,7 +67,6 @@ namespace kyosu
 //!     * `c`: [Conditional expression](@ref eve::conditional_expr) masking the operation.
 //!     * `l`: [Logical value](@ref eve::logical_value) masking the operation.
 //!
-//!
 //!   **Return value**
 //!
 //!      1. return the jacobian amplitude function. Take care that the meaning of the second parameters
@@ -81,7 +75,7 @@ namespace kyosu
 //! @note
 //!   * \f$\alpha\f$ is named the modular angle given in radian (modular option).
 //!   * \f$ k = \sin\alpha \f$ is named the elliptic modulus or eccentricity (eccentric option).
-//!   * \f$ m = k^2 = \sin^2\alpha\f$ is named the parameter (no option).
+//!   * \f$ m = k^2 = \sin^2\alpha\f$ is named the parameter (no option).Currentlty it must belong to \f$[0 1]\f$.
 //!   Each of the above three quantities is completely determined by any of the others (given that they are non-negative).
 //!   Thus, they can be used interchangeably up to roundings errors by giving the right option.
 //!

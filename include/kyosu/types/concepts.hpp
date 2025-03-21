@@ -22,10 +22,19 @@ namespace kyosu::_
 
 namespace kyosu::concepts
 {
-  // Value of the Cayley-Dickson algebra encompass reals and 
+  // Value of the Cayley-Dickson algebra encompass reals and
   // actual caley-dickson values
   template<typename T>
   concept cayley_dickson_like = _::rank<std::remove_cvref_t<T>> != 0;
+
+  template<typename T>
+  concept complex_like = cayley_dickson_like<T> && _::rank<std::remove_cvref_t<T>> <= 2;
+
+  template<typename T>
+  concept quaternion_like = cayley_dickson_like<T> && _::rank<std::remove_cvref_t<T>> <= 4;
+
+  template<typename T>
+  concept octonion_like = cayley_dickson_like<T> && _::rank<std::remove_cvref_t<T>> <= 8;
 
   /// General Cayley-dickson concept
   template<typename T>
