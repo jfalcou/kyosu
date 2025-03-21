@@ -16,7 +16,7 @@ namespace kyosu
   struct beta_t : eve::strict_elementwise_callable<beta_t, Options>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_t<complexify_t<Z0>, complexify_t<Z1>>
+    KYOSU_FORCEINLINE constexpr /*as_cayley_dickson_t<complexify_t<Z0>, complexify_t<Z1>>*/ auto
     operator()(Z0 const& z0, Z1 const & z1) const noexcept
     {
       if constexpr(eve::floating_value<Z0>, eve::floating_value<Z1>)
