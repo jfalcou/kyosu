@@ -147,20 +147,18 @@ $(document).ready(function(){initNavTree('group__functions_gafb2c650b3e7a1251e5a
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">asinh</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;        <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">asinh</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">asinh</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> complexify_t&lt;T&gt; <a class="code hl_variable" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">asinh</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gafb2c650b3e7a1251e5ace712ad2fad44_html_gafb2c650b3e7a1251e5ace712ad2fad44"><div class="ttname"><a href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">kyosu::asinh</a></div><div class="ttdeci">constexpr auto asinh</div><div class="ttdoc">Computes the inverse hyperbolic sine of the argument.</div><div class="ttdef"><b>Definition:</b> asinh.hpp:98</div></div>
+<div class="ttc" id="agroup__functions_gafb2c650b3e7a1251e5ace712ad2fad44_html_gafb2c650b3e7a1251e5ace712ad2fad44"><div class="ttname"><a href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">kyosu::asinh</a></div><div class="ttdeci">constexpr auto asinh</div><div class="ttdoc">Computes the inverse hyperbolic sine of the argument.</div><div class="ttdef"><b>Definition:</b> asinh.hpp:89</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<ol type="1">
-<li>A real type input z calls eve::asinh(z) and so returns the same type as input.</li>
-<li>Returns the complex inverse hyperbolic sine of z, with branch cuts outside the interval \(i\times[-\pi/2, \pi/2]\) along the imaginary axis.<ul>
+<ul>
+<li>A real typed input z calls eve::asinh(z) and so returns the same type as input.</li>
+<li>For complex input, returns the complex inverse hyperbolic sine of z, with branch cuts outside the interval \(i\times[-\pi/2, \pi/2]\) along the imaginary axis.<ul>
 <li>for every z: <code><a class="el" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44" title="Computes the inverse hyperbolic sine of the argument.">asinh(conj(z))</a> ==<a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">conj(asinh(z))</a></code></li>
 <li>for every z: <code>asinh(-z) == -<a class="el" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44" title="Computes the inverse hyperbolic sine of the argument.">asinh(z)</a></code></li>
 <li>If z is \(+0\), the result is \(+0\)</li>
@@ -175,8 +173,8 @@ $(document).ready(function(){initNavTree('group__functions_gafb2c650b3e7a1251e5a
 <li>If z is \( \textrm{NaN}+ i \textrm{NaN}\), the result is \( \textrm{NaN}+ i \textrm{NaN}\)</li>
 </ul>
 </li>
-<li>Returns \(\log(z+\sqrt{1+z^2})\).</li>
-</ol>
+<li>For general <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> input,returns \(\log(z+\sqrt{1+z^2})\).</li>
+</ul>
 <h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://en.cppreference.com/w/cpp/numeric/complex/asinh">C++ standard reference: asinh</a></li>
