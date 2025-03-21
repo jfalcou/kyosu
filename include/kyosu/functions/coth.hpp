@@ -25,10 +25,6 @@ namespace kyosu
         return _::cayley_extend(*this, z);
     }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::coth(v); }
-
     KYOSU_CALLABLE_OBJECT(coth_t, coth_);
 };
 

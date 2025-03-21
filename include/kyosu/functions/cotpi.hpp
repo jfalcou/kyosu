@@ -19,7 +19,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
       if constexpr(eve::floating_value<Z>)
-        return eve::cotpi_t(z);
+        return eve::cotpi(z);
       if constexpr(concepts::complex<Z> )
       {
         auto r = kyosu::tanpi(z);
