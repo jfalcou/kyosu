@@ -15,9 +15,11 @@ namespace kyosu
   template<typename Options>
   struct cotpi_t : eve::elementwise_callable<cotpi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
+      if constexpr(eve::floating_value<Z>)
+        return eve::cotpi_t(z);
       if constexpr(concepts::complex<Z> )
       {
         auto r = kyosu::tanpi(z);
@@ -31,12 +33,8 @@ namespace kyosu
       }
     }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::cotpi(v); }
-
     KYOSU_CALLABLE_OBJECT(cotpi_t, cotpi_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -56,7 +54,6 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T cotpi(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T cotpi(T z) noexcept;
 //!   }
 //!   @endcode
 //!

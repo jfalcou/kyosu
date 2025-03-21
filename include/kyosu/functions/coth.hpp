@@ -14,17 +14,15 @@ namespace kyosu
   template<typename Options>
   struct coth_t : eve::elementwise_callable<coth_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
+      if constexpr(eve::floating_value<Z>)
+        return eve::coth(z);
       if constexpr(concepts::complex<Z> )
-      {
         return kyosu::rec(kyosu::tanh(z));
-      }
       else
-      {
         return _::cayley_extend(*this, z);
-      }
     }
 
     template<concepts::real V>
@@ -51,8 +49,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T coth(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T coth(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T coth(T z) noexcept;
 //!   }
 //!   @endcode
 //!

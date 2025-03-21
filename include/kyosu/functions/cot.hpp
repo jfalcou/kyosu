@@ -15,22 +15,16 @@ namespace kyosu
   template<typename Options>
   struct cot_t : eve::elementwise_callable<cot_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
+      if constexpr(eve::floating_value<Z>)
+        return eve::cot(z);
       if constexpr(concepts::complex<Z> )
-      {
         return kyosu::rec(kyosu::tan(z));
-      }
       else
-      {
         return _::cayley_extend(*this, z);
-      }
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::cot(v); }
 
     KYOSU_CALLABLE_OBJECT(cot_t, cot_);
 };
@@ -52,8 +46,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T cot(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T cot(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T cot(T z) noexcept;
 //!   }
 //!   @endcode
 //!
