@@ -17,22 +17,16 @@ namespace kyosu
   template<typename Options>
   struct asinh_t : eve::elementwise_callable<asinh_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
+      if constexpr(concepts::real<Z>)
+        return eve::asinh(z);
       if constexpr(concepts::complex<Z> )
-      {
         return mulmi( kyosu::asin(muli(z)));
-      }
       else
-      {
         return kyosu::_::cayley_extend((*this), z);
-      }
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::asinh(v); }
 
     KYOSU_CALLABLE_OBJECT(asinh_t, asinh_);
 };
@@ -54,9 +48,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto asinh(T z) noexcept;  //1
-//!      template<kyosu::concepts::complex T>        constexpr auto asinh(T z) noexcept;  //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto asinh(T z) noexcept;  //3
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> asinh(T z) noexcept;  //3
 //!   }
 //!   @endcode
 //!
@@ -66,9 +58,8 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. A real type input z calls eve::asinh(z) and so returns the same type as input.
-//!
-//!   2. Returns the complex inverse hyperbolic sine of z, with branch cuts outside the interval
+//!   - A real  typed input z calls eve::asinh(z) and so returns the same type as input.
+//!   - For complex input, returns the complex inverse hyperbolic sine of z, with branch cuts outside the interval
 //!      \f$i\times[-\pi/2, \pi/2]\f$ along the imaginary axis.
 //!
 //!      * for every z: `asinh(conj(z)) ==conj(asinh(z))`
@@ -84,7 +75,7 @@ namespace kyosu
 //!      * If z is \f$ \textrm{NaN}+i \infty\f$, the result is \f$\pm \infty+ i \textrm{NaN}\f$ (the sign of the real part is unspecified)
 //!      * If z is \f$ \textrm{NaN}+ i \textrm{NaN}\f$, the result is \f$ \textrm{NaN}+ i \textrm{NaN}\f$
 //!
-//!   3. Returns \f$\log(z+\sqrt{1+z^2})\f$.
+//!   - For general cayley_dickson input,returns \f$\log(z+\sqrt{1+z^2})\f$.
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: asinh](https://en.cppreference.com/w/cpp/numeric/complex/asinh)
