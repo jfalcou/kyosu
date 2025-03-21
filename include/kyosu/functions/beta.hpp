@@ -19,8 +19,13 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_t<complexify_t<Z0>, complexify_t<Z1>>
     operator()(Z0 const& z0, Z1 const & z1) const noexcept
     {
-      auto y = z0 + z1;
-      return tgamma(z0)*tgamma(z1)/tgamma(y);
+      if constexpr(eve::floating_value<Z0>, eve::floating_value<Z1>)
+        return (*this)(complex(z0), complex(z1));
+      else
+      {
+        auto y = z0 + z1;
+        return tgamma(z0)*tgamma(z1)/tgamma(y);
+      }
     }
 
     KYOSU_CALLABLE_OBJECT(beta_t, beta_);
