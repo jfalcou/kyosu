@@ -13,13 +13,14 @@ namespace kyosu
   template<typename Options>
   struct trunc_t : eve::elementwise_callable<trunc_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return Z{kumi::map([](auto const& e) { return eve::trunc(e); }, z)}; }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::trunc(v); }
+    {
+      if constexpr(eve::floating_value<Z>)
+        return eve::trunc(z);
+      else
+        return Z{kumi::map([](auto const& e) { return eve::trunc(e); }, z)};
+    }
 
     KYOSU_CALLABLE_OBJECT(trunc_t, trunc_);
 };
@@ -41,8 +42,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T trunc(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T trunc(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T trunc(T z) noexcept;
 //!   }
 //!   @endcode
 //!

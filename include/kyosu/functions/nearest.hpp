@@ -13,13 +13,15 @@ namespace kyosu
   template<typename Options>
   struct nearest_t : eve::elementwise_callable<nearest_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return Z{kumi::map([](auto const& e) { return eve::nearest(e); }, z)}; }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::nearest(v); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    {
+      if constexpr(eve::floating_value<Z>)
+        return eve::nearest(z);
+      else
+        return Z{kumi::map([](auto const& e) { return eve::nearest(e); }, z)};
+    }
 
     KYOSU_CALLABLE_OBJECT(nearest_t, nearest_);
 };
@@ -41,8 +43,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T nearest(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T nearest(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T nearest(T z) noexcept;
 //!   }
 //!   @endcode
 //!
