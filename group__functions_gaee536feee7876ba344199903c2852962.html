@@ -147,20 +147,19 @@ $(document).ready(function(){initNavTree('group__functions_gaee536feee7876ba3441
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaee536feee7876ba344199903c2852962.html#gaee536feee7876ba344199903c2852962">asecpi</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaee536feee7876ba344199903c2852962.html#gaee536feee7876ba344199903c2852962">asecpi</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaee536feee7876ba344199903c2852962.html#gaee536feee7876ba344199903c2852962">asecpi</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaee536feee7876ba344199903c2852962_html_gaee536feee7876ba344199903c2852962"><div class="ttname"><a href="group__functions_gaee536feee7876ba344199903c2852962.html#gaee536feee7876ba344199903c2852962">kyosu::asecpi</a></div><div class="ttdeci">constexpr auto asecpi</div><div class="ttdoc">Computes the arc secant of the argument in  multiples.</div><div class="ttdef"><b>Definition:</b> asecpi.hpp:66</div></div>
+<div class="ttc" id="agroup__functions_gaee536feee7876ba344199903c2852962_html_gaee536feee7876ba344199903c2852962"><div class="ttname"><a href="group__functions_gaee536feee7876ba344199903c2852962.html#gaee536feee7876ba344199903c2852962">kyosu::asecpi</a></div><div class="ttdeci">constexpr auto asecpi</div><div class="ttdoc">Computes the arc secant of the argument in  multiples.</div><div class="ttdef"><b>Definition:</b> asecpi.hpp:65</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<ol type="1">
-<li>a real input z is treated as if kyosu::<code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered.</li>
-<li>Returns <code><a class="el" href="group__functions_gabd703393200a757087fb7f2054546dcf.html#gabd703393200a757087fb7f2054546dcf" title="Computes the parameter divided by .">radinpi(asec(z))</a></code></li>
-</ol>
+<ul>
+<li>A real typed input z is treated as if kyosu::<code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered.</li>
+<li>For general <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> input, returns <code><a class="el" href="group__functions_gabd703393200a757087fb7f2054546dcf.html#gabd703393200a757087fb7f2054546dcf" title="Computes the parameter divided by .">radinpi(asec(z))</a></code></li>
+</ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -183,7 +182,7 @@ $(document).ready(function(){initNavTree('group__functions_gaee536feee7876ba3441
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaafed3076d5ce6fbfa0bfa53301927ae3_html_gaafed3076d5ce6fbfa0bfa53301927ae3"><div class="ttname"><a href="group__functions_gaafed3076d5ce6fbfa0bfa53301927ae3.html#gaafed3076d5ce6fbfa0bfa53301927ae3">kyosu::asech</a></div><div class="ttdeci">constexpr auto asech</div><div class="ttdoc">Computes the inverse hyperbolic secant of the argument.</div><div class="ttdef"><b>Definition:</b> asech.hpp:69</div></div>
+<div class="ttc" id="agroup__functions_gaafed3076d5ce6fbfa0bfa53301927ae3_html_gaafed3076d5ce6fbfa0bfa53301927ae3"><div class="ttname"><a href="group__functions_gaafed3076d5ce6fbfa0bfa53301927ae3.html#gaafed3076d5ce6fbfa0bfa53301927ae3">kyosu::asech</a></div><div class="ttdeci">constexpr auto asech</div><div class="ttdoc">Computes the inverse hyperbolic secant of the argument.</div><div class="ttdef"><b>Definition:</b> asech.hpp:70</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
 </div><!-- fragment --> 
 </div>
