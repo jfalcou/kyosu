@@ -1,7 +1,6 @@
 #include <kyosu/kyosu.hpp>
 #include <eve/wide.hpp>
 #include <iostream>
-#include <complex>
 
 int main()
 {
