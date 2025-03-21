@@ -148,12 +148,12 @@ $(document).ready(function(){initNavTree('group__functions_ga8f4895e6ad347a36555
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
 <div class="line">  Regular call</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga8f4895e6ad347a36555c231f430684eb.html#ga8f4895e6ad347a36555c231f430684eb">associator</a>(<span class="keyword">auto</span> z0, <span class="keyword">auto</span> z1, <span class="keyword">auto</span> z2) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga8f4895e6ad347a36555c231f430684eb.html#ga8f4895e6ad347a36555c231f430684eb">associator</a>(<span class="keyword">auto</span> z0, <span class="keyword">auto</span> z1, <span class="keyword">auto</span> z2) <span class="keyword">noexcept</span>;           <span class="comment">//1</span></div>
 <div class="line"> </div>
 <div class="line">  Semantic modifyier</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga8f4895e6ad347a36555c231f430684eb.html#ga8f4895e6ad347a36555c231f430684eb">associator</a>[pedantic](<span class="keyword">auto</span> z0, <span class="keyword">auto</span> z1, <span class="keyword">auto</span> z2) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga8f4895e6ad347a36555c231f430684eb.html#ga8f4895e6ad347a36555c231f430684eb">associator</a>[pedantic](<span class="keyword">auto</span> z0, <span class="keyword">auto</span> z1, <span class="keyword">auto</span> z2) <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga8f4895e6ad347a36555c231f430684eb_html_ga8f4895e6ad347a36555c231f430684eb"><div class="ttname"><a href="group__functions_ga8f4895e6ad347a36555c231f430684eb.html#ga8f4895e6ad347a36555c231f430684eb">kyosu::associator</a></div><div class="ttdeci">constexpr auto associator</div><div class="ttdoc">Computes the associator of the three parameters.</div><div class="ttdef"><b>Definition:</b> associator.hpp:71</div></div>
+<div class="ttc" id="agroup__functions_ga8f4895e6ad347a36555c231f430684eb_html_ga8f4895e6ad347a36555c231f430684eb"><div class="ttname"><a href="group__functions_ga8f4895e6ad347a36555c231f430684eb.html#ga8f4895e6ad347a36555c231f430684eb">kyosu::associator</a></div><div class="ttdeci">constexpr auto associator</div><div class="ttdoc">Computes the associator of the three parameters.</div><div class="ttdef"><b>Definition:</b> associator.hpp:84</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('group__functions_ga8f4895e6ad347a36555
 <p><b>Return value</b></p>
 <ol type="1">
 <li>Returns the difference z0*(z1*z2)-(z0*z1)*z2. (always exactly zero up to quaternion)</li>
-<li>Same, but always do the computation. (up to quaternions, non zero result is merely the floating point associativity default)</li>
+<li>Same, but always do the computation. (up to quaternions, non zero result is merely the floating point associativity rounding error)</li>
 </ol>
 <h2 class="groupheader">External references </h2>
 <ul>
