@@ -13,13 +13,14 @@ namespace kyosu
   template<typename Options>
   struct ceil_t : eve::elementwise_callable<ceil_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return Z{kumi::map([](auto const& e) { return eve::ceil(e); }, z)}; }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::ceil(v); }
+    {
+      if constexpr(eve::floating_value<Z>)
+        return eve::ceil(z);
+      else
+        return Z{kumi::map([](auto const& e) { return eve::ceil(e); }, z)};
+    }
 
     KYOSU_CALLABLE_OBJECT(ceil_t, ceil_);
 };
@@ -41,8 +42,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T ceil(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T ceil(T z) noexcept;
+//!     template<kyosu::concepts::cayley_dickson_like T> constexpr T ceil(T z) noexcept;
 //!   }
 //!   @endcode
 //!
