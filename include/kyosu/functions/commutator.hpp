@@ -18,8 +18,6 @@ namespace kyosu
       KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const
       noexcept -> decltype(z0+z1)
     {
-      constexpr size_t dZ0 = dimension_v<Z0>;
-      constexpr size_t dZ1 = dimension_v<Z1>;
       if constexpr((concepts::complex_like<Z0> && concepts::complex_like<Z1>) ||
                    (concepts::real<Z0> || concepts::real<Z1>))
         return  eve::zero(eve::as<decltype(z0+z1)>());
