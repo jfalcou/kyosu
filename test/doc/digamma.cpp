@@ -14,6 +14,7 @@ int main()
   std::cout
     << "---- simd" << std::endl
     << "<- zc               = " << zc << std::endl
+    << "<- ref2             = " << ref2 << std::endl
     << "-> digamma(zc)      = " << kyosu::digamma(zc)<< std::endl
     << "-> digamma(ref2)    = " << kyosu::digamma(ref2) << std::endl;
 

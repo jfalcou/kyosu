@@ -19,13 +19,14 @@ namespace kyosu
   template<typename Options>
   struct deta_t : eve::strict_elementwise_callable<deta_t, Options>
   {
-    template<concepts::cayley_dickson Z, eve::unsigned_scalar_value K>
-    KYOSU_FORCEINLINE constexpr Z operator()(K k, Z const& z) const noexcept
-    { return KYOSU_CALL(k, z); }
-
-    template<concepts::real V, eve::unsigned_scalar_value K>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(K k, V v) const noexcept
-    { return (*this)(k, complex(v)); }
+    template<concepts::cayley_dickson_like Z, eve::unsigned_scalar_value K>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(K k, Z const& z) const noexcept
+    {
+      if constexpr(concepts::real<Z>)
+        return (*this)(k, complex(z));
+      else
+        return KYOSU_CALL(k, z);
+    }
 
     KYOSU_CALLABLE_OBJECT(deta_t, deta_);
   };
