@@ -18,7 +18,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::reale<Z>)
+      if constexpr(concepts::real<Z>)
         return eve::csch(z);
       if constexpr(concepts::complex<Z> )
         return kyosu::rec(kyosu::sinh(z));
