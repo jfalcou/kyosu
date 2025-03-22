@@ -14,13 +14,14 @@ namespace kyosu
   template<typename Options>
   struct conj_t : eve::elementwise_callable<conj_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z z) const noexcept
-    { return Z{kumi::map_index([]<typename I>(I, auto m) { if constexpr(I::value>0) return -m; else return m;}, z)};}
-
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept { return v; }
+    {
+      if constexpr(eve::floating_value<Z>)
+        return z;
+      else
+        return Z{kumi::map_index([]<typename I>(I, auto m) { if constexpr(I::value>0) return -m; else return m;}, z)};
+    }
 
     KYOSU_CALLABLE_OBJECT(conj_t, conj_);
   };

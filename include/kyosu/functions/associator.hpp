@@ -23,17 +23,11 @@ namespace kyosu
         return (c0*c1)*c2 - c0*(c1*c2);
       else
       {
-        constexpr size_t dZ0 = dimension_v<Z0>;
-        constexpr size_t dZ1 = dimension_v<Z1>;
-        constexpr size_t dZ2 = dimension_v<Z2>;
-        if constexpr((dZ0 < 8 && dZ1 < 8 && dZ2 < 8) || (dZ0 == 1 || dZ1 == 1 || dZ2 == 1))
-        {
+        if constexpr((concepts::quaternion_like<Z0> && concepts::quaternion_like<Z1> && concepts::quaternion_like<Z2>) ||
+                     concepts::real<Z0> || concepts::real<Z1> || concepts::real<Z2>)
           return zero(as<decltype(c0+c1+c2)>());
-        }
         else
-        {
           return (c0*c1)*c2 - c0*(c1*c2);
-        }
       }
     }
 
