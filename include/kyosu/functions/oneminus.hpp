@@ -15,13 +15,9 @@ namespace kyosu
   template<typename Options>
   struct oneminus_t : eve::elementwise_callable<oneminus_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     { return inc(minus(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::oneminus(v); }
 
     KYOSU_CALLABLE_OBJECT(oneminus_t, oneminus_);
 };
@@ -43,8 +39,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T oneminus(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T oneminus(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T oneminus(T z) noexcept;
 //!   }
 //!   @endcode
 //!

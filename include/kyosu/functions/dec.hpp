@@ -13,16 +13,12 @@ namespace kyosu
   template<typename Options>
   struct dec_t : eve::elementwise_callable<dec_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z c) const noexcept
     {
       real(c) = eve::dec(real(c));
       return c;
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::dec(v); }
 
     KYOSU_CALLABLE_OBJECT(dec_t, dec_);
 };
