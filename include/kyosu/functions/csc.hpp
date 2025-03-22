@@ -15,13 +15,16 @@ namespace kyosu
   template<typename Options>
   struct csc_t : eve::elementwise_callable<csc_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return kyosu::rec(kyosu::sin(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::csc(v); }
+    {
+      if constexpr(eve::floating_value<Z>)
+        return eve::csc(z);
+      if constexpr(concepts::complex<Z> )
+        return kyosu::rec(kyosu::sin(z));
+      else
+        return _::cayley_extend(*this, z);
+    }
 
     KYOSU_CALLABLE_OBJECT(csc_t, csc_);
 };
@@ -43,8 +46,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T csc(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T csc(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T csc(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -60,7 +62,6 @@ namespace kyosu
 //!   *  [Wolfram MathWorld: Cosecant](https://mathworld.wolfram.com/Cosecant.html)
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/csc.cpp}
 //======================================================================================================================
   inline constexpr auto csc = eve::functor<csc_t>;

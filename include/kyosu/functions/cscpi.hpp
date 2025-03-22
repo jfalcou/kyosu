@@ -17,13 +17,16 @@ namespace kyosu
   template<typename Options>
   struct cscpi_t : eve::elementwise_callable<cscpi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return kyosu::rec(kyosu::sinpi(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::cscpi(v); }
+    {
+      if constexpr(eve::floating_value<Z>)
+        return eve::cscpi(z);
+      if constexpr(concepts::complex<Z> )
+        return kyosu::rec(kyosu::sinpi(z));
+      else
+        return _::cayley_extend(*this, z);
+    }
 
     KYOSU_CALLABLE_OBJECT(cscpi_t, cscpi_);
 };
@@ -45,8 +48,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T cscpi(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr T cscpi(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T cscpi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
