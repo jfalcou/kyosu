@@ -21,7 +21,7 @@ template<typename Options>
             , concepts::cayley_dickson_like... Ts
             >
     requires(eve::same_lanes_or_scalar<T0, T1, Ts...>)
-    EVE_FORCEINLINE auto constexpr operator()(T0 t0, T1 t1, Ts...ts) const noexcept
+    EVE_FORCEINLINE typename result<T0,T1,Ts...>::type constexpr operator()(T0 t0, T1 t1, Ts...ts) const noexcept
     {
       return KYOSU_CALL(t0,t1,ts...);
     }
