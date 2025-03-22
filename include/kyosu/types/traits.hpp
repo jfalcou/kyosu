@@ -7,6 +7,7 @@
 //======================================================================================================================
 #pragma once
 
+#include "eve/traits/as_floating_point.hpp"
 #include <eve/as.hpp>
 #include <bit>
 
@@ -118,6 +119,15 @@ namespace kyosu
   requires( requires(Ts... ts) { typename as_cayley_dickson_n<std::max( {dimension_v<Ts>...} ), Ts...>::type; } )
   struct as_cayley_dickson : as_cayley_dickson_n<std::max( {dimension_v<Ts>...} ), Ts...>
   {};
+}
+
+namespace kyosu
+{
+  namespace _
+  {
+    template<typename T>
+    using common_real = eve::as_floating_point_t<as_real_type_t<T>>;
+  }
 
   //====================================================================================================================
   //! @brief Computes the best fitting Cayley-Dickson type from a series of types.
@@ -127,10 +137,9 @@ namespace kyosu
   template<typename... Ts>
   using as_cayley_dickson_t = typename as_cayley_dickson<Ts...>::type;
 
-
   template<auto Callable, typename... Ts>
   using expected_result_t = as_cayley_dickson_n_t < std::max( {dimension_v<Ts>...} )
-                                                  , decltype( Callable( std::declval<as_real_type_t<Ts>>()...) )
+                                                  , decltype( Callable( std::declval<_::common_real<Ts>>()...) )
                                                   >;
 
   using eve::as;
