@@ -14,8 +14,8 @@ namespace kyosu
   template<typename Options>
   struct mul_t : eve::strict_tuple_callable<mul_t, Options>
   {
-    template<typename... Ts>       struct result        { using type = expected_result_t<eve::mul,Ts...>; };
-    template<concepts::real... Ts> struct result<Ts...> { using type = eve::common_value_t<Ts...>; };
+    template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
+    template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
 
     template< concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1
             , concepts::cayley_dickson_like... Ts

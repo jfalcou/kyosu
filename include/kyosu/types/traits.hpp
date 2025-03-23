@@ -7,7 +7,6 @@
 //======================================================================================================================
 #pragma once
 
-#include "eve/traits/as_floating_point.hpp"
 #include <eve/as.hpp>
 #include <bit>
 
@@ -139,7 +138,7 @@ namespace kyosu
 
   template<auto Callable, typename... Ts>
   using expected_result_t = as_cayley_dickson_n_t < std::max( {dimension_v<Ts>...} )
-                                                  , decltype( Callable( std::declval<_::common_real<Ts>>()...) )
+                                                  , decltype( Callable( std::declval<as_real_type_t<Ts>>()...) )
                                                   >;
 
   using eve::as;
