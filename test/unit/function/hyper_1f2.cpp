@@ -23,7 +23,8 @@ TTS_CASE_TPL ( "Check hyper 0f2"
 //    r_t I = r_t(0.0, 1.0);
     auto cinf = kyosu::cinf(eve::as<r_t>());
     auto fnan = kyosu::fnan(eve::as<r_t>());
-    r_t res[] = {cinf,
+    auto  nan = kyosu::nan(eve::as<r_t>());
+    r_t res[] = {nan,
                  cinf,
                  r_t(1.3866990577793,0),
                  r_t(1.3866990577793,0),
