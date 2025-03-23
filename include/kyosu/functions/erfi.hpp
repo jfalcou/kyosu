@@ -19,10 +19,17 @@ namespace kyosu
   template<typename Options>
   struct erfi_t : eve::elementwise_callable<erfi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
+      if constexpr(concepts::real<Z> )
+      {
+        auto over = eve::sqr(z) > 720;
+        auto r = eve::inf(eve::as(z))*eve::sign(z);
+        r = eve::if_else(over, r, -imag(kyosu::erf(complex(eve::zero(eve::as(z)), -z))));
+        return complex(r);
+      }
+      else  if constexpr(concepts::complex<Z> )
       {
         if (eve::all(is_real(z)))
           return complex((*this)(real(z)));
@@ -33,15 +40,6 @@ namespace kyosu
       {
         return _::cayley_extend(*this, z);
       }
-    }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V z) const noexcept
-    {
-      auto over = eve::sqr(z) > 720;
-      auto r = eve::inf(eve::as(z))*eve::sign(z);
-      r = eve::if_else(over, r, -imag(kyosu::erf(complex(eve::zero(eve::as(z)), -z))));
-      return complex(r);
     }
 
     KYOSU_CALLABLE_OBJECT(erfi_t, erfi_);
@@ -64,8 +62,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>              constexpr auto erfi(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto erfi(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> erfi(T z) noexcept;
 //!   }
 //!   @endcode
 //!

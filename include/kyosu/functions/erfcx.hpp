@@ -15,10 +15,12 @@ namespace kyosu
   template<typename Options>
   struct erfcx_t : eve::elementwise_callable<erfcx_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
+      if constexpr(concepts::real<Z> )
+        return eve::erfcx(z);
+      else if constexpr(concepts::complex<Z> )
       {
         auto realz = is_real(z);
         if (eve::all(realz))
@@ -33,10 +35,6 @@ namespace kyosu
         return _::cayley_extend(*this, z);
       }
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::erfcx(v); }
 
     KYOSU_CALLABLE_OBJECT(erfcx_t, erfcx_);
 };
@@ -59,8 +57,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::ordered_value T>              constexpr auto erfcx(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto erfcx(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto erfcx(T z) noexcept;  //2
 //!   }
 //!   @endcode
 //!
@@ -70,9 +67,8 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z return eve::erfcx(z).
-//!
-//!   2. The value of the normalized complementary error function is returned.
+//!   - A real input typed z calls eve::erfcx.
+//!   - The value of the normalized complementary error function is returned.
 //!
 //!  @groupheader{External references}
 //!   *  [Wikipedia: Error function](https://en.wikipedia.org/wiki/Error_function)

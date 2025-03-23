@@ -13,12 +13,15 @@ namespace kyosu
   template<typename Options>
   struct sqr_t : eve::elementwise_callable<sqr_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z c) const noexcept
     {
-      if constexpr(kyosu::dimension_v<Z> <= 2)
+      if constexpr(concepts::real<Z>)
+        return eve::sqr(c);
+      else if constexpr(concepts::complex<Z>)
       {
-        return c*c;
+        auto [zr, zi] = c;
+        return complex((zr-zi)*(zi+zr), 2 * zr * zi);
       }
       else
       {
@@ -31,10 +34,6 @@ namespace kyosu
         return r+a*c;
       }
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::sqr(v); }
 
     KYOSU_CALLABLE_OBJECT(sqr_t, sqr_);
 };
@@ -56,8 +55,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T sqr(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T sqr(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T sqr(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -67,7 +65,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the square of its argument. i.e. `z*z` in an optimized way.
+//!     Returns the square of its argument. i.e. `z*z` in an optimized way, if possible.
 //!
 //!  @groupheader{Example}
 //!
