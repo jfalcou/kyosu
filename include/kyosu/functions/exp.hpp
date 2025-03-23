@@ -17,10 +17,12 @@ namespace kyosu
   template<typename Options>
   struct exp_t : eve::elementwise_callable<exp_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
+      if constexpr(concepts::real<Z> )
+        return eve::exp(z);
+      else if constexpr(concepts::complex<Z> )
       {
         auto [rz, iz] = z;
         auto [s, c]   = eve::sincos(iz);
@@ -35,10 +37,6 @@ namespace kyosu
         return _::cayley_extend(*this, z);
       }
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::exp(v); }
 
     KYOSU_CALLABLE_OBJECT(exp_t, exp_);
 };
@@ -60,9 +58,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr T exp(T z) noexcept; //1
-//!      template<kyosu::concepts::complex T>        constexpr T exp(T z) noexcept; //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T exp(T z) noexcept; //3
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T exp(T z) noexcept; //3
 //!   }
 //!   @endcode
 //!
@@ -72,26 +68,26 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. Returns the exponential of the argument, calling `eve::exp`.
+//!      - Returns the exponential of the argument, calling `eve::exp`.
 //!
-//!     2. Returns the exponential of the complex input following IEEE standards:
+//!      - For complex inpus, returns the exponential of the complex input following IEEE standards:
 //!
-//!      * for every z: `exp(conj(z)) == conj(exp(z))`
-//!      * If z is \f$\pm0\f$, the result is \f$1\f$
-//!      * If z is \f$x+i \infty\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
-//!      * If z is \f$x+i \textrm{NaN}\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
-//!      * If z is \f$+\infty+i 0\f$, the result is \f$+\infty\f$
-//!      * If z is \f$-\infty+i y\f$ (for any finite y), the result is \f$+0 e^{iy}\f$.
-//!      * If z is \f$+\infty+i y\f$ (for any finite nonzero y), the result is \f$+\infty e^{iy}\f$.
-//!      * If z is \f$-\infty+i \infty\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified)
-//!      * If z is \f$+\infty+i \pm\infty\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
-//!      * If z is \f$-\infty+i \textrm{NaN}\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified).
-//!      * If z is \f$\pm\infty+i \textrm{NaN}\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
-//!      * If z is \f$\textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$.
-//!      * If z is \f$\textrm{NaN}+i y\f$ (for any nonzero y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
-//!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+//!       * for every z: `exp(conj(z)) == conj(exp(z))`
+//!       * If z is \f$\pm0\f$, the result is \f$1\f$
+//!       * If z is \f$x+i \infty\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+//!       * If z is \f$x+i \textrm{NaN}\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+//!       * If z is \f$+\infty+i 0\f$, the result is \f$+\infty\f$
+//!       * If z is \f$-\infty+i y\f$ (for any finite y), the result is \f$+0 e^{iy}\f$.
+//!       * If z is \f$+\infty+i y\f$ (for any finite nonzero y), the result is \f$+\infty e^{iy}\f$.
+//!       * If z is \f$-\infty+i \infty\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified)
+//!       * If z is \f$+\infty+i \pm\infty\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
+//!       * If z is \f$-\infty+i \textrm{NaN}\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified).
+//!       * If z is \f$\pm\infty+i \textrm{NaN}\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
+//!       * If z is \f$\textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$.
+//!       * If z is \f$\textrm{NaN}+i y\f$ (for any nonzero y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+//!       * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
 //!
-//!     3.  Returns \f$e^{z_0}(\cos|\underline{z}|+\underline{z}\; \mathop{sinc}|\underline{z}|)\f$
+//!     - For generate cayley-dickson inputs, returns \f$e^{z_0}(\cos|\underline{z}|+\underline{z}\; \mathop{sinc}|\underline{z}|)\f$
 //!
 //!  @groupheader{Example}
 //!

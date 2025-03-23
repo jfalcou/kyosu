@@ -15,13 +15,14 @@ namespace kyosu
   template<typename Options>
   struct expx2_t : eve::elementwise_callable<expx2_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return exp(sqr(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::expx2(v); }
+    {
+      if constexpr(concepts::real<Z> )
+        return eve::expx2(z);
+      else
+        return exp(sqr(z));
+    }
 
     KYOSU_CALLABLE_OBJECT(expx2_t, expx2_);
 };
@@ -43,8 +44,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T expx2(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T expx2(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T expx2(T z) noexcept;
 //!   }
 //!   @endcode
 //!
