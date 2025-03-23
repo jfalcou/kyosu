@@ -14,7 +14,7 @@ namespace kyosu
   template<typename Options>
   struct chi_t : eve::strict_elementwise_callable<chi_t, Options>
   {
-    template<concepts::cayley_dickson Z, typename B>
+    template<concepts::cayley_dickson_like Z, typename B>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& x, B const & b) const noexcept
     {
       auto z = kyosu::if_else(b(x), one(as(x)), zero);
@@ -23,10 +23,6 @@ namespace kyosu
       else
         return z;
     }
-
-    template<concepts::real V, typename B>
-    KYOSU_FORCEINLINE constexpr V operator()(V v, B const & b) const noexcept
-    { return eve::chi(v, b); }
 
     KYOSU_CALLABLE_OBJECT(chi_t, chi_);
 };
@@ -48,7 +44,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      constexpr auto chi(value auto z, auto belongs)                              noexcept;
+//!      template <concepts::cayley_dickson_like Z> constexpr Z chi(Z z, auto belongs)                              noexcept;
 //!   }
 //!   @endcode
 //!
