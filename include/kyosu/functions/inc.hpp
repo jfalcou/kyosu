@@ -13,16 +13,12 @@ namespace kyosu
   template<typename Options>
   struct inc_t : eve::elementwise_callable<inc_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z c) const noexcept
     {
       real(c) = eve::inc(real(c));
       return c;
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::inc(v); }
 
     KYOSU_CALLABLE_OBJECT(inc_t, inc_);
 };
@@ -44,8 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T inc(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T inc(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T inc(T z) noexcept;
 //!   }
 //!   @endcode
 //!

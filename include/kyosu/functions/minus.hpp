@@ -13,13 +13,9 @@ namespace kyosu
   template<typename Options>
   struct minus_t : eve::elementwise_callable<minus_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {     return -z; }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::minus(v); }
 
     KYOSU_CALLABLE_OBJECT(minus_t, minus_);
 };
