@@ -48,7 +48,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto deta(unsigned_scalar_value auto k, auto z) noexcept;
+//!     constexpr template<concepts::cayley_dickson_like Z> complexify_t<Z> deta(unsigned_scalar_value auto k, Z z) noexcept;
 //!   }
 //!   @endcode
 //!

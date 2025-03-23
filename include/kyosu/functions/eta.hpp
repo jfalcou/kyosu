@@ -40,7 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<unsigned_scalar_value K, kyosu::concepts::cayley_dickson T> constexpr auto eta(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto eta(T z) noexcept;
 //!   }
 //!   @endcode
 //!
