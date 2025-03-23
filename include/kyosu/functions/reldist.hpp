@@ -15,29 +15,13 @@
 namespace kyosu
 {
   template<typename Options>
-  struct reldist_t : eve::strict_elementwise_callable<reldist_t, Options, eve::numeric_option>
+  struct reldist_t : eve::strict_elementwise_callable<reldist_t, Options, eve::pedantic_option, eve::numeric_option>
   {
-    template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::dist(c0, c1))
     {
-      auto d = dist(c0, c1);
-      auto r = d/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
-      if (Options::contains(eve::numeric))
-        return if_else (kyosu::is_equal(c0, c1) || (kyosu::is_nan(c0) && kyosu::is_nan(c1)),  zero,  r);
-      else
-        return r;
-    }
-
-    template<concepts::real Z0, concepts::real Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(eve::reldist(c0,c1))
-    {
-      auto d = dist(c0, c1);
-      auto r = d/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0))));
-      if (Options::contains(eve::numeric))
-        return if_else (is_equal(c0, c1) || (is_nan(c0) && is_nan(c1)),  zero,  r);
-      else
-        return r;
+      auto d = dist[this->options()](c0, c1);
+      return if_else( is_infinite(d) || is_eqz(d), d, d/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0)))));
     }
 
     KYOSU_CALLABLE_OBJECT(reldist_t, reldist_);
@@ -60,7 +44,12 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto reldist(auto z0, auto z1) noexcept;
+//!     // regular call
+//!     constexpr auto reldist(auto z0, auto z1) noexcept;           //1
+//!
+//!     // Semantic modifyiers
+//!     constexpr auto reldist[pedantic](auto z0, auto z1) noexcept; //2
+//!     constexpr auto reldist[numeric](auto z0, auto z1) noexcept;  //3
 //!   }
 //!   @endcode
 //!
@@ -70,9 +59,11 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the the relative distance computed as the absolute value of the arguments difference
-//!     divided by the maximum of their absolute values and 1.
-//!
+//!      1. Returns the the relative distance computed as the absolute value of the arguments difference given by `dist`
+//!        divided by the maximum of their absolute values and 1.
+//!      2. if the pedantic option is used the distance betwween an infinite value an anything (even a nan) is infinite.
+//!      3. the numeric option implies pedantic and also return zero if all corresponding parts satisfy `eve::is_equal[numeric]`.
+
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/reldist.cpp}
