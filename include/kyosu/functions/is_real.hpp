@@ -13,7 +13,7 @@ namespace kyosu
   template<typename Options>
   struct is_real_t : eve::elementwise_callable<is_real_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z c) const noexcept
     {
       if constexpr(kyosu::concepts::real<Z>)
@@ -52,8 +52,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_real(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto is_real(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_real(T z) noexcept;
 //!   }
 //!   @endcode
 //!
