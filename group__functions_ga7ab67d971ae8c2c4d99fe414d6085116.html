@@ -146,11 +146,10 @@ $(document).ready(function(){initNavTree('group__functions_ga7ab67d971ae8c2c4d99
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
-<div class="line">   template&lt;<a class="code hl_namespace" href="namespacekyosu.html">kyosu</a>::<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">concepts::cayley_dickson</a> T&gt; constexpr auto <a class="code hl_variable" href="group__functions_ga7ab67d971ae8c2c4d99fe414d6085116.html#ga7ab67d971ae8c2c4d99fe414d6085116">is_nez</a>(T z) noexcept;</div>
-<div class="line">   template&lt;eve::floating_ordered_value T&gt;     constexpr auto <a class="code hl_variable" href="group__functions_ga7ab67d971ae8c2c4d99fe414d6085116.html#ga7ab67d971ae8c2c4d99fe414d6085116">is_nez</a>(T z) noexcept;</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7ab67d971ae8c2c4d99fe414d6085116.html#ga7ab67d971ae8c2c4d99fe414d6085116">is_nez</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="aconceptkyosu_1_1concepts_1_1cayley__dickson_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a></div><div class="ttdoc">General Cayley-dickson concept.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:41</div></div>
-<div class="ttc" id="agroup__functions_ga7ab67d971ae8c2c4d99fe414d6085116_html_ga7ab67d971ae8c2c4d99fe414d6085116"><div class="ttname"><a href="group__functions_ga7ab67d971ae8c2c4d99fe414d6085116.html#ga7ab67d971ae8c2c4d99fe414d6085116">kyosu::is_nez</a></div><div class="ttdeci">constexpr auto is_nez</div><div class="ttdoc">test the parameter for non-equality to zero.</div><div class="ttdef"><b>Definition:</b> is_nez.hpp:61</div></div>
+<div class="ttc" id="agroup__functions_ga7ab67d971ae8c2c4d99fe414d6085116_html_ga7ab67d971ae8c2c4d99fe414d6085116"><div class="ttname"><a href="group__functions_ga7ab67d971ae8c2c4d99fe414d6085116.html#ga7ab67d971ae8c2c4d99fe414d6085116">kyosu::is_nez</a></div><div class="ttdeci">constexpr auto is_nez</div><div class="ttdoc">test the parameter for non-equality to zero.</div><div class="ttdef"><b>Definition:</b> is_nez.hpp:58</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
