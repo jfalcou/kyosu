@@ -156,8 +156,7 @@ $(document).ready(function(){initNavTree('group__functions_gaa2dcdb1644aa5086e76
 <li><code>z0</code>, <code>z1</code>: Values to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the dot product of z0 and z1: z0*conj(z1). Arguments can be a mix of floating or Cayley-Dickson values.</p>
-<p><code><a class="el" href="group__functions_gaa2dcdb1644aa5086e764ee6de919ad93.html#gaa2dcdb1644aa5086e764ee6de919ad93" title="Computes elementwise the dot product of the coordinates of the corresponding element.">dot(z0, z0)</a></code> is always semantically equivalent to <code><a class="el" href="group__functions_ga297cbe86ab12760ec934f76879f805d0.html#ga297cbe86ab12760ec934f76879f805d0" title="Computes the squared sqr_absolute value of the parameter.">sqr_abs(z0)</a></code>, but return a caley-dickson.</p>
+<p>Returns the dot product of <code>z0</code> and <code>z1</code>: <code>z0*conj(z1)</code>. Arguments can be a mix of floating or Cayley-Dickson values. for real typed inputs the result is real typed.</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

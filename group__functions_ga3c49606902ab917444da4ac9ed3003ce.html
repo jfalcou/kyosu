@@ -147,16 +147,26 @@ $(document).ready(function(){initNavTree('group__functions_ga3c49606902ab917444d
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga3c49606902ab917444da4ac9ed3003ce.html#ga3c49606902ab917444da4ac9ed3003ce">dist</a>(<span class="keyword">auto</span> z0,  <span class="keyword">auto</span> z1) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="comment">// regular call</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga3c49606902ab917444da4ac9ed3003ce.html#ga3c49606902ab917444da4ac9ed3003ce">dist</a>(<span class="keyword">auto</span> z0,  <span class="keyword">auto</span> z1)           <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Semantic modifyiers</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga3c49606902ab917444da4ac9ed3003ce.html#ga3c49606902ab917444da4ac9ed3003ce">dist</a>[pedantic](<span class="keyword">auto</span> z0,  <span class="keyword">auto</span> z1) <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga3c49606902ab917444da4ac9ed3003ce.html#ga3c49606902ab917444da4ac9ed3003ce">dist</a>[numeric](<span class="keyword">auto</span> z0,  <span class="keyword">auto</span> z1) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga3c49606902ab917444da4ac9ed3003ce_html_ga3c49606902ab917444da4ac9ed3003ce"><div class="ttname"><a href="group__functions_ga3c49606902ab917444da4ac9ed3003ce.html#ga3c49606902ab917444da4ac9ed3003ce">kyosu::dist</a></div><div class="ttdeci">constexpr auto dist</div><div class="ttdoc">Computes the distance between the two parameters.</div><div class="ttdef"><b>Definition:</b> dist.hpp:67</div></div>
+<div class="ttc" id="agroup__functions_ga3c49606902ab917444da4ac9ed3003ce_html_ga3c49606902ab917444da4ac9ed3003ce"><div class="ttname"><a href="group__functions_ga3c49606902ab917444da4ac9ed3003ce.html#ga3c49606902ab917444da4ac9ed3003ce">kyosu::dist</a></div><div class="ttdeci">constexpr auto dist</div><div class="ttdoc">Computes the distance between the two parameters.</div><div class="ttdef"><b>Definition:</b> dist.hpp:91</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z0</code>, <code>z1</code>: Values to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the distance between the two arguments computed as the absolute value of the arguments difference. Arguments can be a mix of floating or Cayley-Dickson values.</p>
+<ol type="1">
+<li>Returns the distance between the two arguments computed as the absolute value of the arguments difference. The distance betwween an infinite an a nan value is nan</li>
+<li>if the pedantic option is used the distance betwween an infinite value an anything (even a nan) is infinite.</li>
+<li>the numeric option implies pedantic return zero if all corresponding parts satisfy <code>eve::is_equal[numeric]</code>.</li>
+</ol>
+<p>Arguments can be a mix of floating or Cayley-Dickson values.</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
