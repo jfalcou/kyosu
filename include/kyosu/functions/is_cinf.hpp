@@ -42,7 +42,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_cinf(T z) noexcept; /1
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_cinf(T z) noexcept;
 //!   }
 //!   @endcode
 //!
