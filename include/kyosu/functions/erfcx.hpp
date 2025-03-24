@@ -57,7 +57,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto erfcx(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto erfcx(T z) noexcept;
 //!   }
 //!   @endcode
 //!
