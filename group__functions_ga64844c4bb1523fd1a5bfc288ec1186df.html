@@ -147,8 +147,7 @@ $(document).ready(function(){initNavTree('group__functions_ga64844c4bb1523fd1a5b
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::ordered_value T&gt;              <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga64844c4bb1523fd1a5bfc288ec1186df.html#ga64844c4bb1523fd1a5bfc288ec1186df">faddeeva</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga64844c4bb1523fd1a5bfc288ec1186df.html#ga64844c4bb1523fd1a5bfc288ec1186df">faddeeva</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_ga64844c4bb1523fd1a5bfc288ec1186df.html#ga64844c4bb1523fd1a5bfc288ec1186df">faddeeva</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_ga64844c4bb1523fd1a5bfc288ec1186df_html_ga64844c4bb1523fd1a5bfc288ec1186df"><div class="ttname"><a href="group__functions_ga64844c4bb1523fd1a5bfc288ec1186df.html#ga64844c4bb1523fd1a5bfc288ec1186df">kyosu::faddeeva</a></div><div class="ttdeci">constexpr auto faddeeva</div><div class="ttdoc">Callable object computing  the scaled complex complementary error function.</div><div class="ttdef"><b>Definition:</b> faddeeva.hpp:66</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
@@ -157,7 +156,7 @@ $(document).ready(function(){initNavTree('group__functions_ga64844c4bb1523fd1a5b
 <li><code>z</code> : Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns \(e^{-z^2}\mathrm{erfc}(-iz)\) the scaled complex complementary error function</p>
+<p>Returns the Faddeeva function \( w(z) = e^{-z^2} \left(1+\frac{2i}{\sqrt\pi}\int_0^ze^{t^2}\mbox{d}t \right)\).</p>
 <h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://dlmf.nist.gov/7.21">DLMF: Error Functions</a></li>
