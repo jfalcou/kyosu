@@ -15,13 +15,14 @@ namespace kyosu
   struct dot_t : eve::strict_elementwise_callable<dot_t, Options>
   {
     template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept -> as_cayley_dickson_t<Z0, Z1>
-    { return z0*conj(z1);; }
-
-    template<concepts::real V0, concepts::real V1>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> decltype(v0*v1)
-    { return v0*v1; }
+    requires(concepts::cayley_dickson_like<Z0> || concepts::cayley_dickson_like<Z1>)
+      KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const & z1) const noexcept -> decltype(z0+z1)
+    {
+      if constexpr(concepts::real<Z0> && concepts::real<Z1>)
+        return z0*z1;
+      else
+        return z0*conj(z1);
+    }
 
     KYOSU_CALLABLE_OBJECT(dot_t, dot_);
 };
@@ -53,10 +54,9 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the dot product of z0 and z1: z0*conj(z1).
+//!     Returns the dot product of `z0` and `z1`: `z0*conj(z1)`.
 //!     Arguments can be a mix of floating or Cayley-Dickson values.
-//!
-//!     `dot(z0, z0)` is always semantically equivalent to `sqr_abs(z0)`, but return a caley-dickson.
+//!     for real typed inputs the result is real typed.
 //!
 //!  @groupheader{Example}
 //!

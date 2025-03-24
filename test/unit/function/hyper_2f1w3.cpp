@@ -19,7 +19,7 @@ TTS_CASE_TPL ( "Check hyper 2F1"
   auto pr = tts::prec<T>(4.0e-3, 1.0e-8);
   using r_t = kyosu::cayley_dickson<T, 2>;
   r_t I = r_t(0.0, 1.0);
-  r_t cinf = kyosu::cinf(eve::as<r_t>());
+  r_t  nan = kyosu::nan(eve::as<r_t>());
   if constexpr(sizeof(T) == 8)
   {
     {
@@ -27,7 +27,7 @@ TTS_CASE_TPL ( "Check hyper 2F1"
       eve::wide a{-2.0, 1.0, 2.0, 1.5};
       eve::wide b{1.0, -2.0, 1.0, 2.0};
       eve::wide c{-3.5, -3.5, -3.0, -3.0};
-      eve::wide res{1.34285714285714 + 0*I, 1.34285714285714 + 0*I, cinf, cinf};
+      eve::wide res{1.34285714285714 + 0*I, 1.34285714285714 + 0*I, nan, nan};
       auto r =  kyosu::hypergeometric(z, kumi::tuple{a, b}, kumi::tuple{c});
       TTS_RELATIVE_EQUAL(r, res, pr);
     }
@@ -104,7 +104,7 @@ TTS_CASE_TPL ( "Check hyper 2F1"
       eve::wide a{-2.0f, 1.0f, 2.0f, 1.5f};
       eve::wide b{1.0f, -2.0f, 1.0f, 2.0f};
       eve::wide c{-3.5f, -3.5f, -3.0f, -3.0f};
-      eve::wide res{1.34285714285714f + 0*I, 1.34285714285714f + 0*I, cinf, cinf};
+      eve::wide res{1.34285714285714f + 0*I, 1.34285714285714f + 0*I, nan, nan};
       auto r =  kyosu::hypergeometric(z, kumi::tuple{a, b}, kumi::tuple{c});
       TTS_RELATIVE_EQUAL(r, res, pr);
     }
