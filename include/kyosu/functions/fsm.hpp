@@ -14,14 +14,15 @@ namespace kyosu
   template<typename Options>
   struct fsm_t : eve::strict_elementwise_callable<fsm_t, Options>
   {
-    template<typename Z0, typename Z1, typename Z2>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1> || concepts::cayley_dickson<Z2>)
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1, Z2 const & z2) const noexcept -> decltype(z0+z1+z2)
-    { return z1*z2-z0; }
-
-    template<concepts::real V0, concepts::real V1, concepts::real V2>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1, V2 v2) const noexcept -> decltype(v0+v1+v2)
-    { return eve::fsm(v0,v1,v2); }
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like Z2>
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1, Z2 const & z2)
+      const noexcept -> decltype(z0+z1+z2)
+    {
+      if constexpr(concepts::real<Z0> && concepts::real<Z1> && concepts::real<Z2>)
+          return eve::fsm(z0,z1,z2);
+      else
+        return  z1*z2-z0;
+    }
 
     KYOSU_CALLABLE_OBJECT(fsm_t, fsm_);
 };
