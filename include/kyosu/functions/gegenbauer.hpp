@@ -42,10 +42,6 @@ namespace kyosu
         return r;
       }
     }
-//     template<concepts::real N, concepts::real L, concepts::real Z>
-//     KYOSU_FORCEINLINE constexpr auto operator()(N n, L l, Z z) const noexcept -> decltype(n+l+complex(z))
-//     { return (*this)(complex(n), complex(l), complex(z)); }
-
 
     KYOSU_CALLABLE_OBJECT(gegenbauer_t, gegenbauer_);
   };
