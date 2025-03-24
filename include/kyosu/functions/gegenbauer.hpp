@@ -18,30 +18,30 @@ namespace kyosu
   struct gegenbauer_t : eve::strict_elementwise_callable<gegenbauer_t, Options
                                                          , eve::successor_option, eve::kind_1_option, eve::kind_2_option>
   {
-    template<concepts::cayley_dickson N, concepts::cayley_dickson L, concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr auto  operator()(N nn, L ll, Z zz) const noexcept -> decltype(nn+ll+zz)
+    template<concepts::cayley_dickson_like N, concepts::cayley_dickson_like L, concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr auto  operator()(N nn, L ll, Z zz) const noexcept -> complexify_t<decltype(nn+ll+zz)>
     {
-      using r_t = decltype(nn+ll+zz);
-      using u_t = eve::underlying_type_t<r_t>;
-      constexpr auto hf = eve::half(eve::as<u_t>());
-      auto n = r_t(nn);
-      auto l = r_t(ll);
-      auto l2 = 2*l;
-      auto z = r_t(zz);
-      n = if_else(_::is_negint(n+1), eve::next(real(n)), n);
-      l = if_else(_::is_negint(l+1), eve::next(real(l)), l);
-      auto a = kumi::tuple{-n, n+l2};
-      auto b = kumi::tuple{l+hf};
-      auto fac = kyosu::tgamma(n+2*l)*kyosu::tgamma_inv(l2)*kyosu::tgamma_inv(n+1);
-      auto hyp = hypergeometric(oneminus(z)*hf, a, b);
-      auto r = kyosu::if_else(kyosu::is_nan(fac) || is_nan(hyp), kyosu::cinf(eve::as<r_t>()), hyp*fac);
-      return r;
+      if constexpr(concepts::real<N> && concepts::real<L> && concepts::real<Z>)
+        return (*this)(nn, ll, complex(zz));
+      else
+      {
+        using r_t = decltype(nn+ll+zz);
+        using u_t = eve::underlying_type_t<r_t>;
+        constexpr auto hf = eve::half(eve::as<u_t>());
+        auto n = r_t(nn);
+        auto l = r_t(ll);
+        auto l2 = 2*l;
+        auto z = r_t(zz);
+        n = if_else(_::is_negint(n+1), eve::next(real(n)), n);
+        l = if_else(_::is_negint(l+1), eve::next(real(l)), l);
+        auto a = kumi::tuple{-n, n+l2};
+        auto b = kumi::tuple{l+hf};
+        auto fac = kyosu::tgamma(n+2*l)*kyosu::tgamma_inv(l2)*kyosu::tgamma_inv(n+1);
+        auto hyp = hypergeometric(oneminus(z)*hf, a, b);
+        auto r = kyosu::if_else(kyosu::is_nan(fac) || is_nan(hyp), kyosu::cinf(eve::as<r_t>()), hyp*fac);
+        return r;
+      }
     }
-
-    template<concepts::real N, concepts::real L, concepts::real Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(N n, L l, Z z) const noexcept -> decltype(n+l+complex(z))
-    { return (*this)(complex(n), complex(l), complex(z)); }
-
 
     KYOSU_CALLABLE_OBJECT(gegenbauer_t, gegenbauer_);
   };
