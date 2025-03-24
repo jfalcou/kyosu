@@ -13,7 +13,7 @@ namespace kyosu
   template<typename Options>
   struct is_unitary_t : eve::elementwise_callable<is_unitary_t, Options, eve::raw_option, eve::pedantic_option>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& c) const noexcept
     {
       using ar_t = decltype(kyosu::sqr_abs(c));
