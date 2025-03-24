@@ -16,18 +16,16 @@ namespace kyosu
   template<typename Options>
   struct gd_t : eve::elementwise_callable<gd_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
+      if constexpr(concepts::real<Z> )
+        return eve::gd(z);
+      else if constexpr(concepts::complex<Z> )
         return 2*kyosu::atan(tanh(z*kyosu::half(as(z))));
       else
         return kyosu::_::cayley_extend(*this, z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::gd(v); }
 
     KYOSU_CALLABLE_OBJECT(gd_t, gd_);
 };
@@ -49,8 +47,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T gd(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T gd(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T gd(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -60,7 +57,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the gudermanian of the argument.
+//!     - A real typed entry calls `eve::gd`
+//!     - Returns the gudermanian of the argument.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Gudermannian](https://mathworld.wolfram.com/Gudermannian.html)
