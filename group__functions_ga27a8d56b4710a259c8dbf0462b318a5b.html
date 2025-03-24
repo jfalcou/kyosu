@@ -147,17 +147,19 @@ $(document).ready(function(){initNavTree('group__functions_ga27a8d56b4710a259c8d
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga27a8d56b4710a259c8dbf0462b318a5b.html#ga27a8d56b4710a259c8dbf0462b318a5b">gd</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga27a8d56b4710a259c8dbf0462b318a5b.html#ga27a8d56b4710a259c8dbf0462b318a5b">gd</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_ga27a8d56b4710a259c8dbf0462b318a5b.html#ga27a8d56b4710a259c8dbf0462b318a5b">gd</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga27a8d56b4710a259c8dbf0462b318a5b_html_ga27a8d56b4710a259c8dbf0462b318a5b"><div class="ttname"><a href="group__functions_ga27a8d56b4710a259c8dbf0462b318a5b.html#ga27a8d56b4710a259c8dbf0462b318a5b">kyosu::gd</a></div><div class="ttdeci">constexpr auto gd</div><div class="ttdoc">Computes the gudermanian of the argument.</div><div class="ttdef"><b>Definition:</b> gd.hpp:73</div></div>
+<div class="ttc" id="agroup__functions_ga27a8d56b4710a259c8dbf0462b318a5b_html_ga27a8d56b4710a259c8dbf0462b318a5b"><div class="ttname"><a href="group__functions_ga27a8d56b4710a259c8dbf0462b318a5b.html#ga27a8d56b4710a259c8dbf0462b318a5b">kyosu::gd</a></div><div class="ttdeci">constexpr auto gd</div><div class="ttdoc">Computes the gudermanian of the argument.</div><div class="ttdef"><b>Definition:</b> gd.hpp:71</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the gudermanian of the argument.</p>
+<ul>
+<li>A real typed entry calls <code>eve::gd</code></li>
+<li>Returns the gudermanian of the argument.</li>
+</ul>
 <h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://mathworld.wolfram.com/Gudermannian.html">Wolfram MathWorld: Gudermannian</a></li>
