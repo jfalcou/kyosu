@@ -22,9 +22,9 @@ namespace kyosu
       if constexpr(Options::contains(eve::pedantic) || Options::contains(eve::numeric))
       {
         d = if_else(kyosu::is_infinite(c0) || kyosu::is_infinite(c1), eve::inf(as(d)), d);
-       if constexpr(concepts::real<Z0> && concepts::real<Z1>)
+        if constexpr(concepts::real<Z0> && concepts::real<Z1>)
         {
-          if constexpr (Options::contains(eve::pedantic)) d;
+          if constexpr (Options::contains(eve::pedantic)) return d;
           else return if_else(eve::is_equal[eve::numeric](c0, c1), zero, d);
         }
         else
