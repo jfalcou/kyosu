@@ -13,13 +13,13 @@ namespace kyosu
   template<typename Options>
   struct is_pure_t : eve::elementwise_callable<is_pure_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept { return eve::is_eqz(real(z)); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
+    {
+      return eve::is_eqz(real(z));
+    }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::is_eqz(v); }
-
-    KYOSU_CALLABLE_OBJECT(is_pure_t, is_pure_);
+     KYOSU_CALLABLE_OBJECT(is_pure_t, is_pure_);
   };
 
 //======================================================================================================================
@@ -39,8 +39,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T>    constexpr auto is_pure(T z) noexcept;
-//!      template<eve::floating_ordered_value T> constexpr auto is_pure(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T>    constexpr auto is_pure(T z) noexcept;
 //!   }
 //!   @endcode
 //!

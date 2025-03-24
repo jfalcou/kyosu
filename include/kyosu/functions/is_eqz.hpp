@@ -14,18 +14,15 @@ namespace kyosu
   template<typename Options>
   struct is_eqz_t : eve::elementwise_callable<is_eqz_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
-    { 
+    {
       return z == eve::zero(as(z));
     }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::is_eqz(v); }
-    
     KYOSU_CALLABLE_OBJECT(is_eqz_t, is_eqz_);
   };
-  
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -43,8 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_eqz(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto is_eqz(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_eqz(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -65,4 +61,3 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-

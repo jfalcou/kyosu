@@ -16,6 +16,10 @@ namespace kyosu
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z c) const noexcept
     {
+      if constexpr(kyosu::concepts::real<Z>)
+      {
+        return eve::true_(eve::as(c));
+      }
       if constexpr(kyosu::concepts::complex<Z>)
       {
         return eve::is_eqz(ipart(c));
@@ -26,9 +30,6 @@ namespace kyosu
         return kumi::all_of(c, [](auto const& e) { return eve::is_eqz(e); });
       }
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::true_(eve::as(v)); }
 
     KYOSU_CALLABLE_OBJECT(is_real_t, is_real_);
   };

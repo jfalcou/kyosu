@@ -13,15 +13,14 @@ namespace kyosu
   template<typename Options>
   struct is_cinf_t : eve::elementwise_callable<is_cinf_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
-//      return  eve::is_nan(kyosu::real(z)) && eve::is_pinf(kyosu::imag(z));
-      return  kyosu::is_nan(z) && kyosu::is_infinite(z);
+      if constexpr(concepts::real<Z>)
+        return eve::false_(eve::as(z));
+      else
+        return  kyosu::is_nan(z) && kyosu::is_infinite(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::false_(eve::as(v)); }
 
     KYOSU_CALLABLE_OBJECT(is_cinf_t, is_cinf_);
   };
@@ -43,8 +42,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_cinf(T z) noexcept; /1
-//!      template<eve::floating_ordered_value T>     constexpr auto is_cinf(T z) noexcept; /2
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_cinf(T z) noexcept; /1
 //!   }
 //!   @endcode
 //!
