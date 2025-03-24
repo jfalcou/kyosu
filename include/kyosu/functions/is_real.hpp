@@ -20,7 +20,7 @@ namespace kyosu
       {
         return eve::true_(eve::as(c));
       }
-      if constexpr(kyosu::concepts::complex<Z>)
+      else if constexpr(kyosu::concepts::complex<Z>)
       {
         return eve::is_eqz(ipart(c));
       }
