@@ -13,10 +13,14 @@ namespace kyosu
   template<typename Options>
   struct is_real_t : eve::elementwise_callable<is_real_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z c) const noexcept
     {
-      if constexpr(kyosu::concepts::complex<Z>)
+      if constexpr(kyosu::concepts::real<Z>)
+      {
+        return eve::true_(eve::as(c));
+      }
+      else if constexpr(kyosu::concepts::complex<Z>)
       {
         return eve::is_eqz(ipart(c));
       }
@@ -26,9 +30,6 @@ namespace kyosu
         return kumi::all_of(c, [](auto const& e) { return eve::is_eqz(e); });
       }
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::true_(eve::as(v)); }
 
     KYOSU_CALLABLE_OBJECT(is_real_t, is_real_);
   };
@@ -51,8 +52,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_real(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto is_real(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_real(T z) noexcept;
 //!   }
 //!   @endcode
 //!

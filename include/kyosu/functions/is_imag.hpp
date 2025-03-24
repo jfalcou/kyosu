@@ -13,14 +13,11 @@ namespace kyosu
   template<typename Options>
   struct is_imag_t : eve::elementwise_callable<is_imag_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
       return eve::is_eqz(real(z));
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::is_eqz(v); }
 
     KYOSU_CALLABLE_OBJECT(is_imag_t, is_imag_);
   };
@@ -41,8 +38,7 @@ namespace kyosu
 //!
 //!   @code
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_imag(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto is_imag(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_imag(T z) noexcept;
 //!   }
 //!   @endcode
 //!

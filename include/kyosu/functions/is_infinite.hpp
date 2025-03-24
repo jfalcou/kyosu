@@ -14,15 +14,12 @@ namespace kyosu
   template<typename Options>
   struct is_infinite_t : eve::elementwise_callable<is_infinite_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
       return kumi::any_of(z, [](auto e) { return eve::is_infinite(e); });
     }
-    
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::is_infinite(v); }
-    
+
     KYOSU_CALLABLE_OBJECT(is_infinite_t, is_infinite_);
   };
 
@@ -43,8 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_infinite(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto is_infinite(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_infinite(T z) noexcept;
 //!   }
 //!   @endcode
 //!

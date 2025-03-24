@@ -13,13 +13,16 @@ namespace kyosu
   template<typename Options>
   struct is_unitary_t : eve::elementwise_callable<is_unitary_t, Options, eve::raw_option, eve::pedantic_option>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& c) const noexcept
     {
       using ar_t = decltype(kyosu::sqr_abs(c));
       if constexpr(Options::contains(eve::pedantic))
       {
-        return kyosu::sqr_abs(c) == eve::one(eve::as<ar_t>());
+        if constexpr(concepts::real<Z>)
+          return eve::abs(c) == eve::one(eve::as(c));
+        else
+          return kyosu::sqr_abs(c) == eve::one(eve::as<ar_t>());
       }
       else
       {
@@ -28,9 +31,6 @@ namespace kyosu
         return eve::is_equal[eve::almost](kyosu::sqr_abs(c), eve::one(eve::as<ar_t>()));
       }
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::abs(v) == eve::one(eve::as(v)); }
 
     KYOSU_CALLABLE_OBJECT(is_unitary_t, is_unitary_);
   };
@@ -55,12 +55,10 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      Regular call
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_unitary(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto is_unitary(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_unitary(T z) noexcept;
 //!
 //!      Semantic modifyier
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_unitary[pedantic](T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto is_unitary[pedantic](T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_unitary[pedantic](T z) noexcept;
 //!   }
 //!   @endcode
 //!

@@ -13,13 +13,11 @@ namespace kyosu
   template<typename Options>
   struct is_denormal_t : eve::elementwise_callable<is_denormal_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& c) const noexcept
     {
       return kumi::any_of(c, [](auto const& e) { return eve::is_denormal(e); });
     }
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::is_denormal(v); }
 
     KYOSU_CALLABLE_OBJECT(is_denormal_t, is_denormal_);
   };
@@ -41,8 +39,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_denormal(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto is_denormal(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_denormal(T z) noexcept;
 //!   }
 //!   @endcode
 //!
