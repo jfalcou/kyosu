@@ -60,7 +60,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns `exp(i*z)`. (`i*i = -1`)
+//!     Returns `exp(i*z)`.
 //!
 //!  @groupheader{Example}
 //!
