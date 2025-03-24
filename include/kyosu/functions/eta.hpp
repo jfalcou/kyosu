@@ -15,13 +15,9 @@ namespace kyosu
   template<typename Options>
   struct eta_t : eve::elementwise_callable<eta_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     { return deta(1u, z); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(eta_t, eta_);
 };
@@ -44,8 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<unsigned_scalar_value K, eve::ordered_value T>              constexpr auto eta(T z) noexcept;  //1
-//!      template<unsigned_scalar_value K, kyosu::concepts::cayley_dickson T> constexpr auto eta(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto eta(T z) noexcept;
 //!   }
 //!   @endcode
 //!

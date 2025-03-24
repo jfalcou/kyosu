@@ -17,13 +17,14 @@ namespace kyosu
   template<typename Options>
   struct digamma_t : eve::elementwise_callable<digamma_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return  (*this)(complex(v)); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    {
+      if constexpr(concepts::real<Z>)
+        return (*this)(complex(z));
+      else
+        return  KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(digamma_t, digamma_);
 };
@@ -45,7 +46,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto  digamma(auto z) noexcept;
+//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> deta(Z z) noexcept;
 //!   }
 //!   @endcode
 //!
