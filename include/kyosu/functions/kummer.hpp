@@ -15,7 +15,7 @@ namespace kyosu
   template<typename Options>
   struct kummer_t : eve::strict_elementwise_callable<kummer_t, Options, regularized_option>
   {
-    template<typename Z, typename T1,  typename T2>
+    template<concepts::complex Z, typename T1,  typename T2>
     constexpr KYOSU_FORCEINLINE
     auto operator()(Z zz, T1 aa, T2 bb) const noexcept
     {
