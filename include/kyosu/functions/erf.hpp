@@ -19,13 +19,14 @@ namespace kyosu
   template<typename Options>
   struct erf_t : eve::elementwise_callable<erf_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::erf(v); }
+    {
+      if constexpr(concepts::real<Z> )
+        return eve::erf(z);
+      else
+        return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(erf_t, erf_);
 };
@@ -49,8 +50,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!   {  template<eve::floating_value T>             constexpr T erf(T z) noexcept;
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T erf(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T erf(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -60,7 +60,8 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   * The value of the error function is returned.
+//!   - A real input typed z calls eve::erf.
+//!   - The value of the error function is returned.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Erf](https://mathworld.wolfram.com/Erf.html)
@@ -83,15 +84,11 @@ namespace kyosu::_
   {
     if constexpr(concepts::complex<Z> )
     {
-      auto numeric_sqr = [](auto z){ // UNTIL DECORATORS ARE AT HAND
-        auto [zr, zi] = z;
-        return complex((zr-zi)*(zi+zr), 2 * zr * zi);
-      };
       auto x =  real(z);
       auto y =  imag(z);
       using real_t =  decltype(x);
       using r_t = eve::element_type_t<real_t>;
-      auto mz2 = -numeric_sqr(z);// -z^2, being careful of overflow
+      auto mz2 = -sqr(z);
       using A9 = kumi::result::generate_t<9, r_t>;
       constexpr std::array< A9, 97> coefs =
         {
