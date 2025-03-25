@@ -16,8 +16,8 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
-       KYOSU_CALL(z);
-  }
+      return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(is_not_fnan_t, is_not_fnan_);
   };
