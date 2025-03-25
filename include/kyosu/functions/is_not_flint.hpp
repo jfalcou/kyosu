@@ -17,11 +17,8 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
-     if constexpr(concepts::real<Z>)
-       return eve::is_not_flint(z);
-     else
-       return kyosu::is_not_real(z) || eve::is_not_flint(real(z));
-    }
+       KYOSU_CALL(z);
+  }
 
     KYOSU_CALLABLE_OBJECT(is_not_flint_t, is_not_flint_);
   };
@@ -63,4 +60,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+   template<typename Z, eve::callable_options O>
+   KYOSU_FORCEINLINE constexpr auto is_not_flint_(KYOSU_DELAY(), O const&, Z z) noexcept
+   {
+     if constexpr(concepts::real<Z>)
+       return eve::is_not_flint(z);
+     else
+       return kyosu::is_not_real(z) || eve::is_not_flint(real(z));
+  }
 }
