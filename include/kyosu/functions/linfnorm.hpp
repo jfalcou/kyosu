@@ -16,34 +16,13 @@ namespace kyosu
   template<typename Options>
   struct linfnorm_t : eve::strict_elementwise_callable<linfnorm_t, Options, kyosu::flat_option>
   {
-    template<typename Z1, typename ...Zs>
-    requires(concepts::cayley_dickson<Z1> || (concepts::cayley_dickson<Zs> || ...))
+
+    template<concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like... Zs>
+    requires(eve::same_lanes_or_scalar<Z1, Zs...>)
       KYOSU_FORCEINLINE constexpr auto  operator()(Z1 const & z1, Zs const & ...zs) const noexcept// -> decltype(eve::maxabs(real(z1), real(zs)...))
     {
-      if constexpr(Options::contains(kyosu::flat))
-      {
-        if constexpr(sizeof...(zs) == 0)
-          return eve::maxabs(kyosu::real(z1), kyosu::imag(z1));
-        else
-          return eve::maxabs(kumi::cat(kumi::make_tuple(kyosu::real(z1), kyosu::real(zs)...),
-                                     kumi::make_tuple(kyosu::imag(z1), kyosu::imag(zs)...)));
-      }
-      else
-      {
-        if constexpr(sizeof...(zs) == 0)
-          return kyosu::abs(z1);
-        else
-          return kyosu::maxabs(z1, zs...);
-      }
+      return KYOSU_CALL(z1, zs...);
     }
-
-    template<concepts::real V1, concepts::real ...Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(V1 v1, Vs... vs) const noexcept// -> decltype(eve::abs(v1+ vs...))
-    {
-      if constexpr(sizeof...(vs) == 0)
-        return eve::abs(v1);
-      else
-        return eve::maxabs(v1,vs...); }
 
     KYOSU_CALLABLE_OBJECT(linfnorm_t, linfnorm_);
 };
@@ -80,8 +59,8 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     1. Returns \f$ \max_{i = 0}^n |x_i| \f$. This is equivalent to a call to [lpnorm](@ref lpnorm) with `p` being `inf`
-//!     2. the `flat` option computes the infinite norm of the tuple of real and imaginary parts of the inputs, i.e.
-//!        \f$ \max_{i = 0}^n \max(|\real(x_i)|, |\imag(x_i)|)\f$.
+//!     2. the `flat` option computes the infinite norm of the tuple of real and other parts of the inputs. For instance for
+//!        complex entries:  \f$ \max_{i = 0}^n \max(|\real(x_i)|, |\ipart(x_i)|)\f$.
 //!
 //!  @groupheader{External references}
 //!   *  [Wikipedia: Error Function](https://en.wikipedia.org/wiki/Linf_space)
@@ -93,4 +72,33 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+namespace kyosu::_
+{
+  template<eve::callable_options O, typename Z1, typename... Zs>
+  EVE_FORCEINLINE constexpr auto linfnorm_(KYOSU_DELAY(), O const&, Z1 const& z1, Zs const& ... zs) noexcept
+  {
+    if constexpr(concepts::real<Z1> && (... && concepts::real<Zs>))
+    {
+      if constexpr(sizeof...(zs) == 0)
+        return eve::abs(z1);
+      else
+        return eve::maxabs(z1,zs...);
+    }
+    else if constexpr(O::contains(kyosu::flat))
+    {
+      if constexpr(sizeof...(zs) == 0)
+        return eve::maxabs(kyosu::real(z1), kyosu::imag(z1));
+      else
+        return eve::maxabs(kumi::cat(kumi::make_tuple(kyosu::real(z1), kyosu::real(zs)...),
+                                     kumi::make_tuple(kyosu::imag(z1), kyosu::imag(zs)...)));
+    }
+    else
+    {
+      if constexpr(sizeof...(zs) == 0)
+        return kyosu::abs(z1);
+      else
+        return kyosu::maxabs(z1, zs...);
+    }
+  }
 }

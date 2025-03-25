@@ -14,17 +14,11 @@ namespace kyosu
   template<typename Options>
   struct lerp_t : eve::strict_elementwise_callable<lerp_t, Options>
   {
-    template<typename Z0, typename Z1, typename Z2>
-    requires((concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)&& concepts::real<Z2>)
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::real Z2>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& c0, Z1 const & c1, Z2 const & t) const noexcept -> decltype(c0+c1+t)
     {
-      using r_t = as_cayley_dickson_t<Z0,Z1,Z2>;
-      return r_t{kumi::map([&t](auto const& e, auto const & f) { return eve::lerp(e, f, t); }, r_t(c0), r_t(c1))};
+      return KYOSU_CALL(c0, c1, t);
     }
-
-    template<concepts::real V0, concepts::real V1, concepts::real V2>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1, V2 v2) const noexcept -> decltype(v0+v1+v2)
-    { return eve::lerp(v0,v1,v2); }
 
     KYOSU_CALLABLE_OBJECT(lerp_t, lerp_);
 };
@@ -73,4 +67,19 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z0, typename Z1, typename Z2, eve::callable_options O>
+  constexpr KYOSU_FORCEINLINE auto lerp_(KYOSU_DELAY(), O const&, Z0 const& c0, Z1 const& c1, Z2 const& t)
+  {
+    if constexpr(concepts::real<Z0> && concepts::real<Z1>)
+      return eve::lerp(c0,c1,t);
+    else
+    {
+      using r_t = as_cayley_dickson_t<Z0,Z1,Z2>;
+      return r_t{kumi::map([&t](auto const& e, auto const & f) { return eve::lerp(e, f, t); }, r_t(c0), r_t(c1))};
+    }
+  }
 }
