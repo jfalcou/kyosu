@@ -14,22 +14,10 @@ namespace kyosu
   struct is_real_t : eve::elementwise_callable<is_real_t, Options>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z c) const noexcept
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z z) const noexcept
     {
-      if constexpr(kyosu::concepts::real<Z>)
-      {
-        return eve::true_(eve::as(c));
-      }
-      else if constexpr(kyosu::concepts::complex<Z>)
-      {
-        return eve::is_eqz(ipart(c));
-      }
-      else
-      {
-        get<0>(c) = eve::zero(eve::as(get<0>(c)));
-        return kumi::all_of(c, [](auto const& e) { return eve::is_eqz(e); });
-      }
-    }
+       KYOSU_CALL(z);
+  }
 
     KYOSU_CALLABLE_OBJECT(is_real_t, is_real_);
   };
@@ -72,4 +60,25 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+   template<typename Z, eve::callable_options O>
+   KYOSU_FORCEINLINE constexpr auto is_real_(KYOSU_DELAY(), O const&, Z z) noexcept
+   {
+      if constexpr(kyosu::concepts::real<Z>)
+      {
+        return eve::true_(eve::as(z));
+      }
+      else if constexpr(kyosu::concepts::complex<Z>)
+      {
+        return eve::is_eqz(ipart(z));
+      }
+      else
+      {
+        get<0>(z) = eve::zero(eve::as(get<0>(z)));
+        return kumi::all_of(z, [](auto const& e) { return eve::is_eqz(e); });
+      }
+  }
 }
