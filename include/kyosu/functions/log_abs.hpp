@@ -19,10 +19,7 @@ namespace kyosu
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z const& z) const noexcept
     {
-      if (Options::contains(eve::pedantic))
-        return  eve::log(kyosu::abs(z));
-      else
-        return kyosu::half(kyosu::as<as_real_type_t<Z>>())*eve::log(kyosu::sqr_abs(z));
+      return KYOSU_CALL(z);
     }
 
     template<concepts::real V>
@@ -49,11 +46,10 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto log_abs(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto log_abs(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto log_abs(T z) noexcept;
 //!
 //!      // Semantic modifyiers
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto log_abs[pedantic](T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto log_abs[pedantic](T z) noexcept;
 //!
 //!   }
 //!   @endcode
@@ -75,4 +71,15 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log_abs_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+      if (O::contains(eve::pedantic))
+        return  eve::log(kyosu::abs(z));
+      else
+        return kyosu::half(kyosu::as<as_real_type_t<Z>>())*eve::log(kyosu::sqr_abs(z));
+  }
 }
