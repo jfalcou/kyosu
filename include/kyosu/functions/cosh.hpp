@@ -19,28 +19,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(eve::floating_value<Z>)
-        return eve::cosh(z);
-      if constexpr(concepts::complex<Z> )
-      {
-        auto [rz, iz] = z;
-        auto [s, c]   = eve::sincos(iz);
-        auto [sh, ch] = eve::sinhcosh(rz);
-        auto r = c*ch;
-        auto i = s*sh;
-        i = eve::if_else(kyosu::is_eqz(kyosu::ipart(z)) || kyosu::is_real(z), eve::zero, i);
-        auto res = Z(r, i);
-        if (eve::any(kyosu::is_not_finite(z)))
-        {
-          res = eve::if_else(eve::is_infinite(rz) && eve::is_not_finite(iz), Z(eve::inf(eve::as(rz)), eve::nan(eve::as(rz))), res);
-          res = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz),        Z(eve::nan(eve::as(rz)), eve::nan(eve::as(rz))), res);
-        }
-        return res;
-      }
-      else
-      {
-        return _::cayley_extend(*this, z);
-      }
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(cosh_t, cosh_);
@@ -63,7 +42,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T cosh(T z) noexcept;
+//!     template<kyosu::concepts::cayley_dickson_like T> constexpr T cosh(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -104,4 +83,34 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  constexpr KYOSU_FORCEINLINE Z cosh_(KYOSU_DELAY(), O const&, Z const& z)
+  {
+    if constexpr(concepts::real<Z>)
+      return eve::cosh(z);
+    if constexpr(concepts::complex<Z> )
+    {
+      auto [rz, iz] = z;
+      auto [s, c]   = eve::sincos(iz);
+      auto [sh, ch] = eve::sinhcosh(rz);
+      auto r = c*ch;
+      auto i = s*sh;
+      i = eve::if_else(kyosu::is_eqz(kyosu::ipart(z)) || kyosu::is_real(z), eve::zero, i);
+      auto res = Z(r, i);
+      if (eve::any(kyosu::is_not_finite(z)))
+      {
+        res = eve::if_else(eve::is_infinite(rz) && eve::is_not_finite(iz), Z(eve::inf(eve::as(rz)), eve::nan(eve::as(rz))), res);
+        res = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz),        Z(eve::nan(eve::as(rz)), eve::nan(eve::as(rz))), res);
+      }
+      return res;
+    }
+    else
+    {
+      return _::cayley_extend(kyosu::cosh, z);
+    }
+  }
 }

@@ -42,8 +42,6 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr T cos(T z) noexcept; //1
-//!      template<kyosu::concepts::complex T>        constexpr T cos(T z) noexcept; //2
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T cos(T z) noexcept; //3
 //!   }
 //!   @endcode
@@ -54,12 +52,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. Returns the cosine of the argument.
-//!
-//!     2. The behavior of this function is equivalent to `eve::cosh(i*z)`.
-//!
-//!     3.  Returns \f$\cosh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\cos(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!     - Returns the cosine of the argument.
+//!     - The behavior of this function is equivalent to `eve::cosh(i*z)`.
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: complex cos](https://en.cppreference.com/w/cpp/numeric/complex/cos)
@@ -75,7 +69,7 @@ namespace kyosu
 //======================================================================================================================
 }
 
-namespace kyosu::_ 
+namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
   constexpr KYOSU_FORCEINLINE Z cos_(KYOSU_DELAY(), O const&, Z const& z)
