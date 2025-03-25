@@ -18,15 +18,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-      {
-        auto [s, c] = eve::sincos(z);
-        return  complex(c, s);
-      }
-      else
-      {
-        return kyosu::exp(muli(z));
-      }
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(exp_i_t, exp_i_);
@@ -70,4 +62,21 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr Z exp_i_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+    {
+      auto [s, c] = eve::sincos(z);
+      return  complex(c, s);
+    }
+    else
+    {
+      return kyosu::exp(muli(z));
+    }
+  }
 }
