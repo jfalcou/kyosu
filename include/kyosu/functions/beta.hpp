@@ -15,9 +15,9 @@ namespace kyosu
   template<typename Options>
   struct beta_t : eve::strict_elementwise_callable<beta_t, Options>
   {
-    template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const & z1) const noexcept -> complexify_t<decltype(z0+z1)>
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
+    requires(eve::same_lanes_or_scalar<Z0, Z1>)
+      KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const & z1) const noexcept -> complexify_t<decltype(z0+z1)>
     {
       if constexpr(concepts::real<Z0> && concepts::real<Z1>) return (*this)(complex(z0), complex(z1));
       else return KYOSU_CALL(z0, z1);
@@ -69,13 +69,12 @@ namespace kyosu
 //======================================================================================================================
 }
 
-
 namespace kyosu::_
 {
   template<typename Z0, typename Z1, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto beta_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
   {
-    if constexpr(kyosu::concepts::complex<Z0> && kyosu::concepts::complex<Z1>)
+    if constexpr(kyosu::concepts::complex_like<Z0> && kyosu::concepts::complex_like<Z1>)
     {
       auto y = z0 + z1;
       return tgamma(z0)*tgamma(z1)/tgamma(y);
