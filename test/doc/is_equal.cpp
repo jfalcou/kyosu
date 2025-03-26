@@ -19,6 +19,7 @@ int main()
   e_t e1(2);
   std::cout << e0 << ", " << e1 << " -> " << std::boolalpha << is_equal(e0, e1) << "\n";
   std::cout << e0 << ", " << e0 << " -> " << std::boolalpha << is_equal(e0, e0) << "\n";
+  std::cout << e0 << ", " << e0 << " -> " << std::boolalpha << is_equal[eve::numeric](e0, e0) << "\n";
   we_t we0(e0);
   we_t we1(e1);
   std::cout << we0 << ", " << we1 << " -> " << is_equal(we0, we1) << "\n";
@@ -28,6 +29,7 @@ int main()
   c_t c1(5, 9);
   std::cout << c0 << ", " << c1 << " -> " << std::boolalpha << is_equal(c0, c1) << "\n";
   std::cout << c0 << ", " << c0 << " -> " << std::boolalpha << is_equal(c0, c0) << "\n";
+  std::cout << c0 << ", " << c0 << " -> " << std::boolalpha << is_equal[eve::numeric](c0, c0) << "\n";
   wc_t wc0(c0, c1);
   wc_t wc1(c1, c1);
   std::cout << wc0 << ", " << wc1 << " -> " << is_equal(wc0, wc1) << "\n";
