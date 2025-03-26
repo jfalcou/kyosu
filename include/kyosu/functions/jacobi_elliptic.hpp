@@ -16,16 +16,15 @@ namespace kyosu
   struct jacobi_elliptic_t : eve::strict_elementwise_callable<jacobi_elliptic_t, Options, eve::modular_option,
                                                  eve::eccentric_option, eve::threshold_option>
   {
-    template<concepts::real T0, concepts::real T1>
+    template<concepts::complex_like T0, concepts::real T1>
     constexpr KYOSU_FORCEINLINE
-    auto operator()(T0 a, T1 b) const noexcept
-    { return (*this)(kyosu::complex(a), b); }
-
-    template<concepts::complex T0, concepts::real T1>
-    constexpr KYOSU_FORCEINLINE
-    auto operator()(T0 a, T1 b) const noexcept
-    { return KYOSU_CALL(a, b); }
-
+    auto operator()(T0 a, T1 b) const noexcept -> decltype(eve::zip(complexify_t<T0>(), complexify_t<T0>(), complexify_t<T0>()))
+    {
+      if constexpr(concepts::real<T0>)
+        return (*this)(kyosu::complex(a), b);
+      else
+        return KYOSU_CALL(a, b);
+    }
 
     KYOSU_CALLABLE_OBJECT(jacobi_elliptic_t, jacobi_elliptic_);
   };
@@ -46,16 +45,14 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      // Regular overload
-//!      template<eve;scalar_value U, kyosu::concepts::real Z>    constexpr Z    jacobi_elliptic(real<U> m, real<Z> z)                 noexcept; //1
-//!      template<eve;scalar_value U, kyosu::concepts::complex Z> constexpr auto jacobi_elliptic(real<U> m, complex<Z> z)              noexcept; //1
+//!      template<concepts::complex_like Z, concepts::real U> constexpr auto jacobi_elliptic Z z, U m)                             noexcept;
 //!
 //!      //Semantic modifiers
-//!      template<eve;scalar_value U, kyosu::concepts::real Z>    constexpr Z    jacobi_elliptic[modular](real<U> alpha, real<Z> z)        noexcept; //1
-//!      template<eve;scalar_value U, kyosu::concepts::complex Z> constexpr auto jacobi_elliptic[modular](real<U> alpha, complex<Z> z)     noexcept; //1
-//!      template<eve;scalar_value U, kyosu::concepts::real Z>    constexpr Z    jacobi_elliptic[eccentric](real<U> k, real<Z> z)          noexcept; //1
-//!      template<eve;scalar_value U, kyosu::concepts::complex Z> constexpr auto jacobi_elliptic[eccentric](real<U> k, complex<Z> z)       noexcept; //1
-//!      template<eve;scalar_value U, kyosu::concepts::complex Z> constexpr auto jacobi_elliptic[threshold = tol](real<U> t, real<Z> z)    noexcept; //1
-//!      template<eve;scalar_value U, kyosu::concepts::complex Z> constexpr auto jacobi_elliptic[threshold = tol](real<U> t, complex<Z> z) noexcept; //1
+//!      template<concepts::complex_like Z, concepts::real U> constexpr Z jacobi_elliptic[modular](Z z, U alpha)                   noexcept;
+//!      template<concepts::complex_like Z, concepts::real U> constexpr Z jacobi_elliptic[eccentric](Z z, U k)                     noexcept;
+//!      template<concepts::complex_like Z, concepts::real U> constexpr Z jacobi_elliptic[threshold = tol](Z z, U m)               noexcept;
+//!      template<concepts::complex_like Z, concepts::real U> constexpr Z jacobi_elliptic[threshold = tol][modular](Z z, U alpha)  noexcept;
+//!      template<concepts::complex_like Z, concepts::real U> constexpr Z jacobi_elliptic[threshold = tol][eccentric](Z z, U k)    noexcept;
 //!   }
 //!   @endcode
 //!
@@ -72,15 +69,16 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!      1. return the jacobian amplitude function. Take care that the meaning of the second parameters
-//!         depends on the option used (see note below).
+//!      - returns the jacobian amplitude function. Take care that the meaning of the second parameters
+//!         depends on the option(s) used (see note below).
+//!      - The threshold option can be used to choose an accuracy tolerance.
 //!
 //! @note
 //!   * \f$\alpha\f$ is named the modular angle given in radian (modular option).
 //!   * \f$ k = \sin\alpha \f$ is named the elliptic modulus or eccentricity (eccentric option).
 //!   * \f$ m = k^2 = \sin^2\alpha\f$ is named the parameter (no option).
 //!   Each of the above three quantities is completely determined by any of the others (given that they are non-negative).
-//!   Thus, they can be used interchangeably up to roundings erreors by giving the right option.
+//!   Thus, they can be used interchangeably up to roundings errors by giving the right option.
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: am](https://en.cppreference.com/w/cpp/numeric/special_functions/am)

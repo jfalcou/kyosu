@@ -16,27 +16,14 @@ namespace kyosu
   template<typename Options>
   struct log1p_t : eve::elementwise_callable<log1p_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    {    if constexpr(kyosu::concepts::complex<Z>)
-         {
-           auto m = kyosu::inc(z);
-           auto arg = [](auto zz){ return eve::atan2[eve::pedantic](kyosu::imag(zz), kyosu::real(zz));};
-           auto theta = eve::if_else((kyosu::is_real(m) && eve::is_nltz(kyosu::real(m))), eve::zero, arg(m)) ;
-           auto rz =  kyosu::real(z);
-           auto iz2 =  eve::sqr(kyosu::imag(z));
-           auto r = eve::half(eve::as(theta))*eve::log1p(rz*(rz+2)+iz2);
-           return complex(r, theta);
-         }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    {
+      if constexpr(concepts::real<Z>)
+        return (*this)(complex(z));
       else
-      {
-        return _::cayley_extend(*this, z);
-      }
+        return  KYOSU_CALL(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(log1p_t, log1p_);
 };
@@ -58,8 +45,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr complex_t<T> log1p(T z) noexcept; //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T log1p(T z) noexcept;            //2
+//!      template<kyosu::concepts::cayley_dickson_likeT> constexpr complexify_t<T> log1p(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -69,17 +55,37 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   1.  a real typed input z is treated as if `complex(z)` was entered.\n
-//!       For real and complex entries provision are made to get better precision near z = 0.
-//!
-//!   2.  returns [log](@ref kyosu::log)(1+z).
+//!     - A real typed input z is treated as if `complex(z)` was entered.\n
+//!     - For real and complex entries provisions are made to get better precision near z = 0.
+//!     - Returns [log](@ref kyosu::log)(1+z).
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/log1p.cpp}
 //======================================================================================================================
   inline constexpr auto log1p = eve::functor<log1p_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  constexpr auto log1p_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<Z>)
+    {
+      auto m = kyosu::inc(z);
+      auto arg = [](auto zz){ return eve::atan2[eve::pedantic](kyosu::imag(zz), kyosu::real(zz));};
+      auto theta = eve::if_else((kyosu::is_real(m) && eve::is_nltz(kyosu::real(m))), eve::zero, arg(m)) ;
+      auto rz =  kyosu::real(z);
+      auto iz2 =  eve::sqr(kyosu::imag(z));
+      auto r = eve::half(eve::as(theta))*eve::log1p(rz*(rz+2)+iz2);
+      return complex(r, theta);
+    }
+    else
+    {
+      return _::cayley_extend(kyosu::log1p, z);
+    }
+  }
 }
