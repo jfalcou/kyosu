@@ -14,35 +14,11 @@ namespace kyosu
   template<typename Options>
   struct cospi_t : eve::elementwise_callable<cospi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
-      {
-        auto [rz, iz] = z;
-        iz *= eve::pi(eve::as(iz));
-        auto [s, c]   = eve::sinpicospi(rz);
-        auto [sh, ch] = eve::sinhcosh(iz);
-        auto r = c*ch;
-        auto i = eve::if_else(is_imag(z) || kyosu::is_real(z),eve::zero, -s*sh);
-        if (eve::any(kyosu::is_not_finite(z)))
-        {
-          r = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::inf(eve::as(r)), r);
-          i = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::nan(eve::as(r)), i);
-          r = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, r);
-          i = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, i);
-        }
-        return kyosu::complex(r, i);
-      }
-      else
-      {
-        return _::cayley_extend(*this, z);
-      }
+      return KYOSU_CALL(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::cospi(v); }
 
     KYOSU_CALLABLE_OBJECT(cospi_t, cospi_);
 };
@@ -64,8 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T cospi(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T cospi(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T cospi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -85,4 +60,36 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  constexpr KYOSU_FORCEINLINE Z cospi_(KYOSU_DELAY(), O const&, Z const& z)
+  {
+    if constexpr(eve::floating_value<Z>)
+      return eve::cospi(z);
+    else if constexpr(concepts::complex<Z> )
+    {
+      auto [rz, iz] = z;
+      iz *= eve::pi(eve::as(iz));
+      auto [s, c]   = eve::sinpicospi(rz);
+      auto [sh, ch] = eve::sinhcosh(iz);
+      auto r = c*ch;
+      auto i = eve::if_else(is_imag(z) || kyosu::is_real(z),eve::zero, -s*sh);
+      if (eve::any(kyosu::is_not_finite(z)))
+      {
+        r = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::inf(eve::as(r)), r);
+        i = eve::if_else(eve::is_infinite(iz) && eve::is_not_finite(rz), eve::nan(eve::as(r)), i);
+        r = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, r);
+        i = eve::if_else(eve::is_nan(iz) && eve::is_infinite(rz), eve::allbits, i);
+      }
+      return kyosu::complex(r, i);
+    }
+    else
+    {
+      return _::cayley_extend(kyosu::cospi, z);
+    }
+  }
 }
