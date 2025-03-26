@@ -16,13 +16,11 @@ namespace kyosu
   template<typename Options>
   struct log_abs_gamma_t : eve::elementwise_callable<log_abs_gamma_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z const& z) const noexcept
-    {  return log_abs(tgamma(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return  (*this)(complex(v)); }
+    {
+      return  KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(log_abs_gamma_t, log_abs_gamma_);
   };
@@ -64,4 +62,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log_abs_gamma_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+      return eve::log_abs(eve::tgamma(z));
+    else
+      return kyosu::log_abs(kyosu::tgamma(z));
+  }
 }
