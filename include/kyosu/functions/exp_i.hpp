@@ -15,13 +15,11 @@ namespace kyosu
   template<typename Options>
   struct exp_i_t : eve::elementwise_callable<exp_i_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return kyosu::exp(muli(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    {
+      return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(exp_i_t, exp_i_);
 };
@@ -43,8 +41,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T exp_i(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T exp_i(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> exp_i(T z) noexcept;
+
 //!   }
 //!   @endcode
 //!
@@ -64,4 +62,21 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto exp_i_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+    {
+      auto [s, c] = eve::sincos(z);
+      return  complex(c, s);
+    }
+    else
+    {
+      return kyosu::exp(muli(z));
+    }
+  }
 }

@@ -15,29 +15,10 @@ namespace kyosu
   template<typename Options>
   struct exp_ipi_t : eve::elementwise_callable<exp_ipi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z>)
-      {
-        auto [rz, iz] = muli(z);
-        auto [s, c]   = eve::sinpicospi(iz);
-        auto rho = eve::exp(rz*eve::pi(eve::as(rz)));
-        return eve::if_else(kyosu::is_real(z) || rz == eve::minf(eve::as(rz)),
-                            kyosu::complex(rho, eve::zero(eve::as(rho))),
-                            kyosu::complex(rho*c, rho*s)
-                           );
-      }
-      else
-      {
-        return  exp(muli(z)*pi(as(z))); //extend can't work here
-      }
-    }
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    {
-      auto [s, c] = eve::sinpicospi(v);
-      return  complex(c, s);
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(exp_ipi_t, exp_ipi_);
@@ -60,8 +41,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T exp_ipi(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T exp_ipi(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T exp_ipi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -81,4 +61,31 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto exp_ipi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+    {
+      auto [s, c] = eve::sinpicospi(z);
+      return  complex(c, s);
+    }
+    else if constexpr(concepts::complex<Z>)
+    {
+      auto [rz, iz] = muli(z);
+      auto [s, c]   = eve::sinpicospi(iz);
+      auto rho = eve::exp(rz*eve::pi(eve::as(rz)));
+      return eve::if_else(kyosu::is_real(z) || rz == eve::minf(eve::as(rz)),
+                          kyosu::complex(rho, eve::zero(eve::as(rho))),
+                          kyosu::complex(rho*c, rho*s)
+                         );
+    }
+    else
+    {
+      return  exp(muli(z)*pi(as(z)));
+    }
+  }
 }
