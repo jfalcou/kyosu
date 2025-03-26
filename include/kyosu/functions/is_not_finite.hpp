@@ -13,18 +13,15 @@ namespace kyosu
   template<typename Options>
   struct is_not_finite_t : eve::elementwise_callable<is_not_finite_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
-      return kumi::any_of(z, [](auto const& e) { return eve::is_not_finite(e); });
+      return KYOSU_CALL(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept { return eve::is_not_finite(v); }
-
+    
     KYOSU_CALLABLE_OBJECT(is_not_finite_t, is_not_finite_);
   };
-
+  
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -42,8 +39,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto is_not_finite(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto is_not_finite(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_not_finite(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,4 +59,13 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto is_not_finite_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return kumi::any_of(z, [](auto const& e) { return eve::is_not_finite(e); });
+  }
 }

@@ -16,7 +16,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
-      return kumi::all_of(z, [](auto const& e) { return eve::is_finite(e); });
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(is_finite_t, is_finite_);
@@ -59,4 +59,13 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto is_finite_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return kumi::all_of(z, [](auto const& e) { return eve::is_finite(e); });
+  }
 }
