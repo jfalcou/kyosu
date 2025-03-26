@@ -16,23 +16,21 @@ namespace kyosu
   template<typename Options>
   struct lbeta_t : eve::strict_elementwise_callable<lbeta_t, Options>
   {
-    template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-      KYOSU_FORCEINLINE constexpr as_cayley_dickson_t<Z0, Z1>  operator()(Z0 const& z0, Z1 const & z1) const noexcept
-    { return kyosu::log(kyosu::beta(z0, z1)); }
-
-    template<concepts::real V0, concepts::real V1>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept -> decltype(complex(v0)+v1)
-    { return (*this)(complex(v0),v1); }
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept -> complexify_t<decltype(z0+z1)>
+    {
+      if constexpr(concepts::real<Z0> && concepts::real<Z1>) return (*this)(complex(z0), complex(z1));
+      else return KYOSU_CALL(z0, z1);
+    }
 
     KYOSU_CALLABLE_OBJECT(lbeta_t, lbeta_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var lbeta
-//!   @brief Computes the natural logarithm of the `beta` function.
+//!   @brief Computes the principal branch of the natural logarithm of the `beta` function.
 //!
 //!   @groupheader{Header file}
 //!
@@ -45,7 +43,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      auto lbeta(auto x,auto y) noexcept;
+//!      tauto lbeta(auto x,auto y) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -55,7 +53,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!    `log(beta(x, y))`.
+//!     - Real typed entries are treated as complex ones.
+//!     - Returns `log(beta(x, y))`.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Beta Function](https://mathworld.wolfram.com/BetaFunction.html)
@@ -67,4 +66,17 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z0,  typename Z1, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto lbeta_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
+  {
+    if constexpr(kyosu::concepts::complex_like<Z0> && kyosu::concepts::complex_like<Z1>)
+    {
+      return kyosu::log(kyosu::beta(z0, z1));
+    }
+    else return kyosu::_::cayley_extend2(kyosu::lbeta, z0, z1);
+  }
 }
