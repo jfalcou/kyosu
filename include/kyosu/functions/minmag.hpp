@@ -15,32 +15,22 @@ namespace kyosu
   template<typename Options>
   struct minmag_t : eve::strict_elementwise_callable<minmag_t, Options>
   {
-     template<typename C0, typename C1, typename ...Cs>
-    requires(concepts::cayley_dickson<C0> || concepts::cayley_dickson<C1> || (concepts::cayley_dickson<Cs> || ...))
-      KYOSU_FORCEINLINE constexpr auto  operator()(C0 const& c0, C1 const& c1, Cs const & ...cs) const noexcept -> kyosu::as_cayley_dickson_t<C0, C1, Cs...>
+    template<concepts::cayley_dickson_like Z0>
+    KYOSU_FORCEINLINE constexpr
+    Z0 operator()(Z0 z0) const noexcept
     {
-      if constexpr(sizeof...(cs) == 0)
-      {
-        auto ac0 = kyosu::sqr_abs(c0);
-        auto ac1 = kyosu::sqr_abs(c1);
-        auto tmp = kyosu::if_else(eve::is_not_greater_equal(ac1, ac0), c1, c0);
-        return kyosu::if_else(eve::is_not_greater_equal(ac0, ac1), c0, tmp);
-      }
-      else
-      {
-        using r_t = kyosu::as_cayley_dickson_t<C0, C1, Cs...>;
-        r_t that(minmag(c0, c1));
-        ((that = minmag(that, cs)), ...);
-        return that;
-      }
+      return z0;
     }
 
-    template<concepts::real V0, concepts::real ...Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs... vs) const noexcept -> decltype(eve::minmag(v0,vs...))
-    { return eve::minmag(v0,vs...); }
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like ...Zs>
+    KYOSU_FORCEINLINE constexpr
+    typename kyosu::as_cayley_dickson_like_t<Z0,Z1,Zs...> operator()(Z0 z0, Z1 z1, Zs... zs) const noexcept
+    {
+      return KYOSU_CALL(z0, z1, zs...);
+    }
 
     KYOSU_CALLABLE_OBJECT(minmag_t, minmag_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -79,4 +69,29 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<eve::callable_options O, typename Z0, typename Z1, typename ...Zs>
+  KYOSU_FORCEINLINE constexpr
+  auto minmag_(KYOSU_DELAY(), O const& o, Z0 z0, Z1 z1, Zs... zs) noexcept
+  {
+    if constexpr(concepts::real<Z0> && concepts::real<Z1> && (... && concepts::real<Zs>))
+      return eve::minmag(z0, z1, zs...);
+    else  if constexpr(sizeof...(Zs) == 0)
+    {
+      auto az0 = kyosu::sqr_abs(z0);
+      auto az1 = kyosu::sqr_abs(z1);
+      auto tmp = kyosu::if_else(eve::is_not_greater_equal(az1, az0), z1, z0);
+      return kyosu::if_else(eve::is_not_greater_equal(az0, az1), z0, tmp);
+    }
+    else
+    {
+      using r_t = kyosu::as_cayley_dickson_t<Z0, Z1, Zs...>;
+      r_t that(minmag(z0, z1));
+      ((that = minmag(that, zs)), ...);
+      return that;
+    }
+  }
 }
