@@ -15,19 +15,14 @@ namespace kyosu
   template<typename Options>
   struct manhattan_t : eve::strict_tuple_callable<manhattan_t, Options, eve::pedantic_option>
   {
-    template<eve::value Z0, eve::value ...Zs>
-    requires( concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...) )
+
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like ...Zs>
     KYOSU_FORCEINLINE constexpr
     auto operator()(Z0 z0, Zs... zs) const noexcept -> decltype(eve::manhattan(real(z0), real(zs)...))
     {
-      return eve::manhattan[this->options()](kumi::flatten(kumi::make_tuple(z0, zs...)));
+      return KYOSU_CALL(z0, zs...);
     }
 
-    template<concepts::real T0, concepts::real... Ts>
-    auto operator()(T0 t0, Ts... ts) const noexcept -> decltype( eve::manhattan(t0, ts...))
-    {
-      return eve::manhattan[this->options()](t0, ts...);
-    }
 
     KYOSU_CALLABLE_OBJECT(manhattan_t, manhattan_);
   };
@@ -73,4 +68,18 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+
+namespace kyosu::_
+{
+  template<eve::callable_options O, typename Z0, typename ...Zs>
+  KYOSU_FORCEINLINE constexpr
+  auto manhattan_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
+  {
+    if constexpr(concepts::real<Z0> && (... && concepts::real<Zs>))
+      return  eve::manhattan[o](z0, zs...);
+    else
+      return eve::manhattan[o](kumi::flatten(kumi::make_tuple(z0, zs...)));
+  }
 }
