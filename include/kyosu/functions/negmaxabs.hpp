@@ -15,16 +15,12 @@ namespace kyosu
   template<typename Options>
   struct negmaxabs_t : eve::strict_elementwise_callable<negmaxabs_t, Options, eve::numeric_option, eve::pedantic_option>
   {
-    template<typename Z0, typename ...Zs>
-    requires(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs>|| ...))
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z0  const & z0, Zs const & ... zs) const noexcept
-    -> decltype(eve::negmaxabs(real(z0), real(zs)...))
-    {  return eve::minus(kyosu::maxabs[this->options()](z0, zs...)); }
-
-    template<concepts::real V0, concepts::real... Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs... vs) const noexcept
-    -> decltype( eve::negmaxabs(v0, vs...))
-    { return eve::negmaxabs[this->options()](v0,vs...); }
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like ...Zs>
+    KYOSU_FORCEINLINE constexpr
+    auto operator()(Z0 z0, Zs... zs) const noexcept -> decltype(eve::maxabs(real(z0), real(zs)...))
+    {
+      return KYOSU_CALL(z0, zs...);
+    }
 
     KYOSU_CALLABLE_OBJECT(negmaxabs_t, negmaxabs_);
   };
@@ -59,11 +55,23 @@ namespace kyosu
 //!     Returns elementwise  the negated maximum of the absolute values of the parameters.
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/negmaxabs.cpp}
 //======================================================================================================================
   inline constexpr auto negmaxabs = eve::functor<negmaxabs_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<eve::callable_options O, typename Z0, typename ...Zs>
+  KYOSU_FORCEINLINE constexpr
+  auto negmaxabs_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
+  {
+    if constexpr(concepts::real<Z0> && (... && concepts::real<Zs>))
+      return eve::negmaxabs[o](z0,zs...);
+    else
+      return eve::minus(kyosu::maxabs[o](z0, zs...));
+  }
 }

@@ -15,16 +15,12 @@ namespace kyosu
   template<typename Options>
   struct minabs_t : eve::strict_elementwise_callable<minabs_t, Options, eve::numeric_option, eve::pedantic_option>
   {
-    template<typename Z0, typename ... Zs>
-    requires(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs> || ...))
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Zs const & ... zs) const noexcept
-    -> decltype(eve::minabs(real(z0), real(zs)...))
-    { return eve::sqrt(eve::min[this->options()](kyosu::sqr_abs(z0), kyosu::sqr_abs(zs)...)); }
-
-    template<concepts::real V0, concepts::real ... Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs ...vs) const noexcept
-    -> decltype( eve::minabs(v0, vs...))
-    { return eve::minabs[this->options()](v0,vs...); }
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like ...Zs>
+    KYOSU_FORCEINLINE constexpr
+    auto operator()(Z0 z0, Zs... zs) const noexcept -> decltype(eve::maxabs(real(z0), real(zs)...))
+    {
+      return KYOSU_CALL(z0, zs...);
+    }
 
     KYOSU_CALLABLE_OBJECT(minabs_t, minabs_);
 };
@@ -66,4 +62,17 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<eve::callable_options O, typename Z0, typename ...Zs>
+  KYOSU_FORCEINLINE constexpr
+  auto minabs_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
+  {
+    if constexpr(concepts::real<Z0> && (... && concepts::real<Zs>))
+      return eve::minabs[o](z0,zs...);
+    else
+     return eve::sqrt(eve::min[o](kyosu::sqr_abs(z0), kyosu::sqr_abs(zs)...));
+  }
 }
