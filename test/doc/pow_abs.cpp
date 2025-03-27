@@ -45,7 +45,7 @@ int main()
   std::cout << kyosu::pow_abs(c0, q1) << std::endl;
   std::cout << kyosu::pow_abs(e0, q1) << std::endl;
   std::cout << kyosu::pow_abs(c0, wq1) << std::endl;
-  std::cout << kyosu::pow_abs(we0, q1) << std::endl;
+  std::cout << kyosu::pow_abs(we1, q1) << std::endl;
 
   return 0;
 }

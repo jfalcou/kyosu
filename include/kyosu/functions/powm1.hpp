@@ -14,16 +14,20 @@ namespace kyosu
   template<typename Options>
   struct powm1_t : eve::strict_elementwise_callable<powm1_t, Options>
   {
-    template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept
-    -> decltype(kyosu::dec(kyosu::pow(z0, z1)))
-    { return kyosu::dec(kyosu::pow(z0, z1)); }
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
+    requires(!eve::integral_scalar_value<Z1>)
+    KYOSU_FORCEINLINE constexpr
+    auto  operator()(Z0 z0, Z1 z1) const noexcept //complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
+    {
+      return KYOSU_CALL(z0, z1);
+    }
 
-    template<concepts::real V0, concepts::real V1>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept
-    -> decltype(eve::powm1(v0,v1))
-    { return eve::powm1(v0,v1); }
+    template<concepts::cayley_dickson_like Z0, eve::integral_value Z1>
+    KYOSU_FORCEINLINE constexpr
+    auto operator()(Z0 z0, Z1 z1) const noexcept //-> decltype(z0+z1)
+    {
+      return KYOSU_CALL(z0, z1);
+    }
 
     KYOSU_CALLABLE_OBJECT(powm1_t, powm1_);
   };
@@ -65,4 +69,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z0,  typename Z1, eve::callable_options O>
+  constexpr auto powm1_(KYOSU_DELAY(), O const&, Z0 z0,  Z1 z1) noexcept
+  {
+    if constexpr(concepts::real<Z0> && concepts::real<Z1>)
+      return kyosu::dec(kyosu::pow(complex(z0),z1));
+    else
+      return kyosu::dec(kyosu::pow(z0, z1));
+  }
 }
