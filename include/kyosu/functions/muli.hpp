@@ -12,31 +12,23 @@
 namespace kyosu
 {
   template<typename Options>
-  struct muli_t : eve::elementwise_callable<muli_t, Options>
+  struct muli_t : eve::elementwise_callable<muli_t, Options
+                                            , eve::left_option, eve::right_option >
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& c) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(kyosu::concepts::complex<Z>)
-        return Z(-ipart(c), real(c));
-      else if constexpr(kyosu::concepts::quaternion<Z>)
-        return Z(-ipart(c), real(c), -kpart(c), jpart(c));
-      else
-        return kyosu::i(as(c))*c;
+      return KYOSU_CALL(z);
     }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return complex(zero(as(v)), v); }
-
     KYOSU_CALLABLE_OBJECT(muli_t, muli_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var muli
-//!   @brief Computes the value of the parameter multiplied by i on the left side.
+//!   @brief Computes the value of the parameter multiplied by i on the left or right side.
 //!   For real, complex and quaternion the computation is an optimization over the call to * operator.
 //!
 //!   @groupheader{Header file}
@@ -50,8 +42,13 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto  muli(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto  muli(T z) noexcept;
+//!   {  // regular call
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  muli(T z)        noexcept; //1
+//!
+//!      // Semantic modifyer
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  muli[left}(T z)  noexcept; //1
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  muli[right](T z) noexcept; //2
+//!
 //!   }
 //!   @endcode
 //!
@@ -61,8 +58,9 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * Returns `i(as(z))*z` If z is floating point a complex is returned,
-//!       in the other cases the returned value as the same type as the input.
+//!     1. Returns `i(as(z))*z` If z is floating point a complex is returned,
+//!     2. Returns `z*i(as(z))` If z is floating point a complex is returned,
+//!       Of course the option has no effect on real or complex inputs.
 //!
 //!  @groupheader{Example}
 //!
@@ -72,4 +70,24 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  constexpr auto muli_(KYOSU_DELAY(), O const&o, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::real<Z>)         return complex(zero(as(z)), z);
+    else if constexpr(kyosu::concepts::complex<Z>) return Z(-ipart(z), real(z));
+    else if constexpr(O::contains(eve::right))
+    {
+      if constexpr(kyosu::concepts::quaternion<Z>) return Z(-ipart(z), real(z), +kpart(z), -jpart(z));
+      else                                         return z**kyosu::i(as(z));
+    }
+    else
+    {
+      if constexpr(kyosu::concepts::quaternion<Z>) return Z(-ipart(z), real(z), -kpart(z), jpart(z));
+      else                                         return kyosu::i(as(z))*z;
+    }
+  }
 }
