@@ -15,14 +15,9 @@ namespace kyosu
   struct abs_t : eve::elementwise_callable<abs_t, Options, eve::raw_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z v) const noexcept
+    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z z) const noexcept
     {
-      if constexpr(concepts::real <Z>)
-        return eve::abs(v);
-      else if constexpr(Options::contains(eve::raw))
-        return eve::hypot(v);
-      else
-        return eve::hypot[eve::pedantic](v);
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(abs_t, abs_);
@@ -73,4 +68,18 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto abs_(KYOSU_DELAY(), O const&, Z v) noexcept
+  {
+    if constexpr(concepts::real <Z>)
+      return eve::abs(v);
+    else if constexpr(O::contains(eve::raw))
+      return eve::hypot(v);
+    else
+      return eve::hypot[eve::pedantic](v);
+  }
 }
