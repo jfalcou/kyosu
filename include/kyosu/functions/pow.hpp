@@ -9,6 +9,7 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/exp_i.hpp>
+#include <kyosu/functions/exp_ipi.hpp>
 #include <kyosu/functions/from_polar.hpp>
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/log_abs.hpp>
@@ -162,8 +163,10 @@ namespace kyosu::_
   requires(!eve::integral_value<C1>)
   {
     if constexpr(concepts::real<C0> && concepts::real<C1>)
-      return kyosu::pow(complex(c0), c1);
-    else
+      return kyosu::if_else(eve::is_gez(c0)
+                           , complex(eve::pow(c0, c1))
+                           , kyosu::exp_ipi(c1)*eve::pow(-c0, c1));
+   else
     {
       using r_t = kyosu::as_cayley_dickson_like_t<C0,C1>;
       using er_t = eve::element_type_t<r_t>;
