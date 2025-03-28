@@ -16,9 +16,10 @@ namespace kyosu
   template<typename Options>
   struct acospi_t : eve::elementwise_callable<acospi_t, Options>
   {
+
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    { return radinpi(kyosu::acos(z)); }
+    { return KYOSU_CALL(z); }
 
     KYOSU_CALLABLE_OBJECT(acospi_t, acospi_);
 };
@@ -60,4 +61,14 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acospi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return radinpi(kyosu::acos(z));
+  }
 }
