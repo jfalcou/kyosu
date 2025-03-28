@@ -17,32 +17,13 @@ namespace kyosu
   template<typename Options>
   struct acosh_t : eve::elementwise_callable<acosh_t, Options>
   {
-    template<concepts::cayley_dickson_like Z>
+     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       if constexpr(concepts::real<Z>)
         return (*this)(complex(z));
-      else if constexpr(concepts::complex<Z> )
-      {
-        // acosh(a0) = +/-i acos(a0)
-        // Choosing the sign of multiplier to give real(acosh(a0)) >= 0
-        // we have compatibility with C99.
-        auto [r, i] = kyosu::acos(z);
-        auto lez = eve::is_negative(i);;
-        auto res = complex(-i, r);
-        res = eve::if_else(lez, res, -res);
-        auto nani = eve::is_nan(i);
-        if (eve::any(nani))
-          return eve::if_else(nani && eve::is_finite(r)
-                             , complex(eve::nan(eve::as(r)), eve::nan(eve::as(r)))
-                             , res);
-        else
-          return res;
-      }
       else
-      {
-        return _::cayley_extend(*this, z);
-      }
+        return  KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(acosh_t, acosh_);
@@ -108,4 +89,33 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      // acosh(a0) = +/-i acos(a0)
+      // Choosing the sign of multiplier to give real(acosh(a0)) >= 0
+      // we have compatibility with C99.
+      auto [r, i] = kyosu::acos(z);
+      auto lez = eve::is_negative(i);;
+      auto res = complex(-i, r);
+      res = eve::if_else(lez, res, -res);
+      auto nani = eve::is_nan(i);
+      if (eve::any(nani))
+        return eve::if_else(nani && eve::is_finite(r)
+                           , complex(eve::nan(eve::as(r)), eve::nan(eve::as(r)))
+                           , res);
+      else
+        return res;
+    }
+    else
+    {
+      return _::cayley_extend(kyosu::acosh, z);
+    }
+  }
 }

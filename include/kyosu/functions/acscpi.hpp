@@ -18,7 +18,9 @@ namespace kyosu
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    { return radinpi(kyosu::acsc(z)); }
+    {
+      return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(acscpi_t, acscpi_);
 };
@@ -61,4 +63,13 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acscpi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return radinpi(kyosu::acsc(z));
+  }
 }

@@ -19,8 +19,10 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>) return (*this)(complex(z));
-      else                            return kyosu::atanh(kyosu::rec(z));
+      if constexpr(concepts::real<Z>)
+        return (*this)(complex(z));
+      else
+        return  KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(acoth_t, acoth_);
@@ -56,7 +58,6 @@ namespace kyosu
 //!   - A real typed input z is treated as if `complex(z)` was entered.
 //!   - For complex input, returns elementwise the complex principal value
 //!      of the inverse hyperbolic cotangent of the input as the inverse hyperbolic tangent of the inverse of the input.
-//!
 //!   - For general cayley_dickson input, the call is equivalent to `atanh(rec(z))`.
 //!
 //!  @groupheader{External references}
@@ -71,4 +72,14 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acoth_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>) return kyosu::acoth(complex(z));
+    else                            return kyosu::atanh(kyosu::rec(z));
+  }
 }
