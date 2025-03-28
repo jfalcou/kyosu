@@ -78,8 +78,11 @@ namespace kyosu::_
   {
     if constexpr(concepts::real<Z0> && concepts::real<Z1>)
     {
-      auto z0p1 = eve::inc(z0);
-      return kyosu::if_else(eve::is_gez(z0p1),  complex(eve::pow1p(z0, z1)), exp_ipi(z1)*eve::pow(-z0p1, z1));
+      using s_t = decltype(z0+z1);
+      s_t zz0(z0);
+      s_t z0p1(eve::inc(zz0));
+      s_t zz1(z1);
+      return kyosu::if_else(eve::is_gez(z0p1),  complex(eve::pow1p(zz0, zz1)), exp_ipi(zz1)*eve::pow(-z0p1, zz1));
     }
     else
       return kyosu::pow(kyosu::inc(z0), z1);
