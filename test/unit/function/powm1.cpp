@@ -16,7 +16,7 @@ TTS_CASE_WITH ( "Check kyosu::powm1 over real"
               )
 (auto r0, auto r1)
 {
-  TTS_EQUAL(kyosu::powm1(r0, r1), eve::powm1(r0, r1));
+  TTS_EQUAL(kyosu::powm1(r0, r1), kyosu::complex(eve::powm1(r0, r1)));
 };
 
 TTS_CASE_WITH ( "Check kyosu::powm1 over complex"
