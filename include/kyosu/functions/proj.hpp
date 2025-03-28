@@ -13,13 +13,9 @@ namespace kyosu
   template<typename Options>
   struct proj_t : eve::elementwise_callable<proj_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return if_else(eve::is_infinite(v), eve::inf(as(v)), v); }
 
     KYOSU_CALLABLE_OBJECT(proj_t, proj_);
 };
@@ -43,7 +39,6 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T proj(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T proj(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -74,7 +69,9 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto proj_(KYOSU_DELAY(), O const&, C c) noexcept
   {
     using real_t = eve::as<as_real_type_t<C>>;
-    if constexpr (kyosu::concepts::complex<C>)
+    if constexpr (kyosu::concepts::real<C>)
+      return if_else(eve::is_infinite(c), eve::inf(as(c)), c);
+    else if constexpr (kyosu::concepts::complex<C>)
       return if_else(is_infinite(c)
                     , complex(eve::inf(real_t{}), eve::copysign(eve::zero(real_t{}), imag(c)))
                     , c);

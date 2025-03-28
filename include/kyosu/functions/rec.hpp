@@ -17,15 +17,11 @@ namespace kyosu
   template<typename Options>
   struct rec_t : eve::elementwise_callable<rec_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& c) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      return if_else(is_infinite(c), eve::zero, if_else(is_eqz(c), Z(eve::rec(real(c))), conj(c)/sqr_abs(c)));
+      return  KYOSU_CALL(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::rec(v); }
 
     KYOSU_CALLABLE_OBJECT(rec_t, rec_);
 };
@@ -68,4 +64,18 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+   KYOSU_FORCEINLINE constexpr auto rec_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z> )
+      return eve::rec(z);
+    else
+      return if_else(is_infinite(z), eve::zero, if_else(is_eqz(z), Z(eve::rec(real(z))), conj(z)/sqr_abs(z)));
+  }
 }
