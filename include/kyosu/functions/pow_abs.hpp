@@ -78,7 +78,7 @@ namespace kyosu::_
   template<typename Z0,  typename Z1, eve::callable_options O>
   constexpr auto pow_abs_(KYOSU_DELAY(), O const&, Z0 z0,  Z1 z1) noexcept
   {
-    if constexpr(kyosu::concepts::real<Z1>)
+    if constexpr(kyosu::concepts::real<Z1> && !eve::integral_value<Z1>)
       return eve::pow(kyosu::sqr_abs(z0), z1*eve::half(eve::as(z1)));
     else
       return kyosu::pow(kyosu::abs(z0), z1);
