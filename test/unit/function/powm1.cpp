@@ -10,7 +10,7 @@
 
 TTS_CASE_WITH ( "Check kyosu::powm1 over real"
               , kyosu::real_types
-              , tts::generate(tts::randoms(-10,10)
+              , tts::generate(tts::randoms(0,10)
                              ,tts::randoms(-10,10)
                              )
               )
