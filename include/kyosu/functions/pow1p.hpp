@@ -77,7 +77,10 @@ namespace kyosu::_
   constexpr auto pow1p_(KYOSU_DELAY(), O const&, Z0 z0,  Z1 z1) noexcept
   {
     if constexpr(concepts::real<Z0> && concepts::real<Z1>)
-      return kyosu::pow(complex(eve::inc(z0)),z1);
+    {
+      auto z0p1 = eve::inc(z0);
+      return kyosu::if_else(eve::is_gez(z0p1),  complex(eve::pow1p(z0, z1)), exp_ipi(z1)*eve::pow(-z0p1, z1));
+    }
     else
       return kyosu::pow(kyosu::inc(z0), z1);
   }
