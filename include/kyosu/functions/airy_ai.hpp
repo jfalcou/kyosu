@@ -16,16 +16,11 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-        return eve::airy_ai(z);
-      else if constexpr(kyosu::concepts::complex<Z> )
-        return _::ai(z);
-      else
-        return _::cayley_extend(*this, z);
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(airy_ai_t, airy_ai_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -65,4 +60,18 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto airy_ai_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+      return eve::airy_ai(z);
+    else if constexpr(kyosu::concepts::complex<Z> )
+      return _::ai(z);
+    else
+      return _::cayley_extend(kyosu::airy_ai, z);
+  }
 }

@@ -22,7 +22,7 @@ namespace kyosu
      if constexpr(concepts::real<Z>)
         return (*this)(complex(z));
       else
-        return radinpi(kyosu::asec(z));
+        return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(asecpi_t, asecpi_);
@@ -66,4 +66,13 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto asecpi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    return radinpi(kyosu::asec(z));
+  }
 }
