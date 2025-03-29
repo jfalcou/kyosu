@@ -18,7 +18,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(eve::floating_value<Z> )
+      if constexpr(concepts::real<Z> )
         return  (*this)(complex(z));
       else
         return KYOSU_CALL(z);

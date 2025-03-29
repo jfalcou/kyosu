@@ -15,13 +15,9 @@ namespace kyosu
   struct average_t : eve::strict_elementwise_callable<average_t, Options>
   {
     template<typename Z0, typename Z1, typename ...Zs>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1> ||( concepts::cayley_dickson<Zs> || ...))
+    requires(concepts::cayley_dickson_like<Z0> || concepts::cayley_dickson_like<Z1> ||( concepts::cayley_dickson_like<Zs> || ...))
     KYOSU_FORCEINLINE constexpr auto  operator()(Z0 z0, Z1 z1, Zs ...zs) const noexcept
     { return KYOSU_CALL(z0,z1,zs...); }
-
-    template<concepts::real V0, concepts::real V1, concepts::real ...Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1, Vs...vs) const noexcept -> decltype(v0+(v1+...+ vs))
-    { return eve::average(v0,v1,vs...); }
 
     KYOSU_CALLABLE_OBJECT(average_t, average_);
 };
@@ -71,19 +67,26 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto average_(KYOSU_DELAY(), O const&,
                                             C0 const & c0, C1 const &  c1, Cs const &...  cs) noexcept
   {
-    using r_t = kyosu::as_cayley_dickson_t<C0,C1,Cs...>;
-    if constexpr(sizeof...(cs) == 0)
+    if constexpr(concepts::real<C0> && concepts::real<C1> && (concepts::real <Cs> && ...))
     {
-      using er_t = eve::element_type_t<r_t>;
-      return r_t{kumi::map([](auto const& e, auto const& f) { return eve::average(e, f); }
-                          , kyosu::convert(c0, eve::as<er_t>())
-                          , kyosu::convert(c1, eve::as<er_t>())
-                          )
-          };
+      return eve::average(c0,c1,cs...);
     }
     else
     {
-      return (c0+ (c1+ ... + cs)) / (sizeof...(cs) + 2);
+      using r_t = kyosu::as_cayley_dickson_t<C0,C1,Cs...>;
+      if constexpr(sizeof...(cs) == 0)
+      {
+        using er_t = eve::element_type_t<r_t>;
+        return r_t{kumi::map([](auto const& e, auto const& f) { return eve::average(e, f); }
+                            , kyosu::convert(c0, eve::as<er_t>())
+                            , kyosu::convert(c1, eve::as<er_t>())
+                            )
+            };
+      }
+      else
+      {
+        return (c0+ (c1+ ... + cs)) / (sizeof...(cs) + 2);
+      }
     }
   }
 }

@@ -19,10 +19,8 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(eve::floating_value<Z> )
-        return eve::atanpi(z);
-      else
-        return radinpi(kyosu::atan(z)); }
+      return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(atanpi_t, atanpi_);
 };
@@ -65,4 +63,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto atanpi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(eve::floating_value<Z> )
+      return eve::atanpi(z);
+    else
+      return radinpi(kyosu::atan(z));
+  }
 }
