@@ -19,12 +19,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-         return (*this)(complex(z));
-      else if constexpr(concepts::complex<Z> )
-        return kyosu::log(kyosu::tan(z*kyosu::half(as(z))+kyosu::pio_4(as(z))));
-      else
-        return kyosu::_::cayley_extend(*this, z);
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(agd_t, agd_);
@@ -72,4 +67,18 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto agd_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+      return kyosu::agd(complex(z));
+    else if constexpr(concepts::complex<Z> )
+      return kyosu::log(kyosu::tan(z*kyosu::half(as(z))+kyosu::pio_4(as(z))));
+    else
+      return kyosu::_::cayley_extend(kyosu::agd, z);
+  }
 }
