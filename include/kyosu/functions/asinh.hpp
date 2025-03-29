@@ -97,6 +97,6 @@ namespace kyosu::_
     if constexpr(concepts::complex<Z> )
       return mulmi(kyosu::asin(muli(z)));
     else
-      return kyosu::_::cayley_extend(kyosu::asin, z);
+      return kyosu::_::cayley_extend(kyosu::asinh, z);
   }
 }
