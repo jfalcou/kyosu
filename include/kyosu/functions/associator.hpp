@@ -12,23 +12,14 @@
 namespace kyosu
 {
   template<typename Options>
-  struct associator_t : eve::strict_elementwise_callable<associator_t, Options, eve::pedantic_option>
+  struct associator_t : eve::elementwise_callable<associator_t, Options, eve::pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like Z2>
     requires(eve::same_lanes_or_scalar<Z0, Z1, Z2>)
     KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& c0, Z1 const & c1, Z2 const & c2) const
-      noexcept -> decltype(c0+c1+c2)
+      noexcept// -> decltype(c0+c1+c2)
     {
-      if constexpr(Options::contains(eve::pedantic))
-        return (c0*c1)*c2 - c0*(c1*c2);
-      else
-      {
-        if constexpr((concepts::quaternion_like<Z0> && concepts::quaternion_like<Z1> && concepts::quaternion_like<Z2>) ||
-                     concepts::real<Z0> || concepts::real<Z1> || concepts::real<Z2>)
-          return zero(as<decltype(c0+c1+c2)>());
-        else
-          return (c0*c1)*c2 - c0*(c1*c2);
-      }
+      return KYOSU_CALL(c0, c1, c2);
     }
 
     KYOSU_CALLABLE_OBJECT(associator_t, associator_);
@@ -79,4 +70,22 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename C0, typename C1, typename C2, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto associator_(KYOSU_DELAY(), O const&, C0 c0, C1 c1, C2 c2) noexcept
+  {
+    if constexpr(O::contains(eve::pedantic))
+      return (c0*c1)*c2 - c0*(c1*c2);
+    else
+    {
+      if constexpr((concepts::quaternion_like<C0> && concepts::quaternion_like<C1> && concepts::quaternion_like<C2>) ||
+                   concepts::real<C0> || concepts::real<C1> || concepts::real<C2>)
+        return zero(as<decltype(c0+c1+c2)>());
+      else
+        return (c0*c1)*c2 - c0*(c1*c2);
+    }
+  }
 }
