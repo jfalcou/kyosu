@@ -16,10 +16,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(eve::floating_value<Z>)
-        return eve::floor(z);
-      else
-        return Z{kumi::map([](auto const& e) { return eve::floor(e); }, z)};
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(floor_t, floor_);
@@ -62,4 +59,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto floor_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::real<Z>)
+      return eve::floor(z);
+    else
+      return Z{kumi::map([](auto const& e) { return eve::floor(e); }, z)};
+  }
 }
