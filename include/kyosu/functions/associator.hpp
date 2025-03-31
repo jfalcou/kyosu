@@ -83,7 +83,7 @@ namespace kyosu::_
     {
       if constexpr((concepts::quaternion_like<C0> && concepts::quaternion_like<C1> && concepts::quaternion_like<C2>) ||
                    concepts::real<C0> || concepts::real<C1> || concepts::real<C2>)
-        return zero(as<decltype(c0+c1+c2)>());
+        return zero(kyosu::as<decltype( (c0*c1)*c2 - c0*(c1*c2))>());
       else
         return (c0*c1)*c2 - c0*(c1*c2);
     }

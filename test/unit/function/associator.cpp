@@ -31,12 +31,13 @@ TTS_CASE_WITH ( "Check kyosu::associator over complex"
               )
 (auto r0, auto i0, auto r1, auto i1, auto r2, auto i2)
 {
+  using T =  decltype(r0);
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
   auto c2 = kyosu::complex(r2,i2);
-  TTS_RELATIVE_EQUAL(kyosu::associator(c0, c1, r2), eve::zero(eve::as(c0)), 1e-7);
-  TTS_RELATIVE_EQUAL(kyosu::associator(r0, c1, c2), eve::zero(eve::as(c0)), 1e-7);
-  TTS_RELATIVE_EQUAL(kyosu::associator(c0, c1, c2), eve::zero(eve::as(c0)), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::associator(c0, c1, r2), kyosu::zero(kyosu::as(c0)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::associator(r0, c1, c2), kyosu::zero(kyosu::as(c0)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::associator(c0, c1, c2), kyosu::zero(kyosu::as(c0)), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::associator over quaternion"
@@ -55,7 +56,7 @@ TTS_CASE_WITH ( "Check kyosu::associator over quaternion"
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
   auto q2 = type(r2,i2,j2,k2);
-  TTS_RELATIVE_EQUAL(kyosu::associator(q0, q1, q2), eve::zero(eve::as(q0)), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::associator(q0, q1, q2), kyosu::zero(eve::as(q0)), 1e-7);
 };
 TTS_CASE_WITH ( "Check kyosu::associator over octonion"
               , kyosu::real_types
