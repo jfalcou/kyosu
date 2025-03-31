@@ -35,9 +35,9 @@ TTS_CASE_WITH ( "Check kyosu::associator over complex"
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
   auto c2 = kyosu::complex(r2,i2);
-  TTS_RELATIVE_EQUAL(kyosu::associator(c0, c1, r2), kyosu::zero(kyosu::as(c0)), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::associator(r0, c1, c2), kyosu::zero(kyosu::as(c0)), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::associator(c0, c1, c2), kyosu::zero(kyosu::as(c0)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::associator(c0, c1, r2), kyosu::zero(kyosu::as(c0+c1+r2)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::associator(r0, c1, c2), kyosu::zero(kyosu::as(r0+c1+c2)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::associator(c0, c1, c2), kyosu::zero(kyosu::as(c0+c1+c2)), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::associator over quaternion"
