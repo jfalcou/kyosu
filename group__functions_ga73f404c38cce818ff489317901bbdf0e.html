@@ -141,25 +141,31 @@ $(document).ready(function(){initNavTree('group__functions_ga73f404c38cce818ff48
 </table>
 </div><div class="memdoc">
 
-<p>Computes the value of the parameter multiplied by i on the left side. For real, complex and quaternion the computation is an optimization over the call to * operator. </p>
+<p>Computes the value of the parameter multiplied by i on the left or right side. For real, complex and quaternion the computation is an optimization over the call to * operator. </p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>  <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">muli</a>(T z) <span class="keyword">noexcept</span>;</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;     <span class="keyword">constexpr</span> <span class="keyword">auto</span>  <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">muli</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">{  <span class="comment">// regular call</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>  <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">muli</a>(T z)        <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Semantic modifyer</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>  <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">muli</a>[left}(T z)  <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> <span class="keyword">auto</span>  <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">muli</a>[right](T z) <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
+<div class="line"> </div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga73f404c38cce818ff489317901bbdf0e_html_ga73f404c38cce818ff489317901bbdf0e"><div class="ttname"><a href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">kyosu::muli</a></div><div class="ttdeci">constexpr auto muli</div><div class="ttdoc">Computes the value of the parameter multiplied by i on the left side. For real, complex and quaternio...</div><div class="ttdef"><b>Definition:</b> muli.hpp:71</div></div>
+<div class="ttc" id="agroup__functions_ga73f404c38cce818ff489317901bbdf0e_html_ga73f404c38cce818ff489317901bbdf0e"><div class="ttname"><a href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">kyosu::muli</a></div><div class="ttdeci">constexpr auto muli</div><div class="ttdoc">Computes the value of the parameter multiplied by i on the left or right side. For real,...</div><div class="ttdef"><b>Definition:</b> muli.hpp:69</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<ul>
-<li>Returns <code><a class="el" href="group__constants_gafdb3298b4657efe925df35dd5ded4694.html#gafdb3298b4657efe925df35dd5ded4694" title="Computes the complex number  in the chosen type.">i(as(z))</a>*z</code> If z is floating point a complex is returned, in the other cases the returned value as the same type as the input.</li>
-</ul>
+<ol type="1">
+<li>Returns <code><a class="el" href="group__constants_gafdb3298b4657efe925df35dd5ded4694.html#gafdb3298b4657efe925df35dd5ded4694" title="Computes the complex number  in the chosen type.">i(as(z))</a>*z</code> If z is floating point a complex is returned,</li>
+<li>Returns <code>z*i(as(z))</code> If z is floating point a complex is returned, Of course the option has no effect on real or complex inputs.</li>
+</ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -176,12 +182,14 @@ $(document).ready(function(){initNavTree('group__functions_ga73f404c38cce818ff48
 <div class="line"> </div>
 <div class="line">  std::cout</div>
 <div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- r             = &quot;</span> &lt;&lt; r &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; muli(r)       = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">kyosu::muli</a>(r)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc            = &quot;</span> &lt;&lt; zc &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; muli(zc)      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">kyosu::muli</a>(zc)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zq            = &quot;</span> &lt;&lt; zq &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; muli(zq)      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">kyosu::muli</a>(zq) &lt;&lt; std::endl;</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- r                         = &quot;</span> &lt;&lt; r &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; muli(r)                   = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">kyosu::muli</a>(r)&lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc                        = &quot;</span> &lt;&lt; zc &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; muli(zc)                  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">kyosu::muli</a>(zc)&lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zq                        = &quot;</span> &lt;&lt; zq &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; muli(zq)                  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">kyosu::muli</a>(zq) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; muli[eve::left](zq)       = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">kyosu::muli</a>[eve::left](zq) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; muli[eve::right](zq)      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga73f404c38cce818ff489317901bbdf0e.html#ga73f404c38cce818ff489317901bbdf0e">kyosu::muli</a>[eve::right](zq) &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
