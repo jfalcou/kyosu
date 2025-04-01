@@ -14,13 +14,11 @@ namespace kyosu
   template<typename Options>
   struct radinpi_t : eve::elementwise_callable<radinpi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& a) const noexcept
-    { return inv_pi(eve::as(a))*a; }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::radinpi(v); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    {
+      return  KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(radinpi_t, radinpi_);
 };
@@ -42,8 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_type_t<T> radinpi(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T                 radinpi(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> radinpi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,4 +60,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto radinpi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z> )
+      return eve::radinpi(z);
+    else
+      return inv_pi(eve::as(z))*z;
+  }
 }
