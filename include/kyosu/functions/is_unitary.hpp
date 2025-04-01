@@ -14,28 +14,15 @@ namespace kyosu
   struct is_unitary_t : eve::elementwise_callable<is_unitary_t, Options, eve::raw_option, eve::pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& c) const noexcept
+    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
-      using ar_t = decltype(kyosu::sqr_abs(c));
-      if constexpr(Options::contains(eve::pedantic))
-      {
-        if constexpr(concepts::real<Z>)
-          return eve::abs(c) == eve::one(eve::as(c));
-        else
-          return kyosu::sqr_abs(c) == eve::one(eve::as<ar_t>());
-      }
-      else
-      {
-        // almost is used to encompass the fact that normalization of cayley_dickson can suffer
-        // rounding errors. Use raw if you don't need this behavior.
-        return eve::is_equal[eve::almost](kyosu::sqr_abs(c), eve::one(eve::as<ar_t>()));
-      }
+      return KYOSU_CALL(z);
     }
-
+    
     KYOSU_CALLABLE_OBJECT(is_unitary_t, is_unitary_);
   };
-
-
+  
+  
 //!   {
 //======================================================================================================================
 //! @addtogroup functions
@@ -84,4 +71,26 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto is_unitary_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    using ar_t = decltype(kyosu::sqr_abs(z));
+    if constexpr(O::contains(eve::pedantic))
+    {
+      if constexpr(concepts::real<Z>)
+        return eve::abs(z) == eve::one(eve::as(z));
+      else
+        return kyosu::sqr_abs(z) == eve::one(eve::as<ar_t>());
+    }
+    else
+    {
+      // almost is used to encompass the fact that normalization of cayley_dickson can suffer
+      // rounding errors. Use raw if you don't need this behavior.
+      return eve::is_equal[eve::almost](kyosu::sqr_abs(z), eve::one(eve::as<ar_t>()));
+    }
+  }
 }
