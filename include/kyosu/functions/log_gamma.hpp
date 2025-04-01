@@ -17,14 +17,14 @@ namespace kyosu
   template<typename Options>
   struct log_gamma_t : eve::strict_elementwise_callable<log_gamma_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
-
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    {
+      if constexpr(concepts::real<Z>)
+        return (*this)(complex(z));
+      else
+        return  KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(log_gamma_t, log_gamma_);
 };

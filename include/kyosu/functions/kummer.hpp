@@ -15,7 +15,7 @@ namespace kyosu
   template<typename Options>
   struct kummer_t : eve::strict_elementwise_callable<kummer_t, Options, regularized_option>
   {
-    template<typename Z, typename T1,  typename T2>
+    template<concepts::complex_like Z, concepts::complex_like T1,  concepts::complex_like T2>
     constexpr KYOSU_FORCEINLINE
     auto operator()(Z zz, T1 aa, T2 bb) const noexcept
     {
@@ -23,7 +23,7 @@ namespace kyosu
         return (*this)(kyosu::complex(zz), aa, bb);
       else if constexpr(Options::contains(regularized))
       {
-        using r_t = decltype(aa+bb+zz);
+        using r_t = decltype((aa+bb)+zz);
         r_t a(aa);
         r_t b(bb);
         r_t z(zz);
