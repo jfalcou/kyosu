@@ -14,24 +14,11 @@ namespace kyosu
   template<typename Options>
   struct sinc_t : eve::elementwise_callable<sinc_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
-      {
-        auto s = kyosu::sin(z);
-        using u_t = eve::underlying_type_t<Z>;
-        return kyosu::if_else(kyosu::abs(z) < eve::eps(eve::as(u_t())), eve::one(eve::as(u_t())), s/z);
-      }
-      else
-      {
-        return _::cayley_extend(*this, z);
-      }
+      return KYOSU_CALL(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::sinc(v); }
 
     KYOSU_CALLABLE_OBJECT(sinc_t, sinc_);
 };
@@ -77,4 +64,24 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr Z sign_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::real<Z>)
+      return eve::sinc(z);
+    else if constexpr(concepts::complex<Z> )
+    {
+      auto s = kyosu::sin(z);
+      using u_t = eve::underlying_type_t<Z>;
+      return kyosu::if_else(kyosu::linfnorm(z) < eve::eps(eve::as(u_t())), eve::one(eve::as(u_t())), s/z);
+    }
+    else
+    {
+      return _::cayley_extend(sinc, z);
+    }
+  }
 }
