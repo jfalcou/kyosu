@@ -74,7 +74,7 @@ namespace kyosu::_
     else if constexpr(concepts::complex<Z> )
     {
       auto [sh, ch] = kyosu::sinhcosh(kyosu::muli(z));
-      return eve::kumi::tuple{kyosu::mulmi(sh), ch};
+      return kumi::tuple{kyosu::mulmi(sh), ch};
 
     }
     else
