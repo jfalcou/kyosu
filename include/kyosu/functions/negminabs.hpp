@@ -15,18 +15,12 @@ namespace kyosu
   struct negminabs_t : eve::strict_elementwise_callable<negminabs_t, Options,
                                                         eve::numeric_option, eve::pedantic_option>
   {
-    template<typename Z0, typename ...Zs>
-    requires(concepts::cayley_dickson<Z0> || (concepts::cayley_dickson<Zs>|| ...))
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0  const & z0, Zs const & ... zs) const noexcept
-    -> decltype(eve::negminabs(real(z0), real(zs)...))
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like ...Zs>
+    KYOSU_FORCEINLINE constexpr
+    auto operator()(Z0 z0, Zs... zs) const noexcept -> decltype(eve::maxabs(real(z0), real(zs)...))
     {
-      return eve::minus(minabs[this->options()](z0, zs...));
+      return KYOSU_CALL(z0, zs...);
     }
-
-    template<concepts::real V0, concepts::real... Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs... vs) const noexcept
-    -> decltype( eve::negminabs(v0, vs...))
-    { return eve::negminabs[this->options()](v0,vs...); }
 
     KYOSU_CALLABLE_OBJECT(negminabs_t, negminabs_);
   };
@@ -61,11 +55,23 @@ namespace kyosu
 //!     Returns elementwise  the negated minimum of the absolute values of the parameters.
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/negminabs.cpp}
 //======================================================================================================================
   inline constexpr auto negminabs = eve::functor<negminabs_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<eve::callable_options O, typename Z0, typename ...Zs>
+  KYOSU_FORCEINLINE constexpr
+  auto negminabs_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
+  {
+    if constexpr(concepts::real<Z0> && (... && concepts::real<Zs>))
+      return eve::negminabs[o](z0,zs...);
+    else
+      return eve::minus(kyosu::minabs[o](z0, zs...));
+  }
 }

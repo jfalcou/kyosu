@@ -109,7 +109,7 @@ namespace kyosu
   //! @brief Computes a Cayley-Dickson type of a given dimension
   //!
   //! @tparam Dim Dimension of the Cayley-Dickson algebra to use.
-  //! @tparam Ts  Types used to computes the Cayley-Dickson underlying type.
+  //! @tparam Ts  Types used to compute the Cayley-Dickson underlying type.
   //====================================================================================================================
   template<unsigned int Dim, typename... Ts>
   using as_cayley_dickson_n_t = typename as_cayley_dickson_n<Dim,Ts...>::type;
@@ -131,7 +131,7 @@ namespace kyosu
   //====================================================================================================================
   //! @brief Computes the best fitting Cayley-Dickson type from a series of types.
   //!
-  //! @tparam Ts  Types used to computes the Cayley-Dickson underlying type.
+  //! @tparam Ts  Types used to compute the Cayley-Dickson underlying type.
   //====================================================================================================================
   template<typename... Ts>
   using as_cayley_dickson_t = typename as_cayley_dickson<Ts...>::type;
@@ -182,4 +182,15 @@ namespace kyosu
   };
 
   template < typename T> using complexify_t =  typename complexify<T>::type;
+
+  //====================================================================================================================
+  //! @brief Compute the cayley_dickson_like type associated to a Cayley-Dickson-like family of types
+  //!
+  //! @tparam Ts Types used to compute the Cayley-Dickson_like common type.
+  //====================================================================================================================
+
+  template<typename... Ts>       struct as_cayley_dickson_like        : as_cayley_dickson<Ts...> {};
+  template<concepts::real... Ts> struct as_cayley_dickson_like<Ts...> : eve::common_value<Ts...> {};
+  template<typename... Ts> using as_cayley_dickson_like_t = typename as_cayley_dickson_like<Ts...>::type;
+
 }

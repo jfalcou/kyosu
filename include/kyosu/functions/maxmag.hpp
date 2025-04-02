@@ -15,29 +15,20 @@ namespace kyosu
   template<typename Options>
   struct maxmag_t : eve::strict_elementwise_callable<maxmag_t, Options>
   {
-    template<typename Z0, typename Z1, typename ...Zs>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1> || (concepts::cayley_dickson<Zs> || ...))
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const& z1, Zs const & ...zs) const noexcept -> kyosu::as_cayley_dickson_t<Z0, Z1, Zs...>
+
+    template<concepts::cayley_dickson_like Z0>
+    KYOSU_FORCEINLINE constexpr
+    Z0 operator()(Z0 z0) const noexcept
     {
-      if constexpr(sizeof...(Zs) == 0)
-      {
-        auto az0 = kyosu::sqr_abs(z0);
-        auto az1 = kyosu::sqr_abs(z1);
-        auto tmp = kyosu::if_else(eve::is_not_greater_equal(az0, az1), z1, z0);
-        return kyosu::if_else(eve::is_not_greater_equal(az1, az0), z0, tmp);
-      }
-      else
-      {
-        using r_t = kyosu::as_cayley_dickson_t<Z0, Z1, Zs...>;
-        r_t that((*this)(z0, z1));
-        ((that = (*this)(that, zs)), ...);
-        return that;
-      }
+      return z0;
     }
 
-    template<concepts::real V0, concepts::real ...Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, Vs ... vs) const noexcept -> decltype(eve::maxmag(v0,vs...))
-    { return eve::maxmag(v0,vs...); }
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like ...Zs>
+    KYOSU_FORCEINLINE constexpr
+    typename  kyosu::as_cayley_dickson_like_t<Z0,Z1,Zs...> operator()(Z0 z0, Z1 z1, Zs... zs) const noexcept
+    {
+      return KYOSU_CALL(z0, z1, zs...);
+    }
 
     KYOSU_CALLABLE_OBJECT(maxmag_t, maxmag_);
 };
@@ -79,4 +70,29 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<eve::callable_options O, typename Z0, typename Z1, typename ...Zs>
+  KYOSU_FORCEINLINE constexpr
+  auto maxmag_(KYOSU_DELAY(), O const& o, Z0 z0, Z1 z1, Zs... zs) noexcept
+  {
+    if constexpr(concepts::real<Z0> && concepts::real<Z1> && (... && concepts::real<Zs>))
+      return eve::maxmag(z0, z1, zs...);
+    else if constexpr(sizeof...(Zs) == 0)
+    {
+      auto az0 = kyosu::sqr_abs(z0);
+      auto az1 = kyosu::sqr_abs(z1);
+      auto tmp = kyosu::if_else(eve::is_not_greater_equal(az0, az1), z1, z0);
+      return kyosu::if_else(eve::is_not_greater_equal(az1, az0), z0, tmp);
+    }
+    else
+    {
+      using r_t = kyosu::as_cayley_dickson_t<Z0, Z1, Zs...>;
+      r_t that(kyosu::maxmag(z0, z1));
+      ((that = kyosu::maxmag(that, zs)), ...);
+      return that;
+    }
+  }
 }
