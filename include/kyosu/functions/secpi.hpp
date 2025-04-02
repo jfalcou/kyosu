@@ -15,13 +15,11 @@ namespace kyosu
   template<typename Options>
   struct secpi_t : eve::elementwise_callable<secpi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return kyosu::rec(kyosu::cospi(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::secpi(v); }
+    {
+      return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(secpi_t, secpi_);
 };
@@ -43,8 +41,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto secpi(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto secpi(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto secpi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -64,4 +61,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr Z secpi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::real<Z>)
+      return eve::secpi(z);
+    else
+      return kyosu::rec(kyosu::cospi(z));
+  }
 }

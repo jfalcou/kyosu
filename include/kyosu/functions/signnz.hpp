@@ -14,13 +14,11 @@ namespace kyosu
   template<typename Options>
   struct signnz_t : eve::elementwise_callable<signnz_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& c) const noexcept
-    {    return kyosu::if_else(kyosu::is_nez(c), c/abs(c), Z(eve::signnz(real(c))));; }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::signnz(v); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    {
+      return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(signnz_t, signnz_);
 };
@@ -43,8 +41,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T signnz(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T signnz(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T signnz(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -54,7 +51,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the "signnz" of the argument i.e. its normalized value,  and the sign of
+//!     Returns the "signnz" of the argument i.e. its normalized value, and the non zero sign of
 //!     the real part if the input is zero.
 //!
 //!  @groupheader{Example}
@@ -65,4 +62,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr Z signnz_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::real<Z>)
+      return eve::signnz(z);
+    else
+      return kyosu::if_else(kyosu::is_nez(z), z/abs(z), eve::signnz(real(z)));
+  }
 }

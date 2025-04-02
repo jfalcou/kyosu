@@ -15,13 +15,11 @@ namespace kyosu
   template<typename Options>
   struct sign_t : eve::elementwise_callable<sign_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& c) const noexcept
-    {     return kyosu::if_else(kyosu::is_nez(c), c/abs(c), eve::zero); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::sign(v); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    {
+      return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(sign_t, sign_);
 };
@@ -43,8 +41,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T sign(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T sign(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T sign(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -54,7 +51,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the "sign" of the argument i.e. its normalized value.
+//!     Returns the "sign" of the argument i.e. its normalized value, and zero for zero
 //!
 //!  @groupheader{Example}
 //!
@@ -64,4 +61,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr Z sign_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::real<Z>)
+      return eve::sign(z);
+    else
+      return kyosu::if_else(kyosu::is_nez(z), z/abs(z), eve::zero);
+  }
 }
