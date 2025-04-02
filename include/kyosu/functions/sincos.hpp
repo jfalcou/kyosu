@@ -67,14 +67,14 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr kumi::tuple<Z, Z> sincos_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto sincos_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr(kyosu::concepts::real<Z>)
       return eve::sincos(z);
     else if constexpr(concepts::complex<Z> )
     {
       auto [sh, ch] = kyosu::sinhcosh(kyosu::muli(z));
-      return kumi::tuple{kyosu::mulmi(sh), ch};
+      return eve::kumi::tuple{kyosu::mulmi(sh), ch};
 
     }
     else
