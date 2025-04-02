@@ -18,19 +18,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(eve::floating_value<Z> )
-        return eve::atan(z);
-      if constexpr(concepts::complex<Z> )
-      {
-        // C99 definition here; atan(z) = -i atanh(i*z):
-        auto [r, i] = z;
-        auto [r1, i1] = kyosu::atanh(complex(-i, r));
-        return complex(i1, -r1);
-      }
-      else
-      {
-        return _::cayley_extend(*this, z);
-      }
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(atan_t, atan_);
@@ -86,4 +74,25 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto atan_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(eve::floating_value<Z> )
+      return eve::atan(z);
+    if constexpr(concepts::complex<Z> )
+    {
+      // C99 definition here; atan(z) = -i atanh(i*z):
+      auto [r, i] = z;
+      auto [r1, i1] = kyosu::atanh(complex(-i, r));
+      return complex(i1, -r1);
+    }
+    else
+    {
+      return _::cayley_extend(kyosu::atan, z);
+    }
+  }
 }
