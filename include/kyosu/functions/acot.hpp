@@ -16,13 +16,11 @@ namespace kyosu
   template<typename Options>
   struct acot_t : eve::elementwise_callable<acot_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    {    return kyosu::atan(kyosu::rec(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::acot(v); }
+    {
+      return  KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(acot_t, acot_);
 };
@@ -44,8 +42,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr T acot(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T acot(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T acot(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -55,12 +52,10 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. A real typed input z calls eve::acot(z) and so returns the same type as the input.
-//!   2. For cayley-dickson input
-//!
-//!      - For complex input, returns elementwise the complex principal value
+//!    - A real typed input z calls eve::acot(z) and so returns the same type as the input.
+//!    - For complex input, returns elementwise the complex principal value
 //!        of the arc cotangent of the input as the arc tangent of the inverse of the input.
-//!      - For other general cayley_dickson input, returns \f$I_z \mathrm{acoth}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!    - For other general cayley_dickson input, returns \f$I_z \mathrm{acoth}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref pure)  part of \f$z\f$.
 //!
 //!  @groupheader{External references}
@@ -74,4 +69,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acot_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+      return eve::acot(z);
+    else
+      return kyosu::atan(kyosu::rec(z));
+  }
 }

@@ -16,13 +16,11 @@ namespace kyosu
   template<typename Options>
   struct acotpi_t : eve::elementwise_callable<acotpi_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    {  return radinpi(kyosu::acot(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::acotpi(v); }
+    {
+      return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(acotpi_t, acotpi_);
 };
@@ -44,8 +42,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr T acotpi(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T acotpi(T z) noexcept;  //2
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T acotpi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -66,4 +63,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acotpi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+      return eve::acotpi(z);
+    else
+     return radinpi(kyosu::acot(z));
+  }
 }
