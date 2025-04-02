@@ -69,7 +69,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr Z sign_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr Z sinc_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr(kyosu::concepts::real<Z>)
       return eve::sinc(z);
