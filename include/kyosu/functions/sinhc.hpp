@@ -14,24 +14,11 @@ namespace kyosu
   template<typename Options>
   struct sinhc_t : eve::elementwise_callable<sinhc_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
-      {
-        auto s = kyosu::sinh(z);
-        using u_t = eve::underlying_type_t<Z>;
-        return kyosu::if_else(kyosu::abs(z) < eve::eps(eve::as(u_t())), eve::one(eve::as(u_t())), s/z);
-      }
-      else
-      {
-        return _::cayley_extend(*this, z);
-      }
+      return KYOSU_CALL(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::sinhc(v); }
 
     KYOSU_CALLABLE_OBJECT(sinhc_t, sinhc_);
 };
@@ -53,8 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sinhc(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto sinhc(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto sinhc(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -74,4 +60,22 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sinhc_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::real<Z>)
+      return eve::sinhc(z);
+    if constexpr(concepts::complex<Z> )
+    {
+      auto s = kyosu::sinh(z);
+      using u_t = eve::underlying_type_t<Z>;
+      return kyosu::if_else(kyosu::abs(z) < eve::eps(eve::as(u_t())), eve::one(eve::as(u_t())), s/z);
+    }
+    else
+      return _::cayley_extend(kyosu::sinhc, z);
+  }
 }

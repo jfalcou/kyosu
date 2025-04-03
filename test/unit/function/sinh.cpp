@@ -17,9 +17,9 @@ TTS_CASE_WITH ( "Check kyosu::sinh over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10))
               )
-(auto data)
+<typename T>(T data)
 {
-  TTS_ULP_EQUAL(kyosu::sinh(data), eve::sinh(data), 0.5);
+  TTS_RELATIVE_EQUAL(kyosu::sinh(data), eve::sinh(data), tts::prec<T>());
 };
 
 #ifdef HAS_BOOST
