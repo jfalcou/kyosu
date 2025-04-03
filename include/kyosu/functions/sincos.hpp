@@ -18,7 +18,7 @@ namespace kyosu
   struct sincos_t : eve::elementwise_callable<sincos_t, Options>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr kumi::tuple<Z, Z> operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr eve::zipped<Z, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -43,7 +43,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr kumi::tuple<T, T> sincos(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr eve::zipped<T, T> sincos(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -74,7 +74,7 @@ namespace kyosu::_
     else if constexpr(concepts::complex<Z> )
     {
       auto [sh, ch] = kyosu::sinhcosh(kyosu::muli(z));
-      return kumi::tuple{kyosu::mulmi(sh), ch};
+      return eve::zip(kyosu::mulmi(sh), ch);
 
     }
     else

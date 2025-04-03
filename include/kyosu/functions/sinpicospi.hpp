@@ -15,7 +15,7 @@ namespace kyosu
   struct sinpicospi_t : eve::elementwise_callable<sinpicospi_t, Options>
   {
    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr kumi::tuple<Z, Z> operator()(Z const& z) const noexcept
+   KYOSU_FORCEINLINE constexpr eve::zipped<Z, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -40,7 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr kumi::tuple<T, T> sinpicospi(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr eve::zipped<T, T>sinpicospi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -101,7 +101,7 @@ namespace kyosu::_
         rs = eve::if_else(eve::is_eqz(arz), eve::zero, rs);
       }
       auto spi = kyosu::complex(is, -rs);
-      return kumi::tuple{spi, cpi};
+      return eve::zip(spi, cpi);
     }
     else
     {
