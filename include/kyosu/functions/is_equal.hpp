@@ -15,23 +15,10 @@ namespace kyosu
   template<typename Options>
   struct is_equal_t : eve::strict_elementwise_callable<is_equal_t, Options, eve::numeric_option>
   {
-   template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
-   KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept// -> decltype(z0 == z1)
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept// -> decltype(z0 == z1)
     {
-      if constexpr(Options::contains(eve::numeric))
-      {
-        if constexpr(concepts::real<Z0> && concepts::real<Z1>)
-          return eve::is_equal[eve::numeric](z0, z1);
-        else
-        {
-          using c_t = as_cayley_dickson_t<Z1,Z0>;
-          using er_t = eve::element_type_t<decltype(c_t(z0) == c_t(z1))>;
-          return eve::convert(kumi::map([](auto a,  auto b) { return eve::is_equal[eve::numeric](a, b); }, c_t(z0), c_t(z1)), eve::as<er_t>());
-        }
-      }
-      else
-        return z0 == z1;
-//       return KYOSU_CALL(z0, z1);
+       return KYOSU_CALL(z0, z1);
     }
 
     KYOSU_CALLABLE_OBJECT(is_equal_t, is_equal_);
@@ -81,23 +68,22 @@ namespace kyosu
 //======================================================================================================================
 }
 
-// namespace kyosu::_
-// {
-//   template<typename Z0, typename Z1, eve::callable_options O>
-//   KYOSU_FORCEINLINE constexpr auto is_equal_(KYOSU_DELAY(), O const&, Z0 z0,  Z1 z1) noexcept
-//   {
-// //     if constexpr(O::contains(eve::numeric))
-// //     {
-// //       if constexpr(concepts::real<Z0> && concepts::real<Z1>)
-// //         return eve::is_equal[eve::numeric](z0, z1);
-// //       else
-// //       {
-// //         using c_t = decltype(z0 + z1);
-// //         using r_t = decltype(r_t(z0) == r_t(z1));
-// //         return r_t(kumi::map([](auto a,  auto b) { return eve::is_equal[eve::numeric](a, b); }, r_t(z0), r_t(z1)));
-// //       }
-// //     }
-// //     else
-//       return z0 == z1;
-//   }
-// }
+namespace kyosu::_
+{
+  template<typename Z0, typename Z1, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto is_equal_(KYOSU_DELAY(), O const&, Z0 z0,  Z1 z1) noexcept
+  {
+//     if constexpr(O::contains(eve::numeric))
+//     {
+//       if constexpr(concepts::real<Z0> && concepts::real<Z1>)
+//         return eve::is_equal[eve::numeric](z0, z1);
+//       else
+//       {
+//         using c_t = decltype(z0 + z1);
+//         return kumi::all_of(kumi::map([](auto a,  auto b) { return eve::is_equal[eve::numeric](a, b); }, z0, z1));
+//       }
+//     }
+//     else
+      return z0 == z1;
+  }
+}
