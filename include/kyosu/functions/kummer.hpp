@@ -16,10 +16,10 @@ namespace kyosu
   struct kummer_t : eve::strict_elementwise_callable<kummer_t, Options, regularized_option>
   {
     template<concepts::cayley_dickson_like Z, concepts::cayley_dickson_like T1, concepts::cayley_dickson_like T2>
-    KYOSU_FORCEINLINE constexpr Z operator()( Z const& z, T1 const& t1,  T2 const & t2) const noexcept
+    KYOSU_FORCEINLINE constexpr auto  operator()( Z const& z, T1 const& t1,  T2 const & t2) const noexcept -> complexify_t<decltype(z+t1+t2)>
     {
       if constexpr(concepts::real<Z>)
-        return (*this)[this->options](kyosu::complex(z), t1, t2);
+        return (*this)[this->options()](kyosu::complex(z), t1, t2);
       else
         return KYOSU_CALL(z, t1, t2);
     }
