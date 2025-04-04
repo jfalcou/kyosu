@@ -15,13 +15,14 @@ namespace kyosu
   template<typename Options>
   struct sqrt_t : eve::elementwise_callable<sqrt_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return KYOSU_CALL(z); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return  (*this)(complex(v)); }
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    {
+      if constexpr(concepts::real<Z>)
+        return  (*this)(complex(z));
+      else
+        return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(sqrt_t, sqrt_);
 };
@@ -43,9 +44,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr T sqrt(T z) noexcept; //1
-//!      template<kyosu::concepts::complex T>        constexpr T sqrt(T z) noexcept; //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T sqrt(T z) noexcept; //3
+//!      template<kyosu::concepts::cayley_dickson T> constexpr T sqrt(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -55,9 +54,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. a real typed input z is treated as if `complex(z)` was entered.
-//!
-//!     2. Returns the elementwise the square root of z,
+//!     - A real typed input z is treated as if `complex(z)` was entered.
+//!     - for complex inpur, returns the elementwise the square root of z,
 //!        in the range of the right half-plane, including the imaginary axis (\f$[0, +\infty]\f$
 //!        along the real axis and \f$[-\infty, +\infty]\f$ along the imaginary axis.)
 //!
@@ -73,8 +71,7 @@ namespace kyosu
 //!        *  If z is \f$+\infty+i NaN\f$, the result is \f$+\infty+i NaN\f$
 //!        *  If z is \f$NaN+i y\f$, the result is \f$NaN+i NaN\f$
 //!        *  If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
-//!
-//!     2. Returns a square root of z.
+//!      - Returns a square root of z.
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: complex cosh](https://en.cppreference.com/w/cpp/numeric/complex/sqrt)
@@ -142,7 +139,7 @@ namespace kyosu::_
     }
     else
     {
-      return cayley_extend(sqrt, z);
+      return cayley_extend(kyosu::sqrt, z);
     }
   }
 }
