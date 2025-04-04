@@ -16,17 +16,9 @@ namespace kyosu
   template<typename Options>
   struct tgamma_inv_t : eve::elementwise_callable<tgamma_inv_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    {
-      return if_else(eve::is_flint(v) && eve::is_lez(v)
-                    , eve::zero(as(v))*eve::sign_alternate(v)
-                    , eve::rec[eve::pedantic](eve::tgamma(v)));
-    }
 
     KYOSU_CALLABLE_OBJECT(tgamma_inv_t, tgamma_inv_);
   };
@@ -48,7 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      constexpr T  tgamma_inv(T z) noexcept;
+//!      constexpr auto tgamma_inv(cayley_dickson_like auto z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -58,7 +50,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the inverse (not reciprocal) of \f$\Gamma(z)\f$.
+//!     Returns  \f$\frac1\Gamma(z)\f$.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Gamma Function](https://mathworld.wolfram.com/GammaFunction.html)
@@ -78,7 +70,13 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   constexpr auto tgamma_inv_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(concepts::complex<Z> )
+    if constexpr(concepts::real<Z> )
+    {
+      return if_else(eve::is_flint(z) && eve::is_lez(z)
+                    , eve::zero(as(z))*eve::sign_alternate(z)
+                    , eve::rec[eve::pedantic](eve::tgamma(z)));
+    }
+    else if constexpr(concepts::complex<Z> )
     {
       using u_t = eve::underlying_type_t<Z>;
       constexpr auto hf = eve::half(eve::as<u_t>());

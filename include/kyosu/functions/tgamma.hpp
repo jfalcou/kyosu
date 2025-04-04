@@ -22,13 +22,9 @@ namespace kyosu
   template<typename Options>
   struct tgamma_t : eve::elementwise_callable<tgamma_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr auto operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::tgamma(v); }
 
     KYOSU_CALLABLE_OBJECT(tgamma_t, tgamma_);
 };
@@ -52,7 +48,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      // regular calls
-//!      constexpr T  tgamma(T z) noexcept;                                                      // 1
+//!      constexpr T  tgamma(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,7 +58,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. Returns \f$\Gamma(z)\f$.
+//!     returns \f$\Gamma(z)\f$.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Gamma Function](https://mathworld.wolfram.com/GammaFunction.html)
@@ -77,13 +73,14 @@ namespace kyosu
 //======================================================================================================================
 }
 
-
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
   constexpr auto tgamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
-   if constexpr(concepts::complex<Z> )
+    if constexpr(concepts::real<Z>)
+      return eve::tgamma(a0);
+    else if constexpr(concepts::complex<Z> )
     {
       // 15 sig. digits for 0<=real(z)<=171
       // coeffs should sum to about g*g/2+23/24
