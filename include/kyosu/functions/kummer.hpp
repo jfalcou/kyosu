@@ -15,87 +15,16 @@ namespace kyosu
   template<typename Options>
   struct kummer_t : eve::strict_elementwise_callable<kummer_t, Options, regularized_option>
   {
-    template<concepts::complex_like Z, concepts::complex_like T1,  concepts::complex_like T2>
-    constexpr KYOSU_FORCEINLINE
-    auto operator()(Z zz, T1 aa, T2 bb) const noexcept
+    template<concepts::cayley_dickson_like Z, concepts::cayley_dickson_like T1, concepts::cayley_dickson_like T2>
+    KYOSU_FORCEINLINE constexpr auto  operator()( Z const& z, T1 const& t1,  T2 const & t2) const noexcept -> complexify_t<decltype(z+t1+t2)>
     {
       if constexpr(concepts::real<Z>)
-        return (*this)(kyosu::complex(zz), aa, bb);
-      else if constexpr(Options::contains(regularized))
-      {
-        using r_t = decltype((aa+bb)+zz);
-        r_t a(aa);
-        r_t b(bb);
-        r_t z(zz);
-        using u_t = eve::underlying_type_t<r_t>;
-        auto tol = eve::eps(eve::as<u_t>());
-        constexpr size_t Maxit = 100000;
-        auto anegint = kyosu::is_flint(a) && eve::is_lez(real(a));
-        auto bnegint = kyosu::is_flint(b) && eve::is_lez(real(b));
-        b = if_else(bnegint, eve::next(real(b)), b);
-        auto abnegint = (anegint && !bnegint) || (bnegint && anegint && (real(b) < real(a)));
-        auto anegintnotb = anegint && !bnegint;
-
-        auto br_abnegint =  [&](){
-          return kyosu::zero(eve::as<r_t>());
-        };
-
-        auto br_anegintnotb =  [&](){
-          auto bz = kyosu::if_else(bnegint, b, zero);
-          int n =  eve::maximum(-real(a));
-          r_t a1(1), s(kyosu::tgamma_inv(bz));
-          for (size_t j=1; j <= n; ++j)
-          {
-            a1*=(kyosu::dec(a+j)/(kyosu::dec(bz+j)*j))*z;
-            s += a1;
-          }
-          return s;
-        };
-
-        auto br_regular =  [&](auto test){
-          auto z = kyosu::if_else(test,  zz, zero);
-          auto r1 = a/b;
-          auto r2 = kyosu::inc(a)/(2*kyosu::inc(b));
-          r_t s1 = kyosu::inc(z*r1);
-          r_t s2 = s1+kyosu::sqr(z)*(r1)*r2;
-          r_t s3{};
-          auto smallp = kyosu::false_(as<r_t>());
-          auto gb = kyosu::tgamma_inv(b);
-          for (size_t j=3; j <= Maxit; ++j)
-          {
-            auto r = kyosu::dec(a+j)/(j*kyosu::dec(b+j));
-            s3 = s2 + (s2-s1)*r*z;
-            auto small = kyosu::linfnorm[kyosu::flat](s3-s2) < kyosu::linfnorm[kyosu::flat](s1)*tol;
-            if (eve::all(small && smallp)) return gb*s3;
-            s1 = s2;
-            s2 = s3;
-            smallp = small;
-          }
-          return if_else(smallp, gb*s3, allbits);
-        };
-
-        r_t r =  kyosu::nan(eve::as<r_t>());
-        auto notdone = kyosu::is_nan(r);
-
-        if( eve::any(notdone) )
-        {
-          notdone = next_interval(br_abnegint, notdone, abnegint, r);
-          if( eve::any(notdone) )
-          {
-            notdone = next_interval(br_anegintnotb, notdone, anegintnotb, r);
-            if( eve::any(notdone) )
-            {
-              notdone = last_interval(br_regular, notdone, r, notdone);
-            }
-          }
-          return r;
-        }
-      }
+        return (*this)[this->options()](kyosu::complex(z), t1, t2);
       else
-      {
-        return  _::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb});
-      }
+        return KYOSU_CALL(z, t1, t2);
     }
+
+    KYOSU_CALLABLE_OBJECT(kummer_t, kummer_);
   };
 
 //======================================================================================================================
@@ -149,4 +78,86 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, typename T1, typename T2, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto kummer_(KYOSU_DELAY(), O const&, Z zz, T1 aa, T2 bb) noexcept
+  {
+    if constexpr(O::contains(regularized))
+    {
+      using r_t = decltype((aa+bb)+zz);
+      r_t a(aa);
+      r_t b(bb);
+      r_t z(zz);
+      using u_t = eve::underlying_type_t<r_t>;
+      auto tol = eve::eps(eve::as<u_t>());
+      constexpr size_t Maxit = 100000;
+      auto anegint = kyosu::is_flint(a) && eve::is_lez(real(a));
+      auto bnegint = kyosu::is_flint(b) && eve::is_lez(real(b));
+      b = if_else(bnegint, eve::next(real(b)), b);
+      auto abnegint = (anegint && !bnegint) || (bnegint && anegint && (real(b) < real(a)));
+      auto anegintnotb = anegint && !bnegint;
+
+      auto br_abnegint =  [&](){
+        return kyosu::zero(eve::as<r_t>());
+      };
+
+      auto br_anegintnotb =  [&](){
+        auto bz = kyosu::if_else(bnegint, b, zero);
+        int n =  eve::maximum(-real(a));
+        r_t a1(1), s(kyosu::tgamma_inv(bz));
+        for (size_t j=1; j <= n; ++j)
+        {
+          a1*=(kyosu::dec(a+j)/(kyosu::dec(bz+j)*j))*z;
+          s += a1;
+        }
+        return s;
+      };
+
+      auto br_regular =  [&](auto test){
+        auto z = kyosu::if_else(test,  zz, zero);
+        auto r1 = a/b;
+        auto r2 = kyosu::inc(a)/(2*kyosu::inc(b));
+        r_t s1 = kyosu::inc(z*r1);
+        r_t s2 = s1+kyosu::sqr(z)*(r1)*r2;
+        r_t s3{};
+        auto smallp = kyosu::false_(as<r_t>());
+        auto gb = kyosu::tgamma_inv(b);
+        for (size_t j=3; j <= Maxit; ++j)
+        {
+          auto r = kyosu::dec(a+j)/(j*kyosu::dec(b+j));
+          s3 = s2 + (s2-s1)*r*z;
+          auto small = kyosu::linfnorm[kyosu::flat](s3-s2) < kyosu::linfnorm[kyosu::flat](s1)*tol;
+          if (eve::all(small && smallp)) return gb*s3;
+          s1 = s2;
+          s2 = s3;
+          smallp = small;
+        }
+        return if_else(smallp, gb*s3, allbits);
+      };
+
+      r_t r =  kyosu::nan(eve::as<r_t>());
+      auto notdone = kyosu::is_nan(r);
+
+      if( eve::any(notdone) )
+      {
+        notdone = next_interval(br_abnegint, notdone, abnegint, r);
+        if( eve::any(notdone) )
+        {
+          notdone = next_interval(br_anegintnotb, notdone, anegintnotb, r);
+          if( eve::any(notdone) )
+          {
+            notdone = last_interval(br_regular, notdone, r, notdone);
+          }
+        }
+        return r;
+      }
+    }
+    else
+    {
+      return  _::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb});
+    }
+  }
 }
