@@ -19,10 +19,7 @@ namespace kyosu
     template<concepts::real N, concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr auto  operator()(N n, Z z) const noexcept -> complexify_t<decltype(n+z)>
     {
-      if constexpr(concepts::real<Z>)
-        return (*this)(n, complex(z));
-      else
-        return KYOSU_CALL(n, z);
+      return KYOSU_CALL(n, z);
     }
 
     template<concepts::cayley_dickson_like Z, concepts::cayley_dickson_like T>
@@ -30,7 +27,7 @@ namespace kyosu
     {
       return KYOSU_CALL(z, t2, t1);
     }
-    
+
     KYOSU_CALLABLE_OBJECT(tchebytchev_t, tchebytchev_);
   };
 
@@ -107,19 +104,24 @@ namespace kyosu::_
   template<typename N, typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto tchebytchev_(KYOSU_DELAY(), O const&, N nn, Z zz) noexcept
   {
-    using r_t = decltype(nn+zz);
-    using u_t = eve::underlying_type_t<r_t>;
-    auto n = r_t(nn);
-    auto z = r_t(zz);
-    if constexpr(!O::contains(kind_2))
-    {
-      auto r = kyosu::hypergeometric(oneminus(z)*eve::half(eve::as<u_t>()), kumi::tuple{-n, n}, kumi::tuple{u_t(0.5)});
-      return if_else(is_real(z), complex(real(r)), r);
-    }
+    if constexpr(concepts::real<Z>)
+        return tchebytchev(nn, complex(zz));
     else
     {
-      auto r = kyosu::inc(n)*hypergeometric(oneminus(z)*eve::half(eve::as<u_t>()), kumi::tuple{-n, n+2}, kumi::tuple{u_t(1.5)});
-      return if_else(is_real(z), complex(real(r)), r);
+      using r_t = decltype(nn+zz);
+      using u_t = eve::underlying_type_t<r_t>;
+      auto n = r_t(nn);
+      auto z = r_t(zz);
+      if constexpr(!O::contains(kind_2))
+      {
+        auto r = kyosu::hypergeometric(oneminus(z)*eve::half(eve::as<u_t>()), kumi::tuple{-n, n}, kumi::tuple{u_t(0.5)});
+        return if_else(is_real(z), complex(real(r)), r);
+      }
+      else
+      {
+        auto r = kyosu::inc(n)*hypergeometric(oneminus(z)*eve::half(eve::as<u_t>()), kumi::tuple{-n, n+2}, kumi::tuple{u_t(1.5)});
+        return if_else(is_real(z), complex(real(r)), r);
+      }
     }
   }
 
