@@ -16,45 +16,21 @@ namespace kyosu
   struct tchebytchev_t : eve::strict_elementwise_callable<tchebytchev_t, Options
                                                           , eve::successor_option, eve::kind_1_option, eve::kind_2_option>
   {
-    template<concepts::real N, concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr auto  operator()(N nn, Z zz) const noexcept -> decltype(nn+zz)
+    template<concepts::real N, concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr auto  operator()(N n, Z z) const noexcept -> complexify_t<decltype(n+z)>
     {
-      using r_t = decltype(nn+zz);
-      using u_t = eve::underlying_type_t<r_t>;
-      auto n = r_t(nn);
-      auto z = r_t(zz);
-      if constexpr(!Options::contains(kind_2))
-      {
-        auto r = kyosu::hypergeometric(oneminus(z)*eve::half(eve::as<u_t>()), kumi::tuple{-n, n}, kumi::tuple{u_t(0.5)});
-        return if_else(is_real(z), complex(real(r)), r);
-      }
+      if constexpr(concepts::real<Z>)
+        return (*this)(n, complex(z));
       else
-      {
-        auto r = kyosu::inc(n)*hypergeometric(oneminus(z)*eve::half(eve::as<u_t>()), kumi::tuple{-n, n+2}, kumi::tuple{u_t(1.5)});
-        return if_else(is_real(z), complex(real(r)), r);
-      }
+        return KYOSU_CALL(n, z);
     }
 
-    template<concepts::real N, concepts::real Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(N n, Z z) const noexcept -> decltype(n+complex(z))
-    { return (*this)(n, complex(z)); }
-
-
-    // Recurrence relation for Tchebytchev polynomials:
-   template<concepts::cayley_dickson Z,  concepts::cayley_dickson T>
-    KYOSU_FORCEINLINE constexpr auto  operator()( Z z, T tn, T tnm1) const noexcept -> decltype(z+tn)
+    template<concepts::cayley_dickson_like Z, concepts::cayley_dickson_like T>
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z z, T t2, T t1) const noexcept -> complexify_t<decltype(t1+z)>
     {
-      return complex(2*z*tn-tnm1);
+      return KYOSU_CALL(z, t2, t1);
     }
-
-      template<concepts::real Z, concepts::real T>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z z, T tn,  T tnm1) const noexcept -> decltype(complex(z+tn))
-        requires(Options::contains(eve::successor))
-    {
-      return (*this)[eve::successor](complex(z), tn, tnm1);
-    }
-
-
+    
     KYOSU_CALLABLE_OBJECT(tchebytchev_t, tchebytchev_);
   };
 
@@ -80,8 +56,7 @@ namespace kyosu
 //!   namespace eve
 //!   {
 //!      // Regular overload
-//!      auto constexpr tchebytchev(kyosu::concepts::real auto n, kyosu::concepts::cayley_dickson auto z) noexcept; // 1
-//!      auto constexpr tchebytchev(kyosu::concepts::real auto n, kyosu::concepts::real auto z)           noexcept; // 1
+//!      auto constexpr tchebytchev(kyosu::concepts::real auto n, kyosu::concepts::cayley_dickson_like auto z) noexcept; // 1
 //!
 //!      // Lanes masking
 //!      constexpr auto tchebytchev[conditional_expr auto c](/* any previous overload */)                 noexcept; // 2
@@ -90,9 +65,9 @@ namespace kyosu
 //!      // Semantic options
 //!      constexpr auto tchebytchev[kind_1](/* any previous overload */)                                  noexcept; // 1
 //!      constexpr auto tchebytchev[kind_2](i/* any previous overload */)                                 noexcept; // 3
-//!      constexpr auto tchebytchev[successor]( kyosu::concepts::cayley_dickson auto z,
-//!                                                           kyosu::cayley_dickson auto tn,
-//!                                                           kyosu::cayley_dickson auto tnm1)            noexcept; // 4
+//!      constexpr auto tchebytchev[successor]( kyosu::concepts::cayley_dickson_like auto z,
+//!                                                           kyosu::cayley_dickson_like auto tn,
+//!                                                           kyosu::cayley_dickson_like auto tnm1)       noexcept; // 4
 //!   }
 //!   @endcode
 //!
@@ -100,11 +75,11 @@ namespace kyosu
 //!
 //!     * `n` :  [integral positive arguments](@ref eve::integral_value).
 //!              (note that negative values return a NaN)
-//!     * `x` :  [real floating argument](@ref eve::floating_value).
+//!     * `z` :  argument
 //!
 //!    **Return value**
 //!
-//!      1.The value of the polynomial at `z` is returned.
+//!      1.The value of the polynomial of order `n` at `z` is returned.
 //!      2. [The operation is performed conditionnaly](@ref conditional).
 //!      3. evaluates the nth polynomial of tchebytchev of second kind
 //!         \f$ \displaystyle U_n(z) =  \frac{\sin(n\arccos z)}{\sin(\arccos z)}\f$.
@@ -125,4 +100,37 @@ namespace kyosu
 //================================================================================================
 //! @}
 //================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename N, typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto tchebytchev_(KYOSU_DELAY(), O const&, N nn, Z zz) noexcept
+  {
+    using r_t = decltype(nn+zz);
+    using u_t = eve::underlying_type_t<r_t>;
+    auto n = r_t(nn);
+    auto z = r_t(zz);
+    if constexpr(!O::contains(kind_2))
+    {
+      auto r = kyosu::hypergeometric(oneminus(z)*eve::half(eve::as<u_t>()), kumi::tuple{-n, n}, kumi::tuple{u_t(0.5)});
+      return if_else(is_real(z), complex(real(r)), r);
+    }
+    else
+    {
+      auto r = kyosu::inc(n)*hypergeometric(oneminus(z)*eve::half(eve::as<u_t>()), kumi::tuple{-n, n+2}, kumi::tuple{u_t(1.5)});
+      return if_else(is_real(z), complex(real(r)), r);
+    }
+  }
+
+  // Recurrence relation for Tchebytchev polynomials:
+  template<typename Z, typename T, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto tchebytchev_(KYOSU_DELAY(), O const&, Z z, T tn, T tnm1) noexcept
+  requires(O::contains(eve::successor))
+  {
+    if constexpr(concepts::real<Z> && concepts::real<T>)
+      return tchebytchev[eve::successor](complex(z), tn, tnm1);
+    else
+      return complex(2*z*tn-tnm1);
+  }
 }

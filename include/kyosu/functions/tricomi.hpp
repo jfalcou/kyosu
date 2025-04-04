@@ -16,30 +16,17 @@ namespace kyosu
   template<typename Options>
   struct tricomi_t : eve::strict_elementwise_callable<tricomi_t, Options>
   {
-    template<typename Z, typename T1,  typename T2>
-    constexpr KYOSU_FORCEINLINE
-    auto operator()(Z z, T1 a, T2 b) const noexcept
+    template<concepts::cayley_dickson_like Z, concepts::cayley_dickson_like T1, concepts::cayley_dickson_like T2>
+    KYOSU_FORCEINLINE constexpr auto  operator()( Z const& z, T1 const& t1,  T2 const & t2) const noexcept -> complexify_t<decltype(z+t1+t2)>
     {
       if constexpr(concepts::real<Z>)
-        return (*this)(kyosu::complex(z), a, b);
+        return (*this)[this->options()](kyosu::complex(z), t1, t2);
       else
-      {
-        using r_t = decltype(z+a+b);
-        using u_t = eve::underlying_type_t<Z>;
-        auto constexpr opsqrteps = 1+eve::sqrteps(as<u_t>());
-        r_t zz(z);
-        r_t aa(a);
-        r_t bb(b);
-        r_t ombb = oneminus(bb);
-        r_t incaambb = inc(aa-bb);
-
-        auto f1 = kyosu::tgamma(dec(bb))*tgamma_inv(aa);
-        auto f2 = kyosu::tgamma(ombb)*tgamma_inv(inc(aa-bb));
-        auto p  = pow(z, ombb);
-        return f1*p*_::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb})+
-          f2*_::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb});
-      }
+        return KYOSU_CALL(z, t1, t2);
     }
+
+    KYOSU_CALLABLE_OBJECT(tricomi_t, tricomi_);
+
   };
 
 //======================================================================================================================
@@ -84,4 +71,26 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, typename T1, typename T2, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto tricomi_(KYOSU_DELAY(), O const&, Z z, T1 a, T2 b) noexcept
+  {
+    using r_t = decltype(z+a+b);
+    using u_t = eve::underlying_type_t<Z>;
+    auto constexpr opsqrteps = 1+eve::sqrteps(as<u_t>());
+    r_t zz(z);
+    r_t aa(a);
+    r_t bb(b);
+    r_t ombb = oneminus(bb);
+    r_t incaambb = inc(aa-bb);
+
+    auto f1 = kyosu::tgamma(dec(bb))*tgamma_inv(aa);
+    auto f2 = kyosu::tgamma(ombb)*tgamma_inv(inc(aa-bb));
+    auto p  = pow(z, ombb);
+    return f1*p*_::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb})+
+      f2*_::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb});
+  }
 }
