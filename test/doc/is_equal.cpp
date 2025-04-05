@@ -4,7 +4,7 @@
 
 int main()
 {
-  using e_t = float,;
+  using e_t = float;
   using c_t = kyosu::complex_t<float>;
   using q_t = kyosu::quaternion_t<float>;
   using we_t = eve::wide<float, eve::fixed<2>>;
