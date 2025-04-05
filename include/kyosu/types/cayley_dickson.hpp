@@ -116,6 +116,12 @@ namespace kyosu
       return a.contents == b.contents;
     }
 
+    friend constexpr eve::as_logical_t<Type>
+    operator!=(cayley_dickson const& a, cayley_dickson const& b) noexcept
+    {
+      return a.contents != b.contents;
+    }
+
     data_type contents;
   };
 
