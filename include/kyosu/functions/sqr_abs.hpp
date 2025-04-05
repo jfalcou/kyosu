@@ -14,18 +14,11 @@ namespace kyosu
   template<typename Options>
   struct sqr_abs_t : eve::elementwise_callable<sqr_abs_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z v) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z z) const noexcept
     {
-      auto anyinf = kumi::any_of(v, eve::is_infinite);
-      auto squares = kumi::map([](auto const& e) { return e*e; }, v);
-      auto r = kumi::sum( kumi::extract(squares,kumi::index<1>), get<0>(squares));
-      return if_else(anyinf,  eve::inf(as(r)), r);
+      return KYOSU_CALL(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::sqr(v); }
 
     KYOSU_CALLABLE_OBJECT(sqr_abs_t, sqr_abs_);
   };
@@ -47,8 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr as_real_type_t<T>  sqr_abs(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto               sqr_abs(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T>  sqr_abs(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -68,4 +60,21 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sqr_abs_(KYOSU_DELAY(), O const&, Z v) noexcept
+  {
+    if constexpr(concepts::real <Z>)
+      return eve::sqr(v);
+    else
+    {
+      auto anyinf = kumi::any_of(v, eve::is_infinite);
+      auto squares = kumi::map([](auto const& e) { return e*e; }, v);
+      auto r = kumi::sum( kumi::extract(squares,kumi::index<1>), get<0>(squares));
+      return if_else(anyinf,  eve::inf(as(r)), r);
+    }
+  }
 }

@@ -16,23 +16,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z c) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-        return eve::sqr(c);
-      else if constexpr(concepts::complex<Z>)
-      {
-        auto [zr, zi] = c;
-        return complex((zr-zi)*(zi+zr), 2 * zr * zi);
-      }
-      else
-      {
-        auto squares = kumi::map_index([]<typename I>(I, auto const& m)
-                                       { constexpr auto sgn = (I::value == 0)-(I::value > 0);
-                                         return sgn*m*m; }, c);
-        auto r = kumi::sum( squares, 0);
-        auto a =  2*real(c);
-        real(c) = 0;
-        return r+a*c;
-      }
+      return KYOSU_CALL(c);
     }
 
     KYOSU_CALLABLE_OBJECT(sqr_t, sqr_);
@@ -75,4 +59,29 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sqr_(KYOSU_DELAY(), O const&, Z c) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+      return eve::sqr(c);
+    else if constexpr(concepts::complex<Z>)
+    {
+      auto [zr, zi] = c;
+      return complex((zr-zi)*(zi+zr), 2 * zr * zi);
+    }
+    else
+    {
+      auto squares = kumi::map_index([]<typename I>(I, auto const& m)
+                                     { constexpr auto sgn = (I::value == 0)-(I::value > 0);
+                                       return sgn*m*m; }, c);
+      auto r = kumi::sum( squares, 0);
+      auto a =  2*real(c);
+      real(c) = 0;
+      return r+a*c;
+    }
+  }
 }
