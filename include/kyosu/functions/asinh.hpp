@@ -20,12 +20,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-        return eve::asinh(z);
-      if constexpr(concepts::complex<Z> )
-        return mulmi( kyosu::asin(muli(z)));
-      else
-        return kyosu::_::cayley_extend((*this), z);
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(asinh_t, asinh_);
@@ -90,4 +85,18 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto asinh_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+      return eve::asinh(z);
+    if constexpr(concepts::complex<Z> )
+      return mulmi(kyosu::asin(muli(z)));
+    else
+      return kyosu::_::cayley_extend(kyosu::asinh, z);
+  }
 }
