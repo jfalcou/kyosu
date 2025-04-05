@@ -16,25 +16,14 @@ namespace kyosu
   template<typename Options>
   struct zeta_t : eve::elementwise_callable<zeta_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
-      {
-        auto zz=exp2(z);
-        auto k = zz/(zz-2);
-        auto g = if_else(z == Z(1), complex(eve::nan(eve::as(real(z)))), k*eta(z));
-        return if_else(real(z) == eve::inf(eve::as(real(z))), complex(eve::one(eve::as(real(z)))), g);
-      }
-      else
-      {
-        return _::cayley_extend(*this, z);
-      }
+      if constexpr(concepts::real<Z>)
+        return (*this)(complex(z));
+      else if constexpr(concepts::complex<Z> )
+        return KYOSU_CALL(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr complex_t<V> operator()(V v) const noexcept
-    { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(zeta_t, zeta_);
 };
@@ -56,7 +45,6 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T> constexpr auto zeta(T z) noexcept;
 //!      template<kyosu::concepts::complex T>    constexpr auto zeta(T z) noexcept;
 //!   }
 //!   @endcode
@@ -95,7 +83,7 @@ namespace kyosu::_
     }
     else
     {
-      return cayley_extend(zeta, z);
+      return cayley_extend(kyosu::zeta, z);
     }
   }
 }
