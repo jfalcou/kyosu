@@ -13,17 +13,17 @@
 namespace kyosu
 {
   template<typename Options>
-  struct tchebytchev_t : eve::strict_elementwise_callable<tchebytchev_t, Options
+  struct tchebytchev_t : eve::callable<tchebytchev_t, Options
                                                           , eve::successor_option, eve::kind_1_option, eve::kind_2_option>
   {
     template<concepts::real N, concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr auto  operator()(N n, Z z) const noexcept -> complexify_t<decltype(n+z)>
+    KYOSU_FORCEINLINE constexpr auto  operator()(N n, Z z) const noexcept ->  complexify_t<as_cayley_dickson_like_t<N, Z>> //complexify_t<decltype(n+z)>
     {
       return KYOSU_CALL(n, z);
     }
 
     template<concepts::cayley_dickson_like Z, concepts::cayley_dickson_like T>
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z z, T t2, T t1) const noexcept -> complexify_t<decltype(t1+z)>
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z z, T t2, T t1) const noexcept -> complexify_t<as_cayley_dickson_like_t<T, Z>>//complexify_t<decltype(t1+z)>
     {
       return KYOSU_CALL(z, t2, t1);
     }
@@ -102,10 +102,17 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto tchebytchev_(KYOSU_DELAY(), O const&, N nn, Z zz) noexcept
+  KYOSU_FORCEINLINE constexpr auto tchebytchev_(KYOSU_DELAY(), O const& o, N nn, Z zz) noexcept
   {
+    std::cout << O::contains(eve::condition_key) << std::endl;
+    return complex(nn+zz);
     if constexpr(concepts::real<Z>)
         return tchebytchev(nn, complex(zz));
+    else if constexpr(O::contains(eve::condition_key))
+    {
+      auto opt = o.drop(eve::condition_key);
+      return  eve::detail::mask_op(o[eve::condition_key], eve::detail::return_2nd, kyosu::tchebytchev[opt](nn, zz), zz);
+    }
     else
     {
       using r_t = decltype(nn+zz);
