@@ -17,18 +17,11 @@ namespace kyosu
   template<typename Options>
   struct sin_t : eve::elementwise_callable<sin_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
-        return muli(kyosu::sinh(Z(mulmi(z))));
-      else
-        return _::cayley_extend(*this, z);
+      return KYOSU_CALL(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::sin(v); }
 
     KYOSU_CALLABLE_OBJECT(sin_t, sin_);
 };
@@ -50,9 +43,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>     constexpr auto sin(T z) noexcept; //1
-//!      template<kyosu::concepts::complex T>        constexpr auto sin(T z) noexcept; //2
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sin(T z) noexcept; //3
+//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sin(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -62,11 +53,9 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. Returns the sine of the argument.
-//!
-//!     2. The behavior of this function is equivalent to \f$-i*\sinh(i*z)\f$.
-//!
-//!     3.  Returns \f$-I_z\cosh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\sin(z_0)\f$,
+//!     - Returns the sine of the argument.
+//!     - For complex input, the behavior of this function is equivalent to \f$-i*\sinh(i*z)\f$.
+//!     - For general cayley_dickson input, returns \f$-I_z\cosh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\sin(z_0)\f$,
 //!       where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!        \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
@@ -82,4 +71,20 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr Z sin_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::real<Z>)
+      return eve::sin(z);
+    else if constexpr(concepts::complex<Z> )
+      return kyosu::muli(kyosu::sinh(Z(kyosu::mulmi(z))));
+    else
+      return _::cayley_extend(kyosu::sin, z);
+
+  }
 }

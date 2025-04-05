@@ -17,24 +17,11 @@ namespace kyosu
   template<typename Options>
   struct sincos_t : eve::elementwise_callable<sincos_t, Options>
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr  kumi::tuple<Z, Z> operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr eve::zipped<Z, Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
-      {
-        auto [sh, ch] = sinhcosh(muli(z));
-        return kumi::tuple{mulmi(sh), ch};
-
-      }
-      else
-      {
-        return _::cayley_extend2(*this, z);
-      }
+      return KYOSU_CALL(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
-    { return eve::sincos(v); }
 
     KYOSU_CALLABLE_OBJECT(sincos_t, sincos_);
 };
@@ -56,8 +43,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto sincos(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr auto sincos(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr eve::zipped<T, T> sincos(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -70,11 +56,30 @@ namespace kyosu
 //!     Returns simultaneously  the [sine](@ref sin) and [cosine](@ref cos) of the argument.
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/sincos.cpp}
 //======================================================================================================================
   inline constexpr auto sincos = eve::functor<sincos_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sincos_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::real<Z>)
+      return eve::sincos(z);
+    else if constexpr(concepts::complex<Z> )
+    {
+      auto [sh, ch] = kyosu::sinhcosh(kyosu::muli(z));
+      return eve::zip(kyosu::mulmi(sh), ch);
+
+    }
+    else
+    {
+      return _::cayley_extend2(kyosu::sincos, z);
+    }
+  }
 }
