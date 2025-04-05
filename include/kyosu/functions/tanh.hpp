@@ -13,33 +13,15 @@ namespace kyosu
   template<typename Options>
   struct tanh_t : eve::elementwise_callable<tanh_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::complex<Z> )
-      {
-        auto zz = z+z;
-        auto [rz, iz] = zz;
-        auto [s, c] = eve::sincos(iz);
-        auto [sh, ch] = eve::sinhcosh(rz);
-        auto tmp = c+ch;
-        auto rr = eve::if_else(eve::is_eqz(kyosu::real(z)), eve::zero, sh/tmp);
-        auto ii = eve::if_else(kyosu::is_real(z), eve::zero, s/tmp);
-        return kyosu::if_else(eve::is_infinite(rz), Z(eve::sign(rz)), Z(rr, ii));
-      }
-      else
-      {
-        return _::cayley_extend(*this, z);
-      }
+      return KYOSU_CALL(z);
     }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::tanh(v); }
-
+    
     KYOSU_CALLABLE_OBJECT(tanh_t, tanh_);
-};
-
+  };
+  
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -57,8 +39,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T tanh(T z) noexcept;
-//!      template<eve::floating_ordered_value T>              constexpr T tanh(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T tanh(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -68,10 +49,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1.  Returns eve::tanh(z).
-//!
-//!     2. Returns elementwise the complex value
-//!        of the hyperbolic tangent of the input.
+//!     - returns eve::tanh(z).
+//!     - For complex input, returns elementwise the complex value  of the hyperbolic tangent of the input.
 //!
 //!       * for every z: `tanh(conj(z)) == conj(tanh(z))`
 //!       * for every z: `tanh(-z) == -tanh(z)`
@@ -86,15 +65,38 @@ namespace kyosu
 //!       * If z is \f$\textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$
 //!       * If z is \f$\textrm{NaN}+i y\f$ (for any non-zero y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!       * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
-//!
-//!     3. The call is semantically equivalent to sinh(z)/cosh(z);
+//!     - For general cayley_dickson input, the call is semantically equivalent to sinh(z)/cosh(z);
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/tanh.cpp}
 //======================================================================================================================
   inline constexpr auto tanh = eve::functor<tanh_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto tanh_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+      return eve::tanh(z);
+    else if constexpr(concepts::complex<Z> )
+    {
+      auto zz = z+z;
+      auto [rz, iz] = zz;
+      auto [s, c] = eve::sincos(iz);
+      auto [sh, ch] = eve::sinhcosh(rz);
+      auto tmp = c+ch;
+      auto rr = eve::if_else(eve::is_eqz(kyosu::real(z)), eve::zero, sh/tmp);
+      auto ii = eve::if_else(kyosu::is_real(z), eve::zero, s/tmp);
+      return kyosu::if_else(eve::is_infinite(rz), Z(eve::sign(rz)), Z(rr, ii));
+    }
+    else
+    {
+      return _::cayley_extend(kyosu::tanh, z);
+    }
+  }
 }
