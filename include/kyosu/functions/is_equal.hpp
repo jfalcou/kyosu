@@ -79,7 +79,6 @@ namespace kyosu::_
       if constexpr(concepts::real<Z0> && concepts::real<Z1>) return eve::is_equal[eve::numeric](z0, z1);
       else
       {
-        using c_t = decltype(z0 + z1);
         return kumi::all_of(kumi::map([](auto a,  auto b) { return eve::is_equal[eve::numeric](a, b); }, z0, z1));
       }
     }
