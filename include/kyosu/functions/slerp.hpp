@@ -20,12 +20,9 @@ namespace kyosu
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::real Z2>
     requires(eve::same_lanes_or_scalar<Z0, Z1, Z2>)
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& c0, Z1 const & c1, Z2 const & c2) const
-      noexcept// -> decltype(c0+c1+c2)
+    KYOSU_FORCEINLINE constexpr  kyosu::as_cayley_dickson_like_t<complexify_t<Z0>,complexify_t<Z1>,Z2>  operator()(Z0 const& c0, Z1 const & c1, Z2 const & c2) const
+      noexcept
     {
-      if constexpr(concepts::real<Z0> && concepts::real<Z1>)
-        return (*this)(complex(c0),complex(c1),c2);
-      else
         return KYOSU_CALL(c0, c1, c2);
     }
 
@@ -80,7 +77,9 @@ namespace kyosu::_
   template<typename Z0, typename Z1, typename Z2, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto slerp_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1, Z2 z2) noexcept
   {
-    if constexpr(!O::contains(assume_unitary))
+    if constexpr(concepts::real<Z0> && concepts::real<Z1>)
+      return kyosu::slerp(complex(z0),complex(z1),z2);
+    else if constexpr(!O::contains(assume_unitary))
     {
       z0 = kyosu::signnz(z0);
       z1 = kyosu::signnz(z1);
