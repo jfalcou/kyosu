@@ -110,7 +110,11 @@ namespace kyosu
     using data_type       = kumi::result::generate_t<static_dimension,Type>;
     using is_product_type = void;
 
-    friend constexpr bool operator==(cayley_dickson const&, cayley_dickson const&) noexcept =default;
+    friend constexpr eve::as_logical_t<Type>
+    operator==(cayley_dickson const& a, cayley_dickson const& b) noexcept
+    {
+      return a.contents == b.contents;
+    }
 
     data_type contents;
   };
@@ -139,10 +143,10 @@ namespace kyosu
   cayley_dickson(T0,Ts... ) -> cayley_dickson<T0,1+sizeof...(Ts)>;
   //====================================================================================================================
   //! @}
-  //====================================================================================================================  
+  //====================================================================================================================
 }
 
-namespace kyosu::_ 
+namespace kyosu::_
 {
   template<typename T, unsigned int N>
   inline constexpr unsigned int rank<cayley_dickson<T,N>> = N;
