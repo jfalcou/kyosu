@@ -104,8 +104,6 @@ namespace kyosu::_
   template<typename N, typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto tchebytchev_(KYOSU_DELAY(), O const& o, N nn, Z zz) noexcept
   {
-    std::cout << O::contains(eve::condition_key) << std::endl;
-    return complex(nn+zz);
     if constexpr(concepts::real<Z>)
         return tchebytchev(nn, complex(zz));
     else if constexpr(O::contains(eve::condition_key))
