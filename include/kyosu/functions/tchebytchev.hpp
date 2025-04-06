@@ -111,7 +111,8 @@ namespace kyosu::_
     else if constexpr(O::contains(eve::condition_key))
     {
       auto opt = o.drop(eve::condition_key);
-      return  eve::detail::mask_op(o[eve::condition_key], eve::detail::return_2nd, kyosu::tchebytchev[opt](nn, zz), zz);
+      auto z = kyosu::tchebytchev[opt](nn, zz);
+      return  eve::detail::mask_op(o[eve::condition_key], eve::detail::return_2nd, zz, z);
     }
     else
     {
