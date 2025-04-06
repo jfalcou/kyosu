@@ -15,13 +15,9 @@ namespace kyosu
   struct chi_t : eve::strict_elementwise_callable<chi_t, Options>
   {
     template<concepts::cayley_dickson_like Z, typename B>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& x, B const & b) const noexcept
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z, B const & b) const noexcept
     {
-      auto z = kyosu::if_else(b(x), one(as(x)), zero);
-      if constexpr(Options::contains(eve::condition_key))
-        return  mask_op(this->options()[eve::condition_key], eve::detail::return_2nd, x, z);
-      else
-        return z;
+        return  KYOSU_CALL(z, b);
     }
 
     KYOSU_CALLABLE_OBJECT(chi_t, chi_);
@@ -31,7 +27,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var chi
-//!   @brief Computes the gudermanian of the argument.
+//!   @brief Computes the value of the indicatrix of a set defined by a predicate at the argument.
 //!
 //!   @groupheader{Header file}
 //!
@@ -44,7 +40,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template <concepts::cayley_dickson_like Z> constexpr Z chi(Z z, auto belongs)                              noexcept;
+//!      template <concepts::cayley_dickson_like Z> constexpr Z chi(Z z, auto belongs)  noexcept;
 //!   }
 //!   @endcode
 //!
@@ -67,4 +63,17 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, typename B, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto chi_(KYOSU_DELAY(), O const& o, Z z, B const & b) noexcept
+  {
+    auto zz = kyosu::if_else(b(z), one(as(z)), zero);
+    if constexpr(O::contains(eve::condition_key))
+      return  mask_op(o[eve::condition_key], eve::detail::return_2nd, z, zz);
+    else
+      return zz;
+  }
 }
