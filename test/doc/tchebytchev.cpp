@@ -20,5 +20,5 @@ int main()
   std::cout << "-> tchebytchev(n, x)                       = " << kyosu::tchebytchev(n, x)   << '\n';
   std::cout << "-> tchebytchev[kind_2](n, xd)              = " << kyosu::tchebytchev[eve::kind_2](n, xd) << "\n\n";
   std::cout << "-> tchebytchev[eve::ignore_last(2)](n, xd) = " << kyosu::tchebytchev[eve::ignore_last(2)](n, xd) << '\n';
-//   std::cout << "-> tchebytchev[n > 3](n, xd)               = " << kyosu::tchebytchev[n >  3](n, xd) << '\n';
+  std::cout << "-> tchebytchev[n > 3](n, xd)               = " << kyosu::tchebytchev[n >  3](n, xd) << '\n';
 }
