@@ -61,7 +61,6 @@ namespace kyosu
 //======================================================================================================================
 }
 
-
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
