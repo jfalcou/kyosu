@@ -73,7 +73,9 @@ namespace kyosu::_
   {
     if constexpr(concepts::real<Z>)
       return eve::csc(z);
-    else
+    else if constexpr(concepts::complex<Z> )
       return kyosu::rec(kyosu::sin(z));
+    else
+      return _::cayley_extend(kyosu::csc, z);
   }
 }
