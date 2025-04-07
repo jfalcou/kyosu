@@ -16,7 +16,7 @@ int main()
   std::cout << "<- x                                       = " << x  << '\n';
 
   std::cout << "-> gegenbauer(n, l, xd)                      = " << kyosu::gegenbauer(n, l, xd) << '\n';
-  std::cout << "-> gegenbauer[eve::ignore_last(2)](n, l, xd) = " << kyosu::gegenbauer[eve::ignore_last(2)](n, l, xd) << '\n';
+//   std::cout << "-> gegenbauer[eve::ignore_last(2)](n, l, xd) = " << kyosu::gegenbauer[eve::ignore_last(2)](n, l, xd) << '\n';
   std::cout << "-> gegenbauer[n > 3](n, l, xd)               = " << kyosu::gegenbauer[n >  3](n, l, xd) << '\n';
   std::cout << "-> gegenbauer(3.0, 2.0, xd)                  = " << kyosu::gegenbauer(3.0, 2.0, xd) << '\n';
   std::cout << "-> gegenbauer(n, l, 2.0)                     = " << kyosu::gegenbauer(n, l, 2.0) << '\n';
