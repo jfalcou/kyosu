@@ -19,16 +19,11 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z> )
-        return eve::gd(z);
-      else if constexpr(concepts::complex<Z> )
-        return 2*kyosu::atan(tanh(z*kyosu::half(as(z))));
-      else
-        return kyosu::_::cayley_extend(*this, z);
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(gd_t, gd_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -65,11 +60,24 @@ namespace kyosu
 //!   *  [Wikipedia: Gudermannian function](https://en.wikipedia.org/wiki/Gudermannian_function)
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/gd.cpp}
 //======================================================================================================================
   inline constexpr auto gd = eve::functor<gd_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto gd_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z> )
+      return eve::gd(z);
+    else if constexpr(concepts::complex<Z> )
+      return 2*kyosu::atan(tanh(z*kyosu::half(as(z))));
+    else
+      return kyosu::_::cayley_extend(kyosu::gd, z);
+  }
 }

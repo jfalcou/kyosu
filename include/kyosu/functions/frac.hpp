@@ -13,13 +13,11 @@ namespace kyosu
   template<typename Options>
   struct frac_t : eve::elementwise_callable<frac_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    {   return Z{kumi::map([](auto const& e) { return eve::frac(e); }, z)}; }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::frac(v); }
+    {
+      return KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(frac_t, frac_);
 };
@@ -41,8 +39,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T frac(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T frac(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T frac(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,4 +60,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto frac_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(kyosu::concepts::real<Z>)
+      return eve::frac(z);
+    else
+      return Z{kumi::map([](auto const& e) { return eve::frac(e); }, z)};
+  }
 }
