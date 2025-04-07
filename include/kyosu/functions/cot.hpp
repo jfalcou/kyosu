@@ -75,6 +75,6 @@ namespace kyosu::_
     else if constexpr(concepts::complex<Z> )
       return kyosu::rec(kyosu::tan(z));
     else
-      return _::cayley_extend(kyosu::tan, z);
+      return _::cayley_extend(kyosu::cot, z);
   }
 }

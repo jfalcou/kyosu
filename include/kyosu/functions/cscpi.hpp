@@ -19,11 +19,9 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    { return kyosu::rec(kyosu::sinpi(z)); }
-
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept
-    { return eve::cscpi(v); }
+    {
+      return  KYOSU_CALL(z);
+    }
 
     KYOSU_CALLABLE_OBJECT(cscpi_t, cscpi_);
 };
@@ -66,4 +64,18 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cscpi_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+      return eve::cscpi(z);
+    else if constexpr(concepts::complex<Z> )
+      return kyosu::rec(kyosu::sinpi(z));
+    else
+      return _::cayley_extend(kyosu::cscpi, z);
+  }
 }
