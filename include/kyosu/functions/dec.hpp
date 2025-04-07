@@ -14,10 +14,9 @@ namespace kyosu
   struct dec_t : eve::elementwise_callable<dec_t, Options>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z c) const noexcept
+    KYOSU_FORCEINLINE constexpr Z operator()(Z z) const noexcept
     {
-      real(c) = eve::dec(real(c));
-      return c;
+      return  KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(dec_t, dec_);
@@ -41,7 +40,6 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T dec(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T dec(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -61,4 +59,19 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto dec_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+      return eve::dec(z);
+    else
+    {
+      real(z) = eve::dec(real(z));
+      return z;
+    }
+  }
 }
