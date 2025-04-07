@@ -70,7 +70,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto csc_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto csch_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     if constexpr(concepts::real<Z>)
       return eve::csch(z);
