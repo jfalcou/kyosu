@@ -18,12 +18,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-        return eve::cot(z);
-      if constexpr(concepts::complex<Z> )
-        return kyosu::rec(kyosu::tan(z));
-      else
-        return _::cayley_extend(*this, z);
+      return  KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(cot_t, cot_);
@@ -68,4 +63,18 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cot_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z>)
+      return eve::cot(z);
+    else if constexpr(concepts::complex<Z> )
+      return kyosu::rec(kyosu::tan(z));
+    else
+      return _::cayley_extend(kyosu::cot, z);
+  }
 }
