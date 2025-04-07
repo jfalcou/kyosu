@@ -15,7 +15,7 @@ namespace kyosu
   template<typename Options>
   struct csch_t : eve::elementwise_callable<csch_t, Options>
   {
-    template<concepts::cayley_dickson Z>
+    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
       return  KYOSU_CALL(z);
