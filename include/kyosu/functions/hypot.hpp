@@ -15,8 +15,10 @@ namespace kyosu
   struct hypot_t : eve::strict_elementwise_callable<hypot_t, Options, eve::pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like ...Zs>
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 z0, Zs ... zs) const noexcept -> decltype(eve::hypot(real(z0), real(zs)...))
-    {       return eve::hypot[this->options()](kumi::flatten(kumi::make_tuple(z0, zs...))); }
+    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 z0, Zs ... zs) const noexcept ->decltype(eve::hypot(real(z0), real(zs)...))
+    {
+      return KYOSU_CALL(z0, zs...);
+    }
 
     KYOSU_CALLABLE_OBJECT(hypot_t, hypot_);
 };
@@ -60,4 +62,17 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+
+namespace kyosu::_
+{
+  template<eve::callable_options O, typename Z0, typename ... Zs>
+  KYOSU_FORCEINLINE constexpr auto hypot_(KYOSU_DELAY(), O const& o, Z0 z0, Zs...zs) noexcept
+  {
+    if constexpr(concepts::real<Z0> && (... && concepts::real<Zs>))
+      return eve::hypot[o](z0,zs...);
+    else
+      return eve::hypot[o](kumi::flatten(kumi::make_tuple(z0, zs...)));
+  }
 }
