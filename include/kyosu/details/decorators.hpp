@@ -7,6 +7,7 @@
 //======================================================================================================================
 #pragma once
 #include <eve/detail/raberu.hpp>
+#include <eve/module/core/decorator/core.hpp>
 
 namespace kyosu
 {
@@ -15,8 +16,6 @@ namespace kyosu
   struct flat_mode              {};
   struct incomplete_mode        {};
   struct intrinsic_mode         {};
-  struct kind_1_mode            {};
-  struct kind_2_mode            {};
   struct regularized_mode       {};
   struct type_1_mode            {};
   struct type_2_mode            {};
@@ -27,8 +26,6 @@ namespace kyosu
   [[maybe_unused]] inline constexpr auto extrinsic       = ::rbr::flag(extrinsic_mode{});
   [[maybe_unused]] inline constexpr auto flat            = ::rbr::flag(flat_mode{});
   [[maybe_unused]] inline constexpr auto incomplete      = ::rbr::flag(incomplete_mode{});
-  [[maybe_unused]] inline constexpr auto kind_1          = ::rbr::flag(kind_1_mode{});
-  [[maybe_unused]] inline constexpr auto kind_2          = ::rbr::flag(kind_2_mode{});
   [[maybe_unused]] inline constexpr auto regularized     = ::rbr::flag(regularized_mode{});
   [[maybe_unused]] inline constexpr auto type_1          = ::rbr::flag(type_1_mode{});
   [[maybe_unused]] inline constexpr auto type_2          = ::rbr::flag(type_2_mode{});
@@ -39,12 +36,72 @@ namespace kyosu
   struct flat_option : eve::detail::exact_option<flat>                          {};
   struct incomplete_option: eve::detail::exact_option<incomplete>               {};
   struct intrinsic_option : eve::detail::exact_option<intrinsic>                {};
-  struct kind_1_option : eve::detail::exact_option<kind_1>                      {};
-  struct kind_2_option : eve::detail::exact_option<kind_2>                      {};
   struct regularized_option : eve::detail::exact_option<regularized>            {};
   struct type_1_option : eve::detail::exact_option<type_1>                      {};
   struct type_2_option : eve::detail::exact_option<type_2>                      {};
   struct type_3_option : eve::detail::exact_option<type_3>                      {};
 
+  //putting eve decorators in kyosu namespace
 
+  using eve::almost_option         ;
+  using eve::associated_option     ;
+  using eve::compensated_option    ;
+  using eve::condon_shortley_option;
+  using eve::cylindrical_option    ;
+  using eve::definitely_option     ;
+  using eve::eccentric_option      ;
+  using eve::kind_1_option         ;
+  using eve::kind_2_option         ;
+  using eve::left_option           ;
+  using eve::modular_option        ;
+  using eve::numeric_option        ;
+  using eve::p_kind_option         ;
+  using eve::promote_option        ;
+  using eve::q_kind_option         ;
+  using eve::right_option          ;
+  using eve::spherical_option      ;
+  using eve::successor_option      ;
+  using eve::threshold_option      ;
+  using eve::upper_option          ;
+  using eve::lower_option          ;
+  using eve::strict_option         ;
+  using eve::widen_option          ;
+  using eve::to_nearest_option     ;
+  using eve::downward_option       ;
+  using eve::upward_option         ;
+  using eve::toward_zero_option    ;
+  using eve::pedantic_option       ;
+  using eve::raw_option            ;
+  using eve::saturated_option      ;
+
+  using eve::almost;
+  using eve::associated;
+  using eve::compensated;
+  using eve::condon_shortley;
+  using eve::cylindrical;
+  using eve::definitely;
+  using eve::eccentric;
+  using eve::kind_1;
+  using eve::kind_2;
+  using eve::left;
+  using eve::modular;
+  using eve::numeric;
+  using eve::p_kind;
+  using eve::promote;
+  using eve::q_kind;
+  using eve::right;
+  using eve::spherical;
+  using eve::successor;
+  using eve::threshold;
+  using eve::upper;
+  using eve::lower;
+  using eve::strict;
+  using eve::widen;
+  using eve::to_nearest;
+  using eve::downward;
+  using eve::upward;
+  using eve::toward_zero;
+  using eve::pedantic;
+  using eve::raw;
+  using eve::saturated;
 }
