@@ -22,6 +22,7 @@ int main()
   we_t we0(e0);
   we_t we1(e1);
   std::cout << we0 << ", " << we1 << " -> " << pow1p(we0, we1) << "\n";
+  std::cout << we0 << ", " << 4 << " -> " << pow1p(we0, 4) << "\n";
 
   std::cout << "Complex:     "<< "\n";
   c_t c0(1, 5);
