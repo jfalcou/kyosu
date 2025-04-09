@@ -18,10 +18,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z> )
-        return eve::expmx2(z);
-      else
-        return kyosu::exp(-sqr(z));
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(expmx2_t, expmx2_);
@@ -57,11 +54,22 @@ namespace kyosu
 //!     Returns `exp(-z*z)`.
 //!
 //!  @groupheader{Example}
-//!
 //!  @godbolt{doc/expmx2.cpp}
 //======================================================================================================================
   inline constexpr auto expmx2 = eve::functor<expmx2_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto expmx2_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z> )
+      return eve::expmx2(z);
+    else
+      return kyosu::exp(-sqr(z));
+  }
 }

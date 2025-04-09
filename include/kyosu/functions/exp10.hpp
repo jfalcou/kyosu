@@ -17,10 +17,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z> )
-        return eve::exp10(z);
-      else
-        return kyosu::exp(z*kyosu::log_10(eve::as_element<Z>()));
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(exp10_t, exp10_);
@@ -63,4 +60,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto exp10_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z> )
+      return eve::exp10(z);
+    else
+      return kyosu::exp(z*kyosu::log_10(eve::as_element<Z>()));
+  }
 }
