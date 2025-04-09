@@ -18,22 +18,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z> )
-        return eve::erfcx(z);
-      else if constexpr(concepts::complex<Z> )
-      {
-        auto realz = is_real(z);
-        if (eve::all(realz))
-          return complex(eve::erfcx(real(z)));
-        else  if (eve::none(realz))
-          return faddeeva(muli(z));
-        else
-          return if_else(realz, complex(eve::erfcx(real(z))), faddeeva(muli(z)));
-      }
-      else
-      {
-        return _::cayley_extend(*this, z);
-      }
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(erfcx_t, erfcx_);
@@ -80,4 +65,28 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto erfcx_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    if constexpr(concepts::real<Z> )
+      return eve::erfcx(z);
+    else if constexpr(concepts::complex<Z> )
+    {
+      auto realz = is_real(z);
+      if (eve::all(realz))
+        return complex(eve::erfcx(real(z)));
+      else  if (eve::none(realz))
+        return faddeeva(muli(z));
+      else
+        return if_else(realz, complex(eve::erfcx(real(z))), faddeeva(muli(z)));
+    }
+    else
+    {
+      return _::cayley_extend(kyosu::erfcx, z);
+    }
+  }
 }

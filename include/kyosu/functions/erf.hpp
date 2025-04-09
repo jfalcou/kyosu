@@ -22,10 +22,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z> )
-        return eve::erf(z);
-      else
-        return KYOSU_CALL(z);
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(erf_t, erf_);
@@ -82,7 +79,9 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto erf_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(concepts::complex<Z> )
+    if constexpr(concepts::real<Z> )
+      return eve::erf(z);
+    else if constexpr(concepts::complex<Z> )
     {
       auto x =  real(z);
       auto y =  imag(z);
