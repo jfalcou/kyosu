@@ -74,7 +74,6 @@ namespace kyosu
 }
 namespace kyosu::_
 {
-
   template<typename C0,  typename C1, eve::callable_options O>
   constexpr auto reldist_(KYOSU_DELAY(), O const& o, C0 c0,  C1 c1) noexcept
   {
