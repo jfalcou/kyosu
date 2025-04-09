@@ -15,66 +15,16 @@ namespace kyosu
   template<typename Options>
   struct bessel_k_t : eve::strict_elementwise_callable<bessel_k_t, Options, eve::spherical_option, eve::cylindrical_option>
   {
-    template<eve::scalar_value N, typename Z>
-    requires(concepts::real<Z> || concepts::cayley_dickson<Z>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z) const noexcept
+    template<eve::scalar_value N, concepts::cayley_dickson_like Z>
+      KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n, Z const & z) const noexcept
     {
-       if constexpr(concepts::complex<Z> )
-      {
-        if constexpr(eve::integral_scalar_value<N>)
-        {
-          if constexpr(Options::contains(eve::spherical))
-          {
-            if (eve::is_ltz(n))
-            {
-              using u_t = eve::underlying_type_t<Z>;
-              return _::sb_kr(u_t(n), z);
-            }
-            else
-              return _::sb_kn(n, z);
-          }
-          else
-            return _::cb_kn(n, z);
-        }
-        else if constexpr( eve::floating_scalar_value<N>)
-        {
-          if constexpr(Options::contains(eve::spherical))
-            return _::sb_kr(n, z);
-          else
-            return _::cb_kr(n, z);
-        }
-      }
-      else
-        return _::cayley_extend_rev(*this, n, z);
+      return KYOSU_CALL(n, z);
     }
 
-    template<eve::scalar_value N, typename Z, std::size_t S>
-    requires(concepts::real<Z> || concepts::complex<Z>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z, std::span<Z, S> is) const noexcept
+    template<eve::scalar_value N, concepts::complex_like  Z, std::size_t S>
+      KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n, Z const & z, std::span<Z, S> ks) const noexcept
     {
-      constexpr auto Kind = Options::contains(kind_2) ? 2 : 1;
-      if constexpr(eve::integral_scalar_value<N>)
-      {
-        if constexpr(Options::contains(eve::spherical))
-        {
-          if (eve::is_ltz(n))
-          {
-            using u_t = eve::underlying_type_t<Z>;
-            return _::sb_kr(u_t(n), z, is);
-          }
-          else
-            return _::sb_kn(n, z, is);
-        }
-        else
-          return _::cb_kn(n, z, is);
-      }
-      else
-      {
-        if constexpr(Options::contains(eve::spherical))
-          return _::sb_kr(n, z, is);
-        else
-          return _::cb_kr(n, z, is);
-      }
+      return KYOSU_CALL(n, z, ks);
     }
 
     KYOSU_CALLABLE_OBJECT(bessel_k_t, bessel_k_);
@@ -96,14 +46,10 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_k(N n, T z)                                 noexcept; //1
-//!      template<eve;scalar_value N, kyosu::concepts::real T>              constexpr T    bessel_k(N n, T z)                                 noexcept; //1
-//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_k(N n, T z, std::span<Z, S> cis)            noexcept; //2
-//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_k(N n, T z, std::span<Z, S> cis)            noexcept; //2
-//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson T>    constexpr auto bessel_k[spherical](N n, T z)                      noexcept; //3
-//!      template<eve;scalar_value N, kyosu::concepts::real T>              constexpr T    bessel_k[spherical](N n, T z)                      noexcept; //3
-//!      template<eve;scalar_value N, kyosu::concepts::complex T, size_t S> constexpr auto bessel_k[spherical](N n, T z, std::span<Z, S> sis) noexcept; //4
-//!      template<eve;scalar_value N, kyosu::concepts::real T, size_t S>    constexpr T    bessel_k[spherical](N n, T z, std::span<Z, S> sis) noexcept; //4
+//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson_like T>    constexpr auto bessel_k(N n, T z)                                 noexcept; //1
+//!      template<eve;scalar_value N, kyosu::concepts::complex_like T, size_t S> constexpr auto bessel_k(N n, T z, std::span<Z, S> cis)            noexcept; //2
+//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson_like T>    constexpr auto bessel_k[spherical](N n, T z)                      noexcept; //3
+//!      template<eve;scalar_value N, kyosu::concepts::complex_like T, size_t S> constexpr auto bessel_k[spherical](N n, T z, std::span<Z, S> sis) noexcept; //4
 //!   }
 //!   @endcode
 //!
@@ -140,4 +86,67 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename N, typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto bessel_k_(KYOSU_DELAY(), O const& o, N n, Z z) noexcept
+  {
+    if constexpr(concepts::complex<Z> )
+    {
+      if constexpr(eve::integral_scalar_value<N>)
+      {
+        if constexpr(O::contains(eve::spherical))
+        {
+          if (eve::is_ltz(n))
+          {
+            using u_t = eve::underlying_type_t<Z>;
+            return _::sb_kr(u_t(n), z);
+          }
+          else
+            return _::sb_kn(n, z);
+        }
+        else
+          return _::cb_kn(n, z);
+      }
+      else if constexpr( eve::floating_scalar_value<N>)
+      {
+        if constexpr(O::contains(eve::spherical))
+          return _::sb_kr(n, z);
+        else
+          return _::cb_kr(n, z);
+      }
+    }
+    else
+      return _::cayley_extend_rev(kyosu::bessel_k, n, z);
+  }
+
+  template<typename N, typename Z, typename KS, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto bessel_k_(KYOSU_DELAY(), O const& o, N n, Z z, KS & ks) noexcept
+  {
+    constexpr auto Kind = O::contains(kind_2) ? 2 : 1;
+    if constexpr(eve::integral_scalar_value<N>)
+    {
+      if constexpr(O::contains(eve::spherical))
+      {
+        if (eve::is_ltz(n))
+        {
+          using u_t = eve::underlying_type_t<Z>;
+          return _::sb_kr(u_t(n), z, ks);
+        }
+        else
+          return _::sb_kn(n, z, ks);
+      }
+      else
+        return _::cb_kn(n, z, ks);
+    }
+    else
+    {
+      if constexpr(O::contains(eve::spherical))
+        return _::sb_kr(n, z, ks);
+      else
+        return _::cb_kr(n, z, ks);
+    }
+  }
 }
