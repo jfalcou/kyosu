@@ -58,7 +58,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     1. Returns elementwise false or true according the equality of the parameters
-//!     2. NaN values in correspoding parts are considered equal
+//!     2. NaN values in corresponding parts are considered equal
 //!
 //!  @groupheader{Example}
 //!
