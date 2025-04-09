@@ -12,34 +12,12 @@
 namespace kyosu
 {
   template<typename Options>
-  struct dist_t : eve::elementwise_callable<dist_t, Options, eve::pedantic_option, eve::numeric_option>
+  struct dist_t : eve::strict_elementwise_callable<dist_t, Options, eve::pedantic_option, eve::numeric_option>
   {
-    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1 >
+   template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1 >
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::abs(c0-c1))
     {
-      auto d = kyosu::abs(c0-c1);
-
-      if constexpr(Options::contains(eve::pedantic) || Options::contains(eve::numeric))
-      {
-        d = if_else(kyosu::is_infinite(c0) || kyosu::is_infinite(c1), eve::inf(as(d)), d);
-       if constexpr(concepts::real<Z0> && concepts::real<Z1>)
-        {
-          if constexpr (Options::contains(eve::pedantic)) d;
-          else return if_else(eve::is_equal[eve::numeric](c0, c1), zero, d);
-        }
-        else
-        {
-          if constexpr(Options::contains(eve::numeric))
-          {
-            using r_t = decltype(c0-c1);
-            auto eq = kumi::map([](auto a,  auto b) { return eve::is_equal[eve::numeric](a, b); }, r_t(c0), r_t(c1));
-            return  if_else(kumi::all_of(eq), zero, d);
-          }
-          else
-            return d;
-        }
-      }
-      return d;
+      return KYOSU_CALL(c0, c1);
     }
 
     KYOSU_CALLABLE_OBJECT(dist_t, dist_);
@@ -92,4 +70,36 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+
+namespace kyosu::_
+{
+  template<typename Z0, typename Z1, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto dist_(KYOSU_DELAY(), O const&, Z0 c0, Z1 c1) noexcept
+  {
+    auto d = kyosu::abs(c0-c1);
+
+    if constexpr(O::contains(eve::pedantic) || O::contains(eve::numeric))
+    {
+      d = if_else(kyosu::is_infinite(c0) || kyosu::is_infinite(c1), eve::inf(as(d)), d);
+      if constexpr(concepts::real<Z0> && concepts::real<Z1>)
+      {
+        if constexpr (O::contains(eve::pedantic)) return d;
+        else return if_else(eve::is_equal[eve::numeric](c0, c1), zero, d);
+      }
+      else
+      {
+        if constexpr(O::contains(eve::numeric))
+        {
+          using r_t = decltype(c0-c1);
+          auto eq = kumi::map([](auto a,  auto b) { return eve::is_equal[eve::numeric](a, b); }, r_t(c0), r_t(c1));
+          return  if_else(kumi::all_of(eq), zero, d);
+        }
+        else
+          return d;
+      }
+    }
+    return d;
+  }
 }
