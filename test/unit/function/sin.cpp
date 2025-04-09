@@ -18,9 +18,12 @@ TTS_CASE_WITH ( "Check kyosu::sin over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10))
               )
-(auto data)
+<typename T>(T data)
 {
   TTS_ULP_EQUAL(kyosu::sin(data), eve::sin(data), 0.5);
+  auto cond = eve::is_ltz(data);
+
+  TTS_RELATIVE_EQUAL(kyosu::sin[cond](data), kyosu::if_else(cond,  kyosu::sin(data), data), tts::prec<T>());
 };
 
 #ifdef HAS_BOOST

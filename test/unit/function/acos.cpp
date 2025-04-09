@@ -29,4 +29,12 @@ TTS_CASE_WITH ( "Check kyosu::acos over quaternion"
   TTS_RELATIVE_EQUAL(kyosu::cos(lr), ce_t(r), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::cos(lc), c, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::cos(lq), q, tts::prec<T>());
+
+  auto cond = eve::is_ltz(a0);
+
+  TTS_RELATIVE_EQUAL(kyosu::acos[cond](r), kyosu::if_else(cond,  kyosu::acos(r), ce_t(r)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acos[cond](c), kyosu::if_else(cond,  kyosu::acos(c), c), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acos[cond](q), kyosu::if_else(cond,  kyosu::acos(q), q), tts::prec<T>());
+
+
 };
