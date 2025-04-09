@@ -14,12 +14,9 @@ namespace kyosu
   template<typename Options>
   struct associator_t : eve::strict_elementwise_callable<associator_t, Options, eve::pedantic_option>
   {
-    template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
-    template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
-
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like Z2>
     requires(eve::same_lanes_or_scalar<Z0, Z1, Z2>)
-    KYOSU_FORCEINLINE constexpr typename result<Z0,Z1,Z2>::type
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z0, Z1, Z2>
     operator()(Z0 const& c0, Z1 const & c1, Z2 const & c2) const noexcept
     {
       return KYOSU_CALL(c0, c1, c2);
