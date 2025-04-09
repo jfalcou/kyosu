@@ -14,14 +14,10 @@ namespace kyosu
   template<typename Options>
   struct dot_t : eve::strict_elementwise_callable<dot_t, Options>
   {
-    template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson_like<Z0> || concepts::cayley_dickson_like<Z1>)
-      KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const & z1) const noexcept -> decltype(z0+z1)
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z0, Z1> operator()(Z0 const& z0, Z1 const & z1) const noexcept
     {
-      if constexpr(concepts::real<Z0> && concepts::real<Z1>)
-        return z0*z1;
-      else
-        return z0*conj(z1);
+      return KYOSU_CALL(z0,z1);
     }
 
     KYOSU_CALLABLE_OBJECT(dot_t, dot_);
@@ -66,4 +62,16 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z0,  typename Z1, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
+  {
+    if constexpr(concepts::real<Z1>)
+      return z0*z1;
+    else
+      return z0*conj(z1);
+  }
 }
