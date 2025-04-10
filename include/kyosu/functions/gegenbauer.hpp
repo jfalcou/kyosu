@@ -104,13 +104,14 @@ namespace kyosu::_
       auto hyp = hypergeometric(oneminus(z)*hf, a, b);
       auto r = kyosu::if_else(kyosu::is_nan(fac) || is_nan(hyp), kyosu::cinf(eve::as<r_t>()), hyp*fac);
       return r;
-    } 
+    }
   }
 
-  template<eve::conditional_expr C, typename T, typename L, typename N, typename Z, eve::callable_options O>
+  template<eve::conditional_expr C, typename L, typename N, typename Z, eve::callable_options O>
   EVE_FORCEINLINE
   auto gegenbauer_(KYOSU_DELAY(), C cx, O const& o, L l,  N n, Z z) noexcept
   {
-    return  eve::detail::mask_op(cx, eve::detail::return_2nd, z, kyosu::gegenbauer[o](l, n, z));
+    using r_t = as_cayley_dickson_like_t<L, N, Z>;
+    return  eve::detail::mask_op(cx, eve::detail::return_2nd, r_t(z), kyosu::gegenbauer[o](r_t(l), r_t(n), r_t(z)));
   }
 }
