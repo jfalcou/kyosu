@@ -105,13 +105,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto tchebytchev_(KYOSU_DELAY(), O const& o, N nn, Z zz) noexcept
   {
     if constexpr(concepts::real<Z>)
-        return tchebytchev(nn, complex(zz));
-    else if constexpr(O::contains(eve::condition_key))
-    {
-      auto opt = o.drop(eve::condition_key);
-      auto z = kyosu::tchebytchev[opt](nn, zz);
-      return  eve::detail::mask_op(o[eve::condition_key], eve::detail::return_2nd, zz, z);
-    }
+      return tchebytchev(nn, complex(zz));
     else
     {
       using r_t = decltype(nn+zz);
@@ -129,6 +123,13 @@ namespace kyosu::_
         return if_else(is_real(z), complex(real(r)), r);
       }
     }
+  }
+
+  template<eve::conditional_expr C, typename N, typename Z, eve::callable_options O>
+  EVE_FORCEINLINE
+  auto tchebytchev_(KYOSU_DELAY(), C cx, O const& o, N n, Z z) noexcept
+  {
+    return  eve::detail::mask_op(cx, eve::detail::return_2nd, z, kyosu::tchebytchev[o](n, z));
   }
 
   // Recurrence relation for Tchebytchev polynomials:
