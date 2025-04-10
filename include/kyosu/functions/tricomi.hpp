@@ -78,9 +78,8 @@ namespace kyosu::_
   template<typename Z, typename T1, typename T2, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto tricomi_(KYOSU_DELAY(), O const&, Z z, T1 a, T2 b) noexcept
   {
-    using r_t = decltype(z+a+b);
+    using r_t = as_cayley_dickson_like_t<T1, T2, Z>;
     using u_t = eve::underlying_type_t<Z>;
-    auto constexpr opsqrteps = 1+eve::sqrteps(as<u_t>());
     r_t zz(z);
     r_t aa(a);
     r_t bb(b);
