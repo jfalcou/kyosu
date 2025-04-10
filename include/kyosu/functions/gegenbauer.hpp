@@ -63,7 +63,7 @@ namespace kyosu
 //!
 //!    **Return value**
 //!
-//!      1.The value of the function at `z` is returned.
+//!      1.The value of the function at `z` is returned. real input `z` is treated as `complex(z)`.
 //!      2. [The operation is performed conditionnaly](@ref conditional).
 //!
 //!  @groupheader{External references}
@@ -85,20 +85,15 @@ namespace kyosu::_
   template<eve::callable_options O, typename L, typename N, typename Z>
   EVE_FORCEINLINE constexpr auto gegenbauer_(KYOSU_DELAY(), O const& o, L ll,  N nn, Z zz) noexcept
   {
-    using r_t = complexify_t<as_cayley_dickson_like_t<N, L, Z>>;
-    auto n = r_t(nn);
-    auto l = r_t(ll);
-    auto z = r_t(zz);
-    if constexpr(O::contains(eve::condition_key))
-    {
-      auto opt = o.drop(eve::condition_key);
-      auto z1 = kyosu::gegenbauer[opt](l, n, z);
-      return  eve::detail::mask_op(o[eve::condition_key], eve::detail::return_2nd, z, z1);
-    }
+    if constexpr(concepts::real<N> && concepts::real<L> && concepts::real<Z>)
+      return kyosu::gegenbauer(nn, ll, complex(zz));
     else
     {
+      using r_t = complexify_t<as_cayley_dickson_like_t<N, L, Z>>;
       using u_t = eve::underlying_type_t<r_t>;
       constexpr auto hf = eve::half(eve::as<u_t>());
+      auto n = r_t(nn);
+      auto l = r_t(ll);
       auto l2 = 2*l;
       auto z = r_t(zz);
       n = if_else(_::is_negint(n+1), eve::next(real(n)), n);
@@ -109,6 +104,13 @@ namespace kyosu::_
       auto hyp = hypergeometric(oneminus(z)*hf, a, b);
       auto r = kyosu::if_else(kyosu::is_nan(fac) || is_nan(hyp), kyosu::cinf(eve::as<r_t>()), hyp*fac);
       return r;
-    }
+    } 
+  }
+
+  template<eve::conditional_expr C, typename T, typename L, typename N, typename Z, eve::callable_options O>
+  EVE_FORCEINLINE
+  auto gegenbauer_(KYOSU_DELAY(), C cx, O const& o, L l,  N n, Z z) noexcept
+  {
+    return  eve::detail::mask_op(cx, eve::detail::return_2nd, z, kyosu::gegenbauer[o](l, n, z));
   }
 }
