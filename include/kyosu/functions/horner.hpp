@@ -14,8 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct horner_t : eve::strict_tuple_callable<horner_t, Options
-                                               , eve::left_option, eve::right_option>
+  struct horner_t : eve::callable<horner_t, Options, eve::left_option, eve::right_option>
   {
     template<concepts::cayley_dickson_like ... Zs>
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Zs...> operator()(Zs const&... zs ) const noexcept
@@ -25,9 +24,7 @@ namespace kyosu
     }
 
     template<concepts::cayley_dickson_like Z, kumi::non_empty_product_type Tup>
-    KYOSU_FORCEINLINE constexpr
-    kyosu::as_cayley_dickson_like_t<kumi::apply_traits_t<kyosu::as_cayley_dickson_like,Tup>, Z>
-    operator()(Z z, Tup const& t ) const noexcept
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z,Tup> operator()(Z z, Tup const& t ) const noexcept
     {
       return KYOSU_CALL(z, t);
     }
@@ -142,7 +139,7 @@ namespace kyosu::_
   template<typename X, kumi::non_empty_product_type Tup, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, Tup tup) noexcept
   {
-    using r_t = kyosu::as_cayley_dickson_like_t<kumi::apply_traits_t<kyosu::as_cayley_dickson_like,Tup>, X>;
+    using r_t = as_cayley_dickson_like_t<X,Tup>;
     auto x = convert(xx, eve::as_element<r_t>());
     return kumi::apply( [&](auto... m) { return horner[o](x, convert(m, eve::as_element<r_t>())...); }, tup);
   }
