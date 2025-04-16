@@ -44,7 +44,6 @@ TTS_CASE_WITH ( "Check kyosu::horner over complex"
   TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, c0, c1, c2), (c0*x+c1)*x+c2, tts::prec<T>());
   kumi::tuple c{c0, c1, c2};
   TTS_RELATIVE_EQUAL(kyosu::horner(x, c)         , (c0*x+c1)*x+c2, tts::prec<T>());
-
 };
 
 TTS_CASE_WITH ( "Check kyosu::horner over quaternion"
@@ -74,5 +73,4 @@ TTS_CASE_WITH ( "Check kyosu::horner over quaternion"
   kumi::tuple a{q0, q1, q2};
   TTS_RELATIVE_EQUAL(kyosu::horner(x, a)            , (q0*x+q1)*x+q2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, a),  x*(x*q0+q1)+q2, tts::prec<T>());
-
 };

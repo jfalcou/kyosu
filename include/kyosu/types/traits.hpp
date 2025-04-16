@@ -190,6 +190,13 @@ namespace kyosu
   //====================================================================================================================
 
   template<typename... Ts>       struct as_cayley_dickson_like        : as_cayley_dickson<Ts...> {};
+
+
+  template<concepts::cayley_dickson_like Z, kumi::non_empty_product_type Tup>
+  struct  as_cayley_dickson_like<Z,Tup>
+        : as_cayley_dickson_like<Z,kumi::apply_traits_t<kyosu::as_cayley_dickson_like,Tup>>
+  {};
+
   template<concepts::real... Ts> struct as_cayley_dickson_like<Ts...> : eve::common_value<Ts...> {};
   template<typename... Ts> using as_cayley_dickson_like_t = typename as_cayley_dickson_like<Ts...>::type;
 
