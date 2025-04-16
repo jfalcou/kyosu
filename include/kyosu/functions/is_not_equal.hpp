@@ -16,19 +16,12 @@ namespace kyosu
   template<typename Options>
   struct is_not_equal_t : eve::strict_elementwise_callable<is_not_equal_t, Options, eve::numeric_option>
   {
-    template<typename Z0, typename Z1>
-    requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const noexcept -> eve::as_logical_t<decltype(z0 + z1)>
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
+    KYOSU_FORCEINLINE constexpr eve::common_logical_t<as_real_type_t<Z0>,as_real_type_t<Z1>>
+    operator()(Z0 const& z0, Z1 const & z1) const noexcept
     {
-      if constexpr(Options::contains(eve::numeric))
-        return (z0 != z1) || (is_not_nan(z0) && is_not_nan(z1));
-      else
-        return z0 != z1;
+       return KYOSU_CALL(z0, z1);
     }
-
-    template<concepts::real V0, concepts::real V1>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept ->  eve::as_logical_t<decltype(v0 + v1)>
-    { return eve::is_not_equal[this->options()](v0, v1); }
 
     KYOSU_CALLABLE_OBJECT(is_not_equal_t, is_not_equal_);
 };
@@ -65,7 +58,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     1. Returns elementwise false or true according the equality of the parameters
-//!     2. NaN values are considered equal
+//!     2. NaN values in corresponding parts are considered equal
 //!
 //!  @groupheader{Example}
 //!
@@ -75,4 +68,21 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z0, typename Z1, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto is_not_equal_(KYOSU_DELAY(), O const& opts, Z0 z0,  Z1 z1) noexcept
+  {
+    if constexpr(O::contains(eve::numeric))
+    {
+      if constexpr(concepts::real<Z0> && concepts::real<Z1>) return eve::is_not_equal[eve::numeric](z0, z1);
+      else
+      {
+        return kumi::map([](auto a,  auto b) { return eve::is_not_equal[eve::numeric](a, b); }, r_t(z0), r_t(z1));
+      }
+    }
+    else return z0 != z1;
+  }
 }
