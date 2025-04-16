@@ -70,10 +70,6 @@ namespace kyosu::_
   template<typename Z, typename B, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto chi_(KYOSU_DELAY(), O const& o, Z z, B const & b) noexcept
   {
-    auto zz = kyosu::if_else(b(z), one(as(z)), zero);
-    if constexpr(O::contains(eve::condition_key))
-      return  mask_op(o[eve::condition_key], eve::detail::return_2nd, z, zz);
-    else
-      return zz;
+    return kyosu::if_else(b(z), one(as(z)), zero);
   }
 }
