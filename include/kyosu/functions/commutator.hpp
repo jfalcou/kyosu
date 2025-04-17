@@ -15,14 +15,10 @@ namespace kyosu
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     requires(eve::same_lanes_or_scalar<Z0, Z1>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z0 const& z0, Z1 const & z1) const
-      noexcept -> decltype(z0+z1)
+      KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z0, Z1> operator()(Z0 const& z0, Z1 const & z1) const
+      noexcept
     {
-      if constexpr((concepts::complex_like<Z0> && concepts::complex_like<Z1>) ||
-                   (concepts::real<Z0> || concepts::real<Z1>))
-        return  eve::zero(eve::as<decltype(z0+z1)>());
-      else
-        return (z0*z1) - (z1*z0);
+      return  KYOSU_CALL(z0, z1);
     }
 
     KYOSU_CALLABLE_OBJECT(commutator_t, commutator_);
@@ -69,4 +65,17 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z0, typename Z1, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto commutator_(KYOSU_DELAY(), O const& o, Z0 z0, Z1 const & z1) noexcept
+  {
+    if constexpr((concepts::complex_like<Z0> && concepts::complex_like<Z1>) ||
+                 (concepts::real<Z0> || concepts::real<Z1>))
+      return  eve::zero(eve::as<as_cayley_dickson_like_t<Z0, Z1>>());
+    else
+      return (z0*z1) - (z1*z0);
+  }
 }
