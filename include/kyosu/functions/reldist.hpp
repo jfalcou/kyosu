@@ -18,10 +18,9 @@ namespace kyosu
   struct reldist_t : eve::strict_elementwise_callable<reldist_t, Options, eve::pedantic_option, eve::numeric_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 c0, Z1 c1) const noexcept -> decltype(kyosu::dist(c0, c1))
+    KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1) const noexcept -> decltype(kyosu::dist(z0, z1))
     {
-      auto d = dist[this->options()](c0, c1);
-      return if_else( is_infinite(d) || is_eqz(d), d, d/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0)))));
+      return KYOSU_CALL(z0, z1);
     }
 
     KYOSU_CALLABLE_OBJECT(reldist_t, reldist_);
@@ -72,4 +71,13 @@ namespace kyosu
 //======================================================================================================================
 //! @}
 //======================================================================================================================
+}
+namespace kyosu::_
+{
+  template<typename C0,  typename C1, eve::callable_options O>
+  constexpr auto reldist_(KYOSU_DELAY(), O const& o, C0 c0,  C1 c1) noexcept
+  {
+    auto d = dist[o](c0, c1);
+    return if_else( is_infinite(d) || is_eqz(d), d, d/eve::max(kyosu::abs(c0), kyosu::abs(c1), eve::one(eve::as(abs(c0)))));
+  }
 }
