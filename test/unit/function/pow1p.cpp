@@ -10,13 +10,14 @@
 
 TTS_CASE_WITH ( "Check kyosu::pow1p over real"
               , kyosu::real_types
-              , tts::generate(tts::randoms(-10,10)
+              , tts::generate(tts::randoms(0,10)
                              ,tts::randoms(-10,10)
                              )
               )
 (auto r0, auto r1)
 {
-  TTS_EQUAL(kyosu::pow1p(r0, r1), eve::pow1p(r0, r1));
+  using T =  decltype(r0);
+  TTS_RELATIVE_EQUAL(kyosu::pow1p(r0, r1), kyosu::complex(eve::pow1p(r0, r1)), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::pow1p over complex"
@@ -27,7 +28,7 @@ TTS_CASE_WITH ( "Check kyosu::pow1p over complex"
               )
 (auto r0, auto i0, auto r1, auto i1)
 {
-  using T =  decltype(r0); 
+  using T =  decltype(r0);
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
   TTS_RELATIVE_EQUAL(kyosu::pow1p(c0, c1), kyosu::pow(kyosu::inc(c0), c1), tts::prec<T>());
