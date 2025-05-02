@@ -10,6 +10,28 @@
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/convert.hpp>
 #include <kyosu/functions/fma.hpp>
+#include <tuple>
+
+namespace kyosu
+{
+  template<kumi::product_type Data>
+  struct coefficients : Data
+  {
+    coefficients(Data const& d) : Data{d} {}
+
+    template<typename... Cs>
+    coefficients(Cs const&... cs) : Data{cs...} {}
+  };
+
+  template<typename... Cs>
+  coefficients(Cs const&... cs) -> coefficients<kumi::tuple<Cs...>>;
+}
+
+template<kumi::product_type Data>
+struct std::tuple_size<kyosu::coefficients<Data>> : std::tuple_size<Data> {};
+
+template<std::size_t I, kumi::product_type Data>
+struct std::tuple_element<I,kyosu::coefficients<Data>> : std::tuple_element<I,Data> {};
 
 namespace kyosu
 {
@@ -17,14 +39,15 @@ namespace kyosu
   struct horner_t : eve::callable<horner_t, Options, eve::left_option, eve::right_option>
   {
     template<concepts::cayley_dickson_like ... Zs>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Zs...> operator()(Zs const&... zs ) const noexcept
+    KYOSU_FORCEINLINE constexpr auto operator()(Zs const&... zs ) const noexcept
     requires(eve::same_lanes_or_scalar<Zs...>)
     {
       return KYOSU_CALL(zs...);
     }
 
-    template<concepts::cayley_dickson_like Z, kumi::non_empty_product_type Tup>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z,Tup> operator()(Z z, Tup const& t ) const noexcept
+    template<concepts::cayley_dickson_like Z, kumi::non_empty_product_type Data>
+    KYOSU_FORCEINLINE constexpr
+    auto operator()(Z z, coefficients<Data> const& t ) const noexcept
     {
       return KYOSU_CALL(z, t);
     }
@@ -110,7 +133,7 @@ namespace kyosu::_
   template<typename X, concepts::cayley_dickson_like Z, typename ... Zs, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, Z z, Zs... zs) noexcept
   {
-    if constexpr(concepts::real<X> && (... && concepts::real<Zs>))
+    if constexpr((concepts::real<X> && ... && concepts::real<Zs>))
       return eve::horner[o](xx, zs...);
     else
     {
@@ -136,10 +159,10 @@ namespace kyosu::_
     }
   }
 
-  template<typename X, kumi::non_empty_product_type Tup, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, Tup tup) noexcept
+  template<typename X, kumi::non_empty_product_type Data, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, coefficients<Data> const& tup) noexcept
   {
-    using r_t = as_cayley_dickson_like_t<X,Tup>;
+    using r_t = as_cayley_dickson_like_t<X,Data>;
     auto x = convert(xx, eve::as_element<r_t>());
     return kumi::apply( [&](auto... m) { return horner[o](x, convert(m, eve::as_element<r_t>())...); }, tup);
   }
