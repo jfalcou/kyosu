@@ -19,7 +19,7 @@ TTS_CASE_WITH ( "Check kyosu::reverse_horner over real"
 (auto r0, auto r1, auto r2, auto x)
 {
   using T =  decltype(r0);
-  kumi::tuple a{r2, r1, r0};
+  kyosu::coefficients a{r2, r1, r0};
   TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, r2, r1, r0), (r0*x+r1)*x+r2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, a)         , (r0*x+r1)*x+r2, tts::prec<T>());
 };
@@ -39,7 +39,7 @@ TTS_CASE_WITH ( "Check kyosu::reverse_horner over complex"
   auto c1 = kyosu::complex(r1,i1);
   auto c2 = kyosu::complex(r2,i2);
   auto x  = kyosu::complex(x0, x1);
-  kumi::tuple c{c2, c1, c0};
+  kyosu::coefficients c{c2, c1, c0};
   TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, c)         , (c0*x+c1)*x+c2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, c2, c1, c0), (c0*x+c1)*x+c2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::reverse_horner[eve::right](x, c)         , (c0*x+c1)*x+c2, tts::prec<T>());
@@ -71,7 +71,7 @@ TTS_CASE_WITH ( "Check kyosu::reverse_horner over quaternion"
   auto x  = type(x0,x1,x2,x3);
   TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, q2, q1, q0),  (q0*x+q1)*x+q2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::reverse_horner[eve::right](x, q2, q1, q0),  x*(x*q0+q1)+q2, tts::prec<T>());
-  kumi::tuple a{q2, q1, q0};
+  kyosu::coefficients a{q2, q1, q0};
   TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, a)         , (q0*x+q1)*x+q2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::reverse_horner[eve::right](x, a),  x*(x*q0+q1)+q2, tts::prec<T>());
 

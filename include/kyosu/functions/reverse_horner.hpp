@@ -10,43 +10,30 @@
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/convert.hpp>
 #include <kyosu/functions/horner.hpp>
+#include <kyosu/types/helpers.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct reverse_horner_t : eve::strict_elementwise_callable<reverse_horner_t, Options
-                                                       , eve::left_option, eve::right_option>
+  struct reverse_horner_t : eve::callable<reverse_horner_t, Options, eve::left_option, eve::right_option>
   {
-    template<typename ...Zs>
-    requires(concepts::cayley_dickson<Zs> || ... )
-    struct result : kyosu::as_cayley_dickson<Zs...>
-    {};
-
-    template<typename Z, typename... Zs>
-    requires(concepts::cayley_dickson<Zs> || ... || concepts::cayley_dickson<Z>)
-    struct result<Z, kumi::tuple<Zs...>> : kyosu::as_cayley_dickson<Z,Zs...>
-    {};
-
-    template<typename... Zs>
-    requires(concepts::cayley_dickson<Zs> || ... )
-    KYOSU_FORCEINLINE constexpr typename result<Zs...>::type operator()(Zs const&... zs ) const noexcept
+    template<concepts::cayley_dickson_like ... Zs>
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Zs...> operator()(Zs const&... zs ) const noexcept
+    requires(eve::same_lanes_or_scalar<Zs...>)
     {
       return KYOSU_CALL(zs...);
     }
 
-    template<concepts::real... Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(Vs... vs) const noexcept -> decltype(eve::reverse_horner(vs...))
-    { return eve::reverse_horner(vs...); }
-
-    template<concepts::real Z, concepts::real ...Zs>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z z, kumi::tuple<Zs...> const& t ) const noexcept
-                                -> decltype(eve::reverse_horner(z,t))
+    template<concepts::cayley_dickson_like Z, kumi::non_empty_product_type Data>
+    KYOSU_FORCEINLINE constexpr
+    as_cayley_dickson_like_t<Z,coefficients<Data>> operator()(Z z, coefficients<Data> const& t ) const noexcept
     {
-      return eve::reverse_horner(z, t);
+      return KYOSU_CALL(z, t);
     }
 
     KYOSU_CALLABLE_OBJECT(reverse_horner_t, reverse_horner_);
-};
+  };
+
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -127,23 +114,18 @@ namespace kyosu
 
 namespace kyosu::_
 {
-
-  template<typename X, typename ... Zs, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto reverse_horner_(KYOSU_DELAY(), O const& o
-                                                  , X x, kumi::tuple<Zs...> tup) noexcept
+  template<typename X, kumi::non_empty_product_type Data, eve::callable_options O>
+  KYOSU_FORCEINLINE
+  constexpr auto reverse_horner_(KYOSU_DELAY(), O const& o, X x, coefficients<Data> const& t) noexcept
   {
-    return horner[o](x, kumi::reverse(tup));
+    return horner[o](x, coefficients(kumi::reverse(t)));
   }
 
   template<typename X,  typename ... Zs, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto reverse_horner_(KYOSU_DELAY(), O const& o
-                                                  , X xx, Zs... zs) noexcept
+  KYOSU_FORCEINLINE constexpr auto reverse_horner_(KYOSU_DELAY(), O const& o, X xx, Zs... zs) noexcept
   {
-    using r_t = kyosu::as_cayley_dickson_t<X, Zs...>;
+    using r_t = kyosu::as_cayley_dickson_like_t<X, Zs...>;
     auto x = convert(xx, eve::as_element<r_t>());
-    using t_t = kumi::result::generate_t<sizeof...(zs), r_t>;
-    t_t tup{convert(zs, eve::as_element<r_t>())...};
-    return reverse_horner[o](x, tup);
+    return reverse_horner[o](x,coefficients{convert(zs, eve::as_element<r_t>())...});
   }
-
 }
