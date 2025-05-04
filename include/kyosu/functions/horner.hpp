@@ -113,7 +113,9 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, Z z, Zs... zs) noexcept
   {
     if constexpr((concepts::real<X> && ... && concepts::real<Zs>))
-      return eve::horner[o](xx, zs...);
+    {
+      return eve::horner[o](xx, z, zs...);
+    }
     else
     {
       using r_t = as_cayley_dickson_like_t<X, Z, Zs...>;
