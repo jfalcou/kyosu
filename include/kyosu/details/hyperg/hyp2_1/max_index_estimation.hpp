@@ -7,10 +7,10 @@
 //======================================================================================================================
 #pragma once
 #include <eve/module/math.hpp>
+#include <kyosu/types/helpers.hpp>
 
 namespace kyosu::_
 {
-
   KYOSU_FORCEINLINE auto dcv_poly_calc(auto a,auto b,auto c,auto z)
   {
     auto mod_a2 = sqr_abs(a);
@@ -25,7 +25,7 @@ namespace kyosu::_
     auto dcv1 = 2*(eve::dec((mod_a2 + mod_b2 + 4*re_a*re_b)*mod_z2) - 4*re_c - mod_c2);
     auto dcv2 = 6*(eve::dec((re_a + re_b)*mod_z2 - re_c));
     auto dcv3 = 4*eve::dec(mod_z2);
-    return kumi::tuple{dcv0,dcv1,dcv2,dcv3};
+    return coefficients{dcv0,dcv1,dcv2,dcv3};
   }
 
   KYOSU_FORCEINLINE auto dcv_calc(auto dcv_coefs, auto x)

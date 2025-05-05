@@ -7,6 +7,8 @@
 //======================================================================================================================
 #pragma once
 
+#include "eve/deps/kumi/tuple.hpp"
+#include <kyosu/types/helpers.hpp>
 #include <eve/as.hpp>
 #include <bit>
 
@@ -190,6 +192,17 @@ namespace kyosu
   //====================================================================================================================
 
   template<typename... Ts>       struct as_cayley_dickson_like        : as_cayley_dickson<Ts...> {};
+
+  template<typename T, typename Ts>
+  struct  as_cayley_dickson_like<T, coefficients<Ts>>
+        : as_cayley_dickson_like<T,kumi::apply_traits_t<as_cayley_dickson_like, Ts>>
+  {};
+
+  template<typename T, typename Ts>
+  struct  as_cayley_dickson_like<T, nodes<Ts>>
+        : as_cayley_dickson_like<T,kumi::apply_traits_t<as_cayley_dickson_like, Ts>>
+  {};
+
   template<concepts::real... Ts> struct as_cayley_dickson_like<Ts...> : eve::common_value<Ts...> {};
   template<typename... Ts> using as_cayley_dickson_like_t = typename as_cayley_dickson_like<Ts...>::type;
 

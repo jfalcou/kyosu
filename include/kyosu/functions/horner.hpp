@@ -10,39 +10,25 @@
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/convert.hpp>
 #include <kyosu/functions/fma.hpp>
+#include <kyosu/types/helpers.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct horner_t : eve::strict_tuple_callable<horner_t, Options
-                                               , eve::left_option, eve::right_option>
+  struct horner_t : eve::callable<horner_t, Options, eve::left_option, eve::right_option>
   {
-    template<typename ...Zs>
-    requires(concepts::cayley_dickson<Zs> || ... )
-    struct result : kyosu::as_cayley_dickson<Zs...>
-    {};
-
-    template<typename Z, typename... Zs>
-    requires(concepts::cayley_dickson<Zs> || ... || concepts::cayley_dickson<Z>)
-    struct result<Z, kumi::tuple<Zs...>> : kyosu::as_cayley_dickson<Z,Zs...>
-    {};
-
-    template<typename... Zs>
-    requires(concepts::cayley_dickson<Zs> || ... )
-    KYOSU_FORCEINLINE constexpr typename result<Zs...>::type operator()(Zs const&... zs ) const noexcept
+    template<concepts::cayley_dickson_like ... Zs>
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Zs...> operator()(Zs const&... zs ) const noexcept
+    requires(eve::same_lanes_or_scalar<Zs...>)
     {
       return KYOSU_CALL(zs...);
     }
 
-    template<concepts::real... Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(Vs... vs) const noexcept -> decltype(eve::horner(vs...))
-    { return eve::horner(vs...); }
-
-    template<concepts::real Z, concepts::real ...Zs>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z z, kumi::tuple<Zs...> const& t ) const noexcept
-                                -> decltype(eve::horner(z,t))
+    template<concepts::cayley_dickson_like Z, kumi::non_empty_product_type Data>
+    KYOSU_FORCEINLINE constexpr
+    as_cayley_dickson_like_t<Z,coefficients<Data>> operator()(Z z, coefficients<Data> const& t ) const noexcept
     {
-      return eve::horner(z, t);
+      return KYOSU_CALL(z, t);
     }
 
     KYOSU_CALLABLE_OBJECT(horner_t, horner_);
@@ -123,36 +109,42 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename X, typename Z, typename ... Zs, eve::callable_options O>
+  template<typename X, concepts::cayley_dickson_like Z, typename ... Zs, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, Z z, Zs... zs) noexcept
   {
-    using r_t = kyosu::as_cayley_dickson_t<X, Z, Zs...>;
-    constexpr size_t N = sizeof...(Zs);
-
-    if constexpr( N == 0 ) return r_t(0);
-    else if constexpr( N == 1 ) return convert(z,eve::as_element<r_t>{});
+    if constexpr((concepts::real<X> && ... && concepts::real<Zs>))
+    {
+      return eve::horner[o](xx, z, zs...);
+    }
     else
     {
-      r_t x = r_t(xx);
-      r_t  that(z);
-      if constexpr(O::contains(eve::right))
-      {
-        ((that = fma(x, that, convert(zs,eve::as_element<r_t>{}))), ...);
-      }
+      using r_t = as_cayley_dickson_like_t<X, Z, Zs...>;
+      constexpr size_t N = sizeof...(Zs);
+
+      if constexpr( N == 0 ) return r_t(0);
+      else if constexpr( N == 1 ) return convert(z,eve::as_element<r_t>{});
       else
       {
-        ((that = fma(that, x, convert(zs,eve::as_element<r_t>{}))), ...);
+        r_t x = r_t(xx);
+        r_t  that(z);
+        if constexpr(O::contains(eve::right))
+        {
+          ((that = fma(x, that, convert(zs,eve::as_element<r_t>{}))), ...);
+        }
+        else
+        {
+          ((that = fma(that, x, convert(zs,eve::as_element<r_t>{}))), ...);
+        }
+        return that;
       }
-      return that;
     }
   }
 
-  template<typename X, typename ... Zs, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, kumi::tuple<Zs...> tup) noexcept
+  template<typename X, kumi::non_empty_product_type Data, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, coefficients<Data> const& tup) noexcept
   {
-    using r_t = kyosu::as_cayley_dickson_t<X, Zs...>;
+    using r_t = as_cayley_dickson_like_t<X,coefficients<Data>>;
     auto x = convert(xx, eve::as_element<r_t>());
     return kumi::apply( [&](auto... m) { return horner[o](x, convert(m, eve::as_element<r_t>())...); }, tup);
   }
-
 }

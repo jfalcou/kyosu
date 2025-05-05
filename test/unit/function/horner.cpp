@@ -19,10 +19,18 @@ TTS_CASE_WITH ( "Check kyosu::horner over real"
   (auto r0, auto r1, auto r2, auto x)
 {
   using T = decltype(r0);
-  kumi::tuple a{r0, r1, r2};
+  kyosu::coefficients a{r0, r1, r2};
   TTS_RELATIVE_EQUAL(kyosu::horner(x, r0, r1, r2), (r0*x+r1)*x+r2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0, r1, r2), (r0*x+r1)*x+r2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::horner(x, a)         , (r0*x+r1)*x+r2, tts::prec<T>());
+  kyosu::coefficients b{r0, r1};
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, r0, r1), (r0*x+r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0, r1), (r0*x+r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, b)         , (r0*x+r1), tts::prec<T>());
+  kyosu::coefficients c{r0};
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, r0), r0, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0), r0, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, c)         , r0, tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::horner over complex"
@@ -42,9 +50,8 @@ TTS_CASE_WITH ( "Check kyosu::horner over complex"
   auto x  = kyosu::complex(x0, x1);
   TTS_RELATIVE_EQUAL(kyosu::horner(x, c0, c1, c2), (c0*x+c1)*x+c2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, c0, c1, c2), (c0*x+c1)*x+c2, tts::prec<T>());
-  kumi::tuple c{c0, c1, c2};
+  kyosu::coefficients c{c0, c1, c2};
   TTS_RELATIVE_EQUAL(kyosu::horner(x, c)         , (c0*x+c1)*x+c2, tts::prec<T>());
-
 };
 
 TTS_CASE_WITH ( "Check kyosu::horner over quaternion"
@@ -71,8 +78,7 @@ TTS_CASE_WITH ( "Check kyosu::horner over quaternion"
   auto x  = type(x0,x1,x2,x3);
   TTS_RELATIVE_EQUAL(kyosu::horner(x, q0, q1, q2),  (q0*x+q1)*x+q2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, q0, q1, q2),  x*(x*q0+q1)+q2, tts::prec<T>());
-  kumi::tuple a{q0, q1, q2};
+  kyosu::coefficients a{q0, q1, q2};
   TTS_RELATIVE_EQUAL(kyosu::horner(x, a)            , (q0*x+q1)*x+q2, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, a),  x*(x*q0+q1)+q2, tts::prec<T>());
-
 };
