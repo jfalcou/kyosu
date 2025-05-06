@@ -68,7 +68,7 @@ namespace kyosu
     template<unsigned int M>
     requires(M > 1 && M == N/2)
     constexpr cayley_dickson(cayley_dickson<Type,M> const& a) noexcept requires(N>1)
-            : contents(kumi::cat(a.contents, kumi::generate<M>(Type{0}) ))
+            : contents(kumi::cat(a.contents, kumi::fill<M>(Type{0}) ))
     {}
 
     /// Assign a smaller Cayley-Dickson to another
