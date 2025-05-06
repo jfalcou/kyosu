@@ -107,7 +107,7 @@ namespace kyosu
     //==================================================================================================================
     //  Tuple-like behavior
     //==================================================================================================================
-    using data_type       = kumi::result::generate_t<static_dimension,Type>;
+    using data_type       = kumi::result::fill_t<static_dimension,Type>;
     using is_product_type = void;
 
     friend constexpr eve::as_logical_t<Type>
