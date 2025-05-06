@@ -50,7 +50,7 @@ namespace kyosu
     requires( (1+sizeof...(Ts)) <= static_dimension )
     constexpr cayley_dickson(T0 v0, Ts... vs) noexcept
             : contents(kumi::cat( kumi::tuple{static_cast<Type>(v0),static_cast<Type>(vs)...}
-                                , kumi::generate<(N-1-sizeof...(Ts))>(Type{0})
+                                , kumi::fill<(N-1-sizeof...(Ts))>(Type{0})
                       )         )
     {}
 
