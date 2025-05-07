@@ -50,7 +50,7 @@ namespace kyosu
     requires( (1+sizeof...(Ts)) <= static_dimension )
     constexpr cayley_dickson(T0 v0, Ts... vs) noexcept
             : contents(kumi::cat( kumi::tuple{static_cast<Type>(v0),static_cast<Type>(vs)...}
-                                , kumi::generate<(N-1-sizeof...(Ts))>(Type{0})
+                                , kumi::fill<(N-1-sizeof...(Ts))>(Type{0})
                       )         )
     {}
 
@@ -68,7 +68,7 @@ namespace kyosu
     template<unsigned int M>
     requires(M > 1 && M == N/2)
     constexpr cayley_dickson(cayley_dickson<Type,M> const& a) noexcept requires(N>1)
-            : contents(kumi::cat(a.contents, kumi::generate<M>(Type{0}) ))
+            : contents(kumi::cat(a.contents, kumi::fill<M>(Type{0}) ))
     {}
 
     /// Assign a smaller Cayley-Dickson to another
@@ -107,7 +107,7 @@ namespace kyosu
     //==================================================================================================================
     //  Tuple-like behavior
     //==================================================================================================================
-    using data_type       = kumi::result::generate_t<static_dimension,Type>;
+    using data_type       = kumi::result::fill_t<static_dimension,Type>;
     using is_product_type = void;
 
     friend constexpr eve::as_logical_t<Type>

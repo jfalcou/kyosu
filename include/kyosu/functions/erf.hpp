@@ -88,7 +88,7 @@ namespace kyosu::_
       using real_t =  decltype(x);
       using r_t = eve::element_type_t<real_t>;
       auto mz2 = -sqr(z);
-      using A9 = kumi::result::generate_t<9, r_t>;
+      using A9 = kumi::result::fill_t<9, r_t>;
       constexpr std::array< A9, 97> coefs =
         {
           A9{0.28351593328822191546e-2,0.28494783221378400759e-2,0.14427470563276734183e-4,0.10939723080231588129e-6,0.92474307943275042045e-9,0.89128907666450075245e-11,0.92974121935111111110e-13,0.00000000000000000000e+00,0.00000000000000000000e+00},
@@ -201,7 +201,7 @@ namespace kyosu::_
             // use Taylor expansion for small x (|x| <= 0.0309...)
             //  (2/sqrt(pi)) * (x -2/3 x^3 , 4/15 x^5  -8/105 x^7, 16/945 x^9)
             auto mx2(-eve::sqr(x));
-            kumi::result::generate_t<5, r_t> a{1.1283791670955125739, 0.75225277806367504925, 0.30090111122547001970
+            kumi::result::fill_t<5, r_t> a{1.1283791670955125739, 0.75225277806367504925, 0.30090111122547001970
                 , 0.085971746064420005629, 0.016931216931216931217};
             return x*eve::reverse_horner(mx2, a);
           }
