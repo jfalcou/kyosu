@@ -32,9 +32,11 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var gegenbauer
-//!   @brief Computes the value of the Gegenbauer function of order \f$n\f$ and parameter  \f$\lambda\f$,  \f$C^{(\lambda)}_n(z)\f$ at `z`.
-//!     If \f$n\f$ is an integer the function is a polynomial of degree \f$n\f$.
+//!   @brief Computes the value of the Gegenbauer function of order \f$n\f$
 //!
+//!   Computes the value of the Gegenbauer function of order \f$n\f$ and parameter
+//!   \f$\lambda\f$, \f$C^{(\lambda)}_n(z)\f$ at `z`. If \f$n\f$ is an integer, the function is a
+//!   polynomial of degree \f$n\f$.
 //!
 //!   @groupheader{Header file}
 //!
@@ -53,7 +55,6 @@ namespace kyosu
 //!      // Lanes masking
 //!      constexpr auto gegenbauer[conditional_expr auto c](/* any previous overload */)  noexcept; // 2
 //!      constexpr auto gegenbauer[logical_value auto m](/* any previous overload */)     noexcept; // 2
-//!
 //!   }
 //!   @endcode
 //!
@@ -111,7 +112,7 @@ namespace kyosu::_
   EVE_FORCEINLINE
   auto gegenbauer_(KYOSU_DELAY(), C cx, O const& o, L l,  N n, Z z) noexcept
   {
-    using r_t = as_cayley_dickson_like_t<L, N, Z>;
+    using r_t = complexify_t<as_cayley_dickson_like_t<N, L, Z>>;
     return  eve::detail::mask_op(cx, eve::detail::return_2nd, r_t(z), kyosu::gegenbauer[o](r_t(l), r_t(n), r_t(z)));
   }
 }
