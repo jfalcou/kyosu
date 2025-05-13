@@ -13,8 +13,8 @@
 namespace kyosu
 {
   template<typename Options>
-  struct tchebytchev_t : eve::callable<tchebytchev_t, Options
-                                                          , eve::successor_option, eve::kind_1_option, eve::kind_2_option>
+  struct tchebytchev_t : eve::conditional_callable<tchebytchev_t, Options
+                                                  , eve::successor_option, eve::kind_1_option, eve::kind_2_option>
   {
     template<concepts::real N, concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr auto  operator()(N n, Z z) const noexcept ->  complexify_t<as_cayley_dickson_like_t<N, Z>> //complexify_t<decltype(n+z)>
