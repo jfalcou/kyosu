@@ -84,10 +84,12 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::callable_options O, typename L, typename N, typename Z>
-  EVE_FORCEINLINE constexpr auto gegenbauer_(KYOSU_DELAY(), O const& o, L ll,  N nn, Z zz) noexcept
+  EVE_FORCEINLINE constexpr auto gegenbauer_(KYOSU_DELAY(), O const& o,  N nn,  L ll, Z zz) noexcept
   {
     if constexpr(concepts::real<N> && concepts::real<L> && concepts::real<Z>)
-      return kyosu::gegenbauer(nn, ll, complex(zz));
+    {
+      return kyosu::gegenbauer(  nn, ll, complex(zz));
+    }
     else
     {
       using r_t = complexify_t<as_cayley_dickson_like_t<N, L, Z>>;
@@ -110,9 +112,9 @@ namespace kyosu::_
 
   template<eve::conditional_expr C, typename L, typename N, typename Z, eve::callable_options O>
   EVE_FORCEINLINE
-  auto gegenbauer_(KYOSU_DELAY(), C cx, O const& o, L l,  N n, Z z) noexcept
+  auto gegenbauer_(KYOSU_DELAY(), C cx, O const& o,   N n, L l, Z z) noexcept
   {
     using r_t = complexify_t<as_cayley_dickson_like_t<N, L, Z>>;
-    return  eve::detail::mask_op(cx, eve::detail::return_2nd, r_t(z), kyosu::gegenbauer[o](r_t(l), r_t(n), r_t(z)));
+    return  eve::detail::mask_op(cx, eve::detail::return_2nd, r_t(z), kyosu::gegenbauer[o]( r_t(n), r_t(l), r_t(z)));
   }
 }
