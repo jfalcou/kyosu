@@ -195,7 +195,7 @@ namespace kyosu::_
           if (eve::is_nan(x)) return x;
           auto t = eve::dec(2*eve::frac(y100));
           int index = ((int) y100);
-          if (index < 97) return eve::reverse_horner(t, coefs[index]);
+          if (index < 97) return eve::reverse_horner(t, coefficients(coefs[index]));
           else
           {
             // use Taylor expansion for small x (|x| <= 0.0309...)
@@ -203,7 +203,7 @@ namespace kyosu::_
             auto mx2(-eve::sqr(x));
             kumi::result::fill_t<5, r_t> a{1.1283791670955125739, 0.75225277806367504925, 0.30090111122547001970
                 , 0.085971746064420005629, 0.016931216931216931217};
-            return x*eve::reverse_horner(mx2, a);
+            return x*eve::reverse_horner(mx2, coefficients(a));
           }
         };
 
