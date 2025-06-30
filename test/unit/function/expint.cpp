@@ -10,14 +10,15 @@
 
 TTS_CASE_WITH ( "Check kyosu::expint over reals"
               , kyosu::simd_real_types
-              , tts::generate ( tts::randoms(1,2)
+              , tts::generate ( tts::randoms(0,5)
                               )
               )
 <typename T>(T a0)
 {
   auto r  = T(a0);
-  auto resk = kyosu::expint(kyosu::complex(r));
+  auto resk = kyosu::expint(r);
   auto rese =  eve::exp_int(r);
+  std::cout << std::setprecision(16) << "r    " << r    << std::endl;
   std::cout << "resk " << resk << std::endl;
   std::cout << "rese " << rese << std::endl;
   std::cout << std::setprecision(15) << "a0 " << a0 << std::endl;

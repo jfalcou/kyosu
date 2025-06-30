@@ -11,7 +11,7 @@
 #include <kyosu/functions/tgamma.hpp>
 #include <kyosu/functions/tgamma_inv.hpp>
 #include <iostream>
-
+#include <iomanip>
 namespace kyosu
 {
   template<typename Options>
@@ -31,23 +31,34 @@ namespace kyosu
         r_t zz(z);
         r_t aa(a);
         r_t bb(b);
-        bb = if_else(kyosu::is_flint(bb), r_t(real(bb)*opeps), bb);
+//        bb = if_else(kyosu::is_flint(bb), r_t(real(bb)*opeps), bb);
         r_t ombb = oneminus(bb);
         r_t incaambb = inc(aa-bb);
 
         auto f1 = kyosu::tgamma(dec(bb))*tgamma_inv(aa);
         auto f2 = kyosu::tgamma(ombb)*tgamma_inv(inc(aa-bb));
         auto p  = pow(z, ombb);
-//         std::cout << "f1 " << f1 << std::endl;
-//         std::cout << "f2 " << f2 << std::endl;
-//         std::cout << "p  " << p  << std::endl;
-//         std::cout << "h1 " << _::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb}) << std::endl;
-//         std::cout << "h2 " << _::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb}) << std::endl;
-        return f1*p*_::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb})+
-          f2*_::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb});
+        std::cout << std::setprecision(15) << "zz " << zz << std::endl;
+        std::cout << "aa " << aa << std::endl;
+        std::cout << "bb " << bb << std::endl;
+        std::cout << "f1 " << f1 << std::endl;
+        std::cout << "f2 " << f2 << std::endl;
+        std::cout << "p  " << p  << std::endl;
+        std::cout << "h1 " << _::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb}) << std::endl;
+        std::cout << "h2 " << _::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb}) << std::endl;
+        return f1*p*_::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb}, kyosu::regularized)+
+          f2*_::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb}, kyosu::regularized);
       }
     }
   };
+
+//  HypergeometricU[a, n, z] == ((-1)^n/Gamma[1 + a - n]) (
+//  (Log[z]/(n - 1)!) Hypergeometric1F1[a, n, z]
+//   - Sum[(k - 1)!/(z^k (Pochhammer[1 - a, k] (n - k - 1)!)), {k, 1, n - 1}] +
+//   Sum[(Pochhammer[a, k]/((n + k - 1)! k!)) (PolyGamma[a + k] - PolyGamma[1 + k] - PolyGamma[n + k]) z^k, {k, 0, Infinity}]) /;
+//  Element[n, Integers] && n > 0
+//https://functions.wolfram.com/HypergeometricFunctions/HypergeometricU/06/01/03/02/
+//https://functions.wolfram.com/HypergeometricFunctions/HypergeometricU/06/02/
 
 //======================================================================================================================
 //! @addtogroup functions
