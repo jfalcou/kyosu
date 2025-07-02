@@ -27,8 +27,9 @@ TTS_CASE_TPL ( "Check exp_int "
                  r_t(-0.210405792206054376, -0.0646082262867762182142),
                  r_t(-0.0019147781533606244, -0.0020421342605292576),
                  r_t(0.00296509191308227717, 0.0),
-                 r_t(4.4195931497672e18, -1.1367863689312e19),
-                 r_t(-0.454219904863173, -3.141592653589793238)
+                 r_t(1.0009404046387060e-19, 0.0),
+                 r_t(0.0029073376929193176, -0.000427807241151299437953),
+                 r_t(0.00863536147631597639, 0.0),
     };
     r_t r(cinf);
     r = kyosu::exp_int(0.4+2*I);
@@ -37,10 +38,16 @@ TTS_CASE_TPL ( "Check exp_int "
     TTS_RELATIVE_EQUAL(r, res[1], pr);
     r = kyosu::exp_int(r_t(2.0), 0.4+2*I);
     TTS_RELATIVE_EQUAL(r, res[2], pr);
-//     r = kyosu::exp_int(r_t(2.5), 4+2*I);
-//     TTS_RELATIVE_EQUAL(r, res[3], pr);
-//     r = kyosu::exp_int(r_t(2.5), r_t(4.0));
-//     TTS_RELATIVE_EQUAL(r, res[4], pr);
+    r = kyosu::exp_int(r_t(2.5), 4+2*I);
+    TTS_RELATIVE_EQUAL(r, res[3], pr);
+    r = kyosu::exp_int(r_t(2.5), r_t(4.0));
+    TTS_RELATIVE_EQUAL(r, res[4], pr);
+    r = kyosu::exp_int(r_t(2.5), r_t(40.0));
+    TTS_RELATIVE_EQUAL(r, res[5], pr);
+    r = kyosu::exp_int(r_t(2.5, 1.0), r_t(4.0));
+    TTS_RELATIVE_EQUAL(r, res[6], pr);
+    r = kyosu::exp_int(r_t(-2.5), r_t(4.0));
+    TTS_RELATIVE_EQUAL(r, res[7], pr);
 
     TTS_RELATIVE_EQUAL(kyosu::exp_int(r_t(0.0)), cinf, pr);
     TTS_RELATIVE_EQUAL(kyosu::exp_int(1.0),kyosu::real(kyosu::exp_int(r_t(1.0))), pr);
