@@ -65,13 +65,12 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `n`: order. If not present taken to be 1.
+//!     * `n`: order. cayley_dickson or real argument. If not present taken to be 1.
 //!     * `x`: cayley_dickson or real argument.
 //!
 //!   **Return value**
 //!
-//!     1. The value of the exponential integral
-//!   \f$ \mathbf{E}_n(x) = \displaystyle \int_1^\infty \frac{e^{-xt}}{t^n}\;\mbox{d}t\f$, is returned.
+//!     1. The value of the exponential integral \f$ \mathbf{E}_n(x) = \displaystyle \int_1^\infty \frac{e^{-xt}}{t^n}\;\mbox{d}t\f$, is returned.
 //!     2. [The operation is performed conditionnaly](@ref conditional).
 //!
 //!  @groupheader{External references}
@@ -107,9 +106,18 @@ namespace kyosu::_
         constexpr auto tol = eve::eps(eve::as<u_t>());
         auto mzz = -zz;
         auto dn = dec(nn);
-        auto sflint = kyosu::tgamma_inv(nn)*kyosu::pow(mzz, dec(nn))*(kyosu::digamma(nn)-kyosu::log(zz));
-        auto sfloat = kyosu::tgamma(-dn)*pow(zz, dn);
-        auto s = kyosu::if_else(kyosu::is_flint(nn), sflint, sfloat);
+        auto s = kyosu::zero(eve::as(zz));
+        auto isflint = kyosu::is_flint(kyosu::real(nn));
+        if (eve::all(isflint))
+          s = kyosu::tgamma_inv(nn)*kyosu::pow(mzz, dec(nn))*(kyosu::digamma(nn)-kyosu::log(zz));
+        else if   (eve::none(isflint))
+          s = kyosu::tgamma(-dn)*pow(zz, dn);
+        else
+        {
+          auto sflint = kyosu::tgamma_inv(nn)*kyosu::pow(mzz, dec(nn))*(kyosu::digamma(nn)-kyosu::log(zz));
+          auto sfloat = kyosu::tgamma(-dn)*pow(zz, dn);
+          s = kyosu::if_else(kyosu::is_flint(nn), sflint, sfloat);
+        }
         auto test = kyosu::false_(eve::as(zz));
         auto fac =  kyosu::one(eve::as(zz));
 
