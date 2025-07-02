@@ -98,6 +98,7 @@ namespace kyosu::_
     r_t aa(a);
     r_t bb(b);
     auto bpflint = kyosu::is_real(bb) && eve::is_flint(kyosu::real(bb)) && eve::is_gtz(kyosu::real(bb));
+    
     auto br_bpflint =  [aa, bb, bpflint](auto z){ //br_bpflint
       auto n = eve::if_else(bpflint, real(bb), eve::one);
       auto fac = eve::sign_alternate(n)*kyosu::tgamma_inv(kyosu::inc(aa-n));
@@ -147,7 +148,7 @@ namespace kyosu::_
       auto br_t2 = [aa, n](auto zz){
         auto tol = eve::eps(eve::as<u_t>());
         auto z = zz; //kyosu::if_else(test,  zz, zero);
-        auto ak = kyosu::one(eve::as(aa));
+        auto ak =aa;
         r_t fac = kyosu::tgamma_inv(n);
 //        std::cout << "init fac   " << fac  << std::endl;
         auto s = fac*(kyosu::digamma(ak)-kyosu::digamma(u_t(1))-kyosu::digamma(n));
@@ -159,6 +160,7 @@ namespace kyosu::_
           fac *= (ak/((n+k-1)*k))*zz;
           auto t = fac*(kyosu::digamma(ak)-kyosu::digamma(u_t(k))-kyosu::digamma(n+k));
           s+= if_else(small, zero, t);
+          std::cout << " t " << t << " --- s" << s << std::endl;
           small = kyosu::linfnorm[kyosu::flat](t) <= kyosu::linfnorm[kyosu::flat](s)*tol;
           if (eve::all(small)){
 //            std::cout << "t2 k   " << k   << std::endl;
