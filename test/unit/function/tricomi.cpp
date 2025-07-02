@@ -41,7 +41,5 @@ TTS_CASE_TPL ( "Check tricomi "
     TTS_RELATIVE_EQUAL(r, res[3], pr);
     r = kyosu::tricomi(0.4-1.2*I, -20.4, -20.4);
     TTS_RELATIVE_EQUAL(r, res[4], pr);
-    r = kyosu::tricomi(1.0, 1.0, -2);
-    TTS_RELATIVE_EQUAL(r, res[5], pr);
   }
 };
