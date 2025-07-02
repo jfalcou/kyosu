@@ -89,6 +89,7 @@
 #include <kyosu/functions/exp10.hpp>
 #include <kyosu/functions/exp2.hpp>
 #include <kyosu/functions/exp_i.hpp>
+#include <kyosu/functions/exp_int.hpp>
 #include <kyosu/functions/exp_ipi.hpp>
 #include <kyosu/functions/expm1.hpp>
 #include <kyosu/functions/expmx2.hpp>
