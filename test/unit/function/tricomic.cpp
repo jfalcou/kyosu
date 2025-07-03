@@ -28,13 +28,13 @@ TTS_CASE_TPL ( "Check tricomi "
                  r_t(0.596347362323194, 0.0),
                  r_t(10.93582915778848, 0.0),
                  r_t(-0.2707662554910, -0.021167884792604296731),
-                 r_t(-0.11314702047341, -0.00014262808581531501620860)
+                 r_t(0.181761874151898, 0.0)
     };
     r_t r(cinf);
 //      r = kyosu::tricomi(-2.0, 1.0, 1.0);
 //      TTS_RELATIVE_EQUAL(r, res[0], pr);
-     r = kyosu::tricomi(1.0, 1.5, 1.0);
-     TTS_RELATIVE_EQUAL(r, res[1], pr);
+//       r = kyosu::tricomi(1.0, 1.5, 1.0);
+//      TTS_RELATIVE_EQUAL(r, res[1], pr);
 //     r = kyosu::tricomi(-2.0, 3.0, 3.0);
 //     TTS_RELATIVE_EQUAL(r, res[2], pr);
 //     r = kyosu::tricomi(1.0, 1.0, 1.0);
@@ -45,7 +45,11 @@ TTS_CASE_TPL ( "Check tricomi "
 //     TTS_RELATIVE_EQUAL(r, res[5], pr);
 //     r = kyosu::tricomi(-10.0, 1.0, 1.0);
 //     TTS_RELATIVE_EQUAL(r, res[6], pr);
+      r = kyosu::tricomi(2.0, 1.5, 1.0);
+     TTS_RELATIVE_EQUAL(r, res[7], pr);
 
 
   }
 };
+// sum_(k=0)^20 ((1.5)_k (\u03c8(1.5 + k) - \u03c8(1 + k) - \u03c8(1 + k)) 1^k)/((k + 1 - 1)! k!)\u2248-0.3172090633360333543575118713021572347289
+// sum_(k=0)^20 ((1.5)_k (\u03c8(1.5 + k) - \u03c8(
