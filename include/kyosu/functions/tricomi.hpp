@@ -124,20 +124,24 @@ namespace kyosu::_
         auto s =  kyosu::zero(kyosu::as(iz));
         auto k = 1;
         auto test =  k < n;
-        auto aak = kyosu::one(kyosu::as(iz));
-//         std::cout << "k   " << k   << std::endl;
+        auto aak = kyosu::oneminus(aa);
+         std::cout << "k   " << k   << std::endl;
+         std::cout << "n   " << n   << std::endl;
+         std::cout << "iz  " << iz  << std::endl;
 //         std::cout << "oma " << oma << std::endl;
         while (eve::any(test))
         {
-//           std::cout << "k   " << k   << std::endl;
+           std::cout << "aak   " << aak   << std::endl;
+           std::cout << "  k   " <<   k   << std::endl;
 //           std::cout << "oma " << oma << std::endl;
-          aak *= (oma+k-1);
-          std::cout << "aak " << aak << std::endl;
+
           auto t = tgamma(u_t(k))*pow(iz, k)/(aak*tgamma(n-k));
           std::cout << "t   " << t   << std::endl;
           s -= t;
           ++k;
           test =  k < n;
+          std::cout << "tst " << test << std::endl;
+          aak*= (oma+k-1);
         }
 //         auto k = 0;
 //         auto t = one(eve::as(iz));
@@ -174,9 +178,6 @@ namespace kyosu::_
           fac *= (ak/((n+k-1)*k))*zz;
           auto t = fac*(kyosu::digamma(aa+k)-kyosu::digamma(u_t(k+1))-kyosu::digamma(n+k));
           s+= if_else(small, zero, t);
- //          std::cout << "ak " <<ak << " n " << n << " zz " << zz <<  std::endl;
-//           std::cout << " k " << k << " --- t " << t << " --- s " << s << std::endl;
-//           if (k == 1) exit(1);
           small = kyosu::linfnorm[kyosu::flat](t) <= kyosu::linfnorm[kyosu::flat](s)*tol;
           if (eve::all(small)){
             std::cout << "t2 k   " <<  k << " -> s "<< s   << std::endl;
@@ -227,7 +228,7 @@ namespace kyosu::_
     auto notdone = kyosu::is_not_fnan(zzz);
     if( eve::any(notdone) )
     {
-      notdone = next_interval(br_bpflint, notdone, bpflint && (kyosu::is_not_flint(aa) || aa == kyosu::one(as(aa))), r, zzz);
+      notdone = next_interval(br_bpflint, notdone, bpflint /* && (kyosu::is_not_flint(aa) || aa == kyosu::one(as(aa)))*/, r, zzz);
       if( eve::any(notdone) )
       {
         if( eve::any(notdone) ) { last_interval(br_else, notdone, r, zzz); }
