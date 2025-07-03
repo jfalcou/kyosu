@@ -103,7 +103,7 @@ namespace kyosu::_
     auto br_bpflint =  [aa, bb, bpflint](auto z){ //br_bpflint
       auto n = eve::if_else(bpflint, real(bb), eve::one);
       auto fac = eve::sign_alternate(n)*kyosu::tgamma_inv(kyosu::inc(aa-n));
-      std::cout << "fac global " << fac << std::endl;
+      //std::cout << "fac global " << fac << std::endl;
       // assume n is flint > 0 and a is not flint
       // tricomi is the the of 3 terms multiplied by a common factor
       // common factor : \f$(-1)^n / \Gamma(a-n+1) \$n
@@ -115,9 +115,9 @@ namespace kyosu::_
 
       auto t1 =  kyosu::log(z)*tgamma_inv(n)*_::hyperg(z, kumi::tuple{aa}, kumi::tuple{n});
 
-//        std::cout << "aa  " << aa << std::endl;
-//        std::cout << "n   " << n  << std::endl;
-//        std::cout << "1F1 " << _::hyperg(z, kumi::tuple{aa}, kumi::tuple{n})<< std::endl;
+//        //std::cout << "aa  " << aa << std::endl;
+//        //std::cout << "n   " << n  << std::endl;
+//        //std::cout << "1F1 " << _::hyperg(z, kumi::tuple{aa}, kumi::tuple{n})<< std::endl;
 
       auto br_t3 = [aa, n](auto iz){
         auto oma = kyosu::oneminus(aa);
@@ -125,22 +125,22 @@ namespace kyosu::_
         auto k = 1;
         auto test =  k < n;
         auto aak = kyosu::oneminus(aa);
-         std::cout << "k   " << k   << std::endl;
-         std::cout << "n   " << n   << std::endl;
-         std::cout << "iz  " << iz  << std::endl;
-//         std::cout << "oma " << oma << std::endl;
+         //std::cout << "k   " << k   << std::endl;
+         //std::cout << "n   " << n   << std::endl;
+         //std::cout << "iz  " << iz  << std::endl;
+//         //std::cout << "oma " << oma << std::endl;
         while (eve::any(test))
         {
-           std::cout << "aak   " << aak   << std::endl;
-           std::cout << "  k   " <<   k   << std::endl;
-//           std::cout << "oma " << oma << std::endl;
+           //std::cout << "aak   " << aak   << std::endl;
+           //std::cout << "  k   " <<   k   << std::endl;
+//           //std::cout << "oma " << oma << std::endl;
 
           auto t = tgamma(u_t(k))*pow(iz, k)/(aak*tgamma(n-k));
-          std::cout << "t   " << t   << std::endl;
+          //std::cout << "t   " << t   << std::endl;
           s -= t;
           ++k;
           test =  k < n;
-          std::cout << "tst " << test << std::endl;
+          //std::cout << "tst " << test << std::endl;
           aak*= (oma+k-1);
         }
 //         auto k = 0;
@@ -148,8 +148,8 @@ namespace kyosu::_
 //         auto test = k < n-1;
 //         while (eve::any(test))
 //         {
-// //           std::cout << "k   " << k   << std::endl;
-// //           std::cout << "oma " << oma << std::endl;
+// //           //std::cout << "k   " << k   << std::endl;
+// //           //std::cout << "oma " << oma << std::endl;
 //           t *= (k)*iz/((oma+k)*(n-k));
 
 //           s-= t;
@@ -158,7 +158,7 @@ namespace kyosu::_
 
 //           if (eve::all(test)) break;
 //         }
-        std::cout << "s   " << s   << std::endl;
+        //std::cout << "s   " << s   << std::endl;
         return s;
       };
 
@@ -167,9 +167,9 @@ namespace kyosu::_
         auto z = zz; //kyosu::if_else(test,  zz, zero);
         auto ak =aa;
         r_t fac = kyosu::tgamma_inv(n);
-//        std::cout << "init fac   " << fac  << std::endl;
+//        //std::cout << "init fac   " << fac  << std::endl;
         auto s = fac*(kyosu::digamma(aa)-kyosu::digamma(u_t(1))-kyosu::digamma(n));
-        std::cout << " ======  s " << s <<  std::endl;
+        //std::cout << " ======  s " << s <<  std::endl;
         constexpr int Maxit = 500;
         auto small = kyosu::false_(eve::as(z));
 
@@ -180,7 +180,7 @@ namespace kyosu::_
           s+= if_else(small, zero, t);
           small = kyosu::linfnorm[kyosu::flat](t) <= kyosu::linfnorm[kyosu::flat](s)*tol;
           if (eve::all(small)){
-            std::cout << "t2 k   " <<  k << " -> s "<< s   << std::endl;
+            //std::cout << "t2 k   " <<  k << " -> s "<< s   << std::endl;
             return s;
           }
           ak = kyosu::inc(ak);
@@ -190,15 +190,15 @@ namespace kyosu::_
 
       auto r =  t1;
       auto t2 = br_t2(z);
-//        std::cout << "t1   " << t1   << std::endl;
+//        //std::cout << "t1   " << t1   << std::endl;
       r+= t2;
       auto t3 = br_t3(kyosu::rec(z));
-        std::cout << "t3   " << t3   << std::endl;
+        //std::cout << "t3   " << t3   << std::endl;
       r += t3;
-      std::cout << "fac ici " << fac << std::endl;
+      //std::cout << "fac ici " << fac << std::endl;
 
       r*= fac;
-//      std::cout << "r   " << r << std::endl;
+//      //std::cout << "r   " << r << std::endl;
 
       return  r; //kyosu::if_else(kyosu::is_real(z) && eve::is_ltz(real(z)), conj(r), r);
 
@@ -211,14 +211,14 @@ namespace kyosu::_
       auto f1 = kyosu::tgamma(dec(bb))*tgamma_inv(aa);
       auto f2 = kyosu::tgamma(ombb)*tgamma_inv(inc(aa-bb));
       auto p  = pow(z, ombb);
-      //        std::cout << std::setprecision(15) << "zz " << zz << std::endl;
-//         std::cout << "aa " << aa << std::endl;
-//         std::cout << "bb " << bb << std::endl;
-//         std::cout << "f1 " << f1 << std::endl;
-//         std::cout << "f2 " << f2 << std::endl;
-//         std::cout << "p  " << p  << std::endl;
-//         std::cout << "h1 " << _::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb}) << std::endl;
-//         std::cout << "h2 " << _::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb}) << std::endl;
+      //        //std::cout << std::setprecision(15) << "zz " << zz << std::endl;
+//         //std::cout << "aa " << aa << std::endl;
+//         //std::cout << "bb " << bb << std::endl;
+//         //std::cout << "f1 " << f1 << std::endl;
+//         //std::cout << "f2 " << f2 << std::endl;
+//         //std::cout << "p  " << p  << std::endl;
+//         //std::cout << "h1 " << _::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb}) << std::endl;
+//         //std::cout << "h2 " << _::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb}) << std::endl;
       return f1*p*_::hyperg(z, kumi::tuple{incaambb}, kumi::tuple{2-bb})+
       f2*_::hyperg(z, kumi::tuple{aa}, kumi::tuple{bb});
     };
@@ -234,6 +234,7 @@ namespace kyosu::_
         if( eve::any(notdone) ) { last_interval(br_else, notdone, r, zzz); }
       }
     }
+//    std::cout << "r =  " << r << std::endl;
     return r;
   }
 }

@@ -18,7 +18,7 @@ TTS_CASE_TPL ( "Check tricomi "
 {
   if constexpr(sizeof(T) == 8)
   {
-    auto pr = tts::prec<T>(4.0e-3, 1.0e-8);
+    auto pr = tts::prec<T>(4.0e-3, 1.0e-15);
     using r_t = kyosu::cayley_dickson<T, 2>;
     auto cinf = kyosu::cinf(eve::as<r_t>());
     r_t res[] = {r_t(-0.670482709790073, -0.425168331587636328),
@@ -35,29 +35,28 @@ TTS_CASE_TPL ( "Check tricomi "
                  r_t(-0.05491954836832, 0.070861388597939388073)
     };
     r_t r(cinf);
-//       r = kyosu::tricomi(-2.0, 1.0, 1.0);
-//       TTS_RELATIVE_EQUAL(r, res[0], pr);
-//       r = kyosu::tricomi(2.0, 1.5, 1.0);
-//      TTS_RELATIVE_EQUAL(r, res[7], pr);
-//       r = kyosu::tricomi(1.0, 1.5, 2.0);
-//      TTS_RELATIVE_EQUAL(r, res[8], pr);
-//       r = kyosu::tricomi(2.0, 1.5, 2.0);
-//      TTS_RELATIVE_EQUAL(r, res[9], pr);
-//       r = kyosu::tricomi(2.0, 2.0, 2.0);
-//      TTS_RELATIVE_EQUAL(r, res[10], pr);
-
-//       r = kyosu::tricomi(1.0, 1.5, 1.0);
-//      TTS_RELATIVE_EQUAL(r, res[1], pr);
+    r = kyosu::tricomi(-2.0, 1.0, 1.0);
+    TTS_RELATIVE_EQUAL(r, res[0], pr);
+    r = kyosu::tricomi(1.0, 1.5, 1.0);
+    TTS_RELATIVE_EQUAL(r, res[1], pr);
     r = kyosu::tricomi(-2.0, 3.0, 3.0);
     TTS_RELATIVE_EQUAL(r, res[2], pr);
-//     r = kyosu::tricomi(1.0, 1.0, 1.0);
-//     TTS_RELATIVE_EQUAL(r, res[3], pr);
-//     r = kyosu::tricomi(1.0e-5, 1.0, 1.0);
-//     TTS_RELATIVE_EQUAL(r, res[4], pr);
-//     r = kyosu::tricomi(-5.0, 1.0, 1.0);
-//     TTS_RELATIVE_EQUAL(r, res[5], pr);
-//     r = kyosu::tricomi(-10.0, 1.0, 1.0);
-//     TTS_RELATIVE_EQUAL(r, res[6], pr);
+    r = kyosu::tricomi(1.0, 1.0, 1.0);
+    TTS_RELATIVE_EQUAL(r, res[4], pr);
+    r = kyosu::tricomi(1.0e-5, 1.0, 1.0);
+    TTS_RELATIVE_EQUAL(r, res[5], pr);
+    r = kyosu::tricomi(-5.0, 1.0, 1.0);
+    TTS_RELATIVE_EQUAL(r, res[6], pr);
+    r = kyosu::tricomi(-10.0, 1.0, 1.0);
+    TTS_RELATIVE_EQUAL(r, res[6], pr);
+    r = kyosu::tricomi(2.0, 1.5, 1.0);
+    TTS_RELATIVE_EQUAL(r, res[7], pr);
+    r = kyosu::tricomi(1.0, 1.5, 2.0);
+    TTS_RELATIVE_EQUAL(r, res[8], pr);
+    r = kyosu::tricomi(2.0, 1.5, 2.0);
+    TTS_RELATIVE_EQUAL(r, res[9], pr);
+    r = kyosu::tricomi(2.0, 2.0, 2.0);
+    TTS_RELATIVE_EQUAL(r, res[10], pr);
     r = kyosu::tricomi(-2.0, 4.0, 4.0);
     TTS_RELATIVE_EQUAL(r, res[11], pr);
 
