@@ -28,11 +28,20 @@ TTS_CASE_TPL ( "Check tricomi "
                  r_t(0.596347362323194, 0.0),
                  r_t(10.93582915778848, 0.0),
                  r_t(-0.2707662554910, -0.021167884792604296731),
-                 r_t(0.181761874151898, 0.0)
+                 r_t(0.181761874151898, 0.0),
+                 r_t(0.680920590299878, 0.0),
+                 r_t(0.277406605653042, 0.0)
     };
     r_t r(cinf);
-//      r = kyosu::tricomi(-2.0, 1.0, 1.0);
-//      TTS_RELATIVE_EQUAL(r, res[0], pr);
+//       r = kyosu::tricomi(-2.0, 1.0, 1.0);
+//       TTS_RELATIVE_EQUAL(r, res[0], pr);
+//       r = kyosu::tricomi(2.0, 1.5, 1.0);
+//      TTS_RELATIVE_EQUAL(r, res[7], pr);
+      r = kyosu::tricomi(1.0, 1.5, 2.0);
+     TTS_RELATIVE_EQUAL(r, res[8], pr);
+      r = kyosu::tricomi(2.0, 1.5, 2.0);
+     TTS_RELATIVE_EQUAL(r, res[9], pr);
+
 //       r = kyosu::tricomi(1.0, 1.5, 1.0);
 //      TTS_RELATIVE_EQUAL(r, res[1], pr);
 //     r = kyosu::tricomi(-2.0, 3.0, 3.0);
@@ -45,9 +54,6 @@ TTS_CASE_TPL ( "Check tricomi "
 //     TTS_RELATIVE_EQUAL(r, res[5], pr);
 //     r = kyosu::tricomi(-10.0, 1.0, 1.0);
 //     TTS_RELATIVE_EQUAL(r, res[6], pr);
-      r = kyosu::tricomi(2.0, 1.5, 1.0);
-     TTS_RELATIVE_EQUAL(r, res[7], pr);
-
 
   }
 };

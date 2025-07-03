@@ -103,6 +103,7 @@ namespace kyosu::_
     auto br_bpflint =  [aa, bb, bpflint](auto z){ //br_bpflint
       auto n = eve::if_else(bpflint, real(bb), eve::one);
       auto fac = eve::sign_alternate(n)*kyosu::tgamma_inv(kyosu::inc(aa-n));
+      std::cout << "fac global " << fac << std::endl;
       // assume n is flint > 0 and a is not flint
       // tricomi is the the of 3 terms multiplied by a common factor
       // common factor : \f$(-1)^n / \Gamma(a-n+1) \$n
@@ -124,12 +125,12 @@ namespace kyosu::_
         auto k = 1;
         auto test =  k < n;
         auto aak = kyosu::one(kyosu::as(iz));
-        std::cout << "k   " << k   << std::endl;
-        std::cout << "oma " << oma << std::endl;
+//         std::cout << "k   " << k   << std::endl;
+//         std::cout << "oma " << oma << std::endl;
         while (eve::any(test))
         {
-          std::cout << "k   " << k   << std::endl;
-          std::cout << "oma " << oma << std::endl;
+//           std::cout << "k   " << k   << std::endl;
+//           std::cout << "oma " << oma << std::endl;
           aak *= (oma+k-1);
           std::cout << "aak " << aak << std::endl;
           auto t = tgamma(u_t(k))*pow(iz, k)/(aak*tgamma(n-k));
@@ -153,6 +154,7 @@ namespace kyosu::_
 
 //           if (eve::all(test)) break;
 //         }
+        std::cout << "s   " << s   << std::endl;
         return s;
       };
 
@@ -184,13 +186,16 @@ namespace kyosu::_
         }
         return kyosu::fnan(eve::as(z));
       };
+
       auto r =  t1;
       auto t2 = br_t2(z);
 //        std::cout << "t1   " << t1   << std::endl;
       r+= t2;
       auto t3 = br_t3(kyosu::rec(z));
-//        std::cout << "t2   " << t2   << std::endl;
-      r -= t3;
+        std::cout << "t3   " << t3   << std::endl;
+      r += t3;
+      std::cout << "fac ici " << fac << std::endl;
+
       r*= fac;
 //      std::cout << "r   " << r << std::endl;
 
