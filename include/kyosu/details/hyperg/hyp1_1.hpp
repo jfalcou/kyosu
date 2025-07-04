@@ -9,6 +9,7 @@
 #include <kyosu/functions/linfnorm.hpp>
 #include <kyosu/constants/wrapped.hpp>
 #include <kyosu/functions/is_flint.hpp>
+#include <kyosu/constants/cinf.hpp>
 
 namespace kyosu::_
 {
