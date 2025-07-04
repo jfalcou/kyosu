@@ -160,7 +160,6 @@ namespace kyosu::_
         }
         return s;
       };
-
       return  fac*(t1+br_t2(z)+br_t3(kyosu::rec(z)));
     };
 
@@ -171,20 +170,18 @@ namespace kyosu::_
       auto ak = aa;
       auto ambp1k = kyosu::inc(aa-bb);
       int k = 1;
-      auto t = fac; //kyosu::one(eve::as(iz));
+      auto t = fac;
       auto s = t;
       auto test = kyosu::false_(eve::as(iz));
       while (true)
       {
         t *= -(ak/k++)*ambp1k*iz;
-        s += t;
+        s += kyosu::if_else(test, zero, t);
         test = kyosu::linfnorm[kyosu::flat](t) <= kyosu::linfnorm[kyosu::flat](s)*tol;
         if (eve::all(test)) break;
         ++ak;
         ++ambp1k;
       }
-
-      //return kyosu::pow(iz, aa)*(kyosu::one(eve::as(iz))- aa*(aa-bb+1)*iz);
       return s;
     };
 
