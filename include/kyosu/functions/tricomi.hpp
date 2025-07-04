@@ -17,8 +17,7 @@
 #include <kyosu/functions/digamma.hpp>
 #include <kyosu/functions/pow.hpp>
 #include <eve/detail/hz_device.hpp>
-#include <iostream>
-#include <iomanip>
+
 namespace kyosu
 {
   template<typename Options>
