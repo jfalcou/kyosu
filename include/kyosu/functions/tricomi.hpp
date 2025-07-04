@@ -99,109 +99,94 @@ namespace kyosu::_
     r_t aa(a);
     r_t bb(b);
     auto bpflint = kyosu::is_real(bb) && eve::is_flint(kyosu::real(bb)) && eve::is_gtz(kyosu::real(bb));
+    auto zlarge = kyosu::abs(z) > u_t(50);
+    auto tol = eve::eps(eve::as<u_t>());
 
-    auto br_bpflint =  [aa, bb, bpflint](auto z){ //br_bpflint
+
+    auto br_bpflint =  [aa, bb, bpflint, tol](auto z){ //b is positive and flint
       auto n = eve::if_else(bpflint, real(bb), eve::one);
       auto fac = eve::sign_alternate(n)*kyosu::tgamma_inv(kyosu::inc(aa-n));
-      //std::cout << "fac global " << fac << std::endl;
       // assume n is flint > 0 and a is not flint
       // tricomi is the the of 3 terms multiplied by a common factor
       // common factor : \f$(-1)^n / \Gamma(a-n+1) \$n
       // first term    : \f$ \frac{\log(z)}{\Gamma(n)}{}_1F_1(a; n; z)\f$
       // second term   : \f$ \sum_0^\infty \frac{(a)_k(\psi(a+k)-\psi(k+1)-\psi(k+n))z^k}{(k+n-1)! k!}\f$
-      // third term    : \f$-\sum_1^{n-1}  \frac{(k-1)!z^{k-1}}{(1_a)_k(n-k-1)!}\f$
-      //
+      // third term    : \f$-\sum_1^{n-1}  \frac{(k-1)!z^{k-1}}{(1-a)_k(n-k-1)!}\f$
 
+      auto t1 =  kyosu::log(z)*tgamma_inv(n)*_::hyperg(z, kumi::tuple{aa}, kumi::tuple{n});//first term
 
-      auto t1 =  kyosu::log(z)*tgamma_inv(n)*_::hyperg(z, kumi::tuple{aa}, kumi::tuple{n});
-
-//        //std::cout << "aa  " << aa << std::endl;
-//        //std::cout << "n   " << n  << std::endl;
-//        //std::cout << "1F1 " << _::hyperg(z, kumi::tuple{aa}, kumi::tuple{n})<< std::endl;
-
-      auto br_t3 = [aa, n](auto iz){
-        auto oma = kyosu::oneminus(aa);
-        auto s =  kyosu::zero(kyosu::as(iz));
-        auto k = 1;
-        auto test =  k < n;
-        auto aak = kyosu::oneminus(aa);
-         //std::cout << "k   " << k   << std::endl;
-         //std::cout << "n   " << n   << std::endl;
-         //std::cout << "iz  " << iz  << std::endl;
-//         //std::cout << "oma " << oma << std::endl;
-        while (eve::any(test))
-        {
-           //std::cout << "aak   " << aak   << std::endl;
-           //std::cout << "  k   " <<   k   << std::endl;
-//           //std::cout << "oma " << oma << std::endl;
-
-          auto t = tgamma(u_t(k))*pow(iz, k)/(aak*tgamma(n-k));
-          //std::cout << "t   " << t   << std::endl;
-          s -= t;
-          ++k;
-          test =  k < n;
-          //std::cout << "tst " << test << std::endl;
-          aak*= (oma+k-1);
-        }
-//         auto k = 0;
-//         auto t = one(eve::as(iz));
-//         auto test = k < n-1;
-//         while (eve::any(test))
-//         {
-// //           //std::cout << "k   " << k   << std::endl;
-// //           //std::cout << "oma " << oma << std::endl;
-//           t *= (k)*iz/((oma+k)*(n-k));
-
-//           s-= t;
-//           ++k;
-//           test =  k < n-1;
-
-//           if (eve::all(test)) break;
-//         }
-        //std::cout << "s   " << s   << std::endl;
-        return s;
-      };
-
-      auto br_t2 = [aa, n](auto zz){
-        auto tol = eve::eps(eve::as<u_t>());
+      auto br_t2 = [aa, n, tol](auto zz){ //second term
         auto z = zz; //kyosu::if_else(test,  zz, zero);
-        auto ak =aa;
+        auto ak = aa;
         r_t fac = kyosu::tgamma_inv(n);
-//        //std::cout << "init fac   " << fac  << std::endl;
-        auto s = fac*(kyosu::digamma(aa)-kyosu::digamma(u_t(1))-kyosu::digamma(n));
-        //std::cout << " ======  s " << s <<  std::endl;
+        auto haa = aa;
+        auto h1  = u_t(1);
+        auto hn  = n;
+        auto daa = kyosu::digamma(haa);
+        auto d1  = kyosu::digamma(h1);
+        auto dn  = kyosu::digamma(hn);
+         auto s = fac*(daa-d1-dn); //(kyosu::digamma(aa)-kyosu::digamma(u_t(1))-kyosu::digamma(n));
         constexpr int Maxit = 500;
         auto small = kyosu::false_(eve::as(z));
 
         for (size_t k = 1; k <= Maxit; ++k)
         {
           fac *= (ak/((n+k-1)*k))*zz;
-          auto t = fac*(kyosu::digamma(aa+k)-kyosu::digamma(u_t(k+1))-kyosu::digamma(n+k));
+          auto rk = kyosu::rec(u_t(k));
+          daa += kyosu::rec(haa++);
+          d1  += eve::rec(h1++);
+          dn  += kyosu::rec(hn++);
+          auto t = fac*(daa-d1-dn); //*(kyosu::digamma(aa+k)-kyosu::digamma(u_t(k+1))-kyosu::digamma(n+k));
           s+= if_else(small, zero, t);
           small = kyosu::linfnorm[kyosu::flat](t) <= kyosu::linfnorm[kyosu::flat](s)*tol;
-          if (eve::all(small)){
-            //std::cout << "t2 k   " <<  k << " -> s "<< s   << std::endl;
-            return s;
-          }
+          if (eve::all(small)) return s;
           ak = kyosu::inc(ak);
         }
         return kyosu::fnan(eve::as(z));
       };
 
-      auto r =  t1;
-      auto t2 = br_t2(z);
-//        //std::cout << "t1   " << t1   << std::endl;
-      r+= t2;
-      auto t3 = br_t3(kyosu::rec(z));
-        //std::cout << "t3   " << t3   << std::endl;
-      r += t3;
-      //std::cout << "fac ici " << fac << std::endl;
+      auto br_t3 = [aa, n](auto iz){ //third term
+        auto oma = kyosu::oneminus(aa);
+        auto s =  kyosu::zero(kyosu::as(iz));
+        auto k = 1;
+        auto test =  k < n;
+        auto aak = kyosu::oneminus(aa);
+        while (eve::any(test))
+        {
+          auto t = tgamma(u_t(k))*pow(iz, k)/(aak*tgamma(n-k));
+          s -= kyosu::if_else(test, t, zero);
+          ++k;
+          test =  k < n;
+          aak*= (oma+k-1);
+        }
+        return s;
+      };
 
-      r*= fac;
-//      //std::cout << "r   " << r << std::endl;
+      return  fac*(t1+br_t2(z)+br_t3(kyosu::rec(z)));
+    };
 
-      return  r; //kyosu::if_else(kyosu::is_real(z) && eve::is_ltz(real(z)), conj(r), r);
 
+    auto br_large =  [aa, bb, zlarge, tol](auto iz){ //z is large
+      iz = kyosu::if_else(zlarge, iz, zero);
+      auto fac = kyosu::pow(iz, aa);
+      auto ak = aa;
+      auto ambp1k = kyosu::inc(aa-bb);
+      int k = 1;
+      auto t = fac; //kyosu::one(eve::as(iz));
+      auto s = t;
+      auto test = kyosu::false_(eve::as(iz));
+      while (true)
+      {
+        t *= -(ak/k++)*ambp1k*iz;
+        s += t;
+        test = kyosu::linfnorm[kyosu::flat](t) <= kyosu::linfnorm[kyosu::flat](s)*tol;
+        if (eve::all(test)) break;
+        ++ak;
+        ++ambp1k;
+      }
+
+      //return kyosu::pow(iz, aa)*(kyosu::one(eve::as(iz))- aa*(aa-bb+1)*iz);
+      return s;
     };
 
     auto br_else =  [aa, bb](auto z){ //is_not_real(bb) || is_not_flint(bb)
@@ -211,30 +196,26 @@ namespace kyosu::_
       auto f1 = kyosu::tgamma(dec(bb))*tgamma_inv(aa);
       auto f2 = kyosu::tgamma(ombb)*tgamma_inv(inc(aa-bb));
       auto p  = pow(z, ombb);
-      //        //std::cout << std::setprecision(15) << "zz " << zz << std::endl;
-//         //std::cout << "aa " << aa << std::endl;
-//         //std::cout << "bb " << bb << std::endl;
-//         //std::cout << "f1 " << f1 << std::endl;
-//         //std::cout << "f2 " << f2 << std::endl;
-//         //std::cout << "p  " << p  << std::endl;
-//         //std::cout << "h1 " << _::hyperg(zz, kumi::tuple{incaambb}, kumi::tuple{2-bb}) << std::endl;
-//         //std::cout << "h2 " << _::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb}) << std::endl;
       return f1*p*_::hyperg(z, kumi::tuple{incaambb}, kumi::tuple{2-bb})+
       f2*_::hyperg(z, kumi::tuple{aa}, kumi::tuple{bb});
     };
 
     r_t zzz(z);
+
     auto r = kyosu::fnan(eve::as<r_t>());
     auto notdone = kyosu::is_not_fnan(zzz);
     if( eve::any(notdone) )
     {
-      notdone = next_interval(br_bpflint, notdone, bpflint /* && (kyosu::is_not_flint(aa) || aa == kyosu::one(as(aa)))*/, r, zzz);
+      notdone = next_interval(br_large, notdone, zlarge, r, kyosu::rec(zzz));
       if( eve::any(notdone) )
       {
-        if( eve::any(notdone) ) { last_interval(br_else, notdone, r, zzz); }
+        notdone = next_interval(br_bpflint, notdone, bpflint, r, zzz);
+        if( eve::any(notdone) )
+        {
+          if( eve::any(notdone) ) { last_interval(br_else, notdone, r, zzz); }
+        }
       }
     }
-//    std::cout << "r =  " << r << std::endl;
     return r;
   }
 }

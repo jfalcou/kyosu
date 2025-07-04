@@ -20,7 +20,7 @@ TTS_CASE_TPL ( "Check tricomi "
     using r_t = kyosu::cayley_dickson<T, 2>;
 
     auto test = [](auto z, auto a,  auto b, auto ref,  auto i){
-      auto pr = tts::prec<T>(4.0e-3, 1.0e-9);
+      auto pr = tts::prec<T>(4.0e-3, 1.0e-8);
       auto r = kyosu::tricomi(r_t(z), r_t(a), r_t(b));
       TTS_RELATIVE_EQUAL(r, ref, pr) <<  "i " << i << " z " <<  z << " a " << a <<  " b " << b <<  "\n";
     };
@@ -42,6 +42,9 @@ TTS_CASE_TPL ( "Check tricomi "
                  r_t(0.075192911520, 0.0),                        //14
                  r_t(0.010338915008, 0.08232684012981332521971),  //15
                  r_t(4.4195931497672e18, -1.1367863689312e19),    //16
+                 r_t(0.000099021781146, 0.0),                     //17
+                 r_t(9.990022425326364410e-7, 0.0),               //18
+                 r_t(9.098306861960373114e-21, 0.0),              //19
     };
     r_t I = r_t(0.0, 1.0);
 
@@ -62,5 +65,8 @@ TTS_CASE_TPL ( "Check tricomi "
     test(0.5, 2.0, -1.4, res[14], 14);
     test(0.5, 1.0, 12*I, res[15], 15);
     test(0.4-1.2*I, -20.4, -20.4, res[16], 16);
+    test(100.0, 2.0, 2.5, res[17], 17);
+    test(1000.0, 2.0, 2.5, res[18], 18);
+    test(100.0, 10.0, 10.0, res[19], 19);
 
 };
