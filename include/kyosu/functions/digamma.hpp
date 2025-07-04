@@ -21,7 +21,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       if constexpr(concepts::real<Z>)
-        return (*this)(complex(z));
+        return (*this)(kyosu::complex(z));
       else
         return  KYOSU_CALL(z);
     }

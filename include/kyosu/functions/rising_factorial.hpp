@@ -9,6 +9,7 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/tgamma.hpp>
+#include <kyosu/functions/tgamma_inv.hpp>
 
 namespace kyosu
 {
@@ -18,7 +19,7 @@ namespace kyosu
     template<typename Z0, typename Z1>
     requires(concepts::cayley_dickson<Z0> || concepts::cayley_dickson<Z1>)
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_t<Z0, Z1> operator()(Z0 const& z0, Z1 const & z1) const noexcept
-    { return kyosu::if_else(is_eqz(z1), one, tgamma(z0+z1)/tgamma(z0));; }
+    { return kyosu::if_else(is_eqz(z1), one, tgamma(z0+z1)*tgamma_inv(z0));; }
 
     template<concepts::real V0, concepts::real V1>
     KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept ->  decltype(eve::rising_factorial(complex(v0),v1))
