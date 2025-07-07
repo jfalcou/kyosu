@@ -36,14 +36,6 @@ namespace kyosu
     KYOSU_CALLABLE_OBJECT(tricomi_t, tricomi_);
   };
 
-//  HypergeometricU[a, n, z] == ((-1)^n/Gamma[1 + a - n]) (
-//  (Log[z]/(n - 1)!) Hypergeometric1F1[a, n, z]
-//   - Sum[(k - 1)!/(z^k (Pochhammer[1 - a, k] (n - k - 1)!)), {k, 1, n - 1}] +
-//   Sum[(Pochhammer[a, k]/((n + k - 1)! k!)) (PolyGamma[a + k] - PolyGamma[1 + k] - PolyGamma[n + k]) z^k, {k, 0, Infinity}]) /;
-//  Element[n, Integers] && n > 0
-//https://functions.wolfram.com/HypergeometricFunctions/HypergeometricU/06/01/03/02/
-//https://functions.wolfram.com/HypergeometricFunctions/HypergeometricU/06/02/
-
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
