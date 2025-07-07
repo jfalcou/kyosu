@@ -69,7 +69,7 @@ namespace kyosu
 //!
 //!  @groupheader{External references}
 //!   *  [DLMF: Kummer Functions](https://dlmf.nist.gov/13.2)
-//!   *  [Wolfram MathWorld:Confluent Hypergeometric Function of the Second Kind ](https://mathworld.wolfram.com/ConfluentHypergeometricFunctionoftheSecondKind.html)
+//!   *  [Wolfram MathWorld:Confluent Hypergeometric Function of the Second Kind](https://mathworld.wolfram.com/ConfluentHypergeometricFunctionoftheSecondKind.html)
 //!   *  [Wikipedia: Confluent hypergeometric function](https://en.wikipedia.org/wiki/Confluent_hypergeometric_function)
 //!  @groupheader{Example}
 //!  @godbolt{doc/tricomi.cpp}
