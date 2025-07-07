@@ -9,6 +9,7 @@
 #include <kyosu/functions/linfnorm.hpp>
 #include <kyosu/constants/wrapped.hpp>
 #include <kyosu/functions/is_flint.hpp>
+#include <kyosu/functions/tgamma_inv.hpp>
 #include <kyosu/constants/cinf.hpp>
 
 namespace kyosu::_
@@ -99,7 +100,8 @@ namespace kyosu::_
   {
     using r_t = decltype(kumi::get<0>(aa)+kumi::get<0>(cc)+z);
     r_t c(kumi::get<0>(cc));
-    c = if_else(is_negint(c), eve::next(real(c)), c);
-    return  hyperg(z, aa, kumi::tuple{c})*tgamma_inv(c);
+    auto isnegint =  kyosu::is_real(c) && eve::is_flint(kyosu::real(c)) && eve::is_ltz(kyosu::real(c));
+    c = if_else(isnegint, eve::next(real(c)), c);
+    return  hyperg(z, aa, kumi::tuple{c})*kyosu::tgamma_inv(c);
   }
 }
