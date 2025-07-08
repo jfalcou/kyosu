@@ -61,10 +61,12 @@ namespace kyosu
 //!   **Parameters**
 //!
 //!     * `zi...`: Values to process.
+//!     * `tup  `: tuple of cayley_dickson_like values to process.
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise  the value which has the minimum of the absolute values between the parameters.
+//!     1. Returns elementwise  the value which has the minimum of the absolute values between the parameters.
+//!     2. Returns elementwise  the value which has the minimum of the absolute values between tuple members.
 //!
 //!  @groupheader{Example}
 //!

@@ -56,13 +56,8 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      //regular call
-//!      template<typename ... Ts> auto minabs(Ts ... zs       ) const noexcept// 1
-//!      template<typename Tup>    auto minabs(kumi::tuple Tup ) const noexcept// 2
-//!
-//!      // Semantic modifyiers
-//!      auto minabs[raw](/* any previous overload*/)      noexcept;           // 3
-//!      auto minabs[numeric](/* any previous overload*/)  noexcept;           // 4
-//!      auto minabs[pedantic](/* any previous overload*/) noexcept;           // 5
+//!      template<typename ... Ts> auto maxmag(Ts ... zs       ) const noexcept// 1
+//!      template<typename Tup>    auto maxmag(kumi::tuple Tup ) const noexcept// 2
 //!   }
 //!   @endcode
 //!
@@ -73,7 +68,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns elementwise  the value which has the maximum of the absolute values between the parameters.
+//!     1. Returns elementwise  the value which has the maximum of the absolute values between the parameters.
+//!     2. Returns elementwise  the value which has the maximum of the absolute values between tuple members.  
 //!
 //!  @groupheader{Example}
 //!
