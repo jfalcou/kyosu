@@ -24,6 +24,8 @@ TTS_CASE_WITH ( "Check kyosu::abs over complex"
 (auto r, auto i)
 {
   TTS_ULP_EQUAL(kyosu::abs(kyosu::complex(r,i)), eve::hypot[eve::pedantic](r, i), 0.5);
+  TTS_ULP_EQUAL(kyosu::abs[kyosu::raw](kyosu::complex(r,i)), eve::hypot(r, i), 0.5);
+  TTS_ULP_EQUAL(kyosu::abs[kyosu::flat](kyosu::complex(r,i)), eve::maxabs[eve::pedantic](r, i), 0.5);
 };
 
 TTS_CASE_WITH ( "Check kyosu::abs over quaternion"
@@ -35,6 +37,8 @@ TTS_CASE_WITH ( "Check kyosu::abs over quaternion"
 (auto r, auto i, auto j, auto k)
 {
   TTS_ULP_EQUAL(kyosu::abs(kyosu::quaternion(r,i,j,k)), eve::hypot[eve::pedantic](r, i, j, k), 0.5);
+  TTS_ULP_EQUAL(kyosu::abs[kyosu::raw](kyosu::quaternion(r,i,j,k)), eve::hypot(r, i, j, k), 0.5);
+  TTS_ULP_EQUAL(kyosu::abs[kyosu::flat](kyosu::quaternion(r,i,j,k)), eve::maxabs(r, i, j, k), 0.5);
 };
 
 TTS_CASE_WITH ( "Check kyosu::abs over octonion"
@@ -48,4 +52,6 @@ TTS_CASE_WITH ( "Check kyosu::abs over octonion"
 <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
   TTS_ULP_EQUAL(kyosu::abs(kyosu::octonion_t<T>(r,i,j,k,l,li,lj,lk)), eve::hypot[eve::pedantic](r, i, j, k, l, li, lj, lk), 0.5);
+  TTS_ULP_EQUAL(kyosu::abs[kyosu::raw](kyosu::octonion_t<T>(r,i,j,k,l,li,lj,lk)), eve::hypot(r, i, j, k,l,li,lj,lk), 0.5);
+  TTS_ULP_EQUAL(kyosu::abs[kyosu::flat](kyosu::octonion_t<T>(r,i,j,k,l,li,lj,lk)), eve::maxabs(r, i, j, k,l,li,lj,lk), 0.5);
 };
