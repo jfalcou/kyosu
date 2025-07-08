@@ -41,11 +41,12 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      //regular calls
+//!      //regular call
 //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs(T z) noexcept;       // 1
 //!
 //!      // Semantic modifyiers
 //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[raw](T z) noexcept;  // 2
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[flat](T z) noexcept; // 3
 //!   }
 //!   @endcode
 //!
@@ -58,6 +59,7 @@ namespace kyosu
 //!    1. The  modulus of its parameter (always a floating ordered value).
 //!       The modulus is the square root of the sum of the squares of the absolute value of each component.
 //!    2. With the raw option no provision is made to enhance accuracy and avoid overflows
+//!    3. With the flat otion it is the \$f\l_\infty\f$ norm of the components that is computed.
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: complex abs](https://en.cppreference.com/w/cpp/numeric/complex/abs)
@@ -79,7 +81,7 @@ namespace kyosu::_
     if constexpr(concepts::real <Z>)
       return eve::abs(v);
     else if constexpr(O::contains(flat))
-      return eve::maxabs(kumi::flatten(kumi::make_tuple(v))); 
+      return eve::maxabs(kumi::flatten(kumi::make_tuple(v)));
     else if constexpr(O::contains(eve::raw))
       return eve::hypot(v);
     else
