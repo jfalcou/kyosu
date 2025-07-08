@@ -52,24 +52,26 @@ namespace kyosu
 //!      template<typename Tup>    auto maxabs(kumi::tuple Tup ) const noexcept// 2
 //!
 //!      // Semantic modifyiers
-//!      auto maxabs[raw](/* any previous overload*/)              noexcept;   // 3
-//!      auto maxabs[numeric](/* any previous overload*/auto  tup) noexcept;   // 4
-//!      auto maxabs[pedantic](/* any previous overload*/)         noexcept;   // 5
-///!   }
+//!      auto maxabs[raw](/* any previous overload*/) const      noexcept;     // 3
+//!      auto maxabs[numeric](/* any previous overload*/) const  noexcept;     // 4
+//!      auto maxabs[pedantic](/* any previous overload*/) const noexcept;     // 5
+//!      auto maxnabs[flat](/* any previous overload*/) const    noexcept;     // 6
+//!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `zi...`: Values to process.
-//!     * `tup  `: tuple of values to process.
+//!     * `zi...`: cayley_dickson_like values to process.
+//!     * `tup  `: tuple of cayley_dickson_like values to process.
 //!
 //!   **Return value**
 //!
 //!     1. Returns elementwise  the square root maximum of the squared absolute values of the parameters.
-//!     2. With the raw option no provision is made to enhance accuracy and avoid overflows
-//!     3. With the flat otion it is the \$f\l_\infty\f$ norm of all the components that is computed.
-//!     4. Returns elementwise  the pedantic maximum of the  absolute values of the parameters.
-//!     5. Returns elementwise  the numeric maximum of the  absolute values of the parameters.
+//!     2  Same as 1, but the parameters are from the tuple
+//!     3. With the raw option no provision is made to enhance accuracy and avoid overflows
+//!     4. With the flat otion it is the \$f\l_\infty\f$ norm of all the components that is computed.
+//!     5. Returns elementwise  the pedantic maximum of the  absolute values of the parameters.
+//!     6. Returns elementwise  the numeric maximum of the  absolute values of the parameters.
 //!
 //!  @groupheader{Example}
 //!
@@ -90,7 +92,7 @@ namespace kyosu::_
     if constexpr(concepts::real<Z0> && (... && concepts::real<Zs>))
       return eve::maxabs[o](z0,zs...);
     else if constexpr(O::contains(flat))
-      return eve::max[o](kyosu::abs[flat](z0), kyosu::abs[flat](zs)...);
+       return eve::maxabs[o](kumi::flatten(kumi::tuple{z0, zs...}));
     else if constexpr(O::contains(pedantic) || O::contains(numeric))
       return eve::max[o](kyosu::abs(z0), kyosu::abs(zs)...);
     else

@@ -18,6 +18,8 @@ TTS_CASE_WITH ( "Check kyosu::minabs over real"
 {
   TTS_EQUAL(kyosu::minabs(r0, r1), eve::minabs(r0, r1));
   TTS_EQUAL(kyosu::minabs(kumi::tuple{r0, r1}), eve::minabs(r0, r1));
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](r0, r1), eve::minabs(r0, r1));
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](kumi::tuple{r0, r1}), eve::minabs(r0, r1));
 };
 
 TTS_CASE_WITH ( "Check kyosu::minabs over complex"
@@ -34,7 +36,8 @@ TTS_CASE_WITH ( "Check kyosu::minabs over complex"
   TTS_EQUAL(kyosu::minabs(kumi::tuple{c0, c1}), eve::sqrt(eve::min(kyosu::sqr_abs(c0), kyosu::sqr_abs(c1))));
   TTS_EQUAL(kyosu::minabs[eve::numeric](c0, c1), eve::min[eve::numeric](kyosu::abs(c0), kyosu::abs(c1)));
   TTS_EQUAL(kyosu::minabs[eve::numeric](kumi::tuple{c0, c1}), eve::min[eve::numeric](kyosu::abs(c0), kyosu::abs(c1)));
-
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](c0, c1), eve::minabs(r0, i0, r1, i1));
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](kumi::tuple{c0, c1}), eve::minabs(r0, i0, r1, i1));
 };
 
 TTS_CASE_WITH ( "Check kyosu::minabs over quaternion"
@@ -54,4 +57,6 @@ TTS_CASE_WITH ( "Check kyosu::minabs over quaternion"
   TTS_EQUAL(kyosu::minabs(kumi::tuple{q0, q1}), eve::sqrt(eve::min(kyosu::sqr_abs(q0), kyosu::sqr_abs(q1))));
   TTS_EQUAL(kyosu::minabs[eve::numeric](q0, q1), eve::min[eve::numeric](kyosu::abs(q0), kyosu::abs(q1)));
   TTS_EQUAL(kyosu::minabs[eve::numeric](kumi::tuple{q0, q1}), eve::min[eve::numeric](kyosu::abs(q0), kyosu::abs(q1)));
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](q0, q1), eve::minabs(r0, i0, j0, k0, r1, i1, j1, k1));
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](kumi::tuple{q0, q1}), eve::minabs(r0, i0, j0, k0, r1, i1, j1, k1));
 };
