@@ -48,19 +48,20 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      //regular call
-//!      template<typename ... Ts> auto maxabs(Ts ... zs ) const noexcept// 1
+//!      template<typename ... Ts> auto maxabs(Ts ... zs       ) const noexcept// 1
+//!      template<typename Tup>    auto maxabs(kumi::tuple Tup ) const noexcept// 2
 //!
 //!      // Semantic modifyiers
-//!      template<kyosu::concepts::cayley_dickson_like ... Ts> auto abs[raw](Ts ... zs) noexcept;      // 2
-//!      template<kyosu::concepts::cayley_dickson_like ... Ts> auto abs[flat](Ts ... zs) noexcept;     // 3
-//!      template<kyosu::concepts::cayley_dickson_like ... Ts> auto abs[numeric](Ts ... zs) noexcept;  // 4
-//!      template<kyosu::concepts::cayley_dickson_like ... Ts> auto abs[pedantic](Ts ... zs) noexcept; // 5
+//!      auto maxabs[raw](/* any previous overload*/)              noexcept;   // 3
+//!      auto maxabs[numeric](/* any previous overload*/auto  tup) noexcept;   // 4
+//!      auto maxabs[pedantic](/* any previous overload*/)         noexcept;   // 5
 ///!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
 //!     * `zi...`: Values to process.
+//!     * `tup  `: tuple of values to process.
 //!
 //!   **Return value**
 //!
@@ -68,7 +69,7 @@ namespace kyosu
 //!     2. With the raw option no provision is made to enhance accuracy and avoid overflows
 //!     3. With the flat otion it is the \$f\l_\infty\f$ norm of all the components that is computed.
 //!     4. Returns elementwise  the pedantic maximum of the  absolute values of the parameters.
-//!     5. Returns elementwise  the numericc maximum of the  absolute values of the parameters.
+//!     5. Returns elementwise  the numeric maximum of the  absolute values of the parameters.
 //!
 //!  @groupheader{Example}
 //!
