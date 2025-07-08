@@ -17,7 +17,9 @@ TTS_CASE_WITH ( "Check kyosu::minmag over real"
 (auto r0, auto r1)
 {
   TTS_EQUAL(kyosu::minmag(r0, r1), eve::minmag(r0, r1));
+  TTS_EQUAL(kyosu::minmag(kumi::tuple{r0, r1}), eve::minmag(r0, r1));
 };
+
 
 TTS_CASE_WITH ( "Check kyosu::minmag over complex"
               , kyosu::real_types
@@ -27,10 +29,10 @@ TTS_CASE_WITH ( "Check kyosu::minmag over complex"
               )
 (auto r0, auto i0, auto r1, auto i1)
 {
-  using T =  decltype(r0);
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
-  TTS_RELATIVE_EQUAL(kyosu::minmag(c0, c1), kyosu::if_else(kyosu::abs(c0) <= kyosu::abs(c1), c0, c1), tts::prec<T>());
+  TTS_EQUAL(kyosu::minmag(c0, c1), kyosu::if_else(kyosu::abs(c0) <= kyosu::abs(c1), c0, c1));
+  TTS_EQUAL(kyosu::minmag(kumi::tuple{c0, c1}), kyosu::minmag(c0, c1));
 };
 
 TTS_CASE_WITH ( "Check kyosu::minmag over quaternion"
@@ -46,5 +48,6 @@ TTS_CASE_WITH ( "Check kyosu::minmag over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::minmag(q0, q1), kyosu::if_else(kyosu::abs(q0) <= kyosu::abs(q1), q0, q1), tts::prec<T>());
+  TTS_EQUAL(kyosu::minmag(q0, q1), kyosu::if_else(kyosu::abs(q0) <= kyosu::abs(q1), q0, q1));
+  TTS_EQUAL(kyosu::minmag(kumi::tuple{q0, q1}),kyosu::minmag(q0, q1));
 };

@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct minmag_t : eve::strict_elementwise_callable<minmag_t, Options>
+  struct minmag_t : eve::tuple_callable<minmag_t, Options>
   {
     template<concepts::cayley_dickson_like Z0>
     KYOSU_FORCEINLINE constexpr
@@ -28,6 +28,11 @@ namespace kyosu
     {
       return KYOSU_CALL(z0, z1, zs...);
     }
+
+    template<kumi::non_empty_product_type Tup>
+    requires(eve::same_lanes_or_scalar_tuple<Tup>)
+      EVE_FORCEINLINE constexpr kumi::apply_traits_t<eve::common_value,Tup>
+    operator()(Tup t) const noexcept  requires(kumi::size_v<Tup> >= 2) { return EVE_DISPATCH_CALL(t); }
 
     KYOSU_CALLABLE_OBJECT(minmag_t, minmag_);
   };

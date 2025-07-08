@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct maxmag_t : eve::strict_elementwise_callable<maxmag_t, Options>
+  struct maxmag_t : eve::tuple_callable<maxmag_t, Options>
   {
 
     template<concepts::cayley_dickson_like Z0>
@@ -29,6 +29,11 @@ namespace kyosu
     {
       return KYOSU_CALL(z0, z1, zs...);
     }
+
+    template<kumi::non_empty_product_type Tup>
+    requires(eve::same_lanes_or_scalar_tuple<Tup>)
+      EVE_FORCEINLINE constexpr  kumi::apply_traits_t<eve::common_value,Tup>
+    operator()(Tup t) const noexcept  requires(kumi::size_v<Tup> >= 2) { return EVE_DISPATCH_CALL(t); }
 
     KYOSU_CALLABLE_OBJECT(maxmag_t, maxmag_);
 };
@@ -50,13 +55,21 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<typename ... Ts> auto maxmag(Ts ... zi ) const noexcept
+//!      //regular call
+//!      template<typename ... Ts> auto minabs(Ts ... zs       ) const noexcept// 1
+//!      template<typename Tup>    auto minabs(kumi::tuple Tup ) const noexcept// 2
+//!
+//!      // Semantic modifyiers
+//!      auto minabs[raw](/* any previous overload*/)      noexcept;           // 3
+//!      auto minabs[numeric](/* any previous overload*/)  noexcept;           // 4
+//!      auto minabs[pedantic](/* any previous overload*/) noexcept;           // 5
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `zi...`: Values to process.
+//!     * `zi...`: cayley_dickson_like to process.
+//!     * `tup  `: tuple of cayley_dickson_like values to process.
 //!
 //!   **Return value**
 //!
