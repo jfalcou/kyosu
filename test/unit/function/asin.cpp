@@ -23,9 +23,13 @@ TTS_CASE_WITH ( "Check kyosu::asin over quaternion"
   auto c  = ce_t(a0,a1);
   auto q  = qe_t(a0,a1,a2,a3);
 
+  auto re = kyosu::acos[kyosu::real_only](r);
   auto lr = kyosu::asin(r);
   auto lc = kyosu::asin(c);
   auto lq = kyosu::asin(q);
+  auto rr = eve::asin(r);
+
+  TTS_IEEE_EQUAL(re,  ce_t(rr, eve::if_else(eve::is_nan(rr), eve::nan(eve::as(r)), eve::zero)));
   TTS_RELATIVE_EQUAL(kyosu::sin(lr), kyosu::complex(r), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::sin(lc), c, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::sin(lq), q, tts::prec<T>());
