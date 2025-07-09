@@ -12,19 +12,29 @@
 #include <kyosu/functions/is_not_finite.hpp>
 #include <kyosu/functions/is_imag.hpp>
 #include <kyosu/functions/to_complex.hpp>
+#include <kyosu/details/decorators.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct acos_t : eve::elementwise_callable<acos_t, Options>
+  struct acos_t : eve::elementwise_callable<acos_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    requires(!Options::contains(real_only))
     {
       if constexpr(concepts::real<Z>)
         return (*this)(complex(z));
       else
         return  KYOSU_CALL(z);
+    }
+
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    requires(Options::contains(real_only))
+    {
+      auto r = eve::acos(z);
+      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
     }
 
     KYOSU_CALLABLE_OBJECT(acos_t, acos_);
@@ -47,7 +57,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
+//!     //  regular call
 //!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acos(Z z) noexcept;
+//!
+//!     // semantic modifyers
+//!     template<concepts::real Z> constexpr Z acos(Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -57,7 +71,9 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   - A real typed input z is treated as if `complex(z)` was entered.
+//!   - A real typed input z is treated as if `complex(z)` was entered unless the option real_only is used
+//!     in which case the parameter must be a floating_value,  the result will the same as an eve::acos
+//!     implying a Nan result if the result is not real.
 //!   - For complex input, returns elementwise the complex principal value of the arc cosine of the input.
 //!      Branch cuts exist outside the interval \f$[-1, +1]\f$ along the real axis.
 //!
@@ -97,7 +113,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acos_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  constexpr auto acos_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
     if constexpr(concepts::complex<Z> )
     {

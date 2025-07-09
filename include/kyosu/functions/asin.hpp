@@ -11,15 +11,23 @@
 namespace kyosu
 {
   template<typename Options>
-  struct asin_t : eve::elementwise_callable<asin_t, Options>
+  struct asin_t : eve::elementwise_callable<asin_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
+     if constexpr(concepts::real<Z>)
         return (*this)(complex(z));
       else
         return  KYOSU_CALL(z);
+    }
+
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    requires(Options::contains(real_only))
+    {
+      auto r = eve::acos(z);
+      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
     }
 
     KYOSU_CALLABLE_OBJECT(asin_t, asin_);
@@ -52,14 +60,14 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if `complex(z)` was entered.
-//!
+//!   1. a real input z is treated as if `complex(z)` was entered unless the option real_only is used
+//!     in which case the parameter must be a floating_value, the result will the same as an eve::asin
+//!     implying a Nan result if the result is not real.
 //!   2. Returns the elementwise the complex principal value
 //!      of the arc sine of the input in the range of a strip unbounded along the imaginary axis
 //!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
 //!
 //!      special cases are handled as if the operation was implemented by \f$-i\; \mathrm{asinh}(z\; i)\f$
-//!
 //!   3. Returns \f$-I_z \mathrm{asinh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!
@@ -81,9 +89,9 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto asin_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  constexpr auto asin_(KYOSU_DELAY(), O const& o, Z a0) noexcept
   {
-     if constexpr(concepts::complex<Z> )
+    if constexpr(concepts::complex<Z> )
     {
       // This implementation is a simd transcription and adaptation of the boost_math code
       // which itself is a transcription of the pseudo-code in:
