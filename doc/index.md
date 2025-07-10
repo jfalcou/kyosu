@@ -137,7 +137,8 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
 
           All these kinds of functions called with a floating value in the kyosu namespace will return a complex value.
 
-          However, they provide a `real_only` option that allows to call them with floating parameters only and returns the complex,
+          However, some of those functions provide a `real_only` option that allows to call them with floating parameters 
+          only and returns the complex,
           the real part of which is the eve call result and the imaginary part is zero or a NaN. Shortly : if **EVE** returns a Nan, **KYOSU**,
           with this option, will return fnan (i.e. complex(nan,nan)).
 
