@@ -54,10 +54,10 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      //  regular call
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> asin(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> sqrt(T z) noexcept;
 //!
 //!      // semantic modifyers
-//!      template<concepts::real T> constexpr complexify_t<T> asin[real_only](T z) noexcept;
+//!      template<concepts::real T> constexpr complexify_t<T> sqrt[real_only](T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -67,7 +67,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     - A real typed input z is treated as if `complex(z)` was enteredunless the option real_only is used
+//!     - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
 //!       in which case the parameter must be a floating_value, the real part of the result will the same as an eve::sqrt
 //!       implying a Nan result if the result is not real.
 //!     - for complex inpur, returns the elementwise the square root of z,
