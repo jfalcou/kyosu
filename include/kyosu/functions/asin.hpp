@@ -14,6 +14,7 @@ namespace kyosu
   struct asin_t : eve::elementwise_callable<asin_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
+    requires(!Options::contains(real_only))
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
      if constexpr(concepts::real<Z>)
@@ -22,7 +23,7 @@ namespace kyosu
         return  KYOSU_CALL(z);
     }
 
-    template<concepts::cayley_dickson_like Z>
+    template<concepts::real Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     requires(Options::contains(real_only))
     {
@@ -50,7 +51,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
+//!      //  regular call
 //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> asin(T z) noexcept;  //3
+//!
+//!      // semantic modifyers
+//!      template<concepts::real T> constexpr complexify_t<T> asin[real_only](T z) noexcept;
 //!   }
 //!   @endcode
 //!

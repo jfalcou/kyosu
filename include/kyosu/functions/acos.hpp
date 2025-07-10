@@ -29,7 +29,7 @@ namespace kyosu
         return  KYOSU_CALL(z);
     }
 
-    template<concepts::cayley_dickson_like Z>
+    template<concepts::real Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     requires(Options::contains(real_only))
     {
@@ -61,7 +61,7 @@ namespace kyosu
 //!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acos(Z z) noexcept;
 //!
 //!     // semantic modifyers
-//!     template<concepts::real Z> constexpr Z acos(Z z) noexcept;
+//!     template<concepts::real Z> constexpr complexify_t<Z> acos[real_only](Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -72,7 +72,7 @@ namespace kyosu
 //! **Return value**
 //!
 //!   - A real typed input z is treated as if `complex(z)` was entered unless the option real_only is used
-//!     in which case the parameter must be a floating_value,  the result will the same as an eve::acos
+//!     in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::acos
 //!     implying a Nan result if the result is not real.
 //!   - For complex input, returns elementwise the complex principal value of the arc cosine of the input.
 //!      Branch cuts exist outside the interval \f$[-1, +1]\f$ along the real axis.

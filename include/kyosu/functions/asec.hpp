@@ -14,15 +14,24 @@
 namespace kyosu
 {
   template<typename Options>
-  struct asec_t : eve::elementwise_callable<asec_t, Options>
+  struct asec_t : eve::elementwise_callable<asec_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    {
+    requires(!Options::contains(real_only))
+     {
       if constexpr(concepts::real<Z>)
         return (*this)(complex(z));
       else
         return  KYOSU_CALL(z);
+    }
+
+    template<concepts::real Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    requires(Options::contains(real_only))
+    {
+      auto r = eve::asec(z);
+      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
     }
 
     KYOSU_CALLABLE_OBJECT(asec_t, asec_);
@@ -45,7 +54,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto asec(T z) noexcept;
+//!     //  regular call
+//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> asec(Z z) noexcept;
+//!
+//!     // semantic modifyers
+//!     template<concepts::real Z> constexpr complexify_t<Z> asec[real_only](Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -75,8 +88,8 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto asec_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto asec_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    return  kyosu::acos(kyosu::rec(z));
+    return  kyosu::acos[o](kyosu::rec(z));
   }
 }
