@@ -27,7 +27,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     requires(Options::contains(real_only))
     {
-      auto r = eve::acos(z);
+      auto r = eve::asin(z);
       return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
     }
 

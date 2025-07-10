@@ -24,7 +24,7 @@ TTS_CASE_WITH ( "Check kyosu::acscpi over quaternion"
   auto q  = qe_t(a0,a1,a2,a3);
   auto rr = eve::acscpi(r);
   auto re = kyosu::acscpi[kyosu::real_only](r);
-  TTS_IEEE_EQUAL(re,  ce_t(rr, eve::if_else(eve::is_nan(rr), eve::nan(eve::as(r)), eve::zero)));
+  TTS_IEEE_EQUAL(re,  ce_t(rr, eve::if_else(eve::is_nan(rr), eve::nan(eve::as(r)), eve::zero))) << r << '\n';
 
   auto lr = kyosu::acscpi(r);
   auto lc = kyosu::acscpi(c);

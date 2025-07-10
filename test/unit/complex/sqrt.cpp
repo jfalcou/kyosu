@@ -100,7 +100,7 @@ TTS_CASE_TPL( "Check corner cases of sqrt", kyosu::scalar_real_types)
   using kyosu::sqrt;
   for(int i=0; i < N; ++i)
   {
-    TTS_IEEE_EQUAL(sqrt(inputs[i]), results[i]);
-//    TTS_IEEE_EQUAL(sqrt(conj(inputs[i])), conj(sqrt(inputs[i])));
+    TTS_IEEE_EQUAL(sqrt(inputs[i]), results[i]) << i << '\n';
+    TTS_IEEE_EQUAL(sqrt(conj(inputs[i])), conj(sqrt(inputs[i])));
   }
 };

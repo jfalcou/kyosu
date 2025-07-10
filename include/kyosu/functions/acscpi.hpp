@@ -76,6 +76,6 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto acscpi_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    return radinpi(kyosu::acsc(z));
+    return radinpi(kyosu::acsc[o](z));
   }
 }
