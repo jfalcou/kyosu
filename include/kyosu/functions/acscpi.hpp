@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct acscpi_t : eve::elementwise_callable<acscpi_t, Options>
+  struct acscpi_t : eve::elementwise_callable<acscpi_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
@@ -42,7 +42,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
+//!     //  regular call
 //!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acscpi(Z z) noexcept;
+//!
+//!     // semantic modifyers
+//!     template<concepts::real Z> constexpr complexify_t<Z> acscpi[real_only](Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -52,7 +56,9 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   - A real input z is treated as if `complex(z)` was entered.
+//!   - A real input z is treated as if `complex(z)` was enteredunless the option real_only is used
+//!     in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::acscpi
+//!     implying a Nan result if the result is not real.
 //!   - Returns `radinpi(acsc(z))`
 //!
 //!  @groupheader{Example}
@@ -68,7 +74,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acscpi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto acscpi_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     return radinpi(kyosu::acsc(z));
   }
