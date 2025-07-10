@@ -86,13 +86,13 @@ namespace kyosu
 //!          summation stops, an \f$a_i\f$ or \f$b_i\f$ being a non positive flint and the polynomial is so defined everywhere.
 //!     2. With the regularized option the result is divided by the product of the \f$\Gamma(b_i)\f$ extended to the elements of the `b` tuple.
 //!
-//!     Up to now the only implemented functions are for size of `a` and `b` tuples running from 0 to 2.
+//!     Up to now the only implemented functions are for size of `a` and `b` tuples running from 0 to 2. And some can have flaws.
 //!
 //!   @note hypergeometric functons are a kind of jungle. As **KYOSU** and **EVE** only use standard floating types as base of computations,
 //!         overflows or lack of precision along large computation or huge values can degrade the accuracy.
 //!         Moreover:
 //!          - These fonctions always return complex outputs even if entries are all real ones.
-//!          - The uses of float-based inputs and computations are ok, but discouraged as overflows or lack of precision are much greater
+//!          - The use of float-based inputs and computations are ok, but discouraged as overflows or lack of precision are much greater
 //!            than double-based ones.
 //!          - receiving a `fnan` ouput generally means than the computation did not end well.
 //!          - receiving a `cinf` ouput generally means than the function is not defined here and that point is a singularity.
