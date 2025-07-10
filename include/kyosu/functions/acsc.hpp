@@ -22,6 +22,14 @@ namespace kyosu
       return  KYOSU_CALL(z);
     }
 
+    template<concepts::real Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    requires(Options::contains(real_only))
+    {
+      auto r = eve::acsc(z);
+      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+    }
+
     KYOSU_CALLABLE_OBJECT(acsc_t, acsc_);
   };
 

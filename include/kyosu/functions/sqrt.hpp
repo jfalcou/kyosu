@@ -9,6 +9,7 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/is_pure.hpp>
+#include <kyosu/constants/fnan.hpp>
 
 namespace kyosu
 {
@@ -114,8 +115,13 @@ namespace kyosu::_
       {
         auto rz = kyosu::real(z);
         auto sqt = eve::sqrt(eve::abs(rz));
-        return eve::if_else(eve::is_positive(rz), kyosu::complex(sqt, zero(eve::as(sqt)))
-                           , kyosu::complex(zero(eve::as(sqt)), sqt));
+        return eve::if_else(is_nan(real(z))
+                           , kyosu::fnan(as(z))
+                           , eve::if_else(eve::is_positive(rz)
+                                         , kyosu::complex(sqt, zero(eve::as(sqt)))
+                                         , kyosu::complex(zero(eve::as(sqt)), sqt)
+                                         )
+                           );
       }
       else
       {

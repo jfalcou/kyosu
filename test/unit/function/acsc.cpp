@@ -23,6 +23,10 @@ TTS_CASE_WITH ( "Check kyosu::acsc over quaternion"
   auto c  = ce_t(a0,a1);
   auto q  = qe_t(a0,a1,a2,a3);
 
+  auto rr = eve::acsc(r);
+  auto re = kyosu::acsc[kyosu::real_only](r);
+  TTS_IEEE_EQUAL(re,  ce_t(rr, eve::if_else(eve::is_nan(rr), eve::nan(eve::as(r)), eve::zero))) << r << '\n';
+
   auto lr = kyosu::acsc(r);
   auto lc = kyosu::acsc(c);
   auto lq = kyosu::acsc(q);
