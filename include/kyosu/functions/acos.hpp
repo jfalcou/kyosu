@@ -33,8 +33,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     requires(Options::contains(real_only))
     {
-      auto r = eve::acos(z);
-      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+      return  KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(acos_t, acos_);
@@ -115,7 +114,9 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   constexpr auto acos_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
-    if constexpr(concepts::complex<Z> )
+    if constexpr(O::contains(real_only))
+      return kyosu::inject(eve::acos(a0));
+    else if constexpr(concepts::complex<Z> )
     {
       // This implementation is a simd transcription and adaptation of the boost_math code
       // which itself is a transcription of the pseudo-code in:

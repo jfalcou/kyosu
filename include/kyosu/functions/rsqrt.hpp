@@ -7,41 +7,41 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/atan.hpp>
-#include <kyosu/functions/rec.hpp>
-
+#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/is_pure.hpp>
+#include <kyosu/constants/fnan.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct acoth_t : eve::elementwise_callable<acoth_t, Options, real_only_option>
+  struct rsqrt_t : eve::elementwise_callable<rsqrt_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     requires(!Options::contains(real_only))
     {
       if constexpr(concepts::real<Z>)
-        return (*this)(complex(z));
+        return  (*this)(complex(z));
       else
-        return  KYOSU_CALL(z);
+        return KYOSU_CALL(z);
     }
-
 
     template<concepts::real Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     requires(Options::contains(real_only))
     {
-      return  KYOSU_CALL(z);
+      auto r = eve::rsqrt(z);
+      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
     }
 
-    KYOSU_CALLABLE_OBJECT(acoth_t, acoth_);
+    KYOSU_CALLABLE_OBJECT(rsqrt_t, rsqrt_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var acoth
-//!   @brief Computes the inverse  hyperbolic cotangent of the argument.
+//!   @var rsqrt
+//!   @brief Computes a square root value.
 //!
 //!   @groupheader{Header file}
 //!
@@ -54,36 +54,34 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     //  regular call
-//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acoth(Z z) noexcept;
+//!      //  regular call
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> rsqrt(T z) noexcept;
 //!
-//!     // semantic modifyers
-//!     template<concepts::real Z> constexpr complexify_t<Z> acoth[real_only](Z z) noexcept;
+//!      // semantic modifyers
+//!      template<concepts::real T> constexpr complexify_t<T> rsqrt[real_only](T z) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z`: Value to process.
+//!     * `z`: Value to for which square root is computed.
 //!
-//! **Return value**
+//!   **Return value**
 //!
-//!   - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
-//!     in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::acos
-//!     implying a Nan result if the result is not real.
-//!   - For complex input, returns elementwise the complex principal value
-//!      of the inverse hyperbolic cotangent of the input as the inverse hyperbolic tangent of the inverse of the input.
-//!   - For general cayley_dickson input, the call is equivalent to `atanh(rec(z))`.
+//!     - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
+//!       in which case the parameter must be a floating_value, the real part of the result will the same as an eve::rsqrt
+//!       implying a Nan result if the result is not real.
+//!     - Returns a square root of 1/z.
 //!
 //!  @groupheader{External references}
-//!   *  [Wolfram MathWorld: Inverse Hyperbolic Cotangent](https://mathworld.wolfram.com/InverseHyperbolicCotangent.html)
-//!   *  [Wikipedia: Inverse hyperbolic functions](https://en.wikipedia.org/wiki/Inverse_hyperbolic_functions)
-//!   *  [DLMF: Inverse hyperbolic functions](https://dlmf.nist.gov/4.37)
+//!   *  [Wolfram MathWorld: Square Root](https://mathworld.wolfram.com/SquareRoot.html)
+//!   *  [Wikipedia: Square root](https://en.wikipedia.org/wiki/Square_root)
 //!
 //!  @groupheader{Example}
-//!  @godbolt{doc/acoth.cpp}
+//!
+//!  @godbolt{doc/rsqrt.cpp}
 //======================================================================================================================
-  inline constexpr auto acoth = eve::functor<acoth_t>;
+  inline constexpr auto rsqrt = eve::functor<rsqrt_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -92,8 +90,8 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acoth_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto rsqrt_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    return kyosu::atanh[o](kyosu::rec(z));
+    return kyosu::sqrt[o](kyosu::rec(z));
   }
 }

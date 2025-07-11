@@ -35,6 +35,7 @@ TTS_CASE_WITH ( "Check kyosu::pow over complex"
   TTS_RELATIVE_EQUAL(kyosu::pow(c0, c1), kyosu::exp(kyosu::log(c0)*c1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::pow(r0, c1), kyosu::exp(kyosu::log(r0)*c1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::pow(c0, r1), kyosu::exp(kyosu::log(c0)*r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::pow(c0, 4),  kyosu::sqr(kyosu::sqr(c0)), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::pow over quaternion"

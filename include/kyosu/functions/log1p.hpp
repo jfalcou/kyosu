@@ -30,8 +30,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     requires(Options::contains(real_only))
     {
-      auto r = eve::log1p(z);
-      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(log1p_t, log1p_);
@@ -88,7 +87,9 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   constexpr auto log1p_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(kyosu::concepts::complex<Z>)
+    if constexpr(O::contains(real_only))
+      return kyosu::inject(eve::log1p(a0));
+    else if constexpr(kyosu::concepts::complex<Z>)
     {
       auto m = kyosu::inc(z);
       auto theta = eve::if_else((kyosu::is_real(m) && eve::is_nltz(kyosu::real(m))), eve::zero, kyosu::arg(m)) ;
