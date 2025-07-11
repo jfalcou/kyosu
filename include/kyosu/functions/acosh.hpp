@@ -31,8 +31,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     requires(Options::contains(real_only))
     {
-      auto r = eve::acosh(z);
-      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+      return  KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(acosh_t, acosh_);
@@ -111,7 +110,9 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(concepts::complex<Z> )
+    if constexpr(O::contains(real_only))
+      return kyosu::inject(eve::acosh(z));
+    else if constexpr(concepts::complex<Z> )
     {
       // acosh(a0) = +/-i acos(a0)
       // Choosing the sign of multiplier to give real(acosh(a0)) >= 0

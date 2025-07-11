@@ -21,25 +21,44 @@
 namespace kyosu
 {
   template<typename Options>
-  struct pow_t : eve::strict_elementwise_callable<pow_t, Options>
+  struct pow_t : eve::callable<pow_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
-    requires(!eve::integral_scalar_value<Z1>)
     KYOSU_FORCEINLINE constexpr
-    auto operator()(Z0 z0, Z1 z1) const noexcept // -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
+    auto operator()(Z0 z0, Z1 z1) const noexcept -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
+    requires(!eve::integral_scalar_value<Z1> && !Options::contains(real_only))
     {
       return KYOSU_CALL(z0, z1);
     }
 
     template<concepts::cayley_dickson_like Z0, eve::integral_value Z1>
     KYOSU_FORCEINLINE constexpr
-    auto operator()(Z0 z0, Z1 z1) const noexcept// -> eve::as_wide_as<Z0, Z1>
+    auto operator()(Z0 z0, Z1 z1) const noexcept -> eve::as_wide_as_t<Z0, Z1>
+    requires(!Options::contains(real_only))
     {
       return KYOSU_CALL(z0, z1);
     }
 
+    template<concepts::real Z0, concepts::real Z1>
+    KYOSU_FORCEINLINE constexpr
+    auto operator()(Z0 const& z0, Z1 const& z1) const noexcept -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
+    requires(Options::contains(real_only))
+    {
+      auto r = eve::pow(z0, z1);
+      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+    }
+
+    template<concepts::real Z0, eve::integral_value Z1>
+    KYOSU_FORCEINLINE constexpr
+    auto operator()(Z0 const& z0, Z1 const& z1) const noexcept -> complexify_t<eve::as_wide_as_t<Z0, Z1>>
+    requires(Options::contains(real_only))
+    {
+      auto r = eve::pow(z0, z1);
+      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+    }
+
     KYOSU_CALLABLE_OBJECT(pow_t, pow_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -68,7 +87,9 @@ namespace kyosu
 //!     * `z0`, `z1`: Values to process.
 //!
 //!   **Return value**
-//!      1. if both parameters are floating the call will act as if they were converted to complex before call
+//!      1. if both parameters are floating the call will act as if they were converted to complex before call, unless the option real_only is used
+//!         in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::acos
+//!         implying a Nan result if the result is not real.
 //!      2. if both parameters are floating or complex. The ieee specification are taken:\n
 //!         In particular we have (IEC 60559):
 //!
@@ -129,7 +150,7 @@ namespace kyosu::_
     if constexpr( eve::unsigned_value<C1> )
     {
       if constexpr(kyosu::concepts::real<C0>)
-        return eve::pow(c0, c1);
+        return r_t(eve::pow(c0, c1));
       else if constexpr(kyosu::concepts::complex<C0>)
       {
         C0 base = c0;
