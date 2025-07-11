@@ -147,16 +147,23 @@ $(document).ready(function(){initNavTree('group__functions_ga4407e9699352f7ad2d4
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> ... Ts&gt; <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4407e9699352f7ad2d48f57bad47aa3c.html#ga4407e9699352f7ad2d48f57bad47aa3c">maxmag</a>(Ts ... zi ) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line">   <span class="comment">//regular call</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> ... Ts&gt; <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4407e9699352f7ad2d48f57bad47aa3c.html#ga4407e9699352f7ad2d48f57bad47aa3c">maxmag</a>(Ts ... zs       ) <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="comment">// 1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tup&gt;    <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga4407e9699352f7ad2d48f57bad47aa3c.html#ga4407e9699352f7ad2d48f57bad47aa3c">maxmag</a>(kumi::tuple Tup ) <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="comment">// 2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga4407e9699352f7ad2d48f57bad47aa3c_html_ga4407e9699352f7ad2d48f57bad47aa3c"><div class="ttname"><a href="group__functions_ga4407e9699352f7ad2d48f57bad47aa3c.html#ga4407e9699352f7ad2d48f57bad47aa3c">kyosu::maxmag</a></div><div class="ttdeci">constexpr auto maxmag</div><div class="ttdoc">Callable object computing the maxmag operation.</div><div class="ttdef"><b>Definition:</b> maxmag.hpp:69</div></div>
+<div class="ttc" id="agroup__functions_ga4407e9699352f7ad2d48f57bad47aa3c_html_ga4407e9699352f7ad2d48f57bad47aa3c"><div class="ttname"><a href="group__functions_ga4407e9699352f7ad2d48f57bad47aa3c.html#ga4407e9699352f7ad2d48f57bad47aa3c">kyosu::maxmag</a></div><div class="ttdeci">constexpr auto maxmag</div><div class="ttdoc">Callable object computing the maxmag operation.</div><div class="ttdef"><b>Definition:</b> maxmag.hpp:78</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>zi...</code>: Values to process.</li>
+<li><code>zi...</code>: cayley_dickson_like to process.</li>
+<li><code>tup</code>: tuple of cayley_dickson_like values to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns elementwise the value which has the maximum of the absolute values between the parameters.</p>
+<ol type="1">
+<li>Returns elementwise the value which has the maximum of the absolute values between the parameters.</li>
+<li>Returns elementwise the value which has the maximum of the absolute values between tuple members. <br  />
+</li>
+</ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

@@ -147,16 +147,32 @@ $(document).ready(function(){initNavTree('group__functions_ga51f203310426d80b471
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> ... Ts&gt; <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga51f203310426d80b4717446f3ec0dca6.html#ga51f203310426d80b4717446f3ec0dca6">minabs</a>(Ts ... zi ) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line">   <span class="comment">//regular call</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> ... Ts&gt; <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga51f203310426d80b4717446f3ec0dca6.html#ga51f203310426d80b4717446f3ec0dca6">minabs</a>(Ts ... zs       ) <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="comment">// 1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tup&gt;    <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga51f203310426d80b4717446f3ec0dca6.html#ga51f203310426d80b4717446f3ec0dca6">minabs</a>(kumi::tuple Tup ) <span class="keyword">const</span> <span class="keyword">noexcept</span><span class="comment">// 2</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Semantic modifyiers</span></div>
+<div class="line">   <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga51f203310426d80b4717446f3ec0dca6.html#ga51f203310426d80b4717446f3ec0dca6">minabs</a>[raw](<span class="comment">/* any previous overload*/</span>)      <span class="keyword">noexcept</span>;           <span class="comment">// 3</span></div>
+<div class="line">   <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga51f203310426d80b4717446f3ec0dca6.html#ga51f203310426d80b4717446f3ec0dca6">minabs</a>[numeric](<span class="comment">/* any previous overload*/</span>)  <span class="keyword">noexcept</span>;           <span class="comment">// 4</span></div>
+<div class="line">   <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga51f203310426d80b4717446f3ec0dca6.html#ga51f203310426d80b4717446f3ec0dca6">minabs</a>[pedantic](<span class="comment">/* any previous overload*/</span>) <span class="keyword">noexcept</span>;           <span class="comment">// 5</span></div>
+<div class="line">   <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga51f203310426d80b4717446f3ec0dca6.html#ga51f203310426d80b4717446f3ec0dca6">minabs</a>[flat](<span class="comment">/* any previous overload*/</span>)     <span class="keyword">noexcept</span>;           <span class="comment">// 6</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga51f203310426d80b4717446f3ec0dca6_html_ga51f203310426d80b4717446f3ec0dca6"><div class="ttname"><a href="group__functions_ga51f203310426d80b4717446f3ec0dca6.html#ga51f203310426d80b4717446f3ec0dca6">kyosu::minabs</a></div><div class="ttdeci">constexpr auto minabs</div><div class="ttdoc">Callable object computing the minabs operation.</div><div class="ttdef"><b>Definition:</b> minabs.hpp:61</div></div>
+<div class="ttc" id="agroup__functions_ga51f203310426d80b4717446f3ec0dca6_html_ga51f203310426d80b4717446f3ec0dca6"><div class="ttname"><a href="group__functions_ga51f203310426d80b4717446f3ec0dca6.html#ga51f203310426d80b4717446f3ec0dca6">kyosu::minabs</a></div><div class="ttdeci">constexpr auto minabs</div><div class="ttdoc">Callable object computing the minabs operation.</div><div class="ttdef"><b>Definition:</b> minabs.hpp:81</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>zi...</code>: Values to process.</li>
+<li><code>zi...</code>: cayley_dickson_like values to process.</li>
+<li><code>tup</code>: tuple of cayley_dickson_like values to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns elementwise the minimum of the absolute values of the parameters.</p>
+<ol type="1">
+<li>Returns elementwise the square root minimum of the squared absolute values of the parameters. 2 Same as 1, but the parameters are from the tuple</li>
+<li>With the raw option no provision is made to enhance accuracy and avoid overflows</li>
+<li>Returns elementwise the numeric minimum of the absolute values of the parameters.</li>
+<li>Returns elementwise the pedantic minimum of the absolute values of the parameters.</li>
+<li>Returns elementwise the minimum of the absolute values of the elements of each parameters. Generally it's not what you want. <br  />
+</li>
+</ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
