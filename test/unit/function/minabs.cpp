@@ -17,6 +17,9 @@ TTS_CASE_WITH ( "Check kyosu::minabs over real"
 (auto r0, auto r1)
 {
   TTS_EQUAL(kyosu::minabs(r0, r1), eve::minabs(r0, r1));
+  TTS_EQUAL(kyosu::minabs(kumi::tuple{r0, r1}), eve::minabs(r0, r1));
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](r0, r1), eve::minabs(r0, r1));
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](kumi::tuple{r0, r1}), eve::minabs(r0, r1));
 };
 
 TTS_CASE_WITH ( "Check kyosu::minabs over complex"
@@ -29,7 +32,12 @@ TTS_CASE_WITH ( "Check kyosu::minabs over complex"
 {
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
-  TTS_RELATIVE_EQUAL(kyosu::minabs(c0, c1), eve::minabs(kyosu::abs(c0), kyosu::abs(c1)), 2e-5);
+  TTS_EQUAL(kyosu::minabs(c0, c1), eve::sqrt(eve::min(kyosu::sqr_abs(c0), kyosu::sqr_abs(c1))));
+  TTS_EQUAL(kyosu::minabs(kumi::tuple{c0, c1}), eve::sqrt(eve::min(kyosu::sqr_abs(c0), kyosu::sqr_abs(c1))));
+  TTS_EQUAL(kyosu::minabs[eve::numeric](c0, c1), eve::min[eve::numeric](kyosu::abs(c0), kyosu::abs(c1)));
+  TTS_EQUAL(kyosu::minabs[eve::numeric](kumi::tuple{c0, c1}), eve::min[eve::numeric](kyosu::abs(c0), kyosu::abs(c1)));
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](c0, c1), eve::minabs(r0, i0, r1, i1));
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](kumi::tuple{c0, c1}), eve::minabs(r0, i0, r1, i1));
 };
 
 TTS_CASE_WITH ( "Check kyosu::minabs over quaternion"
@@ -45,5 +53,10 @@ TTS_CASE_WITH ( "Check kyosu::minabs over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::minabs(q0, q1), eve::min(kyosu::abs(q0), kyosu::abs(q1)), tts::prec<T>());
+  TTS_EQUAL(kyosu::minabs(q0, q1), eve::sqrt(eve::min(kyosu::sqr_abs(q0), kyosu::sqr_abs(q1))));
+  TTS_ULP_EQUAL(kyosu::minabs(kumi::tuple{q0, q1}), eve::sqrt(eve::min(kyosu::sqr_abs(q0), kyosu::sqr_abs(q1))), 0.5);
+  TTS_EQUAL(kyosu::minabs[eve::numeric](q0, q1), eve::min[eve::numeric](kyosu::abs(q0), kyosu::abs(q1)));
+  TTS_EQUAL(kyosu::minabs[eve::numeric](kumi::tuple{q0, q1}), eve::min[eve::numeric](kyosu::abs(q0), kyosu::abs(q1)));
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](q0, q1), eve::minabs(r0, i0, j0, k0, r1, i1, j1, k1));
+  TTS_EQUAL(kyosu::minabs[kyosu::flat](kumi::tuple{q0, q1}), eve::minabs(r0, i0, j0, k0, r1, i1, j1, k1));
 };
