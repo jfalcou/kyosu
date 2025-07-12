@@ -14,17 +14,28 @@ namespace kyosu
   template<typename Options>
   struct pow_abs_t : eve::strict_elementwise_callable<pow_abs_t, Options>
   {
-    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson Z1>
     requires(!eve::integral_scalar_value<Z1>)
       KYOSU_FORCEINLINE constexpr
-    auto operator()(Z0 z0, Z1 z1) const noexcept // -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
+    auto operator()(Z0 z0, Z1 z1) const noexcept -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
+    {
+      if constexpr(concepts::real<Z1>)
+       return (*this)(z0, complex(z1));
+      else
+       return KYOSU_CALL(z0, z1);
+    }
+
+    template<concepts::cayley_dickson_like Z0, concepts::real Z1>
+    KYOSU_FORCEINLINE constexpr
+      auto operator()(Z0 z0, Z1 z1) const noexcept -> kyosu::as_cayley_dickson_like_t<kyosu::as_real_type_t<Z0>, Z1>
+    requires(!eve::integral_scalar_value<Z1>)
     {
       return KYOSU_CALL(z0, z1);
     }
 
-    template<concepts::cayley_dickson_like Z0, eve::integral_value Z1>
+    template<concepts::cayley_dickson_like Z0, eve::integral_scalar_value Z1>
     KYOSU_FORCEINLINE constexpr
-    auto operator()(Z0 z0, Z1 z1) const noexcept// -> eve::as_wide_as<Z0, Z1>
+    auto operator()(Z0 z0, Z1 z1) const noexcept -> kyosu::as_real_type_t<Z0>
     {
       return KYOSU_CALL(z0, z1);
     }

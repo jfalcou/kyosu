@@ -65,7 +65,6 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     Returns the value at z of the confluent hypergeometric function of the second kind
-//!     with `a` and `b` parameters and non integral `b`
 //!
 //!  @groupheader{External references}
 //!   *  [DLMF: Kummer Functions](https://dlmf.nist.gov/13.2)
@@ -98,7 +97,7 @@ namespace kyosu::_
       auto n = eve::if_else(bpflint, real(bb), eve::one);
       auto fac = eve::sign_alternate(n)*kyosu::tgamma_inv(kyosu::inc(aa-n));
       // assume n is flint > 0 and a is not flint
-      // tricomi is the the of 3 terms multiplied by a common factor
+      // tricomi is the sum of 3 terms multiplied by a common factor
       // common factor : \f$(-1)^n / \Gamma(a-n+1) \$n
       // first term    : \f$ \frac{\log(z)}{\Gamma(n)}{}_1F_1(a; n; z)\f$
       // second term   : \f$ \sum_0^\infty \frac{(a)_k(\psi(a+k)-\psi(k+1)-\psi(k+n))z^k}{(k+n-1)! k!}\f$

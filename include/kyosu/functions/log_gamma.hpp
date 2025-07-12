@@ -15,7 +15,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct log_gamma_t : eve::strict_elementwise_callable<log_gamma_t, Options>
+  struct log_gamma_t : eve::strict_elementwise_callable<log_gamma_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
@@ -24,6 +24,13 @@ namespace kyosu
         return (*this)(complex(z));
       else
         return  KYOSU_CALL(z);
+    }
+
+    template<concepts::real Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    requires(Options::contains(real_only))
+    {
+      return  KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(log_gamma_t, log_gamma_);
@@ -46,7 +53,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      constexpr T  log_gamma(T z) noexcept;
+//!     //  regular call
+//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> log_gamma(Z z) noexcept;
+//!
+//!     // semantic modifyers
+//!     template<concepts::real Z> constexpr complexify_t<Z> log_gamma[real_only](Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -56,7 +67,10 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns \f$\Gamma(z)\f$.
+//!   - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
+//!     in which case the parameter must be a floating_value,  the real part of the result will
+//!      the same as  eve::log_gamma
+///!  -  Returns \f$\Gamma(z)\f$.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Gamma Function](https://mathworld.wolfram.com/GammaFunction.html)
@@ -76,7 +90,9 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   constexpr auto log_gamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
-    if constexpr(concepts::complex<Z> )
+    if constexpr(O::contains(real_only))
+      return kyosu::inject(eve::log_gamma(a0));
+    else if constexpr(concepts::complex<Z> )
     {
       // 15 sig. digits for 0<=real(z)<=171
       // coeffs should sum to about g*g/2+23/24

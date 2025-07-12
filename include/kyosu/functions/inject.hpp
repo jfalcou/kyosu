@@ -7,28 +7,26 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/acsc.hpp>
-#include <kyosu/functions/radinpi.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct acscpi_t : eve::elementwise_callable<acscpi_t, Options, real_only_option>
+  struct inject_t : eve::elementwise_callable<inject_t, Options>
   {
-    template<concepts::cayley_dickson_like Z>
+    template<concepts::real Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
 
-    KYOSU_CALLABLE_OBJECT(acscpi_t, acscpi_);
+    KYOSU_CALLABLE_OBJECT(inject_t, inject_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var acscpi
-//!   @brief Computes the arc cosecant of the argument in \f$\pi\f$ multiples.
+//!   @var inject
+//!   @brief inject a real in the complex plane a nan producing a fnan.
 //!
 //!   @groupheader{Header file}
 //!
@@ -41,11 +39,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     //  regular call
-//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acscpi(Z z) noexcept;
-//!
-//!     // semantic modifyers
-//!     template<concepts::real Z> constexpr complexify_t<Z> acscpi[real_only](Z z) noexcept;
+//!     template<kyosu::concepts::real Z> constexpr complexify_t<Z> inject(Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -53,18 +47,15 @@ namespace kyosu
 //!
 //!     * `z`: Value to process.
 //!
-//! **Return value**
+//!   **Return value**
 //!
-//!   - A real input z is treated as if `complex(z)` was enteredunless the option real_only is used
-//!     in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::acscpi
-//!     implying a Nan result if the result is not real.
-//!   - Returns `radinpi(acsc(z))`
+//!     - same as complex(z) except that real nan produces complex fnan
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/acscpi.cpp}
+//!  @godbolt{doc/inject.cpp}
 //======================================================================================================================
-  inline constexpr auto acscpi = eve::functor<acscpi_t>;
+  inline constexpr auto inject = eve::functor<inject_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -72,9 +63,9 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acscpi_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  template<typename R, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto inject_(KYOSU_DELAY(), O const&, R r) noexcept
   {
-    return kyosu::radinpi(kyosu::acsc[o](z));
+    return kyosu::complex_t<R>(r, eve::is_nan(r).mask());
   }
 }

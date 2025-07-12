@@ -27,6 +27,7 @@
 #include <kyosu/functions/pure.hpp>
 #include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/arg.hpp>
+#include <kyosu/functions/inject.hpp>
 
 //======================================================================================================================
 // Arithmetic and math
@@ -172,6 +173,7 @@
 #include <kyosu/functions/rec.hpp>
 #include <kyosu/functions/reldist.hpp>
 #include <kyosu/functions/reverse_horner.hpp>
+#include <kyosu/functions/rsqrt.hpp>
 #include <kyosu/functions/sec.hpp>
 #include <kyosu/functions/secpi.hpp>
 #include <kyosu/functions/sech.hpp>
