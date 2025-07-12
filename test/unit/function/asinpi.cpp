@@ -26,6 +26,11 @@ TTS_CASE_WITH ( "Check kyosu::asinpi over quaternion"
   auto lr = kyosu::asinpi(r);
   auto lc = kyosu::asinpi(c);
   auto lq = kyosu::asinpi(q);
+
+  auto re = kyosu::asinpi[kyosu::real_only](r);
+  auto rr = eve::asinpi(r);
+
+  TTS_IEEE_EQUAL(re,  kyosu::inject(rr));
   TTS_RELATIVE_EQUAL(kyosu::sinpi(lr), kyosu::complex(r), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::sinpi(lc), c, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::sinpi(lq), q, tts::prec<T>());

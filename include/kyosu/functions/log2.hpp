@@ -84,10 +84,10 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr Z log2_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr(O::contains(real_only))
-      return kyosu::inject(eve::log2(a0));
+      return kyosu::inject(eve::log2(z));
     else  if constexpr(kyosu::concepts::complex<Z>)
     {
       auto [rz, iz] = z;

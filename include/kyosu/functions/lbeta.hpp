@@ -24,7 +24,6 @@ namespace kyosu
       else return KYOSU_CALL(z0, z1);
     }
 
-
     template<concepts::real Z0, concepts::real Z1>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const& z1) const noexcept -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
     requires(Options::contains(real_only))
@@ -56,7 +55,7 @@ namespace kyosu
 //!     auto lbeta(auto x,auto y) noexcept;
 //!
 //!     // semantic modifyers
-//!     auto log_gamma[real_only](auto z) noexcept;
+//!     auto lbeta[real_only](auto z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -66,7 +65,9 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     - Real typed entries are treated as complex ones.
+//!     - Real typed entries are treated as complex ones. unless the option real_only is used
+//!     in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::lbeta
+//!     implying a Nan result if the result is not real.
 //!     - Returns `log(beta(x, y))`.
 //!
 //!  @groupheader{External references}

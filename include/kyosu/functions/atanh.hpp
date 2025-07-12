@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct atanh_t : eve::elementwise_callable<atanh_t, Options>
+  struct atanh_t : eve::elementwise_callable<atanh_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept

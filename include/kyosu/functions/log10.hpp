@@ -85,7 +85,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr Z log10_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr(O::contains(real_only))
-      return kyosu::inject(eve::log10(a0));
+      return kyosu::inject(eve::log10(z));
     else if constexpr(kyosu::concepts::complex<Z>)
     {
       auto [rz, iz] = z;

@@ -14,19 +14,19 @@ TTS_CASE_WITH ( "Check kyosu::acsc over quaternion"
                               , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
               )
-<typename T>(T a0, T a1, T a2, T a3)
+  <typename T>(T a0, T a1, T a2, T a3)
 {
   using ce_t = kyosu::complex_t<T>;
   using qe_t = kyosu::quaternion_t<T>;
-
+  
   auto r  = T(a0);
   auto c  = ce_t(a0,a1);
   auto q  = qe_t(a0,a1,a2,a3);
-
+  
   auto rr = eve::acsc(r);
   auto re = kyosu::acsc[kyosu::real_only](r);
-  TTS_IEEE_EQUAL(re,  ce_t(rr, eve::if_else(eve::is_nan(rr), eve::nan(eve::as(r)), eve::zero))) << r << '\n';
-
+  TTS_IEEE_EQUAL(re, kyosu::inject(rr));
+  
   auto lr = kyosu::acsc(r);
   auto lc = kyosu::acsc(c);
   auto lq = kyosu::acsc(q);

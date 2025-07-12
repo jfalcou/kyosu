@@ -26,6 +26,14 @@ namespace kyosu
         return  KYOSU_CALL(z);
     }
 
+
+    template<concepts::real Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    requires(Options::contains(real_only))
+    {
+      return  KYOSU_CALL(z);
+    }
+
     KYOSU_CALLABLE_OBJECT(asec_t, asec_);
 };
 

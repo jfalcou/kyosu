@@ -35,8 +35,7 @@ namespace kyosu
     auto operator()(Z0 const& z0, Z1 const& z1) const noexcept -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
     requires(Options::contains(real_only))
     {
-      auto r = eve::powm1(z0, z1);
-      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+      return KYOSU_CALL(z0, z1);
     }
 
     template<concepts::real Z0, eve::integral_value Z1>
@@ -44,8 +43,7 @@ namespace kyosu
     auto operator()(Z0 const& z0, Z1 const& z1) const noexcept -> complexify_t<eve::as_wide_as_t<Z0, Z1>>
     requires(Options::contains(real_only))
     {
-      auto r = eve::powm1(z0, z1);
-      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+      return KYOSU_CALL(z0, z1);
     }
 
     KYOSU_CALLABLE_OBJECT(powm1_t, powm1_);
@@ -95,7 +93,9 @@ namespace kyosu::_
   template<typename Z0,  typename Z1, eve::callable_options O>
   constexpr auto powm1_(KYOSU_DELAY(), O const&, Z0 z0,  Z1 z1) noexcept
   {
-    if constexpr(concepts::real<Z0> && concepts::real<Z1>)
+    if constexpr(O::contains(real_only))
+      return kyosu::inject(eve::powm1(z0, z1));
+    else if constexpr(concepts::real<Z0> && concepts::real<Z1>)
       return kyosu::if_else(eve::is_gez(z0),  complex(eve::powm1(z0, z1)), kyosu::dec(exp_ipi(z1)*eve::pow(-z0, z1)));
     else
       return kyosu::dec(kyosu::pow(z0, z1));

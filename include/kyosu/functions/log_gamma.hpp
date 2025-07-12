@@ -15,7 +15,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct log_gamma_t : eve::strict_elementwise_callable<log_gamma_t, Options>
+  struct log_gamma_t : eve::strict_elementwise_callable<log_gamma_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept

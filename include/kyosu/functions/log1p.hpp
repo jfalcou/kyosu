@@ -88,7 +88,7 @@ namespace kyosu::_
   constexpr auto log1p_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr(O::contains(real_only))
-      return kyosu::inject(eve::log1p(a0));
+      return kyosu::inject(eve::log1p(z));
     else if constexpr(kyosu::concepts::complex<Z>)
     {
       auto m = kyosu::inc(z);

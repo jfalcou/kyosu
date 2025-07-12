@@ -29,7 +29,7 @@ TTS_CASE_WITH ( "Check kyosu::acos over quaternion"
   auto lq = kyosu::acos(q);
   auto rr = eve::acos(r);
 
-  TTS_IEEE_EQUAL(re,  ce_t(rr, eve::if_else(eve::is_nan(rr), eve::nan(eve::as(r)), eve::zero)));
+  TTS_IEEE_EQUAL(re, kyosu::inject(rr));
   TTS_RELATIVE_EQUAL(kyosu::cos(lr), ce_t(r), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::cos(lc), c, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::cos(lq), q, tts::prec<T>());
