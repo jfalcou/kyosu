@@ -31,14 +31,14 @@ namespace kyosu
       return KYOSU_CALL(z0, z1);
     }
 
-    template<concepts::cayley_dickson_like Z0, eve::integral_value Z1>
+    template<concepts::cayley_dickson_like Z0, eve::integral_scalar_value Z1>
     KYOSU_FORCEINLINE constexpr
-    auto operator()(Z0 z0, Z1 z1) const noexcept -> eve::as_wide_as_t<Z0, Z1>
+    auto operator()(Z0 z0, Z1 z1) const noexcept -> complexify_t<Z0>
     requires(!Options::contains(real_only))
     {
-      return KYOSU_CALL(z0, z1);
+      return KYOSU_CALL(complex(z0), z1);
     }
-    
+
     template<concepts::real Z0, concepts::real Z1>
     KYOSU_FORCEINLINE constexpr
     auto operator()(Z0 const& z0, Z1 const& z1) const noexcept -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
@@ -46,18 +46,10 @@ namespace kyosu
     {
       return KYOSU_CALL(z0, z1);
     }
-    
-    template<concepts::real Z0, eve::integral_value Z1>
-    KYOSU_FORCEINLINE constexpr
-    auto operator()(Z0 const& z0, Z1 const& z1) const noexcept -> complexify_t<eve::as_wide_as_t<Z0, Z1>>
-    requires(Options::contains(real_only))
-    {
-      return KYOSU_CALL(z0, z1);
-    }
-    
+
     KYOSU_CALLABLE_OBJECT(pow_t, pow_);
   };
-  
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -141,7 +133,7 @@ namespace kyosu::_
 
   template<typename C0,  typename C1, eve::callable_options O>
   constexpr auto pow_(KYOSU_DELAY(), O const&, C0 c0,  C1 c1) noexcept
-  requires(eve::integral_value<C1>)
+  requires(eve::integral_scalar_value<C1>)
   {
     if constexpr(O::contains(real_only))
     {
@@ -149,7 +141,7 @@ namespace kyosu::_
     }
     else
     {
-      using r_t = eve::as_wide_as_t<C0,C1>;
+      using r_t = C0;
       using u_t  = eve::underlying_type_t<r_t>;
       if constexpr( eve::unsigned_value<C1> )
       {
@@ -168,7 +160,7 @@ namespace kyosu::_
             expo = (expo >> 1);
             base = kyosu::sqr(base);
           }
-          return result;
+          return complex(result);
         }
         else
         {
@@ -178,12 +170,12 @@ namespace kyosu::_
       else
       {
         using ic1_t = eve::as_integer_t<C1, unsigned>;
-        auto tmp = kyosu::pow(c0, eve::bit_cast(eve::abs(c1), eve::as<ic1_t>()));
-        return kyosu::if_else(eve::is_ltz(c1), kyosu::rec(tmp), tmp);
+        C0 tmp = kyosu::pow(c0, eve::bit_cast(eve::abs(c1), eve::as<ic1_t>()));
+        return complex(kyosu::if_else(eve::is_ltz(c1), kyosu::rec(tmp), tmp));
       }
     }
   }
-  
+
   template<typename C0,  typename C1, eve::callable_options O>
   constexpr auto pow_(KYOSU_DELAY(), O const&, C0 c0,  C1 c1) noexcept
   requires(!eve::integral_value<C1>)
@@ -256,7 +248,7 @@ namespace kyosu::_
           {
             auto cc0 = kyosu::convert(c0, eve::as<er_t>());
             auto cc1 = kyosu::convert(c1, eve::as<er_t>());
-            
+
             auto r = kyosu::exp(kyosu::log(cc0)*cc1);
             return kyosu::if_else (kyosu::is_eqz(cc0)
                                   , eve::if_else(kyosu::is_eqz(cc1)
