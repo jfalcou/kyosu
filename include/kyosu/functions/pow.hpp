@@ -38,28 +38,26 @@ namespace kyosu
     {
       return KYOSU_CALL(z0, z1);
     }
-
+    
     template<concepts::real Z0, concepts::real Z1>
     KYOSU_FORCEINLINE constexpr
     auto operator()(Z0 const& z0, Z1 const& z1) const noexcept -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
     requires(Options::contains(real_only))
     {
-      auto r = eve::pow(z0, z1);
-      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+      return KYOSU_CALL(z0, z1);
     }
-
+    
     template<concepts::real Z0, eve::integral_value Z1>
     KYOSU_FORCEINLINE constexpr
     auto operator()(Z0 const& z0, Z1 const& z1) const noexcept -> complexify_t<eve::as_wide_as_t<Z0, Z1>>
     requires(Options::contains(real_only))
     {
-      auto r = eve::pow(z0, z1);
-      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+      return KYOSU_CALL(z0, z1);
     }
-
+    
     KYOSU_CALLABLE_OBJECT(pow_t, pow_);
   };
-
+  
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -145,114 +143,128 @@ namespace kyosu::_
   constexpr auto pow_(KYOSU_DELAY(), O const&, C0 c0,  C1 c1) noexcept
   requires(eve::integral_value<C1>)
   {
-    using r_t = eve::as_wide_as_t<C0,C1>;
-    using u_t  = eve::underlying_type_t<r_t>;
-    if constexpr( eve::unsigned_value<C1> )
+    if constexpr(O::contains(real_only))
     {
-      if constexpr(kyosu::concepts::real<C0>)
-        return r_t(eve::pow(c0, c1));
-      else if constexpr(kyosu::concepts::complex<C0>)
-      {
-        C0 base = c0;
-        C1 expo = c1;
-        auto const o = eve::one(eve::as<u_t>());
-        r_t result(o);
-        while(true)
-        {
-          if  (eve::all(eve::is_eqz(expo))) break;
-          result = kyosu::if_else(eve::is_odd(expo), result*base, o);
-          expo = (expo >> 1);
-          base = kyosu::sqr(base);
-        }
-        return result;
-      }
-      else
-      {
-        return cayley_extend(pow, c0, c1);
-      }
+      return kyosu::inject(eve::pow(c0, c1));
     }
     else
     {
-      using ic1_t = eve::as_integer_t<C1, unsigned>;
-      auto tmp = kyosu::pow(c0, eve::bit_cast(eve::abs(c1), eve::as<ic1_t>()));
-      return kyosu::if_else(eve::is_ltz(c1), kyosu::rec(tmp), tmp);
+      using r_t = eve::as_wide_as_t<C0,C1>;
+      using u_t  = eve::underlying_type_t<r_t>;
+      if constexpr( eve::unsigned_value<C1> )
+      {
+        if constexpr(kyosu::concepts::real<C0>)
+          return r_t(eve::pow(c0, c1));
+        else if constexpr(kyosu::concepts::complex<C0>)
+        {
+          C0 base = c0;
+          C1 expo = c1;
+          auto const o = eve::one(eve::as<u_t>());
+          r_t result(o);
+          while(true)
+          {
+            if  (eve::all(eve::is_eqz(expo))) break;
+            result = kyosu::if_else(eve::is_odd(expo), result*base, o);
+            expo = (expo >> 1);
+            base = kyosu::sqr(base);
+          }
+          return result;
+        }
+        else
+        {
+          return cayley_extend(pow, c0, c1);
+        }
+      }
+      else
+      {
+        using ic1_t = eve::as_integer_t<C1, unsigned>;
+        auto tmp = kyosu::pow(c0, eve::bit_cast(eve::abs(c1), eve::as<ic1_t>()));
+        return kyosu::if_else(eve::is_ltz(c1), kyosu::rec(tmp), tmp);
+      }
     }
   }
-
+  
   template<typename C0,  typename C1, eve::callable_options O>
   constexpr auto pow_(KYOSU_DELAY(), O const&, C0 c0,  C1 c1) noexcept
   requires(!eve::integral_value<C1>)
   {
-    if constexpr(concepts::real<C0> && concepts::real<C1>)
-      return kyosu::if_else(eve::is_gez(c0)
-                           , complex(eve::pow(c0, c1))
-                           , kyosu::exp_ipi(c1)*eve::pow(-c0, c1));
-   else
+    if constexpr(O::contains(real_only))
     {
-      using r_t = kyosu::as_cayley_dickson_like_t<C0,C1>;
-      using er_t = eve::element_type_t<r_t>;
-      using u_t  = eve::underlying_type_t<er_t>;
-      if constexpr(concepts::complex_like<C0> && concepts::complex_like<C1>)
-      {
-        r_t r;
-        if constexpr(kyosu::concepts::real<C0> && kyosu::concepts::complex<C1>) // c1 is complex c0 is real
-        {
-          auto [rc1, ic1] = c1;
-          auto lgac0 = eve::log_abs(c0);
-          auto ang = eve::if_else(kyosu::is_real(c1), eve::zero, ic1*lgac0);
-          auto mod = eve::pow(c0, rc1);
-          auto r1 = kyosu::from_polar(mod, ang);
-          auto isposc0 = eve::is_positive(c0);
-          if (eve::all(isposc0))
-          {
-            r = r1;
-          }
-          else
-          {
-            auto rho = eve::exp(eve::diff_of_prod(lgac0, rc1, ic1, eve::pi(eve::as(rc1))));
-            auto theta = eve::sum_of_prod[eve::pedantic](eve::pi(eve::as(rc1)), rc1, ic1, lgac0);
-            auto r2 = rho*kyosu::exp_i(theta);
-            r = kyosu::if_else(isposc0, r1, r2);
-          }
-        }
-        else if constexpr(kyosu::concepts::real<C1> ) // c0 is complex c1 is real
-        {
-          return exp(c1*log(c0));
-        }
-        else if constexpr( kyosu::concepts::complex<C0>)// c0 and c1 are complex
-        {
-          auto  [rc1, ic1] = c1;
-          auto lc0 = kyosu::log_abs[eve::pedantic](c0);
-          auto argc0 = kyosu::arg(c0);
-          auto rho = eve::exp(eve::diff_of_prod[eve::pedantic](lc0, rc1, ic1, argc0));
-          auto theta = eve::sum_of_prod[eve::pedantic](argc0, rc1, ic1, lc0);
-          r = kyosu::if_else(is_eqz(rho), rho, rho*exp_i(theta));
-        }
-        r = kyosu::if_else(kyosu::is_eqz(c1), eve::one(eve::as<u_t>()), r);
-        return r;
-      }
+      return kyosu::inject(eve::pow(c0, c1));
+    }
+    else
+    {
+      if constexpr(concepts::real<C0> && concepts::real<C1>)
+        return kyosu::if_else(eve::is_gez(c0)
+                             , complex(eve::pow(c0, c1))
+                             , kyosu::exp_ipi(c1)*eve::pow(-c0, c1));
       else
       {
-        if constexpr(kyosu::concepts::real<C1>) //c0 cayley c1 real
+        using r_t = kyosu::as_cayley_dickson_like_t<C0,C1>;
+        using er_t = eve::element_type_t<r_t>;
+        using u_t  = eve::underlying_type_t<er_t>;
+        if constexpr(concepts::complex_like<C0> && concepts::complex_like<C1>)
         {
-          return cayley_extend(pow, c0, c1);
-        }
-        else if  constexpr(kyosu::concepts::real<C0>)//c1 cayley c0 real
-        {
-          return cayley_extend_rev(pow, c0, c1);
+          r_t r;
+          if constexpr(kyosu::concepts::real<C0> && kyosu::concepts::complex<C1>) // c1 is complex c0 is real
+          {
+            auto [rc1, ic1] = c1;
+            auto lgac0 = eve::log_abs(c0);
+            auto ang = eve::if_else(kyosu::is_real(c1), eve::zero, ic1*lgac0);
+            auto mod = eve::pow(c0, rc1);
+            auto r1 = kyosu::from_polar(mod, ang);
+            auto isposc0 = eve::is_positive(c0);
+            if (eve::all(isposc0))
+            {
+              r = r1;
+            }
+            else
+            {
+              auto rho = eve::exp(eve::diff_of_prod(lgac0, rc1, ic1, eve::pi(eve::as(rc1))));
+              auto theta = eve::sum_of_prod[eve::pedantic](eve::pi(eve::as(rc1)), rc1, ic1, lgac0);
+              auto r2 = rho*kyosu::exp_i(theta);
+              r = kyosu::if_else(isposc0, r1, r2);
+            }
+          }
+          else if constexpr(kyosu::concepts::real<C1> ) // c0 is complex c1 is real
+          {
+            return exp(c1*log(c0));
+          }
+          else if constexpr( kyosu::concepts::complex<C0>)// c0 and c1 are complex
+          {
+            auto  [rc1, ic1] = c1;
+            auto lc0 = kyosu::log_abs[eve::pedantic](c0);
+            auto argc0 = kyosu::arg(c0);
+            auto rho = eve::exp(eve::diff_of_prod[eve::pedantic](lc0, rc1, ic1, argc0));
+            auto theta = eve::sum_of_prod[eve::pedantic](argc0, rc1, ic1, lc0);
+            r = kyosu::if_else(is_eqz(rho), rho, rho*exp_i(theta));
+          }
+          r = kyosu::if_else(kyosu::is_eqz(c1), eve::one(eve::as<u_t>()), r);
+          return r;
         }
         else
         {
-          auto cc0 = kyosu::convert(c0, eve::as<er_t>());
-          auto cc1 = kyosu::convert(c1, eve::as<er_t>());
-
-          auto r = kyosu::exp(kyosu::log(cc0)*cc1);
-          return kyosu::if_else (kyosu::is_eqz(cc0)
-                                , eve::if_else(kyosu::is_eqz(cc1)
-                                              , eve::one(eve::as<u_t>())
-                                              , eve::zero(eve::as<u_t>()))
-                                , r
-                                );
+          if constexpr(kyosu::concepts::real<C1>) //c0 cayley c1 real
+          {
+            return cayley_extend(pow, c0, c1);
+          }
+          else if  constexpr(kyosu::concepts::real<C0>)//c1 cayley c0 real
+          {
+            return cayley_extend_rev(pow, c0, c1);
+          }
+          else
+          {
+            auto cc0 = kyosu::convert(c0, eve::as<er_t>());
+            auto cc1 = kyosu::convert(c1, eve::as<er_t>());
+            
+            auto r = kyosu::exp(kyosu::log(cc0)*cc1);
+            return kyosu::if_else (kyosu::is_eqz(cc0)
+                                  , eve::if_else(kyosu::is_eqz(cc1)
+                                                , eve::one(eve::as<u_t>())
+                                                , eve::zero(eve::as<u_t>()))
+                                  , r
+                                  );
+          }
         }
       }
     }
