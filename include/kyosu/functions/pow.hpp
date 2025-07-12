@@ -36,7 +36,10 @@ namespace kyosu
     auto operator()(Z0 z0, Z1 z1) const noexcept -> complexify_t<Z0>
     requires(!Options::contains(real_only))
     {
-      return KYOSU_CALL(complex(z0), z1);
+     if constexpr(concepts::real<Z0>)
+        return (*this)(complex(z0), z1);
+      else
+        return KYOSU_CALL(z0, z1);
     }
 
     template<concepts::real Z0, concepts::real Z1>
