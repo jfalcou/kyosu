@@ -22,13 +22,6 @@ namespace kyosu
       return KYOSU_CALL(z0, z1);
     }
 
-    template<concepts::real V0, concepts::real V1>
-    KYOSU_FORCEINLINE constexpr auto operator()(V0 v0, V1 v1) const noexcept ->  complexify_t<kyosu::as_cayley_dickson_like_t<V0, V1>>
-    requires(!Options::contains(real_only))
-    {
-      return KYOSU_CALL(v0, v1);
-    }
-
     template<concepts::real Z0, concepts::real Z1>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const& z1) const noexcept -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
     requires(Options::contains(real_only))
@@ -96,10 +89,9 @@ namespace kyosu::_
   {
     if constexpr(O::contains(kyosu::real_only))
       return kyosu::inject(eve::lrising_factorial(z0, z1));
-    if constexpr(kyosu::concepts::complex_like<Z0> && kyosu::concepts::complex_like<Z1>)
+    else
     {
       return kyosu::log(kyosu::rising_factorial(z0, z1));
     }
-    else return kyosu::_::cayley_extend2(kyosu::lrising_factorial, z0, z1);
   }
 }
