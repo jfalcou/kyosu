@@ -105,6 +105,10 @@ namespace kyosu
     using cd_t  = cayley_dickson<eve::as_floating_point_t<eve::underlying_type_t<T>>,Dim>;
     using type  = std::conditional_t<card != 1ULL, eve::wide<cd_t,eve::fixed<card>>, cd_t>;
   };
+
+  template<typename... Ts>
+  struct as_cayley_dickson_n<1, Ts...> : eve::common_value<_::sema_t<Ts>...>
+  {};
 #endif
 
   //====================================================================================================================
