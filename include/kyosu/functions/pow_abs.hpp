@@ -62,14 +62,6 @@ namespace kyosu
       return KYOSU_CALL(z0, z1);
     }
 
-
-//     template<concepts::cayley_dickson_like Z0, eve::integral_simd_value Z1>
-//     KYOSU_FORCEINLINE constexpr
-//     auto operator()(Z0 z0, Z1 z1) const noexcept -> result_t<Z0, Z1>
-//     {
-//       return KYOSU_CALL(z0, z1);
-//     }
-
     KYOSU_CALLABLE_OBJECT(pow_abs_t, pow_abs_);
   };
 
