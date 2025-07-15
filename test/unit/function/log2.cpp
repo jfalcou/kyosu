@@ -23,6 +23,10 @@ TTS_CASE_WITH ( "Check kyosu::exp over quaternion"
   auto c  = ce_t(a0,a1);
   auto q  = qe_t(a0,a1,a2,a3);
 
+  auto rr = eve::log2(r);
+  auto re = kyosu::log2[kyosu::real_only](r);
+  TTS_IEEE_EQUAL(re,  ce_t(rr, eve::if_else(eve::is_nan(rr), eve::nan(eve::as(rr)), eve::zero)));
+
   auto lr = kyosu::log2(r);
   auto lc = kyosu::log2(c);
   auto lq = kyosu::log2(q);

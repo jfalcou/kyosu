@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct acospi_t : eve::elementwise_callable<acospi_t, Options>
+  struct acospi_t : eve::elementwise_callable<acospi_t, Options, real_only_option>
   {
 
     template<concepts::cayley_dickson_like Z>
@@ -41,7 +41,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
+//!     //  regular call
 //!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acospi(Z z) noexcept;
+//!
+//!     // semantic modifyers
+//!     template<concepts::real Z> constexpr complexify_t<Z> acospi[real_only](Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -67,8 +71,8 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acospi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto acospi_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    return radinpi(kyosu::acos(z));
+    return radinpi(kyosu::acos[o](z));
   }
 }

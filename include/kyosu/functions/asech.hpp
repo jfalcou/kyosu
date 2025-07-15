@@ -14,15 +14,12 @@
 namespace kyosu
 {
   template<typename Options>
-  struct asech_t : eve::elementwise_callable<asech_t, Options>
+  struct asech_t : eve::elementwise_callable<asech_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-        return (*this)(complex(z));
-      else
-        return KYOSU_CALL(z);
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(asech_t, asech_);
@@ -45,8 +42,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<eve::floating_ordered_value T>          constexpr T asech(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T asech(T z) noexcept;  //2
+//!     //  regular call
+//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> asech(Z z) noexcept;
+//!
+//!     // semantic modifyers
+//!     template<concepts::real Z> constexpr complexify_t<Z> asech[real_only](Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -56,8 +56,10 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. A real typed input z is treated as if `complex(z)` was entered.
-//!   2. Returns elementwise `acosh(rec(z))`.
+//!   - A real typed input z is treated as if `complex(z)` was entered unless the option real_only is used
+//!     in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::acos
+//!     implying a Nan result if the result is not real.
+//!   - Returns elementwise `acosh(rec(z))`.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Inverse Hyperbolic Secant](https://mathworld.wolfram.com/InverseHyperbolicSecant.html)
@@ -76,8 +78,8 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto asech_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto asech_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    return  kyosu::acosh(kyosu::rec(z));
+    return  kyosu::acosh[o](kyosu::rec(z));
   }
 }

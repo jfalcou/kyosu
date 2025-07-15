@@ -18,6 +18,10 @@ TTS_CASE_WITH ( "Check kyosu::powm1 over real"
 {
   using T =  decltype(r0);
   TTS_RELATIVE_EQUAL(kyosu::powm1(r0, r1), kyosu::complex(eve::powm1(r0, r1)), tts::prec<T>());
+  auto re = kyosu::powm1[kyosu::real_only](r0, r1);
+  auto rr = eve::powm1(r0, r1);
+
+  TTS_IEEE_EQUAL(re,  kyosu::inject(rr));
 };
 
 TTS_CASE_WITH ( "Check kyosu::powm1 over complex"
