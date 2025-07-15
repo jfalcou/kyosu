@@ -120,21 +120,13 @@ namespace kyosu::_
   template<typename Z0,  typename Z1, eve::callable_options O>
   constexpr auto pow_abs_(KYOSU_DELAY(), O const&, Z0 z0,  Z1 z1) noexcept
   {
-    if constexpr(concepts::real<Z1>)
-      return eve::pow(kyosu::abs(z0), z1);
-    else
-      return kyosu::pow(kyosu::abs(z0), z1);
-  }
-
-  template<concepts::cayley_dickson_like T,  eve::integral_simd_value U, eve::callable_options O>
-  EVE_FORCEINLINE constexpr auto
-  pow_abs_(KYOSU_DELAY(), O const &, T a0, U a1) noexcept
-  {
-      using r_t = kyosu::as_real_type_t<eve::as_wide_as_t<T, U >>;
-      if constexpr( eve::unsigned_value<U> )
+   if constexpr( eve::integral_simd_value<Z1>)
+    {
+      using r_t = kyosu::as_real_type_t<eve::as_wide_as_t<Z0, Z1>>;
+      if constexpr( eve::unsigned_value<Z1> )
       {
-        r_t base(eve::abs(a0));
-        auto expo = a1;
+        r_t base(eve::abs(z0));
+        auto expo = z1;
 
         auto result = eve::one(eve::as<r_t>());
         while( eve::any(eve::is_nez(expo)) )
@@ -148,17 +140,18 @@ namespace kyosu::_
       }
       else
       {
-        using u_t = eve::as_integer_t<U, unsigned>;
-        r_t tmp     = kyosu::pow_abs(a0, eve::bit_cast(eve::abs(a1), eve::as<u_t>()));
-        return eve::if_else(eve::is_ltz(a1), eve::rec[eve::pedantic](tmp), tmp);
+        using u_t = eve::as_integer_t<Z1, unsigned>;
+        r_t tmp     = kyosu::pow_abs(z0, eve::bit_cast(eve::abs(z1), eve::as<u_t>()));
+        return eve::if_else(eve::is_ltz(z1), eve::rec[eve::pedantic](tmp), tmp);
       }
+    }
+    else if constexpr(eve::integral_scalar_value<Z1>)
+    {
+      return eve::pow(kyosu::abs(z0), z1);
+    }
+    else if constexpr(concepts::real<Z1>)
+      return eve::pow(kyosu::abs(z0), z1);
+    else
+      return kyosu::pow(kyosu::abs(z0), z1);
   }
-
-  template<concepts::cayley_dickson_like T,  eve::integral_scalar_value U, eve::callable_options O>
-  EVE_FORCEINLINE constexpr kyosu::as_real_type_t<T>
-  pow_abs_(KYOSU_DELAY(), O const &, T a0, U a1) noexcept
-  {
-    return eve::pow(kyosu::abs(a0), a1);
-  }
-
 }
