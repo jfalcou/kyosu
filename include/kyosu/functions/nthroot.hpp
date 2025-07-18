@@ -101,7 +101,7 @@ namespace kyosu
 //!      - if the first parameter is floating the call will act as if they were converted to complex before call, unless the option real_only is used
 //!        in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::nthroot and the result will be
 //!        fnan if no real solution exists.
-//!      - the kth nth root of z, is. `exp((log(z)+k*pi)/n)`. If not present k is taken as 0.
+//!      - the kth nth root of z, is. `exp((log(z)+2*k*i*pi)/n)`. If not present k is taken as 0.
 //!
 //!
 //!  @groupheader{Example}
@@ -127,7 +127,7 @@ namespace kyosu::_
     {
       auto [rho, theta] = kyosu::to_polarpi(z);
       auto rho_n = eve::nthroot(rho, cv(n));
-      auto rntn = rho_n*kyosu::exp_ipi((theta+cv(k))/cv(n));
+      auto rntn = rho_n*kyosu::exp_ipi((theta+2*cv(eve::rem(k, n)))/cv(n));
       return rntn;
     }
     else  return  cayley_extend2(nthroot, z, n, k);
