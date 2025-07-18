@@ -41,6 +41,7 @@
 #include <kyosu/functions/add.hpp>
 #include <kyosu/functions/agd.hpp>
 #include <kyosu/functions/am.hpp>
+#include <kyosu/functions/argpi.hpp>
 #include <kyosu/functions/atanpi.hpp>
 #include <kyosu/functions/acsc.hpp>
 #include <kyosu/functions/acscpi.hpp>
