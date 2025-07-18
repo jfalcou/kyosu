@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct to_polar_t : eve::elementwise_callable<to_polar_t, Options>
+  struct to_polarpi_t : eve::elementwise_callable<to_polarpi_t, Options>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr auto operator()(Z const& z) const noexcept
@@ -23,14 +23,14 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
     { return (*this)(complex(v)); }
 
-    KYOSU_CALLABLE_OBJECT(to_polar_t, to_polar_);
+    KYOSU_CALLABLE_OBJECT(to_polarpi_t, to_polarpi_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var to_polar
-//!   @brief returns modulus and argument of the input.
+//!   @var to_polarpi
+//!   @brief  returns modulus and argument (in \f$\pi\f$ multiples) of the input.
 //!
 //!   @groupheader{Header file}
 //!
@@ -43,8 +43,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr T to_polar(T z) noexcept;
-//!      template<eve::floating_ordered_value T>     constexpr T to_polar(T z) noexcept;
+//!      template<kyosu::concepts::complex T> constexpr T to_polarpi(T z) noexcept;
+//!      template<eve::floating_value T>      constexpr T to_polarpi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -54,14 +54,13 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns  The kumi tuple `{rho, theta}`. for real and commplex and `{rho, theta, I}` for other cayley-dickson
-//!     where \f$\textrm{I}\f$ is pure and \f$\textrm{I}^2 = -1 \f$
+//!     Returns  The kumi tuple `{rho, theta}`. for real and comple with theta in \f$\pi\f$ multiples.
 //!
 //!  @groupheader{Example}
 //!
-//!  @godbolt{doc/to_polar.cpp}
+//!  @godbolt{doc/to_polarpi.cpp}
 //======================================================================================================================
-  inline constexpr auto to_polar = eve::functor<to_polar_t>;
+  inline constexpr auto to_polarpi = eve::functor<to_polarpi_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -70,11 +69,11 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto to_polar_(KYOSU_DELAY(), O const&, C c) noexcept
+  KYOSU_FORCEINLINE constexpr auto to_polarpi_(KYOSU_DELAY(), O const&, C c) noexcept
   {
     if constexpr(kyosu::concepts::complex<C>)
-      return kumi::tuple{kyosu::abs(c),  kyosu::arg(c)};
+      return kumi::tuple{kyosu::abs(c),  kyosu::argpi(c)};
     else
-      return kumi::tuple{kyosu::abs(c),  kyosu::arg(c), sign(ipart(c))*sign(pure(c))};
+      return kumi::tuple{kyosu::abs(c),  kyosu::argpi(c), sign(ipart(c))*sign(pure(c))};
   }
 }

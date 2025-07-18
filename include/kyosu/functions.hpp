@@ -105,6 +105,7 @@
 #include <kyosu/functions/fnms.hpp>
 #include <kyosu/functions/frac.hpp>
 #include <kyosu/functions/from_polar.hpp>
+#include <kyosu/functions/from_polarpi.hpp>
 #include <kyosu/functions/fsm.hpp>
 #include <kyosu/functions/gd.hpp>
 #include <kyosu/functions/gegenbauer.hpp>
@@ -201,6 +202,7 @@
 #include <kyosu/functions/tgamma_inv.hpp>
 #include <kyosu/functions/to_cylindrical.hpp>
 #include <kyosu/functions/to_polar.hpp>
+#include <kyosu/functions/to_polarpi.hpp>
 #include <kyosu/functions/tricomi.hpp>
 #include <kyosu/functions/trunc.hpp>
 #include <kyosu/functions/zeta.hpp>
