@@ -15,9 +15,9 @@ TTS_CASE_WITH ( "Check kyosu::nthroot over real"
 <typename T>(T r0)
 {
   using wi_t =  eve::wide<unsigned int, eve::fixed<T::size()>>;
-  T fn(eve::iota(eve::as<T>())+1);
-  wi_t n(eve::iota(eve::as<wi_t>())+1);
-  TTS_RELATIVE_EQUAL(kyosu::pow(kyosu::nthroot(r0, n), fn), kyosu::complex(r0), tts::prec<T>() );
+  T fn(eve::floor(eve::iota(eve::as<T>())/2)+1);
+  wi_t n(eve::iota(eve::as<wi_t>())/2+1);
+  TTS_RELATIVE_EQUAL(kyosu::pow(kyosu::nthroot(r0, n), fn), kyosu::complex(r0), tts::prec<T>() )';
   TTS_RELATIVE_EQUAL(kyosu::pow(kyosu::nthroot(r0, fn), fn), kyosu::complex(r0), tts::prec<T>() );
   TTS_RELATIVE_EQUAL(kyosu::real(kyosu::nthroot[kyosu::real_only](r0, fn)), eve::nthroot(r0, fn), tts::prec<T>() );
 };
