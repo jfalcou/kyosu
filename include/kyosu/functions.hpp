@@ -27,6 +27,7 @@
 #include <kyosu/functions/pure.hpp>
 #include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/arg.hpp>
+#include <kyosu/functions/inject.hpp>
 
 //======================================================================================================================
 // Arithmetic and math
@@ -40,6 +41,7 @@
 #include <kyosu/functions/add.hpp>
 #include <kyosu/functions/agd.hpp>
 #include <kyosu/functions/am.hpp>
+#include <kyosu/functions/argpi.hpp>
 #include <kyosu/functions/atanpi.hpp>
 #include <kyosu/functions/acsc.hpp>
 #include <kyosu/functions/acscpi.hpp>
@@ -57,6 +59,7 @@
 #include <kyosu/functions/average.hpp>
 
 #include <kyosu/functions/beta.hpp>
+#include <kyosu/functions/cbrt.hpp>
 #include <kyosu/functions/ceil.hpp>
 #include <kyosu/functions/chi.hpp>
 #include <kyosu/functions/commutator.hpp>
@@ -103,6 +106,7 @@
 #include <kyosu/functions/fnms.hpp>
 #include <kyosu/functions/frac.hpp>
 #include <kyosu/functions/from_polar.hpp>
+#include <kyosu/functions/from_polarpi.hpp>
 #include <kyosu/functions/fsm.hpp>
 #include <kyosu/functions/gd.hpp>
 #include <kyosu/functions/gegenbauer.hpp>
@@ -162,6 +166,7 @@
 #include <kyosu/functions/nearest.hpp>
 #include <kyosu/functions/negmaxabs.hpp>
 #include <kyosu/functions/negminabs.hpp>
+#include <kyosu/functions/nthroot.hpp>
 #include <kyosu/functions/oneminus.hpp>
 #include <kyosu/functions/pow.hpp>
 #include <kyosu/functions/pow1p.hpp>
@@ -172,6 +177,7 @@
 #include <kyosu/functions/rec.hpp>
 #include <kyosu/functions/reldist.hpp>
 #include <kyosu/functions/reverse_horner.hpp>
+#include <kyosu/functions/rsqrt.hpp>
 #include <kyosu/functions/sec.hpp>
 #include <kyosu/functions/secpi.hpp>
 #include <kyosu/functions/sech.hpp>
@@ -197,6 +203,7 @@
 #include <kyosu/functions/tgamma_inv.hpp>
 #include <kyosu/functions/to_cylindrical.hpp>
 #include <kyosu/functions/to_polar.hpp>
+#include <kyosu/functions/to_polarpi.hpp>
 #include <kyosu/functions/tricomi.hpp>
 #include <kyosu/functions/trunc.hpp>
 #include <kyosu/functions/zeta.hpp>

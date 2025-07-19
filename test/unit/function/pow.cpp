@@ -18,7 +18,11 @@ TTS_CASE_WITH ( "Check kyosu::pow over real"
 {
   using T =  decltype(r0);
   TTS_RELATIVE_EQUAL(kyosu::pow(r0, r1), kyosu::exp(kyosu::log(r0)*r1), tts::prec<T>(5.0e-3,  1.0e-7));
-  TTS_RELATIVE_EQUAL(kyosu::pow(r0, 4),  kyosu::sqr(kyosu::sqr(r0)), tts::prec<T>());
+//  TTS_RELATIVE_EQUAL(kyosu::pow(r0, 4),  complex(kyosu::sqr(kyosu::sqr(r0))), tts::prec<T>());
+  auto re = kyosu::pow[kyosu::real_only](r0, r1);
+  auto rr = eve::pow(r0, r1);
+
+  TTS_IEEE_EQUAL(re, kyosu::inject(rr));
 };
 
 TTS_CASE_WITH ( "Check kyosu::pow over complex"
@@ -35,6 +39,7 @@ TTS_CASE_WITH ( "Check kyosu::pow over complex"
   TTS_RELATIVE_EQUAL(kyosu::pow(c0, c1), kyosu::exp(kyosu::log(c0)*c1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::pow(r0, c1), kyosu::exp(kyosu::log(r0)*c1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::pow(c0, r1), kyosu::exp(kyosu::log(c0)*r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::pow(c0, 4),  kyosu::sqr(kyosu::sqr(c0)), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::pow over quaternion"

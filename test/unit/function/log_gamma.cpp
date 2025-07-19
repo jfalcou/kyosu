@@ -22,6 +22,10 @@ TTS_CASE_WITH ( "Check kyosu::tgamma over quaternion"
   auto r  = T(a0);
   auto c  = ce_t(a0,a1);
   auto q  = qe_t(a0,a1,a2,a3);
+  auto re = kyosu::log_gamma[kyosu::real_only](r);
+  auto rr = eve::log_gamma(r);
+
+  TTS_IEEE_EQUAL(re,  kyosu::inject(rr));
 
   TTS_RELATIVE_EQUAL(kyosu::log_gamma(r), kyosu::log(kyosu::tgamma(r)), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::log_gamma(c), kyosu::log(kyosu::tgamma(c)), tts::prec<T>());

@@ -8,23 +8,56 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/pow.hpp>
+#include <kyosu/functions/if_else.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct pow_abs_t : eve::strict_elementwise_callable<pow_abs_t, Options>
+  struct pow_abs_t : eve::callable<pow_abs_t, Options>
   {
-    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
-    requires(!eve::integral_scalar_value<Z1>)
+
+    template<typename Z0,typename Z1>
+    struct result
+    {
+      using type =  decltype(kyosu::real(kyosu::pow(kyosu::abs(Z0()), Z1())));
+    };
+
+    template<kyosu::concepts::cayley_dickson_like Z0, kyosu::concepts::cayley_dickson Z1>
+    struct result<Z0,Z1>
+    {
+      using type =  decltype((kyosu::pow(kyosu::abs(Z0()), Z1())));
+    };
+
+    template<kyosu::concepts::cayley_dickson_like Z0, eve::integral_value Z1>
+    struct result<Z0,Z1>
+    {
+      using r_t = decltype(eve::convert(Z1(), eve::as(eve::element_type_t<kyosu::as_real_type_t<Z0>>())));
+      using type =  decltype(kyosu::real(kyosu::pow(kyosu::abs(Z0()), r_t())));
+    };
+
+    //================================================================================
+
+    template<typename Z0, typename Z1>
+    using result_t = typename result<Z0, Z1>::type;
+
+    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson Z1>
+    requires(!eve::integral_value<Z1>)
       KYOSU_FORCEINLINE constexpr
-    auto operator()(Z0 z0, Z1 z1) const noexcept // -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
+    auto operator()(Z0 z0, Z1 z1) const noexcept -> result_t<Z0, Z1>
+    {
+      return KYOSU_CALL(z0, z1);
+    }
+
+    template<concepts::cayley_dickson_like Z0, eve::floating_value Z1>
+    KYOSU_FORCEINLINE constexpr
+    auto operator()(Z0 z0, Z1 z1) const noexcept -> result_t<Z0, Z1>
     {
       return KYOSU_CALL(z0, z1);
     }
 
     template<concepts::cayley_dickson_like Z0, eve::integral_value Z1>
     KYOSU_FORCEINLINE constexpr
-    auto operator()(Z0 z0, Z1 z1) const noexcept// -> eve::as_wide_as<Z0, Z1>
+    auto operator()(Z0 z0, Z1 z1) const noexcept -> result_t<Z0, Z1>
     {
       return KYOSU_CALL(z0, z1);
     }
@@ -75,11 +108,41 @@ namespace kyosu
 namespace kyosu::_
 {
 
+
   template<typename Z0,  typename Z1, eve::callable_options O>
   constexpr auto pow_abs_(KYOSU_DELAY(), O const&, Z0 z0,  Z1 z1) noexcept
   {
-    if constexpr(kyosu::concepts::real<Z1> && !eve::integral_value<Z1>)
-      return eve::pow(kyosu::sqr_abs(z0), z1*eve::half(eve::as(z1)));
+   if constexpr( eve::integral_simd_value<Z1>)
+    {
+      using r_t = kyosu::as_real_type_t<eve::as_wide_as_t<Z0, Z1>>;
+      if constexpr( eve::unsigned_value<Z1> )
+      {
+        r_t base(eve::abs(z0));
+        auto expo = z1;
+
+        auto result = eve::one(eve::as<r_t>());
+        while( eve::any(eve::is_nez(expo)) )
+        {
+          auto fac = eve::if_else(eve::is_odd(expo), base, eve::one);
+          result *= fac;
+          expo = (expo >> 1);
+          base = eve::sqr(base);
+        }
+        return result;
+      }
+      else
+      {
+        using u_t = eve::as_integer_t<Z1, unsigned>;
+        r_t tmp     = kyosu::pow_abs(z0, eve::bit_cast(eve::abs(z1), eve::as<u_t>()));
+        return eve::if_else(eve::is_ltz(z1), eve::rec[eve::pedantic](tmp), tmp);
+      }
+    }
+    else if constexpr(eve::integral_scalar_value<Z1>)
+    {
+      return eve::pow(kyosu::abs(z0), z1);
+    }
+    else if constexpr(concepts::real<Z1>)
+      return eve::pow(kyosu::abs(z0), z1);
     else
       return kyosu::pow(kyosu::abs(z0), z1);
   }

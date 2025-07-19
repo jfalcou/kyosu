@@ -1,0 +1,23 @@
+#include <kyosu/kyosu.hpp>
+#include <eve/wide.hpp>
+#include <iostream>
+
+int main()
+{
+
+ using wide_ft = eve::wide <float, eve::fixed<4>>;
+  wide_ft ref1 = { 3.0f, 2.0f, 1.0f, 0.5f};
+  wide_ft imf1 = { 2.0f , -1.0,  -5.0, 0.0};
+  wide_ft ref2 = { 0.0, -1.0, 2.0, eve::nan(eve::as<double>())};
+  auto zc = kyosu::complex_t<wide_ft>(ref1, imf1);
+
+  std::cout
+    << "---- simd" << std::endl
+    << "<- zc                                 = " << zc << std::endl
+    << "<- ref2                               = " << ref2 << std::endl
+    << "-> argpi(zc)                            = " << kyosu::argpi(zc)<< std::endl
+    << "-> argpi(ref2)                          = " << kyosu::argpi(ref2) << std::endl
+    << "-> argpi(kyosu::cinf(eve::as<double>()) = " << kyosu::argpi(kyosu::cinf(eve::as<double>())) << std::endl
+    << "-> argpi(kyosu::zero(kyosu::as(zc)))    = " << kyosu::argpi(kyosu::zero(kyosu::as(zc))) << std::endl;
+  return 0;
+}

@@ -13,18 +13,18 @@ int main()
   using we_t = eve::wide<float, eve::fixed<2>>;
   using wc_t = eve::wide<kyosu::complex_t<float>, eve::fixed<2>>;
   using wq_t = eve::wide<kyosu::quaternion_t<float>, eve::fixed<2>>;
-  using wi_t =  eve::wide<int, eve::fixed<2>>;
+  using wi_t =  eve::wide<unsigned int, eve::fixed<2>>;
 
   std::cout << "Real:        "<< "\n";
-  e_t e0(1);
+  e_t e0(3);
   e_t e1(2);
   std::cout << e0 << ", " << e1 << " -> "  << pow(e0, e1) << "\n";
   std::cout << e0 << ", " << e0 << " -> "  << pow(e0, e0) << "\n";
+  std::cout << e0 << ", " << 5  << " -> "  << pow(e0, 5)  << "\n";
   we_t we0(e0);
   we_t we1(e1);
-  wi_t wi0(4, 5);
+  wi_t wi0{4, 5};
   std::cout << we0 << ", " << we1 << " -> " << pow(we0, we1) << "\n";
-  std::cout << we1 << ", " << wi0 << " -> " << pow(we1, wi0) << "\n";
 
   std::cout << "Complex:     "<< "\n";
   c_t c0(1, 5);
@@ -34,7 +34,7 @@ int main()
   wc_t wc0(c0, c1);
   wc_t wc1(c1, c1);
   std::cout << wc0 << ", " << wc1 << " -> " << pow(wc0, wc1) << "\n";
-  std::cout << wc0 << ", " << wi0 << " -> " << pow(wc0, wi0) << "\n";
+  std::cout << wc0 << ", " << 3   << " -> " << pow(wc0, 3) << "\n";
 
 
   std::cout << "Quaternion:  "<< "\n";
