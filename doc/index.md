@@ -205,6 +205,13 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
    |[tanh](@ref kyosu::tanh)                           |[tanpi](@ref kyosu::tanpi)                         |[tchebytchev](@ref kyosu::tchebytchev)             |[tgamma](@ref kyosu::tgamma)                       |
    |[tgamma_inv](@ref kyosu::tgamma_inv)               |[to_cylindrical](@ref kyosu::to_cylindrical)       |[to_polar](@ref kyosu::to_polar)                   |[tricomi](@ref kyosu::tricomi)                     |
    |[trunc](@ref kyosu::trunc)                         |[zeta](@ref kyosu::zeta)                           |                                                   |                                                   |
+  * Callables usable with complex and real only
+
+    These functions are related to proper complex properties of nth roots, they always provide a complex result.
+
+    |                                    |                                   |
+    |------------------------------------|-----------------------------------|
+    | [cbrt](@ref kyosu::cbrt)           |  [nthroot](@ref kyosu::nthroot)   |
 
   * Callables usable with quaternion, complex and real only
 
