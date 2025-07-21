@@ -206,6 +206,7 @@
 #include <kyosu/functions/to_polarpi.hpp>
 #include <kyosu/functions/tricomi.hpp>
 #include <kyosu/functions/trunc.hpp>
+#include <kyosu/functions/xi.hpp>
 #include <kyosu/functions/zeta.hpp>
 
 #include <kyosu/functions/bessel_j.hpp>
