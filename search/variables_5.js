@@ -15,8 +15,9 @@ var searchData=
   ['from_5feuler_12',['from_euler',['../group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7',1,'kyosu']]],
   ['from_5fmultipolar_13',['from_multipolar',['../group__quaternion_ga768dc300e06ddd80f84746662db3c01b.html#ga768dc300e06ddd80f84746662db3c01b',1,'kyosu']]],
   ['from_5fpolar_14',['from_polar',['../group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8',1,'kyosu']]],
-  ['from_5frotation_5fmatrix_15',['from_rotation_matrix',['../group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302',1,'kyosu']]],
-  ['from_5fsemipolar_16',['from_semipolar',['../group__quaternion_gae4c3253d49e644eeea3531e3b588fc9c.html#gae4c3253d49e644eeea3531e3b588fc9c',1,'kyosu']]],
-  ['from_5fspherical_17',['from_spherical',['../group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#ga943f811be2981809d36a4f31f52b0025',1,'kyosu']]],
-  ['fsm_18',['fsm',['../group__functions_ga9ff0e0971171a0cf6b8c8b84390707bd.html#ga9ff0e0971171a0cf6b8c8b84390707bd',1,'kyosu']]]
+  ['from_5fpolarpi_15',['from_polarpi',['../group__complex_gabe395cb541b4dd24a7dbe400af33d770.html#gabe395cb541b4dd24a7dbe400af33d770',1,'kyosu']]],
+  ['from_5frotation_5fmatrix_16',['from_rotation_matrix',['../group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302',1,'kyosu']]],
+  ['from_5fsemipolar_17',['from_semipolar',['../group__quaternion_gae4c3253d49e644eeea3531e3b588fc9c.html#gae4c3253d49e644eeea3531e3b588fc9c',1,'kyosu']]],
+  ['from_5fspherical_18',['from_spherical',['../group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#ga943f811be2981809d36a4f31f52b0025',1,'kyosu']]],
+  ['fsm_19',['fsm',['../group__functions_ga9ff0e0971171a0cf6b8c8b84390707bd.html#ga9ff0e0971171a0cf6b8c8b84390707bd',1,'kyosu']]]
 ];

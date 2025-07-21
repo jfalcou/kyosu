@@ -147,19 +147,23 @@ $(document).ready(function(){initNavTree('group__functions_ga40c963ecefcdeba9487
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_ga40c963ecefcdeba9487598d5ef9bf874.html#ga40c963ecefcdeba9487598d5ef9bf874">acsc</a>(Z z) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="comment">//  regular call</span></div>
+<div class="line">  <span class="keyword">template</span>&lt;concepts::cayley_dickson_like Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_ga40c963ecefcdeba9487598d5ef9bf874.html#ga40c963ecefcdeba9487598d5ef9bf874">acsc</a>(Z z) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// semantic modifyers</span></div>
+<div class="line">  <span class="keyword">template</span>&lt;concepts::real Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_ga40c963ecefcdeba9487598d5ef9bf874.html#ga40c963ecefcdeba9487598d5ef9bf874">acsc</a>[real_only](Z z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga40c963ecefcdeba9487598d5ef9bf874_html_ga40c963ecefcdeba9487598d5ef9bf874"><div class="ttname"><a href="group__functions_ga40c963ecefcdeba9487598d5ef9bf874.html#ga40c963ecefcdeba9487598d5ef9bf874">kyosu::acsc</a></div><div class="ttdeci">constexpr auto acsc</div><div class="ttdoc">Computes the arccosecant of the argument.</div><div class="ttdef"><b>Definition:</b> acsc.hpp:70</div></div>
+<div class="ttc" id="agroup__functions_ga40c963ecefcdeba9487598d5ef9bf874_html_ga40c963ecefcdeba9487598d5ef9bf874"><div class="ttname"><a href="group__functions_ga40c963ecefcdeba9487598d5ef9bf874.html#ga40c963ecefcdeba9487598d5ef9bf874">kyosu::acsc</a></div><div class="ttdeci">constexpr auto acsc</div><div class="ttdoc">Computes the arccosecant of the argument.</div><div class="ttdef"><b>Definition:</b> acsc.hpp:73</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<ol type="1">
-<li>a real input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered.</li>
+<ul>
+<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered unless the option real_only is used in which case the parameter must be a floating_value, the real part of the result will the same as an eve::acsc implying a Nan result if the result is not real.</li>
 <li>Returns elementwise <code><a class="el" href="group__functions_ga7586f69da3dd2de8eb36e571d0cda51a.html#ga7586f69da3dd2de8eb36e571d0cda51a" title="Computes the arcsine of the argument.">asin(rec(z))</a></code>.</li>
-</ol>
+</ul>
 <h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://mathworld.wolfram.com/InverseCosecant.html">Wolfram MathWorld: Inverse Cosecant</a></li>

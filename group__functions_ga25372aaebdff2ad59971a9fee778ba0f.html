@@ -150,14 +150,14 @@ $(document).ready(function(){initNavTree('group__functions_ga25372aaebdff2ad5997
 <div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(<span class="keyword">auto</span> z0, <span class="keyword">auto</span> z1) <span class="keyword">noexcept</span>;                \\123</div>
 <div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(<span class="keyword">auto</span> z0, eve::integral_value n)  <span class="keyword">noexcept</span>; \\4</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga25372aaebdff2ad59971a9fee778ba0f_html_ga25372aaebdff2ad59971a9fee778ba0f"><div class="ttname"><a href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">kyosu::pow</a></div><div class="ttdeci">constexpr auto pow</div><div class="ttdoc">Computes the computing the pow operation .</div><div class="ttdef"><b>Definition:</b> pow.hpp:114</div></div>
+<div class="ttc" id="agroup__functions_ga25372aaebdff2ad59971a9fee778ba0f_html_ga25372aaebdff2ad59971a9fee778ba0f"><div class="ttname"><a href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">kyosu::pow</a></div><div class="ttdeci">constexpr auto pow</div><div class="ttdoc">Computes the computing the pow operation .</div><div class="ttdef"><b>Definition:</b> pow.hpp:128</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z0</code>, <code>z1</code>: Values to process.</li>
 </ul>
 <p><b>Return value</b></p><ol type="1">
-<li>if both parameters are floating the call will act as if they were converted to complex before call</li>
+<li>if both parameters are floating the call will act as if they were converted to complex before call, unless the option real_only is used in which case the parameter must be a floating_value, the real part of the result will the same as an eve::acos implying a Nan result if the result is not real.</li>
 <li>if both parameters are floating or complex. The ieee specification are taken:<br  />
  In particular we have (IEC 60559):<ul>
 <li>pow(+0, y), where y is a negative odd integer, returns \(+\infty\)</li>
@@ -208,18 +208,18 @@ $(document).ready(function(){initNavTree('group__functions_ga25372aaebdff2ad5997
 <div class="line">  <span class="keyword">using </span>we_t = eve::wide&lt;float, eve::fixed&lt;2&gt;&gt;;</div>
 <div class="line">  <span class="keyword">using </span>wc_t = eve::wide&lt;kyosu::complex_t&lt;float&gt;, eve::fixed&lt;2&gt;&gt;;</div>
 <div class="line">  <span class="keyword">using </span>wq_t = eve::wide&lt;kyosu::quaternion_t&lt;float&gt;, eve::fixed&lt;2&gt;&gt;;</div>
-<div class="line">  <span class="keyword">using </span>wi_t =  eve::wide&lt;int, eve::fixed&lt;2&gt;&gt;;</div>
+<div class="line">  <span class="keyword">using </span>wi_t =  eve::wide&lt;unsigned int, eve::fixed&lt;2&gt;&gt;;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  e_t e0(1);</div>
+<div class="line">  e_t e0(3);</div>
 <div class="line">  e_t e1(2);</div>
 <div class="line">  std::cout &lt;&lt; e0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; e1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span>  &lt;&lt; <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(e0, e1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; e0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; e0 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span>  &lt;&lt; <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(e0, e0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; e0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; 5  &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span>  &lt;&lt; <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(e0, 5)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  we_t we0(e0);</div>
 <div class="line">  we_t we1(e1);</div>
-<div class="line">  wi_t wi0(4, 5);</div>
+<div class="line">  wi_t wi0{4, 5};</div>
 <div class="line">  std::cout &lt;&lt; we0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; we1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(we0, we1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; we1 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; wi0 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(we1, wi0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  c_t c0(1, 5);</div>
@@ -229,7 +229,7 @@ $(document).ready(function(){initNavTree('group__functions_ga25372aaebdff2ad5997
 <div class="line">  wc_t wc0(c0, c1);</div>
 <div class="line">  wc_t wc1(c1, c1);</div>
 <div class="line">  std::cout &lt;&lt; wc0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; wc1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(wc0, wc1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; wc0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; wi0 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(wc0, wi0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; wc0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; 3   &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f">pow</a>(wc0, 3) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>

@@ -147,9 +147,13 @@ $(document).ready(function(){initNavTree('group__functions_ga7586f69da3dd2de8eb3
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
+<div class="line">   <span class="comment">//  regular call</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> complexify_t&lt;T&gt; <a class="code hl_variable" href="group__functions_ga7586f69da3dd2de8eb36e571d0cda51a.html#ga7586f69da3dd2de8eb36e571d0cda51a">asin</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// semantic modifyers</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;concepts::real T&gt; <span class="keyword">constexpr</span> complexify_t&lt;T&gt; <a class="code hl_variable" href="group__functions_ga7586f69da3dd2de8eb36e571d0cda51a.html#ga7586f69da3dd2de8eb36e571d0cda51a">asin</a>[real_only](T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga7586f69da3dd2de8eb36e571d0cda51a_html_ga7586f69da3dd2de8eb36e571d0cda51a"><div class="ttname"><a href="group__functions_ga7586f69da3dd2de8eb36e571d0cda51a.html#ga7586f69da3dd2de8eb36e571d0cda51a">kyosu::asin</a></div><div class="ttdeci">constexpr auto asin</div><div class="ttdoc">Computes the arcsine of the argument.</div><div class="ttdef"><b>Definition:</b> asin.hpp:75</div></div>
+<div class="ttc" id="agroup__functions_ga7586f69da3dd2de8eb36e571d0cda51a_html_ga7586f69da3dd2de8eb36e571d0cda51a"><div class="ttname"><a href="group__functions_ga7586f69da3dd2de8eb36e571d0cda51a.html#ga7586f69da3dd2de8eb36e571d0cda51a">kyosu::asin</a></div><div class="ttdeci">constexpr auto asin</div><div class="ttdoc">Computes the arcsine of the argument.</div><div class="ttdef"><b>Definition:</b> asin.hpp:87</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -157,7 +161,7 @@ $(document).ready(function(){initNavTree('group__functions_ga7586f69da3dd2de8eb3
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>a real input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered.</li>
+<li>a real input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered unless the option real_only is used in which case the parameter must be a floating_value, the result will the same as an eve::asin implying a Nan result if the result is not real.</li>
 <li><p class="startli">Returns the elementwise the complex principal value of the arc sine of the input in the range of a strip unbounded along the imaginary axis and in the interval \([-\pi/2, \pi/2]\) along the real axis.</p>
 <p class="startli">special cases are handled as if the operation was implemented by \(-i\; \mathrm{asinh}(z\; i)\)</p>
 </li>

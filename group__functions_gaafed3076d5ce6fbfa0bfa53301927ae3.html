@@ -147,20 +147,23 @@ $(document).ready(function(){initNavTree('group__functions_gaafed3076d5ce6fbfa0b
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T&gt;          <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gaafed3076d5ce6fbfa0bfa53301927ae3.html#gaafed3076d5ce6fbfa0bfa53301927ae3">asech</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//1</span></div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="group__functions_gaafed3076d5ce6fbfa0bfa53301927ae3.html#gaafed3076d5ce6fbfa0bfa53301927ae3">asech</a>(T z) <span class="keyword">noexcept</span>;  <span class="comment">//2</span></div>
+<div class="line">  <span class="comment">//  regular call</span></div>
+<div class="line">  <span class="keyword">template</span>&lt;concepts::cayley_dickson_like Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_gaafed3076d5ce6fbfa0bfa53301927ae3.html#gaafed3076d5ce6fbfa0bfa53301927ae3">asech</a>(Z z) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// semantic modifyers</span></div>
+<div class="line">  <span class="keyword">template</span>&lt;concepts::real Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_gaafed3076d5ce6fbfa0bfa53301927ae3.html#gaafed3076d5ce6fbfa0bfa53301927ae3">asech</a>[real_only](Z z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaafed3076d5ce6fbfa0bfa53301927ae3_html_gaafed3076d5ce6fbfa0bfa53301927ae3"><div class="ttname"><a href="group__functions_gaafed3076d5ce6fbfa0bfa53301927ae3.html#gaafed3076d5ce6fbfa0bfa53301927ae3">kyosu::asech</a></div><div class="ttdeci">constexpr auto asech</div><div class="ttdoc">Computes the inverse hyperbolic secant of the argument.</div><div class="ttdef"><b>Definition:</b> asech.hpp:70</div></div>
+<div class="ttc" id="agroup__functions_gaafed3076d5ce6fbfa0bfa53301927ae3_html_gaafed3076d5ce6fbfa0bfa53301927ae3"><div class="ttname"><a href="group__functions_gaafed3076d5ce6fbfa0bfa53301927ae3.html#gaafed3076d5ce6fbfa0bfa53301927ae3">kyosu::asech</a></div><div class="ttdeci">constexpr auto asech</div><div class="ttdoc">Computes the inverse hyperbolic secant of the argument.</div><div class="ttdef"><b>Definition:</b> asech.hpp:72</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<ol type="1">
-<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered.</li>
+<ul>
+<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered unless the option real_only is used in which case the parameter must be a floating_value, the real part of the result will the same as an eve::acos implying a Nan result if the result is not real.</li>
 <li>Returns elementwise <code><a class="el" href="group__functions_gaa67951f7f8d8489a34dd23928f747757.html#gaa67951f7f8d8489a34dd23928f747757" title="Computes the inverse hyperbolic cosine of the argument.">acosh(rec(z))</a></code>.</li>
-</ol>
+</ul>
 <h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://mathworld.wolfram.com/InverseHyperbolicSecant.html">Wolfram MathWorld: Inverse Hyperbolic Secant</a></li>

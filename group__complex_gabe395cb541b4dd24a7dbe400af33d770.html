@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::asinpi</title>
+<title>kyosu: kyosu::from_polarpi</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga92c4c9260b24c8171caca5c014ad4298.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__complex_gabe395cb541b4dd24a7dbe400af33d770.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,8 +121,8 @@ $(document).ready(function(){initNavTree('group__functions_ga92c4c9260b24c8171ca
 </div>
 
 <div class="contents">
-<a id="ga92c4c9260b24c8171caca5c014ad4298" name="ga92c4c9260b24c8171caca5c014ad4298"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga92c4c9260b24c8171caca5c014ad4298">&#9670;&#160;</a></span>asinpi</h2>
+<a id="gabe395cb541b4dd24a7dbe400af33d770" name="gabe395cb541b4dd24a7dbe400af33d770"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabe395cb541b4dd24a7dbe400af33d770">&#9670;&#160;</a></span>from_polarpi</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('group__functions_ga92c4c9260b24c8171ca
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::asinpi = eve::functor&lt;asinpi_t&gt;</td>
+          <td class="memname">kyosu::from_polarpi = eve::functor&lt;from_polarpi_t&gt;</td>
         </tr>
       </table>
   </td>
@@ -141,55 +141,25 @@ $(document).ready(function(){initNavTree('group__functions_ga92c4c9260b24c8171ca
 </table>
 </div><div class="memdoc">
 
-<p>Computes the arc sine of the argument in \(\pi\) multiples. </p>
-<h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
+<p>Callable object computing a complex or a general Cayley-Dickson from a polar representation, with the argument in \(\pi\) multiples. </p>
+<p>This function is the reciprocal of to_polar</p>
+<h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include kyosu/quaternion.hpp&gt;`</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>eve</div>
 <div class="line">{</div>
-<div class="line">  <span class="comment">//  regular call</span></div>
-<div class="line">  <span class="keyword">template</span>&lt;concepts::cayley_dickson_like Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_ga92c4c9260b24c8171caca5c014ad4298.html#ga92c4c9260b24c8171caca5c014ad4298">asinpi</a>(Z z) <span class="keyword">noexcept</span>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// semantic modifyers</span></div>
-<div class="line">  <span class="keyword">template</span>&lt;concepts::real Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_ga92c4c9260b24c8171caca5c014ad4298.html#ga92c4c9260b24c8171caca5c014ad4298">asinpi</a>[real_only](Z z) <span class="keyword">noexcept</span>;</div>
+<div class="line"> <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T0, eve::<span class="keywordtype">float</span>ing_ordered_value T1&gt;,</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__complex_gabe395cb541b4dd24a7dbe400af33d770.html#gabe395cb541b4dd24a7dbe400af33d770">from_polarpi</a>( T0 rho, T1 theta) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga92c4c9260b24c8171caca5c014ad4298_html_ga92c4c9260b24c8171caca5c014ad4298"><div class="ttname"><a href="group__functions_ga92c4c9260b24c8171caca5c014ad4298.html#ga92c4c9260b24c8171caca5c014ad4298">kyosu::asinpi</a></div><div class="ttdeci">constexpr auto asinpi</div><div class="ttdoc">Computes the arc sine of the argument in  multiples.</div><div class="ttdef"><b>Definition:</b> asinpi.hpp:78</div></div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
+<div class="ttc" id="agroup__complex_gabe395cb541b4dd24a7dbe400af33d770_html_gabe395cb541b4dd24a7dbe400af33d770"><div class="ttname"><a href="group__complex_gabe395cb541b4dd24a7dbe400af33d770.html#gabe395cb541b4dd24a7dbe400af33d770">kyosu::from_polarpi</a></div><div class="ttdeci">constexpr auto from_polarpi</div><div class="ttdoc">Callable object computing a complex or a general Cayley-Dickson from a polar representation,...</div><div class="ttdef"><b>Definition:</b> from_polarpi.hpp:74</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
-<ul>
-<li><code>z</code>: Value to process.</li>
-</ul>
+<p><code>rho</code> : modulus. <code>theta</code>: argument.</p>
 <p><b>Return value</b></p>
-<ul>
-<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered unless the option real_only is used in which case the parameter must be a floating_value, the real part of the result will the same as an eve::asinpi implying a Nan result if the result is not real.<ul>
-<li>returns <code><a class="el" href="group__functions_gabd703393200a757087fb7f2054546dcf.html#gabd703393200a757087fb7f2054546dcf" title="Computes the parameter divided by .">radinpi(asin(z))</a></code></li>
-</ul>
-</li>
-</ul>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line"> </div>
-<div class="line"> <span class="keyword">using </span>wide_ft = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
-<div class="line">  wide_ft ref1 = { 3.0f, 2.0f, 1.0f, 0.5f};</div>
-<div class="line">  wide_ft imf1 = { 2.0f , -1.0,  -5.0, 0.0};</div>
-<div class="line">  wide_ft ref2 = { 0.0, 1.0, 2.0, 3.0};</div>
-<div class="line">  <span class="keyword">auto</span> zc = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_ft&gt;</a>(ref1, imf1);</div>
-<div class="line"> </div>
-<div class="line">  std::cout</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc              = &quot;</span> &lt;&lt; zc &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; asinpi(zc)      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga92c4c9260b24c8171caca5c014ad4298.html#ga92c4c9260b24c8171caca5c014ad4298">kyosu::asinpi</a>(zc)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; asinpi(ref2)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga92c4c9260b24c8171caca5c014ad4298.html#ga92c4c9260b24c8171caca5c014ad4298">kyosu::asinpi</a>(ref2) &lt;&lt; std::endl;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
-</div><!-- fragment --> 
+<p>the complex number <code>rho*exp_ipi(theta)</code>.</p>
+<dl class="section note"><dt>Note</dt><dd>the entries constitue a proper polar representation if rho is non-negative, however the formula is used as is.</dd></dl>
+<h4><a class="anchor" id="autotoc_md11"></a>
+Example</h4>
+<div class="fragment"></div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

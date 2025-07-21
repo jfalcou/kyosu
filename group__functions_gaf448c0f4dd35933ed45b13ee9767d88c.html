@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::asinpi</title>
+<title>kyosu: kyosu::cbrt</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga92c4c9260b24c8171caca5c014ad4298.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_gaf448c0f4dd35933ed45b13ee9767d88c.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,8 +121,8 @@ $(document).ready(function(){initNavTree('group__functions_ga92c4c9260b24c8171ca
 </div>
 
 <div class="contents">
-<a id="ga92c4c9260b24c8171caca5c014ad4298" name="ga92c4c9260b24c8171caca5c014ad4298"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga92c4c9260b24c8171caca5c014ad4298">&#9670;&#160;</a></span>asinpi</h2>
+<a id="gaf448c0f4dd35933ed45b13ee9767d88c" name="gaf448c0f4dd35933ed45b13ee9767d88c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf448c0f4dd35933ed45b13ee9767d88c">&#9670;&#160;</a></span>cbrt</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('group__functions_ga92c4c9260b24c8171ca
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::asinpi = eve::functor&lt;asinpi_t&gt;</td>
+          <td class="memname">kyosu::cbrt = eve::functor&lt;cbrt_t&gt;</td>
         </tr>
       </table>
   </td>
@@ -141,50 +141,48 @@ $(document).ready(function(){initNavTree('group__functions_ga92c4c9260b24c8171ca
 </table>
 </div><div class="memdoc">
 
-<p>Computes the arc sine of the argument in \(\pi\) multiples. </p>
+<p>Computes the the kth cubic root of the argument. </p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
 <div class="line">  <span class="comment">//  regular call</span></div>
-<div class="line">  <span class="keyword">template</span>&lt;concepts::cayley_dickson_like Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_ga92c4c9260b24c8171caca5c014ad4298.html#ga92c4c9260b24c8171caca5c014ad4298">asinpi</a>(Z z) <span class="keyword">noexcept</span>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// semantic modifyers</span></div>
-<div class="line">  <span class="keyword">template</span>&lt;concepts::real Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_ga92c4c9260b24c8171caca5c014ad4298.html#ga92c4c9260b24c8171caca5c014ad4298">asinpi</a>[real_only](Z z) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaf448c0f4dd35933ed45b13ee9767d88c.html#gaf448c0f4dd35933ed45b13ee9767d88c">cbrt</a>(complex_like z, <span class="keyword">auto</span> <a class="code hl_variable" href="group__constants_gaa1ba802b81aac3ea60fdbd1fa551c20e.html#gaa1ba802b81aac3ea60fdbd1fa551c20e">k</a>)             <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaf448c0f4dd35933ed45b13ee9767d88c.html#gaf448c0f4dd35933ed45b13ee9767d88c">cbrt</a>(complex_like z)                     <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga92c4c9260b24c8171caca5c014ad4298_html_ga92c4c9260b24c8171caca5c014ad4298"><div class="ttname"><a href="group__functions_ga92c4c9260b24c8171caca5c014ad4298.html#ga92c4c9260b24c8171caca5c014ad4298">kyosu::asinpi</a></div><div class="ttdeci">constexpr auto asinpi</div><div class="ttdoc">Computes the arc sine of the argument in  multiples.</div><div class="ttdef"><b>Definition:</b> asinpi.hpp:78</div></div>
+<div class="ttc" id="agroup__constants_gaa1ba802b81aac3ea60fdbd1fa551c20e_html_gaa1ba802b81aac3ea60fdbd1fa551c20e"><div class="ttname"><a href="group__constants_gaa1ba802b81aac3ea60fdbd1fa551c20e.html#gaa1ba802b81aac3ea60fdbd1fa551c20e">kyosu::k</a></div><div class="ttdeci">constexpr auto k</div><div class="ttdoc">Computes the complex number k i.e. quaternion(0, 0, 0, 1) in the chosen type.</div><div class="ttdef"><b>Definition:</b> k.hpp:72</div></div>
+<div class="ttc" id="agroup__functions_gaf448c0f4dd35933ed45b13ee9767d88c_html_gaf448c0f4dd35933ed45b13ee9767d88c"><div class="ttname"><a href="group__functions_gaf448c0f4dd35933ed45b13ee9767d88c.html#gaf448c0f4dd35933ed45b13ee9767d88c">kyosu::cbrt</a></div><div class="ttdeci">constexpr auto cbrt</div><div class="ttdoc">Computes the the kth cubic root of the argument.</div><div class="ttdef"><b>Definition:</b> cbrt.hpp:79</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>z</code>: Value to process.</li>
+<li><code>z</code>: Value to process. floating or complex.</li>
+<li><code>n</code>: nth root</li>
+<li>`k : kth nth root</li>
 </ul>
-<p><b>Return value</b></p>
-<ul>
-<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered unless the option real_only is used in which case the parameter must be a floating_value, the real part of the result will the same as an eve::asinpi implying a Nan result if the result is not real.<ul>
-<li>returns <code><a class="el" href="group__functions_gabd703393200a757087fb7f2054546dcf.html#gabd703393200a757087fb7f2054546dcf" title="Computes the parameter divided by .">radinpi(asin(z))</a></code></li>
-</ul>
-</li>
-</ul>
-<h2 class="groupheader">Example </h2>
+<p><b>Return value</b> </p><pre class="fragment"> - if the first parameter is floating the call will act as if they were converted to complex before call.
+ - the kth cubic root of z, is. `exp((log(z)+2*k*i*pi)/3)`. If not present k is taken as 0. (k is always taken modulo 3).
+</pre><h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_gaf448c0f4dd35933ed45b13ee9767d88c.html#gaf448c0f4dd35933ed45b13ee9767d88c">kyosu::cbrt</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a>;</div>
 <div class="line"> </div>
-<div class="line"> <span class="keyword">using </span>wide_ft = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
-<div class="line">  wide_ft ref1 = { 3.0f, 2.0f, 1.0f, 0.5f};</div>
-<div class="line">  wide_ft imf1 = { 2.0f , -1.0,  -5.0, 0.0};</div>
-<div class="line">  wide_ft ref2 = { 0.0, 1.0, 2.0, 3.0};</div>
-<div class="line">  <span class="keyword">auto</span> zc = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_ft&gt;</a>(ref1, imf1);</div>
+<div class="line">   <span class="keyword">using </span>wi_t =  eve::wide&lt;unsigned int, eve::fixed&lt;4&gt;&gt;;</div>
+<div class="line">   <span class="keyword">using </span>wf_t =  eve::wide&lt;float       , eve::fixed&lt;4&gt;&gt;;</div>
+<div class="line">   wi_t  wk = eve::iota(eve::as&lt;wi_t&gt;())+1;</div>
+<div class="line">   wf_t  wf{5.0f,  2.3f, -1.2f, 0.0f};</div>
 <div class="line"> </div>
-<div class="line">  std::cout</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc              = &quot;</span> &lt;&lt; zc &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; asinpi(zc)      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga92c4c9260b24c8171caca5c014ad4298.html#ga92c4c9260b24c8171caca5c014ad4298">kyosu::asinpi</a>(zc)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; asinpi(ref2)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga92c4c9260b24c8171caca5c014ad4298.html#ga92c4c9260b24c8171caca5c014ad4298">kyosu::asinpi</a>(ref2) &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;wk                          &quot;</span> &lt;&lt; wk &lt;&lt;  std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;wf                          &quot;</span> &lt;&lt; wf &lt;&lt;  std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kyosu::cbrt(16.0, wk)    &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaf448c0f4dd35933ed45b13ee9767d88c.html#gaf448c0f4dd35933ed45b13ee9767d88c">kyosu::cbrt</a>(16.0, wk) &lt;&lt;  std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kyosu::cbrt(wf, wk)      &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaf448c0f4dd35933ed45b13ee9767d88c.html#gaf448c0f4dd35933ed45b13ee9767d88c">kyosu::cbrt</a>(wf, wk)   &lt;&lt;  std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kyosu::cbrt(wf)          &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaf448c0f4dd35933ed45b13ee9767d88c.html#gaf448c0f4dd35933ed45b13ee9767d88c">kyosu::cbrt</a>(wf)&lt;&lt;  std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>

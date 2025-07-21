@@ -147,9 +147,13 @@ $(document).ready(function(){initNavTree('group__functions_ga72bd8b3dcf975e0e9bb
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
+<div class="line">  <span class="comment">//  regular call</span></div>
 <div class="line">  <span class="keyword">template</span>&lt;concepts::cayley_dickson_like Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0.html#ga72bd8b3dcf975e0e9bb4e5e83df4f4a0">acoth</a>(Z z) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// semantic modifyers</span></div>
+<div class="line">  <span class="keyword">template</span>&lt;concepts::real Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="group__functions_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0.html#ga72bd8b3dcf975e0e9bb4e5e83df4f4a0">acoth</a>[real_only](Z z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0_html_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0"><div class="ttname"><a href="group__functions_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0.html#ga72bd8b3dcf975e0e9bb4e5e83df4f4a0">kyosu::acoth</a></div><div class="ttdeci">constexpr auto acoth</div><div class="ttdoc">Computes the inverse hyperbolic cotangent of the argument.</div><div class="ttdef"><b>Definition:</b> acoth.hpp:71</div></div>
+<div class="ttc" id="agroup__functions_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0_html_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0"><div class="ttname"><a href="group__functions_ga72bd8b3dcf975e0e9bb4e5e83df4f4a0.html#ga72bd8b3dcf975e0e9bb4e5e83df4f4a0">kyosu::acoth</a></div><div class="ttdeci">constexpr auto acoth</div><div class="ttdoc">Computes the inverse hyperbolic cotangent of the argument.</div><div class="ttdef"><b>Definition:</b> acoth.hpp:86</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -157,7 +161,7 @@ $(document).ready(function(){initNavTree('group__functions_ga72bd8b3dcf975e0e9bb
 </ul>
 <p><b>Return value</b></p>
 <ul>
-<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered.</li>
+<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered, unless the option real_only is used in which case the parameter must be a floating_value, the real part of the result will the same as an eve::acos implying a Nan result if the result is not real.</li>
 <li>For complex input, returns elementwise the complex principal value of the inverse hyperbolic cotangent of the input as the inverse hyperbolic tangent of the inverse of the input.</li>
 <li>For general <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> input, the call is equivalent to <code><a class="el" href="group__functions_ga4f764df12120f10236ef0c746e9ed6ff.html#ga4f764df12120f10236ef0c746e9ed6ff" title="Computes the inverse hyperbolic tangent of the argument.">atanh(rec(z))</a></code>.</li>
 </ul>
