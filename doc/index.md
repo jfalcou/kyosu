@@ -132,10 +132,15 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
           are only defined on a proper part of the real axis as, for example, `acos` DOES NOT ever provide the same result
           if called in **EVE** or **KYOSU** context.
 
-          eve::acos(2.0) wil returns a NaN value, but kyosu::acos(2.0) will return the pure imaginary
+          eve::acos(2.0) will returns a NaN value, but kyosu::acos(2.0) will return the pure imaginary
           complex number \f$i\;\log(2+\sqrt{3})\f$
 
           All these kinds of functions called with a floating value in the kyosu namespace will return a complex value.
+
+          However, some of those functions provide a `real_only` option that allows to call them with floating parameters
+          only and returns the complex,
+          the real part of which is the eve call result and the imaginary part is zero or a NaN. Shortly : if **EVE** returns a Nan, **KYOSU**,
+          with this option, will return fnan (i.e. complex(nan,nan)).
 
   * Callables usable with all cayley_dickson types
 
@@ -150,7 +155,7 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
         is the imaginary part of the complex \f$v\f$
 
     Moreover some functions are defined that does not pertain to **EVE** because they do not return real results for real entries.
-    (For instance [erfi](@ref kyosu::erfi)).
+    (For instance [expipi](@ref kyosu::expipi)).
 
    |                                                   |                                                   |                                                   |                                                   |
    |---------------------------------------------------|---------------------------------------------------|---------------------------------------------------|---------------------------------------------------|
@@ -200,6 +205,13 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
    |[tanh](@ref kyosu::tanh)                           |[tanpi](@ref kyosu::tanpi)                         |[tchebytchev](@ref kyosu::tchebytchev)             |[tgamma](@ref kyosu::tgamma)                       |
    |[tgamma_inv](@ref kyosu::tgamma_inv)               |[to_cylindrical](@ref kyosu::to_cylindrical)       |[to_polar](@ref kyosu::to_polar)                   |[tricomi](@ref kyosu::tricomi)                     |
    |[trunc](@ref kyosu::trunc)                         |[zeta](@ref kyosu::zeta)                           |                                                   |                                                   |
+  * Callables usable with complex and real only
+
+    These functions are related to proper complex properties of nth roots, they always provide a complex result.
+
+    |                                    |                                   |
+    |------------------------------------|-----------------------------------|
+    | [cbrt](@ref kyosu::cbrt)           |  [nthroot](@ref kyosu::nthroot)   |
 
   * Callables usable with quaternion, complex and real only
 
@@ -216,3 +228,6 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
     * [j(as<Z>())](@ref kyosu::j) and [k(as<Z>())](@ref kyosu::k) return a least a quaternion of the same underlying type as Z or a value of the Z type;
     * cinf(as<Z>()) returns at least a complex with nan real part and inf imaginary part, that can be roughly taken as a complex-infinity, in the sense that abs is infinite and arg is undefinite (nan), or a value of the Z type.
     * fnan(as<Z>()) returns a cayley-dickson like in which all parts are nans.
+
+      @warning [i(as<Z>())](@ref kyosu::i) and  [j(as<Z>())](@ref kyosu::j) are not aliases of each other. [j(as<Z>())](@ref kyosu::j)is always
+        at least a quaternion. Sorry for the electrical engineers !

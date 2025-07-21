@@ -19,11 +19,19 @@ namespace kyosu
   {
      template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    requires(!Options::contains(real_only))
     {
       if constexpr(concepts::real<Z>)
         return (*this)(complex(z));
       else
         return  KYOSU_CALL(z);
+    }
+
+    template<concepts::real Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    requires(Options::contains(real_only))
+    {
+      return  KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(acosh_t, acosh_);
@@ -46,7 +54,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acosh(Z z) noexcept;
+//!     //  regular call
+//!    template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acosh(Z z) noexcept;
+//!
+//!     // semantic modifyers
+//!     template<concepts::real Z> constexpr complexify_t<Z> acosh[real_only](Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -56,7 +68,9 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   - A real input z is treated as if `complex(z)` was entered.
+//!   - A real input z is treated as if `complex(z)` was entered unless the option real_only is used
+//!     in which case the parameter must be a floating_value, the result will the same as an eve::acosh
+//!     implying a Nan result if the result is not real.
 //!   - For complex input, returns the complex inverse hyperbolic cosine of z, in the range of a
 //!      strip unbounded along the imaginary axis and
 //!      in the interval \f$[0,\pi]\f$ along the real axis.
@@ -96,7 +110,9 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(concepts::complex<Z> )
+    if constexpr(O::contains(real_only))
+      return kyosu::inject(eve::acosh(z));
+    else if constexpr(concepts::complex<Z> )
     {
       // acosh(a0) = +/-i acos(a0)
       // Choosing the sign of multiplier to give real(acosh(a0)) >= 0

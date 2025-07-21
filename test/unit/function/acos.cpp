@@ -9,7 +9,7 @@
 #include <test.hpp>
 
 TTS_CASE_WITH ( "Check kyosu::acos over quaternion"
-              , kyosu::scalar_real_types
+              , kyosu::simd_real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)
                               )
@@ -23,9 +23,13 @@ TTS_CASE_WITH ( "Check kyosu::acos over quaternion"
   auto c  = ce_t(a0,a1);
   auto q  = qe_t(a0,a1,a2,a3);
 
+  auto re = kyosu::acos[kyosu::real_only](r);
   auto lr = kyosu::acos(r);
   auto lc = kyosu::acos(c);
   auto lq = kyosu::acos(q);
+  auto rr = eve::acos(r);
+
+  TTS_IEEE_EQUAL(re, kyosu::inject(rr));
   TTS_RELATIVE_EQUAL(kyosu::cos(lr), ce_t(r), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::cos(lc), c, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::cos(lq), q, tts::prec<T>());

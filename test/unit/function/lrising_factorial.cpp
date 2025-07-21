@@ -8,23 +8,23 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::pow1p over real"
+TTS_CASE_WITH ( "Check kyosu::lrising_factorial over real"
               , kyosu::real_types
-              , tts::generate(tts::randoms(0,10)
+              , tts::generate(tts::randoms(-10,10)
                              ,tts::randoms(-10,10)
                              )
               )
 (auto r0, auto r1)
 {
   using T =  decltype(r0);
-  TTS_RELATIVE_EQUAL(kyosu::pow1p(r0, r1), kyosu::complex(eve::pow1p(r0, r1)), tts::prec<T>());
-  auto re = kyosu::pow1p[kyosu::real_only](r0, r1);
-  auto rr = eve::pow1p(r0, r1);
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial(r0, r1), kyosu::log(kyosu::rising_factorial(r0, r1)), tts::prec<T>(5.0e-3,  1.0e-7));
+  auto re = kyosu::lrising_factorial[kyosu::real_only](r0, r1);
+  auto rr = eve::lrising_factorial(r0, r1);
 
-  TTS_IEEE_EQUAL(re,  kyosu::inject(rr));
+  TTS_IEEE_EQUAL(re, kyosu::inject(rr));
 };
 
-TTS_CASE_WITH ( "Check kyosu::pow1p over complex"
+TTS_CASE_WITH ( "Check kyosu::lrising_factorial over complex"
               , kyosu::real_types
               , tts::generate(tts::randoms(-1,1), tts::randoms(-1,1)
                              ,tts::randoms(-1,1), tts::randoms(-1,1)
@@ -35,12 +35,12 @@ TTS_CASE_WITH ( "Check kyosu::pow1p over complex"
   using T =  decltype(r0);
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
-  TTS_RELATIVE_EQUAL(kyosu::pow1p(c0, c1), kyosu::pow(kyosu::inc(c0), c1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::pow1p(r0, c1), kyosu::pow(kyosu::inc(r0), c1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::pow1p(c0, r1), kyosu::pow(kyosu::inc(c0), r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial(c0, c1), kyosu::log(kyosu::rising_factorial(c0, c1)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial(r0, c1), kyosu::log(kyosu::rising_factorial(r0, c1)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial(c0, r1), kyosu::log(kyosu::rising_factorial(c0, r1)), tts::prec<T>());
 };
 
-TTS_CASE_WITH ( "Check kyosu::pow1p over quaternion"
+TTS_CASE_WITH ( "Check kyosu::lrising_factorial over quaternion"
               , kyosu::real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)
@@ -53,5 +53,5 @@ TTS_CASE_WITH ( "Check kyosu::pow1p over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::pow1p(q0, q1),  kyosu::pow(kyosu::inc(q0), q1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial(q0, q1),  kyosu::log(kyosu::rising_factorial(q0, q1)), tts::prec<T>());
 };

@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct atanh_t : eve::elementwise_callable<atanh_t, Options>
+  struct atanh_t : eve::elementwise_callable<atanh_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
@@ -22,6 +22,13 @@ namespace kyosu
         return  (*this)(complex(z));
       else
         return KYOSU_CALL(z);
+    }
+
+    template<concepts::real Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    requires(Options::contains(real_only))
+    {
+      return  KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(atanh_t, atanh_);
@@ -98,7 +105,9 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto atanh_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
-    if constexpr(concepts::complex<Z> )
+    if constexpr(O::contains(real_only))
+      return kyosu::inject(eve::atanh(a0));
+    else if constexpr(concepts::complex<Z> )
     {
       // This implementation is a simd (i.e. no branch) transcription and adaptation of the
       // boost_math code which itself is a transcription of the pseudo-code in:

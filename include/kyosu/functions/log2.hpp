@@ -14,13 +14,20 @@
 namespace kyosu
 {
   template<typename Options>
-  struct log2_t : eve::elementwise_callable<log2_t, Options>
+  struct log2_t : eve::elementwise_callable<log2_t, Options, real_only_option>
   {
    template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       if constexpr(concepts::real<Z>) return (*this)(complex(z));
       else                            return KYOSU_CALL(z);
+    }
+
+    template<concepts::real Z>
+    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    requires(Options::contains(real_only))
+    {
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(log2_t, log2_);
@@ -43,7 +50,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T log2(T z) noexcept;
+//!      //  regular call
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log2(T z) noexcept;
+//!
+//!      // semantic modifyers
+//!      template<concepts::real T> constexpr complexify_t<T> log2[real_only](T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -53,7 +64,9 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     - real typed input z is treated as if `complex(z)` was entered.
+//!     - real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
+//!       in which case the parameter must be a floating_value, the real part of the result will the same as an eve::log2
+//!       implying a Nan result if the result is not real.
 //!     - returns [log](@ref kyosu::log)(z)/log_2(as(z)).
 //!
 //!  @groupheader{External references}
@@ -71,22 +84,32 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr Z log2_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(kyosu::concepts::complex<Z>)
+    if constexpr(O::contains(real_only))
+      return kyosu::inject(eve::log2(z));
+    else  if constexpr(kyosu::concepts::complex<Z>)
     {
       auto [rz, iz] = z;
-      auto infty = eve::inf(eve::as(rz));
-      auto arg = [](auto z){ return eve::atan2[eve::pedantic](kyosu::imag(z), kyosu::real(z));};
-      auto argz = arg(z)*eve::invlog_2(eve::as(rz));
-      auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
-      auto la = eve::log2(absz);
-      auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), complex(la), complex(la, argz));
-      if(eve::any(kyosu::is_not_finite(z)))
+      if (eve::all(kyosu::is_real(z)))
       {
-        r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), complex(infty, iz), r);
+        auto lga = eve::log2(eve::abs(rz));
+        return if_else(eve::is_positive(rz), lga, complex(lga, eve::invlog_2(eve::as(lga))*pi(eve::as(lga))*eve::signnz(iz)));
       }
-      return r;
+      else
+      {
+        auto infty = eve::inf(eve::as(rz));
+        auto arg = [](auto z){ return eve::atan2[eve::pedantic](kyosu::imag(z), kyosu::real(z));};
+        auto argz = arg(z)*eve::invlog_2(eve::as(rz));
+        auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
+        auto la = eve::log2(absz);
+        auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), complex(la), complex(la, argz));
+        if(eve::any(kyosu::is_not_finite(z)))
+        {
+          r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), complex(infty, iz), r);
+        }
+        return r;
+      }
     }
     else
     {
