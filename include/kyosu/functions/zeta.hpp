@@ -78,7 +78,7 @@ namespace kyosu::_
     {
       auto zz=exp2(z);
       auto k = zz/(zz-2);
-      auto g = if_else(z == Z(1), complex(eve::nan(eve::as(real(z)))), k*eta(z));
+      auto g = if_else(z == Z(1), kyosu::cinf(eve::as(z)), k*eta(z));
       return if_else(real(z) == eve::inf(eve::as(real(z))), complex(eve::one(eve::as(real(z)))), g);
     }
     else
