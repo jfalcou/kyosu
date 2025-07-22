@@ -64,10 +64,13 @@ namespace kyosu
 //!   *  [Wolfram MathWorld: Gamma Function](https://mathworld.wolfram.com/GammaFunction.html)
 //!   *  [Wikipedia: Gamma function](https://en.wikipedia.org/wiki/Gamma_function)
 //!
+//!  @note Γ can be used as an alias in code.
+//!
 //!  @groupheader{Example}
 //!  @godbolt{doc/tgamma.cpp}
 //======================================================================================================================
   inline constexpr auto tgamma = eve::functor<tgamma_t>;
+  inline constexpr auto Γ = eve::functor<tgamma_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
