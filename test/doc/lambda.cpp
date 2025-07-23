@@ -16,7 +16,8 @@ int main()
     << "<- zc              = " << zc << std::endl
     << "<- ref2            = " << ref2 <<  std::endl
     << "-> lambda(zc)      = " << kyosu::lambda(zc)<< std::endl
-    << "-> lambda(ref2)    = " << kyosu::lambda(ref2) << std::endl;
+    << "-> lambda(ref2)    = " << kyosu::lambda(ref2) << std::endl
+    << "-> λ(ref2)         = " << kyosu::λ(ref2) << std::endl;
 
   return 0;
 }

@@ -15,5 +15,6 @@ int main()
     << "---- simd" << std::endl
     << "<- zc                          = " << zc << std::endl
     << "-> tgamma(zc)                  = " << kyosu::tgamma(zc)<< std::endl
-    << "-> tgamma(ref2)                = " << kyosu::tgamma(ref2) << std::endl; 
+    << "-> tgamma(ref2)                = " << kyosu::tgamma(ref2) << std::endl
+    << "-> Γ(ref2)                 = " << kyosu::Γ(ref2) << std::endl;
 }

@@ -15,7 +15,8 @@ int main()
     << "---- simd" << std::endl
     << "<- zc        = " << zc << std::endl
     << "-> eta(zc)   = " << kyosu::eta(zc)<< std::endl
-    << "-> eta(ref2)    = " << kyosu::eta(ref2) << std::endl;
+    << "-> eta(ref2)    = " << kyosu::eta(ref2) << std::endl
+    << "-> η(ref2)    = " << kyosu::η(ref2) << std::endl;
 
   return 0;
 }
