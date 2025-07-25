@@ -54,9 +54,9 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `k` : scalar unsigned value,  parameter of the sum.
+//!     * `k` : scalar unsigned value,  parameter of the sum can only take the values 1 and 2.
 //!     * `z` : cayley_dickson or real value to process. ( a real input z is treated
-//!        as if a complex with 0 imaginary part was entered.
+//!        as if  complex(z) was entered.
 //!
 //! **Return value**
 //!
@@ -77,7 +77,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::unsigned_scalar_value K, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto deta_(KYOSU_DELAY(), O const&,
+  constexpr auto deta_(KYOSU_DELAY(), O const&,
                K const & kk, Z z) noexcept
   {
     if constexpr(concepts::complex<Z> )
@@ -100,7 +100,7 @@ namespace kyosu::_
       auto reflect = rz < r;
       z =  if_else(reflect, oneminus(z), z);
 
-      std::array<real_t, 64> cm = {
+      constexpr std::array<real_t, 64> cm = {
         .27105054312137610850e-19
         -.17889335846010823161e-17,
         .58167446553847312884e-16,

@@ -7,14 +7,14 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/to_complex.hpp>
-#include <kyosu/functions/eta.hpp>
+#include <kyosu/functions/dec.hpp>
+#include <kyosu/functions/zeta.hpp>
 #include <kyosu/functions/if_else.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct zeta_t : eve::elementwise_callable<zeta_t, Options>
+  struct xi_t : eve::elementwise_callable<xi_t, Options>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
@@ -25,14 +25,14 @@ namespace kyosu
         return KYOSU_CALL(z);
     }
 
-    KYOSU_CALLABLE_OBJECT(zeta_t, zeta_);
+    KYOSU_CALLABLE_OBJECT(xi_t, xi_);
 };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
-//!   @var zeta
-//!   @brief Computes the Riemann \f$ \displaystyle\zeta(z)=\sum_0^\infty \frac{1}{(n+1)^z}\f$.
+//!   @var xi
+//!   @brief Computes the Riemann \f$ \displaystyle\xi(z)=\sum_0^\infty \frac{1}{(n+1)^z}\f$.
 //!
 //!   @groupheader{Header file}
 //!
@@ -45,7 +45,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::complex T>    constexpr auto zeta(T z) noexcept;
+//!      template<kyosu::concepts::complex T>    constexpr auto xi(T z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -55,18 +55,15 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   Returns the Dirichlet zeta sum: \f$  \displaystyle \sum_0^\infty \frac{1}{(n+1)^z}\f$
-//!
-//!  @note ζ can be used as an alias of `zeta`.
+//!   Returns the Dirichlet xi sum: \f$  \displaystyle \sum_0^\infty \frac{1}{(n+1)^z}\f$
 //!
 //!  @groupheader{External references}
 //!   *  [Wikipedia: Dirichlet series](https://en.wikipedia.org/wiki/Dirichlet_series)
 //!
 //!  @groupheader{Example}
-//!  @godbolt{doc/zeta.cpp}
+//!  @godbolt{doc/xi.cpp}
 //======================================================================================================================
-  inline constexpr auto zeta = eve::functor<zeta_t>;
-  inline constexpr auto ζ = eve::functor<zeta_t>;
+  inline constexpr auto xi = eve::functor<xi_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -75,18 +72,20 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto zeta_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto xi_(KYOSU_DELAY(), O const&, Z zz) noexcept
   {
-   if constexpr(concepts::complex<Z> )
+    if constexpr(concepts::complex<Z> )
     {
-      auto zz=exp2(z);
-      auto k = zz/(zz-2);
-      auto g = if_else(z == Z(1), kyosu::cinf(eve::as(z)), k*eta(z));
-      return if_else(real(z) == eve::inf(eve::as(real(z))), complex(eve::one(eve::as(real(z)))), g);
+      using u_t = eve::underlying_type_t<Z>;
+      auto z = kyosu::if_else(kyosu::abs(zz) > u_t(0.25), oneminus(zz), zz); //reflection to avoid problems near zz == 1
+      u_t logpi(1.1447298858494001741434273);
+      auto hz = kyosu::half(kyosu::as<u_t>())*z;
+      auto r = dec(z)*kyosu::tgamma(kyosu::inc(hz))*kyosu::exp(-logpi*hz)*kyosu::zeta(z);
+      return r; 
     }
     else
     {
-      return cayley_extend(kyosu::zeta, z);
+      return cayley_extend(kyosu::xi, zz);
     }
   }
 }
