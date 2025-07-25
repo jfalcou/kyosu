@@ -150,7 +150,7 @@ $(document).ready(function(){initNavTree('group__functions_ga87e87a2d786aa520b7a
 <div class="line">{</div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> complexify_t&lt;T&gt; <a class="code hl_variable" href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">lambda</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga87e87a2d786aa520b7a6f37208f369bc_html_ga87e87a2d786aa520b7a6f37208f369bc"><div class="ttname"><a href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">kyosu::lambda</a></div><div class="ttdeci">constexpr auto lambda</div><div class="ttdoc">Callable object computing The Dirichlet .</div><div class="ttdef"><b>Definition:</b> lambda.hpp:69</div></div>
+<div class="ttc" id="agroup__functions_ga87e87a2d786aa520b7a6f37208f369bc_html_ga87e87a2d786aa520b7a6f37208f369bc"><div class="ttname"><a href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">kyosu::lambda</a></div><div class="ttdeci">constexpr auto lambda</div><div class="ttdoc">Callable object computing The Dirichlet .</div><div class="ttdef"><b>Definition:</b> lambda.hpp:71</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -158,6 +158,7 @@ $(document).ready(function(){initNavTree('group__functions_ga87e87a2d786aa520b7a
 </ul>
 <p><b>Return value</b></p>
 <p>Returns the Dirichlet sum \(  \displaystyle \sum_0^\infty \frac{1}{(2n+1)^z}\)</p>
+<dl class="section note"><dt>Note</dt><dd>λ can be used as an alias in code.</dd></dl>
 <h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://mathworld.wolfram.com/DirichletLambdaFunction.html">Wolfram MathWorld: Dirichlet lambda</a></li>
@@ -182,7 +183,8 @@ $(document).ready(function(){initNavTree('group__functions_ga87e87a2d786aa520b7a
 <div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc              = &quot;</span> &lt;&lt; zc &lt;&lt; std::endl</div>
 <div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- ref2            = &quot;</span> &lt;&lt; ref2 &lt;&lt;  std::endl</div>
 <div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; lambda(zc)      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">kyosu::lambda</a>(zc)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; lambda(ref2)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">kyosu::lambda</a>(ref2) &lt;&lt; std::endl;</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; lambda(ref2)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga87e87a2d786aa520b7a6f37208f369bc.html#ga87e87a2d786aa520b7a6f37208f369bc">kyosu::lambda</a>(ref2) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; λ(ref2)         = &quot;</span> &lt;&lt; kyosu::λ(ref2) &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
