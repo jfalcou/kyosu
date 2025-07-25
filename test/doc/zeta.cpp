@@ -12,6 +12,7 @@ int main()
     << "---- simd" << std::endl
     << "<- zc          = " << zc << std::endl
     << "-> zeta(zc)    = " << kyosu::zeta(zc) << std::endl
-    << "-> zeta(ref1)  = " << kyosu::zeta(ref1) << std::endl;
+    << "-> zeta(ref1)  = " << kyosu::zeta(ref1) << std::endl
+    << "-> ζ(ref1)       " << kyosu::ζ(ref1) << std::endl;
    return 0;
 }

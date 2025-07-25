@@ -52,11 +52,14 @@ namespace kyosu
 //!
 //!   Returns the Dirichlet alternating zeta function: \f$  \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\f$
 //!
+//!  @note η can be used as an alias in code.
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/eta.cpp}
 //======================================================================================================================
   inline constexpr auto eta = eve::functor<eta_t>;
+  inline constexpr auto η = eve::functor<eta_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================

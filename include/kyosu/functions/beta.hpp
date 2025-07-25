@@ -57,13 +57,16 @@ namespace kyosu
 //!      \f$\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
 //!     If  `x` and `y` are real typed values they are treated as complex inputs.
 //!
+//!  @note Β (upper case greek letter) can be used as an alias in code.
+//!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Beta Function](https://mathworld.wolfram.com/BetaFunction.html)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/beta.cpp}
 //======================================================================================================================
-  inline constexpr auto beta = eve::functor<beta_t>;
+  inline constexpr auto beta = eve::functor<beta_t>; 
+  inline constexpr auto Β = eve::functor<beta_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================

@@ -57,6 +57,8 @@ namespace kyosu
 //!
 //!   Returns the Dirichlet zeta sum: \f$  \displaystyle \sum_0^\infty \frac{1}{(n+1)^z}\f$
 //!
+//!  @note ζ can be used as an alias of `zeta`.
+//!
 //!  @groupheader{External references}
 //!   *  [Wikipedia: Dirichlet series](https://en.wikipedia.org/wiki/Dirichlet_series)
 //!
@@ -64,6 +66,7 @@ namespace kyosu
 //!  @godbolt{doc/zeta.cpp}
 //======================================================================================================================
   inline constexpr auto zeta = eve::functor<zeta_t>;
+  inline constexpr auto ζ = eve::functor<zeta_t>;
 //======================================================================================================================
 //! @}
 //======================================================================================================================
