@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::deta</title>
+<title>kyosu: kyosu::xi</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__functions_ga7018e98e80593a808e25376989db03ff.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,8 +121,8 @@ $(document).ready(function(){initNavTree('group__functions_ga80b0877803d92aafcb1
 </div>
 
 <div class="contents">
-<a id="ga80b0877803d92aafcb11e1c641f7f0fd" name="ga80b0877803d92aafcb11e1c641f7f0fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga80b0877803d92aafcb11e1c641f7f0fd">&#9670;&#160;</a></span>deta</h2>
+<a id="ga7018e98e80593a808e25376989db03ff" name="ga7018e98e80593a808e25376989db03ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7018e98e80593a808e25376989db03ff">&#9670;&#160;</a></span>xi</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('group__functions_ga80b0877803d92aafcb1
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">kyosu::deta = eve::functor&lt;deta_t&gt;</td>
+          <td class="memname">kyosu::xi = eve::functor&lt;xi_t&gt;</td>
         </tr>
       </table>
   </td>
@@ -141,24 +141,22 @@ $(document).ready(function(){initNavTree('group__functions_ga80b0877803d92aafcb1
 </table>
 </div><div class="memdoc">
 
-<p>Computes the Dirichlet sums \( \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\). </p>
+<p>Computes the Riemann \( \displaystyle\xi(z)=\sum_0^\infty \frac{1}{(n+1)^z}\). </p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;concepts::cayley_dickson_like Z&gt; complexify_t&lt;Z&gt; <span class="keyword">constexpr</span> <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(unsigned_scalar_value <span class="keyword">auto</span> <a class="code hl_variable" href="group__constants_gaa1ba802b81aac3ea60fdbd1fa551c20e.html#gaa1ba802b81aac3ea60fdbd1fa551c20e">k</a>, Z z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::complex T&gt;    <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga7018e98e80593a808e25376989db03ff.html#ga7018e98e80593a808e25376989db03ff">xi</a>(T z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__constants_gaa1ba802b81aac3ea60fdbd1fa551c20e_html_gaa1ba802b81aac3ea60fdbd1fa551c20e"><div class="ttname"><a href="group__constants_gaa1ba802b81aac3ea60fdbd1fa551c20e.html#gaa1ba802b81aac3ea60fdbd1fa551c20e">kyosu::k</a></div><div class="ttdeci">constexpr auto k</div><div class="ttdoc">Computes the complex number k i.e. quaternion(0, 0, 0, 1) in the chosen type.</div><div class="ttdef"><b>Definition:</b> k.hpp:72</div></div>
-<div class="ttc" id="agroup__functions_ga80b0877803d92aafcb11e1c641f7f0fd_html_ga80b0877803d92aafcb11e1c641f7f0fd"><div class="ttname"><a href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">kyosu::deta</a></div><div class="ttdeci">constexpr auto deta</div><div class="ttdoc">Computes the Dirichlet sums .</div><div class="ttdef"><b>Definition:</b> deta.hpp:71</div></div>
+<div class="ttc" id="agroup__functions_ga7018e98e80593a808e25376989db03ff_html_ga7018e98e80593a808e25376989db03ff"><div class="ttname"><a href="group__functions_ga7018e98e80593a808e25376989db03ff.html#ga7018e98e80593a808e25376989db03ff">kyosu::xi</a></div><div class="ttdeci">constexpr auto xi</div><div class="ttdoc">Computes the Riemann .</div><div class="ttdef"><b>Definition:</b> xi.hpp:66</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition:</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>k</code> : scalar unsigned value, parameter of the sum can only take the values 1 and 2.</li>
-<li><code>z</code> : <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> or real value to process. ( a real input z is treated as if <a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a> was entered.</li>
+<li><code>z</code> : value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the Dirichlet sum \(  \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\)</p>
+<p>Returns the Dirichlet xi sum: \(  \displaystyle \sum_0^\infty \frac{1}{(n+1)^z}\)</p>
 <h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Dirichlet_series">Wikipedia: Dirichlet series</a></li>
@@ -170,30 +168,17 @@ $(document).ready(function(){initNavTree('group__functions_ga80b0877803d92aafcb1
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">kyosu::deta</a>;</div>
-<div class="line"><span class="keyword">using </span>wide_ft = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
-<div class="line"> </div>
-<div class="line">  wide_ft ref1 = { 3.0f, 2.0f, 1.0f, 0.6f};</div>
+<div class="line">  <span class="keyword">using </span>wide_ft = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
+<div class="line">  wide_ft ref1 = { 3.0f, 2.0f, 1.0f, 0.5f};</div>
 <div class="line">  wide_ft imf1 = { 2.0f , -1.0,  -5.0, 0.0};</div>
 <div class="line">  <span class="keyword">auto</span> zc = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_ft&gt;</a>(ref1, imf1);</div>
-<div class="line">  <span class="keyword">auto</span> z = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;double&gt;</a>(1.0, 0.0);</div>
-<div class="line">  <span class="keyword">auto</span> zf= <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;float &gt;</a>(1.0, 0.0);</div>
 <div class="line">  std::cout</div>
 <div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- z           = &quot;</span> &lt;&lt; z &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(1, z)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(1u, z) &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(2, z)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(2u, z) &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(3, z)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(3u, z) &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(2, 0.2)= &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(2u, 0.2)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(1, 0.2)= &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(1u, 0.2)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(1, z)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(1u, zf) &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(2, z)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(2u, zf) &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(3, z)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(3u, zf) &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(2, 0.2)= &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(2u, 0.2f)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(1, 0.2)= &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(1u, 0.2f)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc          = &quot;</span> &lt;&lt; zc &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(1, zc) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga80b0877803d92aafcb11e1c641f7f0fd.html#ga80b0877803d92aafcb11e1c641f7f0fd">deta</a>(1u, zc)&lt;&lt; std::endl;</div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc        = &quot;</span> &lt;&lt; zc &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- ref1      = &quot;</span> &lt;&lt; ref1 &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; xi(zc)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga7018e98e80593a808e25376989db03ff.html#ga7018e98e80593a808e25376989db03ff">kyosu::xi</a>(zc) &lt;&lt; std::endl</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; xi(ref1)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga7018e98e80593a808e25376989db03ff.html#ga7018e98e80593a808e25376989db03ff">kyosu::xi</a>(ref1) &lt;&lt; std::endl;</div>
+<div class="line">   <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition:</b> complex.hpp:27</div></div>
 </div><!-- fragment --> 
