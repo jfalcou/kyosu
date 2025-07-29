@@ -18,19 +18,44 @@ TTS_CASE_WITH ( "Check kyosu::acsc over quaternion"
 {
   using ce_t = kyosu::complex_t<T>;
   using qe_t = kyosu::quaternion_t<T>;
-  
+
   auto r  = T(a0);
   auto c  = ce_t(a0,a1);
   auto q  = qe_t(a0,a1,a2,a3);
-  
+
   auto rr = eve::acsc(r);
   auto re = kyosu::acsc[kyosu::real_only](r);
   TTS_IEEE_EQUAL(re, kyosu::inject(rr));
-  
+
   auto lr = kyosu::acsc(r);
   auto lc = kyosu::acsc(c);
   auto lq = kyosu::acsc(q);
   TTS_RELATIVE_EQUAL(kyosu::csc(lr), kyosu::complex(r), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::csc(lc), c, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::csc(lq), q, tts::prec<T>());
+};
+
+
+
+TTS_CASE_WITH ( "Check kyosu::acsc conditionnal"
+              , kyosu::simd_real_types
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
+                              , tts::randoms(-10,10), tts::randoms(-10,10)
+                              )
+              )
+<typename T>(T a0, T a1, T a2, T a3)
+{
+  using ce_t = kyosu::complex_t<T>;
+  using qe_t = kyosu::quaternion_t<T>;
+
+  auto r  = T(a0);
+  auto c  = ce_t(a0,a1);
+  auto q  = qe_t(a0,a1,a2,a3);
+
+  auto cond = eve::is_ltz(a0);
+
+  TTS_RELATIVE_EQUAL(kyosu::acsc[cond](r), kyosu::if_else(cond,  kyosu::acsc(r), ce_t(r)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acsc[cond](c), kyosu::if_else(cond,  kyosu::acsc(c), c), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acsc[cond](q), kyosu::if_else(cond,  kyosu::acsc(q), q), tts::prec<T>());
+
 };
