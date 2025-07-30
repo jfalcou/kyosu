@@ -18,13 +18,13 @@ namespace kyosu
     template<concepts::real U,
              concepts::real V,
              concepts::real W, int I,  int J, int K>
-    KYOSU_FORCEINLINE constexpr auto operator()( U const & v1
-                                               , V const & v2
-                                               , W const & v3
-                                               , _::axis<I>
-                                               , _::axis<J>
-                                               , _::axis<K>) const noexcept
-    -> quaternion_t<eve::common_value_t<U, V, W>>
+    KYOSU_FORCEINLINE constexpr
+    quaternion_t<eve::common_value_t<U, V, W>> operator()( U const & v1
+                                                         , V const & v2
+                                                         , W const & v3
+                                                         , _::axis<I>
+                                                         , _::axis<J>
+                                                         , _::axis<K>) const noexcept
     requires(I != J && J != K)
     {
       using e_t = decltype(v1+v2+v3);

@@ -17,7 +17,8 @@ namespace kyosu
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     requires(eve::same_lanes_or_scalar<Z0, Z1>)
-      KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const & z1) const noexcept -> complexify_t<decltype(z0+z1)>
+      KYOSU_FORCEINLINE constexpr
+    complexify_t<as_cayley_dickson_t<Z0, Z1>> operator()(Z0 const& z0, Z1 const & z1) const noexcept
     {
       if constexpr(concepts::real<Z0> && concepts::real<Z1>) return (*this)(complex(z0), complex(z1));
       else return KYOSU_CALL(z0, z1);
@@ -65,7 +66,7 @@ namespace kyosu
 //!  @groupheader{Example}
 //!  @godbolt{doc/beta.cpp}
 //======================================================================================================================
-  inline constexpr auto beta = eve::functor<beta_t>; 
+  inline constexpr auto beta = eve::functor<beta_t>;
   inline constexpr auto Β = eve::functor<beta_t>;
 //======================================================================================================================
 //! @}
