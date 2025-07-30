@@ -26,7 +26,7 @@ namespace kyosu
 
     template<eve::scalar_value N,  concepts::complex_like  Z, std::size_t S>
 
-    KYOSU_FORCEINLINE constexpr auto
+    KYOSU_FORCEINLINE constexpr Z
     operator()(N const& n, Z const & z, std::span<Z, S> ys) const noexcept
     {
       return KYOSU_CALL(n, z, ys);

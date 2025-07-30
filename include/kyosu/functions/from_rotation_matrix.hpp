@@ -14,9 +14,8 @@ namespace kyosu
   template<typename Options>
   struct from_rotation_matrix_t : eve::elementwise_callable<from_rotation_matrix_t, Options>
   {
-    template<typename M >
-    KYOSU_FORCEINLINE constexpr auto operator()( M const& r) const noexcept
-    -> quaternion_t<decltype(r[0][0])>
+    template<typename T >
+    KYOSU_FORCEINLINE constexpr quaternion_t<T> operator()(std::array< std::array<T, 3>, 3> const & r ) const noexcept
     {
       auto r11pr22 =  r[1][1] + r[2][2];
       auto qq0m1   =  r[0][0] + r11pr22;
@@ -37,7 +36,6 @@ namespace kyosu
       auto q1 =  eve::sqrt(eve::if_else(eve::is_gtz(qq1m1), eve::inc(qq1m1), (eve::sqr(r21mr12)+sqr(r01pr10)+eve::sqr(r20pr02))/(3-qq1m1)))*h;
       auto q2 =  eve::sqrt(eve::if_else(eve::is_gtz(qq2m1), eve::inc(qq2m1), (eve::sqr(r02mr20)+sqr(r01pr10)+eve::sqr(r12pr21))/(3-qq2m1)))*h;
       auto q3 =  eve::sqrt(eve::if_else(eve::is_gtz(qq3m1), eve::inc(qq3m1), (eve::sqr(r10mr01)+sqr(r20pr02)+eve::sqr(r12pr21))/(3-qq3m1)))*h;
-      using e_t = decltype(r11pr22);
       return quaternion(q0, q1, q2, q3);
     }
 

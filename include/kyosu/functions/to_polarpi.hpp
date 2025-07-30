@@ -18,7 +18,7 @@ namespace kyosu
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr  kumi::tuple<as_real_type_t<Z>, as_real_type_t<Z>, Z>
     operator()(Z const& z) const noexcept
-    requires (Z::dimension > 2)
+    requires (dimension_v<Z> > 2)
     { return KYOSU_CALL(z); }
 
     template<concepts::complex Z>
@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns  The kumi tuple `{rho, theta}`. for real and comple with theta in \f$\pi\f$ multiples.
+//!     Returns  The kumi tuple `{rho, theta}`. for real and complex with theta in \f$\pi\f$ multiples.
 //!
 //!  @groupheader{Example}
 //!
