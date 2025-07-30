@@ -19,7 +19,7 @@ namespace kyosu
 
     template<concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like... Zs>
     requires(eve::same_lanes_or_scalar<Z1, Zs...>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z1 const & z1, Zs const & ...zs) const noexcept// -> decltype(eve::maxabs(real(z1), real(zs)...))
+      KYOSU_FORCEINLINE constexpr auto  operator()(Z1 const & z1, Zs const & ...zs) const noexcept -> decltype(eve::maxabs(real(z1), real(zs)...))
     {
       return KYOSU_CALL(z1, zs...);
     }

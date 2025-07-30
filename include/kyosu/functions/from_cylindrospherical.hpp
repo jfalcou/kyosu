@@ -15,11 +15,12 @@ namespace kyosu
   struct from_cylindrospherical_t : eve::elementwise_callable<from_cylindrospherical_t, Options>
   {
     template<concepts::real U ,concepts::real V,concepts::real W, concepts::real T>
-    KYOSU_FORCEINLINE constexpr auto operator()(V const & t
-                                               , U const & radius
-                                               , W const & longitude
-                                               , T const & latitude) const noexcept
-    -> quaternion_t<eve::common_value_t<V, U, W, T>>
+    KYOSU_FORCEINLINE constexpr
+    quaternion_t<eve::common_value_t<V, U, W, T>>
+    operator()(V const & t
+              , U const & radius
+              , W const & longitude
+              , T const & latitude) const noexcept
     {
       auto [slat, clat] = eve::sincos(latitude);
       auto [slon, clon] = eve::sincos(longitude);
