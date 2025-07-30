@@ -23,9 +23,9 @@ namespace kyosu
   template<typename Options>
   struct tricomi_t : eve::strict_elementwise_callable<tricomi_t, Options>
   {
-    template<typename Z, typename T1,  typename T2>
+    template<concepts::complex_like Z, concepts::complex_like T1, concepts::complex_like T2>
     constexpr KYOSU_FORCEINLINE
-    auto operator()(Z z, T1 a, T2 b) const noexcept
+    as_cayley_dickson_t<complexify_t<Z>, T1, T2> operator()(Z z, T1 a, T2 b) const noexcept
     {
       if constexpr(concepts::real<Z>)
         return (*this)(kyosu::complex(z), a, b);
@@ -84,8 +84,9 @@ namespace kyosu::_
   template<typename Z, typename T1, typename T2, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto tricomi_(KYOSU_DELAY(), O const&, Z z, T1 a, T2 b) noexcept
   {
-    using r_t = decltype(z+a+b);
-    using u_t =  eve::underlying_type_t<r_t>;
+    using r_t = as_cayley_dickson_t<complexify_t<Z>, T1, T2>;
+    using er_t = eve::element_type_t<r_t>;
+    using u_t =  eve::element_type_t<as_real_type_t<r_t>>;
     r_t aa(a);
     r_t bb(b);
     auto bpflint = kyosu::is_real(bb) && eve::is_flint(kyosu::real(bb)) && eve::is_gtz(kyosu::real(bb));

@@ -85,7 +85,8 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::callable_options O, typename L, typename N, typename Z>
-  EVE_FORCEINLINE constexpr auto gegenbauer_(KYOSU_DELAY(), O const& o,  N nn,  L ll, Z zz) noexcept
+  EVE_FORCEINLINE constexpr auto
+  gegenbauer_(KYOSU_DELAY(), O const& o,  N nn,  L ll, Z zz) noexcept
   {
     if constexpr(concepts::real<N> && concepts::real<L> && concepts::real<Z>)
     {
