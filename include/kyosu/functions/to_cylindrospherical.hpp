@@ -17,18 +17,21 @@ namespace kyosu
   struct to_cylindrospherical_t : eve::elementwise_callable<to_cylindrospherical_t, Options>
   {
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
+    KYOSU_FORCEINLINE constexpr  kumi::tuple< V, V, V, V>
+    operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
       return kumi::tuple{v, z, z, z};
     }
 
-    template<concepts::cayley_dickson Z>
-    requires(dimension_v<Z> <= 4)
-    KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
+    template<concepts::cayley_dickson Q>
+    requires(dimension_v<Q> <= 4)
+    KYOSU_FORCEINLINE constexpr
+    kumi::tuple< as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>>
+    operator()(Q const& q) const noexcept
     {
       auto q0 = real(q);
-      if constexpr(kyosu::concepts::complex<Z>)
+      if constexpr(kyosu::concepts::complex<Q>)
       {
         auto z =  eve::zero(eve::as(q0));
         return kumi::tuple{q0, ipart(q), z, z};

@@ -10,7 +10,7 @@
 #include <eve/module/core.hpp>
 #include <eve/module/math.hpp>
 #include <eve/module/special.hpp>
-#include <eve/module/bessel.hpp>
+//#include <eve/module/bessel.hpp>
 
 //======================================================================================================================
 //! @defgroup functions Cayley-Dickson Functions
@@ -109,8 +109,8 @@
 #include <kyosu/functions/from_polarpi.hpp>
 #include <kyosu/functions/fsm.hpp>
 #include <kyosu/functions/gd.hpp>
-#include <kyosu/functions/gegenbauer.hpp>
-#include <kyosu/functions/hypergeometric.hpp>
+//#include <kyosu/functions/gegenbauer.hpp>
+//#include <kyosu/functions/hypergeometric.hpp>
 #include <kyosu/functions/hypot.hpp>
 #include <kyosu/functions/horner.hpp>
 #include <kyosu/functions/inc.hpp>
@@ -210,15 +210,15 @@
 #include <kyosu/functions/xi.hpp>
 #include <kyosu/functions/zeta.hpp>
 
-#include <kyosu/functions/bessel_j.hpp>
-#include <kyosu/functions/bessel_y.hpp>
-#include <kyosu/functions/bessel_h.hpp>
-#include <kyosu/functions/bessel_i.hpp>
-#include <kyosu/functions/bessel_k.hpp>
+// #include <kyosu/functions/bessel_j.hpp>
+// #include <kyosu/functions/bessel_y.hpp>
+// #include <kyosu/functions/bessel_h.hpp>
+// #include <kyosu/functions/bessel_i.hpp>
+// #include <kyosu/functions/bessel_k.hpp>
 
-#include <kyosu/functions/airy.hpp>
-#include <kyosu/functions/airy_ai.hpp>
-#include <kyosu/functions/airy_bi.hpp>
+// #include <kyosu/functions/airy.hpp>
+// #include <kyosu/functions/airy_ai.hpp>
+// #include <kyosu/functions/airy_bi.hpp>
 
 //======================================================================================================================
 // Functions performing computations over quaternion complex or real elements only.

@@ -21,12 +21,18 @@ namespace kyosu
       else                      return quaternion_t<eve::as_floating_point_t<eve::underlying_type_t<T>>>{0,0,0,1};
     }
 
-    template<typename T>
-    requires(concepts::cayley_dickson<T>)
-    KYOSU_FORCEINLINE constexpr auto operator()(as<T> const& v) const { return KYOSU_CALL(v); }
+    template<concepts::cayley_dickson T>
+      KYOSU_FORCEINLINE T operator()(as<T> const& v) const
+      requires(T::dimension_v > 4)
+    { return KYOSU_CALL(v); }
+
+    template<concepts::cayley_dickson T>
+      KYOSU_FORCEINLINE quaternion_t<as_real_type_t<T>> operator()(as<T> const& v) const
+      requires(T::dimension_v <= 4)
+    { return KYOSU_CALL(v); }
 
     template<concepts::real T>
-    KYOSU_FORCEINLINE constexpr auto operator()(as<T> const& v) const
+    KYOSU_FORCEINLINE constexpr quaternion_t<T> operator()(as<T> const& v) const
     {
       return KYOSU_CALL(v);
     }

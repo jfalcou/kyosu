@@ -19,15 +19,14 @@ namespace kyosu
   template<typename Options>
   struct ellint_rd_t : eve::elementwise_callable<ellint_rd_t, Options, eve::threshold_option>
   {
-    template<eve::floating_value T0, eve::floating_value T1,
-             eve::floating_value T2>
-    constexpr KYOSU_FORCEINLINE
-    auto operator()(T0 a, T1 b, T2 c) const noexcept
+    template<eve::floating_value T0, eve::floating_value T1, eve::floating_value T2>
+    constexpr KYOSU_FORCEINLINE as_cayley_dickson_like_t<T0, T1, T2>
+    operator()(T0 a, T1 b, T2 c) const noexcept
     { return eve::ellint_rd(a, b, c); }
 
     template<concepts::complex T0, concepts::complex T1, concepts::complex T2>
     constexpr KYOSU_FORCEINLINE
-    auto operator()(T0 a, T1 b, T2 c) const noexcept
+    as_cayley_dickson_like_t<T0, T1, T2> operator()(T0 a, T1 b, T2 c) const noexcept
     requires(concepts::complex<T0> || concepts::complex<T1> || concepts::complex<T2>)
     { return KYOSU_CALL(a, b, c); }
 

@@ -15,13 +15,13 @@ namespace kyosu
   struct from_polarpi_t : eve::strict_elementwise_callable<from_polarpi_t, Options>
   {
     template<concepts::real Z0, concepts::real Z1, concepts::cayley_dickson Z2>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 r, Z1 t, Z2 iz) const noexcept -> decltype(r+t+iz)
+    KYOSU_FORCEINLINE constexpr as_real_type_t<as_cayley_dickson_like_t<Z0, Z1>> operator()(Z0 r, Z1 t, Z2 iz) const noexcept
     {
       return KYOSU_CALL(r, t, iz);
     }
 
     template<concepts::real Z0, concepts::real Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 r, Z1 t) const noexcept -> complex_t<decltype(r+t)>
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z0, Z1> operator()(Z0 r, Z1 t) const noexcept
     {
       return KYOSU_CALL(r, t);
     }
