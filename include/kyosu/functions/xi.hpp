@@ -62,8 +62,8 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. Returns the Riemann  \f$\xi\f$ function (Ξ can be used a an alias).
-//!   3. Returns the Landau   \f$\Xi\f$ function (ξ can be used a an alias).
+//!   1. Returns the Riemann  \f$\xi\f$ function (ξ can be used a an alias).
+//!   3. Returns the Landau   \f$\Xi\f$ function (Ξ can be used a an alias).
 //!
 //!  @groupheader{External references}
 //!   *  [Wikipedia: Dirichlet series](https://https://en.wikipedia.org/wiki/Riemann_xi_function)
@@ -72,8 +72,8 @@ namespace kyosu
 //!  @godbolt{doc/xi.cpp}
 //======================================================================================================================
   inline constexpr auto xi = eve::functor<xi_t>;
-//   inline constexpr auto ξ = xi[landau];
-//   inline constexpr auto Ξ = xi[riemann];
+  inline constexpr auto Ξ = xi[landau];
+  inline constexpr auto ξ = xi[riemann];
 //======================================================================================================================
 //! @}
 //======================================================================================================================
