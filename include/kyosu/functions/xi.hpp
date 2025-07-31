@@ -33,8 +33,8 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var xi
-//!   @brief Computes the Riemann \f$ \displaystyle\xi\f$ function and the Landau
-//!   version  \f$ \displaystyle\Xi(z) = \xi(1/2 + i z)\f$.
+//!   @brief Computes the Riemann \f$ \displaystyle\xi(z) = \frac{1}{2}z(z-1)\pi^{-\frac{z}{2}}\Gamma(\frac{z}{2})\zeta(z)\f$.
+//!   function or the Landau  version  \f$ \displaystyle\Xi(z) = \xi(\frac{1}{2} + i z)\f$.
 //!
 //!   @groupheader{Header file}
 //!
@@ -48,25 +48,27 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      //regular call
-//!      template<kyosu::concepts::complex T>    constexpr auto xi(T z) noexcept;
+//!      constexpr auto xi(auto z) noexcept;           // 1
 //!
 //!      // Semantic modifyiers
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> xi[riemann](T z) noexcept;  // 1
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> xi[landau](T z) noexcept;   // 2
+//!      constexpr auto xi[riemann](auto z) noexcept;  // 1
+//!      constexpr auto xi[landau](T z) noexcept;      // 2
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z` : value to process.
+//!     * `z` : cayley-dickson like value to process.
 //!
 //! **Return value**
 //!
-//!   1. Returns the Riemann  \f$\xi\f$ function (ξ can be used a an alias).
-//!   3. Returns the Landau   \f$\Xi\f$ function (Ξ can be used a an alias).
+//!   1. Returns the value at `z` of the Riemann  \f$\xi\f$ function (ξ can be used a an alias).
+//!   3. Returns the value at `z` of the Landau   \f$\Xi\f$ function (Ξ can be used a an alias).
+//!
+//!   if the input `z` is a floating_value the call is done as if `complex(z)` was input.
 //!
 //!  @groupheader{External references}
-//!   *  [Wikipedia: Dirichlet series](https://https://en.wikipedia.org/wiki/Riemann_xi_function)
+//!   *  [Wikipedia: Riemann xi function](https://en.wikipedia.org/wiki/Riemann_xi_function)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/xi.cpp}
