@@ -9,12 +9,13 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/zeta.hpp>
+#include <kyosu/functions/tgamma.hpp>
 #include <kyosu/functions/if_else.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct xi_t : eve::elementwise_callable<xi_t, Options>
+  struct xi_t : eve::elementwise_callable<xi_t, Options,  riemann_option, landau_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
@@ -26,13 +27,14 @@ namespace kyosu
     }
 
     KYOSU_CALLABLE_OBJECT(xi_t, xi_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
 //!   @var xi
-//!   @brief Computes the Riemann \f$ \displaystyle\xi(z)=\sum_0^\infty \frac{1}{(n+1)^z}\f$.
+//!   @brief Computes the Riemann \f$ \displaystyle\xi\f$ function and the Landau
+//!   version  \f$ \displaystyle\Xi(z) = \xi(1/2 + i z)\f$.
 //!
 //!   @groupheader{Header file}
 //!
@@ -45,7 +47,12 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
+//!      //regular call
 //!      template<kyosu::concepts::complex T>    constexpr auto xi(T z) noexcept;
+//!
+//!      // Semantic modifyiers
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> xi[riemann](T z) noexcept;  // 1
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> xi[landau](T z) noexcept;   // 2
 //!   }
 //!   @endcode
 //!
@@ -55,15 +62,18 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   Returns the Dirichlet xi sum: \f$  \displaystyle \sum_0^\infty \frac{1}{(n+1)^z}\f$
+//!   1. Returns the Riemann  \f$\xi\f$ function (Ξ can be used a an alias).
+//!   3. Returns the Landau   \f$\Xi\f$ function (ξ can be used a an alias).
 //!
 //!  @groupheader{External references}
-//!   *  [Wikipedia: Dirichlet series](https://en.wikipedia.org/wiki/Dirichlet_series)
+//!   *  [Wikipedia: Dirichlet series](https://https://en.wikipedia.org/wiki/Riemann_xi_function)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/xi.cpp}
 //======================================================================================================================
   inline constexpr auto xi = eve::functor<xi_t>;
+//   inline constexpr auto ξ = xi[landau];
+//   inline constexpr auto Ξ = xi[riemann];
 //======================================================================================================================
 //! @}
 //======================================================================================================================
@@ -72,20 +82,22 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto xi_(KYOSU_DELAY(), O const&, Z zz) noexcept
+  KYOSU_FORCEINLINE constexpr auto xi_(KYOSU_DELAY(), O const& o, Z zz) noexcept
   {
-    if constexpr(concepts::complex<Z> )
+    if constexpr(O::contains(landau))
+      return xi(kyosu::half(as(zz))+kyosu::muli(zz));
+    else if constexpr(concepts::complex<Z> )
     {
       using u_t = eve::underlying_type_t<Z>;
       auto z = kyosu::if_else(kyosu::abs(zz) > u_t(0.25), oneminus(zz), zz); //reflection to avoid problems near zz == 1
       u_t logpi(1.1447298858494001741434273);
       auto hz = kyosu::half(kyosu::as<u_t>())*z;
       auto r = dec(z)*kyosu::tgamma(kyosu::inc(hz))*kyosu::exp(-logpi*hz)*kyosu::zeta(z);
-      return r; 
+      return r;
     }
     else
     {
-      return cayley_extend(kyosu::xi, zz);
+      return cayley_extend(kyosu::xi[o], zz);
     }
   }
 }
