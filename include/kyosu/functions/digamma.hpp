@@ -57,15 +57,16 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     The value of the Digamma function: \f$\psi(z) = \frac{\Gamma'(z)}{\Gamma(z)}\f$ is returned.
-//!     ψ can be used as an alias.    
+//!     `psi` or ψ can be used as an alias.
 //!
 //!  @groupheader{External references}
 //!   *  [Wikipedia: Digamma function](https://en.wikipedia.org/wiki/Digamma_function)
-//!   
+//!
 //!  @groupheader{Example}
 //!  @godbolt{doc/digamma.cpp}
 //======================================================================================================================
   inline constexpr auto digamma = eve::functor<digamma_t>;
+  inline constexpr auto psi     = eve::functor<digamma_t>;
   inline constexpr auto ψ = eve::functor<digamma_t>;
 //======================================================================================================================
 //! @}
