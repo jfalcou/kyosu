@@ -24,12 +24,12 @@ namespace kyosu
 
     template<concepts::cayley_dickson T>
       KYOSU_FORCEINLINE T operator()(as<T> const& v) const
-      requires(T::dimension_v >= 4)
+      requires(dimension_v<T> >= 4)
     { return KYOSU_CALL(v); }
 
     template<concepts::cayley_dickson T>
       KYOSU_FORCEINLINE quaternion_t<as_real_type_t<T>> operator()(as<T> const& v) const
-      requires(T::dimension_v < 4)
+      requires(dimension_v<T> < 4)
     { return KYOSU_CALL(v); }
 
     template<concepts::real T>
