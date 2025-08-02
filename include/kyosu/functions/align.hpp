@@ -18,8 +18,9 @@ namespace kyosu
 
     template<concepts::real T, concepts::real U, std::size_t S>
     requires(S >= 3)
-      KYOSU_FORCEINLINE constexpr auto operator()( std::span<T, S> v0
-                                                 , std::span<U, S> v1) const noexcept
+      KYOSU_FORCEINLINE constexpr
+    quaternion_t<eve::common_value_t<U, T>> operator()( std::span<T, S> v0
+                                                      , std::span<U, S> v1) const noexcept
     {
       auto qv0 = quaternion(eve::zero(eve::as(v0[0])), v0[0], v0[1], v0[2]);
       auto qv1 = quaternion(eve::zero(eve::as(v1[0])), v1[0], v1[1], v1[2]);

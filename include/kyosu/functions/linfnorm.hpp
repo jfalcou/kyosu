@@ -16,10 +16,11 @@ namespace kyosu
   template<typename Options>
   struct linfnorm_t : eve::strict_elementwise_callable<linfnorm_t, Options, kyosu::flat_option>
   {
-
     template<concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like... Zs>
-    requires(eve::same_lanes_or_scalar<Z1, Zs...>)
-      KYOSU_FORCEINLINE constexpr auto  operator()(Z1 const & z1, Zs const & ...zs) const noexcept// -> decltype(eve::maxabs(real(z1), real(zs)...))
+    requires(eve::same_lanes_or_scalar<Z1, Zs...> )
+      KYOSU_FORCEINLINE constexpr
+    eve::common_type_t<as_real_type_t<Z1>, as_real_type_t<Zs>...>
+    operator()(Z1 const & z1, Zs const & ...zs) const noexcept
     {
       return KYOSU_CALL(z1, zs...);
     }

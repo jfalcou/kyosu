@@ -25,9 +25,22 @@ namespace kyosu
   template<typename Options>
   struct hypergeometric_t : eve::strict_elementwise_callable<hypergeometric_t, Options, kyosu::regularized_option>
   {
+
+    template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
+
+    template<typename Z,  typename Tup1,  typename Tup2>       struct res
+    {
+      using cZ = complexify_t<Z>; 
+      using Tup = kumi::result::cat_t<Tup1, Tup2, kumi::tuple<cZ>>;
+      using type = kumi::apply_traits_t<result,Tup>;
+    };
+
+    template < typename T1,  typename T2,  typename T3>
+    using res_t =  typename res<T1, T2, T3>::type;
+
     template<concepts::complex_like Z, kumi::product_type T1,  kumi::product_type T2>
     constexpr KYOSU_FORCEINLINE
-    auto operator()(Z z, T1 a, T2 b) const noexcept
+    res_t<Z, T1, T2> operator()(Z z, T1 a, T2 b) const noexcept
     {
       if constexpr(!Options::contains(kyosu::regularized) || T2::empty())
       {

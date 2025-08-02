@@ -28,7 +28,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr T operator()(as<T> const& v) const { return KYOSU_CALL(v); }
 
     template<concepts::real T>
-    KYOSU_FORCEINLINE constexpr auto operator()(as<T> const& v) const
+    KYOSU_FORCEINLINE constexpr complexify_t<T> operator()(as<T> const& v) const
     {
       return KYOSU_CALL(v);
     }

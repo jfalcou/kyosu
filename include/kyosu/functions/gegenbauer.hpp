@@ -19,7 +19,8 @@ namespace kyosu
                                                          , eve::successor_option, eve::kind_1_option, eve::kind_2_option>
   {
     template<concepts::cayley_dickson_like N, concepts::cayley_dickson_like L, concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<as_cayley_dickson_like_t<N, L, Z>>  operator()(N nn, L ll, Z zz) const noexcept
+    KYOSU_FORCEINLINE constexpr complexify_t<as_cayley_dickson_like_t<N, L, Z>>
+    operator()(N nn, L ll, Z zz) const noexcept
     {
       return KYOSU_CALL(nn, ll, zz);
     }
@@ -84,7 +85,8 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::callable_options O, typename L, typename N, typename Z>
-  EVE_FORCEINLINE constexpr auto gegenbauer_(KYOSU_DELAY(), O const& o,  N nn,  L ll, Z zz) noexcept
+  EVE_FORCEINLINE constexpr auto
+  gegenbauer_(KYOSU_DELAY(), O const& o,  N nn,  L ll, Z zz) noexcept
   {
     if constexpr(concepts::real<N> && concepts::real<L> && concepts::real<Z>)
     {

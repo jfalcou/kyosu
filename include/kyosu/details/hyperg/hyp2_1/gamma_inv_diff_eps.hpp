@@ -22,8 +22,8 @@ namespace kyosu::_
 
     auto is_z_negative_integer = (z == n) && eve::is_lez(n);
     auto is_epspz_negative_integer = (epspz == m) && (m <= 0);
-    auto z_neg_int_distance = kyosu::linfnorm(z + kyosu::abs(n));
-    auto epspz_neg_int_distance = kyosu::linfnorm(epspz + kyosu::abs(m));
+    auto z_neg_int_distance = kyosu::abs[kyosu::flat](z + kyosu::abs(n));
+    auto epspz_neg_int_distance = kyosu::abs[kyosu::flat](epspz + kyosu::abs(m));
     auto r       = kyosu::nan(kyosu::as<r_t>());
 
     auto br_gt01 = [&](){  //    kyosu::linfnorm(eps) > u_t(0.1))

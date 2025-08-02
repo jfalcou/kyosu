@@ -98,7 +98,7 @@ namespace kyosu::_
       auto gamma_prod1 = gamma_inv_cma*gamma_inv_eps_pa_pm;
 
       auto prod1 = gamma_prod1*gamma_inv_mp1*(gamma_inv_diff_eps(kyosu::one(as<r_t>()), eps, notdone)*prod_eps_pa_mc_p1 - gamma_inv_one_meps*prod_diff_eps);
-      auto prod_2a = gamma_prod1*gamma_inv_diff_eps(inc(m),eps, notdone);
+      auto prod_2a = gamma_prod1*gamma_inv_diff_eps(kyosu::inc(m),eps, notdone);
       auto prod_2b = gamma_inv_cma*gamma_inv_eps_pm_p1*gamma_inv_diff_eps (a_pm,eps, notdone);
       auto gide = gamma_inv_diff_eps(cma,-eps, notdone);
       auto gg = gamma_inv_eps_pm_p1*gamma_inv_a_pm;

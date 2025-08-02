@@ -18,9 +18,9 @@ namespace kyosu
   {
 
     template< concepts::real V, concepts::real T, std::size_t S>
-    KYOSU_FORCEINLINE constexpr auto operator()( V  angle
-                                               , std::span<T, S> axis) const noexcept
-    -> quaternion_t<eve::common_value_t<V, T>>
+    KYOSU_FORCEINLINE constexpr
+    quaternion_t<eve::common_value_t<V, T>> operator()( V  angle
+                                                      , std::span<T, S> axis) const noexcept
     {
       using e_t = eve::common_value_t<T, V>;
       auto q =  quaternion(e_t(0), e_t(axis[0]), e_t(axis[1]), e_t(axis[2]));

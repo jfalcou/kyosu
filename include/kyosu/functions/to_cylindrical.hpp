@@ -17,7 +17,8 @@ namespace kyosu
   struct to_cylindrical_t : eve::elementwise_callable<to_cylindrical_t, Options>
   {
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
+    KYOSU_FORCEINLINE constexpr kumi::tuple< V, V, V, V>
+    operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
       return kumi::tuple{eve::abs(v), eve::arg(v), z, z};
@@ -25,7 +26,9 @@ namespace kyosu
 
     template<concepts::cayley_dickson Q>
     requires(dimension_v<Q> <= 4)
-    KYOSU_FORCEINLINE constexpr auto operator()(Q const& q) const noexcept
+    KYOSU_FORCEINLINE constexpr
+    kumi::tuple< as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>>
+    operator()(Q const& q) const noexcept
     {
       auto c0 = complex(real(q), imag(q));
       if constexpr(kyosu::concepts::complex<Q>)

@@ -16,11 +16,19 @@ namespace kyosu
   struct to_polar_t : eve::elementwise_callable<to_polar_t, Options>
   {
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr  kumi::tuple<as_real_type_t<Z>, as_real_type_t<Z>, Z>
+    operator()(Z const& z) const noexcept
+    requires(dimension_v<Z> > 2)
+    { return KYOSU_CALL(z); }
+
+    template<concepts::complex Z>
+    KYOSU_FORCEINLINE constexpr  kumi::tuple<as_real_type_t<Z>, as_real_type_t<Z>>
+    operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
 
     template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr kumi::tuple<V, V> operator()(V v) const noexcept
+    KYOSU_FORCEINLINE constexpr kumi::tuple<V, V>
+    operator()(V v) const noexcept
     { return (*this)(complex(v)); }
 
     KYOSU_CALLABLE_OBJECT(to_polar_t, to_polar_);

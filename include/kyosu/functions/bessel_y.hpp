@@ -16,14 +16,18 @@ namespace kyosu
   struct bessel_y_t : eve::strict_elementwise_callable<bessel_y_t, Options, eve::spherical_option, eve::cylindrical_option>
   {
     template<eve::scalar_value N, concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z) const noexcept
+    KYOSU_FORCEINLINE constexpr Z  operator()(N const& n, Z const & z) const noexcept
     {
+    if constexpr(concepts::real<Z> )
+      return KYOSU_CALL(n, complex(z));
+    else
       return KYOSU_CALL(n, z);
     }
 
     template<eve::scalar_value N,  concepts::complex_like  Z, std::size_t S>
 
-    KYOSU_FORCEINLINE constexpr auto  operator()(N const& n, Z const & z, std::span<Z, S> ys) const noexcept
+    KYOSU_FORCEINLINE constexpr Z
+    operator()(N const& n, Z const & z, std::span<Z, S> ys) const noexcept
     {
       return KYOSU_CALL(n, z, ys);
     }

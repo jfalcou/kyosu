@@ -16,7 +16,7 @@ namespace kyosu
   {
     template<typename Z0, typename Z1, typename ...Zs>
     requires(concepts::cayley_dickson_like<Z0> || concepts::cayley_dickson_like<Z1> ||( concepts::cayley_dickson_like<Zs> || ...))
-    KYOSU_FORCEINLINE constexpr auto  operator()(Z0 z0, Z1 z1, Zs ...zs) const noexcept
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z0, Z1, Zs...> operator()(Z0 z0, Z1 z1, Zs ...zs) const noexcept
     { return KYOSU_CALL(z0,z1,zs...); }
 
     KYOSU_CALLABLE_OBJECT(average_t, average_);

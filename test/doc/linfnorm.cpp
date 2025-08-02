@@ -19,8 +19,8 @@ int main()
   e_t e0(1);
   e_t e1(2);
   std::cout << e0 << ", " << e1 << " -> " << linfnorm(e0, e1) << "\n";
-  we_t we0(e0);
-  we_t we1(e1);
+   we_t we0(e0);
+   we_t we1(e1);
   std::cout << we0 << ", " << we1 << " -> " << linfnorm(we0, we1) << "\n";
 
   std::cout << "Complex:     "<< "\n";

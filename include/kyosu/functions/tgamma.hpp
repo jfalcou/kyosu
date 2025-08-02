@@ -23,7 +23,7 @@ namespace kyosu
   struct tgamma_t : eve::elementwise_callable<tgamma_t, Options>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     { return KYOSU_CALL(z); }
 
     KYOSU_CALLABLE_OBJECT(tgamma_t, tgamma_);

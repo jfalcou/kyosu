@@ -19,11 +19,12 @@ namespace kyosu
   {
     template<typename Q, int II,  int JJ,  int KK>
     requires((concepts::cayley_dickson<Q> && dimension_v<Q> <= 4) || concepts::real<Q>)
-      KYOSU_FORCEINLINE constexpr auto operator()(Q  q0
+      KYOSU_FORCEINLINE constexpr
+    kumi::tuple<as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>>
+    operator()(Q  q0
                                                  , _::axis<II>
                                                  , _::axis<JJ>
                                                  , _::axis<KK>) const noexcept
-    //   -> kumi::tuple<as_real_t<Q>, as_real_t<Q>, as_real_t<Q>>
     {
       using e_t =  std::remove_reference_t<decltype(real(Q()))>;
       auto q = quaternion(q0);

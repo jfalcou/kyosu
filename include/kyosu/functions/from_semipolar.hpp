@@ -15,11 +15,11 @@ namespace kyosu
   struct from_semipolar_t : eve::elementwise_callable<from_semipolar_t, Options>
   {
     template<concepts::real U ,concepts::real V,concepts::real W, concepts::real T>
-    KYOSU_FORCEINLINE constexpr auto operator()( V const & rho
-                                               , U const & alpha
-                                               , W const & theta1
-                                               , T const & theta2) const noexcept
-    -> quaternion_t<eve::common_value_t<V, U, W, T>>
+    KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>>
+    operator()( V const & rho
+              , U const & alpha
+              , W const & theta1
+              , T const & theta2) const noexcept
     {
       auto [st1, ct1] = eve::sincos(theta1);
       auto [st2, ct2] = eve::sincos(theta2);
