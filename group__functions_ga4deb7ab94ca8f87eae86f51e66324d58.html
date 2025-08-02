@@ -180,35 +180,7 @@ $(document).ready(function(){initNavTree('group__functions_ga4deb7ab94ca8f87eae8
 <li><a href="https://dlmf.nist.gov/10.25">DLMF: Modified Bessel functions</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iomanip&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  std::cout&lt;&lt; std::setprecision(16) &lt;&lt; std::endl;</div>
-<div class="line">  <span class="keyword">using </span>w_t = eve::wide&lt;double, eve::fixed&lt;2&gt;&gt;;</div>
-<div class="line">  <span class="keyword">auto</span> z = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a>(w_t(20.0, 1.5), w_t(0.0, 1.5));</div>
-<div class="line">  <span class="keyword">auto</span> v = -(2+1/3.0);</div>
-<div class="line">  <span class="keywordtype">int</span> nb = int(eve::abs(v)+1);</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;z                    &quot;</span> &lt;&lt; z &lt;&lt; std::endl;</div>
-<div class="line">  std::vector&lt;<span class="keyword">decltype</span>(z)&gt; is(nb);</div>
-<div class="line">  <a class="code hl_variable" href="group__functions_ga4e656e84fd3efa77c0c763238c471e24.html#ga4e656e84fd3efa77c0c763238c471e24">kyosu::bessel_y</a>(v, z, std::span(is));</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a> = eve::sign(v);</div>
-<div class="line">  <span class="keyword">auto</span> v0 =  eve::frac(v);</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> n=0; n &lt; nb; ++n)</div>
-<div class="line">  {</div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;is[&quot;</span> &lt;&lt; n &lt;&lt; <span class="stringliteral">&quot;]              = &quot;</span> &lt;&lt; is[n] &lt;&lt; std::endl;</div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;bessel_y[cylindrical](v0, z) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga4e656e84fd3efa77c0c763238c471e24.html#ga4e656e84fd3efa77c0c763238c471e24">kyosu::bessel_y</a>(v0, z) &lt;&lt; std::endl;</div>
-<div class="line">    v0 += <a class="code hl_variable" href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">inc</a>;</div>
-<div class="line">  }</div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga4e656e84fd3efa77c0c763238c471e24_html_ga4e656e84fd3efa77c0c763238c471e24"><div class="ttname"><a href="group__functions_ga4e656e84fd3efa77c0c763238c471e24.html#ga4e656e84fd3efa77c0c763238c471e24">kyosu::bessel_y</a></div><div class="ttdeci">constexpr auto bessel_y</div><div class="ttdoc">Computes the spherical or cylindrical Bessel functions of the second kind, extended to the complex pl...</div><div class="ttdef"><b>Definition:</b> bessel_y.hpp:86</div></div>
-<div class="ttc" id="agroup__functions_ga5354d486ec4fca0c8261639b8ccfffd7_html_ga5354d486ec4fca0c8261639b8ccfffd7"><div class="ttname"><a href="group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7">kyosu::inc</a></div><div class="ttdeci">constexpr auto inc</div><div class="ttdoc">Increments the argument.</div><div class="ttdef"><b>Definition:</b> inc.hpp:58</div></div>
-<div class="ttc" id="agroup__functions_gae0cdc9d2dae205852268d4c5cdca6578_html_gae0cdc9d2dae205852268d4c5cdca6578"><div class="ttname"><a href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">kyosu::complex</a></div><div class="ttdeci">constexpr auto complex</div><div class="ttdoc">Constructs a kyosu::complex_t instance.</div><div class="ttdef"><b>Definition:</b> to_complex.hpp:75</div></div>
-</div><!-- fragment --> 
+<div class="fragment"></div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
