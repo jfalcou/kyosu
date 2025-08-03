@@ -151,7 +151,7 @@ namespace kyosu::_
         //=====================================
         auto br_12 = [&](auto z, auto sgn){ // ((-2.0<x && x<=1.0 && 1.0<y && y< 2.0*pi)) || ((-2.0<x && x<=1.0 && 1.0<y && y< 2.0*pi))
           std::cout << "in br_12 " << t1 << "  " << t2 << std::endl;
-          auto pz=(kyosu::sqrt(kyosu::conj(2*(z+1+sgn*ipi))));
+          auto pz=kyosu::conj(kyosu::sqrt(kyosu::conj(2*(z+1+sgn*ipi))));
           return r = kyosu::reverse_horner(pz, mone(as(x)), -I*sgn, third, sgn*inv36*I, inv270, inv4320*I);
         };
         //===============================
