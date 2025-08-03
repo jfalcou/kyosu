@@ -112,33 +112,23 @@ namespace kyosu::_
       auto singular = (x == eve::mone(eve::as(x))) && (eve::abs(y)==pi);
       auto notdone = is_not_infinite(zz) && is_not_nan(zz) && !singular;
       auto notalreadydone = notdone;
-      // ////std::cout << "zz = " << zz << std::endl;
-      // ////std::cout << "singular " << singular << std::endl;
-      // ////std::cout << "notdone " << notdone << std::endl;
       auto w = kyosu::fnan(kyosu::as(zz));
-
-      // ////std::cout << "w avant 0 = " << w << std::endl;
       // Signed zeros between branches
       auto inftest = (eve::is_minf(x) && (-pi < y) && (y<= pi));
       w = if_else(inftest, sign(pio2-y)*zero(eve::as(y)), w);
-
-      // ////std::cout << "w avant 1 = " << w << std::endl;
       w += kyosu::muli(eve::bitofsign(y));
-
-      // ////std::cout << "w avant 2 = " << w << std::endl;
       auto ympi = y-pi;
       auto yppi = y+pi;
       auto near = u_t(0.1e-1);
       w = if_else(eve::is_pinf(x) || eve::is_infinite(y), zz, w);
       w = if_else(singular, kyosu::mone(kyosu::as(zz)), w);
+
       constexpr u_t half =  eve::half(eve::as<u_t>());
       constexpr u_t third = eve::third(eve::as<u_t>());
       constexpr u_t thotw = 3*half;
       constexpr u_t inv36(1.0/36.0);
       constexpr u_t inv270(1.0/270.0);
       constexpr u_t inv4320(1.0/4320.0);
-
-      // ////std::cout << "w avant 3 = " << w << std::endl;
 
       if( eve::any(notdone) )
       {
@@ -150,7 +140,6 @@ namespace kyosu::_
         // Series about z=-1+Pi*I or  z=-1-Pi*I
         //=====================================
         auto br_12 = [&](auto z, auto sgn){ // ((-2.0<x && x<=1.0 && 1.0<y && y< 2.0*pi)) || ((-2.0<x && x<=1.0 && 1.0<y && y< 2.0*pi))
-          std::cout << "in br_12 " << t1 << "  " << t2 << std::endl;
           auto pz=kyosu::conj(kyosu::sqrt(kyosu::conj(2*(z+1+sgn*ipi))));
           return r = kyosu::reverse_horner(pz, mone(as(x)), -I*sgn, third, sgn*inv36*I, inv270, inv4320*I);
         };
@@ -159,7 +148,6 @@ namespace kyosu::_
         // Serie: About -infinity
         //===============================
         auto br_3 = [&](auto z){ // (x <= -2.0 && -pi < y && y <= pi)
-          std::cout << "in br_3" << std::endl;
           auto pz=kyosu::exp(z);
           return kyosu::reverse_horner(pz, one(as(x)), mone(as(x)), thotw, u_t(-8.0/3.0), u_t(125.0/24.0))*pz;
         };
@@ -169,7 +157,6 @@ namespace kyosu::_
         //======================
         auto br_4 = [&](auto z){ // (((-2.0 < x) && (x<=1.0) && (-1.0 <= y) && (y <= 1.0))
           //    || ((-2.0 < x) && (x-0.1e1)*(x-0.1e1)+y*y<=pi*pi))
-          std::cout << "in br_4" << std::endl;
           auto pz=kyosu::dec(z);
           return fam(half, half, z) + kyosu::reverse_horner(pz, u_t(1.0/16.0), u_t(-1.0/192.0), u_t(-1.0/3072.0), u_t(13.0/61440.0))*sqr(pz);
         };
@@ -178,7 +165,6 @@ namespace kyosu::_
         // Negative log series
         //======================
         auto br_5 = [&](auto z){ // (x<=-0.105e1 && pi<y && y-pi<=-0.75e0*(x+0.1e1))
-          std::cout << "in br_5" << std::endl;
           auto t=z-ipi;
           auto pz=kyosu::log(-t);
           auto r00 = kyosu::reverse_horner(pz, eve::one(as<u_t>()), -thotw, third);
@@ -190,7 +176,6 @@ namespace kyosu::_
         // Negative log series
         //======================
         auto br_6 = [&](auto z){// (x<=-0.105e1 && 0.75e0*(x+0.1e1)< y+pi && y+pi<0.0e0)
-          std::cout << "in br_6" << std::endl;
           auto  t=z+ipi;
           auto pz=kyosu::log(-t);
           return ((1+(-thotw+third*pz)*pz)*pz+((-1+half*pz)*pz+(pz+(-pz+t)*t)*t)*t)/(t*t*t);
@@ -200,31 +185,30 @@ namespace kyosu::_
         // Series solution about infinity
         //================================
         auto br_7 = [&](auto z){// else
-          std::cout << "in br_7" << std::endl;
           auto pz=kyosu::log(z);
           return ((1+(-thotw+third*pz)*pz)*pz+((-1+half*pz)*pz+(pz+(-pz+z)*z)*z)*z)/(z*z*z);
         };
 
         if( eve::any(notdone) )
         {
-          auto t5 = (x<=-0.105e1 && pi<y && y-pi<=u_t(-0.75)*(x+0.1e1));
-          notdone = next_interval(br_5, notdone, t5, w, zz);
+          auto sgn = if_else(t2, eve::one, mone(eve::as(x)));
+          notdone = next_interval(br_12, notdone, (t1||t2), w, zz, sgn);
           if( eve::any(notdone) )
           {
-            auto t6 = (x<=u_t(-0.105e1) && u_t(0.75)*(x+1)< y+pi && y+pi<0);
-            notdone = next_interval(br_6, notdone, t6, w, zz);
+            auto t3 =(x <= -2 && -pi < y && y <= pi);
+            notdone = next_interval(br_3, notdone, t3, w, zz);
             if( eve::any(notdone) )
             {
-              auto sgn = if_else(t2, eve::one, mone(eve::as(x)));
-              notdone = next_interval(br_12, notdone, (t1||t2), w, zz, sgn);
+              auto t4 =((-2 < x) && (x<=1) && (-1 <= y) && (y <= 1));
+              notdone = next_interval(br_4, notdone, t4, w, zz);
               if( eve::any(notdone) )
               {
-                auto t3 =(x <= -2 && -pi < y && y <= pi);
-                notdone = next_interval(br_3, notdone, t3, w, zz);
+                auto t5 = (x<=-0.105e1 && pi<y && y-pi<=u_t(-0.75)*(x+0.1e1));
+                notdone = next_interval(br_5, notdone, t5, w, zz);
                 if( eve::any(notdone) )
                 {
-                  auto t4 =((-2 < x) && (x<=1) && (-1 <= y) && (y <= 1));
-                  notdone = next_interval(br_4, notdone, t4, w, zz);
+                  auto t6 = (x<=u_t(-0.105e1) && u_t(0.75)*(x+1)< y+pi && y+pi<0);
+                  notdone = next_interval(br_6, notdone, t6, w, zz);
                   if( eve::any(notdone) )
                   {
                     notdone = last_interval(br_7, notdone, w, zz);
@@ -261,10 +245,7 @@ namespace kyosu::_
 
       auto test = notalreadydone && (x <= -0.1e1 + near && (eve::abs(ympi) <= near || eve::abs(yppi) <= near));
       auto regulzz = regul(zz, test);
-      if (eve::any(test))
-      {
-        zz = if_else(notalreadydone, if_else(test, regulzz, zz), zz);
-      }
+      if (eve::any(test))  zz = if_else(notalreadydone, if_else(test, regulzz, zz), zz);
 
       //===============
       // Iteration one
@@ -275,7 +256,7 @@ namespace kyosu::_
         r = fam(zz, -s, w1)-kyosu::log(w1);
         auto wp1=fma(s, w1, eve::one(eve::as(x)));
         e=r/wp1*fms(2*wp1, fam(wp1, u_t(2.0/3.0), r), r)/fms(2*wp1, fam(wp1, u_t(2.0/3.0), r), 2*r);
-        w1*=(1+e);
+        w1*=kyosu::inc(e);
         w = if_else(notalreadydone, w1, w);
 
         //===============

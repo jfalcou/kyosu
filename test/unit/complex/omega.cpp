@@ -11,20 +11,24 @@
 
 
 TTS_CASE_WITH ( "Check kyosu::omega over real"
-              , kyosu::scalar_real_types
-              , tts::generate ( tts::randoms(-10,10))
+              , kyosu::simd_real_types
+              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10))
               )
-  <typename T>(T const& a0)
+  <typename T>(T const& a0, T const& a1)
 {
   TTS_RELATIVE_EQUAL(kyosu::omega(a0),  kyosu::complex(eve::omega(a0)), tts::prec<T>()) << a0 << '\n';
   TTS_RELATIVE_EQUAL(kyosu::omega(5.8148731e-15), kyosu::complex(eve::omega(5.8148731e-15)), tts::prec<T>()) << a0 << '\n';
+
+  auto x = kyosu::complex(a0, a1);
+  auto o = kyosu::omega(x);
+  TTS_RELATIVE_EQUAL(kyosu::log(o)+o, x, tts::prec<T>());
 };
 
 
 TTS_CASE_TPL( "Check peculiar values", kyosu::real_types)
 <typename T>(tts::type<T>)
 {
-  using e_t = T;
+  using e_t = eve::element_type_t<T>;
   auto tcx = kyosu::complex;
   using c_t = decltype(tcx(e_t(0)));
   using eve::as;
@@ -76,5 +80,18 @@ TTS_CASE_TPL( "Check peculiar values", kyosu::real_types)
   for(int i=0; i < N; ++i)
   {
     TTS_RELATIVE_EQUAL(kyosu::omega(inputs[i]), expected[i], tts::prec<T>()) << i << " < - "<< inputs[i] << '\n';
+  }
+
+  e_t r0(sizeof(e_t) == 4 ? 64 : 512);
+  e_t recr0(eve::rec(r0));
+  for(e_t r = recr0; r < r0; r *= e_t(2))
+  {
+    //int i = 16; //
+    for(int i=-32; i < 32; ++i)
+    {
+      auto xx = r*kyosu::exp_ipi(i/e_t(16));
+      auto o =  kyosu::omega(xx);
+      TTS_RELATIVE_EQUAL(kyosu::log(o)+o, xx, tts::prec<T>()) << o << '\n';
+    }
   }
 };
