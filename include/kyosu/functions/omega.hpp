@@ -101,7 +101,8 @@ namespace kyosu::_
     if constexpr(concepts::complex<Z> )
     {
       using u_t = eve::underlying_type_t<Z>;
-      auto [x, y] = zz;
+      auto x = kyosu::real(zz);
+      auto y = kyosu::imag(zz);
       auto e = kyosu::zero(kyosu::as(zz));
       auto r = kyosu::zero(kyosu::as(zz));
       auto pi = eve::pi(kyosu::as(x));
