@@ -16,11 +16,9 @@
 //               )
 //   <typename T>(T const& a0)
 // {
-
-// //  TTS_RELATIVE_EQUAL(eve::detail::map([](auto v){return kyosu::omega(v); }, a0),  eve::detail::map([](auto v){return kyosu::complex(eve::omega(v)); }, a0), tts::prec<T>());
 //   if constexpr( sizeof(eve::element_type_t<T>) == 8)
 //    {
-// //     TTS_RELATIVE_EQUAL(kyosu::omega(a0),  kyosu::complex(eve::omega(a0)), tts::prec<T>()) << a0 << '\n';
+//      TTS_RELATIVE_EQUAL(kyosu::omega(a0),  kyosu::complex(eve::omega(a0)), tts::prec<T>()) << a0 << '\n';
 //      TTS_RELATIVE_EQUAL(kyosu::omega(5.8148731e-15), kyosu::complex(eve::omega(5.8148731e-15)), tts::prec<T>()) << a0 << '\n';
 //      std::cout << kyosu::omega(5.8148731e-15) << std::endl;
 //    }
@@ -36,7 +34,7 @@ TTS_CASE_TPL( "Check peculiar values", kyosu::real_types)
     auto tcx = kyosu::complex;
     using c_t = decltype(tcx(e_t(0)));
     using eve::as;
-    const int N = 15;
+    const int N = 18;
     std::array<c_t, N> inputs =
       {
         tcx(eve::zero(as<e_t>()),eve::zero(as<e_t>())),//0*
@@ -54,6 +52,9 @@ TTS_CASE_TPL( "Check peculiar values", kyosu::real_types)
         tcx( -2+eve::log_2(as<e_t>()), eve::pi(as<e_t>())),//12*
         tcx(eve::one(as<e_t>()),eve::one(as<e_t>())),  //13*
         tcx( eve::zero(as<e_t>())    , 1+eve::pio_2(as<e_t>())),//14*
+        tcx( e_t(-10.0), 3*eve::pio_4(as<e_t>())),  //15*
+        tcx( -1.06, 3.1618),  //16*
+        tcx( -1.06, -3.1416), //17*
       };
     std::array<c_t, N> expected =
       {
@@ -72,13 +73,15 @@ TTS_CASE_TPL( "Check peculiar values", kyosu::real_types)
         tcx(e_t(-2))                ,                           //12*
         tcx(e_t(0.937208208373369753), e_t(0.50542131601315120396215)),   //13*
         tcx( eve::zero(as<e_t>())    , eve::one(as<e_t>())),    //14*
+        tcx(-0.00003210259810118209, 0.0000321046594533210201), //15*
+        tcx( -1.392216875578e+00, 7.156772220838e-02),//16*
+        tcx(  -1.387512771358e+00, -2.630426333236e-05),//17*
       };
 
 
     for(int i=0; i < N; ++i)
     {
       TTS_RELATIVE_EQUAL(kyosu::omega(inputs[i]), expected[i], tts::prec<T>()) << i << " < - "<< inputs[i] << '\n';
-   TTS_IEEE_EQUAL(kyosu::acos(kyosu::conj(inputs[i])), kyosu::conj(expected[i]));
     }
   }
 };
