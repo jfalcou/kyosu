@@ -17,7 +17,7 @@ TTS_CASE_WITH ( "Check kyosu::rsqrt over real"
   auto asq = eve::rsqrt(eve::abs(v));
   TTS_RELATIVE_EQUAL(kyosu::rsqrt(v),  kyosu::if_else(eve::is_gez(v)
                                                     , kyosu::complex(asq, T(0))
-                                                    , kyosu::complex(T(0), asq)), tts::prec<T>());
+                                                     , kyosu::complex(T(0), eve::signnz(v)*asq)), tts::prec<T>());
   auto rr = eve::rsqrt(v);
   auto re = kyosu::rsqrt[kyosu::real_only](v);
   TTS_IEEE_EQUAL(re, kyosu::inject(rr));
