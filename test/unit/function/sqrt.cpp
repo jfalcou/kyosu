@@ -21,6 +21,10 @@ TTS_CASE_WITH ( "Check kyosu::sqrt over real"
   auto rr = eve::sqrt(v);
   auto re = kyosu::sqrt[kyosu::real_only](v);
   TTS_IEEE_EQUAL(re, kyosu::inject(rr));
+  auto x = kyosu::sqrt(kyosu::complex(T(-4), T(-0.0)));
+  TTS_IEEE_EQUAL(x,  kyosu::complex(T(0.0), T(-2.0)));
+  auto y =  kyosu::sqrt(kyosu::complex(T(-4), T(0.0)));
+  TTS_IEEE_EQUAL(y, kyosu::complex(T(0.0), T(2.0)));
 };
 
 TTS_CASE_WITH ( "Check kyosu::sqrt over complex"

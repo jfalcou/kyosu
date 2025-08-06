@@ -92,12 +92,6 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto omega_(KYOSU_DELAY(), O const&, Z zz) noexcept
   {
-
-//     if constexpr(concepts::real<Z> )
-//     {
-//       return complex(eve::omega(zz));
-//     }
-//     else
     if constexpr(concepts::complex<Z> )
     {
       using u_t = eve::underlying_type_t<Z>;
@@ -260,11 +254,13 @@ namespace kyosu::_
         w1*=kyosu::inc(e);
         w = if_else(notalreadydone, w1, w);
 
-        //===============
+        //===============yes
         // Iteration two
         //===============
         auto tmp = eve::sqr(kyosu::abs(wp1));
-        if(eve::any(notalreadydone && (kyosu::abs(reverse_horner(w, 2, -8*w, -1))*eve::sqr(eve::sqr(kyosu::abs(r))) >= eps(as(x))*72*tmp*eve::sqr(tmp))))
+        if(eve::any(notalreadydone
+                    && (kyosu::abs(reverse_horner(w, 2, -8*w, -1))*eve::sqr(eve::sqr(kyosu::abs(r)))
+                        >= eps(as(x))*72*tmp*eve::sqr(tmp))))
         {
           r=fam(zz, -s, w)-kyosu::log(w);
           wp1=fma(s, w, eve::one(eve::as(x)));
