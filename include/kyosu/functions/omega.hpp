@@ -131,7 +131,7 @@ namespace kyosu::_
         auto t2 = ((-2<x && x<=1 && -2*pi<y && y<-1));
         // Choose approximation based on region
         //=====================================
-        // Region 12: upper/lower branch point
+        // Region 1/2: upper/lower branch point
         // Series about z=-1+Pi*I or  z=-1-Pi*I
         //=====================================
         auto br_12 = [&](auto z, auto sgn){ // ((-2.0<x && x<=1.0 && 1.0<y && y< 2.0*pi)) || ((-2.0<x && x<=1.0 && 1.0<y && y< 2.0*pi))
@@ -254,7 +254,7 @@ namespace kyosu::_
         w1*=kyosu::inc(e);
         w = if_else(notalreadydone, w1, w);
 
-        //===============yes
+        //===============
         // Iteration two
         //===============
         auto tmp = eve::sqr(kyosu::abs(wp1));
