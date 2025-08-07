@@ -168,6 +168,7 @@
 #include <kyosu/functions/negmaxabs.hpp>
 #include <kyosu/functions/negminabs.hpp>
 #include <kyosu/functions/nthroot.hpp>
+#include <kyosu/functions/omega.hpp>
 #include <kyosu/functions/oneminus.hpp>
 #include <kyosu/functions/pow.hpp>
 #include <kyosu/functions/pow1p.hpp>

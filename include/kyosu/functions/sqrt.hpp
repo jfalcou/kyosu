@@ -119,7 +119,7 @@ namespace kyosu::_
                            , kyosu::fnan(as(z))
                            , eve::if_else(eve::is_positive(rz)
                                          , kyosu::complex(sqt, zero(eve::as(sqt)))
-                                         , kyosu::complex(zero(eve::as(sqt)), sqt)
+                                         , kyosu::complex(zero(eve::as(sqt)), eve::signnz(kyosu::imag(z))*sqt)
                                          )
                            );
       }
