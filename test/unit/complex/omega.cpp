@@ -86,7 +86,6 @@ TTS_CASE_TPL( "Check peculiar values", kyosu::real_types)
   e_t recr0(eve::rec(r0));
   for(e_t r = recr0; r < r0; r *= e_t(2))
   {
-    //int i = 16; //
     for(int i=-32; i < 32; ++i)
     {
       auto xx = r*kyosu::exp_ipi(i/e_t(16));
