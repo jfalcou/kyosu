@@ -10,13 +10,14 @@ var searchData=
   ['erfcx_7',['erfcx',['../group__functions_ga738d6a61ebf48d0bacd80f958d1b590b.html#ga738d6a61ebf48d0bacd80f958d1b590b',1,'kyosu']]],
   ['erfi_8',['erfi',['../group__functions_gac01bdb4384827ce21ddddedd19f8b032.html#gac01bdb4384827ce21ddddedd19f8b032',1,'kyosu']]],
   ['eta_9',['eta',['../group__functions_ga7ad40bb479ce858eed855c2819c4ab22.html#ga7ad40bb479ce858eed855c2819c4ab22',1,'kyosu']]],
-  ['exp_10',['exp',['../group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449',1,'kyosu']]],
-  ['exp10_11',['exp10',['../group__functions_ga9c08281f95af17445823ff698486d24b.html#ga9c08281f95af17445823ff698486d24b',1,'kyosu']]],
-  ['exp2_12',['exp2',['../group__functions_ga0ae8f99de8716a46dd7de3ff990602bb.html#ga0ae8f99de8716a46dd7de3ff990602bb',1,'kyosu']]],
-  ['exp_5fi_13',['exp_i',['../group__functions_gad5a796471bcfd81c38de6db0658fa23a.html#gad5a796471bcfd81c38de6db0658fa23a',1,'kyosu']]],
-  ['exp_5fint_14',['exp_int',['../group__functions_gab4bd1587b54034cbb09736150e334372.html#gab4bd1587b54034cbb09736150e334372',1,'kyosu']]],
-  ['exp_5fipi_15',['exp_ipi',['../group__functions_ga761c2a207a0417867f0eb4b3dc30ee2b.html#ga761c2a207a0417867f0eb4b3dc30ee2b',1,'kyosu']]],
-  ['expm1_16',['expm1',['../group__functions_gab0f1c35d5251d1f6db39bec53d8960b6.html#gab0f1c35d5251d1f6db39bec53d8960b6',1,'kyosu']]],
-  ['expmx2_17',['expmx2',['../group__functions_ga29021b202d2832d1e6863d7402e25b79.html#ga29021b202d2832d1e6863d7402e25b79',1,'kyosu']]],
-  ['expx2_18',['expx2',['../group__functions_ga6658defe6cc879802872ceb5e92749a9.html#ga6658defe6cc879802872ceb5e92749a9',1,'kyosu']]]
+  ['example_10',['example',['../group__quaternion_ga768dc300e06ddd80f84746662db3c01b.html#autotoc_md9',1,'Example'],['../group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#autotoc_md10',1,'Example'],['../group__complex_gabe395cb541b4dd24a7dbe400af33d770.html#autotoc_md11',1,'Example'],['../group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#autotoc_md12',1,'Example'],['../group__quaternion_ga47b1fa117c5671882a31b65c997660d7.html#autotoc_md14',1,'Example'],['../group__quaternion_gaa5964ee08fa64046a80d3908056a09c4.html#autotoc_md16',1,'Example'],['../group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#autotoc_md17',1,'Example'],['../group__quaternion_ga31804ee3fdb4a806efea330cf1e20898.html#autotoc_md18',1,'Example'],['../group__quaternion_gadc8b483ae153b0e6d1eb4d7ece78660d.html#autotoc_md20',1,'Example'],['../group__quaternion_ga3519a64d1cbe848507cc57a05b5ed1b3.html#autotoc_md22',1,'Example'],['../group__quaternion_gad7e50e38859bb508a816fdd9d63d7b0a.html#autotoc_md24',1,'Example'],['../group__quaternion_ga36f4e319eab743013ddf5a868679fb63.html#autotoc_md7',1,'Example'],['../group__quaternion_ga36f4e319eab743013ddf5a868679fb63.html#autotoc_md5',1,'Example']]],
+  ['exp_11',['exp',['../group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449',1,'kyosu']]],
+  ['exp10_12',['exp10',['../group__functions_ga9c08281f95af17445823ff698486d24b.html#ga9c08281f95af17445823ff698486d24b',1,'kyosu']]],
+  ['exp2_13',['exp2',['../group__functions_ga0ae8f99de8716a46dd7de3ff990602bb.html#ga0ae8f99de8716a46dd7de3ff990602bb',1,'kyosu']]],
+  ['exp_5fi_14',['exp_i',['../group__functions_gad5a796471bcfd81c38de6db0658fa23a.html#gad5a796471bcfd81c38de6db0658fa23a',1,'kyosu']]],
+  ['exp_5fint_15',['exp_int',['../group__functions_gab4bd1587b54034cbb09736150e334372.html#gab4bd1587b54034cbb09736150e334372',1,'kyosu']]],
+  ['exp_5fipi_16',['exp_ipi',['../group__functions_ga761c2a207a0417867f0eb4b3dc30ee2b.html#ga761c2a207a0417867f0eb4b3dc30ee2b',1,'kyosu']]],
+  ['expm1_17',['expm1',['../group__functions_gab0f1c35d5251d1f6db39bec53d8960b6.html#gab0f1c35d5251d1f6db39bec53d8960b6',1,'kyosu']]],
+  ['expmx2_18',['expmx2',['../group__functions_ga29021b202d2832d1e6863d7402e25b79.html#ga29021b202d2832d1e6863d7402e25b79',1,'kyosu']]],
+  ['expx2_19',['expx2',['../group__functions_ga6658defe6cc879802872ceb5e92749a9.html#ga6658defe6cc879802872ceb5e92749a9',1,'kyosu']]]
 ];
