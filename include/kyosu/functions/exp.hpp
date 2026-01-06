@@ -55,7 +55,7 @@ namespace kyosu
 //!
 //!      - Returns the exponential of the argument, calling `eve::exp`.
 //!
-//!      - For complex inpus, returns the exponential of the complex input following IEEE standards:
+//!      - For complex inputs, returns the exponential following IEEE standards:
 //!
 //!       * for every z: `exp(conj(z)) == conj(exp(z))`
 //!       * If z is \f$\pm0\f$, the result is \f$1\f$

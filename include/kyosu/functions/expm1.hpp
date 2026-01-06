@@ -67,7 +67,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the expm1onential of the argument minus 1.
+//!     Returns the exponential of the argument minus 1.
 //!     Provisions are made to ensure good precision near zero.
 //!
 //!  @groupheader{Example}
