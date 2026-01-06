@@ -32,7 +32,7 @@ namespace kyosu
 //! @{
 //!   @var beta
 //!   @brief Computes the beta function: \f$\displaystyle \mathbf{B}(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$
-//!   for real or complex entries.
+//!   for real, complex or general Cayley_dickson entries.
 //!
 //!   @groupheader{Header file}
 //!

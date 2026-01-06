@@ -58,7 +58,7 @@ namespace kyosu
 //!
 //!     1.  Returns the difference z0*(z1*z2)-(z0*z1)*z2. (always exactly zero up to quaternion)
 //!     2.  Same,  but always do the computation. (up to quaternions, non zero result is merely the
-//!         floating point associativity rounding error)
+//!         floating point associativity rounding error or sometimes a NaN if invalid are involved)
 //!
 //!  @groupheader{External references}
 //!   *  [Wikipedia: Associator](https://en.wikipedia.org/wiki/Associator)
