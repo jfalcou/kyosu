@@ -141,12 +141,11 @@ $(document).ready(function(){initNavTree('group__functions_ga2b61f0670b8c56dca24
 </table>
 </div><div class="memdoc">
 
-<p>Computes the value of the Legendre and associated Legendre functions of order <code>n</code> ( and 'm<code>) at</code>x`: </p>
+<p>Computes the value of the Legendre and associated Legendre functions of order <code>n</code> ( and <code>m</code>) at <code>x</code>: </p>
 <p>For positive integer <code>n</code> the standard legendre functions are polynomials:</p><ul>
 <li>The Legendre polynomial of order n is given by \(\displaystyle \mbox{L}_{n}(x)
      = \frac{e^x}{n!}\frac{d^n}{dx^n}(x^ne^{-x})\).</li>
 </ul>
-<p>However the function legendre must and can be called with real or complex parameters.</p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
@@ -168,19 +167,19 @@ $(document).ready(function(){initNavTree('group__functions_ga2b61f0670b8c56dca24
 <div class="line">}</div>
 <div class="ttc" id="aconceptkyosu_1_1concepts_1_1cayley__dickson_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a></div><div class="ttdoc">General Cayley-dickson concept.</div><div class="ttdef"><b>Definition</b> concepts.hpp:41</div></div>
 <div class="ttc" id="aconceptkyosu_1_1concepts_1_1real_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1real.html">kyosu::concepts::real</a></div><div class="ttdoc">General real concept.</div><div class="ttdef"><b>Definition</b> concepts.hpp:48</div></div>
-<div class="ttc" id="agroup__functions_ga2b61f0670b8c56dca241b1a1482a934b_html_ga2b61f0670b8c56dca241b1a1482a934b"><div class="ttname"><a href="group__functions_ga2b61f0670b8c56dca241b1a1482a934b.html#ga2b61f0670b8c56dca241b1a1482a934b">kyosu::legendre</a></div><div class="ttdeci">constexpr auto legendre</div><div class="ttdoc">Computes the value of the Legendre and associated Legendre functions of order n ( and 'm) atx`:</div><div class="ttdef"><b>Definition</b> legendre.hpp:116</div></div>
+<div class="ttc" id="agroup__functions_ga2b61f0670b8c56dca241b1a1482a934b_html_ga2b61f0670b8c56dca241b1a1482a934b"><div class="ttname"><a href="group__functions_ga2b61f0670b8c56dca241b1a1482a934b.html#ga2b61f0670b8c56dca241b1a1482a934b">kyosu::legendre</a></div><div class="ttdeci">constexpr auto legendre</div><div class="ttdoc">Computes the value of the Legendre and associated Legendre functions of order n ( and m) at x:</div><div class="ttdef"><b>Definition</b> legendre.hpp:113</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><code>n</code> : integral positive arguments.</li>
-<li><code>z</code> : <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> or real argument</li>
-<li><code>pn</code>, <code>pnm1</code> : <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> arguments</li>
+<li><code>n</code>: real positive argument.</li>
+<li><code>z</code>: <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> or real argument</li>
+<li><code>pn</code>, <code>pnm1</code>: <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> arguments</li>
 <li><code>c</code>: Conditional expression masking the operation.</li>
 <li><code>m</code>: Logical value masking the operation.</li>
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>The value of the Legendre polynomial of order <code>n</code> at <code>z</code> is returned.</li>
+<li>The value of the Legendre function of order <code>n</code> at <code>z</code> is returned.</li>
 <li>The operation is performed conditionnaly.</li>
 <li>The <code>successor</code> option implements the three term recurrence relation for the (associated) Legendre functions, \(\displaystyle \mbox{P}_{l+1} =
         \left((2l+1)\mbox{P}_{l}(x)-l\mbox{P}_{l-1}(x)\right)/(l+1)\).</li>

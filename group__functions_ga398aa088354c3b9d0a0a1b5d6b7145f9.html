@@ -162,10 +162,10 @@ $(document).ready(function(){initNavTree('group__functions_ga398aa088354c3b9d0a0
 </ul>
 <p><b>Return value</b></p>
 <ul>
-<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered, unless the option real_only is used in which case the parameter must be a floating_value, the real part of the result will the same as an eve::log implying a Nan result if the result is not real..</li>
+<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered, unless the option <code>real_only</code> is used in which case the parameter must be a floating_value, the real part of the result will the same as an <code>eve::log</code> implying a Nan result if the result is not real..</li>
 <li>For complex entry returns elementwise the natural logarithm of the input in the range of a strip in the interval \(i\times[-\pi, \pi]\) along the imaginary axis and mathematically unbounded along the real axis. .<ul>
 <li>The function is continuous onto the branch cut along the negative real axis, taking into account the sign of imaginary part</li>
-<li>for every z: <code><a class="el" href="group__functions_ga398aa088354c3b9d0a0a1b5d6b7145f9.html#ga398aa088354c3b9d0a0a1b5d6b7145f9" title="Computes the natural logarithm of the argument.">log(conj(z))</a> == :<a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">conj(log(z))</a></code></li>
+<li>for every z: <code><a class="el" href="group__functions_ga398aa088354c3b9d0a0a1b5d6b7145f9.html#ga398aa088354c3b9d0a0a1b5d6b7145f9" title="Computes the natural logarithm of the argument.">log(conj(z))</a> == <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">conj(log(z))</a></code></li>
 <li>If z is \(-0\), the result is \(-\infty+i \pi \)</li>
 <li>If z is \(+0\), the result is \(-\infty\)</li>
 <li>If z is \(x+i \infty\) (for any finite x), the result is \(\infty+i \pi/2\)</li>

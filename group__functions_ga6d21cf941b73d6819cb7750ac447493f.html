@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('group__functions_ga6d21cf941b73d6819cb
 </table>
 </div><div class="memdoc">
 
-<p>argpiument. </p>
+<p>argument in \(\pi\) multiples. </p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('group__functions_ga6d21cf941b73d6819cb
 <div class="line">{</div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">as_real_type_t&lt;Z&gt;</a> <a class="code hl_variable" href="group__functions_ga6d21cf941b73d6819cb7750ac447493f.html#ga6d21cf941b73d6819cb7750ac447493f">argpi</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">T</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z</a>) <span class="keyword">noexcept</span>; <span class="comment">//3</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga6d21cf941b73d6819cb7750ac447493f_html_ga6d21cf941b73d6819cb7750ac447493f"><div class="ttname"><a href="group__functions_ga6d21cf941b73d6819cb7750ac447493f.html#ga6d21cf941b73d6819cb7750ac447493f">kyosu::argpi</a></div><div class="ttdeci">constexpr auto argpi</div><div class="ttdoc">argpiument.</div><div class="ttdef"><b>Definition</b> argpi.hpp:62</div></div>
+<div class="ttc" id="agroup__functions_ga6d21cf941b73d6819cb7750ac447493f_html_ga6d21cf941b73d6819cb7750ac447493f"><div class="ttname"><a href="group__functions_ga6d21cf941b73d6819cb7750ac447493f.html#ga6d21cf941b73d6819cb7750ac447493f">kyosu::argpi</a></div><div class="ttdeci">constexpr auto argpi</div><div class="ttdoc">argument in  multiples.</div><div class="ttdef"><b>Definition</b> argpi.hpp:62</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
@@ -159,7 +159,7 @@ $(document).ready(function(){initNavTree('group__functions_ga6d21cf941b73d6819cb
 <p><b>Return value</b></p>
 <ul>
 <li>For floating value input, returns \(0\) or \(1\) according to the non negativity of <code>z</code> (argpi of minus zero is 1).</li>
-<li>For complex value input, returns elementwise the argpiument of the complex number in \(\pi\) i.e. <code>eve::atan2pi[pedantic](<a class="el" href="group__functions.html#gaff94a2685c6d030458b388a4a4079efe" title="Alias for kyosu::ipart.">imag(z)</a>,<a class="el" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be" title="Extracts the real part of a value.">real(z)</a>)</code>.</li>
+<li>For complex value input, returns elementwise the argument of the complex number in \(\pi\) multiples i.e. <code>eve::atan2pi[pedantic](<a class="el" href="group__functions.html#gaff94a2685c6d030458b388a4a4079efe" title="Alias for kyosu::ipart.">imag(z)</a>,<a class="el" href="group__functions_gaa9d12dd4e1420039046c737ddd3240be.html#gaa9d12dd4e1420039046c737ddd3240be" title="Extracts the real part of a value.">real(z)</a>)</code>.</li>
 <li>For general <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a>, returns \(\mathrm{atan2pi}(\mathrm{sign}(z_1)|\underline{z}|, z_0)\) where \(z_0\) is the real part of \(z\), \(z_1\) is the <code>ipart</code> of \(z\) and \(\underline{z}\) the <code>pure</code> part of \(z\).</li>
 </ul>
 <h2 class="groupheader">Example </h2>

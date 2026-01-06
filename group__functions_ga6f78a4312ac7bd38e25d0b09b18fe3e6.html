@@ -163,9 +163,9 @@ $(document).ready(function(){initNavTree('group__functions_ga6f78a4312ac7bd38e25
 <p><b>Return value</b></p>
 <ul>
 <li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered, unless the option real_only is used in which case the parameter must be a floating_value, the real part of the result will the same as an eve::sqrt implying a Nan result if the result is not real.</li>
-<li>for complex inpur, returns the elementwise the square root of z, in the range of the right half-plane, including the imaginary axis ( \([0, +\infty]\) along the real axis and \([-\infty, +\infty]\) along the imaginary axis.)<ul>
+<li>for complex input, returns elementwise the square root of z, in the range of the right half-plane, including the imaginary axis ( \([0, +\infty]\) along the real axis and \([-\infty, +\infty]\) along the imaginary axis.)<ul>
 <li>The function is continuous onto the branch cut taking into account the sign of imaginary part</li>
-<li>eve::sqrt(kyosu::conj(z)) == <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">kyosu::conj(kyosu::sqrt(z))</a></li>
+<li><a class="el" href="group__functions_ga6f78a4312ac7bd38e25d0b09b18fe3e6.html#ga6f78a4312ac7bd38e25d0b09b18fe3e6" title="Computes a square root value.">kyosu::sqrt(kyosu::conj(z))</a> == <a class="el" href="group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0" title="Computes the conjugate value.">kyosu::conj(kyosu::sqrt(z))</a></li>
 <li>If z is \(\pm0\), the result is \(+0\)</li>
 <li>If z is \(x+i \infty\), the result is \(\infty+i \infty\) even if x is \(NaN\)</li>
 <li>If z is \(x,NaN\), the result is \(NaN,NaN\) (unless x is \(\pm\infty\))</li>

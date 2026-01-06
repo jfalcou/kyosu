@@ -147,9 +147,10 @@ $(document).ready(function(){initNavTree('group__functions_gaa1c85fe49012f1d7bda
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaa1c85fe49012f1d7bdabbfe0fe1abaf4.html#gaa1c85fe49012f1d7bdabbfe0fe1abaf4">commutator</a>(<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z0</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z1</a>)           <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaa1c85fe49012f1d7bdabbfe0fe1abaf4.html#gaa1c85fe49012f1d7bdabbfe0fe1abaf4">commutator</a>(<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z0</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z1</a>)           <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaa1c85fe49012f1d7bdabbfe0fe1abaf4.html#gaa1c85fe49012f1d7bdabbfe0fe1abaf4">commutator</a>[pedantic](<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z0</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z1</a>) <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaa1c85fe49012f1d7bdabbfe0fe1abaf4_html_gaa1c85fe49012f1d7bdabbfe0fe1abaf4"><div class="ttname"><a href="group__functions_gaa1c85fe49012f1d7bdabbfe0fe1abaf4.html#gaa1c85fe49012f1d7bdabbfe0fe1abaf4">kyosu::commutator</a></div><div class="ttdeci">constexpr auto commutator</div><div class="ttdoc">Computes the commutator of the two parameters.</div><div class="ttdef"><b>Definition</b> commutator.hpp:64</div></div>
+<div class="ttc" id="agroup__functions_gaa1c85fe49012f1d7bdabbfe0fe1abaf4_html_gaa1c85fe49012f1d7bdabbfe0fe1abaf4"><div class="ttname"><a href="group__functions_gaa1c85fe49012f1d7bdabbfe0fe1abaf4.html#gaa1c85fe49012f1d7bdabbfe0fe1abaf4">kyosu::commutator</a></div><div class="ttdeci">constexpr auto commutator</div><div class="ttdoc">Computes the commutator of the two parameters.</div><div class="ttdef"><b>Definition</b> commutator.hpp:66</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
@@ -157,7 +158,10 @@ $(document).ready(function(){initNavTree('group__functions_gaa1c85fe49012f1d7bda
 <li><code>z0</code>, <code>z1</code>: Values to process. Can be a mix of cayley_dickson_like values.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the difference z0*z1-z1*z0. (always exactly zero up to complex)</p>
+<ol type="1">
+<li>Returns the difference z0*z1-z1*z0. (always exactly zero up to complex)</li>
+<li>Always computes the result that can sometimes be a NaN.</li>
+</ol>
 <h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://mathworld.wolfram.com/Commutator.html">Wolfram MathWorld: Commutator</a></li>

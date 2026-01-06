@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('group__functions_ga764d5554dc7ce3cac33
 </table>
 </div><div class="memdoc">
 
-<p>Computes the computing the pow_abs operation \(|x|^y\). </p>
+<p>Computes the pow_abs operation \(|x|^y\). </p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('group__functions_ga764d5554dc7ce3cac33
 <div class="line">{</div>
 <div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga764d5554dc7ce3cac3302591c4d75947.html#ga764d5554dc7ce3cac3302591c4d75947">pow_abs</a>(<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z0</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z1</a>) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga764d5554dc7ce3cac3302591c4d75947_html_ga764d5554dc7ce3cac3302591c4d75947"><div class="ttname"><a href="group__functions_ga764d5554dc7ce3cac3302591c4d75947.html#ga764d5554dc7ce3cac3302591c4d75947">kyosu::pow_abs</a></div><div class="ttdeci">constexpr auto pow_abs</div><div class="ttdoc">Computes the computing the pow_abs operation .</div><div class="ttdef"><b>Definition</b> pow_abs.hpp:102</div></div>
+<div class="ttc" id="agroup__functions_ga764d5554dc7ce3cac3302591c4d75947_html_ga764d5554dc7ce3cac3302591c4d75947"><div class="ttname"><a href="group__functions_ga764d5554dc7ce3cac3302591c4d75947.html#ga764d5554dc7ce3cac3302591c4d75947">kyosu::pow_abs</a></div><div class="ttdeci">constexpr auto pow_abs</div><div class="ttdoc">Computes the pow_abs operation .</div><div class="ttdef"><b>Definition</b> pow_abs.hpp:102</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('group__functions_ga764d5554dc7ce3cac33
 <li><code>z0</code>, <code>z1</code>: Values to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>the call is semantically equivalent to <code><a class="el" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449" title="Computes the exponential of the argument.">kyosu::exp(log_abs(z0)*z1)</a></code> In particular if z1 is floating typed the result is floating_typed, which is not the case of <a class="el" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f" title="Computes the computing the pow operation .">kyosu::pow(abs(z0), z1)</a>;</p>
+<p>the call is semantically equivalent to <code><a class="el" href="group__functions_gad726f439fb9920c055c094631185d449.html#gad726f439fb9920c055c094631185d449" title="Computes the exponential of the argument.">kyosu::exp(log_abs(z0)*z1)</a></code> In particular if z1 is a floating value the result is a floating value, which is not the case of <a class="el" href="group__functions_ga25372aaebdff2ad59971a9fee778ba0f.html#ga25372aaebdff2ad59971a9fee778ba0f" title="Computes the pow operation .">kyosu::pow(abs(z0), z1)</a>;</p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

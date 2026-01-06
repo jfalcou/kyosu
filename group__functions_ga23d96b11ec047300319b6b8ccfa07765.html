@@ -142,6 +142,31 @@ $(document).ready(function(){initNavTree('group__functions_ga23d96b11ec047300319
 </div><div class="memdoc">
 
 <p>Computes the relative distance between the two parameters. </p>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// regular call</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765">reldist</a>(<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z0</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z1</a>) <span class="keyword">noexcept</span>;           <span class="comment">//1</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Semantic modifyiers</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765">reldist</a>[pedantic](<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z0</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z1</a>) <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765">reldist</a>[numeric](<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z0</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z1</a>) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__functions_ga23d96b11ec047300319b6b8ccfa07765_html_ga23d96b11ec047300319b6b8ccfa07765"><div class="ttname"><a href="group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765">kyosu::reldist</a></div><div class="ttdeci">constexpr auto reldist</div><div class="ttdoc">Computes the relative distance between the two parameters.</div><div class="ttdef"><b>Definition</b> reldist.hpp:70</div></div>
+<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
+<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
+</div><!-- fragment --><p><b>Parameters</b></p>
+<ul>
+<li><code>z0</code>, <code>z1</code>: Value to process.</li>
+</ul>
+<p><b>Return value</b></p>
+<ol type="1">
+<li>Returns the the relative distance computed as the absolute value of the arguments difference given by <code>dist</code> divided by the maximum of their absolute values and 1.</li>
+<li>if the pedantic option is used the distance betwween an infinite value an anything (even a nan) is infinite.</li>
+<li>the numeric option implies pedantic and also return zero if all corresponding parts satisfy <code>eve::is_equal[numeric]</code>.</li>
+</ol>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -187,33 +212,8 @@ $(document).ready(function(){initNavTree('group__functions_ga23d96b11ec047300319
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga23d96b11ec047300319b6b8ccfa07765_html_ga23d96b11ec047300319b6b8ccfa07765"><div class="ttname"><a href="group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765">kyosu::reldist</a></div><div class="ttdeci">constexpr auto reldist</div><div class="ttdoc">Computes the relative distance between the two parameters.</div><div class="ttdef"><b>Definition</b> reldist.hpp:70</div></div>
 <div class="ttc" id="agroup__types_ga0fb102adb92b2be024f398e2ac5dd5cd_html_ga0fb102adb92b2be024f398e2ac5dd5cd"><div class="ttname"><a href="group__types_ga0fb102adb92b2be024f398e2ac5dd5cd.html#ga0fb102adb92b2be024f398e2ac5dd5cd">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:24</div></div>
-<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
-</div><!-- fragment --><h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
-</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
-<div class="line">{</div>
-<div class="line">  <span class="comment">// regular call</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765">reldist</a>(<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z0</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z1</a>) <span class="keyword">noexcept</span>;           <span class="comment">//1</span></div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// Semantic modifyiers</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765">reldist</a>[pedantic](<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z0</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z1</a>) <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga23d96b11ec047300319b6b8ccfa07765.html#ga23d96b11ec047300319b6b8ccfa07765">reldist</a>[numeric](<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z0</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z1</a>) <span class="keyword">noexcept</span>;  <span class="comment">//3</span></div>
-<div class="line">}</div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
-</div><!-- fragment --><p><b>Parameters</b></p>
-<ul>
-<li><code>z0</code>, <code>z1</code>: Value to process.</li>
-</ul>
-<p><b>Return value</b></p>
-<ol type="1">
-<li>Returns the the relative distance computed as the absolute value of the arguments difference given by <code>dist</code> divided by the maximum of their absolute values and 1.</li>
-<li>if the pedantic option is used the distance betwween an infinite value an anything (even a nan) is infinite.</li>
-<li>the numeric option implies pedantic and also return zero if all corresponding parts satisfy <code>eve::is_equal[numeric]</code>. </li>
-</ol>
-
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
