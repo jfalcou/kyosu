@@ -51,7 +51,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     - For floating  value input, returns \f$0\f$ or \f$1\f$ according to the non negativity of `z` (argpi of minus zero is 1).
-//!     - For complex  value input, returns elementwise the argpiument of the complex number in \f$\pi\f$ i.e. `eve::atan2pi[pedantic](imag(z),real(z))`.
+//!     - For complex  value input, returns elementwise the argument of the complex number in \f$\pi\f$ multiples i.e. `eve::atan2pi[pedantic](imag(z),real(z))`.
 //!     - For general cayley_dickson,  returns \f$\mathrm{atan2pi}(\mathrm{sign}(z_1)|\underline{z}|, z_0)\f$ where \f$z_0\f$ is the real part of \f$z\f$,
 //!       \f$z_1\f$ is the `ipart` of \f$z\f$ and \f$\underline{z}\f$ the `pure` part of \f$z\f$.
 //!
