@@ -27,10 +27,16 @@ namespace kyosu
       return t_t{ kumi::fill<kumi::size_v<eve::element_type_t<t_t>>>(eve::nan(as<u_t>()))};
     }
 
-    template<concepts::cayley_dickson_like T>
+    template<concepts::cayley_dickson T>
     KYOSU_FORCEINLINE constexpr typename result<T>::type operator()(as<T> const& v) const
     {
       return KYOSU_CALL(v);
+    }
+
+    template<concepts::real T>
+    KYOSU_FORCEINLINE constexpr T operator()(as<T> const& v) const
+    {
+      return eve::nan(as(v));
     }
 
     EVE_CALLABLE_OBJECT(fnan_t, fnan_);
