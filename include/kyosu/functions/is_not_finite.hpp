@@ -18,10 +18,10 @@ namespace kyosu
     {
       return KYOSU_CALL(z);
     }
-    
+
     KYOSU_CALLABLE_OBJECT(is_not_finite_t, is_not_finite_);
   };
-  
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -66,6 +66,7 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto is_not_finite_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    return kumi::any_of(z, [](auto const& e) { return eve::is_not_finite(e); });
+    if constexpr(concepts::real<Z>) return eve::is_not_infinite(z);
+    else return kumi::any_of(z, [](auto const& e) { return eve::is_not_finite(e); });
   }
 }

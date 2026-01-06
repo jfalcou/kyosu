@@ -15,27 +15,22 @@ namespace kyosu
   struct fnan_t : eve::constant_callable<fnan_t, Options>
   {
     template<typename T>
-    static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
-    {
-      using t_t = eve::as_floating_point_t<eve::underlying_type_t<T>>;
-
-      if constexpr(concepts::cayley_dickson<T>)
-      {
-        T z;
-        return  T{kumi::map([&z](auto const& e) {  return eve::nan(as(real(z))); }, z)};
-        }
-        else
-          return complex_t<T>{eve::nan(as<t_t>()),eve::nan(as<t_t>())};
-    }
+    struct result : std::conditional<concepts::cayley_dickson<T>, T, as_cayley_dickson_n_t<2, T>>
+    {};
 
     template<typename T>
-    requires(concepts::cayley_dickson<T>)
-    KYOSU_FORCEINLINE constexpr T operator()(as<T> const& v) const { return KYOSU_CALL(v); }
-
-    template<concepts::real T>
-    KYOSU_FORCEINLINE constexpr T operator()(as<T> const& v) const
+    static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
     {
-      return eve::nan(as(v));
+      using t_t = typename result<T>::type;
+      using u_t = eve::underlying_type_t<t_t>;
+
+      return t_t{ kumi::fill<kumi::size_v<eve::element_type_t<t_t>>>(eve::nan(as<u_t>()))};
+    }
+
+    template<concepts::cayley_dickson_like T>
+    KYOSU_FORCEINLINE constexpr typename result<T>::type operator()(as<T> const& v) const
+    {
+      return KYOSU_CALL(v);
     }
 
     EVE_CALLABLE_OBJECT(fnan_t, fnan_);
