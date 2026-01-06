@@ -18,7 +18,7 @@ jobs:
   install:
     runs-on: [ubuntu-latest]
     container:
-      image: ghcr.io/jfalcou/compilers:v6
+      image: ghcr.io/jfalcou/compilers:v10
     strategy:
       fail-fast: false
 
@@ -33,7 +33,7 @@ jobs:
       - name: Run Sample CMake
         run: |
           mkdir install && cd install
-          cmake ../test/integration/install-test -G Ninja
+          cmake ../test/integration/install-test -G Ninja -DCMAKE_CXX_COMPILER=g++-15
           ninja test_kyosu && ctest -R ^test_kyosu* --verbose
 
   fetch-content:
@@ -52,7 +52,7 @@ jobs:
         run: |
           git config --global --add safe.directory /__w/kyosu/kyosu
           mkdir install && cd install
-          cmake ../test/integration/fetch-test -G Ninja -DGIT_BRANCH=${BRANCH_NAME} -DKYOSU_BUILD_TEST=OFF
+          cmake ../test/integration/fetch-test -G Ninja  -DCMAKE_CXX_COMPILER=g++-15 -DGIT_BRANCH=${BRANCH_NAME} -DKYOSU_BUILD_TEST=OFF
           ninja test_kyosu && ctest -R ^test_kyosu* --verbose
 
   cpm:
@@ -71,5 +71,5 @@ jobs:
         run: |
           git config --global --add safe.directory /__w/kyosu/kyosu
           mkdir install && cd install
-          cmake ../test/integration/cpm-test -G Ninja -DGIT_BRANCH=${BRANCH_NAME}
+          cmake ../test/integration/cpm-test -G Ninja -DGIT_BRANCH=${BRANCH_NAME}  -DCMAKE_CXX_COMPILER=g++-15
           ninja test_kyosu && ctest -R ^test_kyosu* --verbose
