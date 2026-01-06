@@ -17,18 +17,14 @@ namespace kyosu
     template<typename T>
     static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
     {
-      using t_t = eve::as_floating_point_t<eve::underlying_type_t<T>>;
+      using t_t = as_cayley_dickson_n_t<2, T>;
+      using u_t = eve::underlying_type_t<t_t>;
 
-      if constexpr(concepts::cayley_dickson<T>) return T{eve::nan(as<t_t>()),eve::inf(as<t_t>())};
-      else                                      return complex_t<T>{eve::nan(as<t_t>()),eve::inf(as<t_t>())};
+      return t_t{eve::nan(as<u_t>()),eve::inf(as<u_t>())};
     }
 
-    template<typename T>
-    requires(concepts::cayley_dickson<T>)
-    KYOSU_FORCEINLINE constexpr T operator()(as<T> const& v) const { return KYOSU_CALL(v); }
-
-    template<concepts::real T>
-    KYOSU_FORCEINLINE constexpr complexify_t<T> operator()(as<T> const& v) const
+    template<concepts::cayley_dickson_like T>
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_n_t<2, T> operator()(as<T> const& v) const
     {
       return KYOSU_CALL(v);
     }

@@ -14,18 +14,17 @@ namespace kyosu
   struct i_t : eve::constant_callable<i_t, Options>
   {
     template<typename T>
-    static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
-    {
-      if constexpr(concepts::cayley_dickson<T>) return T{0,1};
-      else                                      return complex_t<eve::as_floating_point_t<T>>{0,1};
-    }
+    struct result : std::conditional<concepts::cayley_dickson<T>, T, as_cayley_dickson_n_t<2, T>>
+    {};
 
     template<typename T>
-    requires(concepts::cayley_dickson<T>)
-    KYOSU_FORCEINLINE constexpr T operator()(as<T> const& v) const { return KYOSU_CALL(v); }
+    static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
+    {
+      return typename result<T>::type{0,1};
+    }
 
-    template<concepts::real T>
-    KYOSU_FORCEINLINE constexpr complexify_t<T> operator()(as<T> const& v) const
+    template<concepts::cayley_dickson_like T>
+    KYOSU_FORCEINLINE constexpr typename result<T>::type operator()(as<T> const& v) const
     {
       return KYOSU_CALL(v);
     }
@@ -51,7 +50,7 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      template<kyosu::concepts::cayley_dickson T> constexpr T  i(as<T> t) noexcept;
-//!      template<kyosu::real T>                     constexpr as_complex_t<eve::as_floating_point_t<T>>  i(as<T> t) noexcept;
+//!      template<kyosu::real T>                     constexpr complex_t<eve::as_floating_point_t<T>>  i(as<T> t) noexcept;
 //!   }
 //!   @endcode
 //!

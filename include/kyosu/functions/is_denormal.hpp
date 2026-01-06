@@ -18,10 +18,10 @@ namespace kyosu
     {
       return KYOSU_CALL(z);
     }
-    
+
     KYOSU_CALLABLE_OBJECT(is_denormal_t, is_denormal_);
   };
-  
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -66,6 +66,7 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto is_denormal_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    return kumi::any_of(z, [](auto const& e) { return eve::is_denormal(e); });
+    if constexpr(concepts::real<Z>) return eve::is_denormal(z);
+    else  return kumi::any_of(z, [](auto const& e) { return eve::is_denormal(e); });
   }
 }

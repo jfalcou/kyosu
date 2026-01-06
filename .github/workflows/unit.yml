@@ -14,18 +14,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  linux:
-    runs-on: [self-hosted]
+  x86:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jfalcou/compilers:v10
+      options: -u root
     strategy:
       fail-fast: false
       matrix:
         cfg:
-        - { compiler: g++     , opts: "-O3 -DNDEBUG"                       }
-        - { compiler: clang++ , opts: "-O3 -DNDEBUG"                       }
-        - { compiler: g++     , opts: "-O3 -DNDEBUG -mavx2"                }
-        - { compiler: clang++ , opts: "-O3 -DNDEBUG -mavx2"                }
-        - { compiler: g++     , opts: "-O3 -DNDEBUG -march=skylake-avx512" }
-        - { compiler: clang++ , opts: "-O3 -DNDEBUG -march=skylake-avx512" }
+        - { compiler: g++-15     , opts: "-O0 -DEVE_NO_FORCEINLINE"                       }
+        - { compiler: clang++-20 , opts: "-O0 -DEVE_NO_FORCEINLINE"                       }
+        - { compiler: g++-15     , opts: "-O0 -DEVE_NO_FORCEINLINE -mavx2"                }
+        - { compiler: clang++-20 , opts: "-O0 -DEVE_NO_FORCEINLINE -mavx2"                }
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4
@@ -34,18 +35,16 @@ jobs:
           mkdir build && cd build
           cmake .. -G Ninja -DCMAKE_CXX_COMPILER=${{ matrix.cfg.compiler }} -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}"
       - name: Running Unit Tests
-        run:  cd build && ninja kyosu-test -j 8 && ctest --output-on-failure -j 8
+        run:  cd build && ninja kyosu-test -j 2 && ctest --output-on-failure -j 2
 
-  macosx:
+  arm64:
     runs-on: [macos-14]
     strategy:
       fail-fast: false
       matrix:
         cfg:
-        - { opts: -O0                                 , linker:                 }
-        - { opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++  }
-        - { opts: "-O3 -flto -DNDEBUG"                , linker:                 }
-        - { opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++  }
+        - { opts: "-O0 -DEVE_NO_FORCEINLINE"       , linker:                 }
+        - { opts: "-O0 -DEVE_NO_FORCEINLINE -stdlib=libc++" , linker: -stdlib=libc++  }
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4

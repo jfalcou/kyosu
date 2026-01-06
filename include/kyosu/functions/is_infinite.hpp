@@ -19,10 +19,10 @@ namespace kyosu
     {
       return KYOSU_CALL(z);
     }
-    
+
     KYOSU_CALLABLE_OBJECT(is_infinite_t, is_infinite_);
   };
-  
+
 //======================================================================================================================
 //! @addtogroup functions
 //! @{
@@ -67,6 +67,7 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto is_infinite_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    return kumi::any_of(z, [](auto e) { return eve::is_infinite(e); });
+    if constexpr(concepts::real<Z>) return eve::is_infinite(z);
+    else return kumi::any_of(z, [](auto e) { return eve::is_infinite(e); });
   }
 }

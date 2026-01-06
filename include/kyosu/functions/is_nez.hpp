@@ -66,6 +66,7 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto is_nez_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    return kumi::any_of(z, [](auto const& e) { return eve::is_nez(e); });
+    if constexpr(concepts::real<Z>) return eve::is_nez(z);
+    else return kumi::any_of(z, [](auto const& e) { return eve::is_nez(e); });
   }
 }

@@ -16,24 +16,20 @@ namespace kyosu
   struct j_t : eve::constant_callable<j_t, Options>
   {
     template<typename T>
+    struct result : std::conditional<(concepts::cayley_dickson<T> && dimension_v<T> > 2)
+                                    , T
+                                    , as_cayley_dickson_n_t<4, T>
+                                    >
+    {};
+
+    template<typename T>
     static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
     {
-      if constexpr(concepts::cayley_dickson<T> && (dimension_v<T> > 2)) return T{0,0,1,0};
-      else                      return quaternion_t<eve::as_floating_point_t<eve::underlying_type_t<T>>>{0,0,1,0};
+      return typename result<T>::type{0,0,1,0};
     }
 
-    template<concepts::cayley_dickson T>
-      KYOSU_FORCEINLINE T operator()(as<T> const& v) const
-      requires(dimension_v<T> >= 4)
-    { return KYOSU_CALL(v); }
-
-    template<concepts::cayley_dickson T>
-      KYOSU_FORCEINLINE quaternion_t<as_real_type_t<T>> operator()(as<T> const& v) const
-      requires(dimension_v<T> < 4)
-    { return KYOSU_CALL(v); }
-
-    template<concepts::real T>
-    KYOSU_FORCEINLINE constexpr quaternion_t<T> operator()(as<T> const& v) const
+    template<concepts::cayley_dickson_like T>
+    KYOSU_FORCEINLINE constexpr typename result<T>::type operator()(as<T> const& v) const
     {
       return KYOSU_CALL(v);
     }
