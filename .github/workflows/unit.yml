@@ -23,10 +23,10 @@ jobs:
       fail-fast: false
       matrix:
         cfg:
-        - { compiler: g++-15     , opts: "-O3 -DNDEBUG"                       }
-        - { compiler: clang++-20 , opts: "-O3 -DNDEBUG"                       }
-        - { compiler: g++-15     , opts: "-O3 -DNDEBUG -mavx2"                }
-        - { compiler: clang++-20 , opts: "-O3 -DNDEBUG -mavx2"                }
+        - { compiler: g++-15     , opts: "-O0 -DEVE_NO_FORCEINLINE"                       }
+        - { compiler: clang++-20 , opts: "-O0 -DEVE_NO_FORCEINLINE"                       }
+        - { compiler: g++-15     , opts: "-O0 -DEVE_NO_FORCEINLINE -mavx2"                }
+        - { compiler: clang++-20 , opts: "-O0 -DEVE_NO_FORCEINLINE -mavx2"                }
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4
@@ -43,8 +43,8 @@ jobs:
       fail-fast: false
       matrix:
         cfg:
-        - { opts: "-O3 -DNDEBUG"       , linker:                 }
-        - { opts: "-O3 -stdlib=libc++" , linker: -stdlib=libc++  }
+        - { opts: "-O0 -DEVE_NO_FORCEINLINE"       , linker:                 }
+        - { opts: "-O0 -DEVE_NO_FORCEINLINE -stdlib=libc++" , linker: -stdlib=libc++  }
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4
