@@ -6,7 +6,7 @@
 */
 //======================================================================================================================
 #pragma once
-#include <kyosu/functions/is_not_equal.hpp>>
+#include <kyosu/functions/is_not_equal.hpp>
 
 namespace kyosu::_
 {
