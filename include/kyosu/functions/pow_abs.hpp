@@ -69,7 +69,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var pow_abs
-//!   @brief Computes the  computing the pow_abs operation \f$|x|^y\f$.
+//!   @brief Computes the pow_abs operation \f$|x|^y\f$.
 //!
 //!   @groupheader{Header file}
 //!
@@ -92,8 +92,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!      the call is semantically equivalent to `kyosu::exp(log_abs(z0)*z1)` In particular if z1 is floating typed the
-//!      result is floating_typed, which is not the case of kyosu::pow(abs(z0), z1);
+//!      the call is semantically equivalent to `kyosu::exp(log_abs(z0)*z1)` In particular if z1 is a floating value the
+//!      result is a floating value, which is not the case of kyosu::pow(abs(z0), z1);
 //!
 //!  @groupheader{Example}
 //!

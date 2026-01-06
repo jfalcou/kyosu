@@ -52,7 +52,7 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!    - A real typed input z calls ``eve:atanpi`` so return the same type.
+//!    - A real typed input z calls `eve:atanpi` so return the same type.
 //!    - Returns `radinpi(atan(z))`
 //!
 //!  @groupheader{Example}

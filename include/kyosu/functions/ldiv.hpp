@@ -53,7 +53,7 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto ldiv(auto z0, auto zto zs...) noexcept;
+//!     constexpr auto ldiv(auto z0, auto z1, auto zs...) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -63,8 +63,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!      - For two arguments Returns the left division  of the two arguments. This function not equivalent to z1/z0 as soon as multiplication
-//!     is not commutative (i.e. for general Cayley-Dickson values with dimensionality strictly above 2).
+//!      - For two arguments Returns the left division  of the two arguments. This function is not equivalent to z1/z0 as
+//!        soon as multiplication is not commutative (i.e. for general Cayley-Dickson values with dimensionality strictly above 2).
 //!      - For  more arguments the left division of the product of the arguments but the first, by the first is returned.
 //!
 //!  @groupheader{Example}

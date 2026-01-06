@@ -11,7 +11,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct commutator_t : eve::strict_elementwise_callable<commutator_t, Options>
+  struct commutator_t : eve::strict_elementwise_callable<commutator_t, Options, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     requires(eve::same_lanes_or_scalar<Z0, Z1>)
@@ -41,7 +41,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto commutator(auto z0, auto z1)           noexcept;
+//!     constexpr auto commutator(auto z0, auto z1)           noexcept; //1
+//!     constexpr auto commutator[pedantic](auto z0, auto z1) noexcept; //2
 //!   }
 //!   @endcode
 //!
@@ -51,7 +52,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the difference z0*z1-z1*z0. (always exactly zero up to complex)
+//!     1. Returns the difference z0*z1-z1*z0. (always exactly zero up to complex)
+//!     2. Always computes the result that can sometimes be a NaN.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Commutator](https://mathworld.wolfram.com/Commutator.html)
@@ -70,9 +72,9 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z0, typename Z1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto commutator_(KYOSU_DELAY(), O const& o, Z0 z0, Z1 const & z1) noexcept
+  KYOSU_FORCEINLINE constexpr auto commutator_(KYOSU_DELAY(), O const&, Z0 z0, Z1 const & z1) noexcept
   {
-    if constexpr((concepts::complex_like<Z0> && concepts::complex_like<Z1>) ||
+    if constexpr(!O::contains(pedantic) && (concepts::complex_like<Z0> && concepts::complex_like<Z1>) ||
                  (concepts::real<Z0> || concepts::real<Z1>))
       return  eve::zero(eve::as<as_cayley_dickson_like_t<Z0, Z1>>());
     else

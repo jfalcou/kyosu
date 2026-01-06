@@ -57,7 +57,7 @@ namespace kyosu
 //! **Return value**
 //!
 //!   - A real typed input z is treated as if `complex(z)` was entered unless the option real_only is used
-//!     in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::acos
+//!     in which case the parameter must be a floating_value,  the real part of the result will the same as an `eve::asech`
 //!     implying a Nan result if the result is not real.
 //!   - Returns elementwise `acosh(rec(z))`.
 //!

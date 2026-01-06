@@ -64,13 +64,12 @@ namespace kyosu
 //!   **Parameters**
 //!
 //!     * `z`: Value to process. floating or complex.
-//!     * `n`: nth root
-//!     * `k : kth nth root
+//!     * `k`: kth cubic root.
 //!
-//! **Return value**
+//!   **Return value**
 //!
-//!      - if the first parameter is floating the call will act as if they were converted to complex before call.
-//!      - the kth cubic root of z, is. `exp((log(z)+2*k*i*pi)/3)`. If not present k is taken as 0. (k is always taken modulo 3).
+//!     * if the first parameter is floating the call will act as if they were converted to complex before call.
+//!     * the kth cubic root of z, is `exp((log(z)+2*k*i*pi)/3)`. If not present k is taken as 0. (k is always taken modulo 3).
 //!
 //!
 //!  @groupheader{Example}

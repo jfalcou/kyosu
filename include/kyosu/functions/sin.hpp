@@ -55,7 +55,7 @@ namespace kyosu
 //!
 //!     - Returns the sine of the argument.
 //!     - For complex input, the behavior of this function is equivalent to \f$-i*\sinh(i*z)\f$.
-//!     - For general cayley_dickson input, returns \f$-I_z\cosh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\sin(z_0)\f$,
+//!     - For general cayley_dickson input, returns \f$-I_z\sinh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\sin(z_0)\f$,
 //!       where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!        \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
 //!

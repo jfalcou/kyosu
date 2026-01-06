@@ -63,7 +63,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var tchebytchev
-//!   @brief Computes the value of the Tchebytchev polynomial of order `n` at `z`:
+//!   @brief Computes the value of the Tchebytchev polynomial of order `n` at `x`:
 //!
 //!    * The Tchebytchev polynomial of order n is given by \f$ \displaystyle \mbox{T}_{n}(x)
 //!      = \cos(n\arccos(x))\f$

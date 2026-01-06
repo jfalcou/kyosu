@@ -67,12 +67,12 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     1. Returns elementwise  the square root minimum of the squared absolute values of the parameters.
-//!     2  Same as 1, but the parameters are from the tuple
+//!     2. Same as 1, but the parameters are from the tuple
 //!     3. With the raw option no provision is made to enhance accuracy and avoid overflows
 //!     4. Returns elementwise  the numeric minimum of the  absolute values of the parameters.
 //!     5. Returns elementwise  the pedantic minimum of the  absolute values of the parameters.
 //!     6. Returns elementwise  the minimum of the  absolute values of the elements of each parameters.
-//!        Generally it's not what you want.   
+//!        Generally it's not what you want.
 //!
 //!  @groupheader{Example}
 //!

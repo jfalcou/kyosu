@@ -67,7 +67,7 @@ namespace kyosu
 //!     * `m`: amplitude parameter (\f$0\le m\le 1\f$).
 //!     * `alpha `: modular angle in radian.
 //!     * `k`: elliptic modulus (eccentricity) .
-//!     * `tol': accuracy tolerance (by defaut [epsilon](@ref eve::epsilon).
+//!     * `tol`: accuracy tolerance (by defaut [epsilon](@ref eve::epsilon).
 //!     * `c`: [Conditional expression](@ref eve::conditional_expr) masking the operation.
 //!     * `l`: [Logical value](@ref eve::logical_value) masking the operation.
 //!
@@ -85,7 +85,7 @@ namespace kyosu
 //!   Thus, they can be used interchangeably up to roundings errors by giving the right option.
 //!
 //!  @groupheader{External references}
-//!   *  [DLMF: Legendre-F¢s Integrals](https://dlmf.nist.gov/19.2#ii)-A
+//!   *  [DLMF: Legendre Integrals](https://dlmf.nist.gov/19.2#ii)
 //!   *  [Wolfram MathWorld: Jacobi Amplitude](https://functions.wolfram.com/EllipticIntegrals/EllipticF/)
 //!   *  [Wolfram MathWorld: Jacobi Amplitude](https://functions.wolfram.com/EllipticIntegrals/EllipticE/)
 //!   *  [Wikipedia: Elliptic integral](https://en.wikipedia.org/wiki/Elliptic_integral)

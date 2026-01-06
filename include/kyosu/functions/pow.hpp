@@ -57,7 +57,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var pow
-//!   @brief Computes the  computing the pow operation \f$x^y\f$.
+//!   @brief Computes the pow operation \f$x^y\f$.
 //!
 //!   @groupheader{Header file}
 //!
@@ -80,8 +80,9 @@ namespace kyosu
 //!     * `z0`, `z1`: Values to process.
 //!
 //!   **Return value**
-//!      1. if both parameters are floating the call will act as if they were converted to complex before call, unless the option real_only is used
-//!         in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::acos
+//!      1. if both parameters are floating the call will act as if they were converted to complex before call,
+//!         unless the option real_only is used
+//!         in which case the parameters must be  floating values,  the real part of the result will the same as an eve::acos
 //!         implying a Nan result if the result is not real.
 //!      2. if both parameters are floating or complex. The ieee specification are taken:\n
 //!         In particular we have (IEC 60559):

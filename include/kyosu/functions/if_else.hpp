@@ -61,7 +61,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!        elementwise `y` or `z` according the truth value of `x`.
+//!     * elementwise `y` or `z` according the truth value of `x`.
 //!
 //!  @groupheader{Example}
 //!

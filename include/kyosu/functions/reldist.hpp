@@ -62,7 +62,7 @@ namespace kyosu
 //!        divided by the maximum of their absolute values and 1.
 //!      2. if the pedantic option is used the distance betwween an infinite value an anything (even a nan) is infinite.
 //!      3. the numeric option implies pedantic and also return zero if all corresponding parts satisfy `eve::is_equal[numeric]`.
-
+//!
 //!  @groupheader{Example}
 //!
 //!  @godbolt{doc/reldist.cpp}

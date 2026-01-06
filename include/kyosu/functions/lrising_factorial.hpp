@@ -53,7 +53,7 @@ namespace kyosu
 //!     auto lrising_factorial(auto x,auto y) noexcept;
 //!
 //!     // semantic modifyers
-//!     auto lrising_factorial[real_only](auto z) noexcept;
+//!     auto lrising_factorial[real_only](auto x,auto y) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -65,8 +65,8 @@ namespace kyosu
 //!
 //!     - \f$\displaystyle \log\left(\frac{\Gamma(a+x)}{\Gamma(a)}\right)\f$ is returned.
 //!     - Real typed entries are treated as complex ones. unless the option real_only is used
-//!       in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::lrising_factorial
-//!       implying a Nan result if the result is not real.
+//!       in which case the parameters must be floating values,  the real part of the result will
+//!       the same as an eve::lrising_factorial implying a Nan result if the result is not real.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Rising Factorial](https://mathworld.wolfram.com/RisingFactorial.html)

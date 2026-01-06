@@ -33,8 +33,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var tgamma
-//!   @brief Computes \f$\Gamma(z)\f$, \f$\Gamma(z, x)\f$ and \f$\gamma(z, x)\f$,  the gamma function and the upper and lower
-//!     incomplete gamma functions
+//!   @brief Computes \f$\Gamma(z)\f$ the gamma function.
 //!
 //!   @groupheader{Header file}
 //!

@@ -56,8 +56,8 @@ namespace kyosu
 //!   **Return value**
 //!
 //!      1. Returns the distance between the two arguments computed as the absolute value of the arguments difference.
-//!         The distance betwween an infinite an a nan value is nan
-//!      2. if the pedantic option is used the distance betwween an infinite value an anything (even a nan) is infinite.
+//!         The distance between an infinite an a nan value is nan
+//!      2. if the pedantic option is used the distance between an infinite value an anything (even a nan) is infinite.
 //!      3. the numeric option implies pedantic return zero if all corresponding parts satisfy `eve::is_equal[numeric]`.
 //!
 //!     Arguments can be a mix of floating or Cayley-Dickson values.

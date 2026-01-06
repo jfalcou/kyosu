@@ -63,7 +63,7 @@ namespace kyosu
 //!     * `m`: amplitude parameter (\f$0\le m\le 1\f$).
 //!     * `alpha `: modular angle in radian.
 //!     * `k`: elliptic modulus (eccentricity) .
-//!     * `tol': accuracy tolerance (by defaut [epsilon](@ref eve::epsilon).
+//!     * `tol`: accuracy tolerance (by defaut [epsilon](@ref eve::epsilon)).
 //!     * `c`: [Conditional expression](@ref eve::conditional_expr) masking the operation.
 //!     * `l`: [Logical value](@ref eve::logical_value) masking the operation.
 //!
