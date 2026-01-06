@@ -61,7 +61,7 @@ namespace kyosu
 //!
 //!     1. Returns \f$ \max_{i = 0}^n |x_i| \f$. This is equivalent to a call to [lpnorm](@ref lpnorm) with `p` being `inf`
 //!     2. the `flat` option computes the infinite norm of the tuple of real and other parts of the inputs. For instance for
-//!        complex entries:  \f$ \max_{i = 0}^n \max(|\real(x_i)|, |\ipart(x_i)|)\f$.
+//!        complex entries:  \f$ \max_{i = 0}^n \max(|real(x_i)|, |ipart(x_i)|)\f$.
 //!
 //!  @groupheader{External references}
 //!   *  [Wikipedia: Error Function](https://en.wikipedia.org/wiki/Linf_space)

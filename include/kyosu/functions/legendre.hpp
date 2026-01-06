@@ -53,14 +53,11 @@ namespace kyosu
 //! @{
 //!   @var legendre
 //!   @brief Computes the value of the Legendre and associated
-//!   Legendre functions of order `n` ( and 'm`) at `x`:
+//!   Legendre functions of order `n` ( and `m`) at `x`:
 //!
 //!   For positive integer `n` the standard legendre functions are polynomials:
 //!    * The Legendre polynomial of order n is given by \f$\displaystyle \mbox{L}_{n}(x)
 //!      = \frac{e^x}{n!}\frac{d^n}{dx^n}(x^ne^{-x})\f$.
-//!
-//!    However the function legendre must and can be called with real or complex parameters.
-//!
 //!
 //!   @groupheader{Header file}
 //!
@@ -91,15 +88,15 @@ namespace kyosu
 //!
 //!   **Parameters**
 //!
-//!     * `n` : [integral positive arguments](@ref eve::integral_value).
-//!     * `z` : cayley_dickson or real argument
-//!     * `pn`, `pnm1` : cayley_dickson arguments
+//!     * `n`: real positive argument.
+//!     * `z`: cayley_dickson or real argument
+//!     * `pn`, `pnm1`: cayley_dickson arguments
 //!     * `c`: [Conditional expression](@ref eve::conditional_expr) masking the operation.
 //!     * `m`: [Logical value](@ref eve::logical_value) masking the operation.
 //!
 //!    **Return value**
 //!
-//!      1. The value of the Legendre polynomial  of order `n` at `z` is returned.
+//!      1. The value of the Legendre function  of order `n` at `z` is returned.
 //!      2. [The operation is performed conditionnaly](@ref conditional).
 //!      3. The `successor` option implements the three term recurrence relation for the
 //!         (associated) Legendre functions, \f$\displaystyle \mbox{P}_{l+1} =

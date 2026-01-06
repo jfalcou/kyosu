@@ -62,8 +62,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!    - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
-//!       in which case the parameter must be a floating_value, the real part of the result will the same as an eve::log
+//!    - A real typed input z is treated as if `complex(z)` was entered, unless the option `real_only` is used
+//!       in which case the parameter must be a floating_value, the real part of the result will the same as an `eve::log`
 //!       implying a Nan result if the result is not real..
 //!    - For complex entry returns elementwise the natural logarithm of the input
 //!      in the range of a strip in the interval \f$i\times[-\pi, \pi]\f$ along the imaginary axis
@@ -71,7 +71,7 @@ namespace kyosu
 //!
 //!      * The function is continuous onto the branch cut  along the negative real axis,
 //!        taking into account the sign of imaginary part
-//!      * for every z: `log(conj(z)) == :conj(log(z))`
+//!      * for every z: `log(conj(z)) == conj(log(z))`
 //!      * If z is \f$-0\f$, the result is \f$-\infty+i \pi \f$
 //!      * If z is \f$+0\f$, the result is \f$-\infty\f$
 //!      * If z is \f$x+i \infty\f$ (for any finite x), the result is \f$\infty+i \pi/2\f$

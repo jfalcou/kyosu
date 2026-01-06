@@ -40,7 +40,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var log_gamma
-//!   @brief Computes \f$\Gamma(z)\f$r.
+//!   @brief Computes \f$\log(\Gamma(z))\f$.
 //!
 //!   @groupheader{Header file}
 //!
