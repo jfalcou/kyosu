@@ -27,7 +27,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var argpi
-//!   @brief  argpiument.
+//!   @brief  argument in \f$\pi\f$ multiples.
 //!
 //!   @groupheader{Header file}
 //!
