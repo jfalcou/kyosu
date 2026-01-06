@@ -45,7 +45,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var pow1p
-//!   @brief Computes the  computing the pow1p operation \f$(x+1)^y\f$.
+//!   @brief Computes the pow1p operation \f$(x+1)^y\f$.
 //!
 //!   @groupheader{Header file}
 //!

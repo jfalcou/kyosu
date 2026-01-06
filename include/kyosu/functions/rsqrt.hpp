@@ -41,7 +41,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var rsqrt
-//!   @brief Computes a square root value.
+//!   @brief Computes a inverse square root value.
 //!
 //!   @groupheader{Header file}
 //!

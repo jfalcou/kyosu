@@ -45,7 +45,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var powm1
-//!   @brief Computes the  computing the powm1 operation \f$x^y-1\f$.
+//!   @brief Computes the powm1 operation \f$x^y-1\f$.
 //!
 //!   @groupheader{Header file}
 //!

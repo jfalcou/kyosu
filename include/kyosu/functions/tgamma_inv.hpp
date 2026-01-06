@@ -27,7 +27,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var tgamma_inv
-//!   @brief Computes \f$\frac1{\Gamma(z)}\f$r.
+//!   @brief Computes \f$\frac1{\Gamma(z)}\f$.
 //!
 //!   @groupheader{Header file}
 //!
@@ -50,7 +50,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns  \f$\frac1\Gamma(z)\f$.
+//!     Returns  \f$\frac1{\Gamma(z)}\f$.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Gamma Function](https://mathworld.wolfram.com/GammaFunction.html)

@@ -71,13 +71,13 @@ namespace kyosu
 //!     - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
 //!       in which case the parameter must be a floating_value, the real part of the result will the same as an eve::sqrt
 //!       implying a Nan result if the result is not real.
-//!     - for complex inpur, returns the elementwise the square root of z,
+//!     - for complex input, returns elementwise the square root of z,
 //!        in the range of the right half-plane, including the imaginary axis (\f$[0, +\infty]\f$
 //!        along the real axis and \f$[-\infty, +\infty]\f$ along the imaginary axis.)
 //!
 //!        *  The function is continuous onto the branch cut taking into account
 //!           the sign of imaginary part
-//!        *  eve::sqrt(kyosu::conj(z)) == kyosu::conj(kyosu::sqrt(z))
+//!        *  kyosu::sqrt(kyosu::conj(z)) == kyosu::conj(kyosu::sqrt(z))
 //!        *  If z is \f$\pm0\f$, the result is \f$+0\f$
 //!        *  If z is \f$x+i \infty\f$, the result is \f$\infty+i \infty\f$ even if x is \f$NaN\f$
 //!        *  If z is \f$x,NaN\f$, the result is \f$NaN,NaN\f$ (unless x is \f$\pm\infty\f$)

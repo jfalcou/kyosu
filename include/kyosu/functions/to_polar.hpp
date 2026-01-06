@@ -62,7 +62,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns  The kumi tuple `{rho, theta}`. for real and commplex and `{rho, theta, I}` for other cayley-dickson
+//!     Returns  The kumi tuple `{rho, theta}`. for real and complex and `{rho, theta, I}` for other cayley-dickson
 //!     where \f$\textrm{I}\f$ is pure and \f$\textrm{I}^2 = -1 \f$
 //!
 //!  @groupheader{Example}

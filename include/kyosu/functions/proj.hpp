@@ -49,7 +49,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!     *  For most z, proj(z)==z, but all infinities, even the numbers where one component
-//!        is infinite and the other is NaN, become positive real\n
+//!        is infinite and the other is NaN, become positive real of the form:\n
 //!        infinity, (inf, 0...) or (inf, -0...).\n
 //!        The sign of the pure (zero) components are the signs of the components of pure(z).
 //!
