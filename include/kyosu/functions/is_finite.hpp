@@ -66,6 +66,7 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto is_finite_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    return kumi::all_of(z, [](auto const& e) { return eve::is_finite(e); });
+    if constexpr(concepts::real<Z>) return eve::is_finite(z);
+    else return kumi::all_of(z, [](auto const& e) { return eve::is_finite(e); });
   }
 }
