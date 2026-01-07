@@ -29,8 +29,11 @@ TTS_CASE_WITH ( "Check kyosu::dot over complex"
 {
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
-  TTS_RELATIVE_EQUAL(kyosu::dot(c0, c1)
-                     , c0*kyosu::conj(c1), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::dot(c0, c1), c0*kyosu::conj(c1), 1e-7);
+  auto c2 = kyosu::complex(r1,i0);
+  auto c3 = kyosu::complex(r1,i0);
+  TTS_RELATIVE_EQUAL(kyosu::dot(c0, c1, c2, c3), c0*kyosu::conj(c2)+c1*kyosu::conj(c3), 1e-7);
+
 };
 
 TTS_CASE_WITH ( "Check kyosu::dot over quaternion"
@@ -47,4 +50,7 @@ TTS_CASE_WITH ( "Check kyosu::dot over quaternion"
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
   TTS_RELATIVE_EQUAL(kyosu::dot(q0, q1),  q0*kyosu::conj(q1), 1e-7);
+  auto q2 = type(r1,i0, r0, i0);
+  auto q3 = type(r1,i0, j0, k1);
+  TTS_RELATIVE_EQUAL(kyosu::dot(q0, q1, q2, q3), q0*kyosu::conj(q2)+q1*kyosu::conj(q3), 1e-7);
 };

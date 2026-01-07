@@ -42,5 +42,9 @@ int main()
   std::cout << wq0 << ", " << e1 << " -> " << dot(wq0, e1) << "\n";
   std::cout << q0 << ", " << we1 << " -> " << dot(q0, we1) << "\n";
 
+  kumi::tuple s{wc0, e0, 2*wc1};
+  kumi::tuple t{wc1, wc0, wc0};
+  std::cout <<  "kyosu::dot( s, t) == " << kyosu::dot(s, t) << std::endl;
+
   return 0;
 }

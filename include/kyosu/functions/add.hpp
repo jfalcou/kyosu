@@ -20,17 +20,17 @@ template<typename Options>
     template< concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1
             , concepts::cayley_dickson_like... Ts
             >
-    requires(eve::same_lanes_or_scalar<T0, T1, Ts...>)
-    EVE_FORCEINLINE typename result<T0,T1,Ts...>::type constexpr operator()(T0 t0, T1 t1, Ts...ts) const noexcept
+    requires(eve::same_lanes_or_scalar<Ts...>)
+    EVE_FORCEINLINE typename result<T0,T1,Ts...>::type constexpr operator()(Ts...ts) const noexcept
     {
-      return KYOSU_CALL(t0,t1,ts...);
+      return KYOSU_CALL(ts...);
     }
 
     template<kumi::non_empty_product_type Tup>
     requires(eve::same_lanes_or_scalar_tuple<Tup>)
     EVE_FORCEINLINE constexpr
     kumi::apply_traits_t<result,Tup>
-    operator()(Tup const& t) const noexcept requires(kumi::size_v<Tup> >= 2) { return KYOSU_CALL(t); }
+    operator()(Tup const& t) const noexcept requires(kumi::size_v<Tup> >= 1) { return KYOSU_CALL(t); }
 
     KYOSU_CALLABLE_OBJECT(add_t, add_);
   };

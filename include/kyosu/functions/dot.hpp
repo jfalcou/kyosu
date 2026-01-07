@@ -12,13 +12,35 @@
 namespace kyosu
 {
   template<typename Options>
-  struct dot_t : eve::strict_elementwise_callable<dot_t, Options>
+  struct dot_t : eve::strict_tuple_callable<dot_t, Options>
   {
-    template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z0, Z1> operator()(Z0 const& z0, Z1 const & z1) const noexcept
+    template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
+    template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
+
+    template< concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1
+            , concepts::cayley_dickson_like... Ts
+            >
+    requires(eve::same_lanes_or_scalar<T0, T1, Ts...>)
+    KYOSU_FORCEINLINE typename result<T0,T1,Ts...>::type constexpr operator()(T0 t0, T1 t1, Ts...ts) const noexcept
     {
-      return KYOSU_CALL(z0,z1);
+      return KYOSU_CALL(t0,t1,ts...);
     }
+
+    template<kumi::non_empty_product_type Tup>
+    requires(eve::same_lanes_or_scalar_tuple<Tup>)
+      KYOSU_FORCEINLINE constexpr
+    kumi::apply_traits_t<result,Tup>
+    operator()(Tup const& t) const noexcept requires(kumi::size_v<Tup> >= 2)
+    { return KYOSU_CALL(t); }
+
+
+    template<kumi::non_empty_product_type Tup1, kumi::non_empty_product_type Tup2>
+    requires(eve::same_lanes_or_scalar_tuple<Tup1> && eve::same_lanes_or_scalar_tuple<Tup2> &&
+             !concepts::cayley_dickson_like<Tup1> && !concepts::cayley_dickson_like<Tup2>)
+      KYOSU_FORCEINLINE constexpr
+    kumi::apply_traits_t<as_cayley_dickson_like, kumi::result::cat_t<Tup1, Tup2>>
+    operator()(Tup1 const& t1, Tup2 const& t2) const noexcept
+    { return EVE_DISPATCH_CALL(kumi::cat(t1, t2)); }
 
     KYOSU_CALLABLE_OBJECT(dot_t, dot_);
 };
@@ -27,7 +49,8 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var dot
-//!   @brief Computes elementwise the dot product of the coordinates of the corresponding element.
+//!   @brief `elementwise_callable` object computing the elementwise  dot product
+//!     of the vector of the first half parameter by thevector of the last half.
 //!
 //!   @groupheader{Header file}
 //!
@@ -66,12 +89,20 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z0,  typename Z1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
+  template<typename T0, typename T1, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const & o, T0 z0, T1 z1) noexcept
   {
-    if constexpr(concepts::real<Z1>)
-      return z0*z1;
-    else
-      return z0*conj(z1);
+    return z0*conj(z1);
+  }
+
+  template<typename... Ts, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const & o, Ts... args) noexcept
+  requires(sizeof...(Ts) > 3  && sizeof...(Ts)%2 == 0)
+  {
+    using r_t =  eve::common_value_t<Ts...>;
+    auto coeffs = eve::zip(r_t(args)...);
+    auto [f,s]   = kumi::split(coeffs, kumi::index<sizeof...(Ts)/2>);
+    auto tup = kumi::map([](auto a, auto b) { return a*conj(b); }, f, s);
+    return add[o](tup);
   }
 }
