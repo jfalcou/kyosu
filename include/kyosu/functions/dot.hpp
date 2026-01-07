@@ -99,7 +99,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const & o, Ts... args) noexcept
   requires(sizeof...(Ts) > 3  && sizeof...(Ts)%2 == 0)
   {
-    using r_t =  eve::common_value_t<Ts...>;
+    using r_t =  as_cayley_dickson_like_t<Ts...>;
     auto coeffs = eve::zip(r_t(args)...);
     auto [f,s]   = kumi::split(coeffs, kumi::index<sizeof...(Ts)/2>);
     auto tup = kumi::map([](auto a, auto b) { return a*conj(b); }, f, s);
