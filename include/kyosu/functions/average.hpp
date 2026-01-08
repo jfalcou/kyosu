@@ -19,6 +19,11 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z0, Z1, Zs...> operator()(Z0 z0, Z1 z1, Zs ...zs) const noexcept
     { return KYOSU_CALL(z0,z1,zs...); }
 
+    template<typename Z0>
+    requires(concepts::cayley_dickson_like<Z0>)
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z0> operator()(Z0 z0) const noexcept
+    { return KYOSU_CALL(z0); }
+
     KYOSU_CALLABLE_OBJECT(average_t, average_);
 };
 
@@ -63,6 +68,13 @@ namespace kyosu
 
 namespace kyosu::_
 {
+  template<typename  C0, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto average_(KYOSU_DELAY(), O const&,
+                                            C0 const & c0) noexcept
+  {
+    return c0; 
+  }
+
   template<typename  C0, typename  C1,  typename ...Cs, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto average_(KYOSU_DELAY(), O const&,
                                             C0 const & c0, C1 const &  c1, Cs const &...  cs) noexcept

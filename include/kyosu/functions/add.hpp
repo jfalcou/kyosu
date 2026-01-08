@@ -17,8 +17,7 @@ template<typename Options>
     template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
     template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
 
-    template<concepts::cayley_dickson_like... Ts
-            >
+    template<concepts::cayley_dickson_like... Ts>
     requires(eve::same_lanes_or_scalar<Ts...>)
     EVE_FORCEINLINE typename result<Ts...>::type constexpr operator()(Ts...ts) const noexcept
     {
