@@ -7,7 +7,6 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {
@@ -89,7 +88,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename T0, typename T1, eve::callable_options O>
+  template<concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const & o, T0 z0, T1 z1) noexcept
   {
     return z0*conj(z1);
@@ -103,6 +102,14 @@ namespace kyosu::_
     auto coeffs = eve::zip(r_t(args)...);
     auto [f,s]   = kumi::split(coeffs, kumi::index<sizeof...(Ts)/2>);
     auto tup = kumi::map([](auto a, auto b) { return a*conj(b); }, f, s);
+    return add[o](tup);
+  }
+
+  template<kumi::non_empty_product_type Tup1, kumi::non_empty_product_type Tup2, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const & o, Tup1 z0, Tup2 z1) noexcept
+    requires(!concepts::cayley_dickson_like<Tup1> && !concepts::cayley_dickson_like<Tup2>)
+  {
+    auto tup = kumi::map([](auto a, auto b) { return a*conj(b); }, z0, z1);
     return add[o](tup);
   }
 }
