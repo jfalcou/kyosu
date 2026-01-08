@@ -7,6 +7,7 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
+//#include <iostream>
 
 namespace kyosu
 {
@@ -39,7 +40,7 @@ namespace kyosu
       KYOSU_FORCEINLINE constexpr
     kumi::apply_traits_t<as_cayley_dickson_like, kumi::result::cat_t<Tup1, Tup2>>
     operator()(Tup1 const& t1, Tup2 const& t2) const noexcept
-    { return EVE_DISPATCH_CALL(kumi::cat(t1, t2)); }
+    { return EVE_DISPATCH_CALL(t1, t2); }
 
     KYOSU_CALLABLE_OBJECT(dot_t, dot_);
 };
@@ -98,6 +99,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const & o, Ts... args) noexcept
   requires(sizeof...(Ts) > 3  && sizeof...(Ts)%2 == 0)
   {
+//    std::cout << "latte" << std::endl;
     using r_t =  as_cayley_dickson_like_t<Ts...>;
     auto coeffs = eve::zip(r_t(args)...);
     auto [f,s]   = kumi::split(coeffs, kumi::index<sizeof...(Ts)/2>);
@@ -109,6 +111,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const & o, Tup1 z0, Tup2 z1) noexcept
     requires(!concepts::cayley_dickson_like<Tup1> && !concepts::cayley_dickson_like<Tup2>)
   {
+//    std::cout << "icitte" << std::endl;
     auto tup = kumi::map([](auto a, auto b) { return a*conj(b); }, z0, z1);
     return add[o](tup);
   }
