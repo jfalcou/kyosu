@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct mul_t : eve::strict_tuple_callable<mul_t, Options>
+  struct mul_t : eve::strict_tuple_callable<mul_t, Options,  eve::kahan_option>
   {
     template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
     template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
@@ -86,14 +86,46 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<eve::callable_options O, typename T0, typename... Ts>
-  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), O const&, T0 const& v0, Ts const&... vs) noexcept
+  template<eve::callable_options O, typename T0>
+  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), O const&, T0 v0) noexcept
   {
-    return v0*(vs * ... );
+    return v0;
+  }
+
+  template<eve::callable_options O, typename T0, typename T1, typename... Ts>
+  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), O const& o, T0 const& v0, T1 const& v1, Ts const&... vs) noexcept
+  {
+    if constexpr((sizeof...(Ts) == 0 ))
+    {
+      if constexpr( concepts::complex<T0> && concepts::complex<T1> && O::contains(eve::kahan))
+      {
+        auto [aa, bb] = v0;
+        auto [cc, dd] = v1;
+        auto k =  [](auto a,  auto b,  auto c,  auto d){
+          auto w = c*d;
+          auto e = eve::fms(c, d, w);
+          auto f = eve::fma(a, b, w);
+          return f+e;
+        };
+        auto r = k(aa, cc, -bb, dd);
+        auto i = k(aa, dd,  bb, cc);
+        return  as_cayley_dickson<T0, T1>(r, i);
+      }
+      else
+      {
+        return v0*v1;
+      };
+    }
+    else
+    {
+      auto that(mul[o](v0, v1));
+      ((that = mul[o](that, vs)),...);
+      return that;
+    }
   }
 
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
-  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
+  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), C const& cond, O const& o, T0 const& v0, Ts const&... vs) noexcept
   {
     expected_result_t<eve::mul,T0,Ts...> that(v0);
     ((that = mul(that, vs)),...);
