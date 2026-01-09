@@ -8,11 +8,12 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/convert.hpp>
+#include <kyosu/types/tuple.hpp>
 
 namespace kyosu
 {
-template<typename Options>
-  struct add_t : eve::strict_tuple_callable<add_t, Options>
+  template<typename Options>
+  struct add_t : kyosu::strict_tuple_callable<add_t, Options>
   {
     template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
     template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
@@ -25,7 +26,7 @@ template<typename Options>
     }
 
     template<kumi::non_empty_product_type Tup>
-    requires(eve::same_lanes_or_scalar_tuple<Tup>)
+    requires(eve::same_lanes_or_scalar_tuple<Tup> && !concepts::cayley_dickson_like<Tup>)
     EVE_FORCEINLINE constexpr
     kumi::apply_traits_t<result,Tup>
     operator()(Tup const& t) const noexcept requires(kumi::size_v<Tup> >= 1) { return KYOSU_CALL(t); }
@@ -84,11 +85,12 @@ template<typename Options>
 
 namespace kyosu::_
 {
-  template<eve::callable_options O, typename... Ts>
+  template<eve::callable_options O, concepts::cayley_dickson_like... Ts>
   EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), O const&, Ts const&... vs) noexcept
   {
     return (vs + ... );
   }
+
 
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
   EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
@@ -97,4 +99,12 @@ namespace kyosu::_
     ((that = add(that,vs)),...);
     return eve::detail::mask_op(cond, eve::detail::return_2nd, v0, that);
   }
+
+//   template<eve::callable_options O, kumi::non_empty_product_type Tup>
+//   requires(!concepts::cayley_dickson_like<Tup>)
+//   EVE_FORCEINLINE constexpr
+//   auto add_(KYOSU_DELAY(), O const& o, Tup const& tup) noexcept
+//   {
+//     return kumi::apply([o](auto ...m){return add[o](m...); }, tup);
+//   }
 }

@@ -31,6 +31,7 @@ TTS_CASE_WITH ( "Check kyosu::add over complex"
 {
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
+  TTS_EQUAL(kyosu::add(c0)    , c0);
   TTS_RELATIVE_EQUAL(kyosu::add(c0, c1), (c0+c1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::add(c0, c1, r1), (c0+c1+r1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::add(r0, c1, r1), (r0+c1+r1), tts::prec<T>());
