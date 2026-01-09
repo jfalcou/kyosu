@@ -36,6 +36,7 @@ TTS_CASE_WITH ( "Check kyosu::mul over complex"
   TTS_RELATIVE_EQUAL(kyosu::mul(c0, c1), (c0*c1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::mul(c0, c1, r1), (c0*c1*r1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::mul(r0, c1, r1), ((r0*c1)*r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::mul(c0, c0, c0), kyosu::mul[eve::kahan](c0, c0, c0), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::mul over quaternion"
