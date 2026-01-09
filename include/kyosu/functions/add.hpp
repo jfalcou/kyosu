@@ -91,7 +91,6 @@ namespace kyosu::_
     return (vs + ... );
   }
 
-
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
   EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
   {
@@ -99,12 +98,4 @@ namespace kyosu::_
     ((that = add(that,vs)),...);
     return eve::detail::mask_op(cond, eve::detail::return_2nd, v0, that);
   }
-
-//   template<eve::callable_options O, kumi::non_empty_product_type Tup>
-//   requires(!concepts::cayley_dickson_like<Tup>)
-//   EVE_FORCEINLINE constexpr
-//   auto add_(KYOSU_DELAY(), O const& o, Tup const& tup) noexcept
-//   {
-//     return kumi::apply([o](auto ...m){return add[o](m...); }, tup);
-//   }
 }

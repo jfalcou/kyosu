@@ -12,25 +12,23 @@
 namespace kyosu
 {
   template<typename Options>
-  struct mul_t : eve::strict_tuple_callable<mul_t, Options,  eve::kahan_option>
+  struct mul_t : kyosu::strict_tuple_callable<mul_t, Options,  eve::kahan_option>
   {
     template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
     template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
 
-    template< concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1
-            , concepts::cayley_dickson_like... Ts
-            >
-    requires(eve::same_lanes_or_scalar<T0, T1, Ts...>)
-    EVE_FORCEINLINE typename result<T0,T1,Ts...>::type constexpr operator()(T0 t0, T1 t1, Ts...ts) const noexcept
+    template<concepts::cayley_dickson_like... Ts>
+    requires(eve::same_lanes_or_scalar< Ts...>)
+    EVE_FORCEINLINE typename result<Ts...>::type constexpr operator()(Ts...ts) const noexcept
     {
-      return KYOSU_CALL(t0,t1,ts...);
+      return KYOSU_CALL(ts...);
     }
 
     template<kumi::non_empty_product_type Tup>
-    requires(eve::same_lanes_or_scalar_tuple<Tup>)
+    requires(eve::same_lanes_or_scalar_tuple<Tup> && !concepts::cayley_dickson_like<Tup>)
     EVE_FORCEINLINE constexpr
     kumi::apply_traits_t<result,Tup>
-    operator()(Tup const& t) const noexcept requires(kumi::size_v<Tup> >= 2) { return KYOSU_CALL(t); }
+    operator()(Tup const& t) const noexcept requires(kumi::size_v<Tup> >= 1) { return KYOSU_CALL(t); }
 
     KYOSU_CALLABLE_OBJECT(mul_t, mul_);
   };
@@ -83,52 +81,43 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
-
 namespace kyosu::_
 {
-  template<eve::callable_options O, typename T0>
-  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), O const&, T0 v0) noexcept
+  template<eve::callable_options O, concepts::cayley_dickson_like T0>
+  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), O const&, T0 const & v0) noexcept
   {
     return v0;
   }
 
-  template<eve::callable_options O, typename T0, typename T1, typename... Ts>
-  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), O const& o, T0 const& v0, T1 const& v1, Ts const&... vs) noexcept
+  template<eve::callable_options O, concepts::cayley_dickson_like... Ts>
+  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), O const&, Ts const&... vs) noexcept
   {
-    if constexpr((sizeof...(Ts) == 0 ))
-    {
-      if constexpr( concepts::complex<T0> && concepts::complex<T1> && O::contains(eve::kahan))
-      {
-        auto [aa, bb] = v0;
-        auto [cc, dd] = v1;
-        auto k =  [](auto a,  auto b,  auto c,  auto d){
-          auto w = c*d;
-          auto e = eve::fms(c, d, w);
-          auto f = eve::fma(a, b, w);
-          return f+e;
-        };
-        auto r = k(aa, cc, -bb, dd);
-        auto i = k(aa, dd,  bb, cc);
-        return  as_cayley_dickson<T0, T1>(r, i);
-      }
-      else
-      {
-        return v0*v1;
-      };
-    }
-    else
-    {
-      auto that(mul[o](v0, v1));
-      ((that = mul[o](that, vs)),...);
-      return that;
-    }
+    return (vs * ... );
+  }
+
+  template<eve::callable_options O, concepts::complex T0, concepts::complex T1>
+  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), O const& o, T0 const& v0, T1 const& v1) noexcept
+  requires(O::contains(eve::kahan))
+  {
+    using r_t = as_cayley_dickson<T0, T1>;
+    auto [aa, bb] = v0;
+    auto [cc, dd] = v1;
+    auto k =  [](auto a,  auto b,  auto c,  auto d){
+      auto w = c*d;
+      auto e = eve::fms(c, d, w);
+      auto f = eve::fma(a, b, w);
+      return f+e;
+    };
+    auto r = k(aa, cc, -bb, dd);
+    auto i = k(aa, dd,  bb, cc);
+    return complex(r, i);
   }
 
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
-  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), C const& cond, O const& o, T0 const& v0, Ts const&... vs) noexcept
+  EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
   {
-    expected_result_t<eve::mul,T0,Ts...> that(v0);
-    ((that = mul(that, vs)),...);
+    expected_result_t<eve::add,T0,Ts...> that(v0);
+    ((that = mul(that,vs)),...);
     return eve::detail::mask_op(cond, eve::detail::return_2nd, v0, that);
   }
 }
