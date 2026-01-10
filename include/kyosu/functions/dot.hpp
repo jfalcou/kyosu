@@ -8,6 +8,7 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/types/tuple.hpp>
+#include <kyosu/functions/mul.hpp>
 
 namespace kyosu
 {
@@ -100,7 +101,7 @@ namespace kyosu::_
     using r_t =  as_cayley_dickson_like_t<Ts...>;
     auto coeffs = eve::zip(r_t(args)...);
     auto [f,s]   = kumi::split(coeffs, kumi::index<sizeof...(Ts)/2>);
-    auto tup = kumi::map([](auto a, auto b) { return a*conj(b); }, f, s);
+    auto tup = kumi::map([o](auto a, auto b) { return kyosu::mul[o](a, conj(b)); }, f, s);
     return add[o](tup);
   }
 
@@ -108,7 +109,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const & o, Tup1 z0, Tup2 z1) noexcept
   requires(!concepts::cayley_dickson_like<Tup1> && !concepts::cayley_dickson_like<Tup2>)
   {
-    auto tup = kumi::map([](auto a, auto b) { return a*conj(b); }, z0, z1);
+    auto tup = kumi::map([o](auto a, auto b) { return kyosu::mul[o](a, conj(b)); }, z0, z1);
     return add[o](tup);
   }
 }
