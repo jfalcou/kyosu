@@ -7,34 +7,33 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/rec.hpp>
 #include <kyosu/functions/mul.hpp>
+#include <kyosu/functions/rec.hpp>
+#include <kyosu/functions/sqr_abs.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct ldiv_t : eve::strict_tuple_callable<ldiv_t, Options>
+  struct ldiv_t : kyosu::strict_tuple_callable<ldiv_t, Options, eve::kahan_option>
   {
     template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
     template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
 
-    template< concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1
-            , concepts::cayley_dickson_like... Ts
-            >
-    requires(eve::same_lanes_or_scalar<T0, T1, Ts...>)
-    EVE_FORCEINLINE typename result<T0,T1,Ts...>::type constexpr operator()(T0 t0, T1 t1, Ts...ts) const noexcept
+    template<concepts::cayley_dickson_like... Ts>
+    requires(eve::same_lanes_or_scalar<Ts...>)
+      EVE_FORCEINLINE typename result<Ts...>::type constexpr operator()(Ts...ts) const noexcept
     {
-      return KYOSU_CALL(t0,t1,ts...);
+      return KYOSU_CALL(ts...);
     }
 
     template<kumi::non_empty_product_type Tup>
-    requires(eve::same_lanes_or_scalar_tuple<Tup>)
-    EVE_FORCEINLINE constexpr
+    requires(eve::same_lanes_or_scalar_tuple<Tup> && !concepts::cayley_dickson_like<Tup>)
+      EVE_FORCEINLINE constexpr
     kumi::apply_traits_t<result,Tup>
-    operator()(Tup const& t) const noexcept requires(kumi::size_v<Tup> >= 2) { return KYOSU_CALL(t); }
+    operator()(Tup const& t) const noexcept requires(kumi::size_v<Tup> >= 1) { return KYOSU_CALL(t); }
 
-     KYOSU_CALLABLE_OBJECT(ldiv_t, ldiv_);
-};
+    KYOSU_CALLABLE_OBJECT(ldiv_t, ldiv_);
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -53,17 +52,18 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto ldiv(auto z0, auto z1, auto zs...) noexcept;
+//!     constexpr auto ldiv(auto zs...) noexcept;
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0`, `z1`, `zs...`: Values to process.
+//!     * `zs...`: Values to process.
 //!
 //!   **Return value**
 //!
-//!      - For two arguments Returns the left division  of the two arguments. This function is not equivalent to z1/z0 as
+//!      - For one argument returns the inverse of the argument
+//!      - For two arguments returns the left division  of the two arguments. This function is not equivalent to z1/z0 as
 //!        soon as multiplication is not commutative (i.e. for general Cayley-Dickson values with dimensionality strictly above 2).
 //!      - For  more arguments the left division of the product of the arguments but the first, by the first is returned.
 //!
@@ -76,18 +76,29 @@ namespace kyosu
 //! @}
 //======================================================================================================================
 }
+
 namespace kyosu::_
 {
-  template<eve::callable_options O, typename T0, typename... Ts>
-  EVE_FORCEINLINE constexpr auto ldiv_(KYOSU_DELAY(), O const&, T0 const& v0, Ts const&... vs) noexcept
+  template<eve::callable_options O, concepts::cayley_dickson_like... Ts>
+  EVE_FORCEINLINE constexpr auto ldiv_(KYOSU_DELAY(), O const& o, Ts const&... ts) noexcept
   {
-    return rec(v0)*(vs * ... );
+    if constexpr(sizeof...(Ts) == 1)
+      return kyosu::rec(ts...);
+    else
+    {
+      using r_t =  as_cayley_dickson_t<Ts...>;
+      auto tup = kumi::make_tuple(ts...);
+      auto [f,s]   = kumi::split(tup, kumi::index<1>);
+      if constexpr(concepts::complex_like<r_t>)
+        return kyosu::div(kumi::cat(s, f));
+      else
+        return kyosu::mul[o](kyosu::conj(kumi::get<0>(f)), kyosu::mul[o](s))/sqr_abs(kumi::get<0>(f));
+    }
   }
 
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
   EVE_FORCEINLINE constexpr auto ldiv_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
   {
-//    expected_result_t<eve::div,T0,Ts...> that(v0);
     auto that = ldiv(v0, vs...);
     return eve::detail::mask_op(cond, eve::detail::return_2nd, v0, that);
   }

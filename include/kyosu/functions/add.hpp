@@ -7,7 +7,6 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/convert.hpp>
 #include <kyosu/types/tuple.hpp>
 
 namespace kyosu
