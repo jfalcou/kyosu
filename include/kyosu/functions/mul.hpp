@@ -99,7 +99,7 @@ namespace kyosu::_
       return t0;
     else if constexpr(sizeof...(Ts) == 1 )
     {
-      if constexpr(O::contains(eve::kahan))
+      if constexpr(O::contains(eve::kahan) && concepts::complex<r_t>)
       {
         auto mulk = [](auto v0, auto v1){
           auto [aa, bb] = v0;

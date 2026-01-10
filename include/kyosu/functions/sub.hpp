@@ -8,11 +8,12 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/convert.hpp>
+#include <kyosu/functions/add.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct sub_t : kyosu::strict_tuple_callable<sub_t, Options>
+  struct sub_t : kyosu::strict_tuple_callable<sub_t, Options, eve::kahan_option>
   {
     template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
     template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
@@ -84,19 +85,19 @@ namespace kyosu
 
 namespace kyosu::_
 {
-//   template<eve::callable_options O, concepts::cayley_dickson_like T0>
-//   EVE_FORCEINLINE constexpr auto sub_(KYOSU_DELAY(), O const&, T0 const& v0) noexcept
-//   {
-//     return v0;
-//   }
 
   template<eve::callable_options O, concepts::cayley_dickson_like T0, concepts::cayley_dickson_like... Ts>
-  EVE_FORCEINLINE constexpr auto sub_(KYOSU_DELAY(), O const&, T0 const& v0, Ts const&... vs) noexcept
+  EVE_FORCEINLINE constexpr auto sub_(KYOSU_DELAY(), O const& o, T0 const& t0, Ts const&... ts) noexcept
   {
-    if constexpr(sizeof...(Ts) == 0)
-      return v0;
+    using r_t = as_cayley_dickson_t<T0, Ts...>;
+    if constexpr(concepts::real<r_t>)
+      return eve::sub[o](t0, ts...);
+    else if constexpr(sizeof...(Ts) == 0)
+      return t0;
     else
-      return v0  - (vs + ... );
+    {
+      return kyosu::add[o](t0, -kyosu::add[o](ts...));
+    }
   }
 
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>

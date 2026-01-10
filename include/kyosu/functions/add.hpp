@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct add_t : kyosu::strict_tuple_callable<add_t, Options>
+  struct add_t : kyosu::strict_tuple_callable<add_t, Options, eve::kahan_option>
   {
     template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
     template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
@@ -85,12 +85,26 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<eve::callable_options O, concepts::cayley_dickson_like... Ts>
-  EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), O const&, Ts const&... vs) noexcept
+  template<eve::callable_options O, concepts::cayley_dickson_like T0, concepts::cayley_dickson_like... Ts>
+  EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), O const& o, T0 const& t0, Ts const&... ts) noexcept
   {
-    return (vs + ... );
+    using r_t = as_cayley_dickson_t<T0, Ts...>;
+    if constexpr(concepts::real<r_t>)
+      return eve::add[o](t0, ts...);
+    else if constexpr(sizeof...(Ts) == 0)
+      return t0;
+    else
+    {
+      if constexpr(O::contains(eve::kahan) && concepts::complex<r_t>)
+      {
+        auto r = eve::add[o](real(t0), real(ts)...);
+        auto i = eve::add[o](imag(t0), imag(ts)...);
+        return complex(r, i);
+      }
+      else
+        return t0 + (ts + ... );
+    }
   }
-
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
   EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
   {
