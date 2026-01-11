@@ -15,12 +15,9 @@ namespace kyosu
   template<typename Options>
   struct dot_t : kyosu::strict_tuple_callable<dot_t, Options>
   {
-    template<typename... Ts> struct result;
-    template<concepts::cayley_dickson_like... Ts>
-    requires( !(concepts::real<Ts> && ...) )
-    struct result<Ts...> : as_cayley_dickson<Ts...> {};
-    template<concepts::real... Ts>
-    struct result<Ts...> : eve::common_value<Ts...> {};
+    template<typename... Ts>                                                             struct result;
+    template<concepts::cayley_dickson_like... Ts> requires(!(concepts::real<Ts> && ...)) struct result<Ts...> : as_cayley_dickson<Ts...> {};
+    template<concepts::real... Ts>                                                       struct result<Ts...> : eve::common_value<Ts...> {};
 
     template<concepts::cayley_dickson_like... Ts>
     requires(eve::same_lanes_or_scalar<Ts...>)

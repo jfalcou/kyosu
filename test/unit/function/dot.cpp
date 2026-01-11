@@ -12,11 +12,17 @@ TTS_CASE_WITH ( "Check kyosu::dot over real"
               , kyosu::real_types
               , tts::generate(tts::randoms(-10,10)
                              ,tts::randoms(-10,10)
+                             ,tts::randoms(-10,10)
+                             ,tts::randoms(-10,10)
                              )
               )
-(auto r0, auto r1)
+(auto r0, auto r1, auto r2, auto r3)
 {
   TTS_EQUAL(kyosu::dot(r0, r1), r0*r1);
+  auto d = kyosu::dot(r0, r1, r2, r3);
+  TTS_RELATIVE_EQUAL(d, r0*kyosu::conj(r2)+r1*kyosu::conj(r3), 1e-7);
+  TTS_RELATIVE_EQUAL(d,kyosu::dot(kumi::make_tuple(r0, r1, r2, r3)), 1e-7);
+  TTS_RELATIVE_EQUAL(d,kyosu::dot(kumi::make_tuple(r0, r1),kumi::make_tuple( r2, r3)), 1e-7);
 };
 
 TTS_CASE_WITH ( "Check kyosu::dot over complex"
@@ -32,8 +38,10 @@ TTS_CASE_WITH ( "Check kyosu::dot over complex"
   TTS_RELATIVE_EQUAL(kyosu::dot(c0, c1), c0*kyosu::conj(c1), 1e-7);
   auto c2 = kyosu::complex(r1,i0);
   auto c3 = kyosu::complex(r1,i0);
-  TTS_RELATIVE_EQUAL(kyosu::dot(c0, c1, c2, c3), c0*kyosu::conj(c2)+c1*kyosu::conj(c3), 1e-7);
-
+  auto d = kyosu::dot(c0, c1, c2, c3);
+  TTS_RELATIVE_EQUAL(d, c0*kyosu::conj(c2)+c1*kyosu::conj(c3), 1e-7);
+  TTS_RELATIVE_EQUAL(d,kyosu::dot(kumi::make_tuple(c0, c1, c2, c3)), 1e-7);
+  TTS_RELATIVE_EQUAL(d,kyosu::dot(kumi::make_tuple(c0, c1),kumi::make_tuple( c2, c3)), 1e-7);
 };
 
 TTS_CASE_WITH ( "Check kyosu::dot over quaternion"
@@ -52,5 +60,8 @@ TTS_CASE_WITH ( "Check kyosu::dot over quaternion"
   TTS_RELATIVE_EQUAL(kyosu::dot(q0, q1),  q0*kyosu::conj(q1), 1e-7);
   auto q2 = type(r1,i0, r0, i0);
   auto q3 = type(r1,i0, j0, k1);
-  TTS_RELATIVE_EQUAL(kyosu::dot(q0, q1, q2, q3), q0*kyosu::conj(q2)+q1*kyosu::conj(q3), 1e-7);
+  auto d = kyosu::dot(q0, q1, q2, q3);
+  TTS_RELATIVE_EQUAL(d, q0*kyosu::conj(q2)+q1*kyosu::conj(q3), 1e-7);
+  TTS_RELATIVE_EQUAL(d,kyosu::dot(kumi::make_tuple(q0, q1, q2, q3)), 1e-7);
+  TTS_RELATIVE_EQUAL(d,kyosu::dot(kumi::make_tuple(q0, q1),kumi::make_tuple( q2, q3)), 1e-7);
 };

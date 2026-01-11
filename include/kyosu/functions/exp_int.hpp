@@ -17,7 +17,6 @@
 #include <kyosu/functions/tgamma_inv.hpp>
 #include <kyosu/functions/log.hpp>
 #include <kyosu/functions/hypergeometric.hpp>
-#include <iostream>
 
 namespace kyosu
 {

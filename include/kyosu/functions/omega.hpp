@@ -10,8 +10,7 @@
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/exp2.hpp>
 #include <kyosu/functions/deta.hpp>
-#include <iostream>
-#include <iomanip>
+
 namespace kyosu
 {
   template<typename Options>
