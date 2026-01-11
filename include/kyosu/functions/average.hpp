@@ -7,17 +7,27 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/types/tuple.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct average_t : eve::strict_elementwise_callable<average_t, Options>
+  struct average_t : kyosu::strict_tuple_callable<average_t, Options, eve::pedantic_option, eve::kahan_option>
   {
-    template<typename Z0, typename Z1, typename ...Zs>
-    requires(concepts::cayley_dickson_like<Z0> || concepts::cayley_dickson_like<Z1> ||( concepts::cayley_dickson_like<Zs> || ...))
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z0, Z1, Zs...> operator()(Z0 z0, Z1 z1, Zs ...zs) const noexcept
-    { return KYOSU_CALL(z0,z1,zs...); }
+    template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
+    template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
+
+    template<concepts::cayley_dickson_like... Ts>
+    requires(eve::same_lanes_or_scalar<Ts...>)
+    KYOSU_FORCEINLINE constexpr typename result<Ts...>::type operator()(Ts ...ts) const noexcept
+    { return KYOSU_CALL(ts...); }
+
+
+    template<kumi::non_empty_product_type Tup>
+    requires(eve::same_lanes_or_scalar_tuple<Tup> && !concepts::cayley_dickson_like<Tup>)
+    EVE_FORCEINLINE constexpr  kumi::apply_traits_t<result,Tup>
+    operator()(Tup const& t) const noexcept requires(kumi::size_v<Tup> >= 1)
+    { return KYOSU_CALL(t); }
 
     KYOSU_CALLABLE_OBJECT(average_t, average_);
 };
@@ -39,17 +49,30 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto average(auto z0, auto... z1) noexcept;
+//!      // Regular overloads
+//!      constexpr auto average(auto ... xs)                                              noexcept; // 1
+//!      constexpr auto average(kumi::non_empty_product_type auto const& tup)             noexcept; // 2
+//!      conséexpr auto average[pedantic](/*any of the above overloads*/)                 noexcept; // 3
+//!      constexpr auto average[kahan] (/*any of the above overloads*/)                   noexcept; // 4
+//!
+//!      // Lanes masking
+//!      constexpr auto average[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 5
+//!      constexpr auto average[logical_value auto m](/*any of the above overloads*/)     noexcept; // 5
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0`, `z1...`: Values to process. Can be a mix of complex and real floating values.
+//!     * `xs...`: Values to process. Can be a mix of cayley_dickson_like values.
+//!     * `tup : kumi tuple of arguments.
 //!
 //!   **Return value**
 //!
-//!     Returns the arithmetic mean of the arguments.
+//!     1. The value of the arithmetic mean of the arguments is returned.
+//!     2. The value of the arithmetic mean of the tuple elements is returned.
+//!     3. avoid spurious overflows.
+//!     4. kahan algorithm is used to enhance accuracy.
+//!     5. [The operation is performed conditionnaly](@ref conditional).
 //!
 //!  @groupheader{Example}
 //!
@@ -63,30 +86,24 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename  C0, typename  C1,  typename ...Cs, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto average_(KYOSU_DELAY(), O const&,
-                                            C0 const & c0, C1 const &  c1, Cs const &...  cs) noexcept
+
+  template<concepts::cayley_dickson_like T0, concepts::cayley_dickson_like ...Ts, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto average_(KYOSU_DELAY(), O const& o, T0 const & t0, Ts const &...  ts) noexcept
   {
-    if constexpr(concepts::real<C0> && concepts::real<C1> && (concepts::real <Cs> && ...))
+    using r_t = as_cayley_dickson_t<T0, Ts...>;
+    if constexpr(concepts::real<r_t>)
+      return eve::average[o](t0, ts...);
+    else if constexpr(sizeof...(Ts) == 0)
+      return t0;
+    else if constexpr(O::contains(eve::pedantic))
     {
-      return eve::average(c0,c1,cs...);
+      using f_t =  eve::element_type_t<r_t>;
+      auto invs = eve::rec(f_t(sizeof...(Ts))+1);
+      return average[o.drop(eve::pedantic)](t0*invs, (ts*invs)...);
     }
     else
     {
-      using r_t = kyosu::as_cayley_dickson_t<C0,C1,Cs...>;
-      if constexpr(sizeof...(cs) == 0)
-      {
-        using er_t = eve::element_type_t<r_t>;
-        return r_t{kumi::map([](auto const& e, auto const& f) { return eve::average(e, f); }
-                            , kyosu::convert(c0, eve::as<er_t>())
-                            , kyosu::convert(c1, eve::as<er_t>())
-                            )
-            };
-      }
-      else
-      {
-        return (c0+ (c1+ ... + cs)) / (sizeof...(cs) + 2);
-      }
+      return add[o](t0, ts...)/(sizeof...(Ts)+1);
     }
   }
 }
