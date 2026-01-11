@@ -49,17 +49,30 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto average(auto z0, auto... z1) noexcept;
+//!      // Regular overloads
+//!      constexpr auto average(auto ... xs)                                              noexcept; // 1
+//!      constexpr auto average(kumi::non_empty_product_type auto const& tup)             noexcept; // 2
+//!      conséexpr auto average[pedantic](/*any of the above overloads*/)                 noexcept; // 3
+//!      constexpr auto average[kahan] (/*any of the above overloads*/)                   noexcept; // 4
+//!
+//!      // Lanes masking
+//!      constexpr auto average[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 5
+//!      constexpr auto average[logical_value auto m](/*any of the above overloads*/)     noexcept; // 5
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `z0`, `z1...`: Values to process. Can be a mix of complex and real floating values.
+//!     * `xs...`: Values to process. Can be a mix of cayley_dickson_like values.
+//!     * `tup : kumi tuple of arguments.
 //!
 //!   **Return value**
 //!
-//!     Returns the arithmetic mean of the arguments.
+//!     1. The value of the arithmetic mean of the arguments is returned.
+//!     2. The value of the arithmetic mean of the tuple elements is returned.
+//!     3. avoid spurious overflows.
+//!     4. kahan algorithm is used to enhance accuracy.
+//!     5. [The operation is performed conditionnaly](@ref conditional).
 //!
 //!  @groupheader{Example}
 //!

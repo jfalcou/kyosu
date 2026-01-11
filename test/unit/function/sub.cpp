@@ -39,6 +39,9 @@ TTS_CASE_WITH ( "Check kyosu::sub over complex"
   TTS_RELATIVE_EQUAL(kyosu::sub(c0, c1, r1), (c0-c1-r1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::sub[eve::kahan](c0, c1, r1), kyosu::sub(c0, c1, r1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::sub(r0, c1, r1), (r0-c1-r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sub[r0 > 0](c0, c1, r1), kyosu::if_else(r0 > 0, (c0-c1-r1), c0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sub[r0 > 0](r0, c1, r1), kyosu::if_else(r0 > 0, (r0-c1-r1), kyosu::complex(r0)), tts::prec<T>());
+  // TTS_RELATIVE_EQUAL(kyosu::sub[r0 > 0](kumi::tuple(r0, c1, r1)), kyosu::if_else(r0 > 0, (r0+c1+r1), kyosu::complex(r0)), tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::sub over quaternion"
@@ -58,4 +61,6 @@ TTS_CASE_WITH ( "Check kyosu::sub over quaternion"
   TTS_RELATIVE_EQUAL(kyosu::sub(q0, q1), (q0-q1) , tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::sub(q0, q1, r0), (q0-q1-r0) , tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::sub(kumi::tuple{q0, q1, r0}), (q0-q1-r0) , tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sub[r0 > 0](q0, q1, r0), kyosu::if_else(r0 > 0, (q0-q1-r0), q0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sub[r0 > 0](r0, q1, r0), kyosu::if_else(r0 > 0, (r0-q1-r0), kyosu::quaternion(r0)), tts::prec<T>());
 };

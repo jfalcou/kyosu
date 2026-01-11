@@ -54,24 +54,26 @@ namespace kyosu
 //!      // Regular overloads
 //!      constexpr auto add(auto ... xs)                                              noexcept; // 1
 //!      constexpr auto add(kumi::non_empty_product_type auto const& tup)             noexcept; // 2
+//!      constexpr auto add[kahan] (/*any of the above overloads*/)                   noexcept; // 3
 //!
 //!      // Lanes masking
-//!      constexpr auto add[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 3
-//!      constexpr auto add[logical_value auto m](/*any of the above overloads*/)     noexcept; // 3
+//!      constexpr auto add[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 4
+//!      constexpr auto add[logical_value auto m](/*any of the above overloads*/)     noexcept; // 4
 //!
 //!   }
 //!   @endcode
 //!
-//!!   **Parameters**
+//!   **Parameters**
 //!
-//!     * `xs` :  real or cayley-dickson arguments.
-//!     * `tup` : kumi tuple of arguments.
+//!     * `xs...`:  real or cayley-dickson arguments.
+//!     * `tup`: kumi tuple of arguments.
 //!
 //!   **Return value**
 //!
-//!    1. The value of the sum of the arguments is returned.
-//!    2. The value of the sum of the tuple elements is returned.
-//!    3. [The operation is performed conditionnaly](@ref conditional)
+//!     1. The value of the sum of the arguments is returned.
+//!     2. The value of the sum of the tuple elements is returned.
+//!     3. kahan algorithm is used to enhance accuracy.
+//!     4. [The operation is performed conditionnaly](@ref conditional)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/add.cpp}
@@ -93,22 +95,13 @@ namespace kyosu::_
     else if constexpr(sizeof...(Ts) == 0)
       return t0;
     else
-    {
-      if constexpr(O::contains(eve::kahan) && concepts::complex<r_t>)
-      {
-        auto r = eve::add[o](real(t0), real(ts)...);
-        auto i = eve::add[o](imag(t0), imag(ts)...);
-        return complex(r, i);
-      }
-      else
-        return t0 + (ts + ... );
-    }
+      return kumi::map(eve::add[o], r_t(t0), r_t(ts)...);
   }
+
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
-  EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
+  EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), C const& cond, O const& o, T0 const& v0, Ts const&... vs) noexcept
   {
-    expected_result_t<eve::add,T0,Ts...> that(v0);
-    ((that = add(that,vs)),...);
-    return eve::detail::mask_op(cond, eve::detail::return_2nd, v0, that);
+    using r_t = as_cayley_dickson_t<T0, Ts...>;
+    return eve::detail::mask_op(cond, eve::detail::return_2nd, r_t(v0), add(v0, vs...));
   }
 }

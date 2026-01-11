@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct dot_t : kyosu::strict_tuple_callable<dot_t, Options>
+  struct dot_t : kyosu::strict_tuple_callable<dot_t, Options, eve::kahan_option>
   {
     template<typename... Ts>                                                             struct result;
     template<concepts::cayley_dickson_like... Ts> requires(!(concepts::real<Ts> && ...)) struct result<Ts...> : as_cayley_dickson<Ts...> {};
@@ -63,7 +63,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      constexpr auto dot(auto z0,  auto z1) noexcept;
+//!      // Regular overloads
+//!      constexpr auto dot(auto value... xs, auto value... ys)        noexcept; // 1
+//!      constexpr auto dot(kumi::tuple xs, kumi::tuple ys)            noexcept; // 2
+//!      constexpr auto dot[kahan](/*any of the above overloads*/)     noexcept; // 3
+//!
 //!   }
 //!   @endcode
 //!
@@ -73,9 +77,12 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     Returns the dot product of `z0` and `z1`: `z0*conj(z1)`.
-//!     Arguments can be a mix of floating or Cayley-Dickson values.
-//!     for real typed inputs the result is real typed.
+//!    1. dot product. \f$\sum_s x_s*conj(y_s)\f$.
+//!    2. use the content of the tuples
+//!    3. kahan algorithms are used to improve accuracy.
+//!
+//!  @groupheader{External references}
+//!   *  [Wikipedia taxicab norm](https://en.wikipedia.org/wiki/Dot_product)
 //!
 //!  @groupheader{Example}
 //!
