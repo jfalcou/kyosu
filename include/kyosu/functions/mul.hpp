@@ -54,10 +54,11 @@ namespace kyosu
 //!      // Regular overloads
 //!      constexpr auto mul(auto ... xs)                                              noexcept; // 1
 //!      constexpr auto mul(kumi::non_empty_product_type auto const& tup)             noexcept; // 2
+//!      constexpr auto mul[kahan](/*any of the above overloads*/)                    noexcept; // 3
 //!
 //!      // Lanes masking
-//!      constexpr auto mul[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 3
-//!      constexpr auto mul[logical_value auto m](/*any of the above overloads*/)     noexcept; // 3
+//!      constexpr auto mul[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 4
+//!      constexpr auto mul[logical_value auto m](/*any of the above overloads*/)     noexcept; // 4
 //!
 //!   }
 //!   @endcode
@@ -71,7 +72,8 @@ namespace kyosu
 //!
 //!    1. The value of the product of the arguments is returned.
 //!    2. The value of the product of the tuple elements is returned.
-//!    3. [The operation is performed conditionnaly](@ref conditional)
+//!    3. kahan algorithm is used to enhance accuracy.
+//!    4. [The operation is performed conditionnaly](@ref conditional)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/mul.cpp}

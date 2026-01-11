@@ -55,10 +55,11 @@ namespace kyosu
 //!      // Regular overloads
 //!      constexpr auto div(auto ... xs)                                              noexcept; // 1
 //!      constexpr auto div(kumi::non_empty_product_type auto const& tup)             noexcept; // 2
+//!      constexpr auto div[kahan](/*any of the above overloads*/)                    noexcept; // 3
 //!
 //!      // Lanes masking
-//!      constexpr auto div[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 3
-//!      constexpr auto div[logical_value auto m](/*any of the above overloads*/)     noexcept; // 3
+//!      constexpr auto div[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 4
+//!      constexpr auto div[logical_value auto m](/*any of the above overloads*/)     noexcept; // 4
 //!
 //!   }
 //!   @endcode
@@ -71,8 +72,9 @@ namespace kyosu
 //!   **Return value**
 //!
 //!    1. The value of the division of its first argument with the product of the others.
-//!    2. same on 1. the tuple elements.
-//!    3. [The operation is performed conditionnaly](@ref conditional)
+//!    2. same as 1. on the tuple elements.
+//!    3. kahan algorithm is used to enhance accuracy.
+//!    4. [The operation is performed conditionnaly](@ref conditional)
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/div.cpp}
