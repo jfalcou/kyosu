@@ -50,5 +50,5 @@ TTS_CASE_WITH ( "Check kyosu::ldiv over quaternion"
   TTS_EQUAL(kyosu::ldiv(q0), kyosu::rec(q0));
   TTS_RELATIVE_EQUAL(kyosu::ldiv(q0, q1), kyosu::conj(q0)*q1/kyosu::sqr_abs(q0) , tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::ldiv(q0, q1, r0), kyosu::ldiv(q0, (q1*r0)) ,  tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::div(kumi::tuple{q0, q1, r0}), (q0/(q1*r0)) ,  tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::ldiv(kumi::tuple{q0, q1, r0}), kyosu::ldiv(q0, (q1*r0)),  tts::prec<T>());
  };

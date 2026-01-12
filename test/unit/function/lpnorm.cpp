@@ -20,6 +20,7 @@ TTS_CASE_WITH ( "Check kyosu::lpnorm over real"
   TTS_EQUAL(kyosu::lpnorm(p, r0, r1), eve::lpnorm(p, r0, r1));
   TTS_EQUAL(kyosu::lpnorm(2, r0, r1), eve::lpnorm(2, r0, r1));
   TTS_EQUAL(kyosu::lpnorm(2, r0, r1), eve::hypot(r0, r1));
+  TTS_EQUAL(kyosu::lpnorm(2, kumi::tuple{r0, r1}), eve::hypot(r0, r1));
   TTS_EQUAL(kyosu::lpnorm(eve::inf(eve::as(r0)), r0, r1), kyosu::maxabs(r0, r1));
 };
 

@@ -26,6 +26,11 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr auto operator()(P p, V1 v1, Vs... vs) const noexcept -> decltype(eve::lpnorm(p, real(v1), real(vs)...))
     { return eve::lpnorm(p,v1,vs...); }
 
+    template<concepts::real P, kumi::non_empty_product_type Tup>
+    KYOSU_FORCEINLINE constexpr
+    auto  operator()(P p, Tup tup) const noexcept -> decltype(eve::lpnorm(p, kumi::map(real, tup)))
+    { return eve::lpnorm(p, kumi::map(abs, tup)); }
+
     KYOSU_CALLABLE_OBJECT(lpnorm_t, lpnorm_);
 };
 
@@ -47,7 +52,8 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template< floating_ordered_value P, typename T, typename ... Ts> auto lpnorm(P p, T z,Ts ... zs ) const noexcept
+//!     template< floating_ordered_value P, auto ... Ts> auto lpnorm(P p, T z,Ts ... zs )  const noexcept //1
+//!     template< floating_ordered_value P, kumi::non_empty_product_type auto const& tup)  const noexcept //2
 //!   }
 //!   @endcode
 //!
@@ -55,10 +61,12 @@ namespace kyosu
 //!
 //!     * `p`:   : positive floating ordered value
 //!     * `zs...`: real or Cayley-dickson values to process.
+//!     * `tup     kumi tuple.
 //!
 //!   **Return value**
 //!
-//!     Returns \f$ \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \f$.
+//!    1.  Returns \f$ \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \f$.
+//!    2. uses the tuple elements.
 //!
 //!  @groupheader{External references}
 //!   *  [Wikipedia: Error Function](https://en.wikipedia.org/wiki/Lp_space)

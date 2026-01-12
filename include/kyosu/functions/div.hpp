@@ -64,7 +64,7 @@ namespace kyosu
 //!   }
 //!   @endcode
 //!
-//!!   **Parameters**
+//!   **Parameters**
 //!
 //!     * `xs` :  real or cayley-dickson arguments.
 //!     * `tup` : kumi tuple of arguments.

@@ -52,20 +52,32 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     constexpr auto ldiv(auto zs...) noexcept;
+//!     // Regular overloads
+//!     constexpr auto ldiv(auto xs...) noexcept;                                     noexcept; // 1
+//!     constexpr auto dliv(kumi::non_empty_product_type auto const& tup)             noexcept; // 2
+//!     constexpr auto ldiv[kahan](/*any of the above overloads*/)                    noexcept; // 3
+//!
+//!     // Lanes masking
+//!     constexpr auto ldiv[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 4
+//!     constexpr auto ldiv[logical_value auto m](/*any of the above overloads*/)     noexcept; // 4
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
-//!     * `zs...`: Values to process.
+//!     * `xs...`: Values to process.
+//!     * `tup` : kumi tuple of arguments.
 //!
 //!   **Return value**
 //!
-//!      - For one argument returns the inverse of the argument
-//!      - For two arguments returns the left division  of the two arguments. This function is not equivalent to z1/z0 as
-//!        soon as multiplication is not commutative (i.e. for general Cayley-Dickson values with dimensionality strictly above 2).
-//!      - For  more arguments the left division of the product of the arguments but the first, by the first is returned.
+//!      1. left division.
+//!         * For one argument returns the inverse of the argument
+//!         * For two arguments returns the left division  of the two arguments. This function is not equivalent to z1/z0 as
+//!           soon as multiplication is not commutative (i.e. for general Cayley-Dickson values with dimensionality strictly above 2).
+//!         * For  more arguments the left division of the product of the arguments but the first, by the first is returned.
+//!      2. same as 1. on the tuple elements.
+//!      3. kahan algorithm is used to enhance accuracy.
+//!      4. [The operation is performed conditionnaly](@ref conditional)
 //!
 //!  @groupheader{Example}
 //!
