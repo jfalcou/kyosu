@@ -16,6 +16,7 @@ TTS_CASE_WITH ( "Check kyosu::ldiv over real"
               )
 <typename T>(T r0, T r1)
 {
+  TTS_EQUAL(kyosu::ldiv(r0), eve::rec(r0));
   TTS_RELATIVE_EQUAL(kyosu::ldiv(r0, r1), r1/r0, tts::prec<T>());
 };
 
@@ -29,6 +30,7 @@ TTS_CASE_WITH ( "Check kyosu::ldiv over complex"
 {
   auto c0 = kyosu::complex(r0,i0);
   auto c1 = kyosu::complex(r1,i1);
+  TTS_EQUAL(kyosu::ldiv(c0), kyosu::rec(c0));
   TTS_RELATIVE_EQUAL(kyosu::ldiv(c0, c1), c1/c0, tts::prec<T>());
 };
 
@@ -45,7 +47,8 @@ TTS_CASE_WITH ( "Check kyosu::ldiv over quaternion"
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0,i0,j0,k0);
   auto q1 = type(r1,i1,j1,k1);
+  TTS_EQUAL(kyosu::ldiv(q0), kyosu::rec(q0));
   TTS_RELATIVE_EQUAL(kyosu::ldiv(q0, q1), kyosu::conj(q0)*q1/kyosu::sqr_abs(q0) , tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::ldiv(q0, q1, r0), kyosu::ldiv(q0, (q1*r0)) ,  tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::div(kumi::tuple{q0, q1, r0}), (q0/(q1*r0)) ,  tts::prec<T>());
-};
+  TTS_RELATIVE_EQUAL(kyosu::ldiv(kumi::tuple{q0, q1, r0}), kyosu::ldiv(q0, (q1*r0)),  tts::prec<T>());
+ };
