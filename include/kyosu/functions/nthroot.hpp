@@ -128,7 +128,7 @@ namespace kyosu::_
     {
       auto [rho, theta] = kyosu::to_polarpi(z);
       auto rho_n = eve::nthroot(rho, cv(n));
-      auto rntn = rho_n*kyosu::exp_ipi((theta+2*cv(eve::rem(k, n)))/cv(n));
+      auto rntn = if_else(n == one(as(n)), z, rho_n*kyosu::exp_ipi((theta+2*cv(eve::rem(k, n)))/cv(n)));
       return rntn;
     }
     else  return  cayley_extend2(nthroot, z, n, k);
