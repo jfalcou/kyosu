@@ -36,9 +36,10 @@ TTS_CASE_WITH ( "Check kyosu::harmmean over complex"
   TTS_EQUAL(kyosu::harmmean(c0), c0);
   using kyosu::rec;
   auto pr = tts::prec<T>(1.0e-1, 1.0e-6);
-  TTS_RELATIVE_EQUAL(kyosu::harmmean(c0, c1), 2*c0*c1/(c0+c1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::harmmean(c0, c1, r1), 3*rec(rec(c0)+rec(c1)+rec(r1)), pr);
-  TTS_RELATIVE_EQUAL(kyosu::harmmean(r0, c1, r1), 3*rec(rec(r0)+rec(c1)+rec(r1)), pr);
+  auto rc = kyosu::rec;
+  TTS_RELATIVE_EQUAL(kyosu::harmmean(c0, c1), rc((rc(c0)+rc(c1))/2), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::harmmean(c0, c1, r1), rc((rc(c0)+rc(c1)+rc(r1))/3), pr);
+  TTS_RELATIVE_EQUAL(kyosu::harmmean(r0, c1, r1), rc((rc(r0)+rc(c1)+rc(r1))/3), pr);
 
   auto cond = eve::is_ltz(r0);
   TTS_EQUAL(kyosu::harmmean[cond](c0, c1), kyosu::if_else(cond, kyosu::harmmean(c0, c1), c0));
@@ -59,12 +60,10 @@ TTS_CASE_WITH ( "Check kyosu::harmmean over quaternion"
   auto q1 = type(r1,i1,j1,k1);
   using kyosu::rec;
   auto pr = tts::prec<T>(1.0e-1, 1.0e-6);
-  if constexpr(sizeof(eve::element_type_t<T>) == 8)
-  {
-    TTS_EQUAL(kyosu::harmmean(q0), q0);
-    TTS_RELATIVE_EQUAL(kyosu::harmmean(q0, q1, r1), 3*rec(rec(q0)+rec(q1)+rec(r1)), pr);
-    TTS_RELATIVE_EQUAL(kyosu::harmmean(r0, q1, r1), 3*rec(rec(r0)+rec(q1)+rec(r1)), pr);
-  }
+  auto rc = kyosu::rec;
+  TTS_EQUAL(kyosu::harmmean(q0), q0);
+  TTS_RELATIVE_EQUAL(kyosu::harmmean(q0, q1, r1), 3*rc(rc(q0)+rc(q1)+rc(r1)), pr);
+  TTS_RELATIVE_EQUAL(kyosu::harmmean(r0, q1, r1), 3*rc(rc(r0)+rc(q1)+rc(r1)), pr);
   auto cond = eve::is_ltz(r0);
   TTS_EQUAL(kyosu::harmmean[cond](q0, q1), kyosu::if_else(cond, kyosu::harmmean(q0, q1), q0));
 
