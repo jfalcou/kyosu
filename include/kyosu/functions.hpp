@@ -140,7 +140,7 @@
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/is_unitary.hpp>
 #include <kyosu/functions/jacobi_elliptic.hpp>
-//#include <kyosu/functions/kolmmean.hpp>
+#include <kyosu/functions/kolmmean.hpp>
 #include <kyosu/functions/kronecker.hpp>
 #include <kyosu/functions/kummer.hpp>
 #include <kyosu/functions/lambda.hpp>
