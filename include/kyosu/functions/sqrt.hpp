@@ -17,22 +17,24 @@ namespace kyosu
   struct sqrt_t : eve::elementwise_callable<sqrt_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(!Options::contains(real_only))
+    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-        return  (*this)(complex(z));
-      else
-        return KYOSU_CALL(z);
+      return KYOSU_CALL(z);
     }
 
-    template<concepts::real Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(Options::contains(real_only))
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z, K const & k) const noexcept
     {
-      auto r = eve::sqrt(z);
-      return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+      return KYOSU_CALL(z, k);
     }
+
+ //    template<concepts::real Z>
+//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+//     requires(Options::contains(real_only))
+//     {
+//       auto r = eve::sqrt(z);
+//       return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
+//     }
 
     KYOSU_CALLABLE_OBJECT(sqrt_t, sqrt_);
 };
@@ -55,25 +57,27 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      //  regular call
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> sqrt(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto sqrt(T z)      noexcept; //1
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto sqrt(T z, K k) noexcept; //2
 //!
 //!      // semantic modifyers
-//!      template<concepts::real T> constexpr complexify_t<T> sqrt[real_only](T z) noexcept;
+//!      template<concepts::real T> constexpr auto sqrt[real_only](T z)                 noexcept; //3
 //!   }
 //!   @endcode
 //!
 //!   **Parameters**
 //!
 //!     * `z`: Value to for which square root is computed.
+//!     * `k`: index of the square root taken modulo 1.
 //!
 //!   **Return value**
 //!
-//!     - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
-//!       in which case the parameter must be a floating_value, the real part of the result will the same as an eve::sqrt
-//!       implying a Nan result if the result is not real.
-//!     - for complex input, returns elementwise the square root of z,
-//!        in the range of the right half-plane, including the imaginary axis (\f$[0, +\infty]\f$
-//!        along the real axis and \f$[-\infty, +\infty]\f$ along the imaginary axis.)
+//!     1. With one parameter  returns a square root of z.
+//!        * A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
+//!          in which case the parameter must be a floating_value.
+//!        * for complex input, returns elementwise the square root of z,
+//!          in the range of the right half-plane, including the imaginary axis (\f$[0, +\infty]\f$
+//!          along the real axis and \f$[-\infty, +\infty]\f$ along the imaginary axis.)
 //!
 //!        *  The function is continuous onto the branch cut taking into account
 //!           the sign of imaginary part
@@ -87,7 +91,7 @@ namespace kyosu
 //!        *  If z is \f$+\infty+i NaN\f$, the result is \f$+\infty+i NaN\f$
 //!        *  If z is \f$NaN+i y\f$, the result is \f$NaN+i NaN\f$
 //!        *  If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
-//!      - Returns a square root of z.
+//!     2. Returns the kth sqrt root of z, k is taken modulo 1; 0 is identical to 1. 1 gives the opposite root.
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: complex cosh](https://en.cppreference.com/w/cpp/numeric/complex/sqrt)
@@ -107,9 +111,13 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sqrt_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto sqrt_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    if constexpr(kyosu::concepts::complex<Z>)
+    if constexpr(O::contains(real_only) && concepts::real<Z>)
+      return eve::sqrt[o.drop(real_only)](z);
+    else if constexpr(concepts::real<Z>)
+      return sqrt(complex(z));
+    else if constexpr(kyosu::concepts::complex<Z>)
     {
       if (eve::all(is_real(z)))
       {
@@ -173,4 +181,11 @@ namespace kyosu::_
       return cayley_extend(kyosu::sqrt, z);
     }
   }
+
+  template<typename Z, eve::value N, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sqrt_(KYOSU_DELAY(), O const&, Z z, N n) noexcept
+  {
+    return eve::sign_alternate(n)*sqrt(z);
+  }
+
 }
