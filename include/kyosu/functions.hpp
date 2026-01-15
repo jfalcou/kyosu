@@ -246,3 +246,5 @@
 #include <kyosu/functions/to_rotation_matrix.hpp>
 #include <kyosu/functions/to_semipolar.hpp>
 #include <kyosu/functions/to_spherical.hpp>
+
+#include <kyosu/functions/pipo.hpp>

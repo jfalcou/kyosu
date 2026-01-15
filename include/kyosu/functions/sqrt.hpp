@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct sqrt_t : eve::elementwise_callable<sqrt_t, Options, real_only_option>
+  struct sqrt_t : eve::strict_elementwise_callable<sqrt_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
@@ -22,19 +22,13 @@ namespace kyosu
       return KYOSU_CALL(z);
     }
 
-    template<concepts::cayley_dickson_like Z, eve::value K>
-    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z, K const & k) const noexcept
+    template<concepts::cayley_dickson_like Z, concepts::real K>
+    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z> , K>
+    operator()(Z const& z, K const & k) const noexcept
+    requires(eve::same_lanes_or_scalar<Z, K>)
     {
       return KYOSU_CALL(z, k);
     }
-
- //    template<concepts::real Z>
-//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-//     requires(Options::contains(real_only))
-//     {
-//       auto r = eve::sqrt(z);
-//       return complex(r, eve::if_else(eve::is_nan(r), eve::nan, eve::zero(as(r))));
-//     }
 
     KYOSU_CALLABLE_OBJECT(sqrt_t, sqrt_);
 };
@@ -182,10 +176,20 @@ namespace kyosu::_
     }
   }
 
-  template<typename Z, eve::value N, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sqrt_(KYOSU_DELAY(), O const&, Z z, N n) noexcept
+  template<concepts::cayley_dickson_like Z, concepts::real K, eve::callable_options O>
+   KYOSU_FORCEINLINE constexpr auto sqrt_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
   {
-    return eve::sign_alternate(n)*sqrt(z);
+    if constexpr( O::contains(real_only))
+    {
+      if constexpr(concepts::real<Z>)
+        return eve::sign_alternate(k)*eve::sqrt(z);
+      else
+        return sqrt[o.drop(real_only)](z, k);
+    }
+    else if constexpr(concepts::real<Z>)
+      return sqrt(complex(z), k);
+    else
+      return eve::sign_alternate(k)*kyosu::sqrt[o](z);
   }
 
 }
