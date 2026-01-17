@@ -8,23 +8,21 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-
-TTS_CASE_TPL( "test constants", kyosu::real_types)
-<typename T>(tts::type<T>)
+TTS_CASE_TPL("test constants", kyosu::real_types)<typename T>(tts::type<T>)
 {
   using kyosu::complex_t;
-  using kyosu::quaternion_t;
   using kyosu::octonion_t;
+  using kyosu::quaternion_t;
 
-#define TEST_CTS(cts)                                                            \
-{                                                                                \
-  T v(eve::cts(eve::as<T>{}));                                                   \
-  TTS_IEEE_EQUAL(kyosu::cts(kyosu::as<T>{})               , v                 ); \
-  TTS_IEEE_EQUAL(kyosu::cts(kyosu::as<complex_t<T>>{})    , complex_t<T>{v}   ); \
-  TTS_IEEE_EQUAL(kyosu::cts(kyosu::as<quaternion_t<T>>{}) , quaternion_t<T>{v}); \
-  TTS_IEEE_EQUAL(kyosu::cts(kyosu::as<octonion_t<T>>{})   , octonion_t<T>{v}  ); \
-}                                                                                \
-/**/
+#define TEST_CTS(cts)                                                                                                  \
+  {                                                                                                                    \
+    T v(eve::cts(eve::as<T>{}));                                                                                       \
+    TTS_IEEE_EQUAL(kyosu::cts(kyosu::as<T>{}), v);                                                                     \
+    TTS_IEEE_EQUAL(kyosu::cts(kyosu::as<complex_t<T>>{}), complex_t<T>{v});                                            \
+    TTS_IEEE_EQUAL(kyosu::cts(kyosu::as<quaternion_t<T>>{}), quaternion_t<T>{v});                                      \
+    TTS_IEEE_EQUAL(kyosu::cts(kyosu::as<octonion_t<T>>{}), octonion_t<T>{v});                                          \
+  }                                                                                                                    \
+  /**/
 
   TEST_CTS(allbits);
   TEST_CTS(bitincrement);
