@@ -26,7 +26,7 @@ TTS_CASE_WITH ( "Check kyosu::cbrt over complex"
 {
   auto c = kyosu::complex(r,i);
   auto kc = kyosu::cbrt(c);
-  TTS_RELATIVE_EQUAL(kyosu::pow(kyosu::cbrt(c), 3), c, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::pow(kc, 3), c, tts::prec<T>());
 };
 
 TTS_CASE_WITH ( "Check kyosu::cbrt over real"
