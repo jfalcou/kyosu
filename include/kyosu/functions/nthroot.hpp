@@ -24,36 +24,14 @@ namespace kyosu
     }
 
     // kth root
-    template<concepts::cayley_dickson_like Z, eve::simd_value N, eve::simd_value K>
+    template<concepts::cayley_dickson_like Z, eve::value N, eve::value K>
     KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<
                                      eve::as_wide_as_t<
                                          kyosu::complexify_if_t<Options, Z>
                                      ,K>,
                                 N>
     operator()(Z const& z, N const & n, K const & k) const noexcept
-    requires(eve::same_lanes_or_scalar<Z, K>, eve::same_lanes_or_scalar<Z, N>
-             && !(eve::scalar_value<K> && eve::scalar_value<N>))
-    {
-      return KYOSU_CALL(z, n, k);
-    }
-
-    template<concepts::cayley_dickson_like Z, eve::scalar_value N, eve::scalar_value K>
-    KYOSU_FORCEINLINE constexpr kyosu::complexify_if_t<Options, Z>
-    operator()(Z const& z, N const & n, K const & k) const noexcept
-    {
-      return KYOSU_CALL(z, n, k);
-    }
-
-    template<concepts::cayley_dickson_like Z, eve::scalar_value N, eve::simd_value K>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z>, K>
-    operator()(Z const& z, N const & n, K const & k) const noexcept
-    {
-      return KYOSU_CALL(z, n, k);
-    }
-
-    template<concepts::cayley_dickson_like Z, eve::simd_value N, eve::scalar_value K>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z>, N>
-    operator()(Z const& z, N const & n, K const & k) const noexcept
+    requires(eve::same_lanes_or_scalar<Z, K>, eve::same_lanes_or_scalar<Z, N>)
     {
       return KYOSU_CALL(z, n, k);
     }
