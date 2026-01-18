@@ -118,7 +118,7 @@ namespace kyosu::_
   template<typename Z, eve::value K, eve::value N, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto nthroot_(KYOSU_DELAY(), O const& , Z zz, N n, K k) noexcept
   {
-    using e_t = eve::underlying_type_t<Z>;
+    using e_t = eve::element_type_t<decltype(real(zz))>;
     auto nn = eve::convert(n, as<e_t>());
     auto kk = eve::convert(k, as<e_t>());
     if constexpr(concepts::complex_like<Z>)
