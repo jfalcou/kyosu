@@ -16,15 +16,8 @@ namespace kyosu
   template<typename Options>
   struct log_t : eve::strict_elementwise_callable<log_t, Options, real_only_option>
   {
-    template<concepts::real Z>
+    template<concepts::cayley_dickson_like  Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
-    {
-      return KYOSU_CALL(z);
-    }
-
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
-    requires(!concepts::real<Z>)
     {
       return KYOSU_CALL(z);
     }
@@ -57,6 +50,7 @@ namespace kyosu
 //!   {
 //!      //  regular call
 //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log(T z eve::value n) noexcept;
 //!
 //!      // semantic modifyers
 //!      template<concepts::real T> constexpr complexify_t<T> log[real_only](T z) noexcept;
@@ -70,7 +64,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!    - A real typed input z is treated as if `complex(z)` was entered, unless the option `real_only` is used
-//!       in which case the  result will the same as an `eve::log` call
+//!       in which case the  result will the same as to an `eve::log` call
 //!       implying a Nan result if the input is not greater than zero.
 //!    - For complex entry returns elementwise the natural logarithm of the input
 //!      in the range of a strip in the interval \f$i\times[-\pi, \pi]\f$ along the imaginary axis
@@ -92,7 +86,8 @@ namespace kyosu
 //!      * If z is \f$\textrm{NaN}+i \infty\f$, the result is \f$\infty+i \textrm{NaN}\f$
 //!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!    - For general cayley_dickson entry`log(z)` is semantically equivalent to `log(abs(z)) + sign(pure(z)) * arg(z)`
-//!
+//!    - with two parameters return the nth branch of the logarithm.
+//!  
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Logarithm](https://mathworld.wolfram.com/Logarithm.html)
 //!   *  [DLMF: Logarithm](https://dlmf.nist.gov/4.2)
