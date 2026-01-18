@@ -23,6 +23,8 @@ int main()
   std::cout               << log(q_t(e))<< "\n";
   std::cout               << log(wc_t(e))<< "\n";
   std::cout               << log(wq_t(e))<< "\n";
+  std::cout               << log(we, 3)<< "\n";
+  std::cout               << log(e, 3)<< "\n";
 
   std::cout << "Complex:     \n";
   c_t c(3.5f,-2.9f);

@@ -17,13 +17,9 @@ namespace kyosu
   struct rsqrt_t : eve::elementwise_callable<rsqrt_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(!Options::contains(real_only))
+    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-        return  (*this)(complex(z));
-      else
-        return KYOSU_CALL(z);
+      return KYOSU_CALL(z);
     }
 
     template<concepts::real Z>
@@ -92,6 +88,9 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto rsqrt_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    return kyosu::sqrt[o](kyosu::rec(z));
+    if constexpr(O::contains(real_only) && concepts::real<Z>)
+      return eve::rsqrt[o](z);
+    else
+      return kyosu::rec(kyosu::sqrt[o](z));
   }
 }

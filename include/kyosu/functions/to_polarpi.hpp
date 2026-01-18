@@ -9,6 +9,7 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/pure.hpp>
+#include <kyosu/functions/argpi.hpp>
 
 namespace kyosu
 {
