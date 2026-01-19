@@ -8,7 +8,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::exp over quaternion"
+TTS_CASE_WITH ( "Check kyosu::exp over cayley_dickson"
               , kyosu::simd_real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
                               , tts::randoms(-10,10), tts::randoms(-10,10)
@@ -25,7 +25,7 @@ TTS_CASE_WITH ( "Check kyosu::exp over quaternion"
 
   auto rr = eve::log(r);
   auto re = kyosu::log[kyosu::real_only](r);
-  TTS_IEEE_EQUAL(re,  ce_t(rr, eve::if_else(eve::is_nan(rr), eve::nan(eve::as(rr)), eve::zero)));
+  TTS_IEEE_EQUAL(re, rr);
 
   auto lr = kyosu::log(r);
   auto lc = kyosu::log(c);

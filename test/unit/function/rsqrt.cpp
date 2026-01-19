@@ -20,7 +20,7 @@ TTS_CASE_WITH ( "Check kyosu::rsqrt over real"
                                                      , kyosu::complex(T(0), eve::signnz(v)*asq)), tts::prec<T>());
   auto rr = eve::rsqrt(v);
   auto re = kyosu::rsqrt[kyosu::real_only](v);
-  TTS_IEEE_EQUAL(re, kyosu::inject(rr));
+  TTS_IEEE_EQUAL(re, rr);
 };
 
 TTS_CASE_WITH ( "Check kyosu::rsqrt over complex"

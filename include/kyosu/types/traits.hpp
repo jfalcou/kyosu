@@ -9,6 +9,7 @@
 
 #include "eve/deps/kumi/tuple.hpp"
 #include <kyosu/types/helpers.hpp>
+#include <kyosu/details/decorators.hpp>
 #include <eve/as.hpp>
 #include <bit>
 
@@ -188,6 +189,26 @@ namespace kyosu
   };
 
   template < typename T> using complexify_t =  typename complexify<T>::type;
+
+  //====================================================================================================================
+  //! @struct complexify_if
+  //! @brief compute the cayley dickson type associated to a floating type or any other type.
+  //!
+  //! if the type is an eve::floating_value and the Option real_only is not present return the complex type associated else let the type as is.
+  //!
+  //! @tparam T Type to wrap
+  //====================================================================================================================
+  template < typename O, typename T> struct complexify_if;
+
+  template < typename O, typename T>
+  requires( requires{typename complexify<T>::type;} )
+  struct complexify_if<O,T>
+  {
+    using base = std::conditional_t<!O::contains(kyosu::real_only), complexify<T>, eve::detail::always<T>>;
+    using type = typename base::type;
+  };
+
+  template< typename O, typename T> using complexify_if_t = complexify_if<O, T>::type;
 
   //====================================================================================================================
   //! @brief Compute the cayley_dickson_like type associated to a Cayley-Dickson-like family of types

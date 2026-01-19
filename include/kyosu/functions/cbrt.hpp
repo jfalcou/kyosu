@@ -14,25 +14,17 @@ namespace kyosu
   template<typename Options>
   struct cbrt_t : eve::callable<cbrt_t, Options>
   {
-
-    template<concepts::cayley_dickson_like Z, eve::value K>
-    KYOSU_FORCEINLINE constexpr auto
-    operator()(Z const& z, K const & k) const noexcept -> decltype(kyosu::nthroot(z, 3, k))
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr  complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
-     if constexpr(eve::floating_value<Z>)
-         return (*this)(kyosu::complex(z), k);
-      else
-        return KYOSU_CALL(z, k);
+      return KYOSU_CALL(z);
     }
 
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr auto
-    operator()(Z const& z) const noexcept -> decltype(kyosu::nthroot(z, 3))
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr  eve::as_wide_as_t<complexify_if_t<Options, Z>, K>
+    operator()(Z const& z, K const & k) const noexcept
     {
-      if constexpr(eve::floating_value<Z>)
-         return (*this)(kyosu::complex(z));
-      else
-        return KYOSU_CALL(z);
+     return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(cbrt_t, cbrt_);
@@ -68,8 +60,8 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     * if the first parameter is floating the call will act as if they were converted to complex before call.
-//!     * the kth cubic root of z, is `exp((log(z)+2*k*i*pi)/3)`. If not present k is taken as 0. (k is always taken modulo 3).
+//!     * if the first parameter is floating the call will act as if it was converted to complex before call.
+//!     * the kth cubic root of z, is `exp((log(z)+2*k*i*pi)/3)`. If not present k is taken as 0.
 //!
 //!
 //!  @groupheader{Example}
@@ -84,14 +76,17 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::value K, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), O const& , Z z, K k) noexcept
+  KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
   {
-    return kyosu::nthroot(z, 3, k);
+    using e_t =  eve::element_type_t<decltype(real(z))>;
+    auto kk = eve::convert(k, eve::as<e_t>());
+    return kyosu::nthroot[o](z, e_t(3))*kyosu::exp_ipi(2*kk/3);
   }
 
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), O const& , Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    return kyosu::nthroot(z, 3, 0);
+    using e_t =  eve::element_type_t<decltype(real(z))>;
+    return kyosu::nthroot[o](z, e_t(3));
   }
 }
