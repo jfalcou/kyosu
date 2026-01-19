@@ -15,15 +15,14 @@ namespace kyosu
   struct cbrt_t : eve::callable<cbrt_t, Options>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z const& z) const noexcept -> complexify_if_t<Options, Z>
+    KYOSU_FORCEINLINE constexpr  complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K>
-    KYOSU_FORCEINLINE constexpr auto
-    operator()(Z const& z, K const & k) const noexcept -> eve::as_wide_as_t<complexify_if_t<Options, Z>, K>
-    requires(eve::same_lanes_or_scalar<Z, K>)
+    KYOSU_FORCEINLINE constexpr  eve::as_wide_as_t<complexify_if_t<Options, Z>, K>
+    operator()(Z const& z, K const & k) const noexcept
     {
      return KYOSU_CALL(z, k);
     }
