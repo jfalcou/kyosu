@@ -149,6 +149,7 @@ $(document).ready(function(){initNavTree('group__functions_gafb007a0b170f27331d8
 <div class="line">{</div>
 <div class="line">   <span class="comment">//  regular call</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">complexify_t&lt;T&gt;</a> <a class="code hl_variable" href="group__functions_gafb007a0b170f27331d8aa088e9f8f0b0.html#gafb007a0b170f27331d8aa088e9f8f0b0">log2</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">T</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z</a>) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">complexify_t&lt;T&gt;</a> <a class="code hl_variable" href="group__functions_gafb007a0b170f27331d8aa088e9f8f0b0.html#gafb007a0b170f27331d8aa088e9f8f0b0">log2</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">T</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z</a> eve::value n) <span class="keyword">noexcept</span>;\\2</div>
 <div class="line"> </div>
 <div class="line">   <span class="comment">// semantic modifyers</span></div>
 <div class="line">   <span class="keyword">template</span>&lt;concepts::real T&gt; <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">complexify_t&lt;T&gt;</a> <a class="code hl_variable" href="group__functions_gafb007a0b170f27331d8aa088e9f8f0b0.html#gafb007a0b170f27331d8aa088e9f8f0b0">log2</a>[real_only](<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">T</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z</a>) <span class="keyword">noexcept</span>;</div>
@@ -161,10 +162,11 @@ $(document).ready(function(){initNavTree('group__functions_gafb007a0b170f27331d8
 <li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<ul>
-<li>real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered, unless the option real_only is used in which case the parameter must be a floating_value, the real part of the result will the same as an eve::log2 implying a Nan result if the result is not real.</li>
+<ol type="1">
+<li>a real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered, unless the option real_only is used in which case the parameter must be a floating_value, the result will the same as to an <code>eve::log2</code> call implying a Nan result if the input is not greater than zero.</li>
 <li>returns <a class="el" href="group__functions_ga398aa088354c3b9d0a0a1b5d6b7145f9.html#ga398aa088354c3b9d0a0a1b5d6b7145f9">log</a>(z)/log_2(as(z)).</li>
-</ul>
+<li>with two parameters return the nth branch of the function.</li>
+</ol>
 <h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Binary_logarithm">Wikipedia: Binary Logarithm</a></li>
