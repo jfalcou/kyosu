@@ -35,7 +35,9 @@ TTS_CASE_WITH ( "Check kyosu::sqrt over complex"
 {
   using T =  decltype(r);
   auto c = kyosu::complex(r,i);
-  TTS_RELATIVE_EQUAL(kyosu::sqr(kyosu::sqrt(c)), c, tts::prec<T>());
+  auto sc= kyosu::sqrt(c);
+  TTS_RELATIVE_EQUAL(kyosu::sqr(sc), c, tts::prec<T>());
+  TTS_EXPECT(eve::all(eve::sign(i) == eve::sign(kyosu::imag(sc))));
 };
 
 TTS_CASE_WITH ( "Check kyosu::sqrt over quaternion"

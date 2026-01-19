@@ -55,7 +55,7 @@ namespace kyosu
 //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto sqrt(T z, K k) noexcept; //2
 //!
 //!      // semantic modifyers
-//!      template<concepts::real T> constexpr auto sqrt[real_only](T z)                 noexcept; //3
+//!      template<concepts::real T> constexpr auto sqrt[real_only](T z)                 noexcept; //1
 //!   }
 //!   @endcode
 //!
@@ -66,9 +66,9 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. With one parameter  returns a square root of z.
+//!     1. With one parameter  returns the square root of z which has the same imaginary part sign as z.
 //!        * A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
-//!          in which case the parameter must be a floating_value.
+//!          in which case the parameter must be a floating_value and the result will the same as a call to eve::rsqrt
 //!        * for complex input, returns elementwise the square root of z,
 //!          in the range of the right half-plane, including the imaginary axis (\f$[0, +\infty]\f$
 //!          along the real axis and \f$[-\infty, +\infty]\f$ along the imaginary axis.)
