@@ -24,19 +24,6 @@ namespace kyosu
     {
       return KYOSU_CALL(z, k);
     }
-//     template<concepts::cayley_dickson_like Z>
-//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-//     {
-//       if constexpr(concepts::real<Z>) return (*this)(complex(z));
-//       else                            return KYOSU_CALL(z);
-//     }
-
-//     template<concepts::real Z>
-//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-//     requires(Options::contains(real_only))
-//     {
-//       return KYOSU_CALL(z);
-//     }
 
     KYOSU_CALLABLE_OBJECT(log10_t, log10_);
 };
@@ -74,7 +61,7 @@ namespace kyosu
 //!   **Return value**
 //!
 //!   1.  a real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
-//!       in which case the parameter must be a floating_value,  the  result will the same as to an `eve::log` call
+//!       in which case the parameter must be a floating_value,  the  result will the same as to an `eve::log10` call
 //!       implying a Nan result if the  input is not greater than zero.
 //!   2.  returns [log](@ref kyosu::log)(z)/log_10(as(z)).
 //!   3.  with two parameters return the nth branch of the function.

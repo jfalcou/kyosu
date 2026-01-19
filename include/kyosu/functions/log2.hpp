@@ -16,18 +16,16 @@ namespace kyosu
   template<typename Options>
   struct log2_t : eve::elementwise_callable<log2_t, Options, real_only_option>
   {
-   template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    {
-      if constexpr(concepts::real<Z>) return (*this)(complex(z));
-      else                            return KYOSU_CALL(z);
-    }
-
-    template<concepts::real Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(Options::contains(real_only))
+    template<concepts::cayley_dickson_like  Z>
+    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
+    }
+
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<Z, K> operator()(Z const& z, K const & k) const noexcept
+    {
+      return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(log2_t, log2_);
@@ -52,6 +50,7 @@ namespace kyosu
 //!   {
 //!      //  regular call
 //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log2(T z) noexcept;
+//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log2(T z eve::value n) noexcept;\\2
 //!
 //!      // semantic modifyers
 //!      template<concepts::real T> constexpr complexify_t<T> log2[real_only](T z) noexcept;
@@ -64,10 +63,11 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     - real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
-//!       in which case the parameter must be a floating_value, the real part of the result will the same as an eve::log2
-//!       implying a Nan result if the result is not real.
-//!     - returns [log](@ref kyosu::log)(z)/log_2(as(z)).
+//!   1.  a real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
+//!       in which case the parameter must be a floating_value,  the  result will the same as to an `eve::log2` call
+//!       implying a Nan result if the  input is not greater than zero.
+//!   2.  returns [log](@ref kyosu::log)(z)/log_2(as(z)).
+//!   3.  with two parameters return the nth branch of the function.
 //!
 //!  @groupheader{External references}
 //!   *  [Wikipedia: Binary Logarithm](https://en.wikipedia.org/wiki/Binary_logarithm)
@@ -83,37 +83,39 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), O const&, Z z) noexcept
+  template<concepts::real Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), O const&o, Z z) noexcept
   {
     if constexpr(O::contains(real_only))
-      return kyosu::inject(eve::log2(z));
-    else  if constexpr(kyosu::concepts::complex<Z>)
+      return eve::log2(z);
+    else
+      return complex(eve::log_abs(z)*eve::invlog_2(eve::as(z)), eve::arg(z)*eve::invlog_2(eve::as(z)));
+  };
+
+  template<concepts::cayley_dickson_like Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), O const&o, Z z) noexcept
+  requires(!concepts::real<Z>)
+  {
+    if constexpr(kyosu::concepts::complex<Z>)
     {
-      auto [rz, iz] = z;
-      if (eve::all(kyosu::is_real(z)))
-      {
-        auto lga = eve::log2(eve::abs(rz));
-        return if_else(eve::is_positive(rz), lga, complex(lga, eve::invlog_2(eve::as(lga))*pi(eve::as(lga))*eve::signnz(iz)));
-      }
-      else
-      {
-        auto infty = eve::inf(eve::as(rz));
-        auto arg = [](auto z){ return eve::atan2[eve::pedantic](kyosu::imag(z), kyosu::real(z));};
-        auto argz = arg(z)*eve::invlog_2(eve::as(rz));
-        auto absz = eve::if_else(eve::is_nan(rz) && eve::is_infinite(iz), infty, kyosu::abs(z));
-        auto la = eve::log2(absz);
-        auto r = kyosu::if_else(kyosu::is_real(z) && eve::is_positive(rz), complex(la), complex(la, argz));
-        if(eve::any(kyosu::is_not_finite(z)))
-        {
-          r = kyosu::if_else(eve::is_infinite(rz) && eve::is_nan(iz), complex(infty, iz), r);
-        }
-        return r;
-      }
+      auto [rho, theta] = to_polar(z);
+      return Z(eve::log2(rho), theta*eve::invlog_2(eve::as(theta)));
     }
     else
-    {
       return _::cayley_extend(kyosu::log2, z);
+  }
+
+  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), O const&o, Z z, K k) noexcept
+  {
+    if constexpr(kyosu::concepts::complex<Z>)
+    {
+      using e_t = eve::element_type_t<decltype(real(z))>;
+      auto [r, i] = log2(z);
+      auto kk = eve::convert(k, as<e_t>());
+      return Z(r, (i+kk*two_pi(as(kk))*eve::invlog_2(eve::as(kk))));
     }
+    else
+      return _::cayley_extend(kyosu::log2, z, k);
   }
 }
