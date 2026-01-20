@@ -192,4 +192,10 @@ namespace kyosu::_
       return eve::sign_alternate(k)*kyosu::sqrt[o](z);
   }
 
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sqrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), sqrt(z, k...));
+  }
 }
