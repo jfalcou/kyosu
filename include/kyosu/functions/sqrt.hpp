@@ -51,10 +51,11 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!      //  regular call
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto sqrt(T z)      noexcept; //1
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto sqrt(T z, K k) noexcept; //2
+//!      constexpr auto sqrt(auto z)                                                    noexcept; //1
+//!      template<eve::value K> constexpr auto sqrt(auto z, K k)                        noexcept; //2
 //!
 //!      // semantic modifyers
+//!      template<eve::value K> constexpr auto sqrt[principal](\*any previus overload)  noexcept; //3
 //!      template<concepts::real T> constexpr auto sqrt[real_only](T z)                 noexcept; //1
 //!   }
 //!   @endcode
@@ -66,7 +67,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. With one parameter  returns the square root of z which has the same imaginary part sign as z.
+//!     1. With one parameter  returns the principal square root of `z` which has the same imaginary part sign as `z`.
 //!        * A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
 //!          in which case the parameter must be a floating_value and the result will the same as a call to eve::rsqrt
 //!        * for complex input, returns elementwise the square root of z,
@@ -176,8 +177,8 @@ namespace kyosu::_
     }
   }
 
-  template<concepts::cayley_dickson_like Z, concepts::real K, eve::callable_options O>
-   KYOSU_FORCEINLINE constexpr auto sqrt_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto sqrt_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
   {
     if constexpr( O::contains(real_only))
     {
