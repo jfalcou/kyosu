@@ -22,7 +22,6 @@ namespace kyosu
       return KYOSU_CALL(z);
     }
 
-
     template<concepts::cayley_dickson_like Z, concepts::real K>
     KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z> , K>
     operator()(Z const& z, K const & k) const noexcept
@@ -66,10 +65,10 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     1. Returns a square root of 1/z. A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
-//!       in which case the parameter must be a floating_value and the  result will the same as an eve::rsqrt
-//!       implying a Nan result if the result is not real.
-//!     2. Returns the kth sqrt root of z, k is taken modulo 1; 0 is identical to 1. 1 gives the opposite root.
+//!     1. Returns the inverse of the principal square root of `z`. A real typed input `z` is treated as if `complex(z)` was entered, unless the option real_only is used
+//!       in which case the parameter must be a floating_value and the result will the same as if eve::rsqrt was called
+//!     2. Returns the inverse of the kth sqrt root of z, k is taken modulo 1; 1 gives the opposite root.
+
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Square Root](https://mathworld.wolfram.com/SquareRoot.html)
@@ -95,10 +94,17 @@ namespace kyosu::_
     else
       return kyosu::rec(kyosu::sqrt[o](z));
   }
-
-   template<concepts::cayley_dickson_like Z, concepts::real K, eve::callable_options O>
-   KYOSU_FORCEINLINE constexpr auto rsqrt_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
-   {
-      return kyosu::rec(kyosu::sqrt[o](z, k));
+  
+  template<concepts::cayley_dickson_like Z, concepts::real K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto rsqrt_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  {
+    return kyosu::rec(kyosu::sqrt[o](z, k));
+  }
+  
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto rsqrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), rsqrt(z, k...));
   }
 }
