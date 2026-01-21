@@ -101,7 +101,7 @@ namespace kyosu::_
     auto nn = eve::convert(n, as<e_t>());
     auto kk = eve::convert(k, as<e_t>());
     if constexpr(kyosu::concepts::real<Z>)
-      return log[o](complex(zz));
+      return log[o](complex(zz), kk);
     if constexpr(concepts::complex_like<Z>)
     {
       auto z = if_else(eve::is_gtz(nn), zz, rec(zz));
