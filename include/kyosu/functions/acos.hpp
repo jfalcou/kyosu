@@ -31,22 +31,6 @@ namespace kyosu
     {
      return KYOSU_CALL(z, k);
     }
-//    template<concepts::cayley_dickson_like Z>
-//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-//     requires(!Options::contains(real_only))
-//     {
-//       if constexpr(concepts::real<Z>)
-//         return (*this)(complex(z));
-//       else
-//         return  KYOSU_CALL(z);
-//     }
-
-//     template<concepts::real Z>
-//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-//     requires(Options::contains(real_only))
-//     {
-//       return  KYOSU_CALL(z);
-//     }
 
     KYOSU_CALLABLE_OBJECT(acos_t, acos_);
   };
@@ -125,7 +109,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
+  template<concepts::cayley_dickson_like Z, eve::callable_options O>
   constexpr auto acos_(KYOSU_DELAY(), O const& o, Z a0) noexcept
   {
     if constexpr(O::contains(real_only) && concepts::real<Z>)
@@ -278,7 +262,7 @@ namespace kyosu::_
     }
   }
 
-  template<typename Z, eve::value K, eve::callable_options O>
+  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto acos_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
   requires(!O::contains(real_only))
   {

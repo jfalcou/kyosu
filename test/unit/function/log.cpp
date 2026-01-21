@@ -33,4 +33,15 @@ TTS_CASE_WITH ( "Check kyosu::exp over cayley_dickson"
   TTS_RELATIVE_EQUAL(kyosu::exp(lr), kyosu::complex(r), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::exp(lc), c, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::exp(lq), q, 2e-4);
+
+  auto cond = eve::is_ltz(a0);
+
+  TTS_RELATIVE_EQUAL(kyosu::log[cond][kyosu::real_only](r), kyosu::if_else(cond,  eve::log(r), r), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::log[cond](r), kyosu::if_else(cond,  kyosu::log(r), ce_t(r)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::log[cond](c), kyosu::if_else(cond,  kyosu::log(c), c), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::log[cond](q), kyosu::if_else(cond,  kyosu::log(q), q), tts::prec<T>());
+
+  TTS_RELATIVE_EQUAL(kyosu::log[cond](r, 2), kyosu::if_else(cond,  kyosu::log(r, 2), ce_t(r)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::log[cond](c, 2), kyosu::if_else(cond,  kyosu::log(c, 2), c), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::log[cond](q, 2), kyosu::if_else(cond,  kyosu::log(q, 2), q), tts::prec<T>());
 };

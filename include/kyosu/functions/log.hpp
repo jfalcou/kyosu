@@ -23,7 +23,9 @@ namespace kyosu
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<Z, K> operator()(Z const& z, K const & k) const noexcept
+    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z>, K>
+    operator()(Z const& z, K const & k) const noexcept
+    requires(eve::same_lanes_or_scalar<Z, K>)
     {
       return KYOSU_CALL(z, k);
     }
@@ -35,7 +37,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var log
-//!   @brief Computes the natural logarithm of the argument.
+//!   @brief Computes the principal value of the  natural logarithm of the argument.
 //!
 //!   @groupheader{Header file}
 //!
@@ -87,7 +89,7 @@ namespace kyosu
 //!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!    - For general cayley_dickson entry`log(z)` is semantically equivalent to `log(abs(z)) + sign(pure(z)) * arg(z)`
 //!    - with two parameters return the nth branch of the logarithm.
-//!  
+//!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Logarithm](https://mathworld.wolfram.com/Logarithm.html)
 //!   *  [DLMF: Logarithm](https://dlmf.nist.gov/4.2)
@@ -104,20 +106,15 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<concepts::real Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto log_(KYOSU_DELAY(), O const&o, Z z) noexcept
-  {
-    if constexpr(O::contains(real_only))
-      return eve::log(z);
-    else
-      return complex(eve::log_abs(z), eve::arg(z));
-  };
 
   template<concepts::cayley_dickson_like Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto log_(KYOSU_DELAY(), O const&o, Z z) noexcept
-  requires(!concepts::real<Z>)
   {
-    if constexpr(kyosu::concepts::complex<Z>)
+    if constexpr(O::contains(real_only) && concepts::real<Z>)
+      return eve::log[o.drop(real_only)](z);
+    else if constexpr(concepts::real<Z> )
+      return kyosu::log[o](complex(z));
+    else if constexpr(kyosu::concepts::complex<Z>)
     {
       auto [rho, theta] = to_polar(z);
       return Z(eve::log(rho), theta);
@@ -130,11 +127,14 @@ namespace kyosu::_
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto log_(KYOSU_DELAY(), O const&o, Z z, K k) noexcept
+  requires(!O::contains(real_only))
   {
-    if constexpr(kyosu::concepts::complex<Z>)
+    if constexpr(kyosu::concepts::real<Z>)
+      return log[o](complex(z));
+    else if constexpr(kyosu::concepts::complex<Z>)
     {
       using e_t = eve::element_type_t<decltype(real(z))>;
-      auto [r, i] = log(z);
+      auto [r, i] = log[o](z);
       auto kk = eve::convert(k, as<e_t>());
       return Z(r, i+kk*two_pi(as(kk)));
     }
@@ -142,5 +142,12 @@ namespace kyosu::_
     {
       return _::cayley_extend(kyosu::log, z, k);
     }
+  }
+
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), log(z, k...));
   }
 }
