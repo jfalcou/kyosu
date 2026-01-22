@@ -135,7 +135,7 @@ namespace kyosu::_
     {
       using e_t = eve::element_type_t<decltype(real(z))>;
       auto kk = eve::convert(k, as<e_t>());
-      return  log[o](z)+kk*two_pi(as(kk));
+      return  log[o](z)+muli(kk*two_pi(as(kk)));
     }
     else
     {

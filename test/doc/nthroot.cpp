@@ -19,7 +19,7 @@ int main()
   std::cout << "kyosu::nthroot(16.0, -2)    " << kyosu::nthroot(16.0, -2.0) <<  std::endl;
   std::cout << "kyosu::nthroot(wf, wn)      " << kyosu::nthroot(wf, wn)   <<  std::endl;
   std::cout << "kyosu::nthroot(wf, wn, 3)   " << kyosu::nthroot(wf, wn, 3) <<  std::endl;
-  std::cout << "all eight rooth of 1        " << kyosu::nthroot(1.0, 8, eve::wide{0, 1, 2, 3, 4, 5, 6, 7}) <<  std::endl;
+  std::cout << "all eighth rooth of 1        " << kyosu::nthroot(1.0, 8, eve::wide{0, 1, 2, 3, 4, 5, 6, 7}) <<  std::endl;
 
 
   return 0;

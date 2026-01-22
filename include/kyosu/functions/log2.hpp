@@ -10,6 +10,7 @@
 #include <kyosu/functions/if_else.hpp>
 #include <kyosu/functions/is_not_finite.hpp>
 #include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/muli.hpp>
 
 namespace kyosu
 {
@@ -104,8 +105,8 @@ namespace kyosu::_
       return kyosu::log2[o](complex(z));
     else if constexpr(kyosu::concepts::complex<Z>)
     {
-      auto [rho, theta] = to_polar(z);
-      return Z(eve::log2(rho), theta*eve::invlog_2(eve::as(theta)));
+      auto [rho, theta] = to_polarpi(z);
+      return eve::log2(rho)+ kyosu::muli(theta*eve::invlog_2(eve::as(theta)));
     }
     else
       return _::cayley_extend(kyosu::log2, z);

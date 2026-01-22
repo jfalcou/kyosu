@@ -101,14 +101,13 @@ namespace kyosu::_
     auto nn = eve::convert(n, as<e_t>());
     auto kk = eve::convert(k, as<e_t>());
     if constexpr(kyosu::concepts::real<Z>)
-      return log[o](complex(zz), kk);
-    if constexpr(concepts::complex_like<Z>)
+      return nthroot[o](complex(zz), nn, kk);
+    else if constexpr(concepts::complex_like<Z>)
     {
-      auto z = if_else(eve::is_gtz(nn), zz, rec(zz));
-      auto nnn = eve::abs(nn);
-      auto [rho, theta] = kyosu::to_polarpi(z);
-      auto rho_n = eve::nthroot(rho, nnn);
-      return rho_n*kyosu::exp_ipi((theta+2*kk)/nnn);
+      auto [rho, theta] = kyosu::to_polarpi(zz);
+      auto rnn = eve::rec(nn);
+      auto rho_n = eve::pow_abs(rho, rnn);
+      return  rho_n*exp_ipi((theta+2*kk)*rnn);
     }
     else
       return cayley_extend2(nthroot, zz, nn, kk);
@@ -123,7 +122,7 @@ namespace kyosu::_
     else if constexpr(concepts::real<Z>)
       return nthroot(complex(z), n);
     else
-      return nthroot(z, n, zero(eve::as(real(z))));
+      return nthroot(z, n, zero(eve::as(n)));
   }
 
   template<typename Z, eve::integral_value N, eve::callable_options O>
