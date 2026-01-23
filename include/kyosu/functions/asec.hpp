@@ -30,24 +30,6 @@ namespace kyosu
      return KYOSU_CALL(z, k);
     }
 
-//     template<concepts::cayley_dickson_like Z>
-//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-//     requires(!Options::contains(real_only))
-//      {
-//       if constexpr(concepts::real<Z>)
-//         return (*this)(complex(z));
-//       else
-//         return  KYOSU_CALL(z);
-//     }
-
-
-//     template<concepts::real Z>
-//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-//     requires(Options::contains(real_only))
-//     {
-//       return  KYOSU_CALL(z);
-//     }
-
     KYOSU_CALLABLE_OBJECT(asec_t, asec_);
 };
 
@@ -69,10 +51,11 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     //  regular call
-//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> asec(Z z) noexcept;
+//!     constexpr auto asec(cayley_dickson_like z) noexcept;
+//!     constexpr auto asec(cayley_dickson_like z, eve::value k) auto asec(Z z, eve::value k) noexcept;
 //!
 //!     // semantic modifyers
-//!     template<concepts::real Z> constexpr complexify_t<Z> asec[real_only](Z z) noexcept;
+//!     template<concepts::real Z> constexpr Z asec[real_only](Z z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -80,10 +63,13 @@ namespace kyosu
 //!
 //!     * `z`: Value to process.
 //!
-//! **Return value**
+//!   **Return value**
 //!
-//!   - A real typed input z is treated as if `complex(z)` was entered.
+//!   - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
+//!     in which case the parameter must be a floating_value and the result will the same as a call to `eve::asec`,
+//!     implying a `Nan` result if the result is not real.
 //!   - For complex input, returns elementwise `acos(rec(z))`.
+//!   - for two parameters returns the kth branch of \f$\asec\f$. If k is not a flint it is truncated before use.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Inverse Secant](https://mathworld.wolfram.com/InverseSecant.html)

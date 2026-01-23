@@ -55,7 +55,6 @@ namespace kyosu
 //!     //  regular call
 //!     template<concepts::cayley_dickson_like Z> constexpr auto acos(Z z)                     noexcept;
 //!     constexpr auto cbrt(ayley_dickson_like z, eve::value k)   auto acos(Z z, eve::value k) noexcept;
-
 //!
 //!     // semantic modifyers
 //!     template<concepts::real Z> constexpr Z acos[real_only](Z z)                            noexcept;
@@ -66,7 +65,7 @@ namespace kyosu
 //!
 //!     * `z`: Value to process.
 //!
-//! **Return value**
+//!   **Return value**
 //!
 //!   - A real typed input `z` is treated as if `complex(z)` was entered unless the option real_only is used
 //!     in which case the parameter must be a floating_value and the result will the same as a call to `eve::acos`,
