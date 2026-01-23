@@ -86,18 +86,9 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<concepts::real Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), O const&o, Z z) noexcept
-  {
-    if constexpr(O::contains(real_only))
-      return eve::log2[o](z);
-    else
-      return complex(eve::log_abs(z)*eve::invlog_2(eve::as(z)), eve::arg(z)*eve::invlog_2(eve::as(z)));
-  };
-
   template<concepts::cayley_dickson_like Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), O const&o, Z z) noexcept
-  requires(!concepts::real<Z>)
+  //  requires(!concepts::real<Z>)
   {
     if constexpr(O::contains(real_only) && concepts::real<Z>)
       return eve::log2[o.drop(real_only)](z);
@@ -105,8 +96,7 @@ namespace kyosu::_
       return kyosu::log2[o](complex(z));
     else if constexpr(kyosu::concepts::complex<Z>)
     {
-      auto [rho, theta] = to_polarpi(z);
-      return eve::log2(rho)+ kyosu::muli(theta*eve::invlog_2(eve::as(theta)));
+      return log(z)*eve::invlog_2(eve::as(real(z)));
     }
     else
       return _::cayley_extend(kyosu::log2, z);
@@ -117,13 +107,12 @@ namespace kyosu::_
   requires(!O::contains(real_only))
   {
     if constexpr(kyosu::concepts::real<Z>)
-      return log2[o](complex(z));
+      return log2[o](complex(z), k);
     else if constexpr(kyosu::concepts::complex<Z>)
     {
       using e_t = eve::element_type_t<decltype(real(z))>;
-      auto [r, i] = log2[o](z);
       auto kk = eve::convert(k, as<e_t>());
-      return Z(r, (i+kk*two_pi(as(kk))*eve::invlog_2(eve::as(kk))));
+      return log(z)*eve::invlog_2(eve::as(real(z))) + kyosu::muli(kk*eve::invlog_2(eve::as(kk)));;
     }
     else
       return _::cayley_extend(kyosu::log2, z, k);
