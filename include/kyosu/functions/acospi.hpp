@@ -52,11 +52,11 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     //  regular call
-//!     constexpr auto asec(cayley_dickson_like z) noexcept;
-//!     constexpr auto asec(cayley_dickson_like z, eve::value k) auto asec(Z z, eve::value k) noexcept;
+//!     constexpr auto acos(cayley_dickson_like z) noexcept;
+//!     constexpr auto acos(cayley_dickson_like z, eve::value k) noexcept;
 //!
 //!     // semantic modifyers
-//!     template<concepts::real Z> constexpr Z asec[real_only](Z z) noexcept;
+//!     template<concepts::real Z> constexpr Z acos[real_only](Z z) noexcept;
 //!   }
 //!   @endcode
 //!
