@@ -167,7 +167,7 @@ $(document).ready(function(){initNavTree('group__functions_ga8dfa8455e1566e87890
 <p><b>Return value</b></p>
 <ul>
 <li>if the first parameter is floating the call will act as if they were converted to complex before call, unless the option <code>real_only</code> is used in which case the parameter must be a floating_value, the real part of the result will the same as an eve::nthroot and the result will be fnan if no real solution exists.</li>
-<li>the kth nth root of z, is. <code>exp((<a class="el" href="group__functions_ga398aa088354c3b9d0a0a1b5d6b7145f9.html#ga398aa088354c3b9d0a0a1b5d6b7145f9" title="Computes the natural logarithm of the argument.">log(z)</a>+2*k*i*pi)/n)</code>. If not present k is taken as 0.</li>
+<li>the kth nth root of z, is. <code>exp((<a class="el" href="group__functions_ga398aa088354c3b9d0a0a1b5d6b7145f9.html#ga398aa088354c3b9d0a0a1b5d6b7145f9" title="Computes the principal value of the natural logarithm of the argument.">log(z)</a>+2*k*i*pi)/n)</code>. If not present k is taken as 0.</li>
 </ul>
 <dl class="section note"><dt>Note</dt><dd>if the first parameter is not real the option <code>real_only</code> has no effect.</dd></dl>
 <h2 class="groupheader">Example </h2>
@@ -192,7 +192,7 @@ $(document).ready(function(){initNavTree('group__functions_ga8dfa8455e1566e87890
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kyosu::nthroot(16.0, -2)    &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga8dfa8455e1566e87890324ae4a8fedb7.html#ga8dfa8455e1566e87890324ae4a8fedb7">kyosu::nthroot</a>(16.0, -2.0) &lt;&lt;  std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kyosu::nthroot(wf, wn)      &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga8dfa8455e1566e87890324ae4a8fedb7.html#ga8dfa8455e1566e87890324ae4a8fedb7">kyosu::nthroot</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wf</a>, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wn</a>)   &lt;&lt;  std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kyosu::nthroot(wf, wn, 3)   &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga8dfa8455e1566e87890324ae4a8fedb7.html#ga8dfa8455e1566e87890324ae4a8fedb7">kyosu::nthroot</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wf</a>, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wn</a>, 3) &lt;&lt;  std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;all eight rooth of 1        &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga8dfa8455e1566e87890324ae4a8fedb7.html#ga8dfa8455e1566e87890324ae4a8fedb7">kyosu::nthroot</a>(1.0, 8, eve::wide{0, 1, 2, 3, 4, 5, 6, 7}) &lt;&lt;  std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;all eighth rooth of 1        &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga8dfa8455e1566e87890324ae4a8fedb7.html#ga8dfa8455e1566e87890324ae4a8fedb7">kyosu::nthroot</a>(1.0, 8, eve::wide{0, 1, 2, 3, 4, 5, 6, 7}) &lt;&lt;  std::endl;</div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
