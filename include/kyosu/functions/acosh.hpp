@@ -10,29 +10,44 @@
 #include <kyosu/details/cayleyify.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/acos.hpp>
+#include <kyosu/functions/muli.hpp>
 
 
 namespace kyosu
 {
   template<typename Options>
-  struct acosh_t : eve::elementwise_callable<acosh_t, Options>
+  struct acosh_t : eve::strict_elementwise_callable<acosh_t, Options, real_only_option>
   {
-     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(!Options::contains(real_only))
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-        return (*this)(complex(z));
-      else
-        return  KYOSU_CALL(z);
+      return KYOSU_CALL(z);
     }
 
-    template<concepts::real Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(Options::contains(real_only))
+    template<concepts::cayley_dickson_like Z, concepts::real K>
+    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z> , K>
+    operator()(Z const& z, K const & k) const noexcept
+    requires(eve::same_lanes_or_scalar<Z, K>)
     {
-      return  KYOSU_CALL(z);
+      return KYOSU_CALL(z, k);
     }
+
+//      template<concepts::cayley_dickson_like Z>
+//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+//     requires(!Options::contains(real_only))
+//     {
+//       if constexpr(concepts::real<Z>)
+//         return (*this)(complex(z));
+//       else
+//         return  KYOSU_CALL(z);
+//     }
+
+//     template<concepts::real Z>
+//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+//     requires(Options::contains(real_only))
+//     {
+//       return  KYOSU_CALL(z);
+//     }
 
     KYOSU_CALLABLE_OBJECT(acosh_t, acosh_);
 };
@@ -108,10 +123,12 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const&o, Z z) noexcept
   {
-    if constexpr(O::contains(real_only))
-      return kyosu::inject(eve::acosh(z));
+    if constexpr(O::contains(real_only) && concepts::real<Z>)
+      return eve::acosh[o.drop(real_only)](z);
+    else if constexpr(concepts::real<Z>)
+      return acosh(complex(z));
     else if constexpr(concepts::complex<Z> )
     {
       // acosh(a0) = +/-i acos(a0)
@@ -134,4 +151,21 @@ namespace kyosu::_
       return _::cayley_extend(kyosu::acosh, z);
     }
   }
+
+  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  requires(!O::contains(real_only))
+  {
+    using e_t =  eve::element_type_t<decltype(real(z))>;
+    auto kk = eve::convert(k, eve::as<e_t>());
+    return acosh(z)+kyosu::muli(kk*eve::two_pi(eve::as(kk)));
+  }
+
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), acosh(z, k...));
+  }
+
 }

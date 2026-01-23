@@ -77,7 +77,7 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   constexpr auto muli_(KYOSU_DELAY(), O const&o, Z z) noexcept
   {
-    if constexpr(kyosu::concepts::real<Z>)         return complex(zero(as(z)), z);
+    if constexpr(kyosu::concepts::real<Z>)         return complex(eve::zero(as(z)), z);
     else if constexpr(kyosu::concepts::complex<Z>) return Z(-ipart(z), real(z));
     else if constexpr(O::contains(eve::right))
     {

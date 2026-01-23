@@ -18,6 +18,7 @@ TTS_CASE_WITH ( "Check kyosu::nthroot over real"
   using wi_t =  eve::wide<unsigned int, eve::fixed<T::size()>>;
   T fn(eve::floor(eve::iota(eve::as<T>())/2)+1);
   wi_t n(eve::iota(eve::as<wi_t>())/2+1);
+
   TTS_RELATIVE_EQUAL(kyosu::pow(kyosu::nthroot(r0, n), fn), kyosu::complex(r0), tts::prec<T>() );
   TTS_RELATIVE_EQUAL(kyosu::pow(kyosu::nthroot(r0, fn), fn), kyosu::complex(r0), tts::prec<T>() );
   TTS_RELATIVE_EQUAL(kyosu::real(kyosu::nthroot[kyosu::real_only](r0, fn)), eve::nthroot(r0, fn), tts::prec<T>() );
@@ -28,7 +29,11 @@ TTS_CASE_WITH ( "Check kyosu::nthroot over real"
   //kth root
   //scalar k scalar n
   using e_t = eve::element_type_t<T>;
-  TTS_RELATIVE_EQUAL(kyosu::nthroot(r0, e_t(3), e_t(2)), kyosu::nthroot(r0, e_t(3))*kyosu::exp_ipi(e_t(4)/3), tts::prec<T>() );
+
+  auto nr3 = kyosu::nthroot(r0, e_t(3));
+  TTS_RELATIVE_EQUAL(kyosu::real(nr3*nr3*nr3), r0, tts::prec<T>() );
+  TTS_RELATIVE_EQUAL(kyosu::nthroot(r0, 3,      2     ), kyosu::nthroot(r0, e_t(3))*kyosu::exp_ipi(e_t(4)/3), tts::prec<T>() );
+
   TTS_RELATIVE_EQUAL(kyosu::nthroot(r0, e_t(3), 2     ), kyosu::nthroot(r0, e_t(3))*kyosu::exp_ipi(e_t(4)/3), tts::prec<T>() );
   TTS_RELATIVE_EQUAL(kyosu::nthroot(r0, 3,      2     ), kyosu::nthroot(r0, e_t(3))*kyosu::exp_ipi(e_t(4)/3), tts::prec<T>() );
 
@@ -54,6 +59,8 @@ TTS_CASE_WITH ( "Check kyosu::nthroot over complex"
 <typename T>  (T r0, T i0)
 {
   //primary root
+  using  e_t = eve::element_type_t<T>;
+  using ce_t = kyosu::complex_t<T>;
   auto c0 = kyosu::complex(r0,i0);
   using wi_t =  eve::wide<unsigned int, eve::fixed<T::size()>>;
   T fn(eve::floor(eve::iota(eve::as<T>())/2)+1);
@@ -83,4 +90,12 @@ TTS_CASE_WITH ( "Check kyosu::nthroot over complex"
   TTS_RELATIVE_EQUAL(kyosu::nthroot(c0, n, fn ), kyosu::nthroot(c0, n), tts::prec<T>() );
   TTS_RELATIVE_EQUAL(kyosu::nthroot(c0, n, n  ), kyosu::nthroot(c0, n), tts::prec<T>() );
   TTS_RELATIVE_EQUAL(kyosu::nthroot(c0, fn, n ), kyosu::nthroot(c0, n), tts::prec<T>() );
+
+  auto cond = eve::is_ltz(r0);
+
+  TTS_RELATIVE_EQUAL(kyosu::nthroot[cond][kyosu::real_only](r0, 3),      kyosu::if_else(cond,  eve::nthroot(r0, 3), r0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::nthroot[cond][kyosu::real_only](r0, e_t(3)), kyosu::if_else(cond,  eve::nthroot(r0, e_t(3)), r0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::nthroot[cond][kyosu::real_only](r0, T(3)), kyosu::if_else(cond,  eve::nthroot(r0, T(3)), r0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::nthroot[cond](r0, 3), kyosu::if_else(cond,  kyosu::nthroot(r0, 3), ce_t(r0)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::nthroot[cond](c0, 3), kyosu::if_else(cond,  kyosu::nthroot(c0, 3), c0), tts::prec<T>());
 };

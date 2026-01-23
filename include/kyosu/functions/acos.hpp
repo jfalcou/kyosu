@@ -17,23 +17,19 @@
 namespace kyosu
 {
   template<typename Options>
-  struct acos_t : eve::elementwise_callable<acos_t, Options, real_only_option>
+  struct acos_t : eve::strict_elementwise_callable<acos_t, Options, real_only_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(!Options::contains(real_only))
+     template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr  complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-        return (*this)(complex(z));
-      else
-        return  KYOSU_CALL(z);
+      return KYOSU_CALL(z);
     }
 
-    template<concepts::real Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(Options::contains(real_only))
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr  eve::as_wide_as_t<complexify_if_t<Options, Z>, K>
+    operator()(Z const& z, K const & k) const noexcept
     {
-      return  KYOSU_CALL(z);
+     return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(acos_t, acos_);
@@ -57,10 +53,11 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     //  regular call
-//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acos(Z z) noexcept;
+//!     template<concepts::cayley_dickson_like Z> constexpr auto acos(Z z)                     noexcept;
+//!     constexpr auto cbrt(ayley_dickson_like z, eve::value k)   auto acos(Z z, eve::value k) noexcept;
 //!
 //!     // semantic modifyers
-//!     template<concepts::real Z> constexpr complexify_t<Z> acos[real_only](Z z) noexcept;
+//!     template<concepts::real Z> constexpr Z acos[real_only](Z z)                            noexcept;
 //!   }
 //!   @endcode
 //!
@@ -68,11 +65,11 @@ namespace kyosu
 //!
 //!     * `z`: Value to process.
 //!
-//! **Return value**
+//!   **Return value**
 //!
-//!   - A real typed input z is treated as if `complex(z)` was entered unless the option real_only is used
-//!     in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::acos
-//!     implying a Nan result if the result is not real.
+//!   - A real typed input `z` is treated as if `complex(z)` was entered unless the option real_only is used
+//!     in which case the parameter must be a floating_value and the result will the same as a call to `eve::acos`,
+//!     implying a `Nan` result if the result is not real.
 //!   - For complex input, returns elementwise the complex principal value of the arc cosine of the input.
 //!      Branch cuts exist outside the interval \f$[-1, +1]\f$ along the real axis.
 //!
@@ -90,9 +87,9 @@ namespace kyosu
 //!      * If z is \f$\textrm{NaN}+i y\f$ (for any finite y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!      * If z is \f$\textrm{NaN}+i\infty\f$, the result is \f$\textrm{NaN}-i\infty\f$
 //!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
-//!
 //!   - For general cayley_dickson input, returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!   - for two parameters returns the kth branch of \f$\acos\f$. If k is not a flint it is truncated before use.
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: complex acos](https://en.cppreference.com/w/cpp/numeric/complex/acos)
@@ -111,11 +108,13 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  constexpr auto acos_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  template<concepts::cayley_dickson_like Z, eve::callable_options O>
+  constexpr auto acos_(KYOSU_DELAY(), O const& o, Z a0) noexcept
   {
-    if constexpr(O::contains(real_only))
-      return kyosu::inject(eve::acos(a0));
+    if constexpr(O::contains(real_only) && concepts::real<Z>)
+      return eve::acos(a0);
+    else if constexpr(concepts::real<Z> )
+      return kyosu::acos(complex(a0));
     else if constexpr(concepts::complex<Z> )
     {
       // This implementation is a simd transcription and adaptation of the boost_math code
@@ -261,4 +260,21 @@ namespace kyosu::_
       return cayley_extend(acos, a0);
     }
   }
+
+  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acos_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  requires(!O::contains(real_only))
+  {
+    using e_t =  eve::element_type_t<decltype(real(z))>;
+    auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
+    return kyosu::acos[o](z)+eve::two_pi(eve::as(kk))*kk;
+  }
+
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acos_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), acos(z, k...));
+  }
+
 }

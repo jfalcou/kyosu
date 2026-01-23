@@ -54,7 +54,10 @@ TTS_CASE_WITH ( "Check kyosu::cbrt over real"
   //simd k
   TTS_RELATIVE_EQUAL(kyosu::cbrt(r0, fn), kyosu::cbrt(r0)*kyosu::exp_ipi(fn*2/3), tts::prec<T>() );
   TTS_RELATIVE_EQUAL(kyosu::cbrt(r0, n ), kyosu::cbrt(r0)*kyosu::exp_ipi(fn*2/3), tts::prec<T>() );
-};
+  auto cond = eve::is_ltz(r0);
+
+  TTS_RELATIVE_EQUAL(kyosu::cbrt[cond][kyosu::real_only](r0), kyosu::if_else(cond,  eve::cbrt(r0), r0), tts::prec<T>());
+ };
 
 TTS_CASE_WITH ( "Check kyosu::cbrt over complex"
               , kyosu::simd_real_types
@@ -80,4 +83,8 @@ TTS_CASE_WITH ( "Check kyosu::cbrt over complex"
   //simd k
   TTS_RELATIVE_EQUAL(kyosu::cbrt(c0, fn), kyosu::cbrt(c0)*kyosu::exp_ipi(fn*2/3), tts::prec<T>() );
   TTS_RELATIVE_EQUAL(kyosu::cbrt(c0, n ), kyosu::cbrt(c0)*kyosu::exp_ipi(fn*2/3), tts::prec<T>() );
+
+  auto cond = eve::is_ltz(r0);
+
+  TTS_RELATIVE_EQUAL(kyosu::cbrt[cond](c0, 2), kyosu::if_else(cond,   kyosu::cbrt(c0, 2), c0), tts::prec<T>());
 };

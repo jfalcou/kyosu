@@ -24,7 +24,7 @@ TTS_CASE_WITH ( "Check kyosu::acospi over quaternion"
   auto q  = qe_t(a0,a1,a2,a3);
   auto rr = eve::acospi(r);
   auto re = kyosu::acospi[kyosu::real_only](r);
-  TTS_IEEE_EQUAL(re, kyosu::inject(rr));
+  TTS_IEEE_EQUAL(re,rr);
 
   auto lr = kyosu::acospi(r);
   auto lc = kyosu::acospi(c);
@@ -32,4 +32,15 @@ TTS_CASE_WITH ( "Check kyosu::acospi over quaternion"
   TTS_RELATIVE_EQUAL(kyosu::cospi(lr), ce_t(r), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::cospi(lc), c, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::cospi(lq), q, tts::prec<T>());
+
+  auto cond = eve::is_ltz(a0);
+
+  TTS_RELATIVE_EQUAL(kyosu::acospi[cond][kyosu::real_only](r), kyosu::if_else(cond,  eve::acospi(r), r), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acospi[cond](r), kyosu::if_else(cond,  kyosu::acospi(r), ce_t(r)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acospi[cond](c), kyosu::if_else(cond,  kyosu::acospi(c), c), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acospi[cond](q), kyosu::if_else(cond,  kyosu::acospi(q), q), tts::prec<T>());
+
+  TTS_RELATIVE_EQUAL(kyosu::acospi[cond](r, 2), kyosu::if_else(cond,  kyosu::acospi(r, 2), ce_t(r)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acospi[cond](c, 2), kyosu::if_else(cond,  kyosu::acospi(c, 2), c), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acospi[cond](q, 2), kyosu::if_else(cond,  kyosu::acospi(q, 2), q), tts::prec<T>());
 };

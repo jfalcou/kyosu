@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct cbrt_t : eve::callable<cbrt_t, Options>
+  struct cbrt_t : eve::strict_elementwise_callable<cbrt_t, Options,  real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr  complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
@@ -24,11 +24,11 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr  eve::as_wide_as_t<complexify_if_t<Options, Z>, K>
     operator()(Z const& z, K const & k) const noexcept
     {
-     return KYOSU_CALL(z, k);
+      return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(cbrt_t, cbrt_);
-};
+  };
 
 //======================================================================================================================
 //! @addtogroup functions
@@ -89,4 +89,23 @@ namespace kyosu::_
     using e_t =  eve::element_type_t<decltype(real(z))>;
     return kyosu::nthroot[o](z, e_t(3));
   }
+
+  template<concepts::real Z, eve::value K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K k) noexcept
+  {
+    if constexpr(!O::contains(real_only))
+      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), cbrt[o](z, k));
+    else
+      return eve::detail::mask_op(cx, eve::detail::return_2nd, z, eve::cbrt[o.drop(real_only)](z));
+  }
+
+  template<concepts::real Z, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z) noexcept
+  {
+    if constexpr(!O::contains(real_only))
+      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), cbrt[o](z));
+    else
+      return eve::detail::mask_op(cx, eve::detail::return_2nd, z, eve::cbrt[o.drop(real_only)](z));
+  }
+
 }
