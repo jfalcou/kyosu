@@ -7,11 +7,12 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
+#include <kyosu/functions/muli.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct log10_t : eve::elementwise_callable<log10_t, Options, real_only_option>
+  struct log10_t : eve::strict_elementwise_callable<log10_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like  Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
@@ -20,7 +21,9 @@ namespace kyosu
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<Z, K> operator()(Z const& z, K const & k) const noexcept
+    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z>, K>
+    operator()(Z const& z, K const & k) const noexcept
+    requires(eve::same_lanes_or_scalar<Z, K>)
     {
       return KYOSU_CALL(z, k);
     }
@@ -50,7 +53,7 @@ namespace kyosu
 //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log10(T z eve::value n) noexcept;\\2
 //!
 //!      // semantic modifyers
-//!      template<concepts::real T> constexpr complexify_t<T> log10[real_only](T z) noexcept;                        \\3
+//!      template<concepts::real T> constexpr T log10[real_only](T z) noexcept;                                      \\1
 //!   }
 //!   @endcode
 //!
@@ -60,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   1.  a real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
+//!   1.  a real typed input `z` is treated as if `complex(z)` was entered, unless the option real_only is used
 //!       in which case the parameter must be a floating_value,  the  result will the same as to an `eve::log10` call
 //!       implying a Nan result if the  input is not greater than zero.
 //!   2.  returns [log](@ref kyosu::log)(z)/log_10(as(z)).
@@ -81,23 +84,16 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<concepts::real Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto log10_(KYOSU_DELAY(), O const&o, Z z) noexcept
-  {
-    if constexpr(O::contains(real_only))
-      return eve::log10(z);
-    else
-      return complex(eve::log_abs(z)*eve::invlog_10(eve::as(z)), eve::arg(z)*eve::invlog_10(eve::as(z)));
-  };
-
   template<concepts::cayley_dickson_like Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto log10_(KYOSU_DELAY(), O const&o, Z z) noexcept
-  requires(!concepts::real<Z>)
   {
-    if constexpr(kyosu::concepts::complex<Z>)
+    if constexpr(O::contains(real_only) && concepts::real<Z>)
+      return eve::log10[o.drop(real_only)](z);
+    else if constexpr(concepts::real<Z> )
+      return kyosu::log10[o](complex(z));
+    else if constexpr(kyosu::concepts::complex<Z>)
     {
-      auto [rho, theta] = to_polar(z);
-      return Z(eve::log10(rho), theta*eve::invlog_10(eve::as(theta)));
+      return log(z)*eve::invlog_10(eve::as(real(z)));
     }
     else
       return _::cayley_extend(kyosu::log10, z);
@@ -105,15 +101,24 @@ namespace kyosu::_
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto log10_(KYOSU_DELAY(), O const&o, Z z, K k) noexcept
+  requires(!O::contains(real_only))
   {
-    if constexpr(kyosu::concepts::complex<Z>)
+    if constexpr(kyosu::concepts::real<Z>)
+      return log10[o](complex(z), k);
+    else if constexpr(kyosu::concepts::complex<Z>)
     {
       using e_t = eve::element_type_t<decltype(real(z))>;
-      auto [r, i] = log10(z);
       auto kk = eve::convert(k, as<e_t>());
-      return Z(r, (i+kk*two_pi(as(kk))*eve::invlog_10(eve::as(kk))));
+      return log(z)*eve::invlog_10(eve::as(real(z))) + kyosu::muli(kk*eve::invlog_10(eve::as(kk)));;
     }
     else
       return _::cayley_extend(kyosu::log10, z, k);
+  }
+
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log10_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), log10(z, k...));
   }
 }

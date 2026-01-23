@@ -7,9 +7,6 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/if_else.hpp>
-#include <kyosu/functions/is_not_finite.hpp>
-#include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/muli.hpp>
 
 namespace kyosu
@@ -56,7 +53,7 @@ namespace kyosu
 //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log2(T z eve::value k) noexcept; //2
 //!
 //!      // semantic modifyers
-//!      template<concepts::real T> constexpr complexify_t<T> log2[real_only](T z)                         noexcept; //1
+//!      template<concepts::real T> constexpr T log2[real_only](T z)                                       noexcept; //1
 //!   }
 //!   @endcode
 //!
@@ -66,7 +63,7 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!   1.  a real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
+//!   1.  a real typed input `z` is treated as if `complex(z)` was entered, unless the option real_only is used
 //!       in which case the parameter must be a floating_value,  the  result will the same as to an `eve::log2` call
 //!       implying a Nan result if the  input is not greater than zero.
 //!   2.  returns [log](@ref kyosu::log)(z)/log_2(as(z)).
@@ -88,7 +85,6 @@ namespace kyosu::_
 {
   template<concepts::cayley_dickson_like Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), O const&o, Z z) noexcept
-  //  requires(!concepts::real<Z>)
   {
     if constexpr(O::contains(real_only) && concepts::real<Z>)
       return eve::log2[o.drop(real_only)](z);
@@ -117,7 +113,6 @@ namespace kyosu::_
     else
       return _::cayley_extend(kyosu::log2, z, k);
   }
-
 
   template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto log2_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept

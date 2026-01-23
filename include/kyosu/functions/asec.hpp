@@ -14,25 +14,39 @@
 namespace kyosu
 {
   template<typename Options>
-  struct asec_t : eve::elementwise_callable<asec_t, Options, real_only_option>
+  struct asec_t : eve::strict_elementwise_callable<asec_t, Options, real_only_option>
   {
+
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(!Options::contains(real_only))
-     {
-      if constexpr(concepts::real<Z>)
-        return (*this)(complex(z));
-      else
-        return  KYOSU_CALL(z);
-    }
-
-
-    template<concepts::real Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(Options::contains(real_only))
+    KYOSU_FORCEINLINE constexpr  complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
-      return  KYOSU_CALL(z);
+      return KYOSU_CALL(z);
     }
+
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr  eve::as_wide_as_t<complexify_if_t<Options, Z>, K>
+    operator()(Z const& z, K const & k) const noexcept
+    {
+     return KYOSU_CALL(z, k);
+    }
+
+//     template<concepts::cayley_dickson_like Z>
+//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+//     requires(!Options::contains(real_only))
+//      {
+//       if constexpr(concepts::real<Z>)
+//         return (*this)(complex(z));
+//       else
+//         return  KYOSU_CALL(z);
+//     }
+
+
+//     template<concepts::real Z>
+//     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+//     requires(Options::contains(real_only))
+//     {
+//       return  KYOSU_CALL(z);
+//     }
 
     KYOSU_CALLABLE_OBJECT(asec_t, asec_);
 };
@@ -92,4 +106,21 @@ namespace kyosu::_
   {
     return  kyosu::acos[o](kyosu::rec(z));
   }
+
+  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto asec_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  requires(!O::contains(real_only))
+  {
+    using e_t =  eve::element_type_t<decltype(real(z))>;
+    auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
+    return kyosu::asec[o](z)+eve::two_pi(eve::as(kk))*kk;
+  }
+
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto asec_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), asec(z, k...));
+  }
+
 }
