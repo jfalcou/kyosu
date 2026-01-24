@@ -11,23 +11,19 @@
 namespace kyosu
 {
   template<typename Options>
-  struct asin_t : eve::elementwise_callable<asin_t, Options, real_only_option>
+  struct asin_t : eve::strict_elementwise_callable<asin_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
-    requires(!Options::contains(real_only))
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr  complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
-     if constexpr(concepts::real<Z>)
-        return (*this)(complex(z));
-      else
-        return  KYOSU_CALL(z);
+      return KYOSU_CALL(z);
     }
 
-    template<concepts::real Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(Options::contains(real_only))
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr  eve::as_wide_as_t<complexify_if_t<Options, Z>, K>
+    operator()(Z const& z, K const & k) const noexcept
     {
-      return  KYOSU_CALL(z);
+     return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(asin_t, asin_);
@@ -50,11 +46,13 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      //  regular call
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> asin(T z) noexcept;  //3
+//!     //  regular call
+//!     constexpr auto asin(Z z)                                                               noexcept;
+//!     constexpr auto asin(ayley_dickson_like z, eve::value k)   auto asin(Z z, eve::value k) noexcept;
 //!
-//!      // semantic modifyers
-//!      template<concepts::real T> constexpr complexify_t<T> asin[real_only](T z) noexcept;
+//!     // semantic modifyers
+//!     template<concepts::real Z> constexpr Z asin[real_only](Z z)                            noexcept;
+//!   }
 //!   }
 //!   @endcode
 //!
@@ -64,16 +62,17 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   1. a real input z is treated as if `complex(z)` was entered unless the option real_only is used
-//!     in which case the parameter must be a floating_value, the result will the same as an eve::asin
-//!     implying a Nan result if the result is not real.
-//!   2. Returns the elementwise the complex principal value
+//!   - A real typed input `z` is treated as if `complex(z)` was entered unless the option real_only is used
+//!     in which case the parameter must be a floating_value and the result will the same as a call to `eve::asin`,
+//!     implying a `Nan` result if the result is not real.
+//!   - For complex input, returns elementwise the complex principal value
 //!      of the arc sine of the input in the range of a strip unbounded along the imaginary axis
 //!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
-//!
-//!      special cases are handled as if the operation was implemented by \f$-i\; \mathrm{asinh}(z\; i)\f$
-//!   3. Returns \f$-I_z \mathrm{asinh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+//!      Special cases are handled as if the operation was implemented by \f$-i\; \mathrm{asinh}(z\; i)\f$
+//!   - For general cayley_dickson input returns \f$-I_z \mathrm{asinh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+//!   - for two parameters returns the kth branch of \f$\asin\f$. If k is not a flint it is truncated before use.
+//!
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: complex asin](https://en.cppreference.com/w/cpp/numeric/complex/asin)
@@ -95,8 +94,10 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   constexpr auto asin_(KYOSU_DELAY(), O const& o, Z a0) noexcept
   {
-    if constexpr(O::contains(real_only))
-      return kyosu::inject(eve::asin(a0));
+     if constexpr(O::contains(real_only) && concepts::real<Z>)
+      return eve::asin(a0);
+    else if constexpr(concepts::real<Z> )
+      return kyosu::asin(complex(a0));
     else if constexpr(concepts::complex<Z> )
     {
       // This implementation is a simd transcription and adaptation of the boost_math code
@@ -244,5 +245,22 @@ namespace kyosu::_
     {
       return cayley_extend(asin, a0);
     }
+  }
+
+
+  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto asin_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  requires(!O::contains(real_only))
+  {
+    using e_t =  eve::element_type_t<decltype(real(z))>;
+    auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
+    return kyosu::asin[o](z)+eve::two_pi(eve::as(kk))*kk;
+  }
+
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto asin_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), asin(z, k...));
   }
 }

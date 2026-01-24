@@ -9,7 +9,6 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/acos.hpp>
 #include <kyosu/functions/rec.hpp>
-#include <kyosu/functions/to_complex.hpp>
 
 namespace kyosu
 {

@@ -53,8 +53,8 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     //  regular call
-//!     template<concepts::cayley_dickson_like Z> constexpr auto acos(Z z)                     noexcept;
-//!     constexpr auto cbrt(ayley_dickson_like z, eve::value k)   auto acos(Z z, eve::value k) noexcept;
+//!     constexpr auto acos(Z z)                                                               noexcept;
+//!     constexpr auto acos(ayley_dickson_like z, eve::value k)   auto acos(Z z, eve::value k) noexcept;
 //!
 //!     // semantic modifyers
 //!     template<concepts::real Z> constexpr Z acos[real_only](Z z)                            noexcept;
