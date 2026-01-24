@@ -52,11 +52,11 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     //  regular call
-//!     constexpr auto acos(cayley_dickson_like z) noexcept;
+//!     constexpr auto acos(cayley_dickson_like z)               noexcept;
 //!     constexpr auto acos(cayley_dickson_like z, eve::value k) noexcept;
 //!
 //!     // semantic modifyers
-//!     template<concepts::real Z> constexpr Z acos[real_only](Z z) noexcept;
+//!     constexpr auto acos[real_only](Real z)                   noexcept;
 //!   }
 //!   @endcode
 //!
@@ -68,7 +68,7 @@ namespace kyosu
 //!
 //!  - A real input z is treated as if `complex(z)` was entered.
 //!  - Returns radinpi(acos(z))
-//!  - for two parameters returns the kth branch of \f$\acospi\f$. If k is not a flint it is truncated before use.
+//!  - for two parameters returns the kth branch of `acospi`. If k is not a flint, it is truncated before use.
 //!
 //!  @groupheader{Example}
 //!  @godbolt{doc/acospi.cpp}
@@ -103,5 +103,4 @@ namespace kyosu::_
   {
     return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), acospi(z, k...));
   }
-
 }

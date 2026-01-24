@@ -53,11 +53,11 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     //  regular call
-//!     template<concepts::cayley_dickson_like Z> constexpr auto acos(Z z)                     noexcept;
-//!     constexpr auto cbrt(ayley_dickson_like z, eve::value k)   auto acos(Z z, eve::value k) noexcept;
+//!     constexpr auto acos(cayley_dickson_like z)                noexcept;
+//!     constexpr auto acos(cayley_dickson_like z, eve::value k)  noexcept;
 //!
 //!     // semantic modifyers
-//!     template<concepts::real Z> constexpr Z acos[real_only](Z z)                            noexcept;
+//!      constexpr Z acos[real_only](Real z)                      noexcept;
 //!   }
 //!   @endcode
 //!
@@ -89,7 +89,7 @@ namespace kyosu
 //!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
 //!   - For general cayley_dickson input, returns \f$I_z \mathrm{acosh}(z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
-//!   - for two parameters returns the kth branch of \f$\acos\f$. If k is not a flint it is truncated before use.
+//!   - for two parameters returns the kth branch of `acos`. If k is not a flint it is truncated before use.
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: complex acos](https://en.cppreference.com/w/cpp/numeric/complex/acos)

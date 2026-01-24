@@ -29,8 +29,19 @@ TTS_CASE_WITH ( "Check kyosu::asin over quaternion"
   auto re = kyosu::asin[kyosu::real_only](r);
   auto rr = eve::asin(r);
 
-  TTS_IEEE_EQUAL(re,  kyosu::inject(rr));
+  TTS_IEEE_EQUAL(re,  rr);
   TTS_RELATIVE_EQUAL(kyosu::sin(lr), kyosu::complex(r), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::sin(lc), c, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::sin(lq), q, tts::prec<T>());
+
+  auto cond = eve::is_ltz(a0);
+
+  TTS_RELATIVE_EQUAL(kyosu::asin[cond][kyosu::real_only](r), kyosu::if_else(cond,  eve::asin(r), r), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::asin[cond](r), kyosu::if_else(cond,  kyosu::asin(r), ce_t(r)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::asin[cond](c), kyosu::if_else(cond,  kyosu::asin(c), c), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::asin[cond](q), kyosu::if_else(cond,  kyosu::asin(q), q), tts::prec<T>());
+
+  TTS_RELATIVE_EQUAL(kyosu::asin[cond](r, 2), kyosu::if_else(cond,  kyosu::asin(r, 2), ce_t(r)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::asin[cond](c, 2), kyosu::if_else(cond,  kyosu::asin(c, 2), c), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::asin[cond](q, 2), kyosu::if_else(cond,  kyosu::asin(q, 2), q), tts::prec<T>());
 };

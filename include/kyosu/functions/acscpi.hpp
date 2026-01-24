@@ -10,15 +10,24 @@
 #include <kyosu/functions/acsc.hpp>
 #include <kyosu/functions/radinpi.hpp>
 
+
 namespace kyosu
 {
   template<typename Options>
-  struct acscpi_t : eve::elementwise_callable<acscpi_t, Options, real_only_option>
+  struct acscpi_t : eve::strict_elementwise_callable<acscpi_t, Options, real_only_option>
   {
+
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr  complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
+    }
+
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr  eve::as_wide_as_t<complexify_if_t<Options, Z>, K>
+    operator()(Z const& z, K const & k) const noexcept
+    {
+     return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(acscpi_t, acscpi_);
@@ -42,10 +51,11 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     //  regular call
-//!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acscpi(Z z) noexcept;
+//!     constexpr auto acscpi(cayley_dickson_like z)               noexcept;
+//!     constexpr auto acscpi(cayley_dickson_like z, eve::value k) noexcept;
 //!
 //!     // semantic modifyers
-//!     template<concepts::real Z> constexpr complexify_t<Z> acscpi[real_only](Z z) noexcept;
+//!     constexpr Z cscpi[real_only](Real z)                       noexcept;
 //!   }
 //!   @endcode
 //!
@@ -55,10 +65,11 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   - A real input z is treated as if `complex(z)` was enteredunless the option real_only is used
+//!   - A real typed input z is treated as if `complex(z)` was entered unless the option real_only is used
 //!     in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::acscpi
 //!     implying a Nan result if the result is not real.
-//!   - Returns `radinpi(acsc(z))`
+//!   - For general cayley_dickson input, returns `radinpi(acsc(z))`
+//!   - for two parameters returns the kth branch of `acscpi`. If k is not a flint, it is truncated before use.
 //!
 //!  @groupheader{Example}
 //!
@@ -75,6 +86,23 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto acscpi_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    return kyosu::radinpi(kyosu::acsc[o](z));
+    return  radinpi(kyosu::acsc[o](z));
   }
+
+  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acscpi_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  requires(!O::contains(real_only))
+  {
+    using e_t =  eve::element_type_t<decltype(real(z))>;
+    auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
+    return kyosu::acscpi[o](z)+2*kk;
+  }
+
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acscpi_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), acscpi(z, k...));
+  }
+
 }
