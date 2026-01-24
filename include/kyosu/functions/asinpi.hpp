@@ -50,11 +50,11 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     //  regular call
-//!     constexpr auto asinpi(Z z)                                                               noexcept;
-//!     constexpr auto asin(ayley_dickson_like z, eve::value k)   auto asinpi(Z z, eve::value k) noexcept;
+//!     constexpr auto asinpi(Z z)                               noexcept;
+//!     constexpr auto asin(ayley_dickson_like z, eve::value k)  noexcept;
 //!
 //!     // semantic modifyers
-//!     template<concepts::real Z> constexpr Z asinpi[real_only](Z z)                            noexcept;
+//!     constexpr auto asinpi[real_only](Real z)                 noexcept;
 //!   }
 //!   @endcode
 //!
@@ -68,8 +68,7 @@ namespace kyosu
 //!     in which case the parameter must be a floating_value and the result will the same as a call to `eve::asinpi`,
 //!     implying a `Nan` result if the result is not real.
 //!   - returns `radinpi(asin(z))`
-//!   - for two parameters returns the kth branch of \f$\asinpi\f$. If k is not a flint it is truncated before use.
-
+//!   - for two parameters returns the kth branch of `asinpi`. If k is not a flint, it is truncated before use.
 //!
 //!  @groupheader{Example}
 //!

@@ -51,10 +51,10 @@ namespace kyosu
 //!   {
 //!     //  regular call
 //!     constexpr auto acsc(cayley_dickson_like z) noexcept;
-//!     constexpr auto auto acsc(Z z, eve::value k) noexcept;
+//!     constexpr auto  acsc(Z z, eve::value k)    noexcept;
 //!
 //!     // semantic modifyers
-//!     template<concepts::real Z> constexpr Z acsc[real_only](Z z) noexcept;
+//!     constexpr auto acsc[real_only](Real z)     noexcept;
 //!   }
 //!   @endcode
 //!
@@ -68,7 +68,7 @@ namespace kyosu
 //!     in which case the parameter must be a floating_value and the result will the same as a call to `eve::acsc`,
 //!     implying a `Nan` result if the result is not real.
 //!   - For complex input, returns elementwise `acos(rec(z))`.
-//!   - for two parameters returns the kth branch of \f$\acsc\f$. If k is not a flint it is truncated before use.
+//!   - for two parameters returns the kth branch of `acsc`. If k is not a flint it is truncated before use.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Inverse Cosecant](https://mathworld.wolfram.com/InverseCosecant.html)

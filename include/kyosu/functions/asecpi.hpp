@@ -51,11 +51,11 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     //  regular call
-//!     constexpr auto asecpi(cayley_dickson_like z) noexcept;
+//!     constexpr auto asecpi(cayley_dickson_like z)               noexcept;
 //!     constexpr auto asecpi(cayley_dickson_like z, eve::value k) noexcept;
 //!
 //!     // semantic modifyers
-//!     template<concepts::real Z> constexpr Z secpi[real_only](Z z) noexcept;
+//!     constexpr auto secpi[real_only](Real z) noexcept;
 //!   }
 //!   @endcode
 //!
@@ -69,7 +69,7 @@ namespace kyosu
 //!     in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::asecpi
 //!     implying a Nan result if the result is not real.
 //!   - For general cayley_dickson input, returns `radinpi(asec(z))`
-//!   - for two parameters returns the kth branch of \f$\asecpi\f$. If k is not a flint it is truncated before use.
+//!   - for two parameters returns the kth branch of `asecpi`. If k is not a flint, it is truncated before use.
 //!
 //!  @groupheader{Example}
 //!

@@ -47,11 +47,11 @@ namespace kyosu
 //!   namespace kyosu
 //!   {
 //!     //  regular call
-//!     constexpr auto asin(Z z)                                                               noexcept;
-//!     constexpr auto asin(ayley_dickson_like z, eve::value k)   auto asin(Z z, eve::value k) noexcept;
+//!     constexpr auto asin(Z z)                                 noexcept;
+//!     constexpr auto asin(ayley_dickson_like z, eve::value k)  noexcept;
 //!
 //!     // semantic modifyers
-//!     template<concepts::real Z> constexpr Z asin[real_only](Z z)                            noexcept;
+//!     constexpr auto asin[real_only](Real z)                   noexcept;
 //!   }
 //!   }
 //!   @endcode
@@ -71,7 +71,7 @@ namespace kyosu
 //!      Special cases are handled as if the operation was implemented by \f$-i\; \mathrm{asinh}(z\; i)\f$
 //!   - For general cayley_dickson input returns \f$-I_z \mathrm{asinh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
 //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
-//!   - for two parameters returns the kth branch of \f$\asin\f$. If k is not a flint it is truncated before use.
+//!   - for two parameters returns the kth branch of `asin`. If k is not a flint, it is truncated before use.
 //!
 //!
 //!  @groupheader{External references}
