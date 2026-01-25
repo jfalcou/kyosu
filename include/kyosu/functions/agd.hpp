@@ -14,10 +14,10 @@
 namespace kyosu
 {
   template<typename Options>
-  struct agd_t : eve::elementwise_callable<agd_t, Options>
+  struct agd_t : eve::strict_elementwise_callable<agd_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr  complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -29,7 +29,7 @@ namespace kyosu
 //! @addtogroup functions
 //! @{
 //!   @var agd
-//!   @brief Computes the gudermanian of the argument.
+//!   @brief Computes the principal branch inverse gudermanian of the argument.
 //!
 //!   @groupheader{Header file}
 //!
@@ -42,7 +42,11 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!     template<kyosu::concepts::cayley_dickson_like Z> constexpr complexify_t<Z> agd(Z z) noexcept;
+//!     //  regular call
+//!     constexpr auto acsc(cayley_dickson_like z) noexcept;
+//!
+//!     // semantic modifyers
+//!     constexpr auto agd[real_only](Real z)      noexcept;
 //!   }
 //!   @endcode
 //!
@@ -52,12 +56,17 @@ namespace kyosu
 //!
 //!   **Return value**
 //!
-//!     - A real typed input z is treated as if `complex(z)` was entered.
-//!     - For complex input, returns the inverse gudermanian of the argument.
+//!     - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
+//!       in which case the parameter must be a floating_value and the result will the same as a call to `eve::agd`,
+//!     - For complex input, returns \f$\log(\tan(z/2 +\pi/4))\f$.
+//!
+//!    @note `agd` has branch cut discontinuities in \f$[\pi/2, 3\pi/2] + 2\pi n\f$ in the complex
+//!      plane for integer  \f$n\f$. Morover,  with `real_only` option the used formula is \f$2*\mathbb{atan}(\tanh(z/2))\f$
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Inverse Gudermannian](https://mathworld.wolfram.com/Gudermannian.html)
 //!   *  [Wikipedia: Gudermannian function](https://en.wikipedia.org/wiki/Gudermannian_function)
+//!   *  [Wikipedia: Inverse Gudermannian function](https://en.wikipedia.org/wiki/InverseGudermannian_function)
 //!
 //!  @groupheader{Example}
 //!
@@ -74,11 +83,20 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto agd_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(concepts::real<Z>)
+    if constexpr(O::contains(real_only) && concepts::real<Z>)
+      return eve::agd(z);
+    else if constexpr(concepts::real<Z> )
       return kyosu::agd(complex(z));
     else if constexpr(concepts::complex<Z> )
       return kyosu::log(kyosu::tan(z*kyosu::half(as(z))+kyosu::pio_4(as(z))));
     else
       return kyosu::_::cayley_extend(kyosu::agd, z);
+  }
+
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto agd_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), agd(z, k...));
   }
 }
