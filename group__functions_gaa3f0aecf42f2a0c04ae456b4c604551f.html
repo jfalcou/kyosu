@@ -147,9 +147,15 @@ $(document).ready(function(){initNavTree('group__functions_gaa3f0aecf42f2a0c04ae
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">T</a> <a class="code hl_variable" href="group__functions_gaa3f0aecf42f2a0c04ae456b4c604551f.html#gaa3f0aecf42f2a0c04ae456b4c604551f">acotpi</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">T</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z</a>) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="comment">//  regular call</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaa3f0aecf42f2a0c04ae456b4c604551f.html#gaa3f0aecf42f2a0c04ae456b4c604551f">acotpi</a>(cayley_dickson_like <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z</a>)                <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaa3f0aecf42f2a0c04ae456b4c604551f.html#gaa3f0aecf42f2a0c04ae456b4c604551f">acotpi</a>(cayley_dickson_like <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z</a>, eve::value <a class="code hl_variable" href="group__constants_gaa1ba802b81aac3ea60fdbd1fa551c20e.html#gaa1ba802b81aac3ea60fdbd1fa551c20e">k</a>)  <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// semantic modifyers</span></div>
+<div class="line">   <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">Z</a> <a class="code hl_variable" href="group__functions_gaa3f0aecf42f2a0c04ae456b4c604551f.html#gaa3f0aecf42f2a0c04ae456b4c604551f">acotpi</a>[real_only](<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">Real</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z</a>)                      <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaa3f0aecf42f2a0c04ae456b4c604551f_html_gaa3f0aecf42f2a0c04ae456b4c604551f"><div class="ttname"><a href="group__functions_gaa3f0aecf42f2a0c04ae456b4c604551f.html#gaa3f0aecf42f2a0c04ae456b4c604551f">kyosu::acotpi</a></div><div class="ttdeci">constexpr auto acotpi</div><div class="ttdoc">Computes the arc cotangent of the argument in  multiples.</div><div class="ttdef"><b>Definition</b> acotpi.hpp:62</div></div>
+<div class="ttc" id="agroup__constants_gaa1ba802b81aac3ea60fdbd1fa551c20e_html_gaa1ba802b81aac3ea60fdbd1fa551c20e"><div class="ttname"><a href="group__constants_gaa1ba802b81aac3ea60fdbd1fa551c20e.html#gaa1ba802b81aac3ea60fdbd1fa551c20e">kyosu::k</a></div><div class="ttdeci">constexpr auto k</div><div class="ttdoc">Computes the complex number k i.e. quaternion(0, 0, 0, 1) in the chosen type.</div><div class="ttdef"><b>Definition</b> k.hpp:74</div></div>
+<div class="ttc" id="agroup__functions_gaa3f0aecf42f2a0c04ae456b4c604551f_html_gaa3f0aecf42f2a0c04ae456b4c604551f"><div class="ttname"><a href="group__functions_gaa3f0aecf42f2a0c04ae456b4c604551f.html#gaa3f0aecf42f2a0c04ae456b4c604551f">kyosu::acotpi</a></div><div class="ttdeci">constexpr auto acotpi</div><div class="ttdoc">Computes the arc cotangent of the argument in  multiples.</div><div class="ttdef"><b>Definition</b> acotpi.hpp:76</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
@@ -157,10 +163,11 @@ $(document).ready(function(){initNavTree('group__functions_gaa3f0aecf42f2a0c04ae
 <li><code>z</code>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<ol type="1">
-<li>A real type input z calls eve::acotpi(z) and so returns the same type as the input.</li>
+<ul>
+<li>A real typed input <code>z</code> is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered unless the option real_only is used in which case the parameter must be a floating_value and the result will the same as a call to <code>eve::atan</code>,</li>
 <li>Returns <a class="el" href="group__functions_gabd703393200a757087fb7f2054546dcf.html#gabd703393200a757087fb7f2054546dcf" title="Computes the parameter divided by .">radinpi(acot(z))</a></li>
-</ol>
+<li>For two parameters returns the kth branch of <code>acotpi</code>. If k is not a flint it is truncated before use.</li>
+</ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>

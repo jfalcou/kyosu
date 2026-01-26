@@ -141,15 +141,20 @@ $(document).ready(function(){initNavTree('group__functions_gaf854dca05e23de45af3
 </table>
 </div><div class="memdoc">
 
-<p>Computes the gudermanian of the argument. </p>
+<p>Computes the principal branch inverse gudermanian of the argument. </p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like Z&gt; <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">complexify_t&lt;Z&gt;</a> <a class="code hl_variable" href="group__functions_gaf854dca05e23de45af3994a5c532cefe.html#gaf854dca05e23de45af3994a5c532cefe">agd</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">Z</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z</a>) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="comment">//  regular call</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga40c963ecefcdeba9487598d5ef9bf874.html#ga40c963ecefcdeba9487598d5ef9bf874">acsc</a>(cayley_dickson_like <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z</a>) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// semantic modifyers</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_gaf854dca05e23de45af3994a5c532cefe.html#gaf854dca05e23de45af3994a5c532cefe">agd</a>[real_only](<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">Real</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">z</a>)      <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaf854dca05e23de45af3994a5c532cefe_html_gaf854dca05e23de45af3994a5c532cefe"><div class="ttname"><a href="group__functions_gaf854dca05e23de45af3994a5c532cefe.html#gaf854dca05e23de45af3994a5c532cefe">kyosu::agd</a></div><div class="ttdeci">constexpr auto agd</div><div class="ttdoc">Computes the gudermanian of the argument.</div><div class="ttdef"><b>Definition</b> agd.hpp:66</div></div>
+<div class="ttc" id="agroup__functions_ga40c963ecefcdeba9487598d5ef9bf874_html_ga40c963ecefcdeba9487598d5ef9bf874"><div class="ttname"><a href="group__functions_ga40c963ecefcdeba9487598d5ef9bf874.html#ga40c963ecefcdeba9487598d5ef9bf874">kyosu::acsc</a></div><div class="ttdeci">constexpr auto acsc</div><div class="ttdoc">Computes the arccosecant of the argument.</div><div class="ttdef"><b>Definition</b> acsc.hpp:81</div></div>
+<div class="ttc" id="agroup__functions_gaf854dca05e23de45af3994a5c532cefe_html_gaf854dca05e23de45af3994a5c532cefe"><div class="ttname"><a href="group__functions_gaf854dca05e23de45af3994a5c532cefe.html#gaf854dca05e23de45af3994a5c532cefe">kyosu::agd</a></div><div class="ttdeci">constexpr auto agd</div><div class="ttdoc">Computes the principal branch inverse gudermanian of the argument.</div><div class="ttdef"><b>Definition</b> agd.hpp:75</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
@@ -158,13 +163,15 @@ $(document).ready(function(){initNavTree('group__functions_gaf854dca05e23de45af3
 </ul>
 <p><b>Return value</b></p>
 <ul>
-<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered.</li>
-<li>For complex input, returns the inverse gudermanian of the argument.</li>
+<li>A real typed input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered, unless the option real_only is used in which case the parameter must be a floating_value and the result will the same as a call to <code>eve::agd</code>,</li>
+<li>For complex input, returns \(\log(\tan(z/2 +\pi/4))\).</li>
 </ul>
+<dl class="section note"><dt>Note</dt><dd><code>agd</code> has branch cut discontinuities in \([\pi/2, 3\pi/2] + 2\pi n\) in the complex plane for integer \(n\). Morover, with <code>real_only</code> option the used formula is \(2*\mathbb{atan}(\tanh(z/2))\)</dd></dl>
 <h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://mathworld.wolfram.com/Gudermannian.html">Wolfram MathWorld: Inverse Gudermannian</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Gudermannian_function">Wikipedia: Gudermannian function</a></li>
+<li><a href="https://en.wikipedia.org/wiki/InverseGudermannian_function">Wikipedia: Inverse Gudermannian function</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
