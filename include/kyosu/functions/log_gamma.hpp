@@ -17,20 +17,18 @@ namespace kyosu
   template<typename Options>
   struct log_gamma_t : eve::strict_elementwise_callable<log_gamma_t, Options, real_only_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+   template<concepts::cayley_dickson_like  Z>
+    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
-      if constexpr(concepts::real<Z>)
-        return (*this)(complex(z));
-      else
-        return  KYOSU_CALL(z);
+      return KYOSU_CALL(z);
     }
 
-    template<concepts::real Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(Options::contains(real_only))
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z>, K>
+    operator()(Z const& z, K const & k) const noexcept
+    requires(eve::same_lanes_or_scalar<Z, K>)
     {
-      return  KYOSU_CALL(z);
+      return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(log_gamma_t, log_gamma_);
@@ -55,6 +53,7 @@ namespace kyosu
 //!   {
 //!     //  regular call
 //!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> log_gamma(Z z) noexcept;
+//!     template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log(T z eve::value n) noexcept;
 //!
 //!     // semantic modifyers
 //!     template<concepts::real Z> constexpr complexify_t<Z> log_gamma[real_only](Z z) noexcept;
@@ -68,9 +67,10 @@ namespace kyosu
 //!   **Return value**
 //!
 //!   - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
-//!     in which case the parameter must be a floating_value,  the real part of the result will
-//!      the same as  eve::log_gamma
-///!  -  Returns \f$\Gamma(z)\f$.
+//!       in which case the  result will the same as to an `eve::log_gamma` call
+//!       implying a Nan result if the input is not greater than zero.
+//!  -  Returns \f$\Gamma(z)\f$.
+//!    - with two parameters use the nth branch of the logarithm.
 //!
 //!  @groupheader{External references}
 //!   *  [Wolfram MathWorld: Gamma Function](https://mathworld.wolfram.com/GammaFunction.html)
@@ -88,10 +88,12 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  constexpr auto log_gamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  constexpr auto log_gamma_(KYOSU_DELAY(), O const& o, Z a0) noexcept
   {
-    if constexpr(O::contains(real_only))
-      return kyosu::inject(eve::log_gamma(a0));
+     if constexpr(O::contains(real_only) && concepts::real<Z>)
+      return eve::log_gamma[o.drop(real_only)](a0);
+    else if constexpr(concepts::real<Z> )
+      return kyosu::log_gamma[o](complex(a0));
     else if constexpr(concepts::complex<Z> )
     {
       // 15 sig. digits for 0<=real(z)<=171
@@ -151,5 +153,30 @@ namespace kyosu::_
     {
       return cayley_extend(log_gamma, a0);
     }
+  }
+
+   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log_gamma_(KYOSU_DELAY(), O const&o, Z z, K k) noexcept
+  requires(!O::contains(real_only))
+  {
+    if constexpr(kyosu::concepts::real<Z>)
+      return log_gamma[o](complex(z));
+    else if constexpr(kyosu::concepts::complex<Z>)
+    {
+      using e_t = eve::element_type_t<decltype(real(z))>;
+      auto kk = eve::convert(k, as<e_t>());
+      return  log_gamma[o](z)+muli(kk*two_pi(as(kk)));
+    }
+    else
+    {
+      return _::cayley_extend(kyosu::log_gamma, z, k);
+    }
+  }
+
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto log_gamma_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), log_gamma(z, k...));
   }
 }
