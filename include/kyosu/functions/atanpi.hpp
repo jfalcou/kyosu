@@ -14,12 +14,19 @@
 namespace kyosu
 {
   template<typename Options>
-  struct atanpi_t : eve::elementwise_callable<atanpi_t, Options>
+  struct atanpi_t : eve::strict_elementwise_callable<atanpi_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr  complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
+    }
+
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr  eve::as_wide_as_t<complexify_if_t<Options, Z>, K>
+    operator()(Z const& z, K const & k) const noexcept
+    {
+     return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(atanpi_t, atanpi_);
@@ -42,7 +49,12 @@ namespace kyosu
 //!   @code
 //!   namespace kyosu
 //!   {
-//!      template<kyosu::concepts::cayley_dickson T> constexpr auto atanpi(T z) noexcept;  //2
+//!     //  regular call
+//!     constexpr auto atanpi(cayley_dickson_like z)                noexcept;
+//!     constexpr auto atanpi(cayley_dickson_like z, eve::value k)  noexcept;
+//!
+//!     // semantic modifyers
+//!      constexpr Z atanpi[real_only](Real z)                      noexcept;
 //!   }
 //!   @endcode
 //!
@@ -52,8 +64,10 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!    - A real typed input z calls `eve:atanpi` so return the same type.
+//!    - A real typed input `z` is treated as if `complex(z)` was entered unless the option real_only is used
+//!     in which case the parameter must be a floating_value and the result will the same as a call to `eve::atan`,
 //!    - Returns `radinpi(atan(z))`
+//!    - For two parameters returns the kth branch of `atanpi`. If k is not a flint it is truncated before use.
 //!
 //!  @groupheader{Example}
 //!
@@ -67,12 +81,24 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto atanpi_(KYOSU_DELAY(), O const&, Z z) noexcept
+  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto atanpi_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
   {
-    if constexpr(eve::floating_value<Z> )
-      return eve::atanpi(z);
-    else
-      return radinpi(kyosu::atan(z));
+    using e_t =  eve::element_type_t<decltype(real(z))>;
+    auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
+    return kyosu::atanpi[o](z)+2*kk;
+  }
+
+  template<concepts::cayley_dickson_like Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto atanpi_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  {
+    return radinpi(kyosu::atan[o](z));
+  }
+
+  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto atanpi_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), atanpi(z, k...));
   }
 }
