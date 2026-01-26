@@ -109,6 +109,10 @@
 #include <kyosu/functions/fsm.hpp>
 #include <kyosu/functions/gd.hpp>
 #include <kyosu/functions/gegenbauer.hpp>
+<<<<<<< Updated upstream
+=======
+#include <kyosu/functions/geommean.hpp>
+>>>>>>> Stashed changes
 #include <kyosu/functions/harmmean.hpp>
 #include <kyosu/functions/hypergeometric.hpp>
 #include <kyosu/functions/hypot.hpp>

@@ -79,17 +79,18 @@ All operators and functions implemented can receive a mix of scalar or simd of c
 dimensionnality and are defined in the namespace kyosu.
 
   - Proper cayley-dickson values are those of dimensionnality greater or equal to 2 (complex, quaternion, ...) and satisfy the
-    `concepts::cayley-dickson` concept;
+    `concepts::cayley-dickson` concept. They don't satisfy the  `concepts::real` concept;
   - scalar and simd floating types only satisfy  the `concepts::cayley-dickson_like` concept, meaning they are interoperable with
-    proper cayley-dickson values.
+    proper cayley-dickson values. They satisfy the `concepts::real` concept.
 
 Of course the algebra operation +, -, * and / are provided, but as \ is not an usable **C++**
-character as an operator, the left division `a \ b` is provided as the call ldiv(a,b).
+character as an operator, the left division `a \ b` is provided as the call ldiv(a,b). Note that except for real
+and complex this is **NOT** `b/a`.
 
 Constructors
 ------------
 
-complex and  quaternion can be constructed using callables facilities `complex` and `quaternion`.
+complex and quaternion can be constructed using callables facilities `complex` and `quaternion`.
 
 complex can also be constructed from their polar representation\n
 quaternion from various parametrizations of \f$\mathbb{R}^4\f$ or from \f$\mathbb{R}^3\f$ rotations:
@@ -117,30 +118,33 @@ Operators
 Operators (as said before) `+`, `-`, `*` and `/` can be used in infix form and can mix cayley-dickson values of
  different dimensionalities. Of course the biggest dimensionlity is recovered in the output.
 
-Prefix forms are also provided as `add`, `sub`, `mul` and `div`. Also plus and minus for unary versions.
+Prefix forms are also provided as `add`, `sub`, `mul` and `div`. These version are multiparameters and can also use **KUMI** tuples.
+Also plus and minus can be used for unary versions.
 
 The left division sometimes necessary if the dimensionality is greater than 2 is given as `ldiv`.
 
-The left multiplication to the left by i or -i (i*i=-1) can be done calling respectively muli and mulmi
+The multiplication to the left by i or -i (i*i=-1) can be done calling respectively muli and mulmi
 
 Functions
 ---------
 
-Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::concepts::cayley_dickson_like) types. The exceptions mainly being rotation related quaternion usage.
+Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::concepts::cayley_dickson_like) types.
+The exceptions mainly being rotation related quaternion usage.
+
+Also many functions as `sqrt` `nthroot` or `log` are the principal value of a multiple valued inverse of an analytic function.
+Most of these functions can use a second parameter that allows to choose an other branch.
 
 @warning  **EVE** callables that correspond to mathematical functions that
           are only defined on a proper part of the real axis as, for example, `acos` DOES NOT ever provide the same result
           if called in **EVE** or **KYOSU** context.
 
           eve::acos(2.0) will returns a NaN value, but kyosu::acos(2.0) will return the pure imaginary
-          complex number \f$i\;\log(2+\sqrt{3})\f$
+          complex number \f$i\log(2+\sqrt{3})\f$
 
           All these kinds of functions called with a floating value in the kyosu namespace will return a complex value.
 
-          However, some of those functions provide a `real_only` option that allows to call them with floating parameters
-          only and returns the complex,
-          the real part of which is the eve call result and the imaginary part is zero or a NaN. Shortly : if **EVE** returns a Nan, **KYOSU**,
-          with this option, will return fnan (i.e. complex(nan,nan)).
+          However, many of those functions provide a `real_only` option that allows to call them with floating parameters
+          only and returns the floating value of the same type which is the eve call result.
 
   * Callables usable with all cayley_dickson types
 
@@ -155,7 +159,7 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
         is the imaginary part of the complex \f$v\f$
 
     Moreover some functions are defined that does not pertain to **EVE** because they do not return real results for real entries.
-    (For instance [expipi](@ref kyosu::expipi)).
+    (For instance [exp_ipi](@ref kyosu::exp_ipi)).
 
    |                                                   |                                                   |                                                   |                                                   |
    |---------------------------------------------------|---------------------------------------------------|---------------------------------------------------|---------------------------------------------------|
@@ -168,6 +172,7 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
    |[atan](@ref kyosu::atan)                           |[atanh](@ref kyosu::atanh)                         |[atanpi](@ref kyosu::atanpi)                       |[atanpi](@ref kyosu::atanpi)                       |
    |[average](@ref kyosu::average)                     |[bessel_h](@ref kyosu::bessel_h)                   |[bessel_i](@ref kyosu::bessel_i)                   |[bessel_j](@ref kyosu::bessel_j)                   |
    |[bessel_k](@ref kyosu::bessel_k)                   |[bessel_y](@ref kyosu::bessel_y)                   |[beta](@ref kyosu::beta)                           |[ceil](@ref kyosu::ceil)                           |
+   |[cbrt](@ref kyosu::cbrt)                           |                                                   |                                                   |                                                   |
    |[chi](@ref kyosu::chi)                             |[commutator](@ref kyosu::commutator)               |[conj](@ref kyosu::conj)                           |[convert](@ref kyosu::convert)                     |
    |[cos](@ref kyosu::cos)                             |[cosh](@ref kyosu::cosh)                           |[cospi](@ref kyosu::cospi)                         |[cot](@ref kyosu::cot)                             |
    |[coth](@ref kyosu::coth)                           |[cotpi](@ref kyosu::cotpi)                         |[csc](@ref kyosu::csc)                             |[csch](@ref kyosu::csch)                           |
@@ -187,7 +192,7 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
    |[is_nez](@ref kyosu::is_nez)                       |[is_not_cinf](@ref kyosu::is_not_cinf)             |[is_not_denormal](@ref kyosu::is_not_denormal)     |[is_not_equal](@ref kyosu::is_not_equal)           |
    |[is_not_finite](@ref kyosu::is_not_finite)         |[is_not_flint](@ref kyosu::is_not_flint)           |[is_not_fnan](@ref kyosu::is_not_fnan)             |[is_not_infinite](@ref kyosu::is_not_infinite)     |
    |[is_not_nan](@ref kyosu::is_not_nan)               |[is_not_real](@ref kyosu::is_not_real)             |[is_pure](@ref kyosu::is_pure)                     |[is_real](@ref kyosu::is_real)                     |
-   |[is_unitary](@ref kyosu::is_unitary)               |[jacobi_elliptic](@ref kyosu::jacobi_elliptic)     |[kronecker](@ref kyosu:kronecker)                  |[kummer](@ref kyosu::kummer)                       |
+   |[is_unitary](@ref kyosu::is_unitary)               |[jacobi_elliptic](@ref kyosu::jacobi_elliptic)     |[kronecker](@ref kyosu::kronecker)                 |[kummer](@ref kyosu::kummer)                       |
    |[lambda](@ref kyosu::lambda)                       |[lbeta](@ref kyosu::lbeta)                         |[ldiv](@ref kyosu::ldiv)                           |[legendre](@ref kyosu::legendre)                   |
    |[lerp](@ref kyosu::lerp)                           |[log](@ref kyosu::log)                             |[log10](@ref kyosu::log10)                         |[log1p](@ref kyosu::log1p)                         |
    |[log2](@ref kyosu::log2)                           |[log_abs](@ref kyosu::log_abs)                     |[log_abs_gamma](@ref kyosu::log_abs_gamma)         |[log_gamma](@ref kyosu::log_gamma)                 |
@@ -195,7 +200,7 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
    |[manhattan](@ref kyosu::manhattan)                 |[maxabs](@ref kyosu::maxabs)                       |[maxmag](@ref kyosu::maxmag)                       |                                                   |
    |[minabs](@ref kyosu::minabs)                       |[minmag](@ref kyosu::minmag)                       |[minus](@ref kyosu::minus)                         |[mul](@ref kyosu::mul)                             |
    |[muli](@ref kyosu::muli)                           |[mulmi](@ref kyosu::mulmi)                         |[nearest](@ref kyosu::nearest)                     |[negmaxabs](@ref kyosu::negmaxabs)                 |
-   |[negminabs](@ref kyosu::negminabs)                 |[oneminus](@ref kyosu::oneminus)                   |[parts](@ref kyosu::parts)                         |[pow](@ref kyosu::pow)                             |
+   |[negminabs](@ref kyosu::negminabs)                 |[nthroot](@ref kyosu::nthroot)                     |[oneminus](@ref kyosu::oneminus)                   |[pow](@ref kyosu::pow)                             |
    |[pow1p](@ref kyosu::pow1p)                         |[pow_abs](@ref kyosu::pow_abs)                     |[powm1](@ref kyosu::powm1)                         |[proj](@ref kyosu::proj)                           |
    |[pure](@ref kyosu::pure)                           |[radinpi](@ref kyosu::radinpi)                     |[rec](@ref kyosu::rec)                             |[reldist](@ref kyosu::reldist)                     |
    |[reverse_horner](@ref kyosu::reverse_horner)       |[rising_factorial](@ref kyosu::rising_factorial)   |[sec](@ref kyosu::sec)                             |[sech](@ref kyosu::sech)                           |
@@ -206,13 +211,6 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
    |[tanh](@ref kyosu::tanh)                           |[tanpi](@ref kyosu::tanpi)                         |[tchebytchev](@ref kyosu::tchebytchev)             |[tgamma](@ref kyosu::tgamma)                       |
    |[tgamma_inv](@ref kyosu::tgamma_inv)               |[to_cylindrical](@ref kyosu::to_cylindrical)       |[to_polar](@ref kyosu::to_polar)                   |[tricomi](@ref kyosu::tricomi)                     |
    |[trunc](@ref kyosu::trunc)                         |[zeta](@ref kyosu::zeta)                           |                                                   |                                                   |
-  * Callables usable with complex and real only
-
-    These functions are related to proper complex properties of nth roots, they always provide a complex result.
-
-    |                                    |                                   |
-    |------------------------------------|-----------------------------------|
-    | [cbrt](@ref kyosu::cbrt)           |  [nthroot](@ref kyosu::nthroot)   |
 
   * Callables usable with quaternion, complex and real only
 
@@ -230,5 +228,5 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
     * cinf(as<Z>()) returns at least a complex with nan real part and inf imaginary part, that can be roughly taken as a complex-infinity, in the sense that abs is infinite and arg is undefinite (nan), or a value of the Z type.
     * fnan(as<Z>()) returns a cayley-dickson like in which all parts are nans.
 
-      @warning [i(as<Z>())](@ref kyosu::i) and  [j(as<Z>())](@ref kyosu::j) are not aliases of each other. [j(as<Z>())](@ref kyosu::j)is always
-        at least a quaternion. Sorry for the electrical engineers !
+      @warning [i(as<Z>())](@ref kyosu::i) and  [j(as<Z>())](@ref kyosu::j) are not aliases of each other. [j(as<Z>())](@ref kyosu::j) is always
+        at least a quaternion. Sorry for the electrical engineers!
