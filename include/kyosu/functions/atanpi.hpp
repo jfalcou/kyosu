@@ -55,7 +55,6 @@ namespace kyosu
 //!
 //!     // semantic modifyers
 //!      constexpr Z atanpi[real_only](Real z)                      noexcept;
-
 //!   }
 //!   @endcode
 //!
@@ -65,11 +64,10 @@ namespace kyosu
 //!
 //! **Return value**
 //!
-//!   - A real typed input `z` is treated as if `complex(z)` was entered unless the option real_only is used
+//!    - A real typed input `z` is treated as if `complex(z)` was entered unless the option real_only is used
 //!     in which case the parameter must be a floating_value and the result will the same as a call to `eve::atan`,
-//!    - A real typed input z calls `eve:atanpi` so return the same type.
 //!    - Returns `radinpi(atan(z))`
-//!   - for two parameters returns the kth branch of `atanpi`. If k is not a flint it is truncated before use.
+//!    - For two parameters returns the kth branch of `atanpi`. If k is not a flint it is truncated before use.
 //!
 //!  @groupheader{Example}
 //!
