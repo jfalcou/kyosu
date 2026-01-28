@@ -59,7 +59,7 @@ namespace kyosu
 //!    1. The  modulus of its parameter (always a floating ordered value).
 //!       The modulus is the square root of the sum of the squares of the absolute value of each component.
 //!    2. With the raw option no provision is made to enhance accuracy and avoid overflows
-//!    3. With the flat otion it is the \$f\l_\infty\f$ norm of the components that is computed.
+//!    3. With the flat otion it is the \f$l_\infty\f$ norm of the components that is computed.
 //!
 //!  @groupheader{External references}
 //!   *  [C++ standard reference: complex abs](https://en.cppreference.com/w/cpp/numeric/complex/abs)

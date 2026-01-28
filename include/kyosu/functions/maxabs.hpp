@@ -69,7 +69,7 @@ namespace kyosu
 //!     1. Returns elementwise  the square root maximum of the squared absolute values of the parameters.
 //!     2  Same as 1, but the parameters are from the tuple
 //!     3. With the raw option no provision is made to enhance accuracy and avoid overflows
-//!     4. With the flat otion it is the \$f\l_\infty\f$ norm of all the components that is computed.
+//!     4. With the flat otion it is the \f$\l_\infty\f$ norm of all the components that is computed.
 //!     5. Returns elementwise  the pedantic maximum of the  absolute values of the parameters.
 //!     6. Returns elementwise  the numeric maximum of the  absolute values of the parameters.
 //!
