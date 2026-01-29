@@ -13,10 +13,11 @@
 namespace kyosu
 {
   template<typename Options>
-  struct beta_t : eve::elementwise_callable<beta_t, Options, real_only_option>
+  struct beta_t : eve::strict_elementwise_callable<beta_t, Options, real_only_option>
   {
-    template<typename... Ts>       struct result        : as_cayley_dickson<Ts...> {};
-    template<concepts::real... Ts> struct result<Ts...> : eve::common_value<Ts...> {};
+    template<typename T0, typename T1>                                           struct result;
+    template<concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1> struct result<T0, T1> : as_cayley_dickson<T0, T1> {};
+    template<concepts::real T0, concepts::real T1>                               struct result<T0, T1> : eve::common_value<T0, T1> {};
 
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     KYOSU_FORCEINLINE constexpr
@@ -90,6 +91,14 @@ namespace kyosu::_
     else if constexpr(kyosu::concepts::complex_like<Z0> && kyosu::concepts::complex_like<Z1>)
       return tgamma(z0)*tgamma(z1)/tgamma( z0 + z1);
     else
-      return kyosu::_::cayley_extend2(kyosu::beta, z0, z1);
+      return kyosu::_::cayley_extend(tgamma, z0)*kyosu::_::cayley_extend(tgamma, z1)/kyosu::_::cayley_extend(tgamma, z0+z1);
   }
+
+  template<concepts::real Z0, concepts::real Z1, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto beta_(KYOSU_DELAY(), C const& cx, O const&, Z0 z0, Z1 z1) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z0), beta(z0, z1));
+  }
+
 }
