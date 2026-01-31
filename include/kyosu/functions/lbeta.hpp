@@ -26,9 +26,8 @@ namespace kyosu
 
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, eve::value K>
     KYOSU_FORCEINLINE constexpr auto
-    operator()(Z0 const& z0, Z1 const & z1, K const & k) const noexcept
-    -> decltype(kyosu::log[this->options()](kyosu::beta[this->options()](z0, z1)))
-      requires(eve::same_lanes_or_scalar<Z0, Z1, K> && !Options::con)
+    operator()(Z0 const& z0, Z1 const & z1, K const & k) const noexcept -> eve::as_wide_as_t<decltype(kyosu::log[this->options()](kyosu::beta[this->options()](z0, z1))), K>
+    requires(eve::same_lanes_or_scalar<Z0, Z1> && !Options::contains(real_only))
     {
       return KYOSU_CALL(z0, z1, k);
     }
@@ -104,7 +103,7 @@ namespace kyosu::_
   }
 
   template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, eve::value K, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto log_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1, K k) noexcept
+  KYOSU_FORCEINLINE constexpr auto lbeta_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1, K k) noexcept
   requires(!O::contains(real_only))
   {
     using e_t = eve::element_type_t<decltype(real(z0+z1))>;

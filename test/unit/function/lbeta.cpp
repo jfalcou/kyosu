@@ -8,6 +8,15 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
+
+//   template<kyosu::concepts::cayley_dickson_like Z0, kyosu::concepts::cayley_dickson_like Z1, eve::value K>
+//   KYOSU_FORCEINLINE constexpr auto log_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1, K k) noexcept
+//   {
+//     using e_t = eve::element_type_t<decltype(kyosu::real(z0+z1))>;
+//     auto kk = eve::convert(k, as<e_t>());
+//     return kyosu::lbeta(z0, z1)+kyosu::muli(kk*two_pi(as(kk)));
+//   }
+
 TTS_CASE_WITH ( "Check kyosu::lbeta over cayley_dickson"
               , kyosu::simd_real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
@@ -37,7 +46,6 @@ TTS_CASE_WITH ( "Check kyosu::lbeta over cayley_dickson"
 
   auto lr = kyosu::lbeta(r0, r1);
   auto lc = kyosu::lbeta(c0, c1);
-  std::cout << lr << lc << "\n";
   auto lq = kyosu::lbeta(q0, q1);
   TTS_RELATIVE_EQUAL(kyosu::exp(lr), kyosu::beta(r0, r1), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::exp(lc), kyosu::beta(c0, c1), tts::prec<T>());
@@ -50,7 +58,7 @@ TTS_CASE_WITH ( "Check kyosu::lbeta over cayley_dickson"
   TTS_RELATIVE_EQUAL(kyosu::lbeta[cond](c0, c1), kyosu::if_else(cond,  kyosu::lbeta(c0, c1), c0), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::lbeta[cond](q0, q1), kyosu::if_else(cond,  kyosu::lbeta(q0, q1), q0), tts::prec<T>());
 
-//   TTS_RELATIVE_EQUAL(kyosu::lbeta[cond](r0, r1, 2), kyosu::if_else(cond,  kyosu::lbeta(r0, r1, 2), ce_t(r0)), tts::prec<T>());
-//   TTS_RELATIVE_EQUAL(kyosu::lbeta[cond](c0, c1, 2), kyosu::if_else(cond,  kyosu::lbeta(c0, c1, 2), c0), tts::prec<T>());
-//   TTS_RELATIVE_EQUAL(kyosu::lbeta[cond](q0, q1, 2), kyosu::if_else(cond,  kyosu::lbeta(q0, q1, 2), q0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lbeta[cond](r0, r1, 2), kyosu::if_else(cond,  kyosu::lbeta(r0, r1, 2), ce_t(r0)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lbeta[cond](c0, c1, 2), kyosu::if_else(cond,  kyosu::lbeta(c0, c1, 2), c0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lbeta[cond](q0, q1, 2), kyosu::if_else(cond,  kyosu::lbeta(q0, q1, 2), q0), tts::prec<T>());
 };

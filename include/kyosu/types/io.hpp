@@ -21,6 +21,7 @@ namespace kyosu
   /// Stream insertion for Cayley-dickson based types
   template<typename C, typename Ct, concepts::cayley_dickson CD>
   auto& operator<<(std::basic_ostream<C,Ct>& os, CD const& z)
+  std::ostream& operator<<(std::ostream& os, CD const& z)
   {
     auto display_positive = [](auto& os,auto e, bool first) -> decltype(auto)
     {
