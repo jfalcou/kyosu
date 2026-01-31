@@ -8,15 +8,6 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-
-//   template<kyosu::concepts::cayley_dickson_like Z0, kyosu::concepts::cayley_dickson_like Z1, eve::value K>
-//   KYOSU_FORCEINLINE constexpr auto log_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1, K k) noexcept
-//   {
-//     using e_t = eve::element_type_t<decltype(kyosu::real(z0+z1))>;
-//     auto kk = eve::convert(k, as<e_t>());
-//     return kyosu::lbeta(z0, z1)+kyosu::muli(kk*two_pi(as(kk)));
-//   }
-
 TTS_CASE_WITH ( "Check kyosu::lbeta over cayley_dickson"
               , kyosu::simd_real_types
               , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)

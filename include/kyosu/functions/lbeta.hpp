@@ -70,8 +70,7 @@ namespace kyosu
 //!     - Real typed input `z0` and `z1` is treated as if `complex(z0)` and `complex(z1)` were entered,
 //!       unless the option `real_only` is used in which case the  result will the same as to an `eve::lbeta` call
 //!     - Real typed entries are treated as complex ones. unless the option real_only is used
-//!       in which case the parameter must be a floating_value,  the real part of the result will the same as an eve::lbeta
-//!       implying a Nan result if the result is not real.
+//!       in which case the parameter must be a floating_value, implying a Nan result if the result is not real.
 //!     - Returns `log(beta(x, y))`.
 //!
 //!  @note lΒ (l followed by upper case greek letter) can be used as an alias in code.

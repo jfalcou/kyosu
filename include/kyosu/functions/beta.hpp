@@ -59,7 +59,8 @@ namespace kyosu
 //!   **Return value**
 //!
 //!      \f$\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
-//!     If  `x` and `y` are real typed values they are treated as complex inputs.
+//!     If  `x` and `y` are real typed values they are treated as complex inputs unless the option `real_only` is used
+//!     in which case the  result will the same as to an `eve::beta` call
 //!
 //!  @note Β (upper case greek letter) can be used as an alias in code.
 //!

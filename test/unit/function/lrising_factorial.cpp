@@ -8,50 +8,48 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH ( "Check kyosu::lrising_factorial over real"
-              , kyosu::real_types
-              , tts::generate(tts::randoms(-10,10)
-                             ,tts::randoms(-10,10)
-                             )
-              )
-(auto r0, auto r1)
-{
-  using T =  decltype(r0);
-  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial(r0, r1), kyosu::log(kyosu::rising_factorial(r0, r1)), tts::prec<T>(5.0e-3,  1.0e-7));
-  auto re = kyosu::lrising_factorial[kyosu::real_only](r0, r1);
-  auto rr = eve::lrising_factorial(r0, r1);
-
-  TTS_IEEE_EQUAL(re, kyosu::inject(rr));
-};
-
-TTS_CASE_WITH ( "Check kyosu::lrising_factorial over complex"
-              , kyosu::real_types
-              , tts::generate(tts::randoms(-1,1), tts::randoms(-1,1)
-                             ,tts::randoms(-1,1), tts::randoms(-1,1)
-                             )
-              )
-(auto r0, auto i0, auto r1, auto i1)
-{
-  using T =  decltype(r0);
-  auto c0 = kyosu::complex(r0,i0);
-  auto c1 = kyosu::complex(r1,i1);
-  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial(c0, c1), kyosu::log(kyosu::rising_factorial(c0, c1)), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial(r0, c1), kyosu::log(kyosu::rising_factorial(r0, c1)), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial(c0, r1), kyosu::log(kyosu::rising_factorial(c0, r1)), tts::prec<T>());
-};
-
-TTS_CASE_WITH ( "Check kyosu::lrising_factorial over quaternion"
-              , kyosu::real_types
-              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
-                              , tts::randoms(-10,10), tts::randoms(-10,10)
-                              , tts::randoms(-10,10), tts::randoms(-10,10)
-                              , tts::randoms(-10,10), tts::randoms(-10,10)
+TTS_CASE_WITH ( "Check kyosu::lrising_factorial over cayley_dickson"
+              , kyosu::simd_real_types
+              , tts::generate ( tts::randoms(1,10), tts::randoms(1,10)
+                              , tts::randoms(1,10), tts::randoms(1,10),
+                                tts::randoms(1,10), tts::randoms(1,10)
+                              , tts::randoms(1,10), tts::randoms(1,10)
                               )
               )
-<typename T>(T r0, T i0, T j0, T k0, T r1, T i1, T j1, T k1)
+<typename T>(T a0, T a1, T a2, T a3, T b0, T b1, T b2, T b3)
 {
-  using type = kyosu::quaternion_t<T>;
-  auto q0 = type(r0,i0,j0,k0);
-  auto q1 = type(r1,i1,j1,k1);
-  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial(q0, q1),  kyosu::log(kyosu::rising_factorial(q0, q1)), tts::prec<T>());
+  auto use = [](auto ...){};
+  use(b0, b1, b2, b3);
+  use(a0, a1, a2, a3);
+  using ce_t = kyosu::complex_t<T>;
+  using qe_t = kyosu::quaternion_t<T>;
+
+  auto r0  = T(a0);
+  auto c0  = ce_t(a0,a1);
+  auto q0  = qe_t(a0,a1,a2,a3);
+  auto r1  = T(b0);
+  auto c1  = ce_t(b0,b1);
+  auto q1  = qe_t(b0,b1,b2,b3);
+
+  auto rr = eve::lrising_factorial[eve::pedantic](r0, r1);
+  auto re = kyosu::lrising_factorial[kyosu::real_only](r0, r1);
+  TTS_IEEE_EQUAL(re, rr);
+
+  auto lr = kyosu::lrising_factorial(r0, r1);
+  auto lc = kyosu::lrising_factorial(c0, c1);
+  auto lq = kyosu::lrising_factorial(q0, q1);
+  TTS_RELATIVE_EQUAL(kyosu::exp(lr), kyosu::rising_factorial(r0, r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::exp(lc), kyosu::rising_factorial(c0, c1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::exp(lq), kyosu::rising_factorial(q0, q1), 2e-4);
+
+  auto cond = eve::is_ltz(a0);
+
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial[cond][kyosu::real_only](r0, r1), kyosu::if_else(cond,  eve::lrising_factorial[eve::pedantic](r0, r1), r0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial[cond](r0, r1), kyosu::if_else(cond,  kyosu::lrising_factorial(r0, r1), ce_t(r0)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial[cond](c0, c1), kyosu::if_else(cond,  kyosu::lrising_factorial(c0, c1), c0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial[cond](q0, q1), kyosu::if_else(cond,  kyosu::lrising_factorial(q0, q1), q0), tts::prec<T>());
+
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial[cond](r0, r1, 2), kyosu::if_else(cond,  kyosu::lrising_factorial(r0, r1, 2), ce_t(r0)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial[cond](c0, c1, 2), kyosu::if_else(cond,  kyosu::lrising_factorial(c0, c1, 2), c0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lrising_factorial[cond](q0, q1, 2), kyosu::if_else(cond,  kyosu::lrising_factorial(q0, q1, 2), q0), tts::prec<T>());
 };
