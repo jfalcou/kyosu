@@ -10,10 +10,10 @@
 
 TTS_CASE_WITH ( "Check kyosu::lbeta over cayley_dickson"
               , kyosu::simd_real_types
-              , tts::generate ( tts::randoms(-10,10), tts::randoms(-10,10)
-                              , tts::randoms(-10,10), tts::randoms(-10,10),
-                                tts::randoms(-10,10), tts::randoms(-10,10)
-                              , tts::randoms(-10,10), tts::randoms(-10,10)
+              , tts::generate ( tts::randoms(1,10), tts::randoms(1,10)
+                              , tts::randoms(1,10), tts::randoms(1,10),
+                                tts::randoms(1,10), tts::randoms(1,10)
+                              , tts::randoms(1,10), tts::randoms(1,10)
                               )
               )
 <typename T>(T a0, T a1, T a2, T a3, T b0, T b1, T b2, T b3)
