@@ -29,5 +29,13 @@ int main()
   wc_t wc1(c1, c1);
   std::cout << wc0 << ", " << wc1 << " -> " << lbeta(wc0, wc1) << "\n";
 
+  double a = 1.5;
+  double b = -2.6;
+  auto lbetab = kyosu::lbeta(a, b);
+  auto lrbetab = eve::lbeta(a, b);
+  auto lrrbetab = kyosu::lbeta[kyosu::real_only](a, b);
+  std::cout << "kyosu::lbeta(a, b)                   "<< lbetab << std::endl;
+  std::cout << "eve::lbeta(a, b)                     "<< lrbetab << std::endl;
+  std::cout << "kyosu::lbeta[kyosu::real_only](a, b) "<< lrrbetab << std::endl;
   return 0;
 }

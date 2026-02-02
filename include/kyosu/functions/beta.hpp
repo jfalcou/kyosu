@@ -13,15 +13,18 @@
 namespace kyosu
 {
   template<typename Options>
-  struct beta_t : eve::strict_elementwise_callable<beta_t, Options>
+  struct beta_t : eve::strict_elementwise_callable<beta_t, Options, real_only_option>
   {
+    template<typename T0, typename T1>                                           struct result;
+    template<concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1> struct result<T0, T1> : as_cayley_dickson<T0, T1> {};
+    template<concepts::real T0, concepts::real T1>                               struct result<T0, T1> : eve::common_value<T0, T1> {};
+
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
+    KYOSU_FORCEINLINE constexpr
+    complexify_if_t<Options, typename result<Z0, Z1>::type> operator()(Z0 const& z0, Z1 const & z1) const noexcept
     requires(eve::same_lanes_or_scalar<Z0, Z1>)
-      KYOSU_FORCEINLINE constexpr
-    complexify_t<as_cayley_dickson_t<Z0, Z1>> operator()(Z0 const& z0, Z1 const & z1) const noexcept
     {
-      if constexpr(concepts::real<Z0> && concepts::real<Z1>) return (*this)(complex(z0), complex(z1));
-      else return KYOSU_CALL(z0, z1);
+      return KYOSU_CALL(z0, z1);
     }
 
     KYOSU_CALLABLE_OBJECT(beta_t, beta_);
@@ -56,7 +59,8 @@ namespace kyosu
 //!   **Return value**
 //!
 //!      \f$\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$ is returned.
-//!     If  `x` and `y` are real typed values they are treated as complex inputs.
+//!     If  `x` and `y` are real typed values they are treated as complex inputs unless the option `real_only` is used
+//!     in which case the  result will the same as to an `eve::beta` call
 //!
 //!  @note Β (upper case greek letter) can be used as an alias in code.
 //!
@@ -75,14 +79,27 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z0, typename Z1, eve::callable_options O>
+  template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto beta_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
   {
-    if constexpr(kyosu::concepts::complex_like<Z0> && kyosu::concepts::complex_like<Z1>)
+    if constexpr(concepts::real<Z0> && concepts::real<Z1>)
     {
-      auto y = z0 + z1;
-      return tgamma(z0)*tgamma(z1)/tgamma(y);
+      if constexpr(O::contains(real_only))
+        return eve::beta(z0, z1);
+      else
+        return kyosu::beta(complex(z0), complex(z1));
     }
-    else return kyosu::_::cayley_extend2(kyosu::beta, z0, z1);
+    else if constexpr(kyosu::concepts::complex_like<Z0> && kyosu::concepts::complex_like<Z1>)
+      return tgamma(z0)*tgamma(z1)/tgamma( z0 + z1);
+    else
+      return kyosu::_::cayley_extend(tgamma, z0)*kyosu::_::cayley_extend(tgamma, z1)/kyosu::_::cayley_extend(tgamma, z0+z1);
   }
+
+  template<concepts::real Z0, concepts::real Z1, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto beta_(KYOSU_DELAY(), C const& cx, O const&, Z0 z0, Z1 z1) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z0), beta(z0, z1));
+  }
+
 }
