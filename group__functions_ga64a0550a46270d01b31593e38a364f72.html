@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('group__functions_ga64a0550a46270d01b31
 <div class="line">{</div>
 <div class="line">   <span class="keyword">auto</span> <a class="code hl_variable" href="group__functions_ga64a0550a46270d01b31593e38a364f72.html#ga64a0550a46270d01b31593e38a364f72">beta</a>(<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">x</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">y</a>) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga64a0550a46270d01b31593e38a364f72_html_ga64a0550a46270d01b31593e38a364f72"><div class="ttname"><a href="group__functions_ga64a0550a46270d01b31593e38a364f72.html#ga64a0550a46270d01b31593e38a364f72">kyosu::beta</a></div><div class="ttdeci">constexpr auto beta</div><div class="ttdoc">Computes the beta function:  for real, complex or general Cayley_dickson entries.</div><div class="ttdef"><b>Definition</b> beta.hpp:69</div></div>
+<div class="ttc" id="agroup__functions_ga64a0550a46270d01b31593e38a364f72_html_ga64a0550a46270d01b31593e38a364f72"><div class="ttname"><a href="group__functions_ga64a0550a46270d01b31593e38a364f72.html#ga64a0550a46270d01b31593e38a364f72">kyosu::beta</a></div><div class="ttdeci">constexpr auto beta</div><div class="ttdoc">Computes the beta function:  for real, complex or general Cayley_dickson entries.</div><div class="ttdef"><b>Definition</b> beta.hpp:73</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('group__functions_ga64a0550a46270d01b31
 <li><code>x</code>,<code>y</code> : Values to process. Can be a mix of Cayley_dickson and real floating values.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>\(\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\) is returned. If <code>x</code> and <code>y</code> are real typed values they are treated as complex inputs.</p>
+<p>\(\displaystyle  \mathbf{B}(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\) is returned. If <code>x</code> and <code>y</code> are real typed values they are treated as complex inputs unless the option <code>real_only</code> is used in which case the result will the same as to an <code>eve::beta</code> call</p>
 <dl class="section note"><dt>Note</dt><dd>Β (upper case greek letter) can be used as an alias in code.</dd></dl>
 <h2 class="groupheader">External references </h2>
 <ul>
