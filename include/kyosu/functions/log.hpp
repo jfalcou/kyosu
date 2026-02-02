@@ -9,7 +9,6 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_polar.hpp>
 #include <kyosu/functions/muli.hpp>
-#include <iostream>
 
 namespace kyosu
 {

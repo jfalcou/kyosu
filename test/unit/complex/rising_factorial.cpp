@@ -19,23 +19,39 @@ TTS_CASE_WITH ( "Check behavior of rising_factorial on wide"
               )
 <typename T>(T const& a0, T const& a1, T const& a2, T const& a3 )
 {
+  auto use = [](auto ...){};
+  use(a0, a1, a2, a3);
   using e_t = T;
   using z_t = kyosu::complex_t<T>;
- auto tcx = [](auto r,  auto i){return kyosu::complex(T(r), T(i)); };
-  auto a = tcx(a0, a1);
+   auto tcx = [](auto r,  auto i){return kyosu::complex(T(r), T(i)); };
+   auto a = tcx(a0, a1);
   auto b = tcx(a2, a3);
 
-  auto rf =  [](auto x,  auto a){return kyosu::tgamma(a+x)/kyosu::tgamma(x); };
+  auto rf =  [](auto z0,  auto z1){
+    auto zz0 = kyosu::complex(z0);
+    return kyosu::if_else(kyosu::is_eqz(z1), kyosu::one, kyosu::tgamma(zz0+z1)*kyosu::tgamma_inv(zz0));
+  };
 
   TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, b) , rf(a, b),tts::prec<T>());
   TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, tcx(2, 0)), a*(a+1), tts::prec<T>());
   TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, tcx(3, 0)), a*(a+1)*(a+2),  tts::prec<T>());
   TTS_RELATIVE_EQUAL( kyosu::rising_factorial(kyosu::abs(a0), b)   , rf(kyosu::abs(a0), b), tts::prec<T>());
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(-kyosu::abs(a0), b)   , rf(-kyosu::abs(a0), b), tts::prec<T>());
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(-kyosu::abs(a0), b)   , rf(-kyosu::abs(a0), b), tts::prec<T>()) << "-abs(a0) " << -a0 << " b " <<  b << "\n";
   TTS_RELATIVE_EQUAL( kyosu::rising_factorial(b, kyosu::abs(a0))   ,  rf(b, kyosu::abs(a0)), tts::prec<T>());
   TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, 3u)   , kyosu::rising_factorial(a, e_t(3)),  tts::prec<T>());
   TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, 2u)   , kyosu::rising_factorial(a, e_t(2)),  tts::prec<T>());
-  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, -2)   , kyosu::rising_factorial(a, e_t(-2)),  tts::prec<T>());
+//    if constexpr(eve::cardinal_v<T> == 4)
+//    {
+//      std::cout << "-------------------------------" << std::endl;
+//      auto aa =  kyosu::rising_factorial(a, T(-2.3));
+//      std::cout << "===============================" << std::endl;
+//      auto bb =  kyosu::rising_factorial(a, e_t(-2.3));
+//      std::cout << tts::typename_<T> << std::endl;
+//      std::cout << "a  " << a << std::endl;
+//      std::cout << "aa " << aa << std::endl;
+//      std::cout << "bb " << bb << std::endl;
+//    }
+  TTS_RELATIVE_EQUAL( kyosu::rising_factorial(a, -2)   , kyosu::rising_factorial(a, e_t(-2)),  tts::prec<T>()) << "a " << a << "\n";
   TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(0, 0), tcx(0, 0)), tcx(1, 0), tts::prec<T>());
   TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(1, 0), tcx(0, 0)), tcx(1, 0), tts::prec<T>());
   TTS_RELATIVE_EQUAL( kyosu::rising_factorial(tcx(1, 3), tcx(0, 0)), tcx(1, 0), tts::prec<T>());

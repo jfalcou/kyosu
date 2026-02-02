@@ -29,5 +29,6 @@ int main()
   wc_t wc0(c0, c1);
   wc_t wc1(c1, c1);
   std::cout << wc0 << ", " << wc1 << " -> " << rising_factorial(wc0, wc1) << "\n";
+
   return 0;
 }
