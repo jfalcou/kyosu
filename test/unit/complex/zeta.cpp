@@ -9,12 +9,8 @@
 #include <test.hpp>
 #include <complex>
 
-
-TTS_CASE_WITH("Check behavior of zeta on wide"
-             , kyosu::scalar_real_types
-             , tts::generate( tts::randoms(-10, 10))
-             )
-  <typename T>([[maybe_unused]] T const& a0)
+TTS_CASE_WITH("Check behavior of zeta on wide", kyosu::scalar_real_types, tts::randoms(-10, 10))
+<typename T>([[maybe_unused]] T const& a0)
 {
   using eve::as;
   using kyosu::real;
@@ -32,7 +28,7 @@ TTS_CASE_WITH("Check behavior of zeta on wide"
   TTS_ULP_EQUAL(real(zeta(T(-14.5))), T(std::riemann_zeta(v_t(-14.5))), 18);
 #endif
 
-  if constexpr( eve::platform::supports_invalids )
+  if constexpr (eve::platform::supports_invalids)
   {
     TTS_IEEE_EQUAL(real(zeta(eve::nan(eve::as<T>()))), eve::nan(eve::as<T>()));
     TTS_IEEE_EQUAL(real(zeta(eve::inf(eve::as<T>()))), eve::one(eve::as<T>()));
