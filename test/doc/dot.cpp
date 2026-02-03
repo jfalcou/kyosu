@@ -1,11 +1,11 @@
-#include <kyosu/kyosu.hpp>
 #include <eve/wide.hpp>
 #include <iostream>
+#include <kyosu/kyosu.hpp>
 
 int main()
 {
-  using kyosu::dot;
   using kyosu::complex_t;
+  using kyosu::dot;
   using kyosu::quaternion_t;
   using e_t = float;
   using c_t = kyosu::complex_t<float>;
@@ -14,7 +14,7 @@ int main()
   using wc_t = eve::wide<kyosu::complex_t<float>, eve::fixed<2>>;
   using wq_t = eve::wide<kyosu::quaternion_t<float>, eve::fixed<2>>;
 
-  std::cout << "Real:        "<< "\n";
+  std::cout << "Real:        " << "\n";
   e_t e0(1);
   e_t e1(2);
   std::cout << e0 << ", " << e1 << " -> " << dot(e0, e1) << "\n";
@@ -22,7 +22,7 @@ int main()
   we_t we1(e1);
   std::cout << we0 << ", " << we1 << " -> " << dot(we0, we1) << "\n";
 
-  std::cout << "Complex:     "<< "\n";
+  std::cout << "Complex:     " << "\n";
   c_t c0(1, 5);
   c_t c1(5, 9);
   std::cout << c0 << ", " << c1 << " -> " << dot(c0, c1) << "\n";
@@ -30,7 +30,7 @@ int main()
   wc_t wc1(c1);
   std::cout << wc0 << ", " << wc1 << " -> " << dot(wc0, wc1) << "\n";
 
-  std::cout << "Quaternion:  "<< "\n";
+  std::cout << "Quaternion:  " << "\n";
   q_t q0(1, 5, 2, 3);
   q_t q1(5, 9, 6, 7);
   std::cout << q0 << ", " << q1 << " -> " << dot(q0, q1) << "\n";
@@ -42,11 +42,12 @@ int main()
   std::cout << wq0 << ", " << e1 << " -> " << dot(wq0, e1) << "\n";
   std::cout << q0 << ", " << we1 << " -> " << dot(q0, we1) << "\n";
 
-  kumi::tuple s{wc0, wc1, 2*wc1};
+  kumi::tuple s{wc0, wc1, 2 * wc1};
   kumi::tuple t{wc1, wc0, wc0};
-  std::cout <<  "kyosu::dot( s, t) == " << kyosu::dot(s, t) << std::endl;
-  std::cout <<  "kyosu::dot(wc0, wc1, 2*wc1, wc1, wc0, wc0) == " << kyosu::dot(wc0, wc1, 2*wc1, wc1, wc0, wc0) << std::endl;
-  kumi::tuple st{wc0, wc1, 2*wc1, wc1, wc0, wc0};
-  std::cout <<  "kyosu::dot(st) == " << kyosu::dot(st) << std::endl;
+  std::cout << "kyosu::dot( s, t) == " << kyosu::dot(s, t) << std::endl;
+  std::cout << "kyosu::dot(wc0, wc1, 2*wc1, wc1, wc0, wc0) == " << kyosu::dot(wc0, wc1, 2 * wc1, wc1, wc0, wc0)
+            << std::endl;
+  kumi::tuple st{wc0, wc1, 2 * wc1, wc1, wc0, wc0};
+  std::cout << "kyosu::dot(st) == " << kyosu::dot(st) << std::endl;
   return 0;
 }

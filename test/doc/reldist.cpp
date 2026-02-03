@@ -1,12 +1,12 @@
-#include <kyosu/kyosu.hpp>
 #include <eve/wide.hpp>
 #include <iostream>
+#include <kyosu/kyosu.hpp>
 
 int main()
 {
-  using kyosu::reldist;
   using kyosu::complex_t;
   using kyosu::quaternion_t;
+  using kyosu::reldist;
   using e_t = float;
   using c_t = kyosu::complex_t<float>;
   using q_t = kyosu::quaternion_t<float>;
@@ -14,7 +14,7 @@ int main()
   using wc_t = eve::wide<kyosu::complex_t<float>, eve::fixed<2>>;
   using wq_t = eve::wide<kyosu::quaternion_t<float>, eve::fixed<2>>;
 
-  std::cout << "Real:        "<< "\n";
+  std::cout << "Real:        " << "\n";
   e_t e0(1);
   e_t e1(2);
   std::cout << e0 << ", " << e1 << " -> " << reldist(e0, e1) << "\n";
@@ -22,7 +22,7 @@ int main()
   we_t we1(e1);
   std::cout << we0 << ", " << we1 << " -> " << reldist(we0, we1) << "\n";
 
-  std::cout << "Complex:     "<< "\n";
+  std::cout << "Complex:     " << "\n";
   c_t c0(1, 5);
   c_t c1(5, 9);
   std::cout << c0 << ", " << c1 << " -> " << reldist(c0, c1) << "\n";
@@ -30,7 +30,7 @@ int main()
   wc_t wc1(c1);
   std::cout << wc0 << ", " << wc1 << " -> " << reldist(wc0, wc1) << "\n";
 
-  std::cout << "Quaternion:  "<< "\n";
+  std::cout << "Quaternion:  " << "\n";
   q_t q0(1, 5, 2, 3);
   q_t q1(5, 9, 6, 7);
   std::cout << q0 << ", " << q1 << " -> " << reldist(q0, q1) << "\n";

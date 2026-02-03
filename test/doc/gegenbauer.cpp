@@ -1,7 +1,7 @@
 // revision 1
-#include <kyosu/kyosu.hpp>
 #include <eve/wide.hpp>
 #include <iostream>
+#include <kyosu/kyosu.hpp>
 
 int main()
 {
@@ -12,15 +12,16 @@ int main()
   double x(0.5);
 
   std::cout << "<- xd                                      = " << xd << '\n';
-  std::cout << "<- n                                       = " << n  << '\n';
-  std::cout << "<- l                                       = " << l  << '\n';
-  std::cout << "<- x                                       = " << x  << '\n';
+  std::cout << "<- n                                       = " << n << '\n';
+  std::cout << "<- l                                       = " << l << '\n';
+  std::cout << "<- x                                       = " << x << '\n';
 
   std::cout << "-> gegenbauer(n, l, xd)                      = " << kyosu::gegenbauer(n, l, xd) << '\n';
   std::cout << " ====================================================== " << std::endl;
-  std::cout << "-> gegenbauer[eve::ignore_last(2)](n, l, xd) = " << kyosu::gegenbauer[eve::ignore_last(2)](n, l, xd) << '\n';
-  std::cout << "-> gegenbauer[n > 3](n, l, xd)               = " << kyosu::gegenbauer[n >  3](n, l, xd) << '\n';
+  std::cout << "-> gegenbauer[eve::ignore_last(2)](n, l, xd) = " << kyosu::gegenbauer[eve::ignore_last(2)](n, l, xd)
+            << '\n';
+  std::cout << "-> gegenbauer[n > 3](n, l, xd)               = " << kyosu::gegenbauer[n > 3](n, l, xd) << '\n';
   std::cout << "-> gegenbauer(3.0, 2.0, xd)                  = " << kyosu::gegenbauer(3.0, 2.0, xd) << '\n';
   std::cout << "-> gegenbauer(n, l, 2.0)                     = " << kyosu::gegenbauer(n, l, 2.0) << '\n';
-  std::cout << "-> gegenbauer(n, l, x)                       = " << kyosu::gegenbauer(n, l, x)   << '\n';
+  std::cout << "-> gegenbauer(n, l, x)                       = " << kyosu::gegenbauer(n, l, x) << '\n';
 }

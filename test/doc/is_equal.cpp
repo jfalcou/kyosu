@@ -1,6 +1,6 @@
-#include <kyosu/kyosu.hpp>
 #include <eve/wide.hpp>
 #include <iostream>
+#include <kyosu/kyosu.hpp>
 
 int main()
 {
@@ -11,7 +11,7 @@ int main()
   using wc_t = eve::wide<kyosu::complex_t<float>, eve::fixed<2>>;
   using wq_t = eve::wide<kyosu::quaternion_t<float>, eve::fixed<2>>;
 
-  std::cout << "Real:        "<< "\n";
+  std::cout << "Real:        " << "\n";
   e_t e0(1);
   e_t e1(2);
   std::cout << e0 << ", " << e1 << " -> " << std::boolalpha << kyosu::is_equal(e0, e1) << "\n";
@@ -21,7 +21,7 @@ int main()
   we_t we1(e1);
   std::cout << we0 << ", " << we1 << " -> " << kyosu::is_equal(we0, we1) << "\n";
 
-  std::cout << "Complex:     "<< "\n";
+  std::cout << "Complex:     " << "\n";
   c_t c0(1, 5);
   c_t c1(5, 9);
   std::cout << c0 << ", " << c1 << " -> " << std::boolalpha << kyosu::is_equal(c0, c1) << "\n";
@@ -31,7 +31,7 @@ int main()
   wc_t wc1(c1, c1);
   std::cout << wc0 << ", " << wc1 << " -> " << kyosu::is_equal(wc0, wc1) << "\n";
 
-  std::cout << "Quaternion:  "<< "\n";
+  std::cout << "Quaternion:  " << "\n";
   q_t q0(1, 5, 2, 3);
   q_t q1(5, 9, 6, 7);
   std::cout << q0 << ", " << q1 << " -> " << std::boolalpha << kyosu::is_equal(q0, q1) << "\n";

@@ -1,19 +1,18 @@
-#include <kyosu/kyosu.hpp>
-#include <eve/wide.hpp>
 #include <array>
+#include <eve/wide.hpp>
 #include <iostream>
+#include <kyosu/kyosu.hpp>
 
 int main()
 {
-  using kyosu::from_polar;
   using kyosu::complex_t;
+  using kyosu::from_polar;
   using kyosu::quaternion_t;
 
-
   auto theta = eve::pio_3(eve::as<double>());
-  auto rho   = 3.0;
-  auto iz0   = kyosu::sign(kyosu::quaternion(0., 1.));
-  auto iz1   = kyosu::sign(kyosu::quaternion(0., 1., 2., 3.));
+  auto rho = 3.0;
+  auto iz0 = kyosu::sign(kyosu::quaternion(0., 1.));
+  auto iz1 = kyosu::sign(kyosu::quaternion(0., 1., 2., 3.));
 
   std::cout << " <- theta = " << theta << std::endl;
   std::cout << " <- rho   = " << rho << std::endl;
