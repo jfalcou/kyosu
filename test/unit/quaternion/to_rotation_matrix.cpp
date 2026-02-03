@@ -20,8 +20,8 @@ TTS_CASE_WITH("Check behavior of to_rotation_matrix on wide",
               tts::randoms(0.5, +1.0),
               tts::randoms(0.5, +1.0),
               tts::randoms(0.5, +1.0),
-              tts::randoms(0.5, +1.0)))
-<typename T>(T const& a0, T const& a1, T const& a2, T const& a3 )
+              tts::randoms(0.5, +1.0))
+<typename T>(T const& a0, T const& a1, T const& a2, T const& a3)
 {
   using e_t = eve::element_type_t<T>;
   using wq_t = eve::wide<kyosu::quaternion_t<e_t>, eve::cardinal_t<T>>;
