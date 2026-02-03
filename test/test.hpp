@@ -141,7 +141,7 @@ namespace kyosu
 
   template<kyosu::concepts::cayley_dickson T> double absolute_distance(T const& l, T const& r)
   {
-    if (is_ieee_equal(l, r)) return 0.0;
+    if (ieee_equal(l, r)) return 0.0;
     else return kyosu::dist(l, r);
   }
 }
