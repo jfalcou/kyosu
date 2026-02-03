@@ -35,13 +35,13 @@ int main()
   std::cout << "sqrt(z) "     << sqrt(z) << std::endl;
   std::cout << "sqrt(z, k) "  << sqrt(z, k) << std::endl;
   std::cout << "sqrt(e) "     << sqrt(e) << std::endl;
-  std::cout << "sqrt[real_only](e) "     << sqrt[real_only](e) << std::endl;
+  std::cout << "sqrt[kyosu::real_only](e) "     << sqrt[kyosu::real_only](e) << std::endl;
   std::cout << "sqrt(-e)"     << sqrt(-e) << std::endl;
-  std::cout << "sqrt[real_only](-e) "     << sqrt[real_only](-e) << std::endl;
+  std::cout << "sqrt[kyosu::real_only](-e) "     << sqrt[kyosu::real_only](-e) << std::endl;
   std::cout << "sqrt(e, k) "  << sqrt(e, k) << std::endl;
-  std::cout << "sqrt[real_only](e, k) "  << sqrt[real_only](e, k) << std::endl;
-  std::cout << "sqrt[real_only](-e, k) "  << sqrt[real_only](-e, k) << std::endl;
-  std::cout << "sqrt[real_only](z, k) "  << sqrt[real_only](z, k) << std::endl;
+  std::cout << "sqrt[kyosu::real_only](e, k) "  << sqrt[kyosu::real_only](e, k) << std::endl;
+  std::cout << "sqrt[kyosu::real_only](-e, k) "  << sqrt[kyosu::real_only](-e, k) << std::endl;
+  std::cout << "sqrt[kyosu::real_only](z, k) "  << sqrt[kyosu::real_only](z, k) << std::endl;
 
   return 0;
 }
