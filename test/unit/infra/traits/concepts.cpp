@@ -20,25 +20,25 @@ TTS_CASE("Check kyosu::concepts::cayley_dickson_like behavior")
   TTS_EXPECT(kyosu::concepts::cayley_dickson_like<wide<float>>);
   TTS_EXPECT(kyosu::concepts::cayley_dickson_like<wide<double>>);
 
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<cayley_dickson<float, 2>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<cayley_dickson<float, 4>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<cayley_dickson<float, 8>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<cayley_dickson<float, 16>>);
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<cayley_dickson<float, 2>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<cayley_dickson<float, 4>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<cayley_dickson<float, 8>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<cayley_dickson<float, 16>>));
 
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<cayley_dickson<double, 2>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<cayley_dickson<double, 4>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<cayley_dickson<double, 8>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<cayley_dickson<double, 16>>);
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<cayley_dickson<double, 2>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<cayley_dickson<double, 4>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<cayley_dickson<double, 8>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<cayley_dickson<double, 16>>));
 
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<float, 2>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<float, 4>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<float, 8>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<float, 16>>>);
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<float, 2>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<float, 4>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<float, 8>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<float, 16>>>));
 
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<double, 2>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<double, 4>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<double, 8>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<double, 16>>>);
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<double, 2>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<double, 4>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<double, 8>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson_like<wide<cayley_dickson<double, 16>>>));
 };
 
 TTS_CASE("Check kyosu::concepts::cayley_dickson behavior")
@@ -53,25 +53,25 @@ TTS_CASE("Check kyosu::concepts::cayley_dickson behavior")
   TTS_EXPECT_NOT(kyosu::concepts::cayley_dickson<wide<float>>);
   TTS_EXPECT_NOT(kyosu::concepts::cayley_dickson<wide<double>>);
 
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<cayley_dickson<float, 2>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<cayley_dickson<float, 4>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<cayley_dickson<float, 8>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<cayley_dickson<float, 16>>);
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<cayley_dickson<float, 2>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<cayley_dickson<float, 4>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<cayley_dickson<float, 8>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<cayley_dickson<float, 16>>));
 
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<cayley_dickson<double, 2>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<cayley_dickson<double, 4>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<cayley_dickson<double, 8>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<cayley_dickson<double, 16>>);
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<cayley_dickson<double, 2>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<cayley_dickson<double, 4>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<cayley_dickson<double, 8>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<cayley_dickson<double, 16>>));
 
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<wide<cayley_dickson<float, 2>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<wide<cayley_dickson<float, 4>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<wide<cayley_dickson<float, 8>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<wide<cayley_dickson<float, 16>>>);
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<wide<cayley_dickson<float, 2>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<wide<cayley_dickson<float, 4>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<wide<cayley_dickson<float, 8>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<wide<cayley_dickson<float, 16>>>));
 
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<wide<cayley_dickson<double, 2>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<wide<cayley_dickson<double, 4>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<wide<cayley_dickson<double, 8>>>);
-  TTS_EXPECT(kyosu::concepts::cayley_dickson<wide<cayley_dickson<double, 16>>>);
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<wide<cayley_dickson<double, 2>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<wide<cayley_dickson<double, 4>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<wide<cayley_dickson<double, 8>>>));
+  TTS_EXPECT((kyosu::concepts::cayley_dickson<wide<cayley_dickson<double, 16>>>));
 };
 
 TTS_CASE("Check kyosu::concepts::scalar_cayley_dickson behavior")
@@ -86,25 +86,25 @@ TTS_CASE("Check kyosu::concepts::scalar_cayley_dickson behavior")
   TTS_EXPECT_NOT(kyosu::concepts::scalar_cayley_dickson<wide<float>>);
   TTS_EXPECT_NOT(kyosu::concepts::scalar_cayley_dickson<wide<double>>);
 
-  TTS_EXPECT(kyosu::concepts::scalar_cayley_dickson<cayley_dickson<float, 2>>);
-  TTS_EXPECT(kyosu::concepts::scalar_cayley_dickson<cayley_dickson<float, 4>>);
-  TTS_EXPECT(kyosu::concepts::scalar_cayley_dickson<cayley_dickson<float, 8>>);
-  TTS_EXPECT(kyosu::concepts::scalar_cayley_dickson<cayley_dickson<float, 16>>);
+  TTS_EXPECT((kyosu::concepts::scalar_cayley_dickson<cayley_dickson<float, 2>>));
+  TTS_EXPECT((kyosu::concepts::scalar_cayley_dickson<cayley_dickson<float, 4>>));
+  TTS_EXPECT((kyosu::concepts::scalar_cayley_dickson<cayley_dickson<float, 8>>));
+  TTS_EXPECT((kyosu::concepts::scalar_cayley_dickson<cayley_dickson<float, 16>>));
 
-  TTS_EXPECT(kyosu::concepts::scalar_cayley_dickson<cayley_dickson<double, 2>>);
-  TTS_EXPECT(kyosu::concepts::scalar_cayley_dickson<cayley_dickson<double, 4>>);
-  TTS_EXPECT(kyosu::concepts::scalar_cayley_dickson<cayley_dickson<double, 8>>);
-  TTS_EXPECT(kyosu::concepts::scalar_cayley_dickson<cayley_dickson<double, 16>>);
+  TTS_EXPECT((kyosu::concepts::scalar_cayley_dickson<cayley_dickson<double, 2>>));
+  TTS_EXPECT((kyosu::concepts::scalar_cayley_dickson<cayley_dickson<double, 4>>));
+  TTS_EXPECT((kyosu::concepts::scalar_cayley_dickson<cayley_dickson<double, 8>>));
+  TTS_EXPECT((kyosu::concepts::scalar_cayley_dickson<cayley_dickson<double, 16>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<float, 2>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<float, 4>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<float, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<float, 16>>>);
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<float, 2>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<float, 4>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<float, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<float, 16>>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<double, 2>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<double, 4>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<double, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<double, 16>>>);
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<double, 2>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<double, 4>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<double, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_cayley_dickson<wide<cayley_dickson<double, 16>>>));
 };
 
 TTS_CASE("Check kyosu::concepts::real behavior")
@@ -119,25 +119,25 @@ TTS_CASE("Check kyosu::concepts::real behavior")
   TTS_EXPECT(kyosu::concepts::real<wide<float>>);
   TTS_EXPECT(kyosu::concepts::real<wide<double>>);
 
-  TTS_EXPECT_NOT(kyosu::concepts::real<cayley_dickson<float, 2>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<cayley_dickson<float, 4>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<cayley_dickson<float, 8>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<cayley_dickson<float, 16>>);
+  TTS_EXPECT_NOT((kyosu::concepts::real<cayley_dickson<float, 2>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<cayley_dickson<float, 4>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<cayley_dickson<float, 8>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<cayley_dickson<float, 16>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::real<cayley_dickson<double, 2>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<cayley_dickson<double, 4>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<cayley_dickson<double, 8>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<cayley_dickson<double, 16>>);
+  TTS_EXPECT_NOT((kyosu::concepts::real<cayley_dickson<double, 2>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<cayley_dickson<double, 4>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<cayley_dickson<double, 8>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<cayley_dickson<double, 16>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::real<wide<cayley_dickson<float, 2>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<wide<cayley_dickson<float, 4>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<wide<cayley_dickson<float, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<wide<cayley_dickson<float, 16>>>);
+  TTS_EXPECT_NOT((kyosu::concepts::real<wide<cayley_dickson<float, 2>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<wide<cayley_dickson<float, 4>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<wide<cayley_dickson<float, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<wide<cayley_dickson<float, 16>>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::real<wide<cayley_dickson<double, 2>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<wide<cayley_dickson<double, 4>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<wide<cayley_dickson<double, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::real<wide<cayley_dickson<double, 16>>>);
+  TTS_EXPECT_NOT((kyosu::concepts::real<wide<cayley_dickson<double, 2>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<wide<cayley_dickson<double, 4>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<wide<cayley_dickson<double, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::real<wide<cayley_dickson<double, 16>>>));
 };
 
 TTS_CASE("Check kyosu::concepts::scalar_real behavior")
@@ -152,25 +152,25 @@ TTS_CASE("Check kyosu::concepts::scalar_real behavior")
   TTS_EXPECT_NOT(kyosu::concepts::scalar_real<wide<float>>);
   TTS_EXPECT_NOT(kyosu::concepts::scalar_real<wide<double>>);
 
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<cayley_dickson<float, 2>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<cayley_dickson<float, 4>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<cayley_dickson<float, 8>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<cayley_dickson<float, 16>>);
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<cayley_dickson<float, 2>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<cayley_dickson<float, 4>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<cayley_dickson<float, 8>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<cayley_dickson<float, 16>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<cayley_dickson<double, 2>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<cayley_dickson<double, 4>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<cayley_dickson<double, 8>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<cayley_dickson<double, 16>>);
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<cayley_dickson<double, 2>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<cayley_dickson<double, 4>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<cayley_dickson<double, 8>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<cayley_dickson<double, 16>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<wide<cayley_dickson<float, 2>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<wide<cayley_dickson<float, 4>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<wide<cayley_dickson<float, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<wide<cayley_dickson<float, 16>>>);
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<wide<cayley_dickson<float, 2>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<wide<cayley_dickson<float, 4>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<wide<cayley_dickson<float, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<wide<cayley_dickson<float, 16>>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<wide<cayley_dickson<double, 2>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<wide<cayley_dickson<double, 4>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<wide<cayley_dickson<double, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::scalar_real<wide<cayley_dickson<double, 16>>>);
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<wide<cayley_dickson<double, 2>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<wide<cayley_dickson<double, 4>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<wide<cayley_dickson<double, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::scalar_real<wide<cayley_dickson<double, 16>>>));
 };
 
 TTS_CASE("Check kyosu::concepts::complex behavior")
@@ -185,25 +185,25 @@ TTS_CASE("Check kyosu::concepts::complex behavior")
   TTS_EXPECT_NOT(kyosu::concepts::complex<wide<float>>);
   TTS_EXPECT_NOT(kyosu::concepts::complex<wide<double>>);
 
-  TTS_EXPECT(kyosu::concepts::complex<cayley_dickson<float, 2>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<cayley_dickson<float, 4>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<cayley_dickson<float, 8>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<cayley_dickson<float, 16>>);
+  TTS_EXPECT((kyosu::concepts::complex<cayley_dickson<float, 2>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<cayley_dickson<float, 4>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<cayley_dickson<float, 8>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<cayley_dickson<float, 16>>));
 
-  TTS_EXPECT(kyosu::concepts::complex<cayley_dickson<double, 2>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<cayley_dickson<double, 4>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<cayley_dickson<double, 8>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<cayley_dickson<double, 16>>);
+  TTS_EXPECT((kyosu::concepts::complex<cayley_dickson<double, 2>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<cayley_dickson<double, 4>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<cayley_dickson<double, 8>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<cayley_dickson<double, 16>>));
 
-  TTS_EXPECT(kyosu::concepts::complex<wide<cayley_dickson<float, 2>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<wide<cayley_dickson<float, 4>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<wide<cayley_dickson<float, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<wide<cayley_dickson<float, 16>>>);
+  TTS_EXPECT((kyosu::concepts::complex<wide<cayley_dickson<float, 2>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<wide<cayley_dickson<float, 4>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<wide<cayley_dickson<float, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<wide<cayley_dickson<float, 16>>>));
 
-  TTS_EXPECT(kyosu::concepts::complex<wide<cayley_dickson<double, 2>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<wide<cayley_dickson<double, 4>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<wide<cayley_dickson<double, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::complex<wide<cayley_dickson<double, 16>>>);
+  TTS_EXPECT((kyosu::concepts::complex<wide<cayley_dickson<double, 2>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<wide<cayley_dickson<double, 4>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<wide<cayley_dickson<double, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::complex<wide<cayley_dickson<double, 16>>>));
 };
 
 TTS_CASE("Check kyosu::concepts::quaternion behavior")
@@ -218,25 +218,25 @@ TTS_CASE("Check kyosu::concepts::quaternion behavior")
   TTS_EXPECT_NOT(kyosu::concepts::quaternion<wide<float>>);
   TTS_EXPECT_NOT(kyosu::concepts::quaternion<wide<double>>);
 
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<cayley_dickson<float, 2>>);
-  TTS_EXPECT(kyosu::concepts::quaternion<cayley_dickson<float, 4>>);
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<cayley_dickson<float, 8>>);
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<cayley_dickson<float, 16>>);
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<cayley_dickson<float, 2>>));
+  TTS_EXPECT((kyosu::concepts::quaternion<cayley_dickson<float, 4>>));
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<cayley_dickson<float, 8>>));
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<cayley_dickson<float, 16>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<cayley_dickson<double, 2>>);
-  TTS_EXPECT(kyosu::concepts::quaternion<cayley_dickson<double, 4>>);
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<cayley_dickson<double, 8>>);
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<cayley_dickson<double, 16>>);
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<cayley_dickson<double, 2>>));
+  TTS_EXPECT((kyosu::concepts::quaternion<cayley_dickson<double, 4>>));
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<cayley_dickson<double, 8>>));
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<cayley_dickson<double, 16>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<wide<cayley_dickson<float, 2>>>);
-  TTS_EXPECT(kyosu::concepts::quaternion<wide<cayley_dickson<float, 4>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<wide<cayley_dickson<float, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<wide<cayley_dickson<float, 16>>>);
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<wide<cayley_dickson<float, 2>>>));
+  TTS_EXPECT((kyosu::concepts::quaternion<wide<cayley_dickson<float, 4>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<wide<cayley_dickson<float, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<wide<cayley_dickson<float, 16>>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<wide<cayley_dickson<double, 2>>>);
-  TTS_EXPECT(kyosu::concepts::quaternion<wide<cayley_dickson<double, 4>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<wide<cayley_dickson<double, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::quaternion<wide<cayley_dickson<double, 16>>>);
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<wide<cayley_dickson<double, 2>>>));
+  TTS_EXPECT((kyosu::concepts::quaternion<wide<cayley_dickson<double, 4>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<wide<cayley_dickson<double, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::quaternion<wide<cayley_dickson<double, 16>>>));
 };
 
 TTS_CASE("Check kyosu::concepts::octonion behavior")
@@ -251,23 +251,23 @@ TTS_CASE("Check kyosu::concepts::octonion behavior")
   TTS_EXPECT_NOT(kyosu::concepts::octonion<wide<float>>);
   TTS_EXPECT_NOT(kyosu::concepts::octonion<wide<double>>);
 
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<cayley_dickson<float, 2>>);
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<cayley_dickson<float, 4>>);
-  TTS_EXPECT(kyosu::concepts::octonion<cayley_dickson<float, 8>>);
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<cayley_dickson<float, 16>>);
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<cayley_dickson<float, 2>>));
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<cayley_dickson<float, 4>>));
+  TTS_EXPECT((kyosu::concepts::octonion<cayley_dickson<float, 8>>));
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<cayley_dickson<float, 16>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<cayley_dickson<double, 2>>);
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<cayley_dickson<double, 4>>);
-  TTS_EXPECT(kyosu::concepts::octonion<cayley_dickson<double, 8>>);
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<cayley_dickson<double, 16>>);
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<cayley_dickson<double, 2>>));
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<cayley_dickson<double, 4>>));
+  TTS_EXPECT((kyosu::concepts::octonion<cayley_dickson<double, 8>>));
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<cayley_dickson<double, 16>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<wide<cayley_dickson<float, 2>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<wide<cayley_dickson<float, 4>>>);
-  TTS_EXPECT(kyosu::concepts::octonion<wide<cayley_dickson<float, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<wide<cayley_dickson<float, 16>>>);
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<wide<cayley_dickson<float, 2>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<wide<cayley_dickson<float, 4>>>));
+  TTS_EXPECT((kyosu::concepts::octonion<wide<cayley_dickson<float, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<wide<cayley_dickson<float, 16>>>));
 
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<wide<cayley_dickson<double, 2>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<wide<cayley_dickson<double, 4>>>);
-  TTS_EXPECT(kyosu::concepts::octonion<wide<cayley_dickson<double, 8>>>);
-  TTS_EXPECT_NOT(kyosu::concepts::octonion<wide<cayley_dickson<double, 16>>>);
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<wide<cayley_dickson<double, 2>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<wide<cayley_dickson<double, 4>>>));
+  TTS_EXPECT((kyosu::concepts::octonion<wide<cayley_dickson<double, 8>>>));
+  TTS_EXPECT_NOT((kyosu::concepts::octonion<wide<cayley_dickson<double, 16>>>));
 };
