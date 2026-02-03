@@ -10,7 +10,8 @@
 
 TTS_CASE_WITH("Check behavior of if_else on scalar cayley-dickson",
               tts::bunch<kyosu::scalar_real_types>,
-              tts::randoms(-100, +100))<typename T>(T const& a0)
+              tts::randoms(-100, +100))
+<typename T>(T const& a0)
 {
   using e_t = typename T::value_type;
   for (auto e : a0)
@@ -31,7 +32,8 @@ TTS_CASE_WITH("Check behavior of if_else on scalar cayley-dickson",
 
 TTS_CASE_WITH("Check behavior of if_else on SIMD cayley-dickson",
               tts::bunch<kyosu::scalar_real_types>,
-              tts::randoms(-100, +100))<typename T>(T const& a0)
+              tts::randoms(-100, +100))
+<typename T>(T const& a0)
 {
   using e_t = typename T::value_type;
   using c_t = kyosu::complex_t<e_t>;
@@ -54,7 +56,8 @@ TTS_CASE_WITH("Check behavior of if_else on SIMD cayley-dickson",
 
 TTS_CASE_WITH("Check behavior of if_else on cayley-dickson/named constants",
               tts::bunch<kyosu::scalar_real_types>,
-              tts::randoms(-10, +10))<typename T>(T const& a0)
+              tts::randoms(-10, +10))
+<typename T>(T const& a0)
 {
   using e_t = typename T::value_type;
   using c_t = kyosu::complex_t<e_t>;

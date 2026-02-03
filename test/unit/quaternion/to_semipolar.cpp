@@ -13,8 +13,8 @@ TTS_CASE_WITH("Check behavior of to_semipolar on wide",
               tts::randoms(0.25, +0.75),
               tts::randoms(0.25, +0.75),
               tts::randoms(0.25, +0.75),
-              tts::randoms(0.25, +0.75))<typename T>(T const& a0, T const& a1, T const& a2, T const& a3){
-  {auto q = kyosu::quaternion(a0, a1, a2, a3);
+              tts::randoms(0.25, +0.75))
+<typename T>(T const& a0, T const& a1, T const& a2, T const& a3){{auto q = kyosu::quaternion(a0, a1, a2, a3);
 auto [r1, t1, r2, t2] = kyosu::to_semipolar(q);
 auto q1 = kyosu::from_semipolar(r1, t1, r2, t2);
 TTS_RELATIVE_EQUAL(q, q1, 1.0e-5);

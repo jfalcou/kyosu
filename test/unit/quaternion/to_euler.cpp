@@ -12,7 +12,8 @@ TTS_CASE_WITH("Check behavior of rotate_vec on wide",
               kyosu::real_types,
               tts::randoms(0.25, +0.75),
               tts::randoms(0.25, +0.75),
-              tts::randoms(0.25, +0.75))<typename T>(T const& a0, T const& a1, T const& a2){
+              tts::randoms(0.25, +0.75))
+<typename T>(T const& a0, T const& a1, T const& a2){
   {auto z = kyosu::from_euler(a0, a1, a2, kyosu::Z_, kyosu::X_, kyosu::Z_);
 auto [t1, t2, t3] = kyosu::to_euler(z, kyosu::Z_, kyosu::X_, kyosu::Z_);
 TTS_RELATIVE_EQUAL(t1, a0, 1.0e-4);

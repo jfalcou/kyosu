@@ -8,7 +8,8 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_TPL("Check complex::operator+ ", kyosu::scalar_real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Check complex::operator+ ", kyosu::scalar_real_types)
+<typename T>(tts::type<T>)
 {
   using c_t = kyosu::complex_t<T>;
   using w_t = eve::wide<T>;
@@ -58,7 +59,8 @@ TTS_CASE_TPL("Check complex::operator+ ", kyosu::scalar_real_types)<typename T>(
   TTS_EQUAL((rv + z_v1), (wc_t{[&](auto i, auto) { return z_v1.get(i) + rv.get(i); }}));
 };
 
-TTS_CASE_TPL("Check complex::operator-", kyosu::scalar_real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Check complex::operator-", kyosu::scalar_real_types)
+<typename T>(tts::type<T>)
 {
   using c_t = kyosu::complex_t<T>;
   using w_t = eve::wide<T>;
@@ -119,7 +121,8 @@ TTS_CASE_TPL("Check complex::operator-", kyosu::scalar_real_types)<typename T>(t
   TTS_EQUAL((rv - z_v1), (wc_t{[&](auto i, auto) { return rv.get(i) - z_v1.get(i); }}));
 };
 
-TTS_CASE_TPL("Check complex::operator*", kyosu::scalar_real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Check complex::operator*", kyosu::scalar_real_types)
+<typename T>(tts::type<T>)
 {
   using c_t = kyosu::complex_t<T>;
   using w_t = eve::wide<T>;
@@ -168,7 +171,8 @@ TTS_CASE_TPL("Check complex::operator*", kyosu::scalar_real_types)<typename T>(t
   TTS_EQUAL((rv * z_v1), (wc_t{[&](auto i, auto) { return z_v1.get(i) * rv.get(i); }}));
 };
 
-TTS_CASE_TPL("Check complex::operator/", kyosu::scalar_real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Check complex::operator/", kyosu::scalar_real_types)
+<typename T>(tts::type<T>)
 {
   using c_t = kyosu::complex_t<T>;
   using w_t = eve::wide<T>;

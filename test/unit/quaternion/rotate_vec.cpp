@@ -13,7 +13,8 @@ TTS_CASE_WITH("Check behavior of rotate_vec on wide",
               tts::randoms(0.25, +0.75),
               tts::randoms(0.25, +0.75),
               tts::randoms(0.25, +0.75),
-              tts::randoms(0.25, +0.75))<typename T>(T const& a0, T const& a1, T const& a2, T const& a3)
+              tts::randoms(0.25, +0.75))
+<typename T>(T const& a0, T const& a1, T const& a2, T const& a3)
 {
   std::array<T, 3> v{a0, a1, a2};
   auto rsq3 = eve::rec(eve::sqrt_3(eve::as(a3)));

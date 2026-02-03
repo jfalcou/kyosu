@@ -10,7 +10,8 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH("Check kyosu::real over real", kyosu::real_types, tts::randoms(-10, 10))<typename T>(T data)
+TTS_CASE_WITH("Check kyosu::real over real", kyosu::real_types, tts::randoms(-10, 10))
+<typename T>(T data)
 {
   using real_t = kyosu::as_real_type_t<T>;
   TTS_EQUAL(kyosu::real(data), data);
@@ -53,7 +54,8 @@ TTS_CASE_WITH("Check kyosu::real over octonion",
               tts::randoms(-10, 10),
               tts::randoms(-10, 10),
               tts::randoms(-10, 10),
-              tts::randoms(-10, 10))<typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
+              tts::randoms(-10, 10))
+<typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
   auto data = kyosu::octonion_t<T>(r, i, j, k, l, li, lj, lk);
   TTS_EQUAL(kyosu::real(data), r);

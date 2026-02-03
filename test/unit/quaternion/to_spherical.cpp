@@ -13,8 +13,8 @@ TTS_CASE_WITH("Check behavior of to_spherical on wide",
               tts::randoms(0.25, +0.75),
               tts::randoms(0.25, +0.75),
               tts::randoms(0.25, +0.75),
-              tts::randoms(0.25, +0.75))<typename T>(T const& a0, T const& a1, T const& a2, T const& a3){
-  {auto q = kyosu::quaternion(a0, a1, a2, a3);
+              tts::randoms(0.25, +0.75))
+<typename T>(T const& a0, T const& a1, T const& a2, T const& a3){{auto q = kyosu::quaternion(a0, a1, a2, a3);
 auto [rho, theta, phi1, phi2] = kyosu::to_spherical(q);
 auto q1 = kyosu::from_spherical(rho, theta, phi1, phi2);
 TTS_RELATIVE_EQUAL(q, q1, 1.0e-5);

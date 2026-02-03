@@ -8,7 +8,8 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_TPL("Generate half", kyosu::real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Generate half", kyosu::real_types)
+<typename T>(tts::type<T>)
 {
   using kyosu::complex_t;
   using kyosu::octonion_t;
@@ -20,7 +21,8 @@ TTS_CASE_TPL("Generate half", kyosu::real_types)<typename T>(tts::type<T>)
   TTS_EQUAL(kyosu::half(kyosu::as<octonion_t<T>>{}), octonion_t<T>{0.5});
 };
 
-TTS_CASE_TPL("Generate pi", kyosu::real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Generate pi", kyosu::real_types)
+<typename T>(tts::type<T>)
 {
   using kyosu::complex_t;
   using kyosu::octonion_t;

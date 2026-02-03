@@ -13,7 +13,8 @@ TTS_CASE_WITH("Check behavior of align on wide",
               tts::randoms(0.25, +0.75),
               tts::randoms(0.25, +0.75),
               tts::randoms(0.25, +0.75),
-              tts::randoms(0.25, +0.75))<typename T>(T const& a0, T const& a1, T const& a2, T const& a3)
+              tts::randoms(0.25, +0.75))
+<typename T>(T const& a0, T const& a1, T const& a2, T const& a3)
 {
   using kyosu::quaternion;
   using kyosu::sign;

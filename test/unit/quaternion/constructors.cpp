@@ -8,7 +8,8 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_TPL("Check quaternion constructor from constants", kyosu::scalar_real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Check quaternion constructor from constants", kyosu::scalar_real_types)
+<typename T>(tts::type<T>)
 {
   using w_t = eve::wide<T>;
   auto spi = T{3.1415};
@@ -68,7 +69,8 @@ TTS_CASE_TPL("Check quaternion constructor from constants", kyosu::scalar_real_t
   // TTS_EQUAL( get<3>(z_ra), wpi);
 };
 
-TTS_CASE_TPL("Check quaternion constructor from lambda", kyosu::scalar_real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Check quaternion constructor from lambda", kyosu::scalar_real_types)
+<typename T>(tts::type<T>)
 {
   using w_t = eve::wide<T>;
 
@@ -104,7 +106,8 @@ TTS_CASE_TPL("Check quaternion constructor from lambda", kyosu::scalar_real_type
   TTS_EQUAL(get<3>(z_cl), w_t(fill_k));
 };
 
-TTS_CASE_TPL("Check quaternion copy/assignment", kyosu::scalar_real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Check quaternion copy/assignment", kyosu::scalar_real_types)
+<typename T>(tts::type<T>)
 {
   using w_t = eve::wide<T>;
   auto spi = T{3.1415};

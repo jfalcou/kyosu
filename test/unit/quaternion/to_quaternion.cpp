@@ -8,7 +8,8 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_TPL("Check to_quaternion converter from constants", kyosu::scalar_real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Check to_quaternion converter from constants", kyosu::scalar_real_types)
+<typename T>(tts::type<T>)
 {
   using e_t = T;
   using w_t = eve::wide<e_t>;

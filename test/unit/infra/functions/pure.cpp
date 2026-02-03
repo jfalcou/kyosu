@@ -46,7 +46,8 @@ TTS_CASE_WITH("Check kyosu::pure over octonion",
               tts::randoms(-10, 10),
               tts::randoms(-10, 10),
               tts::randoms(-10, 10),
-              tts::randoms(-10, 10))<typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
+              tts::randoms(-10, 10))
+<typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
   using type = kyosu::octonion_t<T>;
   auto po = kyosu::pure(type(r, i, j, k, l, li, lj, lk));

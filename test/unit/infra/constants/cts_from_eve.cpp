@@ -8,7 +8,8 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_TPL("test constants", kyosu::real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("test constants", kyosu::real_types)
+<typename T>(tts::type<T>)
 {
   using kyosu::complex_t;
   using kyosu::octonion_t;

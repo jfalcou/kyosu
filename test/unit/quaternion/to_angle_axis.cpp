@@ -13,7 +13,8 @@ TTS_CASE_WITH("Check behavior of from_angle_axis on wide",
               tts::randoms(0.5, +1.0),
               tts::randoms(0.5, +1.0),
               tts::randoms(0.5, +1.0),
-              tts::randoms(0.5, +1.0))<typename T>(T const& a0, T const& a1, T const& a2, T const& a3){
+              tts::randoms(0.5, +1.0))
+<typename T>(T const& a0, T const& a1, T const& a2, T const& a3){
   {auto q = kyosu::sign(kyosu::quaternion(a0, a1, a2, a3));
 auto [a, v] = kyosu::to_angle_axis(q);
 std::span<T, 3> vv(v);

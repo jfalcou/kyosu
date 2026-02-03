@@ -8,7 +8,8 @@
 #include "test.hpp"
 #include <kyosu/kyosu.hpp>
 
-TTS_CASE_TPL("Generate basic constants on real types", kyosu::real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Generate basic constants on real types", kyosu::real_types)
+<typename T>(tts::type<T>)
 {
   TTS_EQUAL(kyosu::i(kyosu::as<T>{}), (kyosu::complex(T{0}, T{1})));
   TTS_EQUAL(kyosu::mi(kyosu::as<T>{}), (kyosu::complex(T{0}, T{-1})));
@@ -20,7 +21,8 @@ TTS_CASE_TPL("Generate basic constants on real types", kyosu::real_types)<typena
   TTS_EXPECT(eve::all(eve::is_infinite(kyosu::imag(ci))));
 };
 
-TTS_CASE_TPL("Generate basic constants on complex", kyosu::real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Generate basic constants on complex", kyosu::real_types)
+<typename T>(tts::type<T>)
 {
   TTS_EQUAL(kyosu::i(kyosu::as<kyosu::complex_t<T>>{}), (kyosu::complex(T{0}, T{1})));
   TTS_EQUAL(kyosu::mi(kyosu::as<kyosu::complex_t<T>>{}), (kyosu::complex(T{0}, T{-1})));
@@ -32,7 +34,8 @@ TTS_CASE_TPL("Generate basic constants on complex", kyosu::real_types)<typename 
   TTS_EXPECT(eve::all(eve::is_infinite(kyosu::imag(ci))));
 };
 
-TTS_CASE_TPL("Generate basic constants on quaternion", kyosu::real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Generate basic constants on quaternion", kyosu::real_types)
+<typename T>(tts::type<T>)
 {
   TTS_EQUAL(kyosu::i(kyosu::as<kyosu::quaternion_t<T>>{}), (kyosu::quaternion(T{0}, T{1})));
   TTS_EQUAL(kyosu::mi(kyosu::as<kyosu::quaternion_t<T>>{}), (kyosu::quaternion(T{0}, T{-1})));
@@ -44,7 +47,8 @@ TTS_CASE_TPL("Generate basic constants on quaternion", kyosu::real_types)<typena
   TTS_EXPECT(eve::all(eve::is_infinite(kyosu::imag(ci))));
 };
 
-TTS_CASE_TPL("Generate basic constants on octonion", kyosu::real_types)<typename T>(tts::type<T>)
+TTS_CASE_TPL("Generate basic constants on octonion", kyosu::real_types)
+<typename T>(tts::type<T>)
 {
   TTS_EQUAL(kyosu::i(kyosu::as<kyosu::octonion_t<T>>{}), (kyosu::octonion_t<T>(T{0}, T{1})));
   TTS_EQUAL(kyosu::mi(kyosu::as<kyosu::octonion_t<T>>{}), (kyosu::octonion_t<T>(T{0}, T{-1})));
