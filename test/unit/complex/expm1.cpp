@@ -34,7 +34,7 @@ TTS_CASE_WITH("Check behavior of exp on scalar",
 TTS_CASE_WITH("Check behavior of exp on wide", kyosu::simd_real_types, tts::randoms(-10, 10), tts::randoms(-10, 10))
 <typename T>(T const& a0, T const& a1)
 {
-  auto pr = tts::prec<T>(2.0e-3, 1.0e-7, );
+  auto pr = tts::prec<T>(2.0e-3, 1.0e-7);
   using e_t = T;
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
