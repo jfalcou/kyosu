@@ -10,34 +10,33 @@
 
 // TTS_CASE_WITH ( "Check kyosu::oneminus over real"
 //               , kyosu::real_types
-//               , tts::generate(tts::randoms(-10,10))
+//               , tts::randoms(-10,10)
 //               )
 // (auto data)
 // {
 //   TTS_EQUAL(kyosu::oneminus(data), eve::oneminus(data));
 // };
 
-TTS_CASE_WITH ( "Check kyosu::oneminus over complex"
-              , kyosu::real_types
-              , tts::generate(tts::randoms(-10,10), tts::randoms(-10,10))
-              )
+TTS_CASE_WITH("Check kyosu::oneminus over complex", kyosu::real_types, tts::randoms(-10, 10), tts::randoms(-10, 10))
 <typename T>(T r, T i)
 {
   using type = kyosu::complex_t<T>;
   auto o = type(1);
   auto c = type(r, i);
-  TTS_EQUAL(kyosu::oneminus(c), o-c);
+  TTS_EQUAL(kyosu::oneminus(c), o - c);
 };
 
-TTS_CASE_WITH ( "Check kyosu::oneminus over quaternion"
-              , kyosu::real_types
-              , tts::generate ( tts::randoms(-5,5), tts::randoms(-5,5)
-                              , tts::randoms(-5,5), tts::randoms(-5,5)
-                              )
-              )
+TTS_CASE_WITH("Check kyosu::oneminus over quaternion",
+              kyosu::real_types,
+              tts::randoms(-5, 5),
+              tts::randoms(-5, 5),
+              tts::randoms(-5, 5),
+              tts::randoms(-5, 5)
+
+)
 <typename T>(T r, T i, T j, T k)
 {
   using type = kyosu::quaternion_t<T>;
   auto o = type(T(1));
-  TTS_EQUAL(kyosu::oneminus(type(r,i,j,k)), o-type(r,i,j,k));
+  TTS_EQUAL(kyosu::oneminus(type(r, i, j, k)), o - type(r, i, j, k));
 };

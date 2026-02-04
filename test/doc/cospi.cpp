@@ -1,11 +1,11 @@
-#include <kyosu/kyosu.hpp>
 #include <eve/wide.hpp>
 #include <iostream>
+#include <kyosu/kyosu.hpp>
 
 int main()
 {
-  using kyosu::cospi;
   using kyosu::complex_t;
+  using kyosu::cospi;
   using kyosu::quaternion_t;
   using e_t = float;
   using c_t = kyosu::complex_t<float>;
@@ -19,21 +19,21 @@ int main()
   we_t we = we_t(e);
   std::cout << e << " -> " << cospi(e) << "\n";
   std::cout << we << " -> " << cospi(we) << "\n";
-  std::cout               << cospi(c_t(e))<< "\n";
-  std::cout               << cospi(q_t(e))<< "\n";
-  std::cout               << cospi(wc_t(e))<< "\n";
-  std::cout               << cospi(wq_t(e))<< "\n";
+  std::cout << cospi(c_t(e)) << "\n";
+  std::cout << cospi(q_t(e)) << "\n";
+  std::cout << cospi(wc_t(e)) << "\n";
+  std::cout << cospi(wq_t(e)) << "\n";
 
   std::cout << "Complex:     \n";
-  c_t c(3.5f,-2.9f);
+  c_t c(3.5f, -2.9f);
   wc_t wc = wc_t(c);
   std::cout << c << " -> " << cospi(c) << "\n";
   std::cout << wc << " -> " << cospi(wc) << "\n";
-  std::cout               << cospi(q_t(c))<< "\n";
-  std::cout               << cospi(wq_t(c))<< "\n";
+  std::cout << cospi(q_t(c)) << "\n";
+  std::cout << cospi(wq_t(c)) << "\n";
 
   std::cout << "Quaternion:  \n";
-  q_t q(3.5f,-2.9f, 2.1f, 3.2f);
+  q_t q(3.5f, -2.9f, 2.1f, 3.2f);
   wq_t wq = wq_t(q);
   std::cout << q << " -> " << cospi(q) << "\n";
   std::cout << wq << " -> " << cospi(wq) << "\n";
