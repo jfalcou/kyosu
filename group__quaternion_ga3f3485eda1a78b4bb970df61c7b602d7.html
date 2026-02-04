@@ -182,26 +182,25 @@ $(document).ready(function(){initNavTree('group__quaternion_ga3f3485eda1a78b4bb9
 <li>Same but the <a href="https://en.wikipedia.org/wiki/Euler_angles">intrinsic</a> way is used to interpret the angles.</li>
 </ol>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">main</a>()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">kyosu::from_euler</a>;</div>
 <div class="line">  <span class="keyword">using </span>kyosu::X_;</div>
-<div class="line">  <span class="keyword">using </span>kyosu::Z_;</div>
 <div class="line">  <span class="keyword">using </span>kyosu::Y_;</div>
+<div class="line">  <span class="keyword">using </span>kyosu::Z_;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> psi  = eve::pio_3(eve::as(0.0));</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">theta</a>= eve::pio_4(eve::as(0.0));</div>
-<div class="line">  <span class="keyword">auto</span> phi  = eve::pio_6(eve::as(0.0));</div>
+<div class="line">  <span class="keyword">auto</span> psi = eve::pio_3(eve::as(0.0));</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">theta</a> = eve::pio_4(eve::as(0.0));</div>
+<div class="line">  <span class="keyword">auto</span> phi = eve::pio_6(eve::as(0.0));</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- psi   &quot;</span> &lt;&lt; psi &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- theta &quot;</span> &lt;&lt; <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">theta</a> &lt;&lt; std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- phi   &quot;</span> &lt;&lt; phi&lt;&lt; std::endl;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; from_euler(psi, theta, phi, X_, Z_, Y_) &quot;</span></div>
-<div class="line">            &lt;&lt; <a class="code hl_variable" href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">kyosu::from_euler</a>(psi, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">theta</a>, phi, X_, Z_, Y_) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; &lt;- phi   &quot;</span> &lt;&lt; phi &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; from_euler(psi, theta, phi, X_, Z_, Y_) &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">kyosu::from_euler</a>(psi, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">theta</a>, phi, X_, Z_, Y_) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; -&gt; from_euler[intrinsic](psi, theta, phi, Y_, Z_, Y_) &quot;</span></div>
 <div class="line">            &lt;&lt; <a class="code hl_variable" href="group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7">kyosu::from_euler</a>[kyosu::intrinsic](psi, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">theta</a>, phi, Y_, Z_, Y_) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>

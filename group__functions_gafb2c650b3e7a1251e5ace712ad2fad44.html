@@ -184,24 +184,23 @@ $(document).ready(function(){initNavTree('group__functions_gafb2c650b3e7a1251e5a
 <li><a href="https://dlmf.nist.gov/4.37">DLMF: Inverse hyperbolic functions</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">main</a>()</div>
 <div class="line">{</div>
 <div class="line"> </div>
-<div class="line"> <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wide_ft</a> = eve::wide &lt;float, eve::fixed&lt;4&gt;&gt;;</div>
-<div class="line">  <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wide_ft</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">ref1</a> = { 3.0f, 2.0f, 1.0f, 0.5f};</div>
-<div class="line">  <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wide_ft</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">imf1</a> = { 2.0f , -1.0,  -5.0, 0.0};</div>
-<div class="line">  <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wide_ft</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">ref2</a> = { 0.0, 1.0, 2.0, 3.0};</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wide_ft</a> = eve::wide&lt;float, eve::fixed&lt;4&gt;&gt;;</div>
+<div class="line">  <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wide_ft</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">ref1</a> = {3.0f, 2.0f, 1.0f, 0.5f};</div>
+<div class="line">  <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wide_ft</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">imf1</a> = {2.0f, -1.0, -5.0, 0.0};</div>
+<div class="line">  <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wide_ft</a> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">ref2</a> = {0.0, 1.0, 2.0, 3.0};</div>
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">zc</a> = <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;wide_ft&gt;</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">ref1</a>, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">imf1</a>);</div>
 <div class="line"> </div>
-<div class="line">  std::cout</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;&lt;- zc             = &quot;</span> &lt;&lt; <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">zc</a> &lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; asinh(zc)      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">kyosu::asinh</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">zc</a>)&lt;&lt; std::endl</div>
-<div class="line">    &lt;&lt; <span class="stringliteral">&quot;-&gt; asinh(ref2)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">kyosu::asinh</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">ref2</a>) &lt;&lt; std::endl;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;&lt;- zc             = &quot;</span> &lt;&lt; <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">zc</a> &lt;&lt; std::endl</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;-&gt; asinh(zc)      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">kyosu::asinh</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">zc</a>) &lt;&lt; std::endl</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;-&gt; asinh(ref2)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gafb2c650b3e7a1251e5ace712ad2fad44.html#gafb2c650b3e7a1251e5ace712ad2fad44">kyosu::asinh</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">ref2</a>) &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>

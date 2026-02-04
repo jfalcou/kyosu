@@ -162,9 +162,9 @@ $(document).ready(function(){initNavTree('group__functions_ga45902be43d9c444ef8e
 <li>returns \(Ai(z)\).</li>
 </ul>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">main</a>()</div>
 <div class="line">{</div>
@@ -176,14 +176,16 @@ $(document).ready(function(){initNavTree('group__functions_ga45902be43d9c444ef8e
 <div class="line">  std::cout &lt;&lt; 72.9f &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga45902be43d9c444ef8e2d4c35e909954.html#ga45902be43d9c444ef8e2d4c35e909954">airy_ai</a>(72.9f) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kyosu::complex_t&lt;float&gt;(3.5f,-2.9f) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga45902be43d9c444ef8e2d4c35e909954.html#ga45902be43d9c444ef8e2d4c35e909954">airy_ai</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;float&gt;</a>(3.5f,-2.9f)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kyosu::complex_t&lt;float&gt;(3.5f, -2.9f) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga45902be43d9c444ef8e2d4c35e909954.html#ga45902be43d9c444ef8e2d4c35e909954">airy_ai</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;float&gt;</a>(3.5f, -2.9f)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kyosu::quaternion_t&lt;double&gt;(1.,2.,3.,4.) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga45902be43d9c444ef8e2d4c35e909954.html#ga45902be43d9c444ef8e2d4c35e909954">airy_ai</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::quaternion_t&lt;double&gt;</a>(1.,2.,3.,4.)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kyosu::quaternion_t&lt;double&gt;(1., 2., 3., 4.) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span></div>
+<div class="line">            &lt;&lt; <a class="code hl_variable" href="group__functions_ga45902be43d9c444ef8e2d4c35e909954.html#ga45902be43d9c444ef8e2d4c35e909954">airy_ai</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::quaternion_t&lt;double&gt;</a>(1., 2., 3., 4.)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;SIMD:        &quot;</span>;</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wc_t</a> = eve::wide&lt;kyosu::complex_t&lt;double&gt;, eve::fixed&lt;2&gt;&gt;;</div>
-<div class="line">  std::cout &lt;&lt; wc_t(kyosu::complex_t&lt;double&gt;(1.3,-3.7)) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga45902be43d9c444ef8e2d4c35e909954.html#ga45902be43d9c444ef8e2d4c35e909954">airy_ai</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wc_t</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;double&gt;</a>(1.3,-3.7))) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; wc_t(kyosu::complex_t&lt;double&gt;(1.3, -3.7)) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_ga45902be43d9c444ef8e2d4c35e909954.html#ga45902be43d9c444ef8e2d4c35e909954">airy_ai</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">wc_t</a>(<a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t&lt;double&gt;</a>(1.3, -3.7)))</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>

@@ -167,9 +167,9 @@ $(document).ready(function(){initNavTree('group__functions_gae6df724ac822c7361d9
 <p><b>Return value</b></p>
 <p>Returns a <a class="el" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">kyosu::quaternion</a> constructed from its arguments.</p>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">main</a>()</div>
 <div class="line">{</div>
@@ -180,10 +180,10 @@ $(document).ready(function(){initNavTree('group__functions_gae6df724ac822c7361d9
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;quaternion(72.9f) -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">quaternion</a>(72.9f) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;quaternion(3.5f, 2.9f) -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">quaternion</a>(3.5f,-2.9f) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;quaternion(3.5f, 2.9f) -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">quaternion</a>(3.5f, -2.9f) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;quaternion(1.0,  2.0, 3.0, 4.0) -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">quaternion</a>(1.,2.,3.,4.) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;quaternion(1.0,  2.0, 3.0, 4.0) -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">quaternion</a>(1., 2., 3., 4.) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">c0</a> = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">complex</a>(1.0, 2.3);</div>
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">c1</a> = <a class="code hl_variable" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578">complex</a>(-4.0, -1.5);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;c0 = &quot;</span> &lt;&lt; <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">c0</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -192,7 +192,7 @@ $(document).ready(function(){initNavTree('group__functions_gae6df724ac822c7361d9
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;SIMD quaternion:        \n&quot;</span>;</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">w_t</a> = eve::wide&lt;double, eve::fixed&lt;2&gt;&gt;;</div>
-<div class="line">  <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">w_t</a> a(3.5f,-2.9f), b(1.0, -3.0);</div>
+<div class="line">  <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">w_t</a> a(3.5f, -2.9f), b(1.0, -3.0);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;a = &quot;</span> &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;b = &quot;</span> &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;quaternion(a, b) -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gae6df724ac822c7361d9ea9252e62d0a4.html#gae6df724ac822c7361d9ea9252e62d0a4">quaternion</a>(a, b) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
