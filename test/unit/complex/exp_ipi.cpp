@@ -20,7 +20,7 @@ TTS_CASE_WITH("Check behavior of exp_ipi on scalar",
               tts::randoms(-10, 10))
 <typename T>(T const& a0, T const& a1)
 {
-  auto pr = tts::prec<T>(2.0e-3, 1.0e-7, );
+  auto pr = tts::prec<T>(2.0e-3, 1.0e-7);
   using e_t = typename T::value_type;
   using c_t = std::complex<e_t>;
   using kc_t = kyosu::complex_t<e_t>;
