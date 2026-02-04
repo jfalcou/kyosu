@@ -57,5 +57,5 @@ TTS_CASE_WITH("Check kyosu::is_unitary over octonion",
   auto z(type(r, i, j, k, l, li, lj, lk));
   z /= kyosu::abs(z);
   auto o = eve::one(eve::as(kyosu::abs(z)));
-  TTS_EQUAL(kyosu::is_unitary(z), eve::is_equal[eve::almost](kyosu::abs(z), o));
+  TTS_EQUAL(kyosu::is_unitary(z), eve::is_equal[eve::almost](kyosu::sqr_abs(z), o));
 };

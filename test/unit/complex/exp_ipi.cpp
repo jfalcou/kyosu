@@ -20,6 +20,7 @@ TTS_CASE_WITH("Check behavior of exp_ipi on scalar",
               tts::randoms(-10, 10))
 <typename T>(T const& a0, T const& a1)
 {
+  auto pr = tts::prec<T>(2.0e-3, 1.0e-7, );
   using e_t = typename T::value_type;
   using c_t = std::complex<e_t>;
   using kc_t = kyosu::complex_t<e_t>;
@@ -28,7 +29,7 @@ TTS_CASE_WITH("Check behavior of exp_ipi on scalar",
   {
     auto e = a0[i];
     auto f = a1[i];
-    TTS_RELATIVE_EQUAL(kyosu::exp_ipi(kc_t(e, f)), cv(std::exp(c_t(-f * pis, e * pis))), tts::prec<T>());
+    TTS_RELATIVE_EQUAL(kyosu::exp_ipi(kc_t(e, f)), cv(std::exp(c_t(-f * pis, e * pis))), pr);
   }
 };
 

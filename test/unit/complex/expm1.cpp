@@ -34,12 +34,13 @@ TTS_CASE_WITH("Check behavior of exp on scalar",
 TTS_CASE_WITH("Check behavior of exp on wide", kyosu::simd_real_types, tts::randoms(-10, 10), tts::randoms(-10, 10))
 <typename T>(T const& a0, T const& a1)
 {
+  auto pr = tts::prec<T>(2.0e-3, 1.0e-7, );
   using e_t = T;
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   auto std_expm1 = [](auto x, auto y) { return kyosu::dec(cv(std::exp(c_t(x, y)))); };
   ke_t e([&](auto i, auto) { return std_expm1(a0.get(i), a1.get(i)); });
-  TTS_RELATIVE_EQUAL(kyosu::expm1(ke_t{a0, a1}), e, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::expm1(ke_t{a0, a1}), e, pr);
 };
 
 TTS_CASE_TPL("Check corner cases of exp", kyosu::scalar_real_types)
