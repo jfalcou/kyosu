@@ -142,7 +142,24 @@ $(document).ready(function(){initNavTree('group__quaternion_ga6b47fd35280cf1ec86
 </div><div class="memdoc">
 
 <p>Callable object computing an unitary quaternion value representing a rotation that align v0 to v1. </p>
-<p><b>Return value</b> An unitary quaternion value representing a rotation that align <code>v0</code> to <code>v1</code>. If <code>v0</code> or <code>v01</code> is a nullvector the result is one as a quaternion.</p>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include kyosu/module/quaternion.hpp&gt;`</span></div>
+</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">align</a>(<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">v1</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">v2</a>)                 <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">align</a>[assume_unitary](<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">v1</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">v2</a>) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c_html_ga6b47fd35280cf1ec86c8596e0cd1b73c"><div class="ttname"><a href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">kyosu::align</a></div><div class="ttdeci">constexpr auto align</div><div class="ttdoc">Callable object computing an unitary quaternion value representing a rotation that align v0 to v1.</div><div class="ttdef"><b>Definition</b> align.hpp:71</div></div>
+<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
+<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
+</div><!-- fragment --><p><b>Parameters</b></p>
+<ul>
+<li><code>v0</code>: span of 3 elements</li>
+<li><code>v1</code>: span of 3 elements</li>
+</ul>
+<p><b>Return value</b></p>
+<p>An unitary quaternion value representing a rotation that align <code>v0</code> to <code>v1</code>. If <code>v0</code> or <code>v01</code> is a nullvector the result is one as a quaternion.</p>
 <dl class="section note"><dt>Note</dt><dd>by default <code>v0</code> and <code>v1</code> are not assumed unitary (vectors of norm 1). If it is the case the decorator <code>assume_unitary</code> can be used.</dd></dl>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -171,24 +188,8 @@ $(document).ready(function(){initNavTree('group__quaternion_ga6b47fd35280cf1ec86
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__constants_gafdb3298b4657efe925df35dd5ded4694_html_gafdb3298b4657efe925df35dd5ded4694"><div class="ttname"><a href="group__constants_gafdb3298b4657efe925df35dd5ded4694.html#gafdb3298b4657efe925df35dd5ded4694">kyosu::i</a></div><div class="ttdeci">constexpr auto i</div><div class="ttdoc">Computes the complex number  in the chosen type.</div><div class="ttdef"><b>Definition</b> i.hpp:68</div></div>
-<div class="ttc" id="agroup__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c_html_ga6b47fd35280cf1ec86c8596e0cd1b73c"><div class="ttname"><a href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">kyosu::align</a></div><div class="ttdeci">constexpr auto align</div><div class="ttdoc">Callable object computing an unitary quaternion value representing a rotation that align v0 to v1.</div><div class="ttdef"><b>Definition</b> align.hpp:79</div></div>
 <div class="ttc" id="agroup__quaternion_gafb8e2e7cadea72110b134c4df850ee3a_html_gafb8e2e7cadea72110b134c4df850ee3a"><div class="ttname"><a href="group__quaternion_gafb8e2e7cadea72110b134c4df850ee3a.html#gafb8e2e7cadea72110b134c4df850ee3a">kyosu::rotate_vec</a></div><div class="ttdeci">constexpr auto rotate_vec</div><div class="ttdoc">Callable object rotating an  vector using a quaternion.</div><div class="ttdef"><b>Definition</b> rotate_vec.hpp:80</div></div>
-<div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
-</div><!-- fragment --><h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include kyosu/module/quaternion.hpp&gt;`</span></div>
-</div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">align</a>(<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">v1</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">v2</a>)                 <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c">align</a>[assume_unitary](<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">v1</a>, <span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">v2</a>) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
-</div><!-- fragment --><p><b>Parameters</b></p>
-<ul>
-<li><code>v0</code>: span of 3 elements</li>
-<li><code>v1</code>: span of 3 elements </li>
-</ul>
-
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
