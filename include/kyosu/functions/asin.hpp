@@ -46,11 +46,11 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!     //  regular call
-  //!     constexpr auto asin(Z z)                                 noexcept;
-  //!     constexpr auto asin(ayley_dickson_like z, eve::value k)  noexcept;
+  //!     constexpr auto asin(cayley_dickson_like z)                noexcept;
+  //!     constexpr auto asin(cayley_dickson_like z, eve::value k)  noexcept;
   //!
   //!     // semantic modifyers
-  //!     constexpr auto asin[real_only](Real z)                   noexcept;
+  //!     constexpr auto asin[real_only](Real z)                    noexcept;
   //!   }
   //!   }
   //!   @endcode

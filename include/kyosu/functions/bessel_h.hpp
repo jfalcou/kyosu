@@ -12,17 +12,23 @@
 namespace kyosu
 {
   template<typename Options>
-  struct bessel_h_t : eve::strict_elementwise_callable<bessel_h_t, Options, eve::spherical_option,
-                                                       eve::cylindrical_option, kind_1_option, kind_2_option>
+  struct bessel_h_t : eve::strict_elementwise_callable<bessel_h_t,
+                                                       Options,
+                                                       eve::spherical_option,
+                                                       eve::cylindrical_option,
+                                                       kind_1_option,
+                                                       kind_2_option>
   {
     template<eve::scalar_value N, concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z>  operator()(N const& n, Z const & z) const noexcept
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n, Z const& z) const noexcept
     {
       return KYOSU_CALL(n, z);
     }
 
     template<eve::scalar_value N, concepts::complex_like Z, std::size_t S>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n, Z const & z, std::span<Z, S> hs) const noexcept
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n,
+                                                                          Z const& z,
+                                                                          std::span<Z, S> hs) const noexcept
     {
       return KYOSU_CALL(n, z, hs);
     }
@@ -30,67 +36,71 @@ namespace kyosu
     KYOSU_CALLABLE_OBJECT(bessel_h_t, bessel_h_);
   };
 
-//======================================================================================================================
-//! @addtogroup functions
-//! @{
-//!   @var  bessel_h
-//!   @brief Computes the spherical or cylindrical Hankel functions,
-//!   extended to the complex plane and cayley_dickson  algebras.
-//!
-//!   @code
-//!   #include <kyosu/functions.hpp>
-//!   @endcode
-//!
-//!   @groupheader{Callable Signatures}
-//!
-//!   @code
-//!   namespace kyosu
-//!   {
-//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson_like T>    constexpr auto bessel_h(N n, T z)                                       noexcept; //1
-//!      template<eve;scalar_value N, kyosu::concepts::complex_like T, size_t S> constexpr auto bessel_h(N n, T z, std::span<Z, S> chs)                  noexcept; //2
-//!
-//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson_like T>    constexpr auto bessel_h[spherical](N n, T z)                            noexcept; //3
-//!      template<eve;scalar_value N, kyosu::concepts::complex_like T, size_t S> constexpr auto bessel_h[spherical](N n, T z, std::span<Z, S> shs)       noexcept; //4
-//!
-//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson_like T>    constexpr auto bessel_h[kind_2](/*any previous overloads*/)             noexcept; //5
-//!      template<eve;scalar_value N, kyosu::concepts::cayley_dickson_like T>    constexpr auto bessel_h[kind_2][spherical](/*any previous overloads*/)  noexcept; //6
-//!   }
-//!   @endcode
-//!
-//!   **Parameters**
-//!
-//!     * `n`: scalar  order (integral or floating)
-//!     * `z`: Value to process.
-//!     * `shs`, `chs`  : std::span of T
-//!
-//!   **Return value**
-//!
-//!     1. returns \f$H_n\f$(z) (cylindrical first kind).
-//!     2. Same as 1,  but chs is filled by the lesser orders.
-//!     3. returns \f$h_n\f$(z) (spherical).
-//!     4. Same as 3,  but shs is filled by the lesser orders.
-//!     5. Same as 1., 2., 3., 4. but returns second kind Hankel functions values.
-//!     6. Same as 1., 2., 3., 4. but returns second kind spherical Hankel functions values.
-//!
-//!  @note
-//!    * Let \f$ i =  \lfloor |n| \rfloor \f$ and \f$ j=|n|-i\f$. If \f$n\f$ is
-//!        positive the lesser order are \f$(\pm j, \pm(j+1), \dots,  \pm(j+i)) \f$
-//!        with \f$+\f$ sign if \f$n\f$ is positive and  \f$-\f$ sign if \f$n\f$ is negative.
-//!    * The span parameters are filled according the minimum of their allocated size and \f$i\f$.
-//!    * `cylindical` and `kind_1` options can be used and their results are identical to the regular call (no option).
-//!
-//!  @groupheader{External references}
-//!   *  [Wolfram MathWorld: Hankel Function](https://mathworld.wolfram.com/HankelFunction.html)
-//!   *  [Wikipedia: Bessel function](https://en.wikipedia.org/wiki/Bessel_function)
-//!   *  [DLMF: Bessel functions](https://dlmf.nist.gov/10.2)
-//!
-//!  @groupheader{Example}
-//!  @godbolt{doc/bessel_h.cpp}
-//======================================================================================================================
+  //======================================================================================================================
+  //! @addtogroup functions
+  //! @{
+  //!   @var  bessel_h
+  //!   @brief Computes the spherical or cylindrical Hankel functions,
+  //!   extended to the complex plane and cayley_dickson  algebras.
+  //!
+  //!   @code
+  //!   #include <kyosu/functions.hpp>
+  //!   @endcode
+  //!
+  //!   @groupheader{Callable Signatures}
+  //!
+  //!   @code
+  //!   namespace kyosu
+  //!   {
+  //!      template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_h(N n, T z) noexcept; //1
+  //!      template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_h(N n, T z, std::span<Z, S> chs)
+  //!      noexcept; //2
+  //!
+  //!      template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_h[spherical](N n, T z) noexcept;
+  //!      //3 template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_h[spherical](N n, T z,
+  //!      std::span<Z, S> shs)       noexcept; //4
+  //!
+  //!      template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_h[kind_2](/*any previous
+  //!      overloads*/)             noexcept; //5 template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto
+  //!      bessel_h[kind_2][spherical](/*any previous overloads*/)  noexcept; //6
+  //!   }
+  //!   @endcode
+  //!
+  //!   **Parameters**
+  //!
+  //!     * `n`: scalar  order (integral or floating)
+  //!     * `z`: Value to process.
+  //!     * `shs`, `chs`  : std::span of T
+  //!
+  //!   **Return value**
+  //!
+  //!     1. returns \f$H_n\f$(z) (cylindrical first kind).
+  //!     2. Same as 1,  but chs is filled by the lesser orders.
+  //!     3. returns \f$h_n\f$(z) (spherical).
+  //!     4. Same as 3,  but shs is filled by the lesser orders.
+  //!     5. Same as 1., 2., 3., 4. but returns second kind Hankel functions values.
+  //!     6. Same as 1., 2., 3., 4. but returns second kind spherical Hankel functions values.
+  //!
+  //!  @note
+  //!    * Let \f$ i =  \lfloor |n| \rfloor \f$ and \f$ j=|n|-i\f$. If \f$n\f$ is
+  //!        positive the lesser order are \f$(\pm j, \pm(j+1), \dots,  \pm(j+i)) \f$
+  //!        with \f$+\f$ sign if \f$n\f$ is positive and  \f$-\f$ sign if \f$n\f$ is negative.
+  //!    * The span parameters are filled according the minimum of their allocated size and \f$i\f$.
+  //!    * `cylindical` and `kind_1` options can be used and their results are identical to the regular call (no
+  //!    option).
+  //!
+  //!  @groupheader{External references}
+  //!   *  [Wolfram MathWorld: Hankel Function](https://mathworld.wolfram.com/HankelFunction.html)
+  //!   *  [Wikipedia: Bessel function](https://en.wikipedia.org/wiki/Bessel_function)
+  //!   *  [DLMF: Bessel functions](https://dlmf.nist.gov/10.2)
+  //!
+  //!  @groupheader{Example}
+  //!  @godbolt{doc/bessel_h.cpp}
+  //======================================================================================================================
   inline constexpr auto bessel_h = eve::functor<bessel_h_t>;
-//======================================================================================================================
-//! @}
-//======================================================================================================================
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }
 
 namespace kyosu::_
@@ -99,60 +109,51 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto bessel_h_(KYOSU_DELAY(), O const& o, N n, Z z) noexcept
   {
     constexpr int Kind = O::contains(kind_2) ? 2 : 1;
-    if constexpr(concepts::complex<Z> )
+    if constexpr (concepts::complex<Z>)
     {
-      if constexpr(eve::integral_scalar_value<N>)
+      if constexpr (eve::integral_scalar_value<N>)
       {
-        if constexpr(O::contains(eve::spherical))
+        if constexpr (O::contains(eve::spherical))
         {
           if (eve::is_ltz(n))
           {
             using u_t = eve::underlying_type_t<Z>;
             return _::sb_hr<Kind>(u_t(n), z);
           }
-          else
-            return _::sb_hn<Kind>(n, z);
+          else return _::sb_hn<Kind>(n, z);
         }
-        else
-          return _::cb_hn<Kind>(n, z);
+        else return _::cb_hn<Kind>(n, z);
       }
-      else if constexpr( eve::floating_scalar_value<N>)
+      else if constexpr (eve::floating_scalar_value<N>)
       {
-        if constexpr(O::contains(eve::spherical))
-          return _::sb_hr<Kind>(n, z);
-        else
-          return _::cb_hr<Kind>(n, z);
+        if constexpr (O::contains(eve::spherical)) return _::sb_hr<Kind>(n, z);
+        else return _::cb_hr<Kind>(n, z);
       }
     }
-    else
-      return _::cayley_extend_rev(kyosu::bessel_h, n, z);
+    else return _::cayley_extend_rev(kyosu::bessel_h, n, z);
   }
 
   template<typename N, typename Z, typename HS, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto bessel_h_(KYOSU_DELAY(), O const& o, N n, Z z, HS & hs) noexcept
+  KYOSU_FORCEINLINE constexpr auto bessel_h_(KYOSU_DELAY(), O const& o, N n, Z z, HS& hs) noexcept
   {
     constexpr int Kind = O::contains(kind_2) ? 2 : 1;
-    if constexpr(eve::integral_scalar_value<N>)
+    if constexpr (eve::integral_scalar_value<N>)
     {
-      if constexpr(O::contains(eve::spherical))
+      if constexpr (O::contains(eve::spherical))
       {
         if (eve::is_ltz(n))
         {
           using u_t = eve::underlying_type_t<Z>;
           return _::sb_hr(u_t(n), z, hs);
         }
-        else
-          return _::sb_hn<Kind>(n, z, hs);
+        else return _::sb_hn<Kind>(n, z, hs);
       }
-      else
-        return _::cb_hn<Kind>(n, z, hs);
+      else return _::cb_hn<Kind>(n, z, hs);
     }
     else
     {
-      if constexpr(O::contains(eve::spherical))
-        return _::sb_hr<Kind>(n, z, hs);
-      else
-        return _::cb_hr<Kind>(n, z, hs);
+      if constexpr (O::contains(eve::spherical)) return _::sb_hr<Kind>(n, z, hs);
+      else return _::cb_hr<Kind>(n, z, hs);
     }
   }
 }

@@ -66,7 +66,7 @@ namespace kyosu
   //!
   //!   - A real typed input z is treated as if `complex(z)` was entered unless the option real_only is used
   //!     in which case the parameter must be a floating_value,  the real part of the result will the same as an
-  //!     eve::asecpi implying a Nan result if the theoretical result is not real.
+  //!     eve::asecpi call implying a Nan result if the theoretical result is not real.
   //!   - For general cayley_dickson input, returns `radinpi(asec(z))`
   //!   - for two parameters returns the kth branch of `asecpi`. If k is not a flint, it is truncated before use.
   //!
