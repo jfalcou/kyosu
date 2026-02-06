@@ -80,6 +80,8 @@ namespace kyosu
   //!    3. kahan algorithm is used to enhance accuracy.
   //!    4. [The operation is performed conditionnaly](@ref conditional)
   //!
+  //! @note If all elements are real typed the result will be real typed, using a call to `eve::sub`
+  //!
   //!  @note With one cayley_dickson_like parameter `sub` returns the parameter: use `minus` or `-`
   //!    to return the opposite value.
   //!

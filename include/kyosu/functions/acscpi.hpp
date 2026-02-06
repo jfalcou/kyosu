@@ -53,7 +53,7 @@ namespace kyosu
   //!     constexpr auto acscpi(cayley_dickson_like z, eve::value k) noexcept;
   //!
   //!     // semantic modifyers
-  //!     constexpr Z cscpi[real_only](Real z)                       noexcept;
+  //!     constexpr Z acscpi[real_only](Real z)                      noexcept;
   //!   }
   //!   @endcode
   //!

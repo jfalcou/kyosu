@@ -14,7 +14,6 @@ namespace kyosu
 {
   template<typename Options> struct acsc_t : eve::strict_elementwise_callable<acsc_t, Options, real_only_option>
   {
-
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
@@ -49,11 +48,11 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!     //  regular call
-  //!     constexpr auto acsc(cayley_dickson_like z) noexcept;
-  //!     constexpr auto  acsc(Z z, eve::value k)    noexcept;
+  //!     constexpr auto acsc(cayley_dickson_like z)                noexcept;
+  //!     constexpr auto acsc(cayley_dickson_like z, eve::value k)  noexcept;
   //!
   //!     // semantic modifyers
-  //!     constexpr auto acsc[real_only](Real z)     noexcept;
+  //!     constexpr auto acsc[real_only](Real z)                    noexcept;
   //!   }
   //!   @endcode
   //!
