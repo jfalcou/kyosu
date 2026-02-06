@@ -12,27 +12,19 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct align_t : eve::elementwise_callable<align_t, Options, assume_unitary_option>
+  template<typename Options> struct align_t : eve::elementwise_callable<align_t, Options, assume_unitary_option>
   {
 
     template<concepts::real T, concepts::real U, std::size_t S>
     requires(S >= 3)
-      KYOSU_FORCEINLINE constexpr
-    quaternion_t<eve::common_value_t<U, T>> operator()( std::span<T, S> v0
-                                                      , std::span<U, S> v1) const noexcept
+    KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<U, T>> operator()(std::span<T, S> v0,
+                                                                                   std::span<U, S> v1) const noexcept
     {
       auto qv0 = quaternion(eve::zero(eve::as(v0[0])), v0[0], v0[1], v0[2]);
       auto qv1 = quaternion(eve::zero(eve::as(v1[0])), v1[0], v1[1], v1[2]);
-      auto v1v0 = qv1*qv0;
-      if constexpr(!Options::contains(assume_unitary))
-      {
-        return sign(oneminus(sign(v1v0)));
-      }
-      else
-      {
-        return sign(oneminus(v1v0));
-      }
+      auto v1v0 = qv1 * qv0;
+      if constexpr (!Options::contains(assume_unitary)) { return sign(oneminus(sign(v1v0))); }
+      else { return sign(oneminus(v1v0)); }
     }
 
     KYOSU_CALLABLE_OBJECT(align_t, align_);
@@ -65,7 +57,7 @@ namespace kyosu
   //!  * `v0`:  span of 3 elements
   //!  * `v1`:  span of 3 elements
   //!
-   //! **Return value**
+  //! **Return value**
   //!
   //!   An unitary quaternion value representing a rotation that align `v0` to `v1`.
   //!   If `v0` or `v01` is a nullvector  the result is one as a quaternion.
