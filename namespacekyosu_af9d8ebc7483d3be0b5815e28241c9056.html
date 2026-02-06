@@ -160,7 +160,7 @@ $(document).ready(function(){initNavTree('namespacekyosu_af9d8ebc7483d3be0b5815e
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_gaf7fbebe9f3448ed38c18e10a21331523_html_gaf7fbebe9f3448ed38c18e10a21331523"><div class="ttname"><a href="group__functions_gaf7fbebe9f3448ed38c18e10a21331523.html#gaf7fbebe9f3448ed38c18e10a21331523">kyosu::add</a></div><div class="ttdeci">constexpr auto add</div><div class="ttdoc">tuple_callable computing the sum of its arguments.</div><div class="ttdef"><b>Definition</b> add.hpp:81</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
-<div class="ttc" id="anamespacekyosu_af9d8ebc7483d3be0b5815e28241c9056_html_af9d8ebc7483d3be0b5815e28241c9056"><div class="ttname"><a href="namespacekyosu_af9d8ebc7483d3be0b5815e28241c9056.html#af9d8ebc7483d3be0b5815e28241c9056">kyosu::sub</a></div><div class="ttdeci">constexpr auto sub</div><div class="ttdoc">tuple_callable computing the difference of its first argument with the sum of the others.</div><div class="ttdef"><b>Definition</b> sub.hpp:82</div></div>
+<div class="ttc" id="anamespacekyosu_af9d8ebc7483d3be0b5815e28241c9056_html_af9d8ebc7483d3be0b5815e28241c9056"><div class="ttname"><a href="namespacekyosu_af9d8ebc7483d3be0b5815e28241c9056.html#af9d8ebc7483d3be0b5815e28241c9056">kyosu::sub</a></div><div class="ttdeci">constexpr auto sub</div><div class="ttdoc">tuple_callable computing the difference of its first argument with the sum of the others.</div><div class="ttdef"><b>Definition</b> sub.hpp:89</div></div>
 </div><!-- fragment --><p>! <b>Parameters</b> </p><pre class="fragment"> * `xs` :  real or cayley-dickson arguments.
  * `tup` : kumi tuple of arguments.
 </pre><p> <b>Return value</b></p>
@@ -170,6 +170,7 @@ $(document).ready(function(){initNavTree('namespacekyosu_af9d8ebc7483d3be0b5815e
 <li>kahan algorithm is used to enhance accuracy.</li>
 <li>The operation is performed conditionnaly</li>
 </ol>
+<dl class="section note"><dt>Note</dt><dd>With one cayley_dickson_like parameter <code>sub</code> returns the parameter: use <code>minus</code> or <code>-</code> to return the opposite value.</dd></dl>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
