@@ -50,10 +50,10 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!     //  regular call
-  //!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acoth(Z z) noexcept;
+  //!     constexpr auto acoth(cayley_dickson_like z) noexcept;
   //!
   //!     // semantic modifyers
-  //!     template<concepts::real Z> constexpr complexify_t<Z> acoth[real_only](Z z) noexcept;
+  //!     constexpr auto acoth[real_only](Real z)     noexcept;
   //!   }
   //!   @endcode
   //!
@@ -66,9 +66,8 @@ namespace kyosu
   //!   - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
   //!     in which case the parameter must be a floating_value,  the real part of the result will the same as an
   //!     eve::acos implying a Nan result if the theoretical result is not real.
-  //!   - For complex input, returns elementwise the complex principal value
-  //!      of the inverse hyperbolic cotangent of the input as the inverse hyperbolic tangent of the inverse of the
-  //!      input.
+  //!   - For complex input, returns elementwise the complex principal value  of the inverse hyperbolic
+  //!     cotangent of the input as the inverse hyperbolic tangent of the inverse of the input.
   //!   - For general cayley_dickson input, the call is equivalent to `atanh(rec(z))`.
   //!
   //!  @groupheader{External references}
