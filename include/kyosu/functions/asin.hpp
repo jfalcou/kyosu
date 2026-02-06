@@ -10,95 +10,92 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct asin_t : eve::strict_elementwise_callable<asin_t, Options, real_only_option>
+  template<typename Options> struct asin_t : eve::strict_elementwise_callable<asin_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr  complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
+    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K>
-    KYOSU_FORCEINLINE constexpr  eve::as_wide_as_t<complexify_if_t<Options, Z>, K>
-    operator()(Z const& z, K const & k) const noexcept
+    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, K> operator()(Z const& z,
+                                                                                             K const& k) const noexcept
     {
-     return KYOSU_CALL(z, k);
+      return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(asin_t, asin_);
-};
+  };
 
-//======================================================================================================================
-//! @addtogroup functions
-//! @{
-//!   @var asin
-//!   @brief Computes the arcsine of the argument.
-//!
-//!   @groupheader{Header file}
-//!
-//!   @code
-//!   #include <kyosu/functions.hpp>
-//!   @endcode
-//!
-//!   @groupheader{Callable Signatures}
-//!
-//!   @code
-//!   namespace kyosu
-//!   {
-//!     //  regular call
-//!     constexpr auto asin(Z z)                                 noexcept;
-//!     constexpr auto asin(ayley_dickson_like z, eve::value k)  noexcept;
-//!
-//!     // semantic modifyers
-//!     constexpr auto asin[real_only](Real z)                   noexcept;
-//!   }
-//!   }
-//!   @endcode
-//!
-//!   **Parameters**
-//!
-//!     * `z`: Value to process.
-//!
-//! **Return value**
-//!
-//!   - A real typed input `z` is treated as if `complex(z)` was entered unless the option real_only is used
-//!     in which case the parameter must be a floating_value and the result will the same as a call to `eve::asin`,
-//!     implying a `Nan` result if the result is not real.
-//!   - For complex input, returns elementwise the complex principal value
-//!      of the arc sine of the input in the range of a strip unbounded along the imaginary axis
-//!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
-//!      Special cases are handled as if the operation was implemented by \f$-i\; \mathrm{asinh}(z\; i)\f$
-//!   - For general cayley_dickson input returns \f$-I_z \mathrm{asinh}(z I_z)\f$ where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-//!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
-//!   - for two parameters returns the kth branch of `asin`. If k is not a flint, it is truncated before use.
-//!
-//!
-//!  @groupheader{External references}
-//!   *  [C++ standard reference: complex asin](https://en.cppreference.com/w/cpp/numeric/complex/asin)
-//!   *  [Wolfram MathWorld: InverseSine](https://mathworld.wolfram.com/InverseSine.html)
-//!   *  [Wikipedia:Inverse trigonometric functions ](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions)
-//!   *  [DLMF:Inverse trigonometric functions](https://dlmf.nist.gov/4.23)
-//!
-//!  @groupheader{Example}
-//!  @godbolt{doc/asin.cpp}
-//======================================================================================================================
+  //======================================================================================================================
+  //! @addtogroup functions
+  //! @{
+  //!   @var asin
+  //!   @brief Computes the arcsine of the argument.
+  //!
+  //!   @groupheader{Header file}
+  //!
+  //!   @code
+  //!   #include <kyosu/functions.hpp>
+  //!   @endcode
+  //!
+  //!   @groupheader{Callable Signatures}
+  //!
+  //!   @code
+  //!   namespace kyosu
+  //!   {
+  //!     //  regular call
+  //!     constexpr auto asin(Z z)                                 noexcept;
+  //!     constexpr auto asin(ayley_dickson_like z, eve::value k)  noexcept;
+  //!
+  //!     // semantic modifyers
+  //!     constexpr auto asin[real_only](Real z)                   noexcept;
+  //!   }
+  //!   }
+  //!   @endcode
+  //!
+  //!   **Parameters**
+  //!
+  //!     * `z`: Value to process.
+  //!
+  //! **Return value**
+  //!
+  //!   - A real typed input `z` is treated as if `complex(z)` was entered unless the option real_only is used
+  //!     in which case the parameter must be a floating_value and the result will the same as a call to `eve::asin`,
+  //!     implying a `Nan` result if the theoretical result is not real.
+  //!   - For complex input, returns elementwise the complex principal value
+  //!      of the arc sine of the input in the range of a strip unbounded along the imaginary axis
+  //!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
+  //!      Special cases are handled as if the operation was implemented by \f$-i\; \mathrm{asinh}(z\; i)\f$
+  //!   - For general cayley_dickson input returns \f$-I_z \mathrm{asinh}(z I_z)\f$ where \f$I_z =
+  //!   \frac{\underline{z}}{|\underline{z}|}\f$ and
+  //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+  //!   - for two parameters returns the kth branch of `asin`. If k is not a flint, it is truncated before use.
+  //!
+  //!
+  //!  @groupheader{External references}
+  //!   *  [C++ standard reference: complex asin](https://en.cppreference.com/w/cpp/numeric/complex/asin)
+  //!   *  [Wolfram MathWorld: InverseSine](https://mathworld.wolfram.com/InverseSine.html)
+  //!   *  [Wikipedia:Inverse trigonometric functions ](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions)
+  //!   *  [DLMF:Inverse trigonometric functions](https://dlmf.nist.gov/4.23)
+  //!
+  //!  @groupheader{Example}
+  //!  @godbolt{doc/asin.cpp}
+  //======================================================================================================================
   inline constexpr auto asin = eve::functor<asin_t>;
-//======================================================================================================================
-//! @}
-//======================================================================================================================
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  constexpr auto asin_(KYOSU_DELAY(), O const& o, Z a0) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto asin_(KYOSU_DELAY(), O const& o, Z a0) noexcept
   {
-     if constexpr(O::contains(real_only) && concepts::real<Z>)
-      return eve::asin(a0);
-    else if constexpr(concepts::real<Z> )
-      return kyosu::asin(complex(a0));
-    else if constexpr(concepts::complex<Z> )
+    if constexpr (O::contains(real_only) && concepts::real<Z>) return eve::asin(a0);
+    else if constexpr (concepts::real<Z>) return kyosu::asin(complex(a0));
+    else if constexpr (concepts::complex<Z>)
     {
       // This implementation is a simd transcription and adaptation of the boost_math code
       // which itself is a transcription of the pseudo-code in:
@@ -109,10 +106,10 @@ namespace kyosu::_
       //
       auto [a0r, a0i] = a0;
       using rtype = decltype(a0r);
-      const rtype a_crossover(1.5);
-      const rtype b_crossover(0.6417);
-      auto  ltzra0 = eve::is_negative(a0r);
-      auto  ltzia0 = eve::is_negative(a0i);
+      rtype const a_crossover(1.5);
+      rtype const b_crossover(0.6417);
+      auto ltzra0 = eve::is_negative(a0r);
+      auto ltzia0 = eve::is_negative(a0i);
 
       //
       // Begin by insuring real(a0) >= 0 and imag(a0) >= 0 :
@@ -124,49 +121,41 @@ namespace kyosu::_
       auto lexone = (x <= eve::one(eve::as(a0r)));
       auto is_proper_real = is_real(a0) && lexone;
 
-      auto s_min = eve::sqrtsmallestposval(eve::as(x))*4;
-      auto s_max = eve::sqrtvalmax(eve::as(x))/8;
-      rtype xp1 =  eve::inc(x);
-      rtype xm1 =  eve::dec(x);
+      auto s_min = eve::sqrtsmallestposval(eve::as(x)) * 4;
+      auto s_max = eve::sqrtvalmax(eve::as(x)) / 8;
+      rtype xp1 = eve::inc(x);
+      rtype xm1 = eve::dec(x);
       auto not_in_safe_zone = (((x > s_max) || (x < s_min)) || ((y > s_max) || (y < s_min)));
-      //compute for safe zone
+      // compute for safe zone
       rtype r, i;
       rtype yy = eve::sqr(y);
-      rtype tr = eve::sqrt(eve::sqr(xp1) + yy);//hypot for pedantic ?
-      rtype ts = eve::sqrt(eve::sqr(xm1) + yy);//hypot for pedantic ?
+      rtype tr = eve::sqrt(eve::sqr(xp1) + yy); // hypot for pedantic ?
+      rtype ts = eve::sqrt(eve::sqr(xm1) + yy); // hypot for pedantic ?
       rtype a = eve::average(tr, ts);
-      rtype b = eve::if_else(eve::is_nan(a), eve::allbits, eve::clamp(x/a, eve::mone(as(b)), eve::one(as(b))));
-      //compute r for b >  b_crossover
+      rtype b = eve::if_else(eve::is_nan(a), eve::allbits, eve::clamp(x / a, eve::mone(as(b)), eve::one(as(b))));
+      // compute r for b >  b_crossover
       rtype apx = a + x;
-      r = eve::if_else(lexone,
-                       eve::atan(x/eve::sqrt(eve::half(eve::as(a0r))*apx*(yy/(tr+xp1)+(ts-xm1)))),
-                       eve::atan(x/(y*eve::sqrt(eve::half(eve::as(a0r))*(apx/(tr+xp1)+apx/(ts+xm1)))))
-                      );
+      r = eve::if_else(lexone, eve::atan(x / eve::sqrt(eve::half(eve::as(a0r)) * apx * (yy / (tr + xp1) + (ts - xm1)))),
+                       eve::atan(x / (y * eve::sqrt(eve::half(eve::as(a0r)) * (apx / (tr + xp1) + apx / (ts + xm1))))));
       // r is computed
       r = eve::if_else((b <= b_crossover), r, eve::asin(b));
-      //compute am 1 temporary for i for a <= a_crossover
-      rtype tmp = yy/(tr+xp1);
-      rtype am1 = eve::if_else(lexone,
-                               eve::average(tmp, yy/(ts-xm1)),
-                               eve::average(tmp, (ts+xm1)));
-      i =  eve::if_else((a <= a_crossover),
-                        eve::log1p(am1 + eve::sqrt(am1*(eve::inc(a)))),
-                        eve::log(a + eve::sqrt(eve::dec(eve::sqr(a))))
-                       );
+      // compute am 1 temporary for i for a <= a_crossover
+      rtype tmp = yy / (tr + xp1);
+      rtype am1 = eve::if_else(lexone, eve::average(tmp, yy / (ts - xm1)), eve::average(tmp, (ts + xm1)));
+      i = eve::if_else((a <= a_crossover), eve::log1p(am1 + eve::sqrt(am1 * (eve::inc(a)))),
+                       eve::log(a + eve::sqrt(eve::dec(eve::sqr(a)))));
       // i is computed
-      //compute for exception zone
+      // compute for exception zone
       if (eve::any(not_in_safe_zone))
       {
-        auto zone1 =  (y <= eve::eps(eve::as(a0r))*eve::abs(xm1));
+        auto zone1 = (y <= eve::eps(eve::as(a0r)) * eve::abs(xm1));
         if (eve::any(eve::logical_and(zone1, not_in_safe_zone)))
         {
           rtype rr = eve::if_else(lexone, eve::asin(x), eve::pio_2(eve::as(a0r)));
-          rtype ii = eve::if_else(lexone, y/eve::sqrt(xp1*xm1),
-                                  eve::if_else((eve::valmax(eve::as(a0r))/xp1 > xm1),
-                                               eve::log1p(xm1 + eve::sqrt(xp1*xm1)),
-                                               eve::log_2(eve::as(a0r)) + eve::log(x)
-                                              )
-                                 );
+          rtype ii =
+            eve::if_else(lexone, y / eve::sqrt(xp1 * xm1),
+                         eve::if_else((eve::valmax(eve::as(a0r)) / xp1 > xm1), eve::log1p(xm1 + eve::sqrt(xp1 * xm1)),
+                                      eve::log_2(eve::as(a0r)) + eve::log(x)));
           r = eve::if_else(zone1, rr, r);
           i = eve::if_else(zone1, ii, i);
         }
@@ -177,63 +166,60 @@ namespace kyosu::_
           r = eve::if_else(zone2, eve::pio_2(eve::as(a0r)) - eve::sqrt(y), r);
           i = eve::if_else(zone2, eve::sqrt(y), i);
         }
-        auto zone3 = (eve::dec(eve::eps(eve::as(a0r))*y) >= x);
+        auto zone3 = (eve::dec(eve::eps(eve::as(a0r)) * y) >= x);
         not_treated = eve::logical_notand(zone2, not_treated);
         if (eve::any(eve::logical_and(zone3, not_treated)))
         {
-          r = eve::if_else(zone3,  x/y, r);
-          i = eve::if_else(zone3,  eve::log_2(eve::as(a0r)) + eve::log(y), i);
+          r = eve::if_else(zone3, x / y, r);
+          i = eve::if_else(zone3, eve::log_2(eve::as(a0r)) + eve::log(y), i);
         }
         auto zone4 = (x > eve::one(eve::as(a0r)));
         not_treated = eve::logical_notand(zone3, not_treated);
         if (eve::any(eve::logical_and(zone4, not_treated)))
         {
-          r = eve::if_else(zone4, eve::atan(x/y), r);
-          i = eve::if_else(zone4, eve::log_2(eve::as(a0r)) + eve::log(y)
-                           + eve::half(eve::as(a0r))*eve::log1p(eve::sqr(x/y)), i);
+          r = eve::if_else(zone4, eve::atan(x / y), r);
+          i = eve::if_else(
+            zone4, eve::log_2(eve::as(a0r)) + eve::log(y) + eve::half(eve::as(a0r)) * eve::log1p(eve::sqr(x / y)), i);
         }
         not_treated = eve::logical_notand(zone4, not_treated);
         if (eve::any(not_treated))
         {
           rtype aa = eve::sqrt(eve::inc(eve::sqr(y)));
-          r = eve::if_else(not_treated, x/aa, r);
-          i = eve::if_else(not_treated,eve::half(eve::as(a0r))*eve::log1p(2*y*(y+aa)), i);
+          r = eve::if_else(not_treated, x / aa, r);
+          i = eve::if_else(not_treated, eve::half(eve::as(a0r)) * eve::log1p(2 * y * (y + aa)), i);
         }
       }
       if (eve::any(is_not_finite(a0)))
       {
         auto nanx = eve::is_nan(x);
         auto nany = eve::is_nan(y);
-        auto infx = (x == eve::inf(eve::as(a0r))) ;
-        auto infy = (y == eve::inf(eve::as(a0r))) ;
+        auto infx = (x == eve::inf(eve::as(a0r)));
+        auto infy = (y == eve::inf(eve::as(a0r)));
         if (eve::any(nanx))
         {
-          r =  eve::if_else(nanx, x, r);
-          r =  eve::if_else(nanx && infy, x, r);
-          i =  eve::if_else(nanx, x, i);
-          i =  eve::if_else(nanx && infy, y, i);
+          r = eve::if_else(nanx, x, r);
+          r = eve::if_else(nanx && infy, x, r);
+          i = eve::if_else(nanx, x, i);
+          i = eve::if_else(nanx && infy, y, i);
         }
         if (eve::any(nany))
         {
           auto isimag = is_imag(a0);
-          r =  eve::if_else(isimag && nany, eve::zero, r);
-          r =  eve::if_else(eve::logical_and(nany, infx),y, r);
-          i =  eve::if_else(isimag && nany, eve::allbits, i);
-          i =  eve::if_else(nany && infx, x, i);
+          r = eve::if_else(isimag && nany, eve::zero, r);
+          r = eve::if_else(eve::logical_and(nany, infx), y, r);
+          i = eve::if_else(isimag && nany, eve::allbits, i);
+          i = eve::if_else(nany && infx, x, i);
         }
         auto test = eve::logical_notand(eve::logical_or(nanx, nany), infx);
         if (eve::any(test))
         {
-          r = eve::if_else(infx && test,
-                           eve::if_else(infy, eve::pio_4(eve::as(a0r)), eve::pio_2(eve::as(a0r))),
-                           r);
+          r = eve::if_else(infx && test, eve::if_else(infy, eve::pio_4(eve::as(a0r)), eve::pio_2(eve::as(a0r))), r);
         }
-        test = eve::logical_notand(eve::is_nan(x) || eve::is_nan(y),
-                                   eve::logical_andnot(infy, infx));
-        r = eve::if_else(test,eve::zero,r);
+        test = eve::logical_notand(eve::is_nan(x) || eve::is_nan(y), eve::logical_andnot(infy, infx));
+        r = eve::if_else(test, eve::zero, r);
       }
       // use proper real results
-      r = eve::if_else(is_proper_real, proper_real,   r);
+      r = eve::if_else(is_proper_real, proper_real, r);
       i = eve::if_else(is_proper_real, eve::zero, i);
       // restore signs
       r = eve::if_else(ltzra0, -r, r);
@@ -241,23 +227,19 @@ namespace kyosu::_
 
       return complex(r, i);
     }
-    else
-    {
-      return cayley_extend(asin, a0);
-    }
+    else { return cayley_extend(asin, a0); }
   }
-
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto asin_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
   requires(!O::contains(real_only))
   {
-    using e_t =  eve::element_type_t<decltype(real(z))>;
+    using e_t = eve::element_type_t<decltype(real(z))>;
     auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
-    return kyosu::asin[o](z)+eve::two_pi(eve::as(kk))*kk;
+    return kyosu::asin[o](z) + eve::two_pi(eve::as(kk)) * kk;
   }
 
-  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+  template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto asin_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
   requires(!O::contains(real_only))
   {

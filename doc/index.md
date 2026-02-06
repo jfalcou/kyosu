@@ -4,7 +4,7 @@ Kyosu
 **KYOSU** is an unified implementation of the complex, quaternions, octonions and more generally all
 \f$\mathbb{R}\f$-Cayley-Dickson algebras in an SIMD aware context provided by **EVE**
 
-\note If you are not interested in quite exotics features as quaternion or octonion, but only in real and complex **KYOSU**
+\note **KYOSU implements SIMD complex numbers**:If you are not interested in quite exotics features as quaternion or octonion, but only in real and complex **KYOSU**
 is still a library that provides a set of ~150 functions that can be used with real and complex in scalar or simd form
 with no abstraction penalty. The list of them can be seen below.
 
@@ -75,8 +75,9 @@ to define most elementary functions.
 What does this implementation provide
 ======================================
 
-All operators and functions implemented can receive a mix of scalar or simd of cayley-dickson and reals of various
-dimensionnality and are defined in the namespace kyosu.
+All operators and functions (with a few exceptions restricted to some dimensionnalities constraints)
+implemented can receive a mix of scalar or  simd of cayley-dickson and reals of various dimensionnality
+and are defined in the namespace kyosu.
 
   - Proper cayley-dickson values are those of dimensionnality greater or equal to 2 (complex, quaternion, ...) and satisfy the
     `concepts::cayley-dickson` concept. They don't satisfy the  `concepts::real` concept;
@@ -84,7 +85,7 @@ dimensionnality and are defined in the namespace kyosu.
     proper cayley-dickson values. They satisfy the `concepts::real` concept.
 
 Of course the algebra operation +, -, * and / are provided, but as \ is not an usable **C++**
-character as an operator, the left division `a \ b` is provided as the call ldiv(a,b). Note that except for real
+character as an operator, the left division `a\b` is provided as the call ldiv(a,b). Note that except for real
 and complex this is **NOT** `b/a`.
 
 Constructors
@@ -118,12 +119,13 @@ Operators
 Operators (as said before) `+`, `-`, `*` and `/` can be used in infix form and can mix cayley-dickson values of
  different dimensionalities. Of course the biggest dimensionlity is recovered in the output.
 
-Prefix forms are also provided as `add`, `sub`, `mul` and `div`. These version are multiparameters and can also use **KUMI** tuples.
-Also plus and minus can be used for unary versions.
+Prefix forms are also provided as `add`, `sub`, `mul`, `div` and `ldiv`. These version are multiparameters and can also use **KUMI** tuples.
+Also `plus` and `minus` can be used for unary versions.
 
 The left division sometimes necessary if the dimensionality is greater than 2 is given as `ldiv`.
 
-The multiplication to the left by i or -i (i*i=-1) can be done calling respectively muli and mulmi
+The multiplication to the left by i or -i (i*i=-1) can be done calling respectively muli and mulmi which ensure optimization.
+With the `right` option the multiplication is done to the right.
 
 Functions
 ---------
@@ -132,19 +134,20 @@ Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::c
 The exceptions mainly being rotation related quaternion usage.
 
 Also many functions as `sqrt` `nthroot` or `log` are the principal value of a multiple valued inverse of an analytic function.
-Most of these functions can use a second parameter that allows to choose an other branch.
+Most of these functions can use a second parameter that allows to choose another branch.
 
 @warning  **EVE** callables that correspond to mathematical functions that
           are only defined on a proper part of the real axis as, for example, `acos` DOES NOT ever provide the same result
-          if called in **EVE** or **KYOSU** context.
-
-          eve::acos(2.0) will returns a NaN value, but kyosu::acos(2.0) will return the pure imaginary
-          complex number \f$i\log(2+\sqrt{3})\f$
+          if called in **EVE** or **KYOSU** context. You can use the option `real_only` to get the
+          **EVE** behaviour if all parameters are real typed.
 
           All these kinds of functions called with a floating value in the kyosu namespace will return a complex value.
 
           However, many of those functions provide a `real_only` option that allows to call them with floating parameters
           only and returns the floating value of the same type which is the eve call result.
+
+          For example, eve::acos(2.0) and kyosu::acos[kyosu::real_only](2) will returns a NaN value, but kyosu::acos(2.0) will return the pure imaginary
+          complex number \f$i\log(2+\sqrt{3})\f$
 
   * Callables usable with all cayley_dickson types
 
@@ -158,7 +161,7 @@ Most of these functions can use a second parameter that allows to choose an othe
      - The result is then \f$\Re(v)+I_c\Im(v)\f$ where \f$I_c\f$ is defined above and \f$\Im(v)\f$
         is the imaginary part of the complex \f$v\f$
 
-    Moreover some functions are defined that does not pertain to **EVE** because they do not return real results for real entries.
+    Moreover some functions are defined that does not pertain to **EVE** because they never return real results for real entries.
     (For instance [exp_ipi](@ref kyosu::exp_ipi)).
 
    |                                                   |                                                   |                                                   |                                                   |
