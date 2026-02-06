@@ -159,7 +159,7 @@ $(document).ready(function(){initNavTree('namespacekyosu_aeac9270de13cad28f1ac68
 <div class="line"> </div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
-<div class="ttc" id="anamespacekyosu_aeac9270de13cad28f1ac682ea7545ea3_html_aeac9270de13cad28f1ac682ea7545ea3"><div class="ttname"><a href="namespacekyosu_aeac9270de13cad28f1ac682ea7545ea3.html#aeac9270de13cad28f1ac682ea7545ea3">kyosu::div</a></div><div class="ttdeci">constexpr auto div</div><div class="ttdoc">tuple_callable computing the division of its first argument with the product of the others.</div><div class="ttdef"><b>Definition</b> div.hpp:82</div></div>
+<div class="ttc" id="anamespacekyosu_aeac9270de13cad28f1ac682ea7545ea3_html_aeac9270de13cad28f1ac682ea7545ea3"><div class="ttname"><a href="namespacekyosu_aeac9270de13cad28f1ac682ea7545ea3.html#aeac9270de13cad28f1ac682ea7545ea3">kyosu::div</a></div><div class="ttdeci">constexpr auto div</div><div class="ttdoc">tuple_callable computing the division of its first argument with the product of the others.</div><div class="ttdef"><b>Definition</b> div.hpp:88</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><code>xs</code> : real or cayley-dickson arguments.</li>
@@ -172,6 +172,7 @@ $(document).ready(function(){initNavTree('namespacekyosu_aeac9270de13cad28f1ac68
 <li>kahan algorithm is used to enhance accuracy.</li>
 <li>The operation is performed conditionnaly</li>
 </ol>
+<dl class="section note"><dt>Note</dt><dd>If all elements are real typed the result will be real typed, using a call to <code>eve::div</code></dd></dl>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>

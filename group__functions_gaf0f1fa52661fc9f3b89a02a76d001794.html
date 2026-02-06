@@ -164,7 +164,7 @@ $(document).ready(function(){initNavTree('group__functions_gaf0f1fa52661fc9f3b89
 </ul>
 <p><b>Return value</b></p>
 <ul>
-<li>A real input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered.</li>
+<li>A real input z is treated as if <code><a class="el" href="group__functions_gae0cdc9d2dae205852268d4c5cdca6578.html#gae0cdc9d2dae205852268d4c5cdca6578" title="Constructs a kyosu::complex_t instance.">complex(z)</a></code> was entered unless the option real_only is used in which case the parameter must be a floating_value and the result will the same as a call to <code>eve::acospi</code>, implying a <code>Nan</code> result if the theoretical result is not real.</li>
 <li>Returns <a class="el" href="group__functions_gabd703393200a757087fb7f2054546dcf.html#gabd703393200a757087fb7f2054546dcf" title="Computes the parameter divided by .">radinpi(acos(z))</a></li>
 <li>for two parameters returns the kth branch of <code>acospi</code>. If k is not a flint, it is truncated before use.</li>
 </ul>
