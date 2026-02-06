@@ -49,11 +49,11 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!     //  regular call
-  //!     constexpr auto asinpi(Z z)                               noexcept;
-  //!     constexpr auto asin(ayley_dickson_like z, eve::value k)  noexcept;
+  //!     constexpr auto asinpi(cayley_dickson_like z)                noexcept;
+  //!     constexpr auto asinpi(cayley_dickson_like z, eve::value k)  noexcept;
   //!
   //!     // semantic modifyers
-  //!     constexpr auto asinpi[real_only](Real z)                 noexcept;
+  //!     constexpr auto asinpi[real_only](Real z)                    noexcept;
   //!   }
   //!   @endcode
   //!
