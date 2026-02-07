@@ -119,7 +119,7 @@ BreakFunctionDefinitionParameters: false
 BreakInheritanceList: BeforeColon
 BreakStringLiterals: true
 BreakTemplateDeclarations: MultiLine
-ColumnLimit: 120
+ColumnLimit: 150
 CommentPragmas: ""
 CompactNamespaces: false
 ConstructorInitializerIndentWidth: 2
@@ -200,7 +200,7 @@ PenaltyReturnTypeOnItsOwnLine: 1000
 PointerAlignment: Left
 QualifierAlignment: Custom
 ReferenceAlignment: Pointer
-ReflowComments: true
+ReflowComments: false
 RemoveBracesLLVM: false
 RemoveParentheses: Leave
 RemoveSemicolon: false
