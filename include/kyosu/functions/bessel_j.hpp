@@ -50,10 +50,10 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!      template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_j(N n, T z) noexcept; //1
-  //!      template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_j(N n, T z, std::span<Z, S> cjs)
+  //!      template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_j(N n, T z, std::span<Z, S> cis)
   //!      noexcept; //2 template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_j[spherical](N n,
   //!      T z)                      noexcept; //3 template<eve;scalar_value N, complex_like T, size_t S> constexpr auto
-  //!      bessel_j[spherical](N n, T z, std::span<Z, S> sjs) noexcept; //4
+  //!      bessel_j[spherical](N n, T z, std::span<Z, S> sis) noexcept; //4
   //!   }
   //!   @endcode
   //!

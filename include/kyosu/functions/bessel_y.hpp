@@ -49,11 +49,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      template<eve;scalar_value N, cayley_dickson T>    constexpr auto bessel_y(N n, T z) noexcept; //1
-  //!      template<eve;scalar_value N, complex T, size_t S> constexpr auto bessel_y(N n, T z, std::span<Z, S> cys)
-  //!      noexcept; //2 template<eve;scalar_value N, cayley_dickson T>    constexpr auto bessel_y[spherical](N n, T z)
-  //!      noexcept; //3 template<eve;scalar_value N, complex T, size_t S> constexpr auto bessel_y[spherical](N n, T z,
-  //!      std::span<Z, S> sys) noexcept; //4
+  //!      template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_y(N n, T z) noexcept; //1
+  //!      template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_y(N n, T z, std::span<Z, S> cis)
+  //!      noexcept; //2 template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_y[spherical](N n,
+  //!      T z)                      noexcept; //3 template<eve;scalar_value N, complex_like T, size_t S> constexpr auto
+  //!      bessel_y[spherical](N n, T z, std::span<Z, S> sis) noexcept; //4
   //!   }
   //!   @endcode
   //!

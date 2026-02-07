@@ -52,17 +52,16 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_h(N n, T z) noexcept; //1
-  //!      template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_h(N n, T z, std::span<Z, S> chs)
-  //!      noexcept; //2
+  //!     template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_h(N n, T z) noexcept; //1
+  //!     template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_h(N n, T z, std::span<Z, S> chs)
+  //!     noexcept; //2
   //!
-  //!      template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_h[spherical](N n, T z) noexcept;
-  //!      //3 template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_h[spherical](N n, T z,
-  //!      std::span<Z, S> shs)       noexcept; //4
-  //!
-  //!      template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_h[kind_2](/*any previous
-  //!      overloads*/)             noexcept; //5 template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto
-  //!      bessel_h[kind_2][spherical](/*any previous overloads*/)  noexcept; //6
+  //!     template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_h[spherical](N n, T z) noexcept;
+  //!     //3 template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_h[spherical](N n, T z,
+  //!     std::span<Z, S> shs)       noexcept; //4 template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto
+  //!     bessel_h[kind_2](/*any previous overloads*/)             noexcept; //5 template<eve;scalar_value N,
+  //!     cayley_dickson_like T>    constexpr auto bessel_h[kind_2][spherical](/*any previous overloads*/)  noexcept;
+  //!     //6
   //!   }
   //!   @endcode
   //!
