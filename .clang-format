@@ -119,7 +119,7 @@ BreakFunctionDefinitionParameters: false
 BreakInheritanceList: BeforeColon
 BreakStringLiterals: true
 BreakTemplateDeclarations: MultiLine
-ColumnLimit: 150
+ColumnLimit: 120
 CommentPragmas: ""
 CompactNamespaces: false
 ConstructorInitializerIndentWidth: 2
