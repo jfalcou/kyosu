@@ -45,7 +45,7 @@ namespace kyosu
   //!   {
   //!      // Regular overloads
   //!      constexpr auto manhattan(auto ... xs)                                              noexcept; // 1
-  //!      constexpr auto manhattan(eve::concepts::non_empty_product_type auto const& tup)             noexcept; // 2
+  //!      constexpr auto manhattan(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!
   //!      // Lanes masking
   //!      constexpr auto manhattan[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 3

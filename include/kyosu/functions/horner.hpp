@@ -23,7 +23,7 @@ namespace kyosu
       return KYOSU_CALL(zs...);
     }
 
-    template<concepts::cayley_dickson_like Z, eve::concepts::non_empty_product_type Data>
+    template<concepts::cayley_dickson_like Z, eve::non_empty_product_type Data>
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z, coefficients<Data>> operator()(
       Z z, coefficients<Data> const& t) const noexcept
     {
@@ -130,7 +130,7 @@ namespace kyosu::_
     }
   }
 
-  template<typename X, eve::concepts::non_empty_product_type Data, eve::callable_options O>
+  template<typename X, eve::non_empty_product_type Data, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, coefficients<Data> const& tup) noexcept
   {
     using r_t = as_cayley_dickson_like_t<X, coefficients<Data>>;

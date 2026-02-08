@@ -27,7 +27,7 @@ namespace kyosu
       return KYOSU_CALL(t0, t1, ts...);
     }
 
-    template<eve::concepts::non_empty_product_type Tup>
+    template<eve::non_empty_product_type Tup>
     requires(eve::same_lanes_or_scalar_tuple<Tup>)
     EVE_FORCEINLINE constexpr kumi::apply_traits_t<result, Tup> operator()(Tup const& t) const noexcept
     requires(kumi::size_v<Tup> >= 2)
@@ -57,7 +57,7 @@ namespace kyosu
   //!   {
   //!      // Regular overloads
   //!      constexpr auto kronecker(auto ... xs)                                              noexcept; // 1
-  //!      constexpr auto kronecker(eve::concepts::non_empty_product_type auto const& tup)             noexcept; // 2
+  //!      constexpr auto kronecker(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!
   //!   }
   //!   @endcode

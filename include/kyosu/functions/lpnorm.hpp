@@ -29,7 +29,7 @@ namespace kyosu
       return eve::lpnorm(p, v1, vs...);
     }
 
-    template<concepts::real P, eve::concepts::non_empty_product_type Tup>
+    template<concepts::real P, eve::non_empty_product_type Tup>
     KYOSU_FORCEINLINE constexpr auto operator()(P p, Tup tup) const noexcept
       -> decltype(eve::lpnorm(p, kumi::map(real, tup)))
     {
@@ -58,7 +58,7 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!     template< floating_ordered_value P, auto ... Ts> auto lpnorm(P p, T z,Ts ... zs )  const noexcept //1
-  //!     template< floating_ordered_value P, eve::concepts::non_empty_product_type auto const& tup)  const noexcept //2
+  //!     template< floating_ordered_value P, eve::non_empty_product_type auto const& tup)  const noexcept //2
   //!   }
   //!   @endcode
   //!

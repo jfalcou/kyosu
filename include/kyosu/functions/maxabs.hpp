@@ -22,7 +22,7 @@ namespace kyosu
       return KYOSU_CALL(z0, zs...);
     }
 
-    template<eve::concepts::non_empty_product_type Tup>
+    template<eve::non_empty_product_type Tup>
     requires(eve::same_lanes_or_scalar_tuple<Tup>)
     EVE_FORCEINLINE constexpr kyosu::as_real_type_t<kumi::apply_traits_t<eve::common_value, Tup>> operator()(
       Tup t) const noexcept

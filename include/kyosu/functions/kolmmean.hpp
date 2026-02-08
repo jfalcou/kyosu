@@ -28,7 +28,7 @@ namespace kyosu
       return KYOSU_CALL(f, g, ts...);
     }
 
-    template<typename F, typename G, eve::concepts::non_empty_product_type Tup>
+    template<typename F, typename G, eve::non_empty_product_type Tup>
     requires(eve::same_lanes_or_scalar_tuple<Tup> && !concepts::cayley_dickson_like<Tup>)
     EVE_FORCEINLINE constexpr kumi::apply_traits_t<result, Tup> operator()(F f, G g, Tup const& t) const noexcept
     requires(kumi::size_v<Tup> >= 1)
@@ -59,7 +59,7 @@ namespace kyosu
   //!   {
   //!      // Regular overloads
   //!      constexpr auto kolmmean(auto ... xs)                                              noexcept; // 1
-  //!      constexpr auto kolmmean(eve::concepts::non_empty_product_type auto const& tup)             noexcept; // 2
+  //!      constexpr auto kolmmean(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!      conséexpr auto kolmmean[pedantic](/*any of the above overloads*/)                 noexcept; // 3
   //!      constexpr auto kolmmean[kahan] (/*any of the above overloads*/)                   noexcept; // 4
   //!   }
@@ -106,7 +106,7 @@ namespace kyosu::_
     else return g(average[o](f(t0), f(args)...));
   }
 
-  template<typename F, typename G, eve::concepts::non_empty_product_type Tup, eve::callable_options O>
+  template<typename F, typename G, eve::non_empty_product_type Tup, eve::callable_options O>
   EVE_FORCEINLINE constexpr auto kolmmean_(KYOSU_DELAY(), O const& o, F f, G g, Tup tup) noexcept
   requires(!concepts::cayley_dickson_like<Tup>)
   {
