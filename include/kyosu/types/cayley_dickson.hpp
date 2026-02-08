@@ -154,7 +154,7 @@ namespace kyosu
   //! @{
   //====================================================================================================================
   /// Deduction guide for constructing from product type
-  template<kumi::product_type Tuple>
+  template<eve::product_type Tuple>
   cayley_dickson(Tuple const&) -> cayley_dickson<kumi::element_t<0, Tuple>, kumi::size_v<Tuple>>;
 
   /// Deduction guide for constructing from sequence of values
