@@ -31,6 +31,7 @@ namespace kyosu
   struct cayley_dickson
   {
     using underlying_type = Type;
+    using is_cayley_dickson = void;
 
     static constexpr auto static_dimension = N;
 
@@ -118,7 +119,6 @@ namespace kyosu
     //  Tuple-like behavior
     //==================================================================================================================
     using data_type = kumi::result::fill_t<static_dimension, Type>;
-    using is_product_type = void;
 
     friend constexpr eve::as_logical_t<Type> operator==(cayley_dickson const& a, cayley_dickson const& b) noexcept
     {
