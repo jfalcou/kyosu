@@ -31,7 +31,6 @@ namespace kyosu
   struct cayley_dickson
   {
     using underlying_type = Type;
-    using is_cayley_dickson = void;
 
     static constexpr auto static_dimension = N;
 
