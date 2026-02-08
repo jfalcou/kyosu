@@ -12,19 +12,16 @@ namespace kyosu
 {
   //====================================================================================================================
   //====================================================================================================================
-  template< template<typename> class Func
-          , typename OptionsValues
-          , typename... Options
-          >
+  template<template<typename> class Func, typename OptionsValues, typename... Options>
   struct strict_tuple_callable : eve::strict_elementwise_callable<Func, OptionsValues, Options...>
   {
     using base_t = eve::strict_elementwise_callable<Func, OptionsValues, Options...>;
 
-    template<eve::callable_options O, kumi::product_type T>
+    template<eve::callable_options O, eve::product_type T>
     requires(!concepts::cayley_dickson_like<T>)
     constexpr EVE_FORCEINLINE auto behavior(auto arch, O const& opts, T x) const
     {
-      return kumi::apply( [&](auto... a) { return static_cast<base_t const&>(*this).behavior(arch, opts, a...); }, x);
+      return kumi::apply([&](auto... a) { return static_cast<base_t const&>(*this).behavior(arch, opts, a...); }, x);
     }
 
     template<eve::callable_options O, typename T, typename... Ts>
