@@ -14,23 +14,20 @@ namespace kyosu
   template<typename Options>
   struct from_cylindricospherical_t : eve::elementwise_callable<from_cylindricospherical_t, Options>
   {
-    template<concepts::real U ,concepts::real V,concepts::real W, concepts::real T>
-    KYOSU_FORCEINLINE constexpr
-    quaternion_t<eve::common_value_t<V, U, W, T>> operator()(V const & t
-                                                            , U const & radius
-                                                            , W const & longitude
-                                                            , T const & latitude) const noexcept
+    template<concepts::real U, concepts::real V, concepts::real W, concepts::real T>
+    KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(
+      V const& t, U const& radius, W const& longitude, T const& latitude) const noexcept
     {
       auto [slat, clat] = eve::sincos(latitude);
       auto [slon, clon] = eve::sincos(longitude);
-      auto f = radius*clat;
-      return kyosu::quaternion(t, f*clon, f*slon, radius*slat);
+      auto f = radius * clat;
+      return kyosu::quaternion(t, f * clon, f * slon, radius * slat);
     }
 
     KYOSU_CALLABLE_OBJECT(from_cylindricospherical_t, from_cylindricospherical_);
   };
 
- //================================================================================================
+  //================================================================================================
   //! @addtogroup quaternion
   //! @{
   //! @var from_cylindrospherical

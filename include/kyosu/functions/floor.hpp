@@ -10,55 +10,53 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct floor_t : eve::elementwise_callable<floor_t, Options>
+  template<typename Options> struct floor_t : eve::elementwise_callable<floor_t, Options>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(floor_t, floor_);
-};
+  };
 
-//======================================================================================================================
-//! @addtogroup functions
-//! @{
-//!   @var floor
-//!   @brief Computes the floor value.
-//!
-//!   @groupheader{Header file}
-//!
-//!   @code
-//!   #include <kyosu/functions.hpp>
-//!   @endcode
-//!
-//!   @groupheader{Callable Signatures}
-//!
-//!   @code
-//!   namespace kyosu
-//!   {
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr T floor(T z) noexcept;
-//!   }
-//!   @endcode
-//!
-//!   **Parameters**
-//!
-//!     * `z`: Value to for which floor is computed.
-//!
-//!   **Return value**
-//!
-//!     Returns the floor of its argument. i.e. the value whose parts are the floor of the original ones.
-//!
-//!  @groupheader{Example}
-//!
-//!  @godbolt{doc/floor.cpp}
-//======================================================================================================================
+  //======================================================================================================================
+  //! @addtogroup functions
+  //! @{
+  //!   @var floor
+  //!   @brief Computes the floor value.
+  //!
+  //!   @groupheader{Header file}
+  //!
+  //!   @code
+  //!   #include <kyosu/functions.hpp>
+  //!   @endcode
+  //!
+  //!   @groupheader{Callable Signatures}
+  //!
+  //!   @code
+  //!   namespace kyosu
+  //!   {
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr T floor(T z) noexcept;
+  //!   }
+  //!   @endcode
+  //!
+  //!   **Parameters**
+  //!
+  //!     * `z`: Value to for which floor is computed.
+  //!
+  //!   **Return value**
+  //!
+  //!     Returns the floor of its argument. i.e. the value whose parts are the floor of the original ones.
+  //!
+  //!  @groupheader{Example}
+  //!
+  //!  @godbolt{doc/floor.cpp}
+  //======================================================================================================================
   inline constexpr auto floor = eve::functor<floor_t>;
-//======================================================================================================================
-//! @}
-//======================================================================================================================
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }
 
 namespace kyosu::_
@@ -66,9 +64,7 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto floor_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(kyosu::concepts::real<Z>)
-      return eve::floor(z);
-    else
-      return Z{kumi::map([](auto const& e) { return eve::floor(e); }, z)};
+    if constexpr (kyosu::concepts::real<Z>) return eve::floor(z);
+    else return Z{kumi::map([](auto const& e) { return eve::floor(e); }, z)};
   }
 }

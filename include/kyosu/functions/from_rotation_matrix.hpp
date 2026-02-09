@@ -11,18 +11,17 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct from_rotation_matrix_t : eve::elementwise_callable<from_rotation_matrix_t, Options>
+  template<typename Options> struct from_rotation_matrix_t : eve::elementwise_callable<from_rotation_matrix_t, Options>
   {
-    template<typename T >
-    KYOSU_FORCEINLINE constexpr quaternion_t<T> operator()(std::array< std::array<T, 3>, 3> const & r ) const noexcept
+    template<typename T>
+    KYOSU_FORCEINLINE constexpr quaternion_t<T> operator()(std::array<std::array<T, 3>, 3> const& r) const noexcept
     {
-      auto r11pr22 =  r[1][1] + r[2][2];
-      auto qq0m1   =  r[0][0] + r11pr22;
-      auto qq1m1   =  r[0][0] - r11pr22;
-      auto r11mr22 =  r[1][1] - r[2][2];
-      auto qq2m1   = -r[0][0] + r11mr22;
-      auto qq3m1   = -r[0][0] - r11mr22;
+      auto r11pr22 = r[1][1] + r[2][2];
+      auto qq0m1 = r[0][0] + r11pr22;
+      auto qq1m1 = r[0][0] - r11pr22;
+      auto r11mr22 = r[1][1] - r[2][2];
+      auto qq2m1 = -r[0][0] + r11mr22;
+      auto qq3m1 = -r[0][0] - r11mr22;
 
       auto r21mr12 = r[2][1] - r[1][2];
       auto r02mr20 = r[0][2] - r[2][0];
@@ -32,10 +31,18 @@ namespace kyosu
       auto r12pr21 = r[1][2] + r[2][1];
 
       auto h = eve::half(eve::as(r11pr22));
-      auto q0 =  eve::sqrt(eve::if_else(eve::is_gtz(qq0m1), eve::inc(qq0m1), (eve::sqr(r21mr12)+sqr(r02mr20)+eve::sqr(r10mr01))/(3-qq0m1)))*h;
-      auto q1 =  eve::sqrt(eve::if_else(eve::is_gtz(qq1m1), eve::inc(qq1m1), (eve::sqr(r21mr12)+sqr(r01pr10)+eve::sqr(r20pr02))/(3-qq1m1)))*h;
-      auto q2 =  eve::sqrt(eve::if_else(eve::is_gtz(qq2m1), eve::inc(qq2m1), (eve::sqr(r02mr20)+sqr(r01pr10)+eve::sqr(r12pr21))/(3-qq2m1)))*h;
-      auto q3 =  eve::sqrt(eve::if_else(eve::is_gtz(qq3m1), eve::inc(qq3m1), (eve::sqr(r10mr01)+sqr(r20pr02)+eve::sqr(r12pr21))/(3-qq3m1)))*h;
+      auto q0 = eve::sqrt(eve::if_else(eve::is_gtz(qq0m1), eve::inc(qq0m1),
+                                       (eve::sqr(r21mr12) + sqr(r02mr20) + eve::sqr(r10mr01)) / (3 - qq0m1))) *
+                h;
+      auto q1 = eve::sqrt(eve::if_else(eve::is_gtz(qq1m1), eve::inc(qq1m1),
+                                       (eve::sqr(r21mr12) + sqr(r01pr10) + eve::sqr(r20pr02)) / (3 - qq1m1))) *
+                h;
+      auto q2 = eve::sqrt(eve::if_else(eve::is_gtz(qq2m1), eve::inc(qq2m1),
+                                       (eve::sqr(r02mr20) + sqr(r01pr10) + eve::sqr(r12pr21)) / (3 - qq2m1))) *
+                h;
+      auto q3 = eve::sqrt(eve::if_else(eve::is_gtz(qq3m1), eve::inc(qq3m1),
+                                       (eve::sqr(r10mr01) + sqr(r20pr02) + eve::sqr(r12pr21)) / (3 - qq3m1))) *
+                h;
       return quaternion(q0, q1, q2, q3);
     }
 

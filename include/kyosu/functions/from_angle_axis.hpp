@@ -17,24 +17,21 @@ namespace kyosu
   struct from_angle_axis_t : eve::strict_elementwise_callable<from_angle_axis_t, Options, assume_unitary_option>
   {
 
-    template< concepts::real V, concepts::real T, std::size_t S>
-    KYOSU_FORCEINLINE constexpr
-    quaternion_t<eve::common_value_t<V, T>> operator()( V  angle
-                                                      , std::span<T, S> axis) const noexcept
+    template<concepts::real V, concepts::real T, std::size_t S>
+    KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, T>> operator()(V angle,
+                                                                                   std::span<T, S> axis) const noexcept
     {
       using e_t = eve::common_value_t<T, V>;
-      auto q =  quaternion(e_t(0), e_t(axis[0]), e_t(axis[1]), e_t(axis[2]));
-      if constexpr(!Options::contains(assume_unitary)){
-        q = if_else(is_eqz(q), quaternion(e_t(0), e_t(1)), sign(q));
-      }
-      auto [s, c] = eve::sincos(angle*eve::half(eve::as(angle)));
-      return c+s*q;
+      auto q = quaternion(e_t(0), e_t(axis[0]), e_t(axis[1]), e_t(axis[2]));
+      if constexpr (!Options::contains(assume_unitary)) { q = if_else(is_eqz(q), quaternion(e_t(0), e_t(1)), sign(q)); }
+      auto [s, c] = eve::sincos(angle * eve::half(eve::as(angle)));
+      return c + s * q;
     }
 
     KYOSU_CALLABLE_OBJECT(from_angle_axis_t, from_angle_axis_);
   };
 
- //================================================================================================
+  //================================================================================================
   //! @addtogroup functions
   //! @{
   //! @var from_angle_axis

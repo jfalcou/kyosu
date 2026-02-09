@@ -15,41 +15,34 @@ namespace kyosu
   template<typename Options>
   struct from_euler_t : eve::elementwise_callable<from_euler_t, Options, extrinsic_option, intrinsic_option>
   {
-    template<concepts::real U,
-             concepts::real V,
-             concepts::real W, int I,  int J, int K>
-    KYOSU_FORCEINLINE constexpr
-    quaternion_t<eve::common_value_t<U, V, W>> operator()( U const & v1
-                                                         , V const & v2
-                                                         , W const & v3
-                                                         , _::axis<I>
-                                                         , _::axis<J>
-                                                         , _::axis<K>) const noexcept
+    template<concepts::real U, concepts::real V, concepts::real W, int I, int J, int K>
+    KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<U, V, W>> operator()(
+      U const& v1, V const& v2, W const& v3, _::axis<I>, _::axis<J>, _::axis<K>) const noexcept
     requires(I != J && J != K)
     {
-      using e_t = decltype(v1+v2+v3);
+      using e_t = decltype(v1 + v2 + v3);
       using q_t = decltype(quaternion(e_t{}));
       auto h = eve::half(eve::as<e_t>());
       std::array<q_t, 3> qs;
-      auto [sa, ca] = eve::sincos(v3*h);
-      auto [sb, cb] = eve::sincos(v2*h);
-      auto [sc, cc] = eve::sincos(v1*h);
+      auto [sa, ca] = eve::sincos(v3 * h);
+      auto [sb, cb] = eve::sincos(v2 * h);
+      auto [sc, cc] = eve::sincos(v1 * h);
       get<0>(qs[0]) = ca;
       get<0>(qs[1]) = cb;
       get<J>(qs[1]) = sb;
       get<0>(qs[2]) = cc;
-      if constexpr(!Options::contains(extrinsic))
+      if constexpr (!Options::contains(extrinsic))
       {
         get<K>(qs[0]) = sa;
         get<I>(qs[2]) = sc;
-        q_t q = qs[2]*qs[1]*qs[0];
+        q_t q = qs[2] * qs[1] * qs[0];
         return q;
       }
       else
       {
         get<I>(qs[0]) = sa;
         get<K>(qs[2]) = sc;
-        q_t q = qs[0]*qs[1]*qs[2];
+        q_t q = qs[0] * qs[1] * qs[2];
         return q;
       }
     }
