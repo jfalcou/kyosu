@@ -13,12 +13,8 @@ namespace kyosu
 {
 
   template<typename Options>
-  struct bessel_i_t : eve::strict_elementwise_callable<bessel_i_t,
-                                                       Options,
-                                                       eve::spherical_option,
-                                                       eve::cylindrical_option,
-                                                       kind_1_option,
-                                                       kind_2_option>
+  struct bessel_i_t
+    : eve::strict_elementwise_callable<bessel_i_t, Options, eve::spherical_option, eve::cylindrical_option, kind_1_option, kind_2_option>
   {
     template<eve::scalar_value N, concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n, Z const& z) const noexcept
@@ -27,9 +23,7 @@ namespace kyosu
     }
 
     template<eve::scalar_value N, concepts::complex_like Z, std::size_t S>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n,
-                                                                          Z const& z,
-                                                                          std::span<Z, S> is) const noexcept
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n, Z const& z, std::span<Z, S> is) const noexcept
     {
       return KYOSU_CALL(n, z, is);
     }
@@ -53,11 +47,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_i(N n, T z) noexcept; //1
-  //!      template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_i(N n, T z, std::span<Z, S> cis)
-  //!      noexcept; //2 template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_i[spherical](N n,
-  //!      T z)                      noexcept; //3 template<eve;scalar_value N, complex_like T, size_t S> constexpr auto
-  //!      bessel_i[spherical](N n, T z, std::span<Z, S> sis) noexcept; //4
+  //!      template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_i(N n, T z)                                 noexcept; //1
+  //!      template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_i(N n, T z, std::span<Z, S> cis)            noexcept; //2
+  //!      template<eve;scalar_value N, cayley_dickson_like T>    constexpr auto bessel_i[spherical](N n, T z)                      noexcept; //3
+  //!      template<eve;scalar_value N, complex_like T, size_t S> constexpr auto bessel_i[spherical](N n, T z, std::span<Z, S> sis) noexcept; //4
   //!   }
   //!   @endcode
   //!
@@ -100,8 +93,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto bessel_i_(KYOSU_DELAY(), O const& o, N n, Z z) noexcept
+  template<typename N, typename Z, eve::callable_options O> KYOSU_FORCEINLINE constexpr auto bessel_i_(KYOSU_DELAY(), O const& o, N n, Z z) noexcept
   {
     constexpr auto Kind = O::contains(kind_2) ? 2 : 1;
     if constexpr (concepts::complex<Z>)

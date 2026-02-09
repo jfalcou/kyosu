@@ -28,7 +28,7 @@ namespace kyosu
       return KYOSU_CALL(ts...);
     }
 
-    template<kumi::non_empty_product_type Tup>
+    template<eve::non_empty_product_type Tup>
     requires(eve::same_lanes_or_scalar_tuple<Tup> && !concepts::cayley_dickson_like<Tup>)
     EVE_FORCEINLINE constexpr kumi::apply_traits_t<result, Tup> operator()(Tup const& t) const noexcept
     requires(kumi::size_v<Tup> >= 1)
@@ -58,7 +58,7 @@ namespace kyosu
   //!   {
   //!      // Regular overloads
   //!      constexpr auto average(auto ... xs)                                              noexcept; // 1
-  //!      constexpr auto average(kumi::non_empty_product_type auto const& tup)             noexcept; // 2
+  //!      constexpr auto average(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!      conséexpr auto average[pedantic](/*any of the above overloads*/)                 noexcept; // 3
   //!      constexpr auto average[kahan] (/*any of the above overloads*/)                   noexcept; // 4
   //!

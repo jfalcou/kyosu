@@ -14,11 +14,8 @@ namespace kyosu::_
   //  confluent hypergeometric limit function 0F1({}; {b}; z)
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
-  template<typename Z,
-           kumi::sized_product_type<0> T1,
-           kumi::sized_product_type<0> T2>
-  KYOSU_FORCEINLINE  auto
-  hyperg(Z z, T1, T2)
+  template<typename Z, eve::sized_product_type<0> T1, eve::sized_product_type<0> T2>
+  KYOSU_FORCEINLINE auto hyperg(Z z, T1, T2)
   {
     return kyosu::exp(z);
   }

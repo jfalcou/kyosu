@@ -31,7 +31,7 @@ namespace kyosu
       return KYOSU_CALL(ts...);
     }
 
-    template<kumi::non_empty_product_type Tup>
+    template<eve::non_empty_product_type Tup>
     requires(eve::same_lanes_or_scalar_tuple<Tup> && !concepts::cayley_dickson_like<Tup>)
     KYOSU_FORCEINLINE constexpr kumi::apply_traits_t<result, Tup> operator()(Tup const& t) const noexcept
     requires(kumi::size_v<Tup> >= 2)
@@ -39,7 +39,7 @@ namespace kyosu
       return KYOSU_CALL(t);
     }
 
-    template<kumi::non_empty_product_type Tup1, kumi::non_empty_product_type Tup2>
+    template<eve::non_empty_product_type Tup1, eve::non_empty_product_type Tup2>
     requires(eve::same_lanes_or_scalar_tuple<Tup1> && eve::same_lanes_or_scalar_tuple<Tup2> &&
              !concepts::cayley_dickson_like<Tup1> && !concepts::cayley_dickson_like<Tup2>)
     KYOSU_FORCEINLINE constexpr kumi::apply_traits_t<as_cayley_dickson_like, kumi::result::cat_t<Tup1, Tup2>>
@@ -119,7 +119,7 @@ namespace kyosu::_
     return add[o](tup);
   }
 
-  template<kumi::non_empty_product_type Tup1, kumi::non_empty_product_type Tup2, eve::callable_options O>
+  template<eve::non_empty_product_type Tup1, eve::non_empty_product_type Tup2, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const& o, Tup1 z0, Tup2 z1) noexcept
   requires(!concepts::cayley_dickson_like<Tup1> && !concepts::cayley_dickson_like<Tup2>)
   {
