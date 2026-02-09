@@ -12,8 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct exp_i_t : eve::elementwise_callable<exp_i_t, Options>
+  template<typename Options> struct exp_i_t : eve::elementwise_callable<exp_i_t, Options>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
@@ -22,46 +21,46 @@ namespace kyosu
     }
 
     KYOSU_CALLABLE_OBJECT(exp_i_t, exp_i_);
-};
+  };
 
-//======================================================================================================================
-//! @addtogroup functions
-//! @{
-//!   @var exp_i
-//!   @brief Computes the exponential of i times the argument
-//!
-//!   @groupheader{Header file}
-//!
-//!   @code
-//!   #include <kyosu/functions.hpp>
-//!   @endcode
-//!
-//!   @groupheader{Callable Signatures}
-//!
-//!   @code
-//!   namespace kyosu
-//!   {
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> exp_i(T z) noexcept;
+  //======================================================================================================================
+  //! @addtogroup functions
+  //! @{
+  //!   @var exp_i
+  //!   @brief Computes the exponential of i times the argument
+  //!
+  //!   @groupheader{Header file}
+  //!
+  //!   @code
+  //!   #include <kyosu/functions.hpp>
+  //!   @endcode
+  //!
+  //!   @groupheader{Callable Signatures}
+  //!
+  //!   @code
+  //!   namespace kyosu
+  //!   {
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> exp_i(T z) noexcept;
 
-//!   }
-//!   @endcode
-//!
-//!   **Parameters**
-//!
-//!     * `z`: Value to process.
-//!
-//!   **Return value**
-//!
-//!     Returns `exp(i*z)`.
-//!
-//!  @groupheader{Example}
-//!
-//!  @godbolt{doc/exp_i.cpp}
-//======================================================================================================================
+  //!   }
+  //!   @endcode
+  //!
+  //!   **Parameters**
+  //!
+  //!     * `z`: Value to process.
+  //!
+  //!   **Return value**
+  //!
+  //!     Returns `exp(i*z)`.
+  //!
+  //!  @groupheader{Example}
+  //!
+  //!  @godbolt{doc/exp_i.cpp}
+  //======================================================================================================================
   inline constexpr auto exp_i = eve::functor<exp_i_t>;
-//======================================================================================================================
-//! @}
-//======================================================================================================================
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }
 
 namespace kyosu::_
@@ -69,14 +68,11 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto exp_i_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    if constexpr(concepts::real<Z>)
+    if constexpr (concepts::real<Z>)
     {
       auto [s, c] = eve::sincos(z);
-      return  complex(c, s);
+      return complex(c, s);
     }
-    else
-    {
-      return kyosu::exp(muli(z));
-    }
+    else { return kyosu::exp(muli(z)); }
   }
 }
