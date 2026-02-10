@@ -14,22 +14,20 @@
 
 namespace kyosu
 {
-  template<std::ptrdiff_t Index>
-  struct extractor
+  template<std::ptrdiff_t Index> struct extractor
   {
-    template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr decltype(auto) operator()(Z&& z) const noexcept
+    template<concepts::cayley_dickson Z> KYOSU_FORCEINLINE constexpr decltype(auto) operator()(Z&& z) const noexcept
     {
       using type = eve::element_type_t<std::remove_cvref_t<Z>>;
-      if constexpr(Index < type::static_dimension)  return get<Index>(KYOSU_FWD(z));
-      else                                          return as_real_type_t<std::remove_cvref_t<Z>>{0};
+      if constexpr (Index < type::static_dimension) return get<Index>(KYOSU_FWD(z));
+      else return as_real_type_t<std::remove_cvref_t<Z>>{0};
     }
 
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr decltype(auto) operator()(V&& v) const noexcept
+    template<concepts::real V> KYOSU_FORCEINLINE constexpr decltype(auto) operator()(V&& v) const noexcept
     {
       using type = std::remove_cvref_t<V>;
-      if constexpr(Index == 0) return KYOSU_FWD(v); else  return type{0};
+      if constexpr (Index == 0) return KYOSU_FWD(v);
+      else return type{0};
     }
   };
 
@@ -71,7 +69,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/real.cpp}
   //====================================================================================================================
-  inline constexpr auto real    = extractor<0>{};
+  inline constexpr auto real = extractor<0>{};
 
   //====================================================================================================================
   //!   @var ipart
@@ -106,10 +104,10 @@ namespace kyosu
   //!
   //!  @godbolt{doc/ipart.cpp}
   //====================================================================================================================
-  inline constexpr auto ipart   = extractor<1>{};
+  inline constexpr auto ipart = extractor<1>{};
 
   //! Alias for kyosu::ipart
-  inline constexpr auto imag    = extractor<1>{};
+  inline constexpr auto imag = extractor<1>{};
 
   //====================================================================================================================
   //!   @var jpart
@@ -145,7 +143,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/jpart.cpp}
   //====================================================================================================================
-  inline constexpr auto jpart   = extractor<2>{};
+  inline constexpr auto jpart = extractor<2>{};
 
   //====================================================================================================================
   //!   @var kpart
@@ -181,7 +179,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/kpart.cpp}
   //====================================================================================================================
-  inline constexpr auto kpart   = extractor<3>{};
+  inline constexpr auto kpart = extractor<3>{};
 
   //====================================================================================================================
   //!   @var lpart
@@ -218,7 +216,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/lpart.cpp}
   //====================================================================================================================
-  inline constexpr auto lpart   = extractor<4>{};
+  inline constexpr auto lpart = extractor<4>{};
 
   //====================================================================================================================
   //!   @var lipart
@@ -255,7 +253,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/lipart.cpp}
   //====================================================================================================================
-  inline constexpr auto lipart  = extractor<5>{};
+  inline constexpr auto lipart = extractor<5>{};
 
   //====================================================================================================================
   //!   @var ljpart
@@ -292,7 +290,7 @@ namespace kyosu
   //!
   //!  @godbolt{doc/lipart.cpp}
   //====================================================================================================================
-  inline constexpr auto ljpart  = extractor<6>{};
+  inline constexpr auto ljpart = extractor<6>{};
 
   //====================================================================================================================
   //!   @var lkpart
@@ -333,5 +331,5 @@ namespace kyosu
   //====================================================================================================================
   //! @}
   //====================================================================================================================
-  inline constexpr auto lkpart  = extractor<7>{};
+  inline constexpr auto lkpart = extractor<7>{};
 }
