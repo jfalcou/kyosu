@@ -13,11 +13,9 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct to_spherical_t : eve::elementwise_callable<to_spherical_t, Options>
+  template<typename Options> struct to_spherical_t : eve::elementwise_callable<to_spherical_t, Options>
   {
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
+    template<concepts::real V> KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
       return kumi::tuple{eve::abs(v), eve::arg(v), z, z};
@@ -25,24 +23,24 @@ namespace kyosu
 
     template<concepts::cayley_dickson Q>
     requires(dimension_v<Q> <= 4)
-      KYOSU_FORCEINLINE constexpr auto operator()(Q  q) const noexcept
+    KYOSU_FORCEINLINE constexpr auto operator()(Q q) const noexcept
     {
-      if constexpr(kyosu::concepts::complex<Q>)
+      if constexpr (kyosu::concepts::complex<Q>)
       {
         auto c0 = complex(real(q), imag(q));
-        auto z =  eve::zero(eve::as(abs(c0)));
+        auto z = eve::zero(eve::as(abs(c0)));
         return kumi::tuple{abs(c0), arg(c0), z, z};
       }
       else
       {
         auto rho = kyosu::abs(q);
-        auto phi2 = eve::asin(kpart(q)/rho);
+        auto phi2 = eve::asin(kpart(q) / rho);
         kpart(q) = 0;
         auto rho1 = kyosu::abs(q);
-        auto phi1 = eve::asin(jpart(q)/rho1);
+        auto phi1 = eve::asin(jpart(q) / rho1);
         jpart(q) = 0;
         auto rho2 = kyosu::abs(q);
-        auto theta= eve::asin(ipart(q)/rho2);
+        auto theta = eve::asin(ipart(q) / rho2);
         return kumi::tuple{rho, theta, phi1, phi2};
       }
     }

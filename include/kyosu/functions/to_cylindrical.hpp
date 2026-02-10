@@ -13,12 +13,9 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct to_cylindrical_t : eve::elementwise_callable<to_cylindrical_t, Options>
+  template<typename Options> struct to_cylindrical_t : eve::elementwise_callable<to_cylindrical_t, Options>
   {
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr kumi::tuple< V, V, V, V>
-    operator()(V const& v) const noexcept
+    template<concepts::real V> KYOSU_FORCEINLINE constexpr kumi::tuple<V, V, V, V> operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
       return kumi::tuple{eve::abs(v), eve::arg(v), z, z};
@@ -26,20 +23,16 @@ namespace kyosu
 
     template<concepts::cayley_dickson Q>
     requires(dimension_v<Q> <= 4)
-    KYOSU_FORCEINLINE constexpr
-    kumi::tuple< as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>>
+    KYOSU_FORCEINLINE constexpr kumi::tuple<as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>>
     operator()(Q const& q) const noexcept
     {
       auto c0 = complex(real(q), imag(q));
-      if constexpr(kyosu::concepts::complex<Q>)
+      if constexpr (kyosu::concepts::complex<Q>)
       {
-        auto z =  eve::zero(eve::as(abs(c0)));
+        auto z = eve::zero(eve::as(abs(c0)));
         return kumi::tuple{abs(c0), arg(c0), z, z};
       }
-      else
-      {
-        return kumi::tuple{abs(c0), arg(c0), jpart(q), kpart(q) };
-      }
+      else { return kumi::tuple{abs(c0), arg(c0), jpart(q), kpart(q)}; }
     }
 
     KYOSU_CALLABLE_OBJECT(to_cylindrical_t, to_cylindrical_);

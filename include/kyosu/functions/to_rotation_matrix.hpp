@@ -16,26 +16,25 @@ namespace kyosu
   template<typename Options>
   struct to_rotation_matrix_t : eve::elementwise_callable<to_rotation_matrix_t, Options, assume_unitary_option>
   {
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr auto operator()(V const&) const noexcept
+    template<concepts::real V> KYOSU_FORCEINLINE constexpr auto operator()(V const&) const noexcept
     {
-      using m_t = std::array< std::array<V, 3>, 3>;
+      using m_t = std::array<std::array<V, 3>, 3>;
       return m_t{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
     }
 
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z  q) const noexcept
+    KYOSU_FORCEINLINE constexpr auto operator()(Z q) const noexcept
     requires(dimension_v<Z> <= 4)
     {
-      if constexpr(!Options::contains(assume_unitary)) q = sign(q);
+      if constexpr (!Options::contains(assume_unitary)) q = sign(q);
       using e_t = as_real_type_t<Z>;
-      using m_t = std::array< std::array<e_t, 3>, 3>;
-      if constexpr(kyosu::concepts::complex<Z>)
+      using m_t = std::array<std::array<e_t, 3>, 3>;
+      if constexpr (kyosu::concepts::complex<Z>)
       {
         auto q0 = real(q);
         auto q1 = imag(q);
-        auto q02 = 2*sqr(q0)-1;
-        auto q0q1= 2*q0*q1;
+        auto q02 = 2 * sqr(q0) - 1;
+        auto q0q1 = 2 * q0 * q1;
         return m_t{{1, 0, 0}, {0, q02, -q0q1}, {0, q0q1, q02}};
       }
       else
@@ -73,7 +72,6 @@ namespace kyosu
 
     KYOSU_CALLABLE_OBJECT(to_rotation_matrix_t, to_rotation_matrix_);
   };
-
 
   //================================================================================================
   //! @addtogroup quaternion

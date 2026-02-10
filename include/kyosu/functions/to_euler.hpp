@@ -14,39 +14,34 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct to_euler_t : eve::callable<to_euler_t, Options, extrinsic_option, intrinsic_option>
+  template<typename Options> struct to_euler_t : eve::callable<to_euler_t, Options, extrinsic_option, intrinsic_option>
   {
-    template<typename Q, int II,  int JJ,  int KK>
+    template<typename Q, int II, int JJ, int KK>
     requires((concepts::cayley_dickson<Q> && dimension_v<Q> <= 4) || concepts::real<Q>)
-      KYOSU_FORCEINLINE constexpr
-    kumi::tuple<as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>>
-    operator()(Q  q0
-                                                 , _::axis<II>
-                                                 , _::axis<JJ>
-                                                 , _::axis<KK>) const noexcept
+    KYOSU_FORCEINLINE constexpr kumi::tuple<as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>> operator()(
+      Q q0, _::axis<II>, _::axis<JJ>, _::axis<KK>) const noexcept
     {
-      using e_t =  std::remove_reference_t<decltype(real(Q()))>;
+      using e_t = std::remove_reference_t<decltype(real(Q()))>;
       auto q = quaternion(q0);
       std::array<e_t, 4> aq{real(q), ipart(q), jpart(q), kpart(q)};
       constexpr bool is_proper = II == KK; //Proper Euler angles else Tait-Bryan
 
-      auto prepare = [&](){
-        if constexpr(Options::contains(extrinsic))
+      auto prepare = [&]() {
+        if constexpr (Options::contains(extrinsic))
         {
-          constexpr int K = 6-II-JJ;
+          constexpr int K = 6 - II - JJ;
           constexpr int I = II;
           constexpr int J = JJ;
-          int sign = (I-J)*(J-K)*(K-I)/2; // even (+1) permutation or odd (-1);
+          int sign = (I - J) * (J - K) * (K - I) / 2; // even (+1) permutation or odd (-1);
 
           auto a = aq[0];
           auto b = aq[I];
           auto c = aq[J];
-          auto d = aq[K]*sign;
-          if constexpr(!is_proper)
+          auto d = aq[K] * sign;
+          if constexpr (!is_proper)
           {
             a -= aq[J];
-            b += aq[K]*sign;
+            b += aq[K] * sign;
             c += aq[0];
             d -= aq[I];
           }
@@ -56,17 +51,17 @@ namespace kyosu
         {
           constexpr int I = KK;
           constexpr int J = JJ;
-          constexpr int K = 6-I-J;
-          int sign = (I-J)*(J-K)*(K-I)/2; // even (+1) permutation or odd (-1);
+          constexpr int K = 6 - I - J;
+          int sign = (I - J) * (J - K) * (K - I) / 2; // even (+1) permutation or odd (-1);
 
           auto a = aq[0];
           auto b = aq[I];
           auto c = aq[J];
-          auto d = aq[K]*sign;
-          if constexpr(!is_proper)
+          auto d = aq[K] * sign;
+          if constexpr (!is_proper)
           {
             a -= aq[J];
-            b += aq[K]*sign;
+            b += aq[K] * sign;
             c += aq[0];
             d -= aq[I];
           }
@@ -74,11 +69,11 @@ namespace kyosu
         }
       };
       auto [a, b, c, d, sign] = prepare();
-      auto a2pb2 = eve::sqr(a)+eve::sqr(b);
-      auto n2 = a2pb2+eve::sqr(c)+eve::sqr(d);
-      auto theta1 = eve::acos(eve::dec(2*a2pb2/n2));
+      auto a2pb2 = eve::sqr(a) + eve::sqr(b);
+      auto n2 = a2pb2 + eve::sqr(c) + eve::sqr(d);
+      auto theta1 = eve::acos(eve::dec(2 * a2pb2 / n2));
       auto eps = 1e-7;
-      auto pi  = eve::pi(eve::as<e_t>());
+      auto pi = eve::pi(eve::as<e_t>());
       auto twopi = eve::two_pi(eve::as<e_t>());
       auto mpi = -pi;
       auto is_safe1 = eve::abs(theta1) >= eps;
@@ -91,32 +86,32 @@ namespace kyosu
       auto theta0 = hp + hm;
       auto theta2 = hp - hm;
 
-      if constexpr(!Options::contains(extrinsic))
+      if constexpr (!Options::contains(extrinsic))
       {
         theta0 = eve::if_else(!is_safe, eve::zero, theta0);
-        theta2 = eve::if_else(!is_safe1, 2*hp, theta2);
-        theta2 = eve::if_else(!is_safe2, -2*hm, theta2);
+        theta2 = eve::if_else(!is_safe1, 2 * hp, theta2);
+        theta2 = eve::if_else(!is_safe2, -2 * hm, theta2);
       }
       else
       {
         theta2 = eve::if_else(!is_safe, eve::zero, theta2);
-        theta0 = eve::if_else(!is_safe1, 2*hp, theta0);
-        theta0 = eve::if_else(!is_safe2, 2*hm, theta0);
+        theta0 = eve::if_else(!is_safe1, 2 * hp, theta0);
+        theta0 = eve::if_else(!is_safe2, 2 * hm, theta0);
       }
       theta0 += eve::if_else(theta0 < mpi, twopi, eve::zero);
-      theta0 -= eve::if_else(theta0 >  pi, twopi, eve::zero);
+      theta0 -= eve::if_else(theta0 > pi, twopi, eve::zero);
       theta1 += eve::if_else(theta1 < mpi, twopi, eve::zero);
-      theta1 -= eve::if_else(theta1 >  pi, twopi, eve::zero);
+      theta1 -= eve::if_else(theta1 > pi, twopi, eve::zero);
       theta2 += eve::if_else(theta2 < mpi, twopi, eve::zero);
-      theta2 -= eve::if_else(theta2 >  pi, twopi, eve::zero);
+      theta2 -= eve::if_else(theta2 > pi, twopi, eve::zero);
 
       // for Tait-Bryan thetas
-      if(!is_proper)
+      if (!is_proper)
       {
         theta2 *= sign;
         theta1 -= pi / 2;
       }
-      if constexpr(!Options::contains(extrinsic)) std::swap(theta0, theta2);
+      if constexpr (!Options::contains(extrinsic)) std::swap(theta0, theta2);
 
       return kumi::tuple{theta0, theta1, theta2};
     }

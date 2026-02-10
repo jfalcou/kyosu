@@ -13,12 +13,9 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct to_multipolar_t : eve::elementwise_callable<to_multipolar_t, Options>
+  template<typename Options> struct to_multipolar_t : eve::elementwise_callable<to_multipolar_t, Options>
   {
-    template<concepts::real V>
-    KYOSU_FORCEINLINE constexpr kumi::tuple< V, V, V, V>
-    operator()(V const& v) const noexcept
+    template<concepts::real V> KYOSU_FORCEINLINE constexpr kumi::tuple<V, V, V, V> operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
       return kumi::tuple{eve::abs(v), eve::arg(v), z, z};
@@ -26,14 +23,13 @@ namespace kyosu
 
     template<concepts::cayley_dickson Z>
     requires(dimension_v<Z> <= 4)
-      KYOSU_FORCEINLINE constexpr
-    kumi::tuple< as_real_type_t<Z>, as_real_type_t<Z>, as_real_type_t<Z>, as_real_type_t<Z>>
+    KYOSU_FORCEINLINE constexpr kumi::tuple<as_real_type_t<Z>, as_real_type_t<Z>, as_real_type_t<Z>, as_real_type_t<Z>>
     operator()(Z const& q) const noexcept
     {
       auto c0 = complex(real(q), imag(q));
-      if constexpr(kyosu::concepts::complex<Z>)
+      if constexpr (kyosu::concepts::complex<Z>)
       {
-        auto z =  eve::zero(eve::as(abs(c0)));
+        auto z = eve::zero(eve::as(abs(c0)));
         return kumi::tuple{abs(c0), arg(c0), z, z};
       }
       else
