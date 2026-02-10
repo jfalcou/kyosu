@@ -77,7 +77,7 @@ namespace kyosu
   //!   *  [DLMF: Gegenbauer Function](https://dlmf.nist.gov/15.9)
   //!
   //!   @groupheader{Example}
-  //!   @godbolt{doc/polynomial/regular/gegenbauer.cpp}
+  //!   @godbolt{doc/gegenbauer.cpp}
   //================================================================================================
   inline constexpr auto gegenbauer = eve::functor<gegenbauer_t>;
   //================================================================================================

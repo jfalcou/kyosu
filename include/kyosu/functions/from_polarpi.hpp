@@ -36,7 +36,7 @@ namespace kyosu
   //! @brief Callable object computing a complex or a general Cayley-Dickson from a polar representation, with the argument
   //!        in \f$\pi\f$ multiples.
   //!
-  //!  This function is the reciprocal of to_polar
+  //!  This function is the reciprocal of to_polarpi
   //!
   //!   @groupheader{Callable Signatures}
   //!
@@ -85,5 +85,11 @@ namespace kyosu::_
     auto a = eve::if_else(eve::is_positive(rho), theta, eve::inc(theta));
     auto [s, c] = eve::sinpicospi(a);
     return complex(r * c, r * s);
+  }
+
+  template<typename C0, typename C1, typename C2, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto from_polarpi_(KYOSU_DELAY(), O const&, C0 rho, C1 theta, C2 iz) noexcept
+  {
+    return rho * kyosu::exp(theta * eve::pi(eve::as(rho)) * iz);
   }
 }
