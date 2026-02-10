@@ -11,21 +11,19 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct from_spherical_t : eve::elementwise_callable<from_spherical_t, Options>
+  template<typename Options> struct from_spherical_t : eve::elementwise_callable<from_spherical_t, Options>
   {
-    template<concepts::real U ,concepts::real V,concepts::real W, concepts::real T>
-    KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>>
-    operator()( V const & rho
-              , U const & theta
-              , W const & phi1
-              , T const & phi2) const noexcept
+    template<concepts::real U, concepts::real V, concepts::real W, concepts::real T>
+    KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(V const& rho,
+                                                                                         U const& theta,
+                                                                                         W const& phi1,
+                                                                                         T const& phi2) const noexcept
     {
-      auto [st, ct]   = eve::sincos(theta);
+      auto [st, ct] = eve::sincos(theta);
       auto [sp1, cp1] = eve::sincos(phi1);
       auto [sp2, cp2] = eve::sincos(phi2);
-      auto f = cp1*cp2;
-      return rho*quaternion(ct*f, st*f, sp1*cp2, sp2);
+      auto f = cp1 * cp2;
+      return rho * quaternion(ct * f, st * f, sp1 * cp2, sp2);
     }
 
     KYOSU_CALLABLE_OBJECT(from_spherical_t, from_spherical_);

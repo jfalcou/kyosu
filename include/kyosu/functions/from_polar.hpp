@@ -11,19 +11,16 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct from_polar_t : eve::strict_elementwise_callable<from_polar_t, Options>
+  template<typename Options> struct from_polar_t : eve::strict_elementwise_callable<from_polar_t, Options>
   {
     template<concepts::real Z0, concepts::real Z1, concepts::cayley_dickson Z2>
-    KYOSU_FORCEINLINE constexpr kyosu::as_cayley_dickson_t<Z0, Z1, Z2>
-    operator()(Z0 r, Z1 t, Z2 iz) const noexcept
+    KYOSU_FORCEINLINE constexpr kyosu::as_cayley_dickson_t<Z0, Z1, Z2> operator()(Z0 r, Z1 t, Z2 iz) const noexcept
     {
       return KYOSU_CALL(r, t, iz);
     }
 
     template<concepts::real Z0, concepts::real Z1>
-    KYOSU_FORCEINLINE constexpr complexify_t<as_cayley_dickson_like_t<Z0, Z1>>
-    operator()(Z0 r, Z1 t) const noexcept
+    KYOSU_FORCEINLINE constexpr complexify_t<as_cayley_dickson_like_t<Z0, Z1>> operator()(Z0 r, Z1 t) const noexcept
     {
       return KYOSU_CALL(r, t);
     }
@@ -91,14 +88,14 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto from_polar_(KYOSU_DELAY(), O const&, C0 rho, C1 theta) noexcept
   {
     auto r = eve::abs(rho);
-    auto a = eve::if_else(eve::is_positive(rho), theta, eve::pi(eve::as(theta))+theta);
+    auto a = eve::if_else(eve::is_positive(rho), theta, eve::pi(eve::as(theta)) + theta);
     auto [s, c] = eve::sincos(a);
-    return complex(r*c, r*s);
+    return complex(r * c, r * s);
   }
 
   template<typename C0, typename C1, typename C2, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto from_polar_(KYOSU_DELAY(), O const&, C0 rho, C1 theta, C2 iz) noexcept
   {
-    return rho*kyosu::exp(theta*iz);
+    return rho * kyosu::exp(theta * iz);
   }
 }
