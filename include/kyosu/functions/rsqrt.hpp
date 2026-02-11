@@ -13,8 +13,7 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct rsqrt_t : eve::strict_elementwise_callable<rsqrt_t, Options, real_only_option>
+  template<typename Options> struct rsqrt_t : eve::strict_elementwise_callable<rsqrt_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
@@ -23,65 +22,65 @@ namespace kyosu
     }
 
     template<concepts::cayley_dickson_like Z, concepts::real K>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z> , K>
-    operator()(Z const& z, K const & k) const noexcept
+    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z>, K> operator()(
+      Z const& z, K const& k) const noexcept
     requires(eve::same_lanes_or_scalar<Z, K>)
     {
       return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(rsqrt_t, rsqrt_);
-};
+  };
 
-//======================================================================================================================
-//! @addtogroup functions
-//! @{
-//!   @var rsqrt
-//!   @brief Computes a inverse square root value.
-//!
-//!   @groupheader{Header file}
-//!
-//!   @code
-//!   #include <kyosu/functions.hpp>
-//!   @endcode
-//!
-//!   @groupheader{Callable Signatures}
-//!
-//!   @code
-//!   namespace kyosu
-//!   {
-//!      //  regular call
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> rsqrt(T z) noexcept;  //1
-//!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto sqrt(T z, K k) noexcept;         //2
-//!
-//!      // semantic modifyers
-//!      template<concepts::real T> constexpr complexify_t<T> rsqrt[real_only](T z) noexcept;             //1
-//!   }
-//!   @endcode
-//!
-//!   **Parameters**
-//!
-//!     * `z`: Value to for which square root is computed.
-//!
-//!   **Return value**
-//!
-//!     1. Returns the inverse of the principal square root of `z`. A real typed input `z` is treated as if `complex(z)` was entered, unless the option real_only is used
-//!       in which case the parameter must be a floating_value and the result will the same as if eve::rsqrt was called
-//!     2. Returns the inverse of the kth sqrt root of z, k is taken modulo 1; 1 gives the opposite root.
+  //======================================================================================================================
+  //! @addtogroup functions
+  //! @{
+  //!   @var rsqrt
+  //!   @brief Computes a inverse square root value.
+  //!
+  //!   @groupheader{Header file}
+  //!
+  //!   @code
+  //!   #include <kyosu/functions.hpp>
+  //!   @endcode
+  //!
+  //!   @groupheader{Callable Signatures}
+  //!
+  //!   @code
+  //!   namespace kyosu
+  //!   {
+  //!      //  regular call
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> rsqrt(T z) noexcept;  //1
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto sqrt(T z, K k) noexcept;         //2
+  //!
+  //!      // semantic modifyers
+  //!      template<concepts::real T> constexpr complexify_t<T> rsqrt[real_only](T z) noexcept;             //1
+  //!   }
+  //!   @endcode
+  //!
+  //!   **Parameters**
+  //!
+  //!     * `z`: Value to for which square root is computed.
+  //!
+  //!   **Return value**
+  //!
+  //!     1. Returns the inverse of the principal square root of `z`. A real typed input `z` is treated as if `complex(z)` was entered, unless the option real_only is used
+  //!       in which case the parameter must be a floating_value and the result will the same as if eve::rsqrt was called
+  //!     2. Returns the inverse of the kth sqrt root of z, k is taken modulo 1; 1 gives the opposite root.
 
-//!
-//!  @groupheader{External references}
-//!   *  [Wolfram MathWorld: Square Root](https://mathworld.wolfram.com/SquareRoot.html)
-//!   *  [Wikipedia: Square root](https://en.wikipedia.org/wiki/Square_root)
-//!
-//!  @groupheader{Example}
-//!
-//!  @godbolt{doc/rsqrt.cpp}
-//======================================================================================================================
+  //!
+  //!  @groupheader{External references}
+  //!   *  [Wolfram MathWorld: Square Root](https://mathworld.wolfram.com/SquareRoot.html)
+  //!   *  [Wikipedia: Square root](https://en.wikipedia.org/wiki/Square_root)
+  //!
+  //!  @groupheader{Example}
+  //!
+  //!  @godbolt{doc/rsqrt.cpp}
+  //======================================================================================================================
   inline constexpr auto rsqrt = eve::functor<rsqrt_t>;
-//======================================================================================================================
-//! @}
-//======================================================================================================================
+  //======================================================================================================================
+  //! @}
+  //======================================================================================================================
 }
 
 namespace kyosu::_
@@ -89,19 +88,17 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto rsqrt_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    if constexpr(O::contains(real_only) && concepts::real<Z>)
-      return eve::rsqrt[o](z);
-    else
-      return kyosu::rec(kyosu::sqrt[o](z));
+    if constexpr (O::contains(real_only) && concepts::real<Z>) return eve::rsqrt[o](z);
+    else return kyosu::rec(kyosu::sqrt[o](z));
   }
-  
+
   template<concepts::cayley_dickson_like Z, concepts::real K, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto rsqrt_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
   {
     return kyosu::rec(kyosu::sqrt[o](z, k));
   }
-  
-  template<concepts::real Z, eve::value ...K, eve::conditional_expr C, eve::callable_options O>
+
+  template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto rsqrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
   requires(!O::contains(real_only))
   {

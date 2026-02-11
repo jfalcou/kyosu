@@ -19,14 +19,14 @@ namespace kyosu
 
     template<concepts::cayley_dickson Z, concepts::real T, std::size_t S>
     requires(dimension_v<Z> <= 4)
-      KYOSU_FORCEINLINE constexpr auto operator()(Z const& q,  std::span<T, S> v) const noexcept
+    KYOSU_FORCEINLINE constexpr auto operator()(Z const& q, std::span<T, S> v) const noexcept
     {
       using e_t = as_real_type_t<Z>;
-      using v_t = decltype(v[0]+e_t());
+      using v_t = decltype(v[0] + e_t());
       std::array<v_t, 3> w, wp;
       using a_t = decltype(kyosu::abs(q));
       a_t fac(2);
-      if constexpr(!Options::contains(assume_unitary)) fac *= kyosu::rec(kyosu::sqr_abs(q));
+      if constexpr (!Options::contains(assume_unitary)) fac *= kyosu::rec(kyosu::sqr_abs(q));
       auto [r, i, j, k] = q;
       w[0] = eve::fma(r, v[0], eve::diff_of_prod(j, v[2], k, v[1]));
       w[1] = eve::fma(r, v[1], eve::diff_of_prod(k, v[0], i, v[2]));

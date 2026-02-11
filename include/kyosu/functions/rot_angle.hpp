@@ -13,20 +13,18 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct rot_angle_t : eve::elementwise_callable<rot_angle_t, Options>
+  template<typename Options> struct rot_angle_t : eve::elementwise_callable<rot_angle_t, Options>
   {
 
     template<concepts::cayley_dickson Z>
     requires(dimension_v<Z> <= 4)
-      KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
+    KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
     {
-      return 2*eve::atan2[eve::pedantic](kyosu::abs(kyosu::pure(q)), kyosu::real(q));
+      return 2 * eve::atan2[eve::pedantic](kyosu::abs(kyosu::pure(q)), kyosu::real(q));
     }
 
     KYOSU_CALLABLE_OBJECT(rot_angle_t, rot_angle_);
   };
-
 
   //================================================================================================
   //! @addtogroup quaternion

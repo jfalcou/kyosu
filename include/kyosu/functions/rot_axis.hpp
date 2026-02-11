@@ -13,26 +13,24 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct rot_axis_t : eve::elementwise_callable<rot_axis_t, Options>
+  template<typename Options> struct rot_axis_t : eve::elementwise_callable<rot_axis_t, Options>
   {
 
     template<concepts::cayley_dickson Z>
     requires(dimension_v<Z> <= 4)
-      KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
+    KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
     {
-    using e_t = as_real_type_t<Z>;
-    auto invn = eve::rec(kyosu::abs(kyosu::pure(q)));
-    invn = eve::if_else(eve::is_nan(invn), eve::zero, invn);
-    std::array<e_t, 3> v{kyosu::ipart(q)*invn, kyosu::jpart(q)*invn, kyosu::kpart(q)*invn};
-    return v;
-
+      using e_t = as_real_type_t<Z>;
+      auto invn = eve::rec(kyosu::abs(kyosu::pure(q)));
+      invn = eve::if_else(eve::is_nan(invn), eve::zero, invn);
+      std::array<e_t, 3> v{kyosu::ipart(q) * invn, kyosu::jpart(q) * invn, kyosu::kpart(q) * invn};
+      return v;
     }
 
     KYOSU_CALLABLE_OBJECT(rot_axis_t, rot_axis_);
   };
 
- //================================================================================================
+  //================================================================================================
   //! @addtogroup quaternion
   //! @{
   //! @var rot_axis
