@@ -109,7 +109,7 @@ namespace kyosu
   //!   *  [Wolfram MathWorld: Legendre Polynomial](https://mathworld.wolfram.com/LegendrePolynomial.html)
   //!
   //!   @groupheader{Example}
-  //!   @godbolt{doc/polynomial/regular/legendre.cpp}
+  //!   @godbolt{doc/legendre.cpp}
   //================================================================================================
   inline constexpr auto legendre = eve::functor<legendre_t>;
   //================================================================================================

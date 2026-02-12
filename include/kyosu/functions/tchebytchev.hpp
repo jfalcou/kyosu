@@ -123,7 +123,7 @@ namespace kyosu
   //!   *  [Wolfram MathWorld: second kind](https://mathworld.wolfram.com/ChebyshevPolynomialoftheSecondKind.html)
   //!
   //!   @groupheader{Example}
-  //!   @godbolt{doc/polynomial/regular/tchebytchev.cpp}
+  //!   @godbolt{doc/tchebytchev.cpp}
   //================================================================================================
   inline constexpr auto tchebytchev = eve::functor<tchebytchev_t>;
   //================================================================================================

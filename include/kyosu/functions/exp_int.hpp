@@ -76,7 +76,7 @@ namespace kyosu
   //!   *  [Wikipedia: Exponential integral](https://en.wikipedia.org/wiki/Exponential_integral)
   //!
   //!  @groupheader{Example}
-  //!  @godbolt{doc/special/exp_int.cpp}
+  //!  @godbolt{doc/exp_int.cpp}
   //======================================================================================================================
   inline constexpr auto exp_int = eve::functor<exp_int_t>;
   //======================================================================================================================

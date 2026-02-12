@@ -69,7 +69,7 @@ namespace kyosu
   //!   *  [Wikipedia: Wright omega function](https://en.wikipedia.org/wiki/Wright_omega_function)
   //!
   //!  @groupheader{Example}
-  //!  @godbolt{doc/special/omega.cpp}
+  //!  @godbolt{doc/omega.cpp}
   //================================================================================================
   inline constexpr auto omega = eve::functor<omega_t>;
   inline constexpr auto ω = eve::functor<omega_t>;
