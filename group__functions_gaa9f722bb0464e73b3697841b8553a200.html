@@ -190,7 +190,32 @@ $(document).ready(function(){initNavTree('group__functions_gaa9f722bb0464e73b369
 <li><a href="https://mathworld.wolfram.com/ChebyshevPolynomialoftheSecondKind.html">Wolfram MathWorld: second kind</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="comment">// revision 1</span></div>
+<div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">main</a>()</div>
+<div class="line">{</div>
+<div class="line">  eve::wide <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">xd</a>{0.5, -1.5, 0.1, -1.0, 19.0, 25.0, 21.5, 10000.0};</div>
+<div class="line">  eve::wide n{0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0};</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">x</a>(0.5);</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;&lt;- xd                                      = &quot;</span> &lt;&lt; <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">xd</a> &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;&lt;- n                                       = &quot;</span> &lt;&lt; n &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;&lt;- x                                       = &quot;</span> &lt;&lt; <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">x</a> &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; tchebytchev(n, xd)                      = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">kyosu::tchebytchev</a>(n, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">xd</a>) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; tchebytchev[eve::ignore_last(2)](n, xd) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">kyosu::tchebytchev</a>[eve::ignore_last(2)](n, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">xd</a>)</div>
+<div class="line">            &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; tchebytchev[n &gt; 3](n, xd)               = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">kyosu::tchebytchev</a>[n &gt; 3](n, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">xd</a>) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; tchebytchev(3.0, xd)                    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">kyosu::tchebytchev</a>(3.0, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">xd</a>) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; tchebytchev(n, 2.0)                     = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">kyosu::tchebytchev</a>(n, 2.0) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; tchebytchev(n, x)                       = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">kyosu::tchebytchev</a>(n, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">x</a>) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; tchebytchev[kind_2](n, xd)              = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__functions_gaa9f722bb0464e73b3697841b8553a200.html#gaa9f722bb0464e73b3697841b8553a200">kyosu::tchebytchev</a>[eve::kind_2](n, <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">xd</a>) &lt;&lt; <span class="stringliteral">&quot;\n\n&quot;</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
