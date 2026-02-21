@@ -34,7 +34,6 @@
 //======================================================================================================================
 #include <kyosu/functions/acos.hpp>
 #include <kyosu/functions/acosh.hpp>
-#include <kyosu/functions/acospi.hpp>
 #include <kyosu/functions/acot.hpp>
 #include <kyosu/functions/acoth.hpp>
 #include <kyosu/functions/acotpi.hpp>
