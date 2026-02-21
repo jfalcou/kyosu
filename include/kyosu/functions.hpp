@@ -45,7 +45,6 @@
 #include <kyosu/functions/acsc.hpp>
 #include <kyosu/functions/acsch.hpp>
 #include <kyosu/functions/asec.hpp>
-#include <kyosu/functions/asecpi.hpp>
 #include <kyosu/functions/asech.hpp>
 #include <kyosu/functions/asin.hpp>
 #include <kyosu/functions/asinh.hpp>
