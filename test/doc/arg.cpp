@@ -16,7 +16,9 @@ int main()
             << "<- ref2                               = " << ref2 << std::endl
             << "-> arg(zc)                            = " << kyosu::arg(zc) << std::endl
             << "-> arg(ref2)                          = " << kyosu::arg(ref2) << std::endl
+            << "-> arg[radpi](ref2)                   = " << kyosu::arg[kyosu::radpi](ref2) << std::endl
             << "-> arg(kyosu::cinf(eve::as<double>()) = " << kyosu::arg(kyosu::cinf(eve::as<double>())) << std::endl
-            << "-> arg(kyosu::zero(kyosu::as(zc)))    = " << kyosu::arg(kyosu::zero(kyosu::as(zc))) << std::endl;
+            << "-> arg(kyosu::zero(kyosu::as(zc)))    = " << kyosu::arg(kyosu::zero(kyosu::as(zc))) << std::endl
+            << "-> arg(kyosu::mzero(kyosu::as(zc)))   = " << kyosu::arg(kyosu::mzero(kyosu::as(zc))) << std::endl;
   return 0;
 }
