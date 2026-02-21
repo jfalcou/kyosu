@@ -43,7 +43,6 @@
 #include <kyosu/functions/argpi.hpp>
 #include <kyosu/functions/atanpi.hpp>
 #include <kyosu/functions/acsc.hpp>
-#include <kyosu/functions/acscpi.hpp>
 #include <kyosu/functions/acsch.hpp>
 #include <kyosu/functions/asec.hpp>
 #include <kyosu/functions/asecpi.hpp>

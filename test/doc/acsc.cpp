@@ -14,7 +14,8 @@ int main()
   std::cout << "---- simd" << std::endl
             << "<- zc            = " << zc << std::endl
             << "-> acsc(zc)      = " << kyosu::acsc(zc) << std::endl
-            << "-> acsc(ref2)    = " << kyosu::acsc(ref2) << std::endl;
+            << "-> acsc(ref2)    = " << kyosu::acsc(ref2) << std::endl
+            << "-> acsc[radpi](ref2) = " << kyosu::acsc[kyosu::radpi](ref2) << std::endl;
 
   return 0;
 }
