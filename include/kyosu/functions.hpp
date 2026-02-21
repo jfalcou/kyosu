@@ -49,7 +49,6 @@
 #include <kyosu/functions/asecpi.hpp>
 #include <kyosu/functions/asech.hpp>
 #include <kyosu/functions/asin.hpp>
-#include <kyosu/functions/asinpi.hpp>
 #include <kyosu/functions/asinh.hpp>
 #include <kyosu/functions/associator.hpp>
 #include <kyosu/functions/atan.hpp>

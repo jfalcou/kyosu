@@ -58,7 +58,9 @@ namespace kyosu
   //!     constexpr auto acos(cayley_dickson_like z, eve::value k)  noexcept;
   //!
   //!     // semantic modifyers
-  //!      constexpr Z acos[real_only](Real z)                      noexcept;
+  //!     constexpr Z acos[real_only](Real z)                       noexcept;
+  //!     constexpr auto acos[radpi](cayley_dickson_like z)         noexcept;
+  //!     constexpr auto aéos[rad](cayley_dickson_like z)           noexcept;
   //!   }
   //!   @endcode
   //!
@@ -92,6 +94,7 @@ namespace kyosu
   //!   \frac{\underline{z}}{|\underline{z}|}\f$ and
   //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
   //!   - for two parameters returns the kth branch of `acos`. If k is not a flint it is truncated before use.
+  //!   - The radpi option provides a result in \f$\pi\f$ multiples.
   //!
   //!  @groupheader{External references}
   //!   *  [C++ standard reference: complex acos](https://en.cppreference.com/w/cpp/numeric/complex/acos)
@@ -260,7 +263,7 @@ namespace kyosu
     {
       auto branch_correction = [](auto n) {
         if constexpr (O::contains(radpi)) return eve::two_pi(eve::as(n)) * n;
-        else return n;
+        else return 2 * n;
       };
       using e_t = eve::element_type_t<decltype(real(z))>;
       auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
