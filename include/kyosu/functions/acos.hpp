@@ -271,7 +271,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr auto acos_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
     requires(!O::contains(real_only))
     {
-      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), acos(z, k...));
+      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), acos[o](z, k...));
     }
 
   }
