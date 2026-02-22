@@ -9,6 +9,7 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/asin.hpp>
 #include <kyosu/functions/rec.hpp>
+#include <kyosu/details/branch_correct.hpp>
 
 namespace kyosu
 {
@@ -98,13 +99,9 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto acsc_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
   requires(!O::contains(real_only))
   {
-    auto branch_correction = [](auto n) {
-      if constexpr (O::contains(radpi)) return eve::two_pi(eve::as(n)) * n;
-      else return 2 * n;
-    };
     using e_t = eve::element_type_t<decltype(real(z))>;
     auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
-    return kyosu::acsc[o](z) + branch_correction(kk);
+    return kyosu::acsc[o](z) + branch_correction<O>(kk);
   }
 
   template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>

@@ -14,6 +14,7 @@
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/details/decorators.hpp>
 #include <kyosu/functions/radinpi.hpp>
+#include <kyosu/details/branch_correct.hpp>
 
 namespace kyosu
 {
@@ -60,7 +61,7 @@ namespace kyosu
   //!     // semantic modifyers
   //!     constexpr Z acos[real_only](Real z)                       noexcept;
   //!     constexpr auto acos[radpi](cayley_dickson_like z)         noexcept;
-  //!     constexpr auto aéos[rad](cayley_dickson_like z)           noexcept;
+  //!     constexpr auto acos[rad](cayley_dickson_like z)           noexcept;
   //!   }
   //!   @endcode
   //!
@@ -116,7 +117,7 @@ namespace kyosu
   namespace _
   {
     template<concepts::cayley_dickson_like Z, eve::callable_options O>
-    constexpr auto acos_(KYOSU_DELAY(), O const& o, Z a0) noexcept
+    EVE_NOINLINE constexpr auto acos_(KYOSU_DELAY(), O const& o, Z a0) noexcept
     {
       if constexpr (O::contains(radpi)) return radinpi(kyosu::acos[o.drop(radpi)](a0));
       else if constexpr (O::contains(real_only) && concepts::real<Z>) return eve::acos[o](a0);
@@ -261,13 +262,9 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr auto acos_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
     requires(!O::contains(real_only))
     {
-      auto branch_correction = [](auto n) {
-        if constexpr (O::contains(radpi)) return eve::two_pi(eve::as(n)) * n;
-        else return 2 * n;
-      };
       using e_t = eve::element_type_t<decltype(real(z))>;
       auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
-      return kyosu::acos[o](z) + branch_correction(kk);
+      return kyosu::acos[o](z) + branch_correction<O>(kk);
     }
 
     template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>

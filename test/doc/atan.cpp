@@ -12,9 +12,12 @@ int main()
   auto zc = kyosu::complex_t<wide_ft>(ref1, imf1);
 
   std::cout << "---- simd" << std::endl
-            << "<- zc            = " << zc << std::endl
-            << "-> atan(zc)      = " << kyosu::atan(zc) << std::endl
-            << "-> atan(ref2)    = " << kyosu::atan(ref2) << std::endl;
+            << "<- zc                = " << zc << std::endl
+            << "-> atan(zc)          = " << kyosu::atan(zc) << std::endl
+            << "-> atan(ref2)        = " << kyosu::atan(ref2) << std::endl
+            << "-> atan[radpi](ref2) = " << kyosu::atan[kyosu::radpi](ref2) << std::endl
+            << "-> atan[radpi](ref2, 3) = " << kyosu::atan[kyosu::radpi](ref2, 3) << std::endl;
+
 
   return 0;
 }

@@ -36,11 +36,9 @@
 #include <kyosu/functions/acosh.hpp>
 #include <kyosu/functions/acot.hpp>
 #include <kyosu/functions/acoth.hpp>
-#include <kyosu/functions/acotpi.hpp>
 #include <kyosu/functions/add.hpp>
 #include <kyosu/functions/agd.hpp>
 #include <kyosu/functions/am.hpp>
-#include <kyosu/functions/atanpi.hpp>
 #include <kyosu/functions/acsc.hpp>
 #include <kyosu/functions/acsch.hpp>
 #include <kyosu/functions/asec.hpp>
@@ -50,7 +48,6 @@
 #include <kyosu/functions/associator.hpp>
 #include <kyosu/functions/atan.hpp>
 #include <kyosu/functions/atanh.hpp>
-#include <kyosu/functions/atanpi.hpp>
 #include <kyosu/functions/average.hpp>
 #include <kyosu/functions/beta.hpp>
 #include <kyosu/functions/cbrt.hpp>
