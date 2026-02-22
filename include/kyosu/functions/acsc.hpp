@@ -87,29 +87,31 @@ namespace kyosu
   //======================================================================================================================
 }
 
-namespace kyosu::_
+namespace kyosu
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acsc_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  namespace _
   {
-    return kyosu::asin[o](kyosu::rec(z));
-  }
+    template<typename Z, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto acsc_(KYOSU_DELAY(), O const& o, Z z) noexcept
+    {
+      return kyosu::asin[o](kyosu::rec(z));
+    }
 
-  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acsc_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
-  requires(!O::contains(real_only))
-  {
-    using e_t = eve::element_type_t<decltype(real(z))>;
-    auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
-    return kyosu::acsc[o](z) + branch_correction<O>(kk);
-  }
+    template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto acsc_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+    requires(!O::contains(real_only))
+    {
+      using e_t = eve::element_type_t<decltype(real(z))>;
+      auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
+      return kyosu::acsc[o](z) + branch_correction<O>(kk);
+    }
 
-  template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acsc_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
-  requires(!O::contains(real_only))
-  {
-    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), acsc[o](z, k...));
+    template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto acsc_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+    requires(!O::contains(real_only))
+    {
+      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), acsc[o](z, k...));
+    }
   }
-
   inline constexpr auto acscpi = acsc[radpi];
 }
