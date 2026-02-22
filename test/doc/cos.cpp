@@ -23,6 +23,7 @@ int main()
   std::cout << cos(q_t(e)) << "\n";
   std::cout << cos(wc_t(e)) << "\n";
   std::cout << cos(wq_t(e)) << "\n";
+  std::cout << cos[kyosu::radpi](c_t(e)) << "\n";
 
   std::cout << "Complex:     \n";
   c_t c(3.5f, -2.9f);

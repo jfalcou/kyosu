@@ -56,7 +56,6 @@
 #include <kyosu/functions/commutator.hpp>
 #include <kyosu/functions/cos.hpp>
 #include <kyosu/functions/cosh.hpp>
-#include <kyosu/functions/cospi.hpp>
 #include <kyosu/functions/cot.hpp>
 #include <kyosu/functions/cotpi.hpp>
 #include <kyosu/functions/coth.hpp>
