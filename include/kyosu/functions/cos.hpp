@@ -40,11 +40,12 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      constexpr ato cos(cayley_dickson_like z)                 noexcept; //1
+  //!     // regular call
+  //!     constexpr ato cos(cayley_dickson_like z)                 noexcept; //1
   //!
   //!     // semantic modifyers
-  //!     constexpr auto asec[radpi](cayley_dickson_like z)         noexcept; //2
-  //!     constexpr auto asec[rad](cayley_dickson_like z)           noexcept; //1
+  //!     constexpr auto cos[radpi](cayley_dickson_like z)         noexcept; //2
+  //!     constexpr auto cos[rad](cayley_dickson_like z)           noexcept; //1
   //!   }
   //!   @endcode
   //!
@@ -56,7 +57,7 @@ namespace kyosu
   //!
   //!      1. Returns the cosine of the argument in radian.
   //!         The behavior of this function is equivalent to `kyosu::cosh(i*z)`.
-  //!       2. Returns the cosine of the argument in \f$\pi\f$.
+  //!      2. Returns the cosine of the argument in \f$\pi\f$ multiples.
   //!
   //!  @groupheader{External references}
   //!   *  [C++ standard reference: complex cos](https://en.cppreference.com/w/cpp/numeric/complex/cos)
