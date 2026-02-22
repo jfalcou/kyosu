@@ -114,6 +114,6 @@ namespace kyosu
     {
       return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), acot[o](z, k...));
     }
-    inline constexpr auto acotpi = acot[radpi];
   }
+  inline constexpr auto acotpi = acot[radpi];
 }
