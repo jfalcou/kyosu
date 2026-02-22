@@ -9,10 +9,12 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/atanh.hpp>
 #include <kyosu/details/decorators.hpp>
+#include <kyosu/details/branch_correct.hpp>
 
 namespace kyosu
 {
-  template<typename Options> struct atan_t : eve::strict_elementwise_callable<atan_t, Options, real_only_option>
+  template<typename Options>
+  struct atan_t : eve::strict_elementwise_callable<atan_t, Options, real_only_option, rad_option, radpi_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
@@ -52,7 +54,9 @@ namespace kyosu
   //!     constexpr auto atan(cayley_dickson_like z, eve::value k)  noexcept;
   //!
   //!     // semantic modifyers
-  //!      constexpr Z atan[real_only](Real z)                      noexcept;
+  //!     constexpr Z atan[real_only](Real z)                       noexcept;
+  //!     constexpr auto atan[radpi](cayley_dickson_like z)         noexcept;
+  //!     constexpr auto atan[rad](cayley_dickson_like z)           noexcept;
   //!   }
   //!   @endcode
   //!
@@ -68,6 +72,7 @@ namespace kyosu
   //!      of the arc tangent of the input in the range of a strip unbounded along the imaginary axis
   //!      and in the interval \f$[-\pi/2, \pi/2]\f$ along the real axis.
   //!      Special cases are handled as if the operation was implemented by \f$-i\; \mathrm{atanh}(z\; i)\f$.
+  //!    - The radpi option provides a result in \f$\pi\f$ multiples.
   //!
   //!    - For generated cayley_dickson input, returns \f$ -I_z \mathrm{atanh}(z I_z)\f$ where \f$I_z =
   //!    \frac{\underline{z}}{|\underline{z}|}\f$ and
@@ -89,37 +94,43 @@ namespace kyosu
   //======================================================================================================================
 }
 
-namespace kyosu::_
+namespace kyosu
 {
-  template<concepts::cayley_dickson_like Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto atan_(KYOSU_DELAY(), O const&, Z z) noexcept
+  namespace _
   {
-    if constexpr (O::contains(real_only) && concepts::real<Z>) return eve::atan(z);
-    else if constexpr (concepts::real<Z>) return kyosu::atan(complex(z));
-    else if constexpr (concepts::complex<Z>)
+    template<concepts::cayley_dickson_like Z, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto atan_(KYOSU_DELAY(), O const& o, Z z) noexcept
     {
-      // C99 definition here; atan(z) = -i atanh(i*z):
-      auto [r, i] = z;
-      auto [r1, i1] = kyosu::atanh(complex(-i, r));
-      return complex(i1, -r1);
+      if constexpr (O::contains(radpi)) return radinpi(kyosu::atan[o.drop(radpi)](z));
+      else if constexpr (O::contains(real_only) && concepts::real<Z>) return eve::atan[o](z);
+      else if constexpr (concepts::real<Z>) return kyosu::atan(complex(z));
+      else if constexpr (concepts::complex<Z>)
+      {
+        // C99 definition here; atan(z) = -i atanh(i*z):
+        auto [r, i] = z;
+        auto [r1, i1] = kyosu::atanh(complex(-i, r));
+        return complex(i1, -r1);
+      }
+      else { return _::cayley_extend(kyosu::atan, z); }
     }
-    else { return _::cayley_extend(kyosu::atan, z); }
+
+    template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto atan_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+    requires(!O::contains(real_only))
+    {
+      using e_t = eve::element_type_t<decltype(real(z))>;
+      auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
+      return kyosu::atan[o](z) + branch_correction<O>(kk);
+    }
+
+    template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto atan_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+    requires(!O::contains(real_only))
+    {
+      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), atan[o](z, k...));
+    }
   }
 
-  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto atan_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
-  requires(!O::contains(real_only))
-  {
-    using e_t = eve::element_type_t<decltype(real(z))>;
-    auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
-    return kyosu::atan[o](z) + eve::two_pi(eve::as(kk)) * kk;
-  }
-
-  template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto atan_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
-  requires(!O::contains(real_only))
-  {
-    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), atan(z, k...));
-  }
+  inline constexpr auto atanpi = atan[radpi];
 
 }

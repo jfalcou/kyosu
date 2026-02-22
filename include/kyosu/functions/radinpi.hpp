@@ -66,6 +66,6 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto radinpi_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::radinpi(z);
-    else return inv_pi(eve::as(z)) * z;
+    else return inv_pi(eve::as(real(z))) * z;
   }
 }

@@ -12,9 +12,10 @@ int main()
   auto zc = kyosu::complex_t<wide_ft>(ref1, imf1);
 
   std::cout << "---- simd" << std::endl
-            << "<- zc            = " << zc << std::endl
-            << "-> acos(zc)      = " << kyosu::acos(zc) << std::endl
-            << "-> acos(ref2)    = " << kyosu::acos(ref2) << std::endl;
+            << "<- zc                = " << zc << std::endl
+            << "-> acos(zc)          = " << kyosu::acos(zc) << std::endl
+            << "-> acos(ref2)        = " << kyosu::acos(ref2) << std::endl
+            << "-> acos[radpi](ref2) = " << kyosu::acos[kyosu::radpi](ref2) << std::endl;
 
   return 0;
 }

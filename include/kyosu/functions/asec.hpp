@@ -9,10 +9,12 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/acos.hpp>
 #include <kyosu/functions/rec.hpp>
+#include <kyosu/details/branch_correct.hpp>
 
 namespace kyosu
 {
-  template<typename Options> struct asec_t : eve::strict_elementwise_callable<asec_t, Options, real_only_option>
+  template<typename Options>
+  struct asec_t : eve::strict_elementwise_callable<asec_t, Options, real_only_option, rad_option, radpi_option>
   {
 
     template<concepts::cayley_dickson_like Z>
@@ -53,7 +55,9 @@ namespace kyosu
   //!     constexpr auto asec(cayley_dickson_like z, eve::value k) noexcept;
   //!
   //!     // semantic modifyers
-  //!     constexpr auto asec[real_only](Z z)                      noexcept;
+  //!     constexpr auto asec[radpi](cayley_dickson_like z)         noexcept;
+  //!     constexpr auto asec[rad](cayley_dickson_like z)           noexcept;
+  //!     constexpr auto asec[real_only](Z z)                       noexcept;
   //!   }
   //!   @endcode
   //!
@@ -68,6 +72,7 @@ namespace kyosu
   //!     implying a `Nan` result if the theoretical result is not real.
   //!   - For complex input, returns elementwise `acos(rec(z))`.
   //!   - for two parameters returns the kth branch of `asec`. If k is not a flint it is truncated before use.
+  //!   - The radpi option provides a result in \f$\pi\f$ multiples.
   //!
   //!  @groupheader{External references}
   //!   *  [Wolfram MathWorld: Inverse Secant](https://mathworld.wolfram.com/InverseSecant.html)
@@ -83,28 +88,32 @@ namespace kyosu
   //======================================================================================================================
 }
 
-namespace kyosu::_
+namespace kyosu
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto asec_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  namespace _
   {
-    return kyosu::acos[o](kyosu::rec(z));
-  }
+    template<typename Z, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto asec_(KYOSU_DELAY(), O const& o, Z z) noexcept
+    {
+      return kyosu::acos[o](kyosu::rec(z));
+    }
 
-  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto asec_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
-  requires(!O::contains(real_only))
-  {
-    using e_t = eve::element_type_t<decltype(real(z))>;
-    auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
-    return kyosu::asec[o](z) + eve::two_pi(eve::as(kk)) * kk;
-  }
+    template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto asec_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+    requires(!O::contains(real_only))
+    {
+      using e_t = eve::element_type_t<decltype(real(z))>;
+      auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
+      return kyosu::asec[o](z) + branch_correction<O>(kk);
+    }
 
-  template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto asec_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
-  requires(!O::contains(real_only))
-  {
-    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), asec(z, k...));
+    template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto asec_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+    requires(!O::contains(real_only))
+    {
+      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), asec[o](z, k...));
+    }
   }
+  inline constexpr auto asecpi = asec[radpi];
 
 }
