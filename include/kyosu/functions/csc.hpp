@@ -78,8 +78,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr auto csc_(KYOSU_DELAY(), O const& o, Z z) noexcept
     {
       if constexpr (concepts::real<Z>) return eve::csc[o](z);
-      else if constexpr (concepts::complex<Z>) return kyosu::rec(kyosu::sin[o](z));
-      else return _::cayley_extend(kyosu::csc[o], z);
+      else return kyosu::rec(kyosu::sin[o](z));
     }
   }
 
