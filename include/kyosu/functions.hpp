@@ -59,7 +59,6 @@
 #include <kyosu/functions/cot.hpp>
 #include <kyosu/functions/coth.hpp>
 #include <kyosu/functions/csc.hpp>
-#include <kyosu/functions/cscpi.hpp>
 #include <kyosu/functions/csch.hpp>
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/deta.hpp>
@@ -172,7 +171,6 @@
 #include <kyosu/functions/reverse_horner.hpp>
 #include <kyosu/functions/rsqrt.hpp>
 #include <kyosu/functions/sec.hpp>
-#include <kyosu/functions/secpi.hpp>
 #include <kyosu/functions/sech.hpp>
 #include <kyosu/functions/sign.hpp>
 #include <kyosu/functions/sin.hpp>

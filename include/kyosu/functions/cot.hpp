@@ -55,7 +55,7 @@ namespace kyosu
   //!   **Return value**
   //!
   //!      1. Returns the cotangent of the argument in radian.
-  //!      2. Returns the tangent of the argument in \f$\pi\f$ multiples.
+  //!      2. Returns the cotangent of the argument in \f$\pi\f$ multiples.
   //!
   //!  @groupheader{External references}
   //!   *  [Wolfram MathWorld: Cotangent](https://mathworld.wolfram.com/Cotangent.html)
