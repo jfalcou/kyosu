@@ -13,7 +13,7 @@
 #include <kyosu/functions/log1p.hpp>
 #include <kyosu/functions/oneminus.hpp>
 #include <kyosu/functions/reverse_horner.hpp>
-#include <kyosu/functions/sinpicospi.hpp>
+#include <kyosu/functions/sincos.hpp>
 #include <kyosu/functions/cot.hpp>
 #include <kyosu/functions/log_gamma.hpp>
 #include <kyosu/functions/sqr_abs.hpp>

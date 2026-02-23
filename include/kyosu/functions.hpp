@@ -178,7 +178,6 @@
 #include <kyosu/functions/sin.hpp>
 #include <kyosu/functions/sinc.hpp>
 #include <kyosu/functions/sincos.hpp>
-#include <kyosu/functions/sinpicospi.hpp>
 #include <kyosu/functions/sinh.hpp>
 #include <kyosu/functions/sinhc.hpp>
 #include <kyosu/functions/sinhcosh.hpp>
