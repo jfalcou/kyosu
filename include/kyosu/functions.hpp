@@ -190,7 +190,6 @@
 #include <kyosu/functions/sqrt.hpp>
 #include <kyosu/functions/sub.hpp>
 #include <kyosu/functions/tan.hpp>
-#include <kyosu/functions/tanpi.hpp>
 #include <kyosu/functions/tanh.hpp>
 #include <kyosu/functions/tchebytchev.hpp>
 #include <kyosu/functions/tgamma.hpp>
