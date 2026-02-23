@@ -13,7 +13,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct tan_t : eve::elementwise_callable<tan_t, Options>
+  template<typename Options> struct tan_t : eve::elementwise_callable<tan_t, Options, rad_option, radpi_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
@@ -40,7 +40,12 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr T tan(T z) noexcept;
+  //!     // regular call
+  //!     constexpr ato tan(cayley_dickson_like z)                 noexcept; //1
+  //!
+  //!     // semantic modifyers
+  //!     constexpr auto tan[radpi](cayley_dickson_like z)         noexcept; //2
+  //!     constexpr auto tan[rad](cayley_dickson_like z)           noexcept; //1
   //!   }
   //!   @endcode
   //!
@@ -50,10 +55,12 @@ namespace kyosu
   //!
   //!   **Return value**
   //!
-  //!     - returns eve::tan(z)
-  //!     - For complex inputs, the behavior of this function is equivalent to \f$-i\tanh(i\; z)\f$.
-  //!     - For general cayley-dickson input,  returns \f$-I_z\, \tanh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\tan(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+  //!      1. Returns the tangent of the argument in radian.
+  //!         The behavior of this function for complex inputsis equivalent to \f$-i\tanh(i\; z)\f$.
+  //!         For general cayley-dickson input,  returns \f$-I_z\, \tanh(I_z\; z)\f$ if \f$z\f$
+  //!         is not zero else \f$\tan(z_0)\f$, where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
   //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+  //!      2. Returns the tangent of the argument in \f$\pi\f$ multiples.
   //!
   //!  @groupheader{External references}
   //!   *  [C++ standard reference: complex tan](https://en.cppreference.com/w/cpp/numeric/complex/tan)
@@ -69,13 +76,35 @@ namespace kyosu
   //======================================================================================================================
 }
 
-namespace kyosu::_
+namespace kyosu
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto tan_(KYOSU_DELAY(), O const&, Z z) noexcept
+  namespace _
   {
-    if constexpr (concepts::real<Z>) return eve::tan(z);
-    else if constexpr (concepts::complex<Z>) return mulmi(kyosu::tanh(muli(z)));
-    else return _::cayley_extend(kyosu::tan, z);
+    template<typename Z, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto tan_(KYOSU_DELAY(), O const& o, Z z) noexcept
+    {
+      if constexpr (concepts::real<Z>) return eve::tan[o](z);
+      else if constexpr (concepts::complex<Z>)
+      {
+        if constexpr (!O::contains(radpi)) return mulmi(kyosu::tanh(muli(z)));
+        else
+        {
+          auto machin = [](auto z) {
+            auto [rz, iz] = z + z;
+            auto [s, c] = eve::sinpicospi(iz);
+            auto [sh, ch] = eve::sinhcosh(eve::pi(eve::as(rz)) * rz);
+            auto tmp = c + ch;
+            auto rr = eve::if_else(kyosu::is_imag(z), eve::zero, sh / tmp);
+            auto ii = eve::if_else(kyosu::is_real(z), eve::zero, s / tmp);
+            return kyosu::if_else(eve::is_infinite(rz), kyosu::complex(sign(rz)), kyosu::complex(rr, ii));
+          };
+          auto r = machin(kyosu::complex(-kyosu::imag(z), kyosu::real(z)));
+          return mulmi(r);
+        }
+      }
+      else return _::cayley_extend(kyosu::tan[o], z);
+    }
   }
+
+  inline constexpr auto tanpi = tan[radpi];
 }

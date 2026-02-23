@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct sec_t : eve::elementwise_callable<sec_t, Options>
+  template<typename Options> struct sec_t : eve::elementwise_callable<sec_t, Options, rad_option, radpi_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
@@ -39,7 +39,12 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto sec(T z) noexcept;
+  //!     // regular call
+  //!     constexpr auto sec(cayley_dickson_like z)                 noexcept; //1
+  //!
+  //!     // semantic modifyers
+  //!     constexpr auto sec[radpi](cayley_dickson_like z)         noexcept; //2
+  //!     constexpr auto sec[rad](cayley_dickson_like z)           noexcept; //1
   //!   }
   //!   @endcode
   //!
@@ -49,7 +54,8 @@ namespace kyosu
   //!
   //!   **Return value**
   //!
-  //!    Returns the secant of the argument.
+  //!      1. Returns the secant of the argument in radian.
+  //!      2. Returns the secant of the argument in \f$\pi\f$ multiples.
   //!
   //!  @groupheader{External references}
   //!   *  [Wolfram MathWorld](https://mathworld.wolfram.com/Secant.html)
@@ -63,12 +69,17 @@ namespace kyosu
   //======================================================================================================================
 }
 
-namespace kyosu::_
+namespace kyosu
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr Z sec_(KYOSU_DELAY(), O const&, Z z) noexcept
+  namespace _
   {
-    if constexpr (kyosu::concepts::real<Z>) return eve::sec(z);
-    else return kyosu::rec(kyosu::cos(z));
+    template<typename Z, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr Z sec_(KYOSU_DELAY(), O const& o, Z z) noexcept
+    {
+      if constexpr (kyosu::concepts::real<Z>) return eve::sec[o](z);
+      else return kyosu::rec(kyosu::cos[o](z));
+    }
   }
+
+  inline constexpr auto secpi = sec[radpi];
 }
