@@ -7,7 +7,7 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/sinpi.hpp>
+#include <kyosu/functions/sin.hpp>
 #include <kyosu/constants/wrapped.hpp>
 #include <eve/module/special/regular/tgamma.hpp>
 

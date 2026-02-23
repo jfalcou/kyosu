@@ -10,7 +10,7 @@
 #include <kyosu/functions/dec.hpp>
 #include <kyosu/functions/is_flint.hpp>
 #include <kyosu/functions/nearest.hpp>
-#include <kyosu/functions/sinpi.hpp>
+#include <kyosu/functions/sin.hpp>
 #include <kyosu/functions/oneminus.hpp>
 #include <kyosu/functions/exp.hpp>
 #include <kyosu/functions/log.hpp>

@@ -57,7 +57,6 @@
 #include <kyosu/functions/cos.hpp>
 #include <kyosu/functions/cosh.hpp>
 #include <kyosu/functions/cot.hpp>
-#include <kyosu/functions/cotpi.hpp>
 #include <kyosu/functions/coth.hpp>
 #include <kyosu/functions/csc.hpp>
 #include <kyosu/functions/cscpi.hpp>
@@ -179,7 +178,6 @@
 #include <kyosu/functions/sin.hpp>
 #include <kyosu/functions/sinc.hpp>
 #include <kyosu/functions/sincos.hpp>
-#include <kyosu/functions/sinpi.hpp>
 #include <kyosu/functions/sinpicospi.hpp>
 #include <kyosu/functions/sinh.hpp>
 #include <kyosu/functions/sinhc.hpp>
