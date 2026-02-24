@@ -7,7 +7,7 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/to_polarpi.hpp>
+#include <kyosu/functions/to_polar.hpp>
 #include <kyosu/functions/exp_i.hpp>
 
 namespace kyosu

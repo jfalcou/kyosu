@@ -190,7 +190,6 @@
 #include <kyosu/functions/tgamma_inv.hpp>
 #include <kyosu/functions/to_cylindrical.hpp>
 #include <kyosu/functions/to_polar.hpp>
-#include <kyosu/functions/to_polarpi.hpp>
 #include <kyosu/functions/tricomi.hpp>
 #include <kyosu/functions/trunc.hpp>
 #include <kyosu/functions/xi.hpp>
