@@ -81,7 +81,6 @@
 #include <kyosu/functions/exp2.hpp>
 #include <kyosu/functions/exp_i.hpp>
 #include <kyosu/functions/exp_int.hpp>
-#include <kyosu/functions/exp_ipi.hpp>
 #include <kyosu/functions/expm1.hpp>
 #include <kyosu/functions/expmx2.hpp>
 #include <kyosu/functions/expx2.hpp>
@@ -191,7 +190,6 @@
 #include <kyosu/functions/tgamma_inv.hpp>
 #include <kyosu/functions/to_cylindrical.hpp>
 #include <kyosu/functions/to_polar.hpp>
-#include <kyosu/functions/to_polarpi.hpp>
 #include <kyosu/functions/tricomi.hpp>
 #include <kyosu/functions/trunc.hpp>
 #include <kyosu/functions/xi.hpp>

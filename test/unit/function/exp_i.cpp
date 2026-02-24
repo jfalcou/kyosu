@@ -8,7 +8,7 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH("Check kyosu::exp_i over quaternion",
+TTS_CASE_WITH("Check kyosu::exp_i over cayley_dickson",
               kyosu::real_types,
               tts::randoms(0.5, 2.0),
               tts::randoms(0.5, 2.0),

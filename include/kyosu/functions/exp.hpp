@@ -14,7 +14,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct exp_t : eve::elementwise_callable<exp_t, Options>
+  template<typename Options> struct exp_t : eve::elementwise_callable<exp_t, Options, radpi_option, rad_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
@@ -85,18 +85,23 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto exp_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto exp_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    if constexpr (concepts::real<Z>) return eve::exp(z);
+    auto rexp = [](auto rz) {
+      if constexpr (O::contains(radpi))
+        return eve::if_else(is_nan(rz), eve::allbits, eve::exp(eve::pi(eve::as(real(rz))) * rz));
+      else return eve::if_else(is_nan(rz), eve::allbits, eve::exp(rz));
+    };
+    if constexpr (concepts::real<Z>) return rexp(z);
     else if constexpr (concepts::complex<Z>)
     {
       auto [rz, iz] = z;
-      auto [s, c] = eve::sincos(iz);
-      auto rho = eve::if_else(is_nan(rz), eve::allbits, eve::exp(rz));
+      auto [s, c] = eve::sincos[o](iz);
+      auto rho = eve::if_else(is_nan(rz), eve::allbits, rexp(rz));
       auto res =
         eve::if_else(is_real(z) || rz == eve::minf(eve::as(rz)), Z(rho, eve::zero(eve::as(rho))), Z(rho * c, rho * s));
       return if_else(rz == eve::inf(eve::as(rz)) && eve::is_not_finite(iz), Z{rz, eve::nan(eve::as(iz))}, res);
     }
-    else { return _::cayley_extend(kyosu::exp, z); }
+    else return _::cayley_extend(kyosu::exp[o], z);
   }
 }

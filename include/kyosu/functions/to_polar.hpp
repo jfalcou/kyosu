@@ -12,7 +12,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct to_polar_t : eve::elementwise_callable<to_polar_t, Options>
+  template<typename Options>
+  struct to_polar_t : eve::elementwise_callable<to_polar_t, Options, radpi_option, rad_option>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr kumi::tuple<as_real_type_t<Z>, as_real_type_t<Z>, Z> operator()(
@@ -65,7 +66,8 @@ namespace kyosu
   //!   **Return value**
   //!
   //!     Returns  The kumi tuple `{rho, theta}`. for real and complex and `{rho, theta, I}` for other cayley-dickson
-  //!     where \f$\textrm{I}\f$ is pure and \f$\textrm{I}^2 = -1 \f$
+  //!     where \f$\textrm{I}\f$ is pure and \f$\textrm{I}^2 = -1 \f$. If the `radpi` option is used the `theta` is given in
+  //!     \f$\pi\f$ multiples else in radians.
   //!
   //!  @groupheader{Example}
   //!
@@ -77,12 +79,16 @@ namespace kyosu
   //======================================================================================================================
 }
 
-namespace kyosu::_
+namespace kyosu
 {
-  template<typename C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto to_polar_(KYOSU_DELAY(), O const&, C c) noexcept
+  namespace _
   {
-    if constexpr (kyosu::concepts::complex<C>) return kumi::tuple{kyosu::abs(c), kyosu::arg(c)};
-    else return kumi::tuple{kyosu::abs(c), kyosu::arg(c), sign(ipart(c)) * sign(pure(c))};
+    template<typename C, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto to_polar_(KYOSU_DELAY(), O const& o, C c) noexcept
+    {
+      if constexpr (kyosu::concepts::complex<C>) return kumi::tuple{kyosu::abs(c), kyosu::arg[o](c)};
+      else return kumi::tuple{kyosu::abs(c), kyosu::arg[o](c), sign(ipart(c)) * sign(pure(c))};
+    }
   }
+  inline constexpr auto to_polarpi = to_polar[radpi];
 }
