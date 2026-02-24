@@ -67,7 +67,7 @@ namespace kyosu
   //!
   //!     Returns  The kumi tuple `{rho, theta}`. for real and complex and `{rho, theta, I}` for other cayley-dickson
   //!     where \f$\textrm{I}\f$ is pure and \f$\textrm{I}^2 = -1 \f$. If the `radpi` option is used the `theta` is given in
-  //!     \f$\pi\f$ multiples.
+  //!     \f$\pi\f$ multiples else in radians.
   //!
   //!  @groupheader{Example}
   //!

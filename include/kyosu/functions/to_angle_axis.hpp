@@ -14,7 +14,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct to_angle_axis_t : eve::elementwise_callable<to_angle_axis_t, Options>
+  template<typename Options>
+  struct to_angle_axis_t : eve::elementwise_callable<to_angle_axis_t, Options, rad_option, radpi_option>
   {
     template<typename Q>
     requires((concepts::cayley_dickson<Q> && dimension_v<Q> <= 4) || concepts::real<Q>)
@@ -26,7 +27,7 @@ namespace kyosu
       auto invn = eve::rec(ap);
       invn = eve::if_else(eve::is_infinite(invn), eve::zero, invn);
       std::array<e_t, 3> v{kyosu::ipart(q) * invn, kyosu::jpart(q) * invn, kyosu::kpart(q) * invn};
-      auto a = 2 * eve::atan2[eve::pedantic](ap, kyosu::real(q));
+      auto a = 2 * eve::atan2[this->options()][eve::pedantic](ap, kyosu::real(q));
       return kumi::tuple{a, v};
     }
 
