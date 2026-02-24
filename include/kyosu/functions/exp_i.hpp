@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct exp_i_t : eve::elementwise_callable<exp_i_t, Options>
+  template<typename Options> struct exp_i_t : eve::elementwise_callable<exp_i_t, Options, radpi_option, rad_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
@@ -40,8 +40,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> exp_i(T z) noexcept;
-
+  //!     // regular call
+  //!     template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> exp_i(T z)        noexcept; //1
+  //!
+  //!     // semantic modifyers
+  //!     template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> exp_i[radpi](T z) noexcept;  //2
   //!   }
   //!   @endcode
   //!
@@ -51,7 +54,8 @@ namespace kyosu
   //!
   //!   **Return value**
   //!
-  //!     Returns `exp(i*z)`.
+  //!     1. Returns `exp(i*z)`.
+  //!     2. Returns `exp(i*pi*z)`
   //!
   //!  @groupheader{Example}
   //!
@@ -63,16 +67,20 @@ namespace kyosu
   //======================================================================================================================
 }
 
-namespace kyosu::_
+namespace kyosu
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto exp_i_(KYOSU_DELAY(), O const&, Z z) noexcept
+  namespace _
   {
-    if constexpr (concepts::real<Z>)
+    template<typename Z, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto exp_i_(KYOSU_DELAY(), O const& o, Z z) noexcept
     {
-      auto [s, c] = eve::sincos(z);
-      return complex(c, s);
+      if constexpr (concepts::real<Z>)
+      {
+        auto [s, c] = eve::sincos[o](z);
+        return complex(c, s);
+      }
+      else return kyosu::exp[o](muli(z));
     }
-    else { return kyosu::exp(muli(z)); }
   }
+  inline constexpr auto exp_ipi = exp_i[radpi];
 }
