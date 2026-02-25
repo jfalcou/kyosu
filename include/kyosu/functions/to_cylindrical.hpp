@@ -13,7 +13,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct to_cylindrical_t : eve::elementwise_callable<to_cylindrical_t, Options>
+  template<typename Options>
+  struct to_cylindrical_t : eve::elementwise_callable<to_cylindrical_t, Options, rad_option, radpi_option>
   {
     template<concepts::real V> KYOSU_FORCEINLINE constexpr kumi::tuple<V, V, V, V> operator()(V const& v) const noexcept
     {
@@ -32,7 +33,7 @@ namespace kyosu
         auto z = eve::zero(eve::as(abs(c0)));
         return kumi::tuple{abs(c0), arg(c0), z, z};
       }
-      else { return kumi::tuple{abs(c0), arg(c0), jpart(q), kpart(q)}; }
+      else { return kumi::tuple{abs(c0), arg[this->options()](c0), jpart(q), kpart(q)}; }
     }
 
     KYOSU_CALLABLE_OBJECT(to_cylindrical_t, to_cylindrical_);
@@ -69,7 +70,8 @@ namespace kyosu
   //! **Return value**
   //!
   //!   a tuple containing in this order `rho1`, `theta1`, `h1`, `h2`:  the components
-  //!   of the cylindrical parametrisation of \f$\mathbb{R}^4\f$ coordinates
+  //!   of the cylindrical parametrisation of \f$\mathbb{R}^4\f$ coordinates. If `radpi` is present
+  //!   theta1` is expressed in \f$\pi\f$ multiples else in radian.
   //!
   //!  @groupheader{Example}
   //!

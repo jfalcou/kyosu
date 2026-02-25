@@ -11,7 +11,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct from_cylindrical_t : eve::elementwise_callable<from_cylindrical_t, Options>
+  template<typename Options>
+  struct from_cylindrical_t : eve::elementwise_callable<from_cylindrical_t, Options, rad_option, radpi_option>
   {
     template<concepts::real U, concepts::real V, concepts::real W, concepts::real T>
     KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(V const& r,
@@ -19,7 +20,7 @@ namespace kyosu
                                                                                          W const& h1,
                                                                                          T const& h2) const noexcept
     {
-      auto [sa, ca] = eve::sincos(angle);
+      auto [sa, ca] = eve::sincos[this->options()(angle);
       return kyosu::quaternion(r * ca, r * sa, h1, h2);
     }
 
@@ -52,13 +53,14 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     auto from_cylindrical(auto r, auto angle, auto h1, auto h2) const noexcept;
+  //!     auto from_cylindrical(auto r, auto angle, auto h1, auto h2) const        noexcept;
+  //!     auto from_cylindrical[radpi](auto r, auto angle, auto h1, auto h2) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
-  //!  * `r`, `angle`, `h1`, `h2`
+  //!  * `r`, `angle`, `h1`, `h2` : if rapdi is present the angle is assumed to be in \f$\pi\f$ multiples else in radian.
   //!
   //! **Return value**
   //!
