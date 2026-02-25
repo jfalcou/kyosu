@@ -14,14 +14,17 @@
 
 namespace kyosu
 {
-  template<typename Options> struct to_euler_t : eve::callable<to_euler_t, Options, extrinsic_option, intrinsic_option>
+  template<typename Options>
+  struct to_euler_t : eve::callable<to_euler_t, Options, extrinsic_option, intrinsic_option, rad_option, radpi_option>
   {
     template<typename Q, int II, int JJ, int KK>
     requires((concepts::cayley_dickson<Q> && dimension_v<Q> <= 4) || concepts::real<Q>)
     KYOSU_FORCEINLINE constexpr kumi::tuple<as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>> operator()(
       Q q0, _::axis<II>, _::axis<JJ>, _::axis<KK>) const noexcept
     {
+      auto o = this->options();
       using e_t = std::remove_reference_t<decltype(real(Q()))>;
+      using ue_t = eve::element_type_t<e_t>;
       auto q = quaternion(q0);
       std::array<e_t, 4> aq{real(q), ipart(q), jpart(q), kpart(q)};
       constexpr bool is_proper = II == KK; //Proper Euler angles else Tait-Bryan
@@ -71,17 +74,18 @@ namespace kyosu
       auto [a, b, c, d, sign] = prepare();
       auto a2pb2 = eve::sqr(a) + eve::sqr(b);
       auto n2 = a2pb2 + eve::sqr(c) + eve::sqr(d);
-      auto theta1 = eve::acos(eve::dec(2 * a2pb2 / n2));
-      auto eps = 1e-7;
-      auto pi = eve::pi(eve::as<e_t>());
-      auto twopi = eve::two_pi(eve::as<e_t>());
-      auto mpi = -pi;
+      auto theta1 = eve::acos[o](eve::dec(2 * a2pb2 / n2));
+      constexpr auto flat = Options::contains(radpi) ? ue_t(1) : eve::pi(eve::as<ue_t>());
+      constexpr auto twoflat = Options::contains(radpi) ? ue_t(2) : eve::two_pi(eve::as<ue_t>());
+      constexpr auto eps = ue_t(3.0e-8) / flat;
+
+      auto mflat = -flat;
       auto is_safe1 = eve::abs(theta1) >= eps;
-      auto is_safe2 = eve::abs(theta1 - pi) >= eps;
+      auto is_safe2 = eve::abs(theta1 - flat) >= eps;
       auto is_safe = is_safe1 && is_safe2;
 
-      auto hp = eve::atan2(b, a);
-      auto hm = eve::atan2(-d, c);
+      auto hp = eve::atan2[o](b, a);
+      auto hm = eve::atan2[o](-d, c);
 
       auto theta0 = hp + hm;
       auto theta2 = hp - hm;
@@ -98,18 +102,18 @@ namespace kyosu
         theta0 = eve::if_else(!is_safe1, 2 * hp, theta0);
         theta0 = eve::if_else(!is_safe2, 2 * hm, theta0);
       }
-      theta0 += eve::if_else(theta0 < mpi, twopi, eve::zero);
-      theta0 -= eve::if_else(theta0 > pi, twopi, eve::zero);
-      theta1 += eve::if_else(theta1 < mpi, twopi, eve::zero);
-      theta1 -= eve::if_else(theta1 > pi, twopi, eve::zero);
-      theta2 += eve::if_else(theta2 < mpi, twopi, eve::zero);
-      theta2 -= eve::if_else(theta2 > pi, twopi, eve::zero);
+      theta0 += eve::if_else(theta0 < mflat, twoflat, eve::zero);
+      theta0 -= eve::if_else(theta0 > flat, twoflat, eve::zero);
+      theta1 += eve::if_else(theta1 < mflat, twoflat, eve::zero);
+      theta1 -= eve::if_else(theta1 > flat, twoflat, eve::zero);
+      theta2 += eve::if_else(theta2 < mflat, twoflat, eve::zero);
+      theta2 -= eve::if_else(theta2 > flat, twoflat, eve::zero);
 
       // for Tait-Bryan thetas
       if (!is_proper)
       {
         theta2 *= sign;
-        theta1 -= pi / 2;
+        theta1 -= flat / 2;
       }
       if constexpr (!Options::contains(extrinsic)) std::swap(theta0, theta2);
 
@@ -155,6 +159,9 @@ namespace kyosu
   //!      auto to_euler[intrinsic](auto q, axis<I> const & a1, axis<J> const & a2, axis<K> const & a3) noexcept   //2
   //!      requires(I != J && J != K)
   //!
+  //!      template < int I, int J, int K >
+  //!      auto to_euler[radpi][/*all previous options*/](/*all previous overloads*/) noexcept
+  //!      requires(I != J && J != K)
   //!   }
   //!   @endcode
   //!
@@ -171,7 +178,8 @@ namespace kyosu
   //!
   //! **Return value**
   //!
-  //!  1.  kumi tuple of the three euler angles in radian.   In case of singularity the first angle is 0.
+  //!  1. kumi tuple of the three euler angles in radian (or in \f$\pi multiples\f$ if the option `radpi` is used).
+  //!     In case of singularity the first angle is 0.
   //!     [extrinsic](https://en.wikipedia.org/wiki/Euler_angles) rotation order is used
   //!  2. Same but in the [intrinsic](https://en.wikipedia.org/wiki/Euler_angles) way
   //!
