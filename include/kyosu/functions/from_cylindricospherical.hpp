@@ -12,14 +12,15 @@
 namespace kyosu
 {
   template<typename Options>
-  struct from_cylindricospherical_t : eve::elementwise_callable<from_cylindricospherical_t, Options>
+  struct from_cylindricospherical_t
+    : eve::elementwise_callable<from_cylindricospherical_t, Options, rad_option, radpi_option>
   {
     template<concepts::real U, concepts::real V, concepts::real W, concepts::real T>
     KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(
       V const& t, U const& radius, W const& longitude, T const& latitude) const noexcept
     {
-      auto [slat, clat] = eve::sincos(latitude);
-      auto [slon, clon] = eve::sincos(longitude);
+      auto [slat, clat] = eve::sincos[this->options()](latitude);
+      auto [slon, clon] = eve::sincos[this->options()](longitude);
       auto f = radius * clat;
       return kyosu::quaternion(t, f * clon, f * slon, radius * slat);
     }
@@ -51,14 +52,16 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto from_cylindrospherical(auto t, auto radius, auto longitude, auto latitude) const noexcept;
+  //!     auto from_cylindrospherical(auto t, auto radius, auto longitude, auto latitude) const        noexcept;
+  //!     auto from_cylindrospherical[radpi](auto t, auto radius, auto longitude, auto latitude) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
   //!  * `t`, `radius`:  the moduli
-  //!  * `longitude`, `latitude`: angles in radian
+  //!  * `longitude`, `latitude`: angles. If `radpi` is present
+  //!     they are assumed expressed in \f$\pi\f$ multiples else in radian.
   //!
   //! **Return value**
   //!

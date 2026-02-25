@@ -20,7 +20,7 @@ namespace kyosu
                                                                                          W const& h1,
                                                                                          T const& h2) const noexcept
     {
-      auto [sa, ca] = eve::sincos[this->options()(angle);
+      auto [sa, ca] = eve::sincos[this->options()](angle);
       return kyosu::quaternion(r * ca, r * sa, h1, h2);
     }
 

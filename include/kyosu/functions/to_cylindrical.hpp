@@ -59,7 +59,8 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto to_cylindrical(auto q) const noexcept;
+  //!     auto to_cylindrical(auto q) const        noexcept;
+  //!     auto to_cylindrical[radpi](auto q) const noexcept;
   //!   }
   //!   @endcode
   //!
@@ -71,7 +72,7 @@ namespace kyosu
   //!
   //!   a tuple containing in this order `rho1`, `theta1`, `h1`, `h2`:  the components
   //!   of the cylindrical parametrisation of \f$\mathbb{R}^4\f$ coordinates. If `radpi` is present
-  //!   theta1` is expressed in \f$\pi\f$ multiples else in radian.
+  //!   `theta1` is expressed in \f$\pi\f$ multiples else in radian.
   //!
   //!  @groupheader{Example}
   //!
