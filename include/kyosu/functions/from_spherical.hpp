@@ -11,7 +11,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct from_spherical_t : eve::elementwise_callable<from_spherical_t, Options>
+  template<typename Options>
+  struct from_spherical_t : eve::elementwise_callable<from_spherical_t, Options, rad_option, radpi_option>
   {
     template<concepts::real U, concepts::real V, concepts::real W, concepts::real T>
     KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(V const& rho,
@@ -19,9 +20,10 @@ namespace kyosu
                                                                                          W const& phi1,
                                                                                          T const& phi2) const noexcept
     {
-      auto [st, ct] = eve::sincos(theta);
-      auto [sp1, cp1] = eve::sincos(phi1);
-      auto [sp2, cp2] = eve::sincos(phi2);
+      auto o = this->options();
+      auto [st, ct] = eve::sincos[o](theta);
+      auto [sp1, cp1] = eve::sincos[o](phi1);
+      auto [sp2, cp2] = eve::sincos[o](phi2);
       auto f = cp1 * cp2;
       return rho * quaternion(ct * f, st * f, sp1 * cp2, sp2);
     }
@@ -55,13 +57,15 @@ namespace kyosu
   //!   namespace eve
   //!   {
   //!     auto from_spherical(auto rho, auto theta, auto phi1, auto phi2) const noexcept;
+  //!     auto from_spherical[radpi](auto rho, auto theta, auto phi1, auto phi2) const noexcept;
   //!   }
   //!   @endcode
   //!
   //! **Parameters**
   //!
   //!   * `rho`:  the modulus
-  //!   * `theta`, `phi1`, `phi2`: angles in radian
+  //!   * `theta`, `phi1`, `phi2`: angles. If the `radpi` is used  the angles are returned in
+  //!   * `\f$\pi\f$ multiples else in radian.
   //!
   //! **Return value**
   //!
