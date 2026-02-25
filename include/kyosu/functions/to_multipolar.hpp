@@ -13,7 +13,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct to_multipolar_t : eve::elementwise_callable<to_multipolar_t, Options>
+  template<typename Options>
+  struct to_multipolar_t : eve::elementwise_callable<to_multipolar_t, Options, rad_option, radpi_option>
   {
     template<concepts::real V> KYOSU_FORCEINLINE constexpr kumi::tuple<V, V, V, V> operator()(V const& v) const noexcept
     {
@@ -30,12 +31,12 @@ namespace kyosu
       if constexpr (kyosu::concepts::complex<Z>)
       {
         auto z = eve::zero(eve::as(abs(c0)));
-        return kumi::tuple{abs(c0), arg(c0), z, z};
+        return kumi::tuple{abs(c0), arg[this->options()](c0), z, z};
       }
       else
       {
         auto c1 = complex(jpart(q), kpart(q));
-        return kumi::tuple{abs(c0), arg(c0), abs(c1), arg(c1)};
+        return kumi::tuple{abs(c0), arg[this->options()](c0), abs(c1), arg[this->options()](c1)};
       }
     }
 
@@ -62,7 +63,8 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto to_multipolar(auto q) const noexcept;
+  //!     auto to_multipolar(auto q) const        noexcept;
+  //!     auto to_multipolar[radpi](auto q) const noexcept;
   //!   }
   //!   @endcode
   //!
@@ -72,8 +74,9 @@ namespace kyosu
   //!
   //! **Return value**
   //!
-  //!   a tuple containing in this order `rho1`, `theta1`, `h1`, `h2`:  the components
-  //!   of the multipolar parametrisation of \f$\mathbb{R}^4\f$ coordinates
+  //!   a tuple containing in this order `rho1`, `theta1`,  `rho2`, `theta2` :  the components
+  //!   of the multipolar parametrisation of \f$\mathbb{R}^4\f$ coordinates. If `radpi` is used  `theta1`, `theta2`
+  //!   are in  \f$\pi\f$ multiples else in radian.
   //!
   //!  @groupheader{Example}
   //!

@@ -178,7 +178,7 @@ namespace kyosu
   //!
   //! **Return value**
   //!
-  //!  1. kumi tuple of the three euler angles in radian (or in \f$\pi multiples\f$ if the option `radpi` is used).
+  //!  1. kumi tuple of the three euler angles in radian (or in \f$\pi\f$  multiples if the option `radpi` is used).
   //!     In case of singularity the first angle is 0.
   //!     [extrinsic](https://en.wikipedia.org/wiki/Euler_angles) rotation order is used
   //!  2. Same but in the [intrinsic](https://en.wikipedia.org/wiki/Euler_angles) way
