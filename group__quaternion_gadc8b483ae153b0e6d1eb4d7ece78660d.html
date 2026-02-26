@@ -150,14 +150,13 @@ $(document).ready(function(){initNavTree('group__quaternion_gadc8b483ae153b0e6d1
 <div class="line">{</div>
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_gadc8b483ae153b0e6d1eb4d7ece78660d.html#gadc8b483ae153b0e6d1eb4d7ece78660d">to_cylindrospherical</a>(<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">q</a>) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__quaternion_gadc8b483ae153b0e6d1eb4d7ece78660d_html_gadc8b483ae153b0e6d1eb4d7ece78660d"><div class="ttname"><a href="group__quaternion_gadc8b483ae153b0e6d1eb4d7ece78660d.html#gadc8b483ae153b0e6d1eb4d7ece78660d">kyosu::to_cylindrospherical</a></div><div class="ttdeci">constexpr auto to_cylindrospherical</div><div class="ttdoc">Callable object computing the cylindrospherical coordinates from a quaternion.</div><div class="ttdef"><b>Definition</b> to_cylindrospherical.hpp:85</div></div>
+<div class="ttc" id="agroup__quaternion_gadc8b483ae153b0e6d1eb4d7ece78660d_html_gadc8b483ae153b0e6d1eb4d7ece78660d"><div class="ttname"><a href="group__quaternion_gadc8b483ae153b0e6d1eb4d7ece78660d.html#gadc8b483ae153b0e6d1eb4d7ece78660d">kyosu::to_cylindrospherical</a></div><div class="ttdeci">constexpr auto to_cylindrospherical</div><div class="ttdoc">Callable object computing the cylindrospherical coordinates from a quaternion.</div><div class="ttdef"><b>Definition</b> to_cylindrospherical.hpp:86</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <p><code>q</code>: quaternion</p>
 <p><b>Return value</b></p>
-<p>a tuple containing in this order <code>t</code>, <code>radius</code>, <code>longitude</code> <code>latitude</code>: the components of the cylindrospherical parametrisation of \(\mathbb{R}^4\) coordinates</p>
-<hr  />
-<h4><a class="anchor" id="autotoc_md20"></a>
+<p>a tuple containing in this order <code>t</code>, <code>radius</code>, <code>longitude</code>, <code>latitude</code>: the components of the cylindrospherical parametrisation of \(\mathbb{R}^4\) coordinates. If <code>radpi</code> is present <code>longitude</code> and <code>latitude</code>are expressed in \(\pi\) multiples else in radian.</p>
+<h4><a class="anchor" id="autotoc_md19"></a>
 Example</h4>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>

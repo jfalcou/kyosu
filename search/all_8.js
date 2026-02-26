@@ -3,7 +3,7 @@ var searchData=
   ['i_0',['i',['../group__constants_gafdb3298b4657efe925df35dd5ded4694.html#gafdb3298b4657efe925df35dd5ded4694',1,'kyosu']]],
   ['if_5felse_1',['if_else',['../group__functions_ga6d65485712648eb40b8dc0453d9c3baf.html#ga6d65485712648eb40b8dc0453d9c3baf',1,'kyosu']]],
   ['imag_2',['imag',['../group__functions.html#gaff94a2685c6d030458b388a4a4079efe',1,'kyosu']]],
-  ['implementation_20provide_3',['What does this implementation provide',['../index.html#autotoc_md26',1,'']]],
+  ['implementation_20provide_3',['What does this implementation provide',['../index.html#autotoc_md25',1,'']]],
   ['implemented_20for_20scalar_20orders_20integral_20or_20floating_4',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]],
   ['inc_5',['inc',['../group__functions_ga5354d486ec4fca0c8261639b8ccfffd7.html#ga5354d486ec4fca0c8261639b8ccfffd7',1,'kyosu']]],
   ['inject_6',['inject',['../group__functions_ga0c282d6ab34f1b885a340f6ca092860e.html#ga0c282d6ab34f1b885a340f6ca092860e',1,'kyosu']]],

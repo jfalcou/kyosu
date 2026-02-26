@@ -12,7 +12,7 @@ var searchData=
   ['airy_9',['airy',['../group__functions_ga042a2f799b04de5311c4614c1101d949.html#ga042a2f799b04de5311c4614c1101d949',1,'kyosu']]],
   ['airy_5fai_10',['airy_ai',['../group__functions_ga45902be43d9c444ef8e2d4c35e909954.html#ga45902be43d9c444ef8e2d4c35e909954',1,'kyosu']]],
   ['airy_5fbi_11',['airy_bi',['../group__functions_ga15859f95307c5a49f89f856d141851cc.html#ga15859f95307c5a49f89f856d141851cc',1,'kyosu']]],
-  ['algebras_12',['Cayley-Dickson algebras',['../index.html#autotoc_md25',1,'']]],
+  ['algebras_12',['Cayley-Dickson algebras',['../index.html#autotoc_md24',1,'']]],
   ['align_13',['align',['../group__quaternion_ga6b47fd35280cf1ec86c8596e0cd1b73c.html#ga6b47fd35280cf1ec86c8596e0cd1b73c',1,'kyosu']]],
   ['am_14',['am',['../group__functions_ga091f00bbfab4113b82e174ea39e1452d.html#ga091f00bbfab4113b82e174ea39e1452d',1,'kyosu']]],
   ['are_20only_20implemented_20for_20scalar_20orders_20integral_20or_20floating_15',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]],

@@ -150,14 +150,14 @@ $(document).ready(function(){initNavTree('group__quaternion_ga3519a64d1cbe848507
 <div class="line">{</div>
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__quaternion_ga3519a64d1cbe848507cc57a05b5ed1b3.html#ga3519a64d1cbe848507cc57a05b5ed1b3">to_semipolar</a>(<span class="keyword">auto</span> <a class="code hl_typedef" href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">q</a>) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__quaternion_ga3519a64d1cbe848507cc57a05b5ed1b3_html_ga3519a64d1cbe848507cc57a05b5ed1b3"><div class="ttname"><a href="group__quaternion_ga3519a64d1cbe848507cc57a05b5ed1b3.html#ga3519a64d1cbe848507cc57a05b5ed1b3">kyosu::to_semipolar</a></div><div class="ttdeci">constexpr auto to_semipolar</div><div class="ttdoc">Callable object computing the semipolar coordinates from a quaternion.</div><div class="ttdef"><b>Definition</b> to_semipolar.hpp:88</div></div>
+<div class="ttc" id="agroup__quaternion_ga3519a64d1cbe848507cc57a05b5ed1b3_html_ga3519a64d1cbe848507cc57a05b5ed1b3"><div class="ttname"><a href="group__quaternion_ga3519a64d1cbe848507cc57a05b5ed1b3.html#ga3519a64d1cbe848507cc57a05b5ed1b3">kyosu::to_semipolar</a></div><div class="ttdeci">constexpr auto to_semipolar</div><div class="ttdoc">Callable object computing the semipolar coordinates from a quaternion.</div><div class="ttdef"><b>Definition</b> to_semipolar.hpp:91</div></div>
 <div class="ttc" id="agroup__types_ga642e4c9da3267bde80011f41e698ba76_html_ga642e4c9da3267bde80011f41e698ba76"><div class="ttname"><a href="group__types_ga642e4c9da3267bde80011f41e698ba76.html#ga642e4c9da3267bde80011f41e698ba76">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <p><code>q</code>: quaternion</p>
 <p><b>Return value</b></p>
-<p>a tuple containing in this order <code>rho1</code>, <code>theta1</code>, <code>h1</code> <code>h2</code>: the components of the semipolar parametrisation of \(\mathbb{R}^4\) coordinates</p>
+<p>a tuple containing in this order <code>rho</code>, <code>alpha</code>, <code>theta1</code>, theta2<code>: the components of the semipolar parametrisation of \f$\mathbb{R}^4\f$ coordinates. If the</code>radpi<code>is used alpha</code>, <code>theta1</code> and <code>theta2</code> are given in \(\pi\) multiples else in radian.</p>
 <hr  />
-<h4><a class="anchor" id="autotoc_md22"></a>
+<h4><a class="anchor" id="autotoc_md21"></a>
 Example</h4>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
