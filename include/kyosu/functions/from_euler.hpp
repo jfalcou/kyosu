@@ -13,20 +13,23 @@
 namespace kyosu
 {
   template<typename Options>
-  struct from_euler_t : eve::elementwise_callable<from_euler_t, Options, extrinsic_option, intrinsic_option>
+  struct from_euler_t
+    : eve::elementwise_callable<from_euler_t, Options, extrinsic_option, intrinsic_option, rad_option, radpi_option>
   {
     template<concepts::real U, concepts::real V, concepts::real W, int I, int J, int K>
     KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<U, V, W>> operator()(
       U const& v1, V const& v2, W const& v3, _::axis<I>, _::axis<J>, _::axis<K>) const noexcept
     requires(I != J && J != K)
     {
+      auto oo = this->options();
+      auto o = oo.drop(intrinsic).drop(extrinsic);
       using e_t = decltype(v1 + v2 + v3);
       using q_t = decltype(quaternion(e_t{}));
       auto h = eve::half(eve::as<e_t>());
       std::array<q_t, 3> qs;
-      auto [sa, ca] = eve::sincos(v3 * h);
-      auto [sb, cb] = eve::sincos(v2 * h);
-      auto [sc, cc] = eve::sincos(v1 * h);
+      auto [sa, ca] = eve::sincos[o](v3 * h);
+      auto [sb, cb] = eve::sincos[o](v2 * h);
+      auto [sc, cc] = eve::sincos[o](v1 * h);
       get<0>(qs[0]) = ca;
       get<0>(qs[1]) = cb;
       get<J>(qs[1]) = sb;
@@ -57,7 +60,9 @@ namespace kyosu
   //!
   //! @brief Callable object computing a quaternion from its euler representation.
   //!
-  //!  This function builds a quaternion from 3 euler angles in radian. Template parameters I, J, K of type int
+  //!  This function builds a quaternion from 3 euler angles in radian
+  //!  (or in \f$\pi multiples\f$ if the option `radpi` is used).
+  //!  Template parameters I, J, K of type int
   //!  are used to choose the euler axis order.
   //!
   //!  for instance I = 3, J = 2, K = 3 choose the ZYZ sequence.

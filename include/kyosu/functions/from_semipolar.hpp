@@ -11,7 +11,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct from_semipolar_t : eve::elementwise_callable<from_semipolar_t, Options>
+  template<typename Options>
+  struct from_semipolar_t : eve::elementwise_callable<from_semipolar_t, Options, rad_option, radpi_option>
   {
     template<concepts::real U, concepts::real V, concepts::real W, concepts::real T>
     KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(V const& rho,
@@ -19,9 +20,10 @@ namespace kyosu
                                                                                          W const& theta1,
                                                                                          T const& theta2) const noexcept
     {
-      auto [st1, ct1] = eve::sincos(theta1);
-      auto [st2, ct2] = eve::sincos(theta2);
-      auto [sa, ca] = eve::sincos(alpha);
+      auto o = this->options();
+      auto [st1, ct1] = eve::sincos[o](theta1);
+      auto [st2, ct2] = eve::sincos[o](theta2);
+      auto [sa, ca] = eve::sincos[o](alpha);
       return rho * kyosu::quaternion(ca * ct1, ca * st1, sa * ct2, sa * st2);
     }
 
@@ -49,7 +51,8 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     auto from_semipolar(auto rho, auto alpha, auto theta1, auto theta2) const noexcept;
+  //!     auto from_semipolar(auto rho, auto alpha, auto theta1, auto theta2) const        noexcept;
+  //!     auto from_semipolar[radpi](auto rho, auto alpha, auto theta1, auto theta2) const noexcept;
   //!   }
   //!   @endcode
   //!
@@ -59,7 +62,8 @@ namespace kyosu
   //!
   //! **Return value**
   //!
-  //! the quaternion value.
+  //!   - the quaternion value.
+  //!   - If radpi` is used  alpha`, `theta1` and `theta2`must be given in  \f$\pi\f$ multiples else in radian.
   //!
   //!  @groupheader{Example}
   //!

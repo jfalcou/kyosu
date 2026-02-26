@@ -11,7 +11,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct from_multipolar_t : eve::elementwise_callable<from_multipolar_t, Options>
+  template<typename Options>
+  struct from_multipolar_t : eve::elementwise_callable<from_multipolar_t, Options, rad_option, radpi_option>
   {
     template<concepts::real U, concepts::real V, concepts::real W, concepts::real T>
     KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(V const& rho1,
@@ -19,8 +20,8 @@ namespace kyosu
                                                                                          W const& rho2,
                                                                                          T const& theta2) const noexcept
     {
-      auto [a0, a1] = kyosu::from_polar(rho1, theta1);
-      auto [a2, a3] = kyosu::from_polar(rho2, theta2);
+      auto [a0, a1] = kyosu::from_polar[this->options()](rho1, theta1);
+      auto [a2, a3] = kyosu::from_polar[this->options()](rho2, theta2);
       return kyosu::quaternion(a0, a1, a2, a3);
     }
 
@@ -37,6 +38,7 @@ namespace kyosu
   //!  from a multipolar representation of an \f$\mathbb{R}^4\f$ element.
   //!
   //!  `from_multipolar` takes the two successive \f$\mathbb{C}\f$ components of the quaternion in polar coordinates
+  //!  If the `radpi` option is used the angles must be given in  \f$\pi\f$ multiples else in radian.
   //!
   //! @groupheader{Header file}
   //!

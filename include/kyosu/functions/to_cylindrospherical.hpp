@@ -13,7 +13,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct to_cylindrospherical_t : eve::elementwise_callable<to_cylindrospherical_t, Options>
+  template<typename Options>
+  struct to_cylindrospherical_t : eve::elementwise_callable<to_cylindrospherical_t, Options, rad_option, radpi_option>
   {
     template<concepts::real V> KYOSU_FORCEINLINE constexpr kumi::tuple<V, V, V, V> operator()(V const& v) const noexcept
     {
@@ -34,8 +35,9 @@ namespace kyosu
       }
       else
       {
-        auto lon = eve::atan2[eve::pedantic](jpart(q), ipart(q));
-        auto lat = eve::atan2[eve::pedantic](kpart(q) * eve::sin(lon), jpart(q));
+        auto o = this->options();
+        auto lon = eve::atan2[o][eve::pedantic](jpart(q), ipart(q));
+        auto lat = eve::atan2[o][eve::pedantic](kpart(q) * eve::sin[o](lon), jpart(q));
         return kumi::tuple{q0, abs(pure(q)), lon, lat};
       }
     }
@@ -73,10 +75,9 @@ namespace kyosu
   //!
   //! **Return value**
   //!
-  //!  a tuple containing in this order `t`, `radius`, `longitude` `latitude`:  the components
-  //!  of the cylindrospherical parametrisation of \f$\mathbb{R}^4\f$ coordinates
-  //!
-  //! ---
+  //!   a tuple containing in this order `t`, `radius`, `longitude`, `latitude`:  the components
+  //!   of the cylindrospherical parametrisation of \f$\mathbb{R}^4\f$ coordinates. If `radpi` is present
+  //!  `longitude` and `latitude`are expressed in \f$\pi\f$ multiples else in radian.
   //!
   //! #### Example
   //!

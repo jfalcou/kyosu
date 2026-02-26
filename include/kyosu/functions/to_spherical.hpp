@@ -13,12 +13,13 @@
 
 namespace kyosu
 {
-  template<typename Options> struct to_spherical_t : eve::elementwise_callable<to_spherical_t, Options>
+  template<typename Options>
+  struct to_spherical_t : eve::elementwise_callable<to_spherical_t, Options, rad_option, radpi_option>
   {
     template<concepts::real V> KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
-      return kumi::tuple{eve::abs(v), eve::arg(v), z, z};
+      return kumi::tuple{eve::abs(v), eve::arg[this->options()](v), z, z};
     }
 
     template<concepts::cayley_dickson Q>
@@ -29,18 +30,18 @@ namespace kyosu
       {
         auto c0 = complex(real(q), imag(q));
         auto z = eve::zero(eve::as(abs(c0)));
-        return kumi::tuple{abs(c0), arg(c0), z, z};
+        return kumi::tuple{abs(c0), arg[this->options()](c0), z, z};
       }
       else
       {
         auto rho = kyosu::abs(q);
-        auto phi2 = eve::asin(kpart(q) / rho);
+        auto phi2 = eve::asin[this->options()](kpart(q) / rho);
         kpart(q) = 0;
         auto rho1 = kyosu::abs(q);
-        auto phi1 = eve::asin(jpart(q) / rho1);
+        auto phi1 = eve::asin[this->options()](jpart(q) / rho1);
         jpart(q) = 0;
         auto rho2 = kyosu::abs(q);
-        auto theta = eve::asin(ipart(q) / rho2);
+        auto theta = eve::asin[this->options()](ipart(q) / rho2);
         return kumi::tuple{rho, theta, phi1, phi2};
       }
     }
@@ -80,6 +81,8 @@ namespace kyosu
   //!
   //!  a tuple containing in this order `rho`, `theta`, `ph1` `ph2`:  the components
   //!  of the spherical parametrisation of \f$\mathbb{R}^4\f$ coordinates
+  //!  If the `radpi` is used  `theta1`, `phi1` and  `phi2`
+  //!   are expressed in \f$\pi\f$ multiples else in radian.
   //!
   //! ---
   //!
