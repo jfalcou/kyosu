@@ -83,24 +83,28 @@ namespace kyosu
   //======================================================================================================================
 }
 
-namespace kyosu::_
+namespace kyosu
 {
-  template<typename C0, typename C1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto from_polar_(KYOSU_DELAY(), O const& o, C0 rho, C1 theta) noexcept
+  namespace _
   {
-    using r_t = eve::common_value_t<C0, C1>;
-    using e_t = eve::element_type_t<r_t>;
-    auto r = eve::abs(rho);
-    constexpr auto flat = O::contains(radpi) ? e_t(1) : eve::pi(eve::as<e_t>());
-    ;
-    auto a = eve::if_else(eve::is_positive(rho), theta, flat + theta);
-    auto [s, c] = eve::sincos[o](a);
-    return complex(r * c, r * s);
-  }
+    template<typename C0, typename C1, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto from_polar_(KYOSU_DELAY(), O const& o, C0 rho, C1 theta) noexcept
+    {
+      using r_t = eve::common_value_t<C0, C1>;
+      using e_t = eve::element_type_t<r_t>;
+      auto r = eve::abs(rho);
+      constexpr auto flat = O::contains(radpi) ? e_t(1) : eve::pi(eve::as<e_t>());
+      ;
+      auto a = eve::if_else(eve::is_positive(rho), theta, flat + theta);
+      auto [s, c] = eve::sincos[o](a);
+      return complex(r * c, r * s);
+    }
 
-  template<typename C0, typename C1, typename C2, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto from_polar_(KYOSU_DELAY(), O const& o, C0 rho, C1 theta, C2 iz) noexcept
-  {
-    return rho * kyosu::exp[o](theta * iz);
+    template<typename C0, typename C1, typename C2, eve::callable_options O>
+    KYOSU_FORCEINLINE constexpr auto from_polar_(KYOSU_DELAY(), O const& o, C0 rho, C1 theta, C2 iz) noexcept
+    {
+      return rho * kyosu::exp[o](theta * iz);
+    }
   }
+  inline constexpr auto from_polarpi = from_polar[radpi];
 }
