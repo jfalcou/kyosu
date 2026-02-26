@@ -11,7 +11,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct from_polar_t : eve::strict_elementwise_callable<from_polar_t, Options>
+  template<typename Options>
+  struct from_polar_t : eve::strict_elementwise_callable<from_polar_t, Options, radpi_option, rad_option>
   {
     template<concepts::real Z0, concepts::real Z1, concepts::cayley_dickson Z2>
     KYOSU_FORCEINLINE constexpr kyosu::as_cayley_dickson_t<Z0, Z1, Z2> operator()(Z0 r, Z1 t, Z2 iz) const noexcept
@@ -85,17 +86,21 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename C0, typename C1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto from_polar_(KYOSU_DELAY(), O const&, C0 rho, C1 theta) noexcept
+  KYOSU_FORCEINLINE constexpr auto from_polar_(KYOSU_DELAY(), O const& o, C0 rho, C1 theta) noexcept
   {
+    using r_t = eve::common_value_t<C0, C1>;
+    using e_t = eve::element_type_t<r_t>;
     auto r = eve::abs(rho);
-    auto a = eve::if_else(eve::is_positive(rho), theta, eve::pi(eve::as(theta)) + theta);
-    auto [s, c] = eve::sincos(a);
+    constexpr auto flat = O::contains(radpi) ? e_t(1) : eve::pi(eve::as<e_t>());
+    ;
+    auto a = eve::if_else(eve::is_positive(rho), theta, flat + theta);
+    auto [s, c] = eve::sincos[o](a);
     return complex(r * c, r * s);
   }
 
   template<typename C0, typename C1, typename C2, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto from_polar_(KYOSU_DELAY(), O const&, C0 rho, C1 theta, C2 iz) noexcept
+  KYOSU_FORCEINLINE constexpr auto from_polar_(KYOSU_DELAY(), O const& o, C0 rho, C1 theta, C2 iz) noexcept
   {
-    return rho * kyosu::exp(theta * iz);
+    return rho * kyosu::exp[o](theta * iz);
   }
 }

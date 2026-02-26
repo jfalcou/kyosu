@@ -11,7 +11,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct exp10_t : eve::elementwise_callable<exp10_t, Options>
+  template<typename Options> struct exp10_t : eve::elementwise_callable<exp10_t, Options, radpi_option, rad_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
@@ -63,9 +63,9 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto exp10_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto exp10_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::exp10(z);
-    else return kyosu::exp(z * kyosu::log_10(eve::as_element<Z>()));
+    else return kyosu::exp[o](z * kyosu::log_10(eve::as_element<Z>()));
   }
 }
