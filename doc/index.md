@@ -205,11 +205,10 @@ Most of these functions can use a second parameter that allows to choose another
    |[pow1p](@ref kyosu::pow1p)                         |[pow_abs](@ref kyosu::pow_abs)                     |[powm1](@ref kyosu::powm1)                         |[proj](@ref kyosu::proj)                           |
    |[pure](@ref kyosu::pure)                           |[radinpi](@ref kyosu::radinpi)                     |[rec](@ref kyosu::rec)                             |[reldist](@ref kyosu::reldist)                     |
    |[reverse_horner](@ref kyosu::reverse_horner)       |[rising_factorial](@ref kyosu::rising_factorial)   |[sec](@ref kyosu::sec)                             |[sech](@ref kyosu::sech)                           |
-   |                                                   |[sign](@ref kyosu::sign)                           |[sin](@ref kyosu::sin)                             |[sinc](@ref kyosu::sinc)                           |
-   |[sincos](@ref kyosu::sincos)                       |[sinh](@ref kyosu::sinh)                           |[sinhc](@ref kyosu::sinhc)                         |[sinhcosh](@ref kyosu::sinhcosh)                   |
-   |                                                   |                                                   |[slerp](@ref kyosu::slerp)                         |[sqr](@ref kyosu::sqr)                             |
-   |[sqr_abs](@ref kyosu::sqr_abs)                     |[sqrt](@ref kyosu::sqrt)                           |[sub](@ref kyosu::sub)                             |[tan](@ref kyosu::tan)                             |
-   |[tanh](@ref kyosu::tanh)                           |                                                   |[tchebytchev](@ref kyosu::tchebytchev)             |[tgamma](@ref kyosu::tgamma)                       |
+   |[sign](@ref kyosu::sign)                           |[sin](@ref kyosu::sin)                             |[sinc](@ref kyosu::sinc)                           |[sincos](@ref kyosu::sincos)                       |
+   |[sinh](@ref kyosu::sinh)                           |[sinhc](@ref kyosu::sinhc)                         |[sinhcosh](@ref kyosu::sinhcosh)                   |[slerp](@ref kyosu::slerp)                         |
+   |[sqr](@ref kyosu::sqr)                             |[sqr_abs](@ref kyosu::sqr_abs)                     |[sqrt](@ref kyosu::sqrt)                           |[sub](@ref kyosu::sub)                             |
+   |[tan](@ref kyosu::tan)                             |[tanh](@ref kyosu::tanh)                           |[tchebytchev](@ref kyosu::tchebytchev)             |[tgamma](@ref kyosu::tgamma)                       |
    |[tgamma_inv](@ref kyosu::tgamma_inv)               |[to_cylindrical](@ref kyosu::to_cylindrical)       |[to_polar](@ref kyosu::to_polar)                   |[tricomi](@ref kyosu::tricomi)                     |
    |[trunc](@ref kyosu::trunc)                         |[zeta](@ref kyosu::zeta)                           |                                                   |                                                   |
 
