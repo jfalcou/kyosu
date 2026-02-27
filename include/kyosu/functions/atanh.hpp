@@ -104,7 +104,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto atanh_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  KYOSU_NOINLINE constexpr auto atanh_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
     if constexpr (O::contains(real_only)) return eve::atanh(a0);
     else if constexpr (concepts::real<Z>) return kyosu::inject[real_only](eve::atanh(a0));
