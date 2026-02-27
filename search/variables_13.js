@@ -11,10 +11,9 @@ var searchData=
   ['to_5feuler_8',['to_euler',['../group__quaternion_ga8d6d4d74663080af513e4428dcc01612.html#ga8d6d4d74663080af513e4428dcc01612',1,'kyosu']]],
   ['to_5fmultipolar_9',['to_multipolar',['../group__quaternion_gae984161c55fda44efe7d7f9b274334c6.html#gae984161c55fda44efe7d7f9b274334c6',1,'kyosu']]],
   ['to_5fpolar_10',['to_polar',['../group__functions_gac49e8cf76fe002ef3d3e480fb80217ff.html#gac49e8cf76fe002ef3d3e480fb80217ff',1,'kyosu']]],
-  ['to_5fpolarpi_11',['to_polarpi',['../group__functions_gab17e711ee9e2d6a04c409bc224274e07.html#gab17e711ee9e2d6a04c409bc224274e07',1,'kyosu']]],
-  ['to_5frotation_5fmatrix_12',['to_rotation_matrix',['../group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0',1,'kyosu']]],
-  ['to_5fsemipolar_13',['to_semipolar',['../group__quaternion_ga3519a64d1cbe848507cc57a05b5ed1b3.html#ga3519a64d1cbe848507cc57a05b5ed1b3',1,'kyosu']]],
-  ['to_5fspherical_14',['to_spherical',['../group__quaternion_gad7e50e38859bb508a816fdd9d63d7b0a.html#gad7e50e38859bb508a816fdd9d63d7b0a',1,'kyosu']]],
-  ['tricomi_15',['tricomi',['../group__functions_ga34f7e8374cc3db60329a3673e46c96f8.html#ga34f7e8374cc3db60329a3673e46c96f8',1,'kyosu']]],
-  ['trunc_16',['trunc',['../group__functions_ga57a5e1064f03073d3e81144181f6ac71.html#ga57a5e1064f03073d3e81144181f6ac71',1,'kyosu']]]
+  ['to_5frotation_5fmatrix_11',['to_rotation_matrix',['../group__quaternion_ga77eff7a7e881497c34bc74d948cf82b0.html#ga77eff7a7e881497c34bc74d948cf82b0',1,'kyosu']]],
+  ['to_5fsemipolar_12',['to_semipolar',['../group__quaternion_ga3519a64d1cbe848507cc57a05b5ed1b3.html#ga3519a64d1cbe848507cc57a05b5ed1b3',1,'kyosu']]],
+  ['to_5fspherical_13',['to_spherical',['../group__quaternion_gad7e50e38859bb508a816fdd9d63d7b0a.html#gad7e50e38859bb508a816fdd9d63d7b0a',1,'kyosu']]],
+  ['tricomi_14',['tricomi',['../group__functions_ga34f7e8374cc3db60329a3673e46c96f8.html#ga34f7e8374cc3db60329a3673e46c96f8',1,'kyosu']]],
+  ['trunc_15',['trunc',['../group__functions_ga57a5e1064f03073d3e81144181f6ac71.html#ga57a5e1064f03073d3e81144181f6ac71',1,'kyosu']]]
 ];

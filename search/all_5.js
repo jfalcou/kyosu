@@ -18,11 +18,10 @@ var searchData=
   ['from_5feuler_15',['from_euler',['../group__quaternion_ga3f3485eda1a78b4bb970df61c7b602d7.html#ga3f3485eda1a78b4bb970df61c7b602d7',1,'kyosu']]],
   ['from_5fmultipolar_16',['from_multipolar',['../group__quaternion_ga768dc300e06ddd80f84746662db3c01b.html#ga768dc300e06ddd80f84746662db3c01b',1,'kyosu']]],
   ['from_5fpolar_17',['from_polar',['../group__complex_gad70670d8278d34dc0f0faf883a48eab8.html#gad70670d8278d34dc0f0faf883a48eab8',1,'kyosu']]],
-  ['from_5fpolarpi_18',['from_polarpi',['../group__complex_gabe395cb541b4dd24a7dbe400af33d770.html#gabe395cb541b4dd24a7dbe400af33d770',1,'kyosu']]],
-  ['from_5frotation_5fmatrix_19',['from_rotation_matrix',['../group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302',1,'kyosu']]],
-  ['from_5fsemipolar_20',['from_semipolar',['../group__quaternion_gae4c3253d49e644eeea3531e3b588fc9c.html#gae4c3253d49e644eeea3531e3b588fc9c',1,'kyosu']]],
-  ['from_5fspherical_21',['from_spherical',['../group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#ga943f811be2981809d36a4f31f52b0025',1,'kyosu']]],
-  ['fsm_22',['fsm',['../group__functions_ga9ff0e0971171a0cf6b8c8b84390707bd.html#ga9ff0e0971171a0cf6b8c8b84390707bd',1,'kyosu']]],
-  ['functions_23',['functions',['../group__functions.html',1,'Cayley-Dickson Functions'],['../index.html#autotoc_md28',1,'Functions']]],
-  ['functions_20are_20only_20implemented_20for_20scalar_20orders_20integral_20or_20floating_24',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]]
+  ['from_5frotation_5fmatrix_18',['from_rotation_matrix',['../group__quaternion_gafe4deac1b486b7f1203090424e8df302.html#gafe4deac1b486b7f1203090424e8df302',1,'kyosu']]],
+  ['from_5fsemipolar_19',['from_semipolar',['../group__quaternion_gae4c3253d49e644eeea3531e3b588fc9c.html#gae4c3253d49e644eeea3531e3b588fc9c',1,'kyosu']]],
+  ['from_5fspherical_20',['from_spherical',['../group__quaternion_ga943f811be2981809d36a4f31f52b0025.html#ga943f811be2981809d36a4f31f52b0025',1,'kyosu']]],
+  ['fsm_21',['fsm',['../group__functions_ga9ff0e0971171a0cf6b8c8b84390707bd.html#ga9ff0e0971171a0cf6b8c8b84390707bd',1,'kyosu']]],
+  ['functions_22',['functions',['../group__functions.html',1,'Cayley-Dickson Functions'],['../index.html#autotoc_md26',1,'Functions']]],
+  ['functions_20are_20only_20implemented_20for_20scalar_20orders_20integral_20or_20floating_23',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]]
 ];

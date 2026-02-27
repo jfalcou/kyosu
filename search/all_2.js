@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['cayley_20dickson_20algebras_0',['Cayley-Dickson algebras',['../index.html#autotoc_md24',1,'']]],
+  ['cayley_20dickson_20algebras_0',['Cayley-Dickson algebras',['../index.html#autotoc_md22',1,'']]],
   ['cayley_20dickson_20constants_1',['Cayley-Dickson constants',['../group__constants.html',1,'']]],
   ['cayley_20dickson_20functions_2',['Cayley-Dickson Functions',['../group__functions.html',1,'']]],
   ['cayley_5fdickson_3',['cayley_dickson',['../structkyosu_1_1cayley__dickson.html',1,'kyosu::cayley_dickson&lt; Type, N &gt;'],['../structkyosu_1_1cayley__dickson.html#aa72548959abb0145c1eef8e8cf2928b4',1,'kyosu::cayley_dickson::cayley_dickson(T0, Ts...) -&gt; cayley_dickson&lt; T0, 1+sizeof...(Ts)&gt;'],['../structkyosu_1_1cayley__dickson.html#aa0be302941e24075875f2ff22e1bc866',1,'kyosu::cayley_dickson::cayley_dickson(Tuple const &amp;) -&gt; cayley_dickson&lt; kumi::element_t&lt; 0, Tuple &gt;, kumi::size_v&lt; Tuple &gt; &gt;'],['../structkyosu_1_1cayley__dickson.html#a790d4ab7df1c48863fc24e56659e0cb4',1,'kyosu::cayley_dickson::cayley_dickson(cayley_dickson&lt; Type, M &gt; const &amp;a) noexcept'],['../structkyosu_1_1cayley__dickson.html#a1a925209827e6dcb263e31d23351817b',1,'kyosu::cayley_dickson::cayley_dickson(cayley_dickson&lt; Type, M &gt; const &amp;a, cayley_dickson&lt; Type, M &gt; const &amp;b) noexcept'],['../structkyosu_1_1cayley__dickson.html#ae438e3f20e692a6de77419c39e890ba8',1,'kyosu::cayley_dickson::cayley_dickson(eve::sized_product_type&lt; N &gt; auto const &amp;vs)'],['../structkyosu_1_1cayley__dickson.html#a8ef11da33b1d2af3a0ad480bd6455ff6',1,'kyosu::cayley_dickson::cayley_dickson(T0 v0, Ts... vs) noexcept'],['../structkyosu_1_1cayley__dickson.html#af70b4a76c4af0caf051ff4eae883d552',1,'kyosu::cayley_dickson::cayley_dickson(T v) noexcept'],['../structkyosu_1_1cayley__dickson.html#a855e307f5821528acf3b6d850194192f',1,'kyosu::cayley_dickson::cayley_dickson() noexcept']]],
@@ -17,7 +17,7 @@ var searchData=
   ['computations_14',['to obtain poor precision with float based computations.',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md3',1,'']]],
   ['conj_15',['conj',['../group__functions_gad4e960a6cb254cdd741323efc8efa3a0.html#gad4e960a6cb254cdd741323efc8efa3a0',1,'kyosu']]],
   ['constants_16',['Cayley-Dickson constants',['../group__constants.html',1,'']]],
-  ['constructors_17',['Constructors',['../index.html#autotoc_md26',1,'']]],
+  ['constructors_17',['Constructors',['../index.html#autotoc_md24',1,'']]],
   ['convert_18',['convert',['../group__functions_gae8e08be7b28ad1cf9159ae564115867f.html#gae8e08be7b28ad1cf9159ae564115867f',1,'kyosu']]],
   ['cos_19',['cos',['../group__functions_ga788b51ca9d3366567828c74d46f12168.html#ga788b51ca9d3366567828c74d46f12168',1,'kyosu']]],
   ['cosh_20',['cosh',['../group__functions_gaa608876852fffef8d90a4f7280ff4549.html#gaa608876852fffef8d90a4f7280ff4549',1,'kyosu']]],

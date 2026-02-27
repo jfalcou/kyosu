@@ -25,7 +25,7 @@ var searchData=
   ['operator_3c_3c_22',['operator&lt;&lt;',['../structkyosu_1_1cayley__dickson.html#a1d50add5f2f5370f64b20919751ccdcf',1,'kyosu::cayley_dickson']]],
   ['operator_3d_23',['operator=',['../structkyosu_1_1cayley__dickson.html#aba6f0b33ec930c1b7d025aa4ae76fd14',1,'kyosu::cayley_dickson']]],
   ['operator_3d_3d_24',['operator==',['../structkyosu_1_1cayley__dickson.html#a561363de989d2101775d8b85655ea08e',1,'kyosu::cayley_dickson::operator==(T1 const &amp;a, T2 b)'],['../structkyosu_1_1cayley__dickson.html#a561363de989d2101775d8b85655ea08e',1,'kyosu::cayley_dickson::operator==(T1 const &amp;a, T2 b)']]],
-  ['operators_25',['Operators',['../index.html#autotoc_md27',1,'']]],
+  ['operators_25',['Operators',['../index.html#autotoc_md25',1,'']]],
   ['or_20floating_26',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]],
   ['orders_20integral_20or_20floating_27',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]]
 ];
