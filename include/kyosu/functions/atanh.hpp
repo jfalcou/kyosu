@@ -107,7 +107,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto atanh_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
     if constexpr (O::contains(real_only)) return eve::atanh(a0);
-    else if constexpr (concepts::real<Z>) return kyosu::inject(eve::atanh(a0));
+    else if constexpr (concepts::real<Z>) return kyosu::inject[real_only](eve::atanh(a0));
     else if constexpr (concepts::complex<Z>)
     {
       if (eve::all(is_real(a0))) return kyosu::inject(eve::atanh(real(a0)));

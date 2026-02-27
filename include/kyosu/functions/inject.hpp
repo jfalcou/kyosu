@@ -10,7 +10,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct inject_t : eve::elementwise_callable<inject_t, Options, pedantic_option>
+  template<typename Options> struct inject_t : eve::elementwise_callable<inject_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
@@ -68,7 +68,7 @@ namespace kyosu::_
   {
     if constexpr (concepts::real<R>)
     {
-      if constexpr (O::contains(pedantic)) return kyosu::complex_t<R>(r, eve::is_nan(r).mask());
+      if constexpr (!O::contains(real_only)) return kyosu::complex_t<R>(r, eve::is_nan(r).mask());
       else return kyosu::complex_t<R>(r, eve::zero(as(r)));
     }
     else return r;
