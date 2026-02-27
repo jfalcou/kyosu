@@ -25,11 +25,11 @@
 var NAVTREE =
 [
   [ "kyosu", "index.html", [
-    [ "Cayley-Dickson algebras", "index.html#autotoc_md22", null ],
-    [ "What does this implementation provide", "index.html#autotoc_md23", [
-      [ "Constructors", "index.html#autotoc_md24", null ],
-      [ "Operators", "index.html#autotoc_md25", null ],
-      [ "Functions", "index.html#autotoc_md26", null ]
+    [ "Cayley-Dickson algebras", "index.html#autotoc_md21", null ],
+    [ "What does this implementation provide", "index.html#autotoc_md22", [
+      [ "Constructors", "index.html#autotoc_md23", null ],
+      [ "Operators", "index.html#autotoc_md24", null ],
+      [ "Functions", "index.html#autotoc_md25", null ]
     ] ],
     [ "How-Tos", "usergroup0.html", null ],
     [ "Reference Documentation", "usergroup1.html", [
@@ -50,5 +50,6 @@ var NAVTREEINDEX =
 "conceptkyosu_1_1concepts_1_1cayley__dickson.html"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';
