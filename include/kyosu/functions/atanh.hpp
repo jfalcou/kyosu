@@ -9,23 +9,23 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/is_nan.hpp>
+#include <kyosu/details/branch_correct.hpp>
 
 namespace kyosu
 {
   template<typename Options> struct atanh_t : eve::elementwise_callable<atanh_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    {
-      if constexpr (concepts::real<Z>) return (*this)(complex(z));
-      else return KYOSU_CALL(z);
-    }
-
-    template<concepts::real Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(Options::contains(real_only))
+    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
+    }
+
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, K> operator()(Z const& z,
+                                                                                             K const& k) const noexcept
+    {
+      return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(atanh_t, atanh_);
@@ -48,9 +48,13 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      template<eve::floating_ordered_value T>     constexpr auto atanh(T z) noexcept; //1
-  //!      template<kyosu::concepts::complex T>        constexpr auto atanh(T z) noexcept; //2
-  //!      template<kyosu::concepts::cayley_dickson T> constexpr auto atanh(T z) noexcept; //3
+  //!     //  regular calls
+  //!      constexpr auto atanh(                    z)                 noexcept; // 1
+  //!      constexpr auto atanh(cayley_dickson_like z, eve::value k)   noexcept; // 2
+  //!
+  //!     // semantic modifyers
+  //!     constexpr Z atan[real_only](Real z)                          noexcept; // 1
+  //!
   //!   }
   //!   @endcode
   //!
@@ -58,13 +62,13 @@ namespace kyosu
   //!
   //!     * `z`: Value to process.
   //!
-  //! **Return value**
+  //!   **Return value**
   //!
-  //!   1. a real input z is treated as if `complex(z)` was entered.
-  //!
-  //!   2.  Returns the complex inverse hyperbolic tangent of z, in the range of a half-strip mathematically
-  //!       unbounded along the real axis and in the interval  \f$i\times[-\pi/2, \pi/2]\f$ along
-  //!       the imaginary axis.
+  //!     1. a real input z is treated as if `complex(z)` was entered, unless the option `real_only` is used
+  //!      in which case the parameter must be a floating_value and the result will the same as a call to `eve::actanh`,
+  //!      In any case returns the complex inverse hyperbolic tangent of z, in the range of a half-strip mathematically
+  //!      unbounded along the real axis and in the interval  \f$i\times[-\pi/2, \pi/2]\f$ along
+  //!      the imaginary axis.
   //!
   //!         * for every z: `atanh(conj(z)) == conj(atanh(z))`
   //!         * for every z: `atanh(-z) == -atanh(z)`
@@ -79,8 +83,8 @@ namespace kyosu
   //!         * If z is \f$NaN+i y\f$ (for any finite y), the result is \f$NaN+i NaN\f$
   //!         * If z is \f$NaN+i \infty\f$, the result is \f$i \pi/2\f$ (the sign of the real part is unspecified)
   //!         * If z is \f$NaN+i NaN\f$,  the result is \f$NaN+i NaN\f$
-  //!
-  //!   3. Returns \f$(\log(1+z)-\log(1-z))/2\f$.
+  //!       Returns \f$(\log(1+z)-\log(1-z))/2\f$.
+  //!     2.  Returns the kth branch of `atanh`. If k is not a flint it is truncated before use.
   //!
   //!  @groupheader{External references}
   //!   *  [C++ standard reference: atanh](https://en.cppreference.com/w/cpp/numeric/complex/atanh)
@@ -102,10 +106,12 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto atanh_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
-    if constexpr (O::contains(real_only)) return kyosu::inject(eve::atanh(a0));
+    if constexpr (O::contains(real_only)) return eve::atanh(a0);
+    else if constexpr (concepts::real<Z>) return kyosu::inject(eve::atanh(a0));
     else if constexpr (concepts::complex<Z>)
     {
-      // This implementation is a simd (i.e. no branch) transcription and adaptation of the
+      if (eve::all(is_real(a0))) return kyosu::inject(eve::atanh(real(a0)));
+      // This implementation is a simd (i.e. no branching) transcription and adaptation of the
       // boost_math code which itself is a transcription of the pseudo-code in:
       //
       // Eric W. Weisstein. "Inverse Hyperbolic Tangent."
@@ -250,4 +256,21 @@ namespace kyosu::_
     }
     else { return cayley_extend(atanh, a0); }
   }
+
+  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto atanh_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  requires(!O::contains(real_only))
+  {
+    using e_t = eve::element_type_t<decltype(real(z))>;
+    auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
+    return kyosu::atanh[o](z) + branch_correction<O>(kk);
+  }
+
+  template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto atanh_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), atanh[o](z, k...));
+  }
+
 }

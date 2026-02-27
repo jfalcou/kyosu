@@ -30,23 +30,6 @@ namespace kyosu
       return KYOSU_CALL(z, k);
     }
 
-    //      template<concepts::cayley_dickson_like Z>
-    //     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    //     requires(!Options::contains(real_only))
-    //     {
-    //       if constexpr(concepts::real<Z>)
-    //         return (*this)(complex(z));
-    //       else
-    //         return  KYOSU_CALL(z);
-    //     }
-
-    //     template<concepts::real Z>
-    //     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    //     requires(Options::contains(real_only))
-    //     {
-    //       return  KYOSU_CALL(z);
-    //     }
-
     KYOSU_CALLABLE_OBJECT(acosh_t, acosh_);
   };
 
@@ -68,10 +51,11 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!     //  regular call
-  //!    template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acosh(Z z) noexcept;
+  //!     constexpr auto acos( acosh(Z z)                           noexcept;
+  //!     constexpr auto acos(cayley_dickson_like z, eve::value k)  noexcept;
   //!
   //!     // semantic modifyers
-  //!     template<concepts::real Z> constexpr complexify_t<Z> acosh[real_only](Z z) noexcept;
+  //!     constexpr auto  acosh[real_only](concepts::real z)        noexcept;
   //!   }
   //!   @endcode
   //!
@@ -102,6 +86,7 @@ namespace kyosu
   //!      * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$
   //!
   //!   - For general cayley_dickson input, returns \f$\log(z+\sqrt{z+1}\sqrt{z-1})\f$.
+  //!   - For two parameters returns the kth branch of `acos`. If k is not a flint it is truncated before use.
   //!
   //!  @groupheader{External references}
   //!   *  [C++ standard reference: complex acosh](https://en.cppreference.com/w/cpp/numeric/complex/acosh)
@@ -148,7 +133,7 @@ namespace kyosu::_
   requires(!O::contains(real_only))
   {
     using e_t = eve::element_type_t<decltype(real(z))>;
-    auto kk = eve::convert(k, eve::as<e_t>());
+    auto kk = eve::convert(trunc(k), eve::as<e_t>());
     return acosh(z) + kyosu::muli(kk * eve::two_pi(eve::as(kk)));
   }
 

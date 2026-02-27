@@ -49,7 +49,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     //  regular calls
   //!     constexpr auto atan(cayley_dickson_like z)                noexcept;
   //!     constexpr auto atan(cayley_dickson_like z, eve::value k)  noexcept;
   //!

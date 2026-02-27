@@ -12,11 +12,13 @@ int main()
   auto zc = kyosu::complex_t<wide_ft>(ref1, imf1);
 
   std::cout << "---- simd" << std::endl
-            << "<- zc                = " << zc << std::endl
-            << "-> acot(zc)          = " << kyosu::acot(zc) << std::endl
-            << "-> acot(ref2)        = " << kyosu::acot(ref2) << std::endl
-            << "-> acot[radpi](ref2) = " << kyosu::acot[kyosu::radpi](ref2) << std::endl;
-
+            << "<- zc                     = " << zc << std::endl
+            << "<- zref2                  = " << ref2 << std::endl
+            << "-> acot(zc)               = " << kyosu::acot(zc) << std::endl
+            << "-> acot(ref2)             = " << kyosu::acot(ref2) << std::endl
+            << "-> acot(ref2, 1)          = " << kyosu::acot(ref2, 1) << std::endl
+            << "-> acot[real_only](ref2)  = " << kyosu::acot[kyosu::real_only](ref2) << std::endl
+            << "-> acot[radpi](ref2)      = " << kyosu::acot[kyosu::radpi](ref2) << std::endl;
 
   return 0;
 }
