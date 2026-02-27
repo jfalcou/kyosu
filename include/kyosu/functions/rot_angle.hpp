@@ -13,14 +13,15 @@
 
 namespace kyosu
 {
-  template<typename Options> struct rot_angle_t : eve::elementwise_callable<rot_angle_t, Options>
+  template<typename Options>
+  struct rot_angle_t : eve::elementwise_callable<rot_angle_t, Options, rad_option, radpi_option>
   {
 
     template<concepts::cayley_dickson Z>
     requires(dimension_v<Z> <= 4)
     KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
     {
-      return 2 * eve::atan2[eve::pedantic](kyosu::abs(kyosu::pure(q)), kyosu::real(q));
+      return 2 * eve::atan2[this->options()][eve::pedantic](kyosu::abs(kyosu::pure(q)), kyosu::real(q));
     }
 
     KYOSU_CALLABLE_OBJECT(rot_angle_t, rot_angle_);
@@ -44,7 +45,8 @@ namespace kyosu
   //!   @code
   //!   namespace eve
   //!   {
-  //!     auto rot_angle(auto q) const noexcept;
+  //!     auto rot_angle(auto q) const        noexcept;
+  //!     auto rot_angle[radpi](auto q) const noexcept;
   //!   }
   //!   @endcode
   //!
@@ -54,9 +56,10 @@ namespace kyosu
   //!
   //! **Return value**
   //!
-  //!  the rotation angle in radian. This is two times the arg of the quaternion.
+  //!  the rotation angle. This is two times the `arg` of the quaternion.
+  //!  If the `radpi` option is used  the angles are returned in
+  //!  \f$\pi\f$ multiples else in radian.
   //!
-  //! ---
   //!
   //! #### Example
   //!
