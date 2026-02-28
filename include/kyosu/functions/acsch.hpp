@@ -9,14 +9,23 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/asinh.hpp>
 #include <kyosu/functions/rec.hpp>
+#include <kyosu/details/branch_correct.hpp>
 
 namespace kyosu
 {
   template<typename Options> struct acsch_t : eve::elementwise_callable<acsch_t, Options>
   {
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
+    }
+
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, K> operator()(Z const& z,
+                                                                                             K const& k) const noexcept
+    {
+      return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(acsch_t, acsch_);
@@ -39,7 +48,13 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     template<kyosu::concepts::cayley_dickson_like Z> constexpr complexify_t<Z> acsch(Z z) noexcept;
+  //!     //  regular calls
+  //!     constexpr auto acsch(cayley_dickson_like z)               noexcept;
+  //!     constexpr auto acsch(cayley_dickson_like z, eve::value k) noexcept;
+  //!
+  //!     // semantic modifyers
+  //!     constexpr auto acsch[real_only](Real z)                   noexcept;
+  //!   }
   //!   }
   //!   @endcode
   //!
@@ -47,10 +62,12 @@ namespace kyosu
   //!
   //!     * `z`: Value to process.
   //!
-  //! **Return value**
+  //!   **Return value**
   //!
-  //!   - A real type input z calls `eve::acsch(z)` and so returns the same type as input.
-  //!   - Returns elementwise `asinh(rec(z))`.
+  //!    - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
+  //!      in which case the parameter must be a floating_value, and is equivalent to `eve::acsch`.
+  //!    - For general cayley_dickson input, the call is equivalent to `asinh(rec(z))`.
+  //!    - For two parameters returns the kth branch of `acsch`. If k is not a flint it is truncated before use.
   //!
   //!  @groupheader{Example}
   //!
@@ -65,8 +82,20 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acsch_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto acsch_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    return kyosu::asinh(kyosu::rec(z));
+    if constexpr (O::contains(real_only)) return eve::acsch(z);
+    else if constexpr (concepts::real<Z>) return kyosu::inject[real_only](eve::acsch(z));
+    else return kyosu::asinh[o](kyosu::rec(z));
   }
+
+  template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acsch_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  requires(!O::contains(real_only))
+  {
+    using e_t = eve::element_type_t<decltype(real(z))>;
+    auto kk = eve::convert(eve::trunc(k), eve::as<e_t>());
+    return kyosu::acsch[o](z) + branch_correction<O>(kk);
+  }
+
 }

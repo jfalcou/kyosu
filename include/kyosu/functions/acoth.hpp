@@ -47,8 +47,9 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     //  regular calls
   //!     constexpr auto acoth(cayley_dickson_like z) noexcept;
+  //!     constexpr auto acoth(cayley_dickson_like z, eve::value k) noexcept;
   //!
   //!     // semantic modifyers
   //!     constexpr auto acoth[real_only](Real z)     noexcept;
@@ -67,6 +68,7 @@ namespace kyosu
   //!   - For complex input, returns elementwise the complex principal value  of the inverse hyperbolic
   //!     cotangent of the input as the inverse hyperbolic tangent of the inverse of the input.
   //!   - For general cayley_dickson input, the call is equivalent to `atanh(rec(z))`.
+  //!    - For two parameters returns the kth branch of `acoth`. If k is not a flint it is truncated before use.
   //!
   //!  @groupheader{External references}
   //!   *  [Wolfram MathWorld: Inverse Hyperbolic
