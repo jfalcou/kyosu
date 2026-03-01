@@ -145,13 +145,15 @@ $(function(){initNavTree('group__functions_ga73d1420e184c7752eb998291672c038d.ht
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="comment">//  regular call</span></div>
-<div class="line">  <span class="keyword">template</span>&lt;concepts::cayley_dickson_like Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="#ga73d1420e184c7752eb998291672c038d">asech</a>(Z z) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="comment">//  regular calls</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga73d1420e184c7752eb998291672c038d">asech</a>(cayley_dickson_like z)               <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga73d1420e184c7752eb998291672c038d">asech</a>(cayley_dickson_like z, eve::value <a class="code hl_variable" href="group__constants_gabb75241dcb99709608d07d0a94af3813.html#gabb75241dcb99709608d07d0a94af3813">k</a>) <span class="keyword">noexcept</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// semantic modifyers</span></div>
-<div class="line">  <span class="keyword">template</span>&lt;concepts::real Z&gt; <span class="keyword">constexpr</span> complexify_t&lt;Z&gt; <a class="code hl_variable" href="#ga73d1420e184c7752eb998291672c038d">asech</a>[real_only](Z z) <span class="keyword">noexcept</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga73d1420e184c7752eb998291672c038d">asech</a>[real_only](Real z)                   <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga73d1420e184c7752eb998291672c038d_html_ga73d1420e184c7752eb998291672c038d"><div class="ttname"><a href="#ga73d1420e184c7752eb998291672c038d">kyosu::asech</a></div><div class="ttdeci">constexpr auto asech</div><div class="ttdoc">Computes the inverse hyperbolic secant of the argument.</div><div class="ttdef"><b>Definition</b> asech.hpp:71</div></div>
+<div class="ttc" id="agroup__constants_gabb75241dcb99709608d07d0a94af3813_html_gabb75241dcb99709608d07d0a94af3813"><div class="ttname"><a href="group__constants_gabb75241dcb99709608d07d0a94af3813.html#gabb75241dcb99709608d07d0a94af3813">kyosu::k</a></div><div class="ttdeci">constexpr auto k</div><div class="ttdoc">Computes the complex number k i.e. quaternion(0, 0, 0, 1) in the chosen type.</div><div class="ttdef"><b>Definition</b> k.hpp:74</div></div>
+<div class="ttc" id="agroup__functions_ga73d1420e184c7752eb998291672c038d_html_ga73d1420e184c7752eb998291672c038d"><div class="ttname"><a href="#ga73d1420e184c7752eb998291672c038d">kyosu::asech</a></div><div class="ttdeci">constexpr auto asech</div><div class="ttdoc">Computes the inverse hyperbolic secant of the argument.</div><div class="ttdef"><b>Definition</b> asech.hpp:79</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -159,8 +161,9 @@ $(function(){initNavTree('group__functions_ga73d1420e184c7752eb998291672c038d.ht
 </ul>
 <p><b>Return value</b></p>
 <ul>
-<li>A real typed input z is treated as if <span class="tt"><a class="el" href="group__functions_gad34d6e0109b4b00e61a647cac6197786.html#gad34d6e0109b4b00e61a647cac6197786" title="Constructs a kyosu::complex_t instance.">complex(z)</a></span> was entered unless the option real_only is used in which case the parameter must be a floating_value, the real part of the result will the same as an <span class="tt">eve::asech</span> implying a Nan result if the theoretical result is not real.</li>
-<li>Returns elementwise <span class="tt"><a class="el" href="group__functions_ga010d55184f68d5a6276939926b22c689.html#ga010d55184f68d5a6276939926b22c689" title="Computes the inverse hyperbolic cosine of the argument.">acosh(rec(z))</a></span>.</li>
+<li>A real typed input z is treated as if <span class="tt"><a class="el" href="group__functions_gad34d6e0109b4b00e61a647cac6197786.html#gad34d6e0109b4b00e61a647cac6197786" title="Constructs a kyosu::complex_t instance.">complex(z)</a></span> was entered, unless the option real_only is used in which case the parameter must be a floating_value, and is equivalent to <span class="tt">eve::asech</span>.</li>
+<li>For general <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> input, the call is equivalent to <span class="tt"><a class="el" href="group__functions_ga010d55184f68d5a6276939926b22c689.html#ga010d55184f68d5a6276939926b22c689" title="Computes the inverse hyperbolic cosine of the argument.">acosh(rec(z))</a></span>.</li>
+<li>For two parameters returns the kth branch of <span class="tt"><a class="el" href="group__functions_gaceca829cfb9fe916d2a1c769b10018ef.html#gaceca829cfb9fe916d2a1c769b10018ef" title="Computes the inverse hyperbolic cosecant of the argument.">acsch</a></span>. If k is not a flint it is truncated before use.</li>
 </ul>
 <h2 class="groupheader">External references </h2>
 <ul>

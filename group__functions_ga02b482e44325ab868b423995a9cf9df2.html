@@ -146,26 +146,27 @@ $(function(){initNavTree('group__functions_ga02b482e44325ab868b423995a9cf9df2.ht
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
 <div class="line">  <span class="comment">// regular call</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga02b482e44325ab868b423995a9cf9df2">sin</a>(cayley_dickson_like z)                 <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga02b482e44325ab868b423995a9cf9df2">sin</a>(cayley_dickson_like z)         <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// semantic modifyers</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga02b482e44325ab868b423995a9cf9df2">sin</a>[radpi](cayley_dickson_like z)         <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga02b482e44325ab868b423995a9cf9df2">sin</a>[rad](cayley_dickson_like z)           <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga02b482e44325ab868b423995a9cf9df2">sin</a>[radpi](cayley_dickson_like z)  <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga02b482e44325ab868b423995a9cf9df2">sin</a>[rad](cayley_dickson_like z)    <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga02b482e44325ab868b423995a9cf9df2_html_ga02b482e44325ab868b423995a9cf9df2"><div class="ttname"><a href="#ga02b482e44325ab868b423995a9cf9df2">kyosu::sin</a></div><div class="ttdeci">constexpr auto sin</div><div class="ttdoc">Computes the sine of the argument.</div><div class="ttdef"><b>Definition</b> sin.hpp:75</div></div>
+<div class="ttc" id="agroup__functions_ga02b482e44325ab868b423995a9cf9df2_html_ga02b482e44325ab868b423995a9cf9df2"><div class="ttname"><a href="#ga02b482e44325ab868b423995a9cf9df2">kyosu::sin</a></div><div class="ttdeci">constexpr auto sin</div><div class="ttdoc">Computes the sine of the argument.</div><div class="ttdef"><b>Definition</b> sin.hpp:73</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><span class="tt">z</span>: Value to process.</li>
 </ul>
-<p><b>Return value</b></p>
-<pre class="fragment"> 1. Returns the cosine of the argument in radian.
-    - For complex arguments, the behavior of this function is equivalent to  \f$-i*\sinh(i*z)\f$.
-    - For general cayley_dickson input, returns \f$-I_z\sinh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\sin(z_0)\f$,
-      where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-      \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
- 2. Returns the cosine of the argument in \f$\pi\f$ multiples.
-</pre><h2 class="groupheader">External references </h2>
+<p><b>Return value</b></p><ol type="1">
+<li>Returns the sine of the argument in radian.<ul>
+<li>For complex arguments, the behavior of this function is equivalent to \(-i*\sinh(i*z)\).</li>
+<li>For general <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> input, returns \(-I_z\sinh(I_z\; z)\) if \(z\) is not zero else \(\sin(z_0)\), where \(I_z = \frac{\underline{z}}{|\underline{z}|}\) and \(\underline{z}\) is the <a class="el" href="group__functions.html#gaff94a2685c6d030458b388a4a4079efe" title="kyosu::imag">pure</a> part of \(z\).</li>
+</ul>
+</li>
+<li>Returns the cosine of an argument given in \(\pi\) multiples.</li>
+</ol>
+<h2 class="groupheader">External references </h2>
 <ul>
 <li><a href="https://en.cppreference.com/w/cpp/numeric/complex/sin">C++ standard reference: complex sin</a></li>
 <li><a href="https://mathworld.wolfram.com/Sine.html">Wolfram MathWorld: Sinine</a></li>
