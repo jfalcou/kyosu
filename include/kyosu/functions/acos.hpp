@@ -95,7 +95,7 @@ namespace kyosu
   //!   \frac{\underline{z}}{|\underline{z}|}\f$ and
   //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
   //!   - For two parameters returns the kth branch of `acos`. If k is not a flint it is truncated before use.
-  //!   - The radpi option provides a result in \f$\pi\f$ multiples.
+  //!   - The radpi option provides a result expressed in \f$\pi\f$ multiples.
   //!
   //!  @groupheader{External references}
   //!   *  [C++ standard reference: complex acos](https://en.cppreference.com/w/cpp/numeric/complex/acos)
