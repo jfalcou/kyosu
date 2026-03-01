@@ -42,11 +42,11 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!     // regular call
-  //!     constexpr auto sin(cayley_dickson_like z)                 noexcept; //1
+  //!     constexpr auto sin(cayley_dickson_like z)         noexcept; //1
   //!
   //!     // semantic modifyers
-  //!     constexpr auto sin[radpi](cayley_dickson_like z)         noexcept; //2
-  //!     constexpr auto sin[rad](cayley_dickson_like z)           noexcept; //1
+  //!     constexpr auto sin[radpi](cayley_dickson_like z)  noexcept; //2
+  //!     constexpr auto sin[rad](cayley_dickson_like z)    noexcept; //1
   //!   }
   //!   @endcode
   //!
@@ -55,14 +55,12 @@ namespace kyosu
   //!     * `z`: Value to process.
   //!
   //!   **Return value**
-  //!
-  //!
-  //!      1. Returns the cosine of the argument in radian.
-  //!         - For complex arguments, the behavior of this function is equivalent to  \f$-i*\sinh(i*z)\f$.
-  //!         - For general cayley_dickson input, returns \f$-I_z\sinh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\sin(z_0)\f$,
-  //!           where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
-  //!           \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
-  //!      2. Returns the cosine of the argument in \f$\pi\f$ multiples.
+  //!     1. Returns the sine of the argument in radian.
+  //!       - For complex arguments, the behavior of this function is equivalent to  \f$-i*\sinh(i*z)\f$.
+  //!       - For general cayley_dickson input, returns \f$-I_z\sinh(I_z\; z)\f$ if \f$z\f$ is not zero else \f$\sin(z_0)\f$,
+  //!         where \f$I_z = \frac{\underline{z}}{|\underline{z}|}\f$ and
+  //!         \f$\underline{z}\f$ is the [pure](@ref kyosu::imag ) part of \f$z\f$.
+  //!     2. Returns the cosine of an argument given in \f$\pi\f$ multiples.
   //!
   //!  @groupheader{External references}
   //!   *  [C++ standard reference: complex sin](https://en.cppreference.com/w/cpp/numeric/complex/sin)

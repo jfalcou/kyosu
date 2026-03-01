@@ -10,7 +10,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct inject_t : eve::elementwise_callable<inject_t, Options>
+  template<typename Options> struct inject_t : eve::elementwise_callable<inject_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
@@ -49,7 +49,7 @@ namespace kyosu
   //!   **Return value**
   //!
   //!     - same as `complex(z)` for real typed `z`, except that real nan produces
-  //!       complex fnan and acts as identity on other cayley_dickson_like
+  //!       complex fnan if `pedantic option is used`and acts as identity on other cayley_dickson_like
   //!
   //!  @groupheader{Example}
   //!
@@ -66,7 +66,11 @@ namespace kyosu::_
   template<typename R, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto inject_(KYOSU_DELAY(), O const&, R r) noexcept
   {
-    if constexpr (concepts::real<R>) return kyosu::complex_t<R>(r, eve::is_nan(r).mask());
+    if constexpr (concepts::real<R>)
+    {
+      if constexpr (!O::contains(real_only)) return kyosu::complex_t<R>(r, eve::is_nan(r).mask());
+      else return kyosu::complex_t<R>(r, eve::zero(as(r)));
+    }
     else return r;
   }
 }

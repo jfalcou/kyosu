@@ -75,6 +75,7 @@ namespace kyosu
   //!      \frac{\underline{z}}{|\underline{z}|}\f$ and
   //!      \f$\underline{z}\f$ is the [pure](@ref pure)  part of \f$z\f$.
   //!    - The radpi option provides a result in \f$\pi\f$ multiples.
+  //!    - For two parameters returns the kth branch of `acot`. If k is not a flint it is truncated before use.
   //!
   //!  @groupheader{External references}
   //!   *  [Wolfram MathWorld: Inverse Cotangent](https://mathworld.wolfram.com/InverseCotangent.html)

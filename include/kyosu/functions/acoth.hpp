@@ -12,21 +12,19 @@
 
 namespace kyosu
 {
-  template<typename Options> struct acoth_t : eve::elementwise_callable<acoth_t, Options, real_only_option>
+  template<typename Options> struct acoth_t : eve::strict_elementwise_callable<acoth_t, Options, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(!Options::contains(real_only))
-    {
-      if constexpr (concepts::real<Z>) return (*this)(complex(z));
-      else return KYOSU_CALL(z);
-    }
-
-    template<concepts::real Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
-    requires(Options::contains(real_only))
+    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
+    }
+
+    template<concepts::cayley_dickson_like Z, eve::value K>
+    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, K> operator()(Z const& z,
+                                                                                             K const& k) const noexcept
+    {
+      return KYOSU_CALL(z, k);
     }
 
     KYOSU_CALLABLE_OBJECT(acoth_t, acoth_);
@@ -49,8 +47,9 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     //  regular calls
   //!     constexpr auto acoth(cayley_dickson_like z) noexcept;
+  //!     constexpr auto acoth(cayley_dickson_like z, eve::value k) noexcept;
   //!
   //!     // semantic modifyers
   //!     constexpr auto acoth[real_only](Real z)     noexcept;
@@ -65,10 +64,11 @@ namespace kyosu
   //!
   //!   - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
   //!     in which case the parameter must be a floating_value,  the real part of the result will the same as an
-  //!     eve::acos implying a Nan result if the theoretical result is not real.
+  //!     `eve::acoth` implying a Nan result if the theoretical result is not real.
   //!   - For complex input, returns elementwise the complex principal value  of the inverse hyperbolic
   //!     cotangent of the input as the inverse hyperbolic tangent of the inverse of the input.
   //!   - For general cayley_dickson input, the call is equivalent to `atanh(rec(z))`.
+  //!    - For two parameters returns the kth branch of `acoth`. If k is not a flint it is truncated before use.
   //!
   //!  @groupheader{External references}
   //!   *  [Wolfram MathWorld: Inverse Hyperbolic
@@ -87,9 +87,16 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acoth_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  template<typename Z, eve::value... K, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acoth_(KYOSU_DELAY(), O const& o, Z z, K... k) noexcept
   {
-    return kyosu::atanh[o](kyosu::rec(z));
+    return kyosu::atanh[o](kyosu::rec(z), k...);
+  }
+
+  template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto acoth_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  requires(!O::contains(real_only))
+  {
+    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), acoth[o](z, k...));
   }
 }
