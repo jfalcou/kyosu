@@ -117,7 +117,7 @@ namespace kyosu::_
   {
     using u_t = eve::underlying_type_t<Z>;
     R_estimate re(n, z);
-    auto r = lentz_b(re, eve::epsi(eve::as<u_t>()));
+    auto r = lentz_b(re, eve::eps(eve::as<u_t>()));
     return r;
   }
 }

@@ -10,15 +10,14 @@
 
 namespace kyosu::_
 {
-  KYOSU_FORCEINLINE
-  template<typename N, typename u_t> auto minus_log10_cyl_j_at_infinity(N n, u_t az)
+
+  template<typename N, typename u_t> KYOSU_FORCEINLINE auto minus_log10_cyl_j_at_infinity(N n, u_t az)
   {
     // Auxiliary function to calculate -log( Jn(x->INF) ).
     return u_t(0.5) * eve::log10(u_t(6.28) * n) - n * eve::log10(u_t(1.36) * az / n);
   };
 
-  KYOSU_FORCEINLINE
-  template<typename u_t> ini_for_br_1(u_t az, auto mg)
+  template<typename u_t> KYOSU_FORCEINLINE auto ini_for_br_1(u_t az, auto mg)
   {
     // Starting point for backward recurrence
     //  for when |Jn(x)|~10e-mg
@@ -43,8 +42,7 @@ namespace kyosu::_
     return eve::trunc(nn);
   };
 
-  KYOSU_FORCEINLINE
-  template<typename u_t> auto ini_for_br_2(auto n, u_t az, auto sd)
+  template<typename u_t> KYOSU_FORCEINLINE auto ini_for_br_2(auto n, u_t az, auto sd)
   {
     // Starting point for backward recurrence
     //  for when Jn(x) has sd significant digits
