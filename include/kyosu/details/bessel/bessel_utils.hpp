@@ -92,22 +92,22 @@ namespace kyosu::_
 
     int n;
     T rz;
-    int i;
+    int ii;
     int sgn;
 
     R_estimate(size_t n_, T z_) : n(n_), rz(kyosu::rec(z_)) { reset(); }
 
     void reset()
     {
-      i = 0;
+      ii = 0;
       sgn = -1;
     }
 
     value_type operator()()
     {
       sgn = -sgn;
-      ++i;
-      auto r = sgn * 2 * (n + i - 1) * rz;
+      ++ii;
+      auto r = sgn * 2 * (n + ii - 1) * rz;
       return r;
     }
   };
