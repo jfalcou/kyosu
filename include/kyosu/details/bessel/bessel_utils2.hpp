@@ -18,12 +18,11 @@ namespace kyosu::_
   };
 
   KYOSU_FORCEINLINE
-  auto ini_for_br_1(auto az, auto mg)
+  template<typename u_t> ini_for_br_1(u_t az, auto mg)
   {
     // Starting point for backward recurrence
     //  for when |Jn(x)|~10e-mg
     //  using the secant method.
-    using u_t = decltype(az);
     auto n0 = inc(eve::ceil(u_t(1.1) * az));
     auto f0 = minus_log10_cyl_j_at_infinity(n0, az) - mg;
     auto n1 = n0 + 5;
@@ -45,9 +44,8 @@ namespace kyosu::_
   };
 
   KYOSU_FORCEINLINE
-  auto ini_for_br_2(auto n, auto az, auto sd)
+  template<typename u_t> auto ini_for_br_2(auto n, u_t az, auto sd)
   {
-    using u_t = decltype(az);
     // Starting point for backward recurrence
     //  for when Jn(x) has sd significant digits
     //  using the secant method.
