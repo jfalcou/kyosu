@@ -25,48 +25,45 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_h12n
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE
-  auto cb_h12n(N n, Z z, R & h1s, R& h2s) noexcept
+  template<eve::integral_scalar_value N, typename Z, typename R>
+  KYOSU_FORCEINLINE auto cb_h12n(N n, Z z, R& h1s, R& h2s) noexcept
   {
     auto an = eve::abs(n);
     an = eve::min(n, N(h1s.size()), N(h2s.size()));
     cb_jyn(n, z, h1s, h2s);
-    for(int i=0; i <= an; ++i)
+    for (int ii = 0; ii <= an; ++ii)
     {
-      auto miyst = muli(h2s[i]);
-      h2s[i] = h1s[i]-miyst;
-      h1s[i] += miyst;
+      auto miyst = muli(h2s[ii]);
+      h2s[ii] = h1s[ii] - miyst;
+      h1s[ii] += miyst;
     }
     return kumi::tuple{h1s[n], h2s[n]};
   }
 
-  template<int Kind, typename Z> KYOSU_FORCEINLINE
-  auto cb_hn(int n, Z z) noexcept
+  template<int Kind, typename Z> KYOSU_FORCEINLINE auto cb_hn(int n, Z z) noexcept
   {
-    auto  j = cb_jn(n, z);
-    auto  y = cb_yn(n, z);
-    if constexpr(Kind == 1)
-      return j+muli(y);
-    else
-      return j-muli(y);
+    auto j = cb_jn(n, z);
+    auto y = cb_yn(n, z);
+    if constexpr (Kind == 1) return j + muli(y);
+    else return j - muli(y);
   }
 
-  template<int Kind, typename Z, typename R> KYOSU_FORCEINLINE
-  auto cb_hn(int n, Z z, R& hs) noexcept
+  template<int Kind, typename Z, typename R> KYOSU_FORCEINLINE auto cb_hn(int n, Z z, R& hs) noexcept
   {
     std::size_t an = eve::abs(n);
-    auto doit = [an, n, z, &hs](auto js, auto ys){
+    auto doit = [an, n, z, &hs](auto js, auto ys) {
       auto [jn, yn] = _::cb_jyn(n, z, js, ys);
-      if constexpr(Kind == 1)
+      if constexpr (Kind == 1)
       {
-        for(int i = 0; i < eve::min(size(hs), an+1); ++i) hs[i] = js[i]+muli+ys[i];
-        return jn+muli(yn);
+        for (int ii = 0; ii < eve::min(size(hs), an + 1); ++ii) hs[ii] = js[ii] + muli + ys[ii];
+        return jn + muli(yn);
       }
-      else{
-        for(int i = 0; i < eve::min(size(hs), an+1); ++i) hs[i] = js[i]+muli-ys[i];
-        return jn-muli(yn);
+      else
+      {
+        for (int ii = 0; ii < eve::min(size(hs), an + 1); ++ii) hs[ii] = js[ii] + muli - ys[ii];
+        return jn - muli(yn);
       }
     };
-    return _::with_alloca<Z>(an+1, doit);
+    return _::with_alloca<Z>(an + 1, doit);
   }
 }
