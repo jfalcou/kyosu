@@ -99,17 +99,15 @@ namespace kyosu::_
   template<concepts::real Z, eve::value K, eve::conditional_expr C, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K k) noexcept
   {
-    if constexpr (!O::contains(real_only))
-      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), cbrt[o](z, k));
-    else return eve::detail::mask_op(cx, eve::detail::return_2nd, z, eve::cbrt[o.drop(real_only)](z));
+    if constexpr (!O::contains(real_only)) return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), cbrt[o](z, k));
+    else return eve::_::mask_op(cx, eve::_::return_2nd, z, eve::cbrt[o.drop(real_only)](z));
   }
 
   template<concepts::real Z, eve::conditional_expr C, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z) noexcept
   {
-    if constexpr (!O::contains(real_only))
-      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), cbrt[o](z));
-    else return eve::detail::mask_op(cx, eve::detail::return_2nd, z, eve::cbrt[o.drop(real_only)](z));
+    if constexpr (!O::contains(real_only)) return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), cbrt[o](z));
+    else return eve::_::mask_op(cx, eve::_::return_2nd, z, eve::cbrt[o.drop(real_only)](z));
   }
 
 }

@@ -111,7 +111,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr auto asec_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
     requires(!O::contains(real_only))
     {
-      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), asec[o](z, k...));
+      return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), asec[o](z, k...));
     }
   }
   inline constexpr auto asecpi = asec[radpi];

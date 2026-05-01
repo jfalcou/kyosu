@@ -61,40 +61,40 @@ namespace kyosu
   [[maybe_unused]] inline constexpr auto riemann = ::rbr::flag(riemann_mode{});
   [[maybe_unused]] inline constexpr auto landau = ::rbr::flag(landau_mode{});
 
-  struct assume_unitary_option : eve::detail::exact_option<assume_unitary>
+  struct assume_unitary_option : eve::_::exact_option<assume_unitary>
   {
   };
-  struct extrinsic_option : eve::detail::exact_option<extrinsic>
+  struct extrinsic_option : eve::_::exact_option<extrinsic>
   {
   };
-  struct flat_option : eve::detail::exact_option<flat>
+  struct flat_option : eve::_::exact_option<flat>
   {
   };
-  struct incomplete_option : eve::detail::exact_option<incomplete>
+  struct incomplete_option : eve::_::exact_option<incomplete>
   {
   };
-  struct intrinsic_option : eve::detail::exact_option<intrinsic>
+  struct intrinsic_option : eve::_::exact_option<intrinsic>
   {
   };
-  struct real_only_option : eve::detail::exact_option<real_only>
+  struct real_only_option : eve::_::exact_option<real_only>
   {
   };
-  struct regularized_option : eve::detail::exact_option<regularized>
+  struct regularized_option : eve::_::exact_option<regularized>
   {
   };
-  struct type_1_option : eve::detail::exact_option<type_1>
+  struct type_1_option : eve::_::exact_option<type_1>
   {
   };
-  struct type_2_option : eve::detail::exact_option<type_2>
+  struct type_2_option : eve::_::exact_option<type_2>
   {
   };
-  struct type_3_option : eve::detail::exact_option<type_3>
+  struct type_3_option : eve::_::exact_option<type_3>
   {
   };
-  struct riemann_option : eve::detail::exact_option<riemann>
+  struct riemann_option : eve::_::exact_option<riemann>
   {
   };
-  struct landau_option : eve::detail::exact_option<landau>
+  struct landau_option : eve::_::exact_option<landau>
   {
   };
 

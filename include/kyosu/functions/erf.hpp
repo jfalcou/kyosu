@@ -460,7 +460,7 @@ namespace kyosu::_
           };
           auto remain = [w_im_y100, signx](auto xx) {
             if constexpr (eve::scalar_value<real_t>) { return w_im_y100(100 / (1 + xx), xx) * signx; }
-            else { return eve::detail::map(w_im_y100, 100 / (1 + xx), xx) * signx; }
+            else { return eve::_::map(w_im_y100, 100 / (1 + xx), xx) * signx; }
           };
 
           auto ax = eve::abs(x);

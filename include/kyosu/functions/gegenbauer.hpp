@@ -118,6 +118,6 @@ namespace kyosu::_
   EVE_FORCEINLINE auto gegenbauer_(KYOSU_DELAY(), C cx, O const& o, N n, L l, Z z) noexcept
   {
     using r_t = complexify_t<as_cayley_dickson_like_t<N, L, Z>>;
-    return eve::detail::mask_op(cx, eve::detail::return_2nd, r_t(z), kyosu::gegenbauer[o](r_t(n), r_t(l), r_t(z)));
+    return eve::_::mask_op(cx, eve::_::return_2nd, r_t(z), kyosu::gegenbauer[o](r_t(n), r_t(l), r_t(z)));
   }
 }

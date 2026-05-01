@@ -109,6 +109,6 @@ namespace kyosu::_
     KYOSU_DELAY(), C const& cx, O const& o, Z0 z0, Z1 z1, K... k) noexcept
   requires(!O::contains(real_only))
   {
-    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z0), lrising_factorial(z0, z1, k...));
+    return eve::_::mask_op(cx, eve::_::return_2nd, complex(z0), lrising_factorial(z0, z1, k...));
   }
 }

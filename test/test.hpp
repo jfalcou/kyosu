@@ -34,7 +34,7 @@ namespace eve
   }
 }
 
-namespace eve::detail
+namespace eve::_
 {
   template<typename T, typename V> auto as_value(callable_object<V> const& v)
   {
