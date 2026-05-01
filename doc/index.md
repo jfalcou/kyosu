@@ -2,9 +2,12 @@ Kyosu
 =====
 
 **KYOSU** is an unified implementation of the complex, quaternions, octonions and more generally all
-\f$\mathbb{R}\f$-Cayley-Dickson algebras in an SIMD aware context provided by **EVE**
+\f$\mathbb{R}\f$-Cayley-Dickson algebras in an SIMD aware context provided by **EVE**. It aims at providing
+as much as possible complex domain functions you dreamed to use and also extend them to quaternions and
+higher dimensionnality cayley_dickson algebras.
 
-\note **KYOSU implements SIMD complex numbers**:If you are not interested in quite exotics features as quaternion or octonion, but only in real and complex **KYOSU**
+\note **KYOSU implements SIMD complex numbers**:If you are not interested in quite exotics
+ features as quaternion or octonion, but only in real and complex **KYOSU**
 is still a library that provides a set of ~150 functions that can be used with real and complex in scalar or simd form
 with no abstraction penalty. The list of them can be seen below.
 
