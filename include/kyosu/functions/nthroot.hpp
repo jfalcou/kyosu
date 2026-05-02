@@ -128,7 +128,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto nthroot_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
   {
     if constexpr (!O::contains(real_only))
-      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), nthroot[o](z, k...));
-    else return eve::detail::mask_op(cx, eve::detail::return_2nd, z, eve::nthroot[o.drop(real_only)](z, k...));
+      return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), nthroot[o](z, k...));
+    else return eve::_::mask_op(cx, eve::_::return_2nd, z, eve::nthroot[o.drop(real_only)](z, k...));
   }
 }

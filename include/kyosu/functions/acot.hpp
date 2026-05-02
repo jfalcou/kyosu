@@ -113,7 +113,7 @@ namespace kyosu
     KYOSU_FORCEINLINE constexpr auto acot_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
     requires(!O::contains(real_only))
     {
-      return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), acot[o](z, k...));
+      return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), acot[o](z, k...));
     }
   }
   inline constexpr auto acotpi = acot[radpi];

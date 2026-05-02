@@ -152,6 +152,6 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto log_gamma_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
   requires(!O::contains(real_only))
   {
-    return eve::detail::mask_op(cx, eve::detail::return_2nd, complex(z), log_gamma(z, k...));
+    return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), log_gamma(z, k...));
   }
 }

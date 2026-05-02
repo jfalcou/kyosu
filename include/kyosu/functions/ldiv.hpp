@@ -114,6 +114,6 @@ namespace kyosu::_
   EVE_FORCEINLINE constexpr auto ldiv_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
   {
     auto that = ldiv(v0, vs...);
-    return eve::detail::mask_op(cond, eve::detail::return_2nd, v0, that);
+    return eve::_::mask_op(cond, eve::_::return_2nd, v0, that);
   }
 }

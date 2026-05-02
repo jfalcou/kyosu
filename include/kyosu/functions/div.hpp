@@ -121,6 +121,6 @@ namespace kyosu::_
   {
     expected_result_t<eve::div, T0, Ts...> that(v0);
     ((that = div(that, vs)), ...);
-    return eve::detail::mask_op(cond, eve::detail::return_2nd, v0, that);
+    return eve::_::mask_op(cond, eve::_::return_2nd, v0, that);
   }
 }
