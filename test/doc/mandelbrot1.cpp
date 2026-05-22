@@ -263,9 +263,9 @@ int main(/*int argc, char** argv*/)
   t1 = hrc::now();
   std::cout << " simd " << chr::duration_cast<chr::milliseconds>(t1 - t0).count() << std::endl;
 
-  auto t0 = hrc::now();
+  t0 = hrc::now();
   image.evaluate_complex_simd();
-  auto t1 = hrc::now();
+  t1 = hrc::now();
   std::cout << " complex simd " << chr::duration_cast<chr::milliseconds>(t1 - t0).count() << std::endl;
 
   t0 = hrc::now();
