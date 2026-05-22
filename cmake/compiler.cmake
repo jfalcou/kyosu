@@ -36,3 +36,29 @@ target_link_libraries(kyosu_docs INTERFACE eve::eve)
 add_library(kyosu_test INTERFACE)
 
 target_link_libraries(kyosu_test INTERFACE kyosu_docs tts::tts)
+
+
+##==================================================================================================
+## Gathering compiler options for Benchmarks
+##==================================================================================================
+add_library(kyosu_bench INTERFACE)
+
+target_compile_features ( kyosu_bench INTERFACE  cxx_std_20 )
+
+if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+  target_compile_options( kyosu_bench INTERFACE /0x /W3 /EHsc /std:c++latest)
+else()
+  target_compile_options( kyosu_bench INTERFACE -O3 -Werror -Wall -Wpedantic -Wextra)
+endif()
+
+target_include_directories( kyosu_bench INTERFACE
+                            ${PROJECT_SOURCE_DIR}/benchmarks
+                            ${PROJECT_SOURCE_DIR}/test
+                            ${PROJECT_SOURCE_DIR}/include
+                          )
+
+target_include_directories( kyosu_bench SYSTEM INTERFACE
+                            ${Boost_INCLUDE_DIRS}
+                          )
+
+target_link_libraries(kyosu_bench INTERFACE eve::eve tts::tts)
