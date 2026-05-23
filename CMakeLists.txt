@@ -61,5 +61,4 @@ copa_setup_pch( TARGET kyosu_bench  INTERFACES  kyosu_bench HEADERS include/kyos
 if(KYOSU_BUILD_TEST)
   enable_testing()
   add_subdirectory(test)
-  add_subdirectory(benchmarks)
 endif()

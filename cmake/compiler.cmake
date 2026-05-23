@@ -52,8 +52,8 @@ else()
 endif()
 
 target_include_directories( kyosu_bench INTERFACE
-                            ${PROJECT_SOURCE_DIR}/benchmarks
                             ${PROJECT_SOURCE_DIR}/test
+                            ${PROJECT_SOURCE_DIR}/test/benchmarks
                             ${PROJECT_SOURCE_DIR}/include
                           )
 

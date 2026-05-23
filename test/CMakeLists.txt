@@ -4,6 +4,7 @@
 ## SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
 copa_setup_test_targets()
+add_custom_target("kyosu-bench")
 set(root "${CMAKE_SOURCE_DIR}/test")
 
 ##======================================================================================================================
@@ -15,3 +16,13 @@ copa_glob_unit(QUIET PATTERN "doc/*.cpp" INTERFACE kyosu_docs PCH kyosu_doc_pch)
 ## Unit tests
 ##======================================================================================================================
 copa_glob_unit(QUIET PATTERN "unit/*.cpp" INTERFACE kyosu_test PCH kyosu_pch)
+
+##======================================================================================================================
+## Performance tests
+##======================================================================================================================
+copa_glob_unit( PATTERN "benchmarks/*.cpp"
+                DESTINATION benchmarks
+                RELATIVE  ${root}
+                INTERFACE kyosu_bench
+                PCH kyosu_bench_pch
+              )
