@@ -7,12 +7,13 @@
 //======================================================================================================================
 #pragma once
 
-#include <vector>
 #include <iomanip>
 #include <iostream>
 #include <string>
 #include <utility>
 #include <type_traits>
+#include <algorithm>
+#include <sstream>
 
 #define ANKERL_NANOBENCH_IMPLEMENT
 #include <nanobench.h>
@@ -20,28 +21,13 @@
 #define TTS_MAIN
 #include <tts/tts.hpp>
 #include <eve/module/core.hpp>
-#include <eve/module/algo.hpp>
-#include <eve/memory/align.hpp>
-#include <eve/memory/aligned_allocator.hpp>
-#include <eve/module/algo/algo/container/soa_vector.hpp>
 
 namespace kyosu::bench
 {
-  template<typename T> struct data_storage
-  {
-    using type = std::vector<eve::element_type_t<T>, eve::aligned_allocator<T>>;
-  };
-
-  template<eve::product_type T> struct data_storage<T>
-  {
-    using type = eve::algo::soa_vector<eve::element_type_t<T>>;
-  };
-
   class benchmark
   {
   private:
     ankerl::nanobench::Bench bench;
-    std::size_t dataSize;
     std::size_t repetitions;
 
     std::vector<std::ptrdiff_t> run_cardinals;
@@ -51,22 +37,6 @@ namespace kyosu::bench
       bench.output(nullptr);
       bench.performanceCounters(true);
       bench.epochs(repetitions);
-      bench.batch(dataSize);
-    }
-
-    template<typename C> static void fill_with(C& data, auto fn)
-    {
-      if constexpr (eve::product_type<typename C::value_type>)
-      {
-        for (std::size_t i = 0; i < data.size(); i++) data.set(i, fn());
-      }
-      else { std::generate(data.begin(), data.end(), fn); }
-    }
-
-    template<typename C> static auto get_value(C const& data, int i)
-    {
-      if constexpr (eve::product_type<typename C::value_type>) return data.get(i);
-      else return data[i];
     }
 
     template<typename TestType, typename Func, typename... Gens>
@@ -75,68 +45,38 @@ namespace kyosu::bench
       constexpr std::ptrdiff_t N = eve::cardinal_v<TestType>;
       run_cardinals.push_back(N);
 
-      std::size_t alignedDataSize = eve::align(dataSize, eve::over{static_cast<std::size_t>(N)});
+      // 1. PURE GENERATION
+      auto args = kumi::map([](auto const& g) -> TestType { return TestType(g()); }, gens);
 
-      // 1. Allocate Input Data
-      kumi::tuple<typename data_storage<std::invoke_result_t<Gens>>::type...> data;
-      kumi::for_each(
-        [&](auto& d, auto const& g) {
-          d.resize(alignedDataSize);
-          fill_with(d, g);
-        },
-        data, gens);
+      bench.batch(N);
 
-      // 2. Allocate Output Buffer
-      using ElementType = eve::element_type_t<TestType>;
-      typename data_storage<ElementType>::type out;
-      out.resize(alignedDataSize);
-
-      bench.batch(alignedDataSize);
-
+      // 2. THE HOT LOOP
       bench.run(name, [&]() {
-        if constexpr (std::is_same_v<TestType, ElementType>)
-        {
-          // SCALAR PATH
-          for (std::size_t i = 0; i < alignedDataSize; ++i)
-          {
-            auto elems = kumi::map([&](auto const& d) { return get_value(d, i); }, data);
-            auto res = kumi::apply(func, elems);
+        // A. Anchor Inputs
+        kumi::for_each(
+          [](auto& arg) {
+            if constexpr (eve::product_type<std::decay_t<decltype(arg)>>)
+            {
+              kumi::for_each([](auto& v) { ankerl::nanobench::doNotOptimizeAway(v); }, arg);
+            }
+            else { ankerl::nanobench::doNotOptimizeAway(arg); }
+          },
+          args);
 
-            if constexpr (eve::product_type<ElementType>) out.set(i, res);
-            else out[i] = res;
-          }
-        }
-        else
-        {
-          // SIMD PATH: Zip inputs and output together
-          kumi::apply(
-            [&](auto&... d_in) {
-              eve::algo::for_each(eve::views::zip(d_in..., out), [&](auto ds, auto ignore) {
-                // Cleanly separate the output iterator from the input iterators using kumi
-                auto in_iters = kumi::pop_back(ds);
-                auto out_iter = kumi::back(ds);
+        // B. Pure Execution
+        auto res = kumi::apply(func, args);
 
-                // Load, Compute, and Store transparently to preserve EVE's loop unrolling
-                auto elems = kumi::map([&](auto it) { return eve::load[ignore](it); }, in_iters);
-                auto res = kumi::apply(func, elems);
-                eve::store[ignore](res, out_iter);
-              });
-            },
-            data);
+        // C. Anchor Output
+        if constexpr (eve::product_type<std::decay_t<decltype(res)>>)
+        {
+          kumi::for_each([](auto const& v) { ankerl::nanobench::doNotOptimizeAway(v); }, res);
         }
+        else { ankerl::nanobench::doNotOptimizeAway(res); }
       });
-
-      // 3. Global Sink
-      if constexpr (eve::product_type<ElementType>) ankerl::nanobench::doNotOptimizeAway(out.get(0));
-      else ankerl::nanobench::doNotOptimizeAway(out[0]);
     }
 
   public:
-    benchmark(std::size_t dataSize = 4096, std::size_t repetitions = 2000)
-      : dataSize(dataSize), repetitions(repetitions)
-    {
-      configure_bench();
-    }
+    benchmark(std::size_t repetitions = 2000) : repetitions(repetitions) { configure_bench(); }
 
     ~benchmark() { report(); }
 
@@ -160,10 +100,36 @@ namespace kyosu::bench
       auto const& results = bench.results();
       if (results.empty()) return *this;
 
-      out_stream << "| Name | N | Speedup | Eff. | cyc/elem | min | max | elem/s | ins/elem |\n";
-      out_stream << "|:---|---:|---:|---:|---:|---:|---:|---:|---:|\n";
+      // 1. Calculate maximum width of the Benchmark Name column
+      std::size_t name_width = 4; // minimum width for "Name"
+      for (auto const& res : results) { name_width = std::max(name_width, res.config().mBenchmarkName.size()); }
 
+      // 2. Fixed widths for numerical columns
+      int const w_n = 4, w_spd = 9, w_eff = 8, w_cyc = 10, w_min = 8, w_max = 8, w_elem = 12, w_ins = 10;
+
+      // 3. Helper to format a single table row cleanly
+      auto print_row = [&](auto n_val, auto n, auto spd, auto eff, auto cyc, auto min, auto max, auto elem, auto ins) {
+        out_stream << "| " << std::left << std::setw(name_width) << n_val << " | " << std::right << std::setw(w_n) << n
+                   << " | " << std::setw(w_spd) << spd << " | " << std::setw(w_eff) << eff << " | " << std::setw(w_cyc)
+                   << cyc << " | " << std::setw(w_min) << min << " | " << std::setw(w_max) << max << " | "
+                   << std::setw(w_elem) << elem << " | " << std::setw(w_ins) << ins << " |\n";
+      };
+
+      // Print Header
+      print_row("Name", "N", "Speedup", "Eff.", "cyc/elem", "min", "max", "elem/s", "ins/elem");
+
+      // Print Perfectly Aligned Markdown Separator
+      out_stream << "|:" << std::string(name_width, '-') << "-|" << std::string(w_n + 1, '-') << ":|"
+                 << std::string(w_spd + 1, '-') << ":|" << std::string(w_eff + 1, '-') << ":|"
+                 << std::string(w_cyc + 1, '-') << ":|" << std::string(w_min + 1, '-') << ":|"
+                 << std::string(w_max + 1, '-') << ":|" << std::string(w_elem + 1, '-') << ":|"
+                 << std::string(w_ins + 1, '-') << ":|\n";
+
+      // Calculate TRUE baseline throughput (elements per second)
       double baseline_time = results.front().median(ankerl::nanobench::Result::Measure::elapsed);
+      double baseline_batch = static_cast<double>(results.front().config().mBatch);
+      double baseline_elem_per_sec = baseline_batch / baseline_time;
+
       bool counters_failed = false;
 
       for (std::size_t i = 0; i < results.size(); ++i)
@@ -173,9 +139,10 @@ namespace kyosu::bench
         double batch_size = static_cast<double>(res.config().mBatch);
         std::ptrdiff_t N = run_cardinals[i];
 
-        double speedup = baseline_time / current_time;
-        double efficiency = speedup / static_cast<double>(N);
+        // THE FIX: Calculate speedup based on normalized throughput, not raw batch time
         double elem_per_sec = batch_size / current_time;
+        double speedup = elem_per_sec / baseline_elem_per_sec;
+        double efficiency = speedup / static_cast<double>(N);
 
         double ins_per_elem = res.median(ankerl::nanobench::Result::Measure::instructions) / batch_size;
         double cyc_per_elem = res.median(ankerl::nanobench::Result::Measure::cpucycles) / batch_size;
@@ -184,15 +151,22 @@ namespace kyosu::bench
 
         if (cyc_per_elem == 0.0 && ins_per_elem == 0.0) { counters_failed = true; }
 
-        out_stream << "| " << res.config().mBenchmarkName << " | " << N << " | ";
+        // Format strings to ensure exact column alignment
+        std::ostringstream spd_str, eff_str;
+        if (speedup == 1.0) spd_str << "x1.00";
+        else spd_str << "x" << std::fixed << std::setprecision(2) << speedup;
 
-        if (speedup == 1.0) out_stream << "x1.00 | ";
-        else out_stream << "x" << std::fixed << std::setprecision(2) << speedup << " | ";
+        eff_str << std::fixed << std::setprecision(1) << (efficiency * 100.0) << "%";
 
-        out_stream << std::fixed << std::setprecision(1) << (efficiency * 100.0) << "% | " << std::fixed
-                   << std::setprecision(2) << cyc_per_elem << " | " << std::setprecision(2) << min_cyc_elem << " | "
-                   << std::setprecision(2) << max_cyc_elem << " | " << std::setprecision(0) << elem_per_sec << " | "
-                   << std::setprecision(2) << ins_per_elem << " |\n";
+        // Helper to format doubles to strings with fixed precision
+        auto fmt = [](double v, int p) {
+          std::ostringstream oss;
+          oss << std::fixed << std::setprecision(p) << v;
+          return oss.str();
+        };
+
+        print_row(res.config().mBenchmarkName, N, spd_str.str(), eff_str.str(), fmt(cyc_per_elem, 2),
+                  fmt(min_cyc_elem, 2), fmt(max_cyc_elem, 2), fmt(elem_per_sec, 0), fmt(ins_per_elem, 2));
       }
 
       if (counters_failed)
