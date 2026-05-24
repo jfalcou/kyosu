@@ -104,7 +104,7 @@ namespace kyosu::_
       auto br_t2 = [aa, n, tol](auto zz) { //second term
         auto z = zz;                       //kyosu::if_else(test,  zz, zero);
         auto ak = aa;
-        r_t fac = kyosu::tgamma_inv(n);
+        r_t fac(kyosu::tgamma_inv(n));
         auto haa = aa;
         auto h1 = u_t(1);
         auto hn = n;
