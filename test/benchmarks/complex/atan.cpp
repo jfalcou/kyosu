@@ -20,11 +20,9 @@ TTS_CASE_TPL("Benchmark complex atan", float, double)
 
   {
     kyosu::bench::benchmark _("complex<" + tts::as_text(tts::typename_<T>) + "> atan");
-    TTS_RUN_BENCHMARK_TPL(_, std::complex<T>, "std::scalar", [](auto a) { return std::atan(a); }, rnd_cmplx);
+    TTS_RUN_BENCHMARK_TPL(_, std::complex<T>, "std", [](auto a) { return std::atan(a); }, rnd_cmplx);
     TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar ", kyosu::atan, rnd_kyosu);
-    TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar radpi", kyosu::atan[kyosu::radpi], rnd_kyosu);
     TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide", kyosu::atan, rnd_kyosu);
-    TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide radpi", kyosu::atan[kyosu::radpi], rnd_kyosu);
   }
 
   TTS_PASS("Benchmarks - SUCCESS");

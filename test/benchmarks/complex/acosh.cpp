@@ -10,15 +10,13 @@
 #include <kyosu/kyosu.hpp>
 #include <complex>
 
-TTS_CASE_TPL("Benchmark complex acos", float, double)
+TTS_CASE_TPL("Benchmark complex acosh", float, double)
 <typename T>(tts::type<T>)
 {
   using type = kyosu::complex_t<T>;
 
-  auto rnd_cmplx = [&]() {
-    return std::complex<T>{::tts::random_value<T>(-100, 100), ::tts::random_value<T>(-100, 100)};
-  };
-  auto rnd_kyosu = [&]() { return type{::tts::random_value<T>(-10, 10), ::tts::random_value<T>(-100, 100)}; };
+  auto rnd_cmplx = [&]() { return std::complex<T>{::tts::random_value<T>(-10, 10), ::tts::random_value<T>(-10, 10)}; };
+  auto rnd_kyosu = [&]() { return type{::tts::random_value<T>(-10, 10), ::tts::random_value<T>(-10, 10)}; };
 
   {
     kyosu::bench::benchmark _("complex<" + tts::as_text(tts::typename_<T>) + "> acosh");

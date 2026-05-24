@@ -15,18 +15,14 @@ TTS_CASE_TPL("Benchmark complex acos", float, double)
 {
   using type = kyosu::complex_t<T>;
 
-  auto rnd_cmplx = [&]() {
-    return std::complex<T>{::tts::random_value<T>(-100, 100), ::tts::random_value<T>(-100, 100)};
-  };
-  auto rnd_kyosu = [&]() { return type{::tts::random_value<T>(-10, 10), ::tts::random_value<T>(-100, 100)}; };
+  auto rnd_cmplx = [&]() { return std::complex<T>{::tts::random_value<T>(-10, 10), ::tts::random_value<T>(-10, 10)}; };
+  auto rnd_kyosu = [&]() { return type{::tts::random_value<T>(-10, 10), ::tts::random_value<T>(-10, 10)}; };
 
   {
     kyosu::bench::benchmark _("complex<" + tts::as_text(tts::typename_<T>) + "> acos");
-    TTS_RUN_BENCHMARK_TPL(_, std::complex<T>, "std::scalar", [](auto a) { return std::acos(a); }, rnd_cmplx);
+    TTS_RUN_BENCHMARK_TPL(_, std::complex<T>, "std", [](auto a) { return std::acos(a); }, rnd_cmplx);
     TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar ", kyosu::acos, rnd_kyosu);
-    TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar radpi", kyosu::acos[kyosu::radpi], rnd_kyosu);
     TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide", kyosu::acos, rnd_kyosu);
-    TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide radpi", kyosu::acos[kyosu::radpi], rnd_kyosu);
   }
 
   TTS_PASS("Benchmarks - SUCCESS");
