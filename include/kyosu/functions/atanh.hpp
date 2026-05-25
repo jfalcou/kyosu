@@ -50,11 +50,13 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!     //  regular calls
-  //!      constexpr auto atanh(                    z)                 noexcept; // 1
-  //!      constexpr auto atanh(cayley_dickson_like z, eve::value k)   noexcept; // 2
+  //!      constexpr auto atanh(                    z)                                   noexcept; // 1
+  //!      constexpr auto atanh(cayley_dickson_like z, eve::value k)                     noexcept; // 2
   //!
   //!     // semantic modifyers
-  //!     constexpr Z atan[real_only](Real z)                          noexcept; // 1
+  //!      constexpr auto atanh[raw](cayley_dickson_like z, eve::value k = 0)            noexcept; // 3
+  //!      constexpr auto atanh[raw]pedantic](cayley_dickson_like z, eve::value k = 0)   noexcept; // 4
+  //!      constexpr Z atan[real_only](Real z)                                           noexcept; // 1
   //!
   //!   }
   //!   @endcode
@@ -87,6 +89,9 @@ namespace kyosu
   //!
   //!       Returns \f$(\log(1+z)-\log(1-z))/2\f$.
   //!     2.  Returns the kth branch of `atanh`. If k is not a flint it is truncated before use.
+  //!     3. never cares about IEEE 754 specification for non-finite inputs
+  //!     4. Take geat care about everything and give sometimes more accurate results
+  //!
   //!
   //!  @groupheader{External references}
   //!   *  [C++ standard reference: atanh](https://en.cppreference.com/w/cpp/numeric/complex/atanh)
@@ -112,11 +117,6 @@ namespace kyosu::_
     else if constexpr (concepts::real<Z>) return kyosu::inject[real_only](eve::atanh(a0));
     else if constexpr (concepts::complex<Z>)
     {
-      //       if (eve::all(is_real(a0)))
-      //       {
-      //         std::cout << "icitte" << std::endl;
-      //         return kyosu::inject(eve::atanh(real(a0)));
-      //       }
       if constexpr (O::contains(pedantic))
       {
         // This implementation is a simd (i.e. no branching) transcription and adaptation of the

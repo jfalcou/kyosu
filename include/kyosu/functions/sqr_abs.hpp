@@ -71,7 +71,7 @@ namespace kyosu::_
     if constexpr (concepts::real<Z>) return eve::sqr(v);
     else if constexpr (O::contains(pedantic))
     {
-      if (concepts::complex<Z>)
+      if constexpr (concepts::complex<Z>)
       {
         auto [r, i] = v;
         auto r2 = eve::sqr(r);
@@ -93,7 +93,7 @@ namespace kyosu::_
     }
     else
     {
-      if (concepts::complex<Z>)
+      if constexpr (concepts::complex<Z>)
       {
         auto [r, i] = v;
         return eve::sqr(r) + eve::sqr(i);
