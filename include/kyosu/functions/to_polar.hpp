@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct to_polar_t : eve::elementwise_callable<to_polar_t, Options, radpi_option, rad_option>
+  struct to_polar_t : eve::elementwise_callable<to_polar_t, Options, radpi_option, rad_option, pedantic_option>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr kumi::tuple<as_real_type_t<Z>, as_real_type_t<Z>, Z> operator()(
@@ -86,8 +86,8 @@ namespace kyosu
     template<typename C, eve::callable_options O>
     KYOSU_FORCEINLINE constexpr auto to_polar_(KYOSU_DELAY(), O const& o, C c) noexcept
     {
-      if constexpr (kyosu::concepts::complex<C>) return kumi::tuple{kyosu::abs(c), kyosu::arg[o](c)};
-      else return kumi::tuple{kyosu::abs(c), kyosu::arg[o](c), sign(ipart(c)) * sign(pure(c))};
+      if constexpr (kyosu::concepts::complex<C>) return kumi::tuple{kyosu::abs[o](c), kyosu::arg[o](c)};
+      else return kumi::tuple{kyosu::abs[o](c), kyosu::arg[o](c), sign(ipart(c)) * sign(pure(c))};
     }
   }
   inline constexpr auto to_polarpi = to_polar[radpi];

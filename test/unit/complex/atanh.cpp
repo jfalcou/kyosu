@@ -56,38 +56,52 @@ TTS_CASE_TPL("Check corner casesof eve::atanh", kyosu::scalar_real_types)
     auto tcx = kyosu::complex;
     using c_t = decltype(tcx(e_t(0)));
     using eve::as;
-    int const N = 16;
+    int const N = 11;
     std::array<c_t, N> inputs = {
       c_t(eve::zero(as<e_t>()), eve::zero(as<e_t>())), // 0
-      c_t(eve::inf(as<e_t>()), eve::zero(as<e_t>())),  // 1
-      c_t(eve::minf(as<e_t>()), eve::zero(as<e_t>())), // 2
-      c_t(eve::nan(as<e_t>()), eve::zero(as<e_t>())),  // 3
-      c_t(eve::zero(as<e_t>()), eve::inf(as<e_t>())),  // 4
-      c_t(eve::inf(as<e_t>()), eve::inf(as<e_t>())),   // 5
-      c_t(eve::minf(as<e_t>()), eve::inf(as<e_t>())),  // 6
-      c_t(eve::nan(as<e_t>()), eve::inf(as<e_t>())),   // 7
-      c_t(eve::zero(as<e_t>()), eve::minf(as<e_t>())), // 8--
-      c_t(eve::inf(as<e_t>()), eve::minf(as<e_t>())),  // 9
-      c_t(eve::minf(as<e_t>()), eve::minf(as<e_t>())), // 10
-      c_t(eve::nan(as<e_t>()), eve::minf(as<e_t>())),  // 11
-      c_t(eve::zero(as<e_t>()), eve::nan(as<e_t>())),  // 12
-      c_t(eve::inf(as<e_t>()), eve::nan(as<e_t>())),   // 13
-      c_t(eve::minf(as<e_t>()), eve::nan(as<e_t>())),  // 14
-      c_t(eve::nan(as<e_t>()), eve::nan(as<e_t>())),   // 15
+      c_t(eve::zero(as<e_t>()), eve::nan(as<e_t>())),  // 1
+      c_t(eve::one(as<e_t>()), eve::zero(as<e_t>())),  // 2
+      c_t(eve::one(as<e_t>()), eve::inf(as<e_t>())),   // 3
+      c_t(eve::one(as<e_t>()), eve::nan(as<e_t>())),   // 4
+      c_t(eve::inf(as<e_t>()), eve::one(as<e_t>())),   // 5
+      c_t(eve::inf(as<e_t>()), eve::inf(as<e_t>())),   // 6
+      c_t(eve::inf(as<e_t>()), eve::nan(as<e_t>())),   // 7
+      c_t(eve::nan(as<e_t>()), eve::one(as<e_t>())),   // 8
+      c_t(eve::nan(as<e_t>()), eve::inf(as<e_t>())),   // 9
+      c_t(eve::nan(as<e_t>()), eve::nan(as<e_t>())),   // 10
+    };
+
+    std::array<c_t, N> results = {
+      c_t(eve::zero(as<e_t>()), eve::zero(as<e_t>())),  // 0
+      c_t(eve::zero(as<e_t>()), eve::nan(as<e_t>())),   // 1
+      c_t(eve::inf(as<e_t>()), eve::zero(as<e_t>())),   // 2
+      c_t(eve::zero(as<e_t>()), eve::pio_2(as<e_t>())), // 3
+      c_t(eve::nan(as<e_t>()), eve::nan(as<e_t>())),    // 4
+      c_t(eve::zero(as<e_t>()), eve::pio_2(as<e_t>())), // 5
+      c_t(eve::zero(as<e_t>()), eve::pio_2(as<e_t>())), // 6
+      c_t(eve::zero(as<e_t>()), eve::nan(as<e_t>())),   // 7
+      c_t(eve::nan(as<e_t>()), eve::nan(as<e_t>())),    // 8
+      c_t(eve::zero(as<e_t>()), eve::pio_2(as<e_t>())), // 5
+      c_t(eve::nan(as<e_t>()), eve::nan(as<e_t>())),    // 10
     };
 
     for (int i = 0; i < N; ++i)
     {
-      if ((i != 2 && i != 1))
-      {
-        // this curious test corresponds to the fact that neither std::atanh nor std::atanh are correct for inputs (0,
-        // inf) or (0, -inf) peculiarly they contredict the C99 specification that atanh is odd atanh should behave "the
-        // same as C99 function catanh, defined in subclause 7.3.6.3 and G.5.2.3." the if clause has to be removed
-        // if/when libc++ will be corrected
-        TTS_IEEE_EQUAL(kyosu::atanh(inputs[i]), cv(std::atanh(sc(inputs[i]))));
-        TTS_IEEE_EQUAL(kyosu::atanh(-inputs[i]), cv(std::atanh(sc(-inputs[i]))));
-      }
+      std::cout << i << std::endl;
+      //       TTS_IEEE_EQUAL(kyosu::atanh(inputs[i]), results[i]);
+      //       TTS_IEEE_EQUAL(kyosu::atanh(-inputs[i]), -results[i]);
+      //       TTS_IEEE_EQUAL(kyosu::atanh(kyosu::conj(inputs[i])), kyosu::conj(results[i]));
+      //        std::cout << "input    " << inputs[i] << std::endl;
+      //      std::cout << "pedantic " << kyosu::atanh[eve::pedantic](c_t(inputs[i])) << std::endl;
+      //      std::cout << "regular  " << kyosu::atanh               (c_t(inputs[i])) << std::endl;
+      //      std::cout << "std      " << cv(std::atanh(sc(inputs[i]))) << std::endl;
+      //        std::cout << "expected " << results[i] << std::endl;
+      using eve::pedantic;
+      TTS_IEEE_EQUAL(kyosu::atanh[pedantic](inputs[i]), results[i]);
+      TTS_IEEE_EQUAL(kyosu::atanh[pedantic](-inputs[i]), -results[i]);
+      TTS_IEEE_EQUAL(kyosu::atanh[pedantic](kyosu::conj(inputs[i])), kyosu::conj(results[i]));
     }
+    //    std::cout << kyosu::atanh[eve::pedantic](c_t(-100.0, 100.0)) << std::endl;
   }
   else TTS_PASS("no test for macosx: atanh corner cases are almost all false according C99");
 };

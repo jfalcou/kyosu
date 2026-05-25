@@ -9,10 +9,13 @@
 
 #include <kyosu/details/callable.hpp>
 #include <kyosu/details/decorators.hpp>
+#include <kyosu/functions/sqr.hpp>
+#include <kyosu/functions/sqrt.hpp>
 
 namespace kyosu
 {
-  template<typename Options> struct abs_t : eve::elementwise_callable<abs_t, Options, eve::raw_option, flat_option>
+  template<typename Options>
+  struct abs_t : eve::elementwise_callable<abs_t, Options, eve::raw_option, pedantic_option, flat_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z z) const noexcept
@@ -41,11 +44,12 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!      //regular call
-  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs(T z) noexcept;       // 1
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs(T z) noexcept;           // 1
   //!
   //!      // Semantic modifyiers
-  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[raw](T z) noexcept;  // 2
-  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[flat](T z) noexcept; // 3
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[raw](T z) noexcept;      // 2
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[flat](T z) noexcept;     // 3
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[pedantic](T z) noexcept; // 4
   //!   }
   //!   @endcode
   //!
@@ -57,8 +61,10 @@ namespace kyosu
   //!
   //!    1. The  modulus of its parameter (always a floating ordered value).
   //!       The modulus is the square root of the sum of the squares of the absolute value of each component.
+  //!       Some care is taken to avoid overflows.
   //!    2. With the raw option no provision is made to enhance accuracy and avoid overflows
-  //!    3. With the `flat` otpion it is the \f$l_\infty\f$ norm of the components that is computed.
+  //!    3. With the `flat` otpion it is the \f$l_\infty\f$ norm of the components that is computed. (much faster)
+  //!    4. More care is taken to avoid overflows and enhance precision
   //!
   //!  @groupheader{External references}
   //!   *  [C++ standard reference: complex abs](https://en.cppreference.com/w/cpp/numeric/complex/abs)
@@ -79,7 +85,13 @@ namespace kyosu::_
   {
     if constexpr (concepts::real<Z>) return eve::abs(v);
     else if constexpr (O::contains(flat)) return eve::maxabs(kumi::flatten(kumi::make_tuple(v)));
-    else if constexpr (O::contains(eve::raw)) return eve::hypot(v);
+    else if constexpr (O::contains(eve::raw)) return eve::hypot[raw](v);
+    else if constexpr (!O::contains(eve::pedantic) && concepts::complex<Z>)
+    {
+      auto [r, i] = v;
+      auto s = eve::maxabs(r, i);
+      return if_else(is_eqz(s), s, s * eve::sqrt(eve::sqr(r / s) + eve::sqr(i / s)));
+    }
     else return eve::hypot[eve::pedantic](v);
   }
 }

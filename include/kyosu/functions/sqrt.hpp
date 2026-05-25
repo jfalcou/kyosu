@@ -9,6 +9,7 @@
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/is_pure.hpp>
+#include <kyosu/functions/is_real.hpp>
 #include <kyosu/constants/fnan.hpp>
 
 namespace kyosu

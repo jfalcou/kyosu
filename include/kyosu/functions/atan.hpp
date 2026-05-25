@@ -8,13 +8,21 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/functions/atanh.hpp>
+#include <kyosu/functions/muli.hpp>
+#include <kyosu/functions/mulmi.hpp>
 #include <kyosu/details/decorators.hpp>
 #include <kyosu/details/branch_correct.hpp>
 
 namespace kyosu
 {
   template<typename Options>
-  struct atan_t : eve::strict_elementwise_callable<atan_t, Options, real_only_option, rad_option, radpi_option>
+  struct atan_t : eve::strict_elementwise_callable<atan_t,
+                                                   Options,
+                                                   real_only_option,
+                                                   rad_option,
+                                                   radpi_option,
+                                                   raw_option,
+                                                   pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
@@ -107,9 +115,7 @@ namespace kyosu
       else if constexpr (concepts::complex<Z>)
       {
         // C99 definition here; atan(z) = -i atanh(i*z):
-        auto [r, i] = z;
-        auto [r1, i1] = kyosu::atanh(complex(-i, r));
-        return complex(i1, -r1);
+        return kyosu::mulmi(kyosu::atanh[o](kyosu::muli(z)));
       }
       else { return _::cayley_extend(kyosu::atan, z); }
     }

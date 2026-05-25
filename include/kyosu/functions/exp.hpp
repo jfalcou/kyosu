@@ -14,7 +14,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct exp_t : eve::elementwise_callable<exp_t, Options, radpi_option, rad_option>
+  template<typename Options>
+  struct exp_t : eve::elementwise_callable<exp_t, Options, radpi_option, rad_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
@@ -53,22 +54,25 @@ namespace kyosu
   //!
   //!      - Returns the exponential of the argument, calling `eve::exp`.
   //!
-  //!      - For complex inputs, returns the exponential following IEEE standards:
+  //!      - For complex inputs, returns the exponential following IEEE standards with the pedantic options:
   //!
-  //!       * for every z: `exp(conj(z)) == conj(exp(z))`
-  //!       * If z is \f$\pm0\f$, the result is \f$1\f$
-  //!       * If z is \f$x+i \infty\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
-  //!       * If z is \f$x+i \textrm{NaN}\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
-  //!       * If z is \f$+\infty+i 0\f$, the result is \f$+\infty\f$
-  //!       * If z is \f$-\infty+i y\f$ (for any finite y), the result is \f$+0 e^{iy}\f$.
-  //!       * If z is \f$+\infty+i y\f$ (for any finite nonzero y), the result is \f$+\infty e^{iy}\f$.
-  //!       * If z is \f$-\infty+i \infty\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified)
-  //!       * If z is \f$+\infty+i \pm\infty\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
-  //!       * If z is \f$-\infty+i \textrm{NaN}\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified).
-  //!       * If z is \f$\pm\infty+i \textrm{NaN}\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
-  //!       * If z is \f$\textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$.
-  //!       * If z is \f$\textrm{NaN}+i y\f$ (for any nonzero y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
-  //!       * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+  //!       1. for every z: `exp(conj(z)) == conj(exp(z))`
+  //!       2. If z is \f$\pm0\f$, the result is \f$1\f$
+  //!       3. If z is \f$x+i \infty\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+  //!       4. If z is \f$x+i \textrm{NaN}\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+  //!       5. If z is \f$+\infty+i 0\f$, the result is \f$+\infty\f$
+  //!       6. If z is \f$-\infty+i y\f$ (for any finite y), the result is \f$+0 e^{iy}\f$.
+  //!       7. If z is \f$+\infty+i y\f$ (for any finite nonzero y), the result is \f$+\infty e^{iy}\f$.
+  //!       8. If z is \f$-\infty+i \infty\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified)
+  //!       9. If z is \f$+\infty+i \pm\infty\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
+  //!       10. If z is \f$-\infty+i \textrm{NaN}\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified).
+  //!       11. If z is \f$\pm\infty+i \textrm{NaN}\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
+  //!       12. If z is \f$\textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$.
+  //!       13. If z is \f$\textrm{NaN}+i y\f$ (for any nonzero y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+  //!       14. If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+  //!
+  //!       Withut the pedantic option the inputs \f$(\infty+i \infty)\f$, \f$\infty+i \textrm{NaN}\f$ and \f$\textrm{NaN}+i0\f$
+  //!       produce \f$\textrm{NaN}+i\textrm{NaN}\f$
   //!
   //!     - For generate cayley-dickson inputs, returns \f$e^{z_0}(\cos|\underline{z}|+\underline{z}\; \mathop{sinc}|\underline{z}|)\f$
   //!
@@ -96,11 +100,20 @@ namespace kyosu::_
     else if constexpr (concepts::complex<Z>)
     {
       auto [rz, iz] = z;
-      auto [s, c] = eve::sincos[o](iz);
-      auto rho = eve::if_else(is_nan(rz), eve::allbits, rexp(rz));
-      auto res =
-        eve::if_else(is_real(z) || rz == eve::minf(eve::as(rz)), Z(rho, eve::zero(eve::as(rho))), Z(rho * c, rho * s));
-      return if_else(rz == eve::inf(eve::as(rz)) && eve::is_not_finite(iz), Z{rz, eve::nan(eve::as(iz))}, res);
+      if constexpr (O::contains(pedantic))
+      {
+        auto [s, c] = eve::sincos[o](iz);
+        auto rho = eve::if_else(is_nan(rz), eve::allbits, rexp(rz));
+        auto res = eve::if_else(is_real(z) || rz == eve::minf(eve::as(rz)), Z(rho, eve::zero(eve::as(rho))),
+                                Z(rho * c, rho * s));
+        return if_else(rz == eve::inf(eve::as(rz)) && eve::is_not_finite(iz), Z{rz, eve::nan(eve::as(iz))}, res);
+      }
+      else
+      {
+        auto r = eve::exp(rz);
+        auto [s, c] = eve::sincos(iz);
+        return complex(r * c, r * s);
+      }
     }
     else return _::cayley_extend(kyosu::exp[o], z);
   }

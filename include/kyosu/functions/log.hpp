@@ -112,7 +112,7 @@ namespace kyosu::_
     else if constexpr (concepts::real<Z>) return kyosu::log[o](complex(z));
     else if constexpr (kyosu::concepts::complex<Z>)
     {
-      auto [rho, theta] = to_polar(z);
+      auto [rho, theta] = to_polar[pedantic](z);
       return Z(eve::log(rho), theta);
     }
     else { return _::cayley_extend(kyosu::log, z); }

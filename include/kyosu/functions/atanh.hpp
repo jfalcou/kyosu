@@ -10,10 +10,11 @@
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/is_nan.hpp>
 #include <kyosu/details/branch_correct.hpp>
-
+#include <iostream>
 namespace kyosu
 {
-  template<typename Options> struct atanh_t : eve::elementwise_callable<atanh_t, Options, real_only_option>
+  template<typename Options>
+  struct atanh_t : eve::elementwise_callable<atanh_t, Options, real_only_option, pedantic_option, raw_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
@@ -83,6 +84,7 @@ namespace kyosu
   //!         * If z is \f$NaN+i y\f$ (for any finite y), the result is \f$NaN+i NaN\f$
   //!         * If z is \f$NaN+i \infty\f$, the result is \f$i \pi/2\f$ (the sign of the real part is unspecified)
   //!         * If z is \f$NaN+i NaN\f$,  the result is \f$NaN+i NaN\f$
+  //!
   //!       Returns \f$(\log(1+z)-\log(1-z))/2\f$.
   //!     2.  Returns the kth branch of `atanh`. If k is not a flint it is truncated before use.
   //!
@@ -110,149 +112,194 @@ namespace kyosu::_
     else if constexpr (concepts::real<Z>) return kyosu::inject[real_only](eve::atanh(a0));
     else if constexpr (concepts::complex<Z>)
     {
-      if (eve::all(is_real(a0))) return kyosu::inject(eve::atanh(real(a0)));
-      // This implementation is a simd (i.e. no branching) transcription and adaptation of the
-      // boost_math code which itself is a transcription of the pseudo-code in:
-      //
-      // Eric W. Weisstein. "Inverse Hyperbolic Tangent."
-      // From MathWorld--A Wolfram Web Resource.
-      // http://mathworld.wolfram.com/InverseHyperbolicTangent.html
-      //
-      // Also: The Wolfram Functions Site,
-      // http://functions.wolfram.com/ElementaryFunctions/ArcTanh/
-      //
-      // Also "Abramowitz and Stegun. Handbook of Mathematical Functions."
-      // at : http://jove.prohosting.com/~skripty/toc.htm
-      //
-      auto [a0r, a0i] = a0;
-      auto realinf = eve::is_eqz(a0i) && eve::is_infinite(a0r);
-      using rtype = decltype(a0r);
-      rtype const alpha_crossover(0.3);
-      auto ltzra0 = eve::is_ltz(a0r);
-      auto ltzia0 = eve::is_ltz(a0i);
-      auto s_min = eve::sqrtsmallestposval(eve::as(a0r)) * 2;
-      auto s_max = eve::sqrtvalmax(eve::as(a0r)) / 2;
-      rtype const two = rtype(2);
-      rtype inf = eve::inf(eve::as(a0r));
-      rtype x = eve::abs(a0r);
-      rtype y = eve::abs(a0i);
-      auto special = eve::is_eqz(y) && (x < eve::one(eve::as(a0r)));
-      auto sr = eve::atanh(a0r);
-      if (eve::all(special)) { return complex(sr, eve::zero(eve::as(sr))); }
-
-      rtype r = eve::zero(eve::as(a0r));
-      rtype i = eve::zero(eve::as(a0r));
-      auto gtxmax = (x > s_max);
-      auto ltxmin = (x < s_min);
-      auto gtymax = (y > s_max);
-      auto ltymin = (y < s_min);
-      rtype xx = eve::sqr(x);
-      rtype yy = eve::sqr(y);
-      rtype sqrabs = xx + yy;
-
-      auto not_in_safe_zone = ((gtxmax || ltxmin) || (gtymax || ltymin));
-      if (eve::any(not_in_safe_zone))
+      //       if (eve::all(is_real(a0)))
+      //       {
+      //         std::cout << "icitte" << std::endl;
+      //         return kyosu::inject(eve::atanh(real(a0)));
+      //       }
+      if constexpr (O::contains(pedantic))
       {
-        // treat underflow or overflow
-        //  one or both of x and y are small, calculate divisor carefully:
-        rtype div = eve::one(eve::as(a0r));
-        div += eve::if_else(ltxmin, xx, eve::zero);
-        div += eve::if_else(ltxmin, yy, eve::zero);
+        // This implementation is a simd (i.e. no branching) transcription and adaptation of the
+        // boost_math code which itself is a transcription of the pseudo-code in:
+        //
+        // Eric W. Weisstein. "Inverse Hyperbolic Tangent."
+        // From MathWorld--A Wolfram Web Resource.
+        // http://mathworld.wolfram.com/InverseHyperbolicTangent.html
+        //
+        // Also: The Wolfram Functions Site,
+        // http://functions.wolfram.com/ElementaryFunctions/ArcTanh/
+        //
+        // Also "Abramowitz and Stegun. Handbook of Mathematical Functions."
+        // at : http://jove.prohosting.com/~skripty/toc.htm
+        //
+        auto [a0r, a0i] = a0;
+        auto realinf = eve::is_eqz(a0i) && eve::is_infinite(a0r);
+        using rtype = decltype(a0r);
+        rtype const alpha_crossover(0.3);
+        auto ltzra0 = eve::is_ltz(a0r);
+        auto ltzia0 = eve::is_ltz(a0i);
+        auto s_min = eve::sqrtsmallestposval(eve::as(a0r)) * 2;
+        auto s_max = eve::sqrtvalmax(eve::as(a0r)) / 2;
+        rtype const two = rtype(2);
+        rtype inf = eve::inf(eve::as(a0r));
+        rtype x = eve::abs(a0r);
+        rtype y = eve::abs(a0i);
+        auto special = eve::is_eqz(y) && (x < eve::one(eve::as(a0r)));
+        auto sr = eve::atanh(a0r);
+        if (eve::all(special)) { return complex(sr, eve::zero(eve::as(sr))); }
 
-        rtype alpha = x / div;
-        alpha += alpha;
+        rtype r = eve::zero(eve::as(a0r));
+        rtype i = eve::zero(eve::as(a0r));
+        auto gtxmax = (x > s_max);
+        auto ltxmin = (x < s_min);
+        auto gtymax = (y > s_max);
+        auto ltymin = (y < s_min);
+        rtype xx = eve::sqr(x);
+        rtype yy = eve::sqr(y);
+        rtype sqrabs = xx + yy;
 
-        auto test = gtymax;
-        // big y, medium x, divide through by y:
-        rtype tmp_alpha = (two * x / y) / (y + xx / y);
-        // small x and y, whatever alpha is, it's too small to calculate:
-        tmp_alpha = eve::if_else(x > eve::one(eve::as(a0r)), tmp_alpha, eve::zero);
-        alpha = eve::if_else(test && (x > eve::one(eve::as(a0r))), tmp_alpha, alpha);
+        auto not_in_safe_zone = ((gtxmax || ltxmin) || (gtymax || ltymin));
+        if (eve::any(not_in_safe_zone))
+        {
+          // treat underflow or overflow
+          //  one or both of x and y are small, calculate divisor carefully:
+          rtype div = eve::one(eve::as(a0r));
+          div += eve::if_else(ltxmin, xx, eve::zero);
+          div += eve::if_else(ltxmin, yy, eve::zero);
 
-        test = eve::logical_andnot(gtxmax, test);
+          rtype alpha = x / div;
+          alpha += alpha;
 
-        // big x small y, as above but neglect y^2/x:
-        tmp_alpha = two / x;
-        // big x: divide through by x:
-        tmp_alpha = eve::if_else((y > eve::one(eve::as(a0r))), two / (x + y * y / x), tmp_alpha);
-        // big x and y: divide alpha through by x*y:
-        tmp_alpha = eve::if_else(gtymax, (two / y) / (x / y + y / x), tmp_alpha);
-        // x or y are infinite: the result is 0
-        tmp_alpha = eve::if_else((y == inf) || (x == inf), eve::zero, tmp_alpha);
+          auto test = gtymax;
+          // big y, medium x, divide through by y:
+          rtype tmp_alpha = (two * x / y) / (y + xx / y);
+          // small x and y, whatever alpha is, it's too small to calculate:
+          tmp_alpha = eve::if_else(x > eve::one(eve::as(a0r)), tmp_alpha, eve::zero);
+          alpha = eve::if_else(test && (x > eve::one(eve::as(a0r))), tmp_alpha, alpha);
 
-        alpha = eve::if_else(test, tmp_alpha, alpha);
-        r = eve::if_else((alpha < alpha_crossover), eve::log1p(alpha) - eve::log1p(-alpha),
-                         eve::log(eve::inc(two * x + xx)) - eve::log(eve::sqr(eve::dec(x))));
-        test = (x == eve::one(eve::as(a0r))) && ltymin;
-        r = eve::if_else(test, -(two * (eve::log(y) - eve::log_2(eve::as(a0r)))), r);
-        r *= rtype(0.25);
+          test = eve::logical_andnot(gtxmax, test);
+
+          // big x small y, as above but neglect y^2/x:
+          tmp_alpha = two / x;
+          // big x: divide through by x:
+          tmp_alpha = eve::if_else((y > eve::one(eve::as(a0r))), two / (x + y * y / x), tmp_alpha);
+          // big x and y: divide alpha through by x*y:
+          tmp_alpha = eve::if_else(gtymax, (two / y) / (x / y + y / x), tmp_alpha);
+          // x or y are infinite: the result is 0
+          tmp_alpha = eve::if_else((y == inf) || (x == inf), eve::zero, tmp_alpha);
+
+          alpha = eve::if_else(test, tmp_alpha, alpha);
+          r = eve::if_else((alpha < alpha_crossover), eve::log1p(alpha) - eve::log1p(-alpha),
+                           eve::log(eve::inc(two * x + xx)) - eve::log(eve::sqr(eve::dec(x))));
+          test = (x == eve::one(eve::as(a0r))) && ltymin;
+          r = eve::if_else(test, -(two * (eve::log(y) - eve::log_2(eve::as(a0r)))), r);
+          r *= rtype(0.25);
+          // compute the imag part
+          //  y^2 is negligible:
+          i = eve::atan2(two * y, eve::oneminus(xx));
+          i = eve::if_else(gtymax || gtxmax, eve::pi(eve::as(a0r)), i);
+          rtype tmp_i =
+            eve::if_else(ltymin, eve::atan2(two * y, eve::one(eve::as(a0r))), eve::atan2(two * y, eve::oneminus(yy)));
+          i = eve::if_else(ltxmin, tmp_i, i);
+        }
+        auto test0 = (inf == x) && (inf == y);
+        if (eve::any(test0))
+        {
+          // inf x, inf y
+          r = eve::if_else(test0, eve::zero, r);
+          i = eve::if_else(test0, eve::pi(eve::as(a0r)), r);
+        }
+        auto test = kyosu::is_nan(a0);
+
+        if (eve::any(test))
+        {
+          // nan x, inf y
+          r = eve::if_else(eve::is_nan(x) && (y == inf), eve::zero, r);
+          i = eve::if_else(eve::is_nan(x) && (y == inf), eve::pi(eve::as(a0r)), r);
+
+          r = eve::if_else(is_nan(y) && (x == inf), eve::zero, r);
+          i = eve::if_else(is_nan(y) && (x == inf), y, i);
+
+          r = eve::if_else(is_nan(y) && eve::is_eqz(x), eve::zero, r);
+          i = eve::if_else(is_nan(y) && is_eqz(x), eve::allbits, i);
+        }
+        // compute for safe zone::one
+        //  the real part is given by:
+        //
+        //  eve::real(atanh(z)) == eve::log((1 + x^2 + y^2 + 2x) / (1 + x^2 + y^2 - 2x))
+        //
+        //  however, when x is either large (x > 1/e) or very small
+        //  (x < e) then this effectively simplifies
+        //  to log(1), leading to wildly inaccurate results.
+        //  by dividing the above (top and bottom) by (1 + x^2 + y^2) we get:
+        //
+        //  eve::real(atanh(z)) == log((1 + (2x / (1 + x^2 + y^2))) / (1 - (-2x / (1 + x^2 + y^2))))
+        //
+        //  which is much more sensitive to the value of x, when x is not near 1
+        //  (remember we can compute log(1+x) for small x very accurately).
+        //
+        //  the cross-over from eve::one method to the other has to be determined
+        //  experimentally, the value used below appears correct to within a
+        //  factor of 2 (and there are larger errors from other parts
+        //  of the input domain anyway).
+        //
+        rtype alpha = x * two / (eve::inc(sqrabs));
+        rtype sqrxm1 = eve::sqr(eve::dec(x));
+        rtype tmp_r = eve::if_else((alpha < alpha_crossover), eve::log1p(alpha) - eve::log1p(-alpha),
+                                   eve::log1p(x + x + sqrabs) - eve::log(sqrxm1 + yy)) *
+                      rtype(0.25);
+        r = eve::if_else(not_in_safe_zone, r, tmp_r);
+
         // compute the imag part
-        //  y^2 is negligible:
-        i = eve::atan2(two * y, eve::oneminus(xx));
-        i = eve::if_else(gtymax || gtxmax, eve::pi(eve::as(a0r)), i);
-        rtype tmp_i =
-          eve::if_else(ltymin, eve::atan2(two * y, eve::one(eve::as(a0r))), eve::atan2(two * y, eve::oneminus(yy)));
-        i = eve::if_else(ltxmin, tmp_i, i);
+        i = eve::if_else(not_in_safe_zone, i, eve::atan2(y + y, (eve::oneminus(sqrabs)))) * eve::half(eve::as(a0r));
+
+        r = eve::if_else(ltzra0, -r, r);
+        i = eve::if_else(eve::is_infinite(y), eve::pio_2(eve::as(a0r)) * eve::sign(y), i);
+        i = eve::if_else(ltzia0, -i, i);
+        r = eve::if_else(realinf, eve::zero(eve::as(a0r)), r);
+        i = eve::if_else(realinf, -eve::sign(a0r) * eve::pio_2(eve::as(a0r)), i);
+        r = eve::if_else(special, sr, r);
+        i = eve::if_else(special, eve::zero, i);
+        auto res = complex(r, i);
+        res = if_else(is_infinite(a0i), complex(eve::zero(as(a0r)), eve::pio_2(as(a0r)) * sign(a0i)), res);
+        return if_else(is_real(a0), complex(r), res);
       }
-      auto test0 = (inf == x) && (inf == y);
-      if (eve::any(test0))
+      else
       {
-        // inf x, inf y
-        r = eve::if_else(test0, eve::zero, r);
-        i = eve::if_else(test0, eve::pi(eve::as(a0r)), r);
+        using e_t = eve::element_type_t<as_real<Z>>;
+        auto pr = eve::is_positive(real(a0));
+        auto a = eve::if_else(pr, a0, -a0);
+        auto pi = eve::is_positive(imag(a));
+        a = eve::if_else(pi, a, conj(a)); // here real and imaginary parts of a are positive
+        auto [ra, ia] = a;
+        auto i2 = eve::sqr(ia);
+        auto x = eve::oneminus(i2 + eve::sqr(ra));
+        auto num = eve::inc(ra);
+        ;
+        auto den = eve::oneminus(ra);
+        num = i2 + eve::sqr(num);
+        den = i2 + eve::sqr(den);
+        auto res = complex((eve::log(num) - eve::log(den)) / 4, eve::atan2(2 * ia, x) / 2);
+        if constexpr (!O::contains(raw))
+        {
+          if (eve::any(is_not_finite(a)))
+          {
+            auto inan = muli(eve::nan(as(ra)));
+            auto ipio_2 = muli(eve::pio_2(as(ra)));
+            auto r1 = if_else(eve::is_pinf(ia), ipio_2, fnan(as(a)));
+            auto r2 = if_else(is_nan(ia), inan, ipio_2);
+            res = if_else(eve::is_nan(ra), r1, res);
+            res = if_else(eve::is_pinf(ra), r2, res);
+            res = if_else(eve::is_nan(ia) && eve::is_finite(ra),
+                          eve::if_else(eve::is_eqz(ra), complex(eve::zero(as(ra)), nan(as(ra))), fnan(as(a))), res);
+
+            res = eve::if_else(eve::is_pinf(ia) && eve::is_finite(ra), ipio_2, res);
+          }
+        }
+        res = if_else(pr, res, -res);
+        res = if_else(pi, res, conj(res));
+        return res;
       }
-      auto test = kyosu::is_nan(a0);
-
-      if (eve::any(test))
-      {
-        // nan x, inf y
-        r = eve::if_else(eve::is_nan(x) && (y == inf), eve::zero, r);
-        i = eve::if_else(eve::is_nan(x) && (y == inf), eve::pi(eve::as(a0r)), r);
-
-        r = eve::if_else(is_nan(y) && (x == inf), eve::zero, r);
-        i = eve::if_else(is_nan(y) && (x == inf), y, i);
-
-        r = eve::if_else(is_nan(y) && eve::is_eqz(x), eve::zero, r);
-        i = eve::if_else(is_nan(y) && is_eqz(x), eve::allbits, i);
-      }
-      // compute for safe zone::one
-      //  the real part is given by:
-      //
-      //  eve::real(atanh(z)) == eve::log((1 + x^2 + y^2 + 2x) / (1 + x^2 + y^2 - 2x))
-      //
-      //  however, when x is either large (x > 1/e) or very small
-      //  (x < e) then this effectively simplifies
-      //  to log(1), leading to wildly inaccurate results.
-      //  by dividing the above (top and bottom) by (1 + x^2 + y^2) we get:
-      //
-      //  eve::real(atanh(z)) == log((1 + (2x / (1 + x^2 + y^2))) / (1 - (-2x / (1 + x^2 + y^2))))
-      //
-      //  which is much more sensitive to the value of x, when x is not near 1
-      //  (remember we can compute log(1+x) for small x very accurately).
-      //
-      //  the cross-over from eve::one method to the other has to be determined
-      //  experimentally, the value used below appears correct to within a
-      //  factor of 2 (and there are larger errors from other parts
-      //  of the input domain anyway).
-      //
-      rtype alpha = x * two / (eve::inc(sqrabs));
-      rtype sqrxm1 = eve::sqr(eve::dec(x));
-      rtype tmp_r = eve::if_else((alpha < alpha_crossover), eve::log1p(alpha) - eve::log1p(-alpha),
-                                 eve::log1p(x + x + sqrabs) - eve::log(sqrxm1 + yy)) *
-                    rtype(0.25);
-      r = eve::if_else(not_in_safe_zone, r, tmp_r);
-
-      // compute the imag part
-      i = eve::if_else(not_in_safe_zone, i, eve::atan2(y + y, (eve::oneminus(sqrabs)))) * eve::half(eve::as(a0r));
-
-      r = eve::if_else(ltzra0, -r, r);
-      i = eve::if_else(eve::is_infinite(y), eve::pio_2(eve::as(a0r)) * eve::sign(y), i);
-      i = eve::if_else(ltzia0, -i, i);
-      r = eve::if_else(realinf, eve::zero(eve::as(a0r)), r);
-      i = eve::if_else(realinf, -eve::sign(a0r) * eve::pio_2(eve::as(a0r)), i);
-      r = eve::if_else(special, sr, r);
-      i = eve::if_else(special, eve::zero, i);
-      return complex(r, i);
     }
     else { return cayley_extend(atanh, a0); }
   }

@@ -22,7 +22,11 @@ TTS_CASE_TPL("Benchmark complex atanh", float, double)
     kyosu::bench::benchmark _("complex<" + tts::as_text(tts::typename_<T>) + "> atanh");
     TTS_RUN_BENCHMARK_TPL(_, std::complex<T>, "std", [](auto a) { return std::atanh(a); }, rnd_cmplx);
     TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar ", kyosu::atanh, rnd_kyosu);
+    TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar raw", kyosu::atanh[eve::raw], rnd_kyosu);
+    TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar pedantic", kyosu::atanh[eve::pedantic], rnd_kyosu);
     TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide", kyosu::atanh, rnd_kyosu);
+    TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide raw", kyosu::atanh[eve::raw], rnd_kyosu);
+    TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide pedantic", kyosu::atanh[eve::pedantic], rnd_kyosu);
   }
 
   TTS_PASS("Benchmarks - SUCCESS");

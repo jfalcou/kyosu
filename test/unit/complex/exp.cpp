@@ -60,14 +60,14 @@ TTS_CASE_TPL("Check corner cases of exp", kyosu::scalar_real_types)
     c_t(one, nan), // 4
     c_t(inf, zer), // 5
     c_t(inf, one), // 6
-    c_t(inf, inf), // 7
-    c_t(inf, nan), // 8
-    c_t(nan, zer), // 9
+    c_t(inf, inf), // 7*
+    c_t(inf, nan), // 8*
+    c_t(nan, zer), // 9*
     c_t(nan, one), // 10
     c_t(nan, nan), // 11
   };
 
-  std::array<c_t, N> results = {
+  std::array<c_t, N> resultsp = {
     c_t(one, zer),                           // 0
     c_t(nan, nan),                           // 1
     c_t(nan, nan),                           // 2
@@ -75,9 +75,9 @@ TTS_CASE_TPL("Check corner cases of exp", kyosu::scalar_real_types)
     c_t(nan, nan),                           // 4
     c_t(inf, zer),                           // 5
     inf * c_t(eve::cos(one), eve::sin(one)), // 6
-    c_t(inf, nan),                           // 7
-    c_t(inf, nan),                           // 8
-    c_t(nan, zer),                           // 9
+    c_t(inf, nan),                           // 7*
+    c_t(inf, nan),                           // 8*
+    c_t(nan, zer),                           // 9*
     c_t(nan, nan),                           // 10
     c_t(nan, nan)                            // 11
   };
@@ -85,9 +85,30 @@ TTS_CASE_TPL("Check corner cases of exp", kyosu::scalar_real_types)
   using kyosu::exp;
   for (int i = 0; i < N; ++i)
   {
+    TTS_IEEE_EQUAL(exp[eve::pedantic](inputs[i]), resultsp[i]);
+    TTS_IEEE_EQUAL(exp[eve::pedantic](conj(inputs[i])), conj(exp[eve::pedantic](inputs[i])));
+  }
+
+  std::array<c_t, N> results = {
+    c_t(one, zer),                           // 0
+    c_t(nan, nan),                           // 1
+    c_t(nan, nan),                           // 2
+    c_t(nan, nan),                           // 3
+    c_t(nan, nan),                           // 4
+    c_t(inf, nan),                           // 5
+    inf * c_t(eve::cos(one), eve::sin(one)), // 6
+    c_t(nan, nan),                           // 7
+    c_t(nan, nan),                           // 8
+    c_t(nan, nan),                           // 9
+    c_t(nan, nan),                           // 10
+    c_t(nan, nan)                            // 11
+  };
+  for (int i = 0; i < N; ++i)
+  {
     TTS_IEEE_EQUAL(exp(inputs[i]), results[i]);
     TTS_IEEE_EQUAL(exp(conj(inputs[i])), conj(exp(inputs[i])));
   }
+
   auto e = eve::euler(as<T>());
   TTS_RELATIVE_EQUAL(kyosu::exp(c_t{one, zer}), (c_t{e, zer}), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::exp(c_t{zer, zer}), (c_t{one, zer}), tts::prec<T>());
