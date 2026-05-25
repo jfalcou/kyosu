@@ -7,6 +7,7 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
+#include <kyosu/types/complex.hpp>
 
 namespace kyosu
 {
