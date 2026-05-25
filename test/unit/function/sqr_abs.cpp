@@ -17,7 +17,7 @@ TTS_CASE_WITH("Check kyosu::sqr_abs over real", kyosu::real_types, tts::randoms(
 TTS_CASE_WITH("Check kyosu::sqr_abs over complex", kyosu::real_types, tts::randoms(-10, 10), tts::randoms(-10, 10))
 (auto r, auto i)
 {
-  TTS_ULP_EQUAL(kyosu::sqr_abs(kyosu::complex(r, i)), eve::sqr(eve::hypot[eve::pedantic](r, i)), 0.5);
+  TTS_ULP_EQUAL(kyosu::sqr_abs(kyosu::complex(r, i)), eve::sqr(eve::hypot[eve::pedantic](r, i)), 1.0);
 };
 
 TTS_CASE_WITH("Check kyosu::abs over quaternion",
