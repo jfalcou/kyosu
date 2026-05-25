@@ -51,8 +51,9 @@ endif()
 ##======================================================================================================================
 ## Setup PCH
 ##======================================================================================================================
-copa_setup_pch( TARGET kyosu      INTERFACES  kyosu_test HEADERS include/kyosu/kyosu.hpp)
-copa_setup_pch( TARGET kyosu_doc  INTERFACES  kyosu_docs HEADERS include/kyosu/kyosu.hpp)
+copa_setup_pch( TARGET kyosu        INTERFACES  kyosu_test  HEADERS include/kyosu/kyosu.hpp)
+copa_setup_pch( TARGET kyosu_doc    INTERFACES  kyosu_docs  HEADERS include/kyosu/kyosu.hpp)
+copa_setup_pch( TARGET kyosu_bench  INTERFACES  kyosu_bench HEADERS include/kyosu/kyosu.hpp)
 
 ##======================================================================================================================
 ## Tests setup
