@@ -68,7 +68,7 @@ namespace kyosu::_
     else if constexpr (concepts::complex<Z>)
     {
       auto [zr, zi] = c;
-      return complex((zr - zi) * (zi + zr), 2 * zr * zi);
+      return Z((zr - zi) * (zi + zr), 2 * zr * zi);
     }
     else
     {
