@@ -11,10 +11,12 @@
 #include <kyosu/functions/is_nan.hpp>
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/is_not_finite.hpp>
-
+#include <kyosu/constants.hpp>
+#include <iostream>
 namespace kyosu
 {
-  template<typename Options> struct exp_t : eve::elementwise_callable<exp_t, Options, radpi_option, rad_option>
+  template<typename Options>
+  struct exp_t : eve::elementwise_callable<exp_t, Options, radpi_option, rad_option, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
@@ -41,7 +43,12 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
+  //!      //regular call
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr T exp(T z) noexcept;
+  //!
+  //!      // Semantic modifyiers
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr T exp[raw}(T z) noexcept;
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr T exp[radpi}(T z) noexcept;
   //!   }
   //!   @endcode
   //!
@@ -51,26 +58,27 @@ namespace kyosu
   //!
   //!   **Return value**
   //!
-  //!      - Returns the exponential of the argument, calling `eve::exp`.
+  //!     1. For complex inputs, returns the exponential following IEEE standards :
   //!
-  //!      - For complex inputs, returns the exponential following IEEE standards:
+  //!       1. for every z: `exp(conj(z)) == conj(exp(z))`
+  //!       2. If z is \f$\pm0\f$, the result is \f$1\f$
+  //!       3. If z is \f$x+i \infty\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+  //!       4. If z is \f$x+i \textrm{NaN}\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+  //!       5. If z is \f$+\infty+i 0\f$, the result is \f$+\infty\f$
+  //!       6. If z is \f$-\infty+i y\f$ (for any finite y), the result is \f$+0 e^{iy}\f$.
+  //!       7. If z is \f$+\infty+i y\f$ (for any finite nonzero y), the result is \f$+\infty e^{iy}\f$.
+  //!       8. If z is \f$-\infty+i \infty\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified)
+  //!       9. If z is \f$+\infty+i \pm\infty\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
+  //!       10. If z is \f$-\infty+i \textrm{NaN}\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified).
+  //!       11. If z is \f$\pm\infty+i \textrm{NaN}\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
+  //!       12. If z is \f$\textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$.
+  //!       13. If z is \f$\textrm{NaN}+i y\f$ (for any nonzero y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+  //!       14. If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
   //!
-  //!       * for every z: `exp(conj(z)) == conj(exp(z))`
-  //!       * If z is \f$\pm0\f$, the result is \f$1\f$
-  //!       * If z is \f$x+i \infty\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
-  //!       * If z is \f$x+i \textrm{NaN}\f$ (for any finite x), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
-  //!       * If z is \f$+\infty+i 0\f$, the result is \f$+\infty\f$
-  //!       * If z is \f$-\infty+i y\f$ (for any finite y), the result is \f$+0 e^{iy}\f$.
-  //!       * If z is \f$+\infty+i y\f$ (for any finite nonzero y), the result is \f$+\infty e^{iy}\f$.
-  //!       * If z is \f$-\infty+i \infty\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified)
-  //!       * If z is \f$+\infty+i \pm\infty\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
-  //!       * If z is \f$-\infty+i \textrm{NaN}\f$, the result is \f$\pm 0+i \pm 0\f$ (signs are unspecified).
-  //!       * If z is \f$\pm\infty+i \textrm{NaN}\f$, the result is \f$\pm \infty+i \textrm{NaN}\f$ (the sign of the real part is unspecified).
-  //!       * If z is \f$\textrm{NaN}\f$, the result is \f$\textrm{NaN}\f$.
-  //!       * If z is \f$\textrm{NaN}+i y\f$ (for any nonzero y), the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
-  //!       * If z is \f$\textrm{NaN}+i \textrm{NaN}\f$, the result is \f$\textrm{NaN}+i \textrm{NaN}\f$.
+  //!       For general cayley-dickson inputs, returns \f$e^{z_0}(\cos|\underline{z}|+\underline{z}\; \mathop{sinc}|\underline{z}|)\f$
   //!
-  //!     - For generate cayley-dickson inputs, returns \f$e^{z_0}(\cos|\underline{z}|+\underline{z}\; \mathop{sinc}|\underline{z}|)\f$
+  //!     2. with the raw options, no care is taken to satisfy the corners cases.
+  //!     3. computes \f$ e^{\pi z}\f$
   //!
   //!  @groupheader{Example}
   //!
@@ -87,20 +95,34 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto exp_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
+
     auto rexp = [](auto rz) {
-      if constexpr (O::contains(radpi))
-        return eve::if_else(is_nan(rz), eve::allbits, eve::exp(eve::pi(eve::as(real(rz))) * rz));
-      else return eve::if_else(is_nan(rz), eve::allbits, eve::exp(rz));
+      if constexpr (O::contains(radpi)) return eve::exp(eve::pi(eve::as(rz)) * (rz));
+      else return eve::exp(rz);
     };
     if constexpr (concepts::real<Z>) return rexp(z);
     else if constexpr (concepts::complex<Z>)
     {
+      auto negiz = eve::is_negative(imag(z));
+      z = if_else(negiz, conj(z), z);
       auto [rz, iz] = z;
+      auto corners = [rz, iz, z](Z rr) {
+        rr =
+          if_else(eve::is_pinf(iz),
+                  if_else(eve::is_pinf(rz), Z(rz, eve::nan(as(rz))), if_else(eve::is_minf(rz), zero(as(rr)), rr)), rr);
+        rr = if_else(eve::is_nan(iz), if_else(eve::is_minf(rz), zero, if_else(eve::is_pinf(rz), z, fnan(as(rr)))), rr);
+        return if_else(eve::is_eqz(iz), Z(real(rr)), rr);
+      };
+      auto r = eve::exp(rz);
       auto [s, c] = eve::sincos[o](iz);
-      auto rho = eve::if_else(is_nan(rz), eve::allbits, rexp(rz));
-      auto res =
-        eve::if_else(is_real(z) || rz == eve::minf(eve::as(rz)), Z(rho, eve::zero(eve::as(rho))), Z(rho * c, rho * s));
-      return if_else(rz == eve::inf(eve::as(rz)) && eve::is_not_finite(iz), Z{rz, eve::nan(eve::as(iz))}, res);
+      auto res = Z(r * c, r * s);
+      imag(res) = if_else(negiz, -imag(res), imag(res));
+      if constexpr (O::contains(raw)) return res;
+      else
+      {
+        if (eve::none(eve::is_not_finite(z))) return res;
+        else return corners(res);
+      }
     }
     else return _::cayley_extend(kyosu::exp[o], z);
   }

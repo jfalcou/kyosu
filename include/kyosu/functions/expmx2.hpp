@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct expmx2_t : eve::elementwise_callable<expmx2_t, Options>
+  template<typename Options> struct expmx2_t : eve::elementwise_callable<expmx2_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
@@ -63,9 +63,9 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto expmx2_(KYOSU_DELAY(), O const&, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto expmx2_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::expmx2(z);
-    else return kyosu::exp(-sqr(z));
+    else return kyosu::exp[o](-sqr(z));
   }
 }
