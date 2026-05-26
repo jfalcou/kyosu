@@ -113,7 +113,7 @@ namespace kyosu::_
         rr = if_else(eve::is_nan(iz), if_else(eve::is_minf(rz), zero, if_else(eve::is_pinf(rz), z, fnan(as(rr)))), rr);
         return if_else(eve::is_eqz(iz), Z(real(rr)), rr);
       };
-      auto r = eve::exp(rz);
+      auto r = rexp(rz);
       auto [s, c] = eve::sincos[o](iz);
       auto res = Z(r * c, r * s);
       imag(res) = if_else(negiz, -imag(res), imag(res));
