@@ -47,44 +47,66 @@ TTS_CASE_TPL("Check corner cases of exp", kyosu::scalar_real_types)
 {
   using c_t = kyosu::complex_t<T>;
   using eve::as;
-  int const N = 12;
+  int const N = 13;
   auto zer = eve::zero(as<T>());
   auto inf = eve::inf(as<T>());
+  auto minf = eve::minf(as<T>());
   auto nan = eve::nan(as<T>());
   auto one = eve::one(as<T>());
+  auto ei = kyosu::exp_i(one);
   std::array<c_t, N> inputs = {
-    c_t(zer, zer), // 0
-    c_t(zer, inf), // 1
-    c_t(zer, nan), // 2
-    c_t(one, inf), // 3
-    c_t(one, nan), // 4
-    c_t(inf, zer), // 5
-    c_t(inf, one), // 6
-    c_t(inf, inf), // 7
-    c_t(inf, nan), // 8
-    c_t(nan, zer), // 9
-    c_t(nan, one), // 10
-    c_t(nan, nan), // 11
+    c_t(zer, zer),  // 0*
+    c_t(one, inf),  // 1*
+    c_t(one, nan),  // 2*
+    c_t(inf, zer),  // 3*
+    c_t(minf, one), // 4*
+    c_t(inf, one),  // 5*
+    c_t(minf, inf), // 6**
+    c_t(inf, inf),  // 7**
+    c_t(minf, nan), // 8*
+    c_t(inf, nan),  // 9*
+    c_t(nan, zer),  // 10*
+    c_t(nan, one),  // 11*
+    c_t(nan, nan)   // 12*
   };
 
   std::array<c_t, N> results = {
-    c_t(one, zer),                           // 0
-    c_t(nan, nan),                           // 1
-    c_t(nan, nan),                           // 2
-    c_t(nan, nan),                           // 3
-    c_t(nan, nan),                           // 4
-    c_t(inf, zer),                           // 5
-    inf * c_t(eve::cos(one), eve::sin(one)), // 6
-    c_t(inf, nan),                           // 7
-    c_t(inf, nan),                           // 8
-    c_t(nan, zer),                           // 9
-    c_t(nan, nan),                           // 10
-    c_t(nan, nan)                            // 11
+    c_t(one, zer), // 0*
+    c_t(nan, nan), // 1*
+    c_t(nan, nan), // 2*
+    c_t(inf, zer), // 3*
+    zer * ei,      // 4*
+    inf * ei,      // 5*
+    c_t(zer, zer), // 6*
+    c_t(inf, nan), // 7*
+    c_t(zer, zer), // 8*
+    c_t(inf, nan), // 9*
+    c_t(nan, zer), // 10*
+    c_t(nan, nan), // 11*
+    c_t(nan, nan)  // 12*
   };
+
+  std::array<c_t, N> raw_results = {
+    c_t(one, zer), // 0*
+    c_t(nan, nan), // 1*
+    c_t(nan, nan), // 2*
+    c_t(inf, nan), // 3*
+    zer * ei,      // 4*
+    inf * ei,      // 5*
+    c_t(nan, nan), // 6*
+    c_t(nan, nan), // 7*
+    c_t(nan, nan), // 8*
+    c_t(nan, nan), // 9*
+    c_t(nan, nan), // 10*
+    c_t(nan, nan), // 11*
+    c_t(nan, nan)  // 12*
+  };
+
   using kyosu::conj;
   using kyosu::exp;
   for (int i = 0; i < N; ++i)
   {
+    TTS_IEEE_EQUAL(exp[eve::raw](inputs[i]), raw_results[i]);
     TTS_IEEE_EQUAL(exp(inputs[i]), results[i]);
     TTS_IEEE_EQUAL(exp(conj(inputs[i])), conj(exp(inputs[i])));
   }
