@@ -14,8 +14,7 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct to_angle_axis_t : eve::elementwise_callable<to_angle_axis_t, Options, rad_option, radpi_option>
+  template<typename Options> struct to_angle_axis_t : eve::elementwise_callable<to_angle_axis_t, Options, radpi_option>
   {
     template<typename Q>
     requires((concepts::cayley_dickson<Q> && dimension_v<Q> <= 4) || concepts::real<Q>)

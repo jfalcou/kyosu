@@ -7,13 +7,15 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <kyosu/functions/to_complex.hpp>
+#include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/parts.hpp>
 #include <kyosu/functions/pure.hpp>
+#include <kyosu/functions/sign.hpp>
+#include <kyosu/functions/arg.hpp>
 
 namespace kyosu
 {
-  template<typename Options>
-  struct to_polar_t : eve::elementwise_callable<to_polar_t, Options, radpi_option, rad_option>
+  template<typename Options> struct to_polar_t : eve::elementwise_callable<to_polar_t, Options, radpi_option>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr kumi::tuple<as_real_type_t<Z>, as_real_type_t<Z>, Z> operator()(

@@ -13,8 +13,7 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct to_spherical_t : eve::elementwise_callable<to_spherical_t, Options, rad_option, radpi_option>
+  template<typename Options> struct to_spherical_t : eve::elementwise_callable<to_spherical_t, Options, radpi_option>
   {
     template<concepts::real V> KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
     {

@@ -11,7 +11,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct arg_t : eve::elementwise_callable<arg_t, Options, rad_option, radpi_option>
+  template<typename Options> struct arg_t : eve::elementwise_callable<arg_t, Options, radpi_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z v) const noexcept

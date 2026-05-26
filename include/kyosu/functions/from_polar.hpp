@@ -11,8 +11,7 @@
 
 namespace kyosu
 {
-  template<typename Options>
-  struct from_polar_t : eve::strict_elementwise_callable<from_polar_t, Options, radpi_option, rad_option>
+  template<typename Options> struct from_polar_t : eve::strict_elementwise_callable<from_polar_t, Options, radpi_option>
   {
     template<concepts::real Z0, concepts::real Z1, concepts::cayley_dickson Z2>
     KYOSU_FORCEINLINE constexpr kyosu::as_cayley_dickson_t<Z0, Z1, Z2> operator()(Z0 r, Z1 t, Z2 iz) const noexcept
