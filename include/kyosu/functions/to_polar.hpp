@@ -64,8 +64,13 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      template<kyosu::concepts::cayley_dickson T> constexpr T to_polar(T z) noexcept;
-  //!      template<eve::floating_ordered_value T>     constexpr T to_polar(T z) noexcept;
+  //!      //regular call
+  //!      template<kyosu::concepts::cayley_dickson T>                             constexpr T to_polar(T z)      noexcept; //1
+  //!      template<eve::floating_ordered_value T>                                 constexpr T to_polar(T z)      noexcept; //2
+  //!      template<eve::floating_ordered_value T, eve::floating_ordered_value U)  constexpr T to_polar(T t, U u) noexcept; //3
+  //!
+  //!      // Semantic modifyiers
+  //!      template<typenam T>                        constexpr T to_polar[radpi](/*any previous overload*/)      noexcept; //4
   //!   }
   //!   @endcode
   //!
@@ -75,9 +80,11 @@ namespace kyosu
   //!
   //!   **Return value**
   //!
-  //!     Returns  The kumi tuple `{rho, theta}`. for real and complex and `{rho, theta, I}` for other cayley-dickson
-  //!     where \f$\textrm{I}\f$ is pure and \f$\textrm{I}^2 = -1 \f$. If the `radpi` option is used the `theta` is given in
-  //!     \f$\pi\f$ multiples else in radians.
+  //!     1. Returns  The kumi tuple `{rho, theta}`. for real and complex and `{rho, theta, I}` for other cayley-dickson
+  //!        where \f$\textrm{I}\f$ is pure and \f$\textrm{I}^2 = -1 \f$.
+  //!     2. same as to_polar(complex(z));
+  //!     3. same as to_polar(complex(t, u));
+  //!     4. If the `radpi` option is used the `theta` is given in \f$\pi\f$ multiples (rather than radians).
   //!
   //!  @groupheader{Example}
   //!
