@@ -12,7 +12,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct log_t : eve::strict_elementwise_callable<log_t, Options, real_only_option>
+  template<typename Options>
+  struct log_t : eve::strict_elementwise_callable<log_t, Options, radpi_option, real_only_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
@@ -109,10 +110,10 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto log_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     if constexpr (O::contains(real_only) && concepts::real<Z>) return eve::log[o.drop(real_only)](z);
-    else if constexpr (concepts::real<Z>) return kyosu::log[o](complex(z));
+    else if constexpr (concepts::real<Z>) return kyosu::log[o.drop(radpi)](complex(z));
     else if constexpr (kyosu::concepts::complex<Z>)
     {
-      auto [rho, theta] = to_polar(z);
+      auto [rho, theta] = to_polar[o](z);
       return Z(eve::log(rho), theta);
     }
     else { return _::cayley_extend(kyosu::log, z); }

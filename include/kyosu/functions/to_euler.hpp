@@ -15,7 +15,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct to_euler_t : eve::callable<to_euler_t, Options, extrinsic_option, intrinsic_option, rad_option, radpi_option>
+  struct to_euler_t : eve::callable<to_euler_t, Options, extrinsic_option, intrinsic_option, radpi_option>
   {
     template<typename Q, int II, int JJ, int KK>
     requires((concepts::cayley_dickson<Q> && dimension_v<Q> <= 4) || concepts::real<Q>)

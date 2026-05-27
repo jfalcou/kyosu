@@ -13,7 +13,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct cos_t : eve::elementwise_callable<cos_t, Options, rad_option, radpi_option>
+  template<typename Options> struct cos_t : eve::elementwise_callable<cos_t, Options, radpi_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {

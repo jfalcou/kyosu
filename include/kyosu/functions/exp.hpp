@@ -16,7 +16,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct exp_t : eve::elementwise_callable<exp_t, Options, radpi_option, rad_option, raw_option, pedantic_option>
+  struct exp_t : eve::elementwise_callable<exp_t, Options, radpi_option, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {
@@ -78,13 +78,14 @@ namespace kyosu
   //!       For general cayley-dickson inputs, returns \f$e^{z_0}(\cos|\underline{z}|+\underline{z}\; \mathop{sinc}|\underline{z}|)\f$
   //!
   //!     2. with the raw options, no care is taken to satisfy the corners cases.
-  //!     3. computes \f$ e^{\pi z}\f$
+  //!     3. computes \f$ e^{\pi z}\f$. `exppi` alias can be used.
   //!
   //!  @groupheader{Example}
   //!
   //!  @godbolt{doc/exp.cpp}
   //======================================================================================================================
   inline constexpr auto exp = eve::functor<exp_t>;
+  inline constexpr auto exppi = exp[radpi];
   //======================================================================================================================
   //! @}
   //======================================================================================================================

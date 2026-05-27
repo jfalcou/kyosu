@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct to_cylindrospherical_t : eve::elementwise_callable<to_cylindrospherical_t, Options, rad_option, radpi_option>
+  struct to_cylindrospherical_t : eve::elementwise_callable<to_cylindrospherical_t, Options, radpi_option>
   {
     template<concepts::real V> KYOSU_FORCEINLINE constexpr kumi::tuple<V, V, V, V> operator()(V const& v) const noexcept
     {
