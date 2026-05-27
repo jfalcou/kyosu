@@ -36,6 +36,14 @@ namespace kyosu
       return (*this)(complex(v));
     }
 
+    template<concepts::real V, concepts::real W>
+    KYOSU_FORCEINLINE constexpr kumi::tuple<eve::common_value_t<V, W>, eve::common_value_t<V, W>> operator()(
+      V v, W w) const noexcept
+    {
+      using t_t = eve::common_value_t<V, W>;
+      return (*this)(complex(t_t(v), t_t(w)));
+    }
+
     KYOSU_CALLABLE_OBJECT(to_polar_t, to_polar_);
   };
 
