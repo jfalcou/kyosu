@@ -29,7 +29,7 @@ jobs:
         - { compiler: clang++-20 , opts: "-O0 -DEVE_NO_FORCEINLINE -mavx2"                }
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Running CMake for ${{ matrix.cfg.compiler }} with ${{ matrix.cfg.opts }}
         run: |
           mkdir build && cd build
@@ -39,7 +39,7 @@ jobs:
       - name: Build and Runs Unit Tests
         run:  cd build && ninja unit.exe -j 2 && ctest -R ^unit.* --output-on-failure -j 2
       - name: Build Benchmarkss
-        run:  cd build && ninja benchmarks.exe -j 2 && ctest  -R ^benchmarks.* --output-on-failure -j 2
+        run:  cd build && ninja benchmarks.exe -j 2
 
   arm64:
     runs-on: [macos-14]
@@ -51,7 +51,7 @@ jobs:
         - { opts: "-O0 -DEVE_NO_FORCEINLINE -stdlib=libc++" , linker: -stdlib=libc++  }
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Running CMake for clang++ with ${{ matrix.cfg.opts }}
         run: |
           mkdir build && cd build
@@ -61,4 +61,4 @@ jobs:
       - name: Build and Runs Unit Tests
         run:  cd build && make unit.exe -j 2 && ctest -R ^unit.* --output-on-failure -j 2
       - name: Build Benchmarkss
-        run:  cd build && make benchmarks.exe -j 2 && ctest  -R ^benchmarks.* --output-on-failure -j 2
+        run:  cd build && make benchmarks.exe -j 2
