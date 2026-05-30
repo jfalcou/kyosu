@@ -120,6 +120,16 @@ namespace eve
   }
 }
 
+namespace eve
+{
+  template<simd_value V> inline tts::text to_text(V const& v)
+  {
+    std::ostringstream ss;
+    ss << v;
+    return tts::text(ss.str().c_str());
+  }
+}
+
 namespace kyosu
 {
   template<kyosu::concepts::cayley_dickson T> inline tts::text to_text(T const& z)
