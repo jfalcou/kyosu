@@ -95,7 +95,7 @@ namespace kyosu
       constexpr auto flat = O::contains(radpi) ? e_t(1) : eve::pi(eve::as<e_t>());
       ;
       auto a = eve::if_else(eve::is_positive(rho), theta, flat + theta);
-      auto [s, c] = eve::sincos[o](a);
+      auto [s, c] = eve::sincos(a);
       return complex(r * c, r * s);
     }
 

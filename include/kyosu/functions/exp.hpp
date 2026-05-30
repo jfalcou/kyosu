@@ -115,7 +115,7 @@ namespace kyosu::_
         return if_else(eve::is_eqz(iz), Z(real(rr)), rr);
       };
       auto r = rexp(rz);
-      auto [s, c] = eve::sincos[o](iz);
+      auto [s, c] = eve::sincos[o.drop(raw)](iz);
       auto res = Z(r * c, r * s);
       imag(res) = if_else(negiz, -imag(res), imag(res));
       if constexpr (O::contains(raw)) return res;

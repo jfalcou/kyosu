@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct nthroot_t : eve::strict_elementwise_callable<nthroot_t, Options, kyosu::real_only_option>
+  struct nthroot_t : eve::strict_elementwise_callable<nthroot_t, Options, kyosu::real_only_option, pedantic_option>
   {
     // primary root
     template<concepts::cayley_dickson_like Z, eve::value N>
@@ -101,8 +101,8 @@ namespace kyosu::_
     {
       auto [rho, theta] = kyosu::to_polarpi(zz);
       auto rnn = eve::rec(nn);
-      auto rho_n = eve::pow_abs(rho, rnn);
-      return rho_n * exp_ipi((theta + 2 * kk) * rnn);
+      auto rho_n = eve::pow_abs[o](rho, rnn);
+      return rho_n * exp_ipi[o]((theta + 2 * kk) * rnn);
     }
     else return cayley_extend2(nthroot, zz, nn, kk);
   }
@@ -113,7 +113,7 @@ namespace kyosu::_
   {
     if constexpr (O::contains(real_only) && concepts::real<Z>) return eve::nthroot[o.drop(real_only)](z, n);
     else if constexpr (concepts::real<Z>) return nthroot(complex(z), n);
-    else return nthroot(z, n, zero(eve::as(n)));
+    else return nthroot[o](z, n, zero(eve::as(n)));
   }
 
   template<typename Z, eve::integral_value N, eve::callable_options O>
@@ -121,7 +121,7 @@ namespace kyosu::_
   {
     using e_t = eve::element_type_t<kyosu::as_real_type_t<Z>>;
     auto nn = eve::convert(n, eve::as<e_t>());
-    return nthroot(z, nn);
+    return nthroot[o](z, nn);
   }
 
   template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
