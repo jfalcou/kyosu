@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct pow_abs_t : eve::callable<pow_abs_t, Options>
+  template<typename Options> struct pow_abs_t : eve::callable<pow_abs_t, Options, pedantic_option>
   {
 
     template<typename Z0, typename Z1> struct result
@@ -101,7 +101,7 @@ namespace kyosu::_
 {
 
   template<typename Z0, typename Z1, eve::callable_options O>
-  constexpr auto pow_abs_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
+  constexpr auto pow_abs_(KYOSU_DELAY(), O const& o, Z0 z0, Z1 z1) noexcept
   {
     if constexpr (eve::integral_simd_value<Z1>)
     {
@@ -130,6 +130,6 @@ namespace kyosu::_
     }
     else if constexpr (eve::integral_scalar_value<Z1>) { return eve::pow(kyosu::abs(z0), z1); }
     else if constexpr (concepts::real<Z1>) return eve::pow(kyosu::abs(z0), z1);
-    else return kyosu::pow(kyosu::abs(z0), z1);
+    else return kyosu::pow[o](kyosu::abs[o](z0), z1);
   }
 }

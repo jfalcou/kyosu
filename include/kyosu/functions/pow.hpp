@@ -20,7 +20,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct pow_t : eve::callable<pow_t, Options, real_only_option>
+  template<typename Options> struct pow_t : eve::callable<pow_t, Options, real_only_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1) const noexcept
@@ -132,7 +132,7 @@ namespace kyosu::_
 {
 
   template<typename C0, typename C1, eve::callable_options O>
-  constexpr auto pow_(KYOSU_DELAY(), O const&, C0 c0, C1 c1) noexcept
+  constexpr auto pow_(KYOSU_DELAY(), O const& o, C0 c0, C1 c1) noexcept
   requires(eve::integral_scalar_value<C1>)
   {
     if constexpr (O::contains(real_only)) { return kyosu::inject(eve::pow(c0, c1)); }
@@ -158,26 +158,26 @@ namespace kyosu::_
           }
           return complex(result);
         }
-        else { return cayley_extend(pow, c0, c1); }
+        else { return cayley_extend(pow[o], c0, c1); }
       }
       else
       {
         using ic1_t = eve::as_integer_t<C1, unsigned>;
-        C0 tmp = kyosu::pow(c0, eve::bit_cast(eve::abs(c1), eve::as<ic1_t>()));
+        C0 tmp = kyosu::pow[o](c0, eve::bit_cast(eve::abs(c1), eve::as<ic1_t>()));
         return complex(kyosu::if_else(eve::is_ltz(c1), kyosu::rec(tmp), tmp));
       }
     }
   }
 
   template<typename C0, typename C1, eve::callable_options O>
-  constexpr auto pow_(KYOSU_DELAY(), O const&, C0 c0, C1 c1) noexcept
+  constexpr auto pow_(KYOSU_DELAY(), O const& o, C0 c0, C1 c1) noexcept
   requires(!eve::integral_value<C1>)
   {
     if constexpr (O::contains(real_only)) { return kyosu::inject(eve::pow(c0, c1)); }
     else
     {
       if constexpr (concepts::real<C0> && concepts::real<C1>)
-        return kyosu::if_else(eve::is_gez(c0), complex(eve::pow(c0, c1)), kyosu::exp_ipi(c1) * eve::pow(-c0, c1));
+        return kyosu::if_else(eve::is_gez(c0), complex(eve::pow(c0, c1)), kyosu::exp_ipi[o](c1) * eve::pow[o](-c0, c1));
       else
       {
         using r_t = kyosu::as_cayley_dickson_like_t<C0, C1>;
@@ -192,7 +192,7 @@ namespace kyosu::_
             auto lgac0 = eve::log_abs(c0);
             auto ang = eve::if_else(kyosu::is_real(c1), eve::zero, ic1 * lgac0);
             auto mod = eve::pow(c0, rc1);
-            auto r1 = kyosu::from_polar(mod, ang);
+            auto r1 = kyosu::from_polar[o](mod, ang);
             auto isposc0 = eve::is_positive(c0);
             if (eve::all(isposc0)) { r = r1; }
             else

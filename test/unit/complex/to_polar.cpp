@@ -7,6 +7,7 @@
 //======================================================================================================================
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
+#include <complex>
 
 TTS_CASE_TPL("Check to_complex converter from constants", kyosu::scalar_real_types)
 <typename T>(tts::type<T>)
