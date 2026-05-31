@@ -135,6 +135,18 @@ With the `right` option the multiplication is done to the right.
 Functions
 ---------
 
+**KYPSU** functions ar all object functions following the **EBE** scheme. All of them accept at least the two (incompatible)
+options `raw` and `pedantic`.
+
+  - the `raw` option ensures that the speediest computatipn implemented will be used, perhaps at the price of accuracy or corner
+    cases values conformity to the standard
+
+  - The `pedantic` option ensures that the most accurate and standard conforming computatipn implemented will be used.
+    In particular conforming to IEEE754 corner cases if any defined.
+
+Often these two options do nothing more than the regular (no options) call and their effects are explained in the individual
+documentations only if it is not the case.
+
 Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::concepts::cayley_dickson_like) types.
 The exceptions mainly being rotation related quaternion usage.
 
