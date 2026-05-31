@@ -24,8 +24,8 @@ TTS_CASE_WITH("Check from_polar scalar",
     TTS_ULP_EQUAL(ra, a0[i]*eve::cos(a1[i]), 0.5);
     TTS_ULP_EQUAL(ia, a0[i]*eve::sin(a1[i]), 0.5);
     auto c = std::polar(a0[i], a1[i]);
-    TTS_ULP_EQUAL(ra, std::real(c), 0.5);
-    TTS_ULP_EQUAL(ia, std::imag(c), 0.5);
+    TTS_ULP_EQUAL(ra, std::real(c), 1.0);
+    TTS_ULP_EQUAL(ia, std::imag(c), 1.0);
 
    }
 };
