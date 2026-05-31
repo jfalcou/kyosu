@@ -16,15 +16,15 @@ TTS_CASE_WITH("Check behavior of to_polarpi on wide",
 )
 <typename T>(T const& a0, T const& a1){
 
-  {std::cout << "icitte" << std::endl;
 auto c = kyosu::complex(a0, a1);
 auto [r1, t1] = kyosu::to_polarpi(c);
 auto c1 = kyosu::from_polarpi(r1, t1);
 TTS_RELATIVE_EQUAL(c, c1, tts::prec<T>());
 
-auto [ra, ta] = kyosu::to_polarpi(kyosu::complex(1, 1));
-auto r = kyosu::abs(a);
-auto t = arg[eve::pi](a);
+auto a = kyosu::complex(T(1), T(1));
+auto [ra, ta] = kyosu::to_polarpi(a);
+auto r =  kyosu::abs(a);
+auto t =  kyosu::arg[eve::radpi](a);
 TTS_ULP_EQUAL(r, ra, 0.5);
 TTS_ULP_EQUAL(t, ta, 0.5);
 }
