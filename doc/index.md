@@ -8,7 +8,7 @@ higher dimensionnality cayley_dickson algebras.
 
 \note **KYOSU implements SIMD complex numbers**:If you are not interested in quite exotics
  features as quaternion or octonion, but only in real and complex **KYOSU**
-is still a library that provides a set of ~200é functions that can be used with real and complex in scalar or simd form
+is still a library that provides a set of ~200 functions that can be used with real and complex in scalar or simd form
 with no abstraction penalty. The list of them can be seen below.
 
 The Cayley-Dickson construction scheme defines a new algebra as a Cartesian product of an algebra with itself,
