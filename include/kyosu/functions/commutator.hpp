@@ -11,7 +11,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct commutator_t : eve::strict_elementwise_callable<commutator_t, Options, pedantic_option>
+  struct commutator_t : eve::strict_elementwise_callable<commutator_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     requires(eve::same_lanes_or_scalar<Z0, Z1>)

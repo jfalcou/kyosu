@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct rotate_vec_t : eve::elementwise_callable<rotate_vec_t, Options, assume_unitary_option>
+  struct rotate_vec_t : eve::elementwise_callable<rotate_vec_t, Options, raw_option, pedantic_option, assume_unitary_option>
   {
 
     template<concepts::cayley_dickson Z, concepts::real T, std::size_t S>

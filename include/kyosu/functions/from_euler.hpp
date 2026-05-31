@@ -14,7 +14,7 @@ namespace kyosu
 {
   template<typename Options>
   struct from_euler_t
-    : eve::elementwise_callable<from_euler_t, Options, extrinsic_option, intrinsic_option, radpi_option>
+    : eve::elementwise_callable<from_euler_t, Options, raw_option, pedantic_option, extrinsic_option, intrinsic_option, radpi_option>
   {
     template<concepts::real U, concepts::real V, concepts::real W, int I, int J, int K>
     KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<U, V, W>> operator()(

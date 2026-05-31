@@ -16,7 +16,7 @@
 namespace kyosu
 {
 
-  template<typename Options> struct ellint_rj_t : eve::elementwise_callable<ellint_rj_t, Options, eve::threshold_option>
+  template<typename Options> struct ellint_rj_t : eve::elementwise_callable<ellint_rj_t, Options, raw_option, pedantic_option, eve::threshold_option>
   {
     template<eve::floating_value T0, eve::floating_value T1, eve::floating_value T2, eve::floating_value T3>
     constexpr KYOSU_FORCEINLINE as_cayley_dickson_like_t<T0, T1, T2, T3> operator()(T0 a,

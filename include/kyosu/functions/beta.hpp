@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct beta_t : eve::strict_elementwise_callable<beta_t, Options, real_only_option>
+  template<typename Options> struct beta_t : eve::strict_elementwise_callable<beta_t, Options, raw_option, pedantic_option, real_only_option>
   {
     template<typename T0, typename T1> struct result;
     template<concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1>

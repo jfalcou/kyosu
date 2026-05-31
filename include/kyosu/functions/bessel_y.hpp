@@ -12,7 +12,7 @@
 namespace kyosu
 {
 
-  template<typename Options> struct bessel_y_t : eve::strict_elementwise_callable<bessel_y_t, Options, eve::spherical_option, eve::cylindrical_option>
+  template<typename Options> struct bessel_y_t : eve::strict_elementwise_callable<bessel_y_t, Options, raw_option, pedantic_option, eve::spherical_option, eve::cylindrical_option>
   {
     template<eve::scalar_value N, concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(N const& n, Z const& z) const noexcept
     {

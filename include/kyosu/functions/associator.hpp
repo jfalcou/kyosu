@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct associator_t : eve::strict_elementwise_callable<associator_t, Options, eve::pedantic_option>
+  struct associator_t : eve::strict_elementwise_callable<associator_t, Options, raw_option, eve::pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like Z2>
     requires(eve::same_lanes_or_scalar<Z0, Z1, Z2>)

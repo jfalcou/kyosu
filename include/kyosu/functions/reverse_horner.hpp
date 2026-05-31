@@ -15,7 +15,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct reverse_horner_t : eve::callable<reverse_horner_t, Options, eve::left_option, eve::right_option>
+  struct reverse_horner_t : eve::callable<reverse_horner_t, Options, raw_option, pedantic_option, eve::left_option, eve::right_option>
   {
     template<concepts::cayley_dickson_like... Zs>
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Zs...> operator()(Zs const&... zs) const noexcept

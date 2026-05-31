@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct harmmean_t : kyosu::strict_tuple_callable<harmmean_t, Options, eve::pedantic_option, eve::kahan_option>
+  struct harmmean_t : kyosu::strict_tuple_callable<harmmean_t, Options, raw_option, eve::pedantic_option, eve::kahan_option>
   {
     template<typename... Ts> struct result : as_cayley_dickson<Ts...>
     {

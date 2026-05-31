@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct nthroot_t : eve::strict_elementwise_callable<nthroot_t, Options, kyosu::real_only_option, pedantic_option>
+  struct nthroot_t : eve::strict_elementwise_callable<nthroot_t, Options, raw_option, kyosu::real_only_option, pedantic_option>
   {
     // primary root
     template<concepts::cayley_dickson_like Z, eve::value N>

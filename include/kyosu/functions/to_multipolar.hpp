@@ -13,7 +13,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct to_multipolar_t : eve::elementwise_callable<to_multipolar_t, Options, radpi_option>
+  template<typename Options> struct to_multipolar_t : eve::elementwise_callable<to_multipolar_t, Options, raw_option, pedantic_option, radpi_option>
   {
     template<concepts::real V> KYOSU_FORCEINLINE constexpr kumi::tuple<V, V, V, V> operator()(V const& v) const noexcept
     {

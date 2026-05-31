@@ -15,7 +15,7 @@ namespace kyosu
 {
   template<typename Options>
   struct from_angle_axis_t
-    : eve::strict_elementwise_callable<from_angle_axis_t, Options, assume_unitary_option, radpi_option>
+    : eve::strict_elementwise_callable<from_angle_axis_t, Options, raw_option, pedantic_option, assume_unitary_option, radpi_option>
   {
 
     template<concepts::real V, concepts::real T, std::size_t S>

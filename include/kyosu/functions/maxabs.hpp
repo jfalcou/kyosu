@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct maxabs_t : eve::tuple_callable<maxabs_t, Options, flat_option, eve::numeric_option, eve::pedantic_option>
+  struct maxabs_t : eve::tuple_callable<maxabs_t, Options, raw_option, flat_option, eve::numeric_option, eve::pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like... Zs>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Zs... zs) const noexcept

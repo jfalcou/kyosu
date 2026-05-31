@@ -20,7 +20,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct pow_t : eve::callable<pow_t, Options, real_only_option, pedantic_option>
+  template<typename Options> struct pow_t : eve::callable<pow_t, Options, raw_option, real_only_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1) const noexcept

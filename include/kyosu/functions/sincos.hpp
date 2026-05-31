@@ -14,7 +14,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct sincos_t : eve::elementwise_callable<sincos_t, Options, radpi_option>
+  template<typename Options> struct sincos_t : eve::elementwise_callable<sincos_t, Options, raw_option, pedantic_option, radpi_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::zipped<Z, Z> operator()(Z const& z) const noexcept

@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct csc_t : eve::elementwise_callable<csc_t, Options, radpi_option>
+  template<typename Options> struct csc_t : eve::elementwise_callable<csc_t, Options, raw_option, pedantic_option, radpi_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {

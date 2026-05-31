@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct lrising_factorial_t : eve::strict_elementwise_callable<lrising_factorial_t, Options, real_only_option>
+  struct lrising_factorial_t : eve::strict_elementwise_callable<lrising_factorial_t, Options, raw_option, pedantic_option, real_only_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const& z1) const noexcept

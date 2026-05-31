@@ -10,7 +10,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct inject_t : eve::elementwise_callable<inject_t, Options, real_only_option>
+  template<typename Options> struct inject_t : eve::elementwise_callable<inject_t, Options, raw_option, pedantic_option, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept

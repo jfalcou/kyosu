@@ -13,7 +13,7 @@ namespace kyosu
 {
   template<typename Options>
   struct bessel_h_t
-    : eve::strict_elementwise_callable<bessel_h_t, Options, eve::spherical_option, eve::cylindrical_option, kind_1_option, kind_2_option>
+    : eve::strict_elementwise_callable<bessel_h_t, Options, raw_option, pedantic_option, eve::spherical_option, eve::cylindrical_option, kind_1_option, kind_2_option>
   {
     template<eve::scalar_value N, concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n, Z const& z) const noexcept

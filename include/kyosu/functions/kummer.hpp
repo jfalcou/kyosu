@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct kummer_t : eve::strict_elementwise_callable<kummer_t, Options, regularized_option>
+  template<typename Options> struct kummer_t : eve::strict_elementwise_callable<kummer_t, Options, raw_option, pedantic_option, regularized_option>
   {
     template<concepts::cayley_dickson_like Z, concepts::cayley_dickson_like T1, concepts::cayley_dickson_like T2>
     KYOSU_FORCEINLINE constexpr complexify_t<as_cayley_dickson_t<Z, T1, T2>> operator()(Z const& z,

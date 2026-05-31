@@ -11,7 +11,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct powm1_t : eve::strict_elementwise_callable<powm1_t, Options, real_only_option>
+  template<typename Options> struct powm1_t : eve::strict_elementwise_callable<powm1_t, Options, raw_option, pedantic_option, real_only_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1) const noexcept

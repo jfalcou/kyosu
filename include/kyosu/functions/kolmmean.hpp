@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct kolmmean_t : eve::strict_elementwise_callable<kolmmean_t, Options, eve::pedantic_option, eve::kahan_option>
+  struct kolmmean_t : eve::strict_elementwise_callable<kolmmean_t, Options, raw_option, eve::pedantic_option, eve::kahan_option>
   {
     template<typename... Ts> struct result : as_cayley_dickson<Ts...>
     {

@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct linfnorm_t : eve::strict_elementwise_callable<linfnorm_t, Options, kyosu::flat_option>
+  struct linfnorm_t : eve::strict_elementwise_callable<linfnorm_t, Options, raw_option, pedantic_option, kyosu::flat_option>
   {
     template<concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like... Zs>
     requires(eve::same_lanes_or_scalar<Z1, Zs...>)

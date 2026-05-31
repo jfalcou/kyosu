@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct negmaxabs_t : eve::strict_elementwise_callable<negmaxabs_t, Options, eve::numeric_option, eve::pedantic_option>
+  struct negmaxabs_t : eve::strict_elementwise_callable<negmaxabs_t, Options, raw_option, eve::numeric_option, eve::pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like... Zs>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Zs... zs) const noexcept
