@@ -1,4 +1,4 @@
-//======raw_option, pedantic_option, ================================================================================================================
+//======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
   Copyright: KYOSU Contributors & Maintainers
@@ -11,7 +11,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct lerp_t : eve::strict_elementwise_callable<lerp_t, Options>
+  template<typename Options> struct lerp_t : eve::strict_elementwise_callable<lerp_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::real Z2>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& c0, Z1 const& c1, Z2 const& t) const noexcept

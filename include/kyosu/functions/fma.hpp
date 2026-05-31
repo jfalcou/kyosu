@@ -1,4 +1,4 @@
-//======raw_option, pedantic_option, ================================================================================================================
+//======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
   Copyright: KYOSU Contributors & Maintainers
@@ -11,7 +11,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct fma_t : eve::strict_elementwise_callable<fma_t, Options>
+  template<typename Options> struct fma_t : eve::strict_elementwise_callable<fma_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like Z2>
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z0, Z1, Z2> operator()(Z0 const& z0,

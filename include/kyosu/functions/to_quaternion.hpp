@@ -1,4 +1,4 @@
-//======raw_option, pedantic_option, ================================================================================================================
+//======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
   Copyright: KYOSU Contributors & Maintainers
@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct make_quaternion_t : eve::callable<make_quaternion_t, Options>
+  template<typename Options> struct make_quaternion_t : eve::callable<make_quaternion_t, Options, raw_option, pedantic_option>
   {
     template<concepts::quaternion Q> KYOSU_FORCEINLINE constexpr Q operator()(Q const& q) const noexcept
     {

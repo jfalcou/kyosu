@@ -1,4 +1,4 @@
-//======raw_option, pedantic_option, ============================================================================================
+//==================================================================================================
 /*
   KYOSU - Complex Without Complexes
   Copyright: KYOSU Project Contributors & Maintainers
@@ -11,7 +11,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct from_rotation_matrix_t : eve::elementwise_callable<from_rotation_matrix_t, Options>
+  template<typename Options> struct from_rotation_matrix_t : eve::elementwise_callable<from_rotation_matrix_t, Options, raw_option, pedantic_option>
   {
     template<typename T>
     KYOSU_FORCEINLINE constexpr quaternion_t<T> operator()(std::array<std::array<T, 3>, 3> const& r) const noexcept

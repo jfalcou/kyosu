@@ -1,4 +1,4 @@
-//======raw_option, pedantic_option, ================================================================================================================
+//======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
   Copyright: KYOSU Contributors & Maintainers
@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct convert_t : eve::callable<convert_t, Options>
+  struct convert_t : eve::callable<convert_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson V, concepts::scalar_cayley_dickson Tgt>
     KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<Tgt, V> operator()(V v, as<Tgt> tgt) const noexcept

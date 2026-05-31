@@ -1,4 +1,4 @@
-//======raw_option, pedantic_option, ================================================================================================================
+//======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
   Copyright: KYOSU Contributors & Maintainers
@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct minmag_t : eve::tuple_callable<minmag_t, Options>
+  template<typename Options> struct minmag_t : eve::tuple_callable<minmag_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0> KYOSU_FORCEINLINE constexpr Z0 operator()(Z0 z0) const noexcept
     {

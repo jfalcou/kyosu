@@ -1,4 +1,4 @@
-//======raw_option, pedantic_option, ================================================================================================================
+//======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
   Copyright: KYOSU Contributors & Maintainers
@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct sign_t : eve::elementwise_callable<sign_t, Options>
+  template<typename Options> struct sign_t : eve::elementwise_callable<sign_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {

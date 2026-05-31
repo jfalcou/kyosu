@@ -1,4 +1,4 @@
-//======raw_option, pedantic_option, ================================================================================================================
+//======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
   Copyright: KYOSU Contributors & Maintainers
@@ -11,7 +11,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct kronecker_t : eve::strict_tuple_callable<kronecker_t, Options>
+  template<typename Options> struct kronecker_t : eve::strict_tuple_callable<kronecker_t, Options, raw_option, pedantic_option>
   {
     template<typename... Ts> struct result : as_real_type<as_cayley_dickson_t<Ts...>>
     {

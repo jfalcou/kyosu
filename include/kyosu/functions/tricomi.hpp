@@ -1,4 +1,4 @@
-//======raw_option, pedantic_option, ================================================================================================================
+//======================================================================================================================
 /*
   Kyosu - Complex Without Complexes
   Copyright: KYOSU Contributors & Maintainers
@@ -20,7 +20,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct tricomi_t : eve::strict_elementwise_callable<tricomi_t, Options>
+  template<typename Options> struct tricomi_t : eve::strict_elementwise_callable<tricomi_t, Options, raw_option, pedantic_option>
   {
     template<concepts::complex_like Z, concepts::complex_like T1, concepts::complex_like T2>
     constexpr KYOSU_FORCEINLINE as_cayley_dickson_t<complexify_t<Z>, T1, T2> operator()(Z z, T1 a, T2 b) const noexcept
