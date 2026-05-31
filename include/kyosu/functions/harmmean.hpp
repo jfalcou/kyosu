@@ -59,7 +59,7 @@ namespace kyosu
   //!      // Regular overloads
   //!      constexpr auto harmmean(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto harmmean(eve::non_empty_product_type auto const& tup)             noexcept; // 2
-  //!      conséexpr auto harmmean[pedantic](/*any of the above overloads*/)                 noexcept; // 3
+  //!      constexpr auto harmmean[pedantic](/*any of the above overloads*/)                 noexcept; // 3
   //!      constexpr auto harmmean[kahan] (/*any of the above overloads*/)                   noexcept; // 4
   //!
   //!      // Lanes masking

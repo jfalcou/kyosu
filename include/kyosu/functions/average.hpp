@@ -59,7 +59,7 @@ namespace kyosu
   //!      // Regular overloads
   //!      constexpr auto average(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto average(eve::non_empty_product_type auto const& tup)             noexcept; // 2
-  //!      conséexpr auto average[pedantic](/*any of the above overloads*/)                 noexcept; // 3
+  //!      constexpr auto average[pedantic](/*any of the above overloads*/)                 noexcept; // 3
   //!      constexpr auto average[kahan] (/*any of the above overloads*/)                   noexcept; // 4
   //!
   //!      // Lanes masking
