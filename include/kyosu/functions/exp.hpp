@@ -93,7 +93,6 @@ namespace kyosu
 
 namespace kyosu::_
 {
-
   template<typename Z>
   KYOSU_FORCEINLINE  constexpr auto corners(const Z & z, Z rr) noexcept
   {
