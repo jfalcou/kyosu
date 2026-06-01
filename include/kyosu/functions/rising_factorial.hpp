@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct rising_factorial_t : eve::strict_elementwise_callable<rising_factorial_t, Options, real_only_option>
+  struct rising_factorial_t : eve::strict_elementwise_callable<rising_factorial_t, Options, raw_option, pedantic_option, real_only_option>
   {
     template<typename T0, typename T1> struct result;
     template<concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1>

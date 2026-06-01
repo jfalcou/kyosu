@@ -11,7 +11,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct lpnorm_t : eve::strict_elementwise_callable<lpnorm_t, Options>
+  template<typename Options> struct lpnorm_t : eve::strict_elementwise_callable<lpnorm_t, Options, raw_option, pedantic_option>
   {
     template<typename P, typename Z1, typename... Zs>
     requires(concepts::real<P>, concepts::cayley_dickson<Z1> || (concepts::cayley_dickson<Zs> || ...))

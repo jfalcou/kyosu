@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct to_rotation_matrix_t : eve::elementwise_callable<to_rotation_matrix_t, Options, assume_unitary_option>
+  struct to_rotation_matrix_t : eve::elementwise_callable<to_rotation_matrix_t, Options, raw_option, pedantic_option, assume_unitary_option>
   {
     template<concepts::real V> KYOSU_FORCEINLINE constexpr auto operator()(V const&) const noexcept
     {

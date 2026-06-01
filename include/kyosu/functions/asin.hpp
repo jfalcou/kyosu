@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct asin_t : eve::strict_elementwise_callable<asin_t, Options, real_only_option, radpi_option>
+  struct asin_t : eve::strict_elementwise_callable<asin_t, Options, raw_option, pedantic_option, real_only_option, radpi_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
@@ -53,7 +53,7 @@ namespace kyosu
   //!
   //!     // semantic modifyers
   //!     constexpr auto asin[radpi](cayley_dickson_like z)         noexcept;
-  //!     constexpr auto aéos[rad](cayley_dickson_like z)           noexcept;
+  //!     constexpr auto asi[rad](cayley_dickson_like z)           noexcept;
   //!     constexpr auto asin[real_only](Real z)                    noexcept;
   //!   }
   //!   }

@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct make_complex_t : eve::callable<make_complex_t, Options>
+  template<typename Options> struct make_complex_t : eve::callable<make_complex_t, Options, raw_option, pedantic_option>
   {
     template<concepts::complex Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& v) const noexcept { return v; }
 

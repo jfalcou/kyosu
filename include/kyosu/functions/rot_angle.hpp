@@ -13,7 +13,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct rot_angle_t : eve::elementwise_callable<rot_angle_t, Options, radpi_option>
+  template<typename Options> struct rot_angle_t : eve::elementwise_callable<rot_angle_t, Options, raw_option, pedantic_option, radpi_option>
   {
 
     template<concepts::cayley_dickson Z>

@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct pow_abs_t : eve::callable<pow_abs_t, Options, pedantic_option>
+  template<typename Options> struct pow_abs_t : eve::callable<pow_abs_t, Options, raw_option, pedantic_option>
   {
 
     template<typename Z0, typename Z1> struct result

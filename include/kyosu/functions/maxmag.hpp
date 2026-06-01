@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct maxmag_t : eve::tuple_callable<maxmag_t, Options>
+  template<typename Options> struct maxmag_t : eve::tuple_callable<maxmag_t, Options, raw_option, pedantic_option>
   {
 
     template<concepts::cayley_dickson_like Z0> KYOSU_FORCEINLINE constexpr Z0 operator()(Z0 z0) const noexcept

@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct cbrt_t : eve::strict_elementwise_callable<cbrt_t, Options, real_only_option, pedantic_option>
+  struct cbrt_t : eve::strict_elementwise_callable<cbrt_t, Options, raw_option, real_only_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept

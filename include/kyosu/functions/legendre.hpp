@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct legendre_t : eve::strict_elementwise_callable<legendre_t, Options, eve::successor_option>
+  struct legendre_t : eve::strict_elementwise_callable<legendre_t, Options, raw_option, pedantic_option, eve::successor_option>
   {
     template<concepts::real N, concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr auto operator()(N nn, Z zz) const noexcept -> decltype(nn + zz)

@@ -13,7 +13,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct log_abs_gamma_t : eve::elementwise_callable<log_abs_gamma_t, Options>
+  template<typename Options> struct log_abs_gamma_t : eve::elementwise_callable<log_abs_gamma_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z const& z) const noexcept

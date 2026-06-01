@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct align_t : eve::elementwise_callable<align_t, Options, assume_unitary_option>
+  template<typename Options> struct align_t : eve::elementwise_callable<align_t, Options, raw_option, pedantic_option, assume_unitary_option>
   {
 
     template<concepts::real T, concepts::real U, std::size_t S>

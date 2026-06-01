@@ -22,7 +22,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct hypergeometric_t : eve::strict_elementwise_callable<hypergeometric_t, Options, kyosu::regularized_option>
+  struct hypergeometric_t : eve::strict_elementwise_callable<hypergeometric_t, Options, raw_option, pedantic_option, kyosu::regularized_option>
   {
 
     template<typename... Ts> struct result : as_cayley_dickson<Ts...>

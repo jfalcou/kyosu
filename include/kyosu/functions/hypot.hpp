@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct hypot_t : eve::strict_elementwise_callable<hypot_t, Options, eve::pedantic_option>
+  struct hypot_t : eve::strict_elementwise_callable<hypot_t, Options, raw_option, eve::pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like ...Zs>
     KYOSU_FORCEINLINE constexpr auto  operator()(Z0 z0, Zs ... zs) const noexcept ->decltype(eve::hypot(real(z0), real(zs)...))

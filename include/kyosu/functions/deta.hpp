@@ -16,7 +16,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct deta_t : eve::strict_elementwise_callable<deta_t, Options>
+  template<typename Options> struct deta_t : eve::strict_elementwise_callable<deta_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z, eve::unsigned_scalar_value K>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(K k, Z const& z) const noexcept

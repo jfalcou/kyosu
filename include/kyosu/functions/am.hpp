@@ -17,7 +17,7 @@ namespace kyosu
 
   template<typename Options>
   struct am_t
-    : eve::strict_elementwise_callable<am_t, Options, eve::modular_option, eve::eccentric_option, eve::threshold_option>
+    : eve::strict_elementwise_callable<am_t, Options, raw_option, pedantic_option, eve::modular_option, eve::eccentric_option, eve::threshold_option>
   {
     template<concepts::complex_like T0, concepts::real T1>
     constexpr KYOSU_FORCEINLINE auto operator()(T0 a, T1 b) const noexcept -> complexify_t<decltype(a + b)>

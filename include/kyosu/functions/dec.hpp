@@ -10,7 +10,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct dec_t : eve::elementwise_callable<dec_t, Options>
+  template<typename Options> struct dec_t : eve::elementwise_callable<dec_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z z) const noexcept
     {

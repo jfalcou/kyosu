@@ -15,7 +15,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct to_polar_t : eve::elementwise_callable<to_polar_t, Options, radpi_option>
+  template<typename Options> struct to_polar_t : eve::elementwise_callable<to_polar_t, Options, raw_option, pedantic_option, radpi_option>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr kumi::tuple<as_real_type_t<Z>, as_real_type_t<Z>, Z> operator()(

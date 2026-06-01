@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct eta_t : eve::elementwise_callable<eta_t, Options>
+  template<typename Options> struct eta_t : eve::elementwise_callable<eta_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept

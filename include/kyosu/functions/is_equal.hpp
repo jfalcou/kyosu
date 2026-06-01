@@ -13,7 +13,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct is_equal_t : eve::strict_elementwise_callable<is_equal_t, Options, eve::numeric_option>
+  struct is_equal_t : eve::strict_elementwise_callable<is_equal_t, Options, raw_option, pedantic_option, eve::numeric_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     KYOSU_FORCEINLINE constexpr eve::common_logical_t<as_real_type_t<Z0>, as_real_type_t<Z1>> operator()(

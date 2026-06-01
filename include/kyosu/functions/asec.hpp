@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct asec_t : eve::strict_elementwise_callable<asec_t, Options, real_only_option, radpi_option>
+  struct asec_t : eve::strict_elementwise_callable<asec_t, Options, raw_option, pedantic_option, real_only_option, radpi_option>
   {
 
     template<concepts::cayley_dickson_like Z>

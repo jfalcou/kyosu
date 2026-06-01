@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct airy_t : eve::elementwise_callable<airy_t, Options>
+  template<typename Options> struct airy_t : eve::elementwise_callable<airy_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr kumi::tuple<Z, Z> operator()(Z const& z) const noexcept

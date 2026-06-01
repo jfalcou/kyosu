@@ -15,7 +15,7 @@
 #include <kyosu/details/decorators.hpp>
 namespace kyosu
 {
-  template<typename Options> struct slerp_t : eve::strict_elementwise_callable<slerp_t, Options, assume_unitary_option>
+  template<typename Options> struct slerp_t : eve::strict_elementwise_callable<slerp_t, Options, raw_option, pedantic_option, assume_unitary_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::real Z2>
     requires(eve::same_lanes_or_scalar<Z0, Z1, Z2>)

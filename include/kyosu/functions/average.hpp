@@ -12,7 +12,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct average_t : kyosu::strict_tuple_callable<average_t, Options, eve::pedantic_option, eve::kahan_option>
+  struct average_t : kyosu::strict_tuple_callable<average_t, Options, raw_option, eve::pedantic_option, eve::kahan_option>
   {
     template<typename... Ts> struct result : as_cayley_dickson<Ts...>
     {
@@ -59,7 +59,7 @@ namespace kyosu
   //!      // Regular overloads
   //!      constexpr auto average(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto average(eve::non_empty_product_type auto const& tup)             noexcept; // 2
-  //!      conséexpr auto average[pedantic](/*any of the above overloads*/)                 noexcept; // 3
+  //!      constexpr auto average[pedantic](/*any of the above overloads*/)                 noexcept; // 3
   //!      constexpr auto average[kahan] (/*any of the above overloads*/)                   noexcept; // 4
   //!
   //!      // Lanes masking

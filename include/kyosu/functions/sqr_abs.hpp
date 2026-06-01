@@ -11,7 +11,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct sqr_abs_t : eve::elementwise_callable<sqr_abs_t, Options, pedantic_option>
+  template<typename Options> struct sqr_abs_t : eve::elementwise_callable<sqr_abs_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z z) const noexcept

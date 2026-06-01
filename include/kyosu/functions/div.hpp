@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct div_t : kyosu::strict_tuple_callable<div_t, Options, eve::kahan_option>
+  template<typename Options> struct div_t : kyosu::strict_tuple_callable<div_t, Options, raw_option, pedantic_option, eve::kahan_option>
   {
     template<typename... Ts> struct result : as_cayley_dickson<Ts...>
     {

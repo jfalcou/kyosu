@@ -20,7 +20,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct exp_int_t : eve::elementwise_callable<exp_int_t, Options>
+  template<typename Options> struct exp_int_t : eve::elementwise_callable<exp_int_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like N, concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::common_value_t<Z, N> operator()(N const& n, Z const& z) const noexcept

@@ -10,7 +10,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct is_not_cinf_t : eve::elementwise_callable<is_not_cinf_t, Options>
+  template<typename Options> struct is_not_cinf_t : eve::elementwise_callable<is_not_cinf_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept

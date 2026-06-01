@@ -8,7 +8,7 @@ higher dimensionnality cayley_dickson algebras.
 
 \note **KYOSU implements SIMD complex numbers**:If you are not interested in quite exotics
  features as quaternion or octonion, but only in real and complex **KYOSU**
-is still a library that provides a set of ~150 functions that can be used with real and complex in scalar or simd form
+is still a library that provides a set of ~200 functions that can be used with real and complex in scalar or simd form
 with no abstraction penalty. The list of them can be seen below.
 
 The Cayley-Dickson construction scheme defines a new algebra as a Cartesian product of an algebra with itself,
@@ -135,10 +135,22 @@ With the `right` option the multiplication is done to the right.
 Functions
 ---------
 
+**KYOSU** callables are object functions following the **EVE** scheme. All of them accept at least the two (incompatible)
+options `raw` and `pedantic`.
+
+  - the `raw` option ensures that the speediest computation implemented will be used, perhaps at the price of accuracy or corner
+    cases values conformity to the standards
+
+  - The `pedantic` option ensures that the most accurate and standard conforming computation implemented will be used.
+    In particular conforming to IEEE754 corner cases if any defined.
+
+Often, these two options do nothing more than the regular (no options) call and their effects are explained in the individual
+documentations only if it is not the case.
+
 Most **KYOSU** callables are usable with all [cayley_dickson_like](@ref kyosu::concepts::cayley_dickson_like) types.
 The exceptions mainly being rotation related quaternion usage.
 
-Also many functions as `sqrt` `nthroot` or `log` are the principal value of a multiple valued inverse of an analytic function.
+Also many functions as `sqrt`, `nthroot` or `log` are the principal value of a multiple valued inverse of an analytic function.
 Most of these functions can use a second parameter that allows to choose another branch.
 
 @warning  **EVE** callables that correspond to mathematical functions that
@@ -155,8 +167,8 @@ Most of these functions can use a second parameter that allows to choose another
 
   * Callables usable with all cayley_dickson types
 
-    Most **EVE** arithmetic and math functions are provided. In particular, real analytic functions of one variable
-    can be quite naturally extended using the polar form described above from a mere complex implementation.
+    Most **EVE** arithmetic and math functions are provided for complex datas. Moreover real analytic functions of one variable
+    are quite naturally extended to general cayley_dickson types using the polar form described above, from a mere complex implementation.
 
     The extension scheme is the following for a function \f$f(z)\f$ defined on complex input \f$z\f$.
     If c is an arbitrary cayley_dickson entry:

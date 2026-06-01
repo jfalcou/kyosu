@@ -15,7 +15,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct reldist_t : eve::strict_elementwise_callable<reldist_t, Options, eve::pedantic_option, eve::numeric_option>
+  struct reldist_t : eve::strict_elementwise_callable<reldist_t, Options, raw_option, eve::pedantic_option, eve::numeric_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1) const noexcept -> decltype(kyosu::dist(z0, z1))
