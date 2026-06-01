@@ -8,6 +8,7 @@
 #pragma once
 
 #include <kyosu/details/callable.hpp>
+#include <kyosu/functions/pure.hpp>
 
 namespace kyosu
 {
