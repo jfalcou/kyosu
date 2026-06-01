@@ -124,7 +124,7 @@ $(function(){initNavTree('index.html','',''); });
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__2____w_2kyosu_2kyosu_2doc_2index"></a></p>
 <p><b>KYOSU</b> is an unified implementation of the complex, quaternions, octonions and more generally all \(\mathbb{R}\)-Cayley-Dickson algebras in an SIMD aware context provided by <b>EVE</b>. It aims at providing as much as possible complex domain functions you dreamed to use and also extend them to quaternions and higher dimensionnality cayley_dickson algebras.</p>
-<dl class="section note"><dt>Note</dt><dd><b>KYOSU implements SIMD complex numbers</b>:If you are not interested in quite exotics features as quaternion or octonion, but only in real and complex <b>KYOSU</b> is still a library that provides a set of ~150 functions that can be used with real and complex in scalar or simd form with no abstraction penalty. The list of them can be seen below.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><b>KYOSU implements SIMD complex numbers</b>:If you are not interested in quite exotics features as quaternion or octonion, but only in real and complex <b>KYOSU</b> is still a library that provides a set of ~200 functions that can be used with real and complex in scalar or simd form with no abstraction penalty. The list of them can be seen below.</dd></dl>
 <p>The Cayley-Dickson construction scheme defines a new algebra as a Cartesian product of an algebra with itself, with multiplication defined in a specific way (different from the componentwise multiplication) and an involution known as conjugation.</p>
 <p>We currently only implement the Cayley-Dickson algebras based on the IEEE float and double representations of real numbers.</p>
 <p>Kyosu proper usable objects are all in the namespace <span class="tt"><a class="el" href="namespacekyosu.html" title="Main KYOSU namespace.">kyosu</a></span>.</p>
@@ -205,15 +205,21 @@ Operators</h2>
 <p>The multiplication to the left by i or -i (i*i=-1) can be done calling respectively <span class="tt">muli</span> and <span class="tt">mulmi</span> which ensure optimization. With the <span class="tt">right</span> option the multiplication is done to the right.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md25"></a>
 Functions</h2>
+<p><b>KYOSU</b> callables are object functions following the <b>EVE</b> scheme. All of them accept at least the two (incompatible) options <span class="tt">raw</span> and <span class="tt">pedantic</span>.</p>
+<ul>
+<li>the <span class="tt">raw</span> option ensures that the speediest computation implemented will be used, perhaps at the price of accuracy or corner cases values conformity to the standards</li>
+<li>The <span class="tt">pedantic</span> option ensures that the most accurate and standard conforming computation implemented will be used. In particular conforming to IEEE754 corner cases if any defined.</li>
+</ul>
+<p>Often, these two options do nothing more than the regular (no options) call and their effects are explained in the individual documentations only if it is not the case.</p>
 <p>Most <b>KYOSU</b> callables are usable with all cayley_dickson_like types. The exceptions mainly being rotation related quaternion usage.</p>
-<p>Also many functions as <span class="tt">sqrt</span> <span class="tt">nthroot</span> or <span class="tt">log</span> are the principal value of a multiple valued inverse of an analytic function. Most of these functions can use a second parameter that allows to choose another branch.</p>
+<p>Also many functions as <span class="tt">sqrt</span>, <span class="tt">nthroot</span> or <span class="tt">log</span> are the principal value of a multiple valued inverse of an analytic function. Most of these functions can use a second parameter that allows to choose another branch.</p>
 <dl class="section warning"><dt>Warning</dt><dd><b>EVE</b> callables that correspond to mathematical functions that are only defined on a proper part of the real axis as, for example, <span class="tt">acos</span> DOES NOT ever provide the same result if called in <b>EVE</b> or <b>KYOSU</b> context.</dd></dl>
 <p>All these kinds of functions called with a floating value in the kyosu namespace will return a complex value.</p>
 <p>However, many of those functions provide a <span class="tt">real_only</span> option that allows to call them with floating value typed parameters (NOT cayley_dickson_like with null pure part) and returns the floating value of the same type which is the eve call result.</p>
 <p>For example, eve::acos(2.0) and <a class="el" href="group__functions_gaa6527f2975e878d560e025dba9def6cd.html#gaa6527f2975e878d560e025dba9def6cd" title="Computes the arc cosine of the argument.">kyosu::acos</a><a href="2.0">kyosu::real_only</a> will returns a NaN value, but <a class="el" href="group__functions_gaa6527f2975e878d560e025dba9def6cd.html#gaa6527f2975e878d560e025dba9def6cd" title="Computes the arc cosine of the argument.">kyosu::acos</a>(2.0) will return the pure imaginary complex number \(i\log(2+\sqrt{3})\)</p>
 <ul>
 <li><p class="startli">Callables usable with all cayley_dickson types</p>
-<p class="startli">Most <b>EVE</b> arithmetic and math functions are provided. In particular, real analytic functions of one variable can be quite naturally extended using the polar form described above from a mere complex implementation.</p>
+<p class="startli">Most <b>EVE</b> arithmetic and math functions are provided for complex datas. Moreover real analytic functions of one variable are quite naturally extended to general cayley_dickson types using the polar form described above, from a mere complex implementation.</p>
 <p class="startli">The extension scheme is the following for a function \(f(z)\) defined on complex input \(z\). If c is an arbitrary cayley_dickson entry:</p><ul>
 <li>first compute \(v=f(\Re(c)+ i |\underline{c}|)\), where \(\Re(c)\) is the real part of \(c\) and \(\underline{c}\) its pure part.</li>
 <li>The result is then \(\Re(v)+I_c\Im(v)\) where \(I_c\) is defined above and \(\Im(v)\) is the imaginary part of the complex \(v\)</li>
