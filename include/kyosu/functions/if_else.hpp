@@ -12,7 +12,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct if_else_t : eve::callable<if_else_t, Options, raw_option, pedantic_option>
+  template<typename Options> struct if_else_t : eve::callable<if_else_t, Options>
   {
     template<typename M, typename T, typename F>
     requires(concepts::cayley_dickson<T> || concepts::cayley_dickson<F>)

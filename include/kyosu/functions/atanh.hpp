@@ -7,6 +7,7 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
+#include <kyosu/functions/inject.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/is_nan.hpp>
 #include <kyosu/details/branch_correct.hpp>

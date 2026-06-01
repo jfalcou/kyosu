@@ -8,6 +8,7 @@
 #pragma once
 #include <kyosu/details/callable.hpp>
 #include <kyosu/details/cayleyify.hpp>
+#include <kyosu/constants/fnan.hpp>
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/acos.hpp>
 #include <kyosu/functions/muli.hpp>
@@ -109,23 +110,23 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     if constexpr (O::contains(real_only) && concepts::real<Z>) return eve::acosh[o.drop(real_only)](z);
-    else if constexpr (concepts::real<Z>) return acosh(complex(z));
+    else if constexpr (concepts::real<Z>) return acosh[o](complex(z));
     else if constexpr (concepts::complex<Z>)
     {
       // acosh(a0) = +/-i acos(a0)
       // Choosing the sign of multiplier to give real(acosh(a0)) >= 0
       // we have compatibility with C99.
-      auto [r, i] = kyosu::acos(z);
+      auto [r, i] = kyosu::acos[o](z);
       auto lez = eve::is_negative(i);
       ;
       auto res = complex(-i, r);
       res = eve::if_else(lez, res, -res);
       auto nani = eve::is_nan(i);
       if (eve::any(nani))
-        return eve::if_else(nani && eve::is_finite(r), complex(eve::nan(eve::as(r)), eve::nan(eve::as(r))), res);
+        return eve::if_else(nani && eve::is_finite(r), fnan(eve::as(z)), res);
       else return res;
     }
-    else { return _::cayley_extend(kyosu::acosh, z); }
+    else { return _::cayley_extend(kyosu::acosh[o], z); }
   }
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
@@ -141,7 +142,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
   requires(!O::contains(real_only))
   {
-    return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), acosh(z, k...));
+    return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), acosh[o](z, k...));
   }
 
 }

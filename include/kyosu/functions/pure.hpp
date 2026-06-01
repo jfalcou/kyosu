@@ -11,7 +11,7 @@
 
 namespace kyosu
 {
-  template<typename Options> struct pure_t : eve::elementwise_callable<pure_t, Options, raw_option, pedantic_option>
+  template<typename Options> struct pure_t : eve::elementwise_callable<pure_t, Options>
   {
     template<concepts::cayley_dickson Z> KYOSU_FORCEINLINE constexpr Z operator()(Z z) const noexcept
     {
