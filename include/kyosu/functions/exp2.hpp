@@ -66,7 +66,11 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto exp2_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    if constexpr (concepts::real<Z>) return eve::exp2(z);
+    if constexpr (concepts::real<Z>)
+    {
+      if constexpr(O::contains(real_only)) return eve::exp2(z);
+      else return complex(eve::exp2(z));
+    }
     else return kyosu::exp[o](z * kyosu::log_2(eve::as_element<Z>()));
   }
 }
