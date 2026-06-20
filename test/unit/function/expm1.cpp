@@ -11,7 +11,8 @@
 TTS_CASE_WITH("Check kyosu::expm1 over real", kyosu::real_types, tts::randoms(-10, 10))
 (auto data)
 {
-  TTS_ULP_EQUAL(kyosu::expm1(data), eve::expm1(data), 0.5);
+  TTS_EQUAL(kyosu::expm1(data), kyosu::inject(eve::expm1(data)));
+  TTS_ULP_EQUAL(kyosu::expm1[kyosu::real_only](data), eve::expm1(data), 0.5);
 };
 
 TTS_CASE_WITH("Check kyosu::expm1 over quaternion",
