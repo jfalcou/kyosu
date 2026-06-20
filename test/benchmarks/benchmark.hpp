@@ -33,7 +33,7 @@ namespace kyosu::bench
     ankerl::nanobench::Bench bench;
     std::size_t repetitions;
 
-    tts::_::buffer<std::ptrdiff_t> run_cardinals;
+    tts::buffer<std::ptrdiff_t> run_cardinals;
     tts::text base_type_name;
     tts::text base_file_name;
 
@@ -103,8 +103,8 @@ namespace kyosu::bench
     benchmark& reset()
     {
       bench = ankerl::nanobench::Bench();
-      // tts::_::buffer lacks .clear(), so we just move-assign a fresh empty instance
-      run_cardinals = tts::_::buffer<std::ptrdiff_t>();
+      // tts::buffer lacks .clear(), so we just move-assign a fresh empty instance
+      run_cardinals = tts::buffer<std::ptrdiff_t>();
       configure_bench();
       return *this;
     }
@@ -137,10 +137,10 @@ namespace kyosu::bench
         char const* ptr = raw_dump.c_str();
 
         // Parse the text block cleanly into a 2D grid
-        tts::_::buffer<tts::_::buffer<double>> grid;
+        tts::buffer<tts::buffer<double>> grid;
         for (std::size_t i = 0; i < results.size(); ++i)
         {
-          tts::_::buffer<double> row;
+          tts::buffer<double> row;
 
           // Retrieve the lane count (N) to normalize time-per-lambda into time-per-element
           double current_N = static_cast<double>(run_cardinals[i]);
