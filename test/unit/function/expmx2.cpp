@@ -18,7 +18,7 @@ TTS_CASE_WITH("Check kyosu::expmx2 over quaternion",
 )
 <typename T>(T r, T i, T j, T k)
 {
-  TTS_RELATIVE_EQUAL(kyosu::expmx2(r), kyosu::exp(-kyosu::sqr(r)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::expmx2[kyosu::real_only](r), eve::expmx2(r), tts::prec<T>());
   using ce_t = kyosu::complex_t<T>;
   auto c = ce_t(r, i);
   TTS_RELATIVE_EQUAL(kyosu::expmx2(c), kyosu::exp(-kyosu::sqr(c)), tts::prec<T>());
