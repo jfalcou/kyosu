@@ -68,7 +68,7 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto expx2_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     if constexpr (O::contains(radpi))
-      return kyosu::exp[o.drop(radpi)](sqr(pi(as_element<Z>())*z));
+      return kyosu::exp[o.drop(radpi)](sqr(eve::pi(eve::as_element_type_t<Z>())*z));
     else
        return kyosu::exp[o](sqr(z));
   }
