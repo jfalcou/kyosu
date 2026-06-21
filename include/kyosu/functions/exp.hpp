@@ -93,28 +93,34 @@ namespace kyosu
 
 namespace kyosu::_
 {
+
+  template<typename Z>
+  KYOSU_FORCEINLINE  constexpr auto corners(const Z & z, Z rr) noexcept
+  {
+    auto [rz, iz] = z;
+    rr = if_else(eve::is_pinf(iz),
+                 if_else(eve::is_pinf(rz), Z(rz, eve::nan(as(rz))), if_else(eve::is_minf(rz), zero(as(rr)), rr)), rr);
+    rr = if_else(eve::is_nan(iz), if_else(eve::is_minf(rz), zero, if_else(eve::is_pinf(rz), z, fnan(as(rr)))), rr);
+    return if_else(eve::is_eqz(iz), Z(real(rr)), rr);
+  }
+
+  template<eve::callable_options O, typename Z>
+  KYOSU_FORCEINLINE  constexpr auto rexp(const Z & z) noexcept
+  {
+    if constexpr (O::contains(radpi)) return eve::exp(eve::pi(eve::as(z))*z);
+    else return eve::exp(z);
+  }
+
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto exp_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-
-    auto rexp = [](auto rz) {
-      if constexpr (O::contains(radpi)) return eve::exp(eve::pi(eve::as(rz)) * (rz));
-      else return eve::exp(rz);
-    };
     if constexpr (concepts::real<Z>) return rexp(z);
     else if constexpr (concepts::complex<Z>)
     {
       auto negiz = eve::is_negative(imag(z));
       z = if_else(negiz, conj(z), z);
       auto [rz, iz] = z;
-      auto corners = [rz, iz, z](Z rr) {
-        rr =
-          if_else(eve::is_pinf(iz),
-                  if_else(eve::is_pinf(rz), Z(rz, eve::nan(as(rz))), if_else(eve::is_minf(rz), zero(as(rr)), rr)), rr);
-        rr = if_else(eve::is_nan(iz), if_else(eve::is_minf(rz), zero, if_else(eve::is_pinf(rz), z, fnan(as(rr)))), rr);
-        return if_else(eve::is_eqz(iz), Z(real(rr)), rr);
-      };
-      auto r = rexp(rz);
+      auto r = rexp<O>(rz);
       auto [s, c] = eve::sincos[o.drop(raw)](iz);
       auto res = Z(r * c, r * s);
       imag(res) = if_else(negiz, -imag(res), imag(res));
@@ -122,7 +128,7 @@ namespace kyosu::_
       else
       {
         if (eve::none(eve::is_not_finite(z))) return res;
-        else return corners(res);
+        else return corners(z, res);
       }
     }
     else return _::cayley_extend(kyosu::exp[o], z);
