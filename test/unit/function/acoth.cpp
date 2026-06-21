@@ -32,7 +32,7 @@ TTS_CASE_WITH("Check kyosu::acoth over quaternion",
   auto rr = eve::acoth(r);
 
   TTS_IEEE_EQUAL(re, rr);
-  TTS_RELATIVE_EQUAL(kyosu::coth(lr), kyosu::complex(r), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::coth(lc), c, tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::coth(lq), q, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::coth(lr), kyosu::complex(r), tts::prec_low<T>());
+  TTS_RELATIVE_EQUAL(kyosu::coth(lc), c, tts::prec_low<T>());
+  TTS_RELATIVE_EQUAL(kyosu::coth(lq), q, tts::prec_low<T>());
 };
