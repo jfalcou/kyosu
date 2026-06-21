@@ -114,21 +114,32 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto exp_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
-    if constexpr (concepts::real<Z>) return rexp(z);
+    if constexpr (concepts::real<Z>) return rexp<O>(z);
     else if constexpr (concepts::complex<Z>)
     {
-      auto negiz = eve::is_negative(imag(z));
-      z = if_else(negiz, conj(z), z);
-      auto [rz, iz] = z;
-      auto r = rexp<O>(rz);
-      auto [s, c] = eve::sincos[o.drop(raw)](iz);
-      auto res = Z(r * c, r * s);
-      imag(res) = if_else(negiz, -imag(res), imag(res));
-      if constexpr (O::contains(raw)) return res;
+      if constexpr(O::contains(raw))
+      {
+        auto [rz, iz] = z;
+        auto [s, c] = eve::sincos[o.drop(raw)](iz);
+        auto r = rexp<O>(rz);
+        auto rr = Z(r * c, r * s);
+        return rr;
+      }
       else
       {
-        if (eve::none(eve::is_not_finite(z))) return res;
-        else return corners(z, res);
+        auto negiz = eve::is_negative(imag(z));
+        z = if_else(negiz, conj(z), z);
+        auto [rz, iz] = z;
+        auto r = rexp<O>(rz);
+        auto [s, c] = eve::sincos[o.drop(raw)](iz);
+        auto res = Z(r * c, r * s);
+        imag(res) = if_else(negiz, -imag(res), imag(res));
+        if constexpr (O::contains(raw)) return res;
+        else
+        {
+          if (eve::none(eve::is_not_finite(z))) return res;
+          else return corners(z, res);
+        }
       }
     }
     else return _::cayley_extend(kyosu::exp[o], z);
