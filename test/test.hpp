@@ -172,7 +172,8 @@ namespace tts
 
   template<typename T> inline double constexpr prec_low()
   {
-    return 1.0e-2;
+    if constexpr (sizeof(eve::element_type_t<T>) == 4) return 1.0e-2;
+    else return 1.0e-2;
   }
 
   template<typename T> inline double constexpr prec()

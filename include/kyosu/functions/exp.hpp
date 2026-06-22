@@ -135,15 +135,11 @@ namespace kyosu::_
         z = if_else(negiz, conj(z), z);
         auto [rz, iz] = z;
         auto r = kyosu::exp[real_only][o](rz);
-        auto [s, c] = eve::sincos(iz);
+        auto [s, c] = eve::sincos[o](iz);
         auto res = Z(r * c, r * s);
         imag(res) = if_else(negiz, -imag(res), imag(res));
-        if constexpr (O::contains(raw)) return res;
-        else
-        {
-          if (eve::none(eve::is_not_finite(z))) return res;
-          else return corners(z, res);
-        }
+        if (eve::none(eve::is_not_finite(z))) return res;
+        else return corners(z, res);
       }
     }
     else
