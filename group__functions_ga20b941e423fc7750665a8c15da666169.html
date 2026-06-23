@@ -145,16 +145,24 @@ $(function(){initNavTree('group__functions_ga20b941e423fc7750665a8c15da666169.ht
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="#ga20b941e423fc7750665a8c15da666169">expm1</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <a class="code hl_struct" href="structkyosu_1_1complexify.html">complexify&lt;T&gt;</a> <a class="code hl_variable" href="#ga20b941e423fc7750665a8c15da666169">expm1</a>(T z)            <span class="keyword">noexcept</span>; <span class="comment">//1</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson T&gt; <span class="keyword">constexpr</span> <a class="code hl_struct" href="structkyosu_1_1complexify.html">complexify&lt;T&gt;</a> <a class="code hl_variable" href="#ga20b941e423fc7750665a8c15da666169">expm1</a>[radpi](T z)     <span class="keyword">noexcept</span>; <span class="comment">//2</span></div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::real           T&gt; <span class="keyword">constexpr</span> T             <a class="code hl_variable" href="#ga20b941e423fc7750665a8c15da666169">expm1</a>[real_only](T z) <span class="keyword">noexcept</span>; <span class="comment">//3</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga20b941e423fc7750665a8c15da666169_html_ga20b941e423fc7750665a8c15da666169"><div class="ttname"><a href="#ga20b941e423fc7750665a8c15da666169">kyosu::expm1</a></div><div class="ttdeci">constexpr auto expm1</div><div class="ttdoc">Computes the exponential of the argument minus 1.</div><div class="ttdef"><b>Definition</b> expm1.hpp:69</div></div>
+<div class="ttc" id="agroup__functions_ga20b941e423fc7750665a8c15da666169_html_ga20b941e423fc7750665a8c15da666169"><div class="ttname"><a href="#ga20b941e423fc7750665a8c15da666169">kyosu::expm1</a></div><div class="ttdeci">constexpr auto expm1</div><div class="ttdoc">Computes the exponential of the argument minus 1.</div><div class="ttdef"><b>Definition</b> expm1.hpp:63</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
+<div class="ttc" id="astructkyosu_1_1complexify_html"><div class="ttname"><a href="structkyosu_1_1complexify.html">kyosu::complexify</a></div><div class="ttdoc">compute the cayley dickson type associated to a floating type or any other type.</div><div class="ttdef"><b>Definition</b> traits.hpp:193</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><span class="tt">z</span>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the exponential of the argument minus 1. Provisions are made to ensure good precision near zero.</p>
+<ol type="1">
+<li>Returns the exponential of the argument minus 1. Provisions are made to ensure good precision near zero.</li>
+<li>z is multiplied by \(pi\) on input</li>
+<li>Equivalent to <span class="tt">eve::expm1</span> call.</li>
+</ol>
+<dl class="section note"><dt>Note</dt><dd>As it is a function devoted to better precision, it admits no <span class="tt">raw</span> option</dd></dl>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>

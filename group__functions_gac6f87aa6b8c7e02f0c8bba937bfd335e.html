@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::manhattan</title>
+<title>kyosu: kyosu::lpnorm</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,7 +93,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__functions_ga27fb46c71e5625bc16d551b2d042fa64.html','',''); });
+$(function(){initNavTree('group__functions_gac6f87aa6b8c7e02f0c8bba937bfd335e.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -119,8 +119,8 @@ $(function(){initNavTree('group__functions_ga27fb46c71e5625bc16d551b2d042fa64.ht
 </div>
 
 <div class="contents">
-<a id="ga27fb46c71e5625bc16d551b2d042fa64" name="ga27fb46c71e5625bc16d551b2d042fa64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga27fb46c71e5625bc16d551b2d042fa64">&#9670;&#160;</a></span>manhattan</h2>
+<a id="gac6f87aa6b8c7e02f0c8bba937bfd335e" name="gac6f87aa6b8c7e02f0c8bba937bfd335e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac6f87aa6b8c7e02f0c8bba937bfd335e">&#9670;&#160;</a></span>lpnorm</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -129,7 +129,7 @@ $(function(){initNavTree('group__functions_ga27fb46c71e5625bc16d551b2d042fa64.ht
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto kyosu::manhattan = eve::functor&lt;manhattan_t&gt;</td>
+          <td class="memname">auto kyosu::lpnorm = eve::functor&lt;lpnorm_t&gt;</td>
         </tr>
       </table>
   </td>
@@ -139,42 +139,31 @@ $(function(){initNavTree('group__functions_ga27fb46c71e5625bc16d551b2d042fa64.ht
 </table>
 </div><div class="memdoc">
 
-<p>Computes the sum of the absolute values of all terms of all the parameters. </p>
+<p>Callable object computing the lpnorm operation \( \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \). </p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kyosu/functions.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="comment">// Regular overloads</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>(<span class="keyword">auto</span> ... xs)                                              <span class="keyword">noexcept</span>; <span class="comment">// 1</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>(eve::non_empty_product_type <span class="keyword">auto</span> <span class="keyword">const</span>&amp; tup)             <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
-<div class="line"> </div>
-<div class="line">   <span class="comment">// Lanes masking</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>[conditional_expr <span class="keyword">auto</span> c](<span class="comment">/*any of the above overloads*/</span>)  <span class="keyword">noexcept</span>; <span class="comment">// 3</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>[logical_value <span class="keyword">auto</span> m](<span class="comment">/*any of the above overloads*/</span>)     <span class="keyword">noexcept</span>; <span class="comment">// 3</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>[saturated](<span class="comment">/*any of the above overloads*/</span>)                <span class="keyword">noexcept</span>; <span class="comment">// 4</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>[pedantic](<span class="comment">/*any of the above overloads*/</span>)                 <span class="keyword">noexcept</span>; <span class="comment">// 5</span></div>
-<div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>[kahan](<span class="comment">/*any of the above overloads*/</span>)                    <span class="keyword">noexcept</span>; <span class="comment">// 6</span></div>
+<div class="line">  <span class="keyword">template</span>&lt; floating_ordered_value P, <span class="keyword">auto</span> ... Ts&gt; <span class="keyword">auto</span> <a class="code hl_variable" href="#gac6f87aa6b8c7e02f0c8bba937bfd335e">lpnorm</a>(P p, T z,Ts ... zs )  <span class="keyword">const</span> <span class="keyword">noexcept</span> <span class="comment">//1</span></div>
+<div class="line">  <span class="keyword">template</span>&lt; floating_ordered_value P, eve::non_empty_product_type <span class="keyword">auto</span> <span class="keyword">const</span>&amp; tup)   <span class="keyword">const</span> <span class="keyword">noexcept</span> <span class="comment">//2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_ga27fb46c71e5625bc16d551b2d042fa64_html_ga27fb46c71e5625bc16d551b2d042fa64"><div class="ttname"><a href="#ga27fb46c71e5625bc16d551b2d042fa64">kyosu::manhattan</a></div><div class="ttdeci">constexpr auto manhattan</div><div class="ttdoc">Computes the sum of the absolute values of all terms of all the parameters.</div><div class="ttdef"><b>Definition</b> manhattan.hpp:80</div></div>
+<div class="ttc" id="agroup__functions_gac6f87aa6b8c7e02f0c8bba937bfd335e_html_gac6f87aa6b8c7e02f0c8bba937bfd335e"><div class="ttname"><a href="#gac6f87aa6b8c7e02f0c8bba937bfd335e">kyosu::lpnorm</a></div><div class="ttdeci">constexpr auto lpnorm</div><div class="ttdoc">Callable object computing the lpnorm operation .</div><div class="ttdef"><b>Definition</b> lpnorm.hpp:81</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
-<li><span class="tt">xs...</span>: Values to process.</li>
+<li><span class="tt">p</span>: positive floating ordered value</li>
+<li><span class="tt">zs...</span>: real or Cayley-dickson values to process.</li>
+<li><span class="tt">tup</span>: kumi tuple.</li>
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>The value of the sum of the values (the \(l_1\) norm) of the \(l_1\) norm of its arguments is returned.</li>
-<li>same as 1. on the tuple elements.</li>
-<li>The operation is performed conditionnaly</li>
-<li>internally uses <span class="tt">saturated</span> options.</li>
-<li>returns \(\infty\) as soon as one of its parameter is infinite, regardless of possible <span class="tt">Nan</span> values.</li>
-<li>uses kahan like compensated algorithm for better accuracy.</li>
+<li>Returns \( \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \).</li>
+<li>uses the tuple elements.</li>
 </ol>
-<dl class="section note"><dt>Note</dt><dd>This is NOT <span class="tt"><a class="el" href="group__functions_gac6f87aa6b8c7e02f0c8bba937bfd335e.html#gac6f87aa6b8c7e02f0c8bba937bfd335e" title="Callable object computing the lpnorm operation .">lpnorm(1, x0, xs...)</a></span> which is the \(l_1\) norm of \(l_2\) norm of its arguments.</dd></dl>
 <h2 class="groupheader">External references </h2>
 <ul>
-<li><a href="https://mathworld.wolfram.com/L1-Norm.html">Wolfram MathWorld: L1 norm</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Lp_space">Wikipedia: Error Function</a></li>
 </ul>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -184,7 +173,7 @@ $(function(){initNavTree('group__functions_ga27fb46c71e5625bc16d551b2d042fa64.ht
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">kyosu::manhattan</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="#gac6f87aa6b8c7e02f0c8bba937bfd335e">kyosu::lpnorm</a>;</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gaa5ee9d69117b35a251ee69d50dc5789b.html#gaa5ee9d69117b35a251ee69d50dc5789b">kyosu::quaternion_t</a>;</div>
 <div class="line">  <span class="keyword">using </span>e_t = float;</div>
 <div class="line">  <span class="keyword">using </span>c_t = <a class="code hl_typedef" href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t&lt;float&gt;</a>;</div>
@@ -196,26 +185,26 @@ $(function(){initNavTree('group__functions_ga27fb46c71e5625bc16d551b2d042fa64.ht
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  e_t e0(1);</div>
 <div class="line">  e_t e1(2);</div>
-<div class="line">  std::cout &lt;&lt; e0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; e1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>(e0, e1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; e0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; e1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gac6f87aa6b8c7e02f0c8bba937bfd335e">lpnorm</a>(e_t(1), e0, e1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  we_t we0(e0);</div>
 <div class="line">  we_t we1(e1);</div>
-<div class="line">  std::cout &lt;&lt; we0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; we1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>(we0, we1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; we0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; we1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gac6f87aa6b8c7e02f0c8bba937bfd335e">lpnorm</a>(e_t(1), we0, we1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  c_t c0(5);</div>
+<div class="line">  c_t c0(e_t(1), 5);</div>
 <div class="line">  c_t c1(5, 9);</div>
-<div class="line">  std::cout &lt;&lt; c0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; c1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>(c0, c1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; c0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; c1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gac6f87aa6b8c7e02f0c8bba937bfd335e">lpnorm</a>(e_t(1), c0, c1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  wc_t wc0(c0);</div>
 <div class="line">  wc_t wc1(c1);</div>
-<div class="line">  std::cout &lt;&lt; wc0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; wc1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>(wc0, wc1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; wc0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; wc1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gac6f87aa6b8c7e02f0c8bba937bfd335e">lpnorm</a>(e_t(1), wc0, wc1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  q_t q0(5, 2, 3);</div>
+<div class="line">  q_t q0(e_t(1), 5, 2, 3);</div>
 <div class="line">  q_t q1(5, 9, 6, 7);</div>
-<div class="line">  std::cout &lt;&lt; q0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; q1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>(q0, q1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; q0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; q1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gac6f87aa6b8c7e02f0c8bba937bfd335e">lpnorm</a>(e_t(1), q0, q1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  wq_t wq0(q0);</div>
 <div class="line">  wq_t wq1(q1);</div>
-<div class="line">  std::cout &lt;&lt; wq0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; wq1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga27fb46c71e5625bc16d551b2d042fa64">manhattan</a>(wq0, wq1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; wq0 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; wq1 &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gac6f87aa6b8c7e02f0c8bba937bfd335e">lpnorm</a>(e_t(1), wq0, wq1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
