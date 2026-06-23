@@ -16,7 +16,8 @@
 TTS_CASE_WITH("Check kyosu::exp over real", kyosu::real_types, tts::randoms(-10, 10))
 (auto data)
 {
-  TTS_ULP_EQUAL(kyosu::exp(data), eve::exp(data), 0.5);
+  TTS_EQUAL(kyosu::exp(data), kyosu::inject(eve::exp(data)));
+  TTS_ULP_EQUAL(kyosu::exp[kyosu::real_only](data), eve::exp(data), 0.5);
 };
 
 #ifdef HAS_BOOST

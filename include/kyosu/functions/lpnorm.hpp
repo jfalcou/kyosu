@@ -43,8 +43,7 @@ namespace kyosu
   //! @addtogroup functions
   //! @{
   //!   @var lpnorm
-  //!   @brief Callable object computing the lpnorm operation \f$ \left(\sum_{i = 0}^n
-  //! |x_i|^p\right)^{\frac1p} \f$.
+  //!   @brief Callable object computing the lpnorm operation \f$ \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \f$.
   //!
   //!   @groupheader{Header file}
   //!
@@ -58,15 +57,15 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!     template< floating_ordered_value P, auto ... Ts> auto lpnorm(P p, T z,Ts ... zs )  const noexcept //1
-  //!     template< floating_ordered_value P, eve::non_empty_product_type auto const& tup)  const noexcept //2
+  //!     template< floating_ordered_value P, eve::non_empty_product_type auto const& tup)   const noexcept //2
   //!   }
   //!   @endcode
   //!
   //!   **Parameters**
   //!
-  //!     * `p`:   : positive floating ordered value
+  //!     * `p`: positive floating ordered value
   //!     * `zs...`: real or Cayley-dickson values to process.
-  //!     * `tup     kumi tuple.
+  //!     * `tup`: kumi tuple.
   //!
   //!   **Return value**
   //!

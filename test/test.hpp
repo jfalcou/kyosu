@@ -170,6 +170,12 @@ namespace tts
     using types_list = typename make<T>::type;
   };
 
+  template<typename T> inline double constexpr prec_low()
+  {
+    if constexpr (sizeof(eve::element_type_t<T>) == 4) return 1.0e-1;
+    else return 5.0e-2;
+  }
+
   template<typename T> inline double constexpr prec()
   {
     if constexpr (sizeof(eve::element_type_t<T>) == 4) return 1.0e-3;

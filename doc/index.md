@@ -7,8 +7,8 @@ as much as possible complex domain functions you dreamed to use and also extend 
 higher dimensionnality cayley_dickson algebras.
 
 \note **KYOSU implements SIMD complex numbers**:If you are not interested in quite exotics
- features as quaternion or octonion, but only in real and complex **KYOSU**
-is still a library that provides a set of ~200 functions that can be used with real and complex in scalar or simd form
+ features as quaternion or octonion, but only in **real** and **complex** **KYOSU**
+is still a library that provides a set of ~200 functions that can be used with **real** and **complex** in **scalar** or **SIMD** form
 with no abstraction penalty. The list of them can be seen below.
 
 The Cayley-Dickson construction scheme defines a new algebra as a Cartesian product of an algebra with itself,
@@ -162,7 +162,7 @@ Most of these functions can use a second parameter that allows to choose another
           However, many of those functions provide a `real_only` option that allows to call them with floating value typed parameters
           (NOT cayley_dickson_like with null pure part) and returns the floating value of the same type which is the eve call result.
 
-          For example, eve::acos(2.0) and kyosu::acos[kyosu::real_only](2.0) will returns a NaN value, but kyosu::acos(2.0) will
+          For example, `eve::acos(2.0)` and `kyosu::acos[kyosu::real_only](2.0)` will returns a NaN value, but `kyosu::acos(2.0)` will
           return the pure imaginary complex number \f$i\log(2+\sqrt{3})\f$
 
   * Callables usable with all cayley_dickson types
@@ -177,7 +177,7 @@ Most of these functions can use a second parameter that allows to choose another
      - The result is then \f$\Re(v)+I_c\Im(v)\f$ where \f$I_c\f$ is defined above and \f$\Im(v)\f$
         is the imaginary part of the complex \f$v\f$
 
-    Moreover some functions are defined that does not pertain to **EVE** because they never return real results for real entries.
+    Moreover some functions are defined that does not pertain to **EVE** because they (almost) never return real results for real entries.
     (For instance [exp_i](@ref kyosu::exp_i)).
 
    |                                                   |                                                   |                                                   |                                                   |
@@ -208,11 +208,11 @@ Most of these functions can use a second parameter that allows to choose another
    |[is_nez](@ref kyosu::is_nez)                       |[is_not_cinf](@ref kyosu::is_not_cinf)             |[is_not_denormal](@ref kyosu::is_not_denormal)     |[is_not_equal](@ref kyosu::is_not_equal)           |
    |[is_not_finite](@ref kyosu::is_not_finite)         |[is_not_flint](@ref kyosu::is_not_flint)           |[is_not_fnan](@ref kyosu::is_not_fnan)             |[is_not_infinite](@ref kyosu::is_not_infinite)     |
    |[is_not_nan](@ref kyosu::is_not_nan)               |[is_not_real](@ref kyosu::is_not_real)             |[is_pure](@ref kyosu::is_pure)                     |[is_real](@ref kyosu::is_real)                     |
-   |[is_unitary](@ref kyosu::is_unitary)               |[jacobi_elliptic](@ref kyosu::jacobi_elliptic)     |[kronecker](@ref kyosu::kronecker)                 |[kummer](@ref kyosu::kummer)                       |
-   |[lambda](@ref kyosu::lambda)                       |[lbeta](@ref kyosu::lbeta)                         |[ldiv](@ref kyosu::ldiv)                           |[legendre](@ref kyosu::legendre)                   |
-   |[lerp](@ref kyosu::lerp)                           |[log](@ref kyosu::log)                             |[log10](@ref kyosu::log10)                         |[log1p](@ref kyosu::log1p)                         |
-   |[log2](@ref kyosu::log2)                           |[log_abs](@ref kyosu::log_abs)                     |[log_abs_gamma](@ref kyosu::log_abs_gamma)         |[log_gamma](@ref kyosu::log_gamma)                 |
-   |[lpnorm](@ref kyosu::lpnorm)                       |[lrising_factorial](@ref kyosu::lrising_factorial) |                                                   |                                                   |
+   |[is_unitary](@ref kyosu::is_unitary)               |[jacobi_elliptic](@ref kyosu::jacobi_elliptic)     |[kolmmean](@ref kyosu::kolmmean)                   |[kronecker](@ref kyosu::kronecker)                 |
+   |[kummer](@ref kyosu::kummer)                       |[lambda](@ref kyosu::lambda)                       |[lbeta](@ref kyosu::lbeta)                         |[ldiv](@ref kyosu::ldiv)                           |
+   |[legendre](@ref kyosu::legendre)                   |[lerp](@ref kyosu::lerp)                           |[log](@ref kyosu::log)                             |[log10](@ref kyosu::log10)                         |
+   |[log1p](@ref kyosu::log1p)                         |[log2](@ref kyosu::log2)                           |[log_abs](@ref kyosu::log_abs)                     |[log_abs_gamma](@ref kyosu::log_abs_gamma)         |
+   |[log_gamma](@ref kyosu::log_gamma)                 |[lpnorm](@ref kyosu::lpnorm)                       |[lrising_factorial](@ref kyosu::lrising_factorial) |                                                   |
    |[manhattan](@ref kyosu::manhattan)                 |[maxabs](@ref kyosu::maxabs)                       |[maxmag](@ref kyosu::maxmag)                       |                                                   |
    |[minabs](@ref kyosu::minabs)                       |[minmag](@ref kyosu::minmag)                       |[minus](@ref kyosu::minus)                         |[mul](@ref kyosu::mul)                             |
    |[muli](@ref kyosu::muli)                           |[mulmi](@ref kyosu::mulmi)                         |[nearest](@ref kyosu::nearest)                     |[negmaxabs](@ref kyosu::negmaxabs)                 |
