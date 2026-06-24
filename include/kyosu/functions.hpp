@@ -18,16 +18,15 @@
 //======================================================================================================================
 
 //======================================================================================================================
-// Fundamental functions
-//=================================)=====================================================================================
+// Fundamental functions with no raw or pedantic options
+//======================================================================================================================
 #include <kyosu/functions/parts.hpp>
 #include <kyosu/functions/abs.hpp>
+#include <kyosu/functions/arg.hpp>
 #include <kyosu/functions/conj.hpp>
 #include <kyosu/functions/convert.hpp>
 #include <kyosu/functions/pure.hpp>
 #include <kyosu/functions/if_else.hpp>
-#include <kyosu/functions/arg.hpp>
-#include <kyosu/functions/inject.hpp>
 
 //======================================================================================================================
 // Arithmetic and math
@@ -217,6 +216,7 @@
 #include <kyosu/functions/from_rotation_matrix.hpp>
 #include <kyosu/functions/from_semipolar.hpp>
 #include <kyosu/functions/from_spherical.hpp>
+#include <kyosu/functions/inject.hpp>
 #include <kyosu/functions/rot_angle.hpp>
 #include <kyosu/functions/rot_axis.hpp>
 #include <kyosu/functions/rotate_vec.hpp>

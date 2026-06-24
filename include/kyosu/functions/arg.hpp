@@ -8,10 +8,11 @@
 #pragma once
 
 #include <kyosu/details/callable.hpp>
+#include <kyosu/functions/pure.hpp>
 
 namespace kyosu
 {
-  template<typename Options> struct arg_t : eve::elementwise_callable<arg_t, Options, raw_option, pedantic_option, radpi_option>
+  template<typename Options> struct arg_t : eve::elementwise_callable<arg_t, Options, radpi_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z v) const noexcept
