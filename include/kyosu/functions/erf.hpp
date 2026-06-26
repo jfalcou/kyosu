@@ -74,9 +74,44 @@ namespace kyosu
 
 namespace kyosu::_
 {
+
+  template <  typename T, typename U>
+  struct nully {
+    auto operator()(T x, U y) const { return complex(eve::erf(x), y); };
+  };
+
+  template <  typename T, typename U, typename V,  typename W>
+  struct nullx {
+    auto operator()(T x, U y, V signy, W w_im) const  {
+      using u_t = eve::underlying_type_t<decltype(x)>;
+      return complex(x, eve::if_else(eve::sqr(y) > u_t(720)
+                                    , eve::inf(eve::as(y))
+                                    , eve::expx2(y) * w_im(y))) * signy;
+    };
+  };
+
+  template <  typename T, typename U>
+  struct taylor{
+    auto operator()(T mz2, U z) const {
+      using r_t = eve::underlying_type_t<T>;
+      return kyosu::horner(mz2, r_t(0.0052239776254421878422), r_t(0.026866170645131251760), r_t(0.11283791670955125739),
+                           r_t(0.37612638903183752464), r_t(1.1283791670955125739)) * z;
+    };
+  };
+
+  template <  typename T, typename U, typename V,  typename W>
+  struct remains {
+        auto operator()(T x, U y, V mz2, W signx) const{
+          auto [mRe_z2, mIm_z2] = mz2;
+          auto [s, c] = eve::sincos(mIm_z2);
+         return oneminus(eve::exp(mRe_z2) * (complex(c, s) * faddeeva(complex(-y, x) * signx))) * signx;
+        };
+  };
+
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto erf_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
+    using r_t = eve::underlying_type_t<Z>;
     if constexpr (concepts::real<Z>) return eve::erf(z);
     else if constexpr (concepts::complex<Z>)
     {
@@ -396,13 +431,6 @@ namespace kyosu::_
         }
       };
 
-      auto taylor = [mz2, z]() {
-        using r_t = eve::element_type_t<real_t>;
-        return kyosu::horner(mz2, 0.0052239776254421878422, 0.026866170645131251760, 0.11283791670955125739,
-                             0.37612638903183752464, 1.1283791670955125739) *
-               z;
-      };
-
       if constexpr (eve::scalar_value<Z>)
       {
         auto w_im = [w_im_y100](real_t xx) {
@@ -441,7 +469,10 @@ namespace kyosu::_
         auto ax = eve::abs(x);
         auto smallx = ax < 8e-2;
         auto smally = eve::abs(y) < 1e-2;
-        if (smallx && smally) return taylor();
+        if (smallx && smally) {
+          taylor<decltype(mz2), decltype(z)> slxy;
+          return slxy(mz2, z);
+        }
         /* don't use complex exp function, since that will produce spurious NaN
            values when multiplying w in an overflow situation. */
         auto [mRe_z2, mIm_z2] = mz2;
@@ -494,31 +525,21 @@ namespace kyosu::_
         auto ax = eve::abs(x);
         auto xsmall = ax < 8e-2;
         auto ysmall = eve::abs(y) < 1e-2;
-        auto nully = [](auto x, auto y) { return complex(eve::erf(x), y); };
-        auto nullx = [signy, w_im](auto x, auto y) {
-          return complex(x, eve::if_else(eve::sqr(y) > real_t(720), eve::inf(eve::as(y)), eve::expx2(y) * w_im(y))) *
-                 signy;
-        };
-
-        auto smallxy = [taylor]() { return taylor(); };
-
-        auto remain = [mz2, signx](auto x, auto y) {
-          auto [mRe_z2, mIm_z2] = mz2;
-          auto [s, c] = eve::sincos(mIm_z2);
-          auto zz = oneminus(eve::exp(mRe_z2) * (complex(c, s) * faddeeva(complex(-y, x) * signx))) * signx;
-          return zz;
-        };
 
         if (eve::any(notdone))
         {
-          notdone = next_interval(nully, notdone, eve::is_eqz(y), r, x, y);
+          nully<decltype(x), decltype(y)> ny;
+          nullx<decltype(x), decltype(y), decltype(signy), decltype(w_im)> nx;
+          taylor<decltype(z), decltype(mz2)> smallxy;
+          remains<decltype(x),decltype(y), decltype(mz2), decltype(signx)> remain;
+          notdone = next_interval(ny, notdone, eve::is_eqz(y), r, x, y);
           if (eve::any(notdone))
           {
-            notdone = next_interval(nullx, notdone, eve::is_eqz(x), r, x, y);
+            notdone = next_interval(nx, notdone, eve::is_eqz(x), r, x, y, signy, w_im);
             if (eve::any(notdone))
             {
-              notdone = next_interval(smallxy, notdone, xsmall && ysmall, r);
-              if (eve::any(notdone)) { notdone = last_interval(remain, notdone, r, x, y); }
+              notdone = next_interval(smallxy, notdone, xsmall && ysmall, r, mz2, z);
+              if (eve::any(notdone)) { notdone = last_interval(remain, notdone, r, x, y, mz2, signx); }
             }
           }
         }
