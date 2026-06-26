@@ -76,14 +76,8 @@ namespace kyosu::_
     else if constexpr (concepts::complex<Z>)
     {
       using u_t = eve::underlying_type_t<Z>;
-      auto zet = [](auto z) {
-        using u_t = eve::underlying_type_t<Z>;
-        auto sqz = sqrt(z);
-        auto zeta = (pow(z, u_t(1.5)) * 2) / 3;
-        return kumi::tuple{sqz / kyosu::sqrt_3(as(z)), zeta};
-      };
-
-      auto [sqzo3, zeta] = zet(z);
+      auto zeta = (pow(z, u_t(1.5)) * 2) / 3;
+      auto sqzo3 = sqrt(z) / kyosu::sqrt_3(as<u_t>());
       auto ip = _::cb_ir(eve::third(as<u_t>()), zeta);
       auto im = _::cb_ir(-eve::third(as<u_t>()), zeta);
       return kumi::tuple{inv_pi(as<u_t>()) * sqzo3 * (im - ip), sqzo3 * (ip + im)};
