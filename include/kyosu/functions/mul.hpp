@@ -91,6 +91,23 @@ namespace kyosu
 }
 namespace kyosu::_
 {
+  struct mul_kahan_t{
+    static auto k(auto a, auto b, auto c, auto d) {
+      auto w = c * d;
+      auto e = eve::fms(c, d, w);
+      auto f = eve::fma(a, b, w);
+      return f + e;
+    };
+
+    static auto call(auto v0, auto v1) {
+      auto [aa, bb] = v0;
+      auto [cc, dd] = v1;
+      auto r = k(aa, cc, -bb, dd);
+      auto i = k(aa, dd, bb, cc);
+      return complex(r, i);
+    };
+  };
+
   template<eve::callable_options O, concepts::cayley_dickson_like T0>
   EVE_FORCEINLINE constexpr auto mul_(KYOSU_DELAY(), O const&, T0 const& v0) noexcept
   {
@@ -107,20 +124,7 @@ namespace kyosu::_
     {
       if constexpr (O::contains(eve::kahan) && concepts::complex<r_t>)
       {
-        auto mulk = [](auto v0, auto v1) {
-          auto [aa, bb] = v0;
-          auto [cc, dd] = v1;
-          auto k = [](auto a, auto b, auto c, auto d) {
-            auto w = c * d;
-            auto e = eve::fms(c, d, w);
-            auto f = eve::fma(a, b, w);
-            return f + e;
-          };
-          auto r = k(aa, cc, -bb, dd);
-          auto i = k(aa, dd, bb, cc);
-          return complex(r, i);
-        };
-        return mulk(t0, ts...);
+        return mul_kahan_t::call(t0, ts...);
       }
       else return t0 * (ts * ...);
     }

@@ -100,7 +100,7 @@ namespace kyosu::_
       }
       else
       {
-        auto squares = kumi::map([](auto const& e) { return eve::sqr(e); }, v);
+        auto squares = kumi::map(eve::sqr, v);
         return kumi::sum(kumi::extract(squares, kumi::index<1>), get<0>(squares));
       }
     }

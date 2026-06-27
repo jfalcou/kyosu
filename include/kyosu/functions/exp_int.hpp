@@ -86,6 +86,49 @@ namespace kyosu
 
 namespace kyosu::_
 {
+
+  template < typename N,  typename Z> struct br_small_t{
+    auto operator()(N nn, Z zz) const { // |z| < thresh
+      using r_t = eve::common_value_t<Z, N>;
+      using u_t = eve::underlying_type_t<r_t>;
+      constexpr auto tol = eve::eps(eve::as<u_t>());
+      auto mzz = -zz;
+      auto dn = dec(nn);
+      auto s = kyosu::zero(eve::as(zz));
+      auto isflint = kyosu::is_flint(kyosu::real(nn));
+      if (eve::all(isflint))
+        s = kyosu::tgamma_inv(nn) * kyosu::pow(mzz, dec(nn)) * (kyosu::digamma(nn) - kyosu::log(zz));
+      else if (eve::none(isflint)) s = kyosu::tgamma(-dn) * pow(zz, dn);
+      else
+      {
+        auto sflint = kyosu::tgamma_inv(nn) * kyosu::pow(mzz, dec(nn)) * (kyosu::digamma(nn) - kyosu::log(zz));
+        auto sfloat = kyosu::tgamma(-dn) * pow(zz, dn);
+        s = kyosu::if_else(kyosu::is_flint(nn), sflint, sfloat);
+      }
+      auto test = kyosu::false_(eve::as(zz));
+      auto fac = kyosu::one(eve::as(zz));
+
+      s -= kyosu::if_else(kyosu::is_eqz(dn), zero, -fac / dn);
+      constexpr int Maxit = 500;
+      for (size_t k = 1; k <= Maxit; ++k)
+      {
+        fac *= zz * kyosu::mone(eve::as(zz)) / k;
+        auto t = fac / (k - dn);
+        s -= if_else(is_nez(k - dn), t, zero);
+        test = kyosu::linfnorm[kyosu::flat](t) <= kyosu::linfnorm[kyosu::flat](s) * tol;
+        if (eve::all(test)) { return s; }
+      };
+      return kyosu::fnan(as(s));
+    };
+  };
+
+  template < typename N,  typename Z> struct br_large_t{
+     auto operator()(N, Z zz) const { // |z| >=thresh
+      return kyosu::exp(-zz) / zz;
+    };
+  };
+
+
   template<typename N, typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr eve::common_value_t<Z, N> exp_int_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
   {
@@ -98,42 +141,10 @@ namespace kyosu::_
       r = if_else(kyosu::is_eqz(z), kyosu::cinf(as(z)), r);
       auto notdone = kyosu::is_not_nan(z) && kyosu::is_nez(z);
 
-      auto br_small = [](auto nn, auto zz) { // |z| < thresh
-        constexpr auto tol = eve::eps(eve::as<u_t>());
-        auto mzz = -zz;
-        auto dn = dec(nn);
-        auto s = kyosu::zero(eve::as(zz));
-        auto isflint = kyosu::is_flint(kyosu::real(nn));
-        if (eve::all(isflint))
-          s = kyosu::tgamma_inv(nn) * kyosu::pow(mzz, dec(nn)) * (kyosu::digamma(nn) - kyosu::log(zz));
-        else if (eve::none(isflint)) s = kyosu::tgamma(-dn) * pow(zz, dn);
-        else
-        {
-          auto sflint = kyosu::tgamma_inv(nn) * kyosu::pow(mzz, dec(nn)) * (kyosu::digamma(nn) - kyosu::log(zz));
-          auto sfloat = kyosu::tgamma(-dn) * pow(zz, dn);
-          s = kyosu::if_else(kyosu::is_flint(nn), sflint, sfloat);
-        }
-        auto test = kyosu::false_(eve::as(zz));
-        auto fac = kyosu::one(eve::as(zz));
+      br_small_t<N, Z> br_small;
+      br_large_t<N, Z> br_large;
 
-        s -= kyosu::if_else(kyosu::is_eqz(dn), zero, -fac / dn);
-        constexpr int Maxit = 500;
-        for (size_t k = 1; k <= Maxit; ++k)
-        {
-          fac *= zz * kyosu::mone(eve::as(zz)) / k;
-          auto t = fac / (k - dn);
-          s -= if_else(is_nez(k - dn), t, zero);
-          test = kyosu::linfnorm[kyosu::flat](t) <= kyosu::linfnorm[kyosu::flat](s) * tol;
-          if (eve::all(test)) { return s; }
-        };
-        return kyosu::fnan(as(s));
-      };
-
-      auto br_large = [](auto nn, auto zz) { // |z| >=thresh
-        return kyosu::exp(-zz) / zz;
-      };
-
-      u_t constexpr thresh = 18.0;
+      u_t constexpr thresh = u_t(18.0);
       if (eve::any(notdone))
       {
         notdone = next_interval(br_small, notdone, kyosu::abs(kyosu::real(z)) < thresh, r, n, z);

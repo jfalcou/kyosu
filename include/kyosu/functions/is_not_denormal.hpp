@@ -66,6 +66,6 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto is_not_denormal_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::is_not_denormal(z);
-    else return kumi::all_of(z, [](auto const& e) { return eve::is_not_denormal(e); });
+    else return kumi::all_of(z, eve::is_not_denormal);
   }
 }

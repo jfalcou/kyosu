@@ -81,28 +81,28 @@ namespace kyosu
   namespace _
   {
     template<typename Z, eve::callable_options O>
-    KYOSU_FORCEINLINE constexpr auto tan_(KYOSU_DELAY(), O const& o, Z z) noexcept
+    KYOSU_FORCEINLINE constexpr auto tan_(KYOSU_DELAY(), O const& o, Z zz) noexcept
     {
-      if constexpr (concepts::real<Z>) return eve::tan[o](z);
+      if constexpr (concepts::real<Z>)
+        return eve::tan[o](zz);
       else if constexpr (concepts::complex<Z>)
       {
-        if constexpr (!O::contains(radpi)) return mulmi(kyosu::tanh(muli(z)));
+        if constexpr (!O::contains(radpi))
+          return mulmi(kyosu::tanh(muli(zz)));
         else
         {
-          auto machin = [](auto z) {
-            auto [rz, iz] = z + z;
-            auto [s, c] = eve::sinpicospi(iz);
-            auto [sh, ch] = eve::sinhcosh(eve::pi(eve::as(rz)) * rz);
-            auto tmp = c + ch;
-            auto rr = eve::if_else(kyosu::is_imag(z), eve::zero, sh / tmp);
-            auto ii = eve::if_else(kyosu::is_real(z), eve::zero, s / tmp);
-            return kyosu::if_else(eve::is_infinite(rz), kyosu::complex(sign(rz)), kyosu::complex(rr, ii));
-          };
-          auto r = machin(kyosu::complex(-kyosu::imag(z), kyosu::real(z)));
+          auto  rz = -2*imag(zz);
+          auto  iz =  2*real(zz);
+          auto [s, c] = eve::sinpicospi(iz);
+          auto [sh, ch] = eve::sinhcosh(eve::pi(eve::as(rz)) * rz);
+          auto tmp = eve::rec[pedantic](c + ch);
+          auto rr = eve::if_else(kyosu::is_real(zz), eve::zero, sh*tmp);
+          auto ii = eve::if_else(kyosu::is_imag(zz), eve::zero, s*tmp);
+          auto r = kyosu::if_else(eve::is_infinite(rz), kyosu::complex(sign(rz)), kyosu::complex(rr, ii));
           return mulmi(r);
         }
       }
-      else return _::cayley_extend(kyosu::tan[o], z);
+      else return _::cayley_extend(kyosu::tan[o], zz);
     }
   }
 
