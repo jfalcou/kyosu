@@ -75,37 +75,31 @@ namespace kyosu
 namespace kyosu::_
 {
 
-  template <  typename T, typename U>
-  struct nully {
-    auto operator()(T x, U y) const { return complex(eve::erf(x), y); };
-  };
-
-  template <  typename T, typename U, typename V,  typename W>
-  struct nullx {
-    auto operator()(T x, U y, V signy, W w_im) const  {
+  struct inner_erf_t{
+    template <typename T,  typename U>
+    auto static inline nully(T x, U y) { return complex(eve::erf(x), y); };
+    template <typename T,  typename U, typename V,  typename W>
+    auto static inline nullx(T x, U y, V signy, W w_im) {
       using u_t = eve::underlying_type_t<decltype(x)>;
       return complex(x, eve::if_else(eve::sqr(y) > u_t(720)
                                     , eve::inf(eve::as(y))
                                     , eve::expx2(y) * w_im(y))) * signy;
     };
-  };
-
-  template <  typename T, typename U>
-  struct taylor{
-    auto operator()(T mz2, U z) const {
-      using r_t = eve::underlying_type_t<T>;
-      return kyosu::horner(mz2, r_t(0.0052239776254421878422), r_t(0.026866170645131251760), r_t(0.11283791670955125739),
-                           r_t(0.37612638903183752464), r_t(1.1283791670955125739)) * z;
+   template <typename T,  typename U>
+    auto static inline taylor(T mz2, U z) {
+      using u_t = eve::underlying_type_t<decltype(mz2)>;
+      return kyosu::horner(mz2, u_t(0.0052239776254421878422), u_t(0.026866170645131251760), u_t(0.11283791670955125739),
+                           u_t(0.37612638903183752464), u_t(1.1283791670955125739)) * z;
     };
-  };
 
-  template <  typename T, typename U, typename V,  typename W>
-  struct remains {
-        auto operator()(T x, U y, V mz2, W signx) const{
-          auto [mRe_z2, mIm_z2] = mz2;
-          auto [s, c] = eve::sincos(mIm_z2);
-         return oneminus(eve::exp(mRe_z2) * (complex(c, s) * faddeeva(complex(-y, x) * signx))) * signx;
-        };
+    template <typename T,  typename U, typename V,  typename W>
+    auto static inline remains(T x, U y, V mz2, W signx) {
+      auto [mRe_z2, mIm_z2] = mz2;
+      auto [s, c] = eve::sincos(mIm_z2);
+      return oneminus(eve::exp(mRe_z2) * (complex(c, s) * faddeeva(complex(-y, x) * signx))) * signx;
+    };
+
+    
   };
 
   template<typename Z, eve::callable_options O>
@@ -470,8 +464,7 @@ namespace kyosu::_
         auto smallx = ax < 8e-2;
         auto smally = eve::abs(y) < 1e-2;
         if (smallx && smally) {
-          taylor<decltype(mz2), decltype(z)> slxy;
-          return slxy(mz2, z);
+          return inner_erf_t::taylor(mz2, z);
         }
         /* don't use complex exp function, since that will produce spurious NaN
            values when multiplying w in an overflow situation. */
@@ -528,18 +521,20 @@ namespace kyosu::_
 
         if (eve::any(notdone))
         {
-          nully<decltype(x), decltype(y)> ny;
-          nullx<decltype(x), decltype(y), decltype(signy), decltype(w_im)> nx;
-          taylor<decltype(z), decltype(mz2)> smallxy;
-          remains<decltype(x),decltype(y), decltype(mz2), decltype(signx)> remain;
+          auto ny = inner_erf_t::nully<decltype(x), decltype(y)>;
           notdone = next_interval(ny, notdone, eve::is_eqz(y), r, x, y);
           if (eve::any(notdone))
           {
+            auto nx = inner_erf_t::nullx<decltype(x), decltype(y), decltype(signy), decltype(w_im)>;
             notdone = next_interval(nx, notdone, eve::is_eqz(x), r, x, y, signy, w_im);
             if (eve::any(notdone))
             {
+              auto smallxy = inner_erf_t::taylor<decltype(z), decltype(mz2)>;
               notdone = next_interval(smallxy, notdone, xsmall && ysmall, r, mz2, z);
-              if (eve::any(notdone)) { notdone = last_interval(remain, notdone, r, x, y, mz2, signx); }
+              if (eve::any(notdone)) {
+                auto remains = inner_erf_t::remains<decltype(x),decltype(y), decltype(mz2), decltype(signx)>;
+                notdone = last_interval(remains, notdone, r, x, y, mz2, signx);
+              }
             }
           }
         }

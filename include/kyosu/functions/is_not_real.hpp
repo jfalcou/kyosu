@@ -70,7 +70,7 @@ namespace kyosu::_
     else
     {
       get<0>(c) = eve::zero(eve::as(get<0>(c)));
-      return kumi::any_of(c, [](auto const& e) { return eve::is_nez(e); });
+      return kumi::any_of(c, eve::is_nez);
     }
   }
 }

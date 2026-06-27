@@ -20,7 +20,7 @@ namespace kyosu
       else
       {
         get<0>(c) = eve::zero(eve::as(get<0>(c)));
-        return kumi::all_of(c, [](auto const& e) { return eve::is_eqz(e); });
+        return kumi::all_of(c, eve::is_eqz);
       }
     }
 

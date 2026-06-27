@@ -65,6 +65,6 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto is_nan_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::is_nan(z);
-    else return kumi::any_of(z, [](auto const& e) { return eve::is_nan(e); });
+    else return kumi::any_of(z, eve::is_nan);
   }
 }

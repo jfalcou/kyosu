@@ -66,6 +66,6 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto nearest_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (kyosu::concepts::real<Z>) return eve::nearest(z);
-    else return Z{kumi::map([](auto const& e) { return eve::nearest(e); }, z)};
+    else return Z{kumi::map(eve::nearest, z)};
   }
 }

@@ -66,6 +66,6 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto is_finite_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::is_finite(z);
-    else return kumi::all_of(z, [](auto const& e) { return eve::is_finite(e); });
+    else return kumi::all_of(z, eve::is_finite);
   }
 }
