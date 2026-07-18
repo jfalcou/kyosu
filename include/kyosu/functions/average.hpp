@@ -72,7 +72,7 @@ namespace kyosu
   //!   **Parameters**
   //!
   //!     * `xs...`: Values to process. Can be a mix of cayley_dickson_like values.
-  //!     * `tup : kumi tuple of arguments.
+  //!     * `tup` : kumi tuple of arguments.
   //!
   //!   **Return value**
   //!

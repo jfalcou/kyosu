@@ -48,7 +48,7 @@ namespace kyosu
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include kyosu/quaternion.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
@@ -64,8 +64,8 @@ namespace kyosu
   //! **Parameters**
   //!
   //!   * `rho`:  the modulus
-  //!   * `theta`, `phi1`, `phi2`: angles. If the `radpi`option  is used  the angles are returned in
-  //!     `\f$\pi\f$ multiples else in radian.
+  //!   * `theta`, `phi1`, `phi2`: angles. If the `radpi `option is used  the angles are returned in
+  //!     \f$\pi\f$ multiples else in radian.
   //!
   //! **Return value**
   //!
