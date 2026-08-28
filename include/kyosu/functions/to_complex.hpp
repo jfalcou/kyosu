@@ -63,7 +63,7 @@ namespace kyosu
   //!
   //!  @groupheader{Example}
   //!
-  //!  @godbolt{doc/make_complex.cpp}
+  //!  @godbolt{doc/to_complex.cpp}
   //======================================================================================================================
 
   inline constexpr auto complex = eve::functor<make_complex_t>;

@@ -4,7 +4,7 @@
 
    # KYOSU: SIMD-Aware Cayley-Dickson Algebras
    The **KYOSU** library is a unified, high-performance C++ library for complex numbers, quaternions, octonions,
-   and general $\mathbb{R}$-Cayley-Dickson algebras.
+   and general \f$\mathbb{R}\f$-Cayley-Dickson algebras.
 
    Built natively for data-parallel execution, **KYOSU** delivers zero-cost abstraction for both scalar and vectorized math.
    It allows you to extend the domain functions you know and love into higher dimensions, keeping your computations clear
@@ -16,7 +16,7 @@
    ## Core Features
    + **Blazing Fast Data-Parallel Execution:** Seamlessly use over 200 functions in both scalar and SIMD-compatible contexts without abstraction penalties.
    + **Execution Control:** Tailor performance by choosing `raw` for maximum vectorization speed, or `pedantic` for strict IEEE754 standard conformity and lane-wise accuracy.
-   + **Precision Angles:** Pass the kyosu::radpi option to calculate in exact multiples of $\pi$, completely bypassing standard floating-point representation inaccuracies within vectorized pipelines.
+   + **Precision Angles:** Pass the kyosu::radpi option to calculate in exact multiples of \f$\pi\f$, completely bypassing standard floating-point representation inaccuracies within vectorized pipelines.
    + **Real-Only Fallbacks:** While out-of-bounds real inputs naturally return complex results in KYOSU (e.g., kyosu::acos(2.0)), you can enforce strictly real scalar or SIMD behavior using the kyosu::real_only flag.
 
    ### Supported Algebras & Types

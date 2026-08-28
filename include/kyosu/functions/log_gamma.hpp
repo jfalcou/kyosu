@@ -68,10 +68,10 @@ namespace kyosu
   //!   **Return value**
   //!
   //!   - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
-  //!       in which case the  result will the same as to an `eve::log_gamma` call
-  //!       implying a Nan result if the input is not greater than zero.
-  //!  -  Returns \f$\Gamma(z)\f$.
-  //!    - with two parameters use the nth branch of the logarithm.
+  //!     in which case the result will be the same as an `eve::log_gamma` call, implying a Nan
+  //!     result if the input is not greater than zero.
+  //!   - Returns \f$\Gamma(z)\f$.
+  //!     - with two parameters use the nth branch of the logarithm.
   //!
   //!  @groupheader{External references}
   //!   *  [Wolfram MathWorld: Gamma Function](https://mathworld.wolfram.com/GammaFunction.html)

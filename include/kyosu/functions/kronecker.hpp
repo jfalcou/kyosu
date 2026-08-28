@@ -40,7 +40,7 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @kroneckertogroup functions
+  //! @addtogroup functions
   //! @{
   //!   @var kronecker
   //!   @brief `tuple_callable` computing the \f$\delta\f$ (Kronecker symbol) of its arguments.

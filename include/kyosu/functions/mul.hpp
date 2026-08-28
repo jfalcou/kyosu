@@ -40,7 +40,7 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @multogroup functions
+  //! @addtogroup functions
   //! @{
   //!   @var mul
   //!   @brief `tuple_callable` computing the product of its arguments.

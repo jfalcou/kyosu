@@ -41,7 +41,7 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @divtogroup functions
+  //! @addtogroup functions
   //! @{
   //!   @var div
   //!   @brief `tuple_callable` computing the division of its first argument with the product of the others.

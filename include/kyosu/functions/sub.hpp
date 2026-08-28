@@ -41,7 +41,7 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @subtogroup functions
+  //! @addtogroup functions
   //! @{
   //!   @var sub
   //!   @brief `tuple_callable` computing the difference of its first argument with the sum of the others.
