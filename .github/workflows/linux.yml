@@ -32,7 +32,7 @@ jobs:
         with:
           config: Debug
           preset: ${{ matrix.compiler.preset }}
-          targets: doc.exe unit.exe benchmarks.exe
+          targets: doc.exe unit.exe
 
       - name: Run Doc Tests
         uses: ./.github/actions/test

@@ -25,4 +25,5 @@ copa_glob_unit( PATTERN "benchmarks/*.cpp"
                 RELATIVE  ${root}
                 INTERFACE kyosu_bench
                 PCH kyosu_bench_pch
+                TARGET kyosu-bench
               )

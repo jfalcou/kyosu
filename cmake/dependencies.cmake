@@ -30,7 +30,7 @@ include(${CPM_DOWNLOAD_LOCATION})
 ##======================================================================================================================
 ## Retrieve dependencies
 ##======================================================================================================================
-CPMAddPackage ( NAME COPACABANA GITHUB_REPOSITORY jfalcou/copacabana  GIT_TAG main)
+CPMAddPackage ( NAME COPACABANA GITHUB_REPOSITORY jfalcou/copacabana  GIT_TAG v3)
 CPMAddPackage ( NAME TTS   GITHUB_REPOSITORY jfalcou/tts
                 GIT_TAG main
                 OPTIONS "TTS_BUILD_TEST OFF"
