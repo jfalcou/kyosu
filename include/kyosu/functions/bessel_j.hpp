@@ -12,7 +12,13 @@
 namespace kyosu
 {
 
-  template<typename Options> struct bessel_j_t : eve::strict_elementwise_callable<bessel_j_t, Options, raw_option, pedantic_option, eve::spherical_option, eve::cylindrical_option>
+  template<typename Options>
+  struct bessel_j_t : eve::strict_elementwise_callable<bessel_j_t,
+                                                       Options,
+                                                       raw_option,
+                                                       pedantic_option,
+                                                       eve::spherical_option,
+                                                       eve::cylindrical_option>
   {
     template<eve::scalar_value N, concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n, Z const& z) const noexcept
@@ -21,7 +27,9 @@ namespace kyosu
     }
 
     template<eve::scalar_value N, concepts::complex_like Z, std::size_t S>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n, Z const& z, std::span<Z, S> js) const noexcept
+    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n,
+                                                                          Z const& z,
+                                                                          std::span<Z, S> js) const noexcept
     {
       return KYOSU_CALL(n, z, js);
     }
@@ -91,7 +99,8 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename N, typename Z, eve::callable_options O> KYOSU_FORCEINLINE constexpr auto bessel_j_(KYOSU_DELAY(), O const& o, N n, Z z) noexcept
+  template<typename N, typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto bessel_j_(KYOSU_DELAY(), O const& o, N n, Z z) noexcept
   {
     if constexpr (concepts::complex<Z>)
     {

@@ -10,10 +10,11 @@
 
 namespace kyosu
 {
-  template<typename Options> struct expm1_t : eve::elementwise_callable<expm1_t, Options, radpi_option, real_only_option>
+  template<typename Options>
+  struct expm1_t : eve::elementwise_callable<expm1_t, Options, radpi_option, real_only_option>
   {
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z>
-    operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z>
+    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -69,18 +70,16 @@ namespace kyosu
 namespace kyosu::_
 {
 
-  template<typename Z, eve::callable_options O>
-  constexpr auto expm1_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto expm1_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     if constexpr (concepts::real<Z>)
     {
       if constexpr (O::contains(real_only))
       {
-        if constexpr (O::contains(radpi)) return eve::expm1(eve::pi(eve::as(z))*z);
+        if constexpr (O::contains(radpi)) return eve::expm1(eve::pi(eve::as(z)) * z);
         else return eve::expm1(z);
       }
-      else
-        return complex(kyosu::expm1[kyosu::real_only](z));
+      else return complex(kyosu::expm1[kyosu::real_only](z));
     }
     else if constexpr (kyosu::concepts::complex<Z>)
     {
@@ -92,7 +91,6 @@ namespace kyosu::_
       r = eve::if_else(rz == eve::inf(eve::as(rz)) && eve::is_not_finite(iz), rz, r);
       return complex(r, eve::if_else(kyosu::is_real(z), eve::zero, i));
     }
-    else
-     return _::cayley_extend(kyosu::expm1[o], z);
+    else return _::cayley_extend(kyosu::expm1[o], z);
   }
 }

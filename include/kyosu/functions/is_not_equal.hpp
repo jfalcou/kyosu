@@ -13,7 +13,8 @@
 namespace kyosu
 {
   template<typename Options>
-  struct is_not_equal_t : eve::strict_elementwise_callable<is_not_equal_t, Options, raw_option, pedantic_option, eve::numeric_option>
+  struct is_not_equal_t
+    : eve::strict_elementwise_callable<is_not_equal_t, Options, raw_option, pedantic_option, eve::numeric_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
     KYOSU_FORCEINLINE constexpr eve::common_logical_t<as_real_type_t<Z0>, as_real_type_t<Z1>> operator()(
@@ -77,10 +78,7 @@ namespace kyosu::_
     if constexpr (O::contains(eve::numeric))
     {
       if constexpr (concepts::real<Z0> && concepts::real<Z1>) return eve::is_not_equal[eve::numeric](z0, z1);
-      else
-      {
-        return kumi::map(eve::is_not_equal[eve::numeric], r_t(z0), r_t(z1));
-      }
+      else { return kumi::map(eve::is_not_equal[eve::numeric], r_t(z0), r_t(z1)); }
     }
     else return z0 != z1;
   }

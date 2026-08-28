@@ -23,8 +23,7 @@ namespace kyosu
   //!
   //! Complex numbers are implemented as Cayley-dickson numbers of dimension 2.
   //====================================================================================================================
-  template<eve::floating_value T>
-  using complex_t = as_cayley_dickson_n_t<2,T>;
+  template<eve::floating_value T> using complex_t = as_cayley_dickson_n_t<2, T>;
 
   //====================================================================================================================
   //! @}

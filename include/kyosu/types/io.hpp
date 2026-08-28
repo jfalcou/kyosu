@@ -20,22 +20,21 @@ namespace kyosu
 
   /// Stream insertion for Cayley-dickson based types
   template<typename C, typename Ct, concepts::cayley_dickson CD>
-  auto& operator<<(std::basic_ostream<C,Ct>& os, CD const& z)
+  auto& operator<<(std::basic_ostream<C, Ct>& os, CD const& z)
   {
-    auto display_positive = [](auto& os,auto e, bool first) -> decltype(auto)
-    {
-      if(first)                     return os << e;
-      else if(eve::is_positive(e))  return os << "+ " << e;
-      else                          return os << "- " << -e;
+    auto display_positive = [](auto& os, auto e, bool first) -> decltype(auto) {
+      if (first) return os << e;
+      else if (eve::is_positive(e)) return os << "+ " << e;
+      else return os << "- " << -e;
     };
 
-    auto basis = [&](auto i)
-    {
-      constexpr const char* base[8] = {" ","i ","j ","k ","l ","li ","lj ", "lk "};
-      if constexpr(CD::static_dimension < 16) return base[i]; else return "z"+ std::to_string(i) + " ";
+    auto basis = [&](auto i) {
+      constexpr char const* base[8] = {" ", "i ", "j ", "k ", "l ", "li ", "lj ", "lk "};
+      if constexpr (CD::static_dimension < 16) return base[i];
+      else return "z" + std::to_string(i) + " ";
     };
 
-    kumi::for_each_index([&](auto i, auto v) { display_positive(os,v,i == 0) << basis(i);}, z);
+    kumi::for_each_index([&](auto i, auto v) { display_positive(os, v, i == 0) << basis(i); }, z);
     return os;
   }
 

@@ -92,7 +92,6 @@
 //!  to obtain poor precision with float based computations.
 //!======================================================================================================================
 
-
 #include <kyosu/details/bessel/bessel_utils.hpp>
 // These files only contain implementation details and do not contain any function
 // belonging to the user interface

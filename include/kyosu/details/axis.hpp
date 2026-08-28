@@ -9,7 +9,9 @@
 
 namespace kyosu::_
 {
-  template < int N >  struct axis:std::integral_constant<int, N>{};
+  template<int N> struct axis : std::integral_constant<int, N>
+  {
+  };
 }
 
 namespace kyosu

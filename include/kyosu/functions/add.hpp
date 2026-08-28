@@ -11,7 +11,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct add_t : kyosu::strict_tuple_callable<add_t, Options, raw_option, pedantic_option, eve::kahan_option>
+  template<typename Options>
+  struct add_t : kyosu::strict_tuple_callable<add_t, Options, raw_option, pedantic_option, eve::kahan_option>
   {
     template<typename... Ts> struct result : as_cayley_dickson<Ts...>
     {

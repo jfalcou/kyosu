@@ -11,7 +11,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct mul_t : kyosu::strict_tuple_callable<mul_t, Options, raw_option, pedantic_option, eve::kahan_option>
+  template<typename Options>
+  struct mul_t : kyosu::strict_tuple_callable<mul_t, Options, raw_option, pedantic_option, eve::kahan_option>
   {
     template<typename... Ts> struct result : as_cayley_dickson<Ts...>
     {
@@ -91,15 +92,18 @@ namespace kyosu
 }
 namespace kyosu::_
 {
-  struct mul_kahan_t{
-    static auto k(auto a, auto b, auto c, auto d) {
+  struct mul_kahan_t
+  {
+    static auto k(auto a, auto b, auto c, auto d)
+    {
       auto w = c * d;
       auto e = eve::fms(c, d, w);
       auto f = eve::fma(a, b, w);
       return f + e;
     };
 
-    static auto call(auto v0, auto v1) {
+    static auto call(auto v0, auto v1)
+    {
       auto [aa, bb] = v0;
       auto [cc, dd] = v1;
       auto r = k(aa, cc, -bb, dd);
@@ -122,10 +126,7 @@ namespace kyosu::_
     else if constexpr (sizeof...(Ts) == 0) return t0;
     else if constexpr (sizeof...(Ts) == 1)
     {
-      if constexpr (O::contains(eve::kahan) && concepts::complex<r_t>)
-      {
-        return mul_kahan_t::call(t0, ts...);
-      }
+      if constexpr (O::contains(eve::kahan) && concepts::complex<r_t>) { return mul_kahan_t::call(t0, ts...); }
       else return t0 * (ts * ...);
     }
     else

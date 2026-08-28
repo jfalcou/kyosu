@@ -20,8 +20,7 @@ namespace kyosu
   //!
   //! Quaternion numbers are implemented as Cayley-dickson numbers of dimension 4.
   //====================================================================================================================
-  template<eve::floating_value T>
-  using quaternion_t = as_cayley_dickson_n_t<4,T>;
+  template<eve::floating_value T> using quaternion_t = as_cayley_dickson_n_t<4, T>;
 
   //====================================================================================================================
   //! @}

@@ -24,7 +24,7 @@ namespace kyosu
 
   /// Adds the real value `other` to `self` and returns the new value of `self`.
   constexpr auto& operator+=(concepts::cayley_dickson auto& self, concepts::real auto other) noexcept
-  requires( requires {get<0>(self) += other;} )
+  requires(requires { get<0>(self) += other; })
   {
     get<0>(self) += other;
     return self;
@@ -35,13 +35,13 @@ namespace kyosu
   requires(dimension_v<Other> <= dimension_v<Self>)
   constexpr auto& operator+=(Self& self, Other const& other) noexcept
   {
-    kumi::for_each_index( [&]<typename I>(I,auto const& o) { get<I::value>(self) += o; }, other);
+    kumi::for_each_index([&]<typename I>(I, auto const& o) { get<I::value>(self) += o; }, other);
     return self;
   }
 
   /// Substracts the real value `other` from `self` and returns the new value of `self`.
   constexpr auto& operator-=(concepts::cayley_dickson auto& self, concepts::real auto other) noexcept
-  requires( requires {get<0>(self) -= other;} )
+  requires(requires { get<0>(self) -= other; })
   {
     get<0>(self) -= other;
     return self;
@@ -52,15 +52,15 @@ namespace kyosu
   requires(dimension_v<Other> <= dimension_v<Self>)
   constexpr auto& operator-=(Self& self, Other const& other) noexcept
   {
-    kumi::for_each_index( [&]<typename I>(I,auto const& o) { get<I::value>(self) -= o; }, other);
+    kumi::for_each_index([&]<typename I>(I, auto const& o) { get<I::value>(self) -= o; }, other);
     return self;
   }
 
   /// Multiplies `self` by the  real value `other`  and returns the new value of `self`.
   constexpr auto& operator*=(concepts::cayley_dickson auto& self, concepts::real auto other) noexcept
-  requires( requires {get<0>(self) *= other;} )
+  requires(requires { get<0>(self) *= other; })
   {
-    kumi::for_each( [&](auto& s) { s *= other; }, self);
+    kumi::for_each([&](auto& s) { s *= other; }, self);
     return self;
   }
 
@@ -69,37 +69,36 @@ namespace kyosu
   requires(dimension_v<Other> <= dimension_v<Self>)
   constexpr Self& operator*=(Self& self, Other const& other) noexcept
   {
-    if constexpr(dimension_v<Self> == 2)
+    if constexpr (dimension_v<Self> == 2)
     {
       // complex is the floor state and need optimized handling with FMAs
-      auto [ra,ia] = self;
-      auto [rb,ib] = other;
+      auto [ra, ia] = self;
+      auto [rb, ib] = other;
 
-      self = as_cayley_dickson_t<Self,Other>{eve::fms(ra,rb,ib*ia), eve::fma(ra,ib,ia*rb)};
+      self = as_cayley_dickson_t<Self, Other>{eve::fms(ra, rb, ib * ia), eve::fma(ra, ib, ia * rb)};
     }
-    else if constexpr(dimension_v<Self> == dimension_v<Other>)
+    else if constexpr (dimension_v<Self> == dimension_v<Other>)
     {
-      constexpr auto sz = dimension_v<Self>/2;
-      auto ria  = kumi::split(self ,kumi::index<sz>);
-      auto rib  = kumi::split(other,kumi::index<sz>);
+      constexpr auto sz = dimension_v<Self> / 2;
+      auto ria = kumi::split(self, kumi::index<sz>);
+      auto rib = kumi::split(other, kumi::index<sz>);
 
-      using cd_t = as_cayley_dickson_n_t<sz,as_real_type_t<Self>,as_real_type_t<Other>>;
-      cd_t  ra{get<0>(ria)}, ia{get<1>(ria)}
-          , rb{get<0>(rib)}, ib{get<1>(rib)};
+      using cd_t = as_cayley_dickson_n_t<sz, as_real_type_t<Self>, as_real_type_t<Other>>;
+      cd_t ra{get<0>(ria)}, ia{get<1>(ria)}, rb{get<0>(rib)}, ib{get<1>(rib)};
 
       // Cayley-Dickson construction : (a,b) x  (c,d)= (a x c - conj(d) x b       , d x a + b x conj(c))
-      self = as_cayley_dickson_t<Self,Other>{kumi::cat((ra * rb) - (conj(ib) * ia),(ib * ra) + (ia * conj(rb)))};
+      self = as_cayley_dickson_t<Self, Other>{kumi::cat((ra * rb) - (conj(ib) * ia), (ib * ra) + (ia * conj(rb)))};
     }
     else
     {
       // Optimize the mixed dimensions to not generate spurious operation with 0s
-      constexpr auto sz = dimension_v<Self>/2;
-      constexpr auto idx  = kumi::index<sz>;
-      auto ria  = kumi::split(self,idx);
+      constexpr auto sz = dimension_v<Self> / 2;
+      constexpr auto idx = kumi::index<sz>;
+      auto ria = kumi::split(self, idx);
 
-      using cd_t = as_cayley_dickson_n_t<sz,as_real_type_t<Self>,as_real_type_t<Other>>;
+      using cd_t = as_cayley_dickson_n_t<sz, as_real_type_t<Self>, as_real_type_t<Other>>;
       cd_t ra{get<0>(ria)}, ia{get<1>(ria)};
-      self = as_cayley_dickson_t<Self,Other>{kumi::cat(ra * other,ia * conj(other))};
+      self = as_cayley_dickson_t<Self, Other>{kumi::cat(ra * other, ia * conj(other))};
     }
 
     return self;
@@ -107,9 +106,9 @@ namespace kyosu
 
   /// Divides `self` by the  real value `other` and returns the new value of `self`.
   constexpr auto& operator/=(concepts::cayley_dickson auto& self, concepts::real auto other) noexcept
-  requires( requires {get<0>(self) /= other;} )
+  requires(requires { get<0>(self) /= other; })
   {
-    kumi::for_each( [&](auto& s) { s /= other; }, self);
+    kumi::for_each([&](auto& s) { s /= other; }, self);
     return self;
   }
 
@@ -118,16 +117,10 @@ namespace kyosu
   requires(dimension_v<Other> <= dimension_v<Self>)
   constexpr Self& operator/=(Self& self, Other const& other) noexcept
   {
-    auto r1 =  (self * if_else(is_infinite(other), eve::zero, conj(other)/sqr_abs(other)));
-    auto eqzother =  is_eqz(other);
-    if(eve::none(eqzother))
-    {
-      self = r1;
-    }
-    else
-    {
-      self = if_else(is_eqz(other), self/real(other), r1);
-    }
+    auto r1 = (self * if_else(is_infinite(other), eve::zero, conj(other) / sqr_abs(other)));
+    auto eqzother = is_eqz(other);
+    if (eve::none(eqzother)) { self = r1; }
+    else { self = if_else(is_eqz(other), self / real(other), r1); }
     return self;
   }
 
@@ -148,27 +141,31 @@ namespace kyosu
   constexpr auto& operator+=(Self&, Other const&) noexcept = delete;
 
   constexpr auto& operator+=(concepts::cayley_dickson auto& self, concepts::real auto v) noexcept
-  requires( !requires {get<0>(self) += v;} ) = delete;
+  requires(!requires { get<0>(self) += v; })
+  = delete;
 
   template<concepts::cayley_dickson Self, concepts::cayley_dickson Other>
   requires(dimension_v<Other> > dimension_v<Self>)
   constexpr auto& operator-=(Self&, Other const&) noexcept = delete;
 
   constexpr auto& operator-=(concepts::cayley_dickson auto& self, concepts::real auto v) noexcept
-  requires( !requires {get<0>(self) -= v;} ) = delete;
+  requires(!requires { get<0>(self) -= v; })
+  = delete;
 
   template<concepts::cayley_dickson Self, concepts::cayley_dickson Other>
   requires(dimension_v<Other> > dimension_v<Self>)
   constexpr auto& operator*=(Self&, Other const&) noexcept = delete;
 
   constexpr auto& operator*=(concepts::cayley_dickson auto& self, concepts::real auto v) noexcept
-  requires( !requires {get<0>(self) *= v;} ) = delete;
+  requires(!requires { get<0>(self) *= v; })
+  = delete;
 
   template<concepts::cayley_dickson Self, concepts::cayley_dickson Other>
   requires(dimension_v<Other> > dimension_v<Self>)
   constexpr auto& operator/=(Self&, Other const&) noexcept = delete;
 
   constexpr auto& operator/=(concepts::cayley_dickson auto& self, concepts::real auto v) noexcept
-  requires( !requires {get<0>(self) /= v;} ) = delete;
+  requires(!requires { get<0>(self) /= v; })
+  = delete;
 #endif
 }

@@ -12,7 +12,8 @@
 namespace kyosu
 {
   template<typename Options>
-  struct average_t : kyosu::strict_tuple_callable<average_t, Options, raw_option, eve::pedantic_option, eve::kahan_option>
+  struct average_t
+    : kyosu::strict_tuple_callable<average_t, Options, raw_option, eve::pedantic_option, eve::kahan_option>
   {
     template<typename... Ts> struct result : as_cayley_dickson<Ts...>
     {

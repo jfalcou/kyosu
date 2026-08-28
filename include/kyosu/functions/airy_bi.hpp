@@ -10,7 +10,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct airy_bi_t : eve::elementwise_callable<airy_bi_t, Options, raw_option, pedantic_option>
+  template<typename Options>
+  struct airy_bi_t : eve::elementwise_callable<airy_bi_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
     {

@@ -12,7 +12,8 @@
 namespace kyosu
 {
   template<typename Options>
-  struct from_cylindrospherical_t : eve::elementwise_callable<from_cylindrospherical_t, Options, raw_option, pedantic_option>
+  struct from_cylindrospherical_t
+    : eve::elementwise_callable<from_cylindrospherical_t, Options, raw_option, pedantic_option>
   {
     template<concepts::real U, concepts::real V, concepts::real W, concepts::real T>
     KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(
