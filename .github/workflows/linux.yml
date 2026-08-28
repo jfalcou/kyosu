@@ -1,0 +1,49 @@
+##======================================================================================================================
+## Kyosu - Complex Without Complexes
+## Copyright : KYOSU Contributors & Maintainers
+## SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+name: KYOSU Linux Tests
+on:
+  workflow_call:
+
+jobs:
+  linux:
+    name: ${{ matrix.compiler.name }}
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jfalcou/compilers:v10
+      options: -u root
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - { name: "gcc"          , preset: "gcc"        }
+          - { name: "clang"        , preset: "clang"      }
+          - { name: "gcc avx2"     , preset: "gcc-avx2"   }
+          - { name: "clang avx2"   , preset: "clang-avx2" }
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v6
+
+      - name: Configure CMake and Build
+        uses: ./.github/actions/config
+        with:
+          config: Debug
+          preset: ${{ matrix.compiler.preset }}
+          targets: doc.exe unit.exe benchmarks.exe
+
+      - name: Run Doc Tests
+        uses: ./.github/actions/test
+        with:
+          config: Debug
+          preset: ${{ matrix.compiler.preset }}
+          targets: ^doc.*
+
+      - name: Run Unit Tests
+        uses: ./.github/actions/test
+        with:
+          config: Debug
+          preset: ${{ matrix.compiler.preset }}
+          targets: ^unit.*

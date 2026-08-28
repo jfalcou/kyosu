@@ -1,0 +1,63 @@
+{
+  "version": 4,
+  "cmakeMinimumRequired": { "major": 3, "minor": 22, "patch": 0 },
+  "vendor": {
+    "copyright": "Kyosu - Complex Without Complexes: KYOSU Contributors & Maintainers",
+    "license": "BSL-1.0",
+    "url": "https://github.com/jfalcou/kyosu"
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "KYOSU_BUILD_TEST": "ON",
+        "CMAKE_CXX_SCAN_FOR_MODULES": "OFF",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_CONFIGURATION_TYPES": "Debug;Release"
+      }
+    },
+    {
+      "name": "unix-base",
+      "hidden": true,
+      "inherits": ["base"],
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": { "CMAKE_DEFAULT_BUILD_TYPE": "Debug" }
+    },
+
+    { "name": "gcc"          , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++-15"    , "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE"        } },
+    { "name": "gcc-avx2"     , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++-15"    , "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE -mavx2" } },
+    { "name": "clang"        , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++-20", "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE"        } },
+    { "name": "clang-avx2"   , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++-20", "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE -mavx2" } },
+
+    { "name": "clang-macos"  , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++"   , "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE" } },
+    {
+      "name": "clang-macos-libc++",
+      "inherits": ["unix-base"],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE -stdlib=libc++",
+        "CMAKE_EXE_LINKER_FLAGS": "-stdlib=libc++"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "base-build", "hidden": true, "targets": ["kyosu-test"] },
+    { "name": "gcc"               , "inherits": "base-build", "configurePreset": "gcc"                },
+    { "name": "gcc-avx2"          , "inherits": "base-build", "configurePreset": "gcc-avx2"           },
+    { "name": "clang"             , "inherits": "base-build", "configurePreset": "clang"              },
+    { "name": "clang-avx2"        , "inherits": "base-build", "configurePreset": "clang-avx2"         },
+    { "name": "clang-macos"       , "inherits": "base-build", "configurePreset": "clang-macos"        },
+    { "name": "clang-macos-libc++", "inherits": "base-build", "configurePreset": "clang-macos-libc++" }
+  ],
+  "testPresets": [
+    { "name": "base-test", "hidden": true, "output": { "outputOnFailure": true }, "configuration": "Debug" },
+    { "name": "gcc"               , "inherits": "base-test", "configurePreset": "gcc"                },
+    { "name": "gcc-avx2"          , "inherits": "base-test", "configurePreset": "gcc-avx2"           },
+    { "name": "clang"             , "inherits": "base-test", "configurePreset": "clang"              },
+    { "name": "clang-avx2"        , "inherits": "base-test", "configurePreset": "clang-avx2"         },
+    { "name": "clang-macos"       , "inherits": "base-test", "configurePreset": "clang-macos"        },
+    { "name": "clang-macos-libc++", "inherits": "base-test", "configurePreset": "clang-macos-libc++" }
+  ]
+}
