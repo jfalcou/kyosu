@@ -1,0 +1,71 @@
+##======================================================================================================================
+## Kyosu - Complex Without Complexes
+## Copyright : KYOSU Contributors & Maintainers
+## SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+## Benchmarks gate nothing, so they run once a change has landed rather than on every pull request,
+## where they were a quarter of the build for no signal. They also need their own presets: the ones
+## used for testing define EVE_NO_FORCEINLINE, which a Release build does not undo.
+##======================================================================================================================
+name: KYOSU Benchmarks
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: kyosu-benchmarks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  benchmarks:
+    name: ${{ matrix.compiler.name }}
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jfalcou/compilers:v10
+      options: -u root
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - { name: "gcc"  , preset: "gcc-bench"   }
+          - { name: "clang", preset: "clang-bench" }
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v6
+
+      - name: Configure CMake and Build
+        uses: ./.github/actions/config
+        with:
+          config: Release
+          preset: ${{ matrix.compiler.preset }}
+          targets: kyosu-bench
+
+      - name: Run Benchmarks
+        shell: bash
+        env:
+          PRESET: ${{ matrix.compiler.preset }}
+        run: |
+          out="benchmarks-${{ matrix.compiler.name }}.md"
+          {
+            echo "# Benchmarks, ${{ matrix.compiler.name }}"
+            echo
+            echo "Run on a shared runner with hardware counters unavailable, so cycle and"
+            echo "instruction columns read zero and the rest is indicative, not a measurement."
+            echo
+          } > "$out"
+
+          find "build/$PRESET/benchmarks/Release" -name 'benchmarks.*.exe' -type f -print0 \
+          | sort -z | while IFS= read -r -d '' exe; do
+              echo "## $(basename "$exe" .exe)" >> "$out"
+              "$exe" >> "$out" 2>&1 || echo "> this one failed to run" >> "$out"
+            done
+
+          cat "$out" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the aggregated output
+        uses: actions/upload-artifact@v7
+        with:
+          name: benchmarks-${{ matrix.compiler.name }}
+          path: benchmarks-${{ matrix.compiler.name }}.md
