@@ -44,3 +44,23 @@ jobs:
     name: MacOS
     needs: precommit
     uses: ./.github/workflows/macos.yml
+
+  ##################################################################################################
+  ## Sanitizers
+  ##################################################################################################
+  sanitizer-tests:
+    name: Sanitizers
+    uses: jfalcou/copacabana/.github/workflows/sanitizers.yml@3337f916bb581d0829909976773f7a2ee827a25c # v4
+    with:
+      build-targets: unit.exe doc.exe
+      test-targets: unit|doc
+
+  ##################################################################################################
+  ## Coverage report - informational, runs alongside the gate without blocking the matrix
+  ##################################################################################################
+  coverage-report:
+    name: Coverage
+    uses: jfalcou/copacabana/.github/workflows/coverage.yml@3337f916bb581d0829909976773f7a2ee827a25c # v4
+    with:
+      project: kyosu
+      build-targets: kyosu-test
