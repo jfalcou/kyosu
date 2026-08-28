@@ -7,7 +7,6 @@ int main()
   using kyosu::inject;
   using kyosu::complex_t;
   using kyosu::quaternion_t;
-  using kyosu::inject;
   using kyosu::complex;
 
   std::cout << "Real:\n";
