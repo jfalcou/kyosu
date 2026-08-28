@@ -9,7 +9,11 @@
     <tab type="usergroup" visible="yes" title="Reference Documentation">
       <tab type="user" url="@ref types" title="Types"/>
       <tab type="user" url="@ref constants" title="Constants"/>
-      <tab type="user" url="@ref functions" title="Functions"/>
+      <tab type="usergroup" url="@ref functions" visible="yes" title="Functions">
+        <tab type="user" url="@ref agnostic"   title="Algebra-agnostic"/>
+        <tab type="user" url="@ref complex"    title="Complex-specific"/>
+        <tab type="user" url="@ref quaternion" title="Quaternion-specific"/>
+      </tab>
       <tab type="user" url="@ref traits" title="Traits"/>
       <tab type="concepts" visible="yes" title=""/>
     </tab>
