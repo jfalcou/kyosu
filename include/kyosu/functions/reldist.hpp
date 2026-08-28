@@ -28,10 +28,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup reldist kyosu::reldist
+  //! @ingroup agnostic
+  //! @brief Computes the relative distance between the two parameters.
   //! @{
   //!   @var reldist
-  //!   @brief Computes the relative distance between the two parameters.
   //!
   //!   @groupheader{Header file}
   //!

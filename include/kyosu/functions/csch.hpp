@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup csch kyosu::csch
+  //! @ingroup agnostic
+  //! @brief Computes the hyperbolic cosecant of the argument.
   //! @{
   //!   @var csch
-  //!   @brief Computes the hyperbolic cosecant of the argument.
   //!
   //!   @groupheader{Header file}
   //!

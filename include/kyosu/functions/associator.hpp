@@ -27,10 +27,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup associator kyosu::associator
+  //! @ingroup agnostic
+  //! @brief Computes the associator of the three parameters.
   //! @{
   //!   @var associator
-  //!   @brief Computes the associator of the three parameters.
   //!
   //!   @groupheader{Header file}
   //!

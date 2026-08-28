@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup minabs kyosu::minabs
+  //! @ingroup agnostic
+  //! @brief Callable object computing the minabs operation.
   //! @{
   //!   @var minabs
-  //!   @brief Callable object computing the minabs operation.
   //!
   //!   @groupheader{Header file}
   //!

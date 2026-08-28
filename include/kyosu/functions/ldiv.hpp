@@ -42,10 +42,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup ldiv kyosu::ldiv
+  //! @ingroup agnostic
+  //! @brief Computes the left division of the product of the arguments but the first
   //! @{
   //!   @var ldiv
-  //!   @brief Computes the left division of the product of the arguments but the first
   //!
   //!   @groupheader{Header file}
   //!

@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sinh kyosu::sinh
+  //! @ingroup agnostic
+  //! @brief Computes the hyperbolic sine of the argument.
   //! @{
   //!   @var sinh
-  //!   @brief Computes the hyperbolic sine of the argument.
   //!
   //!   @groupheader{Header file}
   //!

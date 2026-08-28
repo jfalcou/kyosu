@@ -35,11 +35,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup to_angle_axis kyosu::to_angle_axis
+  //! @ingroup quaternion
+  //! @brief Callable object computing the angle and axis coordinates from a quaternion.
   //! @{
   //! @var to_angle_axis
   //!
-  //! @brief Callable object computing the angle and axis coordinates from a quaternion.
   //!
   //!  This function is the reciprocal of `from_angle_axis`
   //!

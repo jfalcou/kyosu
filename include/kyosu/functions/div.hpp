@@ -41,10 +41,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup div kyosu::div
+  //! @ingroup agnostic
+  //! @brief `tuple_callable` computing the division of its first argument with the product of the others.
   //! @{
   //!   @var div
-  //!   @brief `tuple_callable` computing the division of its first argument with the product of the others.
   //!
   //!   @groupheader{Header file}
   //!

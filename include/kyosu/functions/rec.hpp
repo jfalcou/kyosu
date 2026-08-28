@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup rec kyosu::rec
+  //! @ingroup agnostic
+  //! @brief Computes the inverse of the argument.
   //! @{
   //!   @var rec
-  //!   @brief Computes the inverse of the argument.
   //!
   //!   @groupheader{Header file}
   //!

@@ -48,11 +48,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup to_semipolar kyosu::to_semipolar
+  //! @ingroup quaternion
+  //! @brief Callable object computing the semipolar coordinates from a quaternion.
   //! @{
   //! @var to_semipolar
   //!
-  //! @brief Callable object computing the semipolar coordinates from a quaternion.
   //!
   //!  This function is the reciprocal of from_semipolar
   //!

@@ -41,11 +41,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup kolmmean kyosu::kolmmean
+  //! @ingroup agnostic
+  //! @brief Callable object computing the 'Kolmogorov-Nagumo-de Finetti' mean of the inputs:
+  //!        \f$ \mathbf{g}(\mathbf{average}\mathbf{f}(x_s)) \f$.
   //! @{
   //!   @var kolmmean
-  //!   @brief Callable object computing the 'Kolmogorov-Nagumo-de Finetti' mean of the inputs:
-  //!   \f$ \mathbf{g}(\mathbf{average}\mathbf{f}(x_s)) \f$.
   //!
   //!   @groupheader{Header file}
   //!

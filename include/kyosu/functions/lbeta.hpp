@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup lbeta kyosu::lbeta
+  //! @ingroup agnostic
+  //! @brief Computes the principal branch of the natural logarithm of the `beta` function.
   //! @{
   //!   @var lbeta
-  //!   @brief Computes the principal branch of the natural logarithm of the `beta` function.
   //!
   //!   @groupheader{Header file}
   //!

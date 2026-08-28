@@ -32,10 +32,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup log2 kyosu::log2
+  //! @ingroup agnostic
+  //! @brief Computes the principal branch of the base 2 logarithm of the argument.
   //! @{
   //!   @var log2
-  //!   @brief Computes the principal branch of the base 2 logarithm of the argument.
   //!
   //!   @groupheader{Header file}
   //!

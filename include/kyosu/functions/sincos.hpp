@@ -27,10 +27,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sincos kyosu::sincos
+  //! @ingroup agnostic
+  //! @brief Computes simultaneously the sine and cosine of the argument.
   //! @{
   //!   @var sincos
-  //!   @brief Computes simultaneously the sine and cosine of the argument.
   //!
   //!   @groupheader{Header file}
   //!

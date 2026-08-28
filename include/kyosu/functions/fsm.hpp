@@ -26,10 +26,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup fsm kyosu::fsm
+  //! @ingroup agnostic
+  //! @brief Computes fused sub multiply.
   //! @{
   //!   @var fsm
-  //!   @brief  Computes fused sub multiply.
   //!
   //!   @groupheader{Header file}
   //!

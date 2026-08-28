@@ -49,10 +49,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup to_polar kyosu::to_polar
+  //! @ingroup agnostic
+  //! @brief returns modulus and argument of the input.
   //! @{
   //!   @var to_polar
-  //!   @brief returns modulus and argument of the input.
   //!
   //!   @groupheader{Header file}
   //!

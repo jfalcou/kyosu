@@ -41,10 +41,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup average kyosu::average
+  //! @ingroup agnostic
+  //! @brief Computes the average of the parameters.
   //! @{
   //!   @var average
-  //!   @brief Computes the average of the parameters.
   //!
   //!   @groupheader{Header file}
   //!

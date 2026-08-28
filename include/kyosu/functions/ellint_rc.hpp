@@ -39,12 +39,13 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup functions
+  //! @defgroup ellint_rc kyosu::ellint_rc
+  //! @ingroup agnostic
+  //! @brief Computes the Carlson's elliptic integral
+  //!        \f$  \mathbf{R}_\mathbf{C}(x, y) =
+  //!        \frac12 \int_{0}^{\infty} \scriptstyle(t+x)^{-1/2}(t+y)]^{-1}\;\mathrm{d}t\f$.
   //! @{
   //!   @var ellint_rc
-  //!   @brief Computes the Carlson's elliptic integral
-  //!   \f$  \mathbf{R}_\mathbf{C}(x, y) =
-  //!   \frac12 \int_{0}^{\infty} \scriptstyle(t+x)^{-1/2}(t+y)]^{-1}\;\mathrm{d}t\f$.
   //!
   //!   @groupheader{Header file}
   //!

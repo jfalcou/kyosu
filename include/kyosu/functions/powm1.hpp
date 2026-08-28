@@ -42,10 +42,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup powm1 kyosu::powm1
+  //! @ingroup agnostic
+  //! @brief Computes the powm1 operation \f$x^y-1\f$.
   //! @{
   //!   @var powm1
-  //!   @brief Computes the powm1 operation \f$x^y-1\f$.
   //!
   //!   @groupheader{Header file}
   //!

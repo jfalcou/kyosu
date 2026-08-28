@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup expx2 kyosu::expx2
+  //! @ingroup agnostic
+  //! @brief Computes the exponential of the squared argument.
   //! @{
   //!   @var expx2
-  //!   @brief Computes the exponential of the squared argument.
   //!
   //!   @groupheader{Header file}
   //!

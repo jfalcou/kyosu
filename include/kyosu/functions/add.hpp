@@ -40,10 +40,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup add kyosu::add
+  //! @ingroup agnostic
+  //! @brief `tuple_callable` computing the sum of its arguments.
   //! @{
   //!   @var add
-  //!   @brief `tuple_callable` computing the sum of its arguments.
   //!
   //!   @groupheader{Header file}
   //!

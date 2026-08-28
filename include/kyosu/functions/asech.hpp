@@ -33,10 +33,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup asech kyosu::asech
+  //! @ingroup agnostic
+  //! @brief Computes the inverse  hyperbolic secant of the argument.
   //! @{
   //!   @var asech
-  //!   @brief Computes the inverse  hyperbolic secant of the argument.
   //!
   //!   @groupheader{Header file}
   //!

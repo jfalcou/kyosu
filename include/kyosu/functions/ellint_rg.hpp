@@ -35,14 +35,15 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup functions
+  //! @defgroup ellint_rg kyosu::ellint_rg
+  //! @ingroup agnostic
+  //! @brief Computes the Carlson's elliptic integral
+  //!        \f$ \mathbf{R}_\mathbf{G}(x, y) = \frac1{4\pi} \int_{0}^{2\pi}\int_{0}^{\pi}
+  //!        \scriptstyle\sqrt{x\sin^2\theta\cos^2\phi
+  //!        +y\sin^2\theta\sin^2\phi
+  //!        +z\cos^2\theta} \scriptstyle\;\mathrm{d}\theta\;\mathrm{d}\phi\f$
   //! @{
   //!   @var ellint_rg
-  //!   @brief Computes the Carlson's elliptic integral
-  //!   \f$ \mathbf{R}_\mathbf{G}(x, y) = \frac1{4\pi} \int_{0}^{2\pi}\int_{0}^{\pi}
-  //!   \scriptstyle\sqrt{x\sin^2\theta\cos^2\phi
-  //!   +y\sin^2\theta\sin^2\phi
-  //!   +z\cos^2\theta} \scriptstyle\;\mathrm{d}\theta\;\mathrm{d}\phi\f$
   //!
   //!   @groupheader{Header file}
   //!

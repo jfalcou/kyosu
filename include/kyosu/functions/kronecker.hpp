@@ -40,10 +40,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup kronecker kyosu::kronecker
+  //! @ingroup agnostic
+  //! @brief `tuple_callable` computing the \f$\delta\f$ (Kronecker symbol) of its arguments.
   //! @{
   //!   @var kronecker
-  //!   @brief `tuple_callable` computing the \f$\delta\f$ (Kronecker symbol) of its arguments.
   //!
   //!   @groupheader{Header file}
   //!

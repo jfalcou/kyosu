@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acosh kyosu::acosh
+  //! @ingroup agnostic
+  //! @brief Computes the inverse hyperbolic cosine of the argument.
   //! @{
   //!   @var acosh
-  //!   @brief Computes the inverse hyperbolic cosine of the argument.
   //!
   //!   @groupheader{Header file}
   //!

@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup reverse_horner kyosu::reverse_horner
+  //! @ingroup agnostic
+  //! @brief Implement the reverse_horner scheme to evaluate polynomials
   //! @{
   //!   @var reverse_horner
-  //!   @brief Implement the reverse_horner scheme to evaluate polynomials
   //!
   //!   If \f$(a_i)_{0\le i\le n-1}\f$ denotes the coefficients of the polynomial by increasing
   //!   power order,  the reverse Horner scheme evaluates the polynom \f$p\f$ at \f$x\f$ by :

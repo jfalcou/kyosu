@@ -34,10 +34,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup atanh kyosu::atanh
+  //! @ingroup agnostic
+  //! @brief Computes the inverse hyperbolic tangent of the argument.
   //! @{
   //!   @var atanh
-  //!   @brief Computes the inverse hyperbolic tangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!

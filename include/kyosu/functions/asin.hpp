@@ -32,10 +32,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup asin kyosu::asin
+  //! @ingroup agnostic
+  //! @brief Computes the arcsine of the argument.
   //! @{
   //!   @var asin
-  //!   @brief Computes the arcsine of the argument.
   //!
   //!   @groupheader{Header file}
   //!

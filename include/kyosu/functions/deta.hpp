@@ -30,10 +30,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup deta kyosu::deta
+  //! @ingroup agnostic
+  //! @brief Computes the Dirichlet sums \f$ \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\f$.
   //! @{
   //!   @var deta
-  //!   @brief Computes the Dirichlet sums \f$ \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\f$.
   //!
   //!   @groupheader{Header file}
   //!

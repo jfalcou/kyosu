@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sec kyosu::sec
+  //! @ingroup agnostic
+  //! @brief Computes the secant of the argument.
   //! @{
   //!   @var sec
-  //!   @brief Computes the secant of the argument.
   //!
   //!   @groupheader{Header file}
   //!

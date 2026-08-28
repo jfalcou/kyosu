@@ -31,11 +31,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup rot_axis kyosu::rot_axis
+  //! @ingroup quaternion
+  //! @brief Callable object computing the normalized axis of rotation defined by a quaternion.
   //! @{
   //! @var rot_axis
   //!
-  //! @brief Callable object computing the normalized axis of rotation defined by a quaternion.
   //!
   //! @groupheader{Header file}
   //!

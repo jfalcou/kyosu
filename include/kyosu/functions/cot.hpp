@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup cot kyosu::cot
+  //! @ingroup agnostic
+  //! @brief Computes the cotangent of the argument.
   //! @{
   //!   @var cot
-  //!   @brief Computes the cotangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!

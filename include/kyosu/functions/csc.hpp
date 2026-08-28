@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup csc kyosu::csc
+  //! @ingroup agnostic
+  //! @brief Computes the cosecant of the argument.
   //! @{
   //!   @var csc
-  //!   @brief Computes the cosecant of the argument.
   //!
   //!   @groupheader{Header file}
   //!

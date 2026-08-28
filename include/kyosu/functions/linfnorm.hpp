@@ -29,10 +29,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup linfnorm kyosu::linfnorm
+  //! @ingroup agnostic
+  //! @brief Callable object computing the linfnorm operation \f$ \max_{i = 0}^n |x_i| \f$.
   //! @{
   //!   @var linfnorm
-  //!   @brief Callable object computing the linfnorm operation \f$ \max_{i = 0}^n |x_i| \f$.
   //!
   //!   @groupheader{Header file}
   //!

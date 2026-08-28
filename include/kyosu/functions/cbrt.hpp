@@ -31,10 +31,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup cbrt kyosu::cbrt
+  //! @ingroup agnostic
+  //! @brief Computes the the kth cubic  root  of the argument.
   //! @{
   //!   @var cbrt
-  //!   @brief Computes the the kth cubic  root  of the argument.
   //!
   //!   @groupheader{Header file}
   //!

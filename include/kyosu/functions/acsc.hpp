@@ -34,10 +34,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acsc kyosu::acsc
+  //! @ingroup agnostic
+  //! @brief Computes the arccosecant of the argument.
   //! @{
   //!   @var acsc
-  //!   @brief Computes the arccosecant of the argument.
   //!
   //!   @groupheader{Header file}
   //!

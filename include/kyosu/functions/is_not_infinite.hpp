@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_not_infinite kyosu::is_not_infinite
+  //! @ingroup agnostic
+  //! @brief test if the parameter is not infinite.
   //! @{
   //!   @var is_not_infinite
-  //!   @brief test if the parameter is not infinite.
   //!
   //!   @groupheader{Header file}
   //!

@@ -47,11 +47,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup to_cylindrospherical kyosu::to_cylindrospherical
+  //! @ingroup quaternion
+  //! @brief Callable object computing the cylindrospherical coordinates from a quaternion.
   //! @{
   //! @var to_cylindrospherical
   //!
-  //! @brief Callable object computing the cylindrospherical coordinates from a quaternion.
   //!
   //!  This function is the reciprocal of `from_cylindrospherical`.
   //!

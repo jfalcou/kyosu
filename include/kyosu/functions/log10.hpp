@@ -32,10 +32,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup log10 kyosu::log10
+  //! @ingroup agnostic
+  //! @brief Computes the base 10 logarithm of the argument.
   //! @{
   //!   @var log10
-  //!   @brief Computes the base 10 logarithm of the argument.
   //!
   //!   @groupheader{Header file}
   //!

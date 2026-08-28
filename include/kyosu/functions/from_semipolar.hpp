@@ -31,11 +31,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup from_semipolar kyosu::from_semipolar
+  //! @ingroup quaternion
+  //! @brief Callable object computing a quaternion from its semipolar representation.
   //! @{
   //! @var from_semipolar
   //!
-  //! @brief Callable object computing a quaternion from its semipolar representation.
   //!
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
   //!  from a polar representation of an \f$\mathbb{R}^2\f$ element.

@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup agd kyosu::agd
+  //! @ingroup agnostic
+  //! @brief Computes the principal branch inverse gudermanian of the argument.
   //! @{
   //!   @var agd
-  //!   @brief Computes the principal branch inverse gudermanian of the argument.
   //!
   //!   @groupheader{Header file}
   //!

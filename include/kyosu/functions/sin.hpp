@@ -26,10 +26,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sin kyosu::sin
+  //! @ingroup agnostic
+  //! @brief Computes the sine of the argument.
   //! @{
   //!   @var sin
-  //!   @brief Computes the sine of the argument.
   //!
   //!   @groupheader{Header file}
   //!

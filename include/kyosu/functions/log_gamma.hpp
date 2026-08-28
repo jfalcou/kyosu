@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup log_gamma kyosu::log_gamma
+  //! @ingroup agnostic
+  //! @brief Computes \f$\log(\Gamma(z))\f$.
   //! @{
   //!   @var log_gamma
-  //!   @brief Computes \f$\log(\Gamma(z))\f$.
   //!
   //!   @groupheader{Header file}
   //!

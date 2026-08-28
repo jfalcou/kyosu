@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_fnan kyosu::is_fnan
+  //! @ingroup agnostic
+  //! @brief test the parameter for fnan
   //! @{
   //!   @var is_fnan
-  //!   @brief test the parameter for fnan
   //!   @groupheader{Header file}
   //!
   //!   @code

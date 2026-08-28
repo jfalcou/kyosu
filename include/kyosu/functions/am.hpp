@@ -35,10 +35,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup am kyosu::am
+  //! @ingroup agnostic
+  //! @brief Computes Jacobi's Amplitude function.
   //! @{
   //!   @var  am
-  //!   @brief Computes Jacobi's Amplitude function.
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>

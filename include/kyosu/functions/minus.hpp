@@ -21,10 +21,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup minus kyosu::minus
+  //! @ingroup agnostic
+  //! @brief Computes the opposite value.
   //! @{
   //!   @var minus
-  //!   @brief Computes the opposite value.
   //!
   //!   @groupheader{Header file}
   //!

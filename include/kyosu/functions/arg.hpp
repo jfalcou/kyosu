@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup arg kyosu::arg
+  //! @ingroup agnostic
+  //! @brief argument.
   //! @{
   //!   @var arg
-  //!   @brief  argument.
   //!
   //!   @groupheader{Header file}
   //!

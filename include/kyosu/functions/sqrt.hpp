@@ -38,10 +38,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sqrt kyosu::sqrt
+  //! @ingroup agnostic
+  //! @brief Computes a square root value.
   //! @{
   //!   @var sqrt
-  //!   @brief Computes a square root value.
   //!
   //!   @groupheader{Header file}
   //!

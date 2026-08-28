@@ -25,10 +25,11 @@ namespace kyosu
     KYOSU_CALLABLE_OBJECT(lambda_t, lambda_);
   };
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup lambda kyosu::lambda
+  //! @ingroup agnostic
+  //! @brief Callable object computing The Dirichlet \f$ \displaystyle \lambda(z) = \sum_0^\infty \frac{1}{(2n+1)^z}\f$
   //! @{
   //!   @var lambda
-  //! @brief Callable object computing The Dirichlet \f$ \displaystyle \lambda(z) = \sum_0^\infty \frac{1}{(2n+1)^z}\f$
   //!
   //! This function can be extended to the whole complex plane as \f$\lambda(z) = \zeta(z)(1-2^{-z})\f$
   //! (where \f$\zeta\f$ is the Riemann zeta function). It coincides with the serie where the serie converges.

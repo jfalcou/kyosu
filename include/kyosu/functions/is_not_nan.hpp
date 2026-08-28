@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_not_nan kyosu::is_not_nan
+  //! @ingroup agnostic
+  //! @brief test if the parameter is not a Nan.
   //! @{
   //!   @var is_not_nan
-  //!   @brief test if the parameter is not a Nan.
   //!
   //!   @groupheader{Header file}
   //!

@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup lerp kyosu::lerp
+  //! @ingroup agnostic
+  //! @brief Computes the  linear interpolation.
   //! @{
   //!   @var lerp
-  //!   @brief  Computes the  linear interpolation.
   //!
   //!   @groupheader{Header file}
   //!

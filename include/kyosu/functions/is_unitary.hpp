@@ -24,10 +24,11 @@ namespace kyosu
 
   //!   {
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_unitary kyosu::is_unitary
+  //! @ingroup agnostic
+  //! @brief test if the parameter is unitary (absolute value one).
   //! @{
   //!   @var is_unitary
-  //!   @brief test if the parameter is unitary (absolute value one).
   //!
   //!   @groupheader{Header file}
   //!

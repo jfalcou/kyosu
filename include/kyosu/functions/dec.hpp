@@ -21,10 +21,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup dec kyosu::dec
+  //! @ingroup agnostic
+  //! @brief decrements the argument by 1.
   //! @{
   //!   @var dec
-  //!   @brief decrements the argument by 1.
   //!
   //!   @groupheader{Header file}
   //!

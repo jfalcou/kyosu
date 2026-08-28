@@ -37,10 +37,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup ellint_fe kyosu::ellint_fe
+  //! @ingroup agnostic
+  //! @brief Computes Jacobi's Amplitude function.
   //! @{
   //!   @var  ellint_fe
-  //!   @brief Computes Jacobi's Amplitude function.
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>

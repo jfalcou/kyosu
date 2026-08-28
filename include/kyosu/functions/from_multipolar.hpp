@@ -28,11 +28,12 @@ namespace kyosu
     KYOSU_CALLABLE_OBJECT(from_multipolar_t, from_multipolar_);
   };
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup from_multipolar kyosu::from_multipolar
+  //! @ingroup quaternion
+  //! @brief Callable object computing a quaternion from its multipolar representation.
   //! @{
   //! @var from_multipolar
   //!
-  //! @brief Callable object computing a quaternion from its multipolar representation.
   //!
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
   //!  from a multipolar representation of an \f$\mathbb{R}^4\f$ element.

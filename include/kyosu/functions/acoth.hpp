@@ -32,10 +32,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acoth kyosu::acoth
+  //! @ingroup agnostic
+  //! @brief Computes the inverse  hyperbolic cotangent of the argument.
   //! @{
   //!   @var acoth
-  //!   @brief Computes the inverse  hyperbolic cotangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!

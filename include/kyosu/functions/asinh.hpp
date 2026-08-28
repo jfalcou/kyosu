@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup asinh kyosu::asinh
+  //! @ingroup agnostic
+  //! @brief Computes the inverse hyperbolic sine of the argument.
   //! @{
   //!   @var asinh
-  //!   @brief Computes the inverse hyperbolic sine of the argument.
   //!
   //!   @groupheader{Header file}
   //!

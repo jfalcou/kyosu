@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_imag kyosu::is_imag
+  //! @ingroup agnostic
+  //! @brief test if the parameter real part is zero.
   //! @{
   //!   @var is_imag
-  //!   @brief test if the parameter real part is zero.
   //!
   //!   @groupheader{Header file}
   //!

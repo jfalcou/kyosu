@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup cos kyosu::cos
+  //! @ingroup agnostic
+  //! @brief Computes the cosine of the argument.
   //! @{
   //!   @var cos
-  //!   @brief Computes the cosine of the argument.
   //!
   //!   @groupheader{Header file}
   //!

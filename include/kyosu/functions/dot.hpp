@@ -53,11 +53,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup dot kyosu::dot
+  //! @ingroup agnostic
+  //! @brief object computing the elementwise  dot product
+  //!        of the vector of the first half parameters by thevector of the last half.
   //! @{
   //!   @var dot
-  //!   @brief  object computing the elementwise  dot product
-  //!     of the vector of the first half parameters by thevector of the last half.
   //!
   //!   @groupheader{Header file}
   //!

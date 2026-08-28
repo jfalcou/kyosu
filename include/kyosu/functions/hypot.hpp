@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup hypot kyosu::hypot
+  //! @ingroup agnostic
+  //! @brief Callable object computing the hypot operation.
   //! @{
   //!   @var hypot
-  //!   @brief Callable object computing the hypot operation.
   //!
   //!   @groupheader{Header file}
   //!

@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup tan kyosu::tan
+  //! @ingroup agnostic
+  //! @brief Computes the tangent of the argument.
   //! @{
   //!   @var tan
-  //!   @brief Computes the tangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!

@@ -39,13 +39,14 @@ namespace kyosu
   };
 
   //====================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup to_quaternion kyosu::to_quaternion
+  //! @ingroup agnostic
+  //! @brief Constructs a kyosu::quaternion_t instance
   //! @{
   //====================================================================================================================
 
   //====================================================================================================================
   //!   @var quaternion
-  //!   @brief Constructs a kyosu::quaternion_t instance
   //!
   //!   @groupheader{Header file}
   //!

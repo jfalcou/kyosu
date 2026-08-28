@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup maxabs kyosu::maxabs
+  //! @ingroup agnostic
+  //! @brief Callable object computing the maxabs operation.
   //! @{
   //!   @var maxabs
-  //!   @brief Callable object computing the maxabs operation.
   //!
   //!   @groupheader{Header file}
   //!

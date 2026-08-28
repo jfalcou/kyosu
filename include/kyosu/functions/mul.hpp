@@ -40,10 +40,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup mul kyosu::mul
+  //! @ingroup agnostic
+  //! @brief `tuple_callable` computing the product of its arguments.
   //! @{
   //!   @var mul
-  //!   @brief `tuple_callable` computing the product of its arguments.
   //!
   //!   @groupheader{Header file}
   //!

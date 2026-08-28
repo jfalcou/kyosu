@@ -39,10 +39,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup maxmag kyosu::maxmag
+  //! @ingroup agnostic
+  //! @brief Callable object computing the maxmag operation.
   //! @{
   //!   @var maxmag
-  //!   @brief Callable object computing the maxmag operation.
   //!
   //!   @groupheader{Header file}
   //!

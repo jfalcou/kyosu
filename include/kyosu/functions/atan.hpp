@@ -34,10 +34,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup atan kyosu::atan
+  //! @ingroup agnostic
+  //! @brief Computes the arctangent of the argument.
   //! @{
   //!   @var atan
-  //!   @brief Computes the arctangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!

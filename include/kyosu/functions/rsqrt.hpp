@@ -34,10 +34,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup rsqrt kyosu::rsqrt
+  //! @ingroup agnostic
+  //! @brief Computes a inverse square root value.
   //! @{
   //!   @var rsqrt
-  //!   @brief Computes a inverse square root value.
   //!
   //!   @groupheader{Header file}
   //!

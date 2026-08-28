@@ -51,11 +51,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup functions
+  //! @defgroup legendre kyosu::legendre
+  //! @ingroup agnostic
+  //! @brief Computes the value of the Legendre and associated
+  //!        Legendre functions of order `n` ( and `m`) at `x`:
   //! @{
   //!   @var legendre
-  //!   @brief Computes the value of the Legendre and associated
-  //!   Legendre functions of order `n` ( and `m`) at `x`:
   //!
   //!   For positive integer `n` the standard legendre functions are polynomials:
   //!    * The Legendre polynomial of order n is given by \f$\displaystyle \mbox{L}_{n}(x)

@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup radinpi kyosu::radinpi
+  //! @ingroup agnostic
+  //! @brief Computes the parameter divided by \f$\pi\f$.
   //! @{
   //!   @var radinpi
-  //!   @brief Computes the parameter divided by \f$\pi\f$.
   //!
   //!   @groupheader{Header file}
   //!

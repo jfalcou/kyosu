@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup exp_i kyosu::exp_i
+  //! @ingroup agnostic
+  //! @brief Computes the exponential of i times the argument
   //! @{
   //!   @var exp_i
-  //!   @brief Computes the exponential of i times the argument
   //!
   //!   @groupheader{Header file}
   //!

@@ -75,11 +75,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup to_rotation_matrix kyosu::to_rotation_matrix
+  //! @ingroup quaternion
+  //! @brief Callable object computing a quaternion from its to_rotation_matrix representation.
   //! @{
   //! @var to_rotation_matrix
   //!
-  //! @brief Callable object computing a quaternion from its to_rotation_matrix representation.
   //!
   //!  This function build rotation_matrix angles from a quaternion.
   //!

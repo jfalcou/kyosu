@@ -41,10 +41,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sub kyosu::sub
+  //! @ingroup agnostic
+  //! @brief `tuple_callable` computing the difference of its first argument with the sum of the others.
   //! @{
   //!   @var sub
-  //!   @brief `tuple_callable` computing the difference of its first argument with the sum of the others.
   //!
   //!   @groupheader{Header file}
   //!

@@ -44,11 +44,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup to_multipolar kyosu::to_multipolar
+  //! @ingroup quaternion
+  //! @brief Callable object computing the multipolar coordinates to a quaternion.
   //! @{
   //! @var to_multipolar
   //!
-  //! @brief Callable object computing the multipolar coordinates to a quaternion.
   //!
   //!  This function is the reciprocal of from_multipolar
   //!

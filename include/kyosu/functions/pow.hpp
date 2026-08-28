@@ -51,10 +51,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup pow kyosu::pow
+  //! @ingroup agnostic
+  //! @brief Computes the pow operation \f$x^y\f$.
   //! @{
   //!   @var pow
-  //!   @brief Computes the pow operation \f$x^y\f$.
   //!
   //!   @groupheader{Header file}
   //!

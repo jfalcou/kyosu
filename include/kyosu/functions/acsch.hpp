@@ -32,10 +32,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acsch kyosu::acsch
+  //! @ingroup agnostic
+  //! @brief Computes the inverse hyperbolic cosecant of the argument.
   //! @{
   //!   @var acsch
-  //!   @brief Computes the inverse hyperbolic cosecant of the argument.
   //!
   //!   @groupheader{Header file}
   //!

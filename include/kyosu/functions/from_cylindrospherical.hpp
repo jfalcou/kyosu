@@ -29,11 +29,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup from_cylindrospherical kyosu::from_cylindrospherical
+  //! @ingroup quaternion
+  //! @brief Callable object computing a quaternion from its cylindrospherical representation.
   //! @{
   //! @var from_cylindrospherical
   //!
-  //! @brief Callable object computing a quaternion from its cylindrospherical representation.
   //!
   //!  cylindrospherical is specific to quaternions. It is often interesting to consider
   //!  \f$\mathbb{H}\f$ as the cartesian product of \f$\mathbb{R}\f$ by \f$\mathbb{R}^3\f$

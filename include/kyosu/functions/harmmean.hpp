@@ -41,10 +41,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup harmmean kyosu::harmmean
+  //! @ingroup agnostic
+  //! @brief Computes the harmonic mean of the parameters.
   //! @{
   //!   @var harmmean
-  //!   @brief Computes the harmonic mean of the parameters.
   //!
   //!   @groupheader{Header file}
   //!

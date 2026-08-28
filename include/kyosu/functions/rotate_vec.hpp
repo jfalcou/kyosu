@@ -42,11 +42,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup rotate_vec kyosu::rotate_vec
+  //! @ingroup quaternion
+  //! @brief Callable object rotating an \f$\mathbb{R}^3\f$ vector using a quaternion.
   //! @{
   //! @var rotate_vec
   //!
-  //! @brief Callable object rotating an \f$\mathbb{R}^3\f$ vector using a quaternion.
   //!
   //! @groupheader{Header file}
   //!

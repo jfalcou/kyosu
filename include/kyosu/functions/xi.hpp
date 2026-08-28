@@ -28,11 +28,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup xi kyosu::xi
+  //! @ingroup agnostic
+  //! @brief Computes the Riemann \f$ \displaystyle\xi(z) = \frac{1}{2}z(z-1)\pi^{-\frac{z}{2}}\Gamma(\frac{z}{2})\zeta(z)\f$.
+  //!        function or the Landau  version  \f$ \displaystyle\Xi(z) = \xi(\frac{1}{2} + i z)\f$.
   //! @{
   //!   @var xi
-  //!   @brief Computes the Riemann \f$ \displaystyle\xi(z) = \frac{1}{2}z(z-1)\pi^{-\frac{z}{2}}\Gamma(\frac{z}{2})\zeta(z)\f$.
-  //!   function or the Landau  version  \f$ \displaystyle\Xi(z) = \xi(\frac{1}{2} + i z)\f$.
   //!
   //!   @groupheader{Header file}
   //!

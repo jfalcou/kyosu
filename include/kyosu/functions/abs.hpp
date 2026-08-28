@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup abs kyosu::abs
+  //! @ingroup agnostic
+  //! @brief Computes the absolute value of the parameter.
   //! @{
   //!   @var abs
-  //!   @brief Computes the absolute value of the parameter.
   //!
   //!   @groupheader{Header file}
   //!

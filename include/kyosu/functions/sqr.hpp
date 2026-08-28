@@ -21,10 +21,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sqr kyosu::sqr
+  //! @ingroup agnostic
+  //! @brief Computes the square value.
   //! @{
   //!   @var sqr
-  //!   @brief Computes the square value.
   //!
   //!   @groupheader{Header file}
   //!

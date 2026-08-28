@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup tgamma_inv kyosu::tgamma_inv
+  //! @ingroup agnostic
+  //! @brief Computes \f$\frac1{\Gamma(z)}\f$.
   //! @{
   //!   @var tgamma_inv
-  //!   @brief Computes \f$\frac1{\Gamma(z)}\f$.
   //!
   //!   @groupheader{Header file}
   //!

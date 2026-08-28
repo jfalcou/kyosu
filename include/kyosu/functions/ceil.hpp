@@ -21,10 +21,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup ceil kyosu::ceil
+  //! @ingroup agnostic
+  //! @brief Computes the ceil value.
   //! @{
   //!   @var ceil
-  //!   @brief Computes the ceil value.
   //!
   //!   @groupheader{Header file}
   //!

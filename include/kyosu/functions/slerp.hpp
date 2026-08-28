@@ -32,10 +32,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup slerp kyosu::slerp
+  //! @ingroup agnostic
+  //! @brief Computes the  spherical interpolation between unitary quaternions.
   //! @{
   //!   @var slerp
-  //!   @brief  Computes the  spherical interpolation between unitary quaternions.
   //!
   //!   @groupheader{Header file}
   //!

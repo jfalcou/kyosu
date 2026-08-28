@@ -34,10 +34,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup log kyosu::log
+  //! @ingroup agnostic
+  //! @brief Computes the principal value of the  natural logarithm of the argument.
   //! @{
   //!   @var log
-  //!   @brief Computes the principal value of the  natural logarithm of the argument.
   //!
   //!   @groupheader{Header file}
   //!

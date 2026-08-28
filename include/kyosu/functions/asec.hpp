@@ -35,10 +35,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup asec kyosu::asec
+  //! @ingroup agnostic
+  //! @brief Computes the arcsecant of the argument.
   //! @{
   //!   @var asec
-  //!   @brief Computes the arcsecant of the argument.
   //!
   //!   @groupheader{Header file}
   //!

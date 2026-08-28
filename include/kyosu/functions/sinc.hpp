@@ -22,10 +22,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sinc kyosu::sinc
+  //! @ingroup agnostic
+  //! @brief Computes the sine cardinal of the argument.
   //! @{
   //!   @var sinc
-  //!   @brief Computes the sine cardinal of the argument.
   //!
   //!   @groupheader{Header file}
   //!

@@ -35,10 +35,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup horner kyosu::horner
+  //! @ingroup agnostic
+  //! @brief Implement the horner scheme to evaluate polynomials
   //! @{
   //!   @var horner
-  //!   @brief Implement the horner scheme to evaluate polynomials
   //!
   //!   If \f$(a_i)_{0\le i\le n-1}\f$ denotes the coefficients of the polynomial by decreasing
   //!   power order, the Horner scheme evaluates the polynom \f$p\f$ at \f$x\f$ by :

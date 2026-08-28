@@ -125,11 +125,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup to_euler kyosu::to_euler
+  //! @ingroup quaternion
+  //! @brief Callable object computing euler angles  from a quaternion.
   //! @{
   //! @var to_euler
   //!
-  //! @brief Callable object computing euler angles  from a quaternion.
   //!
   //!  This function build euler angles from a quaternion. Template parameters I, J, K of type int
   //!  are used to choose the euler order.

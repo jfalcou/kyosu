@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup oneminus kyosu::oneminus
+  //! @ingroup agnostic
+  //! @brief Computes the value one minus the argument.
   //! @{
   //!   @var oneminus
-  //!   @brief Computes the value one minus the argument.
   //!
   //!   @groupheader{Header file}
   //!

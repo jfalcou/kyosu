@@ -27,10 +27,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_equal kyosu::is_equal
+  //! @ingroup agnostic
+  //! @brief retuen true if and only if the two parameters are equal.
   //! @{
   //!   @var is_equal
-  //!   @brief retuen true if and only if the two parameters are equal.
   //!
   //!   @groupheader{Header file}
   //!

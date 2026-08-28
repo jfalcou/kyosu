@@ -27,10 +27,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup log_abs kyosu::log_abs
+  //! @ingroup agnostic
+  //! @brief Computes the natural logarithm of the absolute value of the argument.
   //! @{
   //!   @var log_abs
-  //!   @brief Computes the natural logarithm of the absolute value of the argument.
   //!
   //!   @groupheader{Header file}
   //!

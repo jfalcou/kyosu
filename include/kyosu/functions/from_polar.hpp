@@ -30,11 +30,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup complex
+  //! @defgroup from_polar kyosu::from_polar
+  //! @ingroup complex
+  //! @brief Callable object computing a complex or a general Cayley-Dickson from a polar representation.
   //! @{
   //! @var from_polar
   //!
-  //! @brief Callable object computing a complex or a general Cayley-Dickson from a polar representation.
   //!
   //!  This function is the reciprocal of to_polar
   //!

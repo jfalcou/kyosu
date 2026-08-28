@@ -39,10 +39,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acos kyosu::acos
+  //! @ingroup agnostic
+  //! @brief Computes the arc cosine of the argument.
   //! @{
   //!   @var acos
-  //!   @brief Computes the arc cosine of the argument.
   //!
   //!   @groupheader{Header file}
   //!

@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup dist kyosu::dist
+  //! @ingroup agnostic
+  //! @brief Computes the distance between the two parameters.
   //! @{
   //!   @var dist
-  //!   @brief Computes the distance between the two parameters.
   //!
   //!   @groupheader{Header file}
   //!

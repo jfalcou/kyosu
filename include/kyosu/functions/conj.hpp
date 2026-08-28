@@ -22,10 +22,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup conj kyosu::conj
+  //! @ingroup agnostic
+  //! @brief Computes the conjugate value.
   //! @{
   //!   @var conj
-  //!   @brief Computes the conjugate value.
   //!
   //!   @groupheader{Header file}
   //!

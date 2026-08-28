@@ -21,10 +21,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup tanh kyosu::tanh
+  //! @ingroup agnostic
+  //! @brief Computes the hyperbolic tangent of the argument.
   //! @{
   //!   @var tanh
-  //!   @brief Computes the hyperbolic tangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!

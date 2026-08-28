@@ -27,10 +27,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup exp kyosu::exp
+  //! @ingroup agnostic
+  //! @brief Computes the exponential of the argument.
   //! @{
   //!   @var exp
-  //!   @brief Computes the exponential of the argument.
   //!
   //!   @groupheader{Header file}
   //!

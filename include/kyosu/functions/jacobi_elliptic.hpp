@@ -31,10 +31,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup jacobi_elliptic kyosu::jacobi_elliptic
+  //! @ingroup agnostic
+  //! @brief Computes Jacobi's Amplitude function.
   //! @{
   //!   @var  jacobi_elliptic
-  //!   @brief Computes Jacobi's Amplitude function.
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>

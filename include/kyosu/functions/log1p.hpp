@@ -33,10 +33,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup log1p kyosu::log1p
+  //! @ingroup agnostic
+  //! @brief Computes the natural logarithm of the argument plus 1.
   //! @{
   //!   @var log1p
-  //!   @brief Computes the natural logarithm of the argument plus 1.
   //!
   //!   @groupheader{Header file}
   //!

@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup pure kyosu::pure
+  //! @ingroup agnostic
+  //! @brief Extracts the imaginary part of a value.
   //! @{
   //!   @var pure
-  //!   @brief Extracts the imaginary part of a value.
   //!
   //!   @groupheader{Header file}
   //!

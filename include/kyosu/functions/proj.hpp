@@ -21,11 +21,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup proj kyosu::proj
+  //! @ingroup agnostic
+  //! @brief Callable object computing proj(x), the projection of the cayley_dickson number
+  //!        z onto the (hyper) Riemann sphere
   //! @{
   //!   @var proj
-  //!   @brief Callable object computing proj(x), the projection of the cayley_dickson number
-  //!   z onto the (hyper) Riemann sphere
   //!
   //!   @groupheader{Header file}
   //!

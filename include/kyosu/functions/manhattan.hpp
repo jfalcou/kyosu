@@ -31,10 +31,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup manhattan kyosu::manhattan
+  //! @ingroup agnostic
+  //! @brief Computes the sum of the absolute values of all terms of all the parameters.
   //! @{
   //!   @var manhattan
-  //!   @brief Computes the sum of the absolute values of all terms of all the parameters.
   //!
   //!   @groupheader{Header file}
   //!

@@ -25,11 +25,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup muli kyosu::muli
+  //! @ingroup agnostic
+  //! @brief Computes the value of the parameter multiplied by i on the left or right side.
+  //!        For real, complex and quaternion the computation is an optimization over the call to * operator.
   //! @{
   //!   @var muli
-  //!   @brief Computes the value of the parameter multiplied by i on the left or right side.
-  //!   For real, complex and quaternion the computation is an optimization over the call to * operator.
   //!
   //!   @groupheader{Header file}
   //!

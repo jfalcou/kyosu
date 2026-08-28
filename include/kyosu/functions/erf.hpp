@@ -27,12 +27,13 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup erf kyosu::erf
+  //! @ingroup agnostic
+  //! @brief Computes the error function: \f$ \displaystyle
+  //!        \mbox{erf}(x)=\frac{2}{\sqrt\pi}\int_0^{x} e^{-t^2}\mbox{d}t\f$ or
+  //!        its extension to complex and general cayley-dickson values
   //! @{
   //!   @var erf
-  //!   @brief Computes the error function: \f$ \displaystyle
-  //!   \mbox{erf}(x)=\frac{2}{\sqrt\pi}\int_0^{x} e^{-t^2}\mbox{d}t\f$ or
-  //!   its extension to complex and general cayley-dickson values
   //!
   //!   @groupheader{Header file}
   //!

@@ -25,11 +25,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup faddeeva kyosu::faddeeva
+  //! @ingroup agnostic
+  //! @brief Callable object computing \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex
+  //!        complementary  error function.
   //! @{
   //!   @var faddeeva
-  //!   @brief  Callable object computing \f$e^{-z^2}\mathrm{erfc}(-iz)\f$ the scaled complex
-  //!   complementary  error function.
   //!
   //!   @groupheader{Header file}
   //!

@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_real kyosu::is_real
+  //! @ingroup agnostic
+  //! @brief test if the parameter is real.
   //! @{
   //!   @var is_real
-  //!   @brief test if the parameter is real.
   //!
   //!   @groupheader{Header file}
   //!

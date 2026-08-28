@@ -38,10 +38,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup rising_factorial kyosu::rising_factorial
+  //! @ingroup agnostic
+  //! @brief Computes the rising_factorial function: \f$\displaystyle \frac{\Gamma(a+x)}{\Gamma(a)}\f$
   //! @{
   //!   @var rising_factorial
-  //!   @brief Computes the rising_factorial function: \f$\displaystyle \frac{\Gamma(a+x)}{\Gamma(a)}\f$
   //!
   //!   @groupheader{Header file}
   //!

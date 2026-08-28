@@ -37,10 +37,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup nthroot kyosu::nthroot
+  //! @ingroup agnostic
+  //! @brief Computes the the kth nth root  of the argument.
   //! @{
   //!   @var nthroot
-  //!   @brief Computes the the kth nth root  of the argument.
   //!
   //!   @groupheader{Header file}
   //!

@@ -35,10 +35,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acot kyosu::acot
+  //! @ingroup agnostic
+  //! @brief Computes the arc cotangent of the argument.
   //! @{
   //!   @var acot
-  //!   @brief Computes the arc cotangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!

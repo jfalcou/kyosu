@@ -26,10 +26,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup fnms kyosu::fnms
+  //! @ingroup agnostic
+  //! @brief Computes fused negate multiply sub.
   //! @{
   //!   @var fnms
-  //!   @brief  Computes fused negate multiply sub.
   //!
   //!   @groupheader{Header file}
   //!

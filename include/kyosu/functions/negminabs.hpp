@@ -26,10 +26,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup negminabs kyosu::negminabs
+  //! @ingroup agnostic
+  //! @brief Callable object computing the negminabs operation.
   //! @{
   //!   @var negminabs
-  //!   @brief Callable object computing the negminabs operation.
   //!
   //!   @groupheader{Header file}
   //!

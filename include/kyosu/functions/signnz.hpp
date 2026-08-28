@@ -22,11 +22,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup signnz kyosu::signnz
+  //! @ingroup agnostic
+  //! @brief Computes tne normalized value z/abs(z) if z is not zero else the sign of the real part
+  //!        as a cayley_dickson.
   //! @{
   //!   @var signnz
-  //!   @brief Computes tne normalized value z/abs(z) if z is not zero else the sign of the real part
-  //!     as a cayley_dickson.
   //!
   //!   @groupheader{Header file}
   //!

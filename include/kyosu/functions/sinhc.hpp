@@ -22,10 +22,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sinhc kyosu::sinhc
+  //! @ingroup agnostic
+  //! @brief Computes the hyperbolic sine cardinal of the argument.
   //! @{
   //!   @var sinhc
-  //!   @brief Computes the hyperbolic sine cardinal of the argument.
   //!
   //!   @groupheader{Header file}
   //!

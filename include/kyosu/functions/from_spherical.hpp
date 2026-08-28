@@ -32,11 +32,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup from_spherical kyosu::from_spherical
+  //! @ingroup quaternion
+  //! @brief Callable object computing a quaternion from its spherical representation.
   //! @{
   //! @var from_spherical
   //!
-  //! @brief Callable object computing a quaternion from its spherical representation.
   //!
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
   //!  from a spherical representation of an \f$\mathbb{R}^4\f$ element.
