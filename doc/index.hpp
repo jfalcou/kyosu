@@ -1,46 +1,47 @@
 #error This file is for documentation only - DO NOT INCLUDE
 /**
-   \mainpage KYOSU
+   \mainpage SIMD-Aware Cayley-Dickson Algebras
 
-   # KYOSU: SIMD-Aware Cayley-Dickson Algebras
-   The **KYOSU** library is a unified, high-performance C++ library for complex numbers, quaternions, octonions,
-   and general \f$\mathbb{R}\f$-Cayley-Dickson algebras.
+   <strong>KYOSU</strong> is a C++20 library for complex numbers, quaternions, octonions and the general
+   \f$\mathbb{R}\f$-Cayley-Dickson algebras. It extends the usual real functions to all of them, and every
+   one of those functions works on a scalar and on a SIMD register alike.
 
-   Built natively for data-parallel execution, **KYOSU** delivers zero-cost abstraction for both scalar and vectorized math.
-   It allows you to extend the domain functions you know and love into higher dimensions, keeping your computations clear
-   and blazing fast.
-
-   Even if **you just need the basics**, KYOSU remains a highly optimized, hardware-agnostic math suite for
-   standard **real** and **complex** numbers operating across vector registers.
+   If all you need is complex numbers, that is reason enough to use it: they are the two-dimensional case,
+   and they come with the same vectorization as the rest.
 
    ## Core Features
-   + **Blazing Fast Data-Parallel Execution:** Seamlessly use over 200 functions in both scalar and SIMD-compatible contexts without abstraction penalties.
-   + **Execution Control:** Tailor performance by choosing `raw` for maximum vectorization speed, or `pedantic` for strict IEEE754 standard conformity and lane-wise accuracy.
-   + **Precision Angles:** Pass the kyosu::radpi option to calculate in exact multiples of \f$\pi\f$, completely bypassing standard floating-point representation inaccuracies within vectorized pipelines.
-   + **Real-Only Fallbacks:** While out-of-bounds real inputs naturally return complex results in KYOSU (e.g., kyosu::acos(2.0)), you can enforce strictly real scalar or SIMD behavior using the kyosu::real_only flag.
+   + **One call everywhere.** Over two hundred functions, each taking a scalar or a SIMD register, a real
+     or a hyper-complex argument, under the same name.
+   + **Accuracy you choose.** `raw` trades correctness at the edges for speed, `pedantic` keeps IEEE754
+     conformity lane by lane.
+   + **Angles in half-turns.** With kyosu::radpi, an angle is read and returned as a multiple of
+     \f$\pi\f$ rather than in radians — kyosu::arg[kyosu::radpi] gives a half-turn as `1`.
+   + **Real answers when you want them.** A real input outside a function's real domain returns a complex
+     result — kyosu::acos(2.0) is complex — unless kyosu::real_only is passed, which falls back to the
+     matching EVE function and its NaN.
 
-   ### Supported Algebras & Types
-   Starting from standard IEEE floats and doubles, KYOSU continuously scales across vector lanes:
-   + [**Complex Numbers**](https://en.wikipedia.org/wiki/Complex_number).
+   ### Supported algebras
+   Starting from IEEE `float` and `double`:
+   + [**Complex numbers**](https://en.wikipedia.org/wiki/Complex_number).
    + [**Quaternions**](https://en.wikipedia.org/wiki/Quaternion).
    + [**Octonions**](https://en.wikipedia.org/wiki/Octonion).
-   + [**General Algebras**](https://en.wikipedia.org/wiki/Cayley%E2%80%93Dickson_construction).
+   + [**General algebras**](https://en.wikipedia.org/wiki/Cayley%E2%80%93Dickson_construction).
 
-   Dimensionalities can be freely mixed in operations; the system automatically adopts the highest dimension and zeroes out the rest, maintaining continuous SIMD throughput without branching.
+   Dimensions mix freely in an operation: the result takes the largest one and the missing components are
+   zero. Adding a complex to a quaternion is a quaternion, and nothing branches to decide it.
 
-   ### Functionalities
-   + **Rich Math Suite:** Supports a massive array of vectorized functions extended to hyper-complex domains,
-      including Bessel functions, Legendre polynomials, elliptic integrals, and standard transcendentals.
-   + **Advanced Initializers:** Construct complex geometries easily using spatial parametrizations like
-      kyosu::from_euler, kyosu::from_spherical, kyosu::from_cylindrical, and axis-angle constructors.
-   + **Optimized Operations:** Features full operator overloading (`+`, `-`, `*`, `/`), native left-division (kyosu::ldiv), and
-      high-speed imaginary multiplication (kyosu::muli, kyosu::mulmi).
-   + **Built-in Constants:** Provides instant access to foundational algebra constants like
-      kyosu::i, kyosu::mi, kyosu::j, kyosu::k, and complex infinity.
+   ### What is in the box
+   + **The functions**, extended to hyper-complex arguments: Bessel functions, Legendre polynomials,
+     elliptic integrals, and the usual transcendentals.
+   + **The constructors**, for the parametrizations one actually reaches for — kyosu::from_euler,
+     kyosu::from_spherical, kyosu::from_cylindrical, and axis-angle.
+   + **The operators** `+`, `-`, `*`, `/`, plus left-division kyosu::ldiv, which a non-commutative algebra
+     needs, and kyosu::muli and kyosu::mulmi for multiplication by \f$\pm i\f$.
+   + **The constants** kyosu::i, kyosu::mi, kyosu::j, kyosu::k, and complex infinity.
 
-   ## Kyosu Hello World
+   ## Hello World
 
-   The same function over three algebras of growing dimension, mixed freely, then vectorized -
+   The same function over three algebras of growing dimension, mixed freely, then vectorized —
    without the maths changing a line.
 
    @godbolt{doc/hello.cpp}
