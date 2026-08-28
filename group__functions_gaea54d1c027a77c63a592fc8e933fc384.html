@@ -158,7 +158,7 @@ $(function(){initNavTree('group__functions_gaea54d1c027a77c63a592fc8e933fc384.ht
 <div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaea54d1c027a77c63a592fc8e933fc384">ellint_rj</a>[conditional_expr <span class="keyword">auto</span> c](<span class="keyword">auto</span> x, <span class="keyword">auto</span> y, <span class="keyword">auto</span> z, <span class="keyword">auto</span> p) <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
 <div class="line">   <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaea54d1c027a77c63a592fc8e933fc384">ellint_rj</a>[logical_value <span class="keyword">auto</span> m](<span class="keyword">auto</span> x, <span class="keyword">auto</span> y, <span class="keyword">auto</span> z, <span class="keyword">auto</span> p)    <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functions_gaea54d1c027a77c63a592fc8e933fc384_html_gaea54d1c027a77c63a592fc8e933fc384"><div class="ttname"><a href="#gaea54d1c027a77c63a592fc8e933fc384">kyosu::ellint_rj</a></div><div class="ttdeci">constexpr auto ellint_rj</div><div class="ttdoc">Computes the Carlson&#39;s elliptic integral  .</div><div class="ttdef"><b>Definition</b> ellint_rj.hpp:99</div></div>
+<div class="ttc" id="agroup__functions_gaea54d1c027a77c63a592fc8e933fc384_html_gaea54d1c027a77c63a592fc8e933fc384"><div class="ttname"><a href="#gaea54d1c027a77c63a592fc8e933fc384">kyosu::ellint_rj</a></div><div class="ttdeci">constexpr auto ellint_rj</div><div class="ttdoc">Computes the Carlson&#39;s elliptic integral  .</div><div class="ttdef"><b>Definition</b> ellint_rj.hpp:101</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><span class="tt">x</span>, <span class="tt">y</span>, <span class="tt">z</span>: floating real arguments.</li>
@@ -192,10 +192,10 @@ $(function(){initNavTree('group__functions_gaea54d1c027a77c63a592fc8e933fc384.ht
 <div class="line">wide_t im3 = {2.0, -4.0, -3.0, 0.0};</div>
 <div class="line">wide_t re4 = {0.1, -1.5, 2.3, 0.5};</div>
 <div class="line">wide_t im4 = {0.0, -1.0, -2.0, 0.0};</div>
-<div class="line"><span class="keyword">auto</span> p = <a class="code hl_typedef" href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t&lt;wide_t&gt;</a>(re1, im1);</div>
-<div class="line"><span class="keyword">auto</span> q = <a class="code hl_typedef" href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t&lt;wide_t&gt;</a>(re2, im2);</div>
-<div class="line"><span class="keyword">auto</span> r = <a class="code hl_typedef" href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t&lt;wide_t&gt;</a>(re3, im3);</div>
-<div class="line"><span class="keyword">auto</span> s = <a class="code hl_typedef" href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t&lt;wide_t&gt;</a>(re4, im4);</div>
+<div class="line"><span class="keyword">auto</span> p = <a class="code hl_typedef" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;wide_t&gt;</a>(re1, im1);</div>
+<div class="line"><span class="keyword">auto</span> q = <a class="code hl_typedef" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;wide_t&gt;</a>(re2, im2);</div>
+<div class="line"><span class="keyword">auto</span> r = <a class="code hl_typedef" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;wide_t&gt;</a>(re3, im3);</div>
+<div class="line"><span class="keyword">auto</span> s = <a class="code hl_typedef" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;wide_t&gt;</a>(re4, im4);</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
@@ -209,7 +209,7 @@ $(function(){initNavTree('group__functions_gaea54d1c027a77c63a592fc8e933fc384.ht
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;-&gt; ellint_rj[q != 4.0](p, q, r, s)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gaea54d1c027a77c63a592fc8e933fc384">kyosu::ellint_rj</a>[q != 4.0](p, q, r, s) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__types_ga845467957f762a1366cc4f7794d0c357_html_ga845467957f762a1366cc4f7794d0c357"><div class="ttname"><a href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
+<div class="ttc" id="agroup__types_ga10a5d4f4bdbbbc385c544fb41c7d628e_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

@@ -153,7 +153,7 @@ $(function(){initNavTree('group__complex_gaf64b08ee90565c95c04b029767cba95e.html
 <div class="line"> <span class="keyword">template</span>&lt;eve::<span class="keywordtype">float</span>ing_ordered_value T0, eve::<span class="keywordtype">float</span>ing_ordered_value T1, kyosu::concepts::cayley_dickson C&gt;,</div>
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="#gaf64b08ee90565c95c04b029767cba95e">from_polar</a>( T0 rho, T1 theta, C iz) <span class="keyword">const</span> <span class="keyword">noexcept</span>;             <span class="comment">// 2</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__complex_gaf64b08ee90565c95c04b029767cba95e_html_gaf64b08ee90565c95c04b029767cba95e"><div class="ttname"><a href="#gaf64b08ee90565c95c04b029767cba95e">kyosu::from_polar</a></div><div class="ttdeci">constexpr auto from_polar</div><div class="ttdoc">Callable object computing a complex or a general Cayley-Dickson from a polar representation.</div><div class="ttdef"><b>Definition</b> from_polar.hpp:79</div></div>
+<div class="ttc" id="agroup__complex_gaf64b08ee90565c95c04b029767cba95e_html_gaf64b08ee90565c95c04b029767cba95e"><div class="ttname"><a href="#gaf64b08ee90565c95c04b029767cba95e">kyosu::from_polar</a></div><div class="ttdeci">constexpr auto from_polar</div><div class="ttdoc">Callable object computing a complex or a general Cayley-Dickson from a polar representation.</div><div class="ttdef"><b>Definition</b> from_polar.hpp:81</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <p><span class="tt">rho</span> : modulus.</p>
 <p><span class="tt">theta</span>: argument.</p>
@@ -173,9 +173,9 @@ Example</h4>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a>;</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="#gaf64b08ee90565c95c04b029767cba95e">kyosu::from_polar</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gaa5ee9d69117b35a251ee69d50dc5789b.html#gaa5ee9d69117b35a251ee69d50dc5789b">kyosu::quaternion_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> theta = eve::pio_3(eve::as&lt;double&gt;());</div>
 <div class="line">  <span class="keyword">auto</span> rho = 3.0;</div>
@@ -191,9 +191,9 @@ Example</h4>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functions_ga67b994823617f74ac451898540a4dec7_html_ga67b994823617f74ac451898540a4dec7"><div class="ttname"><a href="group__functions_ga67b994823617f74ac451898540a4dec7.html#ga67b994823617f74ac451898540a4dec7">kyosu::sign</a></div><div class="ttdeci">constexpr auto sign</div><div class="ttdoc">Computes tne normalized value z/abs(z) if z is not zero else 0.</div><div class="ttdef"><b>Definition</b> sign.hpp:58</div></div>
-<div class="ttc" id="agroup__functions_ga74ebf9f07f4d05907402cdf7844990d8_html_ga74ebf9f07f4d05907402cdf7844990d8"><div class="ttname"><a href="group__functions_ga74ebf9f07f4d05907402cdf7844990d8.html#ga74ebf9f07f4d05907402cdf7844990d8">kyosu::quaternion</a></div><div class="ttdeci">constexpr auto quaternion</div><div class="ttdoc">Constructs a kyosu::quaternion_t instance.</div><div class="ttdef"><b>Definition</b> to_quaternion.hpp:82</div></div>
-<div class="ttc" id="agroup__types_ga845467957f762a1366cc4f7794d0c357_html_ga845467957f762a1366cc4f7794d0c357"><div class="ttname"><a href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
-<div class="ttc" id="agroup__types_gaa5ee9d69117b35a251ee69d50dc5789b_html_gaa5ee9d69117b35a251ee69d50dc5789b"><div class="ttname"><a href="group__types_gaa5ee9d69117b35a251ee69d50dc5789b.html#gaa5ee9d69117b35a251ee69d50dc5789b">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:24</div></div>
+<div class="ttc" id="agroup__functions_ga74ebf9f07f4d05907402cdf7844990d8_html_ga74ebf9f07f4d05907402cdf7844990d8"><div class="ttname"><a href="group__functions_ga74ebf9f07f4d05907402cdf7844990d8.html#ga74ebf9f07f4d05907402cdf7844990d8">kyosu::quaternion</a></div><div class="ttdeci">constexpr auto quaternion</div><div class="ttdoc">Constructs a kyosu::quaternion_t instance.</div><div class="ttdef"><b>Definition</b> to_quaternion.hpp:83</div></div>
+<div class="ttc" id="agroup__types_ga10a5d4f4bdbbbc385c544fb41c7d628e_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
+<div class="ttc" id="agroup__types_ga43659263f005aec8e7e223b889004a22_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

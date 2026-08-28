@@ -151,7 +151,7 @@ $(function(){initNavTree('group__quaternion_ga730bd78358cd0568b81be9cdcd247455.h
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="#ga730bd78358cd0568b81be9cdcd247455">from_cylindrospherical</a>(<span class="keyword">auto</span> t, <span class="keyword">auto</span> radius, <span class="keyword">auto</span> longitude, <span class="keyword">auto</span> latitude) <span class="keyword">const</span>        <span class="keyword">noexcept</span>;</div>
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="#ga730bd78358cd0568b81be9cdcd247455">from_cylindrospherical</a>[radpi](<span class="keyword">auto</span> t, <span class="keyword">auto</span> radius, <span class="keyword">auto</span> longitude, <span class="keyword">auto</span> latitude) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__quaternion_ga730bd78358cd0568b81be9cdcd247455_html_ga730bd78358cd0568b81be9cdcd247455"><div class="ttname"><a href="#ga730bd78358cd0568b81be9cdcd247455">kyosu::from_cylindrospherical</a></div><div class="ttdeci">constexpr auto from_cylindrospherical</div><div class="ttdoc">Callable object computing a quaternion from its cylindrospherical representation.</div><div class="ttdef"><b>Definition</b> from_cylindrospherical.hpp:73</div></div>
+<div class="ttc" id="agroup__quaternion_ga730bd78358cd0568b81be9cdcd247455_html_ga730bd78358cd0568b81be9cdcd247455"><div class="ttname"><a href="#ga730bd78358cd0568b81be9cdcd247455">kyosu::from_cylindrospherical</a></div><div class="ttdeci">constexpr auto from_cylindrospherical</div><div class="ttdoc">Callable object computing a quaternion from its cylindrospherical representation.</div><div class="ttdef"><b>Definition</b> from_cylindrospherical.hpp:74</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><span class="tt">t</span>, <span class="tt">radius</span>: the moduli</li>
@@ -169,7 +169,7 @@ Example</h4>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="#ga730bd78358cd0568b81be9cdcd247455">kyosu::from_cylindrospherical</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gaa5ee9d69117b35a251ee69d50dc5789b.html#gaa5ee9d69117b35a251ee69d50dc5789b">kyosu::quaternion_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> radius = 2.0;</div>
 <div class="line">  <span class="keyword">auto</span> t = eve::pio_3(eve::as(radius));</div>
@@ -183,7 +183,7 @@ Example</h4>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__types_gaa5ee9d69117b35a251ee69d50dc5789b_html_gaa5ee9d69117b35a251ee69d50dc5789b"><div class="ttname"><a href="group__types_gaa5ee9d69117b35a251ee69d50dc5789b.html#gaa5ee9d69117b35a251ee69d50dc5789b">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:24</div></div>
+<div class="ttc" id="agroup__types_ga43659263f005aec8e7e223b889004a22_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
 </div><!-- fragment --><p>cylindrospherical is specific to quaternions. It is often interesting to consider \(\mathbb{H}\) as the cartesian product of \(\mathbb{R}\) by \(\mathbb{R}^3\) (the quaternionic multiplication has then a special form, as given here). This function therefore builds a quaternion from this representation, with the \(\mathbb{R}^3\) component given in usual \(\mathbb{R}^3\) spherical coordinates.</p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include kyosu/quaternion.hpp&gt;`</span></div>
@@ -209,7 +209,7 @@ Example</h4>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="#ga730bd78358cd0568b81be9cdcd247455">kyosu::from_cylindrospherical</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_gaa5ee9d69117b35a251ee69d50dc5789b.html#gaa5ee9d69117b35a251ee69d50dc5789b">kyosu::quaternion_t</a>;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> radius = 2.0;</div>
 <div class="line">  <span class="keyword">auto</span> t = eve::pio_3(eve::as(radius));</div>

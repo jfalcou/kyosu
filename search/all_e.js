@@ -2,7 +2,7 @@ var searchData=
 [
   ['obtain_20poor_20precision_20with_20float_20based_20computations_0',['to obtain poor precision with float based computations.',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md3',1,'']]],
   ['octonion_1',['octonion',['../conceptkyosu_1_1concepts_1_1octonion.html',1,'kyosu::concepts']]],
-  ['octonion_5ft_2',['octonion_t',['../group__types_gac3a7d42f0e39678e9a138e730a91aed2.html#gac3a7d42f0e39678e9a138e730a91aed2',1,'kyosu']]],
+  ['octonion_5ft_2',['octonion_t',['../group__types_ga403b1334a805ef696b3ab5640d550cff.html#ga403b1334a805ef696b3ab5640d550cff',1,'kyosu']]],
   ['omega_3',['omega',['../group__functions_gaf07c2f937a97dc2ef47bd760183dca54.html#gaf07c2f937a97dc2ef47bd760183dca54',1,'kyosu']]],
   ['oneminus_4',['oneminus',['../group__functions_gab3954d5d5676a222f8a1299d1e81ef40.html#gab3954d5d5676a222f8a1299d1e81ef40',1,'kyosu']]],
   ['only_20implemented_20for_20scalar_20orders_20integral_20or_20floating_5',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]],

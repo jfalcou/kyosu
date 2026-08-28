@@ -12,7 +12,7 @@ var searchData=
   ['complex_9',['Complex',['../group__complex.html',1,'']]],
   ['complex_10',['complex',['../conceptkyosu_1_1concepts_1_1complex.html',1,'kyosu::concepts'],['../group__functions_gad34d6e0109b4b00e61a647cac6197786.html#gad34d6e0109b4b00e61a647cac6197786',1,'kyosu::complex']]],
   ['complex_20bessel_20functions_20are_20only_20implemented_20for_20scalar_20orders_20integral_20or_20floating_11',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]],
-  ['complex_5ft_12',['complex_t',['../group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357',1,'kyosu']]],
+  ['complex_5ft_12',['complex_t',['../group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e',1,'kyosu']]],
   ['complexify_13',['complexify',['../structkyosu_1_1complexify.html',1,'kyosu']]],
   ['complexify_5fif_14',['complexify_if',['../structkyosu_1_1complexify__if.html',1,'kyosu']]],
   ['computations_15',['to obtain poor precision with float based computations.',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md3',1,'']]],

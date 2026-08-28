@@ -149,8 +149,8 @@ $(function(){initNavTree('group__functions_ga39f6e6a20461bbbd304313e231746d47.ht
 <div class="line">{</div>
 <div class="line">   <span class="keyword">template</span>&lt;concepts::cayley_dickson_like Z&gt; complexify_t&lt;Z&gt; <span class="keyword">constexpr</span> <a class="code hl_variable" href="#ga39f6e6a20461bbbd304313e231746d47">deta</a>(unsigned_scalar_value <span class="keyword">auto</span> <a class="code hl_variable" href="group__constants_gabb75241dcb99709608d07d0a94af3813.html#gabb75241dcb99709608d07d0a94af3813">k</a>, Z z) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__constants_gabb75241dcb99709608d07d0a94af3813_html_gabb75241dcb99709608d07d0a94af3813"><div class="ttname"><a href="group__constants_gabb75241dcb99709608d07d0a94af3813.html#gabb75241dcb99709608d07d0a94af3813">kyosu::k</a></div><div class="ttdeci">constexpr auto k</div><div class="ttdoc">Computes the complex number k i.e. quaternion(0, 0, 0, 1) in the chosen type.</div><div class="ttdef"><b>Definition</b> k.hpp:74</div></div>
-<div class="ttc" id="agroup__functions_ga39f6e6a20461bbbd304313e231746d47_html_ga39f6e6a20461bbbd304313e231746d47"><div class="ttname"><a href="#ga39f6e6a20461bbbd304313e231746d47">kyosu::deta</a></div><div class="ttdeci">constexpr auto deta</div><div class="ttdoc">Computes the Dirichlet sums .</div><div class="ttdef"><b>Definition</b> deta.hpp:68</div></div>
+<div class="ttc" id="agroup__constants_gabb75241dcb99709608d07d0a94af3813_html_gabb75241dcb99709608d07d0a94af3813"><div class="ttname"><a href="group__constants_gabb75241dcb99709608d07d0a94af3813.html#gabb75241dcb99709608d07d0a94af3813">kyosu::k</a></div><div class="ttdeci">constexpr auto k</div><div class="ttdoc">Computes the complex number k i.e. quaternion(0, 0, 0, 1) in the chosen type.</div><div class="ttdef"><b>Definition</b> k.hpp:71</div></div>
+<div class="ttc" id="agroup__functions_ga39f6e6a20461bbbd304313e231746d47_html_ga39f6e6a20461bbbd304313e231746d47"><div class="ttname"><a href="#ga39f6e6a20461bbbd304313e231746d47">kyosu::deta</a></div><div class="ttdeci">constexpr auto deta</div><div class="ttdoc">Computes the Dirichlet sums .</div><div class="ttdef"><b>Definition</b> deta.hpp:69</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -175,9 +175,9 @@ $(function(){initNavTree('group__functions_ga39f6e6a20461bbbd304313e231746d47.ht
 <div class="line"> </div>
 <div class="line">  wide_ft ref1 = {3.0f, 2.0f, 1.0f, 0.6f};</div>
 <div class="line">  wide_ft imf1 = {2.0f, -1.0, -5.0, 0.0};</div>
-<div class="line">  <span class="keyword">auto</span> zc = <a class="code hl_typedef" href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t&lt;wide_ft&gt;</a>(ref1, imf1);</div>
-<div class="line">  <span class="keyword">auto</span> z = <a class="code hl_typedef" href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t&lt;double&gt;</a>(1.0, 0.0);</div>
-<div class="line">  <span class="keyword">auto</span> zf = <a class="code hl_typedef" href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t&lt;float&gt;</a>(1.0, 0.0);</div>
+<div class="line">  <span class="keyword">auto</span> zc = <a class="code hl_typedef" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;wide_ft&gt;</a>(ref1, imf1);</div>
+<div class="line">  <span class="keyword">auto</span> z = <a class="code hl_typedef" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;double&gt;</a>(1.0, 0.0);</div>
+<div class="line">  <span class="keyword">auto</span> zf = <a class="code hl_typedef" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;float&gt;</a>(1.0, 0.0);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;&lt;- z           = &quot;</span> &lt;&lt; z &lt;&lt; std::endl</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(1, z)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga39f6e6a20461bbbd304313e231746d47">deta</a>(1u, z) &lt;&lt; std::endl</div>
@@ -194,7 +194,7 @@ $(function(){initNavTree('group__functions_ga39f6e6a20461bbbd304313e231746d47.ht
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;-&gt; deta(1, zc) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga39f6e6a20461bbbd304313e231746d47">deta</a>(1u, zc) &lt;&lt; std::endl;</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__types_ga845467957f762a1366cc4f7794d0c357_html_ga845467957f762a1366cc4f7794d0c357"><div class="ttname"><a href="group__types_ga845467957f762a1366cc4f7794d0c357.html#ga845467957f762a1366cc4f7794d0c357">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:27</div></div>
+<div class="ttc" id="agroup__types_ga10a5d4f4bdbbbc385c544fb41c7d628e_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
