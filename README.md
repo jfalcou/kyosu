@@ -15,55 +15,65 @@ they can be SIMD registers just as well.
 
 ## Example
 
-The same function over three algebras of growing dimension, mixed freely, then vectorized —
-without the maths changing a line.
+One name, whatever the dimension of the argument:
 
 ```cpp
-#include <eve/wide.hpp>
 #include <iostream>
 #include <kyosu/kyosu.hpp>
 
 int main()
 {
-  using kyosu::complex_t;
-  using kyosu::octonion_t;
-  using kyosu::quaternion_t;
+  using kyosu::sqr;
 
-  // The same function, over three algebras of growing dimension.
-  auto c = complex_t<double>(1., 2.);
-  auto q = quaternion_t<double>(1., 2., 3., 4.);
-  auto o = octonion_t<double>(1., 2., 3., 4., 5., 6., 7., 8.);
-
-  std::cout << "complex:    " << c << " -> exp " << kyosu::exp(c) << "\n";
-  std::cout << "quaternion: " << q << " -> exp " << kyosu::exp(q) << "\n";
-  std::cout << "octonion:   " << o << " -> exp " << kyosu::exp(o) << "\n";
-
-  // Dimensions mix freely, the widest one wins.
-  std::cout << "\nc + q     = " << c + q << "\n";
-  std::cout << "q * o     = " << q * o << "\n";
-
-  // And every one of them vectorizes, without changing a line of the maths.
-  using wq_t = eve::wide<quaternion_t<double>, eve::fixed<2>>;
-  wq_t w(q);
-  std::cout << "\nSIMD quaternion: " << w << "\n";
-  std::cout << "            exp: " << kyosu::exp(w) << "\n";
-
-  return 0;
+  // One name, whatever the dimension of the argument.
+  std::cout << "complex:    " << sqr(kyosu::complex_t<double>(1., 2.))            << "\n";
+  std::cout << "quaternion: " << sqr(kyosu::quaternion_t<double>(1., 2., 3., 4.)) << "\n";
+  std::cout << "octonion:   " << sqr(kyosu::octonion_t<double>(1., 2., 3., 4., 5., 6., 7., 8.)) << "\n";
 }
 ```
 
-which prints:
+```text
+complex:    -3 + 4i
+quaternion: -28 + 4i + 6j + 8k
+octonion:   -202 + 4i + 6j + 8k + 10l + 12li + 14lj + 16lk
+```
+
+The algebra is the real one — past the complex numbers it stops being commutative:
+
+```cpp
+#include <iostream>
+#include <kyosu/kyosu.hpp>
+
+int main()
+{
+  using q_t = kyosu::quaternion_t<double>;
+  auto c = kyosu::complex_t<double>(1., 2.);
+  auto q = q_t(1., 2., 3., 4.);
+  auto o = kyosu::octonion_t<double>(1., 2., 3., 4., 5., 6., 7., 8.);
+
+  // Dimensions mix freely: the result takes the largest one.
+  std::cout << "c + q = " << c + q << "\n";
+  std::cout << "q * o = " << q * o << "\n";
+
+  // The constants behave as the algebra says they should, and it is not commutative.
+  auto i = kyosu::i(kyosu::as<q_t>());
+  auto j = kyosu::j(kyosu::as<q_t>());
+  std::cout << "i * j = " << i * j << "\n";
+  std::cout << "j * i = " << j * i << "\n";
+
+  // Which is why a left-division of its own is needed.
+  std::cout << "q / c      = " << q / c            << "\n";
+  std::cout << "ldiv(c, q) = " << kyosu::ldiv(c, q) << "\n";
+}
+```
 
 ```text
-complex:    1 + 2i  -> exp -1.1312 + 2.47173i
-quaternion: 1 + 2i + 3j + 4k  -> exp 1.69392 - 0.78956i - 1.18434j - 1.57912k
-octonion:   1 + 2i + 3j + 4k + 5l + 6li + 7lj + 8lk  -> exp -0.300137 + 0.379239i + 0.568858j + 0.758478k + 0.948097l + 1.13772li + 1.32734lj + 1.51696lk
-
-c + q     = 2 + 4i + 3j + 4k
-q * o     = -28 + 4i + 6j + 8k - 60l + 20li + 14lj + 32lk
-
-SIMD quaternion: (1 + 2i + 3j + 4k , 1 + 2i + 3j + 4k )
-            exp: (1.69392 - 0.78956i - 1.18434j - 1.57912k , 1.69392 - 0.78956i - 1.18434j - 1.57912k )
+c + q = 2 + 4i + 3j + 4k
+q * o = -28 + 4i + 6j + 8k - 60l + 20li + 14lj + 32lk
+i * j = 0 + 0i + 0j + 1k
+j * i = 0 + 0i + 0j - 1k
+q / c      = 1 + 0i - 1j + 2k
+ldiv(c, q) = 1 + 0i + 2.2j - 0.4k
 ```
 
 The full documentation lives at [jfalcou.github.io/kyosu](https://jfalcou.github.io/kyosu).

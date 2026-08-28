@@ -10,15 +10,32 @@
    and they come with the same vectorization as the rest.
 
    ## Core Features
-   + **One call everywhere.** Over two hundred functions, each taking a scalar or a SIMD register, a real
-     or a hyper-complex argument, under the same name.
-   + **Accuracy you choose.** `raw` trades correctness at the edges for speed, `pedantic` keeps IEEE754
-     conformity lane by lane.
-   + **Angles in half-turns.** With kyosu::radpi, an angle is read and returned as a multiple of
-     \f$\pi\f$ rather than in radians — kyosu::arg[kyosu::radpi] gives a half-turn as `1`.
-   + **Real answers when you want them.** A real input outside a function's real domain returns a complex
-     result — kyosu::acos(2.0) is complex — unless kyosu::real_only is passed, which falls back to the
-     matching EVE function and its NaN.
+
+   ### One call, whatever the dimension
+   Over two hundred functions, each taking a real or a hyper-complex argument under the same name.
+
+   @godbolt{doc/one_call.cpp}
+
+   ### One call, scalar or SIMD
+   The same name again, on one value or on a register of them.
+
+   @godbolt{doc/simd.cpp}
+
+   ### Accuracy you choose
+   The default keeps IEEE754 conformity at the edges of the domain; `raw` skips those checks for speed.
+
+   @godbolt{doc/accuracy.cpp}
+
+   ### Angles in half-turns
+   With kyosu::radpi, an angle is read and returned as a multiple of \f$\pi\f$ rather than in radians.
+
+   @godbolt{doc/half_turns.cpp}
+
+   ### Real answers when you want them
+   A real input outside a function's real domain returns a complex result, unless kyosu::real_only is
+   passed, which defers to the matching EVE function and its NaN.
+
+   @godbolt{doc/real_answers.cpp}
 
    ## Supported algebras
    Starting from IEEE `float` and `double`:
@@ -27,24 +44,27 @@
    + [**Octonions**](https://en.wikipedia.org/wiki/Octonion).
    + [**General algebras**](https://en.wikipedia.org/wiki/Cayley%E2%80%93Dickson_construction).
 
-   Dimensions mix freely in an operation: the result takes the largest one and the missing components are
-   zero. Adding a complex to a quaternion is a quaternion, and nothing branches to decide it.
+   Dimensions mix freely in an operation: the result takes the largest one and the missing components
+   are zero. And the algebra is the real one: past the complex numbers it stops being commutative,
+   which is why a left-division of its own is needed alongside `/`.
+
+   @godbolt{doc/algebra.cpp}
 
    ## What is in the box
-   + **The functions**, extended to hyper-complex arguments: Bessel functions, Legendre polynomials,
-     elliptic integrals, and the usual transcendentals.
-   + **The constructors**, for the parametrizations one actually reaches for — kyosu::from_euler,
-     kyosu::from_spherical, kyosu::from_cylindrical, and axis-angle.
-   + **The operators** `+`, `-`, `*`, `/`, plus left-division kyosu::ldiv, which a non-commutative algebra
-     needs, and kyosu::muli and kyosu::mulmi for multiplication by \f$\pm i\f$.
-   + **The constants** kyosu::i, kyosu::mi, kyosu::j, kyosu::k, and complex infinity.
 
-   ## Hello World
+   **The functions**, extended to hyper-complex arguments: Bessel functions, Legendre polynomials,
+   elliptic integrals, and the usual transcendentals. They are listed under Functions.
 
-   The same function over three algebras of growing dimension, mixed freely, then vectorized —
-   without the maths changing a line.
+   ### The constructors
+   For the parametrizations one actually reaches for — kyosu::from_euler, kyosu::from_polar,
+   kyosu::from_spherical, kyosu::from_cylindrical, and axis-angle.
 
-   @godbolt{doc/hello.cpp}
+   @godbolt{doc/constructors.cpp}
+
+   ### The operators and the constants
+   `+`, `-`, `*`, `/` and kyosu::ldiv, shown above, plus kyosu::muli and kyosu::mulmi for
+   multiplication by \f$\pm i\f$. The constants are kyosu::i, kyosu::mi, kyosu::j, kyosu::k, and
+   complex infinity.
 
    ## Licence
 
