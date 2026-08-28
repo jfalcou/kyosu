@@ -15,6 +15,11 @@ FetchContent_Declare(eve
   GIT_TAG main
 )
 
+## Nothing else populates eve here, so its options would stay at their defaults.
+set(EVE_BUILD_TEST          OFF CACHE BOOL "" FORCE)
+set(EVE_BUILD_BENCHMARKS    OFF CACHE BOOL "" FORCE)
+set(EVE_BUILD_DOCUMENTATION OFF CACHE BOOL "" FORCE)
+
 FetchContent_MakeAvailable(eve)
 
 find_package(kyosu CONFIG REQUIRED)

@@ -21,6 +21,12 @@ FetchContent_Declare(eve
   GIT_TAG main
 )
 
+## FetchContent has no per-package OPTIONS: what the dependencies read is pinned here.
+set(KYOSU_BUILD_TEST        OFF CACHE BOOL "" FORCE)
+set(EVE_BUILD_TEST          OFF CACHE BOOL "" FORCE)
+set(EVE_BUILD_BENCHMARKS    OFF CACHE BOOL "" FORCE)
+set(EVE_BUILD_DOCUMENTATION OFF CACHE BOOL "" FORCE)
+
 # make available
 FetchContent_MakeAvailable(kyosu)
 FetchContent_MakeAvailable(eve)

@@ -3,9 +3,8 @@
 ## Copyright : KYOSU Contributors & Maintainers
 ## SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
-## Benchmarks gate nothing, so they run once a change has landed rather than on every pull request,
-## where they were a quarter of the build for no signal. They also need their own presets: the ones
-## used for testing define EVE_NO_FORCEINLINE, which a Release build does not undo.
+## Benchmarks gate nothing, so they run once a change has landed. They need their own presets: the
+## testing ones define EVE_NO_FORCEINLINE, which a Release build does not undo.
 ##======================================================================================================================
 name: KYOSU Benchmarks
 on:
