@@ -15,7 +15,9 @@
     </tab>
     <tab type="usergroup" visible="yes" title="Informations">
        <!-- <tab type="user" url="@ref setup" title="Setup"/> -->
-       <!-- <tab type="user" url="@ref rationale" title="Rationale"/> -->
+      <tab type="usergroup" visible="yes" title="Rationale">
+        <tab type="user" url="@ref math_background" title="Background"/>
+      </tab>
        <!-- <tab type="user" url="@ref changelog" title="Changelog"/> -->
        <tab type="user" url="@ref licence" title="Licence"/>
     </tab>
