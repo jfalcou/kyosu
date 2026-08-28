@@ -40,15 +40,10 @@
 
    ## Kyosu Hello World
 
-   @code
-   #include <kyosu/kyosu.hpp>
-   #include <iostream>
+   The same function over three algebras of growing dimension, mixed freely, then vectorized -
+   without the maths changing a line.
 
-   int main()
-   {
-
-   }
-   @endcode
+   @godbolt{doc/hello.cpp}
 
    ## Licence
 
