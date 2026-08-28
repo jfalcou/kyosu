@@ -3,7 +3,8 @@
    \mainpage SIMD-Aware Cayley-Dickson Algebras
 
    <strong>KYOSU</strong> is a C++20 library for complex numbers, quaternions, octonions and the general
-   \f$\mathbb{R}\f$-Cayley-Dickson algebras. It extends the usual real functions to all of them, and every
+   \f$\mathbb{R}\f$-Cayley-Dickson algebras. It extends the usual real functions to all of them — the
+   transcendentals, but also Bessel functions, Legendre polynomials and elliptic integrals — and every
    one of those functions works on a scalar and on a SIMD register alike.
 
    If all you need is complex numbers, that is reason enough to use it: they are the two-dimensional case,
@@ -37,7 +38,7 @@
 
    @godbolt{doc/real_answers.cpp}
 
-   ## Supported algebras
+   ## The algebras
    Starting from IEEE `float` and `double`:
    + [**Complex numbers**](https://en.wikipedia.org/wiki/Complex_number).
    + [**Quaternions**](https://en.wikipedia.org/wiki/Quaternion).
@@ -46,25 +47,16 @@
 
    Dimensions mix freely in an operation: the result takes the largest one and the missing components
    are zero. And the algebra is the real one: past the complex numbers it stops being commutative,
-   which is why a left-division of its own is needed alongside `/`.
+   which is why kyosu::ldiv sits alongside `/`. The constants kyosu::i, kyosu::mi, kyosu::j and
+   kyosu::k are there, as are kyosu::muli and kyosu::mulmi for multiplication by \f$\pm i\f$.
 
    @godbolt{doc/algebra.cpp}
 
-   ## What is in the box
-
-   **The functions**, extended to hyper-complex arguments: Bessel functions, Legendre polynomials,
-   elliptic integrals, and the usual transcendentals. They are listed under Functions.
-
-   ### The constructors
-   For the parametrizations one actually reaches for — kyosu::from_euler, kyosu::from_polar,
+   ### Building one
+   From the parametrizations one actually reaches for — kyosu::from_euler, kyosu::from_polar,
    kyosu::from_spherical, kyosu::from_cylindrical, and axis-angle.
 
    @godbolt{doc/constructors.cpp}
-
-   ### The operators and the constants
-   `+`, `-`, `*`, `/` and kyosu::ldiv, shown above, plus kyosu::muli and kyosu::mulmi for
-   multiplication by \f$\pm i\f$. The constants are kyosu::i, kyosu::mi, kyosu::j, kyosu::k, and
-   complex infinity.
 
    ## Licence
 
