@@ -20,7 +20,7 @@
      result — kyosu::acos(2.0) is complex — unless kyosu::real_only is passed, which falls back to the
      matching EVE function and its NaN.
 
-   ### Supported algebras
+   ## Supported algebras
    Starting from IEEE `float` and `double`:
    + [**Complex numbers**](https://en.wikipedia.org/wiki/Complex_number).
    + [**Quaternions**](https://en.wikipedia.org/wiki/Quaternion).
@@ -30,7 +30,7 @@
    Dimensions mix freely in an operation: the result takes the largest one and the missing components are
    zero. Adding a complex to a quaternion is a quaternion, and nothing branches to decide it.
 
-   ### What is in the box
+   ## What is in the box
    + **The functions**, extended to hyper-complex arguments: Bessel functions, Legendre polynomials,
      elliptic integrals, and the usual transcendentals.
    + **The constructors**, for the parametrizations one actually reaches for — kyosu::from_euler,
