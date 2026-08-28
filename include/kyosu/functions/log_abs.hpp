@@ -12,7 +12,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct log_abs_t : eve::elementwise_callable<log_abs_t, Options, raw_option, eve::pedantic_option>
+  template<typename Options>
+  struct log_abs_t : eve::elementwise_callable<log_abs_t, Options, raw_option, eve::pedantic_option>
   {
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z const& z) const noexcept

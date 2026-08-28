@@ -15,9 +15,9 @@
 
 namespace kyosu::_
 {
-  template<typename T>                    inline constexpr unsigned int rank = 0;
-  template<eve::floating_value T>         inline constexpr unsigned int rank<T> = 1;
-  template<eve::integral_scalar_value T>  inline constexpr unsigned int rank<T> = 1;
+  template<typename T> inline constexpr unsigned int rank = 0;
+  template<eve::floating_value T> inline constexpr unsigned int rank<T> = 1;
+  template<eve::integral_scalar_value T> inline constexpr unsigned int rank<T> = 1;
 }
 
 namespace kyosu::concepts
@@ -38,7 +38,7 @@ namespace kyosu::concepts
 
   /// General Cayley-dickson concept
   template<typename T>
-  concept cayley_dickson = cayley_dickson_like<T> &&  _::rank<std::remove_cvref_t<T>> > 1;
+  concept cayley_dickson = cayley_dickson_like<T> && _::rank<std::remove_cvref_t<T>> > 1;
 
   template<typename T>
   concept scalar_cayley_dickson = cayley_dickson<T> && eve::scalar_value<T>;
@@ -52,13 +52,13 @@ namespace kyosu::concepts
 
   /// Complex number concept
   template<typename T>
-  concept complex     = cayley_dickson<T> && _::rank<std::remove_cvref_t<T>> == 2;
+  concept complex = cayley_dickson<T> && _::rank<std::remove_cvref_t<T>> == 2;
 
   /// Quaternion concept
   template<typename T>
-  concept quaternion  = cayley_dickson<T> && _::rank<std::remove_cvref_t<T>> == 4;
+  concept quaternion = cayley_dickson<T> && _::rank<std::remove_cvref_t<T>> == 4;
 
   /// Octonion concept
   template<typename T>
-  concept octonion    = cayley_dickson<T> && _::rank<std::remove_cvref_t<T>> == 8;
+  concept octonion = cayley_dickson<T> && _::rank<std::remove_cvref_t<T>> == 8;
 }

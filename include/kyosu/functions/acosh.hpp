@@ -15,7 +15,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct acosh_t : eve::strict_elementwise_callable<acosh_t, Options, raw_option, pedantic_option, real_only_option>
+  template<typename Options>
+  struct acosh_t : eve::strict_elementwise_callable<acosh_t, Options, raw_option, pedantic_option, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
@@ -122,8 +123,7 @@ namespace kyosu::_
       auto res = complex(-i, r);
       res = eve::if_else(lez, res, -res);
       auto nani = eve::is_nan(i);
-      if (eve::any(nani))
-        return eve::if_else(nani && eve::is_finite(r), fnan(eve::as(z)), res);
+      if (eve::any(nani)) return eve::if_else(nani && eve::is_finite(r), fnan(eve::as(z)), res);
       else return res;
     }
     else { return _::cayley_extend(kyosu::acosh[o], z); }

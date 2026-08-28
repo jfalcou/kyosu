@@ -10,7 +10,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct is_finite_t : eve::elementwise_callable<is_finite_t, Options, raw_option, pedantic_option>
+  template<typename Options>
+  struct is_finite_t : eve::elementwise_callable<is_finite_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept

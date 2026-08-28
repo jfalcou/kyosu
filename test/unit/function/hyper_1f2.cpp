@@ -11,28 +11,26 @@
 #include <eve/wide.hpp>
 #include <iostream>
 
-TTS_CASE_TPL ( "Check hyper 0f2"
-             , kyosu::scalar_real_types
-             )
-  <typename T>(tts::type<T>)
+TTS_CASE_TPL("Check hyper 0f2", kyosu::scalar_real_types)
+<typename T>(tts::type<T>)
 {
-  if constexpr(sizeof(T) == 8)
+  if constexpr (sizeof(T) == 8)
   {
     auto pr = tts::prec<T>(4.0e-3, 1.0e-8);
     using r_t = kyosu::cayley_dickson<T, 2>;
-//    r_t I = r_t(0.0, 1.0);
+    //    r_t I = r_t(0.0, 1.0);
     auto cinf = kyosu::cinf(eve::as<r_t>());
     auto fnan = kyosu::fnan(eve::as<r_t>());
-    auto  nan = kyosu::nan(eve::as<r_t>());
+    auto nan = kyosu::nan(eve::as<r_t>());
     r_t res[] = {nan,
                  cinf,
-                 r_t(1.3866990577793,0),
-                 r_t(1.3866990577793,0),
+                 r_t(1.3866990577793, 0),
+                 r_t(1.3866990577793, 0),
                  r_t(1.2265360458091364, 0.8355730069696575),
                  r_t(1.1666666666666667, 0.0),
                  r_t(0.9510416666666667, 0.0),
 
-                 r_t(1.2605622498372,0),
+                 r_t(1.2605622498372, 0),
                  r_t(1.217152359520, 0.541355499156),
                  cinf,
                  cinf,
@@ -63,5 +61,5 @@ TTS_CASE_TPL ( "Check hyper 0f2"
     r = kyosu::hypergeometric(0.5, kumi::tuple{-1.0}, kumi::tuple{1.5, -2.0});
     TTS_RELATIVE_EQUAL(r, res[5], pr);
     r = kyosu::hypergeometric(0.5, kumi::tuple{-2.0}, kumi::tuple{-4.0, -5.0});
-   }
+  }
 };

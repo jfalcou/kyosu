@@ -19,8 +19,7 @@ namespace kyosu
   //!
   //! Octonion numbers are implemented as Cayley-dickson numbers of dimension 8.
   //====================================================================================================================
-  template<eve::floating_value T>
-  using octonion_t = as_cayley_dickson_n_t<8,T>;
+  template<eve::floating_value T> using octonion_t = as_cayley_dickson_n_t<8, T>;
 
   //====================================================================================================================
   //! @}

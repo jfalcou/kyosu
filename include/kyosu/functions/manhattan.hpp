@@ -13,8 +13,12 @@
 namespace kyosu
 {
   template<typename Options>
-  struct manhattan_t
-    : eve::strict_tuple_callable<manhattan_t, Options, raw_option, eve::saturated_option, eve::pedantic_option, eve::kahan_option>
+  struct manhattan_t : eve::strict_tuple_callable<manhattan_t,
+                                                  Options,
+                                                  raw_option,
+                                                  eve::saturated_option,
+                                                  eve::pedantic_option,
+                                                  eve::kahan_option>
   {
 
     template<concepts::cayley_dickson_like... Zs>

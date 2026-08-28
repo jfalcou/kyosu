@@ -8,7 +8,9 @@
 #pragma once
 
 /// Main KYOSU namespace
-namespace kyosu {}
+namespace kyosu
+{
+}
 
 #include <kyosu/types.hpp>
 #include <kyosu/functions.hpp>

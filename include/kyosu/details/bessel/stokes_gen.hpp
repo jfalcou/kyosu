@@ -17,9 +17,7 @@ namespace kyosu::_
   //  physics, 1895.
   // They can serve if we implement bessel for more accurate type in the future
 
-
-  template < size_t N, typename T>
-  auto stokes_gen0() noexcept
+  template<size_t N, typename T> auto stokes_gen0() noexcept
   {
     // once p and tabulated and given  the adapted value of n. considering p and q as
     // the coefficients of two polynomial in ascending power order. For large z (abs(z) > 12, real(z) > 0)
@@ -28,19 +26,18 @@ namespace kyosu::_
     // s = sin(z) and c = cos(z)
     std::array<T, N> p, q;
     auto p[0] = complex(eve::one((eve::as<T>())));
-    auto q[0] = p[0]/8;
-    for ( size_t m=1; m<N; ++m )
+    auto q[0] = p[0] / 8;
+    for (size_t m = 1; m < N; ++m)
     {
-      T pim = T(4*m-3)*T(4*m-3)*T(4*m-1)*T(4*m-1) / ( T(2*m-1)*T(128*m) );
-      p[m] = -p[m-1]*pim;
-      T xim = T(4*m-1)*T(4*m-1)*T(4*m+1)*T(4*m+1) / ( T(2*m+1)*T(128*m) );
-      q[m] = -q[m-1]*xim;
+      T pim = T(4 * m - 3) * T(4 * m - 3) * T(4 * m - 1) * T(4 * m - 1) / (T(2 * m - 1) * T(128 * m));
+      p[m] = -p[m - 1] * pim;
+      T xim = T(4 * m - 1) * T(4 * m - 1) * T(4 * m + 1) * T(4 * m + 1) / (T(2 * m + 1) * T(128 * m));
+      q[m] = -q[m - 1] * xim;
     }
     return std::pair{p, q};
   }
 
-  template < size_t N, typename T>
-  auto stokes_gen1() noexcept
+  template<size_t N, typename T> auto stokes_gen1() noexcept
   {
     // once p and tabulated and  given the adapted value of n. considering p and q as
     // the coefficients of two polynomial in ascending power order. For large z (abs(z) > 12, real(z) > 0)
@@ -49,15 +46,15 @@ namespace kyosu::_
     // s = sin(z) and c = cos(z)
     std::array<T, N> p, q;
     auto p[0] = complex(eve::one((eve::as<T>())));
-    auto q[0] = -3*p[0]/8;
-    for ( size_t m=1; m<N; ++m )
+    auto q[0] = -3 * p[0] / 8;
+    for (size_t m = 1; m < N; ++m)
     {
-      auto twom = m+m;
-      auto fourm = twom+twom;
-      T pim = (4-sqr(fourm-3))*(4-sqr(fourm-1))/((twom-1)*128*m);
-      p[m] = -p[m-1]*pim;
-      T xim =  (sqr(fourm-1)-4)*(sqr(fourm+1)-4)/((twom+1)*128*m);
-      q[m] = -q[m-1]*xim;
+      auto twom = m + m;
+      auto fourm = twom + twom;
+      T pim = (4 - sqr(fourm - 3)) * (4 - sqr(fourm - 1)) / ((twom - 1) * 128 * m);
+      p[m] = -p[m - 1] * pim;
+      T xim = (sqr(fourm - 1) - 4) * (sqr(fourm + 1) - 4) / ((twom + 1) * 128 * m);
+      q[m] = -q[m - 1] * xim;
     }
     return std::pair{p, q};
   }
