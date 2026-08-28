@@ -1,0 +1,44 @@
+##======================================================================================================================
+## Kyosu - Complex Without Complexes
+## Copyright : KYOSU Contributors & Maintainers
+## SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+name: KYOSU MacOS Tests
+on:
+  workflow_call:
+
+jobs:
+  macos:
+    name: ${{ matrix.compiler.name }}
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - { name: "clang"       , preset: "clang-macos"        }
+          - { name: "clang libc++", preset: "clang-macos-libc++" }
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v6
+
+      - name: Configure CMake and Build
+        uses: ./.github/actions/config
+        with:
+          config: Debug
+          preset: ${{ matrix.compiler.preset }}
+          targets: doc.exe unit.exe benchmarks.exe
+
+      - name: Run Doc Tests
+        uses: ./.github/actions/test
+        with:
+          config: Debug
+          preset: ${{ matrix.compiler.preset }}
+          targets: ^doc.*
+
+      - name: Run Unit Tests
+        uses: ./.github/actions/test
+        with:
+          config: Debug
+          preset: ${{ matrix.compiler.preset }}
+          targets: ^unit.*

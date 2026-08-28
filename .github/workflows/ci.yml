@@ -1,0 +1,23 @@
+##======================================================================================================================
+## Kyosu - Complex Without Complexes
+## Copyright : KYOSU Contributors & Maintainers
+## SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+name: Unit Tests
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: kyosu-unit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux-tests:
+    name: Linux
+    uses: ./.github/workflows/linux.yml
+
+  macos-tests:
+    name: MacOS
+    uses: ./.github/workflows/macos.yml
