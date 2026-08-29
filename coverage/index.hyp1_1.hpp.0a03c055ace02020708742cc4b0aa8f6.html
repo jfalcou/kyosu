@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-08-29 20:47:15</td>
+      <td>2026-08-29 22:04:48</td>
     </tr>
   </table>
 </div>
@@ -41,8 +41,8 @@
     </tr>
     <tr>
       <th scope="row">Lines:</th>
-      <td>46</td>
       <td>47</td>
+      <td>48</td>
       <td class="coverage-high">97.9%</td>
     </tr>
     <tr>
@@ -74,9 +74,9 @@
       <th>Block coverage</th>
     </tr>
     <tr><td><a href="#l23">auto kyosu::_::hyperg&lt;kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;double&gt; &gt;(kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;double&gt;) (line 23)</a></td><td>called 2 times, returned 2 times</td><td>98.0%</td></tr>
-    <tr><td><a href="#l87">auto kyosu::_::hyperg&lt;kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;double&gt; &gt;(kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;double&gt;, rbr::flag_keyword&lt;kyosu::regularized_mode&gt;) (line 87)</a></td><td>called 1 time, returned 1 time</td><td>92.0%</td></tr>
+    <tr><td><a href="#l90">auto kyosu::_::hyperg&lt;kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;double&gt; &gt;(kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;double&gt;, rbr::flag_keyword&lt;kyosu::regularized_mode&gt;) (line 90)</a></td><td>called 1 time, returned 1 time</td><td>92.0%</td></tr>
     <tr><td><a href="#l23">auto kyosu::_::hyperg&lt;kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt; &gt;(kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt;) (line 23)</a></td><td>called 4 times, returned 4 times</td><td>98.0%</td></tr>
-    <tr><td><a href="#l87">auto kyosu::_::hyperg&lt;kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt; &gt;(kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt;, rbr::flag_keyword&lt;kyosu::regularized_mode&gt;) (line 87)</a></td><td>called 1 time, returned 1 time</td><td>92.0%</td></tr>
+    <tr><td><a href="#l90">auto kyosu::_::hyperg&lt;kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt; &gt;(kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;double&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt;, rbr::flag_keyword&lt;kyosu::regularized_mode&gt;) (line 90)</a></td><td>called 1 time, returned 1 time</td><td>92.0%</td></tr>
     <tr><td><a href="#l23">auto kyosu::_::hyperg&lt;kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt;, kumi::tuple&lt;double&gt; &gt;(kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt;, kumi::tuple&lt;double&gt;) (line 23)</a></td><td>called 18 times, returned 18 times</td><td>98.0%</td></tr>
     <tr><td><a href="#l23">auto kyosu::_::hyperg&lt;kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt; &gt;(kyosu::cayley_dickson&lt;double, 2u&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;double, 2u&gt; &gt;) (line 23)</a></td><td>called 34 times, returned 34 times</td><td>98.0%</td></tr>
     <tr><td><a href="#l23">auto kyosu::_::hyperg&lt;kyosu::cayley_dickson&lt;float, 2u&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;float, 2u&gt; &gt;, kumi::tuple&lt;float&gt; &gt;(kyosu::cayley_dickson&lt;float, 2u&gt;, kumi::tuple&lt;kyosu::cayley_dickson&lt;float, 2u&gt; &gt;, kumi::tuple&lt;float&gt;) (line 23)</a></td><td>called 12 times, returned 12 times</td><td>98.0%</td></tr>
@@ -726,94 +726,115 @@
         </details>
       </td>
       <td class="linecount coveredLine">184</td>
-      <td class="src coveredLine"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">any</span><span class="p">(</span><span class="n">notdone</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">notdone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">last_interval</span><span class="p">(</span><span class="n">br_zero</span><span class="p">,</span><span class="w"> </span><span class="n">notdone</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">notdone</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></td>
+      <td class="src coveredLine"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">any</span><span class="p">(</span><span class="n">notdone</span><span class="p">))</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l81" href="#l81">81</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">      </span><span class="p">}</span></td>
+      <td class="src "><span class="w">        </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l82" href="#l82">82</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">192</td>
-      <td class="src coveredLine"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">r</span><span class="p">;</span></td>
+      <td class="linecount coveredLine">172</td>
+      <td class="src coveredLine"><span class="w">          </span><span class="n">notdone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">last_interval</span><span class="p">(</span><span class="n">br_zero</span><span class="p">,</span><span class="w"> </span><span class="n">notdone</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">notdone</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l83" href="#l83">83</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="p">}</span></td>
+      <td class="src "><span class="w">        </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l84" href="#l84">84</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="p">}</span></td>
+      <td class="src "><span class="w">      </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l85" href="#l85">85</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="linecount coveredLine">192</td>
+      <td class="src coveredLine"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">r</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l86" href="#l86">86</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Z</span><span class="p">,</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sized_product_type</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T1</span><span class="p">,</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sized_product_type</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T2</span><span class="o">&gt;</span></td>
+      <td class="src "><span class="w">    </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l87" href="#l87">87</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">4</td>
-      <td class="src coveredLine"><span class="w">  </span><span class="n">KYOSU_FORCEINLINE</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">hyperg</span><span class="p">(</span><span class="n">Z</span><span class="w"> </span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">T1</span><span class="w"> </span><span class="n">aa</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="w"> </span><span class="n">cc</span><span class="p">,</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">kyosu</span><span class="o">::</span><span class="n">regularized</span><span class="p">))</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">  </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l88" href="#l88">88</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="p">{</span></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l89" href="#l89">89</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">r_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">z</span><span class="p">);</span></td>
+      <td class="src "><span class="w">  </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Z</span><span class="p">,</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sized_product_type</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T1</span><span class="p">,</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sized_product_type</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T2</span><span class="o">&gt;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l90" href="#l90">90</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">4</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cc</span><span class="p">));</span></td>
+      <td class="src coveredLine"><span class="w">  </span><span class="n">KYOSU_FORCEINLINE</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">hyperg</span><span class="p">(</span><span class="n">Z</span><span class="w"> </span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">T1</span><span class="w"> </span><span class="n">aa</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="w"> </span><span class="n">cc</span><span class="p">,</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">kyosu</span><span class="o">::</span><span class="n">regularized</span><span class="p">))</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l91" href="#l91">91</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">  </span><span class="p">{</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l92" href="#l92">92</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">r_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">z</span><span class="p">);</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l93" href="#l93">93</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount coveredLine">4</td>
+      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cc</span><span class="p">));</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l94" href="#l94">94</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">4</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">isnegint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">is_real</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">is_flint</span><span class="p">(</span><span class="n">kyosu</span><span class="o">::</span><span class="n">real</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">is_ltz</span><span class="p">(</span><span class="n">kyosu</span><span class="o">::</span><span class="n">real</span><span class="p">(</span><span class="n">c</span><span class="p">));</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l92" href="#l92">92</a></td>
+      <td class="lineno"><a id="l95" href="#l95">95</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">4</td>
       <td class="src coveredLine"><span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">if_else</span><span class="p">(</span><span class="n">isnegint</span><span class="p">,</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">next</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">c</span><span class="p">)),</span><span class="w"> </span><span class="n">c</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l93" href="#l93">93</a></td>
+      <td class="lineno"><a id="l96" href="#l96">96</a></td>
       <td class="linebranch">
         <details class="linebranchDetails">
         <summary class="linebranchSummary">1/1</summary>
@@ -826,21 +847,21 @@
       <td class="src coveredLine"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">hyperg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">aa</span><span class="p">,</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">tuple</span><span class="p">{</span><span class="n">c</span><span class="p">})</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">tgamma_inv</span><span class="p">(</span><span class="n">c</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l94" href="#l94">94</a></td>
+      <td class="lineno"><a id="l97" href="#l97">97</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l95" href="#l95">95</a></td>
+      <td class="lineno"><a id="l98" href="#l98">98</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l96" href="#l96">96</a></td>
+      <td class="lineno"><a id="l99" href="#l99">99</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>

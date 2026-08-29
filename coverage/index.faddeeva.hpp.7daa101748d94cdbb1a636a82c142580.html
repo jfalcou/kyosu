@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-08-29 20:47:15</td>
+      <td>2026-08-29 22:04:48</td>
     </tr>
   </table>
 </div>
@@ -41,8 +41,8 @@
     </tr>
     <tr>
       <th scope="row">Lines:</th>
-      <td>62</td>
-      <td>62</td>
+      <td>63</td>
+      <td>63</td>
       <td class="coverage-high">100.0%</td>
     </tr>
     <tr>
@@ -1460,66 +1460,108 @@
         </details>
       </td>
       <td class="linecount coveredLine">682</td>
-      <td class="src coveredLine"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">any</span><span class="p">(</span><span class="n">notdone</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">notdone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_interval</span><span class="p">(</span><span class="n">contfr</span><span class="p">,</span><span class="w"> </span><span class="n">notdone</span><span class="p">,</span><span class="w"> </span><span class="n">notdone</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></td>
+      <td class="src coveredLine"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">any</span><span class="p">(</span><span class="n">notdone</span><span class="p">))</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l172" href="#l172">172</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">        </span><span class="p">}</span></td>
+      <td class="src "><span class="w">          </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l173" href="#l173">173</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">      </span><span class="p">}</span></td>
+      <td class="linecount coveredLine">192</td>
+      <td class="src coveredLine"><span class="w">            </span><span class="n">notdone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_interval</span><span class="p">(</span><span class="n">contfr</span><span class="p">,</span><span class="w"> </span><span class="n">notdone</span><span class="p">,</span><span class="w"> </span><span class="n">notdone</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l174" href="#l174">174</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">1163</td>
-      <td class="src coveredLine"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">if_else</span><span class="p">(</span><span class="n">indneg</span><span class="p">,</span><span class="w"> </span><span class="n">conj</span><span class="p">(</span><span class="n">r</span><span class="p">),</span><span class="w"> </span><span class="n">r</span><span class="p">);</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">          </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l175" href="#l175">175</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">      </span><span class="p">;</span></td>
+      <td class="src "><span class="w">        </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l176" href="#l176">176</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="p">}</span></td>
+      <td class="src "><span class="w">      </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l177" href="#l177">177</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">cayley_extend</span><span class="p">(</span><span class="n">faddeeva</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></td>
+      <td class="linecount coveredLine">1163</td>
+      <td class="src coveredLine"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">if_else</span><span class="p">(</span><span class="n">indneg</span><span class="p">,</span><span class="w"> </span><span class="n">conj</span><span class="p">(</span><span class="n">r</span><span class="p">),</span><span class="w"> </span><span class="n">r</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l178" href="#l178">178</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="p">}</span></td>
+      <td class="src "><span class="w">      </span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l179" href="#l179">179</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="p">}</span></td>
+      <td class="src "><span class="w">    </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l180" href="#l180">180</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">    </span><span class="k">else</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l181" href="#l181">181</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">    </span><span class="p">{</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l182" href="#l182">182</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">cayley_extend</span><span class="p">(</span><span class="n">faddeeva</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">);</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l183" href="#l183">183</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">    </span><span class="p">}</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l184" href="#l184">184</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">  </span><span class="p">}</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l185" href="#l185">185</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="p">}</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l186" href="#l186">186</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
