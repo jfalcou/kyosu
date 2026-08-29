@@ -11,6 +11,8 @@ include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
 ##======================================================================================================================
 option( KYOSU_BUILD_TEST          "Build tests for KYOSU"   ON  )
 option( KYOSU_BUILD_DOCUMENTATION "Build Doxygen for KYOSU" OFF )
+option( KYOSU_ENABLE_SANITIZERS   "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF )
+option( KYOSU_ENABLE_COVERAGE     "Build tests with code coverage instrumentation"                 OFF )
 
 ##======================================================================================================================
 ## Project setup via copacabana
@@ -28,6 +30,8 @@ if(NOT KYOSU_QUIET)
   endif()
   message(STATUS "[${PROJECT_NAME}] - Unit tests : ${KYOSU_BUILD_TEST} (via KYOSU_BUILD_TEST)")
   message(STATUS "[${PROJECT_NAME}] - Doxygen    : ${KYOSU_BUILD_DOCUMENTATION} (via KYOSU_BUILD_DOCUMENTATION)")
+  message(STATUS "[${PROJECT_NAME}] - Sanitizers : ${KYOSU_ENABLE_SANITIZERS} (via KYOSU_ENABLE_SANITIZERS)")
+  message(STATUS "[${PROJECT_NAME}] - Coverage   : ${KYOSU_ENABLE_COVERAGE} (via KYOSU_ENABLE_COVERAGE)")
   set(QUIET_OPTION "")
 else()
   set(QUIET_OPTION "QUIET")
@@ -60,6 +64,15 @@ copa_setup_pch( TARGET kyosu_bench  INTERFACES  kyosu_bench HEADERS include/kyos
 ## Tests setup
 ##======================================================================================================================
 if(KYOSU_BUILD_TEST)
+  if(KYOSU_ENABLE_SANITIZERS)
+    copa_setup_sanitizers(kyosu_docs ENABLE_ASAN ENABLE_UBSAN)
+  endif()
+
   enable_testing()
   add_subdirectory(test)
+
+  # After the test targets exist, so the coverage targets can depend on them
+  if(KYOSU_ENABLE_COVERAGE)
+    copa_setup_coverage(kyosu_docs)
+  endif()
 endif()
