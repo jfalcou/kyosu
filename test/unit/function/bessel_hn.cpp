@@ -177,7 +177,6 @@ TTS_CASE_TPL("Check kyosu::bessel_h1n integral positive order", kyosu::scalar_re
     auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c))) * kyosu::rec(c));
     for (int i = 0; i < N; ++i)
     {
-      // std::cout<< "j " << j  << " c[" << i << "] = " << c << std::endl;
       auto res = kyosu::complex(reresN16[i][j], imresN16[i][j]);
       if (((i < 7) || (sizeof(T) == 8) ||
            kyosu::is_not_real(
@@ -364,7 +363,6 @@ TTS_CASE_TPL("Check kyosu::bessel_h2n integral negative order", kyosu::scalar_re
     auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c))) * kyosu::rec(c));
     for (int i = 0; i < N; ++i)
     {
-      // std::cout<< "j " << j  << " c[" << i << "] = " << c << std::endl;
       auto res = kyosu::complex(reresN16[i][j], imresN16[i][j]);
       if (((i < 7) || (sizeof(T) == 8) ||
            kyosu::is_not_real(

@@ -12,7 +12,6 @@
 #include <kyosu/functions/is_real.hpp>
 #include <kyosu/functions/is_not_finite.hpp>
 #include <kyosu/constants.hpp>
-#include <iostream>
 namespace kyosu
 {
   template<typename Options>
