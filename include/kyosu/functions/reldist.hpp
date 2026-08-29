@@ -48,7 +48,7 @@ namespace kyosu
   //!     // Regular Calls
   //!     constexpr auto reldist(auto z0, auto z1) noexcept;           //1
   //!
-  //!     // Semantic Modifier
+  //!     // Semantic Modifiers
   //!     constexpr auto reldist[pedantic](auto z0, auto z1) noexcept; //2
   //!     constexpr auto reldist[numeric](auto z0, auto z1) noexcept;  //3
   //!   }

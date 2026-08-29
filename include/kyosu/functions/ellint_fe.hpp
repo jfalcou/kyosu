@@ -56,7 +56,7 @@ namespace kyosu
   //!       constexpr Z       ellint_fe( real<Z>   z, real<U> m)               noexcept; //1
   //!       constexpr auto    ellint_fe(complex<Z> z, real<U> m)               noexcept; //1
   //!
-  //!      // Semantic Modifier
+  //!      // Semantic Modifiers
   //!      constexpr Z    ellint_fe[modular]( real<Z>      z, real<U> alpha)   noexcept; //1
   //!      constexpr auto ellint_fe[modular](complex<Z>    z, real<U> alpha)   noexcept; //1
   //!      constexpr Z    ellint_fe[eccentric]( real<Z>    z, real<U> m)       noexcept; //1

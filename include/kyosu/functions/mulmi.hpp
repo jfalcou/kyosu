@@ -46,7 +46,7 @@ namespace kyosu
   //!   {  // regular call
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  mulmi(T z)        noexcept; //1
   //!
-  //!      // Semantic Modifier
+  //!      // Semantic Modifiers
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  mulmi[left}(T z)  noexcept; //1
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  mulmi[right](T z) noexcept; //2
   //!   }

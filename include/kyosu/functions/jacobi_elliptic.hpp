@@ -49,7 +49,7 @@ namespace kyosu
   //!      // Regular overload
   //!      template<concepts::complex_like Z, concepts::real U> constexpr auto jacobi_elliptic Z z, U m)                             noexcept;
   //!
-  //!      // Semantic Modifier
+  //!      // Semantic Modifiers
   //!      template<concepts::complex_like Z, concepts::real U> constexpr Z jacobi_elliptic[modular](Z z, U alpha)                   noexcept;
   //!      template<concepts::complex_like Z, concepts::real U> constexpr Z jacobi_elliptic[eccentric](Z z, U k)                     noexcept;
   //!      template<concepts::complex_like Z, concepts::real U> constexpr Z jacobi_elliptic[threshold = tol](Z z, U m)               noexcept;

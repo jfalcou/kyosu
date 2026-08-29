@@ -45,7 +45,7 @@ namespace kyosu
   //!     // Regular Calls
   //!     constexpr ato tan(cayley_dickson_like z)                 noexcept; //1
   //!
-  //!     // Semantic Modifier
+  //!     // Semantic Modifiers
   //!     constexpr auto tan[radpi](cayley_dickson_like z)         noexcept; //2
   //!     constexpr auto tan[rad](cayley_dickson_like z)           noexcept; //1
   //!   }
