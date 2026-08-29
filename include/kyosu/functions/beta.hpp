@@ -57,7 +57,7 @@ namespace kyosu
   //!     //  regular call
   //!     constexpr auto beta(cayley_dickson_liko x, cayley_dickson_like y) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic modifiers
   //!     constexpr auto beta[real_only](Real x, Real y)                    noexcept;
   //!   }
   //!   @endcode

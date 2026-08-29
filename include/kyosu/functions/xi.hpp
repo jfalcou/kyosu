@@ -49,7 +49,7 @@ namespace kyosu
   //!      //regular call
   //!      constexpr auto xi(auto z) noexcept;           // 1
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic modifiers
   //!      constexpr auto xi[riemann](auto z) noexcept;  // 1
   //!      constexpr auto xi[landau](T z) noexcept;      // 2
   //!   }

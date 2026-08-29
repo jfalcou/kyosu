@@ -52,7 +52,7 @@ namespace kyosu
   //!     constexpr auto cbrt(complex_like z, auto k)             noexcept;
   //!     constexpr auto cbrt(complex_like z)                     noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic modifiers
   //!     constexpr Z cbrt[real_only](Real z)                     noexcept;
   //!   }
   //!   @endcode

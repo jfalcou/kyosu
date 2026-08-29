@@ -73,13 +73,13 @@ namespace kyosu
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!      template < int I, int J, int K > auto from_euler(auto a, auto b, auto c
   //!                                                      , axis<I> a1, axis<J> a2, axis<K> a3

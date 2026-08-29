@@ -71,7 +71,7 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!      // Regular overload
   //!      auto constexpr legendre(kyosu::concepts::real auto n, kyosu::concepts::cayley_dickson auto z) noexcept; // 1
@@ -81,7 +81,7 @@ namespace kyosu
   //!      constexpr auto legendre[conditional_expr auto c](/* any previous overload */)                 noexcept; // 2
   //!      constexpr auto legendre[logical_value auto m](/* any previous overload */)                    noexcept; // 2
   //!
-  //!      // Semantic options
+  //!      // Semantic modifiers
   //!      constexpr auto legendre[successor](integral_value auto n,
   //!                                         kyosu::concepts::cayley_dickson auto z,
   //!                                         kyosu::concepts::cayley_dickson auto pn,

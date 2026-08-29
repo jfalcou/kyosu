@@ -48,7 +48,7 @@ namespace kyosu
   //!   For non commutative cases it is a left-reverse_horner scheme: coefficients are
   //!   at the left of the x powers.
   //!
-  //!   using the `right` semantic modifyier allows to use a right-reverse Horner scheme:
+  //!   using the `right` semantic modifier allows to use a right-reverse Horner scheme:
   //!   coefficients are at the right of the x powers).
   //!
   //!   @groupheader{Header file}
@@ -60,12 +60,12 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!     template< auto T, auto C ...>  auto reverse_horner(T x, C ... coefs)       noexcept; //1
   //!     template< auto C, auto K>      auto reverse_horner(T x, K tup)             noexcept; //2
   //!
-  //!     Semantic modifyiers
+  //!     // Semantic modifiers
   //!     template<auto T, auto C ...>  auto reverse_horner[left](T x, C ... coefs)  noexcept; //1
   //!     template<auto C, auto K>      auto reverse_horner[left]r(T x, K tup)       noexcept; //2
   //!     template<auto T, auto C ...>  auto reverse_horner[right](T x, C ... coefs) noexcept; //3

@@ -57,7 +57,7 @@ namespace kyosu
   //!     auto lbeta(auto z0,auto z1) noexcept;
   //!     auto lbeta(auto z0,  auto z1, eve::value n) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic modifiers
   //!     auto lbeta[real_only](auto z0, auto z1) noexcept;
   //!   }
   //!   @endcode

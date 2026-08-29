@@ -77,7 +77,7 @@ namespace kyosu
   //!      //regular call
   //!     constexpr auto hypergeometric(auto z, auto a, auto b)              noexcept; // 1;
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic modifiers
   //!     constexpr auto hypergeometric[regularized](auto z, auto a, auto b) noexcept; // 2
   //!   }
   //!   @endcode

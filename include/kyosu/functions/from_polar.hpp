@@ -42,13 +42,13 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!    template<eve::floating_ordered_value T0, eve::floating_ordered_value T1>,
   //!     auto from_polar( T0 rho, T1 theta) const noexcept;                   // 1

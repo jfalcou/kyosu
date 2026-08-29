@@ -45,7 +45,7 @@ namespace kyosu
   //!      //regular call
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs(T z) noexcept;       // 1
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic modifiers
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[raw](T z) noexcept;  // 2
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[flat](T z) noexcept; // 3
   //!   }

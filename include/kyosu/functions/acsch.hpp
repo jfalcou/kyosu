@@ -53,7 +53,7 @@ namespace kyosu
   //!     constexpr auto acsch(cayley_dickson_like z)               noexcept;
   //!     constexpr auto acsch(cayley_dickson_like z, eve::value k) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic modifiers
   //!     constexpr auto acsch[real_only](Real z)                   noexcept;
   //!   }
   //!   }

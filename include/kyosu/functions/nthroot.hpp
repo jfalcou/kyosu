@@ -58,7 +58,7 @@ namespace kyosu
   //!     constexpr auto nthroot(complex_like z, auto n, auto k)             noexcept;
   //!     constexpr auto nthroot(complex_like z, auto n)                     noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic modifiers
   //!     constexpr auto nthroot[real_only](/*any previous overload*/)       noexcept;
   //!   }
   //!   @endcode

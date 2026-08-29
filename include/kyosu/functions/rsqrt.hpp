@@ -55,7 +55,7 @@ namespace kyosu
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> rsqrt(T z) noexcept;  //1
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto rsqrt(T z, K k) noexcept;         //2
   //!
-  //!      // semantic modifyers
+  //!      // Semantic modifiers
   //!      template<concepts::real T> constexpr complexify_t<T> rsqrt[real_only](T z) noexcept;             //1
   //!   }
   //!   @endcode

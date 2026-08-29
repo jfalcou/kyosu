@@ -59,8 +59,8 @@ namespace kyosu
   //!      constexpr auto sqrt(auto z)                                                    noexcept; //1
   //!      template<eve::value K> constexpr auto sqrt(auto z, K k)                        noexcept; //2
   //!
-  //!      // semantic modifyers
-  //!      template<eve::value K> constexpr auto sqrt[principal](\*any previus overload)  noexcept; //3
+  //!      // Semantic modifiers
+  //!      template<eve::value K> constexpr auto sqrt[principal](/*any previous overload*/)  noexcept; //3
   //!      template<concepts::real T> constexpr auto sqrt[real_only](T z)                 noexcept; //1
   //!   }
   //!   @endcode

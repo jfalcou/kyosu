@@ -54,12 +54,12 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!      // Regular overload
   //!      constexpr auto ellint_rd( auto x,  auto y, auto z)                        noexcept; // 1
   //!
-  //!      // semantic modifier
+  //!      // Semantic modifiers
   //!      constexpr auto ellint_rd[threshold = tol](auto x, auto y, auto z)         noexcept; // 1
   //!
   //!      // Lanes masking

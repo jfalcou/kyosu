@@ -56,7 +56,7 @@ namespace kyosu
   //!     //  regular call
   //!     auto lrising_factorial(auto x,auto y) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic modifiers
   //!     auto lrising_factorial[real_only](auto x,auto y) noexcept;
   //!   }
   //!   @endcode

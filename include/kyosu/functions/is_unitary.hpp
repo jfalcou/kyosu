@@ -41,10 +41,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      Regular call
+  //!      // Regular call
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_unitary(T z) noexcept;
   //!
-  //!      Semantic modifyier
+  //!      // Semantic modifiers
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_unitary[pedantic](T z) noexcept;
   //!   }
   //!   @endcode

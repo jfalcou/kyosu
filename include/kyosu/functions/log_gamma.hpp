@@ -57,7 +57,7 @@ namespace kyosu
   //!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> log_gamma(Z z) noexcept;
   //!     template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log_gamma(T z, eve::value n) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic modifiers
   //!     template<concepts::real Z> constexpr complexify_t<Z> log_gamma[real_only](Z z) noexcept;
   //!   }
   //!   @endcode

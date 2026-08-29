@@ -52,7 +52,7 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!      // Regular overload
   //!      auto constexpr gegenbauer( auto n, auto lambda, auto z)                          noexcept; // 1

@@ -49,7 +49,7 @@ namespace kyosu
   //!      //regular call
   //!      template<typename T, typename ... Ts> auto linfnorm(T z,Ts ... zs ) const       noexcept //1
   //!
-  //!       Semantic modifyier
+  //!       // Semantic modifiers
   //!      template<typename T, typename ... Ts> auto linfnorm[flat](T z,Ts ... zs ) const noexcept //2
   //!   }
   //!   @endcode

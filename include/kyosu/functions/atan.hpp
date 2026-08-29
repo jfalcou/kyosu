@@ -55,7 +55,7 @@ namespace kyosu
   //!     constexpr auto atan(cayley_dickson_like z)                noexcept;
   //!     constexpr auto atan(cayley_dickson_like z, eve::value k)  noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic modifiers
   //!     constexpr Z atan[real_only](Real z)                       noexcept;
   //!     constexpr auto atan[radpi](cayley_dickson_like z)         noexcept;
   //!     constexpr auto atan[rad](cayley_dickson_like z)           noexcept;

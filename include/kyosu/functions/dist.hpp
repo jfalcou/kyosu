@@ -45,7 +45,7 @@ namespace kyosu
   //!     // regular call
   //!     constexpr auto dist(auto z0,  auto z1)           noexcept; //1
   //!
-  //!     // Semantic modifyiers
+  //!     // Semantic modifiers
   //!     constexpr auto dist[pedantic](auto z0,  auto z1) noexcept; //2
   //!     constexpr auto dist[numeric](auto z0,  auto z1) noexcept;  //3
   //!   }

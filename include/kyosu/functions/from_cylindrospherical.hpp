@@ -45,13 +45,13 @@ namespace kyosu
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!     auto from_cylindrospherical(auto t, auto radius, auto longitude, auto latitude) const        noexcept;
   //!     auto from_cylindrospherical[radpi](auto t, auto radius, auto longitude, auto latitude) const noexcept;

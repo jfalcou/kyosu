@@ -53,7 +53,7 @@ namespace kyosu
   //!      // Regular overload
   //!      template <complex_like Z, floating_value U> constexpr auto am(Z z, U m)               noexcept; //1
   //!
-  //!      //Semantic modifiers
+  //!      // Semantic modifiers
   //!      template <complex_like Z, floating_value U> constexpr auto am[modular](Z z, U alpha)  noexcept; //1
   //!      template <complex_like Z, floating_value U> constexpr auto am[eccentric](Z z, U k)    noexcept; //1
   //!      constexpr auto am[threshold = tol](/*any previous overload*/)                         noexcept; //1

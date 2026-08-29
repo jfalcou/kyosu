@@ -53,7 +53,7 @@ namespace kyosu
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log10(T z) noexcept;             \\1
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log10(T z eve::value n) noexcept;\\2
   //!
-  //!      // semantic modifyers
+  //!      // Semantic modifiers
   //!      template<concepts::real T> constexpr T log10[real_only](T z) noexcept;                                      \\1
   //!   }
   //!   @endcode

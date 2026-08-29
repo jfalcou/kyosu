@@ -57,7 +57,7 @@ namespace kyosu
   //!      template<typename ... Ts> auto minabs(Ts ... zs       ) const noexcept// 1
   //!      template<typename Tup>    auto minabs(kumi::tuple Tup ) const noexcept// 2
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic modifiers
   //!      auto minabs[raw](/* any previous overload*/)      noexcept;           // 3
   //!      auto minabs[numeric](/* any previous overload*/)  noexcept;           // 4
   //!      auto minabs[pedantic](/* any previous overload*/) noexcept;           // 5

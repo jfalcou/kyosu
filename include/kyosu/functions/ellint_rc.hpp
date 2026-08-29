@@ -56,7 +56,7 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!      // Regular overload
   //!      constexpr auto ellint_rc(auto x, auto y)                           noexcept; // 1

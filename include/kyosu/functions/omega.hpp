@@ -40,7 +40,7 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!      // Regular overload
   //!      constexpr auto omega(complex_like auto x)                          noexcept; // 1

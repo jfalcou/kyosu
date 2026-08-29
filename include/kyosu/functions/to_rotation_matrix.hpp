@@ -87,13 +87,13 @@ namespace kyosu
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!       auto to_rotation_matrix(auto q) const noexcept;                   //1
   //!       auto to_rotation_matrix[assume_unitary](auto q) const noexcept;   //2

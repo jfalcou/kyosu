@@ -49,7 +49,7 @@ namespace kyosu
   //!      //regular call
   //!     constexpr auto kummer(auto z, auto a, auto b) noexcept;             //1
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic modifiers
   //!     constexpr auto kummer[regularized](auto z, auto a, auto b) noexcept;//2
   //!
   //!

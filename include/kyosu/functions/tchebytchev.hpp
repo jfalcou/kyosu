@@ -82,7 +82,7 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!      // Regular overload
   //!      auto constexpr tchebytchev(kyosu::concepts::real auto n, kyosu::concepts::cayley_dickson auto z) noexcept; // 1
@@ -92,7 +92,7 @@ namespace kyosu
   //!      constexpr auto tchebytchev[conditional_expr auto c](/* any previous overload */)                 noexcept; // 2
   //!      constexpr auto tchebytchev[logical_value auto m](/* any previous overload */)                    noexcept; // 2
   //!
-  //!      // Semantic options
+  //!      // Semantic modifiers
   //!      constexpr auto tchebytchev[kind_1](/* any previous overload */)                                  noexcept; // 1
   //!      constexpr auto tchebytchev[kind_2](i/* any previous overload */)                                 noexcept; // 3
   //!      constexpr auto tchebytchev[successor]( kyosu::concepts::cayley_dickson auto z,

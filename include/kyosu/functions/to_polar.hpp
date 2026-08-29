@@ -69,9 +69,9 @@ namespace kyosu
   //!      //regular call
   //!      template<kyosu::concepts::cayley_dickson T>                             constexpr T to_polar(T z)      noexcept; //1
   //!      template<eve::floating_ordered_value T>                                 constexpr T to_polar(T z)      noexcept; //2
-  //!      template<eve::floating_ordered_value T, eve::floating_ordered_value U)  constexpr T to_polar(T t, U u) noexcept; //3
+  //!      template<eve::floating_ordered_value T, eve::floating_ordered_value U>  constexpr T to_polar(T t, U u) noexcept; //3
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic modifiers
   //!      template<typenam T>                        constexpr T to_polar[radpi](/*any previous overload*/)      noexcept; //4
   //!   }
   //!   @endcode
