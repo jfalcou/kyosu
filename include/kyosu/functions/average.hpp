@@ -110,6 +110,9 @@ namespace kyosu::_
       auto invs = eve::rec(f_t(sizeof...(Ts)) + 1);
       return average[o.drop(eve::pedantic)](t0 * invs, (ts * invs)...);
     }
-    else { return add[o](t0, ts...) / (sizeof...(Ts) + 1); }
+    else
+    {
+      return add[o](t0, ts...) / (sizeof...(Ts) + 1);
+    }
   }
 }

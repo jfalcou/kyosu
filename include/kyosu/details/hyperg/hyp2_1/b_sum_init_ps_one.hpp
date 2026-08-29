@@ -82,7 +82,10 @@ namespace kyosu::_
 
       auto res = gamma_c * prod_ab * (prod1 - prod2 - prod3);
       auto finite = kyosu::is_finite(res);
-      if (eve::all(finite)) { return res; }
+      if (eve::all(finite))
+      {
+        return res;
+      }
       else
       {
         auto gamma_inv_eps_pm_p1 = phase * sinpi(eps) / (pi_eps_pm * gamma_inv_one_meps_mm);
@@ -98,7 +101,10 @@ namespace kyosu::_
     if (eve::any(notdone))
     {
       notdone = next_interval(br_gt, notdone, inf_norm_eps > u_t(0.1), r);
-      if (eve::any(notdone)) { last_interval(br_le, notdone, r); }
+      if (eve::any(notdone))
+      {
+        last_interval(br_le, notdone, r);
+      }
     }
     return r;
   }

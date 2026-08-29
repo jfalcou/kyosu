@@ -236,7 +236,10 @@ namespace kyosu
 
         return complex(r, i);
       }
-      else { return cayley_extend(asin, a0); }
+      else
+      {
+        return cayley_extend(asin, a0);
+      }
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>

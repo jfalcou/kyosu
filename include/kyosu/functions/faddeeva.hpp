@@ -168,12 +168,18 @@ namespace kyosu::_
         if (eve::any(notdone))
         {
           notdone = next_interval(fexp, notdone, indin, r, z);
-          if (eve::any(notdone)) { notdone = next_interval(contfr, notdone, notdone, r, z); }
+          if (eve::any(notdone))
+          {
+            notdone = next_interval(contfr, notdone, notdone, r, z);
+          }
         }
       }
       return if_else(indneg, conj(r), r);
       ;
     }
-    else { return cayley_extend(faddeeva, z); }
+    else
+    {
+      return cayley_extend(faddeeva, z);
+    }
   }
 }

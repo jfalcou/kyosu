@@ -68,6 +68,9 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto oneminus_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::inc(eve::minus(z));
-    else { return kyosu::inc(kyosu::minus(z)); }
+    else
+    {
+      return kyosu::inc(kyosu::minus(z));
+    }
   }
 }

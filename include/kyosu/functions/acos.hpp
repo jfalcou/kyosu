@@ -256,7 +256,10 @@ namespace kyosu
         i = eve::if_else(gtzia0, -i, i);
         return Z(r, i);
       }
-      else { return cayley_extend(acos, a0); }
+      else
+      {
+        return cayley_extend(acos, a0);
+      }
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>

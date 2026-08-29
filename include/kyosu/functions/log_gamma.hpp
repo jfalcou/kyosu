@@ -113,7 +113,10 @@ namespace kyosu::_
       auto negra0 = eve::is_negative(real(a0));
       auto z = if_else(negra0, -a0, a0);
       Z ss{};
-      for (int pp = N - 1; pp >= 1; --pp) { ss += c[pp] * rec(z + eve::dec(pp)); }
+      for (int pp = N - 1; pp >= 1; --pp)
+      {
+        ss += c[pp] * rec(z + eve::dec(pp));
+      }
       auto zg = z + g - eve::half(eve::as(g));
       auto lsq2pi = r_t(0.9189385332046727417803297);
       auto f = (lsq2pi + log(c[0] + ss)) - zg + (z - eve::half(eve::as<r_t>())) * log(zg);
@@ -132,7 +135,10 @@ namespace kyosu::_
       }
       return f;
     }
-    else { return cayley_extend(log_gamma, a0); }
+    else
+    {
+      return cayley_extend(log_gamma, a0);
+    }
   }
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
@@ -146,7 +152,10 @@ namespace kyosu::_
       auto kk = eve::convert(k, as<e_t>());
       return log_gamma[o](z) + muli(kk * two_pi(as(kk)));
     }
-    else { return _::cayley_extend(kyosu::log_gamma, z, k); }
+    else
+    {
+      return _::cayley_extend(kyosu::log_gamma, z, k);
+    }
   }
 
   template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>

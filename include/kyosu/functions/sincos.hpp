@@ -119,7 +119,10 @@ namespace kyosu
           return eve::zip(spi, cpi);
         }
       }
-      else { return _::cayley_extend2(kyosu::sincos[o], z); }
+      else
+      {
+        return _::cayley_extend2(kyosu::sincos[o], z);
+      }
     }
   }
 

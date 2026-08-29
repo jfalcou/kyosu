@@ -213,7 +213,10 @@ namespace tts
 
       return W(these.storage());
     }
-    else { return data; }
+    else
+    {
+      return data;
+    }
   }
 
   //================================================================================================

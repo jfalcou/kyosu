@@ -24,7 +24,10 @@ namespace kyosu::_
     int an = eve::abs(n);
     EVE_ASSERT(int(size(cjv)) > an, "not enough room in cjv");
     EVE_ASSERT(int(size(cyv)) > an, "not enough room in cyv");
-    if (eve::is_flint(v)) { return cb_jyn(int(v), z, cjv, cyv); }
+    if (eve::is_flint(v))
+    {
+      return cb_jyn(int(v), z, cjv, cyv);
+    }
     else if (eve::is_gtz(v))
     {
       auto v0 = eve::frac(v); // v = n+v0 0 < v0 < 1 as v is not a flint
@@ -32,10 +35,16 @@ namespace kyosu::_
       auto [cjv0, cyv0, cjv1, cyv1] = kyosu::_::cb_jyr01(v0, z);
       cjv[0] = cjv0;
       cyv[0] = cyv0;
-      if (n == 0) { return kumi::tuple{cjv[0], cyv[0]}; }
+      if (n == 0)
+      {
+        return kumi::tuple{cjv[0], cyv[0]};
+      }
       cjv[1] = cjv1;
       cyv[1] = cyv1;
-      if (n == 1) { return kumi::tuple{cjv[1], cyv[1]}; }
+      if (n == 1)
+      {
+        return kumi::tuple{cjv[1], cyv[1]};
+      }
       else if (n >= 2)
       {
         // now jv0 jv1 yv0 and yv1 had been computed
@@ -95,7 +104,10 @@ namespace kyosu::_
         Z r;
         auto notdone = kyosu::true_(as<Z>());
         notdone = next_interval(forward, notdone, 4 * n <= az, r);
-        if (eve::any(notdone)) { last_interval(backward, notdone, r); }
+        if (eve::any(notdone))
+        {
+          last_interval(backward, notdone, r);
+        }
 
         // compute y_{v+i} i =  2...n
         auto twoopiz = twoopi * rz;

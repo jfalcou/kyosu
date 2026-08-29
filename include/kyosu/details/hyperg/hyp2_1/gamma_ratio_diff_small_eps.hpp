@@ -72,7 +72,10 @@ namespace kyosu::_
       auto t2_eps_z = (2.0 * sqr(s_eps_o2) - term) / eps;
       auto t_eps_z = t1_eps_z + t2_eps_z;
       auto r = t_eps_z / kyosu::oneminus(eps * t_eps_z);
-      if (eve::none(zero_eps)) { return r; }
+      if (eve::none(zero_eps))
+      {
+        return r;
+      }
       else
       {
         return if_else(zero_eps && notdone,
@@ -90,7 +93,10 @@ namespace kyosu::_
     {
       auto test = eve::is_greater_equal(x, hf) || eve::is_greater_equal(eps_px, hf);
       notdone = next_interval(br_0, notdone, test && notdone, r, test && notdone);
-      if (eve::any(notdone)) { notdone = next_interval(br_1, notdone, !test && notdone, r, !test && notdone, r); }
+      if (eve::any(notdone))
+      {
+        notdone = next_interval(br_1, notdone, !test && notdone, r, !test && notdone, r);
+      }
     }
     return r;
   }

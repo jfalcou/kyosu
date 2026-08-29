@@ -119,7 +119,10 @@ namespace kyosu::_
         auto t = fac / (k - dn);
         s -= if_else(is_nez(k - dn), t, zero);
         test = kyosu::linfnorm[kyosu::flat](t) <= kyosu::linfnorm[kyosu::flat](s) * tol;
-        if (eve::all(test)) { return s; }
+        if (eve::all(test))
+        {
+          return s;
+        }
       };
       return kyosu::fnan(as(s));
     };
@@ -152,7 +155,10 @@ namespace kyosu::_
       if (eve::any(notdone))
       {
         notdone = next_interval(br_small, notdone, kyosu::abs(kyosu::real(z)) < thresh, r, n, z);
-        if (eve::any(notdone)) { last_interval(br_large, notdone, r, n, z); }
+        if (eve::any(notdone))
+        {
+          last_interval(br_large, notdone, r, n, z);
+        }
       }
       return r;
     }

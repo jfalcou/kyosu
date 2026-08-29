@@ -62,7 +62,8 @@ namespace kyosu::_
     result_type D{};
 
     std::uintmax_t counter(max_terms);
-    do {
+    do
+    {
       v = g();
       if constexpr (b_only)
       {

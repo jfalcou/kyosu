@@ -117,7 +117,10 @@ namespace kyosu::_
       auto [rho, theta] = to_polar[o](z);
       return Z(eve::log(rho), theta);
     }
-    else { return _::cayley_extend(kyosu::log, z); }
+    else
+    {
+      return _::cayley_extend(kyosu::log, z);
+    }
   }
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
@@ -131,7 +134,10 @@ namespace kyosu::_
       auto kk = eve::convert(k, as<e_t>());
       return log[o](z) + muli(kk * two_pi(as(kk)));
     }
-    else { return _::cayley_extend(kyosu::log, z, k); }
+    else
+    {
+      return _::cayley_extend(kyosu::log, z, k);
+    }
   }
 
   template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>

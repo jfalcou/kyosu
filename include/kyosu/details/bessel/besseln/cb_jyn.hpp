@@ -150,7 +150,10 @@ namespace kyosu::_
     if (eve::any(notdone))
     {
       notdone = next_interval(ascending_series_cyl_j0, notdone, saz <= as_real_type_t<Z>(144), r, z);
-      if (eve::any(notdone)) { last_interval(semiconvergent_series_cyl_j0, notdone, r, z); }
+      if (eve::any(notdone))
+      {
+        last_interval(semiconvergent_series_cyl_j0, notdone, r, z);
+      }
     }
     imag(r) = eve::if_else(is_real(z), eve::zero, imag(r));
     return r;
@@ -249,7 +252,10 @@ namespace kyosu::_
     if (eve::any(notdone))
     {
       notdone = next_interval(ascending_series_cyl_j1, notdone, saz <= as_real_type_t<Z>(144), r, z);
-      if (eve::any(notdone)) { last_interval(semiconvergent_series_cyl_j1, notdone, r, z); }
+      if (eve::any(notdone))
+      {
+        last_interval(semiconvergent_series_cyl_j1, notdone, r, z);
+      }
     }
     real(r) = eve::if_else(is_pure(z), eve::zero, real(r));
     r = if_else(rzneg, -r, r);
@@ -306,9 +312,18 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   template<eve::integral_scalar_value N, typename Z> Z cb_jn(N nn, Z z)
   {
-    if (is_eqz(nn)) { return kyosu::_::cb_j0(z); }
-    else if (nn == 1) { return kyosu::_::cb_j1(z); }
-    else if (nn == -1) { return -kyosu::_::cb_j1(z); }
+    if (is_eqz(nn))
+    {
+      return kyosu::_::cb_j0(z);
+    }
+    else if (nn == 1)
+    {
+      return kyosu::_::cb_j1(z);
+    }
+    else if (nn == -1)
+    {
+      return -kyosu::_::cb_j1(z);
+    }
     else
     {
       using e_t = as_real_type_t<Z>;
@@ -365,7 +380,10 @@ namespace kyosu::_
       if (eve::any(notdone))
       {
         notdone = next_interval(forward, notdone, 4 * n < az, r, z);
-        if (eve::any(notdone)) { last_interval(backward, notdone, r, z); }
+        if (eve::any(notdone))
+        {
+          last_interval(backward, notdone, r, z);
+        }
       }
       auto sgnaltern = [n](auto x) { return eve::if_else(eve::is_ltz(x), eve::one, eve::sign_alternate(n)); };
       r = sgnaltern(srz) * sgnaltern(n) * r;
@@ -481,7 +499,10 @@ namespace kyosu::_
       if (eve::any(notdone))
       {
         notdone = next_interval(forwardj, notdone, 4 * n < az, r, z);
-        if (eve::any(notdone)) { last_interval(backwardj, notdone, r, z); }
+        if (eve::any(notdone))
+        {
+          last_interval(backwardj, notdone, r, z);
+        }
       }
 
       // compute y2...yn for real(z) > 0

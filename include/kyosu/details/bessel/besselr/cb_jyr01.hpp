@@ -177,7 +177,10 @@ namespace kyosu::_
     if (eve::any(notdone))
     {
       notdone = lnext_interval(br_lt12, notdone, az <= u_t(12), r);
-      if (eve::any(notdone)) { llast_interval(br_gt12, notdone, r); }
+      if (eve::any(notdone))
+      {
+        llast_interval(br_gt12, notdone, r);
+      }
     }
     kumi::tie(cjv0, cyv0, cjv1, cyv1) = r;
 

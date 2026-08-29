@@ -202,9 +202,15 @@ namespace kyosu::_
               }
             }
           }
-          if (eve::none(notdone)) { return r; }
+          if (eve::none(notdone))
+          {
+            return r;
+          }
         }
-        if (eve::any(notdone)) { last_interval(br_last, notdone, r); }
+        if (eve::any(notdone))
+        {
+          last_interval(br_last, notdone, r);
+        }
       }
       return r;
     };
@@ -233,7 +239,10 @@ namespace kyosu::_
               {
                 auto t63 = !cab_condition && !ab_condition;
                 notdone = next_interval(br_notcab_and_notab, notdone, t63, r, t63);
-                if (eve::any(notdone)) { notdone = next_interval(br_rest, notdone, notdone, r); }
+                if (eve::any(notdone))
+                {
+                  notdone = next_interval(br_rest, notdone, notdone, r);
+                }
               }
             }
           }

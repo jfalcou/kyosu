@@ -48,7 +48,10 @@ TTS_CASE_TPL("Check corner cases of erfcx", kyosu::real_types)
   };
   using kyosu::conj;
   using kyosu::erfcx;
-  for (int i = 0; i < N; ++i) { TTS_RELATIVE_EQUAL(erfcx(z[i]), w[i], tts::prec<e_t>()); }
+  for (int i = 0; i < N; ++i)
+  {
+    TTS_RELATIVE_EQUAL(erfcx(z[i]), w[i], tts::prec<e_t>());
+  }
 };
 
 TTS_CASE_WITH("Check behavior of erfcx on wide",

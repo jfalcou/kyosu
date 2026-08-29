@@ -126,7 +126,10 @@ namespace kyosu::_
       if (eve::any(nani)) return eve::if_else(nani && eve::is_finite(r), fnan(eve::as(z)), res);
       else return res;
     }
-    else { return _::cayley_extend(kyosu::acosh[o], z); }
+    else
+    {
+      return _::cayley_extend(kyosu::acosh[o], z);
+    }
   }
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>

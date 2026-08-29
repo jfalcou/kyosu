@@ -112,7 +112,10 @@ namespace kyosu::_
   template<typename X, concepts::cayley_dickson_like Z, typename... Zs, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, Z z, Zs... zs) noexcept
   {
-    if constexpr ((concepts::real<X> && ... && concepts::real<Zs>)) { return eve::horner[o](xx, z, zs...); }
+    if constexpr ((concepts::real<X> && ... && concepts::real<Zs>))
+    {
+      return eve::horner[o](xx, z, zs...);
+    }
     else
     {
       using r_t = as_cayley_dickson_like_t<X, Z, Zs...>;
@@ -124,8 +127,14 @@ namespace kyosu::_
       {
         r_t x = r_t(xx);
         r_t that(z);
-        if constexpr (O::contains(eve::right)) { ((that = fma(x, that, convert(zs, eve::as_element<r_t>{}))), ...); }
-        else { ((that = fma(that, x, convert(zs, eve::as_element<r_t>{}))), ...); }
+        if constexpr (O::contains(eve::right))
+        {
+          ((that = fma(x, that, convert(zs, eve::as_element<r_t>{}))), ...);
+        }
+        else
+        {
+          ((that = fma(that, x, convert(zs, eve::as_element<r_t>{}))), ...);
+        }
         return that;
       }
     }

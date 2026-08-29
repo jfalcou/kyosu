@@ -85,6 +85,9 @@ namespace kyosu::_
       if (eve::all(is_real(z))) return complex(kyosu::erfi(real(z)));
       else return mulmi(erf(muli(z)));
     }
-    else { return _::cayley_extend(kyosu::erfi, z); }
+    else
+    {
+      return _::cayley_extend(kyosu::erfi, z);
+    }
   }
 }

@@ -126,7 +126,10 @@ namespace kyosu::_
     else if constexpr (sizeof...(Ts) == 0) return t0;
     else if constexpr (sizeof...(Ts) == 1)
     {
-      if constexpr (O::contains(eve::kahan) && concepts::complex<r_t>) { return mul_kahan_t::call(t0, ts...); }
+      if constexpr (O::contains(eve::kahan) && concepts::complex<r_t>)
+      {
+        return mul_kahan_t::call(t0, ts...);
+      }
       else return t0 * (ts * ...);
     }
     else

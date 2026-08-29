@@ -106,6 +106,9 @@ namespace kyosu::_
       }
       return res;
     }
-    else { return _::cayley_extend(kyosu::cosh, z); }
+    else
+    {
+      return _::cayley_extend(kyosu::cosh, z);
+    }
   }
 }

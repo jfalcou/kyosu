@@ -116,6 +116,9 @@ namespace kyosu::_
       }
       return f;
     }
-    else { return cayley_extend(digamma, a0); }
+    else
+    {
+      return cayley_extend(digamma, a0);
+    }
   }
 }

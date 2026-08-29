@@ -24,8 +24,14 @@ namespace kyosu
       auto qv0 = quaternion(eve::zero(eve::as(v0[0])), v0[0], v0[1], v0[2]);
       auto qv1 = quaternion(eve::zero(eve::as(v1[0])), v1[0], v1[1], v1[2]);
       auto v1v0 = qv1 * qv0;
-      if constexpr (!Options::contains(assume_unitary)) { return sign(oneminus(sign(v1v0))); }
-      else { return sign(oneminus(v1v0)); }
+      if constexpr (!Options::contains(assume_unitary))
+      {
+        return sign(oneminus(sign(v1v0)));
+      }
+      else
+      {
+        return sign(oneminus(v1v0));
+      }
     }
 
     KYOSU_CALLABLE_OBJECT(align_t, align_);

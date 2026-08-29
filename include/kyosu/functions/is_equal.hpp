@@ -78,7 +78,10 @@ namespace kyosu::_
     if constexpr (O::contains(eve::numeric))
     {
       if constexpr (concepts::real<Z0> && concepts::real<Z1>) return eve::is_equal[eve::numeric](z0, z1);
-      else { return kumi::all_of(kumi::map(eve::is_equal[eve::numeric], z0, z1)); }
+      else
+      {
+        return kumi::all_of(kumi::map(eve::is_equal[eve::numeric], z0, z1));
+      }
     }
     else return z0 == z1;
   }

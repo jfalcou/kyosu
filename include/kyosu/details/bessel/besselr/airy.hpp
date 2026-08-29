@@ -70,7 +70,10 @@ namespace kyosu::_
       if (eve::any(notdone))
       {
         notdone = next_interval(br_re_gt_0, notdone, eve::is_gtz(re), r, z);
-        if (eve::any(notdone)) { notdone = last_interval(br_re_lt_0, notdone, r, z); }
+        if (eve::any(notdone))
+        {
+          notdone = last_interval(br_re_lt_0, notdone, r, z);
+        }
       }
     }
     return r;
@@ -107,7 +110,10 @@ namespace kyosu::_
       if (eve::any(notdone))
       {
         notdone = next_interval(br_re_gt_0, notdone, eve::is_gtz(re), r, z);
-        if (eve::any(notdone)) { notdone = eve::last_interval(br_re_lt_0, notdone, r, z); }
+        if (eve::any(notdone))
+        {
+          notdone = eve::last_interval(br_re_lt_0, notdone, r, z);
+        }
       }
     }
     return if_else(imlt0, conj(r), r);
