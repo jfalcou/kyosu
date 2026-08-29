@@ -56,6 +56,17 @@ copa_setup_install( LIBRARY kyosu
 ## Setup doxygen
 ##======================================================================================================================
 if(KYOSU_BUILD_DOCUMENTATION)
+  ## Doxygen never fetches anything itself, so eve's tagfile has to be on disk before the target
+  ## runs. The Doxyfile reaches it through $(DOXYGEN_OUPUT), the only handle copacabana exports
+  ## that points into the build tree. Without it the eve:: references stay unresolved.
+  file( DOWNLOAD "https://jfalcou.github.io/eve/eve.tag" "${PROJECT_BINARY_DIR}/eve.tag"
+        STATUS EVE_TAG_STATUS
+      )
+  list(GET EVE_TAG_STATUS 0 EVE_TAG_CODE)
+  if(NOT EVE_TAG_CODE EQUAL 0)
+    message(WARNING "[${PROJECT_NAME}] - eve.tag could not be fetched (${EVE_TAG_STATUS}), the eve:: links will be dead")
+  endif()
+
   copa_setup_doxygen(${QUIET_OPTION} DESTINATION "${PROJECT_BINARY_DIR}/doc")
 endif()
 
