@@ -59,7 +59,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto kolmmean(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto kolmmean(eve::non_empty_product_type auto const& tup)              noexcept; // 2
   //!      constexpr auto kolmmean[pedantic](/*any of the above overloads*/)                 noexcept; // 3

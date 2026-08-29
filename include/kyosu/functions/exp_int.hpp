@@ -56,7 +56,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Calls
   //!      constexpr auto exp_int(concepts::cayley_dickson auto x)                                   noexcept; // 1
   //!      constexpr auto exp_int(concepts::cayley_dickson auto n, floating_value auto x)            noexcept; // 2
   //!   }

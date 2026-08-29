@@ -52,7 +52,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Calls
   //!       constexpr Z       ellint_fe( real<Z>   z, real<U> m)               noexcept; //1
   //!       constexpr auto    ellint_fe(complex<Z> z, real<U> m)               noexcept; //1
   //!

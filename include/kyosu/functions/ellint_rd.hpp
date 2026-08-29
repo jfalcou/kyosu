@@ -56,7 +56,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Call
   //!      constexpr auto ellint_rd( auto x,  auto y, auto z)                        noexcept; // 1
   //!
   //!      // Semantic Modifier

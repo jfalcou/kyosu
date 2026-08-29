@@ -42,7 +42,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Call
   //!      constexpr auto omega(complex_like auto x)                          noexcept; // 1
   //!
   //!      // Lanes masking

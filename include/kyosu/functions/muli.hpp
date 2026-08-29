@@ -43,11 +43,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!   {  // regular call
+  //!     // Regular Calls
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  muli(T z)        noexcept; //1
   //!
   //!      // Semantic Modifiers
-  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  muli[left}(T z)  noexcept; //1
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  muli[left](T z)  noexcept; //1
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  muli[right](T z) noexcept; //2
   //!
   //!   }

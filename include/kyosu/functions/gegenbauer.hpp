@@ -54,7 +54,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Call
   //!      auto constexpr gegenbauer( auto n, auto lambda, auto z)                          noexcept; // 1
   //!
   //!      // Lanes masking

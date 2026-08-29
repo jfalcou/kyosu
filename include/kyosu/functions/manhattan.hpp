@@ -48,7 +48,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto manhattan(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto manhattan(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!

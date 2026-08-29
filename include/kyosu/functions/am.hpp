@@ -50,7 +50,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Call
   //!      template <complex_like Z, floating_value U> constexpr auto am(Z z, U m)               noexcept; //1
   //!
   //!      // Semantic Modifiers

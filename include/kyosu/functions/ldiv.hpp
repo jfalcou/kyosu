@@ -59,7 +59,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // Regular overloads
+  //!     // Regular Calls
   //!     constexpr auto ldiv(auto xs...) noexcept;                                     noexcept; // 1
   //!     constexpr auto ldiv(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!     constexpr auto ldiv[kahan](/*any of the above overloads*/)                    noexcept; // 3

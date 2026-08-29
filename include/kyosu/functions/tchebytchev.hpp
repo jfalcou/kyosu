@@ -84,7 +84,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Calls
   //!      auto constexpr tchebytchev(kyosu::concepts::real auto n, kyosu::concepts::cayley_dickson auto z) noexcept; // 1
   //!      auto constexpr tchebytchev(kyosu::concepts::real auto n, kyosu::concepts::real auto z)           noexcept; // 1
   //!

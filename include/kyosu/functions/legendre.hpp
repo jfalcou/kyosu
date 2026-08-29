@@ -73,7 +73,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Calls
   //!      auto constexpr legendre(kyosu::concepts::real auto n, kyosu::concepts::cayley_dickson auto z) noexcept; // 1
   //!      auto constexpr legendre(kyosu::concepts::real auto n, kyosu::concepts::real auto z)           noexcept; // 1
   //!

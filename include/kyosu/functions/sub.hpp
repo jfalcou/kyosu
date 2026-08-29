@@ -58,7 +58,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto sub(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto sub(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!      constexpr auto sub[kahan] (/*any of the above overloads*/)                   noexcept; // 3

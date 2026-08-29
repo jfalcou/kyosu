@@ -46,7 +46,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Call
   //!      template<concepts::complex_like Z, concepts::real U> constexpr auto jacobi_elliptic Z z, U m)                             noexcept;
   //!
   //!      // Semantic Modifiers

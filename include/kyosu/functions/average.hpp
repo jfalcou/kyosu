@@ -58,7 +58,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto average(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto average(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!      constexpr auto average[pedantic](/*any of the above overloads*/)                 noexcept; // 3
