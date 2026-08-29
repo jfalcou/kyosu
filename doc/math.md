@@ -36,7 +36,8 @@ are lost in a fixed order. This is not an artefact of the construction but a the
 Frobenius (1878) the only finite-dimensional associative division algebras over \f$\mathbb{R}\f$ are
 \f$\mathbb{R}\f$, \f$\mathbb{C}\f$ and \f$\mathbb{H}\f$, and by Hurwitz (1898) the only normed
 division algebras over \f$\mathbb{R}\f$ are those three together with \f$\mathbb{O}\f$. Nothing of
-the kind exists in dimension 16 or beyond.
+the kind exists in dimension 16 or beyond. References for these and for what follows are collected
+in the @ref biblio.
 
 | Dimension | Algebra | Property lost | Structure retained |
 |:---------:|---------|---------------|--------------------|

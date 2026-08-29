@@ -29,11 +29,10 @@
       <tab type="concepts" visible="yes" title=""/>
     </tab>
     <tab type="usergroup" visible="yes" title="Informations">
-      <tab type="usergroup" visible="yes" title="Rationale">
-        <tab type="user" url="@ref math_background" title="Background"/>
-      </tab>
-       <!-- <tab type="user" url="@ref changelog" title="Changelog"/> -->
-       <tab type="user" url="@ref licence" title="Licence"/>
+      <tab type="user" url="@ref math_background" title="Mathematical Background"/>
+      <tab type="user" url="@ref biblio"          title="Bibliography"/>
+      <tab type="user" url="@ref changelog"       title="Changelog"/>
+      <tab type="user" url="@ref licence"         title="Licence"/>
     </tab>
   </navindex>
 
