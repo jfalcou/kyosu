@@ -44,8 +44,7 @@ namespace kyosu::_
 
   template<eve::floating_scalar_value N, typename Z, typename R> auto cb_kr(N v, Z z, R& ks) noexcept
   {
-    v = eve::abs(v); //k(-v, z) == K(v, z) DLMF 10.27.1
-    using u_t = eve::underlying_type_t<Z>;
+    v = eve::abs(v);         //k(-v, z) == K(v, z) DLMF 10.27.1
     auto n = std::size_t(v); //n>= 0
     auto v0 = v - n;
     auto vi = v0;

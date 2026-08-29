@@ -34,7 +34,6 @@ namespace kyosu::_
     auto br_convergent = [&]() {
       ra1 = kyosu::if_else(convergent, ra1, zero);
       ra2 = kyosu::if_else(convergent, ra2, zero);
-      using u_t = eve::underlying_type_t<r_t>;
       auto n = int(eve::maximum(eve::max(-ra1, -ra2)));
       r_t a(1), s(1);
       for (int j = 0; j <= n;)

@@ -66,7 +66,6 @@ namespace kyosu::_
   KYOSU_FORCEINLINE auto cb_ikn(N n, Z z, R1& is, R2& ks) noexcept
   requires(concepts::complex<Z> || concepts::real<Z>)
   {
-    using u_t = eve::underlying_type_t<Z>;
     auto nn = eve::abs(n);
     //    nn = eve::min(n, N(is.size()), N(ks.size()));
     auto sn = sign(n);

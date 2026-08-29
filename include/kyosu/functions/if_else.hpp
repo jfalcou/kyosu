@@ -76,7 +76,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename M, typename Z1, typename Z2, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto if_else_(KYOSU_DELAY(), O const& o, M const& m, Z1 const& t, Z2 const& f) noexcept
+  KYOSU_FORCEINLINE constexpr auto if_else_(KYOSU_DELAY(), O const&, M const& m, Z1 const& t, Z2 const& f) noexcept
   {
     if constexpr (concepts::cayley_dickson<Z1> && concepts::cayley_dickson<Z2>)
     {

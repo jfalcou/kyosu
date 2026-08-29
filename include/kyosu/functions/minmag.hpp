@@ -81,7 +81,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::callable_options O, typename Z0, typename Z1, typename... Zs>
-  KYOSU_FORCEINLINE constexpr auto minmag_(KYOSU_DELAY(), O const& o, Z0 z0, Z1 z1, Zs... zs) noexcept
+  KYOSU_FORCEINLINE constexpr auto minmag_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1, Zs... zs) noexcept
   {
     if constexpr (concepts::real<Z0> && concepts::real<Z1> && (... && concepts::real<Zs>))
       return eve::minmag(z0, z1, zs...);

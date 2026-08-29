@@ -73,7 +73,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z0, typename Z1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto is_not_equal_(KYOSU_DELAY(), O const& opts, Z0 z0, Z1 z1) noexcept
+  KYOSU_FORCEINLINE constexpr auto is_not_equal_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
   {
     if constexpr (O::contains(eve::numeric))
     {

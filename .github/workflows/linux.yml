@@ -47,3 +47,26 @@ jobs:
           config: Debug
           preset: ${{ matrix.compiler.preset }}
           targets: ^unit.*
+
+  ##################################################################################################
+  ## The precompiled header carries kyosu.hpp and silences the warnings raised inside it. Compiler
+  ## Explorer has neither, so this job compiles the way a reader does. It is red on purpose until
+  ## those warnings are dealt with, and is not among the checks the ruleset requires.
+  ##################################################################################################
+  no-pch:
+    name: gcc, no PCH
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jfalcou/compilers:v10
+      options: -u root
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v7
+
+      - name: Configure CMake and Build
+        uses: jfalcou/copacabana/.github/actions/config@3337f916bb581d0829909976773f7a2ee827a25c # v4
+        with:
+          config: Debug
+          preset: gcc-no-pch
+          targets: doc.exe

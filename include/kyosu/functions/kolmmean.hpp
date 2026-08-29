@@ -108,7 +108,7 @@ namespace kyosu::_
   }
 
   template<typename F, typename G, eve::non_empty_product_type Tup, eve::callable_options O>
-  EVE_FORCEINLINE constexpr auto kolmmean_(KYOSU_DELAY(), O const& o, F f, G g, Tup tup) noexcept
+  EVE_FORCEINLINE constexpr auto kolmmean_(KYOSU_DELAY(), O const&, F f, G g, Tup tup) noexcept
   requires(!concepts::cayley_dickson_like<Tup>)
   {
     return kumi::map([f, g](auto... m) { return kolmmean(f, g, m...); }, tup);

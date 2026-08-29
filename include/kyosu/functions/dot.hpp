@@ -104,7 +104,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const& o, T0 z0, T1 z1) noexcept
+  KYOSU_FORCEINLINE constexpr auto dot_(KYOSU_DELAY(), O const&, T0 z0, T1 z1) noexcept
   {
     return z0 * conj(z1);
   }

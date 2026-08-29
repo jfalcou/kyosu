@@ -100,7 +100,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto bessel_y_(KYOSU_DELAY(), O const& o, N n, Z z) noexcept
+  KYOSU_FORCEINLINE constexpr auto bessel_y_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
   {
     if constexpr (concepts::complex<Z>)
     {
@@ -127,7 +127,7 @@ namespace kyosu::_
   }
 
   template<typename N, typename Z, typename YS, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto bessel_y_(KYOSU_DELAY(), O const& o, N n, Z z, YS& ys) noexcept
+  KYOSU_FORCEINLINE constexpr auto bessel_y_(KYOSU_DELAY(), O const&, N n, Z z, YS& ys) noexcept
   {
     if constexpr (eve::integral_scalar_value<N>)
     {
