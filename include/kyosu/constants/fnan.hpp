@@ -40,10 +40,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup constants
+  //! @defgroup fnan kyosu::fnan
+  //! @ingroup constants
+  //! @brief Computes the full nan constant such that all components of the chosen type are NaN.
   //! @{
   //!   @var fnan
-  //!   @brief Computes the full nan constant such that all components of the chosen type are NaN.
   //!
   //!   **Defined in Header**
   //!

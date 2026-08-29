@@ -31,10 +31,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup constants
+  //! @defgroup i kyosu::i
+  //! @ingroup constants
+  //! @brief Computes the complex number \f$i\f$ in the chosen type.
   //! @{
   //!   @var i
-  //!   @brief Computes the complex number \f$i\f$ in the chosen type.
   //!
   //!   **Defined in Header**
   //!
