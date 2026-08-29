@@ -140,7 +140,10 @@ namespace kyosu::_
       rtype y = eve::abs(a0i);
       auto special = eve::is_eqz(y) && (x < eve::one(eve::as(a0r)));
       auto sr = eve::atanh(a0r);
-      if (eve::all(special)) { return complex(sr, eve::zero(eve::as(sr))); }
+      if (eve::all(special))
+      {
+        return complex(sr, eve::zero(eve::as(sr)));
+      }
 
       rtype r = eve::zero(eve::as(a0r));
       rtype i = eve::zero(eve::as(a0r));
@@ -256,7 +259,10 @@ namespace kyosu::_
       i = eve::if_else(special, eve::zero, i);
       return complex(r, i);
     }
-    else { return cayley_extend(atanh, a0); }
+    else
+    {
+      return cayley_extend(atanh, a0);
+    }
   }
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>

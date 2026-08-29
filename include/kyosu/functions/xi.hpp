@@ -94,6 +94,9 @@ namespace kyosu::_
       auto r = dec(z) * kyosu::tgamma(kyosu::inc(hz)) * kyosu::exp(-logpi * hz) * kyosu::zeta(z);
       return r;
     }
-    else { return cayley_extend(kyosu::xi[o], zz); }
+    else
+    {
+      return cayley_extend(kyosu::xi[o], zz);
+    }
   }
 }

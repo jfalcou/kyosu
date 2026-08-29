@@ -66,7 +66,10 @@ namespace kyosu::bench
             {
               kumi::for_each([](auto& v) { ankerl::nanobench::doNotOptimizeAway(v); }, arg);
             }
-            else { ankerl::nanobench::doNotOptimizeAway(arg); }
+            else
+            {
+              ankerl::nanobench::doNotOptimizeAway(arg);
+            }
           },
           args);
 
@@ -78,7 +81,10 @@ namespace kyosu::bench
         {
           kumi::for_each([](auto const& v) { ankerl::nanobench::doNotOptimizeAway(v); }, res);
         }
-        else { ankerl::nanobench::doNotOptimizeAway(res); }
+        else
+        {
+          ankerl::nanobench::doNotOptimizeAway(res);
+        }
       });
     }
 
@@ -154,7 +160,10 @@ namespace kyosu::bench
               row.push_back(val / current_N); // Normalize here!
               ptr = end;
             }
-            else { break; }
+            else
+            {
+              break;
+            }
             while (*ptr == ' ') ++ptr;
           }
           if (*ptr == '\n') ++ptr;
@@ -172,7 +181,10 @@ namespace kyosu::bench
 
         // Find maximum columns (epochs) across all runs
         std::size_t max_epochs = 0;
-        for (std::size_t i = 0; i < grid.size(); ++i) { max_epochs = tts::_::max(max_epochs, grid[i].size()); }
+        for (std::size_t i = 0; i < grid.size(); ++i)
+        {
+          max_epochs = tts::_::max(max_epochs, grid[i].size());
+        }
 
         // Write Transposed CSV: Columns (Measurement data pivoting)
         for (std::size_t epoch = 0; epoch < max_epochs; ++epoch)
@@ -197,7 +209,10 @@ namespace kyosu::bench
 
       // 1. Calculate maximum width of the Benchmark Name column using TTS max
       std::size_t name_width = 4;
-      for (auto const& res : results) { name_width = tts::_::max(name_width, res.config().mBenchmarkName.size()); }
+      for (auto const& res : results)
+      {
+        name_width = tts::_::max(name_width, res.config().mBenchmarkName.size());
+      }
 
       // 2. Fixed widths for numerical columns
       int const w_n = 4, w_spd = 9, w_eff = 8, w_cyc = 10, w_min = 8, w_max = 8, w_elem = 12, w_ins = 10;
@@ -276,7 +291,10 @@ namespace kyosu::bench
         double min_cyc_elem = res.minimum(ankerl::nanobench::Result::Measure::cpucycles) / batch_size;
         double max_cyc_elem = res.maximum(ankerl::nanobench::Result::Measure::cpucycles) / batch_size;
 
-        if (cyc_per_elem == 0.0 && ins_per_elem == 0.0) { counters_failed = true; }
+        if (cyc_per_elem == 0.0 && ins_per_elem == 0.0)
+        {
+          counters_failed = true;
+        }
 
         // Pre-format everything to const char*
         tts::text n_str{"%td", N};

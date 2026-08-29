@@ -85,7 +85,10 @@ namespace kyosu
     template<typename Z, eve::callable_options O>
     KYOSU_FORCEINLINE constexpr auto arg_(KYOSU_DELAY(), O const& o, Z v) noexcept
     {
-      if constexpr (concepts::real<Z>) { return eve::arg[o](v); }
+      if constexpr (concepts::real<Z>)
+      {
+        return eve::arg[o](v);
+      }
       else
       {
         if constexpr (concepts::complex<Z>) return eve::atan2[o][eve::pedantic](imag(v), real(v));

@@ -106,7 +106,10 @@ namespace kyosu::_
       //trick for avoiding FP overflow above z=141
       auto zp = kyosu::pow(zgh, (zh * eve::half(eve::as<r_t>())));
       auto ss = Z{};
-      for (int pp = N - 1; pp >= 1; --pp) { ss += c[pp] / (z + pp); }
+      for (int pp = N - 1; pp >= 1; --pp)
+      {
+        ss += c[pp] / (z + pp);
+      }
       auto sq2pi = r_t(2.5066282746310005024157652848110);
       auto f = (sq2pi * (c[0] + ss)) * ((zp * exp(-zgh)) * zp);
       auto o = eve::one(eve::as<r_t>());
@@ -124,6 +127,9 @@ namespace kyosu::_
       f = if_else(is_eqz(a0), complex(eve::inf(eve::as(g)) * eve::signnz[eve::pedantic](real(a0))), f);
       return f;
     }
-    else { return cayley_extend(tgamma, a0); }
+    else
+    {
+      return cayley_extend(tgamma, a0);
+    }
   }
 }

@@ -11,7 +11,10 @@
 template<typename T> auto prod(auto m, std::array<T, 3> const& v)
 {
   std::array<T, 3> r;
-  for (size_t i = 0; i < v.size(); ++i) { r[i] = m[i][0] * v[0] + m[i][1] * v[1] + m[i][2] * v[2]; }
+  for (size_t i = 0; i < v.size(); ++i)
+  {
+    r[i] = m[i][0] * v[0] + m[i][1] * v[1] + m[i][2] * v[2];
+  }
   return r;
 }
 
@@ -32,9 +35,15 @@ TTS_CASE_WITH("Check behavior of to_rotation_matrix on wide",
   auto refq = q * qv * kyosu::conj(q);
   auto res = prod(m, v);
   std::array<T, 3> ref{kyosu::ipart(refq), kyosu::jpart(refq), kyosu::kpart(refq)};
-  for (int j = 0; j < 3; ++j) { TTS_RELATIVE_EQUAL(res[j], ref[j], 0.0002); }
+  for (int j = 0; j < 3; ++j)
+  {
+    TTS_RELATIVE_EQUAL(res[j], ref[j], 0.0002);
+  }
   auto q1 = wq_t(a0, a1, a2, a3);
   auto m1 = kyosu::to_rotation_matrix(q1);
   auto res1 = prod(m1, v);
-  for (int j = 0; j < 3; ++j) { TTS_RELATIVE_EQUAL(res1[j], ref[j], 0.0002); }
+  for (int j = 0; j < 3; ++j)
+  {
+    TTS_RELATIVE_EQUAL(res1[j], ref[j], 0.0002);
+  }
 };

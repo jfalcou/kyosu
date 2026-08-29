@@ -136,7 +136,10 @@ namespace kyosu::_
   constexpr auto pow_(KYOSU_DELAY(), O const& o, C0 c0, C1 c1) noexcept
   requires(eve::integral_scalar_value<C1>)
   {
-    if constexpr (O::contains(real_only)) { return kyosu::inject(eve::pow(c0, c1)); }
+    if constexpr (O::contains(real_only))
+    {
+      return kyosu::inject(eve::pow(c0, c1));
+    }
     else
     {
       using r_t = C0;
@@ -159,7 +162,10 @@ namespace kyosu::_
           }
           return complex(result);
         }
-        else { return cayley_extend(pow[o], c0, c1); }
+        else
+        {
+          return cayley_extend(pow[o], c0, c1);
+        }
       }
       else
       {
@@ -174,7 +180,10 @@ namespace kyosu::_
   constexpr auto pow_(KYOSU_DELAY(), O const& o, C0 c0, C1 c1) noexcept
   requires(!eve::integral_value<C1>)
   {
-    if constexpr (O::contains(real_only)) { return kyosu::inject(eve::pow(c0, c1)); }
+    if constexpr (O::contains(real_only))
+    {
+      return kyosu::inject(eve::pow(c0, c1));
+    }
     else
     {
       if constexpr (concepts::real<C0> && concepts::real<C1>)
@@ -195,7 +204,10 @@ namespace kyosu::_
             auto mod = eve::pow(c0, rc1);
             auto r1 = kyosu::from_polar[o](mod, ang);
             auto isposc0 = eve::is_positive(c0);
-            if (eve::all(isposc0)) { r = r1; }
+            if (eve::all(isposc0))
+            {
+              r = r1;
+            }
             else
             {
               auto rho = eve::exp(eve::diff_of_prod(lgac0, rc1, ic1, eve::pi(eve::as(rc1))));

@@ -128,7 +128,10 @@ namespace kyosu::_
         return eve::if_else(eve::is_ltz(z1), eve::rec[eve::pedantic](tmp), tmp);
       }
     }
-    else if constexpr (eve::integral_scalar_value<Z1>) { return eve::pow(kyosu::abs(z0), z1); }
+    else if constexpr (eve::integral_scalar_value<Z1>)
+    {
+      return eve::pow(kyosu::abs(z0), z1);
+    }
     else if constexpr (concepts::real<Z1>) return eve::pow(kyosu::abs(z0), z1);
     else return kyosu::pow[o](kyosu::abs[o](z0), z1);
   }

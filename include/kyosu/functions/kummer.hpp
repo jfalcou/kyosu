@@ -145,11 +145,17 @@ namespace kyosu::_
         if (eve::any(notdone))
         {
           notdone = next_interval(br_anegintnotb, notdone, anegintnotb, r);
-          if (eve::any(notdone)) { notdone = last_interval(br_regular, notdone, r, notdone); }
+          if (eve::any(notdone))
+          {
+            notdone = last_interval(br_regular, notdone, r, notdone);
+          }
         }
         return r;
       }
     }
-    else { return _::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb}); }
+    else
+    {
+      return _::hyperg(zz, kumi::tuple{aa}, kumi::tuple{bb});
+    }
   }
 }

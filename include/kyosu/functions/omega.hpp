@@ -206,7 +206,10 @@ namespace kyosu::_
                 {
                   auto t6 = (x <= u_t(-0.105e1) && u_t(0.75) * (x + 1) < y + pi && y + pi < 0);
                   notdone = next_interval(br_6, notdone, t6, w, zz);
-                  if (eve::any(notdone)) { notdone = last_interval(br_7, notdone, w, zz); }
+                  if (eve::any(notdone))
+                  {
+                    notdone = last_interval(br_7, notdone, w, zz);
+                  }
                 }
               }
             }

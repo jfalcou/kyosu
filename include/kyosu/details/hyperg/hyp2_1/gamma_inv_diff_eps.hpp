@@ -48,7 +48,10 @@ namespace kyosu::_
           {
             notdone = next_interval(br_z_neg_int_distance_lt_epspz_neg_int_distance, notdone,
                                     z_neg_int_distance < epspz_neg_int_distance, r);
-            if (eve::any(notdone)) { notdone = last_interval(br_else, notdone, r); }
+            if (eve::any(notdone))
+            {
+              notdone = last_interval(br_else, notdone, r);
+            }
           }
         }
       }
@@ -74,7 +77,10 @@ namespace kyosu::_
         if (eve::any(notdone))
         {
           notdone = next_interval(br_is_z_and_epspz_negative_integers, notdone, is_z_and_epspz_negative_integers, r);
-          if (eve::any(notdone)) { notdone = last_interval(br_final, notdone, r); }
+          if (eve::any(notdone))
+          {
+            notdone = last_interval(br_final, notdone, r);
+          }
         }
       }
     }

@@ -99,6 +99,9 @@ namespace kyosu::_
       }
       return eve::zip(ss, cc);
     }
-    else { return _::cayley_extend2(kyosu::sinhcosh, z); }
+    else
+    {
+      return _::cayley_extend2(kyosu::sinhcosh, z);
+    }
   }
 }

@@ -164,7 +164,10 @@ namespace kyosu::_
         return if_else(negimag, kyosu::conj(res), res);
       }
     }
-    else { return cayley_extend(kyosu::sqrt, z); }
+    else
+    {
+      return cayley_extend(kyosu::sqrt, z);
+    }
   }
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>

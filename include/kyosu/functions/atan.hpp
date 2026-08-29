@@ -112,7 +112,10 @@ namespace kyosu
         auto [r1, i1] = kyosu::atanh(complex(-i, r));
         return complex(i1, -r1);
       }
-      else { return _::cayley_extend(kyosu::atan, z); }
+      else
+      {
+        return _::cayley_extend(kyosu::atan, z);
+      }
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>

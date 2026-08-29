@@ -147,7 +147,10 @@ namespace kyosu::_
     {
       auto gt = inf_norm_eps > u_t(0.1);
       notdone = next_interval(br_eps_gt, notdone, gt, r);
-      if (eve::any(notdone)) { notdone = next_interval(br_eps_le, notdone, !gt, r); }
+      if (eve::any(notdone))
+      {
+        notdone = next_interval(br_eps_le, notdone, !gt, r);
+      }
     }
     return r;
   }

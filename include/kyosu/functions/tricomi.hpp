@@ -195,7 +195,10 @@ namespace kyosu::_
         notdone = next_interval(br_bpflint, notdone, bpflint, r, zzz);
         if (eve::any(notdone))
         {
-          if (eve::any(notdone)) { last_interval(br_else, notdone, r, zzz); }
+          if (eve::any(notdone))
+          {
+            last_interval(br_else, notdone, r, zzz);
+          }
         }
       }
     }

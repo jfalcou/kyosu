@@ -460,7 +460,10 @@ namespace kyosu::_
         auto ax = eve::abs(x);
         auto smallx = ax < 8e-2;
         auto smally = eve::abs(y) < 1e-2;
-        if (smallx && smally) { return inner_erf_t::taylor(mz2, z); }
+        if (smallx && smally)
+        {
+          return inner_erf_t::taylor(mz2, z);
+        }
         /* don't use complex exp function, since that will produce spurious NaN
            values when multiplying w in an overflow situation. */
         auto [mRe_z2, mIm_z2] = mz2;
@@ -478,8 +481,14 @@ namespace kyosu::_
             return signx * ispi * ((xx2) * (xx2 - real_t(4.5)) + 2) / (xx * ((xx2) * (xx2 - 5) + real_t(3.75)));
           };
           auto remain = [w_im_y100, signx](auto xx) {
-            if constexpr (eve::scalar_value<real_t>) { return w_im_y100(100 / (1 + xx), xx) * signx; }
-            else { return eve::_::map(w_im_y100, 100 / (1 + xx), xx) * signx; }
+            if constexpr (eve::scalar_value<real_t>)
+            {
+              return w_im_y100(100 / (1 + xx), xx) * signx;
+            }
+            else
+            {
+              return eve::_::map(w_im_y100, 100 / (1 + xx), xx) * signx;
+            }
           };
 
           auto ax = eve::abs(x);
@@ -537,6 +546,9 @@ namespace kyosu::_
         return r;
       }
     }
-    else { return cayley_extend(erf, z); }
+    else
+    {
+      return cayley_extend(erf, z);
+    }
   }
 }

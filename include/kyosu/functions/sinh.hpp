@@ -109,6 +109,9 @@ namespace kyosu::_
       r = eve::if_else(kyosu::is_eqz(kyosu::real(z)), eve::zero, r);
       return Z(r, i);
     }
-    else { return _::cayley_extend(kyosu::sinh, z); }
+    else
+    {
+      return _::cayley_extend(kyosu::sinh, z);
+    }
   }
 }

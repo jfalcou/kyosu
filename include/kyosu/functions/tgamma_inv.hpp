@@ -110,10 +110,16 @@ namespace kyosu::_
       if (eve::any(notdone))
       {
         notdone = next_interval(br_gthf, notdone, real(z) > hf, r, z);
-        if (eve::any(notdone)) { last_interval(br_lehf, notdone, r, z); }
+        if (eve::any(notdone))
+        {
+          last_interval(br_lehf, notdone, r, z);
+        }
       }
       return r;
     }
-    else { return cayley_extend(tgamma_inv, z); }
+    else
+    {
+      return cayley_extend(tgamma_inv, z);
+    }
   }
 }

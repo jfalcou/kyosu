@@ -164,7 +164,10 @@ namespace kyosu::_
 
       Z f{};
       auto j = inc(63 * k);
-      for (size_t i = 0; i < cm.size(); ++i, j -= k) { f += cm[i] * pow(j, -z); }
+      for (size_t i = 0; i < cm.size(); ++i, j -= k)
+      {
+        f += cm[i] * pow(j, -z);
+      }
       if (eve::none(reflect)) return f;
       auto reflection = [&](auto f) {
         if (k == 1)
@@ -181,10 +184,16 @@ namespace kyosu::_
           auto g = pow(eve::two_o_pi(eve::as(real(f))), z) * sinpi(z) * tgamma(z) * f;
           return if_else(isodd, eve::zero(eve::as(real(f))), g);
         }
-        else { return complex(eve::allbits(eve::as(real(f)))); }
+        else
+        {
+          return complex(eve::allbits(eve::as(real(f))));
+        }
       };
       return if_else(reflect, reflection(f), f);
     }
-    else { return cayley_extend_rev(deta, kk, z); }
+    else
+    {
+      return cayley_extend_rev(deta, kk, z);
+    }
   }
 }

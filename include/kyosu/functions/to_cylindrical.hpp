@@ -34,7 +34,10 @@ namespace kyosu
         auto z = eve::zero(eve::as(abs(c0)));
         return kumi::tuple{abs(c0), arg(c0), z, z};
       }
-      else { return kumi::tuple{abs(c0), arg[this->options()](c0), jpart(q), kpart(q)}; }
+      else
+      {
+        return kumi::tuple{abs(c0), arg[this->options()](c0), jpart(q), kpart(q)};
+      }
     }
 
     KYOSU_CALLABLE_OBJECT(to_cylindrical_t, to_cylindrical_);

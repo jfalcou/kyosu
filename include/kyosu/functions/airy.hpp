@@ -82,6 +82,9 @@ namespace kyosu::_
       auto im = _::cb_ir(-eve::third(as<u_t>()), zeta);
       return kumi::tuple{inv_pi(as<u_t>()) * sqzo3 * (im - ip), sqzo3 * (ip + im)};
     }
-    else { return _::cayley_extend2(kyosu::airy, z); }
+    else
+    {
+      return _::cayley_extend2(kyosu::airy, z);
+    }
   }
 }

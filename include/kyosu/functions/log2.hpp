@@ -88,7 +88,10 @@ namespace kyosu::_
   {
     if constexpr (O::contains(real_only) && concepts::real<Z>) return eve::log2[o.drop(real_only)](z);
     else if constexpr (concepts::real<Z>) return kyosu::log2[o](complex(z));
-    else if constexpr (kyosu::concepts::complex<Z>) { return log(z) * eve::invlog_2(eve::as(real(z))); }
+    else if constexpr (kyosu::concepts::complex<Z>)
+    {
+      return log(z) * eve::invlog_2(eve::as(real(z)));
+    }
     else return _::cayley_extend(kyosu::log2, z);
   }
 

@@ -63,7 +63,10 @@ namespace kyosu::_
     if (eve::any(notdone))
     {
       notdone = next_interval(br_serie, notdone, a_notnegint, r, a_notnegint);
-      if (eve::any(notdone)) { last_interval(br_rest, notdone, r); }
+      if (eve::any(notdone))
+      {
+        last_interval(br_rest, notdone, r);
+      }
     }
     return r;
   }

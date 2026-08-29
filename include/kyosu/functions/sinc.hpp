@@ -76,6 +76,9 @@ namespace kyosu::_
       using u_t = eve::underlying_type_t<Z>;
       return kyosu::if_else(kyosu::linfnorm(z) < eve::eps(eve::as(u_t())), eve::one(eve::as(u_t())), s / z);
     }
-    else { return _::cayley_extend(sinc, z); }
+    else
+    {
+      return _::cayley_extend(sinc, z);
+    }
   }
 }

@@ -91,6 +91,9 @@ namespace kyosu::_
       auto ii = eve::if_else(kyosu::is_real(z), eve::zero, s / tmp);
       return kyosu::if_else(eve::is_infinite(rz), Z(eve::sign(rz)), Z(rr, ii));
     }
-    else { return _::cayley_extend(kyosu::tanh, z); }
+    else
+    {
+      return _::cayley_extend(kyosu::tanh, z);
+    }
   }
 }

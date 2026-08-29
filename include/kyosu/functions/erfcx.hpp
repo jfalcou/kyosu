@@ -78,6 +78,9 @@ namespace kyosu::_
       else if (eve::none(realz)) return faddeeva(muli(z));
       else return if_else(realz, complex(eve::erfcx(real(z))), faddeeva(muli(z)));
     }
-    else { return _::cayley_extend(kyosu::erfcx, z); }
+    else
+    {
+      return _::cayley_extend(kyosu::erfcx, z);
+    }
   }
 }

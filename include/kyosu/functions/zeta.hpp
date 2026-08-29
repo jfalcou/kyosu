@@ -81,6 +81,9 @@ namespace kyosu::_
       auto g = if_else(z == Z(1), kyosu::cinf(eve::as(z)), k * eta(z));
       return if_else(real(z) == eve::inf(eve::as(real(z))), complex(eve::one(eve::as(real(z)))), g);
     }
-    else { return cayley_extend(kyosu::zeta, z); }
+    else
+    {
+      return cayley_extend(kyosu::zeta, z);
+    }
   }
 }

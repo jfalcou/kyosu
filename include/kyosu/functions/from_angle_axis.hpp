@@ -28,7 +28,10 @@ namespace kyosu
     {
       using e_t = eve::common_value_t<T, V>;
       auto q = quaternion(e_t(0), e_t(axis[0]), e_t(axis[1]), e_t(axis[2]));
-      if constexpr (!Options::contains(assume_unitary)) { q = if_else(is_eqz(q), quaternion(e_t(0), e_t(1)), sign(q)); }
+      if constexpr (!Options::contains(assume_unitary))
+      {
+        q = if_else(is_eqz(q), quaternion(e_t(0), e_t(1)), sign(q));
+      }
       auto [s, c] = eve::sincos[this->options()](angle * eve::half(eve::as(angle)));
       return c + s * q;
     }

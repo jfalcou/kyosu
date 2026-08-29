@@ -119,8 +119,14 @@ namespace kyosu
   {
     auto r1 = (self * if_else(is_infinite(other), eve::zero, conj(other) / sqr_abs(other)));
     auto eqzother = is_eqz(other);
-    if (eve::none(eqzother)) { self = r1; }
-    else { self = if_else(is_eqz(other), self / real(other), r1); }
+    if (eve::none(eqzother))
+    {
+      self = r1;
+    }
+    else
+    {
+      self = if_else(is_eqz(other), self / real(other), r1);
+    }
     return self;
   }
 
