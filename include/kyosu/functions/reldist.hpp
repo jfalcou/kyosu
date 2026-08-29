@@ -45,7 +45,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // Regular Calls
+  //!     // Regular Call
   //!     constexpr auto reldist(auto z0, auto z1) noexcept;           //1
   //!
   //!     // Semantic Modifiers

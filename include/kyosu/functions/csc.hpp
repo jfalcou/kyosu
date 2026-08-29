@@ -41,7 +41,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // Regular Calls
+  //!     // Regular Call
   //!     constexpr auto csc(cayley_dickson_like z)                 noexcept; //1
   //!
   //!     // Semantic Modifiers

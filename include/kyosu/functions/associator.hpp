@@ -44,7 +44,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // Regular Calls
+  //!     // Regular Call
   //!     constexpr auto associator(auto z0, auto z1, auto z2) noexcept;           //1
   //!
   //!     // Semantic Modifier

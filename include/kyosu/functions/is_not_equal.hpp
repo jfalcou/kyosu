@@ -44,7 +44,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular Calls
+  //!      // Regular Call
   //!      constexpr auto is_not_equal(auto z0, auto z1)          noexcept; //1
   //!
   //!      // Semantic Modifier

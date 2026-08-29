@@ -41,7 +41,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular Calls
+  //!      // Regular Call
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_unitary(T z) noexcept;
   //!
   //!      // Semantic Modifier

@@ -44,7 +44,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular Calls
+  //!      // Regular Call
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr T exp(T z) noexcept;
   //!
   //!      // Semantic Modifiers

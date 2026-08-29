@@ -41,7 +41,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // Regular Calls
+  //!     // Regular Call
   //!     template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> arg(T z)       noexcept;
   //!
   //!     // Semantic Modifiers

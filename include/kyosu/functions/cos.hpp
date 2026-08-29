@@ -42,7 +42,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // Regular Calls
+  //!     // Regular Call
   //!     constexpr auto cos(cayley_dickson_like z)                 noexcept; //1
   //!
   //!     // Semantic Modifiers
