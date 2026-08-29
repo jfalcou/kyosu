@@ -86,6 +86,6 @@ namespace kyosu::_
     }
     auto gez = eve::is_gez(real(kyosu::dot(z0, z1)));
     auto mix = kyosu::if_else(gez, z1, -z1);
-    return z1 * kyosu::pow(kyosu::conj(z1) * mix, z2);
+    return z0 * kyosu::pow(kyosu::conj(z0) * mix, z2);
   }
 }
