@@ -3,8 +3,19 @@
   <!-- Navigation index tabs for HTML output -->
   <navindex>
     <tab type="mainpage" visible="yes" title=""/>
-    <!-- <tab type="user" url="@ref kyosu101" title="Getting Started"/> -->
-    <tab type="usergroup" visible="yes" title="How-Tos"/>
+    <tab type="usergroup" visible="yes" title="Tutorials">
+      <tab type="user" url="@ref setup"                title="Installation &amp; Quick Start"/>
+      <tab type="usergroup" visible="yes" title="Getting Started">
+        <tab type="user" url="@ref tutorial-complex"    title="Complex Numbers"/>
+        <tab type="user" url="@ref tutorial-simd"       title="Many Values At Once"/>
+      </tab>
+      <tab type="usergroup" visible="yes" title="Past The Complex Numbers">
+        <tab type="user" url="@ref tutorial-quaternion" title="Quaternions"/>
+        <tab type="user" url="@ref tutorial-rotation"   title="Rotations"/>
+        <tab type="user" url="@ref tutorial-beyond"     title="Octonions and Beyond"/>
+      </tab>
+      <tab type="user" url="@ref tutorial-options"     title="Options"/>
+    </tab>
 
     <tab type="usergroup" visible="yes" title="Reference Documentation">
       <tab type="user" url="@ref types" title="Types"/>
@@ -18,7 +29,6 @@
       <tab type="concepts" visible="yes" title=""/>
     </tab>
     <tab type="usergroup" visible="yes" title="Informations">
-       <!-- <tab type="user" url="@ref setup" title="Setup"/> -->
       <tab type="usergroup" visible="yes" title="Rationale">
         <tab type="user" url="@ref math_background" title="Background"/>
       </tab>
