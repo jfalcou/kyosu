@@ -2144,9 +2144,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/manhattan.hpp",
-            "function_covered": 81,
+            "function_covered": 59,
             "function_percent": 100.0,
-            "function_total": 81,
+            "function_total": 59,
             "line_covered": 6,
             "line_percent": 100.0,
             "line_total": 6
@@ -3016,9 +3016,9 @@
             "line_total": 4
         }
     ],
-    "function_covered": 24131,
+    "function_covered": 24109,
     "function_percent": 98.1,
-    "function_total": 24596,
+    "function_total": 24574,
     "gcovr/summary_format_version": "0.6",
     "line_covered": 4820,
     "line_percent": 94.7,
