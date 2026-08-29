@@ -137,7 +137,6 @@ TTS_CASE_TPL("Check kyosu::cyl_bessel_jn over real", kyosu::scalar_real_types)
     auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c))) * kyosu::rec(c));
     for (int i = 0; i < N; ++i)
     {
-      // std::cout<< "j " << j  << " c[" << i << "] = " << c << std::endl;
       auto res = kyosu::complex(reresN16[i][j], imresN16[i][j]);
       TTS_RELATIVE_EQUAL(kyosu::bessel_j(i, c), res, tts::prec<T>());
       TTS_RELATIVE_EQUAL(kyosu::bessel_j(-i, c), eve::sign_alternate(i) * res, tts::prec<T>());

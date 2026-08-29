@@ -180,7 +180,6 @@ TTS_CASE_TPL("Check kyosu::cyl_bessel_yn over real", kyosu::scalar_real_types)
     auto fac = kyosu::sqrt(eve::pio_2(eve::as(kyosu::real(c))) * kyosu::rec(c));
     for (int i = 0; i < N; ++i)
     {
-      //      std::cout<< "i " << i  << "j " << j  << " c[" << i << "] = " << c << std::endl;
       auto res = kyosu::complex(reresN16[i][j], imresN16[i][j]);
       if (((i < 7) || (sizeof(T) == 8) ||
            kyosu::is_not_real(

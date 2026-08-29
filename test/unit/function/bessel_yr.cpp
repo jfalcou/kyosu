@@ -186,7 +186,6 @@ TTS_CASE_TPL("Check kyosu::bessel_yr over real positive order", kyosu::scalar_re
       {
         auto res = kyosu::complex(reresN16[i][j], imresN16[i][j]);
         auto v = v0 + i;
-        //       std::cout<< "j " << j  << " c[" << j << "] = " << c << " i " << i << " v " << v << std::endl;
         TTS_RELATIVE_EQUAL(kyosu::bessel_y(v, c), res, tts::prec<T>());
         TTS_RELATIVE_EQUAL(kyosu::bessel_y[spherical](v, c), kyosu::bessel_y(v + h, c) * fac, tts::prec<T>());
         if (i < 5)
@@ -372,7 +371,6 @@ TTS_CASE_TPL("Check kyosu::bessel_yr over real negative order", kyosu::scalar_re
     {
       auto res = kyosu::complex(reresN16[i][j], imresN16[i][j]);
       auto v = v0 - i;
-      // std::cout<< "j " << j  << " c[" << j << "] = " << c << " i " << i << " v " << v << std::endl;
       if (((i < 7) || (sizeof(T) == 8) ||
            kyosu::is_not_real(
              c))) // The limitation of these tests with float is due to some overflow pbs when z is real

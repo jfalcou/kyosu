@@ -20,7 +20,6 @@ TTS_CASE_WITH("Check kyosu::is_fnan over complex", kyosu::real_types, tts::rando
   using T = kyosu::complex_t<decltype(r)>;
   TTS_EQUAL(kyosu::is_fnan(kyosu::complex(r, i)), eve::is_nan(r) && eve::is_nan(i));
   auto z(kyosu::nan(eve::as<T>()));
-  std::cout << "z " << z << std::endl;
   TTS_EQUAL(kyosu::is_fnan(z), eve::false_(eve::as(r)));
   auto zz = kyosu::complex(eve::nan(eve::as(r)), eve::nan(eve::as(r)));
   TTS_EQUAL(kyosu::is_fnan(zz), eve::true_(eve::as(r)));
