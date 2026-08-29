@@ -3,6 +3,8 @@ Bibliography {#biblio}
 
 The works the rest of the documentation leans on, whether or not it names them explicitly.
 
+A [**ready to use Bibtex file can be downloaded here**](kyosu.bibtex).
+
 # The construction and its limits
 
   + L. E. Dickson, *On Quaternions and Their Generalization and the History of the Eight Square
