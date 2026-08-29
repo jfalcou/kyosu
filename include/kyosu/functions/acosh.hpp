@@ -54,8 +54,8 @@ namespace kyosu
   //!   namespace kyosu
   //!   {
   //!     //  regular call
-  //!     constexpr auto acos( acosh(Z z)                           noexcept;
-  //!     constexpr auto acos(cayley_dickson_like z, eve::value k)  noexcept;
+  //!     constexpr auto acosh(Z z)                           noexcept;
+  //!     constexpr auto acosh(cayley_dickson_like z, eve::value k)  noexcept;
   //!
   //!     // semantic modifyers
   //!     constexpr auto  acosh[real_only](concepts::real z)        noexcept;

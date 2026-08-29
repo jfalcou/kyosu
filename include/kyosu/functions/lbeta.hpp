@@ -55,7 +55,7 @@ namespace kyosu
   //!   {
   //!     //  regular call
   //!     auto lbeta(auto z0,auto z1) noexcept;
-  //!     auto log(auto z0,  auto z1, eve::value n) noexcept;
+  //!     auto lbeta(auto z0,  auto z1, eve::value n) noexcept;
   //!
   //!     // semantic modifyers
   //!     auto lbeta[real_only](auto z0, auto z1) noexcept;

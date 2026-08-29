@@ -61,7 +61,7 @@ namespace kyosu
   //!      auto maxabs[raw](/* any previous overload*/) const      noexcept;     // 3
   //!      auto maxabs[numeric](/* any previous overload*/) const  noexcept;     // 4
   //!      auto maxabs[pedantic](/* any previous overload*/) const noexcept;     // 5
-  //!      auto maxnabs[flat](/* any previous overload*/) const    noexcept;     // 6
+  //!      auto maxabs[flat](/* any previous overload*/) const    noexcept;     // 6
   //!   }
   //!   @endcode
   //!

@@ -56,7 +56,7 @@ namespace kyosu
   //!      constexpr auto atanh(cayley_dickson_like z, eve::value k)   noexcept; // 2
   //!
   //!     // semantic modifyers
-  //!     constexpr Z atan[real_only](Real z)                          noexcept; // 1
+  //!     constexpr Z atanh[real_only](Real z)                          noexcept; // 1
   //!
   //!   }
   //!   @endcode
@@ -68,7 +68,7 @@ namespace kyosu
   //!   **Return value**
   //!
   //!     1. a real input z is treated as if `complex(z)` was entered, unless the option `real_only` is used
-  //!      in which case the parameter must be a floating_value and the result will the same as a call to `eve::actanh`,
+  //!      in which case the parameter must be a floating_value and the result will the same as a call to `eve::atanh`,
   //!      In any case returns the complex inverse hyperbolic tangent of z, in the range of a half-strip mathematically
   //!      unbounded along the real axis and in the interval  \f$i\times[-\pi/2, \pi/2]\f$ along
   //!      the imaginary axis.

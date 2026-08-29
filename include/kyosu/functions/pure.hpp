@@ -56,7 +56,7 @@ namespace kyosu
   //!
   //!  @groupheader{Example}
   //!
-  //!  @godbolt{doc/imag.cpp}
+  //!  @godbolt{doc/pure.cpp}
   //======================================================================================================================
 
   inline constexpr auto pure = eve::functor<pure_t>;

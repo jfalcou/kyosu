@@ -61,7 +61,7 @@ namespace kyosu
   //!      // Regular overloads
   //!      constexpr auto sub(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto sub(eve::non_empty_product_type auto const& tup)             noexcept; // 2
-  //!      constexpr auto add[kahan] (/*any of the above overloads*/)                   noexcept; // 3
+  //!      constexpr auto sub[kahan] (/*any of the above overloads*/)                   noexcept; // 3
   //!
   //!      // Lanes masking
   //!      constexpr auto sub[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 4
