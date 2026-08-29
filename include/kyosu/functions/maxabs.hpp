@@ -53,11 +53,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Calls
   //!      template<typename ... Ts> auto maxabs(Ts ... zs       ) const noexcept// 1
   //!      template<typename Tup>    auto maxabs(kumi::tuple Tup ) const noexcept// 2
   //!
-  //!      // Semantic modifiers
+  //!      // Semantic Modifier
   //!      auto maxabs[raw](/* any previous overload*/) const      noexcept;     // 3
   //!      auto maxabs[numeric](/* any previous overload*/) const  noexcept;     // 4
   //!      auto maxabs[pedantic](/* any previous overload*/) const noexcept;     // 5

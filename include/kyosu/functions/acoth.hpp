@@ -49,11 +49,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular calls
+  //!     // Regular Calls
   //!     constexpr auto acoth(cayley_dickson_like z) noexcept;
   //!     constexpr auto acoth(cayley_dickson_like z, eve::value k) noexcept;
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     constexpr auto acoth[real_only](Real z)     noexcept;
   //!   }
   //!   @endcode

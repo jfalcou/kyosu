@@ -65,7 +65,7 @@ namespace kyosu
   //!     template< auto T, auto C ...>  auto reverse_horner(T x, C ... coefs)       noexcept; //1
   //!     template< auto C, auto K>      auto reverse_horner(T x, K tup)             noexcept; //2
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     template<auto T, auto C ...>  auto reverse_horner[left](T x, C ... coefs)  noexcept; //1
   //!     template<auto C, auto K>      auto reverse_horner[left]r(T x, K tup)       noexcept; //2
   //!     template<auto T, auto C ...>  auto reverse_horner[right](T x, C ... coefs) noexcept; //3

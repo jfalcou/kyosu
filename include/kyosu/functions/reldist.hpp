@@ -45,10 +45,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Calls
   //!     constexpr auto reldist(auto z0, auto z1) noexcept;           //1
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     constexpr auto reldist[pedantic](auto z0, auto z1) noexcept; //2
   //!     constexpr auto reldist[numeric](auto z0, auto z1) noexcept;  //3
   //!   }

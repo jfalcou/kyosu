@@ -51,11 +51,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //  regular call
+  //!      // Regular Calls
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log(T z) noexcept;
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log(T z eve::value n) noexcept;
   //!
-  //!      // Semantic modifiers
+  //!      // Semantic Modifier
   //!      template<concepts::real T> constexpr complexify_t<T> log[real_only](T z) noexcept;
   //!   }
   //!   @endcode

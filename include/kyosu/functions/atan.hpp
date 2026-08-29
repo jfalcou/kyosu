@@ -51,11 +51,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular calls
+  //!     // Regular Calls
   //!     constexpr auto atan(cayley_dickson_like z)                noexcept;
   //!     constexpr auto atan(cayley_dickson_like z, eve::value k)  noexcept;
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     constexpr Z atan[real_only](Real z)                       noexcept;
   //!     constexpr auto atan[radpi](cayley_dickson_like z)         noexcept;
   //!     constexpr auto atan[rad](cayley_dickson_like z)           noexcept;

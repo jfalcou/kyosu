@@ -48,11 +48,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto cbrt(complex_like z, auto k)             noexcept;
   //!     constexpr auto cbrt(complex_like z)                     noexcept;
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     constexpr Z cbrt[real_only](Real z)                     noexcept;
   //!   }
   //!   @endcode

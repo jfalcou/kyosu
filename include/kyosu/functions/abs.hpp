@@ -42,10 +42,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Calls
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs(T z) noexcept;       // 1
   //!
-  //!      // Semantic modifiers
+  //!      // Semantic Modifier
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[raw](T z) noexcept;  // 2
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> abs[flat](T z) noexcept; // 3
   //!   }

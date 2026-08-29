@@ -65,7 +65,7 @@ namespace kyosu
   //!      // Regular overload
   //!      constexpr auto ellint_rj(auto x, auto y, auto z, auto p)                          noexcept; // 1
   //!
-  //!      // Semantic modifiers
+  //!      // Semantic Modifier
   //!      constexpr auto ellint_rj[threshold = tol](auto x, auto y, auto z, auto p)         noexcept; // 1
   //!
   //!      // Lanes masking

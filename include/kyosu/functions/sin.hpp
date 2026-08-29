@@ -43,10 +43,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Calls
   //!     constexpr auto sin(cayley_dickson_like z)         noexcept; //1
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     constexpr auto sin[radpi](cayley_dickson_like z)  noexcept; //2
   //!     constexpr auto sin[rad](cayley_dickson_like z)    noexcept; //1
   //!   }

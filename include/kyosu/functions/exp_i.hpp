@@ -42,10 +42,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Calls
   //!     template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> exp_i(T z)        noexcept; //1
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> exp_i[radpi](T z) noexcept;  //2
   //!   }
   //!   @endcode

@@ -62,7 +62,7 @@ namespace kyosu
   //!     template< auto T, auto C ...>  auto horner(T x, C ... coefs)       noexcept;  //1
   //!     template< auto C, auto K>      auto horner(T x, K tup)             noexcept;  //2
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     template<auto T, auto C ...>  auto horner[left](T x, C ... coefs)  noexcept;  //1
   //!     template<auto C, auto K>      auto horner[left]r(T x, K tup)       noexcept;  //2
   //!     template<auto T, auto C ...>  auto horner[right](T x, C ... coefs) noexcept;  //3

@@ -46,10 +46,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Calls
   //!     constexpr auto kummer(auto z, auto a, auto b) noexcept;             //1
   //!
-  //!      // Semantic modifiers
+  //!      // Semantic Modifier
   //!     constexpr auto kummer[regularized](auto z, auto a, auto b) noexcept;//2
   //!
   //!

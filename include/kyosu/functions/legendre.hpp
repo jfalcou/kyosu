@@ -81,7 +81,7 @@ namespace kyosu
   //!      constexpr auto legendre[conditional_expr auto c](/* any previous overload */)                 noexcept; // 2
   //!      constexpr auto legendre[logical_value auto m](/* any previous overload */)                    noexcept; // 2
   //!
-  //!      // Semantic modifiers
+  //!      // Semantic Modifier
   //!      constexpr auto legendre[successor](integral_value auto n,
   //!                                         kyosu::concepts::cayley_dickson auto z,
   //!                                         kyosu::concepts::cayley_dickson auto pn,

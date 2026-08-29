@@ -53,11 +53,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     auto lbeta(auto z0,auto z1) noexcept;
   //!     auto lbeta(auto z0,  auto z1, eve::value n) noexcept;
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     auto lbeta[real_only](auto z0, auto z1) noexcept;
   //!   }
   //!   @endcode

@@ -44,10 +44,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular call
+  //!      // Regular Calls
   //!      constexpr auto is_equal(auto z0, auto z1)          noexcept; //1
   //!
-  //!      // Semantic modifiers
+  //!      // Semantic Modifier
   //!      constexpr auto is_equal[numeric](auto z0, auto z1) noexcept; //2
   //!   }
   //!   @endcode

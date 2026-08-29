@@ -56,11 +56,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto acos(cayley_dickson_like z)                noexcept;
   //!     constexpr auto acos(cayley_dickson_like z, eve::value k)  noexcept;
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     constexpr Z acos[real_only](Real z)                       noexcept;
   //!     constexpr auto acos[radpi](cayley_dickson_like z)         noexcept;
   //!     constexpr auto acos[rad](cayley_dickson_like z)           noexcept;

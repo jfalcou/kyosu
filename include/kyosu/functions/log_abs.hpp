@@ -46,7 +46,7 @@ namespace kyosu
   //!   {
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto log_abs(T z) noexcept;
   //!
-  //!      // Semantic modifiers
+  //!      // Semantic Modifier
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto log_abs[pedantic](T z) noexcept;
   //!
   //!   }

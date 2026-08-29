@@ -46,10 +46,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Calls
   //!      constexpr auto xi(auto z) noexcept;           // 1
   //!
-  //!      // Semantic modifiers
+  //!      // Semantic Modifier
   //!      constexpr auto xi[riemann](auto z) noexcept;  // 1
   //!      constexpr auto xi[landau](T z) noexcept;      // 2
   //!   }

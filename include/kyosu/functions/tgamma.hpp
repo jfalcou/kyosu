@@ -47,7 +47,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // regular calls
+  //!      // Regular Calls
   //!      constexpr T  tgamma(T z) noexcept;
   //!   }
   //!   @endcode

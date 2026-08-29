@@ -54,10 +54,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto beta(cayley_dickson_liko x, cayley_dickson_like y) noexcept;
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     constexpr auto beta[real_only](Real x, Real y)                    noexcept;
   //!   }
   //!   @endcode

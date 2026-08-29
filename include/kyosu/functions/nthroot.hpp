@@ -54,11 +54,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto nthroot(complex_like z, auto n, auto k)             noexcept;
   //!     constexpr auto nthroot(complex_like z, auto n)                     noexcept;
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     constexpr auto nthroot[real_only](/*any previous overload*/)       noexcept;
   //!   }
   //!   @endcode

@@ -53,10 +53,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     auto lrising_factorial(auto x,auto y) noexcept;
   //!
-  //!     // Semantic modifiers
+  //!     // Semantic Modifier
   //!     auto lrising_factorial[real_only](auto x,auto y) noexcept;
   //!   }
   //!   @endcode

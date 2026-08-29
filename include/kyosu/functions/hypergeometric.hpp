@@ -74,10 +74,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Calls
   //!     constexpr auto hypergeometric(auto z, auto a, auto b)              noexcept; // 1;
   //!
-  //!      // Semantic modifiers
+  //!      // Semantic Modifier
   //!     constexpr auto hypergeometric[regularized](auto z, auto a, auto b) noexcept; // 2
   //!   }
   //!   @endcode
