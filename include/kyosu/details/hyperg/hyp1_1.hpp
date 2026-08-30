@@ -84,6 +84,7 @@ namespace kyosu::_
       }
       return r;
     }
+    return r_t();
   }
 
   template<typename Z, eve::sized_product_type<1> T1, eve::sized_product_type<1> T2>
