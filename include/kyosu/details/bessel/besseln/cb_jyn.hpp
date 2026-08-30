@@ -221,7 +221,7 @@ namespace kyosu::_
 
       while (eve::any(bound_not_reached))
       {
-        auto m = u_t(im);
+
         Pm *= -pim[im] * rz2;
         Qm *= -xim[im] * rz2;
         if constexpr (eve::scalar_value<e_t>)
