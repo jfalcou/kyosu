@@ -26,7 +26,6 @@ namespace kyosu::_
     using r_t = decltype(a + c + z + gamma_c + gamma_inv_cma + gamma_inv_one_meps + gamma_inv_eps_pa_pm + m + eps);
     using u_t = eve::underlying_type_t<r_t>;
 
-    u_t const pi = eve::pi(eve::as<u_t>());
     auto const inf_norm_eps = kyosu::linfnorm(eps);
 
     r_t const phase(eve::sign_alternate(m));
@@ -106,9 +105,6 @@ namespace kyosu::_
                     gamma_inv_one_meps * prod_diff_eps);
       auto prod_2a = gamma_prod1 * gamma_inv_diff_eps(kyosu::inc(m), eps, notdone);
       auto prod_2b = gamma_inv_cma * gamma_inv_eps_pm_p1 * gamma_inv_diff_eps(a_pm, eps, notdone);
-      auto gide = gamma_inv_diff_eps(cma, -eps, notdone);
-      auto gg = gamma_inv_eps_pm_p1 * gamma_inv_a_pm;
-//      auto gz = gamma_inv_cma_meps * z_term; //TO KILL
       auto prod_2c =
         gamma_inv_eps_pm_p1 * gamma_inv_a_pm * (gamma_inv_diff_eps(cma, -eps, notdone) + gamma_inv_cma_meps * z_term);
 
