@@ -36,3 +36,14 @@ TTS_RELATIVE_EQUAL(c, kyosu::cosh(r), 2e-5);
 }
 }
 ;
+
+//======================================================================================================================
+//== These return another type than their argument, so a conditional has nothing to return
+//======================================================================================================================
+TTS_CASE("Check that kyosu::sinhcosh rejects a conditional")
+{
+  [[maybe_unused]] kyosu::complex_t<double> const c{3., 4.};
+  [[maybe_unused]] bool const m{false};
+
+  TTS_EXPECT_NOT_COMPILES(c, m, { kyosu::sinhcosh[m](c); });
+};

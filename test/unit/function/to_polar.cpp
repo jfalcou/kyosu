@@ -34,3 +34,28 @@ TTS_RELATIVE_EQUAL(q, q1, tts::prec<T>());
 }
 }
 ;
+
+TTS_CASE_WITH("Check that the radpi option reaches both sides of the trip",
+              kyosu::real_types,
+              tts::randoms(-1.0, +1.0),
+              tts::randoms(-1.0, +1.0))
+<typename T>(T const& a0, T const& a1)
+{
+  auto c = kyosu::complex(a0, a1);
+  auto [r, t] = kyosu::to_polar[kyosu::radpi](c);
+
+  TTS_RELATIVE_EQUAL(kyosu::from_polar[kyosu::radpi](r, t), c, tts::prec<T>());
+};
+
+//======================================================================================================================
+//== These return another type than their argument, so a conditional has nothing to return
+//======================================================================================================================
+TTS_CASE("Check that kyosu::to_polar and kyosu::from_polar reject a conditional")
+{
+  [[maybe_unused]] kyosu::complex_t<double> const c{3., 4.};
+  [[maybe_unused]] double const r{1.};
+  [[maybe_unused]] bool const m{false};
+
+  TTS_EXPECT_NOT_COMPILES(c, m, { kyosu::to_polar[m](c); });
+  TTS_EXPECT_NOT_COMPILES(r, m, { kyosu::from_polar[m](r, r); });
+};

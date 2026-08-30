@@ -14,7 +14,7 @@
 namespace kyosu
 {
   template<typename Options>
-  struct to_semipolar_t : eve::elementwise_callable<to_semipolar_t, Options, raw_option, pedantic_option, radpi_option>
+  struct to_semipolar_t : eve::callable<to_semipolar_t, Options, raw_option, pedantic_option, radpi_option>
   {
     template<concepts::real V> KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
     {

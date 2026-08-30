@@ -33,3 +33,14 @@ TTS_CASE_WITH("Check behavior of align on wide",
   TTS_RELATIVE_EQUAL(qv0[1], v1[1], 1.0e-4);
   TTS_RELATIVE_EQUAL(qv0[2], v1[2], 1.0e-4);
 };
+
+//======================================================================================================================
+//== These return another type than their argument, so a conditional has nothing to return
+//======================================================================================================================
+TTS_CASE("Check that kyosu::align rejects a conditional")
+{
+  [[maybe_unused]] std::array<double, 3> v{1., 0., 0.};
+  [[maybe_unused]] bool const m{false};
+
+  TTS_EXPECT_NOT_COMPILES(v, m, { kyosu::align[m](std::span<double, 3>(v), std::span<double, 3>(v)); });
+};

@@ -47,3 +47,16 @@ TTS_CASE_WITH("Check behavior of to_rotation_matrix on wide",
     TTS_RELATIVE_EQUAL(res1[j], ref[j], 0.0002);
   }
 };
+
+//======================================================================================================================
+//== These return another type than their argument, so a conditional has nothing to return
+//======================================================================================================================
+TTS_CASE("Check that kyosu::to_rotation_matrix and kyosu::from_rotation_matrix reject a conditional")
+{
+  [[maybe_unused]] kyosu::quaternion_t<double> const q{1., 2., 3., 4.};
+  [[maybe_unused]] std::array<std::array<double, 3>, 3> mx{};
+  [[maybe_unused]] bool const m{false};
+
+  TTS_EXPECT_NOT_COMPILES(q, m, { kyosu::to_rotation_matrix[m](q); });
+  TTS_EXPECT_NOT_COMPILES(mx, m, { kyosu::from_rotation_matrix[m](mx); });
+};
