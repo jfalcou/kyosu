@@ -16,7 +16,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
-      return eve::is_eqz(real(z));
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(is_pure_t, is_pure_);
@@ -59,4 +59,13 @@ namespace kyosu
   //======================================================================================================================
   //! @}
   //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> is_pure_(KYOSU_DELAY(), O const&, Z const& z) noexcept
+  {
+    return eve::is_eqz(real(z));
+  }
 }

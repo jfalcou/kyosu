@@ -16,13 +16,12 @@ namespace kyosu
     template<concepts::cayley_dickson Z>
     KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
-      return eve::is_not_nan(kyosu::arg(z)) || eve::is_not_infinite(kyosu::abs(z));
-      ;
+      return KYOSU_CALL(z);
     }
 
     template<concepts::real V> KYOSU_FORCEINLINE constexpr eve::as_logical_t<V> operator()(V v) const noexcept
     {
-      return eve::true_(eve::as(v));
+      return KYOSU_CALL(v);
     }
 
     KYOSU_CALLABLE_OBJECT(is_not_cinf_t, is_not_cinf_);
@@ -71,4 +70,14 @@ namespace kyosu
   //======================================================================================================================
   //! @}
   //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> is_not_cinf_(KYOSU_DELAY(), O const&, Z const& z) noexcept
+  {
+    if constexpr (concepts::real<Z>) return eve::true_(eve::as(z));
+    else return eve::is_not_nan(kyosu::arg(z)) || eve::is_not_infinite(kyosu::abs(z));
+  }
 }
