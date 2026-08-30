@@ -63,7 +63,7 @@ namespace kyosu::_
       {
         notdone = last_interval(br_rest, notdone, r);
       }
-      return r;
     }
+    return r;
   }
 }

@@ -150,8 +150,8 @@ namespace kyosu::_
             notdone = last_interval(br_regular, notdone, r, notdone);
           }
         }
-        return r;
       }
+      return r;
     }
     else
     {
