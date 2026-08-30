@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['cayley_20dickson_20algebras_0',['Cayley-Dickson algebras',['../index.html#autotoc_md21',1,'']]],
+  ['cayley_20dickson_20algebras_0',['Cayley-Dickson algebras',['../index.html#autotoc_md19',1,'']]],
   ['cayley_20dickson_20constants_1',['Cayley-Dickson constants',['../group__constants.html',1,'']]],
   ['cayley_20dickson_20functions_2',['Cayley-Dickson Functions',['../group__functions.html',1,'']]],
   ['cayley_5fdickson_3',['cayley_dickson',['../structkyosu_1_1cayley__dickson.html',1,'kyosu::cayley_dickson&lt; Type, N &gt;'],['../conceptkyosu_1_1concepts_1_1cayley__dickson.html',1,'kyosu::concepts'],['../structkyosu_1_1cayley__dickson.html#a855e307f5821528acf3b6d850194192f',1,'kyosu::cayley_dickson::cayley_dickson() noexcept'],['../structkyosu_1_1cayley__dickson.html#af70b4a76c4af0caf051ff4eae883d552',1,'kyosu::cayley_dickson::cayley_dickson(T v) noexcept'],['../structkyosu_1_1cayley__dickson.html#a5899e8aaa41998c60dc9ce3e2bb82c6f',1,'kyosu::cayley_dickson::cayley_dickson(T0 v0, Ts... vs) noexcept'],['../structkyosu_1_1cayley__dickson.html#ae438e3f20e692a6de77419c39e890ba8',1,'kyosu::cayley_dickson::cayley_dickson(eve::sized_product_type&lt; N &gt; auto const &amp;vs)'],['../structkyosu_1_1cayley__dickson.html#aa793ea3b391b5e590eb6022b75d3be84',1,'kyosu::cayley_dickson::cayley_dickson(cayley_dickson&lt; Type, M &gt; const &amp;a, cayley_dickson&lt; Type, M &gt; const &amp;b) noexcept'],['../structkyosu_1_1cayley__dickson.html#ab8e1d853182bea96fea1595877d240f4',1,'kyosu::cayley_dickson::cayley_dickson(cayley_dickson&lt; Type, M &gt; const &amp;a) noexcept'],['../structkyosu_1_1cayley__dickson.html#aa0be302941e24075875f2ff22e1bc866',1,'kyosu::cayley_dickson::cayley_dickson(Tuple const &amp;) -&gt; cayley_dickson&lt; kumi::element_t&lt; 0, Tuple &gt;, kumi::size_v&lt; Tuple &gt; &gt;'],['../structkyosu_1_1cayley__dickson.html#aa72548959abb0145c1eef8e8cf2928b4',1,'kyosu::cayley_dickson::cayley_dickson(T0, Ts...) -&gt; cayley_dickson&lt; T0, 1+sizeof...(Ts)&gt;'],['../structkyosu_1_1cayley__dickson.html#aa0be302941e24075875f2ff22e1bc866',1,'kyosu::cayley_dickson(Tuple const &amp;) -&gt; cayley_dickson&lt; kumi::element_t&lt; 0, Tuple &gt;, kumi::size_v&lt; Tuple &gt; &gt;'],['../structkyosu_1_1cayley__dickson.html#aa72548959abb0145c1eef8e8cf2928b4',1,'kyosu::cayley_dickson(T0, Ts...) -&gt; cayley_dickson&lt; T0, 1+sizeof...(Ts)&gt;']]],
@@ -18,7 +18,7 @@ var searchData=
   ['computations_15',['to obtain poor precision with float based computations.',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md3',1,'']]],
   ['conj_16',['conj',['../group__functions_ga7e324b44c677cab7cf646a1cb87e9405.html#ga7e324b44c677cab7cf646a1cb87e9405',1,'kyosu']]],
   ['constants_17',['Cayley-Dickson constants',['../group__constants.html',1,'']]],
-  ['constructors_18',['Constructors',['../index.html#autotoc_md23',1,'']]],
+  ['constructors_18',['Constructors',['../index.html#autotoc_md21',1,'']]],
   ['convert_19',['convert',['../group__functions_ga081e21d8e2b4876702601c74562eeabb.html#ga081e21d8e2b4876702601c74562eeabb',1,'kyosu']]],
   ['cos_20',['cos',['../group__functions_gaff78cbf53496580d8216966a5f96a5f9.html#gaff78cbf53496580d8216966a5f96a5f9',1,'kyosu']]],
   ['cosh_21',['cosh',['../group__functions_gaacd4903b331413b4b0c8da2a1521093a.html#gaacd4903b331413b4b0c8da2a1521093a',1,'kyosu']]],

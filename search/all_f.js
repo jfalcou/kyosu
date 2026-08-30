@@ -7,6 +7,6 @@ var searchData=
   ['powm1_4',['powm1',['../group__functions_gab8e3f77af87791f809ac6cb9e95b38f9.html#gab8e3f77af87791f809ac6cb9e95b38f9',1,'kyosu']]],
   ['precision_20with_20float_20based_20computations_5',['to obtain poor precision with float based computations.',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md3',1,'']]],
   ['proj_6',['proj',['../group__functions_gada630e85053aac1a1b0b53e89e5369f2.html#gada630e85053aac1a1b0b53e89e5369f2',1,'kyosu']]],
-  ['provide_7',['What does this implementation provide',['../index.html#autotoc_md22',1,'']]],
+  ['provide_7',['What does this implementation provide',['../index.html#autotoc_md20',1,'']]],
   ['pure_8',['pure',['../group__functions_gab1c81e9ddeb944ba56779a613452909b.html#gab1c81e9ddeb944ba56779a613452909b',1,'kyosu']]]
 ];
