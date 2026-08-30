@@ -67,3 +67,15 @@ TTS_CASE_TPL("Check tricomi ", kyosu::scalar_real_types)
   test(1000.0, 2.0, 2.5, res[18], 18);
   test(100.0, 10.0, 10.0, res[19], 19);
 };
+
+//======================================================================================================================
+//== A masked call answers a complex where its argument was real, so the lanes the condition rejects carry complex(v)
+//======================================================================================================================
+TTS_CASE_WITH("Check kyosu::tricomi over a masked real", kyosu::real_types, tts::randoms(1.0, 2.0))
+<typename T>(T v)
+{
+  auto cond = eve::is_greater(v, T(1.5));
+
+  TTS_RELATIVE_EQUAL(kyosu::tricomi[cond](v, T(1), T(1)),
+                     kyosu::if_else(cond, kyosu::tricomi(v, T(1), T(1)), kyosu::complex_t<T>(v)), tts::prec<T>());
+};

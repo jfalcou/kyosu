@@ -87,3 +87,15 @@ TTS_CASE_TPL("Check peculiar values", kyosu::real_types)
     }
   }
 };
+
+//======================================================================================================================
+//== A masked call answers a complex where its argument was real, so the lanes the condition rejects carry complex(v)
+//======================================================================================================================
+TTS_CASE_WITH("Check kyosu::omega over a masked real", kyosu::real_types, tts::randoms(-10, 10))
+<typename T>(T v)
+{
+  auto cond = eve::is_ltz(v);
+
+  TTS_RELATIVE_EQUAL(kyosu::omega[cond](v), kyosu::if_else(cond, kyosu::omega(v), kyosu::complex_t<T>(v)),
+                     tts::prec<T>());
+};

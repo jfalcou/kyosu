@@ -39,3 +39,15 @@ TTS_CASE_TPL("Check log_abs_gamma", kyosu::real_types)
   TTS_RELATIVE_EQUAL(kyosu::digamma(tcx(-1, -1)), tcx(0.594650320622477, -2.576674047468582), tts::prec<T>());
   ;
 };
+
+//======================================================================================================================
+//== A masked call answers a complex where its argument was real, so the lanes the condition rejects carry complex(v)
+//======================================================================================================================
+TTS_CASE_WITH("Check kyosu::digamma over a masked real", kyosu::real_types, tts::randoms(0.5, 5.0))
+<typename T>(T v)
+{
+  auto cond = eve::is_greater(v, T(2.5));
+
+  TTS_RELATIVE_EQUAL(kyosu::digamma[cond](v), kyosu::if_else(cond, kyosu::digamma(v), kyosu::complex_t<T>(v)),
+                     tts::prec<T>());
+};

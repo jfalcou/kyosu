@@ -51,3 +51,15 @@ TTS_CASE_WITH("Check kyosu::mulmi over octonion",
   using type = kyosu::octonion_t<T>;
   TTS_EQUAL(kyosu::mulmi(type(r, i, j, k, l, li, lj, lk)), kyosu::mi(kyosu::as<T>()) * type(r, i, j, k, l, li, lj, lk));
 };
+
+//======================================================================================================================
+//== A masked call answers a complex where its argument was real, so the lanes the condition rejects carry complex(v)
+//======================================================================================================================
+TTS_CASE_WITH("Check kyosu::mulmi over a masked real", kyosu::real_types, tts::randoms(-10, 10))
+<typename T>(T v)
+{
+  auto cond = eve::is_ltz(v);
+
+  TTS_RELATIVE_EQUAL(kyosu::mulmi[cond](v), kyosu::if_else(cond, kyosu::mulmi(v), kyosu::complex_t<T>(v)),
+                     tts::prec<T>());
+};

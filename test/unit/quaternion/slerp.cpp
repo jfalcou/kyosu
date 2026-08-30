@@ -57,3 +57,38 @@ TTS_CASE_WITH("Check that slerp takes the shortest arc",
   // q and -q are the same rotation, so both must be interpolated the same way.
   TTS_RELATIVE_EQUAL(kyosu::slerp(z0, z1, T(0.5)), kyosu::slerp(z0, -z1, T(0.5)), tts::prec<T>());
 };
+
+//======================================================================================================================
+//== A masked call answers a complex where its argument was real, so the lanes the condition rejects carry complex(v)
+//======================================================================================================================
+TTS_CASE_WITH("Check kyosu::slerp over a masked real",
+              kyosu::real_types,
+              tts::randoms(-2.0, 2.0),
+              tts::randoms(-2.0, 2.0),
+              tts::randoms(0.25, 0.75))
+<typename T>(T const& a, T const& b, T const& t)
+{
+  auto cond = eve::is_ltz(a);
+
+  TTS_RELATIVE_EQUAL(kyosu::slerp[cond](a, b, t), kyosu::if_else(cond, kyosu::slerp(a, b, t), kyosu::complex_t<T>(a)),
+                     tts::prec<T>());
+};
+
+//======================================================================================================================
+//== The same call on quaternions, where the argument and the answer share a type and the interpolation is a real one
+//======================================================================================================================
+TTS_CASE_WITH("Check kyosu::slerp[cond] over quaternions",
+              kyosu::simd_real_types,
+              tts::randoms(-1., +1.),
+              tts::randoms(-1., +1.),
+              tts::randoms(-1., +1.),
+              tts::randoms(-1., +1.))
+<typename T>(T const& a, T const& b, T const& c, T const& d)
+{
+  auto z0 = kyosu::sign(kyosu::quaternion_t<T>(a, b, c, d));
+  auto z1 = kyosu::sign(kyosu::quaternion_t<T>(d, c, b, a));
+  auto cond = eve::is_even(eve::iota(eve::as<T>()));
+
+  TTS_RELATIVE_EQUAL(kyosu::slerp[cond](z0, z1, T(0.5)), kyosu::if_else(cond, kyosu::slerp(z0, z1, T(0.5)), z0),
+                     tts::prec<T>());
+};

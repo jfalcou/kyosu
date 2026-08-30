@@ -61,3 +61,15 @@ TTS_CASE_TPL("Check faddeeva", kyosu::real_types)
       << "i " << i << " -> " << inputs[i] << " -> " << faddeeva(inputs[i]) << "\n";
   }
 };
+
+//======================================================================================================================
+//== A masked call answers a complex where its argument was real, so the lanes the condition rejects carry complex(v)
+//======================================================================================================================
+TTS_CASE_WITH("Check kyosu::faddeeva over a masked real", kyosu::real_types, tts::randoms(-1.0, 1.0))
+<typename T>(T v)
+{
+  auto cond = eve::is_ltz(v);
+
+  TTS_RELATIVE_EQUAL(kyosu::faddeeva[cond](v), kyosu::if_else(cond, kyosu::faddeeva(v), kyosu::complex_t<T>(v)),
+                     tts::prec<T>());
+};
