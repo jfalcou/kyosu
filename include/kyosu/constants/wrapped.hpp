@@ -33,7 +33,7 @@ namespace kyosu::_
     }
 
     template<concepts::cayley_dickson T>
-    EVE_FORCEINLINE constexpr T operator()(as<T> const& ) const
+    EVE_FORCEINLINE constexpr T operator()(as<T> const&) const
     requires(requires(base_callable const& b) { b(as_real<T>{}); })
     {
       return T{base_callable::operator()(as_real<T>{})};

@@ -68,7 +68,7 @@ namespace kyosu::_
     auto an = std::size_t(eve::abs(v));
     auto doit = [an, v, z, &hs](auto js, auto ys) {
       auto [jv, yv] = _::cb_jyr(v, z, js, ys);
-      int s =  eve::min(size(hs), an + 1);
+      int s = eve::min(size(hs), an + 1);
       if constexpr (Kind == 1)
       {
         for (int ii = 0; ii < s; ++ii) hs[ii] = js[ii] + muli(ys[ii]);

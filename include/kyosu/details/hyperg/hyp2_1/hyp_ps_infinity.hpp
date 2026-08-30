@@ -94,7 +94,7 @@ namespace kyosu::_
       auto n_p1_meps = one_meps + n;
       auto eps_pa_pm_pn = eps_pa_pm + n;
       auto eps_pa_mc_p1_pm_pn = eps_pa_mc_p1_pm + n;
-//      auto eps_pm_pn = eps_pm + n; //TO KILL
+      //      auto eps_pm_pn = eps_pm + n; //TO KILL
       auto prod1 = eps_pa_pm_pn * eps_pa_mc_p1_pm_pn;
       auto prod2 = eps_pm_p1_pn * n_p1;
       auto prod3 = a_pm_pn * a_mc_p1_pm_pn;

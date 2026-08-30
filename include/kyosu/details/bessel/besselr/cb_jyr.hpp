@@ -120,7 +120,7 @@ namespace kyosu::_
       // we use:
       // J_{-v] = J_v(z) cos(v pi) - Y_v *sin(v pi)
       // y_{-v] = J_v(z) sin(v pi) + Y_v *cos(v pi)
-//      auto [jv, yv] = cb_jyr(-v, z, cjv, cyv);
+      //      auto [jv, yv] = cb_jyr(-v, z, cjv, cyv);
       auto v0 = frac(-v);
       auto [s, c] = sinpicospi(v0);
       for (int ii = 0; ii <= an; ++ii)
