@@ -45,3 +45,16 @@ TTS_CASE_WITH("Check behavior of rotate_vec on wide",
     TTS_RELATIVE_EQUAL(t3, a2, 1.0e-4);
   }
 };
+
+//======================================================================================================================
+//== These return another type than their argument, so a conditional has nothing to return
+//======================================================================================================================
+TTS_CASE("Check that kyosu::to_euler and kyosu::from_euler reject a conditional")
+{
+  [[maybe_unused]] kyosu::quaternion_t<double> const q{1., 2., 3., 4.};
+  [[maybe_unused]] double const r{1.};
+  [[maybe_unused]] bool const m{false};
+
+  TTS_EXPECT_NOT_COMPILES(q, m, { kyosu::to_euler[m](q, kyosu::Z_, kyosu::X_, kyosu::Z_); });
+  TTS_EXPECT_NOT_COMPILES(r, m, { kyosu::from_euler[m](r, r, r, kyosu::Z_, kyosu::X_, kyosu::Z_); });
+};

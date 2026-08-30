@@ -37,3 +37,17 @@ TTS_RELATIVE_EQUAL(q, q1, 1.0e-5);
 }
 }
 ;
+
+//======================================================================================================================
+//== These return another type than their argument, so a conditional has nothing to return
+//======================================================================================================================
+TTS_CASE("Check that kyosu::to_angle_axis and kyosu::from_angle_axis reject a conditional")
+{
+  [[maybe_unused]] kyosu::quaternion_t<double> const q{1., 2., 3., 4.};
+  [[maybe_unused]] double const r{1.};
+  [[maybe_unused]] std::array<double, 3> v{1., 0., 0.};
+  [[maybe_unused]] bool const m{false};
+
+  TTS_EXPECT_NOT_COMPILES(q, m, { kyosu::to_angle_axis[m](q); });
+  TTS_EXPECT_NOT_COMPILES(r, v, m, { kyosu::from_angle_axis[m](r, std::span<double, 3>(v)); });
+};
