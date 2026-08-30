@@ -548,7 +548,7 @@ namespace kyosu::_
     std::size_t an = eve::abs(n);
     auto doit = [an, n, z, &rys](auto js, auto ys) {
       _::cb_jyn(n, z, js, ys);
-      for (int ii = 0; ii < size(rys); ++ii) rys[ii] = ys[ii];
+      for (size_t ii = 0; ii < size(rys); ++ii) rys[ii] = ys[ii];
       return ys[an];
     };
     return _::with_alloca<Z>(an + 1, doit);

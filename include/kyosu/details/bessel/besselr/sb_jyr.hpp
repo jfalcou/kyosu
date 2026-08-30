@@ -23,7 +23,7 @@ namespace kyosu::_
     auto fac = sqrt(pio_2(as(real(z))) * rec(z));
     auto v = n + eve::half(eve::as<eve::underlying_type_t<Z>>());
     auto r = _::cb_jr(v, z, vjs);
-    for (int i = 0; i < size(vjs); ++i) vjs[i] *= fac;
+    for (size_t i = 0; i < size(vjs); ++i) vjs[i] *= fac;
     return fac * r;
   }
 
@@ -45,7 +45,7 @@ namespace kyosu::_
     auto fac = sqrt(pio_2(as(real(z))) * rec(z));
     auto v = n + eve::half(eve::as<eve::underlying_type_t<Z>>());
     auto r = _::cb_yr(v, z, vys);
-    for (int i = 0; i < size(vys); ++i) vys[i] *= fac;
+    for (size_t i = 0; i < size(vys); ++i) vys[i] *= fac;
     return fac * r;
   }
 
