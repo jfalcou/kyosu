@@ -10,6 +10,7 @@
 #include <kyosu/functions/to_complex.hpp>
 #include <kyosu/functions/pow.hpp>
 #include <kyosu/functions/is_unitary.hpp>
+#include <kyosu/functions/minus.hpp>
 #include <kyosu/functions/signnz.hpp>
 #include <kyosu/functions/conj.hpp>
 #include <kyosu/details/decorators.hpp>
@@ -84,8 +85,11 @@ namespace kyosu::_
       z0 = kyosu::signnz(z0);
       z1 = kyosu::signnz(z1);
     }
+    // The mask can be wider than what it masks - a wide z0 against a scalar z1 - and a masked call
+    // answers the type of its argument, so z1 goes up to the call's own return type first.
+    using r_t = as_cayley_dickson_like_t<complexify_t<Z0>, complexify_t<Z1>, Z2>;
     auto gez = eve::is_gez(real(kyosu::dot(z0, z1)));
-    auto mix = kyosu::if_else(gez, z1, -z1);
+    auto mix = kyosu::minus[!gez](r_t(z1));
     return z0 * kyosu::pow(kyosu::conj(z0) * mix, z2);
   }
 }
