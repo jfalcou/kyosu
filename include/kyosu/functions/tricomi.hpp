@@ -118,7 +118,7 @@ namespace kyosu::_
         for (size_t k = 1; k <= Maxit; ++k)
         {
           fac *= (ak / ((n + k - 1) * k)) * zz;
-          auto rk = kyosu::rec(u_t(k));
+          //          auto rk = kyosu::rec(u_t(k));
           daa += kyosu::rec(haa++);
           d1 += eve::rec(h1++);
           dn += kyosu::rec(hn++);
