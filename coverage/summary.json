@@ -296,9 +296,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/details/cayleyify.hpp",
-            "function_covered": 237,
+            "function_covered": 241,
             "function_percent": 99.2,
-            "function_total": 239,
+            "function_total": 243,
             "line_covered": 16,
             "line_percent": 100.0,
             "line_total": 16
@@ -1040,12 +1040,12 @@
             "branch_percent": 60.0,
             "branch_total": 70,
             "filename": "include/kyosu/functions/deta.hpp",
-            "function_covered": 25,
+            "function_covered": 49,
             "function_percent": 100.0,
-            "function_total": 25,
-            "line_covered": 33,
+            "function_total": 49,
+            "line_covered": 34,
             "line_percent": 97.1,
-            "line_total": 34
+            "line_total": 35
         },
         {
             "branch_covered": 4,
@@ -1208,12 +1208,12 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/eta.hpp",
-            "function_covered": 12,
+            "function_covered": 52,
             "function_percent": 100.0,
-            "function_total": 12,
-            "line_covered": 2,
+            "function_total": 52,
+            "line_covered": 5,
             "line_percent": 100.0,
-            "line_total": 2
+            "line_total": 5
         },
         {
             "branch_covered": 0,
@@ -1640,12 +1640,12 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/is_cinf.hpp",
-            "function_covered": 18,
+            "function_covered": 58,
             "function_percent": 100.0,
-            "function_total": 18,
-            "line_covered": 3,
+            "function_total": 58,
+            "line_covered": 6,
             "line_percent": 100.0,
-            "line_total": 3
+            "line_total": 6
         },
         {
             "branch_covered": 0,
@@ -1772,12 +1772,12 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/is_not_cinf.hpp",
-            "function_covered": 4,
+            "function_covered": 58,
             "function_percent": 100.0,
-            "function_total": 4,
-            "line_covered": 2,
+            "function_total": 58,
+            "line_covered": 8,
             "line_percent": 100.0,
-            "line_total": 2
+            "line_total": 8
         },
         {
             "branch_covered": 0,
@@ -1880,24 +1880,24 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/is_pure.hpp",
-            "function_covered": 7,
+            "function_covered": 79,
             "function_percent": 100.0,
-            "function_total": 7,
-            "line_covered": 2,
+            "function_total": 79,
+            "line_covered": 5,
             "line_percent": 100.0,
-            "line_total": 2
+            "line_total": 5
         },
         {
             "branch_covered": 0,
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/is_real.hpp",
-            "function_covered": 26,
-            "function_percent": 96.3,
-            "function_total": 27,
-            "line_covered": 5,
+            "function_covered": 82,
+            "function_percent": 96.5,
+            "function_total": 85,
+            "line_covered": 8,
             "line_percent": 100.0,
-            "line_total": 5
+            "line_total": 8
         },
         {
             "branch_covered": 0,
@@ -2204,12 +2204,12 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/minus.hpp",
-            "function_covered": 22,
+            "function_covered": 70,
             "function_percent": 100.0,
-            "function_total": 22,
-            "line_covered": 2,
+            "function_total": 70,
+            "line_covered": 5,
             "line_percent": 100.0,
-            "line_total": 2
+            "line_total": 5
         },
         {
             "branch_covered": 0,
@@ -2324,9 +2324,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/parts.hpp",
-            "function_covered": 268,
-            "function_percent": 98.9,
-            "function_total": 271,
+            "function_covered": 275,
+            "function_percent": 99.3,
+            "function_total": 277,
             "line_covered": 6,
             "line_percent": 100.0,
             "line_total": 6
@@ -2396,12 +2396,12 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/pure.hpp",
-            "function_covered": 25,
+            "function_covered": 71,
             "function_percent": 100.0,
-            "function_total": 25,
-            "line_covered": 4,
+            "function_total": 71,
+            "line_covered": 7,
             "line_percent": 100.0,
-            "line_total": 4
+            "line_total": 7
         },
         {
             "branch_covered": 0,
@@ -3016,12 +3016,12 @@
             "line_total": 4
         }
     ],
-    "function_covered": 24109,
+    "function_covered": 24500,
     "function_percent": 98.1,
-    "function_total": 24574,
+    "function_total": 24966,
     "gcovr/summary_format_version": "0.6",
-    "line_covered": 4820,
+    "line_covered": 4845,
     "line_percent": 94.7,
-    "line_total": 5092,
+    "line_total": 5117,
     "root": "../../.."
 }
