@@ -15,8 +15,7 @@ namespace kyosu
   {
     template<concepts::cayley_dickson Z> KYOSU_FORCEINLINE constexpr Z operator()(Z z) const noexcept
     {
-      real(z) = 0;
-      return z;
+      return KYOSU_CALL(z);
     }
 
     template<concepts::real V> KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept { return V{0}; }
@@ -63,4 +62,14 @@ namespace kyosu
   //======================================================================================================================
   //! @}
   //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr Z pure_(KYOSU_DELAY(), O const&, Z z) noexcept
+  {
+    real(z) = 0;
+    return z;
+  }
 }

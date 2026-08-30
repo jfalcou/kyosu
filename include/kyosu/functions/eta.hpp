@@ -17,7 +17,7 @@ namespace kyosu
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
-      return deta(1u, z);
+      return KYOSU_CALL(z);
     }
 
     KYOSU_CALLABLE_OBJECT(eta_t, eta_);
@@ -64,4 +64,13 @@ namespace kyosu
   //======================================================================================================================
   //! @}
   //======================================================================================================================
+}
+
+namespace kyosu::_
+{
+  template<typename Z, eve::callable_options O>
+  KYOSU_FORCEINLINE constexpr auto eta_(KYOSU_DELAY(), O const& o, Z const& z) noexcept
+  {
+    return kyosu::deta[o](1u, z);
+  }
 }

@@ -60,3 +60,22 @@ TTS_CASE_WITH("Check kyosu::pure over octonion",
   TTS_EQUAL(kyosu::ljpart(po), lj);
   TTS_EQUAL(kyosu::lkpart(po), lk);
 };
+
+//======================================================================================================================
+//== Tests for masked kyosu::pure
+//======================================================================================================================
+TTS_CASE_WITH("Check kyosu::pure[cond]",
+              kyosu::simd_real_types,
+              tts::randoms(-10, 10),
+              tts::randoms(-10, 10),
+              tts::randoms(-10, 10),
+              tts::randoms(-10, 10))
+<typename T>(T a0, T a1, T a2, T a3)
+{
+  auto c = kyosu::complex(a0, a1);
+  auto q = kyosu::quaternion_t<T>(a0, a1, a2, a3);
+  auto cond = eve::is_even(eve::iota(eve::as<T>()));
+
+  TTS_EQUAL(kyosu::pure[cond](c), kyosu::if_else(cond, kyosu::pure(c), c));
+  TTS_EQUAL(kyosu::pure[cond](q), kyosu::if_else(cond, kyosu::pure(q), q));
+};
