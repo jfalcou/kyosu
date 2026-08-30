@@ -108,7 +108,7 @@ namespace kyosu::_
       auto prod_2b = gamma_inv_cma * gamma_inv_eps_pm_p1 * gamma_inv_diff_eps(a_pm, eps, notdone);
       auto gide = gamma_inv_diff_eps(cma, -eps, notdone);
       auto gg = gamma_inv_eps_pm_p1 * gamma_inv_a_pm;
-      auto gz = gamma_inv_cma_meps * z_term;
+//      auto gz = gamma_inv_cma_meps * z_term; //TO KILL
       auto prod_2c =
         gamma_inv_eps_pm_p1 * gamma_inv_a_pm * (gamma_inv_diff_eps(cma, -eps, notdone) + gamma_inv_cma_meps * z_term);
 

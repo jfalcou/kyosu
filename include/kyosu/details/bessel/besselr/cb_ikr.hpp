@@ -91,7 +91,7 @@ namespace kyosu::_
           spv = -spv;
         }
       }
-      for (int ii = 0; ii < eve::min(size(cis), an + 1); ++ii) cis[ii] = is[ii];
+      for (int ii = 0; ii < int(eve::min(size(cis), an + 1)); ++ii) cis[ii] = is[ii];
       return is[an];
     };
     return with_alloca<Z>(an + 1, doit);

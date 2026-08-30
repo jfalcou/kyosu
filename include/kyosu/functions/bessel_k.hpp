@@ -129,7 +129,7 @@ namespace kyosu::_
   template<typename N, typename Z, typename KS, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto bessel_k_(KYOSU_DELAY(), O const&, N n, Z z, KS& ks) noexcept
   {
-    constexpr auto Kind = O::contains(kind_2) ? 2 : 1;
+    //    constexpr auto Kind = O::contains(kind_2) ? 2 : 1;
     if constexpr (eve::integral_scalar_value<N>)
     {
       if constexpr (O::contains(eve::spherical))
