@@ -8,45 +8,43 @@
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
-TTS_CASE_WITH("Check kyosu::is_cinf over real", kyosu::real_types, tts::randoms(-10, 10))
+TTS_CASE_WITH("Check kyosu::is_not_cinf over real", kyosu::real_types, tts::randoms(-10, 10))
 (auto data)
 {
-  TTS_EQUAL(kyosu::is_cinf(data), eve::false_(eve::as(data)));
+  TTS_EQUAL(kyosu::is_not_cinf(data), eve::true_(eve::as(data)));
 };
 
-TTS_CASE_WITH("Check kyosu::is_cinf over complex", kyosu::real_types, tts::randoms(-10, 10), tts::randoms(-10, 10))
+TTS_CASE_WITH("Check kyosu::is_not_cinf over complex", kyosu::real_types, tts::randoms(-10, 10), tts::randoms(-10, 10))
 (auto r, auto i)
 {
   using T = kyosu::complex_t<decltype(r)>;
-  TTS_EQUAL(kyosu::is_cinf(kyosu::complex(r, i)), eve::is_infinite(r) && eve::is_nan(i));
+  TTS_EQUAL(kyosu::is_not_cinf(kyosu::complex(r, i)), eve::true_(eve::as(r)));
   auto z(kyosu::nan(eve::as<T>()));
-  TTS_EQUAL(kyosu::is_cinf(z), eve::false_(eve::as(r)));
-  auto zz = kyosu::complex(eve::nan(eve::as(r)), eve::inf(eve::as(r)));
-  TTS_EQUAL(kyosu::is_cinf(zz), eve::true_(eve::as(r)));
+  TTS_EQUAL(kyosu::is_not_cinf(z), eve::true_(eve::as(r)));
+  auto ci(kyosu::cinf(eve::as<T>()));
+  TTS_EQUAL(kyosu::is_not_cinf(ci), eve::false_(eve::as(r)));
 };
 
-TTS_CASE_WITH("Check kyosu::is_cinf over quaternion",
+TTS_CASE_WITH("Check kyosu::is_not_cinf is the complement of kyosu::is_cinf",
               kyosu::real_types,
               tts::randoms(-10, 10),
               tts::randoms(-10, 10),
               tts::randoms(-10, 10),
-              tts::randoms(-10, 10)
-
-)
+              tts::randoms(-10, 10))
 <typename T>(T r, T i, T j, T k)
 {
   using type = kyosu::quaternion_t<T>;
-  auto z(kyosu::cinf(eve::as(r)));
-  TTS_EQUAL(kyosu::is_cinf(type(r, i, j, k)), eve::is_nan(r) && eve::is_nan(i) && eve::is_nan(j) && eve::is_nan(k));
-  TTS_EQUAL(kyosu::is_cinf(z), eve::true_(eve::as(r)));
-  type zz(kyosu::nan(eve::as<type>()));
-  TTS_EQUAL(kyosu::is_cinf(zz), eve::false_(eve::as(r)));
+  auto q = type(r, i, j, k);
+  TTS_EQUAL(kyosu::is_not_cinf(q), !kyosu::is_cinf(q));
+
+  auto ci(kyosu::cinf(eve::as<kyosu::complex_t<T>>()));
+  TTS_EQUAL(kyosu::is_not_cinf(ci), !kyosu::is_cinf(ci));
 };
 
 //======================================================================================================================
-//== Tests for masked kyosu::is_cinf
+//== Tests for masked kyosu::is_not_cinf
 //======================================================================================================================
-TTS_CASE_WITH("Check kyosu::is_cinf[cond]",
+TTS_CASE_WITH("Check kyosu::is_not_cinf[cond]",
               kyosu::simd_real_types,
               tts::randoms(-10, 10),
               tts::randoms(-10, 10),
@@ -58,6 +56,6 @@ TTS_CASE_WITH("Check kyosu::is_cinf[cond]",
   auto q = kyosu::quaternion_t<T>(a0, a1, a2, a3);
   auto cond = eve::is_even(eve::iota(eve::as<T>()));
 
-  TTS_EQUAL(kyosu::is_cinf[cond](c), cond && kyosu::is_cinf(c));
-  TTS_EQUAL(kyosu::is_cinf[cond](q), cond && kyosu::is_cinf(q));
+  TTS_EQUAL(kyosu::is_not_cinf[cond](c), cond && kyosu::is_not_cinf(c));
+  TTS_EQUAL(kyosu::is_not_cinf[cond](q), cond && kyosu::is_not_cinf(q));
 };
