@@ -18,7 +18,7 @@ namespace kyosu
       return KYOSU_CALL(z);
     }
 
-    template<concepts::real V> KYOSU_FORCEINLINE constexpr V operator()(V v) const noexcept { return V{0}; }
+    template<concepts::real V> KYOSU_FORCEINLINE constexpr V operator()(V ) const noexcept { return V{0}; }
 
     KYOSU_CALLABLE_OBJECT(pure_t, pure_);
   };

@@ -78,7 +78,6 @@ namespace kyosu::_
       auto j0 = kyosu::one((eve::as<Z>()));
       auto sm = j0;
       auto test = sqr_abs(sm) >= eps2 * sqr_abs(j0);
-      auto m(eve::one(eve::as<e_t>()));
       auto qz2 = -sqr(z) * u_t(0.25);
       size_t im = 1;
       while (eve::any(test))
@@ -273,7 +272,6 @@ namespace kyosu::_
     using u_t = eve::underlying_type_t<Z>;
     auto twoopi = eve::two_o_pi(eve::as<u_t>());
     auto egamma = eve::egamma(eve::as<u_t>());
-    auto eps = eve::eps(eve::as<u_t>());
     auto bd = bound(z);
     Z s{};
     mkjs jj(2 * bd - 2, z);

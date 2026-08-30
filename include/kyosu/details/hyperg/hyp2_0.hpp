@@ -21,7 +21,6 @@ namespace kyosu::_
   template<typename Z, eve::sized_product_type<2> T1, eve::sized_product_type<0> T2>
   KYOSU_FORCEINLINE auto hyperg(Z z, T1 aa, T2)
   {
-    constexpr int N = 1;
     using r_t = decltype(kumi::get<0>(aa) + kumi::get<1>(aa) + z);
     r_t a1 = kumi::get<0>(aa);
     r_t a2 = kumi::get<1>(aa);

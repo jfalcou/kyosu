@@ -39,7 +39,7 @@ namespace kyosu::_
 
     auto br_anegint = [&]() {
       auto aa = kyosu::if_else(anegint, a, zero);
-      int n = eve::maximum(-real(a));
+      auto n = eve::maximum(-real(a));
       r_t a1(1), s(1);
       for (size_t j = 1; j <= n; ++j)
       {

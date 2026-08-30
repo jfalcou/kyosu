@@ -29,7 +29,6 @@ namespace kyosu::_
     using u_t = eve::underlying_type_t<Z>;
     auto argz = arg(z);
     auto piotwo = eve::pio_2(eve::as<u_t>());
-    auto i = complex(u_t(0), u_t(1));
     auto f = muli(exp_ipi(v / 2));
     auto cpi = piotwo * f;
     auto cmi = piotwo * rec(f);
@@ -71,7 +70,7 @@ namespace kyosu::_
         cb_jr(v, muli(z), is);
         auto v0 = v - an;
         auto vi = v0;
-        for (int ii = 0; ii <= an; ++ii)
+        for (unsigned ii = 0; ii <= an; ++ii)
         {
           auto fac = exp_ipi(-vi / 2);
           vi = inc(vi);

@@ -38,7 +38,7 @@ namespace kyosu::_
     [[maybe_unused]] auto m = eve::nearest(eps_px);
     auto zero_eps = is_eqz(eps);
 
-    auto br_0 = [&](auto test) {
+    auto br_0 = [&](auto ) {
       r_t sum_num = kyosu::zero(kyosu::as<r_t>());
       r_t sum_den(c[0]);
       for (int i = 1; i < 15; ++i)
@@ -64,7 +64,7 @@ namespace kyosu::_
       }
     };
 
-    auto br_1 = [&](auto test, auto rr) {
+    auto br_1 = [&](auto test, auto ) {
       auto [s, c] = kyosu::sinpicospi(eps);
       auto term = s * kyosu::cotpi(z - n);
       auto t1_eps_z = (c + term) * gamma_ratio_diff_small_eps(kyosu::oneminus(z), -eps, notdone && !test);
