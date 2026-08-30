@@ -86,15 +86,14 @@ namespace kyosu::_
   {
     using u_t = eve::underlying_type_t<Z>;
     auto third = eve::third(as<u_t>());
-    auto invpi = eve::inv_pi(as<u_t>());
     auto br_im_eq_0 = [](auto z) { return Z(eve::airy_bi(real(z))); };
 
-    auto br_re_lt_0 = [third, invpi](auto z) {
+    auto br_re_lt_0 = [third](auto z) {
       auto zet = 2 * pow(-z, u_t(1.5)) / 3;
       return (cb_jr(-third, zet) - cb_jr(third, zet)) * sqrt(-z / 3);
     };
 
-    auto br_re_gt_0 = [third, invpi](auto z) {
+    auto br_re_gt_0 = [third](auto z) {
       auto zet = 2 * pow(z, u_t(1.5)) / 3;
       return sqrt(z / 3) * (cb_ir(third, zet) + cb_ir(-third, zet));
     };

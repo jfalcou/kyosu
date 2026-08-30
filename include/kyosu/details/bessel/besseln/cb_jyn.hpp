@@ -42,7 +42,7 @@ namespace kyosu::_
 
   template<typename Z> struct mkjs
   {
-    mkjs(size_t n, Z z) : rz(kyosu::rec(z)), rs(kyosu::_::R(n, z)), j(cb_jn(n, z)), i(n - 1) {}
+    mkjs(int n, Z z) : rz(kyosu::rec(z)), rs(kyosu::_::R(n, z)), j(cb_jn(n, z)), i(n - 1) {}
 
     auto operator()()
     {
@@ -272,7 +272,7 @@ namespace kyosu::_
     using u_t = eve::underlying_type_t<Z>;
     auto twoopi = eve::two_o_pi(eve::as<u_t>());
     auto egamma = eve::egamma(eve::as<u_t>());
-    auto bd = bound(z);
+    int bd = bound(z);
     Z s{};
     mkjs jj(2 * bd - 2, z);
     auto sgn = eve::sign_alternate(u_t(bd + 1));
@@ -427,7 +427,7 @@ namespace kyosu::_
       auto forwardj = [n, rz, &cjv](auto z) {
         auto bkm2 = cjv[0];
         auto bkm1 = cjv[1];
-        Z bnext;
+
         for (int kk = 2; kk <= n; ++kk)
         {
           auto bk = 2 * (kk - 1) * rz * bkm1 - bkm2;
@@ -443,7 +443,7 @@ namespace kyosu::_
         return cjv[n];
       };
 
-      auto backwardj = [az, nn, n, &cjv](auto z) {
+      auto backwardj = [az, n, &cjv](auto z) {
         auto j0 = cjv[0];
         auto j1 = cjv[1];
         ;
@@ -471,25 +471,6 @@ namespace kyosu::_
         return cjv[n];
       };
 
-      auto forwardy = [rz, az, n, nn, &cjv, &cyv](auto z) {
-        auto y = cyv[0];
-        if (nn != 0)
-        {
-          int n = eve::abs(nn);
-          using u_t = eve::underlying_type_t<Z>;
-          auto twoopi = eve::two_o_pi(eve::as<u_t>());
-          auto b = twoopi * rz;
-          for (int ii = 1; ii <= n; ++ii)
-          {
-            y = fms(cjv[ii], y, b) / cjv[ii - 1];
-            auto r = if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), y);
-            cyv[ii] = r;
-          }
-          return cyv[n];
-        }
-        else return y;
-      };
-
       // compute j2...jn for real(z) > 0
       auto r = kyosu::if_else(is_eqz(az), Z(0), eve::nan(eve::as(az)));
       auto notdone = kyosu::is_nan(r);
@@ -503,7 +484,6 @@ namespace kyosu::_
       }
 
       // compute y2...yn for real(z) > 0
-      auto y = forwardy(z);
 
       if (eve::any(rzle0))
       {
@@ -538,6 +518,7 @@ namespace kyosu::_
       }
       return kumi::tuple{cjv[n], cyv[n]};
     }
+    return kumi::tuple{Z(), Z()};
   }
 
   //===-------------------------------------------------------------------------------------------

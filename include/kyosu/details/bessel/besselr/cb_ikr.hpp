@@ -47,7 +47,8 @@ namespace kyosu::_
     auto n = std::size_t(v); //n>= 0
     auto v0 = v - n;
     auto vi = v0;
-    for (int jj = 0; jj < eve::min(size_t(n + 1), size(ks)); ++jj)
+    int s = eve::min(size_t(n + 1), size(ks));
+    for (int jj = 0; jj < s; ++jj)
     {
       ks[jj] = cb_kr(vi, z);
       vi = eve::inc(vi);
