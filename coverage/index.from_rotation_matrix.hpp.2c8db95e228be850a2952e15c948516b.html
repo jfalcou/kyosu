@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-08-30 17:29:47</td>
+      <td>2026-08-30 21:46:10</td>
     </tr>
   </table>
 </div>
@@ -73,7 +73,7 @@
       <th>Call count</th>
       <th>Block coverage</th>
     </tr>
-    <tr><td><a href="#l19">kyosu::as_cayley_dickson_n&lt;4u, float&gt;::type kyosu::from_rotation_matrix_t&lt;eve::options&lt;rbr::settings&lt;&gt; &gt; &gt;::operator()&lt;float&gt;(std::array&lt;std::array&lt;float, 3ul&gt;, 3ul&gt; const&amp;) const (line 19)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
+    <tr><td><a href="#l18">kyosu::as_cayley_dickson_n&lt;4u, float&gt;::type kyosu::from_rotation_matrix_t&lt;eve::options&lt;rbr::settings&lt;&gt; &gt; &gt;::operator()&lt;float&gt;(std::array&lt;std::array&lt;float, 3ul&gt;, 3ul&gt; const&amp;) const (line 18)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
   </table>
 </details>
 
@@ -191,490 +191,490 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">from_rotation_matrix_t</span></td>
+      <td class="src "><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">from_rotation_matrix_t</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">callable</span><span class="o">&lt;</span><span class="n">from_rotation_matrix_t</span><span class="p">,</span><span class="w"> </span><span class="n">Options</span><span class="p">,</span><span class="w"> </span><span class="n">raw_option</span><span class="p">,</span><span class="w"> </span><span class="n">pedantic_option</span><span class="o">&gt;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l16" href="#l16">16</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">elementwise_callable</span><span class="o">&lt;</span><span class="n">from_rotation_matrix_t</span><span class="p">,</span><span class="w"> </span><span class="n">Options</span><span class="p">,</span><span class="w"> </span><span class="n">raw_option</span><span class="p">,</span><span class="w"> </span><span class="n">pedantic_option</span><span class="o">&gt;</span></td>
+      <td class="src "><span class="w">  </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l17" href="#l17">17</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="p">{</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l18" href="#l18">18</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l19" href="#l19">19</a></td>
+      <td class="lineno"><a id="l18" href="#l18">18</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">    </span><span class="n">KYOSU_FORCEINLINE</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">quaternion_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l20" href="#l20">20</a></td>
+      <td class="lineno"><a id="l19" href="#l19">19</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l21" href="#l21">21</a></td>
+      <td class="lineno"><a id="l20" href="#l20">20</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">r11pr22</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l22" href="#l22">22</a></td>
+      <td class="lineno"><a id="l21" href="#l21">21</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">qq0m1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r11pr22</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l23" href="#l23">23</a></td>
+      <td class="lineno"><a id="l22" href="#l22">22</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">qq1m1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r11pr22</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l24" href="#l24">24</a></td>
+      <td class="lineno"><a id="l23" href="#l23">23</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">r11mr22</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l25" href="#l25">25</a></td>
+      <td class="lineno"><a id="l24" href="#l24">24</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">qq2m1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r11mr22</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l26" href="#l26">26</a></td>
+      <td class="lineno"><a id="l25" href="#l25">25</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">qq3m1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r11mr22</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l27" href="#l27">27</a></td>
+      <td class="lineno"><a id="l26" href="#l26">26</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l28" href="#l28">28</a></td>
+      <td class="lineno"><a id="l27" href="#l27">27</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">r21mr12</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l29" href="#l29">29</a></td>
+      <td class="lineno"><a id="l28" href="#l28">28</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">r02mr20</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l30" href="#l30">30</a></td>
+      <td class="lineno"><a id="l29" href="#l29">29</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">r10mr01</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l31" href="#l31">31</a></td>
+      <td class="lineno"><a id="l30" href="#l30">30</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">r01pr10</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l32" href="#l32">32</a></td>
+      <td class="lineno"><a id="l31" href="#l31">31</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">r20pr02</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l33" href="#l33">33</a></td>
+      <td class="lineno"><a id="l32" href="#l32">32</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">r12pr21</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l34" href="#l34">34</a></td>
+      <td class="lineno"><a id="l33" href="#l33">33</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l35" href="#l35">35</a></td>
+      <td class="lineno"><a id="l34" href="#l34">34</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">half</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">as</span><span class="p">(</span><span class="n">r11pr22</span><span class="p">));</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l36" href="#l36">36</a></td>
+      <td class="lineno"><a id="l35" href="#l35">35</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">q0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">if_else</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">is_gtz</span><span class="p">(</span><span class="n">qq0m1</span><span class="p">),</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">inc</span><span class="p">(</span><span class="n">qq0m1</span><span class="p">),</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l37" href="#l37">37</a></td>
+      <td class="lineno"><a id="l36" href="#l36">36</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">                                       </span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">sqr</span><span class="p">(</span><span class="n">r21mr12</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sqr</span><span class="p">(</span><span class="n">r02mr20</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sqr</span><span class="p">(</span><span class="n">r10mr01</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">qq0m1</span><span class="p">)))</span><span class="w"> </span><span class="o">*</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l38" href="#l38">38</a></td>
+      <td class="lineno"><a id="l37" href="#l37">37</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">                </span><span class="n">h</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l39" href="#l39">39</a></td>
+      <td class="lineno"><a id="l38" href="#l38">38</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">q1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">if_else</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">is_gtz</span><span class="p">(</span><span class="n">qq1m1</span><span class="p">),</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">inc</span><span class="p">(</span><span class="n">qq1m1</span><span class="p">),</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l40" href="#l40">40</a></td>
+      <td class="lineno"><a id="l39" href="#l39">39</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">                                       </span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">sqr</span><span class="p">(</span><span class="n">r21mr12</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sqr</span><span class="p">(</span><span class="n">r01pr10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sqr</span><span class="p">(</span><span class="n">r20pr02</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">qq1m1</span><span class="p">)))</span><span class="w"> </span><span class="o">*</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l41" href="#l41">41</a></td>
+      <td class="lineno"><a id="l40" href="#l40">40</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">                </span><span class="n">h</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l42" href="#l42">42</a></td>
+      <td class="lineno"><a id="l41" href="#l41">41</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">q2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">if_else</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">is_gtz</span><span class="p">(</span><span class="n">qq2m1</span><span class="p">),</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">inc</span><span class="p">(</span><span class="n">qq2m1</span><span class="p">),</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l43" href="#l43">43</a></td>
+      <td class="lineno"><a id="l42" href="#l42">42</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">                                       </span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">sqr</span><span class="p">(</span><span class="n">r02mr20</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sqr</span><span class="p">(</span><span class="n">r01pr10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sqr</span><span class="p">(</span><span class="n">r12pr21</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">qq2m1</span><span class="p">)))</span><span class="w"> </span><span class="o">*</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l44" href="#l44">44</a></td>
+      <td class="lineno"><a id="l43" href="#l43">43</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">                </span><span class="n">h</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l45" href="#l45">45</a></td>
+      <td class="lineno"><a id="l44" href="#l44">44</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">q3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">if_else</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">is_gtz</span><span class="p">(</span><span class="n">qq3m1</span><span class="p">),</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">inc</span><span class="p">(</span><span class="n">qq3m1</span><span class="p">),</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l46" href="#l46">46</a></td>
+      <td class="lineno"><a id="l45" href="#l45">45</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">                                       </span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">sqr</span><span class="p">(</span><span class="n">r10mr01</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sqr</span><span class="p">(</span><span class="n">r20pr02</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">sqr</span><span class="p">(</span><span class="n">r12pr21</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">qq3m1</span><span class="p">)))</span><span class="w"> </span><span class="o">*</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l47" href="#l47">47</a></td>
+      <td class="lineno"><a id="l46" href="#l46">46</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">                </span><span class="n">h</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l48" href="#l48">48</a></td>
+      <td class="lineno"><a id="l47" href="#l47">47</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">1</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">quaternion</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span><span class="w"> </span><span class="n">q1</span><span class="p">,</span><span class="w"> </span><span class="n">q2</span><span class="p">,</span><span class="w"> </span><span class="n">q3</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l49" href="#l49">49</a></td>
+      <td class="lineno"><a id="l48" href="#l48">48</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l50" href="#l50">50</a></td>
+      <td class="lineno"><a id="l49" href="#l49">49</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l51" href="#l51">51</a></td>
+      <td class="lineno"><a id="l50" href="#l50">50</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="n">KYOSU_CALLABLE_OBJECT</span><span class="p">(</span><span class="n">from_rotation_matrix_t</span><span class="p">,</span><span class="w"> </span><span class="n">from_rotation_matrix_</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l52" href="#l52">52</a></td>
+      <td class="lineno"><a id="l51" href="#l51">51</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="p">};</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l53" href="#l53">53</a></td>
+      <td class="lineno"><a id="l52" href="#l52">52</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l54" href="#l54">54</a></td>
+      <td class="lineno"><a id="l53" href="#l53">53</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//================================================================================================</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l55" href="#l55">55</a></td>
+      <td class="lineno"><a id="l54" href="#l54">54</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//! @addtogroup quaternion</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l56" href="#l56">56</a></td>
+      <td class="lineno"><a id="l55" href="#l55">55</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//! @{</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l57" href="#l57">57</a></td>
+      <td class="lineno"><a id="l56" href="#l56">56</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//! @var from_rotation_matrix</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l58" href="#l58">58</a></td>
+      <td class="lineno"><a id="l57" href="#l57">57</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l59" href="#l59">59</a></td>
+      <td class="lineno"><a id="l58" href="#l58">58</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//! @brief Callable object computing a quaternion from its rotation_matrix representation.</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l60" href="#l60">60</a></td>
+      <td class="lineno"><a id="l59" href="#l59">59</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l61" href="#l61">61</a></td>
+      <td class="lineno"><a id="l60" href="#l60">60</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//!  This function returns a quaternion associated to the input rotation matrix m.</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l62" href="#l62">62</a></td>
+      <td class="lineno"><a id="l61" href="#l61">61</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//!  If m is not a proper 3x3 rotation matrix (i.e an orthogonal matrix with determinant 1)</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l63" href="#l63">63</a></td>
+      <td class="lineno"><a id="l62" href="#l62">62</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//!  the result is undefined.</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l64" href="#l64">64</a></td>
+      <td class="lineno"><a id="l63" href="#l63">63</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l65" href="#l65">65</a></td>
+      <td class="lineno"><a id="l64" href="#l64">64</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//! @groupheader{Header file}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l66" href="#l66">66</a></td>
+      <td class="lineno"><a id="l65" href="#l65">65</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l66" href="#l66">66</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   @code</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l67" href="#l67">67</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   @code</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   #include kyosu/quaternion.hpp&gt;`</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l68" href="#l68">68</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   #include kyosu/quaternion.hpp&gt;`</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   @endcode</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l69" href="#l69">69</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   @endcode</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l70" href="#l70">70</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   @groupheader{Callable Signatures}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l71" href="#l71">71</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   @groupheader{Callable Signatures}</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l72" href="#l72">72</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   @code</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l73" href="#l73">73</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   @code</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   namespace eve</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l74" href="#l74">74</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   namespace eve</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   {</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l75" href="#l75">75</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   {</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!      template &lt; typename M &gt;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l76" href="#l76">76</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!      template &lt; typename M &gt;</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!      auto from_rotation_matrix(auto m) const noexcept</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l77" href="#l77">77</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!      auto from_rotation_matrix(auto m) const noexcept</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   }</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l78" href="#l78">78</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   }</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   @endcode</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l79" href="#l79">79</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   @endcode</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l80" href="#l80">80</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//! **Parameters**</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l81" href="#l81">81</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//! **Parameters**</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l82" href="#l82">82</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!  * `m` the rotation matrix. The actual implementation assumes that m[i][j] will return</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l83" href="#l83">83</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!  * `m` the rotation matrix. The actual implementation assumes that m[i][j] will return</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!        the ith line and jth column element of the matrix (indices starting from 0).</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l84" href="#l84">84</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!        the ith line and jth column element of the matrix (indices starting from 0).</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l85" href="#l85">85</a></td>
@@ -688,136 +688,129 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   The computation method is inspired from the article: &quot;Accurate Computation of</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l87" href="#l87">87</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   The computation method is inspired from the article: &quot;Accurate Computation of</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   Quaternions from Rotation Matrices&quot;,  by   Soheil Sarabandi and Federico Thomas</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l88" href="#l88">88</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   Quaternions from Rotation Matrices&quot;,  by   Soheil Sarabandi and Federico Thomas</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   Institut de Robotica i Informatica Industrial (CSIC-UPC)</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l89" href="#l89">89</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   Institut de Robotica i Informatica Industrial (CSIC-UPC)</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!   Llorens Artigas 4-6, 08028 Barcelona, Spain.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l90" href="#l90">90</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!   Llorens Artigas 4-6, 08028 Barcelona, Spain.</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l91" href="#l91">91</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//! **Return value**</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l92" href="#l92">92</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//! **Return value**</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l93" href="#l93">93</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!    an unitary quaternion representing the rotation</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l94" href="#l94">94</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!    an unitary quaternion representing the rotation</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l95" href="#l95">95</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!  @groupheader{Example}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l96" href="#l96">96</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!  @groupheader{Example}</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l97" href="#l97">97</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//!</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//! @godbolt{doc/from_rotation_matrix.cpp}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l98" href="#l98">98</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//! @godbolt{doc/from_rotation_matrix.cpp}</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//======================================================================================================================</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l99" href="#l99">99</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//======================================================================================================================</span></td>
+      <td class="src "><span class="w">  </span><span class="kr">inline</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">from_rotation_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">functor</span><span class="o">&lt;</span><span class="n">from_rotation_matrix_t</span><span class="o">&gt;</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l100" href="#l100">100</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="kr">inline</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">from_rotation_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">functor</span><span class="o">&lt;</span><span class="n">from_rotation_matrix_t</span><span class="o">&gt;</span><span class="p">;</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//======================================================================================================================</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l101" href="#l101">101</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//======================================================================================================================</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//! @}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l102" href="#l102">102</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//! @}</span></td>
+      <td class="src "><span class="w">  </span><span class="c1">//======================================================================================================================</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l103" href="#l103">103</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="c1">//======================================================================================================================</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l104" href="#l104">104</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
       <td class="src "><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l105" href="#l105">105</a></td>
+      <td class="lineno"><a id="l104" href="#l104">104</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
