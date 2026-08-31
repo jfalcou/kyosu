@@ -13,6 +13,7 @@ option( KYOSU_BUILD_TEST          "Build tests for KYOSU"   ON  )
 option( KYOSU_BUILD_DOCUMENTATION "Build Doxygen for KYOSU" OFF )
 option( KYOSU_ENABLE_SANITIZERS   "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF )
 option( KYOSU_ENABLE_COVERAGE     "Build tests with code coverage instrumentation"                 OFF )
+option( KYOSU_BUILD_DEMOS         "Build the interactive demos"                                    OFF )
 
 ##======================================================================================================================
 ## Project setup via copacabana
@@ -32,6 +33,7 @@ if(NOT KYOSU_QUIET)
   message(STATUS "[${PROJECT_NAME}] - Doxygen    : ${KYOSU_BUILD_DOCUMENTATION} (via KYOSU_BUILD_DOCUMENTATION)")
   message(STATUS "[${PROJECT_NAME}] - Sanitizers : ${KYOSU_ENABLE_SANITIZERS} (via KYOSU_ENABLE_SANITIZERS)")
   message(STATUS "[${PROJECT_NAME}] - Coverage   : ${KYOSU_ENABLE_COVERAGE} (via KYOSU_ENABLE_COVERAGE)")
+  message(STATUS "[${PROJECT_NAME}] - Demos      : ${KYOSU_BUILD_DEMOS} (via KYOSU_BUILD_DEMOS)")
   set(QUIET_OPTION "")
 else()
   set(QUIET_OPTION "QUIET")
@@ -77,4 +79,11 @@ if(KYOSU_BUILD_TEST)
   if(KYOSU_ENABLE_COVERAGE)
     copa_setup_coverage(kyosu_docs)
   endif()
+endif()
+
+##======================================================================================================================
+## Demos setup - they open a window, so no CI job builds them
+##======================================================================================================================
+if(KYOSU_BUILD_DEMOS)
+  include(${PROJECT_SOURCE_DIR}/demo/demos.cmake)
 endif()

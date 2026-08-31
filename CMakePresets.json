@@ -38,6 +38,9 @@
     { "name": "gcc-coverage"   , "inherits": ["gcc"  , "coverage"] },
     { "name": "clang-coverage" , "inherits": ["clang", "coverage"] },
 
+    { "name": "gcc-demos"    , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++-15"    , "KYOSU_BUILD_DEMOS": "ON", "KYOSU_BUILD_TEST": "OFF" } },
+    { "name": "clang-demos"  , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++-20", "KYOSU_BUILD_DEMOS": "ON", "KYOSU_BUILD_TEST": "OFF" } },
+
     { "name": "gcc-bench"    , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++-15"    , "CMAKE_CXX_FLAGS": "-mavx2 -mfma" } },
     { "name": "clang-bench"  , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++-20", "CMAKE_CXX_FLAGS": "-mavx2 -mfma" } },
 
