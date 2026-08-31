@@ -13,7 +13,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct acsch_t : eve::elementwise_callable<acsch_t, Options, raw_option, pedantic_option>
+  template<typename Options>
+  struct acsch_t : kyosu::promoting_elementwise_callable<acsch_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept

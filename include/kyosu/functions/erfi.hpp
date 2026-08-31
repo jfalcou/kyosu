@@ -14,7 +14,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct erfi_t : eve::elementwise_callable<erfi_t, Options, raw_option, pedantic_option>
+  template<typename Options>
+  struct erfi_t : kyosu::promoting_elementwise_callable<erfi_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
