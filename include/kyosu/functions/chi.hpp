@@ -68,7 +68,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, typename B, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto chi_(KYOSU_DELAY(), O const& o, Z z, B const& b) noexcept
+  KYOSU_FORCEINLINE constexpr auto chi_(KYOSU_DELAY(), O const&, Z z, B const& b) noexcept
   {
     return kyosu::if_else(b(z), one(as(z)), zero);
   }

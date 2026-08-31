@@ -44,7 +44,7 @@ namespace kyosu::_
     auto br_abnegint = [&]() {
       auto aa = kyosu::if_else(anegint, a, zero);
       auto bb = kyosu::if_else(bnegint, b, zero);
-      int n = eve::maximum(-real(a), -real(b));
+      auto n = eve::maximum(-real(a), -real(b));
       r_t a1(1), s(1);
       for (size_t j = 1; j <= n; ++j)
       {

@@ -1,5 +1,5 @@
 // revision 1
-#include <eve/module/elliptic.hpp>
+#include <kyosu/kyosu.hpp>
 #include <iostream>
 
 using wide_t = eve::wide<double, eve::fixed<4>>;

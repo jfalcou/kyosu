@@ -38,8 +38,8 @@ namespace kyosu::_
     auto br_conegint = [&]() { return kyosu::cinf(eve::as<r_t>()); };
 
     auto br_anegint = [&]() {
-      auto aa = kyosu::if_else(anegint, a, zero);
-      int n = eve::maximum(-real(a));
+      // ?? auto aa = kyosu::if_else(anegint, a, zero);
+      auto n = eve::maximum(-real(a));
       r_t a1(1), s(1);
       for (size_t j = 1; j <= n; ++j)
       {
@@ -85,8 +85,8 @@ namespace kyosu::_
           notdone = last_interval(br_zero, notdone, r, notdone);
         }
       }
-      return r;
     }
+    return r;
   }
 
   template<typename Z, eve::sized_product_type<1> T1, eve::sized_product_type<2> T2>

@@ -30,17 +30,16 @@ namespace kyosu::_
 
     using r_t = Z;
     using u_t = eve::underlying_type_t<r_t>;
-    auto cinf = kyosu::cinf(as<r_t>());
+
     u_t five = 5;
-    u_t thresh = u_t(1.0e-5);
-    u_t spv = 10 * eve::smallestposval(eve::as<u_t>());
+
     auto na = eve::nearest(re_a);
     auto nb = eve::nearest(re_b);
     auto nc = eve::nearest(re_c);
 
     auto is_a_neg_int = (a == na) && eve::is_lez(na);
     auto is_b_neg_int = (b == nb) && eve::is_lez(nb);
-    auto is_c_neg_int = (c == nc) && eve::is_lez(nc);
+
     r_t zm1 = dec(z);
     auto z_is_one = (z == kyosu::one(as(z)));
     r_t z_over_zm1 = z / zm1;
@@ -96,11 +95,11 @@ namespace kyosu::_
                      r);
     };
 
-    auto br_small_zm1 = [&](auto test, auto zm1) { // zm1 < thresh
-      auto tzm1 = kyosu::if_else(test, zm1, thresh / 2);
-      r = if_else(notdone && test, hyp_ps_one(a, b, c, -tzm1), r);
-      return r;
-    };
+    //     auto br_small_zm1 = [&](auto test, auto zm1) { // zm1 < thresh
+    //       auto tzm1 = kyosu::if_else(test, zm1, thresh / 2);
+    //       r = if_else(notdone && test, hyp_ps_one(a, b, c, -tzm1), r);
+    //       return r;
+    //     };
 
     auto br_rest = [&]() {
       auto abs_zm1 = abs(zm1);
@@ -113,37 +112,36 @@ namespace kyosu::_
       auto are_abc_small = are_ac_small && (kyosu::linfnorm(b) < five);
       auto are_a_cmb_c_small = are_ac_small && is_cmb_small;
 
-      auto br_R1 = [&](auto test, auto RR) { // (abs_z <= RR)
-        auto zt = kyosu::if_else(test, z, zero);
+      auto br_R1 = [&](auto test, auto) { // (abs_z <= RR)
         r = if_else(test && notdone, hyp_ps_zero(a, b, c, z, test && notdone && test), r);
         return r;
       };
 
-      auto br_R2 = [&](auto test, auto RR) { // (is_cmb_small && (abs_z_over_zm1 <= RR))
+      auto br_R2 = [&](auto test, auto) { // (is_cmb_small && (abs_z_over_zm1 <= RR))
         auto zt = kyosu::if_else(test, z, zero);
         r = if_else(notdone && test, kyosu::pow(-zm1, -a) * hyp_ps_zero(a, c - b, c, zt / dec(zt), notdone && test), r);
         return r;
       };
 
-      auto br_R3 = [&](auto test, auto RR) { // (abs_z_inv <= R)
+      auto br_R3 = [&](auto test, auto) { // (abs_z_inv <= R)
         auto zt = kyosu::if_else(test, z, kyosu::nan(as(z)));
         r = if_else(notdone && test, hyp_ps_infinity(a, b, c, zt, notdone && test), r);
         return r;
       };
 
-      auto br_R4 = [&](auto test, auto RR) { // (is_cmb_small && (abs_zm1_over_z <= R))
+      auto br_R4 = [&](auto test, auto) { // (is_cmb_small && (abs_zm1_over_z <= R))
         auto z_over_zm1t = kyosu::if_else(test, z_over_zm1, u_t(0.5));
         r = if_else(notdone && test, pow(-zm1, -a) * hyp_ps_infinity(a, c - b, c, z_over_zm1t, notdone && test), r);
         return r;
       };
 
-      auto br_R5 = [&](auto test, auto RR) { // (are_abc_small && (abs_zm1 <= R))
+      auto br_R5 = [&](auto test, auto) { // (are_abc_small && (abs_zm1 <= R))
         auto zm1t = kyosu::if_else(test, zm1, u_t(0.4));
         r = if_else(notdone && test, hyp_ps_one(a, b, c, -zm1t), r);
         return r;
       };
 
-      auto br_R6 = [&](auto test, auto RR) { // (are_a_cmb_c_small && (abs_zm1_inv <= R))
+      auto br_R6 = [&](auto test, auto) { // (are_a_cmb_c_small && (abs_zm1_inv <= R))
         auto zm1t = kyosu::if_else(test, zm1, u_t(3.0));
         r = if_else(notdone && test, hyp_ps_one(a, b, c, -kyosu::rec(zm1t)), r);
         return r;

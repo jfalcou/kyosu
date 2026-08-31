@@ -108,7 +108,7 @@ namespace kyosu::_
   }
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto agd_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  KYOSU_FORCEINLINE constexpr auto agd_(KYOSU_DELAY(), O const&, Z z, K k) noexcept
   requires(!O::contains(real_only))
   {
     using e_t = eve::element_type_t<decltype(real(z))>;
@@ -117,7 +117,7 @@ namespace kyosu::_
   }
 
   template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto agd_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  KYOSU_FORCEINLINE constexpr auto agd_(KYOSU_DELAY(), C const& cx, O const&, Z z, K... k) noexcept
   requires(!O::contains(real_only))
   {
     return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), agd(z, k...));

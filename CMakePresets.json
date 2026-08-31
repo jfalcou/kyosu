@@ -31,6 +31,9 @@
     { "name": "clang"        , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++-20", "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE"        } },
     { "name": "clang-avx2"   , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++-20", "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE -mavx2" } },
 
+    { "name": "no-pch"       , "hidden": true, "cacheVariables": { "KYOSU_USE_PCH": "OFF" } },
+    { "name": "gcc-no-pch"     , "inherits": ["gcc"  , "no-pch"] },
+
     { "name": "sanitize"     , "hidden": true, "cacheVariables": { "KYOSU_ENABLE_SANITIZERS": "ON" } },
     { "name": "coverage"     , "hidden": true, "cacheVariables": { "KYOSU_ENABLE_COVERAGE": "ON", "CMAKE_DEFAULT_BUILD_TYPE": "Debug" } },
     { "name": "gcc-sanitize"   , "inherits": ["gcc"  , "sanitize"] },
@@ -61,6 +64,7 @@
     { "name": "gcc-avx2"          , "inherits": "base-build", "configurePreset": "gcc-avx2"           },
     { "name": "clang"             , "inherits": "base-build", "configurePreset": "clang"              },
     { "name": "clang-avx2"        , "inherits": "base-build", "configurePreset": "clang-avx2"         },
+    { "name": "gcc-no-pch"        , "inherits": "base-build", "configurePreset": "gcc-no-pch"        },
     { "name": "gcc-sanitize"      , "inherits": "base-build", "configurePreset": "gcc-sanitize"      },
     { "name": "clang-sanitize"    , "inherits": "base-build", "configurePreset": "clang-sanitize"    },
     { "name": "gcc-coverage"      , "inherits": "base-build", "configurePreset": "gcc-coverage"      },
@@ -76,6 +80,7 @@
     { "name": "gcc-avx2"          , "inherits": "base-test", "configurePreset": "gcc-avx2"           },
     { "name": "clang"             , "inherits": "base-test", "configurePreset": "clang"              },
     { "name": "clang-avx2"        , "inherits": "base-test", "configurePreset": "clang-avx2"         },
+    { "name": "gcc-no-pch"        , "inherits": "base-test", "configurePreset": "gcc-no-pch"        },
     { "name": "gcc-sanitize"      , "inherits": "base-test", "configurePreset": "gcc-sanitize"      },
     { "name": "clang-sanitize"    , "inherits": "base-test", "configurePreset": "clang-sanitize"    },
     { "name": "gcc-coverage"      , "inherits": "base-test", "configurePreset": "gcc-coverage"      },

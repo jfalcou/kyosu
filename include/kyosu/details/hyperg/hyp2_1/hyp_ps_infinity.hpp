@@ -33,7 +33,6 @@ namespace kyosu::_
     r_t eps_pa_mc_p1_pm = eps + a_mc_p1_pm;
     r_t pi_eps = eve::pi(eve::as<u_t>()) * eps;
     r_t eps_pa_pm = eps_pa + m;
-    r_t eps_pm = eps + m;
     r_t gamma_c = kyosu::tgamma(c);
     r_t gamma_inv_eps_pa_pm = kyosu::tgamma_inv(eps_pa_pm);
     r_t gamma_inv_cma = kyosu::tgamma_inv(cma);
@@ -95,7 +94,7 @@ namespace kyosu::_
       auto n_p1_meps = one_meps + n;
       auto eps_pa_pm_pn = eps_pa_pm + n;
       auto eps_pa_mc_p1_pm_pn = eps_pa_mc_p1_pm + n;
-      auto eps_pm_pn = eps_pm + n;
+      //      auto eps_pm_pn = eps_pm + n; //TO KILL
       auto prod1 = eps_pa_pm_pn * eps_pa_mc_p1_pm_pn;
       auto prod2 = eps_pm_p1_pn * n_p1;
       auto prod3 = a_pm_pn * a_mc_p1_pm_pn;

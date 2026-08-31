@@ -82,7 +82,6 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto tricomi_(KYOSU_DELAY(), O const&, Z z, T1 a, T2 b) noexcept
   {
     using r_t = as_cayley_dickson_t<complexify_t<Z>, T1, T2>;
-    using er_t = eve::element_type_t<r_t>;
     using u_t = eve::element_type_t<as_real_type_t<r_t>>;
     r_t aa(a);
     r_t bb(b);
@@ -119,7 +118,7 @@ namespace kyosu::_
         for (size_t k = 1; k <= Maxit; ++k)
         {
           fac *= (ak / ((n + k - 1) * k)) * zz;
-          auto rk = kyosu::rec(u_t(k));
+          //          auto rk = kyosu::rec(u_t(k));
           daa += kyosu::rec(haa++);
           d1 += eve::rec(h1++);
           dn += kyosu::rec(hn++);

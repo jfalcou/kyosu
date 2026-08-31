@@ -21,7 +21,6 @@ namespace kyosu::_
   template<typename Z, eve::sized_product_type<2> T1, eve::sized_product_type<0> T2>
   KYOSU_FORCEINLINE auto hyperg(Z z, T1 aa, T2)
   {
-    constexpr int N = 1;
     using r_t = decltype(kumi::get<0>(aa) + kumi::get<1>(aa) + z);
     r_t a1 = kumi::get<0>(aa);
     r_t a2 = kumi::get<1>(aa);
@@ -34,7 +33,6 @@ namespace kyosu::_
     auto br_convergent = [&]() {
       ra1 = kyosu::if_else(convergent, ra1, zero);
       ra2 = kyosu::if_else(convergent, ra2, zero);
-      using u_t = eve::underlying_type_t<r_t>;
       auto n = int(eve::maximum(eve::max(-ra1, -ra2)));
       r_t a(1), s(1);
       for (int j = 0; j <= n;)
@@ -65,7 +63,7 @@ namespace kyosu::_
       {
         notdone = last_interval(br_rest, notdone, r);
       }
-      return r;
     }
+    return r;
   }
 }

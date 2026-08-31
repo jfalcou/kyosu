@@ -133,7 +133,7 @@ namespace kyosu::_
   }
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  KYOSU_FORCEINLINE constexpr auto acosh_(KYOSU_DELAY(), O const&, Z z, K k) noexcept
   requires(!O::contains(real_only))
   {
     using e_t = eve::element_type_t<decltype(real(z))>;

@@ -100,7 +100,7 @@ namespace kyosu::_
   }
 
   template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto rsqrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  KYOSU_FORCEINLINE constexpr auto rsqrt_(KYOSU_DELAY(), C const& cx, O const&, Z z, K... k) noexcept
   requires(!O::contains(real_only))
   {
     return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), rsqrt(z, k...));

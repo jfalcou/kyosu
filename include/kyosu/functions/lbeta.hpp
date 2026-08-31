@@ -111,7 +111,7 @@ namespace kyosu::_
   }
 
   template<concepts::real Z0, concepts::real Z1, eve::value... K, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto lbeta_(KYOSU_DELAY(), C const& cx, O const& o, Z0 z0, Z1 z1, K... k) noexcept
+  KYOSU_FORCEINLINE constexpr auto lbeta_(KYOSU_DELAY(), C const& cx, O const&, Z0 z0, Z1 z1, K... k) noexcept
   requires(!O::contains(real_only))
   {
     return eve::_::mask_op(cx, eve::_::return_2nd, complex(z0), lbeta(z0, z1, k...));

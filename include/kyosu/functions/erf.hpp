@@ -102,7 +102,6 @@ namespace kyosu::_
   template<typename Z, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto erf_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
-    using r_t = eve::underlying_type_t<Z>;
     if constexpr (concepts::real<Z>) return eve::erf(z);
     else if constexpr (concepts::complex<Z>)
     {

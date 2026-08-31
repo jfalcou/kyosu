@@ -103,7 +103,7 @@ namespace kyosu::_
   }
 
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
-  EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), C const& cond, O const& o, T0 const& v0, Ts const&... vs) noexcept
+  EVE_FORCEINLINE constexpr auto add_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
   {
     using r_t = as_cayley_dickson_t<T0, Ts...>;
     return eve::_::mask_op(cond, eve::_::return_2nd, r_t(v0), add(v0, vs...));

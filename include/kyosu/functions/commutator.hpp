@@ -73,8 +73,8 @@ namespace kyosu::_
   template<typename Z0, typename Z1, eve::callable_options O>
   KYOSU_FORCEINLINE constexpr auto commutator_(KYOSU_DELAY(), O const&, Z0 z0, Z1 const& z1) noexcept
   {
-    if constexpr (!O::contains(pedantic) && (concepts::complex_like<Z0> && concepts::complex_like<Z1>) ||
-                  (concepts::real<Z0> || concepts::real<Z1>))
+    if constexpr ((!O::contains(pedantic) && (concepts::complex_like<Z0> && concepts::complex_like<Z1>)) ||
+                  concepts::real<Z0> || concepts::real<Z1>)
       return eve::zero(eve::as<as_cayley_dickson_like_t<Z0, Z1>>());
     else return (z0 * z1) - (z1 * z0);
   }

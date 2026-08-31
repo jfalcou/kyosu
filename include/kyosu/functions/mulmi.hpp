@@ -73,7 +73,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O> constexpr auto mulmi_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto mulmi_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (kyosu::concepts::real<Z>) return complex(zero(as(z)), -z);
     else if constexpr (kyosu::concepts::complex<Z>) return Z(ipart(z), -real(z));

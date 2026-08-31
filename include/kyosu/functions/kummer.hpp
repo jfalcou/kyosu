@@ -104,7 +104,7 @@ namespace kyosu::_
 
       auto br_anegintnotb = [&]() {
         auto bz = kyosu::if_else(bnegint, b, zero);
-        int n = eve::maximum(-real(a));
+        auto n = eve::maximum(-real(a));
         r_t a1(1), s(kyosu::tgamma_inv(bz));
         for (size_t j = 1; j <= n; ++j)
         {
@@ -150,8 +150,8 @@ namespace kyosu::_
             notdone = last_interval(br_regular, notdone, r, notdone);
           }
         }
-        return r;
       }
+      return r;
     }
     else
     {
