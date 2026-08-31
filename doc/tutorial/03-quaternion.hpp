@@ -7,7 +7,7 @@
 //! # What they are
 //!
 //! A complex number is a pair of reals. A quaternion is a pair of *complex numbers* — so four
-//! reals — with a product built by the same recipe. That is the whole definition. The four
+//! reals — with a product built by a new but similar recipe. That is the whole definition. The four
 //! components are written against the basis \f$1, i, j, k\f$, and **KYOSU** prints them that way:
 //!
 //! @godbolt{doc/tut_quat_basics.cpp}
@@ -30,12 +30,12 @@
 //!
 //! # Two divisions instead of one
 //!
-//! With real or complex numbers, "divide \f$a\f$ by \f$b\f$" names one operation, because
+//! With real or complex numbers, divide \f$a\f$ by \f$b\f$ names one operation, because
 //! \f$ab^{-1}\f$ and \f$b^{-1}a\f$ agree. With quaternions they do not, and there are two honest
 //! answers:
 //!
 //!   + \f$x\f$ such that \f$xb = a\f$, which is \f$ab^{-1}\f$ — this is what `/` computes;
-//!   + \f$x\f$ such that \f$bx = a\f$, which is \f$b^{-1}a\f$ — this is kyosu::ldiv.
+//!   + \f$x\f$ such that \f$bx = a\f$, which is \f$b^{-1}a\f$ — this is `ldiv`.
 //!
 //! @godbolt{doc/tut_quat_division.cpp}
 //!

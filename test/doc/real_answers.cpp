@@ -3,9 +3,9 @@
 
 int main()
 {
-  // 2 is outside the real domain of acos, so the answer is complex.
-  std::cout << "acos(2.0)            = " << kyosu::acos(2.0) << "\n";
+  // -1 is outside the real domain of sqrt, so the answer is complex.
+  std::cout << "sqrt(-1.0)            = " << kyosu::sqrt(-1.0) << "\n";
 
   // Unless real_only is asked for, which defers to eve::acos and its NaN.
-  std::cout << "acos[real_only](2.0) = " << kyosu::acos[kyosu::real_only](2.0) << "\n";
+  std::cout << "sqrt[real_only](-1.0) = " << kyosu::sqrt[kyosu::real_only](-1.0) << "\n";
 }

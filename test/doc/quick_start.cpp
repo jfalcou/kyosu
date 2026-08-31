@@ -7,7 +7,7 @@ int main()
 
   std::cout << "z      = " << z             << "\n";
   std::cout << "|z|    = " << kyosu::abs(z) << "\n";
-  std::cout << "exp(z) = " << kyosu::exp(z) << "\n";
+  std::cout << "log(z) = " << kyosu::log(z) << "\n";
 
   // A negative real has no real square root, so a complex one comes back.
   std::cout << "sqrt(-1.0) = " << kyosu::sqrt(-1.0) << "\n";

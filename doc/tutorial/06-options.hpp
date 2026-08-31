@@ -20,7 +20,7 @@
 //!
 //! # Accuracy against speed
 //!
-//! By default a function is accurate over its whole domain and guards its edges. `kyosu::raw`
+//! By default a function is as accurate as possible over its whole domain and guards its edges. `raw`
 //! asks for the fastest formula instead, and the price is paid in two places at once: the answer
 //! loses accuracy on ordinary input, and the edges stop being handled.
 //!
@@ -33,7 +33,8 @@
 //!
 //! # Angles in half-turns
 //!
-//! Trigonometry in radians forces \f$\pi\f$ into the arithmetic, and \f$\pi\f$ is not representable.
+//! Trigonometry in radians forces \f$\pi\f$ into the arithmetic, and \f$\pi\f$ is not exactly representable
+//! as an *IEEE* floating number.
 //! `kyosu::radpi` reads and returns angles as multiples of \f$\pi\f$ instead, which removes that
 //! error at the source. Where a plain call needs `pi/2`, the option form takes `0.5`:
 //!
@@ -56,8 +57,8 @@
 //!
 //! <div class="section_buttons">
 //!
-//! | Previous                            |                                          Next |
-//! |:------------------------------------|----------------------------------------------:|
-//! | [Rotations](@ref tutorial-rotation) | [Octonions and Beyond](@ref tutorial-beyond)  |
+//! | Previous                            |                                              Next |
+//! |:------------------------------------|--------------------------------------------------:|
+//! | [Rotations](@ref tutorial-rotation) | [Mathematical background]( @ref math_background)  |
 //!
 //! </div>

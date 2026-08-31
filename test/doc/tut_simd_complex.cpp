@@ -1,5 +1,4 @@
 #include <iostream>
-#include <eve/wide.hpp>
 #include <kyosu/kyosu.hpp>
 
 int main()

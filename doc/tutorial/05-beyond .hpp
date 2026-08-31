@@ -61,8 +61,8 @@
 //!
 //! <div class="section_buttons">
 //!
-//! | Previous                          |                                     Next |
-//! |:----------------------------------|-----------------------------------------:|
-//! | [Options](@ref tutorial-options)  | [Mathematical Background](@ref math_background) |
+//! | Previous                            |                                             Next |
+//! |:------------------------------------|-------------------------------------------------:|
+//! | [Rotation](@ref tutorial-rotation)  | [Options](@ref tutorial-options)                 |
 //!
 //! </div>

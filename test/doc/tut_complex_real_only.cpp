@@ -11,4 +11,5 @@ int main()
   // real_only asks for the real function instead, NaN included.
   std::cout << "sqrt[real_only](-1.0)   = " << kyosu::sqrt[kyosu::real_only](-1.0) << "\n";
   std::cout << "log[real_only](-1.0)    = " << kyosu::log[kyosu::real_only](-1.0)  << "\n";
+  std::cout << "acos[real_only](2.0)    = " << kyosu::acos[kyosu::real_only](2.0)  << "\n";
 }

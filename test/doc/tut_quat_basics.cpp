@@ -10,6 +10,6 @@ int main()
   std::cout << "conj(q)    = " << kyosu::conj(q)     << "\n";
   std::cout << "rec(q)     = " << kyosu::rec(q)      << "\n";
   std::cout << "pure(q)    = " << kyosu::pure(q)     << "\n";
-  std::cout << "exp(q)     = " << kyosu::exp(q)      << "\n";
+  std::cout << "log(q)     = " << kyosu::log(q)      << "\n";
   std::cout << "sqrt(q)    = " << kyosu::sqrt(q)     << "\n";
 }
