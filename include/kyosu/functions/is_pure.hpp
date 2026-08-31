@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_pure kyosu::is_pure
+  //! @ingroup agnostic
+  //! @brief test if the parameter is pure.
   //! @{
   //!   @var is_pure
-  //!   @brief test if the parameter is pure.
   //!
   //!   @groupheader{Header file}
   //!

@@ -41,11 +41,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup kolmmean kyosu::kolmmean
+  //! @ingroup agnostic
+  //! @brief Callable object computing the 'Kolmogorov-Nagumo-de Finetti' mean of the inputs:
+  //!        \f$ \mathbf{g}(\mathbf{average}\mathbf{f}(x_s)) \f$.
   //! @{
   //!   @var kolmmean
-  //!   @brief Callable object computing the 'Kolmogorov-Nagumo-de Finetti' mean of the inputs:
-  //!   \f$ \mathbf{g}(\mathbf{average}\mathbf{f}(x_s)) \f$.
   //!
   //!   @groupheader{Header file}
   //!
@@ -58,7 +59,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto kolmmean(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto kolmmean(eve::non_empty_product_type auto const& tup)              noexcept; // 2
   //!      constexpr auto kolmmean[pedantic](/*any of the above overloads*/)                 noexcept; // 3

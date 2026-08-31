@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup lbeta kyosu::lbeta
+  //! @ingroup agnostic
+  //! @brief Computes the principal branch of the natural logarithm of the `beta` function.
   //! @{
   //!   @var lbeta
-  //!   @brief Computes the principal branch of the natural logarithm of the `beta` function.
   //!
   //!   @groupheader{Header file}
   //!
@@ -52,11 +53,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     auto lbeta(auto z0,auto z1) noexcept;
-  //!     auto log(auto z0,  auto z1, eve::value n) noexcept;
+  //!     auto lbeta(auto z0,  auto z1, eve::value n) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifier
   //!     auto lbeta[real_only](auto z0, auto z1) noexcept;
   //!   }
   //!   @endcode

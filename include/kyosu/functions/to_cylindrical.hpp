@@ -43,24 +43,25 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup to_cylindrical kyosu::to_cylindrical
+  //! @ingroup quaternion
+  //! @brief Callable object computing the cylindrical coordinates to a quaternion.
   //! @{
   //! @var to_cylindrical
   //!
-  //! @brief Callable object computing the cylindrical coordinates to a quaternion.
   //!
   //!  This function is the reciprocal of `from_cylindrical`
   //!
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!     auto to_cylindrical(auto q) const        noexcept;
   //!     auto to_cylindrical[radpi](auto q) const noexcept;

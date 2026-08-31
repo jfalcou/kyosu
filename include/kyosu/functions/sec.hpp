@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sec kyosu::sec
+  //! @ingroup agnostic
+  //! @brief Computes the secant of the argument.
   //! @{
   //!   @var sec
-  //!   @brief Computes the secant of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -40,10 +41,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Call
   //!     constexpr auto sec(cayley_dickson_like z)                 noexcept; //1
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr auto sec[radpi](cayley_dickson_like z)         noexcept; //2
   //!     constexpr auto sec[rad](cayley_dickson_like z)           noexcept; //1
   //!   }

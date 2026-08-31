@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sech kyosu::sech
+  //! @ingroup agnostic
+  //! @brief Computes the hyperbolic secant of the argument.
   //! @{
   //!   @var sech
-  //!   @brief Computes the hyperbolic secant of the argument.
   //!
   //!   @groupheader{Header file}
   //!

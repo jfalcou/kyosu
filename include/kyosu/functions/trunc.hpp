@@ -21,10 +21,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup trunc kyosu::trunc
+  //! @ingroup agnostic
+  //! @brief Computes the trunc value.
   //! @{
   //!   @var trunc
-  //!   @brief Computes the trunc value.
   //!
   //!   @groupheader{Header file}
   //!

@@ -27,10 +27,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup log_abs kyosu::log_abs
+  //! @ingroup agnostic
+  //! @brief Computes the natural logarithm of the absolute value of the argument.
   //! @{
   //!   @var log_abs
-  //!   @brief Computes the natural logarithm of the absolute value of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -45,7 +46,7 @@ namespace kyosu
   //!   {
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto log_abs(T z) noexcept;
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic Modifier
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto log_abs[pedantic](T z) noexcept;
   //!
   //!   }

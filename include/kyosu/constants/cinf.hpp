@@ -31,10 +31,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup constants
+  //! @defgroup cinf kyosu::cinf
+  //! @ingroup constants
+  //! @brief Computes the complex-infinite defined as \f$\textrm{NaN} + i\, \textrm{inf}\f$ in the chosen type.
   //! @{
   //!   @var cinf
-  //!   @brief Computes the complex-infinite defined as \f$\textrm{NaN} + i\, \textrm{inf}\f$ in the chosen type.
   //!
   //!   **Defined in Header**
   //!

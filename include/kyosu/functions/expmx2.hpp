@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup expmx2 kyosu::expmx2
+  //! @ingroup agnostic
+  //! @brief Computes the exponential of the opposite of the squared argument.
   //! @{
   //!   @var expmx2
-  //!   @brief Computes the exponential of the opposite of the squared argument.
   //!
   //!   @groupheader{Header file}
   //!

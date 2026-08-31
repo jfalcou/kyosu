@@ -28,10 +28,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_not_cinf kyosu::is_not_cinf
+  //! @ingroup agnostic
+  //! @brief test if the parameter is a not `cinf`.
   //! @{
   //!   @var is_not_cinf
-  //!   @brief test if the parameter is a not `cinf`.
   //!
   //!   @groupheader{Header file}
   //!

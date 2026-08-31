@@ -28,11 +28,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup from_cylindrical kyosu::from_cylindrical
+  //! @ingroup quaternion
+  //! @brief Callable object computing a quaternion from its cylindrical representation.
   //! @{
   //! @var from_cylindrical
   //!
-  //! @brief Callable object computing a quaternion from its cylindrical representation.
   //!
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
   //!  from a cylindrical representation of an \f$\mathbb{R}^2\f$ element.
@@ -45,7 +46,7 @@ namespace kyosu
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/module/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}

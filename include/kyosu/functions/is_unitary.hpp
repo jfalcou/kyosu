@@ -24,10 +24,11 @@ namespace kyosu
 
   //!   {
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_unitary kyosu::is_unitary
+  //! @ingroup agnostic
+  //! @brief test if the parameter is unitary (absolute value one).
   //! @{
   //!   @var is_unitary
-  //!   @brief test if the parameter is unitary (absolute value one).
   //!
   //!   @groupheader{Header file}
   //!
@@ -40,10 +41,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      Regular call
+  //!      // Regular Call
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_unitary(T z) noexcept;
   //!
-  //!      Semantic modifyier
+  //!      // Semantic Modifier
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto is_unitary[pedantic](T z) noexcept;
   //!   }
   //!   @endcode

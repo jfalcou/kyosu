@@ -34,10 +34,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup if_else kyosu::if_else
+  //! @ingroup agnostic
+  //! @brief Select a value between two arguments based on a logical mask
   //! @{
   //!   @var if_else
-  //!   @brief Select a value between two arguments based on a logical mask
   //!
   //!   @groupheader{Header file}
   //!

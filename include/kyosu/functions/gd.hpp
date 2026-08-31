@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup gd kyosu::gd
+  //! @ingroup agnostic
+  //! @brief Computes the gudermanian of the argument.
   //! @{
   //!   @var gd
-  //!   @brief Computes the gudermanian of the argument.
   //!
   //!   @groupheader{Header file}
   //!

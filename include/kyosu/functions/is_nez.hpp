@@ -22,10 +22,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_nez kyosu::is_nez
+  //! @ingroup agnostic
+  //! @brief test the parameter for non-equality to zero.
   //! @{
   //!   @var is_nez
-  //!   @brief test the parameter for non-equality to zero.
   //!
   //!   @groupheader{Header file}
   //!

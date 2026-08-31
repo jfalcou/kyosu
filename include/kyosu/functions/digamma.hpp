@@ -26,10 +26,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup digamma kyosu::digamma
+  //! @ingroup agnostic
+  //! @brief Computes the Digamma function i.e. the logarithmic derivative of the \f$\Gamma\f$ function
   //! @{
   //!   @var digamma
-  //!   @brief Computes the Digamma function i.e. the logarithmic derivative of the \f$\Gamma\f$ function
   //!
   //!   @groupheader{Header file}
   //!

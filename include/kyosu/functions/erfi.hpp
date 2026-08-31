@@ -26,10 +26,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup erfi kyosu::erfi
+  //! @ingroup agnostic
+  //! @brief Callable object computing The imaginary error function \f$ \displaystyle \mathrm{erfi}(z) = -i\mathrm{erf}(iz)\f$
   //! @{
   //!   @var erfi
-  //!   @brief Callable object computing The imaginary error function \f$ \displaystyle \mathrm{erfi}(z) = -i\mathrm{erf}(iz)\f$
   //!
   //!   @groupheader{Header file}
   //!

@@ -42,22 +42,23 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup rotate_vec kyosu::rotate_vec
+  //! @ingroup quaternion
+  //! @brief Callable object rotating an \f$\mathbb{R}^3\f$ vector using a quaternion.
   //! @{
   //! @var rotate_vec
   //!
-  //! @brief Callable object rotating an \f$\mathbb{R}^3\f$ vector using a quaternion.
   //!
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!     auto rotate_vec(auto q, auto v) const noexcept;
   //!     auto rotate_vec[assume_unitary](auto q, auto v) const noexcept

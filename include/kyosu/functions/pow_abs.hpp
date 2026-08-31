@@ -58,10 +58,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup pow_abs kyosu::pow_abs
+  //! @ingroup agnostic
+  //! @brief Computes the pow_abs operation \f$|x|^y\f$.
   //! @{
   //!   @var pow_abs
-  //!   @brief Computes the pow_abs operation \f$|x|^y\f$.
   //!
   //!   @groupheader{Header file}
   //!

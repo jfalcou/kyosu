@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup expm1 kyosu::expm1
+  //! @ingroup agnostic
+  //! @brief Computes the exponential of the argument minus 1.
   //! @{
   //!   @var expm1
-  //!   @brief Computes the exponential of the argument minus 1.
   //!
   //!   @groupheader{Header file}
   //!

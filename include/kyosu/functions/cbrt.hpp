@@ -31,10 +31,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup cbrt kyosu::cbrt
+  //! @ingroup agnostic
+  //! @brief Computes the the kth cubic  root  of the argument.
   //! @{
   //!   @var cbrt
-  //!   @brief Computes the the kth cubic  root  of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -47,11 +48,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto cbrt(complex_like z, auto k)             noexcept;
   //!     constexpr auto cbrt(complex_like z)                     noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifier
   //!     constexpr Z cbrt[real_only](Real z)                     noexcept;
   //!   }
   //!   @endcode

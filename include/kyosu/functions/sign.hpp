@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sign kyosu::sign
+  //! @ingroup agnostic
+  //! @brief Computes tne normalized value z/abs(z) if z is not zero else 0.
   //! @{
   //!   @var sign
-  //!   @brief Computes tne normalized value z/abs(z) if z is not zero else 0.
   //!
   //!   @groupheader{Header file}
   //!

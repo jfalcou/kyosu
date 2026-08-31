@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup dist kyosu::dist
+  //! @ingroup agnostic
+  //! @brief Computes the distance between the two parameters.
   //! @{
   //!   @var dist
-  //!   @brief Computes the distance between the two parameters.
   //!
   //!   @groupheader{Header file}
   //!
@@ -41,10 +42,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Call
   //!     constexpr auto dist(auto z0,  auto z1)           noexcept; //1
   //!
-  //!     // Semantic modifyiers
+  //!     // Semantic Modifiers
   //!     constexpr auto dist[pedantic](auto z0,  auto z1) noexcept; //2
   //!     constexpr auto dist[numeric](auto z0,  auto z1) noexcept;  //3
   //!   }

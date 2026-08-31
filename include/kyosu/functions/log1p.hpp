@@ -33,10 +33,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup log1p kyosu::log1p
+  //! @ingroup agnostic
+  //! @brief Computes the natural logarithm of the argument plus 1.
   //! @{
   //!   @var log1p
-  //!   @brief Computes the natural logarithm of the argument plus 1.
   //!
   //!   @groupheader{Header file}
   //!
@@ -49,11 +50,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //  regular call
+  //!      // Regular Calls
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log1p(T z) noexcept;
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log1p(T z eve::value n) noexcept;
   //!
-  //!      // semantic modifyers
+  //!      // Semantic Modifier
   //!      template<concepts::real T> constexpr complexify_t<T> log1p[real_only](T z) noexcept;
   //!   }
   //!   @endcode

@@ -21,7 +21,7 @@ namespace kyosu
   //====================================================================================================================
 
   //====================================================================================================================
-  //! @class cayley_dickson
+  //! @struct cayley_dickson
   //! @brief Cayley-Dickson algebra main abstraction
   //! It is built so that all operation over C, Q and other such algebra can be done in a streamlined fashion
   //! based on the Cayley–Dickson construction.

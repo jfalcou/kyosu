@@ -36,11 +36,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup beta kyosu::beta
+  //! @ingroup agnostic
+  //! @brief Computes the beta function: \f$\displaystyle \mathbf{B}(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$
+  //!        for real, complex or general Cayley_dickson entries.
   //! @{
   //!   @var beta
-  //!   @brief Computes the beta function: \f$\displaystyle \mathbf{B}(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\f$
-  //!   for real, complex or general Cayley_dickson entries.
   //!
   //!   @groupheader{Header file}
   //!
@@ -53,11 +54,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Call
   //!     constexpr auto beta(cayley_dickson_liko x, cayley_dickson_like y) noexcept;
   //!
-  //!     // semantic modifyers
-  //!     constexpr auto beta[real_only](Real x,(Real y)                    noexcept;
+  //!     // Semantic Modifier
+  //!     constexpr auto beta[real_only](Real x, Real y)                    noexcept;
   //!   }
   //!   @endcode
   //!

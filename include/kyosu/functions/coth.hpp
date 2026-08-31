@@ -22,10 +22,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup coth kyosu::coth
+  //! @ingroup agnostic
+  //! @brief Computes the hyperbolic cotangent of the argument.
   //! @{
   //!   @var coth
-  //!   @brief Computes the hyperbolic cotangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!

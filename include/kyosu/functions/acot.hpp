@@ -35,10 +35,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acot kyosu::acot
+  //! @ingroup agnostic
+  //! @brief Computes the arc cotangent of the argument.
   //! @{
   //!   @var acot
-  //!   @brief Computes the arc cotangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -51,11 +52,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto acot(cayley_dickson_like z)                  noexcept;
   //!     constexpr auto acot(cayley_dickson_like z, eve::value k)    noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr auto acot[real_only](Real z)                      noexcept;
   //!     constexpr auto acot[radpi](cayley_dickson_like z)           noexcept;
   //!     constexpr auto acot[rad](cayley_dickson_like z)             noexcept;

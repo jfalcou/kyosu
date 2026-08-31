@@ -40,10 +40,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @multogroup functions
+  //! @defgroup mul kyosu::mul
+  //! @ingroup agnostic
+  //! @brief `tuple_callable` computing the product of its arguments.
   //! @{
   //!   @var mul
-  //!   @brief `tuple_callable` computing the product of its arguments.
   //!
   //!   @groupheader{Header file}
   //!
@@ -54,9 +55,9 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto mul(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto mul(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!      constexpr auto mul[kahan](/*any of the above overloads*/)                    noexcept; // 3

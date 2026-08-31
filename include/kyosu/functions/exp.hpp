@@ -27,10 +27,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup exp kyosu::exp
+  //! @ingroup agnostic
+  //! @brief Computes the exponential of the argument.
   //! @{
   //!   @var exp
-  //!   @brief Computes the exponential of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -43,10 +44,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Call
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr T exp(T z) noexcept;
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic Modifiers
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr T exp[raw}(T z) noexcept;
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr T exp[radpi}(T z) noexcept;
   //!   }

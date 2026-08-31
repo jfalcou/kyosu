@@ -39,10 +39,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acos kyosu::acos
+  //! @ingroup agnostic
+  //! @brief Computes the arc cosine of the argument.
   //! @{
   //!   @var acos
-  //!   @brief Computes the arc cosine of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -55,11 +56,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto acos(cayley_dickson_like z)                noexcept;
   //!     constexpr auto acos(cayley_dickson_like z, eve::value k)  noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr Z acos[real_only](Real z)                       noexcept;
   //!     constexpr auto acos[radpi](cayley_dickson_like z)         noexcept;
   //!     constexpr auto acos[rad](cayley_dickson_like z)           noexcept;

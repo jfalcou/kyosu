@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup cot kyosu::cot
+  //! @ingroup agnostic
+  //! @brief Computes the cotangent of the argument.
   //! @{
   //!   @var cot
-  //!   @brief Computes the cotangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -40,10 +41,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Call
   //!     constexpr auto cot(cayley_dickson_like z)                 noexcept; //1
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr auto cot[radpi](cayley_dickson_like z)         noexcept; //2
   //!     constexpr auto cot[rad](cayley_dickson_like z)           noexcept; //1
   //!   }

@@ -36,17 +36,18 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup functions
+  //! @defgroup from_angle_axis kyosu::from_angle_axis
+  //! @ingroup agnostic
+  //! @brief Callable object computing an an unitary quaternion from an angle value
+  //!        and a 3 dimensional axis vector
   //! @{
   //! @var from_angle_axis
   //!
-  //! @brief Callable object computing an an unitary quaternion from an angle value
-  //! and a 3 dimensional axis vector
   //!
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/module/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}

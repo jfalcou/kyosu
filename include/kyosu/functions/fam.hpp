@@ -26,10 +26,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup fam kyosu::fam
+  //! @ingroup agnostic
+  //! @brief Computes fused add multiply.
   //! @{
   //!   @var fam
-  //!   @brief  Computes fused add multiply.
   //!
   //!   @groupheader{Header file}
   //!

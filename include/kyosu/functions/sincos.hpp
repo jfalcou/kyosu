@@ -27,10 +27,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sincos kyosu::sincos
+  //! @ingroup agnostic
+  //! @brief Computes simultaneously the sine and cosine of the argument.
   //! @{
   //!   @var sincos
-  //!   @brief Computes simultaneously the sine and cosine of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -43,10 +44,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Call
   //!     constexpr auto sincos(cayley_dickson_like z)                noexcept; //1
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifier
   //!     constexpr auto sincos[radpi](cayley_dickson_like z)         noexcept; //2
   //!   }
   //!   @endcode

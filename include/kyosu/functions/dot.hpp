@@ -53,11 +53,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup dot kyosu::dot
+  //! @ingroup agnostic
+  //! @brief object computing the elementwise  dot product
+  //!        of the vector of the first half parameters by thevector of the last half.
   //! @{
   //!   @var dot
-  //!   @brief  object computing the elementwise  dot product
-  //!     of the vector of the first half parameters by thevector of the last half.
   //!
   //!   @groupheader{Header file}
   //!
@@ -70,7 +71,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto dot(auto value... xs, auto value... ys)        noexcept; // 1
   //!      constexpr auto dot(kumi::tuple xs, kumi::tuple ys)            noexcept; // 2
   //!      constexpr auto dot[kahan](/*any of the above overloads*/)     noexcept; // 3

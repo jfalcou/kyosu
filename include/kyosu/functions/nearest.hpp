@@ -22,10 +22,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup nearest kyosu::nearest
+  //! @ingroup agnostic
+  //! @brief Computes the nearest value.
   //! @{
   //!   @var nearest
-  //!   @brief Computes the nearest value.
   //!
   //!   @groupheader{Header file}
   //!

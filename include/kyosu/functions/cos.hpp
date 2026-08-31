@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup cos kyosu::cos
+  //! @ingroup agnostic
+  //! @brief Computes the cosine of the argument.
   //! @{
   //!   @var cos
-  //!   @brief Computes the cosine of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -41,10 +42,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Call
   //!     constexpr auto cos(cayley_dickson_like z)                 noexcept; //1
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr auto cos[radpi](cayley_dickson_like z)         noexcept; //2
   //!     constexpr auto cos[rad](cayley_dickson_like z)           noexcept; //1
   //!   }

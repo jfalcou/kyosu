@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup tan kyosu::tan
+  //! @ingroup agnostic
+  //! @brief Computes the tangent of the argument.
   //! @{
   //!   @var tan
-  //!   @brief Computes the tangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -41,10 +42,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Call
   //!     constexpr ato tan(cayley_dickson_like z)                 noexcept; //1
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr auto tan[radpi](cayley_dickson_like z)         noexcept; //2
   //!     constexpr auto tan[rad](cayley_dickson_like z)           noexcept; //1
   //!   }

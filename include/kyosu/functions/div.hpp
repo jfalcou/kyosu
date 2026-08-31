@@ -41,10 +41,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @divtogroup functions
+  //! @defgroup div kyosu::div
+  //! @ingroup agnostic
+  //! @brief `tuple_callable` computing the division of its first argument with the product of the others.
   //! @{
   //!   @var div
-  //!   @brief `tuple_callable` computing the division of its first argument with the product of the others.
   //!
   //!   @groupheader{Header file}
   //!
@@ -55,9 +56,9 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto div(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto div(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!      constexpr auto div[kahan](/*any of the above overloads*/)                    noexcept; // 3

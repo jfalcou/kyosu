@@ -34,10 +34,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acsc kyosu::acsc
+  //! @ingroup agnostic
+  //! @brief Computes the arccosecant of the argument.
   //! @{
   //!   @var acsc
-  //!   @brief Computes the arccosecant of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -50,11 +51,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto acsc(cayley_dickson_like z)                noexcept;
   //!     constexpr auto acsc(cayley_dickson_like z, eve::value k)  noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr auto acsc[radpi](cayley_dickson_like z)         noexcept;
   //!     constexpr auto acsc[real_only](Real z)                    noexcept;
   //!   }

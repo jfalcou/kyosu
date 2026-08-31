@@ -1,9 +1,11 @@
 Licence {#licence}
 =======
 
-This library is licensed under the [Boost Software License 1.0 License](https://spdx.org/licenses/BSL-1.0.html):
+This library is licensed under the [Boost Software License](https://opensource.org/licenses/BSL):
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Copyright : KYOSU Project Contributors
+
 Boost Software License - Version 1.0 - August 17th, 2003
 
 Permission is hereby granted, free of charge, to any person or organization

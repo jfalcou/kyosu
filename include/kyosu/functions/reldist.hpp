@@ -28,10 +28,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup reldist kyosu::reldist
+  //! @ingroup agnostic
+  //! @brief Computes the relative distance between the two parameters.
   //! @{
   //!   @var reldist
-  //!   @brief Computes the relative distance between the two parameters.
   //!
   //!   @groupheader{Header file}
   //!
@@ -44,10 +45,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Call
   //!     constexpr auto reldist(auto z0, auto z1) noexcept;           //1
   //!
-  //!     // Semantic modifyiers
+  //!     // Semantic Modifiers
   //!     constexpr auto reldist[pedantic](auto z0, auto z1) noexcept; //2
   //!     constexpr auto reldist[numeric](auto z0, auto z1) noexcept;  //3
   //!   }

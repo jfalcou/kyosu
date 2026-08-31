@@ -31,10 +31,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup manhattan kyosu::manhattan
+  //! @ingroup agnostic
+  //! @brief Computes the sum of the absolute values of all terms of all the parameters.
   //! @{
   //!   @var manhattan
-  //!   @brief Computes the sum of the absolute values of all terms of all the parameters.
   //!
   //!   @groupheader{Header file}
   //!
@@ -47,7 +48,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto manhattan(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto manhattan(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!

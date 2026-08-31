@@ -29,10 +29,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup linfnorm kyosu::linfnorm
+  //! @ingroup agnostic
+  //! @brief Callable object computing the linfnorm operation \f$ \max_{i = 0}^n |x_i| \f$.
   //! @{
   //!   @var linfnorm
-  //!   @brief Callable object computing the linfnorm operation \f$ \max_{i = 0}^n |x_i| \f$.
   //!
   //!   @groupheader{Header file}
   //!
@@ -45,10 +46,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Call
   //!      template<typename T, typename ... Ts> auto linfnorm(T z,Ts ... zs ) const       noexcept //1
   //!
-  //!       Semantic modifyier
+  //!       // Semantic Modifier
   //!      template<typename T, typename ... Ts> auto linfnorm[flat](T z,Ts ... zs ) const noexcept //2
   //!   }
   //!   @endcode

@@ -38,10 +38,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sqrt kyosu::sqrt
+  //! @ingroup agnostic
+  //! @brief Computes a square root value.
   //! @{
   //!   @var sqrt
-  //!   @brief Computes a square root value.
   //!
   //!   @groupheader{Header file}
   //!
@@ -54,12 +55,12 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //  regular call
+  //!      // Regular Calls
   //!      constexpr auto sqrt(auto z)                                                    noexcept; //1
   //!      template<eve::value K> constexpr auto sqrt(auto z, K k)                        noexcept; //2
   //!
-  //!      // semantic modifyers
-  //!      template<eve::value K> constexpr auto sqrt[principal](\*any previus overload)  noexcept; //3
+  //!      // Semantic Modifiers
+  //!      template<eve::value K> constexpr auto sqrt[principal](/*any previous overload*/)  noexcept; //3
   //!      template<concepts::real T> constexpr auto sqrt[real_only](T z)                 noexcept; //1
   //!   }
   //!   @endcode
@@ -73,7 +74,7 @@ namespace kyosu
   //!
   //!     1. With one parameter  returns the principal square root of `z` which has the same imaginary part sign as `z`.
   //!        * A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
-  //!          in which case the parameter must be a floating_value and the result will the same as a call to eve::rsqrt
+  //!          in which case the parameter must be a floating_value and the result will the same as a call to eve::sqrt
   //!        * for complex input, returns elementwise the square root of z,
   //!          in the range of the right half-plane, including the imaginary axis (\f$[0, +\infty]\f$
   //!          along the real axis and \f$[-\infty, +\infty]\f$ along the imaginary axis.)
@@ -90,10 +91,10 @@ namespace kyosu
   //!        *  If z is \f$+\infty+i NaN\f$, the result is \f$+\infty+i NaN\f$
   //!        *  If z is \f$NaN+i y\f$, the result is \f$NaN+i NaN\f$
   //!        *  If z is \f$NaN+i NaN\f$, the result is \f$NaN+i NaN\f$
-  //!     2. Returns the kth sqrt root of z, k is taken modulo 1; 0 is identical to 1. 1 gives the opposite root.
+  //!     2. Returns the kth sqrt root of z, k is taken modulo 2; 0 is identical to 1. 1 gives the opposite root.
   //!
   //!  @groupheader{External references}
-  //!   *  [C++ standard reference: complex cosh](https://en.cppreference.com/w/cpp/numeric/complex/sqrt)
+  //!   *  [C++ standard reference: complex sqrt](https://en.cppreference.com/w/cpp/numeric/complex/sqrt)
   //!   *  [Wolfram MathWorld: Square Root](https://mathworld.wolfram.com/SquareRoot.html)
   //!   *  [Wikipedia: Square root](https://en.wikipedia.org/wiki/Square_root)
   //!

@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acosh kyosu::acosh
+  //! @ingroup agnostic
+  //! @brief Computes the inverse hyperbolic cosine of the argument.
   //! @{
   //!   @var acosh
-  //!   @brief Computes the inverse hyperbolic cosine of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -52,11 +53,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
-  //!     constexpr auto acos( acosh(Z z)                           noexcept;
-  //!     constexpr auto acos(cayley_dickson_like z, eve::value k)  noexcept;
+  //!     // Regular Calls
+  //!     constexpr auto acosh(Z z)                           noexcept;
+  //!     constexpr auto acosh(cayley_dickson_like z, eve::value k)  noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifier
   //!     constexpr auto  acosh[real_only](concepts::real z)        noexcept;
   //!   }
   //!   @endcode

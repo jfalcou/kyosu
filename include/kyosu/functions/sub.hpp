@@ -41,10 +41,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @subtogroup functions
+  //! @defgroup sub kyosu::sub
+  //! @ingroup agnostic
+  //! @brief `tuple_callable` computing the difference of its first argument with the sum of the others.
   //! @{
   //!   @var sub
-  //!   @brief `tuple_callable` computing the difference of its first argument with the sum of the others.
   //!
   //!   @groupheader{Header file}
   //!
@@ -55,12 +56,12 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto sub(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto sub(eve::non_empty_product_type auto const& tup)             noexcept; // 2
-  //!      constexpr auto add[kahan] (/*any of the above overloads*/)                   noexcept; // 3
+  //!      constexpr auto sub[kahan] (/*any of the above overloads*/)                   noexcept; // 3
   //!
   //!      // Lanes masking
   //!      constexpr auto sub[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 4

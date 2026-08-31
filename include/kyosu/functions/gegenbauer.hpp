@@ -33,10 +33,11 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup functions
+  //! @defgroup gegenbauer kyosu::gegenbauer
+  //! @ingroup agnostic
+  //! @brief Computes the value of the Gegenbauer function of order \f$n\f$
   //! @{
   //!   @var gegenbauer
-  //!   @brief Computes the value of the Gegenbauer function of order \f$n\f$
   //!
   //!   Computes the value of the Gegenbauer function of order \f$n\f$ and parameter
   //!   \f$\lambda\f$, \f$C^{(\lambda)}_n(z)\f$ at `z`. If \f$n\f$ is an integer, the function is a
@@ -51,9 +52,9 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Call
   //!      auto constexpr gegenbauer( auto n, auto lambda, auto z)                          noexcept; // 1
   //!
   //!      // Lanes masking

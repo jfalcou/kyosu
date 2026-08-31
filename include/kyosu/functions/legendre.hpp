@@ -51,11 +51,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup functions
+  //! @defgroup legendre kyosu::legendre
+  //! @ingroup agnostic
+  //! @brief Computes the value of the Legendre and associated
+  //!        Legendre functions of order `n` ( and `m`) at `x`:
   //! @{
   //!   @var legendre
-  //!   @brief Computes the value of the Legendre and associated
-  //!   Legendre functions of order `n` ( and `m`) at `x`:
   //!
   //!   For positive integer `n` the standard legendre functions are polynomials:
   //!    * The Legendre polynomial of order n is given by \f$\displaystyle \mbox{L}_{n}(x)
@@ -70,9 +71,9 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Calls
   //!      auto constexpr legendre(kyosu::concepts::real auto n, kyosu::concepts::cayley_dickson auto z) noexcept; // 1
   //!      auto constexpr legendre(kyosu::concepts::real auto n, kyosu::concepts::real auto z)           noexcept; // 1
   //!
@@ -80,7 +81,7 @@ namespace kyosu
   //!      constexpr auto legendre[conditional_expr auto c](/* any previous overload */)                 noexcept; // 2
   //!      constexpr auto legendre[logical_value auto m](/* any previous overload */)                    noexcept; // 2
   //!
-  //!      // Semantic options
+  //!      // Semantic Modifier
   //!      constexpr auto legendre[successor](integral_value auto n,
   //!                                         kyosu::concepts::cayley_dickson auto z,
   //!                                         kyosu::concepts::cayley_dickson auto pn,

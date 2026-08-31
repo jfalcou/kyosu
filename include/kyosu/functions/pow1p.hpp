@@ -42,10 +42,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup pow1p kyosu::pow1p
+  //! @ingroup agnostic
+  //! @brief Computes the pow1p operation \f$(x+1)^y\f$.
   //! @{
   //!   @var pow1p
-  //!   @brief Computes the pow1p operation \f$(x+1)^y\f$.
   //!
   //!   @groupheader{Header file}
   //!

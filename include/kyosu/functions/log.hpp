@@ -34,10 +34,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup log kyosu::log
+  //! @ingroup agnostic
+  //! @brief Computes the principal value of the  natural logarithm of the argument.
   //! @{
   //!   @var log
-  //!   @brief Computes the principal value of the  natural logarithm of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -50,11 +51,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //  regular call
+  //!      // Regular Calls
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log(T z) noexcept;
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log(T z eve::value n) noexcept;
   //!
-  //!      // semantic modifyers
+  //!      // Semantic Modifier
   //!      template<concepts::real T> constexpr complexify_t<T> log[real_only](T z) noexcept;
   //!   }
   //!   @endcode

@@ -32,11 +32,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup from_spherical kyosu::from_spherical
+  //! @ingroup quaternion
+  //! @brief Callable object computing a quaternion from its spherical representation.
   //! @{
   //! @var from_spherical
   //!
-  //! @brief Callable object computing a quaternion from its spherical representation.
   //!
   //!  This function build quaternions in a way similar to the way polar builds complex numbers
   //!  from a spherical representation of an \f$\mathbb{R}^4\f$ element.
@@ -48,13 +49,13 @@ namespace kyosu
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!     auto from_spherical(auto rho, auto theta, auto phi1, auto phi2) const noexcept;
   //!     auto from_spherical[radpi](auto rho, auto theta, auto phi1, auto phi2) const noexcept;
@@ -64,8 +65,8 @@ namespace kyosu
   //! **Parameters**
   //!
   //!   * `rho`:  the modulus
-  //!   * `theta`, `phi1`, `phi2`: angles. If the `radpi`option  is used  the angles are returned in
-  //!     `\f$\pi\f$ multiples else in radian.
+  //!   * `theta`, `phi1`, `phi2`: angles. If the `radpi `option is used  the angles are returned in
+  //!     \f$\pi\f$ multiples else in radian.
   //!
   //! **Return value**
   //!

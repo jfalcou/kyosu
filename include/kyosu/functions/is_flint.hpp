@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_flint kyosu::is_flint
+  //! @ingroup agnostic
+  //! @brief test the parameter is a flint.
   //! @{
   //!   @var is_flint
-  //!   @brief test the parameter is a flint.
   //!
   //!   @groupheader{Header file}
   //!

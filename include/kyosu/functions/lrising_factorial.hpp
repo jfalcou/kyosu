@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup lrising_factorial kyosu::lrising_factorial
+  //! @ingroup agnostic
+  //! @brief Computes the natural logarithm of the rising_factorial function
   //! @{
   //!   @var lrising_factorial
-  //!   @brief Computes the natural logarithm of the rising_factorial function
   //!
   //!   @groupheader{Header file}
   //!
@@ -52,10 +53,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Call
   //!     auto lrising_factorial(auto x,auto y) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifier
   //!     auto lrising_factorial[real_only](auto x,auto y) noexcept;
   //!   }
   //!   @endcode

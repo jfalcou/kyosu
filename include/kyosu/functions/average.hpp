@@ -41,10 +41,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup average kyosu::average
+  //! @ingroup agnostic
+  //! @brief Computes the average of the parameters.
   //! @{
   //!   @var average
-  //!   @brief Computes the average of the parameters.
   //!
   //!   @groupheader{Header file}
   //!
@@ -57,7 +58,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto average(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto average(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!      constexpr auto average[pedantic](/*any of the above overloads*/)                 noexcept; // 3
@@ -72,7 +73,7 @@ namespace kyosu
   //!   **Parameters**
   //!
   //!     * `xs...`: Values to process. Can be a mix of cayley_dickson_like values.
-  //!     * `tup : kumi tuple of arguments.
+  //!     * `tup` : kumi tuple of arguments.
   //!
   //!   **Return value**
   //!

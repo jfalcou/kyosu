@@ -37,16 +37,17 @@ namespace kyosu
     KYOSU_CALLABLE_OBJECT(align_t, align_);
   };
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup align kyosu::align
+  //! @ingroup quaternion
+  //! @brief Callable object computing an unitary quaternion value representing a rotation that align v0 to v1.
   //! @{
   //! @var align
   //!
-  //! @brief Callable object computing an unitary quaternion value representing a rotation that align v0 to v1.
   //!
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/module/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}

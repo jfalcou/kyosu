@@ -50,24 +50,25 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup to_spherical kyosu::to_spherical
+  //! @ingroup quaternion
+  //! @brief Callable object computing the spherical coordinates from a quaternion.
   //! @{
   //! @var to_spherical
   //!
-  //! @brief Callable object computing the spherical coordinates from a quaternion.
   //!
   //!  This function is the reciprocal of from_spherical
   //!
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!     auto to_spherical(auto q) const noexcept;
   //!   }

@@ -21,10 +21,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup floor kyosu::floor
+  //! @ingroup agnostic
+  //! @brief Computes the floor value.
   //! @{
   //!   @var floor
-  //!   @brief Computes the floor value.
   //!
   //!   @groupheader{Header file}
   //!

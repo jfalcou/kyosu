@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_eqz kyosu::is_eqz
+  //! @ingroup agnostic
+  //! @brief test the parameter for equality to zero.
   //! @{
   //!   @var is_eqz
-  //!   @brief test the parameter for equality to zero.
   //!
   //!   @groupheader{Header file}
   //!

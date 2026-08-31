@@ -32,10 +32,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acoth kyosu::acoth
+  //! @ingroup agnostic
+  //! @brief Computes the inverse  hyperbolic cotangent of the argument.
   //! @{
   //!   @var acoth
-  //!   @brief Computes the inverse  hyperbolic cotangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -48,11 +49,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular calls
+  //!     // Regular Calls
   //!     constexpr auto acoth(cayley_dickson_like z) noexcept;
   //!     constexpr auto acoth(cayley_dickson_like z, eve::value k) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifier
   //!     constexpr auto acoth[real_only](Real z)     noexcept;
   //!   }
   //!   @endcode

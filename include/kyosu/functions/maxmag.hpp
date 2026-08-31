@@ -39,10 +39,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup maxmag kyosu::maxmag
+  //! @ingroup agnostic
+  //! @brief Callable object computing the maxmag operation.
   //! @{
   //!   @var maxmag
-  //!   @brief Callable object computing the maxmag operation.
   //!
   //!   @groupheader{Header file}
   //!
@@ -55,7 +56,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Calls
   //!      template<typename ... Ts> auto maxmag(Ts ... zs       ) const noexcept// 1
   //!      template<typename Tup>    auto maxmag(kumi::tuple Tup ) const noexcept// 2
   //!   }

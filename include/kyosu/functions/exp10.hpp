@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup exp10 kyosu::exp10
+  //! @ingroup agnostic
+  //! @brief Computes the base 10 exponential of the argument.
   //! @{
   //!   @var exp10
-  //!   @brief Computes the base 10 exponential of the argument.
   //!
   //!   @groupheader{Header file}
   //!

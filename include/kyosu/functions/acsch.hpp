@@ -32,10 +32,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup acsch kyosu::acsch
+  //! @ingroup agnostic
+  //! @brief Computes the inverse hyperbolic cosecant of the argument.
   //! @{
   //!   @var acsch
-  //!   @brief Computes the inverse hyperbolic cosecant of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -48,11 +49,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular calls
+  //!     // Regular Calls
   //!     constexpr auto acsch(cayley_dickson_like z)               noexcept;
   //!     constexpr auto acsch(cayley_dickson_like z, eve::value k) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifier
   //!     constexpr auto acsch[real_only](Real z)                   noexcept;
   //!   }
   //!   }

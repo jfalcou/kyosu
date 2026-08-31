@@ -51,11 +51,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup from_rotation_matrix kyosu::from_rotation_matrix
+  //! @ingroup quaternion
+  //! @brief Callable object computing a quaternion from its rotation_matrix representation.
   //! @{
   //! @var from_rotation_matrix
   //!
-  //! @brief Callable object computing a quaternion from its rotation_matrix representation.
   //!
   //!  This function returns a quaternion associated to the input rotation matrix m.
   //!  If m is not a proper 3x3 rotation matrix (i.e an orthogonal matrix with determinant 1)
@@ -64,13 +65,13 @@ namespace kyosu
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!      template < typename M >
   //!      auto from_rotation_matrix(auto m) const noexcept

@@ -28,22 +28,23 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup rot_angle kyosu::rot_angle
+  //! @ingroup quaternion
+  //! @brief Callable object computing the normalized angle of rotation defined by a quaternion.
   //! @{
   //! @var rot_angle
   //!
-  //! @brief Callable object computing the normalized angle of rotation defined by a quaternion.
   //!
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!     auto rot_angle(auto q) const        noexcept;
   //!     auto rot_angle[radpi](auto q) const noexcept;

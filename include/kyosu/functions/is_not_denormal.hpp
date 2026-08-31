@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_not_denormal kyosu::is_not_denormal
+  //! @ingroup agnostic
+  //! @brief test if the parameter is not denormal.
   //! @{
   //!   @var is_not_denormal
-  //!   @brief test if the parameter is not denormal.
   //!
   //!   @groupheader{Header file}
   //!

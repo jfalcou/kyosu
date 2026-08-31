@@ -37,10 +37,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup nthroot kyosu::nthroot
+  //! @ingroup agnostic
+  //! @brief Computes the the kth nth root  of the argument.
   //! @{
   //!   @var nthroot
-  //!   @brief Computes the the kth nth root  of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -53,11 +54,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto nthroot(complex_like z, auto n, auto k)             noexcept;
   //!     constexpr auto nthroot(complex_like z, auto n)                     noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifier
   //!     constexpr auto nthroot[real_only](/*any previous overload*/)       noexcept;
   //!   }
   //!   @endcode

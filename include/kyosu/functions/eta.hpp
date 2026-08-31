@@ -24,11 +24,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup eta kyosu::eta
+  //! @ingroup agnostic
+  //! @brief Computes the Dirichlet sum \f$ \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\f$.
+  //!        Sometimes this function is for obvious reasons called the alternative \f$\zeta\f$ function .
   //! @{
   //!   @var eta
-  //!   @brief Computes the Dirichlet sum \f$ \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\f$.
-  //!   Sometimes this function is for obvious reasons called the alternative \f$\zeta\f$ function .
   //!
   //!   @groupheader{Header file}
   //!

@@ -37,10 +37,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup ellint_fe kyosu::ellint_fe
+  //! @ingroup agnostic
+  //! @brief Computes Jacobi's Amplitude function.
   //! @{
   //!   @var  ellint_fe
-  //!   @brief Computes Jacobi's Amplitude function.
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>
@@ -51,11 +52,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Calls
   //!       constexpr Z       ellint_fe( real<Z>   z, real<U> m)               noexcept; //1
   //!       constexpr auto    ellint_fe(complex<Z> z, real<U> m)               noexcept; //1
   //!
-  //!      //Semantic modifiers
+  //!      // Semantic Modifiers
   //!      constexpr Z    ellint_fe[modular]( real<Z>      z, real<U> alpha)   noexcept; //1
   //!      constexpr auto ellint_fe[modular](complex<Z>    z, real<U> alpha)   noexcept; //1
   //!      constexpr Z    ellint_fe[eccentric]( real<Z>    z, real<U> m)       noexcept; //1

@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sqr_abs kyosu::sqr_abs
+  //! @ingroup agnostic
+  //! @brief Computes the squared sqr_absolute value of the parameter.
   //! @{
   //!   @var sqr_abs
-  //!   @brief Computes the squared sqr_absolute value of the parameter.
   //!
   //!   @groupheader{Header file}
   //!

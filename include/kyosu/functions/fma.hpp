@@ -26,10 +26,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup fma kyosu::fma
+  //! @ingroup agnostic
+  //! @brief Computes fused multiply add.
   //! @{
   //!   @var fma
-  //!   @brief  Computes fused multiply add.
   //!
   //!   @groupheader{Header file}
   //!

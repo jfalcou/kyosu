@@ -23,11 +23,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup erfcx kyosu::erfcx
+  //! @ingroup agnostic
+  //! @brief Computes the normalized complementary error function
+  //!        \f$ \displaystyle \mbox{erfcx}(x) = e^{x^2} \mbox{erfc}(x)\f$.
   //! @{
   //!   @var erfcx
-  //!   @brief Computes the normalized complementary error function
-  //!   \f$ \displaystyle \mbox{erfcx}(x) = e^{x^2} \mbox{erfc}(x)\f$.
   //!
   //!   @groupheader{Header file}
   //!

@@ -26,10 +26,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sin kyosu::sin
+  //! @ingroup agnostic
+  //! @brief Computes the sine of the argument.
   //! @{
   //!   @var sin
-  //!   @brief Computes the sine of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -42,10 +43,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Call
   //!     constexpr auto sin(cayley_dickson_like z)         noexcept; //1
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr auto sin[radpi](cayley_dickson_like z)  noexcept; //2
   //!     constexpr auto sin[rad](cayley_dickson_like z)    noexcept; //1
   //!   }

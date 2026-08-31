@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup arg kyosu::arg
+  //! @ingroup agnostic
+  //! @brief argument.
   //! @{
   //!   @var arg
-  //!   @brief  argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -40,10 +41,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Call
   //!     template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> arg(T z)       noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> arg[radpi](T z) noexcept;
   //!     template<kyosu::concepts::cayley_dickson_like T> constexpr as_real_type_t<T> arg[rad](T z)   noexcept;
   //!   }

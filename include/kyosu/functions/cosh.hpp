@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup cosh kyosu::cosh
+  //! @ingroup agnostic
+  //! @brief Computes the hyperbolic cosine of the argument.
   //! @{
   //!   @var cosh
-  //!   @brief Computes the hyperbolic cosine of the argument.
   //!
   //!   @groupheader{Header file}
   //!

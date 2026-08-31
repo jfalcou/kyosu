@@ -28,11 +28,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup kummer kyosu::kummer
+  //! @ingroup agnostic
+  //! @brief Computes the Kummer function (confluent hypergeometric function of the first kind) \f$M\f$ (which is
+  //!        an other name for the hypergeometric function \f${}_1F_1\f$) and it regularized version \f$\mathbf{M}\f$.
   //! @{
   //!   @var kummer
-  //!   @brief Computes the Kummer function (confluent hypergeometric function of the first kind) \f$M\f$ (which is
-  //!    an other name for the hypergeometric function \f${}_1F_1\f$) and it regularized version \f$\mathbf{M}\f$.
   //!
   //!   **Defined in Header**
   //!
@@ -45,10 +46,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Call
   //!     constexpr auto kummer(auto z, auto a, auto b) noexcept;             //1
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic Modifier
   //!     constexpr auto kummer[regularized](auto z, auto a, auto b) noexcept;//2
   //!
   //!

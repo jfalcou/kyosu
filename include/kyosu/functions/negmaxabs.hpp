@@ -27,10 +27,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup negmaxabs kyosu::negmaxabs
+  //! @ingroup agnostic
+  //! @brief Callable object computing the negmaxabs operation.
   //! @{
   //!   @var negmaxabs
-  //!   @brief Callable object computing the negmaxabs operation.
   //!
   //!   @groupheader{Header file}
   //!

@@ -44,24 +44,25 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup to_multipolar kyosu::to_multipolar
+  //! @ingroup quaternion
+  //! @brief Callable object computing the multipolar coordinates to a quaternion.
   //! @{
   //! @var to_multipolar
   //!
-  //! @brief Callable object computing the multipolar coordinates to a quaternion.
   //!
   //!  This function is the reciprocal of from_multipolar
   //!
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!     auto to_multipolar(auto q) const        noexcept;
   //!     auto to_multipolar[radpi](auto q) const noexcept;

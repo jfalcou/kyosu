@@ -25,10 +25,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup exp_i kyosu::exp_i
+  //! @ingroup agnostic
+  //! @brief Computes the exponential of i times the argument
   //! @{
   //!   @var exp_i
-  //!   @brief Computes the exponential of i times the argument
   //!
   //!   @groupheader{Header file}
   //!
@@ -41,10 +42,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Call
   //!     template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> exp_i(T z)        noexcept; //1
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifier
   //!     template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> exp_i[radpi](T z) noexcept;  //2
   //!   }
   //!   @endcode

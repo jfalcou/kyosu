@@ -25,11 +25,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup muli kyosu::muli
+  //! @ingroup agnostic
+  //! @brief Computes the value of the parameter multiplied by i on the left or right side.
+  //!        For real, complex and quaternion the computation is an optimization over the call to * operator.
   //! @{
   //!   @var muli
-  //!   @brief Computes the value of the parameter multiplied by i on the left or right side.
-  //!   For real, complex and quaternion the computation is an optimization over the call to * operator.
   //!
   //!   @groupheader{Header file}
   //!
@@ -42,11 +43,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!   {  // regular call
+  //!     // Regular Calls
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  muli(T z)        noexcept; //1
   //!
-  //!      // Semantic modifyer
-  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  muli[left}(T z)  noexcept; //1
+  //!      // Semantic Modifiers
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  muli[left](T z)  noexcept; //1
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  muli[right](T z) noexcept; //2
   //!
   //!   }

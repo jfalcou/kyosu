@@ -26,10 +26,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup zeta kyosu::zeta
+  //! @ingroup agnostic
+  //! @brief Computes the Riemann \f$ \displaystyle\zeta(z)=\sum_0^\infty \frac{1}{(n+1)^z}\f$.
   //! @{
   //!   @var zeta
-  //!   @brief Computes the Riemann \f$ \displaystyle\zeta(z)=\sum_0^\infty \frac{1}{(n+1)^z}\f$.
   //!
   //!   @groupheader{Header file}
   //!

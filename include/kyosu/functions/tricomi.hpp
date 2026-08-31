@@ -34,11 +34,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup tricomi kyosu::tricomi
+  //! @ingroup agnostic
+  //! @brief Computes the tricomi function \f$U\f$ also called confluent hypergeometric
+  //!        function of the second kind
   //! @{
   //!   @var tricomi
-  //!   @brief Computes the tricomi function \f$U\f$ also called confluent hypergeometric
-  //!   function of the second kind
   //!
   //!   **Defined in Header**
   //!

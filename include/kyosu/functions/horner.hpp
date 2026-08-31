@@ -35,17 +35,18 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup horner kyosu::horner
+  //! @ingroup agnostic
+  //! @brief Implement the horner scheme to evaluate polynomials
   //! @{
   //!   @var horner
-  //!   @brief Implement the horner scheme to evaluate polynomials
   //!
   //!   If \f$(a_i)_{0\le i\le n-1}\f$ denotes the coefficients of the polynomial by decreasing
   //!   power order, the Horner scheme evaluates the polynom \f$p\f$ at \f$x\f$ by :
   //!   \f$\displaystyle p(x) = (((a_0x+a_1)x+ ... )x + a_{n-1})\f$.\n
   //!   For non commutative cases it is a left-horner scheme: coefficients are at the left of the x powers.
   //!
-  //!   using the `right` semantic modifyier allows to use a right-horner scheme: coefficients are at the right of the x powers).
+  //!   using the `right` semantic modifier allows to use a right-horner scheme: coefficients are at the right of the x powers).
   //!
   //!   @groupheader{Header file}
   //!
@@ -56,12 +57,12 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!     template< auto T, auto C ...>  auto horner(T x, C ... coefs)       noexcept;  //1
   //!     template< auto C, auto K>      auto horner(T x, K tup)             noexcept;  //2
   //!
-  //!     Semantic modifyiers
+  //!     // Semantic Modifiers
   //!     template<auto T, auto C ...>  auto horner[left](T x, C ... coefs)  noexcept;  //1
   //!     template<auto C, auto K>      auto horner[left]r(T x, K tup)       noexcept;  //2
   //!     template<auto T, auto C ...>  auto horner[right](T x, C ... coefs) noexcept;  //3

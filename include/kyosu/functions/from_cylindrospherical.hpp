@@ -29,11 +29,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup from_cylindrospherical kyosu::from_cylindrospherical
+  //! @ingroup quaternion
+  //! @brief Callable object computing a quaternion from its cylindrospherical representation.
   //! @{
   //! @var from_cylindrospherical
   //!
-  //! @brief Callable object computing a quaternion from its cylindrospherical representation.
   //!
   //!  cylindrospherical is specific to quaternions. It is often interesting to consider
   //!  \f$\mathbb{H}\f$ as the cartesian product of \f$\mathbb{R}\f$ by \f$\mathbb{R}^3\f$
@@ -44,13 +45,13 @@ namespace kyosu
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!     auto from_cylindrospherical(auto t, auto radius, auto longitude, auto latitude) const        noexcept;
   //!     auto from_cylindrospherical[radpi](auto t, auto radius, auto longitude, auto latitude) const noexcept;

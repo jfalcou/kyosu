@@ -1,6 +1,7 @@
 // revision 1
 #include <kyosu/kyosu.hpp>
 #include <iostream>
+#include <kyosu/kyosu.hpp>
 
 using wide_t = eve::wide<double, eve::fixed<4>>;
 using r_t = double;

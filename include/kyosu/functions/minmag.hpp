@@ -38,10 +38,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup minmag kyosu::minmag
+  //! @ingroup agnostic
+  //! @brief Callable object computing the minmag operation.
   //! @{
   //!   @var minmag
-  //!   @brief Callable object computing the minmag operation.
   //!
   //!   @groupheader{Header file}
   //!

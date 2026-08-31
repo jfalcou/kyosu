@@ -27,10 +27,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup is_not_equal kyosu::is_not_equal
+  //! @ingroup agnostic
+  //! @brief return true if and only if the two parameters are not equal.
   //! @{
   //!   @var is_not_equal
-  //!   @brief return true if and only if the two parameters are not equal.
   //!
   //!   @groupheader{Header file}
   //!
@@ -43,10 +44,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      Regular call
+  //!      // Regular Call
   //!      constexpr auto is_not_equal(auto z0, auto z1)          noexcept; //1
   //!
-  //!      Semantic modifyier
+  //!      // Semantic Modifier
   //!      constexpr auto is_not_equal[numeric](auto z0, auto z1) noexcept; //2
   //!   }
   //!   @endcode

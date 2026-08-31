@@ -23,10 +23,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup sinhcosh kyosu::sinhcosh
+  //! @ingroup agnostic
+  //! @brief Computes simultaneously  the hyperbolic sine and cosine of the argument.
   //! @{
   //!   @var sinhcosh
-  //!   @brief Computes simultaneously  the hyperbolic sine and cosine of the argument.
   //!
   //!   @groupheader{Header file}
   //!

@@ -35,10 +35,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup constants
+  //! @defgroup j kyosu::j
+  //! @ingroup constants
+  //! @brief Computes the complex number j i.e. quaternion(0, 0, 1, 0) in the chosen type.
   //! @{
   //!   @var j
-  //!   @brief Computes the complex number j i.e. quaternion(0, 0, 1, 0) in the chosen type.
   //!
   //!   **Defined in Header**
   //!

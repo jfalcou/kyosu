@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup chi kyosu::chi
+  //! @ingroup agnostic
+  //! @brief Computes the value of the indicatrix of a set defined by a predicate at the argument.
   //! @{
   //!   @var chi
-  //!   @brief Computes the value of the indicatrix of a set defined by a predicate at the argument.
   //!
   //!   @groupheader{Header file}
   //!

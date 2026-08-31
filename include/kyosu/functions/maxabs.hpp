@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup maxabs kyosu::maxabs
+  //! @ingroup agnostic
+  //! @brief Callable object computing the maxabs operation.
   //! @{
   //!   @var maxabs
-  //!   @brief Callable object computing the maxabs operation.
   //!
   //!   @groupheader{Header file}
   //!
@@ -52,15 +53,15 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Calls
   //!      template<typename ... Ts> auto maxabs(Ts ... zs       ) const noexcept// 1
   //!      template<typename Tup>    auto maxabs(kumi::tuple Tup ) const noexcept// 2
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic Modifiers
   //!      auto maxabs[raw](/* any previous overload*/) const      noexcept;     // 3
   //!      auto maxabs[numeric](/* any previous overload*/) const  noexcept;     // 4
   //!      auto maxabs[pedantic](/* any previous overload*/) const noexcept;     // 5
-  //!      auto maxnabs[flat](/* any previous overload*/) const    noexcept;     // 6
+  //!      auto maxabs[flat](/* any previous overload*/) const    noexcept;     // 6
   //!   }
   //!   @endcode
   //!

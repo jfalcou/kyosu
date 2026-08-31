@@ -43,12 +43,13 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup functions
+  //! @defgroup ellint_rj kyosu::ellint_rj
+  //! @ingroup agnostic
+  //! @brief Computes the Carlson's elliptic integral
+  //!        \f$ \mathbf{R}_\mathbf{J}(x, y) = \frac32 \int_{0}^{\infty}
+  //!        \scriptstyle(t+p)^{-1}[(t+x)(t+y)(t+z)]^{-1/2}\scriptstyle\;\mathrm{d}t\f$.
   //! @{
   //!   @var ellint_rj
-  //!   @brief Computes the Carlson's elliptic integral
-  //!   \f$ \mathbf{R}_\mathbf{J}(x, y) = \frac32 \int_{0}^{\infty}
-  //!   \scriptstyle(t+p)^{-1}[(t+x)(t+y)(t+z)]^{-1/2}\scriptstyle\;\mathrm{d}t\f$.
   //!
   //!   @groupheader{Header file}
   //!
@@ -59,12 +60,12 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Call
   //!      constexpr auto ellint_rj(auto x, auto y, auto z, auto p)                          noexcept; // 1
   //!
-  //!      // semantic modifier
+  //!      // Semantic Modifier
   //!      constexpr auto ellint_rj[threshold = tol](auto x, auto y, auto z, auto p)         noexcept; // 1
   //!
   //!      // Lanes masking

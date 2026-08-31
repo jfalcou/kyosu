@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup convert kyosu::convert
+  //! @ingroup agnostic
+  //! @brief convert to a target type
   //! @{
   //!   @var convert
-  //!   @brief convert to a target type
   //!
   //!   @groupheader{Header file}
   //!

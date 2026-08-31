@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup log_gamma kyosu::log_gamma
+  //! @ingroup agnostic
+  //! @brief Computes \f$\log(\Gamma(z))\f$.
   //! @{
   //!   @var log_gamma
-  //!   @brief Computes \f$\log(\Gamma(z))\f$.
   //!
   //!   @groupheader{Header file}
   //!
@@ -52,11 +53,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     template<concepts::cayley_dickson_like Z> constexpr complexify_t<Z> log_gamma(Z z) noexcept;
-  //!     template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log(T z eve::value n) noexcept;
+  //!     template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> log_gamma(T z, eve::value n) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifier
   //!     template<concepts::real Z> constexpr complexify_t<Z> log_gamma[real_only](Z z) noexcept;
   //!   }
   //!   @endcode
@@ -68,10 +69,10 @@ namespace kyosu
   //!   **Return value**
   //!
   //!   - A real typed input z is treated as if `complex(z)` was entered, unless the option real_only is used
-  //!       in which case the  result will the same as to an `eve::log_gamma` call
-  //!       implying a Nan result if the input is not greater than zero.
-  //!  -  Returns \f$\Gamma(z)\f$.
-  //!    - with two parameters use the nth branch of the logarithm.
+  //!     in which case the result will be the same as an `eve::log_gamma` call, implying a Nan
+  //!     result if the input is not greater than zero.
+  //!   - Returns \f$\Gamma(z)\f$.
+  //!     - with two parameters use the nth branch of the logarithm.
   //!
   //!  @groupheader{External references}
   //!   *  [Wolfram MathWorld: Gamma Function](https://mathworld.wolfram.com/GammaFunction.html)

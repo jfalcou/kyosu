@@ -40,10 +40,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @kroneckertogroup functions
+  //! @defgroup kronecker kyosu::kronecker
+  //! @ingroup agnostic
+  //! @brief `tuple_callable` computing the \f$\delta\f$ (Kronecker symbol) of its arguments.
   //! @{
   //!   @var kronecker
-  //!   @brief `tuple_callable` computing the \f$\delta\f$ (Kronecker symbol) of its arguments.
   //!
   //!   @groupheader{Header file}
   //!
@@ -54,9 +55,9 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
-  //!      // Regular overloads
+  //!      // Regular Calls
   //!      constexpr auto kronecker(auto ... xs)                                              noexcept; // 1
   //!      constexpr auto kronecker(eve::non_empty_product_type auto const& tup)             noexcept; // 2
   //!

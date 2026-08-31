@@ -261,7 +261,7 @@ INHERIT_DOCS           = YES
 # of the file/class/namespace that contains it.
 # The default value is: NO.
 
-SEPARATE_MEMBER_PAGES  = YES
+SEPARATE_MEMBER_PAGES  = NO
 
 # The TAB_SIZE tag can be used to set the number of spaces in a tab. Doxygen
 # uses this value to replace tabs by spaces in code fragments.
@@ -957,8 +957,10 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../include \
-                         .
+INPUT                  = ../include
+INPUT                 += index.hpp
+INPUT                 += tutorial
+INPUT                 += .
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1093,7 +1095,6 @@ EXCLUDE_SYMBOLS        =
 # command).
 
 EXAMPLE_PATH           = ../test/doc \
-                         ../examples \
                          .
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
@@ -1175,7 +1176,7 @@ FILTER_SOURCE_PATTERNS =
 # (index.html). This can be useful if you have a project on for instance GitHub
 # and want to reuse the introduction page also for the doxygen output.
 
-USE_MDFILE_AS_MAINPAGE = ./index.md
+USE_MDFILE_AS_MAINPAGE =
 
 # The Fortran standard specifies that for fixed formatted Fortran code all
 # characters from position 72 are to be considered as comment. A common
@@ -1428,6 +1429,7 @@ HTML_EXTRA_STYLESHEET += color.css
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
 HTML_EXTRA_FILES       = $(DOXYGEN_ASSETS)/godbolt.js
+HTML_EXTRA_FILES      += kyosu.bibtex
 HTML_EXTRA_FILES      += $(AWESOME_ASSETS)/doxygen-awesome-fragment-copy-button.js
 HTML_EXTRA_FILES      += $(AWESOME_ASSETS)/doxygen-awesome-paragraph-link.js
 HTML_EXTRA_FILES      += $(AWESOME_ASSETS)/doxygen-awesome-tabs.js
@@ -2493,7 +2495,9 @@ SKIP_FUNCTION_MACROS   = YES
 # the path). If a tag file is not located in the directory in which doxygen is
 # run, you must also specify the path to the tagfile here.
 
-TAGFILES               =
+# DOXYGEN_OUPUT is the html output directory, so its parent is the build tree, which is where
+# CMakeLists.txt downloads eve.tag. It is the only handle copacabana exports that reaches there.
+TAGFILES               = $(DOXYGEN_OUPUT)/../eve.tag=https://jfalcou.github.io/eve
 
 # When a file name is specified after GENERATE_TAGFILE, doxygen will create a
 # tag file that is based on the input files it reads. See section "Linking to

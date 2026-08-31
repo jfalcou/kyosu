@@ -32,10 +32,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup asin kyosu::asin
+  //! @ingroup agnostic
+  //! @brief Computes the arcsine of the argument.
   //! @{
   //!   @var asin
-  //!   @brief Computes the arcsine of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -48,13 +49,13 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto asin(cayley_dickson_like z)                noexcept;
   //!     constexpr auto asin(cayley_dickson_like z, eve::value k)  noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr auto asin[radpi](cayley_dickson_like z)         noexcept;
-  //!     constexpr auto asi[rad](cayley_dickson_like z)           noexcept;
+  //!     constexpr auto asin[rad](cayley_dickson_like z)           noexcept;
   //!     constexpr auto asin[real_only](Real z)                    noexcept;
   //!   }
   //!   }

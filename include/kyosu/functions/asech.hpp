@@ -33,10 +33,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup asech kyosu::asech
+  //! @ingroup agnostic
+  //! @brief Computes the inverse  hyperbolic secant of the argument.
   //! @{
   //!   @var asech
-  //!   @brief Computes the inverse  hyperbolic secant of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -49,11 +50,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular calls
+  //!     // Regular Calls
   //!     constexpr auto asech(cayley_dickson_like z)               noexcept;
   //!     constexpr auto asech(cayley_dickson_like z, eve::value k) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifier
   //!     constexpr auto asech[real_only](Real z)                   noexcept;
   //!   }
   //!   @endcode

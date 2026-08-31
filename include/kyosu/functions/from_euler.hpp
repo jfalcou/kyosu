@@ -55,11 +55,12 @@ namespace kyosu
   };
 
   //================================================================================================
-  //! @addtogroup quaternion
+  //! @defgroup from_euler kyosu::from_euler
+  //! @ingroup quaternion
+  //! @brief Callable object computing a quaternion from its euler representation.
   //! @{
   //! @var from_euler
   //!
-  //! @brief Callable object computing a quaternion from its euler representation.
   //!
   //!  This function builds a quaternion from 3 euler angles in radian
   //!  (or in \f$\pi multiples\f$ if the option `radpi` is used).
@@ -72,13 +73,13 @@ namespace kyosu
   //! @groupheader{Header file}
   //!
   //!   @code
-  //!   #include kyosu/quaternion.hpp>`
+  //!   #include <kyosu/functions.hpp>
   //!   @endcode
   //!
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
   //!      template < int I, int J, int K > auto from_euler(auto a, auto b, auto c
   //!                                                      , axis<I> a1, axis<J> a2, axis<K> a3

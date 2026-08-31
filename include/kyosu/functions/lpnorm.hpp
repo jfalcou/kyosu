@@ -41,10 +41,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup lpnorm kyosu::lpnorm
+  //! @ingroup agnostic
+  //! @brief Callable object computing the lpnorm operation \f$ \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \f$.
   //! @{
   //!   @var lpnorm
-  //!   @brief Callable object computing the lpnorm operation \f$ \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \f$.
   //!
   //!   @groupheader{Header file}
   //!

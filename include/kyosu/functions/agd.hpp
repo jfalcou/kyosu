@@ -36,10 +36,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup agd kyosu::agd
+  //! @ingroup agnostic
+  //! @brief Computes the principal branch inverse gudermanian of the argument.
   //! @{
   //!   @var agd
-  //!   @brief Computes the principal branch inverse gudermanian of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -52,11 +53,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto agd(cayley_dickson_like z) noexcept;
   //!     constexpr auto agd(cayley_dickson_like z, eve::value k)  noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr auto agd[real_only](Real z)                    noexcept;
   //!     constexpr auto agd[radpi](cayley_dickson_like z)         noexcept;
   //!     constexpr auto agd[rad](cayley_dickson_like z)           noexcept;

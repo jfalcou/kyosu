@@ -35,10 +35,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup asec kyosu::asec
+  //! @ingroup agnostic
+  //! @brief Computes the arcsecant of the argument.
   //! @{
   //!   @var asec
-  //!   @brief Computes the arcsecant of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -51,11 +52,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular call
+  //!     // Regular Calls
   //!     constexpr auto asec(cayley_dickson_like z)               noexcept;
   //!     constexpr auto asec(cayley_dickson_like z, eve::value k) noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr auto asec[radpi](cayley_dickson_like z)         noexcept;
   //!     constexpr auto asec[rad](cayley_dickson_like z)           noexcept;
   //!     constexpr auto asec[real_only](Z z)                       noexcept;

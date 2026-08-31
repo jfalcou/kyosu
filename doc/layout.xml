@@ -3,21 +3,36 @@
   <!-- Navigation index tabs for HTML output -->
   <navindex>
     <tab type="mainpage" visible="yes" title=""/>
-    <!-- <tab type="user" url="@ref kyosu101" title="Getting Started"/> -->
-    <tab type="usergroup" visible="yes" title="How-Tos"/>
+    <tab type="usergroup" visible="yes" title="Tutorials">
+      <tab type="user" url="@ref setup"                title="Installation &amp; Quick Start"/>
+      <tab type="usergroup" visible="yes" title="Getting Started">
+        <tab type="user" url="@ref tutorial-complex"    title="Complex Numbers"/>
+        <tab type="user" url="@ref tutorial-simd"       title="Many Values At Once"/>
+      </tab>
+      <tab type="usergroup" visible="yes" title="Past The Complex Numbers">
+        <tab type="user" url="@ref tutorial-quaternion" title="Quaternions"/>
+        <tab type="user" url="@ref tutorial-rotation"   title="Rotations"/>
+        <tab type="user" url="@ref tutorial-beyond"     title="Octonions and Beyond"/>
+      </tab>
+      <tab type="user" url="@ref tutorial-options"     title="Options"/>
+    </tab>
 
     <tab type="usergroup" visible="yes" title="Reference Documentation">
       <tab type="user" url="@ref types" title="Types"/>
       <tab type="user" url="@ref constants" title="Constants"/>
-      <tab type="user" url="@ref functions" title="Functions"/>
-      <tab type="user" url="@ref traits" title="Traits"/>
+      <tab type="usergroup" url="@ref kyosu_functions" visible="yes" title="Functions">
+        <tab type="user" url="@ref agnostic"   title="Algebra-agnostic"/>
+        <tab type="user" url="@ref complex"    title="Complex-specific"/>
+        <tab type="user" url="@ref quaternion" title="Quaternion-specific"/>
+      </tab>
+      <tab type="user" url="@ref kyosu_traits" title="Traits"/>
       <tab type="concepts" visible="yes" title=""/>
     </tab>
     <tab type="usergroup" visible="yes" title="Informations">
-       <!-- <tab type="user" url="@ref setup" title="Setup"/> -->
-       <!-- <tab type="user" url="@ref rationale" title="Rationale"/> -->
-       <!-- <tab type="user" url="@ref changelog" title="Changelog"/> -->
-       <tab type="user" url="@ref licence" title="Licence"/>
+      <tab type="user" url="@ref math_background" title="Mathematical Background"/>
+      <tab type="user" url="@ref biblio"          title="Bibliography"/>
+      <tab type="user" url="@ref changelog"       title="Changelog"/>
+      <tab type="user" url="@ref licence"         title="Licence"/>
     </tab>
   </navindex>
 

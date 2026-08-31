@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup commutator kyosu::commutator
+  //! @ingroup agnostic
+  //! @brief Computes the commutator of the two parameters.
   //! @{
   //!   @var commutator
-  //!   @brief Computes the commutator of the two parameters.
   //!
   //!   @groupheader{Header file}
   //!

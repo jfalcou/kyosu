@@ -38,11 +38,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup exp_int kyosu::exp_int
+  //! @ingroup agnostic
+  //! @brief `elementwise_callable` object computing the exponential integral
+  //!        \f$ \mathbf{E}_n(x) = \displaystyle \int_1^\infty \frac{e^{-xt}}{t^n}\;\mbox{d}t\f$.
   //! @{
   //!   @var exp_int
-  //!   @brief  `elementwise_callable` object computing the exponential integral
-  //!   \f$ \mathbf{E}_n(x) = \displaystyle \int_1^\infty \frac{e^{-xt}}{t^n}\;\mbox{d}t\f$.
   //!
   //!   @groupheader{Header file}
   //!
@@ -53,9 +54,9 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Calls
   //!      constexpr auto exp_int(concepts::cayley_dickson auto x)                                   noexcept; // 1
   //!      constexpr auto exp_int(concepts::cayley_dickson auto n, floating_value auto x)            noexcept; // 2
   //!   }

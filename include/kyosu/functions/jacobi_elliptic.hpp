@@ -31,10 +31,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup jacobi_elliptic kyosu::jacobi_elliptic
+  //! @ingroup agnostic
+  //! @brief Computes Jacobi's Amplitude function.
   //! @{
   //!   @var  jacobi_elliptic
-  //!   @brief Computes Jacobi's Amplitude function.
   //!
   //!   @code
   //!   #include <kyosu/functions.hpp>
@@ -45,10 +46,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Call
   //!      template<concepts::complex_like Z, concepts::real U> constexpr auto jacobi_elliptic Z z, U m)                             noexcept;
   //!
-  //!      //Semantic modifiers
+  //!      // Semantic Modifiers
   //!      template<concepts::complex_like Z, concepts::real U> constexpr Z jacobi_elliptic[modular](Z z, U alpha)                   noexcept;
   //!      template<concepts::complex_like Z, concepts::real U> constexpr Z jacobi_elliptic[eccentric](Z z, U k)                     noexcept;
   //!      template<concepts::complex_like Z, concepts::real U> constexpr Z jacobi_elliptic[threshold = tol](Z z, U m)               noexcept;

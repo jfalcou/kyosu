@@ -25,11 +25,12 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup mulmi kyosu::mulmi
+  //! @ingroup agnostic
+  //! @brief Computes the value of the parameter multiplied by -i on the left or right side.
+  //!        For real, complex and quaternion the computation is an optimization over the call to * operator.
   //! @{
   //!   @var mulmi
-  //!   @brief Computes the value of the parameter multiplied by -i on the left or right side.
-  //!   For real, complex and quaternion the computation is an optimization over the call to * operator.
   //!
   //!   @groupheader{Header file}
   //!
@@ -42,11 +43,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!   {  // regular call
+  //!     // Regular Calls
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  mulmi(T z)        noexcept; //1
   //!
-  //!      // Semantic modifyer
-  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  mulmi[left}(T z)  noexcept; //1
+  //!      // Semantic Modifiers
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  mulmi[left](T z)  noexcept; //1
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto  mulmi[right](T z) noexcept; //2
   //!   }
   //!   @endcode

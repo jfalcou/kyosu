@@ -27,10 +27,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup associator kyosu::associator
+  //! @ingroup agnostic
+  //! @brief Computes the associator of the three parameters.
   //! @{
   //!   @var associator
-  //!   @brief Computes the associator of the three parameters.
   //!
   //!   @groupheader{Header file}
   //!
@@ -43,10 +44,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     Regular call
+  //!     // Regular Call
   //!     constexpr auto associator(auto z0, auto z1, auto z2) noexcept;           //1
   //!
-  //!     Semantic modifyier
+  //!     // Semantic Modifier
   //!     constexpr auto associator[pedantic](auto z0, auto z1, auto z2) noexcept; //2
   //!   }
   //!   @endcode

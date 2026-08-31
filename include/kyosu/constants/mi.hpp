@@ -32,10 +32,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup constants
+  //! @defgroup mi kyosu::mi
+  //! @ingroup constants
+  //! @brief Computes the complex number \f$-i\f$ in the chosen type.
   //! @{
   //!   @var mi
-  //!   @brief Computes the complex number \f$-i\f$ in the chosen type.
   //!
   //!   **Defined in Header**
   //!

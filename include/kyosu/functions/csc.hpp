@@ -24,10 +24,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup csc kyosu::csc
+  //! @ingroup agnostic
+  //! @brief Computes the cosecant of the argument.
   //! @{
   //!   @var csc
-  //!   @brief Computes the cosecant of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -40,10 +41,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     // regular call
+  //!     // Regular Call
   //!     constexpr auto csc(cayley_dickson_like z)                 noexcept; //1
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr auto csc[radpi](cayley_dickson_like z)         noexcept; //2
   //!     constexpr auto csc[rad](cayley_dickson_like z)           noexcept; //1
   //!   }

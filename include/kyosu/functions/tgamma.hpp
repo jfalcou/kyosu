@@ -30,10 +30,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup tgamma kyosu::tgamma
+  //! @ingroup agnostic
+  //! @brief Computes \f$\Gamma(z)\f$ the gamma function.
   //! @{
   //!   @var tgamma
-  //!   @brief Computes \f$\Gamma(z)\f$ the gamma function.
   //!
   //!   @groupheader{Header file}
   //!
@@ -46,7 +47,7 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      // regular calls
+  //!      // Regular Call
   //!      constexpr T  tgamma(T z) noexcept;
   //!   }
   //!   @endcode

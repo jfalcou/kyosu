@@ -34,10 +34,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup atan kyosu::atan
+  //! @ingroup agnostic
+  //! @brief Computes the arctangent of the argument.
   //! @{
   //!   @var atan
-  //!   @brief Computes the arctangent of the argument.
   //!
   //!   @groupheader{Header file}
   //!
@@ -50,11 +51,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     //  regular calls
+  //!     // Regular Calls
   //!     constexpr auto atan(cayley_dickson_like z)                noexcept;
   //!     constexpr auto atan(cayley_dickson_like z, eve::value k)  noexcept;
   //!
-  //!     // semantic modifyers
+  //!     // Semantic Modifiers
   //!     constexpr Z atan[real_only](Real z)                       noexcept;
   //!     constexpr auto atan[radpi](cayley_dickson_like z)         noexcept;
   //!     constexpr auto atan[rad](cayley_dickson_like z)           noexcept;

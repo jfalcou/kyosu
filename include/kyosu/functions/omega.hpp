@@ -25,10 +25,11 @@ namespace kyosu
     KYOSU_CALLABLE_OBJECT(omega_t, omega_);
   };
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup omega kyosu::omega
+  //! @ingroup agnostic
+  //! @brief Computes the Wright \f$\omega\f$ the inverse function of \f$ x \rightarrow \log  x+x\f$
   //! @{
   //!   @var omega
-  //!   @brief Computes the Wright \f$\omega\f$ the inverse function of \f$ x \rightarrow \log  x+x\f$
   //!
   //!   @groupheader{Header file}
   //!
@@ -39,9 +40,9 @@ namespace kyosu
   //!   @groupheader{Callable Signatures}
   //!
   //!   @code
-  //!   namespace eve
+  //!   namespace kyosu
   //!   {
-  //!      // Regular overload
+  //!      // Regular Call
   //!      constexpr auto omega(complex_like auto x)                          noexcept; // 1
   //!
   //!      // Lanes masking

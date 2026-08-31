@@ -22,10 +22,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup inject kyosu::inject
+  //! @ingroup agnostic
+  //! @brief inject a real in the complex plane a nan producing a fnan.
   //! @{
   //!   @var inject
-  //!   @brief inject a real in the complex plane a nan producing a fnan.
   //!
   //!   @groupheader{Header file}
   //!

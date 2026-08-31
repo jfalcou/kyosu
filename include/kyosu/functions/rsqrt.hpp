@@ -34,10 +34,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup rsqrt kyosu::rsqrt
+  //! @ingroup agnostic
+  //! @brief Computes a inverse square root value.
   //! @{
   //!   @var rsqrt
-  //!   @brief Computes a inverse square root value.
   //!
   //!   @groupheader{Header file}
   //!
@@ -50,11 +51,11 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //  regular call
+  //!      // Regular Calls
   //!      template<kyosu::concepts::cayley_dickson_like T> constexpr complexify_t<T> rsqrt(T z) noexcept;  //1
-  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto sqrt(T z, K k) noexcept;         //2
+  //!      template<kyosu::concepts::cayley_dickson_like T> constexpr auto rsqrt(T z, K k) noexcept;         //2
   //!
-  //!      // semantic modifyers
+  //!      // Semantic Modifier
   //!      template<concepts::real T> constexpr complexify_t<T> rsqrt[real_only](T z) noexcept;             //1
   //!   }
   //!   @endcode

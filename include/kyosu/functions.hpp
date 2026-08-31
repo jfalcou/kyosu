@@ -12,8 +12,26 @@
 #include <eve/module/special.hpp>
 
 //======================================================================================================================
-//! @defgroup functions Cayley-Dickson Functions
+//! @defgroup kyosu_functions Cayley-Dickson Functions
 //! @brief Functions performing computations over all Cayley-Dickson types complex, quaternions, octonions...
+//======================================================================================================================
+
+//======================================================================================================================
+//! @defgroup agnostic Algebra-agnostic functions
+//! @ingroup kyosu_functions
+//! @brief Functions defined over every Cayley-Dickson type, whatever its dimension.
+//======================================================================================================================
+
+//======================================================================================================================
+//! @defgroup complex Complex-specific functions
+//! @ingroup kyosu_functions
+//! @brief Functions that only make sense on the two-dimensional algebra.
+//======================================================================================================================
+
+//======================================================================================================================
+//! @defgroup quaternion Quaternion-specific functions
+//! @ingroup kyosu_functions
+//! @brief Rotations and the parametrizations a quaternion is built from or read back into.
 //======================================================================================================================
 
 //======================================================================================================================

@@ -21,10 +21,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup frac kyosu::frac
+  //! @ingroup agnostic
+  //! @brief Computes the frac value.
   //! @{
   //!   @var frac
-  //!   @brief Computes the frac value.
   //!
   //!   @groupheader{Header file}
   //!

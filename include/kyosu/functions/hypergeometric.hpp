@@ -57,10 +57,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup hypergeometric kyosu::hypergeometric
+  //! @ingroup agnostic
+  //! @brief Computes the hypergeometric function \f${}_pF_q(a_1, \dots, a_p; b_1,\dots, b_p; z)\f$ for \f$ 0 \le p,  q \le 2\f$.
   //! @{
   //!   @var hypergeometric
-  //!   @brief Computes the hypergeometric function \f${}_pF_q(a_1, \dots, a_p; b_1,\dots, b_p; z)\f$ for \f$ 0 \le p,  q \le 2\f$.
   //!
   //!   **Defined in Header**
   //!
@@ -73,10 +74,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Call
   //!     constexpr auto hypergeometric(auto z, auto a, auto b)              noexcept; // 1;
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic Modifier
   //!     constexpr auto hypergeometric[regularized](auto z, auto a, auto b) noexcept; // 2
   //!   }
   //!   @endcode

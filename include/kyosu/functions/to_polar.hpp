@@ -49,10 +49,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup to_polar kyosu::to_polar
+  //! @ingroup agnostic
+  //! @brief returns modulus and argument of the input.
   //! @{
   //!   @var to_polar
-  //!   @brief returns modulus and argument of the input.
   //!
   //!   @groupheader{Header file}
   //!
@@ -65,12 +66,12 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!      //regular call
+  //!      // Regular Calls
   //!      template<kyosu::concepts::cayley_dickson T>                             constexpr T to_polar(T z)      noexcept; //1
   //!      template<eve::floating_ordered_value T>                                 constexpr T to_polar(T z)      noexcept; //2
-  //!      template<eve::floating_ordered_value T, eve::floating_ordered_value U)  constexpr T to_polar(T t, U u) noexcept; //3
+  //!      template<eve::floating_ordered_value T, eve::floating_ordered_value U>  constexpr T to_polar(T t, U u) noexcept; //3
   //!
-  //!      // Semantic modifyiers
+  //!      // Semantic Modifier
   //!      template<typenam T>                        constexpr T to_polar[radpi](/*any previous overload*/)      noexcept; //4
   //!   }
   //!   @endcode

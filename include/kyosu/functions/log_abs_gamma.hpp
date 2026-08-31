@@ -26,10 +26,11 @@ namespace kyosu
   };
 
   //======================================================================================================================
-  //! @addtogroup functions
+  //! @defgroup log_abs_gamma kyosu::log_abs_gamma
+  //! @ingroup agnostic
+  //! @brief Computes the log of the modulus of the \f$\Gamma\f$ function of the parameter.
   //! @{
   //!   @var log_abs_gamma
-  //!   @brief Computes the log of the modulus of the \f$\Gamma\f$ function of the parameter.
   //!
   //!   @groupheader{Header file}
   //!
