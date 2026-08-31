@@ -137,7 +137,7 @@ an identity of computation, and it is on this that the following section rests.
 The construction is carried out over the IEEE `float` and `double` representations of the reals
 exclusively. As **KYOSU** is built upon EVE, these may equally be SIMD registers of such values.
 
-# Extension of real functions
+# Extension of real analytic functions
 
 Let \f$f\f$ be a real analytic function and \f$c \in \mathbb{K}\f$. Its extension is obtained in two
 steps:
@@ -149,3 +149,10 @@ The first step is legitimate because \f$I_c\f$ squares to \f$-1\f$, so that the 
 by \f$c\f$ is isomorphic to \f$\mathbb{C}\f$; the second returns the result to \f$\mathbb{K}\f$ along
 the pure direction of \f$c\f$. Only power-associativity is required, and it holds at every
 dimension of the tower.
+
+Are not part of this scheme the function which as `abs` always returns real for any \f$\mathbb{K}\f$ value
+and are obviouly not real analytic that have individual treatments.
+
+Note that a real analytic function is a function from a real numbers set to real numbers that can be locally
+expressed by a convergent power series around every point in its domain. This representation legitimates its
+extension to parts of  \f$\mathbb{C}\f$.

@@ -3,7 +3,7 @@
 //!
 //! **KYOSU** is a C++20 library for complex numbers, quaternions, octonions and the general
 //! \f$\mathbb{R}\f$-Cayley-Dickson algebras. It extends the usual real functions to all of them — the
-//! transcendentals, but also Bessel functions, Legendre polynomials and elliptic integrals — and every
+//! transcendentals, but also Legendre polynomials and elliptic integrals — and every
 //! one of those functions works on a scalar and on a SIMD register alike.
 //!
 //! If all you need is complex numbers, that is reason enough to use it: they are the two-dimensional case,
@@ -45,7 +45,7 @@
 //! + [**General algebras**](https://en.wikipedia.org/wiki/Cayley%E2%80%93Dickson_construction).
 //!
 //! Dimensions mix freely in an operation: the result takes the largest one and the missing components
-//! are zero. And the algebra is the real one: past the complex numbers it stops being commutative,
+//! are zero. And the algebra terminology is not for fun: past the complex numbers it stops being commutative,
 //! which is why kyosu::ldiv sits alongside `/`. The constants kyosu::i, kyosu::mi, kyosu::j and
 //! kyosu::k are there, as are kyosu::muli and kyosu::mulmi for multiplication by \f$\pm i\f$.
 //!

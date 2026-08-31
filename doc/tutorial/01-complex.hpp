@@ -14,8 +14,8 @@
 //! @godbolt{doc/tut_complex_basics.cpp}
 //!
 //! Note the printing convention. A value comes out as its components against the basis names,
-//! `3 + 4i` rather than `(3,4)`, and that convention scales: a quaternion prints as
-//! `1 + 2i + 3j + 4k`. You will read a lot of these.
+//! 3 + 4i rather than "(3,4)", and that convention scales: a quaternion prints as
+//! 1 + 2i + 3j + 4k. You will read a lot of these.
 //!
 //! # Functions
 //!

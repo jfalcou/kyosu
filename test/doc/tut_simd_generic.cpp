@@ -1,5 +1,4 @@
 #include <iostream>
-#include <eve/wide.hpp>
 #include <kyosu/kyosu.hpp>
 
 // One body, whatever the caller hands over.
@@ -10,5 +9,7 @@ int main()
   std::cout << "scalar : " << energy(kyosu::complex_t<double>(1., 2.)) << "\n";
 
   eve::wide<double> re = [](auto i, auto) { return 1.0 + i; };
-  std::cout << "wide   : " << energy(kyosu::complex(re, re)) << "\n";
+  std::cout << "re                     " << re << "\n";
+  std::cout << "kyosu::complex(re, re) " << kyosu::complex(re, re) << "\n";
+  std::cout << "wide energy            " << energy(kyosu::complex(re, re)) << "\n";
 }

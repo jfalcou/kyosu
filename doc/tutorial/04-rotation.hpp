@@ -46,8 +46,8 @@
 //! # Converting to and from other representations
 //!
 //! You rarely control every piece of a pipeline, so the conversions are provided in both
-//! directions: kyosu::to_rotation_matrix and kyosu::from_rotation_matrix,
-//! kyosu::to_euler and kyosu::from_euler, kyosu::to_angle_axis and kyosu::from_angle_axis.
+//! directions: `to_rotation_matrix` and `from_rotation_matrix`,
+//! `to_euler` and `from_euler`, `to_angle_axis` and `from_angle_axis`.
 //!
 //! @godbolt{doc/tut_rot_convert.cpp}
 //!
@@ -58,8 +58,8 @@
 //!
 //! <div class="section_buttons">
 //!
-//! | Previous                                  |                                Next |
-//! |:------------------------------------------|------------------------------------:|
-//! | [Quaternions](@ref tutorial-quaternion)   | [Options](@ref tutorial-options)    |
+//! | Previous                                  |                                        Next |
+//! |:------------------------------------------|--------------------------------------------:|
+//! | [Quaternions](@ref tutorial-quaternion)   | [Octonions and Beyond](@ref tutorial-beyond)|
 //!
 //! </div>
