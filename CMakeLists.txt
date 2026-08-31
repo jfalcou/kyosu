@@ -68,6 +68,17 @@ if(KYOSU_BUILD_DOCUMENTATION)
   endif()
 
   copa_setup_doxygen(${QUIET_OPTION} DESTINATION "${PROJECT_BINARY_DIR}/doc")
+
+  ## Reading eve.tag is what makes the eve:: references resolve, and it also hands doxygen every symbol eve documents,
+  ## which then fills kyosu's search box. Doxygen has no setting for that, so the index is trimmed afterwards.
+  ## Belongs in copacabana once it hosts the tagfile machinery - jfalcou/copacabana#28.
+  add_custom_command( TARGET kyosu-doxygen POST_BUILD
+                      COMMAND ${CMAKE_COMMAND} -E env python3
+                              "${PROJECT_SOURCE_DIR}/doc/strip_external_search.py"
+                              "${PROJECT_BINARY_DIR}/doc/search"
+                      COMMENT "[${PROJECT_NAME}] - Dropping the external symbols from the search index"
+                      VERBATIM
+                    )
 endif()
 
 ##======================================================================================================================

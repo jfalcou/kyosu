@@ -20,8 +20,8 @@
 //! # Functions
 //!
 //! Everything you would expect is there, under the name you would expect, in namespace `kyosu`.
-//! Over two hundred of them, from the arithmetic to the transcendentals, and on to Bessel
-//! functions, Legendre polynomials and elliptic integrals.
+//! Two hundred of them, from the arithmetic to the transcendentals, and on to the Riemann zeta,
+//! Legendre polynomials and elliptic integrals.
 //!
 //! @godbolt{doc/tut_complex_functions.cpp}
 //!
