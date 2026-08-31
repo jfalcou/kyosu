@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kyosu_0',['Kyosu',['../index.html',1,'']]]
+  ['licence_0',['Licence',['../licence.html',1,'']]]
 ];

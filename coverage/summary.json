@@ -1,7 +1,7 @@
 {
-    "branch_covered": 1753,
-    "branch_percent": 62.0,
-    "branch_total": 2829,
+    "branch_covered": 1305,
+    "branch_percent": 60.0,
+    "branch_total": 2176,
     "files": [
         {
             "branch_covered": 2,
@@ -88,198 +88,6 @@
             "line_total": 4
         },
         {
-            "branch_covered": 5,
-            "branch_percent": 100.0,
-            "branch_total": 5,
-            "filename": "include/kyosu/details/bessel/bessel_utils2.hpp",
-            "function_covered": 18,
-            "function_percent": 60.0,
-            "function_total": 30,
-            "line_covered": 40,
-            "line_percent": 100.0,
-            "line_total": 40
-        },
-        {
-            "branch_covered": 5,
-            "branch_percent": 71.4,
-            "branch_total": 7,
-            "filename": "include/kyosu/details/bessel/bessel_utils.hpp",
-            "function_covered": 12,
-            "function_percent": 50.0,
-            "function_total": 24,
-            "line_covered": 38,
-            "line_percent": 100.0,
-            "line_total": 38
-        },
-        {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
-            "filename": "include/kyosu/details/bessel/besseln/cb_hn.hpp",
-            "function_covered": 4,
-            "function_percent": 100.0,
-            "function_total": 4,
-            "line_covered": 5,
-            "line_percent": 100.0,
-            "line_total": 5
-        },
-        {
-            "branch_covered": 53,
-            "branch_percent": 100.0,
-            "branch_total": 53,
-            "filename": "include/kyosu/details/bessel/besseln/cb_ikn.hpp",
-            "function_covered": 6,
-            "function_percent": 100.0,
-            "function_total": 6,
-            "line_covered": 31,
-            "line_percent": 100.0,
-            "line_total": 31
-        },
-        {
-            "branch_covered": 119,
-            "branch_percent": 44.6,
-            "branch_total": 267,
-            "filename": "include/kyosu/details/bessel/besseln/cb_jyn.hpp",
-            "function_covered": 32,
-            "function_percent": 41.6,
-            "function_total": 77,
-            "line_covered": 251,
-            "line_percent": 80.4,
-            "line_total": 312
-        },
-        {
-            "branch_covered": 6,
-            "branch_percent": 100.0,
-            "branch_total": 6,
-            "filename": "include/kyosu/details/bessel/besseln/sb_hn.hpp",
-            "function_covered": 8,
-            "function_percent": 100.0,
-            "function_total": 8,
-            "line_covered": 22,
-            "line_percent": 100.0,
-            "line_total": 22
-        },
-        {
-            "branch_covered": 40,
-            "branch_percent": 100.0,
-            "branch_total": 40,
-            "filename": "include/kyosu/details/bessel/besseln/sb_ikn.hpp",
-            "function_covered": 12,
-            "function_percent": 100.0,
-            "function_total": 12,
-            "line_covered": 24,
-            "line_percent": 100.0,
-            "line_total": 24
-        },
-        {
-            "branch_covered": 27,
-            "branch_percent": 75.0,
-            "branch_total": 36,
-            "filename": "include/kyosu/details/bessel/besseln/sb_jyn.hpp",
-            "function_covered": 16,
-            "function_percent": 100.0,
-            "function_total": 16,
-            "line_covered": 65,
-            "line_percent": 100.0,
-            "line_total": 65
-        },
-        {
-            "branch_covered": 12,
-            "branch_percent": 75.0,
-            "branch_total": 16,
-            "filename": "include/kyosu/details/bessel/besselr/airy.hpp",
-            "function_covered": 10,
-            "function_percent": 100.0,
-            "function_total": 10,
-            "line_covered": 50,
-            "line_percent": 100.0,
-            "line_total": 50
-        },
-        {
-            "branch_covered": 6,
-            "branch_percent": 100.0,
-            "branch_total": 6,
-            "filename": "include/kyosu/details/bessel/besselr/cb_hr.hpp",
-            "function_covered": 18,
-            "function_percent": 100.0,
-            "function_total": 18,
-            "line_covered": 16,
-            "line_percent": 100.0,
-            "line_total": 16
-        },
-        {
-            "branch_covered": 37,
-            "branch_percent": 82.2,
-            "branch_total": 45,
-            "filename": "include/kyosu/details/bessel/besselr/cb_ikr.hpp",
-            "function_covered": 19,
-            "function_percent": 100.0,
-            "function_total": 19,
-            "line_covered": 53,
-            "line_percent": 100.0,
-            "line_total": 53
-        },
-        {
-            "branch_covered": 64,
-            "branch_percent": 83.1,
-            "branch_total": 77,
-            "filename": "include/kyosu/details/bessel/besselr/cb_jyr01.hpp",
-            "function_covered": 22,
-            "function_percent": 91.7,
-            "function_total": 24,
-            "line_covered": 122,
-            "line_percent": 99.2,
-            "line_total": 123
-        },
-        {
-            "branch_covered": 56,
-            "branch_percent": 76.7,
-            "branch_total": 73,
-            "filename": "include/kyosu/details/bessel/besselr/cb_jyr.hpp",
-            "function_covered": 36,
-            "function_percent": 100.0,
-            "function_total": 36,
-            "line_covered": 101,
-            "line_percent": 99.0,
-            "line_total": 102
-        },
-        {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
-            "filename": "include/kyosu/details/bessel/besselr/sb_hr.hpp",
-            "function_covered": 4,
-            "function_percent": 100.0,
-            "function_total": 4,
-            "line_covered": 3,
-            "line_percent": 100.0,
-            "line_total": 3
-        },
-        {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
-            "filename": "include/kyosu/details/bessel/besselr/sb_ikr.hpp",
-            "function_covered": 4,
-            "function_percent": 100.0,
-            "function_total": 4,
-            "line_covered": 8,
-            "line_percent": 100.0,
-            "line_total": 8
-        },
-        {
-            "branch_covered": 2,
-            "branch_percent": 50.0,
-            "branch_total": 4,
-            "filename": "include/kyosu/details/bessel/besselr/sb_jyr.hpp",
-            "function_covered": 8,
-            "function_percent": 100.0,
-            "function_total": 8,
-            "line_covered": 18,
-            "line_percent": 100.0,
-            "line_total": 18
-        },
-        {
             "branch_covered": 1,
             "branch_percent": 100.0,
             "branch_total": 1,
@@ -296,9 +104,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/details/cayleyify.hpp",
-            "function_covered": 244,
+            "function_covered": 241,
             "function_percent": 99.2,
-            "function_total": 246,
+            "function_total": 243,
             "line_covered": 16,
             "line_percent": 100.0,
             "line_total": 16
@@ -348,8 +156,8 @@
             "function_percent": 100.0,
             "function_total": 8,
             "line_covered": 47,
-            "line_percent": 97.9,
-            "line_total": 48
+            "line_percent": 95.9,
+            "line_total": 49
         },
         {
             "branch_covered": 20,
@@ -359,9 +167,9 @@
             "function_covered": 6,
             "function_percent": 100.0,
             "function_total": 6,
-            "line_covered": 52,
+            "line_covered": 51,
             "line_percent": 100.0,
-            "line_total": 52
+            "line_total": 51
         },
         {
             "branch_covered": 11,
@@ -371,9 +179,9 @@
             "function_covered": 4,
             "function_percent": 80.0,
             "function_total": 5,
-            "line_covered": 32,
+            "line_covered": 31,
             "line_percent": 100.0,
-            "line_total": 32
+            "line_total": 31
         },
         {
             "branch_covered": 17,
@@ -388,16 +196,16 @@
             "line_total": 34
         },
         {
-            "branch_covered": 75,
-            "branch_percent": 61.0,
-            "branch_total": 123,
+            "branch_covered": 71,
+            "branch_percent": 60.7,
+            "branch_total": 117,
             "filename": "include/kyosu/details/hyperg/hyp2_1/b_sum_init_ps_infinity.hpp",
             "function_covered": 9,
             "function_percent": 81.8,
             "function_total": 11,
-            "line_covered": 92,
+            "line_covered": 88,
             "line_percent": 100.0,
-            "line_total": 92
+            "line_total": 88
         },
         {
             "branch_covered": 0,
@@ -443,9 +251,9 @@
             "function_covered": 43,
             "function_percent": 74.1,
             "function_total": 58,
-            "line_covered": 162,
-            "line_percent": 96.4,
-            "line_total": 168
+            "line_covered": 156,
+            "line_percent": 96.3,
+            "line_total": 162
         },
         {
             "branch_covered": 5,
@@ -467,9 +275,9 @@
             "function_covered": 7,
             "function_percent": 100.0,
             "function_total": 7,
-            "line_covered": 80,
+            "line_covered": 78,
             "line_percent": 100.0,
-            "line_total": 80
+            "line_total": 78
         },
         {
             "branch_covered": 0,
@@ -518,18 +326,6 @@
             "line_covered": 2,
             "line_percent": 100.0,
             "line_total": 2
-        },
-        {
-            "branch_covered": 2,
-            "branch_percent": 100.0,
-            "branch_total": 2,
-            "filename": "include/kyosu/details/with_alloca.hpp",
-            "function_covered": 31,
-            "function_percent": 93.9,
-            "function_total": 33,
-            "line_covered": 10,
-            "line_percent": 100.0,
-            "line_total": 10
         },
         {
             "branch_covered": 0,
@@ -638,42 +434,6 @@
             "line_covered": 11,
             "line_percent": 100.0,
             "line_total": 11
-        },
-        {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
-            "filename": "include/kyosu/functions/airy.hpp",
-            "function_covered": 15,
-            "function_percent": 100.0,
-            "function_total": 15,
-            "line_covered": 11,
-            "line_percent": 100.0,
-            "line_total": 11
-        },
-        {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
-            "filename": "include/kyosu/functions/airy_ai.hpp",
-            "function_covered": 18,
-            "function_percent": 100.0,
-            "function_total": 18,
-            "line_covered": 7,
-            "line_percent": 100.0,
-            "line_total": 7
-        },
-        {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
-            "filename": "include/kyosu/functions/airy_bi.hpp",
-            "function_covered": 25,
-            "function_percent": 100.0,
-            "function_total": 25,
-            "line_covered": 7,
-            "line_percent": 100.0,
-            "line_total": 7
         },
         {
             "branch_covered": 0,
@@ -806,66 +566,6 @@
             "line_covered": 7,
             "line_percent": 100.0,
             "line_total": 7
-        },
-        {
-            "branch_covered": 2,
-            "branch_percent": 100.0,
-            "branch_total": 2,
-            "filename": "include/kyosu/functions/bessel_h.hpp",
-            "function_covered": 63,
-            "function_percent": 100.0,
-            "function_total": 63,
-            "line_covered": 16,
-            "line_percent": 100.0,
-            "line_total": 16
-        },
-        {
-            "branch_covered": 2,
-            "branch_percent": 100.0,
-            "branch_total": 2,
-            "filename": "include/kyosu/functions/bessel_i.hpp",
-            "function_covered": 42,
-            "function_percent": 100.0,
-            "function_total": 42,
-            "line_covered": 17,
-            "line_percent": 100.0,
-            "line_total": 17
-        },
-        {
-            "branch_covered": 2,
-            "branch_percent": 100.0,
-            "branch_total": 2,
-            "filename": "include/kyosu/functions/bessel_j.hpp",
-            "function_covered": 42,
-            "function_percent": 100.0,
-            "function_total": 42,
-            "line_covered": 15,
-            "line_percent": 100.0,
-            "line_total": 15
-        },
-        {
-            "branch_covered": 2,
-            "branch_percent": 100.0,
-            "branch_total": 2,
-            "filename": "include/kyosu/functions/bessel_k.hpp",
-            "function_covered": 30,
-            "function_percent": 100.0,
-            "function_total": 30,
-            "line_covered": 15,
-            "line_percent": 100.0,
-            "line_total": 15
-        },
-        {
-            "branch_covered": 2,
-            "branch_percent": 100.0,
-            "branch_total": 2,
-            "filename": "include/kyosu/functions/bessel_y.hpp",
-            "function_covered": 42,
-            "function_percent": 100.0,
-            "function_total": 42,
-            "line_covered": 15,
-            "line_percent": 100.0,
-            "line_total": 15
         },
         {
             "branch_covered": 0,
@@ -1028,9 +728,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/dec.hpp",
-            "function_covered": 66,
+            "function_covered": 63,
             "function_percent": 100.0,
-            "function_total": 66,
+            "function_total": 63,
             "line_covered": 7,
             "line_percent": 100.0,
             "line_total": 7
@@ -1364,9 +1064,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/fms.hpp",
-            "function_covered": 80,
+            "function_covered": 68,
             "function_percent": 100.0,
-            "function_total": 80,
+            "function_total": 68,
             "line_covered": 6,
             "line_percent": 100.0,
             "line_total": 6
@@ -1604,9 +1304,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/if_else.hpp",
-            "function_covered": 604,
-            "function_percent": 88.0,
-            "function_total": 686,
+            "function_covered": 592,
+            "function_percent": 88.2,
+            "function_total": 671,
             "line_covered": 16,
             "line_percent": 100.0,
             "line_total": 16
@@ -1676,9 +1376,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/is_eqz.hpp",
-            "function_covered": 90,
+            "function_covered": 87,
             "function_percent": 100.0,
-            "function_total": 90,
+            "function_total": 87,
             "line_covered": 5,
             "line_percent": 100.0,
             "line_total": 5
@@ -2564,9 +2264,9 @@
             "branch_percent": 100.0,
             "branch_total": 2,
             "filename": "include/kyosu/functions/sin.hpp",
-            "function_covered": 169,
+            "function_covered": 166,
             "function_percent": 98.8,
-            "function_total": 171,
+            "function_total": 168,
             "line_covered": 22,
             "line_percent": 100.0,
             "line_total": 22
@@ -2588,9 +2288,9 @@
             "branch_percent": 66.7,
             "branch_total": 6,
             "filename": "include/kyosu/functions/sincos.hpp",
-            "function_covered": 99,
-            "function_percent": 97.1,
-            "function_total": 102,
+            "function_covered": 96,
+            "function_percent": 97.0,
+            "function_total": 99,
             "line_covered": 27,
             "line_percent": 73.0,
             "line_total": 37
@@ -2891,9 +2591,9 @@
             "function_covered": 18,
             "function_percent": 100.0,
             "function_total": 18,
-            "line_covered": 87,
+            "line_covered": 86,
             "line_percent": 98.9,
-            "line_total": 88
+            "line_total": 87
         },
         {
             "branch_covered": 0,
@@ -2948,9 +2648,9 @@
             "branch_percent": 100.0,
             "branch_total": 2,
             "filename": "include/kyosu/types/compounds.hpp",
-            "function_covered": 325,
+            "function_covered": 323,
             "function_percent": 99.1,
-            "function_total": 328,
+            "function_total": 326,
             "line_covered": 39,
             "line_percent": 100.0,
             "line_total": 39
@@ -3016,12 +2716,12 @@
             "line_total": 4
         }
     ],
-    "function_covered": 24513,
-    "function_percent": 98.1,
-    "function_total": 24979,
+    "function_covered": 23935,
+    "function_percent": 98.4,
+    "function_total": 24325,
     "gcovr/summary_format_version": "0.6",
-    "line_covered": 4845,
-    "line_percent": 94.7,
-    "line_total": 5117,
+    "line_covered": 3870,
+    "line_percent": 94.9,
+    "line_total": 4080,
     "root": "../../.."
 }

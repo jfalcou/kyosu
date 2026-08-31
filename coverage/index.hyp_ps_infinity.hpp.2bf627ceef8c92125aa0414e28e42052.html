@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-08-31 10:08:14</td>
+      <td>2026-08-31 10:24:29</td>
     </tr>
   </table>
 </div>
@@ -41,8 +41,8 @@
     </tr>
     <tr>
       <th scope="row">Lines:</th>
-      <td>80</td>
-      <td>80</td>
+      <td>78</td>
+      <td>78</td>
       <td class="coverage-high">100.0%</td>
     </tr>
     <tr>
@@ -344,94 +344,87 @@
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">eps_pm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eps</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m</span><span class="p">;</span></td>
+      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">gamma_c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">tgamma</span><span class="p">(</span><span class="n">c</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l37" href="#l37">37</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">gamma_c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">tgamma</span><span class="p">(</span><span class="n">c</span><span class="p">);</span></td>
+      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">gamma_inv_eps_pa_pm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">tgamma_inv</span><span class="p">(</span><span class="n">eps_pa_pm</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l38" href="#l38">38</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">gamma_inv_eps_pa_pm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">tgamma_inv</span><span class="p">(</span><span class="n">eps_pa_pm</span><span class="p">);</span></td>
+      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">gamma_inv_cma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">tgamma_inv</span><span class="p">(</span><span class="n">cma</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l39" href="#l39">39</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">gamma_inv_cma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">tgamma_inv</span><span class="p">(</span><span class="n">cma</span><span class="p">);</span></td>
+      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">z_inv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">rec</span><span class="p">(</span><span class="n">z</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l40" href="#l40">40</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">z_inv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">rec</span><span class="p">(</span><span class="n">z</span><span class="p">);</span></td>
+      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">pow_mz_ma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">a</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l41" href="#l41">41</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">pow_mz_ma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">a</span><span class="p">);</span></td>
+      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">gamma_inv_one_meps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">tgamma_inv</span><span class="p">(</span><span class="n">one_meps</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l42" href="#l42">42</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">gamma_inv_one_meps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">tgamma_inv</span><span class="p">(</span><span class="n">one_meps</span><span class="p">);</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l43" href="#l43">43</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">gamma_prod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gamma_c</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gamma_inv_cma</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gamma_inv_eps_pa_pm</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l44" href="#l44">44</a></td>
+      <td class="lineno"><a id="l43" href="#l43">43</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l45" href="#l45">45</a></td>
+      <td class="lineno"><a id="l44" href="#l44">44</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">A_first_term</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">if_else</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">is_gtz</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="w"> </span><span class="n">gamma_prod</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A_sum_init</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="n">gamma_inv_one_meps</span><span class="p">),</span><span class="w"> </span><span class="n">zero</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l46" href="#l46">46</a></td>
+      <td class="lineno"><a id="l45" href="#l45">45</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">A_sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A_first_term</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l47" href="#l47">47</a></td>
+      <td class="lineno"><a id="l46" href="#l46">46</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="n">r_t</span><span class="w"> </span><span class="n">A_term</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A_first_term</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l48" href="#l48">48</a></td>
+      <td class="lineno"><a id="l47" href="#l47">47</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">invalid_A_first_term</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">is_not_finite</span><span class="p">(</span><span class="n">A_first_term</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l49" href="#l49">49</a></td>
+      <td class="lineno"><a id="l48" href="#l48">48</a></td>
       <td class="linebranch">
         <details class="linebranchDetails">
         <summary class="linebranchSummary">2/2</summary>
@@ -445,112 +438,112 @@
       <td class="src coveredLine"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">any</span><span class="p">(</span><span class="n">invalid_A_first_term</span><span class="p">))</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l50" href="#l50">50</a></td>
+      <td class="lineno"><a id="l49" href="#l49">49</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l51" href="#l51">51</a></td>
+      <td class="lineno"><a id="l50" href="#l50">50</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">2</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">A_term</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">if_else</span><span class="p">(</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l52" href="#l52">52</a></td>
+      <td class="lineno"><a id="l51" href="#l51">51</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">        </span><span class="n">invalid_A_first_term</span><span class="p">,</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l53" href="#l53">53</a></td>
+      <td class="lineno"><a id="l52" href="#l52">52</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">2</td>
       <td class="src coveredLine"><span class="w">        </span><span class="n">kyosu</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="n">kyosu</span><span class="o">::</span><span class="n">log_gamma</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">log_gamma</span><span class="p">(</span><span class="n">cma</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">log_gamma</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">log_A_sum_init</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">)),</span><span class="w"> </span><span class="n">A_term</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l54" href="#l54">54</a></td>
+      <td class="lineno"><a id="l53" href="#l53">53</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">2</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">imag</span><span class="p">(</span><span class="n">A_term</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">if_else</span><span class="p">(</span><span class="n">kyosu</span><span class="o">::</span><span class="n">is_real</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">is_real</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">is_real</span><span class="p">(</span><span class="n">c</span><span class="p">),</span><span class="w"> </span><span class="n">zero</span><span class="p">,</span><span class="w"> </span><span class="n">imag</span><span class="p">(</span><span class="n">A_term</span><span class="p">));</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l55" href="#l55">55</a></td>
+      <td class="lineno"><a id="l54" href="#l54">54</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">2</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">A_sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A_term</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l56" href="#l56">56</a></td>
+      <td class="lineno"><a id="l55" href="#l55">55</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l57" href="#l57">57</a></td>
+      <td class="lineno"><a id="l56" href="#l56">56</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l58" href="#l58">58</a></td>
+      <td class="lineno"><a id="l57" href="#l57">57</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pow_z_inv_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="n">z_inv</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l59" href="#l59">59</a></td>
+      <td class="lineno"><a id="l58" href="#l58">58</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">B_first_term</span><span class="w"> </span><span class="o">=</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l60" href="#l60">60</a></td>
+      <td class="lineno"><a id="l59" href="#l59">59</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">B_sum_init_ps_infinity</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">gamma_c</span><span class="p">,</span><span class="w"> </span><span class="n">gamma_inv_cma</span><span class="p">,</span><span class="w"> </span><span class="n">gamma_inv_one_meps</span><span class="p">,</span><span class="w"> </span><span class="n">gamma_inv_eps_pa_pm</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="n">notdone</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l61" href="#l61">61</a></td>
+      <td class="lineno"><a id="l60" href="#l60">60</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l62" href="#l62">62</a></td>
+      <td class="lineno"><a id="l61" href="#l61">61</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="n">B_first_term</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">pow_z_inv_m</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l63" href="#l63">63</a></td>
+      <td class="lineno"><a id="l62" href="#l62">62</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">prod_B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pow_z_inv_m</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l64" href="#l64">64</a></td>
+      <td class="lineno"><a id="l63" href="#l63">63</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">mm_m1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">maximum</span><span class="p">(</span><span class="n">m_m1</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l65" href="#l65">65</a></td>
+      <td class="lineno"><a id="l64" href="#l64">64</a></td>
       <td class="linebranch">
         <details class="linebranchDetails">
         <summary class="linebranchSummary">2/2</summary>
@@ -564,154 +557,154 @@
       <td class="src coveredLine"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mm_m1</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">n</span><span class="p">)</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l66" href="#l66">66</a></td>
+      <td class="lineno"><a id="l65" href="#l65">65</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l67" href="#l67">67</a></td>
+      <td class="lineno"><a id="l66" href="#l66">66</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">213</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">a_mc_p1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">inc</span><span class="p">(</span><span class="n">n</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l68" href="#l68">68</a></td>
+      <td class="lineno"><a id="l67" href="#l67">67</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">213</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">A_term</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">if_else</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">m_m1</span><span class="p">,</span><span class="w"> </span><span class="n">z_inv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ratio</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">one_meps_mm</span><span class="p">),</span><span class="w"> </span><span class="n">zero</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l69" href="#l69">69</a></td>
+      <td class="lineno"><a id="l68" href="#l68">68</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">213</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">A_sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">A_term</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l70" href="#l70">70</a></td>
+      <td class="lineno"><a id="l69" href="#l69">69</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">213</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">prod_B</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">if_else</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">m_m1</span><span class="p">,</span><span class="w"> </span><span class="n">ratio</span><span class="p">,</span><span class="w"> </span><span class="n">one</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l71" href="#l71">71</a></td>
+      <td class="lineno"><a id="l70" href="#l70">70</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l72" href="#l72">72</a></td>
+      <td class="lineno"><a id="l71" href="#l71">71</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l73" href="#l73">73</a></td>
+      <td class="lineno"><a id="l72" href="#l72">72</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="n">prod_B</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">if_else</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">is_gtz</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="w"> </span><span class="n">dec</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dec</span><span class="p">(</span><span class="n">a_mc_p1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">one</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l74" href="#l74">74</a></td>
+      <td class="lineno"><a id="l73" href="#l73">73</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l75" href="#l75">75</a></td>
+      <td class="lineno"><a id="l74" href="#l74">74</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">B_extra_term</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prod_B</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gamma_prod</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gamma_inv_one_meps</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l76" href="#l76">76</a></td>
+      <td class="lineno"><a id="l75" href="#l75">75</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">B_term</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B_first_term</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l77" href="#l77">77</a></td>
+      <td class="lineno"><a id="l76" href="#l76">76</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">B_sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B_first_term</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l78" href="#l78">78</a></td>
+      <td class="lineno"><a id="l77" href="#l77">77</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">B_prec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tol</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">linfnorm</span><span class="p">(</span><span class="n">B_first_term</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l79" href="#l79">79</a></td>
+      <td class="lineno"><a id="l78" href="#l78">78</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l80" href="#l80">80</a></td>
+      <td class="lineno"><a id="l79" href="#l79">79</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">cv_poly1_der_tab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dcv_poly_calc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">a_mc_p1</span><span class="p">,</span><span class="w"> </span><span class="n">one_meps_mm</span><span class="p">,</span><span class="w"> </span><span class="n">z_inv</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l81" href="#l81">81</a></td>
+      <td class="lineno"><a id="l80" href="#l80">80</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">cv_poly2_der_tab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dcv_poly_calc</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">eps_pa_mc_p1_pm</span><span class="p">,</span><span class="w"> </span><span class="n">eps_pm_p1</span><span class="p">,</span><span class="w"> </span><span class="n">z_inv</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l82" href="#l82">82</a></td>
+      <td class="lineno"><a id="l81" href="#l81">81</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l83" href="#l83">83</a></td>
+      <td class="lineno"><a id="l82" href="#l82">82</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">min_n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">min_n_calc</span><span class="p">(</span><span class="n">cv_poly1_der_tab</span><span class="p">),</span><span class="w"> </span><span class="n">min_n_calc</span><span class="p">(</span><span class="n">cv_poly2_der_tab</span><span class="p">));</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l84" href="#l84">84</a></td>
+      <td class="lineno"><a id="l83" href="#l83">83</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">possible_false_cv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">false_</span><span class="p">(</span><span class="n">kyosu</span><span class="o">::</span><span class="n">as</span><span class="o">&lt;</span><span class="n">r_t</span><span class="o">&gt;</span><span class="p">());</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l85" href="#l85">85</a></td>
+      <td class="lineno"><a id="l84" href="#l84">84</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">maxit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l86" href="#l86">86</a></td>
+      <td class="lineno"><a id="l85" href="#l85">85</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l87" href="#l87">87</a></td>
+      <td class="lineno"><a id="l86" href="#l86">86</a></td>
       <td class="linebranch">
         <details class="linebranchDetails">
         <summary class="linebranchSummary">2/2</summary>
@@ -725,147 +718,147 @@
       <td class="src coveredLine"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxit</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">n</span><span class="p">)</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l88" href="#l88">88</a></td>
+      <td class="lineno"><a id="l87" href="#l87">87</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l89" href="#l89">89</a></td>
+      <td class="lineno"><a id="l88" href="#l88">88</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">n_pm_p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m_p1</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l90" href="#l90">90</a></td>
+      <td class="lineno"><a id="l89" href="#l89">89</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">      </span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l91" href="#l91">91</a></td>
+      <td class="lineno"><a id="l90" href="#l90">90</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">n_p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inc</span><span class="p">(</span><span class="n">n</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l92" href="#l92">92</a></td>
+      <td class="lineno"><a id="l91" href="#l91">91</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">a_pm_pn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a_pm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l93" href="#l93">93</a></td>
+      <td class="lineno"><a id="l92" href="#l92">92</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">a_mc_p1_pm_pn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a_mc_p1_pm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l94" href="#l94">94</a></td>
+      <td class="lineno"><a id="l93" href="#l93">93</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">eps_pm_p1_pn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eps_pm_p1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l95" href="#l95">95</a></td>
+      <td class="lineno"><a id="l94" href="#l94">94</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">n_p1_meps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">one_meps</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l96" href="#l96">96</a></td>
+      <td class="lineno"><a id="l95" href="#l95">95</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">eps_pa_pm_pn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eps_pa_pm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l97" href="#l97">97</a></td>
+      <td class="lineno"><a id="l96" href="#l96">96</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">eps_pa_mc_p1_pm_pn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eps_pa_mc_p1_pm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l98" href="#l98">98</a></td>
+      <td class="lineno"><a id="l97" href="#l97">97</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">16834</td>
-      <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">eps_pm_pn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eps_pm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">      </span><span class="c1">//      auto eps_pm_pn = eps_pm + n; //TO KILL</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l99" href="#l99">99</a></td>
+      <td class="lineno"><a id="l98" href="#l98">98</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">prod1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eps_pa_pm_pn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">eps_pa_mc_p1_pm_pn</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l100" href="#l100">100</a></td>
+      <td class="lineno"><a id="l99" href="#l99">99</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">prod2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eps_pm_p1_pn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_p1</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l101" href="#l101">101</a></td>
+      <td class="lineno"><a id="l100" href="#l100">100</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">prod3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a_pm_pn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a_mc_p1_pm_pn</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l102" href="#l102">102</a></td>
+      <td class="lineno"><a id="l101" href="#l101">101</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">z_inv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z_inv</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">i</span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">as</span><span class="p">(</span><span class="n">z_inv</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.4723e-310</span><span class="p">;</span><span class="w"> </span><span class="c1">//////////////</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l103" href="#l103">103</a></td>
+      <td class="lineno"><a id="l102" href="#l102">102</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">33668</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">B_term</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z_inv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">B_term</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">prod1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">prod2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B_extra_term</span><span class="w"> </span><span class="o">*</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l104" href="#l104">104</a></td>
+      <td class="lineno"><a id="l103" href="#l103">103</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">33668</td>
       <td class="src coveredLine"><span class="w">                                                   </span><span class="p">(</span><span class="n">prod3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_pm_p1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a_pm_pn</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a_mc_p1_pm_pn</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">eps</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">prod1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_p1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l105" href="#l105">105</a></td>
+      <td class="lineno"><a id="l104" href="#l104">104</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">                                                   </span><span class="p">(</span><span class="n">eps_pm_p1_pn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_p1_meps</span><span class="p">));</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l106" href="#l106">106</a></td>
+      <td class="lineno"><a id="l105" href="#l105">105</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">B_sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">B_term</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l107" href="#l107">107</a></td>
+      <td class="lineno"><a id="l106" href="#l106">106</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16834</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">B_extra_term</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">z_inv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">prod3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">n_pm_p1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_p1_meps</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l108" href="#l108">108</a></td>
+      <td class="lineno"><a id="l107" href="#l107">107</a></td>
       <td class="linebranch">
         <details class="linebranchDetails">
         <summary class="linebranchSummary">3/3</summary>
@@ -880,70 +873,70 @@
       <td class="src coveredLine"><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eve</span><span class="o">::</span><span class="n">all</span><span class="p">(</span><span class="o">!</span><span class="n">possible_false_cv</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">kyosu</span><span class="o">::</span><span class="n">linfnorm</span><span class="p">(</span><span class="n">B_term</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">B_prec</span><span class="p">)))</span><span class="w"> </span><span class="k">break</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l109" href="#l109">109</a></td>
+      <td class="lineno"><a id="l108" href="#l108">108</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">16797</td>
       <td class="src coveredLine"><span class="w">      </span><span class="n">possible_false_cv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">if_else</span><span class="p">(</span><span class="n">possible_false_cv</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">min_n</span><span class="p">),</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l110" href="#l110">110</a></td>
+      <td class="lineno"><a id="l109" href="#l109">109</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">33594</td>
       <td class="src coveredLine"><span class="w">                                         </span><span class="n">eve</span><span class="o">::</span><span class="n">is_gtz</span><span class="p">(</span><span class="n">dcv_calc</span><span class="p">(</span><span class="n">cv_poly1_der_tab</span><span class="p">,</span><span class="w"> </span><span class="n">u_t</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span><span class="w"> </span><span class="o">||</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l111" href="#l111">111</a></td>
+      <td class="lineno"><a id="l110" href="#l110">110</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">33594</td>
       <td class="src coveredLine"><span class="w">                                           </span><span class="n">eve</span><span class="o">::</span><span class="n">is_gtz</span><span class="p">(</span><span class="n">dcv_calc</span><span class="p">(</span><span class="n">cv_poly2_der_tab</span><span class="p">,</span><span class="w"> </span><span class="n">u_t</span><span class="p">(</span><span class="n">n</span><span class="p">))),</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l112" href="#l112">112</a></td>
+      <td class="lineno"><a id="l111" href="#l111">111</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">                                         </span><span class="n">possible_false_cv</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l113" href="#l113">113</a></td>
+      <td class="lineno"><a id="l112" href="#l112">112</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l114" href="#l114">114</a></td>
+      <td class="lineno"><a id="l113" href="#l113">113</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">69</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">if_else</span><span class="p">(</span><span class="n">kyosu</span><span class="o">::</span><span class="n">is_eqz</span><span class="p">(</span><span class="n">eps</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">phase</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pow_mz_ma</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">A_sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B_sum</span><span class="p">)),</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l115" href="#l115">115</a></td>
+      <td class="lineno"><a id="l114" href="#l114">114</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">138</td>
       <td class="src coveredLine"><span class="w">                   </span><span class="p">(</span><span class="n">A_sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B_sum</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">phase</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pow_mz_ma</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pi_eps</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">sinpi</span><span class="p">(</span><span class="n">eps</span><span class="p">));</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l116" href="#l116">116</a></td>
+      <td class="lineno"><a id="l115" href="#l115">115</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l117" href="#l117">117</a></td>
+      <td class="lineno"><a id="l116" href="#l116">116</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l118" href="#l118">118</a></td>
+      <td class="lineno"><a id="l117" href="#l117">117</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xi_0',['xi',['../group__functions_gacb395fe97c9b0425cd25698db9dc2ef0.html#gacb395fe97c9b0425cd25698db9dc2ef0',1,'kyosu']]]
+  ['zeta_0',['zeta',['../group__functions_ga9dc4aaaee99fe3a698b09d2c63850d66.html#ga9dc4aaaee99fe3a698b09d2c63850d66',1,'kyosu']]]
 ];
