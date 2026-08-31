@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: Quaternion</title>
+<title>kyosu: Quaternion-specific functions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -18,7 +18,7 @@
   DoxygenAwesomeTabs.init()
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
-  SendToGodbolt.init("kyosu:eve","clang1600","-O3 -std=c++20 -DNDEBUG")
+  SendToGodbolt.init("kyosu:eve","clang2010","-O3 -std=c++20 -DNDEBUG")
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -122,49 +122,54 @@ $(function(){initNavTree('group__quaternion.html','',''); });
 
 <div class="header">
   <div class="summary">
-<a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">Quaternion </div></div>
+<a href="#groups">Topics</a>  </div>
+  <div class="headertitle"><div class="title">Quaternion-specific functions <div class="ingroups"><a class="el" href="group__kyosu__functions.html">Cayley-Dickson Functions</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Rotations and the parametrizations a quaternion is built from or read back into.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ga75d48d720e22794a606131a0b0d7ce7d" id="r_ga75d48d720e22794a606131a0b0d7ce7d"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_ga75d48d720e22794a606131a0b0d7ce7d.html#ga75d48d720e22794a606131a0b0d7ce7d">kyosu::align</a> = eve::functor&lt;align_t&gt;</td></tr>
-<tr class="memdesc:ga75d48d720e22794a606131a0b0d7ce7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing an unitary quaternion value representing a rotation that align v0 to v1.  <br /></td></tr>
-<tr class="memitem:ga505ff6cf7441aa432d2549a840868527" id="r_ga505ff6cf7441aa432d2549a840868527"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_ga505ff6cf7441aa432d2549a840868527.html#ga505ff6cf7441aa432d2549a840868527">kyosu::from_cylindrical</a> = eve::functor&lt;from_cylindrical_t&gt;</td></tr>
-<tr class="memdesc:ga505ff6cf7441aa432d2549a840868527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its cylindrical representation.  <br /></td></tr>
-<tr class="memitem:ga730bd78358cd0568b81be9cdcd247455" id="r_ga730bd78358cd0568b81be9cdcd247455"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_ga730bd78358cd0568b81be9cdcd247455.html#ga730bd78358cd0568b81be9cdcd247455">kyosu::from_cylindrospherical</a> = eve::functor&lt;from_cylindrospherical_t&gt;</td></tr>
-<tr class="memdesc:ga730bd78358cd0568b81be9cdcd247455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its cylindrospherical representation.  <br /></td></tr>
-<tr class="memitem:ga4e7d9b2067dc764269c1539b6e4b9271" id="r_ga4e7d9b2067dc764269c1539b6e4b9271"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_ga4e7d9b2067dc764269c1539b6e4b9271.html#ga4e7d9b2067dc764269c1539b6e4b9271">kyosu::from_euler</a> = eve::functor&lt;from_euler_t&gt;</td></tr>
-<tr class="memdesc:ga4e7d9b2067dc764269c1539b6e4b9271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its euler representation.  <br /></td></tr>
-<tr class="memitem:ga2b89a4fbe7aa7dcd69bef6b423d7dac2" id="r_ga2b89a4fbe7aa7dcd69bef6b423d7dac2"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_ga2b89a4fbe7aa7dcd69bef6b423d7dac2.html#ga2b89a4fbe7aa7dcd69bef6b423d7dac2">kyosu::from_multipolar</a> = eve::functor&lt;from_multipolar_t&gt;</td></tr>
-<tr class="memdesc:ga2b89a4fbe7aa7dcd69bef6b423d7dac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its multipolar representation.  <br /></td></tr>
-<tr class="memitem:gad4d2929cc9f93e1308c26a2e0160007d" id="r_gad4d2929cc9f93e1308c26a2e0160007d"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_gad4d2929cc9f93e1308c26a2e0160007d.html#gad4d2929cc9f93e1308c26a2e0160007d">kyosu::from_rotation_matrix</a> = eve::functor&lt;from_rotation_matrix_t&gt;</td></tr>
-<tr class="memdesc:gad4d2929cc9f93e1308c26a2e0160007d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its rotation_matrix representation.  <br /></td></tr>
-<tr class="memitem:gab01fdca022335c40f7f5e9a7445bedcf" id="r_gab01fdca022335c40f7f5e9a7445bedcf"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_gab01fdca022335c40f7f5e9a7445bedcf.html#gab01fdca022335c40f7f5e9a7445bedcf">kyosu::from_semipolar</a> = eve::functor&lt;from_semipolar_t&gt;</td></tr>
-<tr class="memdesc:gab01fdca022335c40f7f5e9a7445bedcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its semipolar representation.  <br /></td></tr>
-<tr class="memitem:ga5a036cb7181db5317fee9c8359fe901b" id="r_ga5a036cb7181db5317fee9c8359fe901b"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_ga5a036cb7181db5317fee9c8359fe901b.html#ga5a036cb7181db5317fee9c8359fe901b">kyosu::rot_angle</a> = eve::functor&lt;rot_angle_t&gt;</td></tr>
-<tr class="memdesc:ga5a036cb7181db5317fee9c8359fe901b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the normalized angle of rotation defined by a quaternion.  <br /></td></tr>
-<tr class="memitem:gadb3618e47c65a49d20d4a926b6d63233" id="r_gadb3618e47c65a49d20d4a926b6d63233"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_gadb3618e47c65a49d20d4a926b6d63233.html#gadb3618e47c65a49d20d4a926b6d63233">kyosu::rot_axis</a> = eve::functor&lt;rot_axis_t&gt;</td></tr>
-<tr class="memdesc:gadb3618e47c65a49d20d4a926b6d63233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the normalized axis of rotation defined by a quaternion.  <br /></td></tr>
-<tr class="memitem:gafc749b146c3a5d756fc81c80e9b77d74" id="r_gafc749b146c3a5d756fc81c80e9b77d74"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_gafc749b146c3a5d756fc81c80e9b77d74.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a> = eve::functor&lt;rotate_vec_t&gt;</td></tr>
-<tr class="memdesc:gafc749b146c3a5d756fc81c80e9b77d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object rotating an \(\mathbb{R}^3\) vector using a quaternion.  <br /></td></tr>
-<tr class="memitem:ga4ab51b43625e09149d9614a764c205c6" id="r_ga4ab51b43625e09149d9614a764c205c6"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_ga4ab51b43625e09149d9614a764c205c6.html#ga4ab51b43625e09149d9614a764c205c6">kyosu::to_angle_axis</a> = eve::functor&lt;to_angle_axis_t&gt;</td></tr>
-<tr class="memdesc:ga4ab51b43625e09149d9614a764c205c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the angle and axis coordinates from a quaternion.  <br /></td></tr>
-<tr class="memitem:ga75b1e4452fa2f7e46268981fac1e63e4" id="r_ga75b1e4452fa2f7e46268981fac1e63e4"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_ga75b1e4452fa2f7e46268981fac1e63e4.html#ga75b1e4452fa2f7e46268981fac1e63e4">kyosu::to_cylindrical</a> = eve::functor&lt;to_cylindrical_t&gt;</td></tr>
-<tr class="memdesc:ga75b1e4452fa2f7e46268981fac1e63e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the cylindrical coordinates to a quaternion.  <br /></td></tr>
-<tr class="memitem:ga42961187254bc61f724610896d63ddca" id="r_ga42961187254bc61f724610896d63ddca"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_ga42961187254bc61f724610896d63ddca.html#ga42961187254bc61f724610896d63ddca">kyosu::to_cylindrospherical</a> = eve::functor&lt;to_cylindrospherical_t&gt;</td></tr>
-<tr class="memdesc:ga42961187254bc61f724610896d63ddca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the cylindrospherical coordinates from a quaternion.  <br /></td></tr>
-<tr class="memitem:gae7eecc3a7b0016fa20207efb5cd4b12a" id="r_gae7eecc3a7b0016fa20207efb5cd4b12a"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_gae7eecc3a7b0016fa20207efb5cd4b12a.html#gae7eecc3a7b0016fa20207efb5cd4b12a">kyosu::to_euler</a> = eve::functor&lt;to_euler_t&gt;</td></tr>
-<tr class="memdesc:gae7eecc3a7b0016fa20207efb5cd4b12a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing euler angles from a quaternion.  <br /></td></tr>
-<tr class="memitem:ga37dfba013d9e8f32d84fed33e7c27032" id="r_ga37dfba013d9e8f32d84fed33e7c27032"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_ga37dfba013d9e8f32d84fed33e7c27032.html#ga37dfba013d9e8f32d84fed33e7c27032">kyosu::to_multipolar</a> = eve::functor&lt;to_multipolar_t&gt;</td></tr>
-<tr class="memdesc:ga37dfba013d9e8f32d84fed33e7c27032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the multipolar coordinates to a quaternion.  <br /></td></tr>
-<tr class="memitem:ga50cf8709672a806974dc93f77c0d6e5b" id="r_ga50cf8709672a806974dc93f77c0d6e5b"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_ga50cf8709672a806974dc93f77c0d6e5b.html#ga50cf8709672a806974dc93f77c0d6e5b">kyosu::to_rotation_matrix</a> = eve::functor&lt;to_rotation_matrix_t&gt;</td></tr>
-<tr class="memdesc:ga50cf8709672a806974dc93f77c0d6e5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its to_rotation_matrix representation.  <br /></td></tr>
-<tr class="memitem:gafd4bfbd92bfffcca410f3b739923c49a" id="r_gafd4bfbd92bfffcca410f3b739923c49a"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_gafd4bfbd92bfffcca410f3b739923c49a.html#gafd4bfbd92bfffcca410f3b739923c49a">kyosu::to_semipolar</a> = eve::functor&lt;to_semipolar_t&gt;</td></tr>
-<tr class="memdesc:gafd4bfbd92bfffcca410f3b739923c49a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the semipolar coordinates from a quaternion.  <br /></td></tr>
-<tr class="memitem:gaff0907e49def12a25b3b86b06a10eb87" id="r_gaff0907e49def12a25b3b86b06a10eb87"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__quaternion_gaff0907e49def12a25b3b86b06a10eb87.html#gaff0907e49def12a25b3b86b06a10eb87">kyosu::to_spherical</a> = eve::functor&lt;to_spherical_t&gt;</td></tr>
-<tr class="memdesc:gaff0907e49def12a25b3b86b06a10eb87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the spherical coordinates from a quaternion.  <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-groups" class="groupheader"><a id="groups" name="groups"></a>
+Topics</h2></td></tr>
+<tr class="memitem:align" id="r_align"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__align.html">kyosu::align</a></td></tr>
+<tr class="memdesc:group__align"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing an unitary quaternion value representing a rotation that align v0 to v1. <br /></td></tr>
+<tr class="memitem:from_5Fcylindrical" id="r_from_5Fcylindrical"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__from__cylindrical.html">kyosu::from_cylindrical</a></td></tr>
+<tr class="memdesc:group__from__cylindrical"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its cylindrical representation. <br /></td></tr>
+<tr class="memitem:from_5Fcylindrospherical" id="r_from_5Fcylindrospherical"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__from__cylindrospherical.html">kyosu::from_cylindrospherical</a></td></tr>
+<tr class="memdesc:group__from__cylindrospherical"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its cylindrospherical representation. <br /></td></tr>
+<tr class="memitem:from_5Feuler" id="r_from_5Feuler"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__from__euler.html">kyosu::from_euler</a></td></tr>
+<tr class="memdesc:group__from__euler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its euler representation. <br /></td></tr>
+<tr class="memitem:from_5Fmultipolar" id="r_from_5Fmultipolar"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__from__multipolar.html">kyosu::from_multipolar</a></td></tr>
+<tr class="memdesc:group__from__multipolar"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its multipolar representation. <br /></td></tr>
+<tr class="memitem:from_5Frotation_5Fmatrix" id="r_from_5Frotation_5Fmatrix"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__from__rotation__matrix.html">kyosu::from_rotation_matrix</a></td></tr>
+<tr class="memdesc:group__from__rotation__matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its rotation_matrix representation. <br /></td></tr>
+<tr class="memitem:from_5Fsemipolar" id="r_from_5Fsemipolar"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__from__semipolar.html">kyosu::from_semipolar</a></td></tr>
+<tr class="memdesc:group__from__semipolar"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its semipolar representation. <br /></td></tr>
+<tr class="memitem:from_5Fspherical" id="r_from_5Fspherical"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__from__spherical.html">kyosu::from_spherical</a></td></tr>
+<tr class="memdesc:group__from__spherical"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its spherical representation. <br /></td></tr>
+<tr class="memitem:rot_5Fangle" id="r_rot_5Fangle"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__rot__angle.html">kyosu::rot_angle</a></td></tr>
+<tr class="memdesc:group__rot__angle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the normalized angle of rotation defined by a quaternion. <br /></td></tr>
+<tr class="memitem:rot_5Faxis" id="r_rot_5Faxis"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__rot__axis.html">kyosu::rot_axis</a></td></tr>
+<tr class="memdesc:group__rot__axis"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the normalized axis of rotation defined by a quaternion. <br /></td></tr>
+<tr class="memitem:rotate_5Fvec" id="r_rotate_5Fvec"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__rotate__vec.html">kyosu::rotate_vec</a></td></tr>
+<tr class="memdesc:group__rotate__vec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object rotating an \(\mathbb{R}^3\) vector using a quaternion. <br /></td></tr>
+<tr class="memitem:to_5Fangle_5Faxis" id="r_to_5Fangle_5Faxis"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__to__angle__axis.html">kyosu::to_angle_axis</a></td></tr>
+<tr class="memdesc:group__to__angle__axis"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the angle and axis coordinates from a quaternion. <br /></td></tr>
+<tr class="memitem:to_5Fcylindrical" id="r_to_5Fcylindrical"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__to__cylindrical.html">kyosu::to_cylindrical</a></td></tr>
+<tr class="memdesc:group__to__cylindrical"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the cylindrical coordinates to a quaternion. <br /></td></tr>
+<tr class="memitem:to_5Fcylindrospherical" id="r_to_5Fcylindrospherical"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__to__cylindrospherical.html">kyosu::to_cylindrospherical</a></td></tr>
+<tr class="memdesc:group__to__cylindrospherical"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the cylindrospherical coordinates from a quaternion. <br /></td></tr>
+<tr class="memitem:to_5Feuler" id="r_to_5Feuler"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__to__euler.html">kyosu::to_euler</a></td></tr>
+<tr class="memdesc:group__to__euler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing euler angles from a quaternion. <br /></td></tr>
+<tr class="memitem:to_5Fmultipolar" id="r_to_5Fmultipolar"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__to__multipolar.html">kyosu::to_multipolar</a></td></tr>
+<tr class="memdesc:group__to__multipolar"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the multipolar coordinates to a quaternion. <br /></td></tr>
+<tr class="memitem:to_5Frotation_5Fmatrix" id="r_to_5Frotation_5Fmatrix"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__to__rotation__matrix.html">kyosu::to_rotation_matrix</a></td></tr>
+<tr class="memdesc:group__to__rotation__matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing a quaternion from its to_rotation_matrix representation. <br /></td></tr>
+<tr class="memitem:to_5Fsemipolar" id="r_to_5Fsemipolar"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__to__semipolar.html">kyosu::to_semipolar</a></td></tr>
+<tr class="memdesc:group__to__semipolar"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the semipolar coordinates from a quaternion. <br /></td></tr>
+<tr class="memitem:to_5Fspherical" id="r_to_5Fspherical"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__to__spherical.html">kyosu::to_spherical</a></td></tr>
+<tr class="memdesc:group__to__spherical"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the spherical coordinates from a quaternion. <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

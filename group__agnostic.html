@@ -1,0 +1,517 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>kyosu: Algebra-agnostic functions</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="godbolt.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeTabs.init()
+  DoxygenAwesomeParagraphLink.init()
+  DoxygenAwesomeFragmentCopyButton.init()
+  SendToGodbolt.init("kyosu:eve","clang2010","-O3 -std=c++20 -DNDEBUG")
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(function() { init_search(); });
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="color.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/jfalcou/kyosu" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<!-- BEGIN TITLEAREA-->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr  style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">kyosu<span id="projectnumber">&#160;v0.1.0</span>
+   </div>
+   <div id="projectbrief">Complex Without Complexes</div>
+  </td>
+ </tr>
+   <tr><td colspan="2" style="padding: 20px 0px 0px 0px;">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group__agnostic.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#groups">Topics</a>  </div>
+  <div class="headertitle"><div class="title">Algebra-agnostic functions <div class="ingroups"><a class="el" href="group__kyosu__functions.html">Cayley-Dickson Functions</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Functions defined over every Cayley-Dickson type, whatever its dimension.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-groups" class="groupheader"><a id="groups" name="groups"></a>
+Topics</h2></td></tr>
+<tr class="memitem:abs" id="r_abs"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__abs.html">kyosu::abs</a></td></tr>
+<tr class="memdesc:group__abs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the absolute value of the parameter. <br /></td></tr>
+<tr class="memitem:acos" id="r_acos"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__acos.html">kyosu::acos</a></td></tr>
+<tr class="memdesc:group__acos"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the arc cosine of the argument. <br /></td></tr>
+<tr class="memitem:acosh" id="r_acosh"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__acosh.html">kyosu::acosh</a></td></tr>
+<tr class="memdesc:group__acosh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the inverse hyperbolic cosine of the argument. <br /></td></tr>
+<tr class="memitem:acot" id="r_acot"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__acot.html">kyosu::acot</a></td></tr>
+<tr class="memdesc:group__acot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the arc cotangent of the argument. <br /></td></tr>
+<tr class="memitem:acoth" id="r_acoth"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__acoth.html">kyosu::acoth</a></td></tr>
+<tr class="memdesc:group__acoth"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the inverse hyperbolic cotangent of the argument. <br /></td></tr>
+<tr class="memitem:acsc" id="r_acsc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__acsc.html">kyosu::acsc</a></td></tr>
+<tr class="memdesc:group__acsc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the arccosecant of the argument. <br /></td></tr>
+<tr class="memitem:acsch" id="r_acsch"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__acsch.html">kyosu::acsch</a></td></tr>
+<tr class="memdesc:group__acsch"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the inverse hyperbolic cosecant of the argument. <br /></td></tr>
+<tr class="memitem:add" id="r_add"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__add.html">kyosu::add</a></td></tr>
+<tr class="memdesc:group__add"><td class="mdescLeft">&#160;</td><td class="mdescRight"><span class="tt">tuple_callable</span> computing the sum of its arguments. <br /></td></tr>
+<tr class="memitem:agd" id="r_agd"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__agd.html">kyosu::agd</a></td></tr>
+<tr class="memdesc:group__agd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the principal branch inverse gudermanian of the argument. <br /></td></tr>
+<tr class="memitem:am" id="r_am"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__am.html">kyosu::am</a></td></tr>
+<tr class="memdesc:group__am"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes Jacobi's Amplitude function. <br /></td></tr>
+<tr class="memitem:arg" id="r_arg"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__arg.html">kyosu::arg</a></td></tr>
+<tr class="memdesc:group__arg"><td class="mdescLeft">&#160;</td><td class="mdescRight">argument. <br /></td></tr>
+<tr class="memitem:asec" id="r_asec"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__asec.html">kyosu::asec</a></td></tr>
+<tr class="memdesc:group__asec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the arcsecant of the argument. <br /></td></tr>
+<tr class="memitem:asech" id="r_asech"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__asech.html">kyosu::asech</a></td></tr>
+<tr class="memdesc:group__asech"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the inverse hyperbolic secant of the argument. <br /></td></tr>
+<tr class="memitem:asin" id="r_asin"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__asin.html">kyosu::asin</a></td></tr>
+<tr class="memdesc:group__asin"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the arcsine of the argument. <br /></td></tr>
+<tr class="memitem:asinh" id="r_asinh"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__asinh.html">kyosu::asinh</a></td></tr>
+<tr class="memdesc:group__asinh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the inverse hyperbolic sine of the argument. <br /></td></tr>
+<tr class="memitem:associator" id="r_associator"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__associator.html">kyosu::associator</a></td></tr>
+<tr class="memdesc:group__associator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the associator of the three parameters. <br /></td></tr>
+<tr class="memitem:atan" id="r_atan"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__atan.html">kyosu::atan</a></td></tr>
+<tr class="memdesc:group__atan"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the arctangent of the argument. <br /></td></tr>
+<tr class="memitem:atanh" id="r_atanh"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__atanh.html">kyosu::atanh</a></td></tr>
+<tr class="memdesc:group__atanh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the inverse hyperbolic tangent of the argument. <br /></td></tr>
+<tr class="memitem:average" id="r_average"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__average.html">kyosu::average</a></td></tr>
+<tr class="memdesc:group__average"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the average of the parameters. <br /></td></tr>
+<tr class="memitem:beta" id="r_beta"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__beta.html">kyosu::beta</a></td></tr>
+<tr class="memdesc:group__beta"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the beta function: \(\displaystyle \mathbf{B}(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}\) for real, complex or general Cayley_dickson entries. <br /></td></tr>
+<tr class="memitem:cbrt" id="r_cbrt"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__cbrt.html">kyosu::cbrt</a></td></tr>
+<tr class="memdesc:group__cbrt"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the the kth cubic root of the argument. <br /></td></tr>
+<tr class="memitem:ceil" id="r_ceil"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__ceil.html">kyosu::ceil</a></td></tr>
+<tr class="memdesc:group__ceil"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the ceil value. <br /></td></tr>
+<tr class="memitem:chi" id="r_chi"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__chi.html">kyosu::chi</a></td></tr>
+<tr class="memdesc:group__chi"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value of the indicatrix of a set defined by a predicate at the argument. <br /></td></tr>
+<tr class="memitem:commutator" id="r_commutator"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__commutator.html">kyosu::commutator</a></td></tr>
+<tr class="memdesc:group__commutator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the commutator of the two parameters. <br /></td></tr>
+<tr class="memitem:conj" id="r_conj"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__conj.html">kyosu::conj</a></td></tr>
+<tr class="memdesc:group__conj"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the conjugate value. <br /></td></tr>
+<tr class="memitem:convert" id="r_convert"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__convert.html">kyosu::convert</a></td></tr>
+<tr class="memdesc:group__convert"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert to a target type <br /></td></tr>
+<tr class="memitem:cos" id="r_cos"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__cos.html">kyosu::cos</a></td></tr>
+<tr class="memdesc:group__cos"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the cosine of the argument. <br /></td></tr>
+<tr class="memitem:cosh" id="r_cosh"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__cosh.html">kyosu::cosh</a></td></tr>
+<tr class="memdesc:group__cosh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the hyperbolic cosine of the argument. <br /></td></tr>
+<tr class="memitem:cot" id="r_cot"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__cot.html">kyosu::cot</a></td></tr>
+<tr class="memdesc:group__cot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the cotangent of the argument. <br /></td></tr>
+<tr class="memitem:coth" id="r_coth"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__coth.html">kyosu::coth</a></td></tr>
+<tr class="memdesc:group__coth"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the hyperbolic cotangent of the argument. <br /></td></tr>
+<tr class="memitem:csc" id="r_csc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__csc.html">kyosu::csc</a></td></tr>
+<tr class="memdesc:group__csc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the cosecant of the argument. <br /></td></tr>
+<tr class="memitem:csch" id="r_csch"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__csch.html">kyosu::csch</a></td></tr>
+<tr class="memdesc:group__csch"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the hyperbolic cosecant of the argument. <br /></td></tr>
+<tr class="memitem:dec" id="r_dec"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__dec.html">kyosu::dec</a></td></tr>
+<tr class="memdesc:group__dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">decrements the argument by 1. <br /></td></tr>
+<tr class="memitem:deta" id="r_deta"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__deta.html">kyosu::deta</a></td></tr>
+<tr class="memdesc:group__deta"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Dirichlet sums \( \displaystyle \sum_{n = 0}^\infty \frac{(-1)^n}{(kn+1)^z}\). <br /></td></tr>
+<tr class="memitem:digamma" id="r_digamma"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__digamma.html">kyosu::digamma</a></td></tr>
+<tr class="memdesc:group__digamma"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Digamma function i.e. the logarithmic derivative of the \(\Gamma\) function. <br /></td></tr>
+<tr class="memitem:dist" id="r_dist"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__dist.html">kyosu::dist</a></td></tr>
+<tr class="memdesc:group__dist"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the distance between the two parameters. <br /></td></tr>
+<tr class="memitem:div" id="r_div"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__div.html">kyosu::div</a></td></tr>
+<tr class="memdesc:group__div"><td class="mdescLeft">&#160;</td><td class="mdescRight"><span class="tt">tuple_callable</span> computing the division of its first argument with the product of the others. <br /></td></tr>
+<tr class="memitem:dot" id="r_dot"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__dot.html">kyosu::dot</a></td></tr>
+<tr class="memdesc:group__dot"><td class="mdescLeft">&#160;</td><td class="mdescRight">object computing the elementwise dot product of the vector of the first half parameters by thevector of the last half. <br /></td></tr>
+<tr class="memitem:ellint_5Ffe" id="r_ellint_5Ffe"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__ellint__fe.html">kyosu::ellint_fe</a></td></tr>
+<tr class="memdesc:group__ellint__fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes Jacobi's Amplitude function. <br /></td></tr>
+<tr class="memitem:ellint_5Frc" id="r_ellint_5Frc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__ellint__rc.html">kyosu::ellint_rc</a></td></tr>
+<tr class="memdesc:group__ellint__rc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Carlson's elliptic integral  \(  \mathbf{R}_\mathbf{C}(x, y) =
+       \frac12 \int_{0}^{\infty} \scriptstyle(t+x)^{-1/2}(t+y)]^{-1}\;\mathrm{d}t\). <br /></td></tr>
+<tr class="memitem:ellint_5Frd" id="r_ellint_5Frd"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__ellint__rd.html">kyosu::ellint_rd</a></td></tr>
+<tr class="memdesc:group__ellint__rd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Carlson's elliptic integral  \( \mathbf{R}_\mathbf{D}(x, y) = \frac32 \int_{0}^{\infty}
+       \scriptstyle[(t+x)(t+y)]^{-1/2}(t+z)^{-3/2}\;\mathrm{d}t\). <br /></td></tr>
+<tr class="memitem:ellint_5Frf" id="r_ellint_5Frf"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__ellint__rf.html">kyosu::ellint_rf</a></td></tr>
+<tr class="memdesc:group__ellint__rf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Carlson's elliptic integral  \(  \mathbf{R}_\mathbf{F}(x, y) =
+       \frac32 \int_{0}^{\infty} \scriptstyle[(t+x)(t+y)(t+z)]^{-1/2}\scriptstyle\;\mathrm{d}t\). <br /></td></tr>
+<tr class="memitem:ellint_5Frg" id="r_ellint_5Frg"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__ellint__rg.html">kyosu::ellint_rg</a></td></tr>
+<tr class="memdesc:group__ellint__rg"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Carlson's elliptic integral    \( \mathbf{R}_\mathbf{G}(x, y) = \frac1{4\pi} \int_{0}^{2\pi}\int_{0}^{\pi}
+       \scriptstyle\sqrt{x\sin^2\theta\cos^2\phi
+       +y\sin^2\theta\sin^2\phi
+       +z\cos^2\theta} \scriptstyle\;\mathrm{d}\theta\;\mathrm{d}\phi\). <br /></td></tr>
+<tr class="memitem:ellint_5Frj" id="r_ellint_5Frj"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__ellint__rj.html">kyosu::ellint_rj</a></td></tr>
+<tr class="memdesc:group__ellint__rj"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Carlson's elliptic integral  \( \mathbf{R}_\mathbf{J}(x, y) = \frac32 \int_{0}^{\infty}
+       \scriptstyle(t+p)^{-1}[(t+x)(t+y)(t+z)]^{-1/2}\scriptstyle\;\mathrm{d}t\). <br /></td></tr>
+<tr class="memitem:erf" id="r_erf"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__erf.html">kyosu::erf</a></td></tr>
+<tr class="memdesc:group__erf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the error function:  \( \displaystyle
+       \mbox{erf}(x)=\frac{2}{\sqrt\pi}\int_0^{x} e^{-t^2}\mbox{d}t\) or its extension to complex and general cayley-dickson values. <br /></td></tr>
+<tr class="memitem:erfcx" id="r_erfcx"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__erfcx.html">kyosu::erfcx</a></td></tr>
+<tr class="memdesc:group__erfcx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the normalized complementary error function \( \displaystyle \mbox{erfcx}(x) = e^{x^2} \mbox{erfc}(x)\). <br /></td></tr>
+<tr class="memitem:erfi" id="r_erfi"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__erfi.html">kyosu::erfi</a></td></tr>
+<tr class="memdesc:group__erfi"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing The imaginary error function \( \displaystyle \mathrm{erfi}(z) = -i\mathrm{erf}(iz)\). <br /></td></tr>
+<tr class="memitem:eta" id="r_eta"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__eta.html">kyosu::eta</a></td></tr>
+<tr class="memdesc:group__eta"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Dirichlet sum \( \displaystyle \sum_0^\infty \frac{(-1)^n}{(n+1)^z}\). Sometimes this function is for obvious reasons called the alternative \(\zeta\) function . <br /></td></tr>
+<tr class="memitem:exp" id="r_exp"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__exp.html">kyosu::exp</a></td></tr>
+<tr class="memdesc:group__exp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the exponential of the argument. <br /></td></tr>
+<tr class="memitem:exp10" id="r_exp10"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__exp10.html">kyosu::exp10</a></td></tr>
+<tr class="memdesc:group__exp10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the base 10 exponential of the argument. <br /></td></tr>
+<tr class="memitem:exp2" id="r_exp2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__exp2.html">kyosu::exp2</a></td></tr>
+<tr class="memdesc:group__exp2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the base 2 exponential of the argument. <br /></td></tr>
+<tr class="memitem:exp_5Fi" id="r_exp_5Fi"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__exp__i.html">kyosu::exp_i</a></td></tr>
+<tr class="memdesc:group__exp__i"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the exponential of i times the argument. <br /></td></tr>
+<tr class="memitem:exp_5Fint" id="r_exp_5Fint"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__exp__int.html">kyosu::exp_int</a></td></tr>
+<tr class="memdesc:group__exp__int"><td class="mdescLeft">&#160;</td><td class="mdescRight"><span class="tt">elementwise_callable</span> object computing the exponential integral \( \mathbf{E}_n(x) = \displaystyle \int_1^\infty \frac{e^{-xt}}{t^n}\;\mbox{d}t\). <br /></td></tr>
+<tr class="memitem:expm1" id="r_expm1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__expm1.html">kyosu::expm1</a></td></tr>
+<tr class="memdesc:group__expm1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the exponential of the argument minus 1. <br /></td></tr>
+<tr class="memitem:expmx2" id="r_expmx2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__expmx2.html">kyosu::expmx2</a></td></tr>
+<tr class="memdesc:group__expmx2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the exponential of the opposite of the squared argument. <br /></td></tr>
+<tr class="memitem:expx2" id="r_expx2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__expx2.html">kyosu::expx2</a></td></tr>
+<tr class="memdesc:group__expx2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the exponential of the squared argument. <br /></td></tr>
+<tr class="memitem:faddeeva" id="r_faddeeva"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__faddeeva.html">kyosu::faddeeva</a></td></tr>
+<tr class="memdesc:group__faddeeva"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing \(e^{-z^2}\mathrm{erfc}(-iz)\) the scaled complex complementary error function. <br /></td></tr>
+<tr class="memitem:fam" id="r_fam"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__fam.html">kyosu::fam</a></td></tr>
+<tr class="memdesc:group__fam"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused add multiply. <br /></td></tr>
+<tr class="memitem:floor" id="r_floor"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__floor.html">kyosu::floor</a></td></tr>
+<tr class="memdesc:group__floor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the floor value. <br /></td></tr>
+<tr class="memitem:fma" id="r_fma"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__fma.html">kyosu::fma</a></td></tr>
+<tr class="memdesc:group__fma"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused multiply add. <br /></td></tr>
+<tr class="memitem:fms" id="r_fms"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__fms.html">kyosu::fms</a></td></tr>
+<tr class="memdesc:group__fms"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused multiply add. <br /></td></tr>
+<tr class="memitem:fnma" id="r_fnma"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__fnma.html">kyosu::fnma</a></td></tr>
+<tr class="memdesc:group__fnma"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused negate multiply add. <br /></td></tr>
+<tr class="memitem:fnms" id="r_fnms"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__fnms.html">kyosu::fnms</a></td></tr>
+<tr class="memdesc:group__fnms"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused negate multiply sub. <br /></td></tr>
+<tr class="memitem:frac" id="r_frac"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__frac.html">kyosu::frac</a></td></tr>
+<tr class="memdesc:group__frac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the frac value. <br /></td></tr>
+<tr class="memitem:from_5Fangle_5Faxis" id="r_from_5Fangle_5Faxis"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__from__angle__axis.html">kyosu::from_angle_axis</a></td></tr>
+<tr class="memdesc:group__from__angle__axis"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing an an unitary quaternion from an angle value and a 3 dimensional axis vector. <br /></td></tr>
+<tr class="memitem:fsm" id="r_fsm"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__fsm.html">kyosu::fsm</a></td></tr>
+<tr class="memdesc:group__fsm"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes fused sub multiply. <br /></td></tr>
+<tr class="memitem:gd" id="r_gd"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__gd.html">kyosu::gd</a></td></tr>
+<tr class="memdesc:group__gd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the gudermanian of the argument. <br /></td></tr>
+<tr class="memitem:gegenbauer" id="r_gegenbauer"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__gegenbauer.html">kyosu::gegenbauer</a></td></tr>
+<tr class="memdesc:group__gegenbauer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value of the Gegenbauer function of order \(n\). <br /></td></tr>
+<tr class="memitem:harmmean" id="r_harmmean"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__harmmean.html">kyosu::harmmean</a></td></tr>
+<tr class="memdesc:group__harmmean"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the harmonic mean of the parameters. <br /></td></tr>
+<tr class="memitem:horner" id="r_horner"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__horner.html">kyosu::horner</a></td></tr>
+<tr class="memdesc:group__horner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implement the horner scheme to evaluate polynomials. <br /></td></tr>
+<tr class="memitem:hypergeometric" id="r_hypergeometric"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__hypergeometric.html">kyosu::hypergeometric</a></td></tr>
+<tr class="memdesc:group__hypergeometric"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the hypergeometric function \({}_pF_q(a_1, \dots, a_p; b_1,\dots, b_p; z)\) for \( 0 \le p,  q \le 2\). <br /></td></tr>
+<tr class="memitem:hypot" id="r_hypot"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__hypot.html">kyosu::hypot</a></td></tr>
+<tr class="memdesc:group__hypot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the hypot operation. <br /></td></tr>
+<tr class="memitem:if_5Felse" id="r_if_5Felse"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__if__else.html">kyosu::if_else</a></td></tr>
+<tr class="memdesc:group__if__else"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select a value between two arguments based on a logical mask. <br /></td></tr>
+<tr class="memitem:inc" id="r_inc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__inc.html">kyosu::inc</a></td></tr>
+<tr class="memdesc:group__inc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments the argument. <br /></td></tr>
+<tr class="memitem:inject" id="r_inject"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__inject.html">kyosu::inject</a></td></tr>
+<tr class="memdesc:group__inject"><td class="mdescLeft">&#160;</td><td class="mdescRight">inject a real in the complex plane a nan producing a fnan. <br /></td></tr>
+<tr class="memitem:ipart" id="r_ipart"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__ipart.html">kyosu::ipart</a></td></tr>
+<tr class="memdesc:group__ipart"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the imaginary part of a value. <br /></td></tr>
+<tr class="memitem:is_5Fcinf" id="r_is_5Fcinf"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__cinf.html">kyosu::is_cinf</a></td></tr>
+<tr class="memdesc:group__is__cinf"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the parameter is a <span class="tt"><a class="el" href="group__cinf.html#ga0c9ef916832ff4cbfbf575bc77f4fb4f">cinf</a></span>. <br /></td></tr>
+<tr class="memitem:is_5Fdenormal" id="r_is_5Fdenormal"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__denormal.html">kyosu::is_denormal</a></td></tr>
+<tr class="memdesc:group__is__denormal"><td class="mdescLeft">&#160;</td><td class="mdescRight">test the parameter for denormality. <br /></td></tr>
+<tr class="memitem:is_5Fequal" id="r_is_5Fequal"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__equal.html">kyosu::is_equal</a></td></tr>
+<tr class="memdesc:group__is__equal"><td class="mdescLeft">&#160;</td><td class="mdescRight">retuen true if and only if the two parameters are equal. <br /></td></tr>
+<tr class="memitem:is_5Feqz" id="r_is_5Feqz"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__eqz.html">kyosu::is_eqz</a></td></tr>
+<tr class="memdesc:group__is__eqz"><td class="mdescLeft">&#160;</td><td class="mdescRight">test the parameter for equality to zero. <br /></td></tr>
+<tr class="memitem:is_5Ffinite" id="r_is_5Ffinite"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__finite.html">kyosu::is_finite</a></td></tr>
+<tr class="memdesc:group__is__finite"><td class="mdescLeft">&#160;</td><td class="mdescRight">test the parameter is finite. <br /></td></tr>
+<tr class="memitem:is_5Fflint" id="r_is_5Fflint"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__flint.html">kyosu::is_flint</a></td></tr>
+<tr class="memdesc:group__is__flint"><td class="mdescLeft">&#160;</td><td class="mdescRight">test the parameter is a flint. <br /></td></tr>
+<tr class="memitem:is_5Ffnan" id="r_is_5Ffnan"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__fnan.html">kyosu::is_fnan</a></td></tr>
+<tr class="memdesc:group__is__fnan"><td class="mdescLeft">&#160;</td><td class="mdescRight">test the parameter for fnan <br /></td></tr>
+<tr class="memitem:is_5Fimag" id="r_is_5Fimag"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__imag.html">kyosu::is_imag</a></td></tr>
+<tr class="memdesc:group__is__imag"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the parameter real part is zero. <br /></td></tr>
+<tr class="memitem:is_5Finfinite" id="r_is_5Finfinite"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__infinite.html">kyosu::is_infinite</a></td></tr>
+<tr class="memdesc:group__is__infinite"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the parameter is infinite. <br /></td></tr>
+<tr class="memitem:is_5Fnan" id="r_is_5Fnan"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__nan.html">kyosu::is_nan</a></td></tr>
+<tr class="memdesc:group__is__nan"><td class="mdescLeft">&#160;</td><td class="mdescRight">test the parameter for nan <br /></td></tr>
+<tr class="memitem:is_5Fnez" id="r_is_5Fnez"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__nez.html">kyosu::is_nez</a></td></tr>
+<tr class="memdesc:group__is__nez"><td class="mdescLeft">&#160;</td><td class="mdescRight">test the parameter for non-equality to zero. <br /></td></tr>
+<tr class="memitem:is_5Fnot_5Fcinf" id="r_is_5Fnot_5Fcinf"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__not__cinf.html">kyosu::is_not_cinf</a></td></tr>
+<tr class="memdesc:group__is__not__cinf"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the parameter is a not <span class="tt"><a class="el" href="group__cinf.html#ga0c9ef916832ff4cbfbf575bc77f4fb4f">cinf</a></span>. <br /></td></tr>
+<tr class="memitem:is_5Fnot_5Fdenormal" id="r_is_5Fnot_5Fdenormal"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__not__denormal.html">kyosu::is_not_denormal</a></td></tr>
+<tr class="memdesc:group__is__not__denormal"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the parameter is not denormal. <br /></td></tr>
+<tr class="memitem:is_5Fnot_5Fequal" id="r_is_5Fnot_5Fequal"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__not__equal.html">kyosu::is_not_equal</a></td></tr>
+<tr class="memdesc:group__is__not__equal"><td class="mdescLeft">&#160;</td><td class="mdescRight">return true if and only if the two parameters are not equal. <br /></td></tr>
+<tr class="memitem:is_5Fnot_5Ffinite" id="r_is_5Fnot_5Ffinite"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__not__finite.html">kyosu::is_not_finite</a></td></tr>
+<tr class="memdesc:group__is__not__finite"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the parameter is not finite. <br /></td></tr>
+<tr class="memitem:is_5Fnot_5Fflint" id="r_is_5Fnot_5Fflint"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__not__flint.html">kyosu::is_not_flint</a></td></tr>
+<tr class="memdesc:group__is__not__flint"><td class="mdescLeft">&#160;</td><td class="mdescRight">test the parameter is not a flint. <br /></td></tr>
+<tr class="memitem:is_5Fnot_5Ffnan" id="r_is_5Fnot_5Ffnan"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__not__fnan.html">kyosu::is_not_fnan</a></td></tr>
+<tr class="memdesc:group__is__not__fnan"><td class="mdescLeft">&#160;</td><td class="mdescRight">test the parameter for not_fnan <br /></td></tr>
+<tr class="memitem:is_5Fnot_5Finfinite" id="r_is_5Fnot_5Finfinite"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__not__infinite.html">kyosu::is_not_infinite</a></td></tr>
+<tr class="memdesc:group__is__not__infinite"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the parameter is not infinite. <br /></td></tr>
+<tr class="memitem:is_5Fnot_5Fnan" id="r_is_5Fnot_5Fnan"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__not__nan.html">kyosu::is_not_nan</a></td></tr>
+<tr class="memdesc:group__is__not__nan"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the parameter is not a Nan. <br /></td></tr>
+<tr class="memitem:is_5Fnot_5Freal" id="r_is_5Fnot_5Freal"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__not__real.html">kyosu::is_not_real</a></td></tr>
+<tr class="memdesc:group__is__not__real"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the parameter is not_real. <br /></td></tr>
+<tr class="memitem:is_5Fpure" id="r_is_5Fpure"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__pure.html">kyosu::is_pure</a></td></tr>
+<tr class="memdesc:group__is__pure"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the parameter is pure. <br /></td></tr>
+<tr class="memitem:is_5Freal" id="r_is_5Freal"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__real.html">kyosu::is_real</a></td></tr>
+<tr class="memdesc:group__is__real"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the parameter is real. <br /></td></tr>
+<tr class="memitem:is_5Funitary" id="r_is_5Funitary"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__is__unitary.html">kyosu::is_unitary</a></td></tr>
+<tr class="memdesc:group__is__unitary"><td class="mdescLeft">&#160;</td><td class="mdescRight">{ <br /></td></tr>
+<tr class="memitem:jacobi_5Felliptic" id="r_jacobi_5Felliptic"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__jacobi__elliptic.html">kyosu::jacobi_elliptic</a></td></tr>
+<tr class="memdesc:group__jacobi__elliptic"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes Jacobi's Amplitude function. <br /></td></tr>
+<tr class="memitem:jpart" id="r_jpart"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__jpart.html">kyosu::jpart</a></td></tr>
+<tr class="memdesc:group__jpart"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the \(j\) part of a value. <br /></td></tr>
+<tr class="memitem:kolmmean" id="r_kolmmean"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kolmmean.html">kyosu::kolmmean</a></td></tr>
+<tr class="memdesc:group__kolmmean"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the 'Kolmogorov-Nagumo-de Finetti' mean of the inputs: \( \mathbf{g}(\mathbf{average}\mathbf{f}(x_s)) \). <br /></td></tr>
+<tr class="memitem:kpart" id="r_kpart"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kpart.html">kyosu::kpart</a></td></tr>
+<tr class="memdesc:group__kpart"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the \(k\) part of a value. <br /></td></tr>
+<tr class="memitem:kronecker" id="r_kronecker"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kronecker.html">kyosu::kronecker</a></td></tr>
+<tr class="memdesc:group__kronecker"><td class="mdescLeft">&#160;</td><td class="mdescRight"><span class="tt">tuple_callable</span> computing the \(\delta\) (Kronecker symbol) of its arguments. <br /></td></tr>
+<tr class="memitem:kummer" id="r_kummer"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kummer.html">kyosu::kummer</a></td></tr>
+<tr class="memdesc:group__kummer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Kummer function (confluent hypergeometric function of the first kind) \(M\) (which is an other name for the hypergeometric function \({}_1F_1\)) and it regularized version \(\mathbf{M}\). <br /></td></tr>
+<tr class="memitem:lambda" id="r_lambda"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__lambda.html">kyosu::lambda</a></td></tr>
+<tr class="memdesc:group__lambda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing The Dirichlet \( \displaystyle \lambda(z) = \sum_0^\infty \frac{1}{(2n+1)^z}\). <br /></td></tr>
+<tr class="memitem:lbeta" id="r_lbeta"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__lbeta.html">kyosu::lbeta</a></td></tr>
+<tr class="memdesc:group__lbeta"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the principal branch of the natural logarithm of the <span class="tt"><a class="el" href="group__beta.html#gace5ed207bcf440be909fff9d63c23409">beta</a></span> function. <br /></td></tr>
+<tr class="memitem:ldiv" id="r_ldiv"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__ldiv.html">kyosu::ldiv</a></td></tr>
+<tr class="memdesc:group__ldiv"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the left division of the product of the arguments but the first. <br /></td></tr>
+<tr class="memitem:legendre" id="r_legendre"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__legendre.html">kyosu::legendre</a></td></tr>
+<tr class="memdesc:group__legendre"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value of the Legendre and associated Legendre functions of order <span class="tt">n</span> ( and <span class="tt">m</span>) at <span class="tt">x</span>: <br /></td></tr>
+<tr class="memitem:lerp" id="r_lerp"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__lerp.html">kyosu::lerp</a></td></tr>
+<tr class="memdesc:group__lerp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the linear interpolation. <br /></td></tr>
+<tr class="memitem:linfnorm" id="r_linfnorm"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__linfnorm.html">kyosu::linfnorm</a></td></tr>
+<tr class="memdesc:group__linfnorm"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the linfnorm operation \( \max_{i = 0}^n |x_i| \). <br /></td></tr>
+<tr class="memitem:lipart" id="r_lipart"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__lipart.html">kyosu::lipart</a></td></tr>
+<tr class="memdesc:group__lipart"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the \(li\) part of a value. <br /></td></tr>
+<tr class="memitem:ljpart" id="r_ljpart"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__ljpart.html">kyosu::ljpart</a></td></tr>
+<tr class="memdesc:group__ljpart"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the \(lj\) part of a value. <br /></td></tr>
+<tr class="memitem:lkpart" id="r_lkpart"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__lkpart.html">kyosu::lkpart</a></td></tr>
+<tr class="memdesc:group__lkpart"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the \(lk\) part of a value. <br /></td></tr>
+<tr class="memitem:log" id="r_log"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__log.html">kyosu::log</a></td></tr>
+<tr class="memdesc:group__log"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the principal value of the natural logarithm of the argument. <br /></td></tr>
+<tr class="memitem:log10" id="r_log10"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__log10.html">kyosu::log10</a></td></tr>
+<tr class="memdesc:group__log10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the base 10 logarithm of the argument. <br /></td></tr>
+<tr class="memitem:log1p" id="r_log1p"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__log1p.html">kyosu::log1p</a></td></tr>
+<tr class="memdesc:group__log1p"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the natural logarithm of the argument plus 1. <br /></td></tr>
+<tr class="memitem:log2" id="r_log2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__log2.html">kyosu::log2</a></td></tr>
+<tr class="memdesc:group__log2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the principal branch of the base 2 logarithm of the argument. <br /></td></tr>
+<tr class="memitem:log_5Fabs" id="r_log_5Fabs"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__log__abs.html">kyosu::log_abs</a></td></tr>
+<tr class="memdesc:group__log__abs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the natural logarithm of the absolute value of the argument. <br /></td></tr>
+<tr class="memitem:log_5Fabs_5Fgamma" id="r_log_5Fabs_5Fgamma"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__log__abs__gamma.html">kyosu::log_abs_gamma</a></td></tr>
+<tr class="memdesc:group__log__abs__gamma"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the log of the modulus of the \(\Gamma\) function of the parameter. <br /></td></tr>
+<tr class="memitem:log_5Fgamma" id="r_log_5Fgamma"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__log__gamma.html">kyosu::log_gamma</a></td></tr>
+<tr class="memdesc:group__log__gamma"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes \(\log(\Gamma(z))\). <br /></td></tr>
+<tr class="memitem:lpart" id="r_lpart"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__lpart.html">kyosu::lpart</a></td></tr>
+<tr class="memdesc:group__lpart"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the \(l\) part of a value. <br /></td></tr>
+<tr class="memitem:lpnorm" id="r_lpnorm"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__lpnorm.html">kyosu::lpnorm</a></td></tr>
+<tr class="memdesc:group__lpnorm"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the lpnorm operation \( \left(\sum_{i = 0}^n |x_i|^p\right)^{\frac1p} \). <br /></td></tr>
+<tr class="memitem:lrising_5Ffactorial" id="r_lrising_5Ffactorial"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__lrising__factorial.html">kyosu::lrising_factorial</a></td></tr>
+<tr class="memdesc:group__lrising__factorial"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the natural logarithm of the rising_factorial function. <br /></td></tr>
+<tr class="memitem:manhattan" id="r_manhattan"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__manhattan.html">kyosu::manhattan</a></td></tr>
+<tr class="memdesc:group__manhattan"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the sum of the absolute values of all terms of all the parameters. <br /></td></tr>
+<tr class="memitem:maxabs" id="r_maxabs"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__maxabs.html">kyosu::maxabs</a></td></tr>
+<tr class="memdesc:group__maxabs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the maxabs operation. <br /></td></tr>
+<tr class="memitem:maxmag" id="r_maxmag"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__maxmag.html">kyosu::maxmag</a></td></tr>
+<tr class="memdesc:group__maxmag"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the maxmag operation. <br /></td></tr>
+<tr class="memitem:minabs" id="r_minabs"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__minabs.html">kyosu::minabs</a></td></tr>
+<tr class="memdesc:group__minabs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the minabs operation. <br /></td></tr>
+<tr class="memitem:minmag" id="r_minmag"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__minmag.html">kyosu::minmag</a></td></tr>
+<tr class="memdesc:group__minmag"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the minmag operation. <br /></td></tr>
+<tr class="memitem:minus" id="r_minus"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__minus.html">kyosu::minus</a></td></tr>
+<tr class="memdesc:group__minus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the opposite value. <br /></td></tr>
+<tr class="memitem:mul" id="r_mul"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__mul.html">kyosu::mul</a></td></tr>
+<tr class="memdesc:group__mul"><td class="mdescLeft">&#160;</td><td class="mdescRight"><span class="tt">tuple_callable</span> computing the product of its arguments. <br /></td></tr>
+<tr class="memitem:muli" id="r_muli"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__muli.html">kyosu::muli</a></td></tr>
+<tr class="memdesc:group__muli"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value of the parameter multiplied by i on the left or right side. For real, complex and quaternion the computation is an optimization over the call to * operator. <br /></td></tr>
+<tr class="memitem:mulmi" id="r_mulmi"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__mulmi.html">kyosu::mulmi</a></td></tr>
+<tr class="memdesc:group__mulmi"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value of the parameter multiplied by -i on the left or right side. For real, complex and quaternion the computation is an optimization over the call to * operator. <br /></td></tr>
+<tr class="memitem:nearest" id="r_nearest"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__nearest.html">kyosu::nearest</a></td></tr>
+<tr class="memdesc:group__nearest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the nearest value. <br /></td></tr>
+<tr class="memitem:negmaxabs" id="r_negmaxabs"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__negmaxabs.html">kyosu::negmaxabs</a></td></tr>
+<tr class="memdesc:group__negmaxabs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the negmaxabs operation. <br /></td></tr>
+<tr class="memitem:negminabs" id="r_negminabs"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__negminabs.html">kyosu::negminabs</a></td></tr>
+<tr class="memdesc:group__negminabs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing the negminabs operation. <br /></td></tr>
+<tr class="memitem:nthroot" id="r_nthroot"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__nthroot.html">kyosu::nthroot</a></td></tr>
+<tr class="memdesc:group__nthroot"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the the kth nth root of the argument. <br /></td></tr>
+<tr class="memitem:omega" id="r_omega"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__omega.html">kyosu::omega</a></td></tr>
+<tr class="memdesc:group__omega"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Wright \(\omega\) the inverse function of \( x \rightarrow \log  x+x\). <br /></td></tr>
+<tr class="memitem:oneminus" id="r_oneminus"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__oneminus.html">kyosu::oneminus</a></td></tr>
+<tr class="memdesc:group__oneminus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value one minus the argument. <br /></td></tr>
+<tr class="memitem:pow" id="r_pow"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__pow.html">kyosu::pow</a></td></tr>
+<tr class="memdesc:group__pow"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the pow operation \(x^y\). <br /></td></tr>
+<tr class="memitem:pow1p" id="r_pow1p"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__pow1p.html">kyosu::pow1p</a></td></tr>
+<tr class="memdesc:group__pow1p"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the pow1p operation \((x+1)^y\). <br /></td></tr>
+<tr class="memitem:pow_5Fabs" id="r_pow_5Fabs"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__pow__abs.html">kyosu::pow_abs</a></td></tr>
+<tr class="memdesc:group__pow__abs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the pow_abs operation \(|x|^y\). <br /></td></tr>
+<tr class="memitem:powm1" id="r_powm1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__powm1.html">kyosu::powm1</a></td></tr>
+<tr class="memdesc:group__powm1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the powm1 operation \(x^y-1\). <br /></td></tr>
+<tr class="memitem:proj" id="r_proj"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__proj.html">kyosu::proj</a></td></tr>
+<tr class="memdesc:group__proj"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object computing <a class="el" href="group__proj.html#gada630e85053aac1a1b0b53e89e5369f2">proj(x)</a>, the projection of the <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a> number z onto the (hyper) Riemann sphere. <br /></td></tr>
+<tr class="memitem:pure" id="r_pure"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__pure.html">kyosu::pure</a></td></tr>
+<tr class="memdesc:group__pure"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the imaginary part of a value. <br /></td></tr>
+<tr class="memitem:radinpi" id="r_radinpi"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__radinpi.html">kyosu::radinpi</a></td></tr>
+<tr class="memdesc:group__radinpi"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the parameter divided by \(\pi\). <br /></td></tr>
+<tr class="memitem:real" id="r_real"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__real.html">kyosu::real</a></td></tr>
+<tr class="memdesc:group__real"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the real part of a value. <br /></td></tr>
+<tr class="memitem:rec" id="r_rec"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__rec.html">kyosu::rec</a></td></tr>
+<tr class="memdesc:group__rec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the inverse of the argument. <br /></td></tr>
+<tr class="memitem:reldist" id="r_reldist"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__reldist.html">kyosu::reldist</a></td></tr>
+<tr class="memdesc:group__reldist"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the relative distance between the two parameters. <br /></td></tr>
+<tr class="memitem:reverse_5Fhorner" id="r_reverse_5Fhorner"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__reverse__horner.html">kyosu::reverse_horner</a></td></tr>
+<tr class="memdesc:group__reverse__horner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implement the reverse_horner scheme to evaluate polynomials. <br /></td></tr>
+<tr class="memitem:rising_5Ffactorial" id="r_rising_5Ffactorial"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__rising__factorial.html">kyosu::rising_factorial</a></td></tr>
+<tr class="memdesc:group__rising__factorial"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the rising_factorial function: \(\displaystyle \frac{\Gamma(a+x)}{\Gamma(a)}\). <br /></td></tr>
+<tr class="memitem:rsqrt" id="r_rsqrt"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__rsqrt.html">kyosu::rsqrt</a></td></tr>
+<tr class="memdesc:group__rsqrt"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a inverse square root value. <br /></td></tr>
+<tr class="memitem:sec" id="r_sec"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sec.html">kyosu::sec</a></td></tr>
+<tr class="memdesc:group__sec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the secant of the argument. <br /></td></tr>
+<tr class="memitem:sech" id="r_sech"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sech.html">kyosu::sech</a></td></tr>
+<tr class="memdesc:group__sech"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the hyperbolic secant of the argument. <br /></td></tr>
+<tr class="memitem:sign" id="r_sign"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sign.html">kyosu::sign</a></td></tr>
+<tr class="memdesc:group__sign"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes tne normalized value z/abs(z) if z is not zero else 0. <br /></td></tr>
+<tr class="memitem:signnz" id="r_signnz"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__signnz.html">kyosu::signnz</a></td></tr>
+<tr class="memdesc:group__signnz"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes tne normalized value z/abs(z) if z is not zero else the sign of the real part as a <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a>. <br /></td></tr>
+<tr class="memitem:sin" id="r_sin"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sin.html">kyosu::sin</a></td></tr>
+<tr class="memdesc:group__sin"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the sine of the argument. <br /></td></tr>
+<tr class="memitem:sinc" id="r_sinc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sinc.html">kyosu::sinc</a></td></tr>
+<tr class="memdesc:group__sinc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the sine cardinal of the argument. <br /></td></tr>
+<tr class="memitem:sincos" id="r_sincos"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sincos.html">kyosu::sincos</a></td></tr>
+<tr class="memdesc:group__sincos"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes simultaneously the sine and cosine of the argument. <br /></td></tr>
+<tr class="memitem:sinh" id="r_sinh"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sinh.html">kyosu::sinh</a></td></tr>
+<tr class="memdesc:group__sinh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the hyperbolic sine of the argument. <br /></td></tr>
+<tr class="memitem:sinhc" id="r_sinhc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sinhc.html">kyosu::sinhc</a></td></tr>
+<tr class="memdesc:group__sinhc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the hyperbolic sine cardinal of the argument. <br /></td></tr>
+<tr class="memitem:sinhcosh" id="r_sinhcosh"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sinhcosh.html">kyosu::sinhcosh</a></td></tr>
+<tr class="memdesc:group__sinhcosh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes simultaneously the hyperbolic sine and cosine of the argument. <br /></td></tr>
+<tr class="memitem:slerp" id="r_slerp"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__slerp.html">kyosu::slerp</a></td></tr>
+<tr class="memdesc:group__slerp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the spherical interpolation between unitary quaternions. <br /></td></tr>
+<tr class="memitem:sqr" id="r_sqr"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sqr.html">kyosu::sqr</a></td></tr>
+<tr class="memdesc:group__sqr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the square value. <br /></td></tr>
+<tr class="memitem:sqr_5Fabs" id="r_sqr_5Fabs"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sqr__abs.html">kyosu::sqr_abs</a></td></tr>
+<tr class="memdesc:group__sqr__abs"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the squared sqr_absolute value of the parameter. <br /></td></tr>
+<tr class="memitem:sqrt" id="r_sqrt"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sqrt.html">kyosu::sqrt</a></td></tr>
+<tr class="memdesc:group__sqrt"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a square root value. <br /></td></tr>
+<tr class="memitem:sub" id="r_sub"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__sub.html">kyosu::sub</a></td></tr>
+<tr class="memdesc:group__sub"><td class="mdescLeft">&#160;</td><td class="mdescRight"><span class="tt">tuple_callable</span> computing the difference of its first argument with the sum of the others. <br /></td></tr>
+<tr class="memitem:tan" id="r_tan"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__tan.html">kyosu::tan</a></td></tr>
+<tr class="memdesc:group__tan"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the tangent of the argument. <br /></td></tr>
+<tr class="memitem:tanh" id="r_tanh"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__tanh.html">kyosu::tanh</a></td></tr>
+<tr class="memdesc:group__tanh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the hyperbolic tangent of the argument. <br /></td></tr>
+<tr class="memitem:tchebytchev" id="r_tchebytchev"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__tchebytchev.html">kyosu::tchebytchev</a></td></tr>
+<tr class="memdesc:group__tchebytchev"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the value of the Tchebytchev polynomial of order <span class="tt">n</span> at <span class="tt">x</span>: <br /></td></tr>
+<tr class="memitem:tgamma" id="r_tgamma"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__tgamma.html">kyosu::tgamma</a></td></tr>
+<tr class="memdesc:group__tgamma"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes \(\Gamma(z)\) the gamma function. <br /></td></tr>
+<tr class="memitem:tgamma_5Finv" id="r_tgamma_5Finv"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__tgamma__inv.html">kyosu::tgamma_inv</a></td></tr>
+<tr class="memdesc:group__tgamma__inv"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes \(\frac1{\Gamma(z)}\). <br /></td></tr>
+<tr class="memitem:to_5Fcomplex" id="r_to_5Fcomplex"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__to__complex.html">kyosu::to_complex</a></td></tr>
+<tr class="memdesc:group__to__complex"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e" title="Type alias for complex numbers.">kyosu::complex_t</a> instance. <br /></td></tr>
+<tr class="memitem:to_5Fpolar" id="r_to_5Fpolar"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__to__polar.html">kyosu::to_polar</a></td></tr>
+<tr class="memdesc:group__to__polar"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns modulus and argument of the input. <br /></td></tr>
+<tr class="memitem:to_5Fquaternion" id="r_to_5Fquaternion"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__to__quaternion.html">kyosu::to_quaternion</a></td></tr>
+<tr class="memdesc:group__to__quaternion"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t</a> instance. <br /></td></tr>
+<tr class="memitem:tricomi" id="r_tricomi"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__tricomi.html">kyosu::tricomi</a></td></tr>
+<tr class="memdesc:group__tricomi"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the tricomi function \(U\) also called confluent hypergeometric function of the second kind. <br /></td></tr>
+<tr class="memitem:trunc" id="r_trunc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__trunc.html">kyosu::trunc</a></td></tr>
+<tr class="memdesc:group__trunc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the trunc value. <br /></td></tr>
+<tr class="memitem:xi" id="r_xi"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__xi.html">kyosu::xi</a></td></tr>
+<tr class="memdesc:group__xi"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Riemann \( \displaystyle\xi(z) = \frac{1}{2}z(z-1)\pi^{-\frac{z}{2}}\Gamma(\frac{z}{2})\zeta(z)\). function or the Landau version \( \displaystyle\Xi(z) = \xi(\frac{1}{2} + i z)\). <br /></td></tr>
+<tr class="memitem:zeta" id="r_zeta"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__zeta.html">kyosu::zeta</a></td></tr>
+<tr class="memdesc:group__zeta"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Riemann \( \displaystyle\zeta(z)=\sum_0^\infty \frac{1}{(n+1)^z}\). <br /></td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- HTML footer for doxygen 1.8.20-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+  </ul>
+</div>
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</body>
+</html>

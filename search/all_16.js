@@ -1,4 +1,26 @@
 var searchData=
 [
-  ['zeta_0',['zeta',['../group__functions_ga9dc4aaaee99fe3a698b09d2c63850d66.html#ga9dc4aaaee99fe3a698b09d2c63850d66',1,'kyosu']]]
+  ['radinpi_1',['radinpi',['../group__radinpi.html#gac3d481a9f480c463b7d66d720cba129d',1,'kyosu::radinpi']]],
+  ['rationale_5',['Rationale',['../math_background.html#autotoc_md54',1,'']]],
+  ['real_11',['real',['../conceptkyosu_1_1concepts_1_1real.html',1,'kyosu::concepts'],['../group__real.html#ga4121e4e64916c81e31b622b9b45c93fb',1,'kyosu::real']]],
+  ['real_20analytic_20functions_12',['Extension of real analytic functions',['../math_background.html#autotoc_md62',1,'']]],
+  ['real_20answers_13',['Real answers',['../tutorial-options.html#autotoc_md49',1,'']]],
+  ['real_20answers_20when_20you_20want_20them_14',['Real answers when you want them',['../index.html#autotoc_md21',1,'']]],
+  ['reals_15',['A register of reals',['../tutorial-simd.html#autotoc_md29',1,'']]],
+  ['rec_18',['rec',['../group__rec.html#ga8eac9efc63807af3af63afdc1df00785',1,'kyosu::rec']]],
+  ['register_20of_20complex_20numbers_21',['A register of complex numbers',['../tutorial-simd.html#autotoc_md30',1,'']]],
+  ['register_20of_20reals_22',['A register of reals',['../tutorial-simd.html#autotoc_md29',1,'']]],
+  ['reldist_32',['reldist',['../group__reldist.html#ga46d7f251fffedca76fef7a5c414fe700',1,'kyosu::reldist']]],
+  ['representations_39',['Converting to and from other representations',['../tutorial-rotation.html#autotoc_md40',1,'']]],
+  ['requisites_40',['Pre-requisites',['../setup.html#autotoc_md63',1,'']]],
+  ['response_44',['The library&apos;s response',['../math_background.html#autotoc_md60',1,'']]],
+  ['reverse_5fhorner_48',['reverse_horner',['../group__reverse__horner.html#ga5db28dd284ecca661abaf0e79fe57126',1,'kyosu::reverse_horner']]],
+  ['rising_5ffactorial_53',['rising_factorial',['../group__rising__factorial.html#gaaae6b536a41451b5fe9ddc49def87bc2',1,'kyosu::rising_factorial']]],
+  ['rot_5fangle_54',['rot_angle',['../group__rot__angle.html#ga5a036cb7181db5317fee9c8359fe901b',1,'kyosu']]],
+  ['rot_5faxis_55',['rot_axis',['../group__rot__axis.html#gadb3618e47c65a49d20d4a926b6d63233',1,'kyosu']]],
+  ['rotate_5fvec_57',['rotate_vec',['../group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74',1,'kyosu']]],
+  ['rotating_20a_20vector_58',['Rotating a vector',['../tutorial-rotation.html#autotoc_md37',1,'']]],
+  ['rotations_59',['Rotations',['../tutorial-rotation.html',1,'Rotations'],['../biblio.html#autotoc_md53',1,'Rotations']]],
+  ['rotations_60',['Composing rotations',['../tutorial-rotation.html#autotoc_md38',1,'']]],
+  ['rsqrt_67',['rsqrt',['../group__rsqrt.html#ga82c0404434b20d982247a9918ea7169b',1,'kyosu::rsqrt']]],
 ];

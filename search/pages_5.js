@@ -1,4 +1,29 @@
 var searchData=
 [
-  ['implementation_20provide_0',['What does this implementation provide',['../index.html#autotoc_md16',1,'']]]
+  ['a_20normalisation_0',['Skipping a normalisation',['../tutorial-options.html#autotoc_md50',1,'']]],
+  ['a_20register_20of_20complex_20numbers_1',['A register of complex numbers',['../tutorial-simd.html#autotoc_md30',1,'']]],
+  ['a_20register_20of_20reals_2',['A register of reals',['../tutorial-simd.html#autotoc_md29',1,'']]],
+  ['a_20type_3',['Naming a type',['../tutorial-complex.html#autotoc_md25',1,'']]],
+  ['a_20vector_4',['Rotating a vector',['../tutorial-rotation.html#autotoc_md37',1,'']]],
+  ['accuracy_20against_20speed_5',['Accuracy against speed',['../tutorial-options.html#autotoc_md47',1,'']]],
+  ['accuracy_20you_20choose_6',['Accuracy you choose',['../index.html#autotoc_md19',1,'']]],
+  ['against_20speed_7',['Accuracy against speed',['../tutorial-options.html#autotoc_md47',1,'']]],
+  ['algebras_8',['Algebras',['../math_background.html',1,'Mathematics of Cayley-Dickson Algebras'],['../index.html',1,'SIMD-Aware Cayley-Dickson Algebras']]],
+  ['algebras_9',['The algebras',['../index.html#autotoc_md22',1,'']]],
+  ['algebras_20themselves_10',['The algebras themselves',['../biblio.html#autotoc_md52',1,'']]],
+  ['an_20installed_20copy_12',['From an installed copy',['../setup.html#autotoc_md67',1,'']]],
+  ['analytic_20functions_13',['Extension of real analytic functions',['../math_background.html#autotoc_md62',1,'']]],
+  ['and_20beyond_14',['Octonions and beyond',['../tutorial-beyond.html',1,'']]],
+  ['and_20from_20other_20representations_15',['Converting to and from other representations',['../tutorial-rotation.html#autotoc_md40',1,'']]],
+  ['and_20its_20limits_16',['The construction and its limits',['../biblio.html#autotoc_md51',1,'']]],
+  ['angles_17',['Why not Euler angles',['../tutorial-rotation.html#autotoc_md36',1,'']]],
+  ['angles_20in_20half_20turns_18',['Angles in half turns',['../index.html#autotoc_md20',1,'Angles in half-turns'],['../tutorial-options.html#autotoc_md48',1,'Angles in half-turns']]],
+  ['answers_19',['Real answers',['../tutorial-options.html#autotoc_md49',1,'']]],
+  ['answers_20when_20you_20want_20them_20',['Real answers when you want them',['../index.html#autotoc_md21',1,'']]],
+  ['any_20dimension_21',['Naming any dimension',['../tutorial-beyond.html#autotoc_md41',1,'']]],
+  ['are_23',['What they are',['../tutorial-quaternion.html#autotoc_md32',1,'']]],
+  ['are_20load_20bearing_24',['First trap: parentheses are load-bearing',['../tutorial-beyond.html#autotoc_md42',1,'']]],
+  ['associativity_25',['Dimension 8: the loss of associativity',['../math_background.html#autotoc_md58',1,'']]],
+  ['at_20once_26',['Many values at once',['../tutorial-simd.html',1,'']]],
+  ['aware_20cayley_20dickson_20algebras_27',['SIMD-Aware Cayley-Dickson Algebras',['../index.html',1,'']]]
 ];

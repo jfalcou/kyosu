@@ -25,21 +25,35 @@
 var NAVTREE =
 [
   [ "kyosu", "index.html", [
-    [ "Cayley-Dickson algebras", "index.html#autotoc_md15", null ],
-    [ "What does this implementation provide", "index.html#autotoc_md16", [
-      [ "Constructors", "index.html#autotoc_md17", null ],
-      [ "Operators", "index.html#autotoc_md18", null ],
-      [ "Functions", "index.html#autotoc_md19", null ]
+    [ "SIMD-Aware Cayley-Dickson Algebras", "index.html", null ],
+    [ "Tutorials", "usergroup0.html", [
+      [ "Installation & Quick Start", "setup.html", null ],
+      [ "Getting Started", "usergroup1.html", [
+        [ "Complex Numbers", "tutorial-complex.html", null ],
+        [ "Many Values At Once", "tutorial-simd.html", null ]
+      ] ],
+      [ "Past The Complex Numbers", "usergroup2.html", [
+        [ "Quaternions", "tutorial-quaternion.html", null ],
+        [ "Rotations", "tutorial-rotation.html", null ],
+        [ "Octonions and Beyond", "tutorial-beyond.html", null ]
+      ] ],
+      [ "Options", "tutorial-options.html", null ]
     ] ],
-    [ "How-Tos", "usergroup0.html", null ],
-    [ "Reference Documentation", "usergroup1.html", [
+    [ "Reference Documentation", "usergroup3.html", [
       [ "Types", "group__types.html", null ],
       [ "Constants", "group__constants.html", null ],
-      [ "Functions", "group__functions.html", null ],
-      [ "Traits", "group__traits.html", null ],
+      [ "Functions", "group__kyosu__functions.html", [
+        [ "Algebra-agnostic", "group__agnostic.html", null ],
+        [ "Complex-specific", "group__complex.html", null ],
+        [ "Quaternion-specific", "group__quaternion.html", null ]
+      ] ],
+      [ "Traits", "group__kyosu__traits.html", null ],
       [ "Concept List", "concepts.html", "concepts" ]
     ] ],
-    [ "Informations", "usergroup2.html", [
+    [ "Informations", "usergroup4.html", [
+      [ "Mathematical Background", "math_background.html", null ],
+      [ "Bibliography", "biblio.html", null ],
+      [ "Changelog", "changelog.html", null ],
       [ "Licence", "licence.html", null ]
     ] ]
   ] ]
@@ -47,7 +61,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"conceptkyosu_1_1concepts_1_1cayley__dickson.html"
+"biblio.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

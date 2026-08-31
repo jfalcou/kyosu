@@ -18,7 +18,7 @@
   DoxygenAwesomeTabs.init()
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
-  SendToGodbolt.init("kyosu:eve","clang1600","-O3 -std=c++20 -DNDEBUG")
+  SendToGodbolt.init("kyosu:eve","clang2010","-O3 -std=c++20 -DNDEBUG")
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -122,7 +122,7 @@ $(function(){initNavTree('group__constants.html','',''); });
 
 <div class="header">
   <div class="summary">
-<a href="#var-members">Variables</a>  </div>
+<a href="#groups">Topics</a>  </div>
   <div class="headertitle"><div class="title">Cayley-Dickson constants </div></div>
 </div><!--header-->
 <div class="contents">
@@ -130,20 +130,20 @@ $(function(){initNavTree('group__constants.html','',''); });
 <p>We only describe here the proper cayley-dickson constants, but all floating <b>EVE</b> defined constants are redefined in 'kyosu::' namespace and can be used freely to provide Cayley-Dickson typed constants whose real part is the <b>EVE</b> one.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ga0c9ef916832ff4cbfbf575bc77f4fb4f" id="r_ga0c9ef916832ff4cbfbf575bc77f4fb4f"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__constants_ga0c9ef916832ff4cbfbf575bc77f4fb4f.html#ga0c9ef916832ff4cbfbf575bc77f4fb4f">kyosu::cinf</a> = eve::functor&lt;cinf_t&gt;</td></tr>
-<tr class="memdesc:ga0c9ef916832ff4cbfbf575bc77f4fb4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the complex-infinite defined as \(\textrm{NaN} + i\, \textrm{inf}\) in the chosen type.  <br /></td></tr>
-<tr class="memitem:ga0cf87abcd108df159683cdcd153e9f12" id="r_ga0cf87abcd108df159683cdcd153e9f12"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__constants_ga0cf87abcd108df159683cdcd153e9f12.html#ga0cf87abcd108df159683cdcd153e9f12">kyosu::fnan</a> = eve::functor&lt;fnan_t&gt;</td></tr>
-<tr class="memdesc:ga0cf87abcd108df159683cdcd153e9f12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the full nan constant such that all components of the chosen type are NaN.  <br /></td></tr>
-<tr class="memitem:gaa17b17c2202168c33700e95ccce7322d" id="r_gaa17b17c2202168c33700e95ccce7322d"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__constants_gaa17b17c2202168c33700e95ccce7322d.html#gaa17b17c2202168c33700e95ccce7322d">kyosu::i</a> = eve::functor&lt;i_t&gt;</td></tr>
-<tr class="memdesc:gaa17b17c2202168c33700e95ccce7322d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the complex number \(i\) in the chosen type.  <br /></td></tr>
-<tr class="memitem:gad984a2daa62e2ee33ee4577d87cb0533" id="r_gad984a2daa62e2ee33ee4577d87cb0533"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__constants_gad984a2daa62e2ee33ee4577d87cb0533.html#gad984a2daa62e2ee33ee4577d87cb0533">kyosu::j</a> = eve::functor&lt;j_t&gt;</td></tr>
-<tr class="memdesc:gad984a2daa62e2ee33ee4577d87cb0533"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the complex number j i.e. <a class="el" href="group__functions_ga74ebf9f07f4d05907402cdf7844990d8.html#ga74ebf9f07f4d05907402cdf7844990d8" title="Constructs a kyosu::quaternion_t instance.">quaternion(0, 0, 1, 0)</a> in the chosen type.  <br /></td></tr>
-<tr class="memitem:gabb75241dcb99709608d07d0a94af3813" id="r_gabb75241dcb99709608d07d0a94af3813"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__constants_gabb75241dcb99709608d07d0a94af3813.html#gabb75241dcb99709608d07d0a94af3813">kyosu::k</a> = eve::functor&lt;k_t&gt;</td></tr>
-<tr class="memdesc:gabb75241dcb99709608d07d0a94af3813"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the complex number k i.e. <a class="el" href="group__functions_ga74ebf9f07f4d05907402cdf7844990d8.html#ga74ebf9f07f4d05907402cdf7844990d8" title="Constructs a kyosu::quaternion_t instance.">quaternion(0, 0, 0, 1)</a> in the chosen type.  <br /></td></tr>
-<tr class="memitem:gada12ac0bbff1fc4e7476a12736e9a6c9" id="r_gada12ac0bbff1fc4e7476a12736e9a6c9"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__constants_gada12ac0bbff1fc4e7476a12736e9a6c9.html#gada12ac0bbff1fc4e7476a12736e9a6c9">kyosu::mi</a> = eve::functor&lt;mi_t&gt;</td></tr>
-<tr class="memdesc:gada12ac0bbff1fc4e7476a12736e9a6c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the complex number \(-i\) in the chosen type.  <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-groups" class="groupheader"><a id="groups" name="groups"></a>
+Topics</h2></td></tr>
+<tr class="memitem:cinf" id="r_cinf"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__cinf.html">kyosu::cinf</a></td></tr>
+<tr class="memdesc:group__cinf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the complex-infinite defined as \(\textrm{NaN} + i\, \textrm{inf}\) in the chosen type. <br /></td></tr>
+<tr class="memitem:fnan" id="r_fnan"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__fnan.html">kyosu::fnan</a></td></tr>
+<tr class="memdesc:group__fnan"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the full nan constant such that all components of the chosen type are NaN. <br /></td></tr>
+<tr class="memitem:i" id="r_i"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__i.html">kyosu::i</a></td></tr>
+<tr class="memdesc:group__i"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the complex number \(i\) in the chosen type. <br /></td></tr>
+<tr class="memitem:j" id="r_j"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__j.html">kyosu::j</a></td></tr>
+<tr class="memdesc:group__j"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the complex number j i.e. <a class="el" href="group__to__quaternion.html#ga74ebf9f07f4d05907402cdf7844990d8">quaternion(0, 0, 1, 0)</a> in the chosen type. <br /></td></tr>
+<tr class="memitem:k" id="r_k"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__k.html">kyosu::k</a></td></tr>
+<tr class="memdesc:group__k"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the complex number k i.e. <a class="el" href="group__to__quaternion.html#ga74ebf9f07f4d05907402cdf7844990d8">quaternion(0, 0, 0, 1)</a> in the chosen type. <br /></td></tr>
+<tr class="memitem:mi" id="r_mi"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__mi.html">kyosu::mi</a></td></tr>
+<tr class="memdesc:group__mi"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the complex number \(-i\) in the chosen type. <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

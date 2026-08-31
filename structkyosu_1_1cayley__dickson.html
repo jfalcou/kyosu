@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kyosu: kyosu::cayley_dickson&lt; Type, N &gt; Class Template Reference</title>
+<title>kyosu: kyosu::cayley_dickson&lt; Type, N &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -18,7 +18,7 @@
   DoxygenAwesomeTabs.init()
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
-  SendToGodbolt.init("kyosu:eve","clang1600","-O3 -std=c++20 -DNDEBUG")
+  SendToGodbolt.init("kyosu:eve","clang2010","-O3 -std=c++20 -DNDEBUG")
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -124,7 +124,7 @@ $(function(){initNavTree('structkyosu_1_1cayley__dickson.html','','structkyosu_1
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="structkyosu_1_1cayley__dickson-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">kyosu::cayley_dickson&lt; Type, N &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__types.html">Types</a></div></div></div>
+  <div class="headertitle"><div class="title">kyosu::cayley_dickson&lt; Type, N &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__types.html">Types</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -133,9 +133,9 @@ $(function(){initNavTree('structkyosu_1_1cayley__dickson.html','','structkyosu_1
 
 <p><code>#include &lt;kyosu/types/cayley_dickson.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;eve::floating_scalar_value Type, unsigned int N&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="elRef" href="https://jfalcou.github.io/eve/concepteve_1_1floating__scalar__value.html">eve::floating_scalar_value</a> Type, unsigned int N&gt;<br />
 requires (N &gt; 1 &amp;&amp; std::has_single_bit(N))<br />
-class kyosu::cayley_dickson&lt; Type, N &gt;</div><p>Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such algebra can be done in a streamlined fashion based on the Cayley–Dickson construction. </p>
+struct kyosu::cayley_dickson&lt; Type, N &gt;</div><p>Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such algebra can be done in a streamlined fashion based on the Cayley–Dickson construction. </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -229,23 +229,23 @@ template&lt;typename C, typename Ct, concepts::cayley_dickson CD&gt; </td></tr>
 <tr class="memdesc:a1d50add5f2f5370f64b20919751ccdcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream insertion for Cayley-dickson based types. <br /></td></tr>
 <tr id="related-3" class="groupHeader"><td colspan="2"><div class="groupHeader">User-defined Literals</div></td></tr>
 <tr class="memitem:a1a8dfb5ebec66f24fce04469de86120b" id="r_a1a8dfb5ebec66f24fce04469de86120b"><td class="memItemLeft"><a id="a1a8dfb5ebec66f24fce04469de86120b" name="a1a8dfb5ebec66f24fce04469de86120b"></a>
-constexpr <a class="el" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a>&lt; double &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_i</b> (long double d) noexcept</td></tr>
-<tr class="memdesc:a1a8dfb5ebec66f24fce04469de86120b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e" title="Type alias for complex numbers.">kyosu::complex_t&lt;double&gt;</a> with real part zero and imaginary part <span class="tt">d</span>. <br /></td></tr>
+constexpr <a class="el" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a>&lt; double &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_i</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:a1a8dfb5ebec66f24fce04469de86120b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e" title="Type alias for complex numbers.">kyosu::complex_t&lt;double&gt;</a> with real part zero and imaginary part <span class="tt">d</span>. <br /></td></tr>
 <tr class="memitem:a9f6fc5aa16208b342059eabb36dbf8a5" id="r_a9f6fc5aa16208b342059eabb36dbf8a5"><td class="memItemLeft"><a id="a9f6fc5aa16208b342059eabb36dbf8a5" name="a9f6fc5aa16208b342059eabb36dbf8a5"></a>
-constexpr <a class="el" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a>&lt; float &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_if</b> (long double d) noexcept</td></tr>
-<tr class="memdesc:a9f6fc5aa16208b342059eabb36dbf8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e" title="Type alias for complex numbers.">kyosu::complex_t&lt;float&gt;</a> with real part zero and imaginary part <span class="tt">d</span>. <br /></td></tr>
+constexpr <a class="el" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a>&lt; float &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_if</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:a9f6fc5aa16208b342059eabb36dbf8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e" title="Type alias for complex numbers.">kyosu::complex_t&lt;float&gt;</a> with real part zero and imaginary part <span class="tt">d</span>. <br /></td></tr>
 <tr class="memitem:abc2491a56ef3c5cb615ddf96eb265510" id="r_abc2491a56ef3c5cb615ddf96eb265510"><td class="memItemLeft"><a id="abc2491a56ef3c5cb615ddf96eb265510" name="abc2491a56ef3c5cb615ddf96eb265510"></a>
-constexpr <a class="el" href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>&lt; double &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_j</b> (long double d) noexcept</td></tr>
-<tr class="memdesc:abc2491a56ef3c5cb615ddf96eb265510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;double&gt;</a> with all parts zero and \(j\) part equals to <span class="tt">d</span>. <br /></td></tr>
+constexpr <a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>&lt; double &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_j</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:abc2491a56ef3c5cb615ddf96eb265510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;double&gt;</a> with all parts zero and \(j\) part equals to <span class="tt">d</span>. <br /></td></tr>
 <tr class="memitem:a032f8a8437b972416acb47c33b144556" id="r_a032f8a8437b972416acb47c33b144556"><td class="memItemLeft"><a id="a032f8a8437b972416acb47c33b144556" name="a032f8a8437b972416acb47c33b144556"></a>
-constexpr <a class="el" href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>&lt; float &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_jf</b> (long double d) noexcept</td></tr>
-<tr class="memdesc:a032f8a8437b972416acb47c33b144556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;float&gt;</a> with all parts zero and \(j\) part equals to <span class="tt">d</span>. <br /></td></tr>
+constexpr <a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>&lt; float &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_jf</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:a032f8a8437b972416acb47c33b144556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;float&gt;</a> with all parts zero and \(j\) part equals to <span class="tt">d</span>. <br /></td></tr>
 <tr class="memitem:ab81a5e9b87e5ca0c50cf8e6eb56217c5" id="r_ab81a5e9b87e5ca0c50cf8e6eb56217c5"><td class="memItemLeft"><a id="ab81a5e9b87e5ca0c50cf8e6eb56217c5" name="ab81a5e9b87e5ca0c50cf8e6eb56217c5"></a>
-constexpr <a class="el" href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>&lt; double &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_k</b> (long double d) noexcept</td></tr>
-<tr class="memdesc:ab81a5e9b87e5ca0c50cf8e6eb56217c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;double&gt;</a> with all parts zero and \(k\) part equals to <span class="tt">d</span>. <br /></td></tr>
+constexpr <a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>&lt; double &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_k</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:ab81a5e9b87e5ca0c50cf8e6eb56217c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;double&gt;</a> with all parts zero and \(k\) part equals to <span class="tt">d</span>. <br /></td></tr>
 <tr class="memitem:a810e99156f3dfbd5d36030c0b585a9f7" id="r_a810e99156f3dfbd5d36030c0b585a9f7"><td class="memItemLeft"><a id="a810e99156f3dfbd5d36030c0b585a9f7" name="a810e99156f3dfbd5d36030c0b585a9f7"></a>
-constexpr <a class="el" href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>&lt; float &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_kf</b> (long double d) noexcept</td></tr>
-<tr class="memdesc:a810e99156f3dfbd5d36030c0b585a9f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types_ga43659263f005aec8e7e223b889004a22.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;float&gt;</a> with all parts zero and \(k\) part equals to <span class="tt">d</span>. <br /></td></tr>
+constexpr <a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>&lt; float &gt;&#160;</td><td class="memItemRight"><b>operator&quot;&quot;_kf</b> (long double d) noexcept</td></tr>
+<tr class="memdesc:a810e99156f3dfbd5d36030c0b585a9f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a <a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t&lt;float&gt;</a> with all parts zero and \(k\) part equals to <span class="tt">d</span>. <br /></td></tr>
 <tr id="related-4" class="groupHeader"><td colspan="2"><div class="groupHeader">Unary Operators</div></td></tr>
 <tr class="memitem:a18cec006320794126c85b238a68fc91c" id="r_a18cec006320794126c85b238a68fc91c"><td class="memTemplParams" colspan="2"><a id="a18cec006320794126c85b238a68fc91c" name="a18cec006320794126c85b238a68fc91c"></a>
 template&lt;concepts::cayley_dickson Z&gt; </td></tr>
@@ -257,20 +257,20 @@ template&lt;concepts::cayley_dickson Z&gt; </td></tr>
 <tr class="memdesc:a3032325260646fe3f0832b076a2b146a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the opposite of a given Cayley-Dickson value. <br /></td></tr>
 <tr id="related-5" class="groupHeader"><td colspan="2"><div class="groupHeader">Binary Operators</div></td></tr>
 <tr class="memitem:a3ee8e2fe476ebb1011c476e093227822" id="r_a3ee8e2fe476ebb1011c476e093227822"><td class="memTemplParams" colspan="2"><a id="a3ee8e2fe476ebb1011c476e093227822" name="a3ee8e2fe476ebb1011c476e093227822"></a>
-template&lt;eve::value T1, eve::value T2&gt; </td></tr>
-<tr class="memitem:a3ee8e2fe476ebb1011c476e093227822 template"><td class="memItemLeft"><a class="el" href="group__traits_ga15c8de6cae864e2052c544b275ee2fb2.html#ga15c8de6cae864e2052c544b275ee2fb2">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memItemRight"><b>operator+</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+template&lt;<a class="elRef" href="https://jfalcou.github.io/eve/concepteve_1_1value.html">eve::value</a> T1, <a class="elRef" href="https://jfalcou.github.io/eve/concepteve_1_1value.html">eve::value</a> T2&gt; </td></tr>
+<tr class="memitem:a3ee8e2fe476ebb1011c476e093227822 template"><td class="memItemLeft"><a class="el" href="group__kyosu__traits.html#ga15c8de6cae864e2052c544b275ee2fb2">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memItemRight"><b>operator+</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
 <tr class="memdesc:a3ee8e2fe476ebb1011c476e093227822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sum of two Cayley-Dickson values. <br /></td></tr>
 <tr class="memitem:a36ef300ed76ad52be7293d1a1fac8331" id="r_a36ef300ed76ad52be7293d1a1fac8331"><td class="memTemplParams" colspan="2"><a id="a36ef300ed76ad52be7293d1a1fac8331" name="a36ef300ed76ad52be7293d1a1fac8331"></a>
-template&lt;eve::value T1, eve::value T2&gt; </td></tr>
-<tr class="memitem:a36ef300ed76ad52be7293d1a1fac8331 template"><td class="memItemLeft"><a class="el" href="group__traits_ga15c8de6cae864e2052c544b275ee2fb2.html#ga15c8de6cae864e2052c544b275ee2fb2">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memItemRight"><b>operator-</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+template&lt;<a class="elRef" href="https://jfalcou.github.io/eve/concepteve_1_1value.html">eve::value</a> T1, <a class="elRef" href="https://jfalcou.github.io/eve/concepteve_1_1value.html">eve::value</a> T2&gt; </td></tr>
+<tr class="memitem:a36ef300ed76ad52be7293d1a1fac8331 template"><td class="memItemLeft"><a class="el" href="group__kyosu__traits.html#ga15c8de6cae864e2052c544b275ee2fb2">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memItemRight"><b>operator-</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
 <tr class="memdesc:a36ef300ed76ad52be7293d1a1fac8331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the difference of two Cayley-Dickson values. <br /></td></tr>
 <tr class="memitem:a2fb59110f4a618933f413b3c409ae8e6" id="r_a2fb59110f4a618933f413b3c409ae8e6"><td class="memTemplParams" colspan="2"><a id="a2fb59110f4a618933f413b3c409ae8e6" name="a2fb59110f4a618933f413b3c409ae8e6"></a>
-template&lt;eve::value T1, eve::value T2&gt; </td></tr>
-<tr class="memitem:a2fb59110f4a618933f413b3c409ae8e6 template"><td class="memItemLeft"><a class="el" href="group__traits_ga15c8de6cae864e2052c544b275ee2fb2.html#ga15c8de6cae864e2052c544b275ee2fb2">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memItemRight"><b>operator*</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+template&lt;<a class="elRef" href="https://jfalcou.github.io/eve/concepteve_1_1value.html">eve::value</a> T1, <a class="elRef" href="https://jfalcou.github.io/eve/concepteve_1_1value.html">eve::value</a> T2&gt; </td></tr>
+<tr class="memitem:a2fb59110f4a618933f413b3c409ae8e6 template"><td class="memItemLeft"><a class="el" href="group__kyosu__traits.html#ga15c8de6cae864e2052c544b275ee2fb2">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memItemRight"><b>operator*</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
 <tr class="memdesc:a2fb59110f4a618933f413b3c409ae8e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the product of two Cayley-Dickson values. <br /></td></tr>
 <tr class="memitem:abccb6441a9eaf55aec6a7aea780bd145" id="r_abccb6441a9eaf55aec6a7aea780bd145"><td class="memTemplParams" colspan="2"><a id="abccb6441a9eaf55aec6a7aea780bd145" name="abccb6441a9eaf55aec6a7aea780bd145"></a>
-template&lt;eve::value T1, eve::value T2&gt; </td></tr>
-<tr class="memitem:abccb6441a9eaf55aec6a7aea780bd145 template"><td class="memItemLeft"><a class="el" href="group__traits_ga15c8de6cae864e2052c544b275ee2fb2.html#ga15c8de6cae864e2052c544b275ee2fb2">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memItemRight"><b>operator/</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
+template&lt;<a class="elRef" href="https://jfalcou.github.io/eve/concepteve_1_1value.html">eve::value</a> T1, <a class="elRef" href="https://jfalcou.github.io/eve/concepteve_1_1value.html">eve::value</a> T2&gt; </td></tr>
+<tr class="memitem:abccb6441a9eaf55aec6a7aea780bd145 template"><td class="memItemLeft"><a class="el" href="group__kyosu__traits.html#ga15c8de6cae864e2052c544b275ee2fb2">as_cayley_dickson_t</a>&lt; T1, T2 &gt;&#160;</td><td class="memItemRight"><b>operator/</b> (T1 const &amp;a, T2 const &amp;b) noexcept</td></tr>
 <tr class="memdesc:abccb6441a9eaf55aec6a7aea780bd145"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the ratio of two Cayley-Dickson values. <br /></td></tr>
 <tr class="memitem:a561363de989d2101775d8b85655ea08e" id="r_a561363de989d2101775d8b85655ea08e"><td class="memTemplParams" colspan="2"><a id="a561363de989d2101775d8b85655ea08e" name="a561363de989d2101775d8b85655ea08e"></a>
 template&lt;concepts::cayley_dickson T1, concepts::real T2&gt; </td></tr>

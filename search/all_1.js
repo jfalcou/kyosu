@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['beta_0',['beta',['../group__functions_gace5ed207bcf440be909fff9d63c23409.html#gace5ed207bcf440be909fff9d63c23409',1,'kyosu']]]
+  ['1_200_0',['SPDX-License-Identifier: BSL-1.0',['..//__w/kyosu/kyosu/doc/strip_external_search.py#autotoc_md70',1,'']]],
+  ['16_20division_20fails_1',['Second trap: from dimension 16, division fails',['../tutorial-beyond.html#autotoc_md43',1,'']]],
+  ['16_3a_20the_20loss_20of_20division_2',['Dimension 16: the loss of division',['../math_background.html#autotoc_md59',1,'']]]
 ];

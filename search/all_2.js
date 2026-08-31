@@ -1,27 +1,4 @@
 var searchData=
 [
-  ['cayley_20dickson_20algebras_0',['Cayley-Dickson algebras',['../index.html#autotoc_md15',1,'']]],
-  ['cayley_20dickson_20constants_1',['Cayley-Dickson constants',['../group__constants.html',1,'']]],
-  ['cayley_20dickson_20functions_2',['Cayley-Dickson Functions',['../group__functions.html',1,'']]],
-  ['cayley_5fdickson_3',['cayley_dickson',['../structkyosu_1_1cayley__dickson.html',1,'kyosu::cayley_dickson&lt; Type, N &gt;'],['../conceptkyosu_1_1concepts_1_1cayley__dickson.html',1,'kyosu::concepts'],['../structkyosu_1_1cayley__dickson.html#a855e307f5821528acf3b6d850194192f',1,'kyosu::cayley_dickson::cayley_dickson() noexcept'],['../structkyosu_1_1cayley__dickson.html#af70b4a76c4af0caf051ff4eae883d552',1,'kyosu::cayley_dickson::cayley_dickson(T v) noexcept'],['../structkyosu_1_1cayley__dickson.html#a5899e8aaa41998c60dc9ce3e2bb82c6f',1,'kyosu::cayley_dickson::cayley_dickson(T0 v0, Ts... vs) noexcept'],['../structkyosu_1_1cayley__dickson.html#ae438e3f20e692a6de77419c39e890ba8',1,'kyosu::cayley_dickson::cayley_dickson(eve::sized_product_type&lt; N &gt; auto const &amp;vs)'],['../structkyosu_1_1cayley__dickson.html#aa793ea3b391b5e590eb6022b75d3be84',1,'kyosu::cayley_dickson::cayley_dickson(cayley_dickson&lt; Type, M &gt; const &amp;a, cayley_dickson&lt; Type, M &gt; const &amp;b) noexcept'],['../structkyosu_1_1cayley__dickson.html#ab8e1d853182bea96fea1595877d240f4',1,'kyosu::cayley_dickson::cayley_dickson(cayley_dickson&lt; Type, M &gt; const &amp;a) noexcept'],['../structkyosu_1_1cayley__dickson.html#aa0be302941e24075875f2ff22e1bc866',1,'kyosu::cayley_dickson::cayley_dickson(Tuple const &amp;) -&gt; cayley_dickson&lt; kumi::element_t&lt; 0, Tuple &gt;, kumi::size_v&lt; Tuple &gt; &gt;'],['../structkyosu_1_1cayley__dickson.html#aa72548959abb0145c1eef8e8cf2928b4',1,'kyosu::cayley_dickson::cayley_dickson(T0, Ts...) -&gt; cayley_dickson&lt; T0, 1+sizeof...(Ts)&gt;'],['../structkyosu_1_1cayley__dickson.html#aa0be302941e24075875f2ff22e1bc866',1,'kyosu::cayley_dickson(Tuple const &amp;) -&gt; cayley_dickson&lt; kumi::element_t&lt; 0, Tuple &gt;, kumi::size_v&lt; Tuple &gt; &gt;'],['../structkyosu_1_1cayley__dickson.html#aa72548959abb0145c1eef8e8cf2928b4',1,'kyosu::cayley_dickson(T0, Ts...) -&gt; cayley_dickson&lt; T0, 1+sizeof...(Ts)&gt;']]],
-  ['cbrt_4',['cbrt',['../group__functions_ga81b0d6fb1ff90f938f3593cc201fcb1b.html#ga81b0d6fb1ff90f938f3593cc201fcb1b',1,'kyosu']]],
-  ['ceil_5',['ceil',['../group__functions_ga8c89c82b3d1c4471c8c52c832c78d792.html#ga8c89c82b3d1c4471c8c52c832c78d792',1,'kyosu']]],
-  ['chi_6',['chi',['../group__functions_ga05dfb6e5aebe98bf4ea725063cbce033.html#ga05dfb6e5aebe98bf4ea725063cbce033',1,'kyosu']]],
-  ['cinf_7',['cinf',['../group__constants_ga0c9ef916832ff4cbfbf575bc77f4fb4f.html#ga0c9ef916832ff4cbfbf575bc77f4fb4f',1,'kyosu']]],
-  ['commutator_8',['commutator',['../group__functions_gacdb90f1b3fb7481bdb308a74224e8b38.html#gacdb90f1b3fb7481bdb308a74224e8b38',1,'kyosu']]],
-  ['complex_9',['Complex',['../group__complex.html',1,'']]],
-  ['complex_10',['complex',['../conceptkyosu_1_1concepts_1_1complex.html',1,'kyosu::concepts'],['../group__functions_gad34d6e0109b4b00e61a647cac6197786.html#gad34d6e0109b4b00e61a647cac6197786',1,'kyosu::complex']]],
-  ['complex_5ft_11',['complex_t',['../group__types_ga10a5d4f4bdbbbc385c544fb41c7d628e.html#ga10a5d4f4bdbbbc385c544fb41c7d628e',1,'kyosu']]],
-  ['complexify_12',['complexify',['../structkyosu_1_1complexify.html',1,'kyosu']]],
-  ['complexify_5fif_13',['complexify_if',['../structkyosu_1_1complexify__if.html',1,'kyosu']]],
-  ['conj_14',['conj',['../group__functions_ga7e324b44c677cab7cf646a1cb87e9405.html#ga7e324b44c677cab7cf646a1cb87e9405',1,'kyosu']]],
-  ['constants_15',['Cayley-Dickson constants',['../group__constants.html',1,'']]],
-  ['constructors_16',['Constructors',['../index.html#autotoc_md17',1,'']]],
-  ['convert_17',['convert',['../group__functions_ga081e21d8e2b4876702601c74562eeabb.html#ga081e21d8e2b4876702601c74562eeabb',1,'kyosu']]],
-  ['cos_18',['cos',['../group__functions_gaff78cbf53496580d8216966a5f96a5f9.html#gaff78cbf53496580d8216966a5f96a5f9',1,'kyosu']]],
-  ['cosh_19',['cosh',['../group__functions_gaacd4903b331413b4b0c8da2a1521093a.html#gaacd4903b331413b4b0c8da2a1521093a',1,'kyosu']]],
-  ['cot_20',['cot',['../group__functions_gafb2eb2745644a8b663b71b6ad8d5f6b4.html#gafb2eb2745644a8b663b71b6ad8d5f6b4',1,'kyosu']]],
-  ['coth_21',['coth',['../group__functions_gaf77965146c145973900d9edec9742caa.html#gaf77965146c145973900d9edec9742caa',1,'kyosu']]],
-  ['csc_22',['csc',['../group__functions_ga627c035548638b22d13890b8b03e5ca9.html#ga627c035548638b22d13890b8b03e5ca9',1,'kyosu']]],
-  ['csch_23',['csch',['../group__functions_gaac742f86aaadd71a3fcca9b9e7a23d52.html#gaac742f86aaadd71a3fcca9b9e7a23d52',1,'kyosu']]]
+  ['2_3a_20the_20loss_20of_20order_0',['Dimension 2: the loss of order',['../math_background.html#autotoc_md56',1,'']]]
 ];

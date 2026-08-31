@@ -1,23 +1,9 @@
 var searchData=
 [
-  ['lambda_0',['lambda',['../group__functions_gaf7906a8d9d35e9e55a84ddcfb03cf308.html#gaf7906a8d9d35e9e55a84ddcfb03cf308',1,'kyosu']]],
-  ['lbeta_1',['lbeta',['../group__functions_gafe0c7a3f991d20592748394411b97f03.html#gafe0c7a3f991d20592748394411b97f03',1,'kyosu']]],
-  ['ldiv_2',['ldiv',['../group__functions_ga4842daf39053c0a08fa68cd1850558e1.html#ga4842daf39053c0a08fa68cd1850558e1',1,'kyosu']]],
-  ['legendre_3',['legendre',['../group__functions_ga1a1ccdfb045aafc00e85d17216d871f0.html#ga1a1ccdfb045aafc00e85d17216d871f0',1,'kyosu']]],
-  ['lerp_4',['lerp',['../group__functions_ga82646e9c6fda08fd02c304d3b001abaa.html#ga82646e9c6fda08fd02c304d3b001abaa',1,'kyosu']]],
-  ['licence_5',['Licence',['../licence.html',1,'']]],
-  ['linfnorm_6',['linfnorm',['../group__functions_ga2413388335ecd0df3e7d75d4e399fdd8.html#ga2413388335ecd0df3e7d75d4e399fdd8',1,'kyosu']]],
-  ['lipart_7',['lipart',['../group__functions_gadbcb03cb1614e1d7a30b6ab6d770792d.html#gadbcb03cb1614e1d7a30b6ab6d770792d',1,'kyosu']]],
-  ['ljpart_8',['ljpart',['../group__functions_gab9af5fb49098ddef5b3dba27f21628bb.html#gab9af5fb49098ddef5b3dba27f21628bb',1,'kyosu']]],
-  ['lkpart_9',['lkpart',['../group__functions_gaa2a8f6265c301b29d450fa2fa479b530.html#gaa2a8f6265c301b29d450fa2fa479b530',1,'kyosu']]],
-  ['log_10',['log',['../group__functions_gabc0fe7e42be704597604cc8dec55f4ae.html#gabc0fe7e42be704597604cc8dec55f4ae',1,'kyosu']]],
-  ['log10_11',['log10',['../group__functions_gae2f0c4d2d1293fe07161174e586a27a3.html#gae2f0c4d2d1293fe07161174e586a27a3',1,'kyosu']]],
-  ['log1p_12',['log1p',['../group__functions_gad73829174f8194f6843b625c3538a180.html#gad73829174f8194f6843b625c3538a180',1,'kyosu']]],
-  ['log2_13',['log2',['../group__functions_ga5385bb9ae59cafa7a52c91df515c68b7.html#ga5385bb9ae59cafa7a52c91df515c68b7',1,'kyosu']]],
-  ['log_5fabs_14',['log_abs',['../group__functions_gae2249b712f1cea3a5d99295d7c355785.html#gae2249b712f1cea3a5d99295d7c355785',1,'kyosu']]],
-  ['log_5fabs_5fgamma_15',['log_abs_gamma',['../group__functions_gad513c55f0b0115b4fe0e159d75a75d3d.html#gad513c55f0b0115b4fe0e159d75a75d3d',1,'kyosu']]],
-  ['log_5fgamma_16',['log_gamma',['../group__functions_ga7ba6f29f797e8ee39b4a6279b810d740.html#ga7ba6f29f797e8ee39b4a6279b810d740',1,'kyosu']]],
-  ['lpart_17',['lpart',['../group__functions_ga8f1c7a32dcae0c94c2f79f0df7b60044.html#ga8f1c7a32dcae0c94c2f79f0df7b60044',1,'kyosu']]],
-  ['lpnorm_18',['lpnorm',['../group__functions_gac6f87aa6b8c7e02f0c8bba937bfd335e.html#gac6f87aa6b8c7e02f0c8bba937bfd335e',1,'kyosu']]],
-  ['lrising_5ffactorial_19',['lrising_factorial',['../group__functions_gaf92a640dbc6c479e4b8b17c9c951eba9.html#gaf92a640dbc6c479e4b8b17c9c951eba9',1,'kyosu']]]
+  ['gd_4',['gd',['../group__gd.html#gad3eacdb5f403d7a4f3a4fcc412f57b0e',1,'kyosu::gd']]],
+  ['gegenbauer_5',['gegenbauer',['../group__gegenbauer.html#gafacfbe5287142d18a3e08d15f9867b2e',1,'kyosu::gegenbauer']]],
+  ['genuinely_20new_8',['The thing that is genuinely new',['../tutorial-quaternion.html#autotoc_md33',1,'']]],
+  ['getting_20kyosu_12',['Getting KYOSU',['../setup.html#autotoc_md64',1,'']]],
+  ['go_20from_20here_14',['Where to go from here',['../tutorial-beyond.html#autotoc_md45',1,'']]],
+  ['go_20next_15',['Where to go next',['../setup.html#autotoc_md69',1,'']]]
 ];

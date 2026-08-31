@@ -1,29 +1,4 @@
 var searchData=
 [
-  ['abs_0',['abs',['../group__functions_gac70344c81b5cf55a5257cf54c6e6cb18.html#gac70344c81b5cf55a5257cf54c6e6cb18',1,'kyosu']]],
-  ['acos_1',['acos',['../group__functions_gaa6527f2975e878d560e025dba9def6cd.html#gaa6527f2975e878d560e025dba9def6cd',1,'kyosu']]],
-  ['acosh_2',['acosh',['../group__functions_ga010d55184f68d5a6276939926b22c689.html#ga010d55184f68d5a6276939926b22c689',1,'kyosu']]],
-  ['acot_3',['acot',['../group__functions_ga7d65b07b38591673afce19e11ad7738c.html#ga7d65b07b38591673afce19e11ad7738c',1,'kyosu']]],
-  ['acoth_4',['acoth',['../group__functions_gaed04ae9c136243a0b242183b8bf7b0a4.html#gaed04ae9c136243a0b242183b8bf7b0a4',1,'kyosu']]],
-  ['acsc_5',['acsc',['../group__functions_gabe9720e52e71443cb2d0cc9c62fad1a2.html#gabe9720e52e71443cb2d0cc9c62fad1a2',1,'kyosu']]],
-  ['acsch_6',['acsch',['../group__functions_gaceca829cfb9fe916d2a1c769b10018ef.html#gaceca829cfb9fe916d2a1c769b10018ef',1,'kyosu']]],
-  ['add_7',['add',['../group__functions_gadcd7dc3600f2f5da8fb31efc6b02d244.html#gadcd7dc3600f2f5da8fb31efc6b02d244',1,'kyosu']]],
-  ['agd_8',['agd',['../group__functions_ga302a7795299874023f6c615a9908e2ba.html#ga302a7795299874023f6c615a9908e2ba',1,'kyosu']]],
-  ['algebras_9',['Cayley-Dickson algebras',['../index.html#autotoc_md15',1,'']]],
-  ['align_10',['align',['../group__quaternion_ga75d48d720e22794a606131a0b0d7ce7d.html#ga75d48d720e22794a606131a0b0d7ce7d',1,'kyosu']]],
-  ['am_11',['am',['../group__functions_gaabbe680517187a5e2b72489ec5921211.html#gaabbe680517187a5e2b72489ec5921211',1,'kyosu']]],
-  ['arg_12',['arg',['../group__functions_gae6b016425d0a624d4391512f4afb64fc.html#gae6b016425d0a624d4391512f4afb64fc',1,'kyosu']]],
-  ['as_5fcayley_5fdickson_5flike_13',['as_cayley_dickson_like',['../structkyosu_1_1as__cayley__dickson__like.html',1,'kyosu']]],
-  ['as_5fcayley_5fdickson_5flike_3c_20t_2c_20kumi_3a_3aapply_5ftraits_5ft_3c_20as_5fcayley_5fdickson_5flike_2c_20ts_20_3e_20_3e_14',['as_cayley_dickson_like&lt; T, kumi::apply_traits_t&lt; as_cayley_dickson_like, Ts &gt; &gt;',['../structkyosu_1_1as__cayley__dickson__like.html',1,'kyosu']]],
-  ['as_5fcayley_5fdickson_5fn_5ft_15',['as_cayley_dickson_n_t',['../group__traits_ga8f185ca9780dc6cec632805d9cd71463.html#ga8f185ca9780dc6cec632805d9cd71463',1,'kyosu']]],
-  ['as_5fcayley_5fdickson_5ft_16',['as_cayley_dickson_t',['../group__traits_ga15c8de6cae864e2052c544b275ee2fb2.html#ga15c8de6cae864e2052c544b275ee2fb2',1,'kyosu']]],
-  ['as_5freal_17',['as_real',['../structkyosu_1_1as__real.html',1,'kyosu']]],
-  ['as_5freal_5ftype_5ft_18',['as_real_type_t',['../group__traits_ga6637bd6d8f6205889825bef54cef64e6.html#ga6637bd6d8f6205889825bef54cef64e6',1,'kyosu']]],
-  ['asec_19',['asec',['../group__functions_gaa0e50a4af9f77cf0b053e27ede376ca5.html#gaa0e50a4af9f77cf0b053e27ede376ca5',1,'kyosu']]],
-  ['asech_20',['asech',['../group__functions_ga73d1420e184c7752eb998291672c038d.html#ga73d1420e184c7752eb998291672c038d',1,'kyosu']]],
-  ['asin_21',['asin',['../group__functions_ga1b0ab1f5f9386bcfe84bc3356ad103e1.html#ga1b0ab1f5f9386bcfe84bc3356ad103e1',1,'kyosu']]],
-  ['asinh_22',['asinh',['../group__functions_ga472ea5acadc02ca6a04f9b8c29b60a27.html#ga472ea5acadc02ca6a04f9b8c29b60a27',1,'kyosu']]],
-  ['associator_23',['associator',['../group__functions_gac1477076e48284b3ea6b0304e24188c1.html#gac1477076e48284b3ea6b0304e24188c1',1,'kyosu']]],
-  ['atan_24',['atan',['../group__functions_ga4c75b3c9fa3f13d411c888143c0660a2.html#ga4c75b3c9fa3f13d411c888143c0660a2',1,'kyosu']]],
-  ['atanh_25',['atanh',['../group__functions_gad32eb35a5b7923acacd701fd74ae6834.html#gad32eb35a5b7923acacd701fd74ae6834',1,'kyosu']]]
+  ['0_0',['SPDX-License-Identifier: BSL-1.0',['..//__w/kyosu/kyosu/doc/strip_external_search.py#autotoc_md70',1,'']]]
 ];

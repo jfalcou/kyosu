@@ -1,13 +1,9 @@
 var searchData=
 [
-  ['manhattan_0',['manhattan',['../group__functions_ga27fb46c71e5625bc16d551b2d042fa64.html#ga27fb46c71e5625bc16d551b2d042fa64',1,'kyosu']]],
-  ['maxabs_1',['maxabs',['../group__functions_gae0175ca71d75db9471034684a10b37f7.html#gae0175ca71d75db9471034684a10b37f7',1,'kyosu']]],
-  ['maxmag_2',['maxmag',['../group__functions_ga3ca0ac25a6f4cb2c0a13290da3b09b77.html#ga3ca0ac25a6f4cb2c0a13290da3b09b77',1,'kyosu']]],
-  ['mi_3',['mi',['../group__constants_gada12ac0bbff1fc4e7476a12736e9a6c9.html#gada12ac0bbff1fc4e7476a12736e9a6c9',1,'kyosu']]],
-  ['minabs_4',['minabs',['../group__functions_gacf658d87e2919f4f6f6a830a2f94350b.html#gacf658d87e2919f4f6f6a830a2f94350b',1,'kyosu']]],
-  ['minmag_5',['minmag',['../group__functions_gaef4a4b97d1e190629aa6e51150c38c6c.html#gaef4a4b97d1e190629aa6e51150c38c6c',1,'kyosu']]],
-  ['minus_6',['minus',['../group__functions_ga77f919fac06fc69976f93e549b57517d.html#ga77f919fac06fc69976f93e549b57517d',1,'kyosu']]],
-  ['mul_7',['mul',['../namespacekyosu_afa0529f93372ed1d6f7288110d2cd663.html#afa0529f93372ed1d6f7288110d2cd663',1,'kyosu']]],
-  ['muli_8',['muli',['../group__functions_ga5d7e27fded33a32379427adc16edec6f.html#ga5d7e27fded33a32379427adc16edec6f',1,'kyosu']]],
-  ['mulmi_9',['mulmi',['../group__functions_gad0611b77939df02be326c41a6b6262bb.html#gad0611b77939df02be326c41a6b6262bb',1,'kyosu']]]
+  ['half_20turns_1',['half turns',['../index.html#autotoc_md20',1,'Angles in half-turns'],['../tutorial-options.html#autotoc_md48',1,'Angles in half-turns']]],
+  ['harmmean_4',['harmmean',['../group__harmmean.html#ga2142b1d05423b76c401df4d5bf13003a',1,'kyosu::harmmean']]],
+  ['here_12',['Where to go from here',['../tutorial-beyond.html#autotoc_md45',1,'']]],
+  ['horner_16',['horner',['../group__horner.html#gaeed0a0dd100ddf05147ded0ba505a5af',1,'kyosu::horner']]],
+  ['hypergeometric_20',['hypergeometric',['../group__hypergeometric.html#gad56c4489b7eb531f721190906ce04ee9',1,'kyosu']]],
+  ['hypot_21',['hypot',['../group__hypot.html#gafb18085cfb37fc835a36abdbf981101e',1,'kyosu::hypot']]]
 ];
