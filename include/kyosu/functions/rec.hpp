@@ -11,6 +11,7 @@
 #include <kyosu/functions/is_infinite.hpp>
 #include <kyosu/functions/sqr_abs.hpp>
 #include <kyosu/functions/conj.hpp>
+#include <kyosu/functions/is_not_real.hpp>
 
 namespace kyosu
 {
@@ -42,8 +43,16 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
+  //!      // Regular Calls
   //!      template<kyosu::concepts::cayley_dickson T> constexpr T rec(T z) noexcept;
   //!      template<eve::floating_ordered_value T>     constexpr T rec(T z) noexcept;
+  //!
+  //!      // Lanes masking
+  //!      constexpr auto rec[conditional_expr auto c](/*any of the above overloads*/)  noexcept; // 4
+  //!      constexpr auto rec[logical_value auto m](/*any of the above overloads*/)     noexcept; // 4
+  //!
+  //!      // Semantic Calls
+  //!      template<kyosu::concepts::cayley_dickson T> constexpr T rec[pedantic](T z) noexcept;
   //!   }
   //!   @endcode
   //!
@@ -53,7 +62,12 @@ namespace kyosu
   //!
   //!   **Return value**
   //!
-  //!     Returns the inverse of the argument.
+  //!     1. Returns the inverse of the argument.
+  //!     2. std::complex like behaviour with infinite or na entries entries
+  //!
+  //!     @note the regular inverse call applied to \f$\pm 0\f$ does not follow
+  //!      std::complex standard: the imaginary part is 0.
+  //!      Use pedantic if you think that an imaginary nan is a better result.
   //!
   //!  @groupheader{Example}
   //!
@@ -71,6 +85,18 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto rec_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::rec(z);
-    else return if_else(is_infinite(z), eve::zero, if_else(is_eqz(z), Z(eve::rec(real(z))), conj(z) / sqr_abs(z)));
+    else if constexpr (O::contains(pedantic))
+    {
+      auto zz = if_else(kyosu::is_not_real(z), conj(z),
+                        Z(real(z), eve::copysign(eve::zero(eve::as(kyosu::real(z))), kyosu::real(z))));
+      return if_else(is_nez(z), zz / sqr_abs(z),
+                     Z(eve::copysign(eve::inf(eve::as(kyosu::real(z))), kyosu::real(z)), eve::nan(eve::as(real(z)))));
+    }
+    else
+    {
+      return if_else(kyosu::is_real(z),
+                     Z(eve::rec(real(z)), eve::copysign(eve::zero(eve::as(kyosu::real(z))), kyosu::real(z))),
+                     if_else(is_infinite(z), eve::zero, conj(z) / sqr_abs(z)));
+    }
   }
 }
