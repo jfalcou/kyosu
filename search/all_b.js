@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['gd_4',['gd',['../group__gd.html#gad3eacdb5f403d7a4f3a4fcc412f57b0e',1,'kyosu::gd']]],
-  ['gegenbauer_5',['gegenbauer',['../group__gegenbauer.html#gafacfbe5287142d18a3e08d15f9867b2e',1,'kyosu::gegenbauer']]],
-  ['genuinely_20new_8',['The thing that is genuinely new',['../tutorial-quaternion.html#autotoc_md33',1,'']]],
-  ['getting_20kyosu_12',['Getting KYOSU',['../setup.html#autotoc_md68',1,'']]],
-  ['go_20from_20here_14',['Where to go from here',['../tutorial-beyond.html#autotoc_md45',1,'']]],
-  ['go_20next_15',['Where to go next',['../setup.html#autotoc_md73',1,'']]]
+  ['half_20turns_1',['half turns',['../index.html#autotoc_md20',1,'Angles in half-turns'],['../tutorial-options.html#autotoc_md48',1,'Angles in half-turns']]],
+  ['harmmean_4',['harmmean',['../group__harmmean.html#ga2142b1d05423b76c401df4d5bf13003a',1,'kyosu::harmmean']]],
+  ['here_12',['Where to go from here',['../tutorial-beyond.html#autotoc_md45',1,'']]],
+  ['horner_16',['horner',['../group__horner.html#gaeed0a0dd100ddf05147ded0ba505a5af',1,'kyosu::horner']]],
+  ['hypergeometric_20',['hypergeometric',['../group__hypergeometric.html#gad56c4489b7eb531f721190906ce04ee9',1,'kyosu']]],
+  ['hypot_21',['hypot',['../group__hypot.html#gafb18085cfb37fc835a36abdbf981101e',1,'kyosu::hypot']]]
 ];

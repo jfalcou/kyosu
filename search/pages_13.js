@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['parentheses_20are_20load_20bearing_0',['First trap: parentheses are load-bearing',['../tutorial-beyond.html#autotoc_md42',1,'']]],
-  ['pre_20requisites_1',['Pre-requisites',['../setup.html#autotoc_md67',1,'']]],
-  ['program_2',['Your first program',['../setup.html#autotoc_md72',1,'']]],
-  ['purpose_3',['What is missing on purpose',['../tutorial-complex.html#autotoc_md28',1,'']]]
+  ['quaternions_1',['Quaternions',['../tutorial-quaternion.html',1,'']]],
+  ['quick_20start_2',['Installation &amp;amp; Quick Start',['../setup.html',1,'']]]
 ];

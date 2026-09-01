@@ -1,5 +1,11 @@
 var searchData=
 [
-  ['half_20turns_0',['half turns',['../index.html#autotoc_md20',1,'Angles in half-turns'],['../tutorial-options.html#autotoc_md48',1,'Angles in half-turns']]],
-  ['here_2',['Where to go from here',['../tutorial-beyond.html#autotoc_md45',1,'']]]
+  ['in_20half_20turns_0',['in half turns',['../index.html#autotoc_md20',1,'Angles in half-turns'],['../tutorial-options.html#autotoc_md48',1,'Angles in half-turns']]],
+  ['installation_20quick_20start_1',['Installation &amp;amp; Quick Start',['../setup.html',1,'']]],
+  ['installed_20copy_2',['From an installed copy',['../setup.html#autotoc_md71',1,'']]],
+  ['instead_20of_20one_3',['Two divisions instead of one',['../tutorial-quaternion.html#autotoc_md34',1,'']]],
+  ['interpolating_20between_20orientations_5',['Interpolating between orientations',['../tutorial-rotation.html#autotoc_md39',1,'']]],
+  ['is_20genuinely_20new_6',['The thing that is genuinely new',['../tutorial-quaternion.html#autotoc_md33',1,'']]],
+  ['is_20missing_20on_20purpose_7',['What is missing on purpose',['../tutorial-complex.html#autotoc_md28',1,'']]],
+  ['its_20limits_8',['The construction and its limits',['../biblio.html#autotoc_md51',1,'']]]
 ];
