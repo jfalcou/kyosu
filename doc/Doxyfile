@@ -36,3 +36,7 @@ TAGFILES               = $(DOXYGEN_OUPUT)/../eve.tag=https://jfalcou.github.io/e
 
 ## The bibliography the citation page offers for download.
 HTML_EXTRA_FILES      += kyosu.bibtex
+
+## Doxygen 1.16 adds a copy button of its own, which lands on top of the one doxygen-awesome draws and styles.
+## Belongs in the shared fragment, where it would settle the pair for the whole fleet - see copacabana#79.
+HTML_COPY_CLIPBOARD    = NO
