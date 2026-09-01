@@ -192,23 +192,30 @@ Variables</h2></td></tr>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        &quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; 72.9f &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga7e324b44c677cab7cf646a1cb87e9405">conj</a>(72.9f) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kyosu::complex_t&lt;float&gt;(3.5f, -2.9f) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga7e324b44c677cab7cf646a1cb87e9405">conj</a>(<a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;float&gt;</a>(3.5f, -2.9f)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     \n&quot;</span>;</div>
+<div class="line">  <span class="keyword">using </span>c_t = <a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;float&gt;</a>;</div>
+<div class="line">  <span class="keyword">using </span>wc_t = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;c_t, eve::fixed&lt;4&gt;</a>&gt;;</div>
+<div class="line">  c_t a   = c_t(3.5f, -2.9f);</div>
+<div class="line">  c_t b   = c_t(3.5f,  2.9f);</div>
+<div class="line">  c_t a0  = c_t(3.5f,  0.0f);</div>
+<div class="line">  c_t am0 = c_t(3.5f, -0.0f);</div>
+<div class="line">  std::cout &lt;&lt; a   &lt;&lt;     <span class="stringliteral">&quot; conj-&gt;                     &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga7e324b44c677cab7cf646a1cb87e9405">conj</a>(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; b   &lt;&lt;     <span class="stringliteral">&quot; conj-&gt;                     &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga7e324b44c677cab7cf646a1cb87e9405">conj</a>(b) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; a0  &lt;&lt;     <span class="stringliteral">&quot;   conj-&gt;                     &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga7e324b44c677cab7cf646a1cb87e9405">conj</a>(a0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; am0 &lt;&lt;     <span class="stringliteral">&quot;   conj-&gt;                     &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga7e324b44c677cab7cf646a1cb87e9405">conj</a>(am0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> wa = wc_t(a, b, a0, am0);</div>
+<div class="line">  std::cout &lt;&lt; wa &lt;&lt; <span class="stringliteral">&quot; conj-&gt;                          &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga7e324b44c677cab7cf646a1cb87e9405">conj</a>(wa) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; wa &lt;&lt; <span class="stringliteral">&quot; conj[kyosu::is_not_real] -&gt;     &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga7e324b44c677cab7cf646a1cb87e9405">conj</a>[<a class="code hl_variable" href="group__is__not__real.html#ga9968f11970b837778ffe48677be73c82">kyosu::is_not_real</a>(wa)](wa) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kyosu::quaternion_t&lt;double&gt;(1., 2., 3., 4.) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span></div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  \n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kyosu::quaternion_t&lt;double&gt;(1., 2., 3., 4.) &lt;&lt; <span class="stringliteral">&quot; conj -&gt; &quot;</span></div>
 <div class="line">            &lt;&lt; <a class="code hl_variable" href="#ga7e324b44c677cab7cf646a1cb87e9405">conj</a>(<a class="code hl_typedef" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t&lt;double&gt;</a>(1., 2., 3., 4.)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;SIMD:        &quot;</span>;</div>
-<div class="line">  <span class="keyword">using </span>wc_t = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;kyosu::complex_t&lt;double&gt;</a>, <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1fixed.html">eve::fixed&lt;2&gt;</a>&gt;;</div>
-<div class="line">  std::cout &lt;&lt; wc_t(kyosu::complex_t&lt;double&gt;(1.3, -3.7)) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga7e324b44c677cab7cf646a1cb87e9405">conj</a>(wc_t(<a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;double&gt;</a>(1.3, -3.7)))</div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__is__not__real_html_ga9968f11970b837778ffe48677be73c82"><div class="ttname"><a href="group__is__not__real.html#ga9968f11970b837778ffe48677be73c82">kyosu::is_not_real</a></div><div class="ttdeci">constexpr auto is_not_real</div><div class="ttdef"><b>Definition</b> is_not_real.hpp:59</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
-<div class="ttc" id="astructeve_1_1fixed_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1fixed.html">eve::fixed</a></div></div>
 <div class="ttc" id="astructeve_1_1wide_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></div></div>
 </div><!-- fragment --> 
 </div>

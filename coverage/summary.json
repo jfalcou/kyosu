@@ -632,9 +632,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/conj.hpp",
-            "function_covered": 98,
+            "function_covered": 99,
             "function_percent": 100.0,
-            "function_total": 98,
+            "function_total": 99,
             "line_covered": 10,
             "line_percent": 100.0,
             "line_total": 10
@@ -1592,8 +1592,8 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/is_real.hpp",
-            "function_covered": 82,
-            "function_percent": 96.5,
+            "function_covered": 85,
+            "function_percent": 100.0,
             "function_total": 85,
             "line_covered": 8,
             "line_percent": 100.0,
@@ -2024,9 +2024,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/parts.hpp",
-            "function_covered": 280,
+            "function_covered": 282,
             "function_percent": 99.3,
-            "function_total": 282,
+            "function_total": 284,
             "line_covered": 6,
             "line_percent": 100.0,
             "line_total": 6
@@ -2120,12 +2120,12 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/rec.hpp",
-            "function_covered": 63,
+            "function_covered": 75,
             "function_percent": 100.0,
-            "function_total": 63,
-            "line_covered": 6,
+            "function_total": 75,
+            "line_covered": 12,
             "line_percent": 100.0,
-            "line_total": 6
+            "line_total": 12
         },
         {
             "branch_covered": 0,
@@ -2468,9 +2468,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/to_complex.hpp",
-            "function_covered": 27,
+            "function_covered": 28,
             "function_percent": 100.0,
-            "function_total": 27,
+            "function_total": 28,
             "line_covered": 5,
             "line_percent": 100.0,
             "line_total": 5
@@ -2716,12 +2716,12 @@
             "line_total": 4
         }
     ],
-    "function_covered": 24337,
+    "function_covered": 24356,
     "function_percent": 98.4,
-    "function_total": 24734,
+    "function_total": 24750,
     "gcovr/summary_format_version": "0.6",
-    "line_covered": 3871,
+    "line_covered": 3877,
     "line_percent": 94.9,
-    "line_total": 4081,
+    "line_total": 4087,
     "root": "../../.."
 }
