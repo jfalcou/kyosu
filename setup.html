@@ -125,7 +125,7 @@ $(function(){initNavTree('setup.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__2____w_2kyosu_2kyosu_2doc_2setup"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md63"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md67"></a>
 Pre-requisites</h1>
 <p><b>KYOSU</b> is a header-only C++20 library. It is built on top of <a href="https://github.com/jfalcou/eve">EVE</a>, which it needs at compile time and which shares its compiler requirements:</p>
 <table class="markdownTable">
@@ -137,10 +137,10 @@ Pre-requisites</h1>
 <td class="markdownTableBodyNone">clang++  </td><td class="markdownTableBodyNone">16 or above  </td><td class="markdownTableBodyNone">20  </td></tr>
 </table>
 <p>CMake 3.22 or above is required to build the tests and the documentation. Consuming the library needs no build step of its own: adding the include directory is enough, provided EVE is reachable too.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md68"></a>
 Getting KYOSU</h1>
 <p>Whichever route you take, the target to link against is <span class="tt">kyosu::kyosu</span>, and EVE must be linked alongside it. The three snippets below are the ones exercised by the integration tests, so they are known to work.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md69"></a>
 With CPM</h2>
 <div class="fragment"><div class="line">CPMAddPackage ( NAME kyosu</div>
 <div class="line">                GIT_REPOSITORY &quot;https://github.com/jfalcou/kyosu.git&quot;</div>
@@ -149,7 +149,7 @@ With CPM</h2>
 <div class="line">              )</div>
 <div class="line"> </div>
 <div class="line">target_link_libraries(my_app PUBLIC kyosu::kyosu eve::eve)</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md66"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md70"></a>
 With FetchContent</h2>
 <div class="fragment"><div class="line">include(FetchContent)</div>
 <div class="line"> </div>
@@ -166,7 +166,7 @@ With FetchContent</h2>
 <div class="line"> </div>
 <div class="line">target_link_libraries(my_app PUBLIC kyosu::kyosu eve::eve)</div>
 </div><!-- fragment --><p><span class="tt">FetchContent</span> carries no per-package options, so the settings each dependency reads are pinned before the call. Left out, every dependency registers its own test suite in your project.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md67"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md71"></a>
 From an installed copy</h2>
 <div class="fragment"><div class="line">git clone https://github.com/jfalcou/kyosu.git</div>
 <div class="line">cmake -S kyosu -B build -DCMAKE_INSTALL_PREFIX=/where/you/want</div>
@@ -174,7 +174,7 @@ From an installed copy</h2>
 </div><!-- fragment --><p>then</p>
 <div class="fragment"><div class="line">find_package(kyosu CONFIG REQUIRED)</div>
 <div class="line">target_link_libraries(my_app PUBLIC kyosu::kyosu eve::eve)</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md68"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md72"></a>
 Your first program</h1>
 <p>A single header brings in everything:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -200,7 +200,7 @@ Your first program</h1>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
 </div><!-- fragment --><p>Two things are worth noticing already. <span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></span> is applied to a value that is not a complex number and returns one anyway, because the square root of a negative real is not real. And the same <span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></span> accepts a quaternion without any change of spelling. Both are the subject of the tutorials that follow.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md69"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md73"></a>
 Where to go next</h1>
 <ul>
 <li><a class="el" href="tutorial-complex.html" title="Complex numbers">Complex numbers</a> — complex numbers, on ground you already know.</li>

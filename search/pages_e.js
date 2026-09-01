@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kyosu_0',['Getting KYOSU',['../setup.html#autotoc_md64',1,'']]]
+  ['kyosu_0',['Getting KYOSU',['../setup.html#autotoc_md68',1,'']]]
 ];

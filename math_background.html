@@ -125,7 +125,7 @@ $(function(){initNavTree('math_background.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__2____w_2kyosu_2kyosu_2doc_2math"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md54"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md58"></a>
 Rationale</h1>
 <p>The complex numbers may be presented without any appeal to \(\sqrt{-1}\), as the set of ordered pairs of reals equipped with a particular product. Cayley and Dickson observed that this presentation makes no use of the fact that the underlying objects are real numbers, and may therefore be iterated. Applied to pairs of complex numbers it yields Hamilton's quaternions; applied to pairs of quaternions it yields the octonions of Graves and Cayley; and it does not stop there.</p>
 <p>Let \(A\) be a real algebra endowed with an involution \(x \mapsto \overline{x}\). The <em>Cayley-Dickson double</em> of \(A\) is the algebra \(A \times A\) whose product and involution are</p>
@@ -135,7 +135,7 @@ Rationale</h1>
 </p>
 <p>Beginning at \(A = \mathbb{R}\), with the identity as involution, this doubling produces in turn \(\mathbb{C}\), \(\mathbb{H}\), \(\mathbb{O}\), and an infinite tower of algebras of dimension \(2^n\). Conventions for the doubling formula differ across the literature; the one above is the convention <b>KYOSU</b> implements.</p>
 <p>Two consequences of this uniformity govern the design of the library. First, a single product is implemented, not one per algebra, and it remains correct at every dimension. Second, as established in the final section, the extension of a real analytic function to any of these algebras follows one scheme, so that a function need not be redefined for each. This is the reason <b>KYOSU</b> is a single library rather than four, and the reason <span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></span> denotes one function whether its argument is a <span class="tt">double</span>, a complex number, a quaternion, or an element of dimension 32.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md55"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md59"></a>
 The cost of each doubling</h1>
 <p>Each doubling doubles the dimension at the expense of a structural property, and the properties are lost in a fixed order. This is not an artefact of the construction but a theorem: by Frobenius (1878) the only finite-dimensional associative division algebras over \(\mathbb{R}\) are \(\mathbb{R}\), \(\mathbb{C}\) and \(\mathbb{H}\), and by Hurwitz (1898) the only normed division algebras over \(\mathbb{R}\) are those three together with \(\mathbb{O}\). Nothing of the kind exists in dimension 16 or beyond. References for these and for what follows are collected in the <a class="el" href="biblio.html" title="Bibliography">Bibliography</a>.</p>
 <table class="markdownTable">
@@ -155,14 +155,14 @@ The cost of each doubling</h1>
 <td class="markdownTableBodyCenter">\(2^n,\ n&gt;4\)  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">power-associative algebra  </td></tr>
 </table>
 <p>Each of these losses constrains what may legitimately be written.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md56"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md60"></a>
 Dimension 2: the loss of order</h2>
 <p>No total order on \(\mathbb{C}\) is compatible with its field structure: were \(&lt;\) such an order, both \(i &gt; 0\) and \(i &lt; 0\) would give \(i^2 = -1 &gt; 0\). Consequently <b>KYOSU</b> provides no relational operator on Cayley-Dickson values; equality and componentwise predicates are defined, comparison is not.</p>
 <p>A second and more practical consequence appears at the same step. A real analytic function restricted to the reals need not remain there: \(\sqrt{-1}\) is not an error condition but the element \(i\). Whether a real argument outside a function's real domain should produce a complex result or a NaN is a matter of intent, and the library requires that intent to be stated.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md57"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md61"></a>
 Dimension 4: the loss of commutativity</h2>
 <p>In \(\mathbb{H}\) one has \(ij = k\) while \(ji = -k\). Once the product depends on the order of its operands, the expression \(a/b\) ceases to designate a single operation: the solutions of \(xb = a\) and of \(bx = a\) are in general distinct, and both are legitimate notions of division.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md58"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md62"></a>
 Dimension 8: the loss of associativity</h2>
 <p>In \(\mathbb{O}\) the products \((ab)c\) and \(a(bc)\) differ. On the standard basis,</p>
 <p class="formulaDsp">
@@ -170,7 +170,7 @@ Dimension 8: the loss of associativity</h2>
 </p>
 <p>The associator \([a,b,c] = (ab)c - a(bc)\) measures this defect and is available as <a class="el" href="group__associator.html#gac1477076e48284b3ea6b0304e24188c1">kyosu::associator</a>; on the triple above it returns \(2e_7\), and on any three quaternions it vanishes.</p>
 <p>What survives is <em>alternativity</em>: the associator is an alternating function of its three arguments, from which Artin's theorem follows — any two elements generate an associative subalgebra. This is weaker than associativity but sufficient for the elementary functions, whose arguments in the extension scheme of the final section lie in a subalgebra generated by two elements.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md59"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md63"></a>
 Dimension 16: the loss of division</h2>
 <p>The sedenions possess zero divisors. Writing \((e_i)\) for the standard basis,</p>
 <p class="formulaDsp">
@@ -178,7 +178,7 @@ Dimension 16: the loss of division</h2>
 </p>
 <p>both factors having norm \(\sqrt2\). The norm is therefore no longer multiplicative, no inverse exists for such elements, and a quotient of two finite operands may be unbounded.</p>
 <p>What persists at every dimension is <em>power-associativity</em>: the subalgebra generated by a single element is associative, so that \(z^mz^n = z^{m+n}\) holds unambiguously. As shown below, this is exactly the hypothesis the extension scheme requires, which is why elementary functions remain meaningful in arbitrary dimension.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md60"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
 The library's response</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -195,7 +195,7 @@ The library's response</h1>
 <td class="markdownTableBodyNone">Algebras of different dimension embed in one another  </td><td class="markdownTableBodyNone">An operation on mixed dimensions promotes to the larger, the absent components being zero.  </td></tr>
 </table>
 <p>The last of these is what renders the tower usable in practice: the sum of a complex number and a quaternion is a quaternion, with no conversion appearing in the source.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md61"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
 Notation</h1>
 <p>Let \(\mathbb{K}\) be a Cayley-Dickson algebra of dimension \(N\). Its elements are written</p>
 <p class="formulaDsp">
@@ -212,7 +212,7 @@ Notation</h1>
 </ul>
 <p>Since \(I_z^2 = -1\), the resemblance of the polar form to the complex case is not an analogy but an identity of computation, and it is on this that the following section rests.</p>
 <p>The construction is carried out over the IEEE <span class="tt">float</span> and <span class="tt">double</span> representations of the reals exclusively. As <b>KYOSU</b> is built upon EVE, these may equally be SIMD registers of such values.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md62"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md66"></a>
 Extension of real analytic functions</h1>
 <p>Let \(f\) be a real analytic function and \(c \in \mathbb{K}\). Its extension is obtained in two steps:</p>
 <ol type="1">

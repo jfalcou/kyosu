@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['each_20doubling_0',['The cost of each doubling',['../math_background.html#autotoc_md55',1,'']]],
+  ['each_20doubling_0',['The cost of each doubling',['../math_background.html#autotoc_md59',1,'']]],
   ['ellint_5ffe_99',['ellint_fe',['../group__ellint__fe.html#ga858bbc0cd82011e1911907d0d6cdf2cb',1,'kyosu::ellint_fe']]],
   ['ellint_5frc_100',['ellint_rc',['../group__ellint__rc.html#ga59830d1553989ba7ee7722d0b2731039',1,'kyosu::ellint_rc']]],
   ['ellint_5frd_101',['ellint_rd',['../group__ellint__rd.html#ga81e0756cf62ec6b36813e4eb930992c9',1,'kyosu::ellint_rd']]],
@@ -22,5 +22,5 @@ var searchData=
   ['expm1_151',['expm1',['../group__expm1.html#ga20b941e423fc7750665a8c15da666169',1,'kyosu::expm1']]],
   ['expmx2_152',['expmx2',['../group__expmx2.html#ga17336c4e1b6666dd1fb632c136b1f19d',1,'kyosu::expmx2']]],
   ['expx2_157',['expx2',['../group__expx2.html#gae725cf6ea34c98c328ae87ef2d9271f2',1,'kyosu::expx2']]],
-  ['extension_20of_20real_20analytic_20functions_158',['Extension of real analytic functions',['../math_background.html#autotoc_md62',1,'']]],
+  ['extension_20of_20real_20analytic_20functions_158',['Extension of real analytic functions',['../math_background.html#autotoc_md66',1,'']]],
 ];

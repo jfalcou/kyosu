@@ -5,7 +5,7 @@ var searchData=
   ['kpart_7',['kpart',['../group__kpart.html#gab70ea330558b767effdc20d5d621a503',1,'kyosu']]],
   ['kronecker_8',['kronecker',['../group__kronecker.html#ga386216ae903d30cecb1c34d69f1335a4',1,'kyosu']]],
   ['kummer_9',['kummer',['../group__kummer.html#gab4537c0d485cdbd2e836420db2f31ec7',1,'kyosu']]],
-  ['kyosu_10',['Getting KYOSU',['../setup.html#autotoc_md64',1,'']]],
+  ['kyosu_10',['Getting KYOSU',['../setup.html#autotoc_md68',1,'']]],
   ['kyosu_11',['kyosu',['../namespacekyosu.html',1,'']]],
   ['kyosu_3a_3aabs_12',['kyosu::abs',['../group__abs.html',1,'']]],
   ['kyosu_3a_3aacos_13',['kyosu::acos',['../group__acos.html',1,'']]],

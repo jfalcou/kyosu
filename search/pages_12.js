@@ -1,15 +1,15 @@
 var searchData=
 [
   ['octonions_20and_20beyond_0',['Octonions and beyond',['../tutorial-beyond.html',1,'']]],
-  ['of_20associativity_1',['Dimension 8: the loss of associativity',['../math_background.html#autotoc_md58',1,'']]],
+  ['of_20associativity_1',['Dimension 8: the loss of associativity',['../math_background.html#autotoc_md62',1,'']]],
   ['of_20cayley_20dickson_20algebras_2',['Mathematics of Cayley-Dickson Algebras',['../math_background.html',1,'']]],
-  ['of_20commutativity_3',['Dimension 4: the loss of commutativity',['../math_background.html#autotoc_md57',1,'']]],
+  ['of_20commutativity_3',['Dimension 4: the loss of commutativity',['../math_background.html#autotoc_md61',1,'']]],
   ['of_20complex_20numbers_4',['A register of complex numbers',['../tutorial-simd.html#autotoc_md30',1,'']]],
-  ['of_20division_5',['Dimension 16: the loss of division',['../math_background.html#autotoc_md59',1,'']]],
-  ['of_20each_20doubling_6',['The cost of each doubling',['../math_background.html#autotoc_md55',1,'']]],
+  ['of_20division_5',['Dimension 16: the loss of division',['../math_background.html#autotoc_md63',1,'']]],
+  ['of_20each_20doubling_6',['The cost of each doubling',['../math_background.html#autotoc_md59',1,'']]],
   ['of_20one_7',['Two divisions instead of one',['../tutorial-quaternion.html#autotoc_md34',1,'']]],
-  ['of_20order_8',['Dimension 2: the loss of order',['../math_background.html#autotoc_md56',1,'']]],
-  ['of_20real_20analytic_20functions_9',['Extension of real analytic functions',['../math_background.html#autotoc_md62',1,'']]],
+  ['of_20order_8',['Dimension 2: the loss of order',['../math_background.html#autotoc_md60',1,'']]],
+  ['of_20real_20analytic_20functions_9',['Extension of real analytic functions',['../math_background.html#autotoc_md66',1,'']]],
   ['of_20reals_10',['A register of reals',['../tutorial-simd.html#autotoc_md29',1,'']]],
   ['on_20purpose_11',['What is missing on purpose',['../tutorial-complex.html#autotoc_md28',1,'']]],
   ['once_12',['Many values at once',['../tutorial-simd.html',1,'']]],
@@ -20,7 +20,7 @@ var searchData=
   ['one_20without_20listing_20four_20numbers_17',['Building one without listing four numbers',['../tutorial-quaternion.html#autotoc_md35',1,'']]],
   ['options_20',['Options',['../tutorial-options.html',1,'']]],
   ['or_20simd_21',['One call, scalar or SIMD',['../index.html#autotoc_md18',1,'']]],
-  ['order_22',['Dimension 2: the loss of order',['../math_background.html#autotoc_md56',1,'']]],
+  ['order_22',['Dimension 2: the loss of order',['../math_background.html#autotoc_md60',1,'']]],
   ['orientations_23',['Interpolating between orientations',['../tutorial-rotation.html#autotoc_md39',1,'']]],
   ['other_20representations_24',['Converting to and from other representations',['../tutorial-rotation.html#autotoc_md40',1,'']]]
 ];

@@ -1,14 +1,14 @@
 var searchData=
 [
   ['i_0',['i',['../group__i.html#gaa17b17c2202168c33700e95ccce7322d',1,'kyosu']]],
-  ['identifier_3a_20bsl_201_200_1',['SPDX-License-Identifier: BSL-1.0',['..//__w/kyosu/kyosu/doc/strip_external_search.py#autotoc_md70',1,'']]],
+  ['identifier_3a_20bsl_201_200_1',['SPDX-License-Identifier: BSL-1.0',['..//__w/kyosu/kyosu/doc/strip_external_search.py#autotoc_md74',1,'']]],
   ['if_5felse_4',['if_else',['../group__if__else.html#ga653d166a9a5d389a6d5aa1a1220b4643',1,'kyosu::if_else']]],
   ['imag_14',['imag',['../group__ipart.html#gaff94a2685c6d030458b388a4a4079efe',1,'kyosu']]],
   ['in_20half_20turns_15',['in half turns',['../index.html#autotoc_md20',1,'Angles in half-turns'],['../tutorial-options.html#autotoc_md48',1,'Angles in half-turns']]],
   ['inc_16',['inc',['../group__inc.html#gae5c7264a43adea8149beb99e71fb0e4d',1,'kyosu::inc']]],
   ['inject_19',['inject',['../group__inject.html#ga5c2b44e7d8e27d43b129c6e0739bf6d3',1,'kyosu']]],
   ['installation_20quick_20start_20',['Installation &amp;amp; Quick Start',['../setup.html',1,'']]],
-  ['installed_20copy_21',['From an installed copy',['../setup.html#autotoc_md67',1,'']]],
+  ['installed_20copy_21',['From an installed copy',['../setup.html#autotoc_md71',1,'']]],
   ['instead_20of_20one_22',['Two divisions instead of one',['../tutorial-quaternion.html#autotoc_md34',1,'']]],
   ['interpolating_20between_20orientations_27',['Interpolating between orientations',['../tutorial-rotation.html#autotoc_md39',1,'']]],
   ['ipart_46',['ipart',['../group__ipart.html#gac538e6a794844977cba0f5043a990c99',1,'kyosu']]],
