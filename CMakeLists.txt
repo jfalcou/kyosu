@@ -67,7 +67,15 @@ if(KYOSU_BUILD_DOCUMENTATION)
     message(WARNING "[${PROJECT_NAME}] - eve.tag could not be fetched (${EVE_TAG_STATUS}), the eve:: links will be dead")
   endif()
 
-  copa_setup_doxygen(${QUIET_OPTION} DESTINATION "${PROJECT_BINARY_DIR}/doc")
+  copa_setup_doxygen(${QUIET_OPTION}
+                     DESTINATION "${PROJECT_BINARY_DIR}/doc"
+                     URL "https://github.com/jfalcou/kyosu"
+                     GODBOLT_LIBRARIES kyosu eve
+                     GODBOLT_COMPILER clang2010
+                     GODBOLT_OPTIONS "-O3 -std=c++20 -DNDEBUG"
+                     COLOR_HUE 41
+                     COLOR_SATURATION 47
+                     COLOR_LIGHTNESS 54)
 
   ## Reading eve.tag is what makes the eve:: references resolve, and it also hands doxygen every symbol eve documents,
   ## which then fills kyosu's search box. Doxygen has no setting for that, so the index is trimmed afterwards.
