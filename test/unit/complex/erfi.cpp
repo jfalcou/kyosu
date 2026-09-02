@@ -72,3 +72,15 @@ TTS_CASE_WITH("Check behavior of erfi on wide",
     TTS_RELATIVE_EQUAL(ez.get(i), kyosu::erfi(z.get(i)), tts::prec<T>());
   }
 };
+
+//======================================================================================================================
+//== A masked call answers a complex where its argument was real, so the lanes the condition rejects carry complex(v)
+//======================================================================================================================
+TTS_CASE_WITH("Check kyosu::erfi over a masked real", kyosu::real_types, tts::randoms(-1.0, 1.0))
+<typename T>(T v)
+{
+  auto cond = eve::is_ltz(v);
+
+  TTS_RELATIVE_EQUAL(kyosu::erfi[cond](v), kyosu::if_else(cond, kyosu::erfi(v), kyosu::complex_t<T>(v)),
+                     tts::prec<T>());
+};

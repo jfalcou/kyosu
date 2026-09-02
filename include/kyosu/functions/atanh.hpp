@@ -107,13 +107,19 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_NOINLINE constexpr auto atanh_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  KYOSU_NOINLINE constexpr auto atanh_(KYOSU_DELAY(), O const& o, Z a0) noexcept
   {
     if constexpr (O::contains(real_only)) return eve::atanh(a0);
-    else if constexpr (concepts::real<Z>) return kyosu::inject[real_only](eve::atanh(a0));
+    // The real atanh only answers on (-1, 1); anywhere else the value is complex, and injecting the real one would
+    // carry its nan into the complex plane rather than the value that exists there.
+    else if constexpr (concepts::real<Z>) return kyosu::atanh[o](complex(a0));
     else if constexpr (concepts::complex<Z>)
     {
-      if (eve::all(is_real(a0))) return kyosu::inject(eve::atanh(real(a0)));
+      // Same domain, so the shortcut to the real atanh only holds on it - the closed interval, the two ends included:
+      // there the real atanh is the infinity the complex one answers too.
+      auto re = real(a0);
+      if (eve::all(is_real(a0) && eve::is_less_equal(eve::abs(re), eve::one(eve::as(re)))))
+        return kyosu::inject(eve::atanh(re));
       // This implementation is a simd (i.e. no branching) transcription and adaptation of the
       // boost_math code which itself is a transcription of the pseudo-code in:
       //

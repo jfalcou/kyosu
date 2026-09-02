@@ -14,7 +14,8 @@
 namespace kyosu
 {
   template<typename Options>
-  struct asech_t : eve::elementwise_callable<asech_t, Options, raw_option, pedantic_option, real_only_option>
+  struct asech_t
+    : kyosu::promoting_elementwise_callable<asech_t, Options, raw_option, pedantic_option, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
@@ -90,7 +91,9 @@ namespace kyosu::_
   KYOSU_FORCEINLINE constexpr auto asech_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     if constexpr (O::contains(real_only)) return eve::asech(z);
-    else if constexpr (concepts::real<Z>) return kyosu::inject[real_only](eve::asech(z));
+    // The real asech only answers on (0, 1]. Anywhere else the value is complex, so the argument goes up to the
+    // complex plane and acosh finds it there, the way sqrt, acos, asin and acosh all do for a real of their own.
+    else if constexpr (concepts::real<Z>) return kyosu::acosh[o](kyosu::rec(complex(z)));
     else return kyosu::acosh[o](kyosu::rec(z));
   }
 

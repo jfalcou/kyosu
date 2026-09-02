@@ -32,3 +32,15 @@ TTS_CASE_WITH("Check kyosu::acsch over quaternion",
   TTS_RELATIVE_EQUAL(kyosu::csch(lc), c, tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::csch(lq), q, 5e-2);
 };
+
+//======================================================================================================================
+//== A masked call answers a complex where its argument was real, so the lanes the condition rejects carry complex(v)
+//======================================================================================================================
+TTS_CASE_WITH("Check kyosu::acsch over a masked real", kyosu::real_types, tts::randoms(1.0, 10.0))
+<typename T>(T v)
+{
+  auto cond = eve::is_greater(v, T(5));
+
+  TTS_RELATIVE_EQUAL(kyosu::acsch[cond](v), kyosu::if_else(cond, kyosu::acsch(v), kyosu::complex_t<T>(v)),
+                     tts::prec<T>());
+};

@@ -32,3 +32,16 @@ TTS_CASE_WITH("Check kyosu::asech over quaternion",
   TTS_RELATIVE_EQUAL(kyosu::sech(lc), c, tts::prec_low<T>());
   TTS_RELATIVE_EQUAL(kyosu::sech(lq), q, tts::prec_low<T>());
 };
+
+//======================================================================================================================
+//== A masked call answers a complex where its argument was real, so the lanes the condition rejects carry complex(v)
+//======================================================================================================================
+//== Away from 1, where asech is zero and its derivative diverges: a relative comparison there says nothing.
+TTS_CASE_WITH("Check kyosu::asech over a masked real", kyosu::real_types, tts::randoms(1.5, 4.0))
+<typename T>(T v)
+{
+  auto cond = eve::is_greater(v, T(2.75));
+
+  TTS_RELATIVE_EQUAL(kyosu::asech[cond](v), kyosu::if_else(cond, kyosu::asech(v), kyosu::complex_t<T>(v)),
+                     tts::prec<T>());
+};

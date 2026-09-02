@@ -12,8 +12,12 @@
 namespace kyosu
 {
   template<typename Options>
-  struct muli_t
-    : eve::elementwise_callable<muli_t, Options, raw_option, pedantic_option, eve::left_option, eve::right_option>
+  struct muli_t : kyosu::promoting_elementwise_callable<muli_t,
+                                                        Options,
+                                                        raw_option,
+                                                        pedantic_option,
+                                                        eve::left_option,
+                                                        eve::right_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept

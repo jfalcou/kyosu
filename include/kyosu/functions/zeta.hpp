@@ -13,7 +13,8 @@
 
 namespace kyosu
 {
-  template<typename Options> struct zeta_t : eve::elementwise_callable<zeta_t, Options, raw_option, pedantic_option>
+  template<typename Options>
+  struct zeta_t : kyosu::promoting_elementwise_callable<zeta_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
     KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
