@@ -7,7 +7,7 @@
 //======================================================================================================================
 #pragma once
 
-#include "kyosu/types/traits.hpp"
+#include <kyosu/types/traits.hpp>
 #include <kyosu/details/callable.hpp>
 
 namespace kyosu

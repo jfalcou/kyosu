@@ -5,7 +5,7 @@
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
-#include "test.hpp"
+#include <test.hpp>
 #include <kyosu/kyosu.hpp>
 
 TTS_CASE_WITH("Check that slerp reaches both ends of the arc",
