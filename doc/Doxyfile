@@ -26,17 +26,5 @@ GENERATE_LATEX         = NO
 ##======================================================================================================================
 @INCLUDE               = $(DOXYGEN_ASSETS)/base.doxyfile
 
-## What this project adds on top of it. color.css is written into the output by copa_setup_doxygen, from the same
-## numbers that tint doxygen's own widgets.
-HTML_EXTRA_STYLESHEET += $(DOXYGEN_ASSETS)/custom.css
-HTML_EXTRA_STYLESHEET += $(DOXYGEN_OUPUT)/color.css
-
-## EVE's tagfile is downloaded while configuring; reading it is what makes the eve:: references resolve.
-TAGFILES               = $(DOXYGEN_OUPUT)/../eve.tag=https://jfalcou.github.io/eve
-
 ## The bibliography the citation page offers for download.
 HTML_EXTRA_FILES      += kyosu.bibtex
-
-## Doxygen 1.16 adds a copy button of its own, which lands on top of the one doxygen-awesome draws and styles.
-## Belongs in the shared fragment, where it would settle the pair for the whole fleet - see copacabana#79.
-HTML_COPY_CLIPBOARD    = NO
