@@ -5,7 +5,7 @@
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
-#include "test.hpp"
+#include <test.hpp>
 #include <kyosu/kyosu.hpp>
 
 template<typename T> auto prod(auto m, std::array<T, 3> const& v)

@@ -5,8 +5,8 @@
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
-#include "kyosu/types/octonion.hpp"
-#include "tts/tools/typename.hpp"
+#include <kyosu/types/octonion.hpp>
+#include <tts/tools/typename.hpp>
 #include <kyosu/kyosu.hpp>
 #include <test.hpp>
 
