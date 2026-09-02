@@ -483,6 +483,20 @@
     <templarg>typename O</templarg>
     <templarg>typename T</templarg>
   </compound>
+  <compound kind="struct">
+    <name>kyosu::promoting_elementwise_callable</name>
+    <filename>structkyosu_1_1promoting__elementwise__callable.html</filename>
+    <templarg>template&lt; typename &gt; class Func</templarg>
+    <templarg>typename OptionsValues</templarg>
+    <templarg>typename... Options</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kyosu::promoting_strict_elementwise_callable</name>
+    <filename>structkyosu_1_1promoting__strict__elementwise__callable.html</filename>
+    <templarg>template&lt; typename &gt; class Func</templarg>
+    <templarg>typename OptionsValues</templarg>
+    <templarg>typename... Options</templarg>
+  </compound>
   <compound kind="concept">
     <name>kyosu::concepts::cayley_dickson</name>
     <filename>conceptkyosu_1_1concepts_1_1cayley__dickson.html</filename>
@@ -511,6 +525,8 @@
     <class kind="struct">kyosu::cayley_dickson</class>
     <class kind="struct">kyosu::complexify</class>
     <class kind="struct">kyosu::complexify_if</class>
+    <class kind="struct">kyosu::promoting_elementwise_callable</class>
+    <class kind="struct">kyosu::promoting_strict_elementwise_callable</class>
     <member kind="typedef">
       <type>typename as_cayley_dickson_n&lt; Dim, Ts... &gt;::type</type>
       <name>as_cayley_dickson_n_t</name>
@@ -2465,6 +2481,13 @@
     <subgroup>to_rotation_matrix</subgroup>
     <subgroup>to_semipolar</subgroup>
     <subgroup>to_spherical</subgroup>
+  </compound>
+  <compound kind="group">
+    <name>traits</name>
+    <title>Traits</title>
+    <filename>group__traits.html</filename>
+    <class kind="struct">kyosu::promoting_elementwise_callable</class>
+    <class kind="struct">kyosu::promoting_strict_elementwise_callable</class>
   </compound>
   <compound kind="group">
     <name>types</name>
