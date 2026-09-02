@@ -6,13 +6,7 @@
 */
 //======================================================================================================================
 #pragma once
-// TODO: drop the guard and keep <eve/deps/raberu.hpp> alone once the EVE pin reaches a commit that
-// carries it, which is what #262 does. Same move as the kumi header in types/traits.hpp.
-#if __has_include(<eve/deps/raberu.hpp>)
 #include <eve/deps/raberu.hpp>
-#else
-#include <eve/detail/raberu.hpp>
-#endif
 #include <eve/module/core/decorator/core.hpp>
 
 namespace kyosu

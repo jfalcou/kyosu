@@ -7,15 +7,7 @@
 //======================================================================================================================
 #pragma once
 
-// TODO: drop the guard and keep <eve/deps/kumi.hpp> alone as soon as the EVE pin in
-// cmake/dependencies.cmake reaches a commit that carries it, which is what #262 does. EVE moved its
-// vendored dependencies under deps/ and renamed them, and the integration tests build against EVE's
-// main whatever the pin says, so both spellings have to resolve in the meantime.
-#if __has_include(<eve/deps/kumi.hpp>)
 #include <eve/deps/kumi.hpp>
-#else
-#include <eve/deps/kumi/tuple.hpp>
-#endif
 #include <kyosu/types/helpers.hpp>
 #include <kyosu/details/decorators.hpp>
 #include <eve/as.hpp>
