@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Le plan de Fano : sept points, sept lignes, la table de multiplication des octonions. -->
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#DDC8A1" stroke-width="22"/>
+  <line x1="256" y1="56" x2="82.8" y2="356" stroke="#DDC8A1" stroke-width="22" stroke-linecap="round"/>
+  <line x1="82.8" y1="356" x2="429.2" y2="356" stroke="#DDC8A1" stroke-width="22" stroke-linecap="round"/>
+  <line x1="429.2" y1="356" x2="256" y2="56" stroke="#DDC8A1" stroke-width="22" stroke-linecap="round"/>
+  <line x1="82.8" y1="356" x2="256" y2="256" stroke="#DDC8A1" stroke-width="22" stroke-linecap="round"/>
+  <line x1="169.4" y1="206" x2="256" y2="256" stroke="#DDC8A1" stroke-width="22" stroke-linecap="round"/>
+  <!-- Trois de ces lignes portent le marine, et forment le K : la mediane verticale et les
+       deux demi-medianes qui partent du centre. Rien n'est ajoute au diagramme. -->
+  <line x1="256" y1="56" x2="256" y2="356" stroke="#151C4C" stroke-width="18" stroke-linecap="round"/>
+  <line x1="256" y1="256" x2="342.6" y2="206" stroke="#151C4C" stroke-width="18" stroke-linecap="round"/>
+  <line x1="256" y1="256" x2="429.2" y2="356" stroke="#151C4C" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="256" cy="56" r="16" fill="#DDC8A1" stroke="#151C4C" stroke-width="6"/>
+  <circle cx="82.8" cy="356" r="16" fill="#DDC8A1" stroke="#151C4C" stroke-width="6"/>
+  <circle cx="429.2" cy="356" r="16" fill="#DDC8A1" stroke="#151C4C" stroke-width="6"/>
+  <circle cx="169.4" cy="206" r="16" fill="#DDC8A1" stroke="#151C4C" stroke-width="6"/>
+  <circle cx="256" cy="356" r="16" fill="#DDC8A1" stroke="#151C4C" stroke-width="6"/>
+  <circle cx="342.6" cy="206" r="16" fill="#DDC8A1" stroke="#151C4C" stroke-width="6"/>
+  <circle cx="256" cy="256" r="16" fill="#DDC8A1" stroke="#151C4C" stroke-width="6"/>
+</svg>

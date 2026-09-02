@@ -1,4 +1,4 @@
-<img src="https://github.com/jfalcou/kyosu/raw/main/doc/logo.png" alt="KYOSU logo" data-canonical-src="https://github.com/jfalcou/kyosu/main/doc/logo.png" align="left"  width="15%" height="15%" />
+<img src="https://raw.githubusercontent.com/jfalcou/kyosu/refs/heads/main/doc/logo.svg" alt="KYOSU logo: the Fano plane, three of its lines drawn dark to form a K" data-canonical-src="https://jfalcou.github.io/kyosu/doc/logo.svg" align="left" width="15%" height="15%" />
 
 # Kyosu
 ## Complex Without Complexes
