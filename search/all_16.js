@@ -26,5 +26,5 @@ var searchData=
   ['start_93',['Installation &amp;amp; Quick Start',['../setup.html',1,'']]],
   ['still_20works_20everywhere_96',['What still works everywhere',['../tutorial-beyond.html#autotoc_md44',1,'']]],
   ['sub_108',['sub',['../group__sub.html#gacc787c1065460b8a8dae30ebdcdceefa',1,'kyosu::sub']]],
-  ['surprise_122',['The one surprise',['../tutorial-complex.html#autotoc_md27',1,'']]],
+  ['surprise_123',['The one surprise',['../tutorial-complex.html#autotoc_md27',1,'']]],
 ];
