@@ -1,9 +1,9 @@
 html {
-  --primary-dark-color: hsl(41, 47%, 34%);
-  --primary-color: hsl(41, 47%, 54%);
-  --primary-light-color: hsl(41, 47%, 74%);
+  --primary-dark-color: hsl(232, 57%, 8%);
+  --primary-color: hsl(232, 57%, 28%);
+  --primary-light-color: hsl(232, 57%, 48%);
 
   --page-background-color: white;
-  --page-foreground-color: hsl(41, 47%, 34%);
-  --page-secondary-foreground-color: hsl(41, 47%, 54%);
+  --page-foreground-color: hsl(232, 57%, 8%);
+  --page-secondary-foreground-color: hsl(232, 57%, 28%);
 }
