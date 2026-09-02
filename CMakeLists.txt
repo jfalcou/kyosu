@@ -61,9 +61,9 @@ if(KYOSU_BUILD_DOCUMENTATION)
                      GODBOLT_LIBRARIES kyosu eve
                      GODBOLT_COMPILER clang2010
                      GODBOLT_OPTIONS "-O3 -std=c++20 -DNDEBUG"
-                     COLOR_HUE 41
-                     COLOR_SATURATION 47
-                     COLOR_LIGHTNESS 54
+                     COLOR_HUE 232
+                     COLOR_SATURATION 57
+                     COLOR_LIGHTNESS 28
                      TAGFILES eve=https://jfalcou.github.io/eve)
 
 endif()
