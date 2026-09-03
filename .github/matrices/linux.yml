@@ -1,0 +1,17 @@
+##======================================================================================================================
+##  Kyosu - Complex Without Complexes
+##  Copyright : KYOSU Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+## Read by copacabana's matrix.yml: the linux jobs, Debug only, the documentation examples and the units in one build.
+runs-on: ubuntu-latest
+image: v10
+container-options: -u root
+configs: [Debug]
+build-targets: doc.exe unit.exe
+test-targets: ^(doc|unit).*
+rows:
+  - { name: "gcc"          , preset: "gcc"        }
+  - { name: "clang"        , preset: "clang"      }
+  - { name: "gcc avx2"     , preset: "gcc-avx2"   }
+  - { name: "clang avx2"   , preset: "clang-avx2" }

@@ -9,33 +9,27 @@ include(${PROJECT_SOURCE_DIR}/cmake/dependencies.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
 
 ##======================================================================================================================
-option( KYOSU_USE_PCH             "Build tests with precompiled headers"                            ON  )
-option( KYOSU_BUILD_TEST          "Build tests for KYOSU"   ON  )
-option( KYOSU_BUILD_DOCUMENTATION "Build Doxygen for KYOSU" OFF )
-option( KYOSU_ENABLE_SANITIZERS   "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF )
-option( KYOSU_ENABLE_COVERAGE     "Build tests with code coverage instrumentation"                 OFF )
-option( KYOSU_BUILD_DEMOS         "Build the interactive demos"                                    OFF )
 
 ##======================================================================================================================
 ## Project setup via copacabana
 ##======================================================================================================================
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake ${COPACABANA_SOURCE_DIR}/copacabana/cmake)
 include(${COPACABANA_SOURCE_DIR}/copacabana/cmake/copacabana.cmake)
+
+copa_add_option(KYOSU_USE_PCH "Build tests with precompiled headers" ON LABEL "Use PCH")
+copa_add_option(KYOSU_BUILD_TEST "Build tests for KYOSU" ON LABEL "Unit tests")
+copa_add_option(KYOSU_BUILD_DOCUMENTATION "Build Doxygen for KYOSU" OFF LABEL "Doxygen")
+copa_add_option(KYOSU_ENABLE_SANITIZERS "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF LABEL "Sanitizers")
+copa_add_option(KYOSU_ENABLE_COVERAGE "Build tests with code coverage instrumentation" OFF LABEL "Coverage")
+copa_add_option(KYOSU_BUILD_DEMOS "Build the interactive demos" OFF LABEL "Demos")
 copa_project_version(MAJOR 0 MINOR 1 PATCH 0 REPOSITORY https://github.com/jfalcou/kyosu)
 
 ##======================================================================================================================
 ## Summary Display
 ##======================================================================================================================
+copa_show_options()
+
 if(NOT KYOSU_QUIET)
-  if(CMAKE_BUILD_TYPE)
-    message(STATUS "[${PROJECT_NAME}] - Building in ${CMAKE_BUILD_TYPE} mode")
-  endif()
-  message(STATUS "[${PROJECT_NAME}] - Use PCH    : ${KYOSU_USE_PCH} (via KYOSU_USE_PCH)")
-  message(STATUS "[${PROJECT_NAME}] - Unit tests : ${KYOSU_BUILD_TEST} (via KYOSU_BUILD_TEST)")
-  message(STATUS "[${PROJECT_NAME}] - Doxygen    : ${KYOSU_BUILD_DOCUMENTATION} (via KYOSU_BUILD_DOCUMENTATION)")
-  message(STATUS "[${PROJECT_NAME}] - Sanitizers : ${KYOSU_ENABLE_SANITIZERS} (via KYOSU_ENABLE_SANITIZERS)")
-  message(STATUS "[${PROJECT_NAME}] - Coverage   : ${KYOSU_ENABLE_COVERAGE} (via KYOSU_ENABLE_COVERAGE)")
-  message(STATUS "[${PROJECT_NAME}] - Demos      : ${KYOSU_BUILD_DEMOS} (via KYOSU_BUILD_DEMOS)")
   set(QUIET_OPTION "")
 else()
   set(QUIET_OPTION "QUIET")
