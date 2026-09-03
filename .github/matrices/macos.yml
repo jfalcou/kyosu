@@ -1,0 +1,13 @@
+##======================================================================================================================
+##  Kyosu - Complex Without Complexes
+##  Copyright : KYOSU Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+## Read by copacabana's matrix.yml: the macOS jobs, Debug only, the documentation examples and the units in one build.
+runs-on: macos-14
+configs: [Debug]
+build-targets: doc.exe unit.exe
+test-targets: ^(doc|unit).*
+rows:
+  - { name: "clang"       , preset: "clang-macos"        }
+  - { name: "clang libc++", preset: "clang-macos-libc++" }

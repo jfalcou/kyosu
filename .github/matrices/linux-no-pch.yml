@@ -1,0 +1,15 @@
+##======================================================================================================================
+##  Kyosu - Complex Without Complexes
+##  Copyright : KYOSU Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+## Read by copacabana's matrix.yml. The precompiled header carries kyosu.hpp and silences the warnings raised inside
+## it; Compiler Explorer has neither, so this row compiles the documentation examples the way a reader does, and runs
+## nothing. It is red on purpose until those warnings are dealt with, and is not among the checks the ruleset requires.
+runs-on: ubuntu-latest
+image: v10
+container-options: -u root
+configs: [Debug]
+build-targets: doc.exe
+rows:
+  - { name: "gcc, no PCH", preset: "gcc-no-pch", test: false }
