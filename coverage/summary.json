@@ -1,7 +1,7 @@
 {
-    "branch_covered": 1463,
-    "branch_percent": 61.3,
-    "branch_total": 2387,
+    "branch_covered": 1582,
+    "branch_percent": 63.1,
+    "branch_total": 2508,
     "files": [
         {
             "branch_covered": 2,
@@ -776,8 +776,8 @@
             "branch_percent": 100.0,
             "branch_total": 2,
             "filename": "include/kyosu/functions/dist.hpp",
-            "function_covered": 190,
-            "function_percent": 100.0,
+            "function_covered": 184,
+            "function_percent": 96.8,
             "function_total": 190,
             "line_covered": 11,
             "line_percent": 100.0,
@@ -1312,9 +1312,9 @@
             "line_total": 6
         },
         {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
+            "branch_covered": 117,
+            "branch_percent": 98.3,
+            "branch_total": 119,
             "filename": "include/kyosu/functions/if_else.hpp",
             "function_covered": 601,
             "function_percent": 87.6,
@@ -1720,9 +1720,9 @@
             "line_total": 12
         },
         {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
+            "branch_covered": 1,
+            "branch_percent": 100.0,
+            "branch_total": 1,
             "filename": "include/kyosu/functions/lerp.hpp",
             "function_covered": 63,
             "function_percent": 100.0,
@@ -2144,8 +2144,8 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/reldist.hpp",
-            "function_covered": 123,
-            "function_percent": 100.0,
+            "function_covered": 117,
+            "function_percent": 95.1,
             "function_total": 123,
             "line_covered": 7,
             "line_percent": 100.0,
@@ -2716,9 +2716,9 @@
             "line_total": 2
         },
         {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
+            "branch_covered": 1,
+            "branch_percent": 100.0,
+            "branch_total": 1,
             "filename": "include/kyosu/types/tuple.hpp",
             "function_covered": 1131,
             "function_percent": 100.0,
@@ -2728,8 +2728,8 @@
             "line_total": 4
         }
     ],
-    "function_covered": 24945,
-    "function_percent": 98.5,
+    "function_covered": 24933,
+    "function_percent": 98.4,
     "function_total": 25336,
     "gcovr/summary_format_version": "0.6",
     "line_covered": 3880,
