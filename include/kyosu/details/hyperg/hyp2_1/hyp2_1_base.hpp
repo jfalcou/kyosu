@@ -210,7 +210,7 @@ namespace kyosu::_
           last_interval(br_last, notdone, r);
         }
       }
-      return r;
+      return if_else(is_real(z), Z(real(r)), r);
     };
 
     if (eve::any(notdone))

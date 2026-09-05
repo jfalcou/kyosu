@@ -21,7 +21,7 @@ CPMAddPackage ( NAME TTS   GITHUB_REPOSITORY jfalcou/tts
                         "TTS_QUIET ON"
               )
 CPMAddPackage ( NAME EVE   GITHUB_REPOSITORY jfalcou/eve
-                GIT_TAG 95f0f2610e8f1009a9b4b15f4d7d78145eeb19c0
+                GIT_TAG main
                 OPTIONS "EVE_BUILD_TEST OFF"
                         "EVE_BUILD_BENCHMARKS OFF"
                         "EVE_BUILD_DOCUMENTATION OFF"

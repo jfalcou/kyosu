@@ -144,9 +144,12 @@ namespace kyosu
     return kumi::all_of(kumi::map([](auto a, auto b) { return tts::ieee_check(a, b); }, l, r));
   }
 
+  // Two nans, or two infinities of the same sign, are the same value, as they are for the absolute
+  // distance below and for TTS on scalars; reldist alone would answer nan.
   template<kyosu::concepts::cayley_dickson T> double relative_distance(T const& l, T const& r)
   {
-    return kyosu::reldist[eve::numeric](l, r);
+    if (ieee_equal(l, r)) return 0.0;
+    else return kyosu::reldist[eve::numeric](l, r);
   }
 
   template<kyosu::concepts::cayley_dickson T> double absolute_distance(T const& l, T const& r)
