@@ -26,10 +26,10 @@
       "cacheVariables": { "CMAKE_DEFAULT_BUILD_TYPE": "Debug" }
     },
 
-    { "name": "gcc"          , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++-15"    , "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE"        } },
-    { "name": "gcc-avx2"     , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++-15"    , "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE -mavx2" } },
-    { "name": "clang"        , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++-20", "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE"        } },
-    { "name": "clang-avx2"   , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++-20", "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE -mavx2" } },
+    { "name": "gcc"          , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++"    , "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE"        } },
+    { "name": "gcc-avx2"     , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++"    , "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE -mavx2" } },
+    { "name": "clang"        , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++", "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE"        } },
+    { "name": "clang-avx2"   , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++", "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE -mavx2" } },
 
     { "name": "no-pch"       , "hidden": true, "cacheVariables": { "KYOSU_USE_PCH": "OFF" } },
     { "name": "compile-cost" , "hidden": true, "cacheVariables": { "KYOSU_COMPILE_COST": "ON" } },
@@ -43,11 +43,11 @@
     { "name": "clang-coverage" , "inherits": ["clang", "coverage"] },
     { "name": "clang-compile-cost" , "inherits": ["clang", "no-pch", "compile-cost"] },
 
-    { "name": "gcc-demos"    , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++-15"    , "KYOSU_BUILD_DEMOS": "ON", "KYOSU_BUILD_TEST": "OFF" } },
-    { "name": "clang-demos"  , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++-20", "KYOSU_BUILD_DEMOS": "ON", "KYOSU_BUILD_TEST": "OFF" } },
+    { "name": "gcc-demos"    , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++"    , "KYOSU_BUILD_DEMOS": "ON", "KYOSU_BUILD_TEST": "OFF" } },
+    { "name": "clang-demos"  , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++", "KYOSU_BUILD_DEMOS": "ON", "KYOSU_BUILD_TEST": "OFF" } },
 
-    { "name": "gcc-bench"    , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++-15"    , "CMAKE_CXX_FLAGS": "-mavx2 -mfma" } },
-    { "name": "clang-bench"  , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++-20", "CMAKE_CXX_FLAGS": "-mavx2 -mfma" } },
+    { "name": "gcc-bench"    , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "g++"    , "CMAKE_CXX_FLAGS": "-mavx2 -mfma" } },
+    { "name": "clang-bench"  , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++", "CMAKE_CXX_FLAGS": "-mavx2 -mfma" } },
 
     { "name": "clang-macos"  , "inherits": ["unix-base"], "cacheVariables": { "CMAKE_CXX_COMPILER": "clang++"   , "CMAKE_CXX_FLAGS": "-O0 -DEVE_NO_FORCEINLINE" } },
     {
