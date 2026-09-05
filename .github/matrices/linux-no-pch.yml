@@ -10,6 +10,8 @@ runs-on: ubuntu-latest
 image: v10
 container-options: -u root
 configs: [Debug]
+## Building alone already takes forty minutes here, and the tests now run on top of it.
+timeout: 120
 build-targets: doc.exe
 rows:
   - { name: "gcc, no PCH", preset: "gcc-no-pch", test: false }

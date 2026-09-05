@@ -6,6 +6,8 @@
 ## Read by copacabana's matrix.yml: the macOS jobs, Debug only, the documentation examples and the units in one build.
 runs-on: macos-14
 configs: [Debug]
+## Building alone already takes forty minutes here, and the tests now run on top of it.
+timeout: 120
 build-targets: doc.exe unit.exe
 test-targets: ^(doc|unit).*
 rows:
