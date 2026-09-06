@@ -1,15 +1,8 @@
-<img src="https://raw.githubusercontent.com/jfalcou/kyosu/refs/heads/main/doc/logo.svg" alt="KYOSU logo: the Fano plane, three of its lines drawn dark to form a K" data-canonical-src="https://jfalcou.github.io/kyosu/doc/logo.svg" align="left" width="15%" height="15%" />
+<img src="https://raw.githubusercontent.com/jfalcou/kyosu/refs/heads/main/doc/logo.svg" alt="KYOSU logo: the Fano plane, three of its lines drawn dark to form a K" data-canonical-src="https://jfalcou.github.io/kyosu/doc/logo.svg" align="left" width="8%" height="8%" />
 
-# Kyosu
-## Complex Without Complexes
+# Kyosu - Complex Without Complexes
 
-Efficient and SIMD-aware computation for complex numbers, quaternions and octonions.
-
-Kyosu proposes a unified treatment of Cayley-Dickson algebras over the real numbers, for
-numerical computation.
-
-Real numbers are the IEEE `float` and `double` types and, as Kyosu builds on the EVE library,
-they can be SIMD registers just as well.
+KYOSU is a C++20 library for complex numbers, quaternions, octonions and the general R-Cayley-Dickson algebras. It extends the usual real functions to all of them — the transcendentals, but also Legendre polynomials and elliptic integrals — and every one of those functions works on a scalar and on a SIMD register alike.
 
 <br clear="left"/>
 
