@@ -5,6 +5,12 @@
 ##======================================================================================================================
 name: Unit Tests
 on:
+  ## Main gets the matrix once a night rather than on every merge: a run of its own queued behind each merge held
+  ## the pull requests back. 00:35 UTC, one rung of the fleet's 45 minute ladder, which starts at 00:35 and
+  ## never lands on the hour every other scheduled workflow on the platform asks for. kyosu opens it and polyfloat
+  ## sits in its middle, the two heaviest matrices taking the emptiest slots.
+  schedule:
+    - cron: '35 0 * * *'
   pull_request:
     branches:
       - main
