@@ -10,52 +10,9 @@
 #include <kyosu/constants/fnan.hpp>
 #include <kyosu/functions/is_fnan.hpp>
 #include <kyosu/details/hyperg/hyp2_1.hpp>
-#include <iostream>
+
 namespace kyosu::_
 {
-
-  //   auto br_c_neg_int = [&](){
-  //     if (eve::any(notdone))
-  //     {
-  //       auto z_is_one = z == one(eve::as(z));
-  //       auto in = (abs(z) < abs(z_over_zm1))
-  //       auto br_a = [&](){
-  //         auto r1 = if_else(z_is_one || in, (hyp_PS_zero (a,b,c,z)), (pow (-zm1,-a)*hyp_PS_zero (a,c-b,c,z_over_zm1)));
-  //         return if_else(test, r1, r);
-  //       };
-  //       auto br_b = [&](){
-  //         auto r2 = if_else(z_is_one || in, (hyp_PS_zero (a,b,c,z)), (pow (-zm1,-b)*hyp_PS_zero (b,c-a,c,z_over_zm1)));
-  //         return if_else(test, r2, r);
-  //       };
-  //     };
-
-  //     auto br_else = [notdone&](){
-  //       return if_else(test, r, nan);
-  //     };
-
-  //     auto test = notdone && is_c_neg_int;
-  //     if (eve::any(notdone))
-  //     {
-  //       auto ta = cnegint && (is_a_neg_int && (nc < na));
-  //       notdone = next_interval(br_a, notdone, ta, r);
-  //       if (eve::any(notdone))
-  //       {
-  //         auto tb = cnegint && (is_b_neg_int && (nc < nb));
-  //         notdone = next_interval(br_b, notdone, tb, r);
-  //         if (eve::any(notdone))
-  //         {
-  //           auto telse = cnegint &&  !(is_a_neg_int && (nc < na)) && !(is_b_neg_int && (nc < nb));
-  //           notdone = next_interval(br_R5, notdone, telse, r, t5, R);
-  //           if (eve::any(notdone))
-  //           {
-  //             auto t6 = (are_a_cmb_c_small && (abs_zm1_inv <= R));
-  //             notdone = next_interval(br_R6, notdone, t6, r, t6, R);
-  //           }
-  //         }
-  //       }
-  //     }
-  //     return r;
-  //   };
 
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
@@ -185,7 +142,6 @@ namespace kyosu::_
       };
 
       auto br_R3 = [&](auto test, auto) { // (abs_z_inv <= R)
-        std::cout << "R3" << std::endl;
         auto zt = kyosu::if_else(test, z, kyosu::nan(as(z)));
         r = if_else(notdone && test, hyp_ps_infinity(a, b, c, zt, notdone && test), r);
         return r;

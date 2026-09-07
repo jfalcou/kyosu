@@ -7,7 +7,6 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/functions/is_finite.hpp>
-#include <iostream>
 
 namespace kyosu::_
 {
@@ -28,7 +27,6 @@ namespace kyosu::_
     using u_t = eve::underlying_type_t<r_t>;
 
     auto const inf_norm_eps = kyosu::linfnorm(eps);
-    std::cout << "inf_norm_eps " << inf_norm_eps << std::endl;
     r_t const phase(eve::sign_alternate(m));
     r_t cma(c - a);
     r_t a_mc_p1(inc(a - c));
@@ -113,7 +111,6 @@ namespace kyosu::_
       auto res = gamma_c * prod_a * (prod1 + prod2);
 
       auto finite = kyosu::is_finite(res);
-      std::cout << "finite " << finite << " res " << res << std::endl;
       if (eve::all(finite))
       {
         if constexpr (kyosu::concepts::real<r_t>) return real(res);
@@ -136,9 +133,6 @@ namespace kyosu::_
         }
 
         auto res_default = gamma_c * (prod1 - prod2) / eps;
-        std::cout << "gamma_c " << gamma_c << " eps " << eps << std::endl;
-        std::cout << "prod1 " << prod1 << std::endl;
-        std::cout << "prod2 " << prod2 << std::endl;
         return if_else(finite, res, res_default);
       }
     };
@@ -153,7 +147,6 @@ namespace kyosu::_
         notdone = next_interval(br_eps_le, notdone, !gt, r);
       }
     }
-    std::cout << notdone << std::endl;
     return r;
   }
 }
