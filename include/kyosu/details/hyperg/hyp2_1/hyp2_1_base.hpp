@@ -39,6 +39,7 @@ namespace kyosu::_
 
     auto is_a_neg_int = (a == na) && eve::is_lez(na);
     auto is_b_neg_int = (b == nb) && eve::is_lez(nb);
+    auto is_c_neg_int = (c == nc) && eve::is_lez(nc);
 
     r_t zm1 = dec(z);
     auto z_is_one = (z == kyosu::one(as(z)));
@@ -47,18 +48,35 @@ namespace kyosu::_
     auto abs_z_over_zm1 = kyosu::abs(z_over_zm1);
 
     auto br_c_neg_int = [&]() {
-      auto t1 = is_a_neg_int && (nc < na);
-      auto t2 = is_b_neg_int && (nc < nb);
+      auto in = abs_z < abs_z_over_zm1;
+      auto br_a = [&](auto ta) {
+        auto r1 = if_else(z_is_one || in, (hyp_ps_zero(a, b, c, z, notdone)),
+                          (kyosu::pow(-zm1, -a) * hyp_ps_zero(a, c - b, c, z_over_zm1, notdone)));
+        return if_else(ta && is_c_neg_int, r1, r);
+      };
+      auto br_b = [&](auto tb) {
+        auto r2 = if_else(z_is_one || in, (hyp_ps_zero(a, b, c, z, notdone)),
+                          (kyosu::pow(-zm1, -b) * hyp_ps_zero(b, c - a, c, z_over_zm1, notdone)));
+        return if_else(tb && is_c_neg_int, r2, r);
+      };
+      auto br_else = [&](auto telse) { return if_else(telse, r, nan); };
 
-      auto test = z_is_one && abs_z < abs_z_over_zm1;
-      auto fac =
-        kyosu::if_else(t1, kyosu::if_else(test, one, kyosu::pow(-zm1, -a)),
-                       kyosu::if_else(t2, kyosu::if_else(test, one, kyosu::pow(-zm1, -b)), kyosu::nan(kyosu::as(z))));
-      auto pa = kyosu::if_else(t1, a, kyosu::if_else(t2, kyosu::if_else(test, a, b), a));
-      auto pb =
-        kyosu::if_else(t1, kyosu::if_else(test, b, c - b), kyosu::if_else(t2, kyosu::if_else(test, b, c - a), b));
-      return if_else(notdone && test, kyosu::if_else(!(t1 || t2), r, hyp_ps_zero(pa, pb, c, z_over_zm1, notdone) * fac),
-                     r);
+      if (eve::any(notdone))
+      {
+        auto ta = (is_a_neg_int && (nc < na));
+        notdone = next_interval(br_a, notdone, ta, r, ta);
+        if (eve::any(notdone))
+        {
+          auto tb = (is_b_neg_int && (nc < nb));
+          notdone = next_interval(br_b, notdone, tb, r, tb);
+          if (eve::any(notdone))
+          {
+            auto telse = !(ta || tb);
+            notdone = next_interval(br_else, notdone, telse, r, telse);
+          }
+        }
+      }
+      return r;
     };
 
     auto br_a_neg_int = [&]() { //(is_a_neg_int)

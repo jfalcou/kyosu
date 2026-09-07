@@ -20,7 +20,6 @@ namespace kyosu::_
     r_t phase(eve::sign_alternate(m));
     auto m_m1 = dec(m);
     auto m_p1 = inc(m);
-
     r_t eps = b - a - m;
     r_t a_mc_p1 = kyosu::inc(a - c);
     r_t one_meps = kyosu::oneminus(eps);

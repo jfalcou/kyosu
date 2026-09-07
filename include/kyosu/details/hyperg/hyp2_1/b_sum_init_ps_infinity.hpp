@@ -27,7 +27,6 @@ namespace kyosu::_
     using u_t = eve::underlying_type_t<r_t>;
 
     auto const inf_norm_eps = kyosu::linfnorm(eps);
-
     r_t const phase(eve::sign_alternate(m));
     r_t cma(c - a);
     r_t a_mc_p1(inc(a - c));
