@@ -6,6 +6,7 @@
 */
 //======================================================================================================================
 #pragma once
+#include <iostream>
 
 namespace kyosu::_
 {
@@ -20,7 +21,7 @@ namespace kyosu::_
     r_t phase(eve::sign_alternate(m));
     auto m_m1 = dec(m);
     auto m_p1 = inc(m);
-
+    std::cout << " a " << a << " b " << b << " m " << m << std::endl;
     r_t eps = b - a - m;
     r_t a_mc_p1 = kyosu::inc(a - c);
     r_t one_meps = kyosu::oneminus(eps);
@@ -43,6 +44,7 @@ namespace kyosu::_
 
     r_t A_first_term = if_else(eve::is_gtz(m), gamma_prod * A_sum_init(m, eps, gamma_inv_one_meps), zero);
     r_t A_sum = A_first_term;
+    std::cout << "A_sum " << A_sum << std::endl;
     r_t A_term = A_first_term;
     auto invalid_A_first_term = kyosu::is_not_finite(A_first_term);
     if (eve::any(invalid_A_first_term))
@@ -55,8 +57,10 @@ namespace kyosu::_
     }
 
     auto pow_z_inv_m = kyosu::pow(z_inv, m);
+    std::cout << "eps " << eps << std::endl;
     auto B_first_term =
       B_sum_init_ps_infinity(a, c, gamma_c, gamma_inv_cma, gamma_inv_one_meps, gamma_inv_eps_pa_pm, z, m, eps, notdone);
+    std::cout << "B_first_term " << B_first_term << std::endl;
 
     B_first_term *= pow_z_inv_m;
     auto prod_B = pow_z_inv_m;

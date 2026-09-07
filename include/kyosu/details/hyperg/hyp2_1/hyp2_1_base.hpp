@@ -94,12 +94,12 @@ namespace kyosu::_
       auto in = abs_z < abs_z_over_zm1;
       auto br_a = [&](auto ta) {
         auto r1 = if_else(z_is_one || in, (hyp_ps_zero(a, b, c, z, notdone)),
-                          (pow(-zm1, -a) * hyp_ps_zero(a, c - b, c, z_over_zm1, notdone)));
+                          (kyosu::pow(-zm1, -a) * hyp_ps_zero(a, c - b, c, z_over_zm1, notdone)));
         return if_else(ta && is_c_neg_int, r1, r);
       };
       auto br_b = [&](auto tb) {
         auto r2 = if_else(z_is_one || in, (hyp_ps_zero(a, b, c, z, notdone)),
-                          (pow(-zm1, -b) * hyp_ps_zero(b, c - a, c, z_over_zm1, notdone)));
+                          (kyosu::pow(-zm1, -b) * hyp_ps_zero(b, c - a, c, z_over_zm1, notdone)));
         return if_else(tb && is_c_neg_int, r2, r);
       };
       auto br_else = [&](auto telse) { return if_else(telse, r, nan); };
@@ -185,6 +185,7 @@ namespace kyosu::_
       };
 
       auto br_R3 = [&](auto test, auto) { // (abs_z_inv <= R)
+        std::cout << "R3" << std::endl;
         auto zt = kyosu::if_else(test, z, kyosu::nan(as(z)));
         r = if_else(notdone && test, hyp_ps_infinity(a, b, c, zt, notdone && test), r);
         return r;

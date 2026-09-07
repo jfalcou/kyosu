@@ -114,7 +114,7 @@ namespace kyosu::_
           }
         }
       }
-      return eve::zip(r, notdone);
+      return r;
     }
   }
 }
