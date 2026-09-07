@@ -2,6 +2,13 @@
 
 # Kyosu - Complex Without Complexes
 
+[![Release](https://img.shields.io/github/v/release/jfalcou/kyosu?style=plastic&label=release)](https://github.com/jfalcou/kyosu/releases/latest)
+[![License](https://img.shields.io/badge/license-BSL-green?style=plastic)](./LICENSE.md)
+[![Discord](https://img.shields.io/discord/692734675726237696?style=plastic)](https://discord.com/channels/692734675726237696/692735300522344468)
+[![Integration](https://github.com/jfalcou/kyosu/actions/workflows/integration.yml/badge.svg)](https://github.com/jfalcou/kyosu/actions/workflows/integration.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https://jfalcou.github.io/kyosu/coverage/badge.json&style=plastic&cacheSeconds=1800)](https://jfalcou.github.io/kyosu/coverage/)
+[![CI](https://github.com/jfalcou/kyosu/actions/workflows/ci.yml/badge.svg?event=schedule)](https://github.com/jfalcou/kyosu/actions/workflows/ci.yml?query=event%3Aschedule)
+
 KYOSU is a C++20 library for complex numbers, quaternions, octonions and the general R-Cayley-Dickson algebras. It extends the usual real functions to all of them — the transcendentals, but also Legendre polynomials and elliptic integrals — and every one of those functions works on a scalar and on a SIMD register alike.
 
 <br clear="left"/>
