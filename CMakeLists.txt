@@ -22,6 +22,7 @@ copa_add_option(KYOSU_BUILD_DOCUMENTATION "Build Doxygen for KYOSU" OFF LABEL "D
 copa_add_option(KYOSU_ENABLE_SANITIZERS "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF LABEL "Sanitizers")
 copa_add_option(KYOSU_ENABLE_COVERAGE "Build tests with code coverage instrumentation" OFF LABEL "Coverage")
 copa_add_option(KYOSU_BUILD_DEMOS "Build the interactive demos" OFF LABEL "Demos")
+copa_add_option(KYOSU_COMPILE_COST "Measure what every test unit costs to compile" OFF)
 copa_project_version(MAJOR 0 MINOR 1 PATCH 0 REPOSITORY https://github.com/jfalcou/kyosu)
 
 ##======================================================================================================================
@@ -83,6 +84,11 @@ if(KYOSU_BUILD_TEST)
   # After the test targets exist, so the coverage targets can depend on them
   if(KYOSU_ENABLE_COVERAGE)
     copa_setup_coverage(kyosu_docs)
+  endif()
+
+  # clang only: -fproc-stat-report is its flag. After the test targets, as the measurement rebuilds them.
+  if(KYOSU_COMPILE_COST)
+    copa_setup_compile_cost(kyosu_test)
   endif()
 endif()
 
