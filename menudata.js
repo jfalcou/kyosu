@@ -24,17 +24,17 @@
 */
 var menudata={children:[
 {text:"Main Page",url:"index.html"},
-{text:"Tutorials",url:"usergroup0.html",children:[
+{text:"Tutorials",url:"setup.html",children:[
 {text:"Installation & Quick Start",url:"setup.html"},
-{text:"Getting Started",url:"usergroup1.html",children:[
+{text:"Getting Started",url:"tutorial-complex.html",children:[
 {text:"Complex Numbers",url:"tutorial-complex.html"},
 {text:"Many Values At Once",url:"tutorial-simd.html"}]},
-{text:"Past The Complex Numbers",url:"usergroup2.html",children:[
+{text:"Past The Complex Numbers",url:"tutorial-quaternion.html",children:[
 {text:"Quaternions",url:"tutorial-quaternion.html"},
 {text:"Rotations",url:"tutorial-rotation.html"},
 {text:"Octonions and Beyond",url:"tutorial-beyond.html"}]},
 {text:"Options",url:"tutorial-options.html"}]},
-{text:"Reference Documentation",url:"usergroup3.html",children:[
+{text:"Reference Documentation",url:"group__types.html",children:[
 {text:"Types",url:"group__types.html"},
 {text:"Constants",url:"group__constants.html"},
 {text:"Functions",url:"group__kyosu__functions.html",children:[
@@ -43,7 +43,7 @@ var menudata={children:[
 {text:"Quaternion-specific",url:"group__quaternion.html"}]},
 {text:"Traits",url:"group__kyosu__traits.html"},
 {text:"Concept List",url:"concepts.html"}]},
-{text:"Informations",url:"usergroup4.html",children:[
+{text:"Informations",url:"math_background.html",children:[
 {text:"Mathematical Background",url:"math_background.html"},
 {text:"Bibliography",url:"biblio.html"},
 {text:"Changelog",url:"changelog.html"},
