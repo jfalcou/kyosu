@@ -398,8 +398,8 @@ namespace kyosu::_
   {
     auto nn = int(nnn);
     auto n = eve::abs(nn);
-    EVE_ASSERT(N(size(cjv)) > n, "not room enough in cjv");
-    EVE_ASSERT(N(size(cyv)) > n, "not room enough in cyv");
+    EVE_ASSERT(N(size(cjv)) > N(n), "not room enough in cjv");
+    EVE_ASSERT(N(size(cyv)) > N(n), "not room enough in cyv");
     using u_t = eve::underlying_type_t<Z>;
     if (n <= 1)
     {
