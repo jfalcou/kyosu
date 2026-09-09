@@ -474,7 +474,6 @@ namespace kyosu::_
       };
 
       auto forwardy = [rz, az, n, nn, &cjv, &cyv](auto z) {
-        using u_t = eve::underlying_type_t<Z>;
         auto y = cyv[0];
         if (nn != 0)
         {
