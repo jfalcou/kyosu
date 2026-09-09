@@ -43,9 +43,15 @@ copa_setup_precommit_hooks(${QUIET_OPTION})
 ##======================================================================================================================
 copa_setup_install( LIBRARY kyosu
                     FEATURES cxx_std_20
+                    CONFIG  ${PROJECT_SOURCE_DIR}/cmake/kyosu-config.cmake.in
                     DOC     ${PROJECT_SOURCE_DIR}/LICENSE.md
                     INCLUDE ${PROJECT_SOURCE_DIR}/include/kyosu
                   )
+
+## The public headers include <eve/eve.hpp>, so the interface target has to hand EVE to whoever
+## links it. Without this, a consumer using FetchContent or CPM compiles against kyosu's headers
+## alone and stops on the first include.
+target_link_libraries(kyosu_lib INTERFACE eve::eve)
 
 ##======================================================================================================================
 ## Setup doxygen
