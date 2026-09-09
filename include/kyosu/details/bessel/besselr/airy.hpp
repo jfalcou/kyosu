@@ -46,7 +46,7 @@ namespace kyosu::_
     auto invpi = eve::inv_pi(as<u_t>());
     auto br_im_eq_0 = [](auto z) { return Z(eve::airy_ai(real(z))); };
 
-    auto br_re_lt_0 = [third, invpi](auto z) {
+    auto br_re_lt_0 = [third](auto z) {
       auto mz = -z;
       auto zet = 2 * pow(mz, u_t(1.5)) / 3;
       return third * sqrt(mz) * (cb_jr(-third, zet) + cb_jr(third, zet));
