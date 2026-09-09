@@ -29,7 +29,7 @@ namespace kyosu::_
     using u_t = eve::underlying_type_t<Z>;
     auto argz = arg(z);
     auto piotwo = eve::pio_2(eve::as<u_t>());
-    auto i = complex(u_t(0), u_t(1));
+    //unused   auto i = complex(u_t(0), u_t(1));
     auto f = muli(exp_ipi(v / 2));
     auto cpi = piotwo * f;
     auto cmi = piotwo * rec(f);
@@ -48,7 +48,7 @@ namespace kyosu::_
     auto n = std::size_t(v); //n>= 0
     auto v0 = v - n;
     auto vi = v0;
-    for (int jj = 0; jj < eve::min(size_t(n + 1), size(ks)); ++jj)
+    for (int jj = 0; jj < int(eve::min(size_t(n + 1), size(ks))); ++jj)
     {
       ks[jj] = cb_kr(vi, z);
       vi = eve::inc(vi);
@@ -71,7 +71,7 @@ namespace kyosu::_
         cb_jr(v, muli(z), is);
         auto v0 = v - an;
         auto vi = v0;
-        for (int ii = 0; ii <= an; ++ii)
+        for (int ii = 0; ii <= int(an); ++ii)
         {
           auto fac = exp_ipi(-vi / 2);
           vi = inc(vi);
@@ -91,7 +91,7 @@ namespace kyosu::_
           spv = -spv;
         }
       }
-      for (int ii = 0; ii < eve::min(size(cis), an + 1); ++ii) cis[ii] = is[ii];
+      for (int ii = 0; ii < int(eve::min(size(cis), an + 1)); ++ii) cis[ii] = is[ii];
       return is[an];
     };
     return with_alloca<Z>(an + 1, doit);

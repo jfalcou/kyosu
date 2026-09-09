@@ -52,14 +52,14 @@ namespace kyosu::_
         using u_t = eve::underlying_type_t<Z>;
         auto twoopi = eve::two_o_pi(as<u_t>());
         auto az = kyosu::abs(z);
-        auto z1 = z;
-        auto z2 = sqr(z);
-        auto v1 = inc(v0); // 1 < v1 < 2
+        //unused        auto z1 = z;
+        //unused        auto z2 = sqr(z);
+        //unused        auto v1 = inc(v0); // 1 < v1 < 2
         auto rz = rec(z);
 
         auto czero = Z{0};
-        auto cone = Z{1};
-        auto cii = i(as<Z>());
+        //unused        auto cone = Z{1};
+        //unused        auto cii = i(as<Z>());
 
         auto forward = [n, v0, rz, cjv0 = cjv0, cjv1 = cjv1, &cjv]() {
           // az large compared to n : 4*n <  az
@@ -83,7 +83,7 @@ namespace kyosu::_
           auto cf2 = czero;
           auto cf1 = kyosu::sqrtsmallestposval(eve::as<Z>());
           auto cf = cf1;
-          auto bn(cf2);
+          //unused          auto bn(cf2);
           for (int kk = m; kk >= 0; --kk)
           {
             cf = u_t(2) * inc(v0 + u_t(kk)) * cf1 * rz - cf2;
@@ -127,7 +127,7 @@ namespace kyosu::_
       // we use:
       // J_{-v] = J_v(z) cos(v pi) - Y_v *sin(v pi)
       // y_{-v] = J_v(z) sin(v pi) + Y_v *cos(v pi)
-      auto [jv, yv] = cb_jyr(-v, z, cjv, cyv);
+      [[maybe_unused]] auto [jv, yv] = cb_jyr(-v, z, cjv, cyv);
       auto v0 = frac(-v);
       auto [s, c] = sinpicospi(v0);
       for (int ii = 0; ii <= an; ++ii)
@@ -143,6 +143,7 @@ namespace kyosu::_
       }
       return kumi::tuple{cjv[an], cyv[an]};
     }
+    return kumi::tuple{cjv[0], cyv[0]};
   }
 
   //===-------------------------------------------------------------------------------------------
@@ -155,7 +156,7 @@ namespace kyosu::_
     auto doit = [n, v, z, &vys](auto js, auto ys) {
       auto [_, yn] = cb_jyr(v, z, js, ys);
       auto s = eve::min(size(vys), eve::inc(n));
-      for (int ii = 0; ii < s; ++ii) vys[ii] = ys[ii];
+      for (int ii = 0; ii < int(s); ++ii) vys[ii] = ys[ii];
       return yn;
     };
     return with_alloca<Z>(n + 1, doit);
@@ -180,7 +181,7 @@ namespace kyosu::_
     auto doit = [n, v, z, &vjs](auto js, auto ys) {
       auto [jn, _] = cb_jyr(v, z, js, ys);
       auto s = eve::min(size(vjs), eve::inc(n));
-      for (int ii = 0; ii < s; ++ii) vjs[ii] = js[ii];
+      for (int ii = 0; ii < int(s); ++ii) vjs[ii] = js[ii];
       return jn;
     };
 

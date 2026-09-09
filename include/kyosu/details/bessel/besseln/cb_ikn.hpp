@@ -92,7 +92,7 @@ namespace kyosu::_
     std::size_t an = eve::abs(n);
     auto jn = cb_jn(an, muli(z), ris);
     auto nn = eve::min(size(ris), an);
-    for (int i = 1; i < nn; ++i) ris[i] *= miton(i);
+    for (int i = 1; i < int(nn); ++i) ris[i] *= miton(i);
     return jn * miton(n);
   }
 }

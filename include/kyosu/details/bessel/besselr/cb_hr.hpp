@@ -70,12 +70,12 @@ namespace kyosu::_
       auto [jv, yv] = _::cb_jyr(v, z, js, ys);
       if constexpr (Kind == 1)
       {
-        for (int ii = 0; ii < eve::min(size(hs), an + 1); ++ii) hs[ii] = js[ii] + muli(ys[ii]);
+        for (int ii = 0; ii < int(eve::min(size(hs), an + 1)); ++ii) hs[ii] = js[ii] + muli(ys[ii]);
         return jv + muli(yv);
       }
       else
       {
-        for (int ii = 0; ii < eve::min(size(hs), an + 1); ++ii) hs[ii] = js[ii] - muli(ys[ii]);
+        for (int ii = 0; ii < int(eve::min(size(hs), an + 1)); ++ii) hs[ii] = js[ii] - muli(ys[ii]);
         return jv - muli(yv);
       }
     };
