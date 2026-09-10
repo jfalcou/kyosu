@@ -8,6 +8,7 @@
 #pragma once
 #include <kyosu/details/bessel/bessel_utils2.hpp>
 #include <kyosu/details/with_alloca.hpp>
+#include <iostream>
 
 namespace kyosu::_
 {
@@ -42,7 +43,7 @@ namespace kyosu::_
 
   template<typename Z> struct mkjs
   {
-    mkjs(int n, Z z) : rz(kyosu::rec(z)), rs(kyosu::_::R(n, z)), j(cb_jn(n, z)), i(n - 1) {}
+    mkjs(size_t n, Z z) : rz(kyosu::rec(z)), rs(kyosu::_::R(n, z)), j(cb_jn(n, z)), i(n - 1) {}
 
     auto operator()()
     {
@@ -78,7 +79,6 @@ namespace kyosu::_
       auto j0 = kyosu::one((eve::as<Z>()));
       auto sm = j0;
       auto test = sqr_abs(sm) >= eps2 * sqr_abs(j0);
-      //unused      auto m(eve::one(eve::as<e_t>()));
       auto qz2 = -sqr(z) * u_t(0.25);
       size_t im = 1;
       while (eve::any(test))
@@ -222,7 +222,6 @@ namespace kyosu::_
 
       while (eve::any(bound_not_reached))
       {
-        //unused        auto m = u_t(im);
         Pm *= -pim[im] * rz2;
         Qm *= -xim[im] * rz2;
         if constexpr (eve::scalar_value<e_t>)
@@ -273,7 +272,7 @@ namespace kyosu::_
     using u_t = eve::underlying_type_t<Z>;
     auto twoopi = eve::two_o_pi(eve::as<u_t>());
     auto egamma = eve::egamma(eve::as<u_t>());
-    //unused    auto eps = eve::eps(eve::as<u_t>());
+    //    auto eps = eve::eps(eve::as<u_t>());
     auto bd = bound(z);
     Z s{};
     mkjs jj(2 * bd - 2, z);
@@ -310,9 +309,8 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_jn just last
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z> Z cb_jn(N nnn, Z z)
+  template<eve::integral_scalar_value N, typename Z> Z cb_jn(N nn, Z z)
   {
-    int nn(nnn);
     if (is_eqz(nn))
     {
       return kyosu::_::cb_j0(z);
@@ -321,7 +319,7 @@ namespace kyosu::_
     {
       return kyosu::_::cb_j1(z);
     }
-    else if (nn == -1)
+    else if (int(nn) == -1)
     {
       return -kyosu::_::cb_j1(z);
     }
@@ -393,13 +391,12 @@ namespace kyosu::_
   }
 
   template<eve::integral_scalar_value N, typename Z, typename R1, typename R2>
-  auto cb_jyn(N nnn, Z z, R1& cjv, R2& cyv) noexcept
+  auto cb_jyn(N nn, Z z, R1& cjv, R2& cyv) noexcept
   requires(concepts::complex_like<Z>)
   {
-    auto nn = int(nnn);
     auto n = eve::abs(nn);
-    EVE_ASSERT(N(size(cjv)) > N(n), "not room enough in cjv");
-    EVE_ASSERT(N(size(cyv)) > N(n), "not room enough in cyv");
+    EVE_ASSERT(N(size(cjv)) > n, "not room enough in cjv");
+    EVE_ASSERT(N(size(cyv)) > n, "not room enough in cyv");
     using u_t = eve::underlying_type_t<Z>;
     if (n <= 1)
     {
@@ -431,8 +428,8 @@ namespace kyosu::_
       auto forwardj = [n, rz, &cjv](auto z) {
         auto bkm2 = cjv[0];
         auto bkm1 = cjv[1];
-        //unused        Z bnext;
-        for (int kk = 2; kk <= int(n); ++kk)
+        //        Z bnext;
+        for (int kk = 2; kk <= n; ++kk)
         {
           auto bk = 2 * (kk - 1) * rz * bkm1 - bkm2;
           bkm2 = bkm1;
@@ -442,7 +439,7 @@ namespace kyosu::_
         auto purez = is_pure(z);
         if (eve::any(purez))
         {
-          for (int kk = 2; kk <= int(n); ++kk) real(cjv[kk]) = eve::if_else(purez, eve::zero, real(cjv[kk]));
+          for (int kk = 2; kk <= n; ++kk) real(cjv[kk]) = eve::if_else(purez, eve::zero, real(cjv[kk]));
         }
         return cjv[n];
       };
@@ -463,7 +460,7 @@ namespace kyosu::_
         while (eve::any(kgez))
         {
           cf = kyosu::if_else(kgez && k <= m0, 2 * inc(k) * cf1 * rec(z) - cf2, cf);
-          if (k <= int(n) && k > 1) cjv[k] = cf;
+          if (k <= n && k > 1) cjv[k] = cf;
           cf2 = kyosu::if_else(kgez && k <= m0, cf1, cf2);
           cf1 = kyosu::if_else(kgez && k <= m0, cf, cf1);
           k = dec(k);
@@ -471,29 +468,28 @@ namespace kyosu::_
         }
         auto fac = if_else(sqr_abs(j0) > sqr_abs(j1), j0 / cf, j1 / cf2);
 
-        for (int kk = 2; kk <= int(n); ++kk) cjv[kk] *= fac;
+        for (int kk = 2; kk <= n; ++kk) cjv[kk] *= fac;
         return cjv[n];
       };
 
-      //unused
-      //       auto forwardy = [rz, nn, &cjv, &cyv](auto z) {
-      //         auto y = cyv[0];
-      //         if (nn != 0)
-      //         {
-      //           int n = eve::abs(nn);
-      //           using u_t = eve::underlying_type_t<Z>;
-      //           auto twoopi = eve::two_o_pi(eve::as<u_t>());
-      //           auto b = twoopi * rz;
-      //           for (int ii = 1; ii <= n; ++ii)
-      //           {
-      //             y = fms(cjv[ii], y, b) / cjv[ii - 1];
-      //             auto r = if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), y);
-      //             cyv[ii] = r;
-      //           }
-      //           return cyv[n];
-      //         }
-      //         else return y;
-      //       };
+      auto forwardy = [rz, nn, &cjv, &cyv](auto z) {
+        auto y = cyv[0];
+        if (nn != 0)
+        {
+          int n = eve::abs(nn);
+          using u_t = eve::underlying_type_t<Z>;
+          auto twoopi = eve::two_o_pi(eve::as<u_t>());
+          auto b = twoopi * rz;
+          for (int ii = 1; ii <= n; ++ii)
+          {
+            y = fms(cjv[ii], y, b) / cjv[ii - 1];
+            auto r = if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), y);
+            cyv[ii] = r;
+          }
+          return cyv[n];
+        }
+        else return y;
+      };
 
       // compute j2...jn for real(z) > 0
       auto r = kyosu::if_else(is_eqz(az), Z(0), eve::nan(eve::as(az)));
@@ -508,7 +504,7 @@ namespace kyosu::_
       }
 
       // compute y2...yn for real(z) > 0
-      //unused      auto y = forwardy(z);
+      [[maybe_unused]] auto y = forwardy(z);
 
       if (eve::any(rzle0))
       {
@@ -554,7 +550,7 @@ namespace kyosu::_
     std::size_t an = eve::abs(n);
     if (size(js) > an)
     {
-      auto doit = [n, z, &js](auto ys) { _::cb_jyn(n, z, js, ys); };
+      auto doit = [an, n, z, &js](auto ys) { _::cb_jyn(n, z, js, ys); };
       _::with_alloca<Z>(an + 1, doit);
       return js[an];
     }
@@ -573,7 +569,7 @@ namespace kyosu::_
     std::size_t an = eve::abs(n);
     auto doit = [an, n, z, &rys](auto js, auto ys) {
       _::cb_jyn(n, z, js, ys);
-      for (int ii = 0; ii < int(size(rys)); ++ii) rys[ii] = ys[ii];
+      for (int ii = 0; ii < int(size(rys)); ++ii) rys[ii] = ys[ii]; //comparison
       return ys[an];
     };
     return _::with_alloca<Z>(an + 1, doit);
@@ -597,8 +593,8 @@ namespace kyosu::_
     std::size_t an = eve::abs(n);
     auto doit = [an, n, z, &rjs, &rys](auto js, auto ys) {
       auto [jn, yn] = _::cb_jyn(n, z, js, ys);
-      for (int ii = 0; ii < int(min(size(rjs), an + 1)); ++ii) rjs[ii] = js[ii];
-      for (int ii = 0; ii < int(min(size(rys), an + 1)); ++ii) rys[ii] = ys[ii];
+      for (int ii = 0; ii < min(size(rjs), an + 1); ++ii) rjs[ii] = js[ii];
+      for (int ii = 0; ii < min(size(rys), an + 1); ++ii) rys[ii] = ys[ii];
       return kumi::tuple{jn, yn};
     };
     return _::with_alloca<Z>(an + 1, doit);

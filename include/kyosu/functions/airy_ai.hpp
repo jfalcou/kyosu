@@ -7,7 +7,6 @@
 //======================================================================================================================
 #pragma once
 #include <kyosu/details/callable.hpp>
-#include <iostream>
 
 namespace kyosu
 {
@@ -75,8 +74,6 @@ namespace kyosu::_
     if constexpr (concepts::real<Z>) return eve::airy_ai(z);
     else if constexpr (kyosu::concepts::complex<Z>)
     {
-      std::cout << std::endl << "calling ai with " << z << std::endl;
-
       return _::ai(z);
     }
     else return _::cayley_extend(kyosu::airy_ai, z);

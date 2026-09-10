@@ -82,7 +82,6 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   template<typename Z> KYOSU_FORCEINLINE auto bi(Z z) noexcept
   {
-    std::cout << "bi " << z << std::endl;
     using u_t = eve::underlying_type_t<Z>;
     auto third = eve::third(as<u_t>());
     auto br_im_eq_0 = [](auto z) { return Z(eve::airy_bi(real(z))); };

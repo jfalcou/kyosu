@@ -115,12 +115,18 @@ namespace kyosu::_
           }
           else return _::sb_yn(n, z);
         }
-        else return _::cb_yn(n, z);
+        else
+        {
+          return _::cb_yn(n, z);
+        }
       }
       else if constexpr (eve::floating_scalar_value<N>)
       {
         if constexpr (O::contains(eve::spherical)) return _::sb_yr(n, z);
-        else return _::cb_yr(n, z);
+        else
+        {
+          return _::cb_yr(n, z);
+        }
       }
     }
     else return _::cayley_extend_rev(kyosu::bessel_y, n, z);
