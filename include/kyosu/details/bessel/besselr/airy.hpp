@@ -82,18 +82,19 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   template<typename Z> KYOSU_FORCEINLINE auto bi(Z z) noexcept
   {
+    std::cout << "bi " << z << std::endl;
     using u_t = eve::underlying_type_t<Z>;
     auto third = eve::third(as<u_t>());
     auto br_im_eq_0 = [](auto z) { return Z(eve::airy_bi(real(z))); };
 
     auto br_re_lt_0 = [third](auto z) {
       auto zet = 2 * pow(-z, u_t(1.5)) / 3;
-      return (cb_jr(-third, zet) - cb_jr(third, zet)) * sqrt(-z / 3);
+      return (cb_ir(-third, zet) - cb_ir(third, zet)) * sqrt(-z / 3);
     };
 
     auto br_re_gt_0 = [third](auto z) {
       auto zet = 2 * pow(z, u_t(1.5)) / 3;
-      return sqrt(z / 3) * (cb_jr(third, zet) + cb_jr(-third, zet));
+      return sqrt(z / 3) * (cb_ir(third, zet) + cb_ir(-third, zet));
     };
 
     auto notdone = eve::true_(as<Z>());
@@ -114,18 +115,5 @@ namespace kyosu::_
       }
     }
     return if_else(imlt0, conj(r), r);
-  }
-
-  //===-------------------------------------------------------------------------------------------
-  // aibi
-  //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE auto aibi(Z z) noexcept
-  {
-    using u_t = eve::underlying_type_t<Z>;
-    auto [sqzo3, zzeta] = zet(z);
-    auto ip = bessel_i(eve::third(as<u_t>()), zzeta);
-    auto im = bessel_i(-eve::third(as<u_t>()), zzeta);
-
-    return kumi::tuple{invpi(as<u_t>()) * sqzo3 * (im - ip), sqzo3 * (ip + im)};
   }
 }
