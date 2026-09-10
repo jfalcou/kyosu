@@ -20,12 +20,14 @@ include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 CPMAddPackage ( NAME COPACABANA GITHUB_REPOSITORY jfalcou/copacabana  GIT_TAG v8)
 CPMDeclarePackage ( TTS   NAME TTS   GITHUB_REPOSITORY jfalcou/tts
                     GIT_TAG main
+                    SYSTEM YES
                     OPTIONS "TTS_BUILD_TEST OFF"
                             "TTS_BUILD_DOCUMENTATION OFF"
                             "TTS_QUIET ON"
                   )
 CPMAddPackage ( NAME EVE   GITHUB_REPOSITORY jfalcou/eve
                 GIT_TAG main
+                SYSTEM YES
                 OPTIONS "EVE_BUILD_TEST OFF"
                         "EVE_BUILD_BENCHMARKS OFF"
                         "EVE_BUILD_DOCUMENTATION OFF"
