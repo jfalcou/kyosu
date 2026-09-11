@@ -6,7 +6,6 @@
 */
 //======================================================================================================================
 #pragma once
-#include <iostream>
 #include <kyosu/details/bessel/bessel_utils2.hpp>
 
 namespace kyosu::_
@@ -86,19 +85,13 @@ namespace kyosu::_
     auto third = eve::third(as<u_t>());
     auto br_im_eq_0 = [](auto z) { return Z(eve::airy_bi(real(z))); };
 
-    auto br_re_lt_0 = [third](auto z) {
-      auto zet = 2 * pow(-z, u_t(1.5)) / 3;
-      return (cb_ir(-third, zet) - cb_ir(third, zet)) * sqrt(-z / 3);
-    };
-
-    auto br_re_gt_0 = [third](auto z) {
+    auto br_other = [third](auto z) {
       auto zet = 2 * pow(z, u_t(1.5)) / 3;
       return sqrt(z / 3) * (cb_ir(third, zet) + cb_ir(-third, zet));
     };
 
     auto notdone = eve::true_(as<Z>());
     Z r = kyosu::nan(as<Z>());
-    auto re = real(z);
     auto imlt0 = eve::is_ltz(imag(z));
     z = if_else(imlt0, conj(z), z);
     if (eve::any(notdone))
@@ -106,11 +99,7 @@ namespace kyosu::_
       notdone = eve::next_interval(br_im_eq_0, notdone, is_real(z), r, z);
       if (eve::any(notdone))
       {
-        notdone = next_interval(br_re_gt_0, notdone, eve::is_gtz(re), r, z);
-        if (eve::any(notdone))
-        {
-          notdone = eve::last_interval(br_re_lt_0, notdone, r, z);
-        }
+        notdone = eve::last_interval(br_other, notdone, r, z);
       }
     }
     return if_else(imlt0, conj(r), r);

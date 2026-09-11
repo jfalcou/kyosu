@@ -8,7 +8,6 @@
 #pragma once
 #include <kyosu/details/bessel/bessel_utils2.hpp>
 #include <kyosu/details/with_alloca.hpp>
-#include <iostream>
 
 namespace kyosu::_
 {
