@@ -6,7 +6,6 @@
 cmake_minimum_required(VERSION 3.22)
 project(kyosu LANGUAGES CXX)
 include(${PROJECT_SOURCE_DIR}/cmake/dependencies.cmake)
-include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
 
 ##======================================================================================================================
 
@@ -70,16 +69,17 @@ if(KYOSU_BUILD_DOCUMENTATION)
 endif()
 
 ##======================================================================================================================
-## Setup PCH
-##======================================================================================================================
-copa_setup_pch( TARGET kyosu        INTERFACES  kyosu_test  HEADERS include/kyosu/kyosu.hpp)
-copa_setup_pch( TARGET kyosu_doc    INTERFACES  kyosu_docs  HEADERS include/kyosu/kyosu.hpp)
-copa_setup_pch( TARGET kyosu_bench  INTERFACES  kyosu_bench HEADERS include/kyosu/kyosu.hpp)
-
-##======================================================================================================================
 ## Tests setup
 ##======================================================================================================================
 if(KYOSU_BUILD_TEST)
+  CPMGetPackage(TTS)
+  include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
+
+  ## After compiler.cmake, which declares the interfaces the precompiled headers are attached to.
+  copa_setup_pch( TARGET kyosu        INTERFACES  kyosu_test  HEADERS include/kyosu/kyosu.hpp)
+  copa_setup_pch( TARGET kyosu_doc    INTERFACES  kyosu_docs  HEADERS include/kyosu/kyosu.hpp)
+  copa_setup_pch( TARGET kyosu_bench  INTERFACES  kyosu_bench HEADERS include/kyosu/kyosu.hpp)
+
   if(KYOSU_ENABLE_SANITIZERS)
     copa_setup_sanitizers(kyosu_docs ENABLE_ASAN ENABLE_UBSAN)
   endif()
