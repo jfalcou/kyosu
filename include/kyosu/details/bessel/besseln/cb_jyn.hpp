@@ -8,6 +8,7 @@
 #pragma once
 #include <kyosu/details/bessel/bessel_utils2.hpp>
 #include <kyosu/details/with_alloca.hpp>
+#include <iostream>
 
 namespace kyosu::_
 {
@@ -340,7 +341,7 @@ namespace kyosu::_
         auto b1 = j1;
         Z bn;
         auto rz = rec(z);
-        for (int k = 1; k < n; ++k)
+        for (int k = 1; k < int(n); ++k)
         {
           bn = 2 * k * b1 * rz - b0;
           b0 = b1;
@@ -428,7 +429,7 @@ namespace kyosu::_
         auto bkm2 = cjv[0];
         auto bkm1 = cjv[1];
         //        Z bnext;
-        for (int kk = 2; kk <= n; ++kk)
+        for (int kk = 2; kk <= int(n); ++kk)
         {
           auto bk = 2 * (kk - 1) * rz * bkm1 - bkm2;
           bkm2 = bkm1;
@@ -438,7 +439,7 @@ namespace kyosu::_
         auto purez = is_pure(z);
         if (eve::any(purez))
         {
-          for (int kk = 2; kk <= n; ++kk) real(cjv[kk]) = eve::if_else(purez, eve::zero, real(cjv[kk]));
+          for (int kk = 2; kk <= int(n); ++kk) real(cjv[kk]) = eve::if_else(purez, eve::zero, real(cjv[kk]));
         }
         return cjv[n];
       };
@@ -467,7 +468,7 @@ namespace kyosu::_
         }
         auto fac = if_else(sqr_abs(j0) > sqr_abs(j1), j0 / cf, j1 / cf2);
 
-        for (int kk = 2; kk <= n; ++kk) cjv[kk] *= fac;
+        for (int kk = 2; kk <= int(n); ++kk) cjv[kk] *= fac;
         return cjv[n];
       };
 
@@ -479,7 +480,7 @@ namespace kyosu::_
           using u_t = eve::underlying_type_t<Z>;
           auto twoopi = eve::two_o_pi(eve::as<u_t>());
           auto b = twoopi * rz;
-          for (int ii = 1; ii <= n; ++ii)
+          for (int ii = 1; ii <= int(n); ++ii)
           {
             y = fms(cjv[ii], y, b) / cjv[ii - 1];
             auto r = if_else(is_eqz(z), complex(eve::minf(eve::as<u_t>())), y);
@@ -510,18 +511,18 @@ namespace kyosu::_
         // correct ys for real(z) < 0
         auto sgn0 = u_t(1);
         auto sgn1 = eve::if_else(izgt0, u_t(1), u_t(-1));
-        for (int ii = 0; ii <= n; ++ii)
+        for (int ii = 0; ii <= int(n); ++ii)
         {
           cyv[ii] = if_else(rzle0, sgn0 * (cyv[ii] + 2 * muli(sgn1 * cjv[ii])), cyv[ii]);
           sgn0 = -sgn0;
         }
 
         // correct js for real(z) < 0
-        for (int ii = 1; ii <= n; ii += 2)
+        for (int ii = 1; ii <= int(n); ii += 2)
           cjv[ii] = if_else(rzle0, -cjv[ii], cjv[ii]); //retablish sign for jn odd indices
 
         auto azne0 = is_nez(az);
-        for (int ii = 1; ii <= n; ++ii)
+        for (int ii = 1; ii <= int(n); ++ii)
         {
           cjv[ii] = if_else(azne0, cjv[ii], eve::zero);
           cyv[ii] = if_else(azne0, cyv[ii], kyosu::minf(as<Z>()));
@@ -530,7 +531,7 @@ namespace kyosu::_
 
       if (nn < 0) //retablish sign for odd indices and negative order
       {
-        for (int ii = 3; ii <= n; ii += 2)
+        for (int ii = 3; ii <= int(n); ii += 2)
         {
           cjv[ii] *= -1;
           cyv[ii] *= -1;
@@ -592,8 +593,8 @@ namespace kyosu::_
     std::size_t an = eve::abs(n);
     auto doit = [an, n, z, &rjs, &rys](auto js, auto ys) {
       auto [jn, yn] = _::cb_jyn(n, z, js, ys);
-      for (int ii = 0; ii < min(size(rjs), an + 1); ++ii) rjs[ii] = js[ii];
-      for (int ii = 0; ii < min(size(rys), an + 1); ++ii) rys[ii] = ys[ii];
+      for (int ii = 0; ii < int(min(size(rjs), an + 1)); ++ii) rjs[ii] = js[ii];
+      for (int ii = 0; ii < int(min(size(rys), an + 1)); ++ii) rys[ii] = ys[ii];
       return kumi::tuple{jn, yn};
     };
     return _::with_alloca<Z>(an + 1, doit);
