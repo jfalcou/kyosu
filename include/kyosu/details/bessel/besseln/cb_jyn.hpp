@@ -406,7 +406,7 @@ namespace kyosu::_
       cjv[1] = kyosu::_::cb_j1(z);
       cyv[1] = kyosu::_::cb_y1(z);
       if (nn == 1) return kumi::tuple{cjv[1], cyv[1]};
-      else if (nn == -1)
+      else if (int(nn) == -1)
       {
         cjv[1] = -cjv[1];
         cyv[1] = -cyv[1];
@@ -460,7 +460,7 @@ namespace kyosu::_
         while (eve::any(kgez))
         {
           cf = kyosu::if_else(kgez && k <= m0, 2 * inc(k) * cf1 * rec(z) - cf2, cf);
-          if (k <= n && k > 1) cjv[k] = cf;
+          if (k <= int(n) && k > 1) cjv[k] = cf;
           cf2 = kyosu::if_else(kgez && k <= m0, cf1, cf2);
           cf1 = kyosu::if_else(kgez && k <= m0, cf, cf1);
           k = dec(k);
@@ -550,7 +550,7 @@ namespace kyosu::_
     std::size_t an = eve::abs(n);
     if (size(js) > an)
     {
-      auto doit = [an, n, z, &js](auto ys) { _::cb_jyn(n, z, js, ys); };
+      auto doit = [n, z, &js](auto ys) { _::cb_jyn(n, z, js, ys); };
       _::with_alloca<Z>(an + 1, doit);
       return js[an];
     }
