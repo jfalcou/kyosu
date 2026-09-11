@@ -137,7 +137,7 @@ $(function(){initNavTree('tutorial-simd.html','',''); });
 <div class="contents">
 <div class="textblock"><p>Every processor made in the last twenty years can add several numbers in the time it takes to add one. The instruction exists, the register exists, and the only difficulty is expressing it. <b>KYOSU</b> is built on <a href="https://github.com/jfalcou/eve">EVE</a>, whose whole purpose is that expression, so the facility comes for free.</p>
 <p>You do not need to know anything about SIMD to read this page. The idea is simply that a value can hold several numbers at once, and that the code does not change.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
 A register of reals</h1>
 <p><span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a>&lt;double&gt;</span> holds as many <span class="tt">double</span> as the machine's registers allow. Arithmetic on it reads exactly like arithmetic on one:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -161,7 +161,7 @@ A register of reals</h1>
 <div class="ttc" id="astructeve_1_1wide_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></div></div>
 <div class="ttc" id="astructeve_1_1wide_html_a1d3739186033f12c8fe47755f598b60b"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html#a1d3739186033f12c8fe47755f598b60b">eve::wide::size</a></div><div class="ttdeci">static constexpr size_type size() noexcept</div></div>
 </div><!-- fragment --><p>Two things to read in that output. The cardinal is not a constant of the library but of the machine you compile for — two on a plain x86-64, four with AVX, eight with AVX-512 — and the source never mentions it. And the rule from the previous page has not gone away: the square root of a register of reals is a register of <em>complex</em> numbers, since any of those reals might have been negative. <span class="tt">kyosu::real_only</span> still asks for the other behaviour.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
 A register of complex numbers</h1>
 <p>The interesting part is that this composes. A complex number whose components are registers is written by handing <span class="tt"><a class="el" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">kyosu::complex</a></span> two wides instead of two doubles, and every function of the library then applies to all of them at once.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -182,7 +182,7 @@ A register of complex numbers</h1>
 <div class="ttc" id="agroup__exp_html_ga43bd0f5793b846caaf808a7f998734c0"><div class="ttname"><a href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a></div><div class="ttdeci">constexpr auto exp</div><div class="ttdef"><b>Definition</b> exp.hpp:88</div></div>
 <div class="ttc" id="agroup__to__complex_html_gad34d6e0109b4b00e61a647cac6197786"><div class="ttname"><a href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">kyosu::complex</a></div><div class="ttdeci">constexpr auto complex</div><div class="ttdef"><b>Definition</b> to_complex.hpp:70</div></div>
 </div><!-- fragment --><p>Nothing in the source distinguishes the scalar case from this one but the type of the components. There is no separate SIMD API to learn, and no <span class="tt">#ifdef</span> on the architecture: the width is whatever the machine you compile for provides.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
 Writing code that does not care</h1>
 <p>Because the spelling is identical, a function template covers both. The same body, called once on scalars and once on registers:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>

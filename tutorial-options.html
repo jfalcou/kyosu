@@ -136,14 +136,14 @@ $(function(){initNavTree('tutorial-options.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>You have already used one option, <span class="tt">kyosu::real_only</span>, without much explanation. This page collects the mechanism and the options worth knowing early.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md46"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md50"></a>
 The mechanism</h1>
 <p>A function is followed by square brackets naming a behaviour:</p>
 <div class="fragment"><div class="line"><a class="code hl_variable" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>[kyosu::real_only](-1.0)</div>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
 </div><!-- fragment --><p>This is not a call. <span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>[opt]</span> produces a <em>new callable</em> that behaves differently, and that callable is then applied. The consequence is that options compose, and that no function name has to be invented for each combination — there is no <span class="tt">sqrt_raw_real_only</span>.</p>
 <p>Options are inherited from EVE and behave identically there, so anything learnt here transfers.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md47"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md51"></a>
 Accuracy against speed</h1>
 <p>By default a function is as accurate as possible over its whole domain and guards its edges. <span class="tt">raw</span> asks for the fastest formula instead, and the price is paid in two places at once: the answer loses accuracy on ordinary input, and the edges stop being handled.</p>
 <p>The example below shows both on <span class="tt"><a class="el" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a></span>. The argument differs in the third decimal on a perfectly well-behaved value, and at the origin the guarded version still names an imaginary part where the raw one produces a NaN. <span class="tt">raw</span> is for the inner loop a profiler pointed at, not a default.</p>
@@ -166,7 +166,7 @@ Accuracy against speed</h1>
 <div class="line">}</div>
 <div class="ttc" id="agroup__log_html_gabc0fe7e42be704597604cc8dec55f4ae"><div class="ttname"><a href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a></div><div class="ttdeci">constexpr auto log</div><div class="ttdef"><b>Definition</b> log.hpp:102</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md48"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md52"></a>
 Angles in half-turns</h1>
 <p>Trigonometry in radians forces \(\pi\) into the arithmetic, and \(\pi\) is not exactly representable as an <em>IEEE</em> floating number. <span class="tt">kyosu::radpi</span> reads and returns angles as multiples of \(\pi\) instead, which removes that error at the source. Where a plain call needs <span class="tt">pi/2</span>, the option form takes <span class="tt">0.5</span>:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -189,7 +189,7 @@ Angles in half-turns</h1>
 <div class="ttc" id="agroup__eve__math__constants_gad32687fc782ada2bb223abb7722ac694_html_gad32687fc782ada2bb223abb7722ac694"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__math__constants_gad32687fc782ada2bb223abb7722ac694.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a></div><div class="ttdeci">constexpr auto pi</div></div>
 <div class="ttc" id="agroup__sin_html_ga02b482e44325ab868b423995a9cf9df2"><div class="ttname"><a href="group__sin.html#ga02b482e44325ab868b423995a9cf9df2">kyosu::sin</a></div><div class="ttdeci">constexpr auto sin</div><div class="ttdef"><b>Definition</b> sin.hpp:75</div></div>
 <div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md49"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md53"></a>
 Real answers</h1>
 <p>Met on the first page: <span class="tt">kyosu::real_only</span> asks for the real function and its NaN rather than for a complex answer.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -204,7 +204,7 @@ Real answers</h1>
 <div class="line">}</div>
 <div class="ttc" id="agroup__acosh_html_ga010d55184f68d5a6276939926b22c689"><div class="ttname"><a href="group__acosh.html#ga010d55184f68d5a6276939926b22c689">kyosu::acosh</a></div><div class="ttdeci">constexpr auto acosh</div><div class="ttdef"><b>Definition</b> acosh.hpp:103</div></div>
 <div class="ttc" id="agroup__asin_html_ga1b0ab1f5f9386bcfe84bc3356ad103e1"><div class="ttname"><a href="group__asin.html#ga1b0ab1f5f9386bcfe84bc3356ad103e1">kyosu::asin</a></div><div class="ttdeci">constexpr auto asin</div><div class="ttdef"><b>Definition</b> asin.hpp:92</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md50"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md54"></a>
 Skipping a normalisation</h1>
 <p>The rotation functions normalise their argument, since a rotation must be a unit quaternion. When you already know it is one, <span class="tt">kyosu::assume_unitary</span> skips the work. It is a promise, not a request: pass a quaternion that is not unitary and the answer is simply wrong.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>

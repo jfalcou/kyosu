@@ -136,11 +136,11 @@ $(function(){initNavTree('tutorial-rotation.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Quaternions are not a curiosity kept alive by mathematicians. They are the standard way to represent rotations in three dimensions in graphics, robotics and aerospace, and the reason is practical rather than elegant. This page is about that use, and it needs nothing from the previous page beyond knowing that a quaternion has four components and does not commute.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md40"></a>
 Why not Euler angles</h1>
 <p>Three angles around three axes are the obvious representation and they have two well-known faults. They suffer <em>gimbal lock</em>: at certain orientations two of the three axes align and a degree of freedom is lost. And interpolating between two sets of angles does not produce a natural motion, because the angles are not independent of one another.</p>
 <p>A unit quaternion has neither problem. It covers every orientation without a singularity, it composes by multiplication, and — the point of this page — two of them can be interpolated along the shortest arc.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
 Rotating a vector</h1>
 <p>Build the rotation from an angle and an axis, then apply it. The vector is an ordinary array of three reals, handed over as a <span class="tt">std::span</span>:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
@@ -166,7 +166,7 @@ Rotating a vector</h1>
 <div class="ttc" id="agroup__rotate__vec_html_gafc749b146c3a5d756fc81c80e9b77d74"><div class="ttname"><a href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></div><div class="ttdeci">constexpr auto rotate_vec</div><div class="ttdef"><b>Definition</b> rotate_vec.hpp:81</div></div>
 <div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
 </div><!-- fragment --><p><span class="tt"><a class="el" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></span> normalises the axis for you. If you know it is already a unit vector, <span class="tt">[kyosu::assume_unitary]</span> skips that work.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md42"></a>
 Composing rotations</h1>
 <p>Applying \(p\) then \(q\) is the single rotation \(qp\) — in that order, because the product does not commute. This is where the previous page pays off: getting the order wrong is the classic bug, and the algebra is what tells you which order is right.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
@@ -190,7 +190,7 @@ Composing rotations</h1>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;q*p applied to x = (&quot;</span> &lt;&lt; a[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; a[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; a[2] &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;p*q applied to x = (&quot;</span> &lt;&lt; b[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; b[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; b[2] &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md43"></a>
 Interpolating between orientations</h1>
 <p><a class="el" href="group__slerp.html#ga1bc2cb0004a3b7a58fd9514247031b7f">kyosu::slerp</a> — <em>spherical linear interpolation</em> — walks from one orientation to another along the shortest arc, at constant angular speed. It is what makes quaternions worth the change of representation in an animation or a trajectory:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
@@ -214,7 +214,7 @@ Interpolating between orientations</h1>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__slerp_html_ga1bc2cb0004a3b7a58fd9514247031b7f"><div class="ttname"><a href="group__slerp.html#ga1bc2cb0004a3b7a58fd9514247031b7f">kyosu::slerp</a></div><div class="ttdeci">constexpr auto slerp</div><div class="ttdef"><b>Definition</b> slerp.hpp:72</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md40"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md44"></a>
 Converting to and from other representations</h1>
 <p>You rarely control every piece of a pipeline, so the conversions are provided in both directions: <span class="tt"><a class="el" href="group__to__rotation__matrix.html" title="Callable object computing a quaternion from its to_rotation_matrix representation.">kyosu::to_rotation_matrix</a></span> and <span class="tt"><a class="el" href="group__from__rotation__matrix.html" title="Callable object computing a quaternion from its rotation_matrix representation.">kyosu::from_rotation_matrix</a></span>, <span class="tt"><a class="el" href="group__to__euler.html" title="Callable object computing euler angles from a quaternion.">kyosu::to_euler</a></span> and <span class="tt"><a class="el" href="group__from__euler.html" title="Callable object computing a quaternion from its euler representation.">kyosu::from_euler</a></span>, <span class="tt"><a class="el" href="group__to__angle__axis.html" title="Callable object computing the angle and axis coordinates from a quaternion.">kyosu::to_angle_axis</a></span> and <span class="tt"><a class="el" href="group__from__angle__axis.html" title="Callable object computing an an unitary quaternion from an angle value and a 3 dimensional axis vecto...">kyosu::from_angle_axis</a></span>.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>

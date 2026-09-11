@@ -634,6 +634,27 @@
     </member>
     <member kind="variable">
       <type>constexpr auto</type>
+      <name>airy</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>ga5eaefb7155f0e19a08aac86894e15ea5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>airy_ai</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>ga5948fbb1b7a58b9ff1c9467a0b77be0f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>airy_bi</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>gac37d1f06afdad8528d6653a7aa222e3c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
       <name>align</name>
       <anchorfile>group__align.html</anchorfile>
       <anchor>ga75d48d720e22794a606131a0b0d7ce7d</anchor>
@@ -707,6 +728,41 @@
       <name>average</name>
       <anchorfile>group__average.html</anchorfile>
       <anchor>ga215f5e846e2b272e4e669c36a4d2afc1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>bessel_h</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>gafe5569de01f5c7bfda7d45ea913efabd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>bessel_i</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>gade570e8c539c4f9b1dd3f9ecc39eb40d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>bessel_j</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>ga95e9a9abb18194231e8b69601f54e646</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>bessel_k</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>gaa20ef30d4f5929be9633838012192da5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>bessel_y</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>ga7878fccd07f718a5c10d351e7433a022</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2457,6 +2513,67 @@
     <title>Complex-specific functions</title>
     <filename>group__complex.html</filename>
     <subgroup>from_polar</subgroup>
+  </compound>
+  <compound kind="group">
+    <name>functions</name>
+    <title>Functions</title>
+    <filename>group__functions.html</filename>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::airy</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>ga5eaefb7155f0e19a08aac86894e15ea5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::airy_ai</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>ga5948fbb1b7a58b9ff1c9467a0b77be0f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::airy_bi</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>gac37d1f06afdad8528d6653a7aa222e3c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::bessel_h</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>gafe5569de01f5c7bfda7d45ea913efabd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::bessel_i</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>gade570e8c539c4f9b1dd3f9ecc39eb40d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::bessel_j</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>ga95e9a9abb18194231e8b69601f54e646</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::bessel_k</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>gaa20ef30d4f5929be9633838012192da5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::bessel_y</name>
+      <anchorfile>group__functions.html</anchorfile>
+      <anchor>ga7878fccd07f718a5c10d351e7433a022</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="group">
     <name>quaternion</name>

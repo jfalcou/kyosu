@@ -137,9 +137,9 @@ $(function(){initNavTree('index.html','',''); });
 <div class="contents">
 <div class="textblock"><p><b>KYOSU</b> is a C++20 library for complex numbers, quaternions, octonions and the general \(\mathbb{R}\)-Cayley-Dickson algebras. It extends the usual real functions to all of them — the transcendentals, but also Legendre polynomials and elliptic integrals — and every one of those functions works on a scalar and on a SIMD register alike.</p>
 <p>If all you need is complex numbers, that is reason enough to use it: they are the two-dimensional case, and they come with the same vectorization as the rest.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
 Core Features</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
 One call, whatever the dimension</h3>
 <p>Over two hundred functions, each taking a real or a hyper-complex argument under the same name.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -158,7 +158,7 @@ One call, whatever the dimension</h3>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 <div class="ttc" id="agroup__types_html_ga403b1334a805ef696b3ab5640d550cff"><div class="ttname"><a href="group__types.html#ga403b1334a805ef696b3ab5640d550cff">kyosu::octonion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 8, T &gt; octonion_t</div><div class="ttdoc">Type alias for octonion numbers.</div><div class="ttdef"><b>Definition</b> octonion.hpp:22</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
 One call, scalar or SIMD</h3>
 <p>The same name again, on one value or on a register of them.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
@@ -178,7 +178,7 @@ One call, scalar or SIMD</h3>
 <div class="line">}</div>
 <div class="ttc" id="agroup__to__complex_html_gad34d6e0109b4b00e61a647cac6197786"><div class="ttname"><a href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">kyosu::complex</a></div><div class="ttdeci">constexpr auto complex</div><div class="ttdef"><b>Definition</b> to_complex.hpp:70</div></div>
 <div class="ttc" id="astructeve_1_1wide_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></div></div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
 Accuracy you choose</h3>
 <p>The default keeps IEEE754 conformity at the edges of the domain; <span class="tt">raw</span> skips those checks for speed.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -197,7 +197,7 @@ Accuracy you choose</h3>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;abs[raw] = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>[kyosu::raw](z) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__abs_html_gac70344c81b5cf55a5257cf54c6e6cb18"><div class="ttname"><a href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a></div><div class="ttdeci">constexpr auto abs</div><div class="ttdef"><b>Definition</b> abs.hpp:72</div></div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md24"></a>
 Angles in half-turns</h3>
 <p>With kyosu::radpi, an angle is read and returned as a multiple of \(\pi\) rather than in radians.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -212,7 +212,7 @@ Angles in half-turns</h3>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;arg[radpi] = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__arg.html#gae6b016425d0a624d4391512f4afb64fc">kyosu::arg</a>[kyosu::radpi](z)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__arg_html_gae6b016425d0a624d4391512f4afb64fc"><div class="ttname"><a href="group__arg.html#gae6b016425d0a624d4391512f4afb64fc">kyosu::arg</a></div><div class="ttdeci">constexpr auto arg</div><div class="ttdef"><b>Definition</b> arg.hpp:76</div></div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md25"></a>
 Real answers when you want them</h3>
 <p>A real input outside a function's real domain returns a complex result, unless kyosu::real_only is passed, which defers to the matching EVE function and its NaN.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -227,7 +227,7 @@ Real answers when you want them</h3>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;sqrt[real_only](-1.0) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>[kyosu::real_only](-1.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md26"></a>
 The algebras</h2>
 <p>Starting from IEEE <span class="tt">float</span> and <span class="tt">double</span>:</p><ul>
 <li><a href="https://en.wikipedia.org/wiki/Complex_number"><b>Complex numbers</b></a>.</li>
@@ -264,7 +264,7 @@ The algebras</h2>
 <div class="ttc" id="agroup__j_html_gad984a2daa62e2ee33ee4577d87cb0533"><div class="ttname"><a href="group__j.html#gad984a2daa62e2ee33ee4577d87cb0533">kyosu::j</a></div><div class="ttdeci">constexpr auto j</div><div class="ttdef"><b>Definition</b> j.hpp:73</div></div>
 <div class="ttc" id="agroup__ldiv_html_ga4842daf39053c0a08fa68cd1850558e1"><div class="ttname"><a href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv</a></div><div class="ttdeci">constexpr auto ldiv</div><div class="ttdef"><b>Definition</b> ldiv.hpp:93</div></div>
 <div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md27"></a>
 Building one</h3>
 <p>From the parametrizations one actually reaches for — <a class="el" href="group__from__euler.html#ga4e7d9b2067dc764269c1539b6e4b9271">kyosu::from_euler</a>, <a class="el" href="group__from__polar.html#gaf64b08ee90565c95c04b029767cba95e">kyosu::from_polar</a>, <a class="el" href="group__from__spherical.html#gaed1e70b2f6b903ef24ce33d7937d8958">kyosu::from_spherical</a>, <a class="el" href="group__from__cylindrical.html#ga505ff6cf7441aa432d2549a840868527">kyosu::from_cylindrical</a>, and axis-angle.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -289,7 +289,7 @@ Building one</h3>
 <div class="ttc" id="agroup__eve__math__constants_gac30b29df2f7d7903ac7e0097a51b22e4_html_gac30b29df2f7d7903ac7e0097a51b22e4"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__math__constants_gac30b29df2f7d7903ac7e0097a51b22e4.html#gac30b29df2f7d7903ac7e0097a51b22e4">eve::pio_3</a></div><div class="ttdeci">constexpr auto pio_3</div></div>
 <div class="ttc" id="agroup__from__euler_html_ga4e7d9b2067dc764269c1539b6e4b9271"><div class="ttname"><a href="group__from__euler.html#ga4e7d9b2067dc764269c1539b6e4b9271">kyosu::from_euler</a></div><div class="ttdeci">constexpr auto from_euler</div><div class="ttdef"><b>Definition</b> from_euler.hpp:122</div></div>
 <div class="ttc" id="agroup__from__polar_html_gaf64b08ee90565c95c04b029767cba95e"><div class="ttname"><a href="group__from__polar.html#gaf64b08ee90565c95c04b029767cba95e">kyosu::from_polar</a></div><div class="ttdeci">constexpr auto from_polar</div><div class="ttdef"><b>Definition</b> from_polar.hpp:81</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md24"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
 Licence</h2>
 <p>This library is licensed under the <a href="https://opensource.org/licenses/BSL">Boost Software License</a>:</p>
 <div class="fragment"><div class="line">Copyright : KYOSU Project Contributors</div>

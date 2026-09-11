@@ -136,7 +136,7 @@ $(function(){initNavTree('tutorial-complex.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>We start where you are already at home. Everything in this page has an equivalent in <span class="tt">std::complex</span>, and the point is less to teach complex arithmetic than to settle the spelling, the printing and the two or three habits that the rest of the tutorial builds on.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md25"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
 Naming a type</h1>
 <p>A complex number over <span class="tt">double</span> is written <span class="tt"><a class="el" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e" title="Type alias for complex numbers.">kyosu::complex_t</a>&lt;double&gt;</span>. The <span class="tt">_t</span> is not decoration: it is an alias for a two-dimensional Cayley-Dickson value, and the same suffix names every other algebra in the library.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -161,7 +161,7 @@ Naming a type</h1>
 <div class="ttc" id="agroup__real_html_ga4121e4e64916c81e31b622b9b45c93fb"><div class="ttname"><a href="group__real.html#ga4121e4e64916c81e31b622b9b45c93fb">kyosu::real</a></div><div class="ttdeci">constexpr auto real</div><div class="ttdef"><b>Definition</b> parts.hpp:71</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 </div><!-- fragment --><p>Note the printing convention. A value comes out as its components against the basis names, 3 + 4i rather than "(3,4)", and that convention scales: a quaternion prints as 1 + 2i + 3j + 4k. You will read a lot of these.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md26"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
 Functions</h1>
 <p>Everything you would expect is there, under the name you would expect, in namespace <span class="tt"><a class="el" href="namespacekyosu.html" title="Main KYOSU namespace.">kyosu</a></span>. Two hundred of them, from the arithmetic to the transcendentals, and on to the Riemann zeta, Legendre polynomials and elliptic integrals.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -188,7 +188,7 @@ Functions</h1>
 <div class="ttc" id="agroup__tanh_html_ga78d8caa0d963138de3b8d7fa35bf9e6b"><div class="ttname"><a href="group__tanh.html#ga78d8caa0d963138de3b8d7fa35bf9e6b">kyosu::tanh</a></div><div class="ttdeci">constexpr auto tanh</div><div class="ttdef"><b>Definition</b> tanh.hpp:72</div></div>
 <div class="ttc" id="agroup__tgamma_html_ga2592a73fafd38f5dcff68431ce527a41"><div class="ttname"><a href="group__tgamma.html#ga2592a73fafd38f5dcff68431ce527a41">kyosu::tgamma</a></div><div class="ttdeci">constexpr auto tgamma</div><div class="ttdef"><b>Definition</b> tgamma.hpp:72</div></div>
 <div class="ttc" id="agroup__zeta_html_ga9dc4aaaee99fe3a698b09d2c63850d66"><div class="ttname"><a href="group__zeta.html#ga9dc4aaaee99fe3a698b09d2c63850d66">kyosu::zeta</a></div><div class="ttdeci">constexpr auto zeta</div><div class="ttdef"><b>Definition</b> zeta.hpp:67</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md27"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
 The one surprise</h1>
 <p><span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>(-1.0)</span> returns a complex number. Its argument is a plain <span class="tt">double</span>, and the answer could not be a <span class="tt">double</span>, so the return type is widened rather than the answer being lost.</p>
 <p>This is deliberate and it is not always what you want. When you would rather have the real function and its NaN, say so:</p>
@@ -210,7 +210,7 @@ The one surprise</h1>
 <div class="ttc" id="agroup__acos_html_gaa6527f2975e878d560e025dba9def6cd"><div class="ttname"><a href="group__acos.html#gaa6527f2975e878d560e025dba9def6cd">kyosu::acos</a></div><div class="ttdeci">constexpr auto acos</div><div class="ttdef"><b>Definition</b> acos.hpp:111</div></div>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
 </div><!-- fragment --><p><span class="tt">kyosu::real_only</span> is an <em>option</em>, written in square brackets after the function name. Options are how <b>KYOSU</b> lets you pick a behaviour without a different function name for each; there are others, and <a class="el" href="tutorial-options.html" title="Options">Options</a> collects them.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
 What is missing on purpose</h1>
 <p>There is no <span class="tt">&lt;</span> on complex numbers. No ordering of the complex plane is compatible with multiplication, so the library offers none rather than offering one that lies. Equality and the componentwise predicates are there:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>

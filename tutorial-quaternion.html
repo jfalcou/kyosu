@@ -136,7 +136,7 @@ $(function(){initNavTree('tutorial-quaternion.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>If you have never computed with anything past the complex numbers, this is the page where that changes. It assumes nothing beyond the previous two.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
 What they are</h1>
 <p>A complex number is a pair of reals. A quaternion is a pair of <em>complex numbers</em> — so four reals — with a product built by a new but similar recipe. That is the whole definition. The four components are written against the basis \(1, i, j, k\), and <b>KYOSU</b> prints them that way:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -178,7 +178,7 @@ What they are</h1>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;2. * q = &quot;</span> &lt;&lt; 2. * q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
 The thing that is genuinely new</h1>
 <p>Multiplication no longer commutes. \(ij = k\), but \(ji = -k\):</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -203,7 +203,7 @@ The thing that is genuinely new</h1>
 <div class="ttc" id="agroup__j_html_gad984a2daa62e2ee33ee4577d87cb0533"><div class="ttname"><a href="group__j.html#gad984a2daa62e2ee33ee4577d87cb0533">kyosu::j</a></div><div class="ttdeci">constexpr auto j</div><div class="ttdef"><b>Definition</b> j.hpp:73</div></div>
 <div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
 </div><!-- fragment --><p>This is not a defect of the implementation, it is what the algebra is. It has one practical consequence you cannot avoid, so it is worth meeting now rather than in a debugger.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
 Two divisions instead of one</h1>
 <p>With real or complex numbers, divide \(a\) by \(b\) names one operation, because \(ab^{-1}\) and \(b^{-1}a\) agree. With quaternions they do not, and there are two honest answers:</p>
 <ul>
@@ -231,7 +231,7 @@ Two divisions instead of one</h1>
 <div class="line">}</div>
 <div class="ttc" id="agroup__ldiv_html_ga4842daf39053c0a08fa68cd1850558e1"><div class="ttname"><a href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv</a></div><div class="ttdeci">constexpr auto ldiv</div><div class="ttdef"><b>Definition</b> ldiv.hpp:93</div></div>
 </div><!-- fragment --><p><b>KYOSU</b> never guesses which one you meant. <span class="tt">/</span> is the right division and <a class="el" href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv</a> is the left one; if you have been getting rotations composed backwards, this is usually why.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
 Building one without listing four numbers</h1>
 <p>Writing <span class="tt">q_t(1., 2., 3., 4.)</span> is rarely how a quaternion arises in practice. The parametrisations people actually reach for are provided directly:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>

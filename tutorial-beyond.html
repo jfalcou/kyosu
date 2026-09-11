@@ -137,7 +137,7 @@ $(function(){initNavTree('tutorial-beyond.html','',''); });
 <div class="contents">
 <div class="textblock"><p>Nothing in the construction stops at four dimensions. A pair of quaternions gives an octonion, a pair of octonions a sedenion, and so on without end. <b>KYOSU</b> implements the whole tower, so this page is about what changes as you climb it — and about the two places where habits acquired on real numbers will mislead you.</p>
 <p>The mathematics is set out properly in <a class="el" href="math_background.html" title="Mathematics of Cayley-Dickson Algebras">Mathematics of Cayley-Dickson Algebras</a>. Here we only look at the code.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md45"></a>
 Naming any dimension</h1>
 <p>Past the octonions the basis elements stop having traditional names and are simply indexed. The type is named by its dimension:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -163,7 +163,7 @@ Naming any dimension</h1>
 <div class="ttc" id="agroup__kyosu__traits_html_ga8f185ca9780dc6cec632805d9cd71463"><div class="ttname"><a href="group__kyosu__traits.html#ga8f185ca9780dc6cec632805d9cd71463">kyosu::as_cayley_dickson_n_t</a></div><div class="ttdeci">typename as_cayley_dickson_n&lt; Dim, Ts... &gt;::type as_cayley_dickson_n_t</div><div class="ttdoc">Computes a Cayley-Dickson type of a given dimension.</div><div class="ttdef"><b>Definition</b> traits.hpp:142</div></div>
 <div class="ttc" id="agroup__types_html_ga403b1334a805ef696b3ab5640d550cff"><div class="ttname"><a href="group__types.html#ga403b1334a805ef696b3ab5640d550cff">kyosu::octonion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 8, T &gt; octonion_t</div><div class="ttdoc">Type alias for octonion numbers.</div><div class="ttdef"><b>Definition</b> octonion.hpp:22</div></div>
 </div><!-- fragment --><p>Every function of the library still applies, and still under the same name.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md42"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md46"></a>
 First trap: parentheses are load-bearing</h1>
 <p>From dimension 8 on, \((ab)c\) and \(a(bc)\) are different numbers. This is not a rounding difference — the sign of a whole component flips:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -187,7 +187,7 @@ First trap: parentheses are load-bearing</h1>
 <div class="ttc" id="agroup__associator_html_gac1477076e48284b3ea6b0304e24188c1"><div class="ttname"><a href="group__associator.html#gac1477076e48284b3ea6b0304e24188c1">kyosu::associator</a></div><div class="ttdeci">constexpr auto associator</div><div class="ttdef"><b>Definition</b> associator.hpp:71</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
 </div><!-- fragment --><p><a class="el" href="group__associator.html#gac1477076e48284b3ea6b0304e24188c1">kyosu::associator</a> computes \((ab)c - a(bc)\) directly, so the defect can be measured. On quaternions and below it is zero; on octonions it is not. <b>KYOSU</b> never re-associates an expression, so what you write is what is evaluated — which also means that a refactoring which looks harmless can change the answer.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md43"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md47"></a>
 Second trap: from dimension 16, division fails</h1>
 <p>Octonions still form a division algebra: every non-zero element has an inverse. Sedenions do not. There exist non-zero values whose product is zero, and neither of them can be inverted:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -212,7 +212,7 @@ Second trap: from dimension 16, division fails</h1>
 <div class="ttc" id="agroup__ldiv_html_ga4842daf39053c0a08fa68cd1850558e1"><div class="ttname"><a href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv</a></div><div class="ttdeci">constexpr auto ldiv</div><div class="ttdef"><b>Definition</b> ldiv.hpp:93</div></div>
 </div><!-- fragment --><p>Two perfectly finite operands, each of norm \(\sqrt2\), with a product of exactly zero.</p>
 <p>Note what the trap is <em>not</em>. Nothing overflows, no NaN appears, and no exception is raised: the answer is a finite, ordinary-looking zero. The multiplication has simply destroyed its operands, and dividing back by \(b\) returns zero rather than \(a\). Above dimension 8 an algebraic identity you would never think to question — that \(ab\) determines \(a\) once \(b\) is known — no longer holds, and nothing in the output will tell you.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md44"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md48"></a>
 What still works everywhere</h1>
 <p>It would be reasonable to conclude that high dimensions are unusable. They are not, because the property the elementary functions actually need survives at every level: the subalgebra generated by a <em>single</em> element is always associative. So powers, exponentials, logarithms and everything built on them remain well defined however far you go.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -233,7 +233,7 @@ What still works everywhere</h1>
 <div class="ttc" id="agroup__log_html_gabc0fe7e42be704597604cc8dec55f4ae"><div class="ttname"><a href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a></div><div class="ttdeci">constexpr auto log</div><div class="ttdef"><b>Definition</b> log.hpp:102</div></div>
 <div class="ttc" id="agroup__sqr_html_ga341e48919690498ce1a6cac915b3e58d"><div class="ttname"><a href="group__sqr.html#ga341e48919690498ce1a6cac915b3e58d">kyosu::sqr</a></div><div class="ttdeci">constexpr auto sqr</div><div class="ttdef"><b>Definition</b> sqr.hpp:57</div></div>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md45"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md49"></a>
 Where to go from here</h1>
 <p>The reference documentation lists every function by category, and <a class="el" href="math_background.html" title="Mathematics of Cayley-Dickson Algebras">Mathematics of Cayley-Dickson Algebras</a> gives the construction, the theorems behind the losses above, and the scheme by which a real function is extended to all of these algebras at once.</p>
 <div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">

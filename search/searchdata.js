@@ -9,7 +9,7 @@ var indexSectionsWithContent =
   6: "ou",
   7: "os",
   8: "abcdefhiklmnopqrstv",
-  9: "1248abcdefghiklmnopqrstvwy",
+  9: "1248abcdefghiklmnopqrstuvwy",
   10: "acfghilmnopqrstuvw"
 };
 
