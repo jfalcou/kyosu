@@ -188,7 +188,7 @@ Variables</h2></td></tr>
 </ul>
 <p><b>Return value</b></p>
 <ul>
-<li>Real typed input <span class="tt">z0</span> and <span class="tt">z1</span> is treated as if <span class="tt"><a class="el" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">complex(z0)</a></span> and <span class="tt"><a class="el" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">complex(z1)</a></span> were entered, unless the option <span class="tt">real_only</span> is used in which case the result will the same as to an <span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/group__eve__special_ga340e8bdb903cecc2bf070e6a5c53975c.html#ga340e8bdb903cecc2bf070e6a5c53975c">eve::lbeta</a></span> call</li>
+<li>Real typed input <span class="tt">z0</span> and <span class="tt">z1</span> is treated as if <span class="tt"><a class="el" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">complex(z0)</a></span> and <span class="tt"><a class="el" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">complex(z1)</a></span> were entered, unless the option <span class="tt">real_only</span> is used in which case the result will the same as to an <span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/group__eve__special.html#ga340e8bdb903cecc2bf070e6a5c53975c">eve::lbeta</a></span> call</li>
 <li>Real typed entries are treated as complex ones. unless the option real_only is used in which case the parameter must be a floating_value, implying a Nan result if the theoretical result is not real.</li>
 <li>Returns <span class="tt"><a class="el" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">log(beta(x, y))</a></span>.</li>
 </ul>
@@ -232,14 +232,14 @@ Variables</h2></td></tr>
 <div class="line">  <span class="keywordtype">double</span> a = 1.5;</div>
 <div class="line">  <span class="keywordtype">double</span> b = -2.6;</div>
 <div class="line">  <span class="keyword">auto</span> lbetab = <a class="code hl_variable" href="#gafe0c7a3f991d20592748394411b97f03">kyosu::lbeta</a>(a, b);</div>
-<div class="line">  <span class="keyword">auto</span> lrbetab = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__special_ga340e8bdb903cecc2bf070e6a5c53975c.html#ga340e8bdb903cecc2bf070e6a5c53975c">eve::lbeta</a>(a, b);</div>
+<div class="line">  <span class="keyword">auto</span> lrbetab = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__special.html#ga340e8bdb903cecc2bf070e6a5c53975c">eve::lbeta</a>(a, b);</div>
 <div class="line">  <span class="keyword">auto</span> lrrbetab = <a class="code hl_variable" href="#gafe0c7a3f991d20592748394411b97f03">kyosu::lbeta</a>[kyosu::real_only](a, b);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kyosu::lbeta(a, b)                   &quot;</span>&lt;&lt; lbetab &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;eve::lbeta(a, b)                     &quot;</span>&lt;&lt; lrbetab &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kyosu::lbeta[kyosu::real_only](a, b) &quot;</span>&lt;&lt; lrrbetab &lt;&lt; std::endl;</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__eve__special_ga340e8bdb903cecc2bf070e6a5c53975c_html_ga340e8bdb903cecc2bf070e6a5c53975c"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__special_ga340e8bdb903cecc2bf070e6a5c53975c.html#ga340e8bdb903cecc2bf070e6a5c53975c">eve::lbeta</a></div><div class="ttdeci">constexpr auto lbeta</div></div>
+<div class="ttc" id="agroup__eve__special_html_ga340e8bdb903cecc2bf070e6a5c53975c"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__special.html#ga340e8bdb903cecc2bf070e6a5c53975c">eve::lbeta</a></div><div class="ttdeci">constexpr auto lbeta</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 <div class="ttc" id="astructeve_1_1fixed_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1fixed.html">eve::fixed</a></div></div>
 <div class="ttc" id="astructeve_1_1wide_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></div></div>

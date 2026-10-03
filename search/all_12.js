@@ -44,7 +44,7 @@ var searchData=
   ['operator_3c_3c_61',['operator&lt;&lt;',['../structkyosu_1_1cayley__dickson.html#a1d50add5f2f5370f64b20919751ccdcf',1,'kyosu::cayley_dickson::operator&lt;&lt;()'],['../structkyosu_1_1cayley__dickson.html#a1d50add5f2f5370f64b20919751ccdcf',1,'kyosu::operator&lt;&lt;()']]],
   ['operator_3d_65',['operator=',['../structkyosu_1_1cayley__dickson.html#aba6f0b33ec930c1b7d025aa4ae76fd14',1,'kyosu::cayley_dickson::operator=()']]],
   ['operator_3d_3d_66',['operator==',['../structkyosu_1_1cayley__dickson.html#a561363de989d2101775d8b85655ea08e',1,'kyosu::cayley_dickson::operator==(T1 const &amp;a, T2 b)'],['../structkyosu_1_1cayley__dickson.html#a561363de989d2101775d8b85655ea08e',1,'kyosu::cayley_dickson::operator==(T1 const &amp;a, T2 b)'],['../structkyosu_1_1cayley__dickson.html#a561363de989d2101775d8b85655ea08e',1,'kyosu::operator==(T1 const &amp;a, T2 b)'],['../structkyosu_1_1cayley__dickson.html#a561363de989d2101775d8b85655ea08e',1,'kyosu::operator==(T1 const &amp;a, T2 b)']]],
-  ['options_78',['Options',['../tutorial-options.html',1,'']]],
+  ['options_78',['Options',['../tutorial-options.html',1,'Options']]],
   ['or_20floating_80',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]],
   ['or_20simd_81',['One call, scalar or SIMD',['../index.html#autotoc_md22',1,'']]],
   ['order_83',['Dimension 2: the loss of order',['../math_background.html#autotoc_md64',1,'']]],

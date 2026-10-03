@@ -33,7 +33,7 @@ var searchData=
   ['from_5fsemipolar_70',['from_semipolar',['../group__from__semipolar.html#gab01fdca022335c40f7f5e9a7445bedcf',1,'kyosu']]],
   ['from_5fspherical_71',['from_spherical',['../group__from__spherical.html#gaed1e70b2f6b903ef24ce33d7937d8958',1,'kyosu']]],
   ['fsm_73',['fsm',['../group__fsm.html#ga35571a35abfd2cc96d0ff2edd24d1d3a',1,'kyosu::fsm']]],
-  ['functions_76',['Functions',['../group__kyosu__functions.html',1,'Cayley-Dickson Functions'],['../group__functions.html',1,'Functions'],['../tutorial-complex.html#autotoc_md30',1,'Functions']]],
-  ['functions_77',['functions',['../group__agnostic.html',1,'Algebra-agnostic functions'],['../group__complex.html',1,'Complex-specific functions'],['../math_background.html#autotoc_md70',1,'Extension of real analytic functions'],['../group__quaternion.html',1,'Quaternion-specific functions']]],
-  ['functions_20are_20only_20implemented_20for_20scalar_20orders_20integral_20or_20floating_78',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]],
+  ['functions_77',['Functions',['../group__kyosu__functions.html',1,'Cayley-Dickson Functions'],['../group__functions.html',1,'Functions'],['../tutorial-complex.html#autotoc_md30',1,'Functions']]],
+  ['functions_78',['functions',['../group__agnostic.html',1,'Algebra-agnostic functions'],['../group__complex.html',1,'Complex-specific functions'],['../math_background.html#autotoc_md70',1,'Extension of real analytic functions'],['../group__quaternion.html',1,'Quaternion-specific functions']]],
+  ['functions_20are_20only_20implemented_20for_20scalar_20orders_20integral_20or_20floating_79',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]],
 ];

@@ -149,7 +149,7 @@ Rotating a vector</h1>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> pi = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__math__constants_gad32687fc782ada2bb223abb7722ac694.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>());</div>
+<div class="line">  <span class="keyword">auto</span> pi = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>());</div>
 <div class="line"> </div>
 <div class="line">  std::array&lt;double, 3&gt; axis{0., 0., 1.};   <span class="comment">// the z axis</span></div>
 <div class="line">  std::array&lt;double, 3&gt; v   {1., 0., 0.};   <span class="comment">// the x axis</span></div>
@@ -161,7 +161,7 @@ Rotating a vector</h1>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;v             = (&quot;</span> &lt;&lt; v[0]  &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; v[1]  &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; v[2]  &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;rotate_vec    = (&quot;</span> &lt;&lt; rv[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; rv[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; rv[2] &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__eve__math__constants_gad32687fc782ada2bb223abb7722ac694_html_gad32687fc782ada2bb223abb7722ac694"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__math__constants_gad32687fc782ada2bb223abb7722ac694.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a></div><div class="ttdeci">constexpr auto pi</div></div>
+<div class="ttc" id="agroup__eve__math__constants_html_gad32687fc782ada2bb223abb7722ac694"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a></div><div class="ttdeci">constexpr auto pi</div></div>
 <div class="ttc" id="agroup__from__angle__axis_html_ga2e2e427d078f717745ed2821f6cd06f2"><div class="ttname"><a href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr auto from_angle_axis</div><div class="ttdef"><b>Definition</b> from_angle_axis.hpp:79</div></div>
 <div class="ttc" id="agroup__rotate__vec_html_gafc749b146c3a5d756fc81c80e9b77d74"><div class="ttname"><a href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></div><div class="ttdeci">constexpr auto rotate_vec</div><div class="ttdef"><b>Definition</b> rotate_vec.hpp:81</div></div>
 <div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
@@ -175,7 +175,7 @@ Composing rotations</h1>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> pi = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__math__constants_gad32687fc782ada2bb223abb7722ac694.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>());</div>
+<div class="line">  <span class="keyword">auto</span> pi = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>());</div>
 <div class="line">  std::array&lt;double, 3&gt; z{0., 0., 1.}, y{0., 1., 0.};</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> p = <a class="code hl_variable" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a>(pi/2, std::span(z));   <span class="comment">// quarter turn about z</span></div>
@@ -199,7 +199,7 @@ Interpolating between orientations</h1>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> pi = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__math__constants_gad32687fc782ada2bb223abb7722ac694.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>());</div>
+<div class="line">  <span class="keyword">auto</span> pi = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>());</div>
 <div class="line">  std::array&lt;double, 3&gt; z{0., 0., 1.};</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> q0 = <a class="code hl_variable" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a>(0.,   std::span(z));   <span class="comment">// no rotation</span></div>
@@ -223,7 +223,7 @@ Converting to and from other representations</h1>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> pi = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__math__constants_gad32687fc782ada2bb223abb7722ac694.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>());</div>
+<div class="line">  <span class="keyword">auto</span> pi = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>());</div>
 <div class="line">  std::array&lt;double, 3&gt; axis{0., 0., 1.};</div>
 <div class="line">  <span class="keyword">auto</span> q = <a class="code hl_variable" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a>(pi/3, std::span(axis));</div>
 <div class="line"> </div>

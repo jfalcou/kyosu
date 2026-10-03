@@ -189,7 +189,7 @@ Variables</h2></td></tr>
 <p><b>Return value</b></p>
 <ul>
 <li>For floating value input, returns \(0\) or \(\pi\) according to the non negativity of <span class="tt">z</span> (arg of minus zero is \(\pi\)).</li>
-<li>For complex value input, returns elementwise the argument of the complex number i.e. <span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/group__eve__math__invtrig_ga4e3cc734432c96af2f4e1bfb576ea504.html#ga4e3cc734432c96af2f4e1bfb576ea504">eve::atan2</a>[pedantic](<a class="el" href="group__ipart.html#gaff94a2685c6d030458b388a4a4079efe" title="Alias for kyosu::ipart.">imag(z)</a>,<a class="el" href="group__real.html#ga4121e4e64916c81e31b622b9b45c93fb">real(z)</a>)</span>.</li>
+<li>For complex value input, returns elementwise the argument of the complex number i.e. <span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/group__eve__math__invtrig.html#ga4e3cc734432c96af2f4e1bfb576ea504">eve::atan2</a>[pedantic](<a class="el" href="group__ipart.html#gaff94a2685c6d030458b388a4a4079efe" title="Alias for kyosu::ipart.">imag(z)</a>,<a class="el" href="group__real.html#ga4121e4e64916c81e31b622b9b45c93fb">real(z)</a>)</span>.</li>
 <li>For general <a class="el" href="structkyosu_1_1cayley__dickson.html" title="Cayley-Dickson algebra main abstraction It is built so that all operation over C, Q and other such al...">cayley_dickson</a>, returns \(\mathrm{atan2}(\mathrm{sign}(z_1)|\underline{z}|, z_0)\) where \(z_0\) is the real part of \(z\), \(z_1\) is the <span class="tt"><a class="el" href="group__ipart.html#gac538e6a794844977cba0f5043a990c99">ipart</a></span> of \(z\) and \(\underline{z}\) the <span class="tt"><a class="el" href="group__pure.html#gab1c81e9ddeb944ba56779a613452909b">pure</a></span> part of \(z\).<ul>
 <li>The radpi option provides a result in \(\pi\) multiples.</li>
 </ul>
@@ -211,7 +211,7 @@ Variables</h2></td></tr>
 <div class="line">  <span class="keyword">using </span>wide_ft = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;float, eve::fixed&lt;4&gt;</a>&gt;;</div>
 <div class="line">  wide_ft ref1 = {3.0f, 2.0f, 1.0f, 0.5f};</div>
 <div class="line">  wide_ft imf1 = {2.0f, -1.0, -5.0, 0.0};</div>
-<div class="line">  wide_ft ref2 = {0.0, -1.0, 2.0, <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__core__constants_ga34b67924fa53bec83dfc96b51bd8fe56.html#ga34b67924fa53bec83dfc96b51bd8fe56">eve::nan</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>())};</div>
+<div class="line">  wide_ft ref2 = {0.0, -1.0, 2.0, <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__core__constants.html#ga34b67924fa53bec83dfc96b51bd8fe56">eve::nan</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>())};</div>
 <div class="line">  <span class="keyword">auto</span> zc = <a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;wide_ft&gt;</a>(ref1, imf1);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;---- simd&quot;</span> &lt;&lt; std::endl</div>
@@ -226,7 +226,7 @@ Variables</h2></td></tr>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__cinf_html_ga0c9ef916832ff4cbfbf575bc77f4fb4f"><div class="ttname"><a href="group__cinf.html#ga0c9ef916832ff4cbfbf575bc77f4fb4f">kyosu::cinf</a></div><div class="ttdeci">constexpr auto cinf</div><div class="ttdef"><b>Definition</b> cinf.hpp:72</div></div>
-<div class="ttc" id="agroup__eve__core__constants_ga34b67924fa53bec83dfc96b51bd8fe56_html_ga34b67924fa53bec83dfc96b51bd8fe56"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__core__constants_ga34b67924fa53bec83dfc96b51bd8fe56.html#ga34b67924fa53bec83dfc96b51bd8fe56">eve::nan</a></div><div class="ttdeci">constexpr auto nan</div></div>
+<div class="ttc" id="agroup__eve__core__constants_html_ga34b67924fa53bec83dfc96b51bd8fe56"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__core__constants.html#ga34b67924fa53bec83dfc96b51bd8fe56">eve::nan</a></div><div class="ttdeci">constexpr auto nan</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 <div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
 <div class="ttc" id="astructeve_1_1wide_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></div></div>

@@ -42,7 +42,7 @@ var searchData=
   ['to_5frotation_5fmatrix_47',['to_rotation_matrix',['../group__to__rotation__matrix.html#ga50cf8709672a806974dc93f77c0d6e5b',1,'kyosu']]],
   ['to_5fsemipolar_48',['to_semipolar',['../group__to__semipolar.html#gafd4bfbd92bfffcca410f3b739923c49a',1,'kyosu']]],
   ['to_5fspherical_49',['to_spherical',['../group__to__spherical.html#gaff0907e49def12a25b3b86b06a10eb87',1,'kyosu']]],
-  ['traits_52',['Traits',['../group__traits.html',1,'']]],
+  ['traits_52',['Traits',['../group__traits.html',1,'Traits']]],
   ['traits_53',['traits',['../group__kyosu__traits.html',1,'Cayley-Dickson traits']]],
   ['trap_3a_20from_20dimension_2016_20division_20fails_70',['Second trap: from dimension 16, division fails',['../tutorial-beyond.html#autotoc_md47',1,'']]],
   ['trap_3a_20parentheses_20are_20load_20bearing_71',['First trap: parentheses are load-bearing',['../tutorial-beyond.html#autotoc_md46',1,'']]],

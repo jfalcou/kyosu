@@ -194,7 +194,7 @@ Variables</h2></td></tr>
 <li><span class="tt">m</span>: amplitude parameter ( \(0\le m\le 1\)).</li>
 <li><span class="tt">alpha </span>: modular angle in radian.</li>
 <li><span class="tt"><a class="el" href="group__k.html#gabb75241dcb99709608d07d0a94af3813">k</a></span>: elliptic modulus (eccentricity) .</li>
-<li><span class="tt">tol</span>: accuracy tolerance (by defaut <a class="elRef" href="https://jfalcou.github.io/eve/group__eve__core__fma__internal_ga331b89f386f0ee1b5b8fe337383df088.html#ga331b89f386f0ee1b5b8fe337383df088" title="eve::epsilon">epsilon</a>.</li>
+<li><span class="tt">tol</span>: accuracy tolerance (by defaut <a class="elRef" href="https://jfalcou.github.io/eve/group__eve__core__fma__internal.html#ga331b89f386f0ee1b5b8fe337383df088" title="eve::epsilon">epsilon</a>.</li>
 <li><span class="tt">c</span>: <a class="elRef" href="https://jfalcou.github.io/eve/concepteve_1_1conditional__expr.html" title="eve::conditional_expr">Conditional expression</a> masking the operation.</li>
 <li><span class="tt">l</span>: <a class="elRef" href="https://jfalcou.github.io/eve/concepteve_1_1logical__value.html" title="eve::logical_value">Logical value</a> masking the operation.</li>
 </ul>
@@ -227,14 +227,14 @@ Variables</h2></td></tr>
 <div class="line">  <span class="keyword">using </span>w_t = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;double, eve::fixed&lt;4&gt;</a>&gt;;</div>
 <div class="line">  <span class="keyword">auto</span> z = <a class="code hl_variable" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">kyosu::complex</a>(w_t(2.0, 1.0, 1.0, 0.0), w_t(1.0, 1.0, 0.0, 1.0));</div>
 <div class="line">  <span class="keyword">auto</span> m = w_t(0.5);</div>
-<div class="line">  <span class="keyword">auto</span> [f, e] = <a class="code hl_variable" href="#ga858bbc0cd82011e1911907d0d6cdf2cb">kyosu::ellint_fe</a>(z, <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__core__arithmetic_ga641aa98b8a2c05bf5bfb4907d15faf37.html#ga641aa98b8a2c05bf5bfb4907d15faf37">eve::sqrt</a>(m));</div>
+<div class="line">  <span class="keyword">auto</span> [f, e] = <a class="code hl_variable" href="#ga858bbc0cd82011e1911907d0d6cdf2cb">kyosu::ellint_fe</a>(z, <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__core__arithmetic.html#ga641aa98b8a2c05bf5bfb4907d15faf37">eve::sqrt</a>(m));</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; z               &quot;</span> &lt;&lt; z &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot; m               &quot;</span> &lt;&lt; m &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;f                &quot;</span> &lt;&lt; f &lt;&lt; std::endl;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;e                &quot;</span> &lt;&lt; e &lt;&lt; std::endl;</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__eve__core__arithmetic_ga641aa98b8a2c05bf5bfb4907d15faf37_html_ga641aa98b8a2c05bf5bfb4907d15faf37"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__core__arithmetic_ga641aa98b8a2c05bf5bfb4907d15faf37.html#ga641aa98b8a2c05bf5bfb4907d15faf37">eve::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div></div>
+<div class="ttc" id="agroup__eve__core__arithmetic_html_ga641aa98b8a2c05bf5bfb4907d15faf37"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__core__arithmetic.html#ga641aa98b8a2c05bf5bfb4907d15faf37">eve::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div></div>
 <div class="ttc" id="astructeve_1_1wide_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></div></div>
 </div><!-- fragment --> 
 </div>

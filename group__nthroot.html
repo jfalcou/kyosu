@@ -190,7 +190,7 @@ Variables</h2></td></tr>
 </ul>
 <p><b>Return value</b></p>
 <ul>
-<li>if the first parameter is floating the call will act as if they were converted to complex before call, unless the option <span class="tt">real_only</span> is used in which case the parameter must be a floating_value, the real part of the result will the same as an <a class="elRef" href="https://jfalcou.github.io/eve/group__eve__math__exp_ga9cf7e798d0bd35ae16a3588021c871e7.html#ga9cf7e798d0bd35ae16a3588021c871e7">eve::nthroot</a> and the result will be fnan if no real solution exists.</li>
+<li>if the first parameter is floating the call will act as if they were converted to complex before call, unless the option <span class="tt">real_only</span> is used in which case the parameter must be a floating_value, the real part of the result will the same as an <a class="elRef" href="https://jfalcou.github.io/eve/group__eve__math__exp.html#ga9cf7e798d0bd35ae16a3588021c871e7">eve::nthroot</a> and the result will be fnan if no real solution exists.</li>
 <li>the kth nth root of z, is. <span class="tt"><a class="el" href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">exp</a>((<a class="el" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">log(z)</a>+2*k*i*pi)/n)</span>. If not present k is taken as 0.</li>
 </ul>
 <dl class="section note"><dt>Note</dt><dd>if the first parameter is not real the option <span class="tt">real_only</span> has no effect.</dd></dl>
@@ -206,7 +206,7 @@ Variables</h2></td></tr>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">using </span>wi_t = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;unsigned int, eve::fixed&lt;4&gt;</a>&gt;;</div>
 <div class="line">  <span class="keyword">using </span>wf_t = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;float, eve::fixed&lt;4&gt;</a>&gt;;</div>
-<div class="line">  wi_t wn = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__core__constants_ga45b9b51c21e6aa1d7879dd2b68f886af.html#ga45b9b51c21e6aa1d7879dd2b68f886af">eve::iota</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;wi_t&gt;</a>()) + 1;</div>
+<div class="line">  wi_t wn = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__core__constants.html#ga45b9b51c21e6aa1d7879dd2b68f886af">eve::iota</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;wi_t&gt;</a>()) + 1;</div>
 <div class="line">  wf_t wf{5.0f, 2.3f, 1.2f, 0.0f};</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;wn                          &quot;</span> &lt;&lt; wn &lt;&lt; std::endl;</div>
@@ -219,7 +219,7 @@ Variables</h2></td></tr>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__eve__core__constants_ga45b9b51c21e6aa1d7879dd2b68f886af_html_ga45b9b51c21e6aa1d7879dd2b68f886af"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__core__constants_ga45b9b51c21e6aa1d7879dd2b68f886af.html#ga45b9b51c21e6aa1d7879dd2b68f886af">eve::iota</a></div><div class="ttdeci">constexpr auto iota</div></div>
+<div class="ttc" id="agroup__eve__core__constants_html_ga45b9b51c21e6aa1d7879dd2b68f886af"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__core__constants.html#ga45b9b51c21e6aa1d7879dd2b68f886af">eve::iota</a></div><div class="ttdeci">constexpr auto iota</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 <div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
 <div class="ttc" id="astructeve_1_1wide_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></div></div>
