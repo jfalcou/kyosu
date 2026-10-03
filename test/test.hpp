@@ -20,26 +20,21 @@
 #include <eve/wide.hpp>
 #include <kyosu/kyosu.hpp>
 
-namespace eve
+namespace tts
 {
-  template<typename T, typename N> inline bool compare_equal(wide<T, N> const& l, wide<T, N> const& r)
+  template<typename T, typename N> struct comparison<eve::wide<T, N>, eve::wide<T, N>>
   {
-    return eve::all(l == r);
-  }
+    static bool equal(eve::wide<T, N> const& l, eve::wide<T, N> const& r) { return eve::all(l == r); }
+  };
 
-  template<typename T> inline bool compare_equal(logical<T> const& l, logical<T> const& r)
+  template<typename T> struct comparison<eve::logical<T>, eve::logical<T>>
   {
-    if constexpr (eve::simd_value<T>) return eve::all(l == r);
-    else return l == r;
-  }
-}
-
-namespace eve::_
-{
-  template<typename T, typename V> auto as_value(callable_object<V> const& v)
-  {
-    return v(eve::as<T>{});
-  }
+    static bool equal(eve::logical<T> const& l, eve::logical<T> const& r)
+    {
+      if constexpr (eve::simd_value<T>) return eve::all(l == r);
+      else return l == r;
+    }
+  };
 }
 
 namespace kyosu
@@ -85,78 +80,80 @@ int main(int argc, char const** argv)
   return tts::report(0, 0);
 }
 
-namespace eve
+namespace tts
 {
-  template<typename T, typename N> inline double ulp_distance(eve::wide<T, N> const& l, eve::wide<T, N> const& r)
+  // A register is measured lane by lane, each lane through the trait of its element type.
+  template<typename T, typename N> struct precision<eve::wide<T, N>>
   {
-    double max_ulp = 0;
-    for (auto i = 0; i < l.size(); ++i) max_ulp = std::max(max_ulp, tts::ulp_check(T(l.get(i)), T(r.get(i))));
+    using wide_t = eve::wide<T, N>;
 
-    return max_ulp;
-  }
+    static double ulp(wide_t const& l, wide_t const& r)
+    {
+      double max_ulp = 0;
+      for (auto i = 0; i < l.size(); ++i) max_ulp = std::max(max_ulp, tts::ulp_check(T(l.get(i)), T(r.get(i))));
 
-  template<typename T, typename N> inline double relative_distance(eve::wide<T, N> const& l, eve::wide<T, N> const& r)
+      return max_ulp;
+    }
+
+    static double relative(wide_t const& l, wide_t const& r)
+    {
+      double max_ulp = 0;
+      for (auto i = 0; i < l.size(); ++i) max_ulp = std::max(max_ulp, tts::relative_check(T(l.get(i)), T(r.get(i))));
+
+      return max_ulp;
+    }
+
+    static double absolute(wide_t const& l, wide_t const& r)
+    {
+      double max_ulp = 0;
+      for (auto i = 0; i < l.size(); ++i) max_ulp = std::max(max_ulp, tts::absolute_check(T(l.get(i)), T(r.get(i))));
+
+      return max_ulp;
+    }
+
+    static bool ieee(wide_t const& l, wide_t const& r)
+    {
+      bool check = true;
+      for (auto i = 0; i < l.size(); ++i) check = check && tts::ieee_check(l.get(i), r.get(i));
+
+      return check;
+    }
+  };
+
+  template<kyosu::concepts::cayley_dickson T> struct precision<T>
   {
-    double max_ulp = 0;
-    for (auto i = 0; i < l.size(); ++i) max_ulp = std::max(max_ulp, tts::relative_check(T(l.get(i)), T(r.get(i))));
+    static bool ieee(T const& l, T const& r)
+    {
+      return kumi::all_of(kumi::map([](auto a, auto b) { return tts::ieee_check(a, b); }, l, r));
+    }
 
-    return max_ulp;
-  }
+    // Two nans, or two infinities of the same sign, are the same value, as they are for the absolute
+    // distance below and for TTS on scalars; reldist alone would answer nan.
+    static double relative(T const& l, T const& r)
+    {
+      if (ieee(l, r)) return 0.0;
+      else return kyosu::reldist[eve::numeric](l, r);
+    }
 
-  template<typename T, typename N> inline double absolute_distance(eve::wide<T, N> const& l, eve::wide<T, N> const& r)
+    static double absolute(T const& l, T const& r)
+    {
+      if (ieee(l, r)) return 0.0;
+      else return kyosu::dist(l, r);
+    }
+  };
+
+  // One specialization for both: a register of Cayley-Dickson values satisfies the two concepts.
+  template<typename T>
+  requires(eve::simd_value<T> || kyosu::concepts::cayley_dickson<T>)
+  struct display<T>
   {
-    double max_ulp = 0;
-    for (auto i = 0; i < l.size(); ++i) max_ulp = std::max(max_ulp, tts::absolute_check(T(l.get(i)), T(r.get(i))));
-
-    return max_ulp;
-  }
-
-  template<typename T, typename N> inline bool ieee_equal(eve::wide<T, N> const& l, eve::wide<T, N> const& r)
-  {
-    bool check = true;
-    for (auto i = 0; i < l.size(); ++i) check = check && tts::ieee_check(l.get(i), r.get(i));
-
-    return check;
-  }
-}
-
-namespace eve
-{
-  template<simd_value V> inline tts::text to_text(V const& v)
-  {
-    std::ostringstream ss;
-    ss << v;
-    return tts::text(ss.str().c_str());
-  }
-}
-
-namespace kyosu
-{
-  template<kyosu::concepts::cayley_dickson T> inline tts::text to_text(T const& z)
-  {
-    std::ostringstream ss;
-    ss << z;
-    return tts::text(ss.str().c_str());
-  }
-
-  template<kyosu::concepts::cayley_dickson T> inline bool ieee_equal(T const& l, T const& r)
-  {
-    return kumi::all_of(kumi::map([](auto a, auto b) { return tts::ieee_check(a, b); }, l, r));
-  }
-
-  // Two nans, or two infinities of the same sign, are the same value, as they are for the absolute
-  // distance below and for TTS on scalars; reldist alone would answer nan.
-  template<kyosu::concepts::cayley_dickson T> double relative_distance(T const& l, T const& r)
-  {
-    if (ieee_equal(l, r)) return 0.0;
-    else return kyosu::reldist[eve::numeric](l, r);
-  }
-
-  template<kyosu::concepts::cayley_dickson T> double absolute_distance(T const& l, T const& r)
-  {
-    if (ieee_equal(l, r)) return 0.0;
-    else return kyosu::dist(l, r);
-  }
+    static text render(T const& v)
+    {
+      std::ostringstream ss;
+      ss << v;
+      return text(ss.str().c_str());
+    }
+  };
 }
 
 namespace tts
@@ -225,14 +222,17 @@ namespace tts
   //================================================================================================
   // Customization point for argument building
   //================================================================================================
-  template<eve::simd_value T> auto produce(type<T> const&, auto g, auto... args)
+  template<eve::simd_value T> struct generation<T>
   {
-    using e_t = eve::element_type_t<T>;
-    auto data = produce(type<std::array<e_t, T::size()>>{}, g, args...);
+    static auto make(auto g, auto... args)
+    {
+      using e_t = eve::element_type_t<T>;
+      auto data = produce(type<std::array<e_t, T::size()>>{}, g, args...);
 
-    using v_t = typename decltype(data)::value_type;
-    eve::as_wide_t<v_t, eve::cardinal_t<T>> that = eve::load(&data[0], eve::cardinal_t<T>{});
+      using v_t = typename decltype(data)::value_type;
+      eve::as_wide_t<v_t, eve::cardinal_t<T>> that = eve::load(&data[0], eve::cardinal_t<T>{});
 
-    return poison(that);
-  }
+      return poison(that);
+    }
+  };
 }
