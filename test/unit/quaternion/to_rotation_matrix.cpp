@@ -37,14 +37,14 @@ TTS_CASE_WITH("Check behavior of to_rotation_matrix on wide",
   std::array<T, 3> ref{kyosu::ipart(refq), kyosu::jpart(refq), kyosu::kpart(refq)};
   for (int j = 0; j < 3; ++j)
   {
-    TTS_RELATIVE_EQUAL(res[j], ref[j], 0.0002);
+    TTS_RELATIVE_EQUAL(res[j], ref[j], 0.000002);
   }
   auto q1 = wq_t(a0, a1, a2, a3);
   auto m1 = kyosu::to_rotation_matrix(q1);
   auto res1 = prod(m1, v);
   for (int j = 0; j < 3; ++j)
   {
-    TTS_RELATIVE_EQUAL(res1[j], ref[j], 0.0002);
+    TTS_RELATIVE_EQUAL(res1[j], ref[j], 0.000002);
   }
 };
 

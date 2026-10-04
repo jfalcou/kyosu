@@ -28,7 +28,7 @@ TTS_CASE_WITH("Check behavior of sqr_abs on scalar",
     auto e = a0[i];
     auto f = a1[i];
 
-    TTS_RELATIVE_EQUAL(kyosu::sqr_abs(kc_t(e, f)), std::norm(c_t(e, f)), tts::prec<T>());
+    TTS_RELATIVE_EQUAL(kyosu::sqr_abs(kc_t(e, f)), std::norm(c_t(e, f)), tts::prec<T>(1.0e-5, 1.0e-8));
   }
 };
 
@@ -39,5 +39,5 @@ TTS_CASE_WITH("Check behavior of sqrt on wide", kyosu::simd_real_types, tts::ran
   using ke_t = kyosu::complex_t<e_t>;
   using c_t = std::complex<eve::element_type_t<e_t>>;
   T e([&](auto i, auto) { return std::norm(c_t(a0.get(i), a1.get(i))); });
-  TTS_RELATIVE_EQUAL(kyosu::sqr_abs(ke_t{a0, a1}), e, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sqr_abs(ke_t{a0, a1}), e, tts::prec<T>(1.0e-5, 1.0e-8));
 };

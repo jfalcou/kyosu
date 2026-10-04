@@ -37,7 +37,8 @@ TTS_CASE_WITH("Check kyosu::acospi over quaternion",
 
   auto cond = eve::is_ltz(a0);
 
-  TTS_RELATIVE_EQUAL(kyosu::acospi[cond][kyosu::real_only](r), kyosu::if_else(cond, eve::acospi(r), r), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::acospi[cond][kyosu::real_only](r), kyosu::if_else(cond, eve::acospi(r), r),
+                     tts::prec<T>(1.0e-5, 1.0e-8));
   TTS_RELATIVE_EQUAL(kyosu::acospi[cond](r), kyosu::if_else(cond, kyosu::acospi(r), ce_t(r)), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::acospi[cond](c), kyosu::if_else(cond, kyosu::acospi(c), c), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::acospi[cond](q), kyosu::if_else(cond, kyosu::acospi(q), q), tts::prec<T>());

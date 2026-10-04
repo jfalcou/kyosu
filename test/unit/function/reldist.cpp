@@ -31,9 +31,9 @@ TTS_CASE_WITH("Check kyosu::reldist over complex",
   auto c1 = kyosu::complex(r1, i1);
   using kyosu::abs;
   auto one = eve::one(eve::as(r0));
-  TTS_RELATIVE_EQUAL(kyosu::reldist(c0, c1), abs(c0 - c1) / eve::max(abs(c0), abs(c1), one), 1e-7);
-  TTS_RELATIVE_EQUAL(kyosu::reldist(r0, c1), abs(r0 - c1) / eve::max(abs(r0), abs(c1), one), 1e-7);
-  TTS_RELATIVE_EQUAL(kyosu::reldist(c0, r1), abs(c0 - r1) / eve::max(abs(c0), abs(r1), one), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::reldist(c0, c1), abs(c0 - c1) / eve::max(abs(c0), abs(c1), one), 1e-9);
+  TTS_RELATIVE_EQUAL(kyosu::reldist(r0, c1), abs(r0 - c1) / eve::max(abs(r0), abs(c1), one), 1e-9);
+  TTS_RELATIVE_EQUAL(kyosu::reldist(c0, r1), abs(c0 - r1) / eve::max(abs(c0), abs(r1), one), 1e-9);
   TTS_IEEE_EQUAL(kyosu::reldist(kyosu::valmax(eve::as<e_t>()), kyosu::valmin(eve::as<e_t>())),
                  eve::inf(eve::as<e_t>()));
   TTS_IEEE_EQUAL(kyosu::reldist(kyosu::nan(eve::as<e_t>()), kyosu::valmin(eve::as<e_t>())), eve::nan(eve::as<e_t>()));
@@ -65,5 +65,5 @@ TTS_CASE_WITH("Check kyosu::reldist over quaternion",
   auto q1 = type(r1, i1, j1, k1);
   using kyosu::abs;
   auto one = eve::one(eve::as(r0));
-  TTS_RELATIVE_EQUAL(kyosu::reldist(q0, q1), abs(q0 - q1) / eve::max(abs(q0), abs(q1), one), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::reldist(q0, q1), abs(q0 - q1) / eve::max(abs(q0), abs(q1), one), 1e-9);
 };

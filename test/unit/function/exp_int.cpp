@@ -17,6 +17,7 @@ TTS_CASE_TPL("Check exp_int ", kyosu::scalar_real_types)
   if constexpr (sizeof(T) == 8)
   {
     auto pr = tts::prec<T>(4.0e-3, 1.0e-8);
+    auto real_pr = tts::prec<T>(4.0e-5, 1.0e-10);
     using r_t = kyosu::cayley_dickson<T, 2>;
     r_t I = r_t(0.0, 1.0);
     auto cinf = kyosu::cinf(eve::as<r_t>());
@@ -49,18 +50,18 @@ TTS_CASE_TPL("Check exp_int ", kyosu::scalar_real_types)
     TTS_RELATIVE_EQUAL(r, res[7], pr);
 
     TTS_RELATIVE_EQUAL(kyosu::exp_int(r_t(0.0)), cinf, pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(1.0), kyosu::real(kyosu::exp_int(r_t(1.0))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0), kyosu::real(kyosu::exp_int(r_t(2.0))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 1.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(1.0))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 9.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(9.0))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 15.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(15.0))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 18.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(18.0))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 18.99), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(18.99))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 20.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(20.0))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 25.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(25.0))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 49.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(49.0))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 51.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(51.0))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 500.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(500.0))), pr);
-    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 1000.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(1000.0))), pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(1.0), kyosu::real(kyosu::exp_int(r_t(1.0))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0), kyosu::real(kyosu::exp_int(r_t(2.0))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 1.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(1.0))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 9.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(9.0))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 15.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(15.0))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 18.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(18.0))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 18.99), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(18.99))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 20.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(20.0))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 25.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(25.0))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 49.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(49.0))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 51.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(51.0))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 500.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(500.0))), real_pr);
+    TTS_RELATIVE_EQUAL(kyosu::exp_int(2.0, 1000.0), kyosu::real(kyosu::exp_int(r_t(2.0), r_t(1000.0))), real_pr);
   }
 };

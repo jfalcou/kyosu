@@ -17,8 +17,8 @@ TTS_CASE_WITH("Check kyosu::sinh over quaternion",
 
 )
 <typename T>(T r, T i, T j, T k){{auto [s, c] = kyosu::sinhcosh(r);
-TTS_RELATIVE_EQUAL(s, kyosu::sinh(r), tts::prec<T>());
-TTS_RELATIVE_EQUAL(c, kyosu::cosh(r), 2e-5);
+TTS_RELATIVE_EQUAL(s, kyosu::sinh(r), tts::prec<T>(1.0e-5, 1.0e-8));
+TTS_RELATIVE_EQUAL(c, kyosu::cosh(r), 2e-7);
 }
 {
   using ke_t = kyosu::complex_t<T>;

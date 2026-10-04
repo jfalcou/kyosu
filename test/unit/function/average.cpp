@@ -18,7 +18,8 @@ TTS_CASE_WITH("Check kyosu::average over real", kyosu::real_types, tts::randoms(
   TTS_EQUAL(kyosu::average(r0, r1), eve::average(r0, r1));
   TTS_EQUAL(kyosu::average(r0, r1, r1), eve::average(r0, r1, r1));
   auto cond = eve::is_ltz(r0);
-  TTS_RELATIVE_EQUAL(kyosu::average[cond](r0, r1), kyosu::if_else(cond, (r0 + r1) * T(0.5), r0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::average[cond](r0, r1), kyosu::if_else(cond, (r0 + r1) * T(0.5), r0),
+                     tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check kyosu::average over complex",

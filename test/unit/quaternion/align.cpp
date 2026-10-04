@@ -29,9 +29,9 @@ TTS_CASE_WITH("Check behavior of align on wide",
   norm(v0);
   norm(v1);
   auto qv0 = kyosu::rotate_vec(q, std::span(v0));
-  TTS_RELATIVE_EQUAL(qv0[0], v1[0], 1.0e-4);
-  TTS_RELATIVE_EQUAL(qv0[1], v1[1], 1.0e-4);
-  TTS_RELATIVE_EQUAL(qv0[2], v1[2], 1.0e-4);
+  TTS_RELATIVE_EQUAL(qv0[0], v1[0], 1.0e-6);
+  TTS_RELATIVE_EQUAL(qv0[1], v1[1], 1.0e-6);
+  TTS_RELATIVE_EQUAL(qv0[2], v1[2], 1.0e-6);
 };
 
 //======================================================================================================================

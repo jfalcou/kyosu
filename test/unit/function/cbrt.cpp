@@ -46,7 +46,8 @@ TTS_CASE_WITH("Check kyosu::cbrt over real", kyosu::simd_real_types, tts::random
   TTS_RELATIVE_EQUAL(kyosu::cbrt(r0, n), kyosu::cbrt(r0) * kyosu::exp_ipi(fn * 2 / 3), tts::prec<T>());
   auto cond = eve::is_ltz(r0);
 
-  TTS_RELATIVE_EQUAL(kyosu::cbrt[cond][kyosu::real_only](r0), kyosu::if_else(cond, eve::cbrt(r0), r0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::cbrt[cond][kyosu::real_only](r0), kyosu::if_else(cond, eve::cbrt(r0), r0),
+                     tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check kyosu::cbrt over complex", kyosu::simd_real_types, tts::randoms(-10, 10), tts::randoms(-10, 10))

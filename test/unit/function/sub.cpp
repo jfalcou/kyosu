@@ -15,10 +15,10 @@ TTS_CASE_WITH(
 <typename T>(T r0, T r1, T r2)
 {
   TTS_EQUAL(kyosu::sub(r0), r0);
-  TTS_RELATIVE_EQUAL(kyosu::sub(r0, r1), eve::sub(r0, r1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::sub(r0, r1, r2), eve::sub(r0, r1, r2), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::sub[eve::kahan](r0, r1, r2), eve::sub(r0, r1, r2), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::sub(kumi::tuple{r0, r1, r2}), eve::sub(r0, r1, r2), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::sub(r0, r1), eve::sub(r0, r1), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::sub(r0, r1, r2), eve::sub(r0, r1, r2), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::sub[eve::kahan](r0, r1, r2), eve::sub(r0, r1, r2), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::sub(kumi::tuple{r0, r1, r2}), eve::sub(r0, r1, r2), tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check kyosu::sub over complex",
