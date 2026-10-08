@@ -20,9 +20,9 @@ TTS_CASE_WITH("Check kyosu::dot over real",
 {
   TTS_EQUAL(kyosu::dot(r0, r1), r0 * r1);
   auto d = kyosu::dot(r0, r1, r2, r3);
-  TTS_RELATIVE_EQUAL(d, r0 * kyosu::conj(r2) + r1 * kyosu::conj(r3), 1e-7);
-  TTS_RELATIVE_EQUAL(d, kyosu::dot(kumi::make_tuple(r0, r1, r2, r3)), 1e-7);
-  TTS_RELATIVE_EQUAL(d, kyosu::dot(kumi::make_tuple(r0, r1), kumi::make_tuple(r2, r3)), 1e-7);
+  TTS_RELATIVE_EQUAL(d, r0 * kyosu::conj(r2) + r1 * kyosu::conj(r3), 1e-9);
+  TTS_RELATIVE_EQUAL(d, kyosu::dot(kumi::make_tuple(r0, r1, r2, r3)), 1e-9);
+  TTS_RELATIVE_EQUAL(d, kyosu::dot(kumi::make_tuple(r0, r1), kumi::make_tuple(r2, r3)), 1e-9);
 };
 
 TTS_CASE_WITH("Check kyosu::dot over complex",

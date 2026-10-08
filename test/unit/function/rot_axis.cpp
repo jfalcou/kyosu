@@ -21,9 +21,9 @@ TTS_CASE_WITH("Check behavior of rot_axis on wide",
   auto ax = kyosu::rot_axis(uq);
   auto axis = kumi::get<1>(kyosu::to_angle_axis(uq));
 
-  TTS_RELATIVE_EQUAL(ax[0], axis[0], 1.0e-5);
-  TTS_RELATIVE_EQUAL(ax[1], axis[1], 1.0e-5);
-  TTS_RELATIVE_EQUAL(ax[2], axis[2], 1.0e-5);
+  TTS_RELATIVE_EQUAL(ax[0], axis[0], 1.0e-7);
+  TTS_RELATIVE_EQUAL(ax[1], axis[1], 1.0e-7);
+  TTS_RELATIVE_EQUAL(ax[2], axis[2], 1.0e-7);
 };
 
 //======================================================================================================================

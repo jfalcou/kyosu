@@ -12,7 +12,7 @@ TTS_CASE_WITH("Check kyosu::chi over real", kyosu::real_types, tts::randoms(-10,
 <typename T>(T data)
 {
   auto b = [](auto z) { return kyosu::abs(z) < 4; };
-  TTS_RELATIVE_EQUAL(kyosu::chi(data, b), eve::chi(data, b), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::chi(data, b), eve::chi(data, b), tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check kyosu::chi over complex", kyosu::real_types, tts::randoms(-10, 10), tts::randoms(-10, 10))

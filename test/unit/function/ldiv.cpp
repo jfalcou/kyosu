@@ -14,7 +14,7 @@ TTS_CASE_WITH("Check kyosu::ldiv over real", kyosu::real_types, tts::randoms(-10
 <typename T>(T r0, T r1)
 {
   TTS_EQUAL(kyosu::ldiv(r0), eve::rec(r0));
-  TTS_RELATIVE_EQUAL(kyosu::ldiv(r0, r1), r1 / r0, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::ldiv(r0, r1), r1 / r0, tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check kyosu::ldiv over complex",

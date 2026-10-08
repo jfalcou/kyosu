@@ -52,7 +52,7 @@ TTS_CASE_WITH("Check kyosu::rising_factorial over cayley_dickson",
   auto cond = eve::is_ltz(a0);
 
   TTS_RELATIVE_EQUAL(kyosu::rising_factorial[cond][kyosu::real_only](r0, r1),
-                     kyosu::if_else(cond, eve::rising_factorial(r0, r1), r0), tts::prec<T>());
+                     kyosu::if_else(cond, eve::rising_factorial(r0, r1), r0), tts::prec<T>(1.0e-5, 1.0e-8));
   TTS_RELATIVE_EQUAL(kyosu::rising_factorial[cond](r0, r1),
                      kyosu::if_else(cond, kyosu::rising_factorial(r0, r1), kyosu::complex(r0)), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::rising_factorial[cond](c0, c1), kyosu::if_else(cond, kyosu::rising_factorial(c0, c1), c0),

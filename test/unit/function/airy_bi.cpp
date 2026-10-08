@@ -43,10 +43,10 @@ TTS_CASE_WITH("Check kyosu::cyl_bessel_j0 over real", kyosu::scalar_real_types, 
       auto res = kyosu::complex(reres[i], imres[i]);
       TTS_RELATIVE_EQUAL(kyosu::airy_bi(c), res, 500 * tts::prec<T>()) << i << " <- " << c << '\n';
       TTS_RELATIVE_EQUAL(kyosu::airy_bi(re[i]), kyosu::real(kyosu::airy_bi(kyosu::complex(re[i], e_t(0.0)))),
-                         tts::prec<T>())
+                         tts::prec<T>(1.0e-5, 1.0e-8))
         << re[i] << '\n';
       TTS_RELATIVE_EQUAL(kyosu::airy_bi(im[i]), kyosu::real(kyosu::airy_bi(kyosu::complex(im[i], e_t(0.0)))),
-                         tts::prec<T>())
+                         tts::prec<T>(1.0e-5, 1.0e-8))
         << im[i] << '\n';
     }
   }

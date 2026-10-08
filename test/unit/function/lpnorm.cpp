@@ -35,8 +35,9 @@ TTS_CASE_WITH("Check kyosu::lpnorm over complex",
   using T = decltype(r0);
   auto c0 = kyosu::complex(r0, i0);
   auto c1 = kyosu::complex(r1, i1);
-  TTS_RELATIVE_EQUAL(kyosu::lpnorm(p, c0, c1), eve::lpnorm(p, kyosu::abs(c0), kyosu::abs(c1)), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::lpnorm(2, c0, c1), kyosu::hypot(c0, c1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lpnorm(p, c0, c1), eve::lpnorm(p, kyosu::abs(c0), kyosu::abs(c1)),
+                     tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::lpnorm(2, c0, c1), kyosu::hypot(c0, c1), tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check kyosu::lpnorm over quaternion",
@@ -57,5 +58,6 @@ TTS_CASE_WITH("Check kyosu::lpnorm over quaternion",
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0, i0, j0, k0);
   auto q1 = type(r1, i1, j1, k1);
-  TTS_RELATIVE_EQUAL(kyosu::lpnorm(p, q0, q1), eve::lpnorm(p, kyosu::abs(q0), kyosu::abs(q1)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::lpnorm(p, q0, q1), eve::lpnorm(p, kyosu::abs(q0), kyosu::abs(q1)),
+                     tts::prec<T>(1.0e-5, 1.0e-8));
 };

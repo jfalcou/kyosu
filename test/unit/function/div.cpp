@@ -14,9 +14,9 @@ TTS_CASE_WITH(
 )
 <typename T>(T r0, T r1, T r2)
 {
-  TTS_RELATIVE_EQUAL(kyosu::div(r0, r1), eve::div(r0, r1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::div(r0, r1, r2), eve::div(r0, r1, r2), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::div(kumi::tuple{r0, r1, r2}), eve::div(r0, r1, r2), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::div(r0, r1), eve::div(r0, r1), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::div(r0, r1, r2), eve::div(r0, r1, r2), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::div(kumi::tuple{r0, r1, r2}), eve::div(r0, r1, r2), tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check kyosu::div over complex",

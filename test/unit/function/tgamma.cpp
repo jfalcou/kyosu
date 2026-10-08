@@ -25,11 +25,11 @@ TTS_CASE_WITH("Check kyosu::tgamma over quaternion",
   auto c = ce_t(a0, a1);
   auto q = qe_t(a0, a1, a2, a3);
 
-  TTS_RELATIVE_EQUAL(kyosu::tgamma(kyosu::inc(r)), r * kyosu::tgamma(r), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::tgamma(kyosu::inc(r)), r * kyosu::tgamma(r), tts::prec<T>(1.0e-5, 1.0e-8));
   TTS_RELATIVE_EQUAL(kyosu::tgamma(kyosu::inc(c)), c * kyosu::tgamma(c), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::tgamma(kyosu::inc(q)), q * kyosu::tgamma(q), tts::prec<T>());
   auto cpl = [](auto z) { return kyosu::tgamma(kyosu::oneminus(z)) * kyosu::tgamma(z) * kyosu::sinpi(z); };
-  TTS_RELATIVE_EQUAL(cpl(r), kyosu::pi(eve::as(r)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(cpl(r), kyosu::pi(eve::as(r)), tts::prec<T>(1.0e-5, 1.0e-8));
   TTS_RELATIVE_EQUAL(cpl(c), kyosu::pi(eve::as(c)), tts::prec<T>());
   TTS_RELATIVE_EQUAL(cpl(q), kyosu::pi(eve::as(q)), tts::prec<T>());
 };

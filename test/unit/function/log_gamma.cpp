@@ -36,7 +36,7 @@ TTS_CASE_WITH("Check kyosu::tgamma over quaternion",
   auto cond = eve::is_ltz(a0);
 
   TTS_RELATIVE_EQUAL(kyosu::log_gamma[cond][kyosu::real_only](r), kyosu::if_else(cond, eve::log_gamma(r), r),
-                     tts::prec<T>());
+                     tts::prec<T>(1.0e-5, 1.0e-8));
   TTS_RELATIVE_EQUAL(kyosu::log_gamma[cond](r), kyosu::if_else(cond, kyosu::log_gamma(r), ce_t(r)), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::log_gamma[cond](c), kyosu::if_else(cond, kyosu::log_gamma(c), c), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::log_gamma[cond](q), kyosu::if_else(cond, kyosu::log_gamma(q), q), tts::prec<T>());

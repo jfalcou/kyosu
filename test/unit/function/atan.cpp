@@ -37,7 +37,8 @@ TTS_CASE_WITH("Check kyosu::atan over quaternion",
 
   auto cond = eve::is_ltz(a0);
 
-  TTS_RELATIVE_EQUAL(kyosu::atan[cond][kyosu::real_only](r), kyosu::if_else(cond, eve::atan(r), r), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::atan[cond][kyosu::real_only](r), kyosu::if_else(cond, eve::atan(r), r),
+                     tts::prec<T>(1.0e-5, 1.0e-8));
   TTS_RELATIVE_EQUAL(kyosu::atan[cond](r), kyosu::if_else(cond, kyosu::atan(r), ce_t(r)), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::atan[cond](c), kyosu::if_else(cond, kyosu::atan(c), c), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::atan[cond](q), kyosu::if_else(cond, kyosu::atan(q), q), tts::prec<T>());
