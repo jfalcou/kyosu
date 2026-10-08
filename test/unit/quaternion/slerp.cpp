@@ -21,8 +21,8 @@ TTS_CASE_WITH("Check that slerp reaches both ends of the arc",
 
   // q and -q denote the same rotation, and slerp takes the shortest arc, so the ends are
   // recovered up to sign. |dot| is what distinguishes a rotation from its representation.
-  TTS_RELATIVE_EQUAL(kyosu::abs(kyosu::dot(kyosu::slerp(z0, z1, T(0)), z0)), T(1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::abs(kyosu::dot(kyosu::slerp(z0, z1, T(1)), z1)), T(1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::abs(kyosu::dot(kyosu::slerp(z0, z1, T(0)), z0)), T(1), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::abs(kyosu::dot(kyosu::slerp(z0, z1, T(1)), z1)), T(1), tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check that slerp walks the arc at constant angular speed", kyosu::real_types, tts::randoms(0.1, 1.0))

@@ -14,9 +14,9 @@ TTS_CASE_WITH("Check kyosu::mul over real", kyosu::real_types, tts::randoms(1, 1
 <typename T>(T r0, T r1)
 {
   TTS_EQUAL(kyosu::mul(r0), r0);
-  TTS_RELATIVE_EQUAL(kyosu::mul(r0, r1), eve::mul(r0, r1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::mul(r0, r1, r1), eve::mul(r0, r1, r1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::mul(kumi::tuple{r0, r1, r1}), eve::mul(r0, r1, r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::mul(r0, r1), eve::mul(r0, r1), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::mul(r0, r1, r1), eve::mul(r0, r1, r1), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::mul(kumi::tuple{r0, r1, r1}), eve::mul(r0, r1, r1), tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check kyosu::mul over complex",

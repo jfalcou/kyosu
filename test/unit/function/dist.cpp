@@ -41,9 +41,9 @@ TTS_CASE_WITH("Check kyosu::dist over complex",
 {
   auto c0 = kyosu::complex(r0, i0);
   auto c1 = kyosu::complex(r1, i1);
-  TTS_RELATIVE_EQUAL(kyosu::dist(c0, r1), kyosu::abs(c0 - r1), 1e-7);
-  TTS_RELATIVE_EQUAL(kyosu::dist(r0, c1), kyosu::abs(r0 - c1), 1e-7);
-  TTS_RELATIVE_EQUAL(kyosu::dist(c0, c1), kyosu::abs(c0 - c1), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::dist(c0, r1), kyosu::abs(c0 - r1), 1e-9);
+  TTS_RELATIVE_EQUAL(kyosu::dist(r0, c1), kyosu::abs(r0 - c1), 1e-9);
+  TTS_RELATIVE_EQUAL(kyosu::dist(c0, c1), kyosu::abs(c0 - c1), 1e-9);
   using e_t = decltype(r0);
   using c_t = decltype(c0);
   TTS_IEEE_EQUAL(kyosu::dist(c_t(kyosu::valmax(eve::as<e_t>())), c_t(kyosu::valmin(eve::as<e_t>()))),
@@ -67,5 +67,5 @@ TTS_CASE_WITH("Check kyosu::dist over quaternion",
   using type = kyosu::quaternion_t<T>;
   auto q0 = type(r0, i0, j0, k0);
   auto q1 = type(r1, i1, j1, k1);
-  TTS_RELATIVE_EQUAL(kyosu::dist(q0, q1), kyosu::abs(q0 - q1), 1e-7);
+  TTS_RELATIVE_EQUAL(kyosu::dist(q0, q1), kyosu::abs(q0 - q1), 1e-9);
 };

@@ -20,8 +20,8 @@ TTS_CASE_WITH("Check kyosu::reverse_horner over real",
 {
   using T = decltype(r0);
   kyosu::coefficients a{r2, r1, r0};
-  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, r2, r1, r0), (r0 * x + r1) * x + r2, tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, a), (r0 * x + r1) * x + r2, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, r2, r1, r0), (r0 * x + r1) * x + r2, tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::reverse_horner(x, a), (r0 * x + r1) * x + r2, tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check kyosu::reverse_horner over complex",

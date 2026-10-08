@@ -22,7 +22,7 @@ TTS_CASE_WITH("Check behavior of rotate_vec on wide",
   auto q = kyosu::from_angle_axis(eve::pi(eve::as(a0)), std::span<T, 3>(axis));
   auto vr = kyosu::rotate_vec(q, std::span<T, 3>(v));
   auto vr2 = kyosu::rotate_vec(q, std::span<T, 3>(vr));
-  TTS_RELATIVE_EQUAL(v[0], vr2[0], 1.0e-4);
+  TTS_RELATIVE_EQUAL(v[0], vr2[0], 1.0e-6);
 };
 
 //======================================================================================================================

@@ -14,10 +14,10 @@ TTS_CASE_WITH("Check kyosu::add over real", kyosu::real_types, tts::randoms(-10,
 <typename T>(T r0, T r1)
 {
   TTS_EQUAL(kyosu::add(r0), r0);
-  TTS_RELATIVE_EQUAL(kyosu::add(r0, r1), eve::add(r0, r1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::add(r0, r1, r1), eve::add(r0, r1, r1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::add[eve::kahan](r0, r1, r1), eve::add(r0, r1, r1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::add(kumi::tuple{r0, r1, r1}), eve::add(r0, r1, r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::add(r0, r1), eve::add(r0, r1), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::add(r0, r1, r1), eve::add(r0, r1, r1), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::add[eve::kahan](r0, r1, r1), eve::add(r0, r1, r1), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::add(kumi::tuple{r0, r1, r1}), eve::add(r0, r1, r1), tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check kyosu::add over complex",

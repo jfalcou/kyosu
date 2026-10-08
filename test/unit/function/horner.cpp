@@ -20,17 +20,17 @@ TTS_CASE_WITH("Check kyosu::horner over real",
 {
   using T = decltype(r0);
   kyosu::coefficients a{r0, r1, r2};
-  TTS_RELATIVE_EQUAL(kyosu::horner(x, r0, r1, r2), (r0 * x + r1) * x + r2, tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0, r1, r2), (r0 * x + r1) * x + r2, tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::horner(x, a), (r0 * x + r1) * x + r2, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, r0, r1, r2), (r0 * x + r1) * x + r2, tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0, r1, r2), (r0 * x + r1) * x + r2, tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, a), (r0 * x + r1) * x + r2, tts::prec<T>(1.0e-5, 1.0e-8));
   kyosu::coefficients b{r0, r1};
-  TTS_RELATIVE_EQUAL(kyosu::horner(x, r0, r1), (r0 * x + r1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0, r1), (r0 * x + r1), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::horner(x, b), (r0 * x + r1), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, r0, r1), (r0 * x + r1), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0, r1), (r0 * x + r1), tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, b), (r0 * x + r1), tts::prec<T>(1.0e-5, 1.0e-8));
   kyosu::coefficients c{r0};
-  TTS_RELATIVE_EQUAL(kyosu::horner(x, r0), r0, tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0), r0, tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::horner(x, c), r0, tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, r0), r0, tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::horner[eve::right](x, r0), r0, tts::prec<T>(1.0e-5, 1.0e-8));
+  TTS_RELATIVE_EQUAL(kyosu::horner(x, c), r0, tts::prec<T>(1.0e-5, 1.0e-8));
 };
 
 TTS_CASE_WITH("Check kyosu::horner over complex",

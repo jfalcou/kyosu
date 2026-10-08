@@ -38,7 +38,8 @@ TTS_CASE_WITH("Check kyosu::exp over quaternion",
 
   auto cond = eve::is_ltz(a0);
 
-  TTS_RELATIVE_EQUAL(kyosu::log10[cond][kyosu::real_only](r), kyosu::if_else(cond, eve::log10(r), r), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::log10[cond][kyosu::real_only](r), kyosu::if_else(cond, eve::log10(r), r),
+                     tts::prec<T>(1.0e-5, 1.0e-8));
   TTS_RELATIVE_EQUAL(kyosu::log10[cond](r), kyosu::if_else(cond, kyosu::log10(r), ce_t(r)), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::log10[cond](c), kyosu::if_else(cond, kyosu::log10(c), c), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::log10[cond](q), kyosu::if_else(cond, kyosu::log10(q), q), tts::prec<T>());

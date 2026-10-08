@@ -55,5 +55,6 @@ TTS_CASE_WITH("Check behavior of cos conditional on wide",
 
   TTS_RELATIVE_EQUAL(kyosu::cos[a0 > a1](ke_t{a0, a1}), kyosu::if_else(a0 > a1, kyosu::cos(ke_t{a0, a1}), ke_t{a0, a1}),
                      tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::cos[a0 > a1](a0), kyosu::if_else(a0 > a1, kyosu::cos(a0), a0), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::cos[a0 > a1](a0), kyosu::if_else(a0 > a1, kyosu::cos(a0), a0),
+                     tts::prec<T>(1.0e-5, 1.0e-8));
 };

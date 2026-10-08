@@ -38,7 +38,8 @@ TTS_CASE_WITH("Check kyosu::agd over cayley_dickson",
 
   auto cond = eve::is_ltz(a0);
 
-  TTS_RELATIVE_EQUAL(kyosu::agd[cond][kyosu::real_only](r), kyosu::if_else(cond, eve::agd(r), r), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::agd[cond][kyosu::real_only](r), kyosu::if_else(cond, eve::agd(r), r),
+                     tts::prec<T>(1.0e-5, 1.0e-8));
   TTS_RELATIVE_EQUAL(kyosu::agd[cond](r), kyosu::if_else(cond, kyosu::agd(r), ce_t(r)), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::agd[cond](c), kyosu::if_else(cond, kyosu::agd(c), c), tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::agd[cond](q), kyosu::if_else(cond, kyosu::agd(q), q), pr);

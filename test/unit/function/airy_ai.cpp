@@ -42,10 +42,10 @@ TTS_CASE_WITH("Check kyosu::airy_ai over real", kyosu::scalar_real_types, tts::r
       TTS_RELATIVE_EQUAL(kyosu::airy_ai(c), res, tts::prec<T>(1.0e-3, 2.0e-4))
         << i << " <- " << c << "arg " << kyosu::arg(c) << '\n';
       TTS_RELATIVE_EQUAL(kyosu::airy_ai(re[i]), kyosu::real(kyosu::airy_ai(kyosu::complex(re[i], e_t(0.0)))),
-                         tts::prec<T>())
+                         tts::prec<T>(1.0e-5, 1.0e-8))
         << i << " -> " << re[i] << '\n';
       TTS_RELATIVE_EQUAL(kyosu::airy_ai(im[i]), kyosu::real(kyosu::airy_ai(kyosu::complex(im[i], e_t(0.0)))),
-                         tts::prec<T>())
+                         tts::prec<T>(1.0e-5, 1.0e-8))
         << i << " -> " << im[i] << '\n';
       TTS_RELATIVE_EQUAL(kyosu::airy_ai(kyosu::conj(c)), kyosu::conj(res), tts::prec<T>(1.0e-3, 2.0e-4))
         << i << " <- " << c << "arg " << kyosu::arg(c) << '\n';

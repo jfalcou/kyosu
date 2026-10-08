@@ -16,7 +16,7 @@ TTS_CASE_WITH("Check kyosu::kolmmean over real", kyosu::real_types, tts::randoms
   // quadratic mean
   auto f = [](auto x) { return kyosu::sqr(x); };
   auto g = [](auto x) { return eve::sqrt(x); };
-  auto pr = tts::prec<T>(1.0e-1, 1.0e-6);
+  auto pr = tts::prec<T>(1.0e-3, 1.0e-8);
   TTS_RELATIVE_EQUAL(kyosu::kolmmean(f, g, r0), r0, pr);
   TTS_RELATIVE_EQUAL(kyosu::kolmmean(f, g, r0, r1), eve::hypot(r0, r1) / eve::sqrt_2(eve::as(r0)), pr);
   TTS_RELATIVE_EQUAL(kyosu::kolmmean(f, g, r0, r1, r1), eve::hypot(r0, r1, r1) / eve::sqrt_3(eve::as(r0)), pr);

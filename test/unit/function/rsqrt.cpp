@@ -22,7 +22,8 @@ TTS_CASE_WITH("Check kyosu::rsqrt over real", kyosu::real_types, tts::randoms(-1
   TTS_IEEE_EQUAL(re, rr);
   auto cond = eve::is_ltz(v);
 
-  TTS_RELATIVE_EQUAL(kyosu::rsqrt[cond][kyosu::real_only](v), kyosu::if_else(cond, eve::rsqrt(v), v), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::rsqrt[cond][kyosu::real_only](v), kyosu::if_else(cond, eve::rsqrt(v), v),
+                     tts::prec<T>(1.0e-5, 1.0e-8));
   TTS_RELATIVE_EQUAL(kyosu::rsqrt[cond](v), kyosu::if_else(cond, kyosu::rsqrt(v), ce_t(v)), tts::prec<T>());
 };
 

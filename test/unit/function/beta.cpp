@@ -52,7 +52,7 @@ TTS_CASE_WITH("Check kyosu::beta over cayley_dickson",
   auto cond = eve::is_ltz(a0);
 
   TTS_RELATIVE_EQUAL(kyosu::beta[cond][kyosu::real_only](r0, r1), kyosu::if_else(cond, eve::beta(r0, r1), r0),
-                     tts::prec<T>());
+                     tts::prec<T>(1.0e-5, 1.0e-8));
   TTS_RELATIVE_EQUAL(kyosu::beta[cond](r0, r1), kyosu::if_else(cond, kyosu::beta(r0, r1), kyosu::complex(r0)),
                      tts::prec<T>());
   TTS_RELATIVE_EQUAL(kyosu::beta[cond](c0, c1), kyosu::if_else(cond, kyosu::beta(c0, c1), c0), tts::prec<T>());
