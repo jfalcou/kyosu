@@ -17,7 +17,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 ## wanted only under an option is declared here and fetched after the options, in CMakeLists.txt. EVE stays
 ## unconditional: the exported target links eve::eve, so it is needed by an install without tests.
 ##======================================================================================================================
-CPMAddPackage ( NAME COPACABANA GITHUB_REPOSITORY jfalcou/copacabana  GIT_TAG v8)
+CPMAddPackage ( NAME COPACABANA GITHUB_REPOSITORY jfalcou/copacabana  GIT_TAG main)
 CPMDeclarePackage ( TTS   NAME TTS   GITHUB_REPOSITORY jfalcou/tts
                     GIT_TAG main
                     SYSTEM YES
