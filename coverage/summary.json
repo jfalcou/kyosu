@@ -8,9 +8,9 @@
             "branch_percent": 100.0,
             "branch_total": 2,
             "filename": "include/kyosu/constants/cinf.hpp",
-            "function_covered": 35,
+            "function_covered": 33,
             "function_percent": 100.0,
-            "function_total": 35,
+            "function_total": 33,
             "line_covered": 4,
             "line_percent": 100.0,
             "line_total": 4
@@ -3028,9 +3028,9 @@
             "line_total": 4
         }
     ],
-    "function_covered": 25509,
+    "function_covered": 25507,
     "function_percent": 98.1,
-    "function_total": 26002,
+    "function_total": 26000,
     "gcovr/summary_format_version": "0.6",
     "line_covered": 4824,
     "line_percent": 94.6,
