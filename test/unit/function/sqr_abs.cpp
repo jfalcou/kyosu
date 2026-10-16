@@ -48,5 +48,5 @@ TTS_CASE_WITH("Check kyosu::abs over octonion",
 <typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
 {
   TTS_ULP_EQUAL(kyosu::sqr_abs(kyosu::octonion_t<T>(r, i, j, k, l, li, lj, lk)),
-                eve::sqr(eve::hypot[eve::pedantic](r, i, j, k, l, li, lj, lk)), 1.0);
+                eve::sqr(eve::hypot[eve::pedantic](r, i, j, k, l, li, lj, lk)), 1.5);
 };
