@@ -19,13 +19,13 @@ namespace kyosu
 
     template<eve::callable_options O, eve::product_type T>
     requires(!concepts::cayley_dickson_like<T>)
-    constexpr KYOSU_ABI auto behavior(auto arch, O const& opts, T x) const
+    KYOSU_ABI constexpr auto behavior(auto arch, O const& opts, T x) const
     {
       return kumi::apply([&](auto... a) { return static_cast<base_t const&>(*this).behavior(arch, opts, a...); }, x);
     }
 
     template<eve::callable_options O, typename T, typename... Ts>
-    constexpr KYOSU_ABI auto behavior(auto arch, O const& opts, T x0, Ts... xs) const
+    KYOSU_ABI constexpr auto behavior(auto arch, O const& opts, T x0, Ts... xs) const
     {
       return base_t::behavior(arch, opts, x0, xs...);
     }

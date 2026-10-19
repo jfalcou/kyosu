@@ -22,13 +22,13 @@ namespace kyosu
                                                         eve::threshold_option>
   {
     template<eve::floating_value T0, eve::floating_value T1>
-    constexpr KYOSU_ABI auto operator()(T0 a, T1 b) const noexcept
+    KYOSU_ABI constexpr auto operator()(T0 a, T1 b) const noexcept
     {
       return eve::zip(eve::ellint_1(a, b), eve::ellint_2(a, b));
     }
 
     template<concepts::complex T0, concepts::real T1>
-    constexpr KYOSU_ABI auto operator()(T0 a, T1 b) const noexcept -> decltype(eve::zip(T0(), T0()))
+    KYOSU_ABI constexpr auto operator()(T0 a, T1 b) const noexcept -> decltype(eve::zip(T0(), T0()))
     {
       return KYOSU_CALL(a, b);
     }

@@ -24,7 +24,7 @@ namespace kyosu
   struct tricomi_t : kyosu::promoting_strict_elementwise_callable<tricomi_t, Options, raw_option, pedantic_option>
   {
     template<concepts::complex_like Z, concepts::complex_like T1, concepts::complex_like T2>
-    constexpr KYOSU_ABI as_cayley_dickson_t<complexify_t<Z>, T1, T2> operator()(Z z, T1 a, T2 b) const noexcept
+    KYOSU_ABI constexpr as_cayley_dickson_t<complexify_t<Z>, T1, T2> operator()(Z z, T1 a, T2 b) const noexcept
     {
       if constexpr (concepts::real<Z>) return (*this)(kyosu::complex(z), a, b);
       else return KYOSU_CALL(z, a, b);
