@@ -6,7 +6,7 @@
 int main()
 {
   std::cout << std::setprecision(16) << std::endl;
-  using w_t = eve::wide<double, eve::fixed<2>>;
+  using w_t = eve::wide<double, 2>;
   auto z = kyosu::complex(w_t(20.0, 1.5), w_t(0.0, 1.5));
   auto v = -(2 + 1 / 3.0);
   int nb = int(eve::abs(v) + 1);

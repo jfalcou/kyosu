@@ -10,8 +10,8 @@ int main()
   using e_t = float;
   using c_t = kyosu::complex_t<float>;
   using q_t = kyosu::quaternion_t<float>;
-  using we_t = eve::wide<float, eve::fixed<2>>;
-  using wq_t = eve::wide<kyosu::quaternion_t<float>, eve::fixed<2>>;
+  using we_t = eve::wide<float, 2>;
+  using wq_t = eve::wide<kyosu::quaternion_t<float>, 2>;
 
   std::cout << "Real:        " << "\n";
   e_t e0(1);

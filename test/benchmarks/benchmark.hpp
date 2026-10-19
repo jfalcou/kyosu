@@ -49,7 +49,7 @@ namespace kyosu::bench
     {
       base_type_name = ::tts::as_text(::tts::typename_<TestType>);
 
-      constexpr std::ptrdiff_t N = eve::cardinal_v<TestType>;
+      constexpr std::ptrdiff_t N = eve::width_v<TestType>;
       run_cardinals.push_back(N);
 
       // 1. PURE GENERATION

@@ -7,8 +7,8 @@ int main()
   using kyosu::cbrt;
   using kyosu::complex_t;
 
-  using wi_t = eve::wide<unsigned int, eve::fixed<4>>;
-  using wf_t = eve::wide<float, eve::fixed<4>>;
+  using wi_t = eve::wide<unsigned int, 4>;
+  using wf_t = eve::wide<float, 4>;
   wi_t wk = eve::iota(eve::as<wi_t>()) + 1;
   wf_t wf{5.0f, 2.3f, -1.2f, 0.0f};
 

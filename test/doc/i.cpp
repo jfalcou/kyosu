@@ -22,7 +22,7 @@ int main()
   std::cout << "i(as(z) " << " -> " << i(as(z)) << "\n";
 
   std::cout << "SIMD:        ";
-  using wc_t = eve::wide<kyosu::complex_t<double>, eve::fixed<2>>;
+  using wc_t = eve::wide<kyosu::complex_t<double>, 2>;
   auto wz = wc_t(complex_t<double>(1.3, -3.7));
   std::cout << "i(as(wz)) " << " -> " << i(as(wz)) << "\n";
 

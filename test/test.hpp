@@ -14,7 +14,7 @@
 //==================================================================================================
 // EVE Specific testing overloads
 //==================================================================================================
-#include <eve/arch/fundamental_cardinal.hpp>
+#include <eve/arch/fundamental_width.hpp>
 #include <eve/module/core.hpp>
 #include <eve/traits.hpp>
 #include <eve/wide.hpp>
@@ -22,7 +22,7 @@
 
 namespace tts
 {
-  template<typename T, typename N> struct comparison<eve::wide<T, N>, eve::wide<T, N>>
+  template<typename T, eve::width_type N> struct comparison<eve::wide<T, N>, eve::wide<T, N>>
   {
     static bool equal(eve::wide<T, N> const& l, eve::wide<T, N> const& r) { return eve::all(l == r); }
   };
@@ -40,10 +40,8 @@ namespace tts
 namespace kyosu
 {
   using scalar_real_types = tts::types<float, double>;
-  using simd_real_types = tts::types<eve::wide<float>,
-                                     eve::wide<double>,
-                                     eve::wide<float, eve::wide<float>::cardinal_type::combined_type>,
-                                     eve::wide<double, eve::wide<double>::cardinal_type::combined_type>>;
+  using simd_real_types =
+    tts::types<eve::wide<float>, eve::wide<double>, eve::wide<float>::combined_type, eve::wide<double>::combined_type>;
   using real_types = tts::concatenate<scalar_real_types, simd_real_types>;
 
   template<typename T> struct tts_complex_t;
@@ -83,7 +81,7 @@ int main(int argc, char const** argv)
 namespace tts
 {
   // A register is measured lane by lane, each lane through the trait of its element type.
-  template<typename T, typename N> struct precision<eve::wide<T, N>>
+  template<typename T, eve::width_type N> struct precision<eve::wide<T, N>>
   {
     using wide_t = eve::wide<T, N>;
 
@@ -197,10 +195,10 @@ namespace tts
 
     // Add garbage at the end of sub-native registers
     // For emulated type, there is no such gap so we don't do anything
-    if constexpr ((W::size() < eve::fundamental_cardinal_v<v_t>) && !eve::emulated_abi<W>)
+    if constexpr ((W::size() < eve::fundamental_width_v<v_t>) && !eve::emulated_abi<W>)
     {
       using p_t = eve::as_arithmetic_t<eve::as_integer_t<v_t, unsigned>>;
-      using ftype = eve::as_wide_t<v_t, eve::fundamental_cardinal_t<v_t>>;
+      using ftype = eve::as_wide_t<v_t, eve::fundamental_width_v<v_t>>;
 
       ftype these(data.storage());
 
@@ -230,7 +228,7 @@ namespace tts
       auto data = produce(type<std::array<e_t, T::size()>>{}, g, args...);
 
       using v_t = typename decltype(data)::value_type;
-      eve::as_wide_t<v_t, eve::cardinal_t<T>> that = eve::load(&data[0], eve::cardinal_t<T>{});
+      eve::as_wide_t<v_t, eve::width_v<T>> that = eve::load(&data[0], eve::width_t<T>{});
 
       return poison(that);
     }

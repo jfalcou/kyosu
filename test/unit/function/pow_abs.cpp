@@ -18,7 +18,7 @@ TTS_CASE_WITH("Check kyosu::pow_abs over real", kyosu::simd_real_types, tts::ran
   TTS_RELATIVE_EQUAL(kyosu::pow_abs(5.3, r1), eve::pow_abs(5.3, r1), tts::prec<T>(1.0e-5, 1.0e-8));
   TTS_RELATIVE_EQUAL(kyosu::pow_abs(r0, 4), eve::pow(kyosu::abs(r0), 4), tts::prec<T>(1.0e-5, 1.0e-8));
 
-  using wi_t = eve::wide<unsigned int, eve::fixed<T::size()>>;
+  using wi_t = eve::wide<unsigned int, T::size()>;
   wi_t n(eve::iota(eve::as<wi_t>()));
   TTS_RELATIVE_EQUAL(kyosu::pow_abs(r0, n), eve::pow(kyosu::abs(r0), n), tts::prec<T>(1.0e-5, 1.0e-8));
 };

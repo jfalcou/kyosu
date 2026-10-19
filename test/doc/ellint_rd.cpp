@@ -3,7 +3,7 @@
 #include <iostream>
 #include <kyosu/kyosu.hpp>
 
-using wide_t = eve::wide<double, eve::fixed<4>>;
+using wide_t = eve::wide<double, 4>;
 using r_t = double;
 wide_t re1 = {3.0, 2.0, 1.0, 0.5};
 wide_t im1 = {2.0, -1.0, -5.0, 0.0};

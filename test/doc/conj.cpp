@@ -13,7 +13,7 @@ int main()
 
   std::cout << "Complex:     \n";
   using c_t = kyosu::complex_t<float>;
-  using wc_t = eve::wide<c_t, eve::fixed<4>>;
+  using wc_t = eve::wide<c_t, 4>;
   c_t a   = c_t(3.5f, -2.9f);
   c_t b   = c_t(3.5f,  2.9f);
   c_t a0  = c_t(3.5f,  0.0f);

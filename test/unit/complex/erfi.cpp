@@ -67,7 +67,7 @@ TTS_CASE_WITH("Check behavior of erfi on wide",
 {
   auto z = kyosu::complex(a0, a1);
   auto ez = kyosu::erfi(z);
-  for (int i = 0; i != eve::cardinal_v<T>; ++i)
+  for (int i = 0; i != eve::width_v<T>; ++i)
   {
     TTS_RELATIVE_EQUAL(ez.get(i), kyosu::erfi(z.get(i)), tts::prec<T>());
   }

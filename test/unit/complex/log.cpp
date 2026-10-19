@@ -99,7 +99,7 @@ TTS_CASE_TPL("Check corner cases of log", kyosu::scalar_real_types)
     TTS_IEEE_EQUAL(log(conj(inputs[i])), conj(log(inputs[i])));
   }
 
-  using wc_t = eve::wide<c_t, eve::fixed<8>>;
+  using wc_t = eve::wide<c_t, 8>;
   wc_t wci0([inputs](auto i, auto) { return inputs[i]; });
   wc_t wco0([results](auto i, auto) { return results[i]; });
   wc_t wci1([inputs](auto i, auto c) { return inputs[c - i - 1]; });

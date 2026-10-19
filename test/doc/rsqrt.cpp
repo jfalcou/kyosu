@@ -19,12 +19,12 @@ int main()
   std::cout << kyosu::quaternion_t<double>(1.,2.,3.,4.) << " -> " << rsqrt(kyosu::quaternion_t<double>(1.,2.,3.,4.)) << "\n";
 
   std::cout << "SIMD:        ";
-  using wc_t = eve::wide<kyosu::complex_t<double>, eve::fixed<2>>;
+  using wc_t = eve::wide<kyosu::complex_t<double>, 2>;
   std::cout << wc_t(kyosu::complex_t<double>(1.3,-3.7)) << " -> " << rsqrt(wc_t(kyosu::complex_t<double>(1.3,-3.7))) << "\n";
 
   using e_t = float;
   using z_t = kyosu::complex_t<e_t>;
-  using k_t = eve::wide<e_t, eve::fixed<2>>;
+  using k_t = eve::wide<e_t, 2>;
   z_t z{e_t(1.0), e_t(2.0)};
   k_t k{0, 1};
   e_t e(1.0);

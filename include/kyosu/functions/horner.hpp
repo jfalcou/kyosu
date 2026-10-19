@@ -91,7 +91,7 @@ namespace kyosu
   //!
   //!    **Notes**
   //!
-  //!      If the coefficients are simd values of cardinal N, this means you simultaneously
+  //!      If the coefficients are simd values of width N, this means you simultaneously
   //!      compute the values of N polynomials.
   //!        *  If x is scalar, the polynomials are all computed at the same point
   //!        *  If x is simd, the nth polynomial is computed on the nth value of x

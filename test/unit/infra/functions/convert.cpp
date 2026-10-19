@@ -50,17 +50,17 @@ TTS_CASE("convert wide<reals> to real/complex/quaternion/octonion")
   using namespace kyosu;
   auto fill = [](auto i, auto) { return 1 + i; };
 
-  eve::wide<float, eve::fixed<4>> rf_in{fill};
-  eve::wide<double, eve::fixed<4>> rd_out{fill};
-  eve::wide<double, eve::fixed<4>> rd_in{fill};
-  eve::wide<float, eve::fixed<4>> rf_out{fill};
+  eve::wide<float, 4> rf_in{fill};
+  eve::wide<double, 4> rd_out{fill};
+  eve::wide<double, 4> rd_in{fill};
+  eve::wide<float, 4> rf_out{fill};
 
-  complex_t<eve::wide<float, eve::fixed<4>>> cf_out{fill};
-  complex_t<eve::wide<double, eve::fixed<4>>> cd_out{fill};
-  quaternion_t<eve::wide<float, eve::fixed<4>>> qf_out{fill};
-  quaternion_t<eve::wide<double, eve::fixed<4>>> qd_out{fill};
-  octonion_t<eve::wide<float, eve::fixed<4>>> of_out{fill};
-  octonion_t<eve::wide<double, eve::fixed<4>>> od_out{fill};
+  complex_t<eve::wide<float, 4>> cf_out{fill};
+  complex_t<eve::wide<double, 4>> cd_out{fill};
+  quaternion_t<eve::wide<float, 4>> qf_out{fill};
+  quaternion_t<eve::wide<double, 4>> qd_out{fill};
+  octonion_t<eve::wide<float, 4>> of_out{fill};
+  octonion_t<eve::wide<double, 4>> od_out{fill};
 
   // float
   TTS_EQUAL((convert(rf_in, eve::as_element(rf_in))), rf_in);
@@ -120,12 +120,12 @@ TTS_CASE("convert wide<complex> to complex/quaternion/octonion")
   using namespace kyosu;
   auto fill = [](auto i, auto) { return 1 + i; };
 
-  complex_t<eve::wide<float, eve::fixed<4>>> cf_in{fill};
-  complex_t<eve::wide<double, eve::fixed<4>>> cd_in{fill};
-  quaternion_t<eve::wide<float, eve::fixed<4>>> qf_out{fill};
-  quaternion_t<eve::wide<double, eve::fixed<4>>> qd_out{fill};
-  octonion_t<eve::wide<float, eve::fixed<4>>> of_out{fill};
-  octonion_t<eve::wide<double, eve::fixed<4>>> od_out{fill};
+  complex_t<eve::wide<float, 4>> cf_in{fill};
+  complex_t<eve::wide<double, 4>> cd_in{fill};
+  quaternion_t<eve::wide<float, 4>> qf_out{fill};
+  quaternion_t<eve::wide<double, 4>> qd_out{fill};
+  octonion_t<eve::wide<float, 4>> of_out{fill};
+  octonion_t<eve::wide<double, 4>> od_out{fill};
 
   // No conversion to real
   TTS_EXPECT_NOT_COMPILES(cf_in, { convert(cf_in, as<float>{}); });
@@ -181,10 +181,10 @@ TTS_CASE("convert wide<quaternion> to quaternion/octonion")
   using namespace kyosu;
   auto fill = [](auto i, auto) { return 1 + i; };
 
-  quaternion_t<eve::wide<float, eve::fixed<4>>> qf_in{fill};
-  quaternion_t<eve::wide<double, eve::fixed<4>>> qd_in{fill};
-  octonion_t<eve::wide<float, eve::fixed<4>>> of_out{fill};
-  octonion_t<eve::wide<double, eve::fixed<4>>> od_out{fill};
+  quaternion_t<eve::wide<float, 4>> qf_in{fill};
+  quaternion_t<eve::wide<double, 4>> qd_in{fill};
+  octonion_t<eve::wide<float, 4>> of_out{fill};
+  octonion_t<eve::wide<double, 4>> od_out{fill};
 
   // No conversion to real
   TTS_EXPECT_NOT_COMPILES(qf_in, { convert(qf_in, as<float>{}); });
@@ -234,8 +234,8 @@ TTS_CASE("convert wide<octonion> to octonion")
   using namespace kyosu;
   auto fill = [](auto i, auto) { return 1 + i; };
 
-  octonion_t<eve::wide<float, eve::fixed<4>>> of{fill};
-  octonion_t<eve::wide<double, eve::fixed<4>>> od{fill};
+  octonion_t<eve::wide<float, 4>> of{fill};
+  octonion_t<eve::wide<double, 4>> od{fill};
 
   // No conversion to real
   TTS_EXPECT_NOT_COMPILES(of, { convert(of, as<float>{}); });

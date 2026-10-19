@@ -5,7 +5,7 @@
 int main()
 {
 
-  using wide_ft = eve::wide<float, eve::fixed<4>>;
+  using wide_ft = eve::wide<float, 4>;
   wide_ft r = {3.0f, 2.0f, 1.0f, 0.5f};
   wide_ft i = {2.0f, -1.0, -5.0, 0.0};
   auto zc = kyosu::complex_t<wide_ft>(r, i);
