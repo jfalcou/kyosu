@@ -219,16 +219,15 @@ constexpr auto&#160;</td><td class="memItemRight"><b>kyosu::imag</b> = extractor
 <div class="line">  std::cout &lt;&lt; q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;SIMD:        &quot;</span>;</div>
-<div class="line">  <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;kyosu::complex_t&lt;double&gt;</a>, <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1fixed.html">eve::fixed&lt;2&gt;</a>&gt; wz(<a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;double&gt;</a>(1.3, -3.7));</div>
+<div class="line">  <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;kyosu::complex_t&lt;double&gt;</a>, 2&gt; wz(<a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;double&gt;</a>(1.3, -3.7));</div>
 <div class="line">  std::cout &lt;&lt; wz &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gac538e6a794844977cba0f5043a990c99">ipart</a>(wz) &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span>;</div>
-<div class="line">  <a class="code hl_variable" href="#gac538e6a794844977cba0f5043a990c99">ipart</a>(wz) = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;double, eve::fixed&lt;2&gt;</a>&gt;{13.37, 63.24};</div>
+<div class="line">  <a class="code hl_variable" href="#gac538e6a794844977cba0f5043a990c99">ipart</a>(wz) = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;double, 2&gt;</a>{13.37, 63.24};</div>
 <div class="line">  std::cout &lt;&lt; wz &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
-<div class="ttc" id="astructeve_1_1fixed_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1fixed.html">eve::fixed</a></div></div>
 <div class="ttc" id="astructeve_1_1wide_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></div></div>
 </div><!-- fragment --> 
 </div>

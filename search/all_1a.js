@@ -9,10 +9,10 @@ var searchData=
   ['where_20to_20go_20from_20here_10',['Where to go from here',['../tutorial-beyond.html#autotoc_md49',1,'']]],
   ['where_20to_20go_20next_11',['Where to go next',['../setup.html#autotoc_md77',1,'']]],
   ['why_20not_20euler_20angles_12',['Why not Euler angles',['../tutorial-rotation.html#autotoc_md40',1,'']]],
-  ['with_20cpm_28',['With CPM',['../setup.html#autotoc_md73',1,'']]],
-  ['with_20fetchcontent_29',['With FetchContent',['../setup.html#autotoc_md74',1,'']]],
-  ['with_20float_20based_20computations_30',['to obtain poor precision with float based computations.',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md3',1,'']]],
-  ['without_20listing_20four_20numbers_32',['Building one without listing four numbers',['../tutorial-quaternion.html#autotoc_md39',1,'']]],
-  ['works_20everywhere_33',['What still works everywhere',['../tutorial-beyond.html#autotoc_md48',1,'']]],
-  ['writing_20code_20that_20does_20not_20care_35',['Writing code that does not care',['../tutorial-simd.html#autotoc_md35',1,'']]]
+  ['with_20cpm_29',['With CPM',['../setup.html#autotoc_md73',1,'']]],
+  ['with_20fetchcontent_30',['With FetchContent',['../setup.html#autotoc_md74',1,'']]],
+  ['with_20float_20based_20computations_31',['to obtain poor precision with float based computations.',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md3',1,'']]],
+  ['without_20listing_20four_20numbers_33',['Building one without listing four numbers',['../tutorial-quaternion.html#autotoc_md39',1,'']]],
+  ['works_20everywhere_34',['What still works everywhere',['../tutorial-beyond.html#autotoc_md48',1,'']]],
+  ['writing_20code_20that_20does_20not_20care_36',['Writing code that does not care',['../tutorial-simd.html#autotoc_md35',1,'']]]
 ];

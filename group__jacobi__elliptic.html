@@ -221,7 +221,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  std::cout &lt;&lt; std::setprecision(16) &lt;&lt; std::endl;</div>
-<div class="line">  <span class="keyword">using </span>w_t = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;double, eve::fixed&lt;2&gt;</a>&gt;;</div>
+<div class="line">  <span class="keyword">using </span>w_t = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;double, 2&gt;</a>;</div>
 <div class="line">  <span class="keyword">auto</span> z = <a class="code hl_variable" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">kyosu::complex</a>(w_t(2.0, 1.0), w_t(0.0, 1.0));</div>
 <div class="line">  <span class="keyword">auto</span> m = w_t(0.5, 0.7);</div>
 <div class="line">  <span class="keyword">auto</span> [sn, cn, dn] = <a class="code hl_variable" href="#ga9ebb9efdd6da680620540b07dd9c34fc">kyosu::jacobi_elliptic</a>(z, m);</div>
