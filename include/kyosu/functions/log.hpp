@@ -17,14 +17,14 @@ namespace kyosu
     : eve::strict_elementwise_callable<log_t, Options, raw_option, radpi_option, real_only_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
+    KYOSU_ABI constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z>, K> operator()(
-      Z const& z, K const& k) const noexcept
+    KYOSU_ABI constexpr eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z>, K> operator()(Z const& z,
+                                                                                            K const& k) const noexcept
     requires(eve::same_lanes_or_scalar<Z, K>)
     {
       return KYOSU_CALL(z, k);
@@ -109,7 +109,7 @@ namespace kyosu::_
 {
 
   template<concepts::cayley_dickson_like Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto log_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  constexpr auto log_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     if constexpr (O::contains(real_only) && concepts::real<Z>) return eve::log[o.drop(real_only)](z);
     else if constexpr (concepts::real<Z>) return kyosu::log[o.drop(radpi)](complex(z));
@@ -125,7 +125,7 @@ namespace kyosu::_
   }
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto log_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  constexpr auto log_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
   requires(!O::contains(real_only))
   {
     if constexpr (kyosu::concepts::real<Z>) return log[o](complex(z));
@@ -142,7 +142,7 @@ namespace kyosu::_
   }
 
   template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto log_(KYOSU_DELAY(), C const& cx, O const&, Z z, K... k) noexcept
+  constexpr auto log_(KYOSU_DELAY(), C const& cx, O const&, Z z, K... k) noexcept
   requires(!O::contains(real_only))
   {
     return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), log(z, k...));

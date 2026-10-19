@@ -19,8 +19,7 @@ namespace kyosu
                                                         eve::left_option,
                                                         eve::right_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }

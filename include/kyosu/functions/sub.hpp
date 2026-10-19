@@ -24,14 +24,14 @@ namespace kyosu
 
     template<concepts::cayley_dickson_like... Ts>
     requires(eve::same_lanes_or_scalar<Ts...>)
-    EVE_FORCEINLINE typename result<Ts...>::type constexpr operator()(Ts... ts) const noexcept
+    KYOSU_ABI typename result<Ts...>::type constexpr operator()(Ts... ts) const noexcept
     {
       return KYOSU_CALL(ts...);
     }
 
     template<eve::non_empty_product_type Tup>
     requires(eve::same_lanes_or_scalar_tuple<Tup> && !concepts::cayley_dickson_like<Tup>)
-    EVE_FORCEINLINE constexpr kumi::apply_traits_t<result, Tup> operator()(Tup const& t) const noexcept
+    KYOSU_ABI constexpr kumi::apply_traits_t<result, Tup> operator()(Tup const& t) const noexcept
     requires(kumi::size_v<Tup> >= 1)
     {
       return KYOSU_CALL(t);
@@ -100,7 +100,7 @@ namespace kyosu::_
 {
 
   template<eve::callable_options O, concepts::cayley_dickson_like T0, concepts::cayley_dickson_like... Ts>
-  EVE_FORCEINLINE constexpr auto sub_(KYOSU_DELAY(), O const& o, T0 const& t0, Ts const&... ts) noexcept
+  constexpr auto sub_(KYOSU_DELAY(), O const& o, T0 const& t0, Ts const&... ts) noexcept
   {
     using r_t = as_cayley_dickson_t<T0, Ts...>;
     if constexpr (concepts::real<r_t>) return eve::sub[o](t0, ts...);
@@ -109,7 +109,7 @@ namespace kyosu::_
   }
 
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
-  EVE_FORCEINLINE constexpr auto sub_(KYOSU_DELAY(), C const& cond, O const& o, T0 const& v0, Ts const&... vs) noexcept
+  constexpr auto sub_(KYOSU_DELAY(), C const& cond, O const& o, T0 const& v0, Ts const&... vs) noexcept
   {
     using r_t = as_cayley_dickson_t<T0, Ts...>;
     return eve::_::mask_op(cond, eve::_::return_2nd, r_t(v0), kyosu::sub[o](v0, vs...));

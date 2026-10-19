@@ -19,7 +19,7 @@ namespace kyosu
 
     template<concepts::cayley_dickson Z, concepts::real T, std::size_t S>
     requires(dimension_v<Z> <= 4)
-    KYOSU_FORCEINLINE constexpr auto operator()(Z const& q, std::span<T, S> v) const noexcept
+    KYOSU_ABI constexpr auto operator()(Z const& q, std::span<T, S> v) const noexcept
     {
       using e_t = as_real_type_t<Z>;
       using v_t = decltype(v[0] + e_t());

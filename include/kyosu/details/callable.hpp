@@ -45,7 +45,7 @@ namespace kyosu
     template<typename Base> struct promoting_callable : Base
     {
       template<eve::callable_options O, typename T, typename... Ts>
-      KYOSU_FORCEINLINE constexpr auto behavior(auto arch, O const& opts, T x0, Ts... xs) const
+      constexpr auto behavior(auto arch, O const& opts, T x0, Ts... xs) const
       {
         constexpr bool masked =
           O::contains(eve::condition_key) && !eve::match_option<eve::condition_key, O, eve::ignore_none_>;

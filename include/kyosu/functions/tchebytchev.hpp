@@ -20,7 +20,7 @@ namespace kyosu
                                                           eve::kind_2_option>
   {
     template<concepts::real N, concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(N nn, Z zz) const noexcept -> decltype(nn + zz)
+    KYOSU_ABI constexpr auto operator()(N nn, Z zz) const noexcept -> decltype(nn + zz)
     {
       using r_t = decltype(nn + zz);
       using u_t = eve::underlying_type_t<r_t>;
@@ -41,20 +41,20 @@ namespace kyosu
     }
 
     template<concepts::real N, concepts::real Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(N n, Z z) const noexcept -> decltype(n + complex(z))
+    KYOSU_ABI constexpr auto operator()(N n, Z z) const noexcept -> decltype(n + complex(z))
     {
       return (*this)(n, complex(z));
     }
 
     // Recurrence relation for Tchebytchev polynomials:
     template<concepts::cayley_dickson Z, concepts::cayley_dickson T>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z z, T tn, T tnm1) const noexcept -> decltype(z + tn)
+    KYOSU_ABI constexpr auto operator()(Z z, T tn, T tnm1) const noexcept -> decltype(z + tn)
     {
       return complex(2 * z * tn - tnm1);
     }
 
     template<concepts::real Z, concepts::real T>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z z, T tn, T tnm1) const noexcept -> decltype(complex(z + tn))
+    KYOSU_ABI constexpr auto operator()(Z z, T tn, T tnm1) const noexcept -> decltype(complex(z + tn))
     requires(Options::contains(eve::successor))
     {
       return (*this)[eve::successor](complex(z), tn, tnm1);

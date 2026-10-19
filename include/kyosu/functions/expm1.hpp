@@ -14,7 +14,7 @@ namespace kyosu
   struct expm1_t : eve::elementwise_callable<expm1_t, Options, radpi_option, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
+    KYOSU_ABI constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }

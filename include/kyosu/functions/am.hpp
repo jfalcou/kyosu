@@ -25,7 +25,7 @@ namespace kyosu
                                                  eve::threshold_option>
   {
     template<concepts::complex_like T0, concepts::real T1>
-    constexpr KYOSU_FORCEINLINE auto operator()(T0 a, T1 b) const noexcept -> complexify_t<decltype(a + b)>
+    KYOSU_ABI constexpr auto operator()(T0 a, T1 b) const noexcept -> complexify_t<decltype(a + b)>
     {
       if constexpr (concepts::real<T0>) return (*this)(kyosu::complex(a), b);
       else return KYOSU_CALL(a, b);
@@ -101,7 +101,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, typename M, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto am_(KYOSU_DELAY(), O const& o, Z u, M m) noexcept
+  constexpr auto am_(KYOSU_DELAY(), O const& o, Z u, M m) noexcept
   {
     auto tol = [&]() {
       if constexpr (O::contains(eve::threshold)) return o[eve::threshold].value(m);

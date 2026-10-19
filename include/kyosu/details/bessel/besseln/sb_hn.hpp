@@ -47,19 +47,19 @@ namespace kyosu::_
     return if_else(imzlt0, h2, eve::sign_alternate(u_t(n)) * h2);
   }
 
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE auto sb_h1n(N n, Z z) noexcept
+  template<eve::integral_scalar_value N, typename Z> auto sb_h1n(N n, Z z) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;
     return eve::sign_alternate(u_t(n)) * sb_h2n(n, -z);
   }
 
-  template<typename Z> KYOSU_FORCEINLINE auto sb_h1n(int n, Z z) noexcept
+  template<typename Z> auto sb_h1n(int n, Z z) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;
     return eve::sign_alternate(u_t(n)) * sb_h2n(n, -z);
   }
 
-  template<int Kind, eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE auto sb_hn(N n, Z z) noexcept
+  template<int Kind, eve::integral_scalar_value N, typename Z> auto sb_hn(N n, Z z) noexcept
   {
     if constexpr (Kind == 1) return sb_h1n(n, z);
     else return sb_h2n(n, z);

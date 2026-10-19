@@ -13,7 +13,7 @@ namespace kyosu
   template<typename Options> struct is_nez_t : eve::elementwise_callable<is_nez_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
+    KYOSU_ABI constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -63,8 +63,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto is_nez_(KYOSU_DELAY(), O const&, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto is_nez_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::is_nez(z);
     else return kumi::any_of(z, eve::is_nez);

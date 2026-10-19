@@ -20,7 +20,7 @@ namespace kyosu
   {
     template<typename Q, int II, int JJ, int KK>
     requires((concepts::cayley_dickson<Q> && dimension_v<Q> <= 4) || concepts::real<Q>)
-    KYOSU_FORCEINLINE constexpr kumi::tuple<as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>> operator()(
+    KYOSU_ABI constexpr kumi::tuple<as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>> operator()(
       Q q0, _::axis<II>, _::axis<JJ>, _::axis<KK>) const noexcept
     {
       auto o = this->options();

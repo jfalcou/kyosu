@@ -15,7 +15,7 @@ namespace kyosu
   struct from_rotation_matrix_t : eve::callable<from_rotation_matrix_t, Options, raw_option, pedantic_option>
   {
     template<typename T>
-    KYOSU_FORCEINLINE constexpr quaternion_t<T> operator()(std::array<std::array<T, 3>, 3> const& r) const noexcept
+    KYOSU_ABI constexpr quaternion_t<T> operator()(std::array<std::array<T, 3>, 3> const& r) const noexcept
     {
       auto r11pr22 = r[1][1] + r[2][2];
       auto qq0m1 = r[0][0] + r11pr22;

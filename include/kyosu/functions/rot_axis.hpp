@@ -18,7 +18,7 @@ namespace kyosu
 
     template<concepts::cayley_dickson Z>
     requires(dimension_v<Z> <= 4)
-    KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
+    KYOSU_ABI constexpr auto operator()(Z const& q) const noexcept
     {
       using e_t = as_real_type_t<Z>;
       auto invn = eve::rec(kyosu::abs(kyosu::pure(q)));

@@ -37,19 +37,19 @@ namespace kyosu
 
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson Z1>
     requires(!eve::integral_value<Z1>)
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1) const noexcept -> result_t<Z0, Z1>
+    KYOSU_ABI constexpr auto operator()(Z0 z0, Z1 z1) const noexcept -> result_t<Z0, Z1>
     {
       return KYOSU_CALL(z0, z1);
     }
 
     template<concepts::cayley_dickson_like Z0, eve::floating_value Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1) const noexcept -> result_t<Z0, Z1>
+    KYOSU_ABI constexpr auto operator()(Z0 z0, Z1 z1) const noexcept -> result_t<Z0, Z1>
     {
       return KYOSU_CALL(z0, z1);
     }
 
     template<concepts::cayley_dickson_like Z0, eve::integral_value Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1) const noexcept -> result_t<Z0, Z1>
+    KYOSU_ABI constexpr auto operator()(Z0 z0, Z1 z1) const noexcept -> result_t<Z0, Z1>
     {
       return KYOSU_CALL(z0, z1);
     }

@@ -22,9 +22,7 @@ namespace kyosu
                                                          eve::kind_2_option>
   {
     template<concepts::cayley_dickson_like N, concepts::cayley_dickson_like L, concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<as_cayley_dickson_like_t<N, L, Z>> operator()(N nn,
-                                                                                           L ll,
-                                                                                           Z zz) const noexcept
+    KYOSU_ABI constexpr complexify_t<as_cayley_dickson_like_t<N, L, Z>> operator()(N nn, L ll, Z zz) const noexcept
     {
       return KYOSU_CALL(nn, ll, zz);
     }
@@ -89,7 +87,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::callable_options O, typename L, typename N, typename Z>
-  EVE_FORCEINLINE constexpr auto gegenbauer_(KYOSU_DELAY(), O const&, N nn, L ll, Z zz) noexcept
+  constexpr auto gegenbauer_(KYOSU_DELAY(), O const&, N nn, L ll, Z zz) noexcept
   {
     if constexpr (concepts::real<N> && concepts::real<L> && concepts::real<Z>)
     {
@@ -116,7 +114,7 @@ namespace kyosu::_
   }
 
   template<eve::conditional_expr C, typename L, typename N, typename Z, eve::callable_options O>
-  EVE_FORCEINLINE auto gegenbauer_(KYOSU_DELAY(), C cx, O const& o, N n, L l, Z z) noexcept
+  auto gegenbauer_(KYOSU_DELAY(), C cx, O const& o, N n, L l, Z z) noexcept
   {
     using r_t = complexify_t<as_cayley_dickson_like_t<N, L, Z>>;
     return eve::_::mask_op(cx, eve::_::return_2nd, r_t(z), kyosu::gegenbauer[o](r_t(n), r_t(l), r_t(z)));

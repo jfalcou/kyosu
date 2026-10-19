@@ -15,8 +15,7 @@ namespace kyosu
   template<typename Options>
   struct digamma_t : kyosu::promoting_elementwise_callable<digamma_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       if constexpr (concepts::real<Z>) return (*this)(kyosu::complex(z));
       else return KYOSU_CALL(z);
@@ -72,8 +71,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto digamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto digamma_(KYOSU_DELAY(), O const&, Z a0) noexcept
   {
     if constexpr (concepts::complex<Z>)
     {

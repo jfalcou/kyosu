@@ -21,7 +21,7 @@ namespace kyosu::_
   // sb_ikn
   ////////////////////////////////
 
-  template<typename T, eve::integral_scalar_value N> KYOSU_FORCEINLINE auto riton(N n)
+  template<typename T, eve::integral_scalar_value N> auto riton(N n)
   {
     n = n & N(3);
     if (n == 0) return complex(eve::one(eve::as<T>()));
@@ -30,13 +30,13 @@ namespace kyosu::_
     else return complex(eve::zero(eve::as<T>()), eve::one(eve::as<T>()));
   };
 
-  template<int Kind, typename Z> KYOSU_FORCEINLINE auto sb_i_0(Z z) noexcept
+  template<int Kind, typename Z> auto sb_i_0(Z z) noexcept
   {
     if constexpr (Kind == 2) return cosh(z) / z;
     else return sinhc(z);
   }
 
-  template<int Kind, typename Z> KYOSU_FORCEINLINE auto sb_i_1(Z z) noexcept
+  template<int Kind, typename Z> auto sb_i_1(Z z) noexcept
   {
     auto [sh, ch] = sinhcosh(z);
     auto rz = rec(z);
@@ -44,8 +44,7 @@ namespace kyosu::_
     else return fnma(sh, rz, ch) * rz;
   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R>
-  KYOSU_FORCEINLINE auto sb_i2n(N n, Z z, R& si2s) noexcept
+  template<eve::integral_scalar_value N, typename Z, typename R> auto sb_i2n(N n, Z z, R& si2s) noexcept
   {
     using e_t = as_real_type_t<Z>;
     auto m = eve::min(n + 1, N(si2s.size()));
@@ -54,7 +53,7 @@ namespace kyosu::_
     return r;
   }
 
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE auto sb_i1n(N n, Z z) noexcept
+  template<eve::integral_scalar_value N, typename Z> auto sb_i1n(N n, Z z) noexcept
   {
     if constexpr (concepts::complex<Z>)
     {
@@ -63,15 +62,14 @@ namespace kyosu::_
     }
   }
 
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE auto sb_i2n(N n, Z z) noexcept
+  template<eve::integral_scalar_value N, typename Z> auto sb_i2n(N n, Z z) noexcept
   {
     if (n == 0) return sb_i2_0(z);
     using e_t = as_real_type_t<Z>;
     return riton<e_t>(n + 1) * sb_yn(n, muli(z));
   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R>
-  KYOSU_FORCEINLINE auto sb_i1n(N n, Z z, R& si1s) noexcept
+  template<eve::integral_scalar_value N, typename Z, typename R> auto sb_i1n(N n, Z z, R& si1s) noexcept
   {
     auto m = eve::min(n + 1, N(si1s.size()));
     using e_t = as_real_type_t<Z>;
@@ -83,7 +81,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sb_k0
   //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE auto sb_k0(Z z) noexcept
+  template<typename Z> auto sb_k0(Z z) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;
     return eve::pio_2(eve::as<u_t>()) * exp(-z) / z;
@@ -102,7 +100,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sb_kn
   //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE auto sb_kn(int n, Z z) noexcept
+  template<typename Z> auto sb_kn(int n, Z z) noexcept
   {
     if (n == 0) return sb_k0(z);
     if (n == 1) return sb_k1(z);
@@ -116,7 +114,7 @@ namespace kyosu::_
     return -eve::pio_2(eve::as<u_t>()) * iton(n) * sb_h1n(n, complex(-imag(z), real(z)));
   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE auto sb_kn(N n, Z z, R& sks) noexcept
+  template<eve::integral_scalar_value N, typename Z, typename R> auto sb_kn(N n, Z z, R& sks) noexcept
   {
     n = eve::min(n, N(sks.size()));
     using u_t = eve::underlying_type_t<Z>;
@@ -129,14 +127,14 @@ namespace kyosu::_
     return -eve::pio_2(eve::as<u_t>()) * iton(n) * b_h1n(n, complex(-imag(z), real(z)), sks);
   }
 
-  template<typename Z, typename R1, typename R2> KYOSU_FORCEINLINE auto sb_ikn(int n, Z z, R1& sis, R2& sks) noexcept
+  template<typename Z, typename R1, typename R2> auto sb_ikn(int n, Z z, R1& sis, R2& sks) noexcept
   {
     sb_i1n(n, z, sis);
     sb_kn(n, z, sks);
     return kumi::tuple{sb_i1n(n, z, sis), sb_kn(n, z, sks)};
   }
 
-  template<int Kind, eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE auto sb_in(N n, Z z) noexcept
+  template<int Kind, eve::integral_scalar_value N, typename Z> auto sb_in(N n, Z z) noexcept
   {
     if constexpr (Kind == 2) return sb_i2n(n, z);
     else return sb_i1n(n, z);

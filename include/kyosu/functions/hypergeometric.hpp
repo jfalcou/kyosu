@@ -41,7 +41,7 @@ namespace kyosu
     template<typename T1, typename T2, typename T3> using res_t = typename res<T1, T2, T3>::type;
 
     template<concepts::complex_like Z, eve::product_type T1, eve::product_type T2>
-    constexpr KYOSU_FORCEINLINE res_t<Z, T1, T2> operator()(Z z, T1 a, T2 b) const noexcept
+    KYOSU_ABI constexpr res_t<Z, T1, T2> operator()(Z z, T1 a, T2 b) const noexcept
     {
       if constexpr (!Options::contains(kyosu::regularized) || T2::empty())
       {

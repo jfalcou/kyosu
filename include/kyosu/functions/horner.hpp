@@ -18,14 +18,14 @@ namespace kyosu
   struct horner_t : eve::callable<horner_t, Options, raw_option, pedantic_option, eve::left_option, eve::right_option>
   {
     template<concepts::cayley_dickson_like... Zs>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Zs...> operator()(Zs const&... zs) const noexcept
+    KYOSU_ABI constexpr as_cayley_dickson_like_t<Zs...> operator()(Zs const&... zs) const noexcept
     requires(eve::same_lanes_or_scalar<Zs...>)
     {
       return KYOSU_CALL(zs...);
     }
 
     template<concepts::cayley_dickson_like Z, eve::non_empty_product_type Data>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<Z, coefficients<Data>> operator()(
+    KYOSU_ABI constexpr as_cayley_dickson_like_t<Z, coefficients<Data>> operator()(
       Z z, coefficients<Data> const& t) const noexcept
     {
       return KYOSU_CALL(z, t);
@@ -111,7 +111,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename X, concepts::cayley_dickson_like Z, typename... Zs, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, Z z, Zs... zs) noexcept
+  constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, Z z, Zs... zs) noexcept
   {
     if constexpr ((concepts::real<X> && ... && concepts::real<Zs>))
     {
@@ -142,7 +142,7 @@ namespace kyosu::_
   }
 
   template<typename X, eve::non_empty_product_type Data, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, coefficients<Data> const& tup) noexcept
+  constexpr auto horner_(KYOSU_DELAY(), O const& o, X xx, coefficients<Data> const& tup) noexcept
   {
     using r_t = as_cayley_dickson_like_t<X, coefficients<Data>>;
     auto x = convert(xx, eve::as_element<r_t>());

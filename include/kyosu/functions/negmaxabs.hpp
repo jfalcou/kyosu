@@ -17,8 +17,7 @@ namespace kyosu
     : eve::strict_elementwise_callable<negmaxabs_t, Options, raw_option, eve::numeric_option, eve::pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like... Zs>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Zs... zs) const noexcept
-      -> decltype(eve::maxabs(real(z0), real(zs)...))
+    KYOSU_ABI constexpr auto operator()(Z0 z0, Zs... zs) const noexcept -> decltype(eve::maxabs(real(z0), real(zs)...))
     {
       return KYOSU_CALL(z0, zs...);
     }
@@ -68,7 +67,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::callable_options O, typename Z0, typename... Zs>
-  KYOSU_FORCEINLINE constexpr auto negmaxabs_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
+  constexpr auto negmaxabs_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
   {
     if constexpr (concepts::real<Z0> && (... && concepts::real<Zs>)) return eve::negmaxabs[o](z0, zs...);
     else return eve::minus(kyosu::maxabs[o](z0, zs...));

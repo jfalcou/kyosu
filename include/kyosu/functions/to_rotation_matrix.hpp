@@ -17,14 +17,14 @@ namespace kyosu
   struct to_rotation_matrix_t
     : eve::callable<to_rotation_matrix_t, Options, raw_option, pedantic_option, assume_unitary_option>
   {
-    template<concepts::real V> KYOSU_FORCEINLINE constexpr auto operator()(V const&) const noexcept
+    template<concepts::real V> KYOSU_ABI constexpr auto operator()(V const&) const noexcept
     {
       using m_t = std::array<std::array<V, 3>, 3>;
       return m_t{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
     }
 
     template<concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z q) const noexcept
+    KYOSU_ABI constexpr auto operator()(Z q) const noexcept
     requires(dimension_v<Z> <= 4)
     {
       if constexpr (!Options::contains(assume_unitary)) q = sign(q);

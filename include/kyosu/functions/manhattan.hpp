@@ -22,7 +22,7 @@ namespace kyosu
   {
 
     template<concepts::cayley_dickson_like... Zs>
-    KYOSU_FORCEINLINE constexpr auto operator()(Zs... zs) const noexcept -> decltype(eve::manhattan(real(zs)...))
+    KYOSU_ABI constexpr auto operator()(Zs... zs) const noexcept -> decltype(eve::manhattan(real(zs)...))
     {
       return KYOSU_CALL(zs...);
     }
@@ -91,7 +91,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::callable_options O, typename Z0, typename... Zs>
-  KYOSU_FORCEINLINE constexpr auto manhattan_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
+  constexpr auto manhattan_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
   {
     if constexpr (concepts::real<Z0> && (... && concepts::real<Zs>)) return eve::manhattan[o](z0, zs...);
     else return eve::manhattan[o](kumi::flatten(kumi::make_tuple(z0, zs...)));

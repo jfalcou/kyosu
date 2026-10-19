@@ -16,9 +16,9 @@ namespace kyosu
   struct kummer_t : eve::strict_elementwise_callable<kummer_t, Options, raw_option, pedantic_option, regularized_option>
   {
     template<concepts::cayley_dickson_like Z, concepts::cayley_dickson_like T1, concepts::cayley_dickson_like T2>
-    KYOSU_FORCEINLINE constexpr complexify_t<as_cayley_dickson_t<Z, T1, T2>> operator()(Z const& z,
-                                                                                        T1 const& t1,
-                                                                                        T2 const& t2) const noexcept
+    KYOSU_ABI constexpr complexify_t<as_cayley_dickson_t<Z, T1, T2>> operator()(Z const& z,
+                                                                                T1 const& t1,
+                                                                                T2 const& t2) const noexcept
     {
       if constexpr (concepts::real<Z>) return (*this)[this->options()](kyosu::complex(z), t1, t2);
       else return KYOSU_CALL(z, t1, t2);
@@ -84,7 +84,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, typename T1, typename T2, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto kummer_(KYOSU_DELAY(), O const&, Z zz, T1 aa, T2 bb) noexcept
+  constexpr auto kummer_(KYOSU_DELAY(), O const&, Z zz, T1 aa, T2 bb) noexcept
   {
     if constexpr (O::contains(regularized))
     {

@@ -19,8 +19,7 @@ namespace kyosu::_
   //   hypergeometric 1F1
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
-  template<typename Z, eve::sized_product_type<1> T1, eve::sized_product_type<1> T2>
-  KYOSU_FORCEINLINE auto hyperg(Z zz, T1 bb, T2 aa)
+  template<typename Z, eve::sized_product_type<1> T1, eve::sized_product_type<1> T2> auto hyperg(Z zz, T1 bb, T2 aa)
   {
     using r_t = decltype(kumi::get<0>(aa) + kumi::get<0>(bb) + zz);
     r_t a(kumi::get<0>(bb));
@@ -88,7 +87,7 @@ namespace kyosu::_
   }
 
   template<typename Z, eve::sized_product_type<1> T1, eve::sized_product_type<1> T2>
-  KYOSU_FORCEINLINE auto hyperg(Z z, T1 aa, T2 cc, decltype(kyosu::regularized))
+  auto hyperg(Z z, T1 aa, T2 cc, decltype(kyosu::regularized))
   {
     using r_t = decltype(kumi::get<0>(aa) + kumi::get<0>(cc) + z);
     r_t c(kumi::get<0>(cc));

@@ -17,7 +17,7 @@ namespace kyosu
   template<typename Options>
   struct sin_t : eve::elementwise_callable<sin_t, Options, raw_option, pedantic_option, radpi_option>
   {
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr Z operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -82,8 +82,7 @@ namespace kyosu
 {
   namespace _
   {
-    template<typename Z, eve::callable_options O>
-    KYOSU_FORCEINLINE constexpr Z sin_(KYOSU_DELAY(), O const& o, Z z) noexcept
+    template<typename Z, eve::callable_options O> constexpr Z sin_(KYOSU_DELAY(), O const& o, Z z) noexcept
     {
       if constexpr (kyosu::concepts::real<Z>) return eve::sin[o](z);
       else if constexpr (concepts::complex<Z>)

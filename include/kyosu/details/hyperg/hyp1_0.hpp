@@ -14,8 +14,7 @@ namespace kyosu::_
   //  1F0({a}; {}; z) = (1-z)^(-a)
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
-  template<typename Z, eve::sized_product_type<1> T1, eve::sized_product_type<0> T2>
-  KYOSU_FORCEINLINE auto hyperg(Z z, T1 aa, T2)
+  template<typename Z, eve::sized_product_type<1> T1, eve::sized_product_type<0> T2> auto hyperg(Z z, T1 aa, T2)
   {
     using r_t = decltype(kumi::get<0>(aa) + z);
     r_t a = kumi::get<0>(aa);

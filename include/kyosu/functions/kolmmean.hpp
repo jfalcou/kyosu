@@ -24,14 +24,14 @@ namespace kyosu
 
     template<typename F, typename G, concepts::cayley_dickson_like... Ts>
     requires(eve::same_lanes_or_scalar<Ts...>)
-    KYOSU_FORCEINLINE constexpr typename result<Ts...>::type operator()(F f, G g, Ts... ts) const noexcept
+    KYOSU_ABI constexpr typename result<Ts...>::type operator()(F f, G g, Ts... ts) const noexcept
     {
       return KYOSU_CALL(f, g, ts...);
     }
 
     template<typename F, typename G, eve::non_empty_product_type Tup>
     requires(eve::same_lanes_or_scalar_tuple<Tup> && !concepts::cayley_dickson_like<Tup>)
-    EVE_FORCEINLINE constexpr kumi::apply_traits_t<result, Tup> operator()(F f, G g, Tup const& t) const noexcept
+    KYOSU_ABI constexpr kumi::apply_traits_t<result, Tup> operator()(F f, G g, Tup const& t) const noexcept
     requires(kumi::size_v<Tup> >= 1)
     {
       return KYOSU_CALL(f, g, t);
@@ -102,14 +102,14 @@ namespace kyosu::_
            concepts::cayley_dickson_like T0,
            concepts::cayley_dickson_like... Ts,
            eve::callable_options O>
-  EVE_FORCEINLINE constexpr auto kolmmean_(KYOSU_DELAY(), O const& o, F f, G g, T0 t0, Ts... args) noexcept
+  constexpr auto kolmmean_(KYOSU_DELAY(), O const& o, F f, G g, T0 t0, Ts... args) noexcept
   {
     if constexpr (sizeof...(Ts) == 0) return t0;
     else return g(average[o](f(t0), f(args)...));
   }
 
   template<typename F, typename G, eve::non_empty_product_type Tup, eve::callable_options O>
-  EVE_FORCEINLINE constexpr auto kolmmean_(KYOSU_DELAY(), O const&, F f, G g, Tup tup) noexcept
+  constexpr auto kolmmean_(KYOSU_DELAY(), O const&, F f, G g, Tup tup) noexcept
   requires(!concepts::cayley_dickson_like<Tup>)
   {
     return kumi::map([f, g](auto... m) { return kolmmean(f, g, m...); }, tup);

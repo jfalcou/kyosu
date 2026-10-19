@@ -19,14 +19,14 @@ namespace kyosu
   {
 
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
+    KYOSU_ABI constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, K> operator()(Z const& z,
-                                                                                             K const& k) const noexcept
+    KYOSU_ABI constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, K> operator()(Z const& z,
+                                                                                     K const& k) const noexcept
     {
       return KYOSU_CALL(z, k);
     }
@@ -96,14 +96,13 @@ namespace kyosu
 {
   namespace _
   {
-    template<typename Z, eve::callable_options O>
-    KYOSU_FORCEINLINE constexpr auto acot_(KYOSU_DELAY(), O const& o, Z z) noexcept
+    template<typename Z, eve::callable_options O> constexpr auto acot_(KYOSU_DELAY(), O const& o, Z z) noexcept
     {
       return kyosu::atan[o](kyosu::rec(z));
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
-    KYOSU_FORCEINLINE constexpr auto acot_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+    constexpr auto acot_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
     requires(!O::contains(real_only))
     {
       using e_t = eve::element_type_t<decltype(real(z))>;
@@ -112,7 +111,7 @@ namespace kyosu
     }
 
     template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
-    KYOSU_FORCEINLINE constexpr auto acot_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+    constexpr auto acot_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
     requires(!O::contains(real_only))
     {
       return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), acot[o](z, k...));

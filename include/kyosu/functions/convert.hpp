@@ -14,20 +14,20 @@ namespace kyosu
   template<typename Options> struct convert_t : eve::callable<convert_t, Options>
   {
     template<concepts::cayley_dickson V, concepts::scalar_cayley_dickson Tgt>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<Tgt, V> operator()(V v, as<Tgt> tgt) const noexcept
+    KYOSU_ABI constexpr eve::as_wide_as_t<Tgt, V> operator()(V v, as<Tgt> tgt) const noexcept
     requires(dimension_v<V> <= dimension_v<Tgt>)
     {
       return KYOSU_CALL(v, tgt);
     }
 
     template<concepts::real V, concepts::scalar_cayley_dickson Tgt>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<Tgt, V> operator()(V v, as<Tgt> tgt) const noexcept
+    KYOSU_ABI constexpr eve::as_wide_as_t<Tgt, V> operator()(V v, as<Tgt> tgt) const noexcept
     {
       return KYOSU_CALL(v, tgt);
     }
 
     template<concepts::real V, concepts::scalar_real Tgt>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<Tgt, V> operator()(V v, as<Tgt> tgt) const noexcept
+    KYOSU_ABI constexpr eve::as_wide_as_t<Tgt, V> operator()(V v, as<Tgt> tgt) const noexcept
     {
       return KYOSU_CALL(v, tgt);
     }
@@ -80,7 +80,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename T, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto convert_(KYOSU_DELAY(), O const&, T const& v, as<Z>) noexcept
+  constexpr auto convert_(KYOSU_DELAY(), O const&, T const& v, as<Z>) noexcept
   {
     if constexpr (std::same_as<T, Z>) return v;
     else if constexpr (concepts::cayley_dickson<Z>)

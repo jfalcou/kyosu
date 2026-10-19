@@ -16,7 +16,7 @@ namespace kyosu
     : eve::strict_elementwise_callable<dist_t, Options, raw_option, eve::pedantic_option, eve::numeric_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
-    KYOSU_FORCEINLINE constexpr as_real_type_t<as_cayley_dickson_like_t<Z0, Z1>> operator()(Z0 c0, Z1 c1) const noexcept
+    KYOSU_ABI constexpr as_real_type_t<as_cayley_dickson_like_t<Z0, Z1>> operator()(Z0 c0, Z1 c1) const noexcept
     {
       return KYOSU_CALL(c0, c1);
     }
@@ -79,7 +79,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z0, typename Z1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto dist_(KYOSU_DELAY(), O const&, Z0 c0, Z1 c1) noexcept
+  constexpr auto dist_(KYOSU_DELAY(), O const&, Z0 c0, Z1 c1) noexcept
   {
     auto d = kyosu::abs(c0 - c1);
 

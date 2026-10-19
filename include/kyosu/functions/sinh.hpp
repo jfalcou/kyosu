@@ -16,7 +16,7 @@ namespace kyosu
 {
   template<typename Options> struct sinh_t : eve::elementwise_callable<sinh_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr Z operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -85,8 +85,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto sinh_(KYOSU_DELAY(), O const&, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto sinh_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (kyosu::concepts::real<Z>) return eve::sinh(z);
     else if constexpr (concepts::complex<Z>)

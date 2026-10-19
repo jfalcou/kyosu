@@ -17,7 +17,7 @@ namespace kyosu
   struct to_cylindrospherical_t
     : eve::callable<to_cylindrospherical_t, Options, raw_option, pedantic_option, radpi_option>
   {
-    template<concepts::real V> KYOSU_FORCEINLINE constexpr kumi::tuple<V, V, V, V> operator()(V const& v) const noexcept
+    template<concepts::real V> KYOSU_ABI constexpr kumi::tuple<V, V, V, V> operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
       return kumi::tuple{v, z, z, z};
@@ -25,7 +25,7 @@ namespace kyosu
 
     template<concepts::cayley_dickson Q>
     requires(dimension_v<Q> <= 4)
-    KYOSU_FORCEINLINE constexpr kumi::tuple<as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>>
+    KYOSU_ABI constexpr kumi::tuple<as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>, as_real_type_t<Q>>
     operator()(Q const& q) const noexcept
     {
       auto q0 = real(q);

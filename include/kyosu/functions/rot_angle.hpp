@@ -19,7 +19,7 @@ namespace kyosu
 
     template<concepts::cayley_dickson Z>
     requires(dimension_v<Z> <= 4)
-    KYOSU_FORCEINLINE constexpr auto operator()(Z const& q) const noexcept
+    KYOSU_ABI constexpr auto operator()(Z const& q) const noexcept
     {
       return 2 * eve::atan2[this->options()][eve::pedantic](kyosu::abs(kyosu::pure(q)), kyosu::real(q));
     }

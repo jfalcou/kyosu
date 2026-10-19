@@ -15,10 +15,10 @@ namespace kyosu
   struct from_multipolar_t : eve::callable<from_multipolar_t, Options, raw_option, pedantic_option, radpi_option>
   {
     template<concepts::real U, concepts::real V, concepts::real W, concepts::real T>
-    KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(V const& rho1,
-                                                                                         U const& theta1,
-                                                                                         W const& rho2,
-                                                                                         T const& theta2) const noexcept
+    KYOSU_ABI constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(V const& rho1,
+                                                                                 U const& theta1,
+                                                                                 W const& rho2,
+                                                                                 T const& theta2) const noexcept
     {
       auto [a0, a1] = kyosu::from_polar[this->options()](rho1, theta1);
       auto [a2, a3] = kyosu::from_polar[this->options()](rho2, theta2);

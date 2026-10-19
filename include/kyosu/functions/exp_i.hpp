@@ -15,8 +15,7 @@ namespace kyosu
   template<typename Options>
   struct exp_i_t : kyosu::promoting_elementwise_callable<exp_i_t, Options, radpi_option, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -73,8 +72,7 @@ namespace kyosu
 {
   namespace _
   {
-    template<typename Z, eve::callable_options O>
-    KYOSU_FORCEINLINE constexpr auto exp_i_(KYOSU_DELAY(), O const& o, Z z) noexcept
+    template<typename Z, eve::callable_options O> constexpr auto exp_i_(KYOSU_DELAY(), O const& o, Z z) noexcept
     {
       if constexpr (concepts::real<Z>)
       {

@@ -11,7 +11,7 @@
 
 namespace kyosu::_
 {
-  KYOSU_FORCEINLINE auto dcv_poly_calc(auto a, auto b, auto c, auto z)
+  auto dcv_poly_calc(auto a, auto b, auto c, auto z)
   {
     auto mod_a2 = sqr_abs(a);
     auto mod_b2 = sqr_abs(b);
@@ -28,12 +28,12 @@ namespace kyosu::_
     return coefficients{dcv0, dcv1, dcv2, dcv3};
   }
 
-  KYOSU_FORCEINLINE auto dcv_calc(auto dcv_coefs, auto x)
+  auto dcv_calc(auto dcv_coefs, auto x)
   {
     return reverse_horner(x, dcv_coefs);
   }
 
-  KYOSU_FORCEINLINE auto min_n_calc(auto dcv_coefs)
+  auto min_n_calc(auto dcv_coefs)
   {
     auto c1 = get<1>(dcv_coefs);
     auto c2 = get<2>(dcv_coefs);

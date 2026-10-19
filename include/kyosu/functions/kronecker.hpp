@@ -23,14 +23,14 @@ namespace kyosu
 
     template<concepts::cayley_dickson_like T0, concepts::cayley_dickson_like T1, concepts::cayley_dickson_like... Ts>
     requires(eve::same_lanes_or_scalar<T0, T1, Ts...>)
-    EVE_FORCEINLINE typename result<T0, T1, Ts...>::type constexpr operator()(T0 t0, T1 t1, Ts... ts) const noexcept
+    KYOSU_ABI typename result<T0, T1, Ts...>::type constexpr operator()(T0 t0, T1 t1, Ts... ts) const noexcept
     {
       return KYOSU_CALL(t0, t1, ts...);
     }
 
     template<eve::non_empty_product_type Tup>
     requires(eve::same_lanes_or_scalar_tuple<Tup>)
-    EVE_FORCEINLINE constexpr kumi::apply_traits_t<result, Tup> operator()(Tup const& t) const noexcept
+    KYOSU_ABI constexpr kumi::apply_traits_t<result, Tup> operator()(Tup const& t) const noexcept
     requires(kumi::size_v<Tup> >= 2)
     {
       return KYOSU_CALL(t);
@@ -86,8 +86,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::callable_options O, typename T0, typename T1, typename... Ts>
-  EVE_FORCEINLINE constexpr auto kronecker_(
-    KYOSU_DELAY(), O const&, T0 const& t0, T1 const& t1, Ts const&... ts) noexcept
+  constexpr auto kronecker_(KYOSU_DELAY(), O const&, T0 const& t0, T1 const& t1, Ts const&... ts) noexcept
   {
     using r_t = kyosu::as_real_type_t<kyosu::as_cayley_dickson_like_t<T0, T1, Ts...>>;
     if constexpr (sizeof...(Ts) == 0) return kyosu::if_else(is_equal(t0, t1), kyosu::one(eve::as<r_t>()), zero);

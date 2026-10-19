@@ -15,7 +15,7 @@ namespace kyosu
 {
   template<typename Options> struct cosh_t : eve::elementwise_callable<cosh_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr Z operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -86,7 +86,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O> constexpr KYOSU_FORCEINLINE Z cosh_(KYOSU_DELAY(), O const&, Z const& z)
+  template<typename Z, eve::callable_options O> constexpr Z cosh_(KYOSU_DELAY(), O const&, Z const& z)
   {
     if constexpr (concepts::real<Z>) return eve::cosh(z);
     if constexpr (concepts::complex<Z>)

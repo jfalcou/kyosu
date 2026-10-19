@@ -15,7 +15,7 @@ namespace kyosu
 {
   template<typename Options> struct gd_t : eve::elementwise_callable<gd_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr Z operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -69,8 +69,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto gd_(KYOSU_DELAY(), O const&, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto gd_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::gd(z);
     else if constexpr (concepts::complex<Z>) return 2 * kyosu::atan(tanh(z * kyosu::half(as(z))));

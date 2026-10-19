@@ -13,7 +13,7 @@ namespace kyosu
   template<typename Options>
   struct nearest_t : eve::elementwise_callable<nearest_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr Z operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -64,8 +64,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto nearest_(KYOSU_DELAY(), O const&, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto nearest_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (kyosu::concepts::real<Z>) return eve::nearest(z);
     else return Z{kumi::map(eve::nearest, z)};

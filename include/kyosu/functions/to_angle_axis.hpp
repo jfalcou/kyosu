@@ -19,7 +19,7 @@ namespace kyosu
   {
     template<typename Q>
     requires((concepts::cayley_dickson<Q> && dimension_v<Q> <= 4) || concepts::real<Q>)
-    KYOSU_FORCEINLINE constexpr auto operator()(Q q0) const noexcept
+    KYOSU_ABI constexpr auto operator()(Q q0) const noexcept
     {
       auto q = quaternion(sign(q0));
       using e_t = std::decay_t<decltype(real(q))>;

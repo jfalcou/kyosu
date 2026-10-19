@@ -14,8 +14,7 @@ namespace kyosu
 {
   template<typename Options> struct eta_t : eve::elementwise_callable<eta_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -69,8 +68,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto eta_(KYOSU_DELAY(), O const& o, Z const& z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto eta_(KYOSU_DELAY(), O const& o, Z const& z) noexcept
   {
     return kyosu::deta[o](1u, z);
   }

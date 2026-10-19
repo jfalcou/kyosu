@@ -14,7 +14,7 @@ namespace kyosu
 {
   template<typename Options> struct erfcx_t : eve::elementwise_callable<erfcx_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr Z operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -68,8 +68,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto erfcx_(KYOSU_DELAY(), O const&, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto erfcx_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::erfcx(z);
     else if constexpr (concepts::complex<Z>)

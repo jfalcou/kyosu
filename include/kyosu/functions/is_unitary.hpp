@@ -14,7 +14,7 @@ namespace kyosu
   struct is_unitary_t : eve::elementwise_callable<is_unitary_t, Options, eve::raw_option, eve::pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
+    KYOSU_ABI constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -75,8 +75,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto is_unitary_(KYOSU_DELAY(), O const&, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto is_unitary_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     using ar_t = decltype(kyosu::sqr_abs(z));
     if constexpr (O::contains(eve::pedantic))

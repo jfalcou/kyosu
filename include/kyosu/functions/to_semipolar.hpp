@@ -16,7 +16,7 @@ namespace kyosu
   template<typename Options>
   struct to_semipolar_t : eve::callable<to_semipolar_t, Options, raw_option, pedantic_option, radpi_option>
   {
-    template<concepts::real V> KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
+    template<concepts::real V> KYOSU_ABI constexpr auto operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
       return kumi::tuple{eve::abs(v), eve::arg[this->options()](v), z, z};
@@ -24,7 +24,7 @@ namespace kyosu
 
     template<concepts::cayley_dickson Z>
     requires(dimension_v<Z> <= 4)
-    KYOSU_FORCEINLINE constexpr auto operator()(Z q) const noexcept
+    KYOSU_ABI constexpr auto operator()(Z q) const noexcept
     {
       auto c0 = complex(real(q), imag(q));
       if constexpr (kyosu::concepts::complex<Z>)

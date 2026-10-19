@@ -24,7 +24,7 @@ namespace kyosu
   template<typename Options> struct pow_t : eve::callable<pow_t, Options, raw_option, real_only_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1) const noexcept
+    KYOSU_ABI constexpr auto operator()(Z0 z0, Z1 z1) const noexcept
       -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
     requires(!eve::integral_scalar_value<Z1> && !Options::contains(real_only))
     {
@@ -32,7 +32,7 @@ namespace kyosu
     }
 
     template<concepts::cayley_dickson_like Z0, eve::integral_scalar_value Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Z1 z1) const noexcept -> complexify_t<Z0>
+    KYOSU_ABI constexpr auto operator()(Z0 z0, Z1 z1) const noexcept -> complexify_t<Z0>
     requires(!Options::contains(real_only))
     {
       if constexpr (concepts::real<Z0>) return (*this)(complex(z0), z1);
@@ -40,7 +40,7 @@ namespace kyosu
     }
 
     template<concepts::real Z0, concepts::real Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const& z1) const noexcept
+    KYOSU_ABI constexpr auto operator()(Z0 const& z0, Z1 const& z1) const noexcept
       -> complexify_t<kyosu::as_cayley_dickson_like_t<Z0, Z1>>
     requires(Options::contains(real_only))
     {

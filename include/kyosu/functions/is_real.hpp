@@ -13,8 +13,7 @@ namespace kyosu
   template<typename Options>
   struct is_real_t : eve::elementwise_callable<is_real_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z c) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr eve::as_logical_t<Z> operator()(Z c) const noexcept
     {
       return KYOSU_CALL(c);
     }
@@ -65,7 +64,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> is_real_(KYOSU_DELAY(), O const&, Z c) noexcept
+  constexpr eve::as_logical_t<Z> is_real_(KYOSU_DELAY(), O const&, Z c) noexcept
   {
     if constexpr (kyosu::concepts::real<Z>) return eve::true_(eve::as(c));
     else if constexpr (kyosu::concepts::complex<Z>) return eve::is_eqz(ipart(c));

@@ -86,21 +86,21 @@ namespace kyosu
     //==================================================================================================================
 
     //! Pre-incrementation operator
-    KYOSU_FORCEINLINE auto& operator++() noexcept
+    KYOSU_ABI auto& operator++() noexcept
     {
       kumi::get<0>(contents)++;
       return *this;
     }
 
     //! Pre-decrementation operator
-    KYOSU_FORCEINLINE auto& operator--() noexcept
+    KYOSU_ABI auto& operator--() noexcept
     {
       kumi::get<0>(contents)--;
       return *this;
     }
 
     //! Post-incrementation operator
-    KYOSU_FORCEINLINE auto operator++(int) noexcept
+    KYOSU_ABI auto operator++(int) noexcept
     {
       auto that(*this);
       this->operator++();
@@ -108,7 +108,7 @@ namespace kyosu
     }
 
     //! Post-decrementation operator
-    KYOSU_FORCEINLINE auto operator--(int) noexcept
+    KYOSU_ABI auto operator--(int) noexcept
     {
       auto that(*this);
       this->operator--();

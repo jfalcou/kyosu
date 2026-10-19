@@ -15,10 +15,10 @@ namespace kyosu
   struct from_spherical_t : eve::callable<from_spherical_t, Options, raw_option, pedantic_option, radpi_option>
   {
     template<concepts::real U, concepts::real V, concepts::real W, concepts::real T>
-    KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(V const& rho,
-                                                                                         U const& theta,
-                                                                                         W const& phi1,
-                                                                                         T const& phi2) const noexcept
+    KYOSU_ABI constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(V const& rho,
+                                                                                 U const& theta,
+                                                                                 W const& phi1,
+                                                                                 T const& phi2) const noexcept
     {
       auto o = this->options();
       auto [st, ct] = eve::sincos[o](theta);

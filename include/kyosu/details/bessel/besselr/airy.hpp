@@ -27,7 +27,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   // zet
   //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE auto zet(Z z) noexcept
+  template<typename Z> auto zet(Z z) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;
     auto sqz = sqrt(z);
@@ -38,7 +38,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   // ai
   //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE Z ai(Z z) noexcept
+  template<typename Z> Z ai(Z z) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;
     auto third = eve::third(as<u_t>());
@@ -79,7 +79,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   // bi
   //===-------------------------------------------------------------------------------------------
-  template<typename Z> KYOSU_FORCEINLINE auto bi(Z z) noexcept
+  template<typename Z> auto bi(Z z) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;
     auto third = eve::third(as<u_t>());

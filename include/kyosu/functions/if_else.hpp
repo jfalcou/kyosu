@@ -16,15 +16,15 @@ namespace kyosu
   {
     template<typename M, typename T, typename F>
     requires(concepts::cayley_dickson<T> || concepts::cayley_dickson<F>)
-    KYOSU_FORCEINLINE constexpr expected_result_t<eve::if_else, M, T, F> operator()(M const& m,
-                                                                                    T const& t,
-                                                                                    F const& f) const noexcept
+    KYOSU_ABI constexpr expected_result_t<eve::if_else, M, T, F> operator()(M const& m,
+                                                                            T const& t,
+                                                                            F const& f) const noexcept
     {
       return KYOSU_CALL(m, t, f);
     }
 
     template<typename M, typename T, typename F>
-    KYOSU_FORCEINLINE constexpr auto operator()(M const& m, T const& t, F const& f) const noexcept
+    KYOSU_ABI constexpr auto operator()(M const& m, T const& t, F const& f) const noexcept
       -> decltype(eve::if_else(m, t, f))
     {
       return eve::if_else(m, t, f);
@@ -77,7 +77,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename M, typename Z1, typename Z2, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto if_else_(KYOSU_DELAY(), O const&, M const& m, Z1 const& t, Z2 const& f) noexcept
+  constexpr auto if_else_(KYOSU_DELAY(), O const&, M const& m, Z1 const& t, Z2 const& f) noexcept
   {
     if constexpr (concepts::cayley_dickson<Z1> && concepts::cayley_dickson<Z2>)
     {

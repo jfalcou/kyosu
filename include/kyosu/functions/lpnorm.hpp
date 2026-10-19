@@ -16,7 +16,7 @@ namespace kyosu
   {
     template<typename P, typename Z1, typename... Zs>
     requires(concepts::real<P>, concepts::cayley_dickson<Z1> || (concepts::cayley_dickson<Zs> || ...))
-    KYOSU_FORCEINLINE constexpr auto operator()(P p, Z1 const& z1, Zs const&... zs) const noexcept
+    KYOSU_ABI constexpr auto operator()(P p, Z1 const& z1, Zs const&... zs) const noexcept
       -> decltype(eve::lpnorm(p, real(z1), real(zs)...))
     {
       if constexpr (sizeof...(zs) == 0) return kyosu::abs(z1);
@@ -24,15 +24,14 @@ namespace kyosu
     }
 
     template<concepts::real P, concepts::real V1, concepts::real... Vs>
-    KYOSU_FORCEINLINE constexpr auto operator()(P p, V1 v1, Vs... vs) const noexcept
+    KYOSU_ABI constexpr auto operator()(P p, V1 v1, Vs... vs) const noexcept
       -> decltype(eve::lpnorm(p, real(v1), real(vs)...))
     {
       return eve::lpnorm(p, v1, vs...);
     }
 
     template<concepts::real P, eve::non_empty_product_type Tup>
-    KYOSU_FORCEINLINE constexpr auto operator()(P p, Tup tup) const noexcept
-      -> decltype(eve::lpnorm(p, kumi::map(real, tup)))
+    KYOSU_ABI constexpr auto operator()(P p, Tup tup) const noexcept -> decltype(eve::lpnorm(p, kumi::map(real, tup)))
     {
       return eve::lpnorm(p, kumi::map(abs, tup));
     }

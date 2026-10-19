@@ -16,7 +16,7 @@ namespace kyosu
   template<typename Options>
   struct to_spherical_t : eve::callable<to_spherical_t, Options, raw_option, pedantic_option, radpi_option>
   {
-    template<concepts::real V> KYOSU_FORCEINLINE constexpr auto operator()(V const& v) const noexcept
+    template<concepts::real V> KYOSU_ABI constexpr auto operator()(V const& v) const noexcept
     {
       auto z = eve::zero(eve::as(v));
       return kumi::tuple{eve::abs(v), eve::arg[this->options()](v), z, z};
@@ -24,7 +24,7 @@ namespace kyosu
 
     template<concepts::cayley_dickson Q>
     requires(dimension_v<Q> <= 4)
-    KYOSU_FORCEINLINE constexpr auto operator()(Q q) const noexcept
+    KYOSU_ABI constexpr auto operator()(Q q) const noexcept
     {
       if constexpr (kyosu::concepts::complex<Q>)
       {
