@@ -19,7 +19,7 @@ int main()
             << sinh(kyosu::quaternion_t<double>(1., 2., 3., 4.)) << "\n";
 
   std::cout << "SIMD:        ";
-  using wc_t = eve::wide<kyosu::complex_t<double>, eve::fixed<2>>;
+  using wc_t = eve::wide<kyosu::complex_t<double>, 2>;
   std::cout << wc_t(kyosu::complex_t<double>(1.3, -3.7)) << " -> " << sinh(wc_t(kyosu::complex_t<double>(1.3, -3.7)))
             << "\n";
 

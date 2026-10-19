@@ -27,7 +27,7 @@ TTS_CASE_WITH("Check kyosu::cbrt over real", kyosu::simd_real_types, tts::random
 <typename T>(T r0)
 {
   // primary root
-  using wi_t = eve::wide<unsigned int, eve::fixed<T::size()>>;
+  using wi_t = eve::wide<unsigned int, T::size()>;
   using e_t = eve::element_type_t<T>;
   T fn(eve::floor(eve::iota(eve::as<T>()) / 2) + 1);
   wi_t n(eve::iota(eve::as<wi_t>()) / 2 + 1);
@@ -54,7 +54,7 @@ TTS_CASE_WITH("Check kyosu::cbrt over complex", kyosu::simd_real_types, tts::ran
 <typename T>(T r0, T i0)
 {
   auto c0 = kyosu::complex(r0, i0);
-  using wi_t = eve::wide<unsigned int, eve::fixed<T::size()>>;
+  using wi_t = eve::wide<unsigned int, T::size()>;
   using e_t = eve::element_type_t<T>;
   T fn(eve::floor(eve::iota(eve::as<T>()) / 2) + 1);
   wi_t n(eve::iota(eve::as<wi_t>()) / 2 + 1);

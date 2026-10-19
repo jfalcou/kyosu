@@ -5,7 +5,7 @@
 int main()
 {
   using kyosu::deta;
-  using wide_ft = eve::wide<float, eve::fixed<4>>;
+  using wide_ft = eve::wide<float, 4>;
 
   wide_ft ref1 = {3.0f, 2.0f, 1.0f, 0.6f};
   wide_ft imf1 = {2.0f, -1.0, -5.0, 0.0};

@@ -11,8 +11,8 @@ int main()
   using e_t = float;
   using c_t = kyosu::complex_t<float>;
   using q_t = kyosu::quaternion_t<float>;
-  using wc_t = eve::wide<c_t, eve::fixed<4>>;
-  using wq_t = eve::wide<q_t, eve::fixed<4>>;
+  using wc_t = eve::wide<c_t, 4>;
+  using wq_t = eve::wide<q_t, 4>;
 
   e_t nan = eve::nan(as<e_t>());
   e_t inf = eve::inf(as<e_t>());

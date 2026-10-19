@@ -12,7 +12,7 @@ TTS_CASE_WITH("Check kyosu::nthroot over real", kyosu::simd_real_types, tts::ran
 <typename T>(T r0)
 {
   // primary root
-  using wi_t = eve::wide<unsigned int, eve::fixed<T::size()>>;
+  using wi_t = eve::wide<unsigned int, T::size()>;
   T fn(eve::floor(eve::iota(eve::as<T>()) / 2) + 1);
   wi_t n(eve::iota(eve::as<wi_t>()) / 2 + 1);
 
@@ -62,7 +62,7 @@ TTS_CASE_WITH("Check kyosu::nthroot over complex", kyosu::simd_real_types, tts::
   using e_t = eve::element_type_t<T>;
   using ce_t = kyosu::complex_t<T>;
   auto c0 = kyosu::complex(r0, i0);
-  using wi_t = eve::wide<unsigned int, eve::fixed<T::size()>>;
+  using wi_t = eve::wide<unsigned int, T::size()>;
   T fn(eve::floor(eve::iota(eve::as<T>()) / 2) + 1);
   wi_t n(eve::iota(eve::as<wi_t>()) / 2 + 1);
   TTS_RELATIVE_EQUAL(kyosu::pow(kyosu::nthroot(c0, n), fn), kyosu::complex(c0), tts::prec<T>());

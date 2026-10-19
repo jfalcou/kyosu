@@ -168,7 +168,7 @@ namespace kyosu::_
 {
   template<typename T, unsigned int N> inline constexpr unsigned int rank<cayley_dickson<T, N>> = N;
 
-  template<typename T, unsigned int N, typename L>
+  template<typename T, unsigned int N, eve::width_type L>
   inline constexpr unsigned int rank<eve::wide<cayley_dickson<T, N>, L>> = N;
 }
 

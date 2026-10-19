@@ -30,7 +30,7 @@ namespace kyosu::_
   template<typename T> struct sema<eve::logical<T>> : sema<T>
   {
   };
-  template<typename T, typename N> struct sema<eve::wide<T, N>>
+  template<typename T, eve::width_type N> struct sema<eve::wide<T, N>>
   {
     using type = eve::wide<eve::underlying_type_t<T>>;
   };
@@ -43,8 +43,8 @@ namespace kyosu::_
 
   // Convert a Base type to a potential wide if any appear in T...
   template<typename Base, typename... T>
-  using widen = std::conditional_t<std::max({eve::cardinal_v<T>...}) != 1ULL,
-                                   eve::as_wide_t<Base, eve::fixed<std::max({eve::cardinal_v<T>...})>>,
+  using widen = std::conditional_t<std::max({eve::width_v<T>...}) != 1ULL,
+                                   eve::as_wide_t<Base, std::max({eve::width_v<T>...})>,
                                    eve::element_type_t<Base>>;
 }
 
@@ -88,7 +88,7 @@ namespace kyosu
   {
     using type = T;
   };
-  template<typename T, typename N> struct as_real_type<eve::wide<T, N>>
+  template<typename T, eve::width_type N> struct as_real_type<eve::wide<T, N>>
   {
     using type = eve::wide<typename as_real_type<T>::type, N>;
   };
@@ -122,9 +122,9 @@ namespace kyosu
   requires(Dim > 1)
   struct as_cayley_dickson_n<Dim, T>
   {
-    static constexpr auto card = eve::cardinal_v<T>;
+    static constexpr auto card = eve::width_v<T>;
     using cd_t = cayley_dickson<eve::as_floating_point_t<eve::underlying_type_t<T>>, Dim>;
-    using type = std::conditional_t<card != 1ULL, eve::wide<cd_t, eve::fixed<card>>, cd_t>;
+    using type = std::conditional_t<card != 1ULL, eve::wide<cd_t, card>, cd_t>;
   };
 
   template<typename... Ts> struct as_cayley_dickson_n<1, Ts...> : eve::common_value<_::sema_t<Ts>...>

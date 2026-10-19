@@ -16,7 +16,7 @@
 //!
 //! @godbolt{doc/tut_simd_wide.cpp}
 //!
-//! Two things to read in that output. The cardinal is not a constant of the library but of the
+//! Two things to read in that output. The width is not a constant of the library but of the
 //! machine you compile for — two on a plain x86-64, four with AVX, eight with AVX-512 — and the
 //! source never mentions it. And the rule from the previous page has not gone away: the square
 //! root of a register of reals is a register of *complex* numbers, since any of those reals might

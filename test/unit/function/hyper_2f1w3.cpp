@@ -83,7 +83,7 @@ TTS_CASE_TPL("Check hyper 2F1", kyosu::scalar_real_types)
       eve::wide c{n * hf + 1.5};
       auto zz = -kyosu::rec(z * z);
       auto r = kyosu::hypergeometric(zz, kumi::tuple{a, b}, kumi::tuple{c});
-      for (int i = 0; i < eve::cardinal_v<decltype(z)>; ++i)
+      for (int i = 0; i < eve::width_v<decltype(z)>; ++i)
       {
         auto rr = kyosu::hypergeometric(zz.get(i), kumi::tuple{a.get(i), b.get(i)}, kumi::tuple{c.get(i)});
         TTS_RELATIVE_EQUAL(r.get(i), rr, pr) << "i" << i << "\n";
@@ -154,7 +154,7 @@ TTS_CASE_TPL("Check hyper 2F1", kyosu::scalar_real_types)
       eve::wide c{n * hf + 1.5f};
       auto zz = -kyosu::rec(z * z);
       auto r = kyosu::hypergeometric(zz, kumi::tuple{a, b}, kumi::tuple{c});
-      for (int i = 0; i < eve::cardinal_v<decltype(z)>; ++i)
+      for (int i = 0; i < eve::width_v<decltype(z)>; ++i)
       {
         auto rr = kyosu::hypergeometric(zz.get(i), kumi::tuple{a.get(i), b.get(i)}, kumi::tuple{c.get(i)});
         TTS_RELATIVE_EQUAL(r.get(i), rr, pr) << "i" << i << "\n";

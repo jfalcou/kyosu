@@ -27,9 +27,9 @@ int main()
   std::cout << q << "\n";
 
   std::cout << "SIMD:        ";
-  eve::wide<kyosu::complex_t<double>, eve::fixed<2>> wz(kyosu::complex_t<double>(1.3, -3.7));
+  eve::wide<kyosu::complex_t<double>, 2> wz(kyosu::complex_t<double>(1.3, -3.7));
   std::cout << wz << " -> " << real(wz) << " => ";
-  real(wz) = eve::wide<double, eve::fixed<2>>{13.37, 63.24};
+  real(wz) = eve::wide<double, 2>{13.37, 63.24};
   std::cout << wz << "\n";
 
   return 0;

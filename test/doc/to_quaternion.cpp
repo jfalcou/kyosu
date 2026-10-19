@@ -22,7 +22,7 @@ int main()
   std::cout << "quaternion(c0, c1) -> " << quaternion(c0, c1) << "\n";
 
   std::cout << "SIMD quaternion:        \n";
-  using w_t = eve::wide<double, eve::fixed<2>>;
+  using w_t = eve::wide<double, 2>;
   w_t a(3.5f, -2.9f), b(1.0, -3.0);
   std::cout << "a = " << a << "\n";
   std::cout << "b = " << b << "\n";

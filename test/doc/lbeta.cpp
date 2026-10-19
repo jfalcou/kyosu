@@ -8,8 +8,8 @@ int main()
   using kyosu::lbeta;
   using e_t = float;
   using c_t = kyosu::complex_t<float>;
-  using we_t = eve::wide<float, eve::fixed<2>>;
-  using wc_t = eve::wide<kyosu::complex_t<float>, eve::fixed<2>>;
+  using we_t = eve::wide<float, 2>;
+  using wc_t = eve::wide<kyosu::complex_t<float>, 2>;
 
   std::cout << "Real:        " << "\n";
   e_t e0(1);

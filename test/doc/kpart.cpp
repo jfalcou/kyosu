@@ -23,9 +23,9 @@ int main()
   std::cout << q << "\n";
 
   std::cout << "SIMD:        ";
-  eve::wide<kyosu::quaternion_t<double>, eve::fixed<2>> wz(kyosu::quaternion_t<double>(1.3, -3.7, 4.2, -7.8));
+  eve::wide<kyosu::quaternion_t<double>, 2> wz(kyosu::quaternion_t<double>(1.3, -3.7, 4.2, -7.8));
   std::cout << wz << " -> " << kpart(wz) << " => ";
-  kpart(wz) = eve::wide<double, eve::fixed<2>>{13.37, 63.24};
+  kpart(wz) = eve::wide<double, 2>{13.37, 63.24};
   std::cout << wz << "\n";
 
   return 0;
