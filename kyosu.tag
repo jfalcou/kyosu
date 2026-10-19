@@ -59,31 +59,31 @@
       <arglist>(T0 v0, Ts... vs) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>KYOSU_FORCEINLINE auto &amp;</type>
+      <type>KYOSU_ABI auto &amp;</type>
       <name>operator++</name>
       <anchorfile>structkyosu_1_1cayley__dickson.html</anchorfile>
-      <anchor>a5212a7e8767444e76d7c054347716619</anchor>
+      <anchor>a5712bbb8c5f5da0fc620c7e1d5c82e32</anchor>
       <arglist>() noexcept</arglist>
     </member>
     <member kind="function">
-      <type>KYOSU_FORCEINLINE auto</type>
+      <type>KYOSU_ABI auto</type>
       <name>operator++</name>
       <anchorfile>structkyosu_1_1cayley__dickson.html</anchorfile>
-      <anchor>a2375cc6d41964418f819e04a5aee14cf</anchor>
+      <anchor>a23a8bb71392e0a35620b5adc7bc8b548</anchor>
       <arglist>(int) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>KYOSU_FORCEINLINE auto &amp;</type>
+      <type>KYOSU_ABI auto &amp;</type>
       <name>operator--</name>
       <anchorfile>structkyosu_1_1cayley__dickson.html</anchorfile>
-      <anchor>a348e923f3719df8b571cbbd1719177f2</anchor>
+      <anchor>acafcc5ef1aff0a76f584e37e2157f9ee</anchor>
       <arglist>() noexcept</arglist>
     </member>
     <member kind="function">
-      <type>KYOSU_FORCEINLINE auto</type>
+      <type>KYOSU_ABI auto</type>
       <name>operator--</name>
       <anchorfile>structkyosu_1_1cayley__dickson.html</anchorfile>
-      <anchor>abb849412f206b0f7ba1e48f4de76ca39</anchor>
+      <anchor>a0690ca3d51911de2aa85d0602009e379</anchor>
       <arglist>(int) noexcept</arglist>
     </member>
     <member kind="function">

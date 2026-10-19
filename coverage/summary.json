@@ -23,9 +23,9 @@
             "function_covered": 21,
             "function_percent": 100.0,
             "function_total": 21,
-            "line_covered": 6,
+            "line_covered": 5,
             "line_percent": 100.0,
-            "line_total": 6
+            "line_total": 5
         },
         {
             "branch_covered": 0,
@@ -2411,9 +2411,9 @@
             "function_covered": 77,
             "function_percent": 100.0,
             "function_total": 77,
-            "line_covered": 7,
+            "line_covered": 6,
             "line_percent": 100.0,
-            "line_total": 7
+            "line_total": 6
         },
         {
             "branch_covered": 0,
@@ -3032,8 +3032,8 @@
     "function_percent": 98.1,
     "function_total": 26000,
     "gcovr/summary_format_version": "0.6",
-    "line_covered": 4824,
+    "line_covered": 4822,
     "line_percent": 94.6,
-    "line_total": 5101,
+    "line_total": 5099,
     "root": "../../.."
 }
