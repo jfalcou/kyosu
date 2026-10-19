@@ -18,7 +18,7 @@ namespace kyosu::_
     using base_callable = Func<Opts>;
 
     template<typename T>
-    EVE_FORCEINLINE constexpr auto operator[](T t) const
+    constexpr auto operator[](T t) const
     requires(requires(base_callable const& b) { b[t]; })
     {
       auto new_traits = base_callable::base::operator[](t);
@@ -26,14 +26,14 @@ namespace kyosu::_
     }
 
     template<concepts::real T>
-    EVE_FORCEINLINE constexpr T operator()(as<T> const& v) const
+    constexpr T operator()(as<T> const& v) const
     requires(requires(base_callable const& b) { b(v); })
     {
       return base_callable::operator()(v);
     }
 
     template<concepts::cayley_dickson T>
-    EVE_FORCEINLINE constexpr T operator()(as<T> const&) const
+    constexpr T operator()(as<T> const&) const
     requires(requires(base_callable const& b) { b(as_real<T>{}); })
     {
       return T{base_callable::operator()(as_real<T>{})};

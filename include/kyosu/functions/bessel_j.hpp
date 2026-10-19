@@ -21,15 +21,15 @@ namespace kyosu
                                                        eve::cylindrical_option>
   {
     template<eve::scalar_value N, concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n, Z const& z) const noexcept
+    KYOSU_ABI constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n, Z const& z) const noexcept
     {
       return KYOSU_CALL(n, z);
     }
 
     template<eve::scalar_value N, concepts::complex_like Z, std::size_t S>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n,
-                                                                          Z const& z,
-                                                                          std::span<Z, S> js) const noexcept
+    KYOSU_ABI constexpr as_cayley_dickson_like_t<N, Z> operator()(N const& n,
+                                                                  Z const& z,
+                                                                  std::span<Z, S> js) const noexcept
     {
       return KYOSU_CALL(n, z, js);
     }
@@ -100,7 +100,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto bessel_j_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
+  constexpr auto bessel_j_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
   {
     if constexpr (concepts::complex<Z>)
     {
@@ -127,7 +127,7 @@ namespace kyosu::_
   }
 
   template<typename N, typename Z, typename JS, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto bessel_j_(KYOSU_DELAY(), O const&, N n, Z z, JS& js) noexcept
+  constexpr auto bessel_j_(KYOSU_DELAY(), O const&, N n, Z z, JS& js) noexcept
   {
     if constexpr (eve::integral_scalar_value<N>)
     {

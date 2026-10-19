@@ -23,13 +23,13 @@ namespace kyosu
     : eve::elementwise_callable<ellint_rc_t, Options, raw_option, pedantic_option, eve::threshold_option>
   {
     template<eve::floating_value T0, eve::floating_value T1>
-    constexpr KYOSU_FORCEINLINE as_cayley_dickson_like_t<T0, T1> operator()(T0 a, T1 b) const noexcept
+    constexpr KYOSU_ABI as_cayley_dickson_like_t<T0, T1> operator()(T0 a, T1 b) const noexcept
     {
       return eve::ellint_rc(a, b);
     }
 
     template<typename T0, typename T1>
-    constexpr KYOSU_FORCEINLINE as_cayley_dickson_like_t<T0, T1> operator()(T0 a, T1 b) const noexcept
+    constexpr KYOSU_ABI as_cayley_dickson_like_t<T0, T1> operator()(T0 a, T1 b) const noexcept
     requires(concepts::complex<T0> || concepts::complex<T1>)
     {
       return KYOSU_CALL(a, b);

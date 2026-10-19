@@ -25,14 +25,14 @@ namespace kyosu
 
     template<concepts::cayley_dickson_like... Ts>
     requires(eve::same_lanes_or_scalar<Ts...>)
-    EVE_FORCEINLINE typename result<Ts...>::type constexpr operator()(Ts... ts) const noexcept
+    KYOSU_ABI typename result<Ts...>::type constexpr operator()(Ts... ts) const noexcept
     {
       return KYOSU_CALL(ts...);
     }
 
     template<eve::non_empty_product_type Tup>
     requires(eve::same_lanes_or_scalar_tuple<Tup> && !concepts::cayley_dickson_like<Tup>)
-    EVE_FORCEINLINE constexpr kumi::apply_traits_t<result, Tup> operator()(Tup const& t) const noexcept
+    KYOSU_ABI constexpr kumi::apply_traits_t<result, Tup> operator()(Tup const& t) const noexcept
     requires(kumi::size_v<Tup> >= 1)
     {
       return KYOSU_CALL(t);
@@ -99,7 +99,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::callable_options O, concepts::cayley_dickson_like... Ts>
-  EVE_FORCEINLINE constexpr auto ldiv_(KYOSU_DELAY(), O const& o, Ts const&... ts) noexcept
+  constexpr auto ldiv_(KYOSU_DELAY(), O const& o, Ts const&... ts) noexcept
   {
     if constexpr (sizeof...(Ts) == 1) return kyosu::rec(ts...);
     else
@@ -113,7 +113,7 @@ namespace kyosu::_
   }
 
   template<eve::conditional_expr C, eve::callable_options O, typename T0, typename... Ts>
-  EVE_FORCEINLINE constexpr auto ldiv_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
+  constexpr auto ldiv_(KYOSU_DELAY(), C const& cond, O const&, T0 const& v0, Ts const&... vs) noexcept
   {
     auto that = ldiv(v0, vs...);
     return eve::_::mask_op(cond, eve::_::return_2nd, v0, that);

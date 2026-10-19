@@ -24,12 +24,12 @@ namespace kyosu
   struct exp_int_t : eve::elementwise_callable<exp_int_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like N, concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr eve::common_value_t<Z, N> operator()(N const& n, Z const& z) const noexcept
+    KYOSU_ABI constexpr eve::common_value_t<Z, N> operator()(N const& n, Z const& z) const noexcept
     {
       return KYOSU_CALL(n, z);
     }
 
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr Z operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(Z(1), z);
     }
@@ -138,7 +138,7 @@ namespace kyosu::_
   };
 
   template<typename N, typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr eve::common_value_t<Z, N> exp_int_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
+  constexpr eve::common_value_t<Z, N> exp_int_(KYOSU_DELAY(), O const&, N n, Z z) noexcept
   {
     using r_t = eve::common_value_t<Z, N>;
     using u_t = eve::underlying_type_t<r_t>;

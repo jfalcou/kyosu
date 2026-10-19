@@ -15,14 +15,14 @@ namespace kyosu
   struct cbrt_t : eve::strict_elementwise_callable<cbrt_t, Options, raw_option, real_only_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
+    KYOSU_ABI constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, K> operator()(Z const& z,
-                                                                                             K const& k) const noexcept
+    KYOSU_ABI constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, K> operator()(Z const& z,
+                                                                                     K const& k) const noexcept
     {
       return KYOSU_CALL(z, k);
     }
@@ -84,29 +84,28 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::value K, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  constexpr auto cbrt_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
   {
     using e_t = eve::element_type_t<decltype(real(z))>;
     auto kk = eve::convert(k, eve::as<e_t>());
     return kyosu::nthroot[o](z, e_t(3)) * kyosu::exp_ipi(2 * kk / 3);
   }
 
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), O const& o, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto cbrt_(KYOSU_DELAY(), O const& o, Z z) noexcept
   {
     using e_t = eve::element_type_t<decltype(real(z))>;
     return kyosu::nthroot[o](z, e_t(3));
   }
 
   template<concepts::real Z, eve::value K, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K k) noexcept
+  constexpr auto cbrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K k) noexcept
   {
     if constexpr (!O::contains(real_only)) return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), cbrt[o](z, k));
     else return eve::_::mask_op(cx, eve::_::return_2nd, z, eve::cbrt[o.drop(real_only)](z));
   }
 
   template<concepts::real Z, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto cbrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z) noexcept
+  constexpr auto cbrt_(KYOSU_DELAY(), C const& cx, O const& o, Z z) noexcept
   {
     if constexpr (!O::contains(real_only)) return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), cbrt[o](z));
     else return eve::_::mask_op(cx, eve::_::return_2nd, z, eve::cbrt[o.drop(real_only)](z));

@@ -17,7 +17,7 @@ namespace kyosu
     : eve::strict_elementwise_callable<lrising_factorial_t, Options, raw_option, pedantic_option, real_only_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const& z1) const noexcept
+    KYOSU_ABI constexpr auto operator()(Z0 const& z0, Z1 const& z1) const noexcept
       -> decltype(kyosu::log[this->options()](kyosu::rising_factorial[this->options()](z0, z1)))
     requires(eve::same_lanes_or_scalar<Z0, Z1>)
     {
@@ -25,7 +25,7 @@ namespace kyosu
     }
 
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, eve::value K>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& z0, Z1 const& z1, K const& k) const noexcept
+    KYOSU_ABI constexpr auto operator()(Z0 const& z0, Z1 const& z1, K const& k) const noexcept
       -> eve::as_wide_as_t<decltype(kyosu::log[this->options()](kyosu::rising_factorial[this->options()](z0, z1))), K>
     requires(eve::same_lanes_or_scalar<Z0, Z1> && !Options::contains(real_only))
     {
@@ -88,7 +88,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto lrising_factorial_(KYOSU_DELAY(), O const& o, Z0 z0, Z1 z1) noexcept
+  constexpr auto lrising_factorial_(KYOSU_DELAY(), O const& o, Z0 z0, Z1 z1) noexcept
   {
     if constexpr (concepts::real<Z0> && concepts::real<Z1> && O::contains(real_only))
     {
@@ -98,7 +98,7 @@ namespace kyosu::_
   }
 
   template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, eve::value K, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto lrising_factorial_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1, K k) noexcept
+  constexpr auto lrising_factorial_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1, K k) noexcept
   requires(!O::contains(real_only))
   {
     using e_t = eve::element_type_t<decltype(real(z0 + z1))>;
@@ -107,8 +107,7 @@ namespace kyosu::_
   }
 
   template<concepts::real Z0, concepts::real Z1, eve::value... K, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto lrising_factorial_(
-    KYOSU_DELAY(), C const& cx, O const&, Z0 z0, Z1 z1, K... k) noexcept
+  constexpr auto lrising_factorial_(KYOSU_DELAY(), C const& cx, O const&, Z0 z0, Z1 z1, K... k) noexcept
   requires(!O::contains(real_only))
   {
     return eve::_::mask_op(cx, eve::_::return_2nd, complex(z0), lrising_factorial(z0, z1, k...));

@@ -15,8 +15,7 @@ namespace kyosu
   struct lerp_t : eve::strict_elementwise_callable<lerp_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, concepts::real Z2>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 const& c0, Z1 const& c1, Z2 const& t) const noexcept
-      -> decltype(c0 + c1 + t)
+    KYOSU_ABI constexpr auto operator()(Z0 const& c0, Z1 const& c1, Z2 const& t) const noexcept -> decltype(c0 + c1 + t)
     {
       return KYOSU_CALL(c0, c1, t);
     }
@@ -74,7 +73,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z0, typename Z1, typename Z2, eve::callable_options O>
-  constexpr KYOSU_FORCEINLINE auto lerp_(KYOSU_DELAY(), O const&, Z0 const& c0, Z1 const& c1, Z2 const& t)
+  constexpr auto lerp_(KYOSU_DELAY(), O const&, Z0 const& c0, Z1 const& c1, Z2 const& t)
   {
     if constexpr (concepts::real<Z0> && concepts::real<Z1>) return eve::lerp(c0, c1, t);
     else

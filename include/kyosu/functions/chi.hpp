@@ -15,7 +15,7 @@ namespace kyosu
   struct chi_t : eve::strict_elementwise_callable<chi_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z, typename B>
-    KYOSU_FORCEINLINE constexpr Z operator()(Z const& z, B const& b) const noexcept
+    KYOSU_ABI constexpr Z operator()(Z const& z, B const& b) const noexcept
     {
       return KYOSU_CALL(z, b);
     }
@@ -69,7 +69,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, typename B, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto chi_(KYOSU_DELAY(), O const&, Z z, B const& b) noexcept
+  constexpr auto chi_(KYOSU_DELAY(), O const&, Z z, B const& b) noexcept
   {
     return kyosu::if_else(b(z), one(as(z)), zero);
   }

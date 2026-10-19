@@ -19,7 +19,7 @@ namespace kyosu
   {
     template<concepts::cayley_dickson_like Z1, concepts::cayley_dickson_like... Zs>
     requires(eve::same_lanes_or_scalar<Z1, Zs...>)
-    KYOSU_FORCEINLINE constexpr eve::common_type_t<as_real_type_t<Z1>, as_real_type_t<Zs>...> operator()(
+    KYOSU_ABI constexpr eve::common_type_t<as_real_type_t<Z1>, as_real_type_t<Zs>...> operator()(
       Z1 const& z1, Zs const&... zs) const noexcept
     {
       return KYOSU_CALL(z1, zs...);
@@ -78,7 +78,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::callable_options O, typename Z1, typename... Zs>
-  EVE_FORCEINLINE constexpr auto linfnorm_(KYOSU_DELAY(), O const&, Z1 const& z1, Zs const&... zs) noexcept
+  constexpr auto linfnorm_(KYOSU_DELAY(), O const&, Z1 const& z1, Zs const&... zs) noexcept
   {
     if constexpr (concepts::real<Z1> && (... && concepts::real<Zs>))
     {

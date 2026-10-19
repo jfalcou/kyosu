@@ -13,7 +13,7 @@ namespace kyosu
   template<typename Options> struct is_nan_t : eve::elementwise_callable<is_nan_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
+    KYOSU_ABI constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -62,8 +62,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto is_nan_(KYOSU_DELAY(), O const&, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto is_nan_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::is_nan(z);
     else return kumi::any_of(z, eve::is_nan);

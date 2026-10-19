@@ -18,8 +18,7 @@ namespace kyosu
   struct xi_t
     : kyosu::promoting_elementwise_callable<xi_t, Options, raw_option, pedantic_option, riemann_option, landau_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       if constexpr (concepts::real<Z>) return (*this)(complex(z));
       else if constexpr (concepts::complex<Z>) return KYOSU_CALL(z);
@@ -83,8 +82,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto xi_(KYOSU_DELAY(), O const& o, Z zz) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto xi_(KYOSU_DELAY(), O const& o, Z zz) noexcept
   {
     if constexpr (O::contains(landau)) return xi(kyosu::half(as(zz)) + kyosu::muli(zz));
     else if constexpr (concepts::complex<Z>)

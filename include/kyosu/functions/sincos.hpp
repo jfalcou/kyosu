@@ -18,7 +18,7 @@ namespace kyosu
   struct sincos_t : eve::callable<sincos_t, Options, raw_option, pedantic_option, radpi_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr eve::zipped<Z, Z> operator()(Z const& z) const noexcept
+    KYOSU_ABI constexpr eve::zipped<Z, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -73,8 +73,7 @@ namespace kyosu
 {
   namespace _
   {
-    template<typename Z, eve::callable_options O>
-    KYOSU_FORCEINLINE constexpr auto sincos_(KYOSU_DELAY(), O const& o, Z z) noexcept
+    template<typename Z, eve::callable_options O> constexpr auto sincos_(KYOSU_DELAY(), O const& o, Z z) noexcept
     {
       if constexpr (kyosu::concepts::real<Z>) return eve::sincos[o](z);
       else if constexpr (concepts::complex<Z>)

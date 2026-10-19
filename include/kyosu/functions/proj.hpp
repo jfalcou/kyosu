@@ -12,7 +12,7 @@ namespace kyosu
 {
   template<typename Options> struct proj_t : eve::elementwise_callable<proj_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr Z operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -66,8 +66,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto proj_(KYOSU_DELAY(), O const&, C c) noexcept
+  template<typename C, eve::callable_options O> constexpr auto proj_(KYOSU_DELAY(), O const&, C c) noexcept
   {
     using real_t = eve::as<as_real_type_t<C>>;
     if constexpr (kyosu::concepts::real<C>) return if_else(eve::is_infinite(c), eve::inf(as(c)), c);

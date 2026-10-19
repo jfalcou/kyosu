@@ -121,7 +121,7 @@ namespace kyosu::_
   //  cb_ik
   //===-------------------------------------------------------------------------------------------
   template<eve::floating_scalar_value N, typename Z, typename R1, typename R2>
-  KYOSU_FORCEINLINE auto cb_ik(N v, Z z, R1& is, R2& ks) noexcept
+  auto cb_ik(N v, Z z, R1& is, R2& ks) noexcept
   {
     auto in = cb_ir(v, z, is);
     auto kn = cb_kr(v, z, ks);

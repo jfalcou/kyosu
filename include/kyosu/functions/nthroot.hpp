@@ -18,16 +18,16 @@ namespace kyosu
   {
     // primary root
     template<concepts::cayley_dickson_like Z, eve::value N>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, N> operator()(Z const& z,
-                                                                                             N const& n) const noexcept
+    KYOSU_ABI constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, N> operator()(Z const& z,
+                                                                                     N const& n) const noexcept
     {
       return KYOSU_CALL(z, n);
     }
 
     // kth root
     template<concepts::cayley_dickson_like Z, eve::value N, eve::value K>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z>, K>, N>
-    operator()(Z const& z, N const& n, K const& k) const noexcept
+    KYOSU_ABI constexpr eve::as_wide_as_t<eve::as_wide_as_t<kyosu::complexify_if_t<Options, Z>, K>, N> operator()(
+      Z const& z, N const& n, K const& k) const noexcept
     requires(eve::same_lanes_or_scalar<Z, K>, eve::same_lanes_or_scalar<Z, N>)
     {
       return KYOSU_CALL(z, n, k);
@@ -92,7 +92,7 @@ namespace kyosu::_
 {
   //kth root
   template<typename Z, eve::value K, eve::value N, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto nthroot_(KYOSU_DELAY(), O const& o, Z zz, N n, K k) noexcept
+  constexpr auto nthroot_(KYOSU_DELAY(), O const& o, Z zz, N n, K k) noexcept
   requires(!O::contains(real_only))
   {
     using e_t = eve::element_type_t<decltype(real(zz))>;
@@ -111,7 +111,7 @@ namespace kyosu::_
 
   /// primary root
   template<typename Z, eve::floating_value N, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto nthroot_(KYOSU_DELAY(), O const& o, Z z, N n) noexcept
+  constexpr auto nthroot_(KYOSU_DELAY(), O const& o, Z z, N n) noexcept
   {
     if constexpr (O::contains(real_only) && concepts::real<Z>) return eve::nthroot[o.drop(real_only)](z, n);
     else if constexpr (concepts::real<Z>) return nthroot(complex(z), n);
@@ -119,7 +119,7 @@ namespace kyosu::_
   }
 
   template<typename Z, eve::integral_value N, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto nthroot_(KYOSU_DELAY(), O const& o, Z z, N n) noexcept
+  constexpr auto nthroot_(KYOSU_DELAY(), O const& o, Z z, N n) noexcept
   {
     using e_t = eve::element_type_t<kyosu::as_real_type_t<Z>>;
     auto nn = eve::convert(n, eve::as<e_t>());
@@ -127,7 +127,7 @@ namespace kyosu::_
   }
 
   template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto nthroot_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  constexpr auto nthroot_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
   {
     if constexpr (!O::contains(real_only))
       return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), nthroot[o](z, k...));

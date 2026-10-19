@@ -19,12 +19,12 @@ namespace kyosu::_
   // sb_jyn
   ////////////////////////////////
 
-  template<typename Z> KYOSU_FORCEINLINE auto sb_j0(Z z) noexcept
+  template<typename Z> auto sb_j0(Z z) noexcept
   {
     return sinc(z);
   }
 
-  template<typename Z> KYOSU_FORCEINLINE auto sb_j1(Z z) noexcept
+  template<typename Z> auto sb_j1(Z z) noexcept
   {
     auto rz = rec(z);
     return if_else(kyosu::abs(z) < eve::eps(eve::as(real(z))), eve::zero, (sinc(z) - cos(z)) * rz);
@@ -81,17 +81,17 @@ namespace kyosu::_
     return sb_jn(n, z, dummy);
   }
 
-  template<typename Z> KYOSU_FORCEINLINE auto sb_y0(Z z) noexcept
+  template<typename Z> auto sb_y0(Z z) noexcept
   {
     return -cos(z) / z;
   }
 
-  template<typename Z> KYOSU_FORCEINLINE auto sb_y1(Z z) noexcept
+  template<typename Z> auto sb_y1(Z z) noexcept
   {
     return -cos(z) / sqr(z) - sinc(z);
   }
 
-  template<eve::integral_scalar_value N, typename Z, typename R> KYOSU_FORCEINLINE auto sb_yn(N n, Z z, R& sys) noexcept
+  template<eve::integral_scalar_value N, typename Z, typename R> auto sb_yn(N n, Z z, R& sys) noexcept
   {
     auto m = eve::min(N(sys.size()), n + 1);
     auto sypred = sb_y0(z);

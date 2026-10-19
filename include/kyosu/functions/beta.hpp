@@ -25,8 +25,8 @@ namespace kyosu
     };
 
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1>
-    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, typename result<Z0, Z1>::type> operator()(
-      Z0 const& z0, Z1 const& z1) const noexcept
+    KYOSU_ABI constexpr complexify_if_t<Options, typename result<Z0, Z1>::type> operator()(Z0 const& z0,
+                                                                                           Z1 const& z1) const noexcept
     requires(eve::same_lanes_or_scalar<Z0, Z1>)
     {
       return KYOSU_CALL(z0, z1);
@@ -90,7 +90,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like Z1, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto beta_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
+  constexpr auto beta_(KYOSU_DELAY(), O const&, Z0 z0, Z1 z1) noexcept
   {
     if constexpr (concepts::real<Z0> && concepts::real<Z1>)
     {
@@ -105,7 +105,7 @@ namespace kyosu::_
   }
 
   template<concepts::real Z0, concepts::real Z1, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto beta_(KYOSU_DELAY(), C const& cx, O const&, Z0 z0, Z1 z1) noexcept
+  constexpr auto beta_(KYOSU_DELAY(), C const& cx, O const&, Z0 z0, Z1 z1) noexcept
   requires(!O::contains(real_only))
   {
     return eve::_::mask_op(cx, eve::_::return_2nd, complex(z0), beta(z0, z1));

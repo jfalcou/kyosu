@@ -16,8 +16,10 @@ namespace kyosu
     : eve::callable<from_cylindrospherical_t, Options, raw_option, pedantic_option, radpi_option>
   {
     template<concepts::real U, concepts::real V, concepts::real W, concepts::real T>
-    KYOSU_FORCEINLINE constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(
-      V const& t, U const& radius, W const& longitude, T const& latitude) const noexcept
+    KYOSU_ABI constexpr quaternion_t<eve::common_value_t<V, U, W, T>> operator()(V const& t,
+                                                                                 U const& radius,
+                                                                                 W const& longitude,
+                                                                                 T const& latitude) const noexcept
     {
       auto [slat, clat] = eve::sincos[this->options()](latitude);
       auto [slon, clon] = eve::sincos[this->options()](longitude);

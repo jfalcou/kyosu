@@ -12,7 +12,7 @@ namespace kyosu
 {
   template<typename Options> struct frac_t : eve::elementwise_callable<frac_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr Z operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -63,8 +63,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto frac_(KYOSU_DELAY(), O const&, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto frac_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (kyosu::concepts::real<Z>) return eve::frac(z);
     else return Z{kumi::map([](auto const& e) { return eve::frac(e); }, z)};

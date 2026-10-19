@@ -14,15 +14,15 @@ namespace kyosu
 {
   template<typename Options> struct make_complex_t : eve::callable<make_complex_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::complex Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& v) const noexcept { return v; }
+    template<concepts::complex Z> KYOSU_ABI constexpr Z operator()(Z const& v) const noexcept { return v; }
 
-    template<eve::floating_value T> KYOSU_FORCEINLINE constexpr complex_t<T> operator()(T r) const noexcept
+    template<eve::floating_value T> KYOSU_ABI constexpr complex_t<T> operator()(T r) const noexcept
     {
       return as_cayley_dickson_n_t<2, T>(r, T{0});
     }
 
     template<eve::floating_value R, eve::floating_value I>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_n_t<2, R, I> operator()(R r, I i) const noexcept
+    KYOSU_ABI constexpr as_cayley_dickson_n_t<2, R, I> operator()(R r, I i) const noexcept
     {
       return as_cayley_dickson_n_t<2, R, I>{r, i};
     }

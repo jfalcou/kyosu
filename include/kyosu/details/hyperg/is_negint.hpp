@@ -9,7 +9,7 @@
 
 namespace kyosu::_
 {
-  auto EVE_FORCEINLINE is_negint(auto n)
+  auto is_negint(auto n)
   {
     return kyosu::is_real(n) && eve::is_flint(real(n)) && eve::is_lez(real(n));
   }

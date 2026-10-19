@@ -23,7 +23,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sb_hr
   //===-------------------------------------------------------------------------------------------
-  template<int Kind, eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE auto sb_hr(N v, Z z) noexcept
+  template<int Kind, eve::floating_scalar_value N, typename Z> auto sb_hr(N v, Z z) noexcept
   {
     if constexpr (Kind == 1) return sb_jr(v, z) + muli(sb_yr(v, z));
     else return sb_jr(v, z) - muli(sb_yr(v, z));
@@ -33,7 +33,7 @@ namespace kyosu::_
   //  sb_h12r
   //===-------------------------------------------------------------------------------------------
   template<eve::floating_scalar_value N, typename Z, typename R1, typename R2>
-  KYOSU_FORCEINLINE auto sb_h12r(N n, Z z, R1& h1s, R2& h2s) noexcept
+  auto sb_h12r(N n, Z z, R1& h1s, R2& h2s) noexcept
   {
     auto an = int(eve::abs(n));
     EVE_ASSERT(int(size(h1s)) > an, "not enough room in h1s");
@@ -51,7 +51,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sb_h1r
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE auto sb_h1r(N v, Z z) noexcept
+  template<eve::floating_scalar_value N, typename Z> auto sb_h1r(N v, Z z) noexcept
   {
     return sb_jr(v, z) + muli(sb_yr(v, z));
   }
@@ -59,7 +59,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sb_h2r
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE auto sb_h2r(N v, Z z) noexcept
+  template<eve::floating_scalar_value N, typename Z> auto sb_h2r(N v, Z z) noexcept
   {
     return sb_jr(v, z) - muli(sb_yr(v, z));
   }

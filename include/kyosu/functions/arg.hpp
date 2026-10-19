@@ -14,8 +14,7 @@ namespace kyosu
 {
   template<typename Options> struct arg_t : eve::elementwise_callable<arg_t, Options, radpi_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z v) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr as_real_type_t<Z> operator()(Z v) const noexcept
     {
       return KYOSU_CALL(v);
     }
@@ -83,8 +82,7 @@ namespace kyosu
 {
   namespace _
   {
-    template<typename Z, eve::callable_options O>
-    KYOSU_FORCEINLINE constexpr auto arg_(KYOSU_DELAY(), O const& o, Z v) noexcept
+    template<typename Z, eve::callable_options O> constexpr auto arg_(KYOSU_DELAY(), O const& o, Z v) noexcept
     {
       if constexpr (concepts::real<Z>)
       {

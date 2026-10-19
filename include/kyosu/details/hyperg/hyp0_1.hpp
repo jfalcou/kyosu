@@ -19,8 +19,7 @@ namespace kyosu::_
   //  confluent hypergeometric limit function 0F1({}; {b}; z)
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
-  template<typename Z, eve::sized_product_type<0> T1, eve::sized_product_type<1> T2>
-  KYOSU_FORCEINLINE auto hyperg(Z z, T1, T2 aa)
+  template<typename Z, eve::sized_product_type<0> T1, eve::sized_product_type<1> T2> auto hyperg(Z z, T1, T2 aa)
   {
     using r_t = decltype(kumi::get<0>(aa) + z);
     using u_t = eve::underlying_type_t<r_t>;
@@ -72,7 +71,7 @@ namespace kyosu::_
   }
 
   template<typename Z, eve::sized_product_type<0> T1, eve::sized_product_type<1> T2>
-  KYOSU_FORCEINLINE auto hyperg(Z z, T1, T2 cc, decltype(kyosu::regularized))
+  auto hyperg(Z z, T1, T2 cc, decltype(kyosu::regularized))
   {
     using r_t = decltype(kumi::get<0>(T2()) + z);
     r_t c(kumi::get<0>(cc));

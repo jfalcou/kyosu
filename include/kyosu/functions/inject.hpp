@@ -12,8 +12,7 @@ namespace kyosu
 {
   template<typename Options> struct inject_t : eve::elementwise_callable<inject_t, Options, real_only_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -64,8 +63,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename R, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto inject_(KYOSU_DELAY(), O const&, R r) noexcept
+  template<typename R, eve::callable_options O> constexpr auto inject_(KYOSU_DELAY(), O const&, R r) noexcept
   {
     if constexpr (concepts::real<R>)
     {

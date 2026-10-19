@@ -15,8 +15,7 @@ namespace kyosu
   template<typename Options>
   struct abs_t : eve::elementwise_callable<abs_t, Options, pedantic_option, eve::raw_option, flat_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr as_real_type_t<Z> operator()(Z z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr as_real_type_t<Z> operator()(Z z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -77,8 +76,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto abs_(KYOSU_DELAY(), O const&, Z v) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto abs_(KYOSU_DELAY(), O const&, Z v) noexcept
   {
     if constexpr (concepts::real<Z>) return eve::abs(v);
     else if constexpr (O::contains(flat)) return eve::maxabs(kumi::flatten(kumi::make_tuple(v)));

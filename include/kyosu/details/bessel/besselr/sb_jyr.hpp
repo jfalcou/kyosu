@@ -17,8 +17,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sb_jr all
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z, std::size_t S>
-  KYOSU_FORCEINLINE auto sb_jr(N n, Z z, std::span<Z, S> vjs) noexcept
+  template<eve::floating_scalar_value N, typename Z, std::size_t S> auto sb_jr(N n, Z z, std::span<Z, S> vjs) noexcept
   {
     auto fac = sqrt(pio_2(as(real(z))) * rec(z));
     auto v = n + eve::half(eve::as<eve::underlying_type_t<Z>>());
@@ -30,7 +29,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sb_jr just last
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE auto sb_jr(N n, Z z) noexcept
+  template<eve::floating_scalar_value N, typename Z> auto sb_jr(N n, Z z) noexcept
   {
     auto dummy = std::span<Z, 0>();
     return sb_jr(n, z, dummy);
@@ -39,8 +38,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sb_yr all
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z, std::size_t S>
-  KYOSU_FORCEINLINE auto sb_yr(N n, Z z, std::span<Z, S> vys) noexcept
+  template<eve::floating_scalar_value N, typename Z, std::size_t S> auto sb_yr(N n, Z z, std::span<Z, S> vys) noexcept
   {
     auto fac = sqrt(pio_2(as(real(z))) * rec(z));
     auto v = n + eve::half(eve::as<eve::underlying_type_t<Z>>());
@@ -52,7 +50,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  sb_yr just last
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE auto sb_yr(N n, Z z) noexcept
+  template<eve::floating_scalar_value N, typename Z> auto sb_yr(N n, Z z) noexcept
   {
     auto dummy = std::span<Z, 0>();
     return sb_yr(n, z, dummy);

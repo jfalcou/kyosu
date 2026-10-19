@@ -18,8 +18,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //===-------------------------------------------------------------------------------------------
   // only works for aa having at least one non positive integer component  else the serie diverges
-  template<typename Z, eve::sized_product_type<2> T1, eve::sized_product_type<0> T2>
-  KYOSU_FORCEINLINE auto hyperg(Z z, T1 aa, T2)
+  template<typename Z, eve::sized_product_type<2> T1, eve::sized_product_type<0> T2> auto hyperg(Z z, T1 aa, T2)
   {
     using r_t = decltype(kumi::get<0>(aa) + kumi::get<1>(aa) + z);
     r_t a1 = kumi::get<0>(aa);

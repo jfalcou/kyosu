@@ -149,8 +149,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_yr all
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z, std::size_t S>
-  KYOSU_FORCEINLINE auto cb_yr(N v, Z z, std::span<Z, S> vys) noexcept
+  template<eve::floating_scalar_value N, typename Z, std::size_t S> auto cb_yr(N v, Z z, std::span<Z, S> vys) noexcept
   {
     auto n = std::size_t(abs(v));
     auto doit = [n, v, z, &vys](auto js, auto ys) {
@@ -165,7 +164,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_yr just last
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE auto cb_yr(N v, Z z) noexcept
+  template<eve::floating_scalar_value N, typename Z> auto cb_yr(N v, Z z) noexcept
   {
     auto dummy = std::span<Z, 0>();
     return cb_yr(v, z, dummy);
@@ -174,8 +173,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_jr all
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z, std::size_t S>
-  KYOSU_FORCEINLINE auto cb_jr(N v, Z z, std::span<Z, S> vjs) noexcept
+  template<eve::floating_scalar_value N, typename Z, std::size_t S> auto cb_jr(N v, Z z, std::span<Z, S> vjs) noexcept
   {
     auto n = std::size_t(abs(v));
     auto doit = [n, v, z, &vjs](auto js, auto ys) {
@@ -191,7 +189,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_jr just last
   //===-------------------------------------------------------------------------------------------
-  template<eve::floating_scalar_value N, typename Z> KYOSU_FORCEINLINE auto cb_jr(N v, Z z) noexcept
+  template<eve::floating_scalar_value N, typename Z> auto cb_jr(N v, Z z) noexcept
   {
     auto dummy = std::span<Z, 0>();
     return cb_jr(v, z, dummy);

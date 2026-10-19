@@ -14,8 +14,7 @@ namespace kyosu
   template<typename Options>
   struct faddeeva_t : kyosu::promoting_elementwise_callable<faddeeva_t, Options, raw_option, pedantic_option>
   {
-    template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_t<Z> operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr complexify_t<Z> operator()(Z const& z) const noexcept
     {
       if constexpr (concepts::real<Z>) return (*this)(complex(z));
       else return KYOSU_CALL(z);
@@ -70,8 +69,7 @@ namespace kyosu
 
 namespace kyosu::_
 {
-  template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto faddeeva_(KYOSU_DELAY(), O const&, Z z) noexcept
+  template<typename Z, eve::callable_options O> constexpr auto faddeeva_(KYOSU_DELAY(), O const&, Z z) noexcept
   {
     if constexpr (concepts::complex<Z>)
     {

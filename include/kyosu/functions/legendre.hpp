@@ -18,7 +18,7 @@ namespace kyosu
     : eve::strict_elementwise_callable<legendre_t, Options, raw_option, pedantic_option, eve::successor_option>
   {
     template<concepts::real N, concepts::cayley_dickson Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(N nn, Z zz) const noexcept -> decltype(nn + zz)
+    KYOSU_ABI constexpr auto operator()(N nn, Z zz) const noexcept -> decltype(nn + zz)
     {
       using r_t = decltype(nn + zz);
       using u_t = eve::underlying_type_t<r_t>;
@@ -30,21 +30,21 @@ namespace kyosu
     }
 
     template<concepts::real N, concepts::real Z>
-    KYOSU_FORCEINLINE constexpr auto operator()(N n, Z z) const noexcept -> decltype(n + complex(z))
+    KYOSU_ABI constexpr auto operator()(N n, Z z) const noexcept -> decltype(n + complex(z))
     {
       return (*this)(n, complex(z));
     }
 
     // Recurrence relation for Legendre polynomials:
     template<concepts::cayley_dickson Z, concepts::cayley_dickson T, concepts::real N>
-    KYOSU_FORCEINLINE constexpr auto operator()(N n, Z z, T pn, T pnm1) const noexcept -> decltype(z + pn)
+    KYOSU_ABI constexpr auto operator()(N n, Z z, T pn, T pnm1) const noexcept -> decltype(z + pn)
     {
       auto np1 = kyosu::inc(n);
       return ((n + np1) * z * pn - n * pnm1) / np1;
     }
 
     template<concepts::real Z, concepts::cayley_dickson T, concepts::real N>
-    KYOSU_FORCEINLINE constexpr auto operator()(N n, Z z, T pn, T pnm1) const noexcept -> decltype(z + pn)
+    KYOSU_ABI constexpr auto operator()(N n, Z z, T pn, T pnm1) const noexcept -> decltype(z + pn)
     {
       return (*this)(n, complex(z), pn, pnm1);
     }

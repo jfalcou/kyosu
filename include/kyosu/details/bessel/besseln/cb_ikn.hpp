@@ -27,7 +27,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_in just last
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE auto cb_in(N n, Z z) noexcept
+  template<eve::integral_scalar_value N, typename Z> auto cb_in(N n, Z z) noexcept
   {
     using e_t = as_real_type_t<Z>;
     auto miton = [](N n) {
@@ -43,7 +43,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_kn just last
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z> KYOSU_FORCEINLINE auto cb_kn(N n, Z z) noexcept
+  template<eve::integral_scalar_value N, typename Z> auto cb_kn(N n, Z z) noexcept
   {
     using u_t = eve::underlying_type_t<Z>;
     auto argz = arg(z);
@@ -63,7 +63,7 @@ namespace kyosu::_
   //  cb_ikn suppose allocatied is and ks
   //===-------------------------------------------------------------------------------------------
   template<eve::integral_scalar_value N, typename Z, typename R1, typename R2>
-  KYOSU_FORCEINLINE auto cb_ikn(N n, Z z, R1& is, R2& ks) noexcept
+  auto cb_ikn(N n, Z z, R1& is, R2& ks) noexcept
   requires(concepts::complex<Z> || concepts::real<Z>)
   {
     auto nn = eve::abs(n);

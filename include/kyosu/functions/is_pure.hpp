@@ -14,7 +14,7 @@ namespace kyosu
   struct is_pure_t : eve::elementwise_callable<is_pure_t, Options, raw_option, pedantic_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
+    KYOSU_ABI constexpr eve::as_logical_t<Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -65,7 +65,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<typename Z, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr eve::as_logical_t<Z> is_pure_(KYOSU_DELAY(), O const&, Z const& z) noexcept
+  constexpr eve::as_logical_t<Z> is_pure_(KYOSU_DELAY(), O const&, Z const& z) noexcept
   {
     return eve::is_eqz(real(z));
   }

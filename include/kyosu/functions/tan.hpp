@@ -16,7 +16,7 @@ namespace kyosu
   template<typename Options>
   struct tan_t : eve::elementwise_callable<tan_t, Options, raw_option, pedantic_option, radpi_option>
   {
-    template<concepts::cayley_dickson_like Z> KYOSU_FORCEINLINE constexpr Z operator()(Z const& z) const noexcept
+    template<concepts::cayley_dickson_like Z> KYOSU_ABI constexpr Z operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
@@ -82,8 +82,7 @@ namespace kyosu
 {
   namespace _
   {
-    template<typename Z, eve::callable_options O>
-    KYOSU_FORCEINLINE constexpr auto tan_(KYOSU_DELAY(), O const& o, Z zz) noexcept
+    template<typename Z, eve::callable_options O> constexpr auto tan_(KYOSU_DELAY(), O const& o, Z zz) noexcept
     {
       if constexpr (concepts::real<Z>) return eve::tan[o](zz);
       else if constexpr (concepts::complex<Z>)

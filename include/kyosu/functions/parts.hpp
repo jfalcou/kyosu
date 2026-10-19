@@ -16,14 +16,14 @@ namespace kyosu
 {
   template<std::ptrdiff_t Index> struct extractor
   {
-    template<concepts::cayley_dickson Z> KYOSU_FORCEINLINE constexpr decltype(auto) operator()(Z&& z) const noexcept
+    template<concepts::cayley_dickson Z> KYOSU_ABI constexpr decltype(auto) operator()(Z&& z) const noexcept
     {
       using type = eve::element_type_t<std::remove_cvref_t<Z>>;
       if constexpr (Index < type::static_dimension) return get<Index>(KYOSU_FWD(z));
       else return as_real_type_t<std::remove_cvref_t<Z>>{0};
     }
 
-    template<concepts::real V> KYOSU_FORCEINLINE constexpr decltype(auto) operator()(V&& v) const noexcept
+    template<concepts::real V> KYOSU_ABI constexpr decltype(auto) operator()(V&& v) const noexcept
     {
       using type = std::remove_cvref_t<V>;
       if constexpr (Index == 0) return KYOSU_FWD(v);

@@ -18,14 +18,14 @@ namespace kyosu
   struct atanh_t : eve::elementwise_callable<atanh_t, Options, raw_option, pedantic_option, real_only_option>
   {
     template<concepts::cayley_dickson_like Z>
-    KYOSU_FORCEINLINE constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
+    KYOSU_ABI constexpr complexify_if_t<Options, Z> operator()(Z const& z) const noexcept
     {
       return KYOSU_CALL(z);
     }
 
     template<concepts::cayley_dickson_like Z, eve::value K>
-    KYOSU_FORCEINLINE constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, K> operator()(Z const& z,
-                                                                                             K const& k) const noexcept
+    KYOSU_ABI constexpr eve::as_wide_as_t<complexify_if_t<Options, Z>, K> operator()(Z const& z,
+                                                                                     K const& k) const noexcept
     {
       return KYOSU_CALL(z, k);
     }
@@ -273,7 +273,7 @@ namespace kyosu::_
   }
 
   template<concepts::cayley_dickson_like Z, eve::value K, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto atanh_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
+  constexpr auto atanh_(KYOSU_DELAY(), O const& o, Z z, K k) noexcept
   requires(!O::contains(real_only))
   {
     using e_t = eve::element_type_t<decltype(real(z))>;
@@ -282,7 +282,7 @@ namespace kyosu::_
   }
 
   template<concepts::real Z, eve::value... K, eve::conditional_expr C, eve::callable_options O>
-  KYOSU_FORCEINLINE constexpr auto atanh_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
+  constexpr auto atanh_(KYOSU_DELAY(), C const& cx, O const& o, Z z, K... k) noexcept
   requires(!O::contains(real_only))
   {
     return eve::_::mask_op(cx, eve::_::return_2nd, complex(z), atanh[o](z, k...));

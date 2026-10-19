@@ -13,7 +13,7 @@ namespace kyosu
 {
   template<typename Options> struct cinf_t : eve::constant_callable<cinf_t, Options>
   {
-    template<typename T> static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
+    template<typename T> KYOSU_ABI static constexpr auto value(eve::as<T> const&, auto const&)
     {
       using t_t = as_cayley_dickson_n_t<2, T>;
       using u_t = eve::underlying_type_t<t_t>;
@@ -22,7 +22,7 @@ namespace kyosu
     }
 
     template<concepts::cayley_dickson_like T>
-    KYOSU_FORCEINLINE constexpr as_cayley_dickson_n_t<2, T> operator()(as<T> const& v) const
+    KYOSU_ABI constexpr as_cayley_dickson_n_t<2, T> operator()(as<T> const& v) const
     {
       return KYOSU_CALL(v);
     }

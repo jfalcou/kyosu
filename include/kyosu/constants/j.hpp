@@ -20,13 +20,13 @@ namespace kyosu
     {
     };
 
-    template<typename T> static KYOSU_FORCEINLINE constexpr auto value(eve::as<T> const&, auto const&)
+    template<typename T> KYOSU_ABI static constexpr auto value(eve::as<T> const&, auto const&)
     {
       return typename result<T>::type{0, 0, 1, 0};
     }
 
     template<concepts::cayley_dickson_like T>
-    KYOSU_FORCEINLINE constexpr typename result<T>::type operator()(as<T> const& v) const
+    KYOSU_ABI constexpr typename result<T>::type operator()(as<T> const& v) const
     {
       return KYOSU_CALL(v);
     }

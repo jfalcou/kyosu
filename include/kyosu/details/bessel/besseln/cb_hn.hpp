@@ -25,8 +25,7 @@ namespace kyosu::_
   //===-------------------------------------------------------------------------------------------
   //  cb_h12n
   //===-------------------------------------------------------------------------------------------
-  template<eve::integral_scalar_value N, typename Z, typename R>
-  KYOSU_FORCEINLINE auto cb_h12n(N n, Z z, R& h1s, R& h2s) noexcept
+  template<eve::integral_scalar_value N, typename Z, typename R> auto cb_h12n(N n, Z z, R& h1s, R& h2s) noexcept
   {
     auto an = eve::abs(n);
     an = eve::min(n, N(h1s.size()), N(h2s.size()));
@@ -40,7 +39,7 @@ namespace kyosu::_
     return kumi::tuple{h1s[n], h2s[n]};
   }
 
-  template<int Kind, typename Z> KYOSU_FORCEINLINE auto cb_hn(int n, Z z) noexcept
+  template<int Kind, typename Z> auto cb_hn(int n, Z z) noexcept
   {
     auto j = cb_jn(n, z);
     auto y = cb_yn(n, z);
@@ -48,7 +47,7 @@ namespace kyosu::_
     else return j - muli(y);
   }
 
-  template<int Kind, typename Z, typename R> KYOSU_FORCEINLINE auto cb_hn(int n, Z z, R& hs) noexcept
+  template<int Kind, typename Z, typename R> auto cb_hn(int n, Z z, R& hs) noexcept
   {
     std::size_t an = eve::abs(n);
     auto doit = [an, n, z, &hs](auto js, auto ys) {

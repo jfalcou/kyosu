@@ -17,15 +17,14 @@ namespace kyosu
     : eve::tuple_callable<minabs_t, Options, raw_option, flat_option, eve::numeric_option, eve::pedantic_option>
   {
     template<concepts::cayley_dickson_like Z0, concepts::cayley_dickson_like... Zs>
-    KYOSU_FORCEINLINE constexpr auto operator()(Z0 z0, Zs... zs) const noexcept
-      -> decltype(eve::minabs(real(z0), real(zs)...))
+    KYOSU_ABI constexpr auto operator()(Z0 z0, Zs... zs) const noexcept -> decltype(eve::minabs(real(z0), real(zs)...))
     {
       return KYOSU_CALL(z0, zs...);
     }
 
     template<eve::non_empty_product_type Tup>
     requires(eve::same_lanes_or_scalar_tuple<Tup>)
-    EVE_FORCEINLINE constexpr kyosu::as_real_type_t<kumi::apply_traits_t<eve::common_value, Tup>> operator()(
+    KYOSU_ABI constexpr kyosu::as_real_type_t<kumi::apply_traits_t<eve::common_value, Tup>> operator()(
       Tup t) const noexcept
     requires(kumi::size_v<Tup> >= 2)
     {
@@ -93,7 +92,7 @@ namespace kyosu
 namespace kyosu::_
 {
   template<eve::callable_options O, typename Z0, typename... Zs>
-  KYOSU_FORCEINLINE constexpr auto minabs_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
+  constexpr auto minabs_(KYOSU_DELAY(), O const& o, Z0 z0, Zs... zs) noexcept
   {
     if constexpr (concepts::real<Z0> && (... && concepts::real<Zs>)) return eve::minabs[o](z0, zs...);
     else if constexpr (O::contains(flat)) return eve::minabs[o](kumi::flatten(kumi::tuple{z0, zs...}));
