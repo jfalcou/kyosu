@@ -86,9 +86,7 @@ namespace kyosu::_
       z0 = kyosu::signnz(z0);
       z1 = kyosu::signnz(z1);
     }
-    // The mask can be wider than what it masks - a wide z0 against a scalar z1 - and a masked call
-    // answers the type of its argument, so z1 goes up to the call's own return type first. That last
-    // step is eve#2381: it can go once if_else stops ignoring the width of its mask.
+    // eve refuses a scalar under a wide mask, and gez is wide whenever z0 is, so z1 takes the return type first
     using r_t = as_cayley_dickson_like_t<complexify_t<Z0>, complexify_t<Z1>, Z2>;
     auto gez = eve::is_gez(real(kyosu::dot(z0, z1)));
     auto mix = kyosu::minus[!gez](r_t(z1));
