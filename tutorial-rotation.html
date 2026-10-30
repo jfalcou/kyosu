@@ -135,17 +135,87 @@ $(function(){initNavTree('tutorial-rotation.html','',''); });
   <div class="headertitle"><div class="title">Rotations </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Quaternions are not a curiosity kept alive by mathematicians. They are the standard way to represent rotations in three dimensions in graphics, robotics and aerospace, and the reason is practical rather than elegant. This page is about that use, and it needs nothing from the previous page beyond knowing that a quaternion has four components and does not commute.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md40"></a>
-Why not Euler angles</h1>
-<p>Three angles around three axes are the obvious representation and they have two well-known faults. They suffer <em>gimbal lock</em>: at certain orientations two of the three axes align and a degree of freedom is lost. And interpolating between two sets of angles does not produce a natural motion, because the angles are not independent of one another.</p>
-<p>A unit quaternion has neither problem. It covers every orientation without a singularity, it composes by multiplication, and — the point of this page — two of them can be interpolated along the shortest arc.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
-Rotating a vector</h1>
-<p>Build the rotation from an angle and an axis, then apply it. The vector is an ordinary array of three reals, handed over as a <span class="tt">std::span</span>:</p>
+<div class="textblock"><p>A unit quaternion <a href="https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation">represents a rotation</a> of the three-dimensional space, and is the standard representation of rotations in graphics, robotics, and aerospace.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
+Constructors</h1>
+<p>The rotation of angle \(\theta\) about the unit axis \(u\) is the quaternion \(q = \cos\frac{\theta}{2} + \sin\frac{\theta}{2}\,(u_x i + u_y j + u_z k)\), which <span class="tt"><a class="el" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></span> builds from \(\theta\) and \(u\):</p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 18 325 262" width="325" height="262" role="img" aria-label="A rotation of angle theta about the unit axis u, and the quaternion that represents it" style="display:block;margin:0 auto;max-width:100%;height:auto;font-family:inherit;font-size:15px">
+  <defs>
+    <marker id="ax-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker>
+    <marker id="u-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#2a7fff"/></marker>
+    <marker id="v-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#d9480f"/></marker>
+  </defs>
+  <style>
+    .ax { stroke: currentColor; stroke-width: 1.3; opacity: .7 }
+    .u  { stroke: #2a7fff; stroke-width: 2.4 }
+    .v  { stroke: #d9480f; stroke-width: 2 }
+    .ring { fill: none; stroke: #2a7fff; stroke-width: 1; stroke-dasharray: 4 4; opacity: .6 }
+    .arc { fill: none; stroke: #d9480f; stroke-width: 2 }
+    text { fill: currentColor }
+    .lbl { font-style: italic }
+    .code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14px }
+  </style>
+  <line class="ax" x1="190.0" y1="178.0" x2="144.0" y2="211.1" marker-end="url(#ax-head)"/>
+  <line class="ax" x1="190.0" y1="178.0" x2="337.2" y2="178.0" marker-end="url(#ax-head)"/>
+  <line class="ax" x1="190.0" y1="178.0" x2="190.0" y2="44.6" marker-end="url(#ax-head)"/>
+  <text class="lbl" x="134.5" y="220.1">x</text>
+  <text class="lbl" x="344.6" y="183.0">y</text>
+  <text class="lbl" x="186.0" y="35.4">z</text>
+  <path class="ring" d="M 88.8 197.9 L 92.8 211.3 L 99.7 223.8 L 109.4 234.8 L 121.6 244.1 L 135.8 251.4 L 151.7 256.5 L 168.7 259.2 L 186.4 259.4 L 204.1 257.2 L 221.5 252.5 L 237.9 245.6 L 252.9 236.6 L 265.9 225.9 L 276.6 213.7 L 284.7 200.4 L 289.9 186.4 L 292.1 172.2 L 291.2 158.1 L 287.2 144.7 L 280.3 132.2 L 270.6 121.2 L 258.4 111.9 L 244.2 104.6 L 228.3 99.5 L 211.3 96.8 L 193.6 96.6 L 175.9 98.8 L 158.5 103.5 L 142.1 110.4 L 127.1 119.4 L 114.1 130.1 L 103.4 142.3 L 95.3 155.6 L 90.1 169.6 L 87.9 183.8 L 88.8 197.9 Z"/>
+  <line class="u" x1="190.0" y1="178.0" x2="208.6" y2="104.8" marker-end="url(#u-head)"/>
+  <text class="lbl" x="212.0" y="99.4" style="fill:#2a7fff">u</text>
+  <line class="v" x1="190.0" y1="178.0" x2="88.8" y2="197.9" marker-end="url(#v-head)"/>
+  <line class="v" x1="190.0" y1="178.0" x2="204.1" y2="257.2" marker-end="url(#v-head)"/>
+  <path class="arc" d="M 88.8 197.9 L 92.8 211.3 L 99.7 223.8 L 109.4 234.8 L 121.6 244.1 L 135.8 251.4 L 151.7 256.5 L 168.7 259.2 L 186.4 259.4 L 204.1 257.2" marker-end="url(#v-head)"/>
+  <text class="lbl" x="66.7" y="204.3" style="fill:#d9480f">v</text>
+  <text class="lbl" x="209.6" y="271.1" style="fill:#d9480f">v′</text>
+  <text class="lbl" x="126.4" y="270.0" style="fill:#d9480f">θ</text>
+
+</svg>
+<p>A quaternion can be built from an angle and an axis, from Euler angles with their axes, from a modulus, an argument, and a unit pure quaternion, or from the spherical and cylindrical coordinates of the four-dimensional space:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;span&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">auto</span> pi = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>());</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// A rotation of pi/3 around the axis (1,2,3).</span></div>
+<div class="line">  std::array&lt;double, 3&gt; axis{1., 2., 3.};</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_angle_axis  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a>(pi/3, std::span(axis)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The same idea through Euler angles, naming the three axes used.</span></div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_euler       = &quot;</span></div>
+<div class="line">            &lt;&lt; <a class="code hl_variable" href="group__from__euler.html#ga4e7d9b2067dc764269c1539b6e4b9271">kyosu::from_euler</a>(pi/2, pi/3, pi/4, kyosu::Z_, kyosu::X_, kyosu::Z_) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Modulus, argument, and the unit pure quaternion that plays the part of i.</span></div>
+<div class="line">  <span class="keyword">auto</span> u = <a class="code hl_typedef" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t&lt;double&gt;</a>(0., 1., 2., 2.) / 3.;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_polar       = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__from__polar.html#gaf64b08ee90565c95c04b029767cba95e">kyosu::from_polar</a>(2., pi/6, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Four-dimensional spherical and cylindrical parametrisations.</span></div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_spherical   = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__from__spherical.html#gaed1e70b2f6b903ef24ce33d7937d8958">kyosu::from_spherical</a>(1., pi/4, pi/3, pi/6) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_cylindrical = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__from__cylindrical.html#ga505ff6cf7441aa432d2549a840868527">kyosu::from_cylindrical</a>(1., pi/4, 2., 3.)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__eve__math__constants_html_gad32687fc782ada2bb223abb7722ac694"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a></div><div class="ttdeci">constexpr auto pi</div></div>
+<div class="ttc" id="agroup__from__angle__axis_html_ga2e2e427d078f717745ed2821f6cd06f2"><div class="ttname"><a href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr auto from_angle_axis</div><div class="ttdef"><b>Definition</b> from_angle_axis.hpp:78</div></div>
+<div class="ttc" id="agroup__from__cylindrical_html_ga505ff6cf7441aa432d2549a840868527"><div class="ttname"><a href="group__from__cylindrical.html#ga505ff6cf7441aa432d2549a840868527">kyosu::from_cylindrical</a></div><div class="ttdeci">constexpr auto from_cylindrical</div><div class="ttdef"><b>Definition</b> from_cylindrical.hpp:74</div></div>
+<div class="ttc" id="agroup__from__euler_html_ga4e7d9b2067dc764269c1539b6e4b9271"><div class="ttname"><a href="group__from__euler.html#ga4e7d9b2067dc764269c1539b6e4b9271">kyosu::from_euler</a></div><div class="ttdeci">constexpr auto from_euler</div><div class="ttdef"><b>Definition</b> from_euler.hpp:122</div></div>
+<div class="ttc" id="agroup__from__polar_html_gaf64b08ee90565c95c04b029767cba95e"><div class="ttname"><a href="group__from__polar.html#gaf64b08ee90565c95c04b029767cba95e">kyosu::from_polar</a></div><div class="ttdeci">constexpr auto from_polar</div><div class="ttdef"><b>Definition</b> from_polar.hpp:81</div></div>
+<div class="ttc" id="agroup__from__spherical_html_gaed1e70b2f6b903ef24ce33d7937d8958"><div class="ttname"><a href="group__from__spherical.html#gaed1e70b2f6b903ef24ce33d7937d8958">kyosu::from_spherical</a></div><div class="ttdeci">constexpr auto from_spherical</div><div class="ttdef"><b>Definition</b> from_spherical.hpp:79</div></div>
+<div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
+<div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
+Comparison with Euler angles</h1>
+<p>Three angles around three axes represent a rotation with two defects. The first is <a href="https://en.wikipedia.org/wiki/Gimbal_lock">gimbal lock</a>: at some orientations two of the three axes align, and a direction of motion is no longer reached by varying the angles. The second concerns interpolation: a linear interpolation of the three angles is not the shortest path between the two rotations, and has neither a fixed axis nor a constant angular speed. A unit quaternion has neither defect: it covers every orientation without a singularity, it composes by multiplication, and two of them interpolate along the shortest arc.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
+Rotating a vector</h1>
+<p>The rotation sends a vector \(v\) to \(v&#39; = q v q^{-1}\), which <span class="tt"><a class="el" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></span> computes. The angle of <span class="tt"><a class="el" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></span> is in radians. <span class="tt"><a class="el" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></span> takes the vector as an array of three reals passed as a <a href="https://en.cppreference.com/w/cpp/container/span"><span class="tt">std::span</span></a>, and returns the rotated vector as a <span class="tt">std::array</span>:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;span&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
@@ -155,23 +225,22 @@ Rotating a vector</h1>
 <div class="line">  std::array&lt;double, 3&gt; v   {1., 0., 0.};   <span class="comment">// the x axis</span></div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> q  = <a class="code hl_variable" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a>(pi/2, std::span(axis));</div>
-<div class="line">  <span class="keyword">auto</span> rv = <a class="code hl_variable" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a>(q, std::span&lt;double, 3&gt;(v));</div>
+<div class="line">  <span class="keyword">auto</span> rv = <a class="code hl_variable" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a>(q, std::span(v));</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;q             = &quot;</span> &lt;&lt; q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;v             = (&quot;</span> &lt;&lt; v[0]  &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; v[1]  &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; v[2]  &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;rotate_vec    = (&quot;</span> &lt;&lt; rv[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; rv[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; rv[2] &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__eve__math__constants_html_gad32687fc782ada2bb223abb7722ac694"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a></div><div class="ttdeci">constexpr auto pi</div></div>
-<div class="ttc" id="agroup__from__angle__axis_html_ga2e2e427d078f717745ed2821f6cd06f2"><div class="ttname"><a href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr auto from_angle_axis</div><div class="ttdef"><b>Definition</b> from_angle_axis.hpp:78</div></div>
 <div class="ttc" id="agroup__rotate__vec_html_gafc749b146c3a5d756fc81c80e9b77d74"><div class="ttname"><a href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></div><div class="ttdeci">constexpr auto rotate_vec</div><div class="ttdef"><b>Definition</b> rotate_vec.hpp:81</div></div>
-<div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
-</div><!-- fragment --><p><span class="tt"><a class="el" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></span> normalises the axis for you. If you know it is already a unit vector, <span class="tt">[kyosu::assume_unitary]</span> skips that work.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md42"></a>
-Composing rotations</h1>
-<p>Applying \(p\) then \(q\) is the single rotation \(qp\) — in that order, because the product does not commute. This is where the previous page pays off: getting the order wrong is the classic bug, and the algebra is what tells you which order is right.</p>
+</div><!-- fragment --><p>A positive angle turns counterclockwise about the axis, by the right-hand rule: the quarter turn about \(z\) sends \(x\) to \(y\).</p>
+<dl class="section note"><dt>Note</dt><dd><span class="tt"><a class="el" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></span> normalizes the axis, and <span class="tt"><a class="el" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></span> the quaternion, so that neither argument has to be of unit length. <a class="el" href="tutorial-options.html" title="Options">The option</a> <span class="tt">kyosu::assume_unitary</span> skips the normalization on an argument already of unit length.</dd></dl>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
+Composition</h1>
+<p>The rotation \(p\) followed by \(q\) is the product \(qp\), in that order, since the product does not commute. A rotation composed backward is the usual effect of a product written in the wrong order, or of one division taken for the other:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;span&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
@@ -184,18 +253,19 @@ Composing rotations</h1>
 <div class="line">  std::array&lt;double, 3&gt; v{1., 0., 0.};</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// p first, then q, is the single rotation q*p.</span></div>
-<div class="line">  <span class="keyword">auto</span> a = <a class="code hl_variable" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a>(q * p, std::span&lt;double, 3&gt;(v));</div>
-<div class="line">  <span class="keyword">auto</span> b = <a class="code hl_variable" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a>(p * q, std::span&lt;double, 3&gt;(v));</div>
+<div class="line">  <span class="keyword">auto</span> a = <a class="code hl_variable" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a>(q * p, std::span(v));</div>
+<div class="line">  <span class="keyword">auto</span> b = <a class="code hl_variable" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a>(p * q, std::span(v));</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;q*p applied to x = (&quot;</span> &lt;&lt; a[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; a[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; a[2] &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;p*q applied to x = (&quot;</span> &lt;&lt; b[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; b[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; b[2] &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md43"></a>
-Interpolating between orientations</h1>
-<p><a class="el" href="group__slerp.html#ga1bc2cb0004a3b7a58fd9514247031b7f">kyosu::slerp</a> — <em>spherical linear interpolation</em> — walks from one orientation to another along the shortest arc, at constant angular speed. It is what makes quaternions worth the change of representation in an animation or a trajectory:</p>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
+Interpolation</h1>
+<p><span class="tt"><a class="el" href="group__slerp.html#ga1bc2cb0004a3b7a58fd9514247031b7f">kyosu::slerp</a></span>, the <a href="https://en.wikipedia.org/wiki/Slerp">spherical linear interpolation</a>, interpolates between two orientations along the shortest arc at constant angular speed, which is the interpolation an animation or a trajectory requires. Since \(q\) and \(-q\) are the <a href="https://en.wikipedia.org/wiki/3D_rotation_group#Connection_between_SO%283%29_and_SU%282%29">same rotation</a>, the sign of the second operand is chosen so that the arc is the short one:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;span&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
@@ -209,17 +279,18 @@ Interpolating between orientations</h1>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">double</span> t = 0.; t &lt;= 1.0001; t += 0.25)</div>
 <div class="line">  {</div>
-<div class="line">    <span class="keyword">auto</span> rv = <a class="code hl_variable" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a>(<a class="code hl_variable" href="group__slerp.html#ga1bc2cb0004a3b7a58fd9514247031b7f">kyosu::slerp</a>(q0, q1, t), std::span&lt;double, 3&gt;(v));</div>
+<div class="line">    <span class="keyword">auto</span> rv = <a class="code hl_variable" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a>(<a class="code hl_variable" href="group__slerp.html#ga1bc2cb0004a3b7a58fd9514247031b7f">kyosu::slerp</a>(q0, q1, t), std::span(v));</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;t = &quot;</span> &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;  -&gt;  (&quot;</span> &lt;&lt; rv[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; rv[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; rv[2] &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__slerp_html_ga1bc2cb0004a3b7a58fd9514247031b7f"><div class="ttname"><a href="group__slerp.html#ga1bc2cb0004a3b7a58fd9514247031b7f">kyosu::slerp</a></div><div class="ttdeci">constexpr auto slerp</div><div class="ttdef"><b>Definition</b> slerp.hpp:72</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md44"></a>
-Converting to and from other representations</h1>
-<p>You rarely control every piece of a pipeline, so the conversions are provided in both directions: <span class="tt"><a class="el" href="group__to__rotation__matrix.html" title="Callable object computing a quaternion from its to_rotation_matrix representation.">kyosu::to_rotation_matrix</a></span> and <span class="tt"><a class="el" href="group__from__rotation__matrix.html" title="Callable object computing a quaternion from its rotation_matrix representation.">kyosu::from_rotation_matrix</a></span>, <span class="tt"><a class="el" href="group__to__euler.html" title="Callable object computing euler angles from a quaternion.">kyosu::to_euler</a></span> and <span class="tt"><a class="el" href="group__from__euler.html" title="Callable object computing a quaternion from its euler representation.">kyosu::from_euler</a></span>, <span class="tt"><a class="el" href="group__to__angle__axis.html" title="Callable object computing the angle and axis coordinates from a quaternion.">kyosu::to_angle_axis</a></span> and <span class="tt"><a class="el" href="group__from__angle__axis.html" title="Callable object computing an an unitary quaternion from an angle value and a 3 dimensional axis vecto...">kyosu::from_angle_axis</a></span>.</p>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
+Conversions</h1>
+<p>A rotation converts to and from a rotation matrix, with <a class="el" href="group__to__rotation__matrix.html#ga50cf8709672a806974dc93f77c0d6e5b">kyosu::to_rotation_matrix</a> and <a class="el" href="group__from__rotation__matrix.html#gad4d2929cc9f93e1308c26a2e0160007d">kyosu::from_rotation_matrix</a>, Euler angles with their axes, with <a class="el" href="group__to__euler.html#gae7eecc3a7b0016fa20207efb5cd4b12a">kyosu::to_euler</a> and <a class="el" href="group__from__euler.html#ga4e7d9b2067dc764269c1539b6e4b9271">kyosu::from_euler</a>, and an angle and an axis, with <a class="el" href="group__to__angle__axis.html#ga4ab51b43625e09149d9614a764c205c6">kyosu::to_angle_axis</a> and <a class="el" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a>. The matrix is a <span class="tt">std::array</span> of three rows. The angle and the axis, and the three Euler angles, are returned as a <span class="tt">kumi::tuple</span>, read by a <a href="https://en.cppreference.com/w/cpp/language/structured_binding">structured binding</a>:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;span&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
@@ -246,17 +317,17 @@ Converting to and from other representations</h1>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;    &quot;</span> &lt;&lt; m[i][0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; m[i][1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; m[i][2] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_rotation_matrix = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__from__rotation__matrix.html#gad4d2929cc9f93e1308c26a2e0160007d">kyosu::from_rotation_matrix</a>(m) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__from__euler_html_ga4e7d9b2067dc764269c1539b6e4b9271"><div class="ttname"><a href="group__from__euler.html#ga4e7d9b2067dc764269c1539b6e4b9271">kyosu::from_euler</a></div><div class="ttdeci">constexpr auto from_euler</div><div class="ttdef"><b>Definition</b> from_euler.hpp:122</div></div>
 <div class="ttc" id="agroup__from__rotation__matrix_html_gad4d2929cc9f93e1308c26a2e0160007d"><div class="ttname"><a href="group__from__rotation__matrix.html#gad4d2929cc9f93e1308c26a2e0160007d">kyosu::from_rotation_matrix</a></div><div class="ttdeci">constexpr auto from_rotation_matrix</div><div class="ttdef"><b>Definition</b> from_rotation_matrix.hpp:100</div></div>
 <div class="ttc" id="agroup__to__angle__axis_html_ga4ab51b43625e09149d9614a764c205c6"><div class="ttname"><a href="group__to__angle__axis.html#ga4ab51b43625e09149d9614a764c205c6">kyosu::to_angle_axis</a></div><div class="ttdeci">constexpr auto to_angle_axis</div><div class="ttdef"><b>Definition</b> to_angle_axis.hpp:75</div></div>
 <div class="ttc" id="agroup__to__euler_html_gae7eecc3a7b0016fa20207efb5cd4b12a"><div class="ttname"><a href="group__to__euler.html#gae7eecc3a7b0016fa20207efb5cd4b12a">kyosu::to_euler</a></div><div class="ttdeci">constexpr auto to_euler</div><div class="ttdef"><b>Definition</b> to_euler.hpp:195</div></div>
 <div class="ttc" id="agroup__to__rotation__matrix_html_ga50cf8709672a806974dc93f77c0d6e5b"><div class="ttname"><a href="group__to__rotation__matrix.html#ga50cf8709672a806974dc93f77c0d6e5b">kyosu::to_rotation_matrix</a></div><div class="ttdeci">constexpr auto to_rotation_matrix</div><div class="ttdef"><b>Definition</b> to_rotation_matrix.hpp:122</div></div>
-</div><!-- fragment --><p>One subtlety worth knowing: \(q\) and \(-q\) describe the <em>same</em> rotation. The representation is a double cover of the rotations, so a round trip through a matrix or a set of angles may hand you back the other of the two. Compare rotations by their effect, not by their components.</p>
+</div><!-- fragment --><p>The Euler angles are in radians. The three axes that follow them are listed in the order of the three rotations, the first angle going with the first axis, and each is one of <span class="tt">kyosu::X_</span>, <span class="tt">kyosu::Y_</span>, and <span class="tt">kyosu::Z_</span>, two consecutive axes being distinct. Each rotation is about the axis as moved by the rotations before it, which is the <a href="https://en.wikipedia.org/wiki/Euler_angles#Definition_by_intrinsic_rotations">intrinsic</a> reading of the angles. The option <span class="tt">kyosu::extrinsic</span> reads them about the <a href="https://en.wikipedia.org/wiki/Euler_angles#Definition_by_extrinsic_rotations">fixed axes</a> instead, and <span class="tt">kyosu::radpi</span> takes them as multiples of \(\pi\).</p>
+<p>A round trip through a matrix or a triple of angles may return \(-q\) in place of \(q\).</p>
 <div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">Previous  </th><th class="markdownTableHeadRight">Next  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><a class="el" href="tutorial-quaternion.html" title="Quaternions">Quaternions</a>  </td><td class="markdownTableBodyRight"><a class="el" href="tutorial-beyond.html" title="Octonions and beyond">Octonions and Beyond</a>  </td></tr>
+<td class="markdownTableBodyLeft"><a class="el" href="tutorial-beyond.html" title="Octonions and higher algebras">Octonions and higher algebras</a>  </td><td class="markdownTableBodyRight"><a class="el" href="tutorial-options.html" title="Options">Options</a>  </td></tr>
 </table>
 </div><div class="section_buttons"></div> </div></div><!-- contents -->
 </div><!-- PageDoc -->

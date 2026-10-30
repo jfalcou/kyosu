@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KYOSU - Complex Without Complexes" />
 <meta name="twitter:description" content="Kyosu gives complex numbers, quaternions and octonions one unified treatment of the Cayley-Dickson algebras over the reals, where a real is a float, a double, or a SIMD register." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kyosu/card.png" />
-<title>kyosu: Many values at once</title>
+<title>kyosu: SIMD support</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -132,38 +132,38 @@ $(function(){initNavTree('tutorial-simd.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Many values at once </div></div>
+  <div class="headertitle"><div class="title">SIMD support </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Every processor made in the last twenty years can add several numbers in the time it takes to add one. The instruction exists, the register exists, and the only difficulty is expressing it. <b>KYOSU</b> is built on <a href="https://github.com/jfalcou/eve">EVE</a>, whose whole purpose is that expression, so the facility comes for free.</p>
-<p>You do not need to know anything about SIMD to read this page. The idea is simply that a value can hold several numbers at once, and that the code does not change.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
-A register of reals</h1>
-<p><span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a>&lt;double&gt;</span> holds as many <span class="tt">double</span> as the machine's registers allow. Arithmetic on it reads exactly like arithmetic on one:</p>
+<div class="textblock"><p><b>KYOSU</b> is built on <a href="https://github.com/jfalcou/eve">EVE</a>, and every function accepts an <span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></span> where it accepts a scalar. An <span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a>&lt;T&gt;</span> is a SIMD register of <span class="tt">T</span>, on which the arithmetic is the arithmetic of a scalar. <span class="tt">kyosu/kyosu.hpp</span> includes EVE, so <span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></span> and the constants of EVE need no header of their own. Nothing of SIMD programming is assumed below.</p>
+<dl class="section note"><dt>Note</dt><dd>Everything about SIMD programming, the registers, the masks, the algorithms, and the architectures, is in the <a href="https://jfalcou.github.io/eve/">EVE documentation</a> and its <a href="https://jfalcou.github.io/eve/intro-01.html">tutorials</a>.</dd></dl>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md24"></a>
+Registers of reals</h1>
+<p><span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a>&lt;double&gt;</span> holds as many <span class="tt">double</span> as a register of the target machine: two on x86-64 with SSE2, four with AVX, eight with AVX-512. The width is a property of the target, selected at compile time, and the source never names it.</p>
+<p>A register is built from a function of two arguments, the lane index and the width, called once per lane: below, a <a href="https://en.cppreference.com/w/cpp/language/lambda">lambda</a> puts \(-1 + i\) in lane \(i\), and the width goes unused. The arithmetic and the functions apply to every lane:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="comment">// eve is at hand as soon as kyosu is</span></div>
+<div class="line">  <span class="comment">// lane i holds -1 + i, whatever the width</span></div>
 <div class="line">  <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;double&gt;</a> x = [](<span class="keyword">auto</span> i, <span class="keyword">auto</span>) { <span class="keywordflow">return</span> -1.0 + i; };</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;width               = &quot;</span> &lt;&lt; <a class="code hl_functionRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html#a4c5abb1c30d231b46212e2f7d61855a0">eve::wide&lt;double&gt;::size</a>() &lt;&lt; <span class="stringliteral">&quot; values at a time\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;x                   = &quot;</span> &lt;&lt; x     &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;x * x               = &quot;</span> &lt;&lt; x * x &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// The rule from the previous page still holds: a square root may leave the reals,</span></div>
-<div class="line">  <span class="comment">// so the answer is complex unless real_only says otherwise.</span></div>
+<div class="line">  <span class="comment">// A square root may leave the reals: the answer is complex unless real_only says otherwise.</span></div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;sqrt(x)             = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>(x)                  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;sqrt[real_only](x)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>[kyosu::real_only](x) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
 <div class="ttc" id="astructeve_1_1wide_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></div></div>
 <div class="ttc" id="astructeve_1_1wide_html_a4c5abb1c30d231b46212e2f7d61855a0"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html#a4c5abb1c30d231b46212e2f7d61855a0">eve::wide::size</a></div><div class="ttdeci">static constexpr width_type size() noexcept</div></div>
-</div><!-- fragment --><p>Two things to read in that output. The width is not a constant of the library but of the machine you compile for — two on a plain x86-64, four with AVX, eight with AVX-512 — and the source never mentions it. And the rule from the previous page has not gone away: the square root of a register of reals is a register of <em>complex</em> numbers, since any of those reals might have been negative. <span class="tt">kyosu::real_only</span> still asks for the other behaviour.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
-A register of complex numbers</h1>
-<p>The interesting part is that this composes. A complex number whose components are registers is written by handing <span class="tt"><a class="el" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">kyosu::complex</a></span> two wides instead of two doubles, and every function of the library then applies to all of them at once.</p>
+</div><!-- fragment --><p><span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a>&lt;double&gt;::size()</span> is the number of <span class="tt">double</span> in the register. The square root of a register of reals is a register of complex numbers, since any lane may be negative, and <span class="tt">kyosu::real_only</span> selects the real function on every lane.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md25"></a>
+Registers of complex numbers</h1>
+<p><span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a>&lt;<a class="el" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e" title="Type alias for complex numbers.">kyosu::complex_t</a>&lt;double&gt;&gt;</span> is a register of complex numbers, built by <span class="tt"><a class="el" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">kyosu::complex</a></span> from two registers of reals, and every function applies to all its lanes:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -172,7 +172,7 @@ A register of complex numbers</h1>
 <div class="line">  <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;double&gt;</a> re = [](<span class="keyword">auto</span> i, <span class="keyword">auto</span>) { <span class="keywordflow">return</span> 1.0 + i; };</div>
 <div class="line">  <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;double&gt;</a> im = [](<span class="keyword">auto</span> i, <span class="keyword">auto</span>) { <span class="keywordflow">return</span> 0.5 * i; };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> z = <a class="code hl_variable" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">kyosu::complex</a>(re, im);</div>
+<div class="line">  <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;kyosu::complex_t&lt;double&gt;</a>&gt; z = <a class="code hl_variable" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">kyosu::complex</a>(re, im);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;z      = &quot;</span> &lt;&lt; z             &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;abs(z) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>(z) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -181,14 +181,15 @@ A register of complex numbers</h1>
 <div class="ttc" id="agroup__abs_html_gac70344c81b5cf55a5257cf54c6e6cb18"><div class="ttname"><a href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a></div><div class="ttdeci">constexpr auto abs</div><div class="ttdef"><b>Definition</b> abs.hpp:71</div></div>
 <div class="ttc" id="agroup__exp_html_ga43bd0f5793b846caaf808a7f998734c0"><div class="ttname"><a href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a></div><div class="ttdeci">constexpr auto exp</div><div class="ttdef"><b>Definition</b> exp.hpp:88</div></div>
 <div class="ttc" id="agroup__to__complex_html_gad34d6e0109b4b00e61a647cac6197786"><div class="ttname"><a href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">kyosu::complex</a></div><div class="ttdeci">constexpr auto complex</div><div class="ttdef"><b>Definition</b> to_complex.hpp:70</div></div>
-</div><!-- fragment --><p>Nothing in the source distinguishes the scalar case from this one but the type of the components. There is no separate SIMD API to learn, and no <span class="tt">#ifdef</span> on the architecture: the width is whatever the machine you compile for provides.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
-Writing code that does not care</h1>
-<p>Because the spelling is identical, a function template covers both. The same body, called once on scalars and once on registers:</p>
+</div><!-- fragment --><p>The source differs from the scalar case by the type of the components alone. There is no separate SIMD interface and no <span class="tt">#ifdef</span> on the architecture.</p>
+<dl class="section note"><dt>Note</dt><dd><span class="tt">auto z = <a class="el" href="group__to__complex.html#gad34d6e0109b4b00e61a647cac6197786">kyosu::complex(re, im)</a>;</span> builds the same register with its type deduced from the components, and is the form to prefer.</dd></dl>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md26"></a>
+Generic code</h1>
+<p>A <a href="https://en.cppreference.com/w/cpp/language/function_template">function template</a> accepts scalars and registers with the same body:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// One body, whatever the caller hands over.</span></div>
+<div class="line"><span class="comment">// One body for a scalar and for a register.</span></div>
 <div class="line"><span class="keyword">auto</span> energy(<span class="keyword">auto</span> z) { <span class="keywordflow">return</span> <a class="code hl_variable" href="group__sqr__abs.html#ga3ec084980c244c7393b5c039d69c4aa5">kyosu::sqr_abs</a>(z) + <a class="code hl_variable" href="group__real.html#ga4121e4e64916c81e31b622b9b45c93fb">kyosu::real</a>(<a class="code hl_variable" href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a>(z)); }</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
@@ -203,12 +204,12 @@ Writing code that does not care</h1>
 <div class="ttc" id="agroup__real_html_ga4121e4e64916c81e31b622b9b45c93fb"><div class="ttname"><a href="group__real.html#ga4121e4e64916c81e31b622b9b45c93fb">kyosu::real</a></div><div class="ttdeci">constexpr auto real</div><div class="ttdef"><b>Definition</b> parts.hpp:71</div></div>
 <div class="ttc" id="agroup__sqr__abs_html_ga3ec084980c244c7393b5c039d69c4aa5"><div class="ttname"><a href="group__sqr__abs.html#ga3ec084980c244c7393b5c039d69c4aa5">kyosu::sqr_abs</a></div><div class="ttdeci">constexpr auto sqr_abs</div><div class="ttdef"><b>Definition</b> sqr_abs.hpp:61</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
-</div><!-- fragment --><p>This is the shape most <b>KYOSU</b> code ends up taking: write the mathematics once, let the caller decide whether it runs on one value or on a register of them.</p>
+</div><!-- fragment --><p>The template is instantiated once per argument type, scalar or wide, and no code is written per width.</p>
 <div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">Previous  </th><th class="markdownTableHeadRight">Next  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><a class="el" href="tutorial-complex.html" title="Complex numbers">Complex Numbers</a>  </td><td class="markdownTableBodyRight"><a class="el" href="tutorial-quaternion.html" title="Quaternions">Quaternions</a>  </td></tr>
+<td class="markdownTableBodyLeft"><a class="el" href="tutorial-complex.html" title="Complex numbers">Complex numbers</a>  </td><td class="markdownTableBodyRight"><a class="el" href="tutorial-quaternion.html" title="Quaternions">Quaternions</a>  </td></tr>
 </table>
 </div><div class="section_buttons"></div> </div></div><!-- contents -->
 </div><!-- PageDoc -->

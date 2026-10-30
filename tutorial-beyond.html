@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KYOSU - Complex Without Complexes" />
 <meta name="twitter:description" content="Kyosu gives complex numbers, quaternions and octonions one unified treatment of the Cayley-Dickson algebras over the reals, where a real is a float, a double, or a SIMD register." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kyosu/card.png" />
-<title>kyosu: Octonions and beyond</title>
+<title>kyosu: Octonions and higher algebras</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -132,14 +132,14 @@ $(function(){initNavTree('tutorial-beyond.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Octonions and beyond </div></div>
+  <div class="headertitle"><div class="title">Octonions and higher algebras </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Nothing in the construction stops at four dimensions. A pair of quaternions gives an octonion, a pair of octonions a sedenion, and so on without end. <b>KYOSU</b> implements the whole tower, so this page is about what changes as you climb it — and about the two places where habits acquired on real numbers will mislead you.</p>
-<p>The mathematics is set out properly in <a class="el" href="math_background.html" title="Mathematics of Cayley-Dickson Algebras">Mathematics of Cayley-Dickson Algebras</a>. Here we only look at the code.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md45"></a>
-Naming any dimension</h1>
-<p>Past the octonions the basis elements stop having traditional names and are simply indexed. The type is named by its dimension:</p>
+<div class="textblock"><p>An <a href="https://en.wikipedia.org/wiki/Octonion">octonion</a> is a number with eight real components, whose product extends the quaternion product and is no longer associative. A <a href="https://en.wikipedia.org/wiki/Sedenion">sedenion</a> has sixteen components, and its product has <a href="https://en.wikipedia.org/wiki/Sedenion#Zero_divisors">zero divisors</a>. In the <a class="el" href="math_background.html" title="Mathematics of Cayley-Dickson Algebras">Cayley-Dickson construction</a>, each of them is a pair of values of the previous algebra, and the construction continues without end. <b>KYOSU</b> supports every dimension via <span class="tt"><a class="el" href="group__kyosu__traits.html#ga8f185ca9780dc6cec632805d9cd71463" title="Computes a Cayley-Dickson type of a given dimension.">kyosu::as_cayley_dickson_n_t</a>&lt;N, T&gt;</span>, and the octonions via <span class="tt"><a class="el" href="group__types.html#ga403b1334a805ef696b3ab5640d550cff" title="Type alias for octonion numbers.">kyosu::octonion_t</a>&lt;T&gt;</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
+Octonions</h1>
+<p>An octonion, <span class="tt"><a class="el" href="group__types.html#ga403b1334a805ef696b3ab5640d550cff" title="Type alias for octonion numbers.">kyosu::octonion_t</a>&lt;T&gt;</span>, has eight components on the basis  \(1, i, j, k, l, li,
+lj, lk\), and is built from them:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -147,25 +147,39 @@ Naming any dimension</h1>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">auto</span> o = <a class="code hl_typedef" href="group__types.html#ga403b1334a805ef696b3ab5640d550cff">kyosu::octonion_t&lt;double&gt;</a>(1., 2., 3., 4., 5., 6., 7., 8.);</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Past dimension 8 the type is named by its dimension.</span></div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;o       = &quot;</span> &lt;&lt; o              &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;abs(o)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>(o)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;conj(o) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__conj.html#ga7e324b44c677cab7cf646a1cb87e9405">kyosu::conj</a>(o) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;exp(o)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a>(o)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__abs_html_gac70344c81b5cf55a5257cf54c6e6cb18"><div class="ttname"><a href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a></div><div class="ttdeci">constexpr auto abs</div><div class="ttdef"><b>Definition</b> abs.hpp:71</div></div>
+<div class="ttc" id="agroup__conj_html_ga7e324b44c677cab7cf646a1cb87e9405"><div class="ttname"><a href="group__conj.html#ga7e324b44c677cab7cf646a1cb87e9405">kyosu::conj</a></div><div class="ttdeci">constexpr auto conj</div><div class="ttdef"><b>Definition</b> conj.hpp:66</div></div>
+<div class="ttc" id="agroup__exp_html_ga43bd0f5793b846caaf808a7f998734c0"><div class="ttname"><a href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a></div><div class="ttdeci">constexpr auto exp</div><div class="ttdef"><b>Definition</b> exp.hpp:88</div></div>
+<div class="ttc" id="agroup__types_html_ga403b1334a805ef696b3ab5640d550cff"><div class="ttname"><a href="group__types.html#ga403b1334a805ef696b3ab5640d550cff">kyosu::octonion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 8, T &gt; octonion_t</div><div class="ttdoc">Type alias for octonion numbers.</div><div class="ttdef"><b>Definition</b> octonion.hpp:22</div></div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
+Higher algebras</h1>
+<p>From dimension 16 the basis elements have no letter. The type is <span class="tt"><a class="el" href="group__kyosu__traits.html#ga8f185ca9780dc6cec632805d9cd71463" title="Computes a Cayley-Dickson type of a given dimension.">kyosu::as_cayley_dickson_n_t</a>&lt;N, T&gt;</span> with <span class="tt">N</span> the dimension, a component is read and written through <span class="tt">kyosu::get&lt;I&gt;</span>, and a value prints its components as \(z_0\) to \(z_{N-1}\):</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
 <div class="line">  <span class="keyword">using </span>s_t = <a class="code hl_typedef" href="group__kyosu__traits.html#ga8f185ca9780dc6cec632805d9cd71463">kyosu::as_cayley_dickson_n_t&lt;16, double&gt;</a>;</div>
 <div class="line">  s_t s{};</div>
 <div class="line">  kyosu::get&lt;0&gt;(s) = 1.;</div>
 <div class="line">  kyosu::get&lt;9&gt;(s) = 2.;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;octonion  : &quot;</span> &lt;&lt; o             &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;sedenion  : &quot;</span> &lt;&lt; s             &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;abs(o)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>(o) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;exp(s)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a>(s) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;s       = &quot;</span> &lt;&lt; s              &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;get&lt;9&gt;  = &quot;</span> &lt;&lt; kyosu::get&lt;9&gt;(s) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;abs(s)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>(s)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;exp(s)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a>(s)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__abs_html_gac70344c81b5cf55a5257cf54c6e6cb18"><div class="ttname"><a href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a></div><div class="ttdeci">constexpr auto abs</div><div class="ttdef"><b>Definition</b> abs.hpp:71</div></div>
-<div class="ttc" id="agroup__exp_html_ga43bd0f5793b846caaf808a7f998734c0"><div class="ttname"><a href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a></div><div class="ttdeci">constexpr auto exp</div><div class="ttdef"><b>Definition</b> exp.hpp:88</div></div>
 <div class="ttc" id="agroup__kyosu__traits_html_ga8f185ca9780dc6cec632805d9cd71463"><div class="ttname"><a href="group__kyosu__traits.html#ga8f185ca9780dc6cec632805d9cd71463">kyosu::as_cayley_dickson_n_t</a></div><div class="ttdeci">typename as_cayley_dickson_n&lt; Dim, Ts... &gt;::type as_cayley_dickson_n_t</div><div class="ttdoc">Computes a Cayley-Dickson type of a given dimension.</div><div class="ttdef"><b>Definition</b> traits.hpp:142</div></div>
-<div class="ttc" id="agroup__types_html_ga403b1334a805ef696b3ab5640d550cff"><div class="ttname"><a href="group__types.html#ga403b1334a805ef696b3ab5640d550cff">kyosu::octonion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 8, T &gt; octonion_t</div><div class="ttdoc">Type alias for octonion numbers.</div><div class="ttdef"><b>Definition</b> octonion.hpp:22</div></div>
-</div><!-- fragment --><p>Every function of the library still applies, and still under the same name.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md46"></a>
-First trap: parentheses are load-bearing</h1>
-<p>From dimension 8 on, \((ab)c\) and \(a(bc)\) are different numbers. This is not a rounding difference — the sign of a whole component flips:</p>
+</div><!-- fragment --><p>The functions of the library apply in every dimension.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
+Associativity</h1>
+<p>From dimension 8, \((ab)c\) and \(a(bc)\) differ for some triples. On the basis elements \(i\), \(j\), and \(l\), the two products are opposite, \((ij)l = -i(jl)\).</p>
+<p><span class="tt"><a class="el" href="group__associator.html#gac1477076e48284b3ea6b0304e24188c1">kyosu::associator</a></span> computes the <a href="https://en.wikipedia.org/wiki/Associator">associator</a> \((ab)c - a(bc)\). It is zero on the quaternions and below. On the octonions, an <a href="https://en.wikipedia.org/wiki/Alternative_algebra#The_associator">alternative algebra</a>, it is zero when two operands coincide or when the three lie in a quaternion subalgebra:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -186,35 +200,10 @@ First trap: parentheses are load-bearing</h1>
 <div class="line">}</div>
 <div class="ttc" id="agroup__associator_html_gac1477076e48284b3ea6b0304e24188c1"><div class="ttname"><a href="group__associator.html#gac1477076e48284b3ea6b0304e24188c1">kyosu::associator</a></div><div class="ttdeci">constexpr auto associator</div><div class="ttdef"><b>Definition</b> associator.hpp:71</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
-</div><!-- fragment --><p><a class="el" href="group__associator.html#gac1477076e48284b3ea6b0304e24188c1">kyosu::associator</a> computes \((ab)c - a(bc)\) directly, so the defect can be measured. On quaternions and below it is zero; on octonions it is not. <b>KYOSU</b> never re-associates an expression, so what you write is what is evaluated — which also means that a refactoring which looks harmless can change the answer.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md47"></a>
-Second trap: from dimension 16, division fails</h1>
-<p>Octonions still form a division algebra: every non-zero element has an inverse. Sedenions do not. There exist non-zero values whose product is zero, and neither of them can be inverted:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">using </span>s_t = <a class="code hl_typedef" href="group__kyosu__traits.html#ga8f185ca9780dc6cec632805d9cd71463">kyosu::as_cayley_dickson_n_t&lt;16, double&gt;</a>;</div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">int</span> N&gt; s_t e() { s_t z{}; kyosu::get&lt;N&gt;(z) = 1.; <span class="keywordflow">return</span> z; }</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> a = e&lt;3&gt;() + e&lt;10&gt;();</div>
-<div class="line">  <span class="keyword">auto</span> b = e&lt;6&gt;() - e&lt;15&gt;();</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;|a|    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>(a)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;|b|    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>(b)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;|a*b|  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>(a*b) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// The product destroys the operands, and no division brings them back.</span></div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;|ldiv(b, a*b)| = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>(<a class="code hl_variable" href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv</a>(b, a*b))</div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;   but |a| = &quot;</span>     &lt;&lt; <a class="code hl_variable" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__ldiv_html_ga4842daf39053c0a08fa68cd1850558e1"><div class="ttname"><a href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv</a></div><div class="ttdeci">constexpr auto ldiv</div><div class="ttdef"><b>Definition</b> ldiv.hpp:93</div></div>
-</div><!-- fragment --><p>Two perfectly finite operands, each of norm \(\sqrt2\), with a product of exactly zero.</p>
-<p>Note what the trap is <em>not</em>. Nothing overflows, no NaN appears, and no exception is raised: the answer is a finite, ordinary-looking zero. The multiplication has simply destroyed its operands, and dividing back by \(b\) returns zero rather than \(a\). Above dimension 8 an algebraic identity you would never think to question — that \(ab\) determines \(a\) once \(b\) is known — no longer holds, and nothing in the output will tell you.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md48"></a>
-What still works everywhere</h1>
-<p>It would be reasonable to conclude that high dimensions are unusable. They are not, because the property the elementary functions actually need survives at every level: the subalgebra generated by a <em>single</em> element is always associative. So powers, exponentials, logarithms and everything built on them remain well defined however far you go.</p>
+</div><!-- fragment --><p>An expression is evaluated as written and never re-associated, so a parenthesis moved in a refactoring changes the result.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md40"></a>
+Elementary functions</h1>
+<p>The subalgebra generated by a single element is associative in every dimension, so the powers, the exponential, the logarithm, and the functions built on them are defined on every algebra:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -225,7 +214,7 @@ What still works everywhere</h1>
 <div class="line">  kyosu::get&lt;0&gt;(z) = 0.5;</div>
 <div class="line">  kyosu::get&lt;7&gt;(z) = 0.25;</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// A single element always generates an associative subalgebra, so these stay meaningful.</span></div>
+<div class="line">  <span class="comment">// A single element generates an associative subalgebra, on which these are defined.</span></div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;exp(log(z)) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a>(<a class="code hl_variable" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a>(z)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;z           = &quot;</span> &lt;&lt; z                         &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;sqrt(z)^2   = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__sqr.html#ga341e48919690498ce1a6cac915b3e58d">kyosu::sqr</a>(<a class="code hl_variable" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>(z)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -233,14 +222,11 @@ What still works everywhere</h1>
 <div class="ttc" id="agroup__log_html_gabc0fe7e42be704597604cc8dec55f4ae"><div class="ttname"><a href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a></div><div class="ttdeci">constexpr auto log</div><div class="ttdef"><b>Definition</b> log.hpp:102</div></div>
 <div class="ttc" id="agroup__sqr_html_ga341e48919690498ce1a6cac915b3e58d"><div class="ttname"><a href="group__sqr.html#ga341e48919690498ce1a6cac915b3e58d">kyosu::sqr</a></div><div class="ttdeci">constexpr auto sqr</div><div class="ttdef"><b>Definition</b> sqr.hpp:57</div></div>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md49"></a>
-Where to go from here</h1>
-<p>The reference documentation lists every function by category, and <a class="el" href="math_background.html" title="Mathematics of Cayley-Dickson Algebras">Mathematics of Cayley-Dickson Algebras</a> gives the construction, the theorems behind the losses above, and the scheme by which a real function is extended to all of these algebras at once.</p>
-<div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+</div><!-- fragment --><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">Previous  </th><th class="markdownTableHeadRight">Next  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><a class="el" href="tutorial-rotation.html" title="Rotations">Rotation</a>  </td><td class="markdownTableBodyRight"><a class="el" href="tutorial-options.html" title="Options">Options</a>  </td></tr>
+<td class="markdownTableBodyLeft"><a class="el" href="tutorial-quaternion.html" title="Quaternions">Quaternions</a>  </td><td class="markdownTableBodyRight"><a class="el" href="tutorial-rotation.html" title="Rotations">Rotations</a>  </td></tr>
 </table>
 </div><div class="section_buttons"></div> </div></div><!-- contents -->
 </div><!-- PageDoc -->

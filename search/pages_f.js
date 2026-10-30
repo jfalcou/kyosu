@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['many_20values_20at_20once_0',['Many values at once',['../tutorial-simd.html',1,'']]],
-  ['mathematics_20of_20cayley_20dickson_20algebras_1',['Mathematics of Cayley-Dickson Algebras',['../math_background.html',1,'']]],
-  ['mechanism_2',['The mechanism',['../tutorial-options.html#autotoc_md50',1,'']]],
-  ['missing_20on_20purpose_3',['What is missing on purpose',['../tutorial-complex.html#autotoc_md32',1,'']]],
+  ['noncommutativity_1',['Noncommutativity',['../tutorial-quaternion.html#autotoc_md28',1,'']]],
+  ['notation_2',['Notation',['../math_background.html#autotoc_md59',1,'']]],
+  ['now_20complex_20bessel_20functions_20are_20only_20implemented_20for_20scalar_20orders_20integral_20or_20floating_3',['Up to now complex bessel functions are only implemented for scalar orders (integral or floating)',['..//__w/kyosu/kyosu/include/kyosu/details/bessel.hpp#autotoc_md0',1,'']]],
+  ['numbers_4',['numbers',['../tutorial-complex.html',1,'Complex numbers'],['../tutorial-simd.html#autotoc_md25',1,'Registers of complex numbers']]]
 ];

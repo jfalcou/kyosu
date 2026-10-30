@@ -135,10 +135,10 @@ $(function(){initNavTree('tutorial-complex.html','',''); });
   <div class="headertitle"><div class="title">Complex numbers </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>We start where you are already at home. Everything in this page has an equivalent in <span class="tt">std::complex</span>, and the point is less to teach complex arithmetic than to settle the spelling, the printing and the two or three habits that the rest of the tutorial builds on.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
-Naming a type</h1>
-<p>A complex number over <span class="tt">double</span> is written <span class="tt"><a class="el" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e" title="Type alias for complex numbers.">kyosu::complex_t</a>&lt;double&gt;</span>. The <span class="tt">_t</span> is not decoration: it is an alias for a two-dimensional Cayley-Dickson value, and the same suffix names every other algebra in the library.</p>
+<div class="textblock"><p><b>KYOSU</b> supports complex numbers via <span class="tt"><a class="el" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e" title="Type alias for complex numbers.">kyosu::complex_t</a>&lt;T&gt;</span>, where <span class="tt">T</span> is a floating point type.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
+Construction and printing</h1>
+<p>A complex number is built from its real and imaginary parts:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -148,7 +148,7 @@ Naming a type</h1>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;z         = &quot;</span> &lt;&lt; z                 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;real(z)   = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__real.html#ga4121e4e64916c81e31b622b9b45c93fb">kyosu::real</a>(z)    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;imag(z)   = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__ipart.html#gaff94a2685c6d030458b388a4a4079efe">kyosu::imag</a>(z)    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;imag(z)   = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__imag.html#gaff94a2685c6d030458b388a4a4079efe">kyosu::imag</a>(z)    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;conj(z)   = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__conj.html#ga7e324b44c677cab7cf646a1cb87e9405">kyosu::conj</a>(z)    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;abs(z)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>(z)     &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;arg(z)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__arg.html#gae6b016425d0a624d4391512f4afb64fc">kyosu::arg</a>(z)     &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -157,13 +157,24 @@ Naming a type</h1>
 <div class="ttc" id="agroup__abs_html_gac70344c81b5cf55a5257cf54c6e6cb18"><div class="ttname"><a href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a></div><div class="ttdeci">constexpr auto abs</div><div class="ttdef"><b>Definition</b> abs.hpp:71</div></div>
 <div class="ttc" id="agroup__arg_html_gae6b016425d0a624d4391512f4afb64fc"><div class="ttname"><a href="group__arg.html#gae6b016425d0a624d4391512f4afb64fc">kyosu::arg</a></div><div class="ttdeci">constexpr auto arg</div><div class="ttdef"><b>Definition</b> arg.hpp:75</div></div>
 <div class="ttc" id="agroup__conj_html_ga7e324b44c677cab7cf646a1cb87e9405"><div class="ttname"><a href="group__conj.html#ga7e324b44c677cab7cf646a1cb87e9405">kyosu::conj</a></div><div class="ttdeci">constexpr auto conj</div><div class="ttdef"><b>Definition</b> conj.hpp:66</div></div>
-<div class="ttc" id="agroup__ipart_html_gaff94a2685c6d030458b388a4a4079efe"><div class="ttname"><a href="group__ipart.html#gaff94a2685c6d030458b388a4a4079efe">kyosu::imag</a></div><div class="ttdeci">constexpr auto imag</div><div class="ttdoc">Alias for kyosu::ipart.</div><div class="ttdef"><b>Definition</b> parts.hpp:115</div></div>
+<div class="ttc" id="agroup__imag_html_gaff94a2685c6d030458b388a4a4079efe"><div class="ttname"><a href="group__imag.html#gaff94a2685c6d030458b388a4a4079efe">kyosu::imag</a></div><div class="ttdeci">constexpr auto imag</div><div class="ttdef"><b>Definition</b> parts.hpp:130</div></div>
 <div class="ttc" id="agroup__real_html_ga4121e4e64916c81e31b622b9b45c93fb"><div class="ttname"><a href="group__real.html#ga4121e4e64916c81e31b622b9b45c93fb">kyosu::real</a></div><div class="ttdeci">constexpr auto real</div><div class="ttdef"><b>Definition</b> parts.hpp:71</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
-</div><!-- fragment --><p>Note the printing convention. A value comes out as its components against the basis names, 3 + 4i rather than "(3,4)", and that convention scales: a quaternion prints as 1 + 2i + 3j + 4k. You will read a lot of these.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
-Functions</h1>
-<p>Everything you would expect is there, under the name you would expect, in namespace <span class="tt"><a class="el" href="namespacekyosu.html" title="Main KYOSU namespace.">kyosu</a></span>. Two hundred of them, from the arithmetic to the transcendentals, and on to the Riemann zeta, Legendre polynomials and elliptic integrals.</p>
+</div><!-- fragment --><p>A value prints as \(3 + 4i\), each component followed by the symbol of its basis element, rather than as the pair \((3,4)\) of <span class="tt">std::complex</span>. The functions above behave as their namesakes on <span class="tt">std::complex</span>:</p>
+<ul>
+<li><a class="el" href="group__real.html#ga4121e4e64916c81e31b622b9b45c93fb">kyosu::real</a> and <a class="el" href="group__imag.html#gaff94a2685c6d030458b388a4a4079efe">kyosu::imag</a> return the two components,</li>
+<li><a class="el" href="group__conj.html#ga7e324b44c677cab7cf646a1cb87e9405">kyosu::conj</a> returns the conjugate,</li>
+<li><a class="el" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a> returns the modulus,</li>
+<li><a class="el" href="group__arg.html#gae6b016425d0a624d4391512f4afb64fc">kyosu::arg</a> returns the argument.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
+Elementary functions</h1>
+<p>The standard arithmetic and the elementary functions are available on complex numbers, in namespace <span class="tt"><a class="el" href="namespacekyosu.html" title="Main KYOSU namespace.">kyosu</a></span>, under the names of their real counterparts. There are <a class="el" href="group__kyosu__functions.html" title="Cayley-Dickson Functions">two hundred functions</a>, from the arithmetic and the transcendental functions to the special functions:</p>
+<ul>
+<li>the Riemann zeta function, <a class="el" href="group__zeta.html#ga9dc4aaaee99fe3a698b09d2c63850d66">kyosu::zeta</a>,</li>
+<li>the Legendre polynomials, <a class="el" href="group__legendre.html#ga1a1ccdfb045aafc00e85d17216d871f0">kyosu::legendre</a>,</li>
+<li>the elliptic integrals, <a class="el" href="group__ellint__fe.html#ga858bbc0cd82011e1911907d0d6cdf2cb">kyosu::ellint_fe</a> for Legendre's forms, and <a class="el" href="group__ellint__rc.html#ga59830d1553989ba7ee7722d0b2731039">kyosu::ellint_rc</a>, <a class="el" href="group__ellint__rd.html#ga81e0756cf62ec6b36813e4eb930992c9">kyosu::ellint_rd</a>, <a class="el" href="group__ellint__rf.html#gac8903dbfbdb109a6d1c70209d3e20386">kyosu::ellint_rf</a>, <a class="el" href="group__ellint__rg.html#gabe721a515ca959098143128eeb2c62c3">kyosu::ellint_rg</a>, and <a class="el" href="group__ellint__rj.html#gaea54d1c027a77c63a592fc8e933fc384">kyosu::ellint_rj</a> for Carlson's.</li>
+</ul>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -188,10 +199,11 @@ Functions</h1>
 <div class="ttc" id="agroup__tanh_html_ga78d8caa0d963138de3b8d7fa35bf9e6b"><div class="ttname"><a href="group__tanh.html#ga78d8caa0d963138de3b8d7fa35bf9e6b">kyosu::tanh</a></div><div class="ttdeci">constexpr auto tanh</div><div class="ttdef"><b>Definition</b> tanh.hpp:72</div></div>
 <div class="ttc" id="agroup__tgamma_html_ga2592a73fafd38f5dcff68431ce527a41"><div class="ttname"><a href="group__tgamma.html#ga2592a73fafd38f5dcff68431ce527a41">kyosu::tgamma</a></div><div class="ttdeci">constexpr auto tgamma</div><div class="ttdef"><b>Definition</b> tgamma.hpp:72</div></div>
 <div class="ttc" id="agroup__zeta_html_ga9dc4aaaee99fe3a698b09d2c63850d66"><div class="ttname"><a href="group__zeta.html#ga9dc4aaaee99fe3a698b09d2c63850d66">kyosu::zeta</a></div><div class="ttdeci">constexpr auto zeta</div><div class="ttdef"><b>Definition</b> zeta.hpp:66</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
-The one surprise</h1>
-<p><span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>(-1.0)</span> returns a complex number. Its argument is a plain <span class="tt">double</span>, and the answer could not be a <span class="tt">double</span>, so the return type is widened rather than the answer being lost.</p>
-<p>This is deliberate and it is not always what you want. When you would rather have the real function and its NaN, say so:</p>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
+Real arguments</h1>
+<p>A function applied to a real argument outside its real domain returns a complex result. For example, <span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>(-1.0)</span> returns \(i\), where <span class="tt">std::sqrt(-1.0)</span> returns NaN.</p>
+<p>The return type widens from <span class="tt">double</span> to <span class="tt"><a class="el" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e" title="Type alias for complex numbers.">kyosu::complex_t</a>&lt;double&gt;</span>, so that the result is not lost.</p>
+<dl class="section note"><dt>Note</dt><dd>The option <span class="tt">kyosu::real_only</span> selects the real function and its NaN instead:</dd></dl>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -209,10 +221,10 @@ The one surprise</h1>
 <div class="line">}</div>
 <div class="ttc" id="agroup__acos_html_gaa6527f2975e878d560e025dba9def6cd"><div class="ttname"><a href="group__acos.html#gaa6527f2975e878d560e025dba9def6cd">kyosu::acos</a></div><div class="ttdeci">constexpr auto acos</div><div class="ttdef"><b>Definition</b> acos.hpp:111</div></div>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
-</div><!-- fragment --><p><span class="tt">kyosu::real_only</span> is an <em>option</em>, written in square brackets after the function name. Options are how <b>KYOSU</b> lets you pick a behaviour without a different function name for each; there are others, and <a class="el" href="tutorial-options.html" title="Options">Options</a> collects them.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
-What is missing on purpose</h1>
-<p>There is no <span class="tt">&lt;</span> on complex numbers. No ordering of the complex plane is compatible with multiplication, so the library offers none rather than offering one that lies. Equality and the componentwise predicates are there:</p>
+</div><!-- fragment --><p>For more information, see the tutorial on <a class="el" href="tutorial-options.html" title="Options">Options</a>.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
+Comparison</h1>
+<p>Complex numbers are compared for equality and tested by the componentwise predicates. No <span class="tt">&lt;</span> is defined: the complex numbers are not an <a href="https://en.wikipedia.org/wiki/Ordered_field">ordered field</a>, no total order of the plane being compatible with both their addition and their multiplication:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -234,7 +246,7 @@ What is missing on purpose</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">Previous  </th><th class="markdownTableHeadRight">Next  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><a class="el" href="setup.html" title="Installation &amp; Quick Start">Quick Start</a>  </td><td class="markdownTableBodyRight"><a class="el" href="tutorial-simd.html" title="Many values at once">Many values at once</a>  </td></tr>
+<td class="markdownTableBodyLeft"><a class="el" href="setup.html" title="Installation">Installation</a>  </td><td class="markdownTableBodyRight"><a class="el" href="tutorial-simd.html" title="SIMD support">SIMD support</a>  </td></tr>
 </table>
 </div><div class="section_buttons"></div> </div></div><!-- contents -->
 </div><!-- PageDoc -->

@@ -1237,7 +1237,7 @@
     <member kind="variable">
       <type>constexpr auto</type>
       <name>imag</name>
-      <anchorfile>group__ipart.html</anchorfile>
+      <anchorfile>group__imag.html</anchorfile>
       <anchor>gaff94a2685c6d030458b388a4a4079efe</anchor>
       <arglist></arglist>
     </member>
@@ -3654,6 +3654,18 @@
     </member>
   </compound>
   <compound kind="group">
+    <name>imag</name>
+    <title>kyosu::imag</title>
+    <filename>group__imag.html</filename>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::imag</name>
+      <anchorfile>group__imag.html</anchorfile>
+      <anchor>gaff94a2685c6d030458b388a4a4079efe</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="group">
     <name>inc</name>
     <title>kyosu::inc</title>
     <filename>group__inc.html</filename>
@@ -3681,13 +3693,7 @@
     <name>ipart</name>
     <title>kyosu::ipart</title>
     <filename>group__ipart.html</filename>
-    <member kind="variable">
-      <type>constexpr auto</type>
-      <name>kyosu::imag</name>
-      <anchorfile>group__ipart.html</anchorfile>
-      <anchor>gaff94a2685c6d030458b388a4a4079efe</anchor>
-      <arglist></arglist>
-    </member>
+    <subgroup>imag</subgroup>
     <member kind="variable">
       <type>constexpr auto</type>
       <name>kyosu::ipart</name>
@@ -5114,7 +5120,7 @@
   </compound>
   <compound kind="page">
     <name>setup</name>
-    <title>Installation &amp; Quick Start</title>
+    <title>Installation</title>
     <filename>setup.html</filename>
     <docanchor file="setup.html" title="/__w/kyosu/kyosu/doc/setup.md">md__2____w_2kyosu_2kyosu_2doc_2setup</docanchor>
   </compound>
@@ -5125,7 +5131,7 @@
   </compound>
   <compound kind="page">
     <name>tutorial-simd</name>
-    <title>Many values at once</title>
+    <title>SIMD support</title>
     <filename>tutorial-simd.html</filename>
   </compound>
   <compound kind="page">
@@ -5140,7 +5146,7 @@
   </compound>
   <compound kind="page">
     <name>tutorial-beyond</name>
-    <title>Octonions and beyond</title>
+    <title>Octonions and higher algebras</title>
     <filename>tutorial-beyond.html</filename>
   </compound>
   <compound kind="page">
@@ -5165,10 +5171,5 @@
     <title>Mathematics of Cayley-Dickson Algebras</title>
     <filename>math_background.html</filename>
     <docanchor file="math_background.html" title="/__w/kyosu/kyosu/doc/math.md">md__2____w_2kyosu_2kyosu_2doc_2math</docanchor>
-  </compound>
-  <compound kind="page">
-    <name>index</name>
-    <title>SIMD-Aware Cayley-Dickson Algebras</title>
-    <filename>index.html</filename>
   </compound>
 </tagfile>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['half_20turns_0',['half turns',['../index.html#autotoc_md24',1,'Angles in half-turns'],['../tutorial-options.html#autotoc_md52',1,'Angles in half-turns']]],
-  ['here_2',['Where to go from here',['../tutorial-beyond.html#autotoc_md49',1,'']]]
+  ['higher_20algebras_1',['Higher algebras',['../tutorial-beyond.html#autotoc_md38',1,'']]],
+  ['higher_20algebras_2',['Octonions and higher algebras',['../tutorial-beyond.html',1,'']]]
 ];

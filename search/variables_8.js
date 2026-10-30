@@ -2,7 +2,7 @@ var searchData=
 [
   ['i_0',['i',['../group__i.html#gaa17b17c2202168c33700e95ccce7322d',1,'kyosu']]],
   ['if_5felse_1',['if_else',['../group__if__else.html#ga653d166a9a5d389a6d5aa1a1220b4643',1,'kyosu::if_else']]],
-  ['imag_6',['imag',['../group__ipart.html#gaff94a2685c6d030458b388a4a4079efe',1,'kyosu']]],
+  ['imag_6',['imag',['../group__imag.html#gaff94a2685c6d030458b388a4a4079efe',1,'kyosu']]],
   ['inc_7',['inc',['../group__inc.html#gae5c7264a43adea8149beb99e71fb0e4d',1,'kyosu::inc']]],
   ['inject_10',['inject',['../group__inject.html#ga5c2b44e7d8e27d43b129c6e0739bf6d3',1,'kyosu']]],
   ['ipart_25',['ipart',['../group__ipart.html#gac538e6a794844977cba0f5043a990c99',1,'kyosu']]],

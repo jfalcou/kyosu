@@ -135,10 +135,11 @@ $(function(){initNavTree('tutorial-quaternion.html','',''); });
   <div class="headertitle"><div class="title">Quaternions </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>If you have never computed with anything past the complex numbers, this is the page where that changes. It assumes nothing beyond the previous two.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
-What they are</h1>
-<p>A complex number is a pair of reals. A quaternion is a pair of <em>complex numbers</em> — so four reals — with a product built by a new but similar recipe. That is the whole definition. The four components are written against the basis \(1, i, j, k\), and <b>KYOSU</b> prints them that way:</p>
+<div class="textblock"><p>A quaternion is a number with four real components, written \(a + bi + cj + dk\) on the basis \(1, i, j, k\), whose product extends the complex product with  \(i^2 = j^2 = k^2 =
+ijk = -1\). In the <a class="el" href="math_background.html" title="Mathematics of Cayley-Dickson Algebras">Cayley-Dickson construction</a> it is a pair of complex numbers. <b>KYOSU</b> supports it via <span class="tt"><a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t</a>&lt;T&gt;</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md27"></a>
+Construction and functions</h1>
+<p>A quaternion is built from its four components:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -161,26 +162,10 @@ What they are</h1>
 <div class="ttc" id="agroup__rec_html_ga8eac9efc63807af3af63afdc1df00785"><div class="ttname"><a href="group__rec.html#ga8eac9efc63807af3af63afdc1df00785">kyosu::rec</a></div><div class="ttdeci">constexpr auto rec</div><div class="ttdef"><b>Definition</b> rec.hpp:76</div></div>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
-</div><!-- fragment --><p>Everything familiar carries over. There is a modulus, a conjugate, an inverse, and the functions you already used on complex numbers accept a quaternion under the same name. A complex number <em>is</em> a quaternion whose last two components are zero, and the library treats it as such: mixing the two in one expression is allowed and the result takes the larger dimension.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> c = <a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;double&gt;</a>(1., 2.);</div>
-<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_typedef" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t&lt;double&gt;</a>(1., 2., 3., 4.);</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// A complex number is a quaternion whose last two components are zero.</span></div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;c + q = &quot;</span> &lt;&lt; c + q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;c * q = &quot;</span> &lt;&lt; c * q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// A real works just as well.</span></div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;2. * q = &quot;</span> &lt;&lt; 2. * q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
-The thing that is genuinely new</h1>
-<p>Multiplication no longer commutes. \(ij = k\), but \(ji = -k\):</p>
+</div><!-- fragment --><p>The arithmetic, the comparisons, and the functions of the complex numbers apply to a quaternion with the same API.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
+Noncommutativity</h1>
+<p>The product depends on the <a href="https://en.wikipedia.org/wiki/Quaternion#Multiplication_of_basis_elements">order of its operands</a>, \(ij = k\) and \(ji = -k\). The property is the algebra's, and its consequence is on the division:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -202,14 +187,10 @@ The thing that is genuinely new</h1>
 <div class="ttc" id="agroup__i_html_gaa17b17c2202168c33700e95ccce7322d"><div class="ttname"><a href="group__i.html#gaa17b17c2202168c33700e95ccce7322d">kyosu::i</a></div><div class="ttdeci">constexpr auto i</div><div class="ttdef"><b>Definition</b> i.hpp:67</div></div>
 <div class="ttc" id="agroup__j_html_gad984a2daa62e2ee33ee4577d87cb0533"><div class="ttname"><a href="group__j.html#gad984a2daa62e2ee33ee4577d87cb0533">kyosu::j</a></div><div class="ttdeci">constexpr auto j</div><div class="ttdef"><b>Definition</b> j.hpp:73</div></div>
 <div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
-</div><!-- fragment --><p>This is not a defect of the implementation, it is what the algebra is. It has one practical consequence you cannot avoid, so it is worth meeting now rather than in a debugger.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
-Two divisions instead of one</h1>
-<p>With real or complex numbers, divide \(a\) by \(b\) names one operation, because \(ab^{-1}\) and \(b^{-1}a\) agree. With quaternions they do not, and there are two honest answers:</p>
-<ul>
-<li>\(x\) such that \(xb = a\), which is \(ab^{-1}\) — this is what <span class="tt">/</span> computes;</li>
-<li>\(x\) such that \(bx = a\), which is \(b^{-1}a\) — this is <span class="tt"><a class="el" href="group__ldiv.html" title="Computes the left division of the product of the arguments but the first.">kyosu::ldiv</a></span>.</li>
-</ul>
+</div><!-- fragment --><p>A constant takes its type as the argument <span class="tt">as&lt;T&gt;()</span>: <span class="tt"><a class="el" href="group__i.html#gaa17b17c2202168c33700e95ccce7322d">kyosu::i</a>(<a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">kyosu::as</a>&lt;q_t&gt;())</span> is \(i\) as a <span class="tt">q_t</span>, and <span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a>&lt;double&gt;())</span> is \(\pi\) as a <span class="tt">double</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
+Divisions</h1>
+<p>Since the product is noncommutative, \(ab^{-1}\) and \(b^{-1}a\) differ, and both divisions exist. <span class="tt">a / b</span> is \(ab^{-1}\), the solution of \(xb = a\), and <span class="tt"><a class="el" href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv(b, a)</a></span> is \(b^{-1}a\), the solution of \(bx = a\). No conversion is made from one to the other:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -225,50 +206,35 @@ Two divisions instead of one</h1>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;a / b       = &quot;</span> &lt;&lt; right &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;ldiv(b, a)  = &quot;</span> &lt;&lt; left  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Each really does solve its own equation.</span></div>
+<div class="line">  <span class="comment">// Each solves its own equation.</span></div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;right * b   = &quot;</span> &lt;&lt; right * b &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;b * left    = &quot;</span> &lt;&lt; b * left  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__ldiv_html_ga4842daf39053c0a08fa68cd1850558e1"><div class="ttname"><a href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv</a></div><div class="ttdeci">constexpr auto ldiv</div><div class="ttdef"><b>Definition</b> ldiv.hpp:93</div></div>
-</div><!-- fragment --><p><b>KYOSU</b> never guesses which one you meant. <span class="tt">/</span> is the right division and <a class="el" href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv</a> is the left one; if you have been getting rotations composed backwards, this is usually why.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
-Building one without listing four numbers</h1>
-<p>Writing <span class="tt">q_t(1., 2., 3., 4.)</span> is rarely how a quaternion arises in practice. The parametrisations people actually reach for are provided directly:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
+Mixed operands</h1>
+<p>A complex number is a quaternion whose last two components are zero, and a real a quaternion whose three imaginary parts are zero. An expression mixing dimensions returns the larger one, with the missing components at zero:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> pi = <a class="code hl_variableRef" href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as&lt;double&gt;</a>());</div>
+<div class="line">  <span class="keyword">auto</span> c = <a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;double&gt;</a>(1., 2.);</div>
+<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_typedef" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t&lt;double&gt;</a>(1., 2., 3., 4.);</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// A rotation of pi/3 around the axis (1,2,3).</span></div>
-<div class="line">  std::array&lt;double, 3&gt; axis{1., 2., 3.};</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_angle_axis  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a>(pi/3, std::span(axis)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="comment">// A complex number is a quaternion whose last two components are zero.</span></div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;c + q = &quot;</span> &lt;&lt; c + q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;c * q = &quot;</span> &lt;&lt; c * q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// The same idea through Euler angles, naming the three axes used.</span></div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_euler       = &quot;</span></div>
-<div class="line">            &lt;&lt; <a class="code hl_variable" href="group__from__euler.html#ga4e7d9b2067dc764269c1539b6e4b9271">kyosu::from_euler</a>(pi/2, pi/3, pi/4, kyosu::Z_, kyosu::X_, kyosu::Z_) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// Modulus and argument, as for a complex number.</span></div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_polar       = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__from__polar.html#gaf64b08ee90565c95c04b029767cba95e">kyosu::from_polar</a>(2., pi/6) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// Four-dimensional spherical and cylindrical parametrisations.</span></div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_spherical   = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__from__spherical.html#gaed1e70b2f6b903ef24ce33d7937d8958">kyosu::from_spherical</a>(1., pi/4, pi/3, pi/6) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;from_cylindrical = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__from__cylindrical.html#ga505ff6cf7441aa432d2549a840868527">kyosu::from_cylindrical</a>(1., pi/4, 2., 3.)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="comment">// A real mixes the same way.</span></div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;2. * q = &quot;</span> &lt;&lt; 2. * q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__eve__math__constants_html_gad32687fc782ada2bb223abb7722ac694"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a></div><div class="ttdeci">constexpr auto pi</div></div>
-<div class="ttc" id="agroup__from__angle__axis_html_ga2e2e427d078f717745ed2821f6cd06f2"><div class="ttname"><a href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr auto from_angle_axis</div><div class="ttdef"><b>Definition</b> from_angle_axis.hpp:78</div></div>
-<div class="ttc" id="agroup__from__cylindrical_html_ga505ff6cf7441aa432d2549a840868527"><div class="ttname"><a href="group__from__cylindrical.html#ga505ff6cf7441aa432d2549a840868527">kyosu::from_cylindrical</a></div><div class="ttdeci">constexpr auto from_cylindrical</div><div class="ttdef"><b>Definition</b> from_cylindrical.hpp:74</div></div>
-<div class="ttc" id="agroup__from__euler_html_ga4e7d9b2067dc764269c1539b6e4b9271"><div class="ttname"><a href="group__from__euler.html#ga4e7d9b2067dc764269c1539b6e4b9271">kyosu::from_euler</a></div><div class="ttdeci">constexpr auto from_euler</div><div class="ttdef"><b>Definition</b> from_euler.hpp:122</div></div>
-<div class="ttc" id="agroup__from__polar_html_gaf64b08ee90565c95c04b029767cba95e"><div class="ttname"><a href="group__from__polar.html#gaf64b08ee90565c95c04b029767cba95e">kyosu::from_polar</a></div><div class="ttdeci">constexpr auto from_polar</div><div class="ttdef"><b>Definition</b> from_polar.hpp:81</div></div>
-<div class="ttc" id="agroup__from__spherical_html_gaed1e70b2f6b903ef24ce33d7937d8958"><div class="ttname"><a href="group__from__spherical.html#gaed1e70b2f6b903ef24ce33d7937d8958">kyosu::from_spherical</a></div><div class="ttdeci">constexpr auto from_spherical</div><div class="ttdef"><b>Definition</b> from_spherical.hpp:79</div></div>
-</div><!-- fragment --><p>What those angles <em>mean</em> is the subject of the next page.</p>
-<div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+<div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
+</div><!-- fragment --><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">Previous  </th><th class="markdownTableHeadRight">Next  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><a class="el" href="tutorial-simd.html" title="Many values at once">Many Values At Once</a>  </td><td class="markdownTableBodyRight"><a class="el" href="tutorial-rotation.html" title="Rotations">Rotations</a>  </td></tr>
+<td class="markdownTableBodyLeft"><a class="el" href="tutorial-simd.html" title="SIMD support">SIMD support</a>  </td><td class="markdownTableBodyRight"><a class="el" href="tutorial-beyond.html" title="Octonions and higher algebras">Octonions and higher algebras</a>  </td></tr>
 </table>
 </div><div class="section_buttons"></div> </div></div><!-- contents -->
 </div><!-- PageDoc -->

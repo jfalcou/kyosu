@@ -25,19 +25,18 @@
 var NAVTREE =
 [
   [ "kyosu", "index.html", [
-    [ "SIMD-Aware Cayley-Dickson Algebras", "index.html", null ],
-    [ "Tutorials", "setup.html", [
-      [ "Installation & Quick Start", "setup.html", null ],
-      [ "Getting Started", "tutorial-complex.html", [
-        [ "Complex Numbers", "tutorial-complex.html", null ],
-        [ "Many Values At Once", "tutorial-simd.html", null ]
-      ] ],
-      [ "Past The Complex Numbers", "tutorial-quaternion.html", [
+    [ "Getting Started", "setup.html", [
+      [ "Installation", "setup.html", null ],
+      [ "Number types", "tutorial-complex.html", [
+        [ "Complex numbers", "tutorial-complex.html", null ],
+        [ "SIMD support", "tutorial-simd.html", null ],
         [ "Quaternions", "tutorial-quaternion.html", null ],
-        [ "Rotations", "tutorial-rotation.html", null ],
-        [ "Octonions and Beyond", "tutorial-beyond.html", null ]
+        [ "Octonions and higher algebras", "tutorial-beyond.html", null ]
       ] ],
-      [ "Options", "tutorial-options.html", null ]
+      [ "General topics", "tutorial-rotation.html", [
+        [ "Rotations", "tutorial-rotation.html", null ],
+        [ "Options", "tutorial-options.html", null ]
+      ] ]
     ] ],
     [ "Reference Documentation", "group__types.html", [
       [ "Types", "group__types.html", null ],

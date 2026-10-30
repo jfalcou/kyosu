@@ -24,16 +24,16 @@
 */
 var menudata={children:[
 {text:"Main Page",url:"index.html"},
-{text:"Tutorials",url:"setup.html",children:[
-{text:"Installation & Quick Start",url:"setup.html"},
-{text:"Getting Started",url:"tutorial-complex.html",children:[
-{text:"Complex Numbers",url:"tutorial-complex.html"},
-{text:"Many Values At Once",url:"tutorial-simd.html"}]},
-{text:"Past The Complex Numbers",url:"tutorial-quaternion.html",children:[
+{text:"Getting Started",url:"setup.html",children:[
+{text:"Installation",url:"setup.html"},
+{text:"Number types",url:"tutorial-complex.html",children:[
+{text:"Complex numbers",url:"tutorial-complex.html"},
+{text:"SIMD support",url:"tutorial-simd.html"},
 {text:"Quaternions",url:"tutorial-quaternion.html"},
+{text:"Octonions and higher algebras",url:"tutorial-beyond.html"}]},
+{text:"General topics",url:"tutorial-rotation.html",children:[
 {text:"Rotations",url:"tutorial-rotation.html"},
-{text:"Octonions and Beyond",url:"tutorial-beyond.html"}]},
-{text:"Options",url:"tutorial-options.html"}]},
+{text:"Options",url:"tutorial-options.html"}]}]},
 {text:"Reference Documentation",url:"group__types.html",children:[
 {text:"Types",url:"group__types.html"},
 {text:"Constants",url:"group__constants.html"},

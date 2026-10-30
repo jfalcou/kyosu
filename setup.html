@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KYOSU - Complex Without Complexes" />
 <meta name="twitter:description" content="Kyosu gives complex numbers, quaternions and octonions one unified treatment of the Cayley-Dickson algebras over the reals, where a real is a float, a double, or a SIMD register." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kyosu/card.png" />
-<title>kyosu: Installation &amp; Quick Start</title>
+<title>kyosu: Installation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -132,26 +132,31 @@ $(function(){initNavTree('setup.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Installation &amp; Quick Start </div></div>
+  <div class="headertitle"><div class="title">Installation </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__2____w_2kyosu_2kyosu_2doc_2setup"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md71"></a>
-Pre-requisites</h1>
-<p><b>KYOSU</b> is a header-only C++20 library. It is built on top of <a href="https://github.com/jfalcou/eve">EVE</a>, which it needs at compile time and which shares its compiler requirements:</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md61"></a>
+Prerequisites</h1>
+<p><b>KYOSU</b> is a header-only C++20 library with the following requirements:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Compiler  </th><th class="markdownTableHeadNone">Minimal version  </th><th class="markdownTableHeadNone">Tested in CI  </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">g++  </td><td class="markdownTableBodyNone">13 or above  </td><td class="markdownTableBodyNone">15  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">clang++  </td><td class="markdownTableBodyNone">16 or above  </td><td class="markdownTableBodyNone">20  </td></tr>
+<td class="markdownTableBodyNone">clang++  </td><td class="markdownTableBodyNone">16 or above  </td><td class="markdownTableBodyNone">19, and Apple clang  </td></tr>
 </table>
-<p>CMake 3.22 or above is required to build the tests and the documentation. Consuming the library needs no build step of its own: adding the include directory is enough, provided EVE is reachable too.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md72"></a>
-Getting KYOSU</h1>
-<p>Whichever route you take, the target to link against is <span class="tt">kyosu::kyosu</span>, and EVE must be linked alongside it. The three snippets below are the ones exercised by the integration tests, so they are known to work.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md73"></a>
+<p>It depends on:</p>
+<ul>
+<li><a href="https://github.com/jfalcou/eve">EVE</a>, at compile time, for the SIMD types and the real functions.</li>
+<li>CMake 3.22 or above, for the tests and the documentation only.</li>
+</ul>
+<p>A consumer has no build step: the include directory of the library and the one of EVE are enough.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md62"></a>
+Installation</h1>
+<p>The target to link is <span class="tt">kyosu::kyosu</span>, with <span class="tt">eve::eve</span> beside it.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md63"></a>
 With CPM</h2>
 <div class="fragment"><div class="line">CPMAddPackage ( NAME kyosu</div>
 <div class="line">                GIT_REPOSITORY &quot;https://github.com/jfalcou/kyosu.git&quot;</div>
@@ -160,7 +165,7 @@ With CPM</h2>
 <div class="line">              )</div>
 <div class="line"> </div>
 <div class="line">target_link_libraries(my_app PUBLIC kyosu::kyosu eve::eve)</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md74"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
 With FetchContent</h2>
 <div class="fragment"><div class="line">include(FetchContent)</div>
 <div class="line"> </div>
@@ -176,18 +181,17 @@ With FetchContent</h2>
 <div class="line">FetchContent_MakeAvailable(eve)</div>
 <div class="line"> </div>
 <div class="line">target_link_libraries(my_app PUBLIC kyosu::kyosu eve::eve)</div>
-</div><!-- fragment --><p><span class="tt">FetchContent</span> carries no per-package options, so the settings each dependency reads are pinned before the call. Left out, every dependency registers its own test suite in your project.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md75"></a>
-From an installed copy</h2>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
+With a git clone</h2>
 <div class="fragment"><div class="line">git clone https://github.com/jfalcou/kyosu.git</div>
-<div class="line">cmake -S kyosu -B build -DCMAKE_INSTALL_PREFIX=/where/you/want</div>
+<div class="line">cmake -S kyosu -B build -DCMAKE_INSTALL_PREFIX=&lt;prefix&gt;</div>
 <div class="line">cmake --install build</div>
 </div><!-- fragment --><p>then</p>
 <div class="fragment"><div class="line">find_package(kyosu CONFIG REQUIRED)</div>
 <div class="line">target_link_libraries(my_app PUBLIC kyosu::kyosu eve::eve)</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md76"></a>
-Your first program</h1>
-<p>A single header brings in everything:</p>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md66"></a>
+First program</h1>
+<p><span class="tt">kyosu/kyosu.hpp</span> declares every type and every function of the library. A program that includes it and links <span class="tt">kyosu::kyosu</span> as above compiles and runs:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -202,7 +206,7 @@ Your first program</h1>
 <div class="line">  <span class="comment">// A negative real has no real square root, so a complex one comes back.</span></div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;sqrt(-1.0) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>(-1.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// The very same name, on a four-dimensional value.</span></div>
+<div class="line">  <span class="comment">// The same name, on a four-dimensional value.</span></div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;sqrt(q)    = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>(<a class="code hl_typedef" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t&lt;double&gt;</a>(1., 2., 3., 4.)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__abs_html_gac70344c81b5cf55a5257cf54c6e6cb18"><div class="ttname"><a href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a></div><div class="ttdeci">constexpr auto abs</div><div class="ttdef"><b>Definition</b> abs.hpp:71</div></div>
@@ -210,18 +214,17 @@ Your first program</h1>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
-</div><!-- fragment --><p>Two things are worth noticing already. <span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></span> is applied to a value that is not a complex number and returns one anyway, because the square root of a negative real is not real. And the same <span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></span> accepts a quaternion without any change of spelling. Both are the subject of the tutorials that follow.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md77"></a>
-Where to go next</h1>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md67"></a>
+Tutorials</h1>
 <ul>
-<li><a class="el" href="tutorial-complex.html" title="Complex numbers">Complex numbers</a> — complex numbers, on ground you already know.</li>
-<li><a class="el" href="tutorial-simd.html" title="Many values at once">Many values at once</a> — the same code applied to many values at once.</li>
-<li><a class="el" href="tutorial-quaternion.html" title="Quaternions">Quaternions</a> — the first algebra past the complex numbers.</li>
-<li><a class="el" href="tutorial-rotation.html" title="Rotations">Rotations</a> — what quaternions are actually used for.</li>
-<li><a class="el" href="tutorial-options.html" title="Options">Options</a> — choosing accuracy, angle units and real-only behaviour.</li>
-<li><a class="el" href="tutorial-beyond.html" title="Octonions and beyond">Octonions and beyond</a> — octonions, and what changes when dimensions keep doubling.</li>
+<li><a class="el" href="tutorial-complex.html" title="Complex numbers">Complex numbers</a></li>
+<li><a class="el" href="tutorial-simd.html" title="SIMD support">SIMD support</a></li>
+<li><a class="el" href="tutorial-quaternion.html" title="Quaternions">Quaternions</a></li>
+<li><a class="el" href="tutorial-beyond.html" title="Octonions and higher algebras">Octonions and higher algebras</a></li>
+<li><a class="el" href="tutorial-rotation.html" title="Rotations">Rotations</a></li>
+<li><a class="el" href="tutorial-options.html" title="Options">Options</a></li>
 </ul>
-<p>The mathematics underlying all of it is set out in <a class="el" href="math_background.html" title="Mathematics of Cayley-Dickson Algebras">Mathematics of Cayley-Dickson Algebras</a>. </p>
+<p>The construction itself, and the theorems behind what the higher dimensions lose, are set out in <a class="el" href="math_background.html" title="Mathematics of Cayley-Dickson Algebras">Mathematics of Cayley-Dickson Algebras</a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

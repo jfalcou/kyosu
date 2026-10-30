@@ -2,8 +2,6 @@ var searchData=
 [
   ['gd_4',['gd',['../group__gd.html#gad3eacdb5f403d7a4f3a4fcc412f57b0e',1,'kyosu::gd']]],
   ['gegenbauer_5',['gegenbauer',['../group__gegenbauer.html#gafacfbe5287142d18a3e08d15f9867b2e',1,'kyosu::gegenbauer']]],
-  ['genuinely_20new_8',['The thing that is genuinely new',['../tutorial-quaternion.html#autotoc_md37',1,'']]],
-  ['getting_20kyosu_17',['Getting KYOSU',['../setup.html#autotoc_md72',1,'']]],
-  ['go_20from_20here_19',['Where to go from here',['../tutorial-beyond.html#autotoc_md49',1,'']]],
-  ['go_20next_20',['Where to go next',['../setup.html#autotoc_md77',1,'']]]
+  ['generic_20code_8',['Generic code',['../tutorial-simd.html#autotoc_md26',1,'']]],
+  ['git_20clone_17',['With a git clone',['../setup.html#autotoc_md65',1,'']]],
 ];

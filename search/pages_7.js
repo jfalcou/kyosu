@@ -1,16 +1,12 @@
 var searchData=
 [
-  ['dickson_20algebras_4',['Dickson Algebras',['../math_background.html',1,'Mathematics of Cayley-Dickson Algebras'],['../index.html',1,'SIMD-Aware Cayley-Dickson Algebras']]],
-  ['dimension_5',['dimension',['../tutorial-beyond.html#autotoc_md45',1,'Naming any dimension'],['../index.html#autotoc_md21',1,'One call, whatever the dimension']]],
-  ['dimension_2016_20division_20fails_6',['Second trap: from dimension 16, division fails',['../tutorial-beyond.html#autotoc_md47',1,'']]],
-  ['dimension_2016_3a_20the_20loss_20of_20division_7',['Dimension 16: the loss of division',['../math_background.html#autotoc_md67',1,'']]],
-  ['dimension_202_3a_20the_20loss_20of_20order_8',['Dimension 2: the loss of order',['../math_background.html#autotoc_md64',1,'']]],
-  ['dimension_204_3a_20the_20loss_20of_20commutativity_9',['Dimension 4: the loss of commutativity',['../math_background.html#autotoc_md65',1,'']]],
-  ['dimension_208_3a_20the_20loss_20of_20associativity_10',['Dimension 8: the loss of associativity',['../math_background.html#autotoc_md66',1,'']]],
-  ['division_11',['Dimension 16: the loss of division',['../math_background.html#autotoc_md67',1,'']]],
-  ['division_20fails_12',['Second trap: from dimension 16, division fails',['../tutorial-beyond.html#autotoc_md47',1,'']]],
-  ['divisions_20instead_20of_20one_13',['Two divisions instead of one',['../tutorial-quaternion.html#autotoc_md38',1,'']]],
-  ['documentation_14',['Building the documentation',['../building.html#autotoc_md61',1,'']]],
-  ['does_20not_20care_15',['Writing code that does not care',['../tutorial-simd.html#autotoc_md35',1,'']]],
-  ['doubling_16',['The cost of each doubling',['../math_background.html#autotoc_md63',1,'']]]
+  ['dickson_20algebras_4',['Mathematics of Cayley-Dickson Algebras',['../math_background.html',1,'']]],
+  ['dimension_2016_3a_20the_20loss_20of_20division_5',['Dimension 16: the loss of division',['../math_background.html#autotoc_md57',1,'']]],
+  ['dimension_202_3a_20the_20loss_20of_20order_6',['Dimension 2: the loss of order',['../math_background.html#autotoc_md54',1,'']]],
+  ['dimension_204_3a_20the_20loss_20of_20commutativity_7',['Dimension 4: the loss of commutativity',['../math_background.html#autotoc_md55',1,'']]],
+  ['dimension_208_3a_20the_20loss_20of_20associativity_8',['Dimension 8: the loss of associativity',['../math_background.html#autotoc_md56',1,'']]],
+  ['division_9',['Dimension 16: the loss of division',['../math_background.html#autotoc_md57',1,'']]],
+  ['divisions_10',['Divisions',['../tutorial-quaternion.html#autotoc_md29',1,'']]],
+  ['documentation_11',['Building the documentation',['../building.html#autotoc_md51',1,'']]],
+  ['doubling_12',['The cost of each doubling',['../math_background.html#autotoc_md53',1,'']]]
 ];
