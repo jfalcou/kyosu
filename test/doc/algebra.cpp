@@ -12,13 +12,13 @@ int main()
   std::cout << "c + q = " << c + q << "\n";
   std::cout << "q * o = " << q * o << "\n";
 
-  // The constants behave as the algebra says they should, and it is not commutative.
+  // The constants follow the algebra, whose product does not commute.
   auto i = kyosu::i(kyosu::as<q_t>());
   auto j = kyosu::j(kyosu::as<q_t>());
   std::cout << "i * j = " << i * j << "\n";
   std::cout << "j * i = " << j * i << "\n";
 
-  // Which is why a left-division of its own is needed.
+  // Hence a left division beside the right one.
   std::cout << "q / c      = " << q / c            << "\n";
   std::cout << "ldiv(c, q) = " << kyosu::ldiv(c, q) << "\n";
 }

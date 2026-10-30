@@ -1,6 +1,7 @@
 #include <array>
 #include <iostream>
 #include <kyosu/kyosu.hpp>
+#include <span>
 
 int main()
 {

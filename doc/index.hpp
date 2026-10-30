@@ -1,63 +1,61 @@
-#error This file is for documentation only - DO NOT INCLUDE
-//! \mainpage SIMD-Aware Cayley-Dickson Algebras
-//!
-//! **KYOSU** is a C++20 library for complex numbers, quaternions, octonions and the general
-//! \f$\mathbb{R}\f$-Cayley-Dickson algebras. It extends the usual real functions to all of them — the
-//! transcendentals, but also Legendre polynomials and elliptic integrals — and every
-//! one of those functions works on a scalar and on a SIMD register alike.
-//!
-//! If all you need is complex numbers, that is reason enough to use it: they are the two-dimensional case,
-//! and they come with the same vectorization as the rest.
-//!
-//! ## Core Features
-//!
-//! ### One call, whatever the dimension
-//! Over two hundred functions, each taking a real or a hyper-complex argument under the same name.
-//!
-//! @godbolt{doc/one_call.cpp}
-//!
-//! ### One call, scalar or SIMD
-//! The same name again, on one value or on a register of them.
-//!
-//! @godbolt{doc/simd.cpp}
-//!
-//! ### Accuracy you choose
-//! The default keeps IEEE754 conformity at the edges of the domain; `raw` skips those checks for speed.
-//!
-//! @godbolt{doc/accuracy.cpp}
-//!
-//! ### Angles in half-turns
-//! With kyosu::radpi, an angle is read and returned as a multiple of \f$\pi\f$ rather than in radians.
-//!
-//! @godbolt{doc/half_turns.cpp}
-//!
-//! ### Real answers when you want them
-//! A real input outside a function's real domain returns a complex result, unless kyosu::real_only is
-//! passed, which defers to the matching EVE function and its NaN.
-//!
-//! @godbolt{doc/real_answers.cpp}
-//!
-//! ## The algebras
-//! Starting from IEEE `float` and `double`:
-//! + [**Complex numbers**](https://en.wikipedia.org/wiki/Complex_number).
-//! + [**Quaternions**](https://en.wikipedia.org/wiki/Quaternion).
-//! + [**Octonions**](https://en.wikipedia.org/wiki/Octonion).
-//! + [**General algebras**](https://en.wikipedia.org/wiki/Cayley%E2%80%93Dickson_construction).
-//!
-//! Dimensions mix freely in an operation: the result takes the largest one and the missing components
-//! are zero. And the algebra terminology is not for fun: past the complex numbers it stops being commutative,
-//! which is why kyosu::ldiv sits alongside `/`. The constants kyosu::i, kyosu::mi, kyosu::j and
-//! kyosu::k are there, as are kyosu::muli and kyosu::mulmi for multiplication by \f$\pm i\f$.
-//!
-//! @godbolt{doc/algebra.cpp}
-//!
-//! ### Building one
-//! From the parametrizations one actually reaches for — kyosu::from_euler, kyosu::from_polar,
-//! kyosu::from_spherical, kyosu::from_cylindrical, and axis-angle.
-//!
-//! @godbolt{doc/constructors.cpp}
-//!
-//! ## Licence
+\mainpage SIMD-Aware Cayley-Dickson Algebras
+
+**KYOSU** is a C++20 library for complex numbers, quaternions, octonions, and the general
+\f$\mathbb{R}\f$-Cayley-Dickson algebras. It extends the real functions to all of them, the
+transcendentals as well as the Legendre polynomials and the elliptic integrals, and every function
+accepts a scalar and a SIMD register alike. The complex numbers are its two-dimensional case,
+with the same vectorization as the rest.
+
+## Core Features
+
+### One call, whatever the dimension
+Two hundred functions, each taking a real or a hypercomplex argument under one name.
+
+@godbolt{doc/one_call.cpp}
+
+### One call, scalar or SIMD
+The same name on one value and on a register of values.
+
+@godbolt{doc/simd.cpp}
+
+### Accuracy chosen by an option
+The default keeps IEEE754 conformity at the edges of the domain, and `kyosu::raw` skips those
+checks for speed.
+
+@godbolt{doc/accuracy.cpp}
+
+### Angles in half-turns
+With kyosu::radpi, an angle is read and returned as a multiple of \f$\pi\f$ instead of radians.
+
+@godbolt{doc/half_turns.cpp}
+
+### Real answers on request
+A real argument outside the real domain of a function returns a complex result. With
+kyosu::real_only, the function defers to its EVE counterpart and returns its NaN.
+
+@godbolt{doc/real_answers.cpp}
+
+## The algebras
+Over IEEE `float` and `double`:
++ [**Complex numbers**](https://en.wikipedia.org/wiki/Complex_number).
++ [**Quaternions**](https://en.wikipedia.org/wiki/Quaternion).
++ [**Octonions**](https://en.wikipedia.org/wiki/Octonion).
++ [**General algebras**](https://en.wikipedia.org/wiki/Cayley%E2%80%93Dickson_construction).
+
+Dimensions mix in an operation: the result takes the largest one, and the missing components are
+zero. Past the complex numbers the product no longer commutes, which is why kyosu::ldiv exists
+beside `/`. The constants kyosu::i, kyosu::mi, kyosu::j, and kyosu::k are defined, as are
+kyosu::muli and kyosu::mulmi for the multiplication by \f$\pm i\f$.
+
+@godbolt{doc/algebra.cpp}
+
+### Constructors
+The parametrizations a value is built from: kyosu::from_euler, kyosu::from_polar,
+kyosu::from_spherical, kyosu::from_cylindrical, and kyosu::from_angle_axis.
+
+@godbolt{doc/constructors.cpp}
+
+## Licence
 //!
 //! This library is licensed under the [Boost Software License](https://opensource.org/licenses/BSL):
 //!

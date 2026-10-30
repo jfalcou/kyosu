@@ -1,64 +1,92 @@
 #error This file is for documentation only - DO NOT INCLUDE
 //! @page tutorial-options Options
 //!
-//! You have already used one option, `kyosu::real_only`, without much explanation. This page
-//! collects the mechanism and the options worth knowing early.
+//! Some functions have different behaviors depending on the context:
 //!
-//! # The mechanism
+//! - `kyosu::sqrt` may return \f$i\f$ or a NaN on \f$-1\f$,
+//! - `kyosu::to_euler` may return its angles in radians or in multiples of \f$\pi\f$,
+//! - `kyosu::log` may evaluate with full accuracy, or by a faster formula with less precision,
+//! - `kyosu::rotate_vec` assumes its quaternion is not normalized, but it may be.
 //!
-//! A function is followed by square brackets naming a behaviour:
+//! A specific function for each behavior would dilute the API, so **KYOSU** reuses the
+//! [option](https://jfalcou.github.io/eve/design_rationale.html#rationale-decorator) mechanism of
+//! EVE:
 //!
 //! @code
 //! kyosu::sqrt[kyosu::real_only](-1.0)
 //! @endcode
 //!
-//! This is not a call. `kyosu::sqrt[opt]` produces a *new callable* that behaves differently, and
-//! that callable is then applied. The consequence is that options compose, and that no function
-//! name has to be invented for each combination — there is no `sqrt_raw_real_only`.
+//! Options, which modify the semantics of a function, are passed in square brackets after its
+//! name. `kyosu::sqrt[kyosu::real_only]` is a new
+//! [callable](https://en.cppreference.com/w/cpp/named_req/Callable), which is then applied to the
+//! arguments.
 //!
-//! Options are inherited from EVE and behave identically there, so anything learnt here transfers.
+//! Options compose, as in `kyosu::to_euler[kyosu::extrinsic][kyosu::radpi]`. A function of its
+//! own for that combination, `to_euler_extrinsic_radpi`, would be obscure in the API.
 //!
-//! # Accuracy against speed
+//! # raw
 //!
-//! By default a function is as accurate as possible over its whole domain and guards its edges. `raw`
-//! asks for the fastest formula instead, and the price is paid in two places at once: the answer
-//! loses accuracy on ordinary input, and the edges stop being handled.
+//! By default a function is accurate over its whole domain and handles the edges of that domain.
+//! `kyosu::raw` selects the fastest formula instead, with two effects:
 //!
-//! The example below shows both on `kyosu::log`. The argument differs in the third decimal on a
-//! perfectly well-behaved value, and at the origin the guarded version still names an imaginary
-//! part where the raw one produces a NaN. `raw` is for the inner loop a profiler pointed at, not
-//! a default.
+//! - less accuracy on ordinary input,
+//! - no handling of the edges.
+//!
+//! Below, `kyosu::log` and `kyosu::log[kyosu::raw]` are applied to an ordinary value and to the
+//! origin, where the default returns an imaginary part and the option a NaN:
 //!
 //! @godbolt{doc/tut_opt_raw.cpp}
 //!
-//! # Angles in half-turns
+//! `kyosu::raw` is for an inner loop whose cost has been measured, not a default.
 //!
-//! Trigonometry in radians forces \f$\pi\f$ into the arithmetic, and \f$\pi\f$ is not exactly representable
-//! as an *IEEE* floating number.
-//! `kyosu::radpi` reads and returns angles as multiples of \f$\pi\f$ instead, which removes that
-//! error at the source. Where a plain call needs `pi/2`, the option form takes `0.5`:
+//! # radpi
+//!
+//! By default, angles are in radians. An angle such as \f$\pi/2\f$ is then an
+//! [irrational](https://en.wikipedia.org/wiki/Proof_that_%CF%80_is_irrational) number, which no
+//! floating point number represents exactly, so `pi/2` already carries a rounding error.
+//! `kyosu::radpi` reads and returns angles as multiples of \f$\pi\f$ instead, with two effects:
+//!
+//! - `0.5` stands for \f$\pi/2\f$ exactly,
+//! - the result carries no rounding error of \f$\pi\f$.
+//!
+//! Below, `kyosu::sin` is applied to a half turn and to a million half turns, where the sine is
+//! zero, in radians and with the option:
 //!
 //! @godbolt{doc/tut_opt_radpi.cpp}
 //!
-//! # Real answers
+//! # real_only
 //!
-//! Met on the first page: `kyosu::real_only` asks for the real function and its NaN rather than
-//! for a complex answer.
+//! By default, a real argument outside the real domain of a function gives a complex result.
+//! `kyosu::real_only` selects the real function instead, with two effects:
+//!
+//! - the result is a real,
+//! - an argument outside the real domain gives a NaN.
+//!
+//! Below, `kyosu::acosh` and `kyosu::asin` are applied to arguments outside their real domains,
+//! with and without the option:
 //!
 //! @godbolt{doc/tut_opt_real_only.cpp}
 //!
-//! # Skipping a normalisation
+//! # assume_unitary
 //!
-//! The rotation functions normalise their argument, since a rotation must be a unit quaternion.
-//! When you already know it is one, `kyosu::assume_unitary` skips the work. It is a promise, not a
-//! request: pass a quaternion that is not unitary and the answer is simply wrong.
+//! By default, `kyosu::from_angle_axis` and `kyosu::rotate_vec` normalize their argument, since a
+//! rotation is a unit quaternion. `kyosu::assume_unitary` skips that normalization on an argument
+//! known to be of unit length, with two effects:
+//!
+//! - `kyosu::from_angle_axis` uses its axis as given,
+//! - `kyosu::rotate_vec` uses its quaternion as given.
+//!
+//! Below, `kyosu::rotate_vec` is applied to a unit quaternion, with and without the option:
 //!
 //! @godbolt{doc/tut_opt_assume_unitary.cpp}
 //!
+//! @warning The option is not checked: on an argument that is not of unit length, the result is
+//! wrong.
+//!
 //! <div class="section_buttons">
 //!
-//! | Previous                            |                                              Next |
-//! |:------------------------------------|--------------------------------------------------:|
-//! | [Rotations](@ref tutorial-rotation) | [Mathematical background]( @ref math_background)  |
+//! | Previous |
+//! |:---------|
+//! | [Rotations](@ref tutorial-rotation) |
 //!
 //! </div>

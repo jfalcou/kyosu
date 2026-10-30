@@ -10,6 +10,6 @@ int main()
   std::cout << "c + q = " << c + q << "\n";
   std::cout << "c * q = " << c * q << "\n";
 
-  // A real works just as well.
+  // A real mixes the same way.
   std::cout << "2. * q = " << 2. * q << "\n";
 }

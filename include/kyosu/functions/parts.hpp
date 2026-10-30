@@ -111,8 +111,24 @@ namespace kyosu
   //====================================================================================================================
   inline constexpr auto ipart = extractor<1>{};
 
-  //! Alias for kyosu::ipart
+  //====================================================================================================================
+  //! @defgroup imag kyosu::imag
+  //! @ingroup agnostic
+  //! @brief Alias of kyosu::ipart, the imaginary part of a value.
+  //! @{
+  //====================================================================================================================
+  //!   @var imag
+  //!
+  //!   `kyosu::imag` is `kyosu::ipart` under the name of `std::imag`.
+  //!
+  //!  @groupheader{Example}
+  //!
+  //!  @godbolt{doc/imag.cpp}
+  //!
+  //!   @see kyosu::ipart
+  //====================================================================================================================
   inline constexpr auto imag = extractor<1>{};
+  //! @}
 
   //! @}
 

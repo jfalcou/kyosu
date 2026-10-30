@@ -15,6 +15,4 @@ int main()
             << "<- zc            = " << zc << std::endl
             << "-> imag(zc)      = " << kyosu::imag(zc) << std::endl
             << "-> imag(ref2)    = " << kyosu::imag(ref2) << std::endl;
-
-  return 0;
 }

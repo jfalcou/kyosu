@@ -8,7 +8,7 @@ int main()
   kyosu::get<0>(z) = 0.5;
   kyosu::get<7>(z) = 0.25;
 
-  // A single element always generates an associative subalgebra, so these stay meaningful.
+  // A single element generates an associative subalgebra, on which these are defined.
   std::cout << "exp(log(z)) = " << kyosu::exp(kyosu::log(z)) << "\n";
   std::cout << "z           = " << z                         << "\n";
   std::cout << "sqrt(z)^2   = " << kyosu::sqr(kyosu::sqrt(z)) << "\n";

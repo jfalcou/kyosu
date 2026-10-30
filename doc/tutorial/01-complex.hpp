@@ -1,49 +1,57 @@
 #error This file is for documentation only - DO NOT INCLUDE
 //! @page tutorial-complex Complex numbers
 //!
-//! We start where you are already at home. Everything in this page has an equivalent in
-//! `std::complex`, and the point is less to teach complex arithmetic than to settle the spelling,
-//! the printing and the two or three habits that the rest of the tutorial builds on.
+//! **KYOSU** supports complex numbers via `kyosu::complex_t<T>`, where `T` is a floating point
+//! type.
 //!
-//! # Naming a type
+//! # Construction and printing
 //!
-//! A complex number over `double` is written `kyosu::complex_t<double>`. The `_t` is not
-//! decoration: it is an alias for a two-dimensional Cayley-Dickson value, and the same suffix
-//! names every other algebra in the library.
+//! A complex number is built from its real and imaginary parts:
 //!
 //! @godbolt{doc/tut_complex_basics.cpp}
 //!
-//! Note the printing convention. A value comes out as its components against the basis names,
-//! 3 + 4i rather than "(3,4)", and that convention scales: a quaternion prints as
-//! 1 + 2i + 3j + 4k. You will read a lot of these.
+//! A value prints as \f$3 + 4i\f$, each component followed by the symbol of its basis element,
+//! rather than as the pair \f$(3,4)\f$ of `std::complex`. The functions above behave as their
+//! namesakes on `std::complex`:
 //!
-//! # Functions
+//! - kyosu::real and kyosu::imag return the two components,
+//! - kyosu::conj returns the conjugate,
+//! - kyosu::abs returns the modulus,
+//! - kyosu::arg returns the argument.
 //!
-//! Everything you would expect is there, under the name you would expect, in namespace `kyosu`.
-//! Two hundred of them, from the arithmetic to the transcendentals, and on to the Riemann zeta,
-//! Legendre polynomials and elliptic integrals.
+//! # Elementary functions
+//!
+//! The standard arithmetic and the elementary functions are available on complex numbers, in
+//! namespace `kyosu`, under the names of their real counterparts. There are
+//! @ref kyosu_functions "two hundred functions", from the arithmetic and the transcendental
+//! functions to the special functions:
+//!
+//! - the Riemann zeta function, kyosu::zeta,
+//! - the Legendre polynomials, kyosu::legendre,
+//! - the elliptic integrals, kyosu::ellint_fe for Legendre's forms, and kyosu::ellint_rc,
+//!   kyosu::ellint_rd, kyosu::ellint_rf, kyosu::ellint_rg, and kyosu::ellint_rj for Carlson's.
 //!
 //! @godbolt{doc/tut_complex_functions.cpp}
 //!
-//! # The one surprise
+//! # Real arguments
 //!
-//! `kyosu::sqrt(-1.0)` returns a complex number. Its argument is a plain `double`, and the answer
-//! could not be a `double`, so the return type is widened rather than the answer being lost.
+//! A function applied to a real argument outside its real domain returns a complex result. For
+//! example, `kyosu::sqrt(-1.0)` returns \f$i\f$, where `std::sqrt(-1.0)` returns NaN.
 //!
-//! This is deliberate and it is not always what you want. When you would rather have the real
-//! function and its NaN, say so:
+//! The return type widens from `double` to `kyosu::complex_t<double>`, so that the result is not
+//! lost.
+//!
+//! @note The option `kyosu::real_only` selects the real function and its NaN instead:
 //!
 //! @godbolt{doc/tut_complex_real_only.cpp}
 //!
-//! `kyosu::real_only` is an *option*, written in square brackets after the function name. Options
-//! are how **KYOSU** lets you pick a behaviour without a different function name for each; there
-//! are others, and @ref tutorial-options collects them.
+//! For more information, see the tutorial on @ref tutorial-options "Options".
 //!
-//! # What is missing on purpose
+//! # Comparison
 //!
-//! There is no `<` on complex numbers. No ordering of the complex plane is compatible with
-//! multiplication, so the library offers none rather than offering one that lies. Equality and
-//! the componentwise predicates are there:
+//! Complex numbers are compared for equality and tested by the componentwise predicates. No `<`
+//! is defined: the complex numbers are not an [ordered field](https://en.wikipedia.org/wiki/Ordered_field), no total order
+//! of the plane being compatible with both their addition and their multiplication:
 //!
 //! @godbolt{doc/tut_complex_predicates.cpp}
 //!
@@ -51,6 +59,6 @@
 //!
 //! | Previous                  |                                    Next |
 //! |:--------------------------|----------------------------------------:|
-//! | [Quick Start](@ref setup) | [Many values at once](@ref tutorial-simd) |
+//! | [Installation](@ref setup) | [SIMD support](@ref tutorial-simd) |
 //!
 //! </div>

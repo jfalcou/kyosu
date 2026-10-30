@@ -1,7 +1,7 @@
 #include <iostream>
 #include <kyosu/kyosu.hpp>
 
-// One body, whatever the caller hands over.
+// One body for a scalar and for a register.
 auto energy(auto z) { return kyosu::sqr_abs(z) + kyosu::real(kyosu::exp(z)); }
 
 int main()

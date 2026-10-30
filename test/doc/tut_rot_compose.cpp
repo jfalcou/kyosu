@@ -1,6 +1,7 @@
 #include <array>
 #include <iostream>
 #include <kyosu/kyosu.hpp>
+#include <span>
 
 int main()
 {
@@ -13,8 +14,8 @@ int main()
   std::array<double, 3> v{1., 0., 0.};
 
   // p first, then q, is the single rotation q*p.
-  auto a = kyosu::rotate_vec(q * p, std::span<double, 3>(v));
-  auto b = kyosu::rotate_vec(p * q, std::span<double, 3>(v));
+  auto a = kyosu::rotate_vec(q * p, std::span(v));
+  auto b = kyosu::rotate_vec(p * q, std::span(v));
 
   std::cout << "q*p applied to x = (" << a[0] << ", " << a[1] << ", " << a[2] << ")\n";
   std::cout << "p*q applied to x = (" << b[0] << ", " << b[1] << ", " << b[2] << ")\n";

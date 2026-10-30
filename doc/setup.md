@@ -1,26 +1,27 @@
-Installation & Quick Start {#setup}
-==========================
+Installation {#setup}
+============
 
-# Pre-requisites
+# Prerequisites
 
-**KYOSU** is a header-only C++20 library. It is built on top of
-[EVE](https://github.com/jfalcou/eve), which it needs at compile time and which shares its
-compiler requirements:
+**KYOSU** is a header-only C++20 library with the following requirements:
 
-| Compiler | Minimal version | Tested in CI |
-| -------- | --------------- | ------------ |
-| g++      | 13 or above     | 15           |
-| clang++  | 16 or above     | 20           |
+| Compiler | Minimal version | Tested in CI          |
+| -------- | --------------- | --------------------- |
+| g++      | 13 or above     | 15                    |
+| clang++  | 16 or above     | 19, and Apple clang   |
 
-CMake 3.22 or above is required to build the tests and the documentation. Consuming the library
-needs no build step of its own: adding the include directory is enough, provided EVE is reachable
-too.
+It depends on:
 
-# Getting KYOSU
+  + [EVE](https://github.com/jfalcou/eve), at compile time, for the SIMD types and the real
+    functions.
+  + CMake 3.22 or above, for the tests and the documentation only.
 
-Whichever route you take, the target to link against is `kyosu::kyosu`, and EVE must be linked
-alongside it. The three snippets below are the ones exercised by the integration tests, so they
-are known to work.
+A consumer has no build step: the include directory of the library and the one of EVE are
+enough.
+
+# Installation
+
+The target to link is `kyosu::kyosu`, with `eve::eve` beside it.
 
 ## With CPM
 
@@ -53,14 +54,11 @@ FetchContent_MakeAvailable(eve)
 target_link_libraries(my_app PUBLIC kyosu::kyosu eve::eve)
 ```
 
-`FetchContent` carries no per-package options, so the settings each dependency reads are pinned
-before the call. Left out, every dependency registers its own test suite in your project.
-
-## From an installed copy
+## With a git clone
 
 ```bash
 git clone https://github.com/jfalcou/kyosu.git
-cmake -S kyosu -B build -DCMAKE_INSTALL_PREFIX=/where/you/want
+cmake -S kyosu -B build -DCMAKE_INSTALL_PREFIX=<prefix>
 cmake --install build
 ```
 
@@ -71,24 +69,21 @@ find_package(kyosu CONFIG REQUIRED)
 target_link_libraries(my_app PUBLIC kyosu::kyosu eve::eve)
 ```
 
-# Your first program
+# First program
 
-A single header brings in everything:
+`kyosu/kyosu.hpp` declares every type and every function of the library. A program that
+includes it and links `kyosu::kyosu` as above compiles and runs:
 
 @godbolt{doc/quick_start.cpp}
 
-Two things are worth noticing already. `kyosu::sqrt` is applied to a value that is not a complex
-number and returns one anyway, because the square root of a negative real is not real. And the
-same `kyosu::sqrt` accepts a quaternion without any change of spelling. Both are the subject of
-the tutorials that follow.
+# Tutorials
 
-# Where to go next
+  + @ref tutorial-complex "Complex numbers"
+  + @ref tutorial-simd "SIMD support"
+  + @ref tutorial-quaternion "Quaternions"
+  + @ref tutorial-beyond "Octonions and higher algebras"
+  + @ref tutorial-rotation "Rotations"
+  + @ref tutorial-options "Options"
 
-  + @ref tutorial-complex — complex numbers, on ground you already know.
-  + @ref tutorial-simd — the same code applied to many values at once.
-  + @ref tutorial-quaternion — the first algebra past the complex numbers.
-  + @ref tutorial-rotation — what quaternions are actually used for.
-  + @ref tutorial-options — choosing accuracy, angle units and real-only behaviour.
-  + @ref tutorial-beyond — octonions, and what changes when dimensions keep doubling.
-
-The mathematics underlying all of it is set out in @ref math_background.
+The construction itself, and the theorems behind what the higher dimensions lose, are set out in
+@ref math_background.

@@ -1,6 +1,7 @@
 #include <array>
 #include <iostream>
 #include <kyosu/kyosu.hpp>
+#include <span>
 
 int main()
 {
@@ -10,7 +11,7 @@ int main()
   std::array<double, 3> v   {1., 0., 0.};   // the x axis
 
   auto q  = kyosu::from_angle_axis(pi/2, std::span(axis));
-  auto rv = kyosu::rotate_vec(q, std::span<double, 3>(v));
+  auto rv = kyosu::rotate_vec(q, std::span(v));
 
   std::cout << "q             = " << q << "\n";
   std::cout << "v             = (" << v[0]  << ", " << v[1]  << ", " << v[2]  << ")\n";
