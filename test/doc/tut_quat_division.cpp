@@ -13,7 +13,7 @@ int main()
   std::cout << "a / b       = " << right << "\n";
   std::cout << "ldiv(b, a)  = " << left  << "\n";
 
-  // Each really does solve its own equation.
+  // Each solves its own equation.
   std::cout << "right * b   = " << right * b << "\n";
   std::cout << "b * left    = " << b * left  << "\n";
 }

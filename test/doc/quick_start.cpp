@@ -12,6 +12,6 @@ int main()
   // A negative real has no real square root, so a complex one comes back.
   std::cout << "sqrt(-1.0) = " << kyosu::sqrt(-1.0) << "\n";
 
-  // The very same name, on a four-dimensional value.
+  // The same name, on a four-dimensional value.
   std::cout << "sqrt(q)    = " << kyosu::sqrt(kyosu::quaternion_t<double>(1., 2., 3., 4.)) << "\n";
 }

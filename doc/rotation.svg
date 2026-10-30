@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 18 325 262" width="325" height="262" role="img" aria-label="A rotation of angle theta about the unit axis u, and the quaternion that represents it" style="display:block;margin:0 auto;max-width:100%;height:auto;font-family:inherit;font-size:15px">
+  <defs>
+    <marker id="ax-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker>
+    <marker id="u-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#2a7fff"/></marker>
+    <marker id="v-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#d9480f"/></marker>
+  </defs>
+  <style>
+    .ax { stroke: currentColor; stroke-width: 1.3; opacity: .7 }
+    .u  { stroke: #2a7fff; stroke-width: 2.4 }
+    .v  { stroke: #d9480f; stroke-width: 2 }
+    .ring { fill: none; stroke: #2a7fff; stroke-width: 1; stroke-dasharray: 4 4; opacity: .6 }
+    .arc { fill: none; stroke: #d9480f; stroke-width: 2 }
+    text { fill: currentColor }
+    .lbl { font-style: italic }
+    .code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14px }
+  </style>
+  <line class="ax" x1="190.0" y1="178.0" x2="144.0" y2="211.1" marker-end="url(#ax-head)"/>
+  <line class="ax" x1="190.0" y1="178.0" x2="337.2" y2="178.0" marker-end="url(#ax-head)"/>
+  <line class="ax" x1="190.0" y1="178.0" x2="190.0" y2="44.6" marker-end="url(#ax-head)"/>
+  <text class="lbl" x="134.5" y="220.1">x</text>
+  <text class="lbl" x="344.6" y="183.0">y</text>
+  <text class="lbl" x="186.0" y="35.4">z</text>
+  <path class="ring" d="M 88.8 197.9 L 92.8 211.3 L 99.7 223.8 L 109.4 234.8 L 121.6 244.1 L 135.8 251.4 L 151.7 256.5 L 168.7 259.2 L 186.4 259.4 L 204.1 257.2 L 221.5 252.5 L 237.9 245.6 L 252.9 236.6 L 265.9 225.9 L 276.6 213.7 L 284.7 200.4 L 289.9 186.4 L 292.1 172.2 L 291.2 158.1 L 287.2 144.7 L 280.3 132.2 L 270.6 121.2 L 258.4 111.9 L 244.2 104.6 L 228.3 99.5 L 211.3 96.8 L 193.6 96.6 L 175.9 98.8 L 158.5 103.5 L 142.1 110.4 L 127.1 119.4 L 114.1 130.1 L 103.4 142.3 L 95.3 155.6 L 90.1 169.6 L 87.9 183.8 L 88.8 197.9 Z"/>
+  <line class="u" x1="190.0" y1="178.0" x2="208.6" y2="104.8" marker-end="url(#u-head)"/>
+  <text class="lbl" x="212.0" y="99.4" style="fill:#2a7fff">u</text>
+  <line class="v" x1="190.0" y1="178.0" x2="88.8" y2="197.9" marker-end="url(#v-head)"/>
+  <line class="v" x1="190.0" y1="178.0" x2="204.1" y2="257.2" marker-end="url(#v-head)"/>
+  <path class="arc" d="M 88.8 197.9 L 92.8 211.3 L 99.7 223.8 L 109.4 234.8 L 121.6 244.1 L 135.8 251.4 L 151.7 256.5 L 168.7 259.2 L 186.4 259.4 L 204.1 257.2" marker-end="url(#v-head)"/>
+  <text class="lbl" x="66.7" y="204.3" style="fill:#d9480f">v</text>
+  <text class="lbl" x="209.6" y="271.1" style="fill:#d9480f">v′</text>
+  <text class="lbl" x="126.4" y="270.0" style="fill:#d9480f">θ</text>
+
+</svg>

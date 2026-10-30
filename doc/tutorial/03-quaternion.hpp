@@ -1,60 +1,53 @@
 #error This file is for documentation only - DO NOT INCLUDE
 //! @page tutorial-quaternion Quaternions
 //!
-//! If you have never computed with anything past the complex numbers, this is the page where that
-//! changes. It assumes nothing beyond the previous two.
+//! A quaternion is a number with four real components, written \f$a + bi + cj + dk\f$ on the
+//! basis \f$1, i, j, k\f$, whose product extends the complex product with \f$i^2 = j^2 = k^2 =
+//! ijk = -1\f$. In the @ref math_background "Cayley-Dickson construction" it is a pair of
+//! complex numbers. **KYOSU** supports it via `kyosu::quaternion_t<T>`.
 //!
-//! # What they are
+//! # Construction and functions
 //!
-//! A complex number is a pair of reals. A quaternion is a pair of *complex numbers* — so four
-//! reals — with a product built by a new but similar recipe. That is the whole definition. The four
-//! components are written against the basis \f$1, i, j, k\f$, and **KYOSU** prints them that way:
+//! A quaternion is built from its four components:
 //!
 //! @godbolt{doc/tut_quat_basics.cpp}
 //!
-//! Everything familiar carries over. There is a modulus, a conjugate, an inverse, and the
-//! functions you already used on complex numbers accept a quaternion under the same name. A
-//! complex number *is* a quaternion whose last two components are zero, and the library treats it
-//! as such: mixing the two in one expression is allowed and the result takes the larger dimension.
+//! The arithmetic, the comparisons, and the functions of the complex numbers apply to a
+//! quaternion with the same API.
 //!
-//! @godbolt{doc/tut_quat_mixing.cpp}
+//! # Noncommutativity
 //!
-//! # The thing that is genuinely new
-//!
-//! Multiplication no longer commutes. \f$ij = k\f$, but \f$ji = -k\f$:
+//! The product depends on the
+//! [order of its operands](https://en.wikipedia.org/wiki/Quaternion#Multiplication_of_basis_elements), \f$ij = k\f$ and
+//! \f$ji = -k\f$. The property
+//! is the algebra's, and its consequence is on the division:
 //!
 //! @godbolt{doc/tut_quat_noncommutative.cpp}
 //!
-//! This is not a defect of the implementation, it is what the algebra is. It has one practical
-//! consequence you cannot avoid, so it is worth meeting now rather than in a debugger.
+//! A constant takes its type as the argument `as<T>()`: `kyosu::i(kyosu::as<q_t>())` is
+//! \f$i\f$ as a `q_t`, and `eve::pi(eve::as<double>())` is \f$\pi\f$ as a `double`.
 //!
-//! # Two divisions instead of one
+//! # Divisions
 //!
-//! With real or complex numbers, divide \f$a\f$ by \f$b\f$ names one operation, because
-//! \f$ab^{-1}\f$ and \f$b^{-1}a\f$ agree. With quaternions they do not, and there are two honest
-//! answers:
-//!
-//!   + \f$x\f$ such that \f$xb = a\f$, which is \f$ab^{-1}\f$ — this is what `/` computes;
-//!   + \f$x\f$ such that \f$bx = a\f$, which is \f$b^{-1}a\f$ — this is `ldiv`.
+//! Since the product is noncommutative, \f$ab^{-1}\f$ and \f$b^{-1}a\f$ differ, and both
+//! divisions exist. `a / b` is \f$ab^{-1}\f$, the solution of \f$xb = a\f$, and
+//! `kyosu::ldiv(b, a)` is \f$b^{-1}a\f$, the solution of \f$bx = a\f$. No conversion is made
+//! from one to the other:
 //!
 //! @godbolt{doc/tut_quat_division.cpp}
 //!
-//! **KYOSU** never guesses which one you meant. `/` is the right division and kyosu::ldiv is the
-//! left one; if you have been getting rotations composed backwards, this is usually why.
+//! # Mixed operands
 //!
-//! # Building one without listing four numbers
+//! A complex number is a quaternion whose last two components are zero, and a real a quaternion
+//! whose three imaginary parts are zero. An expression mixing dimensions returns the larger one,
+//! with the missing components at zero:
 //!
-//! Writing `q_t(1., 2., 3., 4.)` is rarely how a quaternion arises in practice. The
-//! parametrisations people actually reach for are provided directly:
-//!
-//! @godbolt{doc/tut_quat_constructors.cpp}
-//!
-//! What those angles *mean* is the subject of the next page.
+//! @godbolt{doc/tut_quat_mixing.cpp}
 //!
 //! <div class="section_buttons">
 //!
-//! | Previous                                    |                              Next |
-//! |:--------------------------------------------|----------------------------------:|
-//! | [Many Values At Once](@ref tutorial-simd)   | [Rotations](@ref tutorial-rotation) |
+//! | Previous | Next |
+//! |:---------|-----:|
+//! | [SIMD support](@ref tutorial-simd) | [Octonions and higher algebras](@ref tutorial-beyond) |
 //!
 //! </div>

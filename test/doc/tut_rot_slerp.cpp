@@ -1,6 +1,7 @@
 #include <array>
 #include <iostream>
 #include <kyosu/kyosu.hpp>
+#include <span>
 
 int main()
 {
@@ -14,7 +15,7 @@ int main()
 
   for (double t = 0.; t <= 1.0001; t += 0.25)
   {
-    auto rv = kyosu::rotate_vec(kyosu::slerp(q0, q1, t), std::span<double, 3>(v));
+    auto rv = kyosu::rotate_vec(kyosu::slerp(q0, q1, t), std::span(v));
     std::cout << "t = " << t << "  ->  (" << rv[0] << ", " << rv[1] << ", " << rv[2] << ")\n";
   }
 }

@@ -1,6 +1,7 @@
 #include <array>
 #include <iostream>
 #include <kyosu/kyosu.hpp>
+#include <span>
 
 int main()
 {
@@ -14,8 +15,9 @@ int main()
   std::cout << "from_euler       = "
             << kyosu::from_euler(pi/2, pi/3, pi/4, kyosu::Z_, kyosu::X_, kyosu::Z_) << "\n";
 
-  // Modulus and argument, as for a complex number.
-  std::cout << "from_polar       = " << kyosu::from_polar(2., pi/6) << "\n";
+  // Modulus, argument, and the unit pure quaternion that plays the part of i.
+  auto u = kyosu::quaternion_t<double>(0., 1., 2., 2.) / 3.;
+  std::cout << "from_polar       = " << kyosu::from_polar(2., pi/6, u) << "\n";
 
   // Four-dimensional spherical and cylindrical parametrisations.
   std::cout << "from_spherical   = " << kyosu::from_spherical(1., pi/4, pi/3, pi/6) << "\n";
