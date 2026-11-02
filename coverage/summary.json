@@ -1,7 +1,7 @@
 {
-    "branch_covered": 2039,
+    "branch_covered": 2041,
     "branch_percent": 63.7,
-    "branch_total": 3200,
+    "branch_total": 3203,
     "files": [
         {
             "branch_covered": 2,
@@ -1612,16 +1612,16 @@
             "line_total": 6
         },
         {
-            "branch_covered": 121,
-            "branch_percent": 96.8,
-            "branch_total": 125,
+            "branch_covered": 123,
+            "branch_percent": 96.1,
+            "branch_total": 128,
             "filename": "include/kyosu/functions/if_else.hpp",
-            "function_covered": 625,
-            "function_percent": 86.6,
-            "function_total": 722,
-            "line_covered": 16,
+            "function_covered": 653,
+            "function_percent": 87.2,
+            "function_total": 749,
+            "line_covered": 15,
             "line_percent": 100.0,
-            "line_total": 16
+            "line_total": 15
         },
         {
             "branch_covered": 0,
@@ -3028,12 +3028,12 @@
             "line_total": 4
         }
     ],
-    "function_covered": 25554,
+    "function_covered": 25582,
     "function_percent": 98.1,
-    "function_total": 26047,
+    "function_total": 26074,
     "gcovr/summary_format_version": "0.6",
-    "line_covered": 4822,
+    "line_covered": 4821,
     "line_percent": 94.6,
-    "line_total": 5099,
+    "line_total": 5098,
     "root": "../../.."
 }

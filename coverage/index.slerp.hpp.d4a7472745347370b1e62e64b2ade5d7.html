@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-11-02 17:27:14</td>
+      <td>2026-11-02 23:41:11</td>
     </tr>
   </table>
 </div>
@@ -796,66 +796,52 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="c1">// The mask can be wider than what it masks - a wide z0 against a scalar z1 - and a masked call</span></td>
+      <td class="src "><span class="w">    </span><span class="c1">// eve refuses a scalar under a wide mask, and gez is wide whenever z0 is, so z1 takes the return type first</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l90" href="#l90">90</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="c1">// answers the type of its argument, so z1 goes up to the call&#39;s own return type first. That last</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l91" href="#l91">91</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="c1">// step is eve#2381: it can go once if_else stops ignoring the width of its mask.</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l92" href="#l92">92</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">r_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as_cayley_dickson_like_t</span><span class="o">&lt;</span><span class="n">complexify_t</span><span class="o">&lt;</span><span class="n">Z0</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">complexify_t</span><span class="o">&lt;</span><span class="n">Z1</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Z2</span><span class="o">&gt;</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l93" href="#l93">93</a></td>
+      <td class="lineno"><a id="l91" href="#l91">91</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">201</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">gez</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eve</span><span class="o">::</span><span class="n">is_gez</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">kyosu</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="n">z0</span><span class="p">,</span><span class="w"> </span><span class="n">z1</span><span class="p">)));</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l94" href="#l94">94</a></td>
+      <td class="lineno"><a id="l92" href="#l92">92</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">201</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kyosu</span><span class="o">::</span><span class="n">minus</span><span class="p">[</span><span class="o">!</span><span class="n">gez</span><span class="p">](</span><span class="n">r_t</span><span class="p">(</span><span class="n">z1</span><span class="p">));</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l95" href="#l95">95</a></td>
+      <td class="lineno"><a id="l93" href="#l93">93</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">201</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">z0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">kyosu::pow</span><span class="p">(</span><span class="n">kyosu</span><span class="o">::</span><span class="n">conj</span><span class="p">(</span><span class="n">z0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mix</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l96" href="#l96">96</a></td>
+      <td class="lineno"><a id="l94" href="#l94">94</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l97" href="#l97">97</a></td>
+      <td class="lineno"><a id="l95" href="#l95">95</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l98" href="#l98">98</a></td>
+      <td class="lineno"><a id="l96" href="#l96">96</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
