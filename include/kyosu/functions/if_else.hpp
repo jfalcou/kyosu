@@ -82,10 +82,7 @@ namespace kyosu::_
     if constexpr (concepts::cayley_dickson<Z1> && concepts::cayley_dickson<Z2>)
     {
       using type = as_cayley_dickson_t<Z1, Z2>;
-      using ret_t = eve::as_wide_as_t<type, M>;
-
-      return ret_t{kumi::map([&](auto const& v, auto const& w) { return eve::if_else(m, v, w); },
-                             kyosu::convert(t, eve::as_element<type>{}), kyosu::convert(f, eve::as_element<type>{}))};
+      return eve::if_else(m, kyosu::convert(t, eve::as_element<type>{}), kyosu::convert(f, eve::as_element<type>{}));
     }
     else
     {

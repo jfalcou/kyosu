@@ -54,6 +54,30 @@ TTS_CASE_WITH("Check behavior of if_else on SIMD cayley-dickson",
   }
 };
 
+TTS_CASE_WITH("Check behavior of if_else on scalar cayley-dickson under a SIMD mask",
+              tts::bunch<kyosu::scalar_real_types>,
+              tts::randoms(-100, +100))
+<typename T>(T const& a0)
+{
+  using e_t = typename T::value_type;
+  using c_t = kyosu::complex_t<e_t>;
+  using q_t = kyosu::quaternion_t<e_t>;
+  using wc_t = eve::wide<c_t>;
+  using wq_t = eve::wide<q_t>;
+  auto m = eve::is_even(eve::iota(eve::as<eve::wide<e_t>>()));
+
+  for (auto e : a0)
+  {
+    TTS_EQUAL(kyosu::if_else(m, c_t(0, -e), c_t(0, e)), kyosu::if_else(m, wc_t(c_t(0, -e)), wc_t(c_t(0, e))));
+    TTS_EQUAL(kyosu::if_else(m, q_t(0, -e, 1, -2), q_t(0, e, -1, 2)),
+              kyosu::if_else(m, wq_t(q_t(0, -e, 1, -2)), wq_t(q_t(0, e, -1, 2))));
+    TTS_EQUAL(kyosu::if_else(m, c_t(0, -e), q_t(0, e, -1, 2)),
+              kyosu::if_else(m, wc_t(c_t(0, -e)), wq_t(q_t(0, e, -1, 2))));
+    TTS_EQUAL(kyosu::if_else(m, q_t(0, -e, 1, -2), c_t(0, e)),
+              kyosu::if_else(m, wq_t(q_t(0, -e, 1, -2)), wc_t(c_t(0, e))));
+  }
+};
+
 TTS_CASE_WITH("Check behavior of if_else on cayley-dickson/named constants",
               tts::bunch<kyosu::scalar_real_types>,
               tts::randoms(-10, +10))
