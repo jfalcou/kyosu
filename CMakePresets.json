@@ -36,7 +36,7 @@
     { "name": "gcc-no-pch"     , "inherits": ["gcc"  , "no-pch"] },
 
     { "name": "sanitize"     , "hidden": true, "cacheVariables": { "KYOSU_ENABLE_SANITIZERS": "ON" } },
-    { "name": "coverage"     , "hidden": true, "cacheVariables": { "KYOSU_ENABLE_COVERAGE": "ON", "CMAKE_DEFAULT_BUILD_TYPE": "Debug" } },
+    { "name": "coverage"     , "hidden": true, "cacheVariables": { "KYOSU_ENABLE_COVERAGE": "ON", "CMAKE_DEFAULT_BUILD_TYPE": "Debug", "CMAKE_CXX_FLAGS_DEBUG": "-g0" } },
     { "name": "gcc-sanitize"   , "inherits": ["gcc"  , "sanitize"] },
     { "name": "clang-sanitize" , "inherits": ["clang", "sanitize"] },
     { "name": "gcc-coverage"   , "inherits": ["gcc"  , "coverage"] },
