@@ -4,14 +4,15 @@
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
 ## Read by copacabana's matrix.yml. The precompiled header carries kyosu.hpp and silences the warnings raised inside
-## it; Compiler Explorer has neither, so this row compiles the documentation examples the way a reader does, and runs
-## nothing. It is red on purpose until those warnings are dealt with, and is not among the checks the ruleset requires.
+## it, so a unit or an example that forgets an include passes the other rows. This row builds and runs both without
+## it, as Compiler Explorer compiles an example.
 runs-on: ubuntu-latest
 image: v10
 container-options: -u root
 configs: [Debug]
 ## Building alone already takes forty minutes here, and the tests now run on top of it.
 timeout: 120
-build-targets: doc.exe
+build-targets: doc.exe unit.exe
+test-targets: ^(doc|unit).*
 rows:
-  - { name: "gcc, no PCH", preset: "gcc-no-pch", test: false }
+  - { name: "gcc, no PCH", preset: "gcc-no-pch" }

@@ -39,7 +39,6 @@ jobs:
     with:
       file: .github/matrices/linux.yml
 
-  ## Reported and not required: see the matrix file for why it is red on purpose.
   no-pch-tests:
     name: Linux
     needs: precommit
