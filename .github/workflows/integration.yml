@@ -19,3 +19,4 @@ jobs:
     with:
       project: kyosu
       cxx-compiler: g++-15
+      image: ghcr.io/jfalcou/compilers:v11
