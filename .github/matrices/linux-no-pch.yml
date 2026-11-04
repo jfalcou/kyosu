@@ -7,7 +7,7 @@
 ## it, so a unit or an example that forgets an include passes the other rows. This row builds and runs both without
 ## it, as Compiler Explorer compiles an example.
 runs-on: ubuntu-latest
-image: v10
+image: v11
 container-options: -u root
 configs: [Debug]
 ## Building alone already takes forty minutes here, and the tests now run on top of it.
