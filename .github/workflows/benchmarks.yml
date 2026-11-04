@@ -21,7 +21,7 @@ jobs:
     name: ${{ matrix.compiler.name }}
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/jfalcou/compilers:v10
+      image: ghcr.io/jfalcou/compilers:v11
       options: -u root
     strategy:
       fail-fast: false
