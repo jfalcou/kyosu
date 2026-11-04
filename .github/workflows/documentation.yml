@@ -21,3 +21,4 @@ jobs:
     with:
       project: kyosu
       coverage: true
+      image: ghcr.io/jfalcou/compilers:v11

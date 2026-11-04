@@ -28,3 +28,4 @@ jobs:
     with:
       project: kyosu
       exclude: '^doc\.'
+      image: ghcr.io/jfalcou/compilers:v11
