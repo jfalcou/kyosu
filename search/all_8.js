@@ -19,8 +19,8 @@ var searchData=
   ['exp2_135',['exp2',['../group__exp2.html#ga7646bef9d3128713a8284a545c10b1e5',1,'kyosu::exp2']]],
   ['exp_5fi_136',['exp_i',['../group__exp__i.html#gae60807f50d322f3b5a2289f14cb115bc',1,'kyosu']]],
   ['exp_5fint_137',['exp_int',['../group__exp__int.html#gac080f79509178fd061575a3875a29b53',1,'kyosu::exp_int']]],
-  ['expm1_142',['expm1',['../group__expm1.html#ga20b941e423fc7750665a8c15da666169',1,'kyosu::expm1']]],
-  ['expmx2_143',['expmx2',['../group__expmx2.html#ga17336c4e1b6666dd1fb632c136b1f19d',1,'kyosu::expmx2']]],
-  ['expx2_148',['expx2',['../group__expx2.html#gae725cf6ea34c98c328ae87ef2d9271f2',1,'kyosu::expx2']]],
-  ['extension_20of_20real_20analytic_20functions_149',['Extension of real analytic functions',['../math_background.html#autotoc_md60',1,'']]],
+  ['expm1_141',['expm1',['../group__expm1.html#ga20b941e423fc7750665a8c15da666169',1,'kyosu::expm1']]],
+  ['expmx2_142',['expmx2',['../group__expmx2.html#ga17336c4e1b6666dd1fb632c136b1f19d',1,'kyosu::expmx2']]],
+  ['expx2_147',['expx2',['../group__expx2.html#gae725cf6ea34c98c328ae87ef2d9271f2',1,'kyosu::expx2']]],
+  ['extension_20of_20real_20analytic_20functions_148',['Extension of real analytic functions',['../math_background.html#autotoc_md60',1,'']]],
 ];

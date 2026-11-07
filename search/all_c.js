@@ -33,5 +33,5 @@ var searchData=
   ['is_5fpure_101',['is_pure',['../group__is__pure.html#ga5d01b83f2f41b991e96a16caa279388a',1,'kyosu']]],
   ['is_5freal_102',['is_real',['../group__is__real.html#ga83642115085d0145bddbd31b40a09738',1,'kyosu']]],
   ['is_5funitary_104',['is_unitary',['../group__is__unitary.html#gae2445553e9488629a8e57c9e5014b94b',1,'kyosu']]],
-  ['its_20limits_111',['The construction and its limits',['../biblio.html#autotoc_md45',1,'']]]
+  ['its_20limits_110',['The construction and its limits',['../biblio.html#autotoc_md45',1,'']]]
 ];
