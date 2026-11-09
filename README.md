@@ -35,7 +35,7 @@ int main()
 ```text
 complex:    -3 + 4i
 quaternion: -28 + 4i + 6j + 8k
-octonion:   -202 + 4i + 6j + 8k + 10l + 12li + 14lj + 16lk
+octonion:   -202 + 4i + 6j + 8k + 10l + 12il + 14jl + 16kl
 ```
 
 The algebra is the real one — past the complex numbers it stops being commutative:
@@ -69,7 +69,7 @@ int main()
 
 ```text
 c + q = 2 + 4i + 3j + 4k
-q * o = -28 + 4i + 6j + 8k - 60l + 20li + 14lj + 32lk
+q * o = -28 + 4i + 6j + 8k - 60l + 20il + 14jl + 32kl
 i * j = 0 + 0i + 0j + 1k
 j * i = 0 + 0i + 0j - 1k
 q / c      = 1 + 0i - 1j + 2k
