@@ -47,18 +47,18 @@ TTS_CASE_WITH("Check kyosu::pure over octonion",
               tts::randoms(-10, 10),
               tts::randoms(-10, 10),
               tts::randoms(-10, 10))
-<typename T>(T r, T i, T j, T k, T l, T li, T lj, T lk)
+<typename T>(T r, T i, T j, T k, T l, T il, T jl, T kl)
 {
   using type = kyosu::octonion_t<T>;
-  auto po = kyosu::pure(type(r, i, j, k, l, li, lj, lk));
+  auto po = kyosu::pure(type(r, i, j, k, l, il, jl, kl));
   TTS_EQUAL(kyosu::real(po), kyosu::zero(kyosu::as(r)));
   TTS_EQUAL(kyosu::ipart(po), i);
   TTS_EQUAL(kyosu::jpart(po), j);
   TTS_EQUAL(kyosu::kpart(po), k);
   TTS_EQUAL(kyosu::lpart(po), l);
-  TTS_EQUAL(kyosu::lipart(po), li);
-  TTS_EQUAL(kyosu::ljpart(po), lj);
-  TTS_EQUAL(kyosu::lkpart(po), lk);
+  TTS_EQUAL(kyosu::ilpart(po), il);
+  TTS_EQUAL(kyosu::jlpart(po), jl);
+  TTS_EQUAL(kyosu::klpart(po), kl);
 };
 
 //======================================================================================================================

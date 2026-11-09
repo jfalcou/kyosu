@@ -260,12 +260,12 @@ namespace kyosu
   //! @}
 
   //====================================================================================================================
-  //! @defgroup lipart kyosu::lipart
+  //! @defgroup ilpart kyosu::ilpart
   //! @ingroup agnostic
-  //! @brief Extracts the \f$li\f$  part of a value.
+  //! @brief Extracts the \f$il\f$ part of a value.
   //! @{
   //====================================================================================================================
-  //!   @var lipart
+  //!   @var ilpart
   //!
   //!   @groupheader{Header file}
   //!
@@ -278,10 +278,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     constexpr decltype(auto)  lipart(concepts::cayley_dickson  auto&& v)  noexcept; // 1
-  //!     constexpr auto            lipart(concepts::quaternion      auto&& v)  noexcept; // 2
-  //!     constexpr auto            lipart(concepts::complex         auto&& v)  noexcept; // 2
-  //!     constexpr auto            lipart(concepts::real            auto&& v)  noexcept; // 2
+  //!     constexpr decltype(auto)  ilpart(concepts::cayley_dickson  auto&& v)  noexcept; // 1
+  //!     constexpr auto            ilpart(concepts::quaternion      auto&& v)  noexcept; // 2
+  //!     constexpr auto            ilpart(concepts::complex         auto&& v)  noexcept; // 2
+  //!     constexpr auto            ilpart(concepts::real            auto&& v)  noexcept; // 2
   //!   }
   //!   @endcode
   //!
@@ -291,24 +291,29 @@ namespace kyosu
   //!
   //!   **Return value**
   //!
-  //!   1. Returns a properly const-qualified reference to the \f$li\f$ part of `v`.
+  //!   1. Returns a properly const-qualified reference to the \f$il\f$ part of `v`, the component
+  //!      5 of an octonion.
   //!   2. Returns `T{0}`.
   //!
   //!  @groupheader{Example}
   //!
-  //!  @godbolt{doc/lipart.cpp}
+  //!  @godbolt{doc/ilpart.cpp}
   //====================================================================================================================
+  inline constexpr auto ilpart = extractor<5>{};
+
+  //! @brief Deprecated name of kyosu::ilpart, which returns the same component.
+  [[deprecated("lipart reads as the product li, the opposite of the component: use kyosu::ilpart")]]
   inline constexpr auto lipart = extractor<5>{};
 
   //! @}
 
   //====================================================================================================================
-  //! @defgroup ljpart kyosu::ljpart
+  //! @defgroup jlpart kyosu::jlpart
   //! @ingroup agnostic
-  //! @brief Extracts the \f$lj\f$  part of a value.
+  //! @brief Extracts the \f$jl\f$ part of a value.
   //! @{
   //====================================================================================================================
-  //!   @var ljpart
+  //!   @var jlpart
   //!
   //!   @groupheader{Header file}
   //!
@@ -321,10 +326,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     constexpr decltype(auto)  ljpart(concepts::cayley_dickson  auto&& v)  noexcept; // 1
-  //!     constexpr auto            ljpart(concepts::quaternion      auto&& v)  noexcept; // 2
-  //!     constexpr auto            ljpart(concepts::complex         auto&& v)  noexcept; // 2
-  //!     constexpr auto            ljpart(concepts::real            auto&& v)  noexcept; // 2
+  //!     constexpr decltype(auto)  jlpart(concepts::cayley_dickson  auto&& v)  noexcept; // 1
+  //!     constexpr auto            jlpart(concepts::quaternion      auto&& v)  noexcept; // 2
+  //!     constexpr auto            jlpart(concepts::complex         auto&& v)  noexcept; // 2
+  //!     constexpr auto            jlpart(concepts::real            auto&& v)  noexcept; // 2
   //!   }
   //!   @endcode
   //!
@@ -334,24 +339,29 @@ namespace kyosu
   //!
   //!   **Return value**
   //!
-  //!   1. Returns a properly const-qualified reference to the \f$li\f$ part of `v`.
+  //!   1. Returns a properly const-qualified reference to the \f$jl\f$ part of `v`, the component
+  //!      6 of an octonion.
   //!   2. Returns `T{0}`.
   //!
   //!  @groupheader{Example}
   //!
-  //!  @godbolt{doc/ljpart.cpp}
+  //!  @godbolt{doc/jlpart.cpp}
   //====================================================================================================================
+  inline constexpr auto jlpart = extractor<6>{};
+
+  //! @brief Deprecated name of kyosu::jlpart, which returns the same component.
+  [[deprecated("ljpart reads as the product lj, the opposite of the component: use kyosu::jlpart")]]
   inline constexpr auto ljpart = extractor<6>{};
 
   //! @}
 
   //====================================================================================================================
-  //! @defgroup lkpart kyosu::lkpart
+  //! @defgroup klpart kyosu::klpart
   //! @ingroup agnostic
-  //! @brief Extracts the \f$lk\f$  part of a value.
+  //! @brief Extracts the \f$kl\f$ part of a value.
   //! @{
   //====================================================================================================================
-  //!   @var lkpart
+  //!   @var klpart
   //!
   //!   @groupheader{Header file}
   //!
@@ -364,10 +374,10 @@ namespace kyosu
   //!   @code
   //!   namespace kyosu
   //!   {
-  //!     constexpr decltype(auto)  lkpart(concepts::cayley_dickson  auto&& v)  noexcept; // 1
-  //!     constexpr auto            lkpart(concepts::quaternion      auto&& v)  noexcept; // 2
-  //!     constexpr auto            lkpart(concepts::complex         auto&& v)  noexcept; // 2
-  //!     constexpr auto            lkpart(concepts::real            auto&& v)  noexcept; // 2
+  //!     constexpr decltype(auto)  klpart(concepts::cayley_dickson  auto&& v)  noexcept; // 1
+  //!     constexpr auto            klpart(concepts::quaternion      auto&& v)  noexcept; // 2
+  //!     constexpr auto            klpart(concepts::complex         auto&& v)  noexcept; // 2
+  //!     constexpr auto            klpart(concepts::real            auto&& v)  noexcept; // 2
   //!   }
   //!   @endcode
   //!
@@ -377,13 +387,18 @@ namespace kyosu
   //!
   //!   **Return value**
   //!
-  //!   1. Returns a properly const-qualified reference to the \f$lk\f$ part of `v`.
+  //!   1. Returns a properly const-qualified reference to the \f$kl\f$ part of `v`, the component
+  //!      7 of an octonion.
   //!   2. Returns `T{0}`.
   //!
   //!  @groupheader{Example}
   //!
-  //!  @godbolt{doc/lkpart.cpp}
+  //!  @godbolt{doc/klpart.cpp}
   //====================================================================================================================
+  inline constexpr auto klpart = extractor<7>{};
+
+  //! @brief Deprecated name of kyosu::klpart, which returns the same component.
+  [[deprecated("lkpart reads as the product lk, the opposite of the component: use kyosu::klpart")]]
   inline constexpr auto lkpart = extractor<7>{};
 
   //! @}
