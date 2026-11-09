@@ -29,7 +29,8 @@ namespace kyosu
     };
 
     auto basis = [&](auto i) {
-      constexpr char const* base[8] = {" ", "i ", "j ", "k ", "l ", "li ", "lj ", "lk "};
+      // The algebra doubling e5 = il = -li, and so on for jl and kl.
+      constexpr char const* base[8] = {" ", "i ", "j ", "k ", "l ", "il ", "jl ", "kl "};
       if constexpr (CD::static_dimension < 16) return base[i];
       else return "z" + std::to_string(i) + " ";
     };
