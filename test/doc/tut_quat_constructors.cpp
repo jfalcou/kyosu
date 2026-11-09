@@ -11,15 +11,15 @@ int main()
   std::array<double, 3> axis{1., 2., 3.};
   std::cout << "from_angle_axis  = " << kyosu::from_angle_axis(pi/3, std::span(axis)) << "\n";
 
-  // The same idea through Euler angles, naming the three axes used.
+  // A rotation given by three Euler angles and their three axes.
   std::cout << "from_euler       = "
             << kyosu::from_euler(pi/2, pi/3, pi/4, kyosu::Z_, kyosu::X_, kyosu::Z_) << "\n";
 
-  // Modulus, argument, and the unit pure quaternion that plays the part of i.
+  // Modulus, argument, and the unit pure quaternion of the direction.
   auto u = kyosu::quaternion_t<double>(0., 1., 2., 2.) / 3.;
   std::cout << "from_polar       = " << kyosu::from_polar(2., pi/6, u) << "\n";
 
-  // Four-dimensional spherical and cylindrical parametrisations.
+  // Four-dimensional spherical and cylindrical parametrizations.
   std::cout << "from_spherical   = " << kyosu::from_spherical(1., pi/4, pi/3, pi/6) << "\n";
   std::cout << "from_cylindrical = " << kyosu::from_cylindrical(1., pi/4, 2., 3.)   << "\n";
 }

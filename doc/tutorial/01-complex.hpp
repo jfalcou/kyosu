@@ -1,8 +1,9 @@
 #error This file is for documentation only - DO NOT INCLUDE
 //! @page tutorial-complex Complex numbers
 //!
-//! **KYOSU** supports complex numbers via `kyosu::complex_t<T>`, where `T` is a floating point
-//! type.
+//! A complex number is a number \f$a + bi\f$ with two real components, on the basis \f$1, i\f$
+//! with \f$i^2 = -1\f$. In the @ref math_background "Cayley-Dickson construction" it is a pair of
+//! reals. **KYOSU** represents it by `kyosu::complex_t<T>`, where `T` is `float` or `double`.
 //!
 //! # Construction and printing
 //!
@@ -10,21 +11,19 @@
 //!
 //! @godbolt{doc/tut_complex_basics.cpp}
 //!
-//! A value prints as \f$3 + 4i\f$, each component followed by the symbol of its basis element,
-//! rather than as the pair \f$(3,4)\f$ of `std::complex`. The functions above behave as their
-//! namesakes on `std::complex`:
+//! The functions of the example behave as their namesakes on `std::complex`:
 //!
 //! - kyosu::real and kyosu::imag return the two components,
 //! - kyosu::conj returns the conjugate,
 //! - kyosu::abs returns the modulus,
-//! - kyosu::arg returns the argument.
+//! - kyosu::arg returns the argument, in radians.
 //!
 //! # Elementary functions
 //!
-//! The standard arithmetic and the elementary functions are available on complex numbers, in
-//! namespace `kyosu`, under the names of their real counterparts. There are
-//! @ref kyosu_functions "two hundred functions", from the arithmetic and the transcendental
-//! functions to the special functions:
+//! The arithmetic and the elementary functions apply to complex numbers, in namespace `kyosu`,
+//! under the names of their real counterparts. About two hundred
+//! @ref kyosu_functions "functions" range from the arithmetic and the transcendental functions to
+//! the special functions:
 //!
 //! - the Riemann zeta function, kyosu::zeta,
 //! - the Legendre polynomials, kyosu::legendre,
@@ -33,32 +32,37 @@
 //!
 //! @godbolt{doc/tut_complex_functions.cpp}
 //!
+//! Each call returns a complex number, the value of the function at \f$0.5 + 0.25i\f$.
+//!
 //! # Real arguments
 //!
-//! A function applied to a real argument outside its real domain returns a complex result. For
-//! example, `kyosu::sqrt(-1.0)` returns \f$i\f$, where `std::sqrt(-1.0)` returns NaN.
+//! A function applied to a real argument outside its real domain returns a complex result.
+//! `kyosu::sqrt(-1.0)` returns \f$i\f$, while `std::sqrt(-1.0)` returns NaN. The return type
+//! widens from `double` to `kyosu::complex_t<double>`, since no `double` holds \f$i\f$.
 //!
-//! The return type widens from `double` to `kyosu::complex_t<double>`, so that the result is not
-//! lost.
-//!
-//! @note The option `kyosu::real_only` selects the real function and its NaN instead:
+//! The @ref tutorial-options "option" `kyosu::real_only` selects the real function, which returns
+//! NaN outside the real domain:
 //!
 //! @godbolt{doc/tut_complex_real_only.cpp}
 //!
-//! For more information, see the tutorial on @ref tutorial-options "Options".
+//! Without the option, \f$\sqrt{-1}\f$ is \f$i\f$, \f$\log(-1)\f$ is \f$i\pi\f$, and
+//! \f$\arccos 2\f$ is a pure imaginary number. With the option, the three calls return NaN.
 //!
 //! # Comparison
 //!
-//! Complex numbers are compared for equality and tested by the componentwise predicates. No `<`
-//! is defined: the complex numbers are not an [ordered field](https://en.wikipedia.org/wiki/Ordered_field), no total order
-//! of the plane being compatible with both their addition and their multiplication:
+//! Complex numbers are compared for equality and tested by the componentwise predicates. No
+//! total order of the plane is compatible with both the addition and the multiplication, so the
+//! complex numbers are not an [ordered field](https://en.wikipedia.org/wiki/Ordered_field), and
+//! no `<` is defined.
 //!
 //! @godbolt{doc/tut_complex_predicates.cpp}
 //!
+//! \f$3 + 4i\f$ and \f$3\f$ differ, \f$3\f$ is real, and \f$3 + 4i\f$ is finite and not pure.
+//!
 //! <div class="section_buttons">
 //!
-//! | Previous                  |                                    Next |
-//! |:--------------------------|----------------------------------------:|
+//! | Previous                   |                               Next |
+//! |:---------------------------|-----------------------------------:|
 //! | [Installation](@ref setup) | [SIMD support](@ref tutorial-simd) |
 //!
 //! </div>

@@ -1,28 +1,25 @@
 #error This file is for documentation only - DO NOT INCLUDE
 //! @page tutorial-options Options
 //!
-//! Some functions have different behaviors depending on the context:
+//! Some functions have several behaviors:
 //!
-//! - `kyosu::sqrt` may return \f$i\f$ or a NaN on \f$-1\f$,
+//! - `kyosu::sqrt` may return \f$i\f$ or NaN on \f$-1\f$,
 //! - `kyosu::to_euler` may return its angles in radians or in multiples of \f$\pi\f$,
-//! - `kyosu::log` may evaluate with full accuracy, or by a faster formula with less precision,
-//! - `kyosu::rotate_vec` assumes its quaternion is not normalized, but it may be.
+//! - `kyosu::log` may evaluate with full accuracy, or by a faster and less precise formula,
+//! - `kyosu::rotate_vec` normalizes its quaternion, or may take it as already normalized.
 //!
-//! A specific function for each behavior would dilute the API, so **KYOSU** reuses the
-//! [option](https://jfalcou.github.io/eve/design_rationale.html#rationale-decorator) mechanism of
-//! EVE:
+//! A function of its own for each behavior would multiply the names of the API, so **KYOSU** reuses
+//! the [option](https://jfalcou.github.io/eve/design_rationale.html#rationale-decorator) mechanism
+//! of EVE:
 //!
-//! @code
-//! kyosu::sqrt[kyosu::real_only](-1.0)
-//! @endcode
+//! @godbolt{doc/tut_opt_call.cpp}
 //!
-//! Options, which modify the semantics of a function, are passed in square brackets after its
+//! An option, which modifies the semantics of a function, is passed in square brackets after its
 //! name. `kyosu::sqrt[kyosu::real_only]` is a new
 //! [callable](https://en.cppreference.com/w/cpp/named_req/Callable), which is then applied to the
 //! arguments.
 //!
-//! Options compose, as in `kyosu::to_euler[kyosu::extrinsic][kyosu::radpi]`. A function of its
-//! own for that combination, `to_euler_extrinsic_radpi`, would be obscure in the API.
+//! Options compose, as in `kyosu::to_euler[kyosu::extrinsic][kyosu::radpi]`.
 //!
 //! # raw
 //!
@@ -33,26 +30,32 @@
 //! - no handling of the edges.
 //!
 //! Below, `kyosu::log` and `kyosu::log[kyosu::raw]` are applied to an ordinary value and to the
-//! origin, where the default returns an imaginary part and the option a NaN:
+//! origin:
 //!
 //! @godbolt{doc/tut_opt_raw.cpp}
 //!
-//! `kyosu::raw` is for an inner loop whose cost has been measured, not a default.
+//! On \f$3 + 4i\f$, the imaginary part is \f$0.927295\f$ by default and \f$0.922848\f$ with the
+//! option. At the origin, the default returns \f$-\infty + 0i\f$, while the option returns a NaN
+//! imaginary part.
 //!
 //! # radpi
 //!
-//! By default, angles are in radians. An angle such as \f$\pi/2\f$ is then an
-//! [irrational](https://en.wikipedia.org/wiki/Proof_that_%CF%80_is_irrational) number, which no
-//! floating point number represents exactly, so `pi/2` already carries a rounding error.
+//! By default, angles are in radians. In radians, \f$\pi/2\f$ is an
+//! [irrational](https://en.wikipedia.org/wiki/Proof_that_%CF%80_is_irrational) number. No floating
+//! point number represents it exactly, so `pi/2` already carries a rounding error.
 //! `kyosu::radpi` reads and returns angles as multiples of \f$\pi\f$ instead, with two effects:
 //!
 //! - `0.5` stands for \f$\pi/2\f$ exactly,
 //! - the result carries no rounding error of \f$\pi\f$.
 //!
-//! Below, `kyosu::sin` is applied to a half turn and to a million half turns, where the sine is
-//! zero, in radians and with the option:
+//! Below, `kyosu::sin` is applied to a half turn and to a million half turns, in radians and with
+//! the option:
 //!
 //! @godbolt{doc/tut_opt_radpi.cpp}
+//!
+//! The sine of both angles is zero. In radians, the result is the rounding error of \f$\pi\f$
+//! carried through the sine, and it grows with the angle. With the option, both results are
+//! zero.
 //!
 //! # real_only
 //!
@@ -60,12 +63,16 @@
 //! `kyosu::real_only` selects the real function instead, with two effects:
 //!
 //! - the result is a real,
-//! - an argument outside the real domain gives a NaN.
+//! - an argument outside the real domain gives NaN.
 //!
 //! Below, `kyosu::acosh` and `kyosu::asin` are applied to arguments outside their real domains,
 //! with and without the option:
 //!
 //! @godbolt{doc/tut_opt_real_only.cpp}
+//!
+//! Without the option, \f$\mathrm{acosh}\,0.5\f$ is the pure imaginary number
+//! \f$i\pi/3\f$, and \f$\arcsin 2\f$ is a complex number of real part \f$\pi/2\f$. With the
+//! option, both calls return NaN.
 //!
 //! # assume_unitary
 //!
@@ -80,13 +87,15 @@
 //!
 //! @godbolt{doc/tut_opt_assume_unitary.cpp}
 //!
+//! The quaternion has modulus 1, and both calls send \f$x\f$ to \f$y\f$.
+//!
 //! @warning The option is not checked: on an argument that is not of unit length, the result is
 //! wrong.
 //!
 //! <div class="section_buttons">
 //!
-//! | Previous |
-//! |:---------|
+//! | Previous                            |
+//! |:------------------------------------|
 //! | [Rotations](@ref tutorial-rotation) |
 //!
 //! </div>

@@ -11,6 +11,5 @@ int main()
   std::cout << "tanh(z)      = " << kyosu::tanh(z)        << "\n";
   std::cout << "erf(z)       = " << kyosu::erf(z)         << "\n";
   std::cout << "tgamma(z)    = " << kyosu::tgamma(z)      << "\n";
-  std::cout << "zeta(z)      = " << kyosu::zeta(z)        << "\n";
   std::cout << "legendre(3, z) = " << kyosu::legendre(3, z) << "\n";
 }
