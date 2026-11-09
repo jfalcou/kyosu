@@ -2,44 +2,48 @@
 //! @page tutorial-simd SIMD support
 //!
 //! **KYOSU** is built on [EVE](https://github.com/jfalcou/eve), and every function accepts an
-//! `eve::wide` where it accepts a scalar. An `eve::wide<T>` is a SIMD register of `T`, on which
-//! the arithmetic is the arithmetic of a scalar. `kyosu/kyosu.hpp` includes EVE, so `eve::wide`
-//! and the constants of EVE need no header of their own. Nothing of SIMD programming is assumed
-//! below.
+//! `eve::wide` where it accepts a scalar. An `eve::wide<T>` is a SIMD register of `T`, whose
+//! operators apply to every lane as they apply to a scalar. `kyosu/kyosu.hpp` also includes EVE, so `eve::wide`
+//! and the constants of EVE need no header of their own.
 //!
-//! @note Everything about SIMD programming, the registers, the masks, the algorithms, and the
-//! architectures, is in the [EVE documentation](https://jfalcou.github.io/eve/) and its
-//! [tutorials](https://jfalcou.github.io/eve/intro-01.html).
+//! @note The [EVE documentation](https://jfalcou.github.io/eve/) and its
+//! [tutorials](https://jfalcou.github.io/eve/intro-01.html) cover SIMD programming: the registers,
+//! the masks, the algorithms, and the architectures.
 //!
 //! # Registers of reals
 //!
-//! `eve::wide<double>` holds as many `double` as a register of the target machine: two on x86-64
-//! with SSE2, four with AVX, eight with AVX-512. The width is a property of the target, selected
-//! at compile time, and the source never names it.
+//! `eve::wide<double>` holds as many `double` as a register of the target machine:
 //!
-//! A register is built from a function of two arguments, the lane index and the width, called
-//! once per lane: below, a [lambda](https://en.cppreference.com/w/cpp/language/lambda) puts
-//! \f$-1 + i\f$ in lane \f$i\f$, and the width goes unused. The arithmetic and the functions
-//! apply to every lane:
+//! - two on x86-64 with SSE2,
+//! - four with AVX,
+//! - eight with AVX-512.
+//!
+//! The width is selected at compile time from the target, and the source never names it.
+//!
+//! A register is built from a function of two arguments, the lane index and the width, called once
+//! per lane. Below, a [lambda](https://en.cppreference.com/w/cpp/language/lambda) puts
+//! \f$-1 + k\f$ in lane \f$k\f$ and leaves the width unused:
 //!
 //! @godbolt{doc/tut_simd_wide.cpp}
 //!
-//! `eve::wide<double>::size()` is the number of `double` in the register. The square root of a
-//! register of reals is a register of complex numbers, since any lane may be negative, and
-//! `kyosu::real_only` selects the real function on every lane.
+//! `eve::wide<double>::size()` is the number of `double` in the register. Lane \f$k\f$ of `x` holds
+//! \f$-1 + k\f$, and lane \f$k\f$ of `x * x` its square. The square root of a register of reals is
+//! a register of complex numbers, since a lane may be negative: lane 0 holds \f$i\f$. With
+//! `kyosu::real_only`, the result is a register of reals, where lane 0 holds NaN.
 //!
 //! # Registers of complex numbers
 //!
-//! `eve::wide<kyosu::complex_t<double>>` is a register of complex numbers, built by
-//! `kyosu::complex` from two registers of reals, and every function applies to all its lanes:
+//! `eve::wide<kyosu::complex_t<double>>` is a register of complex numbers. `kyosu::complex` builds
+//! it from two registers of reals, and the functions are applied to all its lanes:
 //!
 //! @godbolt{doc/tut_simd_complex.cpp}
 //!
-//! The source differs from the scalar case by the type of the components alone. There is no
-//! separate SIMD interface and no `#ifdef` on the architecture.
+//! Lane \f$k\f$ of `z` holds \f$(1 + k) + 0.5k\,i\f$, and `abs(z)` and `exp(z)` return the
+//! modulus and the exponential of each lane. The source differs from the scalar case only by the
+//! type of the components.
 //!
-//! @note `auto z = kyosu::complex(re, im);` builds the same register with its type deduced from
-//! the components, and is the form to prefer.
+//! @note `auto z = kyosu::complex(re, im);` builds the same register while deducing its type from
+//! the components, and is the preferred form.
 //!
 //! # Generic code
 //!
@@ -48,13 +52,14 @@
 //!
 //! @godbolt{doc/tut_simd_generic.cpp}
 //!
-//! The template is instantiated once per argument type, scalar or wide, and no code is written
-//! per width.
+//! `energy` returns a `double` when given a complex number, and an `eve::wide<double>` when given
+//! a register of complex numbers. The template is instantiated once for each argument type, and no
+//! code is written per width.
 //!
 //! <div class="section_buttons">
 //!
-//! | Previous                              |                            Next |
-//! |:--------------------------------------|--------------------------------:|
+//! | Previous                                 |                                    Next |
+//! |:-----------------------------------------|----------------------------------------:|
 //! | [Complex numbers](@ref tutorial-complex) | [Quaternions](@ref tutorial-quaternion) |
 //!
 //! </div>

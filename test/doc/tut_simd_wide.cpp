@@ -10,7 +10,7 @@ int main()
   std::cout << "x                   = " << x     << "\n";
   std::cout << "x * x               = " << x * x << "\n";
 
-  // A square root may leave the reals: the answer is complex unless real_only says otherwise.
+  // The square root of a negative lane is complex, and NaN with real_only.
   std::cout << "sqrt(x)             = " << kyosu::sqrt(x)                  << "\n";
   std::cout << "sqrt[real_only](x)  = " << kyosu::sqrt[kyosu::real_only](x) << "\n";
 }

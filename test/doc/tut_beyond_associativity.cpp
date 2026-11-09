@@ -13,6 +13,8 @@ int main()
   std::cout << "associator       = " << kyosu::associator(a, b, c) << "\n";
 
   // On quaternions the associator vanishes: they are associative.
-  auto q = kyosu::quaternion_t<double>(1., 2., 3., 4.);
-  std::cout << "on quaternions   = " << kyosu::associator(q, q*q, q+q) << "\n";
+  auto p = kyosu::quaternion_t<double>(1., 2., 3., 4.);
+  auto q = kyosu::quaternion_t<double>(0., 1., -1., 2.);
+  auto r = kyosu::quaternion_t<double>(3., 0., 1., 1.);
+  std::cout << "on quaternions   = " << kyosu::associator(p, q, r) << "\n";
 }

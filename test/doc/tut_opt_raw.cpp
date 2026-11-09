@@ -10,7 +10,7 @@ int main()
   std::cout << "log(z)            = " << kyosu::log(z)             << "\n";
   std::cout << "log[raw](z)       = " << kyosu::log[kyosu::raw](z) << "\n";
 
-  // At the origin, the default returns an imaginary part and the raw formula a NaN.
+  // At the origin, the default returns -inf + 0i, and raw a NaN imaginary part.
   auto o = c_t(0., 0.);
   std::cout << "log(0)            = " << kyosu::log(o)             << "\n";
   std::cout << "log[raw](0)       = " << kyosu::log[kyosu::raw](o) << "\n";
