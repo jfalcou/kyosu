@@ -1236,6 +1236,13 @@
     </member>
     <member kind="variable">
       <type>constexpr auto</type>
+      <name>ilpart</name>
+      <anchorfile>group__ilpart.html</anchorfile>
+      <anchor>ga0281d4f51d59ea6b60cb5769bc6029f4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
       <name>imag</name>
       <anchorfile>group__imag.html</anchorfile>
       <anchor>gaff94a2685c6d030458b388a4a4079efe</anchor>
@@ -1439,6 +1446,13 @@
     </member>
     <member kind="variable">
       <type>constexpr auto</type>
+      <name>jlpart</name>
+      <anchorfile>group__jlpart.html</anchorfile>
+      <anchor>gab01f40c1a2f72e1849e2c7c1163bfdde</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
       <name>jpart</name>
       <anchorfile>group__jpart.html</anchorfile>
       <anchor>ga66085e00476f789b11deaf0acb0f24ac</anchor>
@@ -1449,6 +1463,13 @@
       <name>k</name>
       <anchorfile>group__k.html</anchorfile>
       <anchor>gabb75241dcb99709608d07d0a94af3813</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>klpart</name>
+      <anchorfile>group__klpart.html</anchorfile>
+      <anchor>ga6b7017f23f31fc3244b487d6f3607544</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -1524,21 +1545,21 @@
     <member kind="variable">
       <type>constexpr auto</type>
       <name>lipart</name>
-      <anchorfile>group__lipart.html</anchorfile>
+      <anchorfile>group__ilpart.html</anchorfile>
       <anchor>gadbcb03cb1614e1d7a30b6ab6d770792d</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
       <type>constexpr auto</type>
       <name>ljpart</name>
-      <anchorfile>group__ljpart.html</anchorfile>
+      <anchorfile>group__jlpart.html</anchorfile>
       <anchor>gab9af5fb49098ddef5b3dba27f21628bb</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
       <type>constexpr auto</type>
       <name>lkpart</name>
-      <anchorfile>group__lkpart.html</anchorfile>
+      <anchorfile>group__klpart.html</anchorfile>
       <anchor>gaa2a8f6265c301b29d450fa2fa479b530</anchor>
       <arglist></arglist>
     </member>
@@ -2348,6 +2369,7 @@
     <subgroup>hypergeometric</subgroup>
     <subgroup>hypot</subgroup>
     <subgroup>if_else</subgroup>
+    <subgroup>ilpart</subgroup>
     <subgroup>inc</subgroup>
     <subgroup>inject</subgroup>
     <subgroup>ipart</subgroup>
@@ -2375,7 +2397,9 @@
     <subgroup>is_real</subgroup>
     <subgroup>is_unitary</subgroup>
     <subgroup>jacobi_elliptic</subgroup>
+    <subgroup>jlpart</subgroup>
     <subgroup>jpart</subgroup>
+    <subgroup>klpart</subgroup>
     <subgroup>kolmmean</subgroup>
     <subgroup>kpart</subgroup>
     <subgroup>kronecker</subgroup>
@@ -2386,9 +2410,6 @@
     <subgroup>legendre</subgroup>
     <subgroup>lerp</subgroup>
     <subgroup>linfnorm</subgroup>
-    <subgroup>lipart</subgroup>
-    <subgroup>ljpart</subgroup>
-    <subgroup>lkpart</subgroup>
     <subgroup>log</subgroup>
     <subgroup>log10</subgroup>
     <subgroup>log1p</subgroup>
@@ -3654,6 +3675,25 @@
     </member>
   </compound>
   <compound kind="group">
+    <name>ilpart</name>
+    <title>kyosu::ilpart</title>
+    <filename>group__ilpart.html</filename>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::ilpart</name>
+      <anchorfile>group__ilpart.html</anchorfile>
+      <anchor>ga0281d4f51d59ea6b60cb5769bc6029f4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::lipart</name>
+      <anchorfile>group__ilpart.html</anchorfile>
+      <anchor>gadbcb03cb1614e1d7a30b6ab6d770792d</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="group">
     <name>imag</name>
     <title>kyosu::imag</title>
     <filename>group__imag.html</filename>
@@ -4003,6 +4043,25 @@
     </member>
   </compound>
   <compound kind="group">
+    <name>jlpart</name>
+    <title>kyosu::jlpart</title>
+    <filename>group__jlpart.html</filename>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::jlpart</name>
+      <anchorfile>group__jlpart.html</anchorfile>
+      <anchor>gab01f40c1a2f72e1849e2c7c1163bfdde</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::ljpart</name>
+      <anchorfile>group__jlpart.html</anchorfile>
+      <anchor>gab9af5fb49098ddef5b3dba27f21628bb</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="group">
     <name>jpart</name>
     <title>kyosu::jpart</title>
     <filename>group__jpart.html</filename>
@@ -4023,6 +4082,25 @@
       <name>kyosu::k</name>
       <anchorfile>group__k.html</anchorfile>
       <anchor>gabb75241dcb99709608d07d0a94af3813</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="group">
+    <name>klpart</name>
+    <title>kyosu::klpart</title>
+    <filename>group__klpart.html</filename>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::klpart</name>
+      <anchorfile>group__klpart.html</anchorfile>
+      <anchor>ga6b7017f23f31fc3244b487d6f3607544</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kyosu::lkpart</name>
+      <anchorfile>group__klpart.html</anchorfile>
+      <anchor>gaa2a8f6265c301b29d450fa2fa479b530</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -4143,42 +4221,6 @@
       <name>kyosu::linfnorm</name>
       <anchorfile>group__linfnorm.html</anchorfile>
       <anchor>ga2413388335ecd0df3e7d75d4e399fdd8</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="group">
-    <name>lipart</name>
-    <title>kyosu::lipart</title>
-    <filename>group__lipart.html</filename>
-    <member kind="variable">
-      <type>constexpr auto</type>
-      <name>kyosu::lipart</name>
-      <anchorfile>group__lipart.html</anchorfile>
-      <anchor>gadbcb03cb1614e1d7a30b6ab6d770792d</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="group">
-    <name>ljpart</name>
-    <title>kyosu::ljpart</title>
-    <filename>group__ljpart.html</filename>
-    <member kind="variable">
-      <type>constexpr auto</type>
-      <name>kyosu::ljpart</name>
-      <anchorfile>group__ljpart.html</anchorfile>
-      <anchor>gab9af5fb49098ddef5b3dba27f21628bb</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="group">
-    <name>lkpart</name>
-    <title>kyosu::lkpart</title>
-    <filename>group__lkpart.html</filename>
-    <member kind="variable">
-      <type>constexpr auto</type>
-      <name>kyosu::lkpart</name>
-      <anchorfile>group__lkpart.html</anchorfile>
-      <anchor>gaa2a8f6265c301b29d450fa2fa479b530</anchor>
       <arglist></arglist>
     </member>
   </compound>

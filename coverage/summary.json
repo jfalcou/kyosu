@@ -2336,9 +2336,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/parts.hpp",
-            "function_covered": 282,
+            "function_covered": 288,
             "function_percent": 99.3,
-            "function_total": 284,
+            "function_total": 290,
             "line_covered": 6,
             "line_percent": 100.0,
             "line_total": 6
@@ -3028,9 +3028,9 @@
             "line_total": 4
         }
     ],
-    "function_covered": 25578,
+    "function_covered": 25584,
     "function_percent": 98.1,
-    "function_total": 26070,
+    "function_total": 26076,
     "gcovr/summary_format_version": "0.6",
     "line_covered": 4821,
     "line_percent": 94.6,

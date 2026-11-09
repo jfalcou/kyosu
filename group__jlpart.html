@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KYOSU - Complex Without Complexes" />
 <meta name="twitter:description" content="Kyosu gives complex numbers, quaternions and octonions one unified treatment of the Cayley-Dickson algebras over the reals, where a real is a float, a double, or a SIMD register." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kyosu/card.png" />
-<title>kyosu: kyosu::lkpart</title>
+<title>kyosu: kyosu::jlpart</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,7 +106,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__lkpart.html','',''); });
+$(function(){initNavTree('group__jlpart.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -134,20 +134,23 @@ $(function(){initNavTree('group__lkpart.html','',''); });
 <div class="header">
   <div class="summary">
 <a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">kyosu::lkpart <div class="ingroups"><a class="el" href="group__kyosu__functions.html">Cayley-Dickson Functions</a> &raquo; <a class="el" href="group__agnostic.html">Algebra-agnostic functions</a></div></div></div>
+  <div class="headertitle"><div class="title">kyosu::jlpart <div class="ingroups"><a class="el" href="group__kyosu__functions.html">Cayley-Dickson Functions</a> &raquo; <a class="el" href="group__agnostic.html">Algebra-agnostic functions</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Extracts the \(lk\) part of a value.  
+<p>Extracts the \(jl\) part of a value.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:gaa2a8f6265c301b29d450fa2fa479b530" id="r_gaa2a8f6265c301b29d450fa2fa479b530"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#gaa2a8f6265c301b29d450fa2fa479b530">kyosu::lkpart</a> = extractor&lt;7&gt;{}</td></tr>
+<tr class="memitem:gab01f40c1a2f72e1849e2c7c1163bfdde" id="r_gab01f40c1a2f72e1849e2c7c1163bfdde"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#gab01f40c1a2f72e1849e2c7c1163bfdde">kyosu::jlpart</a> = extractor&lt;6&gt;{}</td></tr>
+<tr class="memitem:gab9af5fb49098ddef5b3dba27f21628bb" id="r_gab9af5fb49098ddef5b3dba27f21628bb"><td class="memItemLeft"><a id="gab9af5fb49098ddef5b3dba27f21628bb" name="gab9af5fb49098ddef5b3dba27f21628bb"></a>
+constexpr auto&#160;</td><td class="memItemRight"><b>kyosu::ljpart</b> = extractor&lt;6&gt;{}</td></tr>
+<tr class="memdesc:gab9af5fb49098ddef5b3dba27f21628bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deprecated name of <a class="el" href="#gab01f40c1a2f72e1849e2c7c1163bfdde">kyosu::jlpart</a>, which returns the same component. <br /></td></tr>
 </table>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="gaa2a8f6265c301b29d450fa2fa479b530" name="gaa2a8f6265c301b29d450fa2fa479b530"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa2a8f6265c301b29d450fa2fa479b530">&#9670;&#160;</a></span>lkpart</h2>
+<a id="gab01f40c1a2f72e1849e2c7c1163bfdde" name="gab01f40c1a2f72e1849e2c7c1163bfdde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab01f40c1a2f72e1849e2c7c1163bfdde">&#9670;&#160;</a></span>jlpart</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,7 +159,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto kyosu::lkpart = extractor&lt;7&gt;{}</td>
+          <td class="memname">auto kyosu::jlpart = extractor&lt;6&gt;{}</td>
         </tr>
       </table>
   </td>
@@ -172,16 +175,16 @@ Variables</h2></td></tr>
 </div><!-- fragment --><h2 class="groupheader">Callable Signatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>)  <a class="code hl_variable" href="#gaa2a8f6265c301b29d450fa2fa479b530">lkpart</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">concepts::cayley_dickson</a>  <span class="keyword">auto</span>&amp;&amp; v)  <span class="keyword">noexcept</span>; <span class="comment">// 1</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span>            <a class="code hl_variable" href="#gaa2a8f6265c301b29d450fa2fa479b530">lkpart</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1quaternion.html">concepts::quaternion</a>      <span class="keyword">auto</span>&amp;&amp; v)  <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span>            <a class="code hl_variable" href="#gaa2a8f6265c301b29d450fa2fa479b530">lkpart</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1complex.html">concepts::complex</a>         <span class="keyword">auto</span>&amp;&amp; v)  <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span>            <a class="code hl_variable" href="#gaa2a8f6265c301b29d450fa2fa479b530">lkpart</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1real.html">concepts::real</a>            <span class="keyword">auto</span>&amp;&amp; v)  <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>)  <a class="code hl_variable" href="#gab01f40c1a2f72e1849e2c7c1163bfdde">jlpart</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">concepts::cayley_dickson</a>  <span class="keyword">auto</span>&amp;&amp; v)  <span class="keyword">noexcept</span>; <span class="comment">// 1</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span>            <a class="code hl_variable" href="#gab01f40c1a2f72e1849e2c7c1163bfdde">jlpart</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1quaternion.html">concepts::quaternion</a>      <span class="keyword">auto</span>&amp;&amp; v)  <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span>            <a class="code hl_variable" href="#gab01f40c1a2f72e1849e2c7c1163bfdde">jlpart</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1complex.html">concepts::complex</a>         <span class="keyword">auto</span>&amp;&amp; v)  <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span>            <a class="code hl_variable" href="#gab01f40c1a2f72e1849e2c7c1163bfdde">jlpart</a>(<a class="code hl_concept" href="conceptkyosu_1_1concepts_1_1real.html">concepts::real</a>            <span class="keyword">auto</span>&amp;&amp; v)  <span class="keyword">noexcept</span>; <span class="comment">// 2</span></div>
 <div class="line">}</div>
 <div class="ttc" id="aconceptkyosu_1_1concepts_1_1cayley__dickson_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1cayley__dickson.html">kyosu::concepts::cayley_dickson</a></div><div class="ttdoc">General Cayley-dickson concept.</div><div class="ttdef"><b>Definition</b> concepts.hpp:41</div></div>
 <div class="ttc" id="aconceptkyosu_1_1concepts_1_1complex_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1complex.html">kyosu::concepts::complex</a></div><div class="ttdoc">Complex number concept.</div><div class="ttdef"><b>Definition</b> concepts.hpp:55</div></div>
 <div class="ttc" id="aconceptkyosu_1_1concepts_1_1quaternion_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1quaternion.html">kyosu::concepts::quaternion</a></div><div class="ttdoc">Quaternion concept.</div><div class="ttdef"><b>Definition</b> concepts.hpp:59</div></div>
 <div class="ttc" id="aconceptkyosu_1_1concepts_1_1real_html"><div class="ttname"><a href="conceptkyosu_1_1concepts_1_1real.html">kyosu::concepts::real</a></div><div class="ttdoc">General real concept.</div><div class="ttdef"><b>Definition</b> concepts.hpp:48</div></div>
-<div class="ttc" id="agroup__lkpart_html_gaa2a8f6265c301b29d450fa2fa479b530"><div class="ttname"><a href="#gaa2a8f6265c301b29d450fa2fa479b530">kyosu::lkpart</a></div><div class="ttdeci">constexpr auto lkpart</div><div class="ttdef"><b>Definition</b> parts.hpp:387</div></div>
+<div class="ttc" id="agroup__jlpart_html_gab01f40c1a2f72e1849e2c7c1163bfdde"><div class="ttname"><a href="#gab01f40c1a2f72e1849e2c7c1163bfdde">kyosu::jlpart</a></div><div class="ttdeci">constexpr auto jlpart</div><div class="ttdef"><b>Definition</b> parts.hpp:350</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
@@ -189,39 +192,24 @@ Variables</h2></td></tr>
 </ul>
 <p><b>Return value</b></p>
 <ol type="1">
-<li>Returns a properly const-qualified reference to the \(lk\) part of <span class="tt">v</span>.</li>
+<li>Returns a properly const-qualified reference to the \(jl\) part of <span class="tt">v</span>, the component 6 of an octonion.</li>
 <li>Returns <span class="tt">T{0}</span>.</li>
 </ol>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="#gaa2a8f6265c301b29d450fa2fa479b530">kyosu::lkpart</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        &quot;</span>;</div>
-<div class="line">  <span class="keywordtype">float</span> f = 72.9f;</div>
-<div class="line">  std::cout &lt;&lt; f &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gaa2a8f6265c301b29d450fa2fa479b530">lkpart</a>(f) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     &quot;</span>;</div>
-<div class="line">  <span class="keyword">auto</span> z = <a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;float&gt;</a>(3.5f, -2.9f);</div>
-<div class="line">  std::cout &lt;&lt; z &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gaa2a8f6265c301b29d450fa2fa479b530">lkpart</a>(z) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>;</div>
-<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_typedef" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t&lt;double&gt;</a>(1., 2., 3., 4.);</div>
-<div class="line">  std::cout &lt;&lt; q &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gaa2a8f6265c301b29d450fa2fa479b530">lkpart</a>(q) &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;octonion:  &quot;</span>;</div>
+<div class="line">  <span class="comment">// The jl component of an octonion, printed with the label jl.</span></div>
 <div class="line">  <span class="keyword">auto</span> o = <a class="code hl_typedef" href="group__types.html#ga403b1334a805ef696b3ab5640d550cff">kyosu::octonion_t&lt;double&gt;</a>(1., 2., 3., 4., 11., 12., 13., 14.);</div>
-<div class="line">  std::cout &lt;&lt; o &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gaa2a8f6265c301b29d450fa2fa479b530">lkpart</a>(o) &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; o &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gab01f40c1a2f72e1849e2c7c1163bfdde">kyosu::jlpart</a>(o) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">  <span class="comment">// Below the octonions, the jl part is zero.</span></div>
+<div class="line">  <span class="keyword">auto</span> q = <a class="code hl_typedef" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t&lt;double&gt;</a>(1., 2., 3., 4.);</div>
+<div class="line">  std::cout &lt;&lt; q &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gab01f40c1a2f72e1849e2c7c1163bfdde">kyosu::jlpart</a>(q) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; 72.9f &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gab01f40c1a2f72e1849e2c7c1163bfdde">kyosu::jlpart</a>(72.9f) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 <div class="ttc" id="agroup__types_html_ga403b1334a805ef696b3ab5640d550cff"><div class="ttname"><a href="group__types.html#ga403b1334a805ef696b3ab5640d550cff">kyosu::octonion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 8, T &gt; octonion_t</div><div class="ttdoc">Type alias for octonion numbers.</div><div class="ttdef"><b>Definition</b> octonion.hpp:22</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
 </div><!-- fragment --> 
