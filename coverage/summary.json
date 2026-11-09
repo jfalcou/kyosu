@@ -8,9 +8,9 @@
             "branch_percent": 100.0,
             "branch_total": 2,
             "filename": "include/kyosu/constants/cinf.hpp",
-            "function_covered": 33,
+            "function_covered": 32,
             "function_percent": 100.0,
-            "function_total": 33,
+            "function_total": 32,
             "line_covered": 4,
             "line_percent": 100.0,
             "line_total": 4
@@ -2852,9 +2852,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/to_quaternion.hpp",
-            "function_covered": 108,
+            "function_covered": 105,
             "function_percent": 100.0,
-            "function_total": 108,
+            "function_total": 105,
             "line_covered": 16,
             "line_percent": 100.0,
             "line_total": 16
@@ -3028,9 +3028,9 @@
             "line_total": 4
         }
     ],
-    "function_covered": 25582,
+    "function_covered": 25578,
     "function_percent": 98.1,
-    "function_total": 26074,
+    "function_total": 26070,
     "gcovr/summary_format_version": "0.6",
     "line_covered": 4821,
     "line_percent": 94.6,
