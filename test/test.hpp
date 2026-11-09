@@ -14,9 +14,9 @@
 //==================================================================================================
 // EVE Specific testing overloads
 //==================================================================================================
-#include <eve/arch/fundamental_width.hpp>
 #include <eve/module/core.hpp>
 #include <eve/traits.hpp>
+#include <eve/traits/width.hpp>
 #include <eve/wide.hpp>
 #include <kyosu/kyosu.hpp>
 
@@ -40,8 +40,10 @@ namespace tts
 namespace kyosu
 {
   using scalar_real_types = tts::types<float, double>;
-  using simd_real_types =
-    tts::types<eve::wide<float>, eve::wide<double>, eve::wide<float>::combined_type, eve::wide<double>::combined_type>;
+  using simd_real_types = tts::types<eve::wide<float>,
+                                     eve::wide<double>,
+                                     eve::wide<float, 2 * eve::expected_width_v<float>>,
+                                     eve::wide<double, 2 * eve::expected_width_v<double>>>;
   using real_types = tts::concatenate<scalar_real_types, simd_real_types>;
 
   template<typename T> struct tts_complex_t;
