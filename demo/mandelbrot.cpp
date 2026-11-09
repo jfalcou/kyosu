@@ -25,7 +25,7 @@ using real_t = float;
 using wide_t = eve::wide<real_t>;
 using scalar_t = kyosu::complex_t<real_t>;
 
-constexpr auto lanes = eve::cardinal_v<wide_t>;
+constexpr auto lanes = eve::width_v<wide_t>;
 
 constexpr char const* names[] = {"std::complex", "kyosu scalar", "kyosu wide"};
 
