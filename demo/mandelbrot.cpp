@@ -94,16 +94,15 @@ void render_scalar(std::vector<float>& esc, int w, int h, int stride, view const
 
 void render_wide(std::vector<float>& esc, int w, int h, int stride, view const& v)
 {
-  wide_t const lane([](auto i, auto) { return real_t(i); });
-
   for (int y = 0; y < h; ++y)
   {
     wide_t const im{real_t(v.cy + (y - h / 2) * v.scale)};
 
     for (int x = 0; x < w; x += lanes)
     {
-      // One register of abscissae, then the same iteration as above with the count carried per lane.
-      auto const re = eve::fma(lane + real_t(x - w / 2), wide_t(real_t(v.scale)), wide_t(real_t(v.cx)));
+      // Do not build the abscissae with a float fma: computed in double and rounded once, as in the scalar kernels,
+      // they keep the three kernels on the same points near the boundary.
+      wide_t const re([&](auto i, auto) { return real_t(v.cx + (x + int(i) - w / 2) * v.scale); });
       auto const c = kyosu::complex(re, im);
 
       auto z = kyosu::complex(wide_t(0), wide_t(0));
