@@ -8,7 +8,7 @@ int main()
   auto q = q_t(1., 2., 3., 4.);
   auto o = kyosu::octonion_t<double>(1., 2., 3., 4., 5., 6., 7., 8.);
 
-  // Dimensions mix freely: the result takes the largest one.
+  // Operands of different dimensions give a result of the larger one.
   std::cout << "c + q = " << c + q << "\n";
   std::cout << "q * o = " << q * o << "\n";
 
