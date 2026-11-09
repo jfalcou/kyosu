@@ -135,26 +135,33 @@ $(function(){initNavTree('tutorial-options.html','',''); });
   <div class="headertitle"><div class="title">Options </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Some functions have different behaviors depending on the context:</p>
+<div class="textblock"><p>Some functions have several behaviors:</p>
 <ul>
-<li><span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></span> may return \(i\) or a NaN on \(-1\),</li>
+<li><span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></span> may return \(i\) or NaN on \(-1\),</li>
 <li><span class="tt"><a class="el" href="group__to__euler.html#gae7eecc3a7b0016fa20207efb5cd4b12a">kyosu::to_euler</a></span> may return its angles in radians or in multiples of \(\pi\),</li>
-<li><span class="tt"><a class="el" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a></span> may evaluate with full accuracy, or by a faster formula with less precision,</li>
-<li><span class="tt"><a class="el" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></span> assumes its quaternion is not normalized, but it may be.</li>
+<li><span class="tt"><a class="el" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a></span> may evaluate with full accuracy, or by a faster and less precise formula,</li>
+<li><span class="tt"><a class="el" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></span> normalizes its quaternion, or may take it as already normalized.</li>
 </ul>
-<p>A specific function for each behavior would dilute the API, so <b>KYOSU</b> reuses the <a href="https://jfalcou.github.io/eve/design_rationale.html#rationale-decorator">option</a> mechanism of EVE:</p>
-<div class="fragment"><div class="line"><a class="code hl_variable" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>[kyosu::real_only](-1.0)</div>
+<p>A function of its own for each behavior would multiply the names of the API, so <b>KYOSU</b> reuses the <a href="https://jfalcou.github.io/eve/design_rationale.html#rationale-decorator">option</a> mechanism of EVE:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// The option in square brackets, then the arguments.</span></div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;sqrt[real_only](-1.0) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>[kyosu::real_only](-1.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
-</div><!-- fragment --><p>Options, which modify the semantics of a function, are passed in square brackets after its name. <span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>[kyosu::real_only]</span> is a new <a href="https://en.cppreference.com/w/cpp/named_req/Callable">callable</a>, which is then applied to the arguments.</p>
-<p>Options compose, as in <span class="tt"><a class="el" href="group__to__euler.html#gae7eecc3a7b0016fa20207efb5cd4b12a">kyosu::to_euler</a>[kyosu::extrinsic][kyosu::radpi]</span>. A function of its own for that combination, <span class="tt">to_euler_extrinsic_radpi</span>, would be obscure in the API.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
+</div><!-- fragment --><p>An option, which modifies the semantics of a function, is passed in square brackets after its name. <span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>[kyosu::real_only]</span> is a new <a href="https://en.cppreference.com/w/cpp/named_req/Callable">callable</a>, which is then applied to the arguments.</p>
+<p>Options compose, as in <span class="tt"><a class="el" href="group__to__euler.html#gae7eecc3a7b0016fa20207efb5cd4b12a">kyosu::to_euler</a>[kyosu::extrinsic][kyosu::radpi]</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md50"></a>
 raw</h1>
 <p>By default a function is accurate over its whole domain and handles the edges of that domain. <span class="tt">kyosu::raw</span> selects the fastest formula instead, with two effects:</p>
 <ul>
 <li>less accuracy on ordinary input,</li>
 <li>no handling of the edges.</li>
 </ul>
-<p>Below, <span class="tt"><a class="el" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a></span> and <span class="tt"><a class="el" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a>[kyosu::raw]</span> are applied to an ordinary value and to the origin, where the default returns an imaginary part and the option a NaN:</p>
+<p>Below, <span class="tt"><a class="el" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a></span> and <span class="tt"><a class="el" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a>[kyosu::raw]</span> are applied to an ordinary value and to the origin:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -167,22 +174,22 @@ raw</h1>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;log(z)            = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a>(z)             &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;log[raw](z)       = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a>[kyosu::raw](z) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// At the origin, the default returns an imaginary part and the raw formula a NaN.</span></div>
+<div class="line">  <span class="comment">// At the origin, the default returns -inf + 0i, and raw a NaN imaginary part.</span></div>
 <div class="line">  <span class="keyword">auto</span> o = c_t(0., 0.);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;log(0)            = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a>(o)             &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;log[raw](0)       = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a>[kyosu::raw](o) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__log_html_gabc0fe7e42be704597604cc8dec55f4ae"><div class="ttname"><a href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a></div><div class="ttdeci">constexpr auto log</div><div class="ttdef"><b>Definition</b> log.hpp:102</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
-</div><!-- fragment --><p><span class="tt">kyosu::raw</span> is for an inner loop whose cost has been measured, not a default.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md42"></a>
+</div><!-- fragment --><p>On \(3 + 4i\), the imaginary part is \(0.927295\) by default and \(0.922848\) with the option. At the origin, the default returns \(-\infty + 0i\), while the option returns a NaN imaginary part.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md51"></a>
 radpi</h1>
-<p>By default, angles are in radians. An angle such as \(\pi/2\) is then an <a href="https://en.wikipedia.org/wiki/Proof_that_%CF%80_is_irrational">irrational</a> number, which no floating point number represents exactly, so <span class="tt">pi/2</span> already carries a rounding error. <span class="tt">kyosu::radpi</span> reads and returns angles as multiples of \(\pi\) instead, with two effects:</p>
+<p>By default, angles are in radians. In radians, \(\pi/2\) is an <a href="https://en.wikipedia.org/wiki/Proof_that_%CF%80_is_irrational">irrational</a> number. No floating point number represents it exactly, so <span class="tt">pi/2</span> already carries a rounding error. <span class="tt">kyosu::radpi</span> reads and returns angles as multiples of \(\pi\) instead, with two effects:</p>
 <ul>
 <li><span class="tt">0.5</span> stands for \(\pi/2\) exactly,</li>
 <li>the result carries no rounding error of \(\pi\).</li>
 </ul>
-<p>Below, <span class="tt"><a class="el" href="group__sin.html#ga02b482e44325ab868b423995a9cf9df2">kyosu::sin</a></span> is applied to a half turn and to a million half turns, where the sine is zero, in radians and with the option:</p>
+<p>Below, <span class="tt"><a class="el" href="group__sin.html#ga02b482e44325ab868b423995a9cf9df2">kyosu::sin</a></span> is applied to a half turn and to a million half turns, in radians and with the option:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -202,12 +209,13 @@ radpi</h1>
 <div class="ttc" id="agroup__eve__math__constants_html_gad32687fc782ada2bb223abb7722ac694"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a></div><div class="ttdeci">constexpr auto pi</div></div>
 <div class="ttc" id="agroup__sin_html_ga02b482e44325ab868b423995a9cf9df2"><div class="ttname"><a href="group__sin.html#ga02b482e44325ab868b423995a9cf9df2">kyosu::sin</a></div><div class="ttdeci">constexpr auto sin</div><div class="ttdef"><b>Definition</b> sin.hpp:75</div></div>
 <div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md43"></a>
+</div><!-- fragment --><p>The sine of both angles is zero. In radians, the result is the rounding error of \(\pi\) carried through the sine, and it grows with the angle. With the option, both results are zero.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md52"></a>
 real_only</h1>
 <p>By default, a real argument outside the real domain of a function gives a complex result. <span class="tt">kyosu::real_only</span> selects the real function instead, with two effects:</p>
 <ul>
 <li>the result is a real,</li>
-<li>an argument outside the real domain gives a NaN.</li>
+<li>an argument outside the real domain gives NaN.</li>
 </ul>
 <p>Below, <span class="tt"><a class="el" href="group__acosh.html#ga010d55184f68d5a6276939926b22c689">kyosu::acosh</a></span> and <span class="tt"><a class="el" href="group__asin.html#ga1b0ab1f5f9386bcfe84bc3356ad103e1">kyosu::asin</a></span> are applied to arguments outside their real domains, with and without the option:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -222,7 +230,8 @@ real_only</h1>
 <div class="line">}</div>
 <div class="ttc" id="agroup__acosh_html_ga010d55184f68d5a6276939926b22c689"><div class="ttname"><a href="group__acosh.html#ga010d55184f68d5a6276939926b22c689">kyosu::acosh</a></div><div class="ttdeci">constexpr auto acosh</div><div class="ttdef"><b>Definition</b> acosh.hpp:103</div></div>
 <div class="ttc" id="agroup__asin_html_ga1b0ab1f5f9386bcfe84bc3356ad103e1"><div class="ttname"><a href="group__asin.html#ga1b0ab1f5f9386bcfe84bc3356ad103e1">kyosu::asin</a></div><div class="ttdeci">constexpr auto asin</div><div class="ttdef"><b>Definition</b> asin.hpp:92</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md44"></a>
+</div><!-- fragment --><p>Without the option, \(\mathrm{acosh}\,0.5\) is the pure imaginary number \(i\pi/3\), and \(\arcsin 2\) is a complex number of real part \(\pi/2\). With the option, both calls return NaN.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md53"></a>
 assume_unitary</h1>
 <p>By default, <span class="tt"><a class="el" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></span> and <span class="tt"><a class="el" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></span> normalize their argument, since a rotation is a unit quaternion. <span class="tt">kyosu::assume_unitary</span> skips that normalization on an argument known to be of unit length, with two effects:</p>
 <ul>
@@ -253,7 +262,8 @@ assume_unitary</h1>
 <div class="ttc" id="agroup__abs_html_gac70344c81b5cf55a5257cf54c6e6cb18"><div class="ttname"><a href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a></div><div class="ttdeci">constexpr auto abs</div><div class="ttdef"><b>Definition</b> abs.hpp:71</div></div>
 <div class="ttc" id="agroup__from__angle__axis_html_ga2e2e427d078f717745ed2821f6cd06f2"><div class="ttname"><a href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr auto from_angle_axis</div><div class="ttdef"><b>Definition</b> from_angle_axis.hpp:78</div></div>
 <div class="ttc" id="agroup__rotate__vec_html_gafc749b146c3a5d756fc81c80e9b77d74"><div class="ttname"><a href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></div><div class="ttdeci">constexpr auto rotate_vec</div><div class="ttdef"><b>Definition</b> rotate_vec.hpp:81</div></div>
-</div><!-- fragment --><dl class="section warning"><dt>Warning</dt><dd>The option is not checked: on an argument that is not of unit length, the result is wrong.</dd></dl>
+</div><!-- fragment --><p>The quaternion has modulus 1, and both calls send \(x\) to \(y\).</p>
+<dl class="section warning"><dt>Warning</dt><dd>The option is not checked: on an argument that is not of unit length, the result is wrong.</dd></dl>
 <div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">Previous  </th></tr>

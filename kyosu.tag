@@ -5214,4 +5214,9 @@
     <filename>math_background.html</filename>
     <docanchor file="math_background.html" title="/__w/kyosu/kyosu/doc/math.md">md__2____w_2kyosu_2kyosu_2doc_2math</docanchor>
   </compound>
+  <compound kind="page">
+    <name>index</name>
+    <title>SIMD-Aware Cayley-Dickson Algebras</title>
+    <filename>index.html</filename>
+  </compound>
 </tagfile>

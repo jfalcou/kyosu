@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['2_3a_20the_20loss_20of_20order_0',['Dimension 2: the loss of order',['../math_background.html#autotoc_md54',1,'']]]
+  ['2_3a_20order_0',['Dimension 2: order',['../math_background.html#autotoc_md67',1,'']]]
 ];

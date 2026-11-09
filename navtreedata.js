@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "kyosu", "index.html", [
+    [ "SIMD-Aware Cayley-Dickson Algebras", "index.html", "index" ],
     [ "Getting Started", "setup.html", [
       [ "Installation", "setup.html", null ],
       [ "Number types", "tutorial-complex.html", [

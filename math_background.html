@@ -136,24 +136,80 @@ $(function(){initNavTree('math_background.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__2____w_2kyosu_2kyosu_2doc_2math"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md52"></a>
-Rationale</h1>
-<p>The complex numbers may be presented without any appeal to \(\sqrt{-1}\), as the set of ordered pairs of reals equipped with a particular product. Cayley and Dickson observed that this presentation makes no use of the fact that the underlying objects are real numbers, and may therefore be iterated. Applied to pairs of complex numbers it yields Hamilton's quaternions; applied to pairs of quaternions it yields the octonions of Graves and Cayley; and it does not stop there.</p>
-<p>Let \(A\) be a real algebra endowed with an involution \(x \mapsto \overline{x}\). The <em>Cayley-Dickson double</em> of \(A\) is the algebra \(A \times A\) whose product and involution are</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md61"></a>
+Construction</h1>
+<p><a class="el" href="biblio.html" title="Bibliography">Hamilton (1837)</a> defined the complex numbers without \(\sqrt{-1}\), as the ordered pairs of reals with the product \((a, b)(c, d) = (ac - bd, ad + bc)\). The same formula applied to pairs of complex numbers gives a commutative algebra, and not the quaternions. Hamilton found the quaternions in 1843, and Graves (1843) and Cayley (1845) the octonions. The doubling that produces the quaternions from the complex numbers, and the octonions from the quaternions, involves a conjugation, and is due to <a class="el" href="biblio.html" title="Bibliography">Dickson (1919)</a>.</p>
+<p>Let \(A\) be a real algebra with a unit and an involution \(x \mapsto \overline{x}\), a linear map with \(\overline{\overline{x}} = x\) and \(\overline{xy} = \overline{y}\,\overline{x}\). The <em>Cayley-Dickson double</em> of \(A\) is the algebra \(A \times A\) with the product and the involution</p>
 <p class="formulaDsp">
-\[ (a, b)\,(c, d) = \left(ac - \overline{d}b,\; da + b\overline{c}\right),
+\[ (a, b)\,(c, d) = \left(ac - \overline{d}b,\: da + b\overline{c}\right),
     \qquad \overline{(a,b)} = \left(\overline{a}, -b\right). \]
 </p>
-<p>Beginning at \(A = \mathbb{R}\), with the identity as involution, this doubling produces in turn \(\mathbb{C}\), \(\mathbb{H}\), \(\mathbb{O}\), and an infinite tower of algebras of dimension \(2^n\). Conventions for the doubling formula differ across the literature; the one above is the convention <b>KYOSU</b> implements.</p>
-<p>Two consequences of this uniformity govern the design of the library. First, a single product is implemented, not one per algebra, and it remains correct at every dimension. Second, as established in the final section, the extension of a real analytic function to any of these algebras follows one scheme, so that a function need not be redefined for each. This is the reason <b>KYOSU</b> is a single library rather than four, and the reason <span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></span> denotes one function whether its argument is a <span class="tt">double</span>, a complex number, a quaternion, or an element of dimension 32.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md53"></a>
-The cost of each doubling</h1>
-<p>Each doubling doubles the dimension at the expense of a structural property, and the properties are lost in a fixed order. This is not an artefact of the construction but a theorem: by Frobenius (1878) the only finite-dimensional associative division algebras over \(\mathbb{R}\) are \(\mathbb{R}\), \(\mathbb{C}\) and \(\mathbb{H}\), and by Hurwitz (1898) the only normed division algebras over \(\mathbb{R}\) are those three together with \(\mathbb{O}\). Nothing of the kind exists in dimension 16 or beyond. References for these and for what follows are collected in the <a class="el" href="biblio.html" title="Bibliography">Bibliography</a>.</p>
+<p>From \(A = \mathbb{R}\), with the identity as involution, the doubling gives in turn \(\mathbb{C}\), \(\mathbb{H}\), \(\mathbb{O}\), and an infinite sequence of algebras of dimension \(2^n\). The literature uses several forms of the doubling formula, and <b>KYOSU</b> implements the one above.</p>
+<p>The construction is the same at every step, with two consequences for the library:</p>
+<ul>
+<li>one function computes the product in every dimension,</li>
+<li>one scheme extends a real analytic function to every algebra of the sequence.</li>
+</ul>
+<p><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a> is therefore one function, whether its argument is a <span class="tt">double</span>, a complex number, a quaternion, or an element of dimension 32.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md62"></a>
+Notation</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md63"></a>
+Elements</h2>
+<p>Let \(\mathbb{K}\) be the Cayley-Dickson algebra of dimension \(N\). Its standard basis \(e_0, \ldots, e_{N-1}\) follows the doubling: for \(k &lt; N/2\), \(e_k\) is the pair \((e_k, 0)\) and \(e_{N/2+k}\) the pair \((0, e_k)\), built on the basis of the algebra of dimension \(N/2\). Then \(e_0 = 1\) and \(e_i^2 = -1\) for \(i &gt; 0\). An element of \(\mathbb{K}\) is written</p>
+<p class="formulaDsp">
+\[ z = z_0 + \sum_{i=1}^{N-1} z_i\,e_i. \]
+</p>
+<p>The components \(z_i\) are IEEE <span class="tt">float</span> or <span class="tt">double</span> values, or, through EVE, SIMD registers of them.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
+Labels of the basis</h2>
+<p>A value prints each component followed by the label of its basis element:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadCenter">Dimension  </th><th class="markdownTableHeadNone">Algebra  </th><th class="markdownTableHeadNone">Property lost  </th><th class="markdownTableHeadNone">Structure retained  </th></tr>
+<th class="markdownTableHeadCenter">Dimension  </th><th class="markdownTableHeadNone">Labels of \(e_1, \ldots, e_{N-1}\)  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">1  </td><td class="markdownTableBodyNone">\(\mathbb{R}\)  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">commutative ordered field  </td></tr>
+<td class="markdownTableBodyCenter">2  </td><td class="markdownTableBodyNone">\(i\)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">4  </td><td class="markdownTableBodyNone">\(i, j, k\)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">8  </td><td class="markdownTableBodyNone">\(i, j, k, l, il, jl, kl\)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">16 and more  </td><td class="markdownTableBodyNone">the index: \(z_0\) for the real part, then \(z_1, \ldots, z_{N-1}\)  </td></tr>
+</table>
+<p>In dimension 8, \(l = e_4\), and each of the last three labels is the product it names: \(e_5 = il\), \(e_6 = jl\), and \(e_7 = kl\).</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
+Quantities</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Quantity  </th><th class="markdownTableHeadNone">Definition  </th><th class="markdownTableHeadNone">Function  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">real part  </td><td class="markdownTableBodyNone">\(z_0\)  </td><td class="markdownTableBodyNone"><a class="el" href="group__real.html#ga4121e4e64916c81e31b622b9b45c93fb">kyosu::real</a>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">pure part  </td><td class="markdownTableBodyNone">\(\underline{z} = \sum_{i=1}^{N-1} z_i\,e_i\)  </td><td class="markdownTableBodyNone"><a class="el" href="group__pure.html#gab1c81e9ddeb944ba56779a613452909b">kyosu::pure</a>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">modulus, or norm  </td><td class="markdownTableBodyNone">\(\vert z\vert = \sqrt{\sum_{i=0}^{N-1} z_i^2}\)  </td><td class="markdownTableBodyNone"><a class="el" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">conjugate  </td><td class="markdownTableBodyNone">\(\overline{z} = z_0 - \underline{z}\)  </td><td class="markdownTableBodyNone"><a class="el" href="group__conj.html#ga7e324b44c677cab7cf646a1cb87e9405">kyosu::conj</a>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">inverse  </td><td class="markdownTableBodyNone">\(z^{-1} = \overline{z}/\vert z\vert^2\), for \(z \neq 0\)  </td><td class="markdownTableBodyNone"><a class="el" href="group__rec.html#ga8eac9efc63807af3af63afdc1df00785">kyosu::rec</a>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">direction  </td><td class="markdownTableBodyNone">\(I_z = \mathrm{sign}(z_1)\,\underline{z}/\vert\underline{z}\vert\)  </td><td class="markdownTableBodyNone">third element of <a class="el" href="group__to__polar.html#ga142fe18a19d74983fd0b09aeeb18ed8b">kyosu::to_polar</a>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">argument  </td><td class="markdownTableBodyNone">\(\theta = \mathrm{sign}(z_1)\arccos(z_0/\vert z\vert)\), in \([-\pi, \pi]\)  </td><td class="markdownTableBodyNone"><a class="el" href="group__arg.html#gae6b016425d0a624d4391512f4afb64fc">kyosu::arg</a>  </td></tr>
+</table>
+<p>The direction and the argument are defined here for \(z_1 \neq 0\). For a real \(z\), <a class="el" href="group__arg.html#gae6b016425d0a624d4391512f4afb64fc">kyosu::arg</a> returns \(0\) or \(\pi\), and <a class="el" href="group__to__polar.html#ga142fe18a19d74983fd0b09aeeb18ed8b">kyosu::to_polar</a> returns \(0\) as the direction.</p>
+<p>With \(e^{\theta I_z}\) defined as \(\cos\theta + I_z\sin\theta\), an element with \(z_1 \neq 0\) has the polar form</p>
+<p class="formulaDsp">
+\[ z = |z|\,e^{\theta I_z} = |z|\,(\cos\theta + I_z\sin\theta), \]
+</p>
+<p>since \(I_z^2 = -1\). <a class="el" href="group__to__polar.html#ga142fe18a19d74983fd0b09aeeb18ed8b">kyosu::to_polar</a> returns \(|z|\), \(\theta\), and \(I_z\) as a <span class="tt">kumi::tuple</span>, and <a class="el" href="group__from__polar.html#gaf64b08ee90565c95c04b029767cba95e">kyosu::from_polar</a> builds \(z\) back from them.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md66"></a>
+Properties lost by the doubling</h1>
+<p>A division algebra is an algebra where \(xb = a\) and \(bx = a\) have exactly one solution for every \(a\) and every nonzero \(b\). The doublings up to dimension 16 lose structural properties in a fixed order. By <a class="el" href="biblio.html" title="Bibliography">Frobenius (1878)</a>, the only finite-dimensional associative division algebras over \(\mathbb{R}\) are \(\mathbb{R}\), \(\mathbb{C}\), and \(\mathbb{H}\), up to isomorphism. By <a class="el" href="biblio.html" title="Bibliography">Hurwitz (1898)</a>, the only normed division algebras with a unit over \(\mathbb{R}\) are these three and \(\mathbb{O}\), up to isomorphism, a normed algebra having a positive definite quadratic form \(N\) with \(N(xy) = N(x)N(y)\). By <a class="el" href="biblio.html" title="Bibliography">Bott and Milnor (1958)</a> and <a class="el" href="biblio.html" title="Bibliography">Kervaire (1958)</a>, a finite-dimensional division algebra over \(\mathbb{R}\), associative or not, has dimension 1, 2, 4, or 8.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Dimension  </th><th class="markdownTableHeadNone">Algebra  </th><th class="markdownTableHeadNone">Properties lost  </th><th class="markdownTableHeadNone">Structure retained  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">1  </td><td class="markdownTableBodyNone">\(\mathbb{R}\)  </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">commutative ordered field  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyCenter">2  </td><td class="markdownTableBodyNone">\(\mathbb{C}\)  </td><td class="markdownTableBodyNone">order  </td><td class="markdownTableBodyNone">commutative field  </td></tr>
 <tr class="markdownTableRowOdd">
@@ -161,78 +217,68 @@ The cost of each doubling</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyCenter">8  </td><td class="markdownTableBodyNone">\(\mathbb{O}\)  </td><td class="markdownTableBodyNone">associativity  </td><td class="markdownTableBodyNone">alternative division algebra  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">16  </td><td class="markdownTableBodyNone">\(\mathbb{S}\)  </td><td class="markdownTableBodyNone">division  </td><td class="markdownTableBodyNone">power-associative algebra  </td></tr>
+<td class="markdownTableBodyCenter">16  </td><td class="markdownTableBodyNone">\(\mathbb{S}\), the sedenions  </td><td class="markdownTableBodyNone">alternativity, division, multiplicative norm  </td><td class="markdownTableBodyNone">flexible power-associative algebra  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">\(2^n,\ n&gt;4\)  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">power-associative algebra  </td></tr>
+<td class="markdownTableBodyCenter">\(2^n,\ n&gt;4\)  </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">flexible power-associative algebra  </td></tr>
 </table>
-<p>Each of these losses constrains what may legitimately be written.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md54"></a>
-Dimension 2: the loss of order</h2>
-<p>No total order on \(\mathbb{C}\) is compatible with its field structure: were \(&lt;\) such an order, both \(i &gt; 0\) and \(i &lt; 0\) would give \(i^2 = -1 &gt; 0\). Consequently <b>KYOSU</b> provides no relational operator on Cayley-Dickson values; equality and componentwise predicates are defined, comparison is not.</p>
-<p>A second and more practical consequence appears at the same step. A real analytic function restricted to the reals need not remain there: \(\sqrt{-1}\) is not an error condition but the element \(i\). Whether a real argument outside a function's real domain should produce a complex result or a NaN is a matter of intent, and the library requires that intent to be stated.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md55"></a>
-Dimension 4: the loss of commutativity</h2>
-<p>In \(\mathbb{H}\) one has \(ij = k\) while \(ji = -k\). Once the product depends on the order of its operands, the expression \(a/b\) ceases to designate a single operation: the solutions of \(xb = a\) and of \(bx = a\) are in general distinct, and both are legitimate notions of division.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md56"></a>
-Dimension 8: the loss of associativity</h2>
-<p>In \(\mathbb{O}\) the products \((ab)c\) and \(a(bc)\) differ. On the standard basis,</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md67"></a>
+Dimension 2: order</h2>
+<p>No total order on \(\mathbb{C}\) is compatible with its field operations: with such an order, \(i &gt; 0\) would give \(i^2 = -1 &gt; 0\), and \(i &lt; 0\) would give \((-i)^2 = -1 &gt; 0\). <b>KYOSU</b> therefore defines the equality and the componentwise predicates on its values, and no relational operator.</p>
+<p>A real analytic function evaluated at a real argument may also leave the reals: \(\sqrt{-1}\) is the element \(i\). A real argument outside the real domain of a function gives a complex result by default, and the option kyosu::real_only selects the real function, which returns NaN.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md68"></a>
+Dimension 4: commutativity</h2>
+<p>In \(\mathbb{H}\), \(ij = k\) and \(ji = -k\). The equations \(xb = a\) and \(bx = a\) then have distinct solutions in general, \(ab^{-1}\) and \(b^{-1}a\), and each defines a division.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md69"></a>
+Dimension 8: associativity</h2>
+<p>In \(\mathbb{O}\), the products \((ab)c\) and \(a(bc)\) differ in general. On the standard basis,</p>
 <p class="formulaDsp">
-\[ (e_1e_2)e_4 = +e_7 \qquad \text{whereas} \qquad e_1(e_2e_4) = -e_7. \]
+\[ (e_1e_2)e_4 = e_7, \qquad e_1(e_2e_4) = -e_7. \]
 </p>
-<p>The associator \([a,b,c] = (ab)c - a(bc)\) measures this defect and is available as <a class="el" href="group__associator.html#gac1477076e48284b3ea6b0304e24188c1">kyosu::associator</a>; on the triple above it returns \(2e_7\), and on any three quaternions it vanishes.</p>
-<p>What survives is <em>alternativity</em>: the associator is an alternating function of its three arguments, from which Artin's theorem follows — any two elements generate an associative subalgebra. This is weaker than associativity but sufficient for the elementary functions, whose arguments in the extension scheme of the final section lie in a subalgebra generated by two elements.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md57"></a>
-Dimension 16: the loss of division</h2>
-<p>The sedenions possess zero divisors. Writing \((e_i)\) for the standard basis,</p>
+<p>The associator \([a,b,c] = (ab)c - a(bc)\), computed by <a class="el" href="group__associator.html#gac1477076e48284b3ea6b0304e24188c1">kyosu::associator</a>, measures the difference. It is \(2e_7\) on the triple above, and zero on any three quaternions.</p>
+<p>The octonions are <em>alternative</em>: the associator is an alternating function of its three arguments. By Artin's theorem, the subalgebra generated by any two elements is then associative.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md70"></a>
+Dimension 16: alternativity, division, and the norm</h2>
+<p>The sedenions have zero divisors, nonzero elements \(x\) with \(xy = 0\) for some nonzero \(y\). On the standard basis,</p>
 <p class="formulaDsp">
 \[ (e_3 + e_{10})(e_6 - e_{15}) = 0, \]
 </p>
-<p>both factors having norm \(\sqrt2\). The norm is therefore no longer multiplicative, no inverse exists for such elements, and a quotient of two finite operands may be unbounded.</p>
-<p>What persists at every dimension is <em>power-associativity</em>: the subalgebra generated by a single element is associative, so that \(z^mz^n = z^{m+n}\) holds unambiguously. As shown below, this is exactly the hypothesis the extension scheme requires, which is why elementary functions remain meaningful in arbitrary dimension.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md58"></a>
-The library's response</h1>
+<p>with both factors of norm \(\sqrt2\). The norm is no longer multiplicative, and the sedenions are no longer alternative. A nonzero element \(x\) keeps the two-sided inverse \(\overline{x}/|x|^2\), which is its only inverse when \(x\) is not a zero divisor. The quotients \(ab^{-1}\) and \(b^{-1}a\) are then defined and finite for any nonzero \(b\), and in general they no longer solve \(xb = a\) and \(bx = a\):</p>
+<ul>
+<li>when \(b\) is not a zero divisor, each equation has exactly one solution, which in general differs from \(ab^{-1}\) and \(b^{-1}a\),</li>
+<li>when \(b\) is a zero divisor, each equation has either no solution or infinitely many.</li>
+</ul>
+<p>Every algebra of the sequence is <em>power-associative</em>: the subalgebra generated by one element is associative, so \(z^mz^n = z^{m+n}\) holds in every dimension. Every algebra of the sequence is also <em>flexible</em>, \((ab)a = a(ba)\).</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md71"></a>
+Expression in the API</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Mathematical fact  </th><th class="markdownTableHeadNone">Its expression in the API  </th></tr>
+<th class="markdownTableHeadNone">Mathematical fact  </th><th class="markdownTableHeadNone">API  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">No compatible order beyond \(\mathbb{R}\)  </td><td class="markdownTableBodyNone">No relational operators. <a class="el" href="group__is__equal.html#ga2d35f43723bf977e2924344dfe248938">kyosu::is_equal</a> and the componentwise predicates only.  </td></tr>
+<td class="markdownTableBodyNone">No order compatible with the operations beyond \(\mathbb{R}\)  </td><td class="markdownTableBodyNone">No relational operator. <a class="el" href="group__is__equal.html#ga2d35f43723bf977e2924344dfe248938">kyosu::is_equal</a> and the componentwise predicates.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Real domains are not preserved  </td><td class="markdownTableBodyNone">A complex result is returned by default; <span class="tt">f[kyosu::real_only]</span> defers to the corresponding EVE function and its NaN.  </td></tr>
+<td class="markdownTableBodyNone">Real domains not preserved  </td><td class="markdownTableBodyNone">A complex result by default. <span class="tt">f[kyosu::real_only]</span> calls the EVE function, which returns NaN.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Two distinct divisions  </td><td class="markdownTableBodyNone"><span class="tt">/</span> solves \(xb = a\), <a class="el" href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv</a> solves \(bx = a\). Both are named; neither is inferred.  </td></tr>
+<td class="markdownTableBodyNone">Two divisions  </td><td class="markdownTableBodyNone"><span class="tt">a / b</span> is \(ab^{-1}\) and <span class="tt"><a class="el" href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv(b, a)</a></span> is \(b^{-1}a\). Up to the octonions, they solve \(xb = a\) and \(bx = a\).  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">The associator does not vanish  </td><td class="markdownTableBodyNone">No expression is re-associated: the parenthesisation written is the one evaluated. <a class="el" href="group__associator.html#gac1477076e48284b3ea6b0304e24188c1">kyosu::associator</a> returns \([a,b,c]\), so the defect can be measured rather than assumed.  </td></tr>
+<td class="markdownTableBodyNone">Nonzero associator  </td><td class="markdownTableBodyNone">An expression is evaluated with its parentheses as written. <a class="el" href="group__associator.html#gac1477076e48284b3ea6b0304e24188c1">kyosu::associator</a> returns \([a,b,c]\).  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Algebras of different dimension embed in one another  </td><td class="markdownTableBodyNone">An operation on mixed dimensions promotes to the larger, the absent components being zero.  </td></tr>
+<td class="markdownTableBodyNone">Each algebra embedded in the next  </td><td class="markdownTableBodyNone">An operation on mixed dimensions returns the larger one, the missing components being zero.  </td></tr>
 </table>
-<p>The last of these is what renders the tower usable in practice: the sum of a complex number and a quaternion is a quaternion, with no conversion appearing in the source.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md59"></a>
-Notation</h1>
-<p>Let \(\mathbb{K}\) be a Cayley-Dickson algebra of dimension \(N\). Its elements are written</p>
-<p class="formulaDsp">
-\[ z = \sum_{i=0}^{N-1} z_i\,e_i \]
-</p>
-<p>where \(e_0 = 1\) and \(e_i^2 = -1\) for \(i &gt; 0\). Up to the octonions the basis elements carry their traditional names \(i, j, k, l, li, lj, lk\); beyond dimension 8 they are indexed. As \(e_0 = 1\), it is omitted from the notation.</p>
-<p>The following are used throughout the API:</p>
-<ul>
-<li>\(|z|\), the modulus, \(\sqrt{\sum_{i=0}^{N-1} |z_i|^2}\);</li>
-<li>\(z_0\), the real part of \(z\);</li>
-<li>\(\underline{z}\), the pure part, \(\sum_{i=1}^{N-1} z_i\,e_i\);</li>
-<li>\(I_z = \pm\,\underline{z}/|\underline{z}|\), the sign chosen to match that of \(z_1\);</li>
-<li>the polar form \(\rho\,e^{\theta I_z} = \rho(\cos\theta + I_z\sin\theta)\), in which \(\rho\) is the modulus and \(\theta\) the argument.</li>
-</ul>
-<p>Since \(I_z^2 = -1\), the resemblance of the polar form to the complex case is not an analogy but an identity of computation, and it is on this that the following section rests.</p>
-<p>The construction is carried out over the IEEE <span class="tt">float</span> and <span class="tt">double</span> representations of the reals exclusively. As <b>KYOSU</b> is built upon EVE, these may equally be SIMD registers of such values.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md60"></a>
+<p>The sum of a complex number and a quaternion, for instance, is a quaternion, and no conversion appears in the source.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md72"></a>
 Extension of real analytic functions</h1>
-<p>Let \(f\) be a real analytic function and \(c \in \mathbb{K}\). Its extension is obtained in two steps:</p>
+<p>A real analytic function is a function from an open subset of \(\mathbb{R}\) to \(\mathbb{R}\) that is the sum of a convergent power series in a neighborhood of each point. It extends to a holomorphic function \(f\) on a neighborhood of its domain in \(\mathbb{C}\), symmetric about the real axis, with \(f(\overline{w}) = \overline{f(w)}\). A function with a branch cut, such as <a class="el" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a> or <a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>, takes the principal branch, holomorphic on \(\mathbb{C} \setminus (-\infty, 0]\).</p>
+<p>Every element \(c \in \mathbb{K}\) satisfies</p>
+<p class="formulaDsp">
+\[ c^2 - 2c_0\,c + |c|^2 = 0, \]
+</p>
+<p>so the real span of \(1\) and \(c\) is a subalgebra. When \(\underline{c} \neq 0\), let \(u_c = \underline{c}/|\underline{c}|\). Since \(u_c^2 = -1\), the map \(x + iy \mapsto x + y\,u_c\) is an isomorphism from \(\mathbb{C}\) onto that subalgebra, and it sends \(c_0 + i|\underline{c}|\) to \(c\). The extension of \(f\) at \(c\) is the image of \(f(c_0 + i|\underline{c}|)\) by this isomorphism:</p>
 <ol type="1">
-<li>evaluate \(v = f\!\left(\Re(c) + i\,|\underline{c}|\right)\), a computation in \(\mathbb{C}\);</li>
-<li>return \(\Re(v) + I_c\,\Im(v)\).</li>
+<li>evaluate \(v = f\!\left(c_0 + i\,|\underline{c}|\right)\) in \(\mathbb{C}\),</li>
+<li>return \(\Re(v) + u_c\,\Im(v)\).</li>
 </ol>
-<p>The first step is legitimate because \(I_c\) squares to \(-1\), so that the subalgebra generated by \(c\) is isomorphic to \(\mathbb{C}\); the second returns the result to \(\mathbb{K}\) along the pure direction of \(c\). Only power-associativity is required, and it holds at every dimension of the tower.</p>
-<p>Are not part of this scheme the function which as <span class="tt"><a class="el" href="group__abs.html" title="Computes the absolute value of the parameter.">kyosu::abs</a></span> always returns real for any \(\mathbb{K}\) value and are obviouly not real analytic that have individual treatments.</p>
-<p>Note that a real analytic function is a function from a real numbers set to real numbers that can be locally expressed by a convergent power series around every point in its domain. This representation legitimates its extension to parts of \(\mathbb{C}\). </p>
+<p>The direction \(-u_c\) sends \(c_0 - i|\underline{c}|\) to \(c\), and since \(f(\overline{w}) = \overline{f(w)}\), it gives the same result. For <a class="el" href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a>, the scheme gives \(\log c = \ln|c| + u_c\arccos(c_0/|c|)\), an angle in \([0, \pi]\) along \(u_c\), where <a class="el" href="group__arg.html#gae6b016425d0a624d4391512f4afb64fc">kyosu::arg</a> carries the sign of \(c_1\). When \(\underline{c} = 0\), \(c\) is real, and the scheme applies where \(f(c_0)\) is real.</p>
+<p>The functions that are not real analytic, such as <a class="el" href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a>, <a class="el" href="group__arg.html#gae6b016425d0a624d4391512f4afb64fc">kyosu::arg</a>, and <a class="el" href="group__conj.html#ga7e324b44c677cab7cf646a1cb87e9405">kyosu::conj</a>, are outside this scheme and have a definition of their own. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

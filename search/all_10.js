@@ -8,7 +8,7 @@ var searchData=
   ['minabs_41',['minabs',['../group__minabs.html#gacf658d87e2919f4f6f6a830a2f94350b',1,'kyosu::minabs']]],
   ['minmag_52',['minmag',['../group__minmag.html#gaef4a4b97d1e190629aa6e51150c38c6c',1,'kyosu::minmag']]],
   ['minus_55',['minus',['../group__minus.html#ga77f919fac06fc69976f93e549b57517d',1,'kyosu::minus']]],
-  ['mixed_20operands_57',['Mixed operands',['../tutorial-quaternion.html#autotoc_md30',1,'']]],
+  ['mixed_20operands_57',['Mixed operands',['../tutorial-quaternion.html#autotoc_md39',1,'']]],
   ['mul_60',['mul',['../group__mul.html#gafa0529f93372ed1d6f7288110d2cd663',1,'kyosu::mul']]],
   ['muli_61',['muli',['../group__muli.html#ga5d7e27fded33a32379427adc16edec6f',1,'kyosu']]],
   ['mulmi_62',['mulmi',['../group__mulmi.html#gad0611b77939df02be326c41a6b6262bb',1,'kyosu']]],

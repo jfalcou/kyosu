@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['vector_0',['Rotating a vector',['../tutorial-rotation.html#autotoc_md33',1,'']]]
+  ['values_0',['Accuracy and special values',['../index.html#autotoc_md23',1,'']]],
+  ['vector_1',['Rotating a vector',['../tutorial-rotation.html#autotoc_md42',1,'']]]
 ];

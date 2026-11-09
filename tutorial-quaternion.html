@@ -135,9 +135,8 @@ $(function(){initNavTree('tutorial-quaternion.html','',''); });
   <div class="headertitle"><div class="title">Quaternions </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>A quaternion is a number with four real components, written \(a + bi + cj + dk\) on the basis \(1, i, j, k\), whose product extends the complex product with  \(i^2 = j^2 = k^2 =
-ijk = -1\). In the <a class="el" href="math_background.html" title="Mathematics of Cayley-Dickson Algebras">Cayley-Dickson construction</a> it is a pair of complex numbers. <b>KYOSU</b> supports it via <span class="tt"><a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t</a>&lt;T&gt;</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md27"></a>
+<div class="textblock"><p>A quaternion is a number with four real components, written \(a + bi + cj + dk\) on the basis \(1, i, j, k\), whose product extends the complex product with \(i^2 = j^2 = k^2 = ijk = -1\). In the <a class="el" href="math_background.html" title="Mathematics of Cayley-Dickson Algebras">Cayley-Dickson construction</a> it is a pair of complex numbers. <b>KYOSU</b> represents it by <span class="tt"><a class="el" href="group__types.html#ga43659263f005aec8e7e223b889004a22" title="Type alias for quaternion numbers.">kyosu::quaternion_t</a>&lt;T&gt;</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
 Construction and functions</h1>
 <p>A quaternion is built from its four components:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -162,10 +161,10 @@ Construction and functions</h1>
 <div class="ttc" id="agroup__rec_html_ga8eac9efc63807af3af63afdc1df00785"><div class="ttname"><a href="group__rec.html#ga8eac9efc63807af3af63afdc1df00785">kyosu::rec</a></div><div class="ttdeci">constexpr auto rec</div><div class="ttdef"><b>Definition</b> rec.hpp:76</div></div>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
-</div><!-- fragment --><p>The arithmetic, the comparisons, and the functions of the complex numbers apply to a quaternion with the same API.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
+</div><!-- fragment --><p><span class="tt">q</span> prints as \(1 + 2i + 3j + 4k\). Its modulus is \(\sqrt{30}\), its conjugate \(1 - 2i - 3j - 4k\), its inverse <a class="el" href="group__rec.html#ga8eac9efc63807af3af63afdc1df00785">kyosu::rec</a> the conjugate divided by \(30\), and its pure part \(2i + 3j + 4k\). The arithmetic, the equality, the componentwise predicates, and the functions of the complex numbers also apply to a quaternion, with the same API.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
 Noncommutativity</h1>
-<p>The product depends on the <a href="https://en.wikipedia.org/wiki/Quaternion#Multiplication_of_basis_elements">order of its operands</a>, \(ij = k\) and \(ji = -k\). The property is the algebra's, and its consequence is on the division:</p>
+<p>The product depends on the <a href="https://en.wikipedia.org/wiki/Quaternion#Multiplication_of_basis_elements">order of its operands</a>: \(ij = k\) while \(ji = -k\).</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -187,10 +186,15 @@ Noncommutativity</h1>
 <div class="ttc" id="agroup__i_html_gaa17b17c2202168c33700e95ccce7322d"><div class="ttname"><a href="group__i.html#gaa17b17c2202168c33700e95ccce7322d">kyosu::i</a></div><div class="ttdeci">constexpr auto i</div><div class="ttdef"><b>Definition</b> i.hpp:67</div></div>
 <div class="ttc" id="agroup__j_html_gad984a2daa62e2ee33ee4577d87cb0533"><div class="ttname"><a href="group__j.html#gad984a2daa62e2ee33ee4577d87cb0533">kyosu::j</a></div><div class="ttdeci">constexpr auto j</div><div class="ttdef"><b>Definition</b> j.hpp:73</div></div>
 <div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
-</div><!-- fragment --><p>A constant takes its type as the argument <span class="tt">as&lt;T&gt;()</span>: <span class="tt"><a class="el" href="group__i.html#gaa17b17c2202168c33700e95ccce7322d">kyosu::i</a>(<a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">kyosu::as</a>&lt;q_t&gt;())</span> is \(i\) as a <span class="tt">q_t</span>, and <span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a>&lt;double&gt;())</span> is \(\pi\) as a <span class="tt">double</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
+</div><!-- fragment --><p>The products \(ab\) and \(ba\) have the same real part and different pure parts.</p>
+<p>A constant is called with the type of its value, wrapped as <span class="tt">as&lt;T&gt;()</span>: <span class="tt"><a class="el" href="group__i.html#gaa17b17c2202168c33700e95ccce7322d">kyosu::i</a>(<a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">kyosu::as</a>&lt;q_t&gt;())</span> is \(i\) as a <span class="tt">q_t</span>, and <span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a>(<a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a>&lt;double&gt;())</span> is \(\pi\) as a <span class="tt">double</span>. <span class="tt"><a class="elRef" href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a>(0.0)</span> deduces the same type from a value.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
 Divisions</h1>
-<p>Since the product is noncommutative, \(ab^{-1}\) and \(b^{-1}a\) differ, and both divisions exist. <span class="tt">a / b</span> is \(ab^{-1}\), the solution of \(xb = a\), and <span class="tt"><a class="el" href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv(b, a)</a></span> is \(b^{-1}a\), the solution of \(bx = a\). No conversion is made from one to the other:</p>
+<p>Since the product does not commute, \(ab^{-1}\) and \(b^{-1}a\) differ, and both divisions exist:</p>
+<ul>
+<li><span class="tt">a / b</span> is \(ab^{-1}\), the solution of \(xb = a\),</li>
+<li><span class="tt"><a class="el" href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv(b, a)</a></span> is \(b^{-1}a\), the solution of \(bx = a\).</li>
+</ul>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -211,9 +215,10 @@ Divisions</h1>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;b * left    = &quot;</span> &lt;&lt; b * left  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__ldiv_html_ga4842daf39053c0a08fa68cd1850558e1"><div class="ttname"><a href="group__ldiv.html#ga4842daf39053c0a08fa68cd1850558e1">kyosu::ldiv</a></div><div class="ttdeci">constexpr auto ldiv</div><div class="ttdef"><b>Definition</b> ldiv.hpp:93</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
+</div><!-- fragment --><p>The two quotients differ, and each, multiplied by \(b\) on the side of its equation, gives back \(a\).</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
 Mixed operands</h1>
-<p>A complex number is a quaternion whose last two components are zero, and a real a quaternion whose three imaginary parts are zero. An expression mixing dimensions returns the larger one, with the missing components at zero:</p>
+<p>A complex number is a quaternion whose last two components are zero, and a real is a quaternion whose three imaginary parts are zero. An expression mixing dimensions returns the larger one, with the missing components at zero:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
 <div class="line"> </div>
@@ -230,7 +235,8 @@ Mixed operands</h1>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;2. * q = &quot;</span> &lt;&lt; 2. * q &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
-</div><!-- fragment --><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+</div><!-- fragment --><p>The sum and the product of a complex number and a quaternion are quaternions, and so is the product of a real and a quaternion.</p>
+<div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">Previous  </th><th class="markdownTableHeadRight">Next  </th></tr>
 <tr class="markdownTableRowOdd">

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['each_20doubling_0',['The cost of each doubling',['../math_background.html#autotoc_md53',1,'']]],
-  ['elementary_20functions_4',['Elementary functions',['../tutorial-complex.html#autotoc_md21',1,'Elementary functions'],['../tutorial-beyond.html#autotoc_md40',1,'Elementary functions']]],
+  ['elementary_20functions_3',['Elementary functions',['../tutorial-complex.html#autotoc_md30',1,'Elementary functions'],['../tutorial-beyond.html#autotoc_md49',1,'Elementary functions']]],
+  ['elements_4',['Elements',['../math_background.html#autotoc_md63',1,'']]],
   ['ellint_5ffe_91',['ellint_fe',['../group__ellint__fe.html#ga858bbc0cd82011e1911907d0d6cdf2cb',1,'kyosu::ellint_fe']]],
   ['ellint_5frc_92',['ellint_rc',['../group__ellint__rc.html#ga59830d1553989ba7ee7722d0b2731039',1,'kyosu::ellint_rc']]],
   ['ellint_5frd_93',['ellint_rd',['../group__ellint__rd.html#ga81e0756cf62ec6b36813e4eb930992c9',1,'kyosu::ellint_rd']]],
@@ -12,7 +12,7 @@ var searchData=
   ['erfcx_113',['erfcx',['../group__erfcx.html#ga39a3490b9804d064f6e763b6b2ee6545',1,'kyosu::erfcx']]],
   ['erfi_114',['erfi',['../group__erfi.html#ga1cfc9aee0b7545c21db6531760e294a3',1,'kyosu']]],
   ['eta_115',['eta',['../group__eta.html#ga5c1b5d98ef3091b5c757ab13d061fef2',1,'kyosu']]],
-  ['euler_20angles_117',['Comparison with Euler angles',['../tutorial-rotation.html#autotoc_md32',1,'']]],
+  ['euler_20angles_117',['Comparison with Euler angles',['../tutorial-rotation.html#autotoc_md41',1,'']]],
   ['example_132',['Example',['../group__from__cylindrospherical.html#autotoc_md5',1,'Example'],['../group__from__multipolar.html#autotoc_md7',1,'Example'],['../group__from__polar.html#autotoc_md8',1,'Example'],['../group__from__spherical.html#autotoc_md9',1,'Example'],['../group__rot__angle.html#autotoc_md10',1,'Example'],['../group__rot__axis.html#autotoc_md12',1,'Example'],['../group__rotate__vec.html#autotoc_md13',1,'Example'],['../group__to__angle__axis.html#autotoc_md14',1,'Example'],['../group__to__cylindrospherical.html#autotoc_md15',1,'Example'],['../group__to__semipolar.html#autotoc_md17',1,'Example'],['../group__to__spherical.html#autotoc_md19',1,'Example']]],
   ['exp_133',['exp',['../group__exp.html#ga43bd0f5793b846caaf808a7f998734c0',1,'kyosu::exp']]],
   ['exp10_134',['exp10',['../group__exp10.html#ga37e090c4b1d41d1c37db13d21e293693',1,'kyosu::exp10']]],
@@ -21,6 +21,7 @@ var searchData=
   ['exp_5fint_137',['exp_int',['../group__exp__int.html#gac080f79509178fd061575a3875a29b53',1,'kyosu::exp_int']]],
   ['expm1_141',['expm1',['../group__expm1.html#ga20b941e423fc7750665a8c15da666169',1,'kyosu::expm1']]],
   ['expmx2_142',['expmx2',['../group__expmx2.html#ga17336c4e1b6666dd1fb632c136b1f19d',1,'kyosu::expmx2']]],
-  ['expx2_147',['expx2',['../group__expx2.html#gae725cf6ea34c98c328ae87ef2d9271f2',1,'kyosu::expx2']]],
-  ['extension_20of_20real_20analytic_20functions_148',['Extension of real analytic functions',['../math_background.html#autotoc_md60',1,'']]],
+  ['expression_20in_20the_20api_146',['Expression in the API',['../math_background.html#autotoc_md71',1,'']]],
+  ['expx2_148',['expx2',['../group__expx2.html#gae725cf6ea34c98c328ae87ef2d9271f2',1,'kyosu::expx2']]],
+  ['extension_20of_20real_20analytic_20functions_149',['Extension of real analytic functions',['../math_background.html#autotoc_md72',1,'']]],
 ];

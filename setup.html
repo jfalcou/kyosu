@@ -136,7 +136,7 @@ $(function(){initNavTree('setup.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__2____w_2kyosu_2kyosu_2doc_2setup"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md61"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md73"></a>
 Prerequisites</h1>
 <p><b>KYOSU</b> is a header-only C++20 library with the following requirements:</p>
 <table class="markdownTable">
@@ -153,10 +153,10 @@ Prerequisites</h1>
 <li>CMake 3.22 or above, for the tests and the documentation only.</li>
 </ul>
 <p>A consumer has no build step: the include directory of the library and the one of EVE are enough.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md62"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md74"></a>
 Installation</h1>
 <p>The target to link is <span class="tt">kyosu::kyosu</span>, with <span class="tt">eve::eve</span> beside it.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md63"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md75"></a>
 With CPM</h2>
 <div class="fragment"><div class="line">CPMAddPackage ( NAME kyosu</div>
 <div class="line">                GIT_REPOSITORY &quot;https://github.com/jfalcou/kyosu.git&quot;</div>
@@ -165,7 +165,7 @@ With CPM</h2>
 <div class="line">              )</div>
 <div class="line"> </div>
 <div class="line">target_link_libraries(my_app PUBLIC kyosu::kyosu eve::eve)</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md76"></a>
 With FetchContent</h2>
 <div class="fragment"><div class="line">include(FetchContent)</div>
 <div class="line"> </div>
@@ -181,7 +181,7 @@ With FetchContent</h2>
 <div class="line">FetchContent_MakeAvailable(eve)</div>
 <div class="line"> </div>
 <div class="line">target_link_libraries(my_app PUBLIC kyosu::kyosu eve::eve)</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md77"></a>
 With a git clone</h2>
 <div class="fragment"><div class="line">git clone https://github.com/jfalcou/kyosu.git</div>
 <div class="line">cmake -S kyosu -B build -DCMAKE_INSTALL_PREFIX=&lt;prefix&gt;</div>
@@ -189,7 +189,7 @@ With a git clone</h2>
 </div><!-- fragment --><p>then</p>
 <div class="fragment"><div class="line">find_package(kyosu CONFIG REQUIRED)</div>
 <div class="line">target_link_libraries(my_app PUBLIC kyosu::kyosu eve::eve)</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md66"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md78"></a>
 First program</h1>
 <p><span class="tt">kyosu/kyosu.hpp</span> declares every type and every function of the library. A program that includes it and links <span class="tt">kyosu::kyosu</span> as above compiles and runs:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -214,7 +214,7 @@ First program</h1>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md67"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md79"></a>
 Tutorials</h1>
 <ul>
 <li><a class="el" href="tutorial-complex.html" title="Complex numbers">Complex numbers</a></li>

@@ -1,12 +1,13 @@
 var searchData=
 [
-  ['dickson_20algebras_4',['Mathematics of Cayley-Dickson Algebras',['../math_background.html',1,'']]],
-  ['dimension_2016_3a_20the_20loss_20of_20division_5',['Dimension 16: the loss of division',['../math_background.html#autotoc_md57',1,'']]],
-  ['dimension_202_3a_20the_20loss_20of_20order_6',['Dimension 2: the loss of order',['../math_background.html#autotoc_md54',1,'']]],
-  ['dimension_204_3a_20the_20loss_20of_20commutativity_7',['Dimension 4: the loss of commutativity',['../math_background.html#autotoc_md55',1,'']]],
-  ['dimension_208_3a_20the_20loss_20of_20associativity_8',['Dimension 8: the loss of associativity',['../math_background.html#autotoc_md56',1,'']]],
-  ['division_9',['Dimension 16: the loss of division',['../math_background.html#autotoc_md57',1,'']]],
-  ['divisions_10',['Divisions',['../tutorial-quaternion.html#autotoc_md29',1,'']]],
-  ['documentation_11',['Building the documentation',['../building.html#autotoc_md51',1,'']]],
-  ['doubling_12',['The cost of each doubling',['../math_background.html#autotoc_md53',1,'']]]
+  ['dickson_20algebras_4',['Dickson Algebras',['../math_background.html',1,'Mathematics of Cayley-Dickson Algebras'],['../index.html',1,'SIMD-Aware Cayley-Dickson Algebras']]],
+  ['dimension_5',['Any dimension',['../index.html#autotoc_md21',1,'']]],
+  ['dimension_2016_3a_20alternativity_20division_20and_20the_20norm_6',['Dimension 16: alternativity, division, and the norm',['../math_background.html#autotoc_md70',1,'']]],
+  ['dimension_202_3a_20order_7',['Dimension 2: order',['../math_background.html#autotoc_md67',1,'']]],
+  ['dimension_204_3a_20commutativity_8',['Dimension 4: commutativity',['../math_background.html#autotoc_md68',1,'']]],
+  ['dimension_208_3a_20associativity_9',['Dimension 8: associativity',['../math_background.html#autotoc_md69',1,'']]],
+  ['division_20and_20the_20norm_10',['Dimension 16: alternativity, division, and the norm',['../math_background.html#autotoc_md70',1,'']]],
+  ['divisions_11',['Divisions',['../tutorial-quaternion.html#autotoc_md38',1,'']]],
+  ['documentation_12',['Building the documentation',['../building.html#autotoc_md60',1,'']]],
+  ['doubling_13',['Properties lost by the doubling',['../math_background.html#autotoc_md66',1,'']]]
 ];
