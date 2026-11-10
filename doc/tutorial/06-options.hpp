@@ -34,9 +34,8 @@
 //!
 //! @godbolt{doc/tut_opt_raw.cpp}
 //!
-//! On \f$3 + 4i\f$, the imaginary part is \f$0.927295\f$ by default and \f$0.922848\f$ with the
-//! option. At the origin, the default returns \f$-\infty + 0i\f$, while the option returns a NaN
-//! imaginary part.
+//! With the option, the imaginary part loses accuracy on \f$3 + 4i\f$, and turns into a NaN at the
+//! origin.
 //!
 //! # radpi
 //!
@@ -54,8 +53,7 @@
 //! @godbolt{doc/tut_opt_radpi.cpp}
 //!
 //! The sine of both angles is zero. In radians, the result is the rounding error of \f$\pi\f$
-//! carried through the sine, and it grows with the angle. With the option, both results are
-//! zero.
+//! carried through the sine, and it grows with the angle.
 //!
 //! # real_only
 //!
@@ -70,10 +68,6 @@
 //!
 //! @godbolt{doc/tut_opt_real_only.cpp}
 //!
-//! Without the option, \f$\mathrm{acosh}\,0.5\f$ is the pure imaginary number
-//! \f$i\pi/3\f$, and \f$\arcsin 2\f$ is a complex number of real part \f$\pi/2\f$. With the
-//! option, both calls return NaN.
-//!
 //! # assume_unitary
 //!
 //! By default, `kyosu::from_angle_axis` and `kyosu::rotate_vec` normalize their argument, since a
@@ -87,7 +81,7 @@
 //!
 //! @godbolt{doc/tut_opt_assume_unitary.cpp}
 //!
-//! The quaternion has modulus 1, and both calls send \f$x\f$ to \f$y\f$.
+//! On a unit quaternion, the two calls agree.
 //!
 //! @warning The option is not checked: on an argument that is not of unit length, the result is
 //! wrong.

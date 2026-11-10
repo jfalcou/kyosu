@@ -16,8 +16,7 @@
 //!
 //! @godbolt{doc/tut_beyond_types.cpp}
 //!
-//! The modulus of `o` is \f$\sqrt{204}\f$, and its conjugate negates the seven imaginary
-//! components.
+//! The conjugate negates the seven imaginary components.
 //!
 //! # Higher algebras
 //!
@@ -28,9 +27,8 @@
 //!
 //! @godbolt{doc/tut_beyond_higher.cpp}
 //!
-//! `s` holds \f$1\f$ in \f$z_0\f$ and \f$2\f$ in \f$z_9\f$, which `get<9>` reads back. Its modulus
-//! is \f$\sqrt5\f$. The @ref agnostic "algebra-agnostic functions" apply in every dimension,
-//! `kyosu::exp` among them.
+//! The @ref agnostic "algebra-agnostic functions" apply in every dimension, `kyosu::exp` among
+//! them.
 //!
 //! # Associativity
 //!
@@ -46,9 +44,6 @@
 //!
 //! @godbolt{doc/tut_beyond_associativity.cpp}
 //!
-//! \f$(ij)l = kl\f$ and \f$i(jl) = -kl\f$, and their associator is \f$2kl\f$. On three
-//! quaternions, the associator is zero.
-//!
 //! @warning An expression is evaluated with its parentheses as written and never re-associated:
 //! moving a parenthesis changes the result.
 //!
@@ -60,8 +55,6 @@
 //! therefore defined on every algebra:
 //!
 //! @godbolt{doc/tut_beyond_functions.cpp}
-//!
-//! In dimension 32, \f$\exp(\log z)\f$ and \f$(\sqrt{z})^2\f$ both give back \f$z\f$.
 //!
 //! <div class="section_buttons">
 //!
