@@ -155,7 +155,7 @@ Octonions</h1>
 <div class="ttc" id="agroup__conj_html_ga7e324b44c677cab7cf646a1cb87e9405"><div class="ttname"><a href="group__conj.html#ga7e324b44c677cab7cf646a1cb87e9405">kyosu::conj</a></div><div class="ttdeci">constexpr auto conj</div><div class="ttdef"><b>Definition</b> conj.hpp:66</div></div>
 <div class="ttc" id="agroup__exp_html_ga43bd0f5793b846caaf808a7f998734c0"><div class="ttname"><a href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a></div><div class="ttdeci">constexpr auto exp</div><div class="ttdef"><b>Definition</b> exp.hpp:88</div></div>
 <div class="ttc" id="agroup__types_html_ga403b1334a805ef696b3ab5640d550cff"><div class="ttname"><a href="group__types.html#ga403b1334a805ef696b3ab5640d550cff">kyosu::octonion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 8, T &gt; octonion_t</div><div class="ttdoc">Type alias for octonion numbers.</div><div class="ttdef"><b>Definition</b> octonion.hpp:22</div></div>
-</div><!-- fragment --><p>The modulus of <span class="tt">o</span> is \(\sqrt{204}\), and its conjugate negates the seven imaginary components.</p>
+</div><!-- fragment --><p>The conjugate negates the seven imaginary components.</p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md47"></a>
 Higher algebras</h1>
 <p>Only the basis elements up to dimension 8 have a letter. The type is <span class="tt"><a class="el" href="group__kyosu__traits.html#ga8f185ca9780dc6cec632805d9cd71463" title="Computes a Cayley-Dickson type of a given dimension.">kyosu::as_cayley_dickson_n_t</a>&lt;N, T&gt;</span> with <span class="tt">N</span> the dimension. A component is read and written through <span class="tt">kyosu::get&lt;I&gt;</span>. A value prints each component followed by its label, \(z_0\) to \(z_{N-1}\):</p>
@@ -175,7 +175,7 @@ Higher algebras</h1>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;exp(s)  = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a>(s)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__kyosu__traits_html_ga8f185ca9780dc6cec632805d9cd71463"><div class="ttname"><a href="group__kyosu__traits.html#ga8f185ca9780dc6cec632805d9cd71463">kyosu::as_cayley_dickson_n_t</a></div><div class="ttdeci">typename as_cayley_dickson_n&lt; Dim, Ts... &gt;::type as_cayley_dickson_n_t</div><div class="ttdoc">Computes a Cayley-Dickson type of a given dimension.</div><div class="ttdef"><b>Definition</b> traits.hpp:142</div></div>
-</div><!-- fragment --><p><span class="tt">s</span> holds \(1\) in \(z_0\) and \(2\) in \(z_9\), which <span class="tt">get&lt;9&gt;</span> reads back. Its modulus is \(\sqrt5\). The <a class="el" href="group__agnostic.html" title="Algebra-agnostic functions">algebra-agnostic functions</a> apply in every dimension, <span class="tt"><a class="el" href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a></span> among them.</p>
+</div><!-- fragment --><p>The <a class="el" href="group__agnostic.html" title="Algebra-agnostic functions">algebra-agnostic functions</a> apply in every dimension, <span class="tt"><a class="el" href="group__exp.html#ga43bd0f5793b846caaf808a7f998734c0">kyosu::exp</a></span> among them.</p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md48"></a>
 Associativity</h1>
 <p>From dimension 8, \((ab)c\) and \(a(bc)\) differ for some triples. On the basis elements \(i\), \(j\), and \(l\), the two products are opposite, \((ij)l = -i(jl)\).</p>
@@ -202,8 +202,7 @@ Associativity</h1>
 <div class="line">}</div>
 <div class="ttc" id="agroup__associator_html_gac1477076e48284b3ea6b0304e24188c1"><div class="ttname"><a href="group__associator.html#gac1477076e48284b3ea6b0304e24188c1">kyosu::associator</a></div><div class="ttdeci">constexpr auto associator</div><div class="ttdef"><b>Definition</b> associator.hpp:71</div></div>
 <div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
-</div><!-- fragment --><p>\((ij)l = kl\) and \(i(jl) = -kl\), and their associator is \(2kl\). On three quaternions, the associator is zero.</p>
-<dl class="section warning"><dt>Warning</dt><dd>An expression is evaluated with its parentheses as written and never re-associated: moving a parenthesis changes the result.</dd></dl>
+</div><!-- fragment --><dl class="section warning"><dt>Warning</dt><dd>An expression is evaluated with its parentheses as written and never re-associated: moving a parenthesis changes the result.</dd></dl>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md49"></a>
 Elementary functions</h1>
 <p>In every dimension, an element \(c\) with a nonzero pure part generates with \(1\) a subalgebra isomorphic to \(\mathbb{C}\), as the <a class="el" href="math_background.html" title="Mathematics of Cayley-Dickson Algebras">mathematics page</a> shows. The powers, the exponential, the logarithm, and the functions built on them are therefore defined on every algebra:</p>
@@ -225,8 +224,7 @@ Elementary functions</h1>
 <div class="ttc" id="agroup__log_html_gabc0fe7e42be704597604cc8dec55f4ae"><div class="ttname"><a href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a></div><div class="ttdeci">constexpr auto log</div><div class="ttdef"><b>Definition</b> log.hpp:102</div></div>
 <div class="ttc" id="agroup__sqr_html_ga341e48919690498ce1a6cac915b3e58d"><div class="ttname"><a href="group__sqr.html#ga341e48919690498ce1a6cac915b3e58d">kyosu::sqr</a></div><div class="ttdeci">constexpr auto sqr</div><div class="ttdef"><b>Definition</b> sqr.hpp:57</div></div>
 <div class="ttc" id="agroup__sqrt_html_ga2281638c0373dd457ae6394e159a0010"><div class="ttname"><a href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a></div><div class="ttdeci">constexpr auto sqrt</div><div class="ttdef"><b>Definition</b> sqrt.hpp:105</div></div>
-</div><!-- fragment --><p>In dimension 32, \(\exp(\log z)\) and \((\sqrt{z})^2\) both give back \(z\).</p>
-<div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+</div><!-- fragment --><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">Previous  </th><th class="markdownTableHeadRight">Next  </th></tr>
 <tr class="markdownTableRowOdd">

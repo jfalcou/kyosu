@@ -181,7 +181,7 @@ raw</h1>
 <div class="line">}</div>
 <div class="ttc" id="agroup__log_html_gabc0fe7e42be704597604cc8dec55f4ae"><div class="ttname"><a href="group__log.html#gabc0fe7e42be704597604cc8dec55f4ae">kyosu::log</a></div><div class="ttdeci">constexpr auto log</div><div class="ttdef"><b>Definition</b> log.hpp:102</div></div>
 <div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
-</div><!-- fragment --><p>On \(3 + 4i\), the imaginary part is \(0.927295\) by default and \(0.922848\) with the option. At the origin, the default returns \(-\infty + 0i\), while the option returns a NaN imaginary part.</p>
+</div><!-- fragment --><p>With the option, the imaginary part loses accuracy on \(3 + 4i\), and turns into a NaN at the origin.</p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md51"></a>
 radpi</h1>
 <p>By default, angles are in radians. In radians, \(\pi/2\) is an <a href="https://en.wikipedia.org/wiki/Proof_that_%CF%80_is_irrational">irrational</a> number. No floating point number represents it exactly, so <span class="tt">pi/2</span> already carries a rounding error. <span class="tt">kyosu::radpi</span> reads and returns angles as multiples of \(\pi\) instead, with two effects:</p>
@@ -209,7 +209,7 @@ radpi</h1>
 <div class="ttc" id="agroup__eve__math__constants_html_gad32687fc782ada2bb223abb7722ac694"><div class="ttname"><a href="https://jfalcou.github.io/eve/group__eve__math__constants.html#gad32687fc782ada2bb223abb7722ac694">eve::pi</a></div><div class="ttdeci">constexpr auto pi</div></div>
 <div class="ttc" id="agroup__sin_html_ga02b482e44325ab868b423995a9cf9df2"><div class="ttname"><a href="group__sin.html#ga02b482e44325ab868b423995a9cf9df2">kyosu::sin</a></div><div class="ttdeci">constexpr auto sin</div><div class="ttdef"><b>Definition</b> sin.hpp:75</div></div>
 <div class="ttc" id="astructeve_1_1as_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1as.html">eve::as</a></div></div>
-</div><!-- fragment --><p>The sine of both angles is zero. In radians, the result is the rounding error of \(\pi\) carried through the sine, and it grows with the angle. With the option, both results are zero.</p>
+</div><!-- fragment --><p>The sine of both angles is zero. In radians, the result is the rounding error of \(\pi\) carried through the sine, and it grows with the angle.</p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md52"></a>
 real_only</h1>
 <p>By default, a real argument outside the real domain of a function gives a complex result. <span class="tt">kyosu::real_only</span> selects the real function instead, with two effects:</p>
@@ -230,8 +230,7 @@ real_only</h1>
 <div class="line">}</div>
 <div class="ttc" id="agroup__acosh_html_ga010d55184f68d5a6276939926b22c689"><div class="ttname"><a href="group__acosh.html#ga010d55184f68d5a6276939926b22c689">kyosu::acosh</a></div><div class="ttdeci">constexpr auto acosh</div><div class="ttdef"><b>Definition</b> acosh.hpp:103</div></div>
 <div class="ttc" id="agroup__asin_html_ga1b0ab1f5f9386bcfe84bc3356ad103e1"><div class="ttname"><a href="group__asin.html#ga1b0ab1f5f9386bcfe84bc3356ad103e1">kyosu::asin</a></div><div class="ttdeci">constexpr auto asin</div><div class="ttdef"><b>Definition</b> asin.hpp:92</div></div>
-</div><!-- fragment --><p>Without the option, \(\mathrm{acosh}\,0.5\) is the pure imaginary number \(i\pi/3\), and \(\arcsin 2\) is a complex number of real part \(\pi/2\). With the option, both calls return NaN.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md53"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md53"></a>
 assume_unitary</h1>
 <p>By default, <span class="tt"><a class="el" href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></span> and <span class="tt"><a class="el" href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></span> normalize their argument, since a rotation is a unit quaternion. <span class="tt">kyosu::assume_unitary</span> skips that normalization on an argument known to be of unit length, with two effects:</p>
 <ul>
@@ -262,7 +261,7 @@ assume_unitary</h1>
 <div class="ttc" id="agroup__abs_html_gac70344c81b5cf55a5257cf54c6e6cb18"><div class="ttname"><a href="group__abs.html#gac70344c81b5cf55a5257cf54c6e6cb18">kyosu::abs</a></div><div class="ttdeci">constexpr auto abs</div><div class="ttdef"><b>Definition</b> abs.hpp:71</div></div>
 <div class="ttc" id="agroup__from__angle__axis_html_ga2e2e427d078f717745ed2821f6cd06f2"><div class="ttname"><a href="group__from__angle__axis.html#ga2e2e427d078f717745ed2821f6cd06f2">kyosu::from_angle_axis</a></div><div class="ttdeci">constexpr auto from_angle_axis</div><div class="ttdef"><b>Definition</b> from_angle_axis.hpp:78</div></div>
 <div class="ttc" id="agroup__rotate__vec_html_gafc749b146c3a5d756fc81c80e9b77d74"><div class="ttname"><a href="group__rotate__vec.html#gafc749b146c3a5d756fc81c80e9b77d74">kyosu::rotate_vec</a></div><div class="ttdeci">constexpr auto rotate_vec</div><div class="ttdef"><b>Definition</b> rotate_vec.hpp:81</div></div>
-</div><!-- fragment --><p>The quaternion has modulus 1, and both calls send \(x\) to \(y\).</p>
+</div><!-- fragment --><p>On a unit quaternion, the two calls agree.</p>
 <dl class="section warning"><dt>Warning</dt><dd>The option is not checked: on an argument that is not of unit length, the result is wrong.</dd></dl>
 <div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">
