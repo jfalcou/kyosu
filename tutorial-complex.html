@@ -197,8 +197,7 @@ Elementary functions</h1>
 <div class="ttc" id="agroup__sin_html_ga02b482e44325ab868b423995a9cf9df2"><div class="ttname"><a href="group__sin.html#ga02b482e44325ab868b423995a9cf9df2">kyosu::sin</a></div><div class="ttdeci">constexpr auto sin</div><div class="ttdef"><b>Definition</b> sin.hpp:75</div></div>
 <div class="ttc" id="agroup__tanh_html_ga78d8caa0d963138de3b8d7fa35bf9e6b"><div class="ttname"><a href="group__tanh.html#ga78d8caa0d963138de3b8d7fa35bf9e6b">kyosu::tanh</a></div><div class="ttdeci">constexpr auto tanh</div><div class="ttdef"><b>Definition</b> tanh.hpp:72</div></div>
 <div class="ttc" id="agroup__tgamma_html_ga2592a73fafd38f5dcff68431ce527a41"><div class="ttname"><a href="group__tgamma.html#ga2592a73fafd38f5dcff68431ce527a41">kyosu::tgamma</a></div><div class="ttdeci">constexpr auto tgamma</div><div class="ttdef"><b>Definition</b> tgamma.hpp:72</div></div>
-</div><!-- fragment --><p>Each call returns a complex number, the value of the function at \(0.5 + 0.25i\).</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
 Real arguments</h1>
 <p>A function applied to a real argument outside its real domain returns a complex result. <span class="tt"><a class="el" href="group__sqrt.html#ga2281638c0373dd457ae6394e159a0010">kyosu::sqrt</a>(-1.0)</span> returns \(i\), while <span class="tt">std::sqrt(-1.0)</span> returns NaN. The return type widens from <span class="tt">double</span> to <span class="tt"><a class="el" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e" title="Type alias for complex numbers.">kyosu::complex_t</a>&lt;double&gt;</span>, since no <span class="tt">double</span> holds \(i\).</p>
 <p>The <a class="el" href="tutorial-options.html" title="Options">option</a> <span class="tt">kyosu::real_only</span> selects the real function, which returns NaN outside the real domain:</p>
