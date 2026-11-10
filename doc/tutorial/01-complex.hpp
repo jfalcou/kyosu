@@ -32,8 +32,6 @@
 //!
 //! @godbolt{doc/tut_complex_functions.cpp}
 //!
-//! Each call returns a complex number, the value of the function at \f$0.5 + 0.25i\f$.
-//!
 //! # Real arguments
 //!
 //! A function applied to a real argument outside its real domain returns a complex result.
