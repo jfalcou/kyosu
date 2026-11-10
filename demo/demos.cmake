@@ -6,14 +6,13 @@
 
 ## A demo opens a window, so it is never a test and no CI job runs it. raylib is pulled here rather than in
 ## cmake/dependencies.cmake so that a build without KYOSU_BUILD_DEMOS fetches nothing.
-CPMAddPackage( NAME raylib
-               GITHUB_REPOSITORY raysan5/raylib
-               GIT_TAG 5.5
-               OPTIONS "BUILD_EXAMPLES OFF"
-                       "BUILD_SHARED_LIBS OFF"
-             )
+CPMAddPackage(
+  NAME raylib
+  GITHUB_REPOSITORY raysan5/raylib
+  GIT_TAG 5.5
+  OPTIONS "BUILD_EXAMPLES OFF" "BUILD_SHARED_LIBS OFF")
 
-add_custom_target("kyosu-demos")
+add_custom_target("kyosu-demos" COMMENT "[kyosu] - Building the demos")
 
 ##======================================================================================================================
 ## Compiler options for demos
@@ -46,9 +45,9 @@ endif()
 ##======================================================================================================================
 ## Included from the root rather than added as a subdirectory: copa_glob_unit resolves its pattern against the current
 ## source directory while naming targets from RELATIVE, and only the root sees both as it needs to for demo.<name>.exe.
-copa_glob_unit( PATTERN "demo/*.cpp"
-                RELATIVE    ${PROJECT_SOURCE_DIR}
-                DESTINATION demo
-                INTERFACE   kyosu_demo
-                TARGET      kyosu-demos
-              )
+copa_glob_unit(
+  PATTERN "demo/*.cpp"
+  RELATIVE ${PROJECT_SOURCE_DIR}
+  DESTINATION demo
+  INTERFACE kyosu_demo
+  TARGET kyosu-demos)

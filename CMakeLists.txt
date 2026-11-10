@@ -18,11 +18,16 @@ include(${COPACABANA_SOURCE_DIR}/copacabana/cmake/copacabana.cmake)
 copa_add_option(KYOSU_USE_PCH "Build tests with precompiled headers" ON LABEL "Use PCH")
 copa_add_option(KYOSU_BUILD_TEST "Build tests for KYOSU" ON LABEL "Unit tests")
 copa_add_option(KYOSU_BUILD_DOCUMENTATION "Build Doxygen for KYOSU" OFF LABEL "Doxygen")
-copa_add_option(KYOSU_ENABLE_SANITIZERS "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF LABEL "Sanitizers")
+copa_add_option(KYOSU_ENABLE_SANITIZERS "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF
+                LABEL "Sanitizers")
 copa_add_option(KYOSU_ENABLE_COVERAGE "Build tests with code coverage instrumentation" OFF LABEL "Coverage")
 copa_add_option(KYOSU_BUILD_DEMOS "Build the interactive demos" OFF LABEL "Demos")
 copa_add_option(KYOSU_COMPILE_COST "Measure what every test unit costs to compile" OFF)
-copa_project_version(MAJOR 0 MINOR 1 PATCH 0 REPOSITORY https://github.com/jfalcou/kyosu)
+copa_project_version(
+  MAJOR 0
+  MINOR 1
+  PATCH 0
+  REPOSITORY https://github.com/jfalcou/kyosu)
 
 ##======================================================================================================================
 ## Summary Display
@@ -40,12 +45,12 @@ copa_setup_precommit_hooks(${QUIET_OPTION})
 ##======================================================================================================================
 ## Install Process setup
 ##======================================================================================================================
-copa_setup_install( LIBRARY kyosu
-                    FEATURES cxx_std_20
-                    CONFIG  ${PROJECT_SOURCE_DIR}/cmake/kyosu-config.cmake.in
-                    DOC     ${PROJECT_SOURCE_DIR}/LICENSE.md
-                    INCLUDE ${PROJECT_SOURCE_DIR}/include/kyosu
-                  )
+copa_setup_install(
+  LIBRARY kyosu
+  FEATURES cxx_std_20
+  CONFIG ${PROJECT_SOURCE_DIR}/cmake/kyosu-config.cmake.in
+  DOC ${PROJECT_SOURCE_DIR}/LICENSE.md
+  INCLUDE ${PROJECT_SOURCE_DIR}/include/kyosu)
 
 ## The public headers include <eve/eve.hpp>, so the interface target has to hand EVE to whoever
 ## links it. Without this, a consumer using FetchContent or CPM compiles against kyosu's headers
@@ -56,15 +61,16 @@ target_link_libraries(kyosu_lib INTERFACE eve::eve)
 ## Setup doxygen
 ##======================================================================================================================
 if(KYOSU_BUILD_DOCUMENTATION)
-  copa_setup_doxygen(${QUIET_OPTION}
-                     DESTINATION "${PROJECT_BINARY_DIR}/doc"
-                     GODBOLT_LIBRARIES kyosu eve
-                     GODBOLT_COMPILER clang2010
-                     GODBOLT_OPTIONS "-O3 -std=c++20 -DNDEBUG"
-                     COLOR_HUE 232
-                     COLOR_SATURATION 57
-                     COLOR_LIGHTNESS 28
-                     TAGFILES eve=https://jfalcou.github.io/eve)
+  copa_setup_doxygen(
+    ${QUIET_OPTION}
+    DESTINATION "${PROJECT_BINARY_DIR}/doc"
+    GODBOLT_LIBRARIES kyosu eve
+    GODBOLT_COMPILER clang2010
+    GODBOLT_OPTIONS "-O3 -std=c++20 -DNDEBUG"
+    COLOR_HUE 232
+    COLOR_SATURATION 57
+    COLOR_LIGHTNESS 28
+    TAGFILES eve=https://jfalcou.github.io/eve)
 
 endif()
 
@@ -76,9 +82,9 @@ if(KYOSU_BUILD_TEST)
   include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
 
   ## After compiler.cmake, which declares the interfaces the precompiled headers are attached to.
-  copa_setup_pch( TARGET kyosu        INTERFACES  kyosu_test  HEADERS include/kyosu/kyosu.hpp)
-  copa_setup_pch( TARGET kyosu_doc    INTERFACES  kyosu_docs  HEADERS include/kyosu/kyosu.hpp)
-  copa_setup_pch( TARGET kyosu_bench  INTERFACES  kyosu_bench HEADERS include/kyosu/kyosu.hpp)
+  copa_setup_pch(TARGET kyosu INTERFACES kyosu_test HEADERS include/kyosu/kyosu.hpp)
+  copa_setup_pch(TARGET kyosu_doc INTERFACES kyosu_docs HEADERS include/kyosu/kyosu.hpp)
+  copa_setup_pch(TARGET kyosu_bench INTERFACES kyosu_bench HEADERS include/kyosu/kyosu.hpp)
 
   if(KYOSU_ENABLE_SANITIZERS)
     copa_setup_sanitizers(kyosu_docs ENABLE_ASAN ENABLE_UBSAN)

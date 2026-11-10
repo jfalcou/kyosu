@@ -13,11 +13,11 @@ message(STATUS "Testing CPM for branch ${GIT_BRANCH}")
 include(cpm.cmake)
 
 # Add dependencies
-CPMAddPackage ( NAME kyosu
-                GIT_REPOSITORY "https://github.com/jfalcou/kyosu.git"
-                GIT_TAG "${GIT_BRANCH}"
-                OPTIONS "KYOSU_BUILD_TEST OFF"
-              )
+CPMAddPackage(
+  NAME kyosu
+  GIT_REPOSITORY "https://github.com/jfalcou/kyosu.git"
+  GIT_TAG "${GIT_BRANCH}"
+  OPTIONS "KYOSU_BUILD_TEST OFF")
 
 # Use kyosu
 add_executable(test_kyosu ../main.cpp)
