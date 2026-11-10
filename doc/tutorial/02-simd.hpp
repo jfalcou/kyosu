@@ -26,10 +26,9 @@
 //!
 //! @godbolt{doc/tut_simd_wide.cpp}
 //!
-//! `eve::wide<double>::size()` is the number of `double` in the register. Lane \f$k\f$ of `x` holds
-//! \f$-1 + k\f$, and lane \f$k\f$ of `x * x` its square. The square root of a register of reals is
-//! a register of complex numbers, since a lane may be negative: lane 0 holds \f$i\f$. With
-//! `kyosu::real_only`, the result is a register of reals, where lane 0 holds NaN.
+//! `eve::wide<double>::size()` is the number of `double` in the register. The square root of a
+//! register of reals is a register of complex numbers, since a lane may be negative. With
+//! `kyosu::real_only`, the result is a register of reals.
 //!
 //! # Registers of complex numbers
 //!
@@ -38,9 +37,7 @@
 //!
 //! @godbolt{doc/tut_simd_complex.cpp}
 //!
-//! Lane \f$k\f$ of `z` holds \f$(1 + k) + 0.5k\,i\f$, and `abs(z)` and `exp(z)` return the
-//! modulus and the exponential of each lane. The source differs from the scalar case only by the
-//! type of the components.
+//! The source differs from the scalar case only by the type of the components.
 //!
 //! @note `auto z = kyosu::complex(re, im);` builds the same register while deducing its type from
 //! the components, and is the preferred form.

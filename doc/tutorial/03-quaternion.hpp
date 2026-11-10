@@ -12,10 +12,9 @@
 //!
 //! @godbolt{doc/tut_quat_basics.cpp}
 //!
-//! `q` prints as \f$1 + 2i + 3j + 4k\f$. Its modulus is \f$\sqrt{30}\f$, its conjugate
-//! \f$1 - 2i - 3j - 4k\f$, its inverse kyosu::rec the conjugate divided by \f$30\f$, and its pure
-//! part \f$2i + 3j + 4k\f$. The arithmetic, the equality, the componentwise predicates, and the
-//! functions of the complex numbers also apply to a quaternion, with the same API.
+//! kyosu::rec returns the inverse, the conjugate divided by the squared modulus. The arithmetic,
+//! the equality, the componentwise predicates, and the functions of the complex numbers also apply
+//! to a quaternion, with the same API.
 //!
 //! # Noncommutativity
 //!

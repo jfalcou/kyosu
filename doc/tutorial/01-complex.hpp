@@ -43,9 +43,6 @@
 //!
 //! @godbolt{doc/tut_complex_real_only.cpp}
 //!
-//! Without the option, \f$\sqrt{-1}\f$ is \f$i\f$, \f$\log(-1)\f$ is \f$i\pi\f$, and
-//! \f$\arccos 2\f$ is a pure imaginary number. With the option, the three calls return NaN.
-//!
 //! # Comparison
 //!
 //! Complex numbers are compared for equality and tested by the componentwise predicates. No
@@ -54,8 +51,6 @@
 //! no `<` is defined.
 //!
 //! @godbolt{doc/tut_complex_predicates.cpp}
-//!
-//! \f$3 + 4i\f$ and \f$3\f$ differ, \f$3\f$ is real, and \f$3 + 4i\f$ is finite and not pure.
 //!
 //! <div class="section_buttons">
 //!
