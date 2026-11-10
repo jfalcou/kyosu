@@ -188,6 +188,7 @@
 #include <kyosu/functions/sec.hpp>
 #include <kyosu/functions/sech.hpp>
 #include <kyosu/functions/sign.hpp>
+#include <kyosu/functions/signnz.hpp>
 #include <kyosu/functions/sin.hpp>
 #include <kyosu/functions/sinc.hpp>
 #include <kyosu/functions/sincos.hpp>
