@@ -12,19 +12,13 @@ message(STATUS "Testing FetchContent for branch ${GIT_BRANCH}")
 include(FetchContent)
 
 # Retrieve kyosu from relative git directory
-FetchContent_Declare(kyosu
-  GIT_REPOSITORY "https://github.com/jfalcou/kyosu.git"
-  GIT_TAG ${GIT_BRANCH}
-)
-FetchContent_Declare(eve
-  GIT_REPOSITORY "https://github.com/jfalcou/eve.git"
-  GIT_TAG main
-)
+FetchContent_Declare(kyosu GIT_REPOSITORY "https://github.com/jfalcou/kyosu.git" GIT_TAG ${GIT_BRANCH})
+FetchContent_Declare(eve GIT_REPOSITORY "https://github.com/jfalcou/eve.git" GIT_TAG main)
 
 ## FetchContent has no per-package OPTIONS: what the dependencies read is pinned here.
-set(KYOSU_BUILD_TEST        OFF CACHE BOOL "" FORCE)
-set(EVE_BUILD_TEST          OFF CACHE BOOL "" FORCE)
-set(EVE_BUILD_BENCHMARKS    OFF CACHE BOOL "" FORCE)
+set(KYOSU_BUILD_TEST OFF CACHE BOOL "" FORCE)
+set(EVE_BUILD_TEST OFF CACHE BOOL "" FORCE)
+set(EVE_BUILD_BENCHMARKS OFF CACHE BOOL "" FORCE)
 set(EVE_BUILD_DOCUMENTATION OFF CACHE BOOL "" FORCE)
 
 # make available

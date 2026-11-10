@@ -10,14 +10,11 @@ enable_testing()
 ## Fake install via FetchContent
 
 include(FetchContent)
-FetchContent_Declare(eve
-  GIT_REPOSITORY "https://github.com/jfalcou/eve.git"
-  GIT_TAG main
-)
+FetchContent_Declare(eve GIT_REPOSITORY "https://github.com/jfalcou/eve.git" GIT_TAG main)
 
 ## Nothing else populates eve here, so its options would stay at their defaults.
-set(EVE_BUILD_TEST          OFF CACHE BOOL "" FORCE)
-set(EVE_BUILD_BENCHMARKS    OFF CACHE BOOL "" FORCE)
+set(EVE_BUILD_TEST OFF CACHE BOOL "" FORCE)
+set(EVE_BUILD_BENCHMARKS OFF CACHE BOOL "" FORCE)
 set(EVE_BUILD_DOCUMENTATION OFF CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(eve)
