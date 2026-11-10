@@ -46,9 +46,8 @@
 //! @godbolt{doc/tut_rot_apply.cpp}
 //!
 //! The quarter turn about \f$z\f$ sends \f$x\f$ to \f$y\f$: a positive angle turns counterclockwise
-//! about the axis, by the right-hand rule. The first component of the result prints as
-//! \f$2.22045 \cdot 10^{-16}\f$ in place of \f$0\f$, a rounding error of the computation in
-//! `double`.
+//! about the axis, by the right-hand rule. The first component of the result is a rounding error
+//! of the computation in `double`, in place of \f$0\f$.
 //!
 //! @note `kyosu::from_angle_axis` normalizes the axis, and `kyosu::rotate_vec` also normalizes the
 //! quaternion, so neither argument has to be of unit length. The @ref tutorial-options "option"
@@ -63,6 +62,8 @@
 //!
 //! The quarter turn \f$p\f$ about \f$z\f$ followed by the quarter turn \f$q\f$ about \f$y\f$ sends
 //! \f$x\f$ to \f$y\f$, while the product in the other order, \f$pq\f$, sends \f$x\f$ to \f$-z\f$.
+//!
+//! @htmlinclude[block] composition.svg
 //!
 //! @warning A product written in the wrong order, or one division taken for the other, composes
 //! the rotations backward.
@@ -81,6 +82,8 @@
 //! From the identity to the quarter turn about \f$z\f$, the steps of \f$t = 0.25\f$ turn \f$x\f$ by
 //! \f$22.5\f$ degrees each, from \f$x\f$ to \f$y\f$.
 //!
+//! @htmlinclude[block] slerp.svg
+//!
 //! # Conversions
 //!
 //! A rotation converts to and from three other forms:
@@ -95,8 +98,8 @@
 //!
 //! @godbolt{doc/tut_rot_convert.cpp}
 //!
-//! kyosu::to_angle_axis gives back the angle \f$\pi/3\f$ and the axis \f$z\f$, and the round
-//! trips through the Euler angles and through the matrix give back \f$q\f$.
+//! The round trips through the angle and the axis, the Euler angles, and the matrix give back
+//! \f$q\f$.
 //!
 //! The Euler angles follow these conventions:
 //!
