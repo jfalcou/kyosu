@@ -1,0 +1,35 @@
+[
+ {
+  "branch": "main",
+  "cpu_us": 2606485700,
+  "date": "2026-11-10T17:29:27Z",
+  "link_cpu_us": 35936520,
+  "link_peak_kib": 128244,
+  "links": 285,
+  "modules": {
+   "unit/complex": {
+    "cpu_us": 599600045,
+    "peak_kib": 1198560,
+    "units": 64
+   },
+   "unit/function": {
+    "cpu_us": 1788302797,
+    "peak_kib": 1609052,
+    "units": 186
+   },
+   "unit/infra": {
+    "cpu_us": 103478036,
+    "peak_kib": 679632,
+    "units": 22
+   },
+   "unit/quaternion": {
+    "cpu_us": 115104822,
+    "peak_kib": 1048540,
+    "units": 13
+   }
+  },
+  "peak_kib": 1609052,
+  "sha": "47fb5c1489525019106991ee393c922e754071c7",
+  "units": 285
+ }
+]
