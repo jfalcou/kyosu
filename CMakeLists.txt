@@ -23,6 +23,7 @@ copa_add_option(KYOSU_ENABLE_SANITIZERS "Build tests with AddressSanitizer + Und
 copa_add_option(KYOSU_ENABLE_COVERAGE "Build tests with code coverage instrumentation" OFF LABEL "Coverage")
 copa_add_option(KYOSU_BUILD_DEMOS "Build the interactive demos" OFF LABEL "Demos")
 copa_add_option(KYOSU_COMPILE_COST "Measure what every test unit costs to compile" OFF)
+copa_add_option(KYOSU_EXTERNAL_DEPENDENCIES "Take dependencies from the environment instead of fetching them" OFF)
 copa_project_version(
   MAJOR 0
   MINOR 1
@@ -78,7 +79,7 @@ endif()
 ## Tests setup
 ##======================================================================================================================
 if(KYOSU_BUILD_TEST)
-  CPMGetPackage(TTS)
+  kyosu_get_package(TTS)
   include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
 
   ## After compiler.cmake, which declares the interfaces the precompiled headers are attached to.

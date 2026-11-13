@@ -5,6 +5,30 @@
 ##======================================================================================================================
 
 ##======================================================================================================================
+## Take the dependencies from the environment, without CPM
+##======================================================================================================================
+option(KYOSU_EXTERNAL_DEPENDENCIES "Take dependencies from the environment instead of fetching them" OFF)
+
+##======================================================================================================================
+## Retrieve a package declared below, from the environment or by CPM
+##======================================================================================================================
+macro(kyosu_get_package name)
+  if(KYOSU_EXTERNAL_DEPENDENCIES)
+    find_package(${name} CONFIG REQUIRED)
+  else()
+    CPMGetPackage(${name})
+  endif()
+endmacro()
+
+if(KYOSU_EXTERNAL_DEPENDENCIES)
+  if(NOT COPACABANA_SOURCE_DIR)
+    message(FATAL_ERROR "[KYOSU] - KYOSU_EXTERNAL_DEPENDENCIES needs COPACABANA_SOURCE_DIR")
+  endif()
+  find_package(EVE CONFIG REQUIRED)
+  return()
+endif()
+
+##======================================================================================================================
 ## CPM is vendored rather than fetched: file(DOWNLOAD) reports nothing on a failure, so a network
 ## hiccup leaves an empty file and CMake only complains later that CPMAddPackage does not exist.
 ##======================================================================================================================
