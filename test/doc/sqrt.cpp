@@ -12,7 +12,11 @@ int main()
   std::cout << 72.9f << " -> " << sqrt(72.9f) << "\n";
 
   std::cout << "Complex:     ";
-  std::cout << kyosu::complex_t<float>(3.5f, -2.9f) << " -> " << sqrt(kyosu::complex_t<float>(3.5f, -2.9f)) << "\n";
+  std::cout << kyosu::complex_t<float>(-3.5f) << " -> " << sqrt(kyosu::complex_t<float>(-3.5f, -0.0f)) << "\n";
+  std::cout << kyosu::complex_t<float>(-3.5f, 0.0f) << " -> " << sqrt(kyosu::complex_t<float>(-3.5f, 0.0f)) << "\n";
+  std::cout << kyosu::quaternion_t<float>(-3.5f, 0.0f, 0.0f, 0.0f) << " -> " << sqrt(kyosu::quaternion_t<float>(-3.5f, 0.0f, 0.0f, 0.0f)) << "\n";
+  auto r = sqrt(kyosu::quaternion_t<float>(-3.5f, 0.0f, 0.0f, 0.0f));
+  std::cout << "r " <<  r <<  " r*r" << r*r << std::endl;
 
   std::cout << "Quaternion:  ";
   std::cout << kyosu::quaternion_t<double>(1., 2., 3., 4.) << " -> "
