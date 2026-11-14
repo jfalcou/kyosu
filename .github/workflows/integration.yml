@@ -20,3 +20,49 @@ jobs:
       project: kyosu
       cxx-compiler: g++-15
       image: ghcr.io/jfalcou/compilers:v11
+
+  ## The configure of a package manager: copacabana, TTS and EVE taken from the environment, CPM never called.
+  external-dependencies:
+    name: Dependencies from the environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    container:
+      image: ghcr.io/jfalcou/compilers:v11
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v7
+
+      ## The pins of cmake/dependencies.cmake, so that this job and CPM read the same versions.
+      - name: Fetch copacabana, TTS and EVE at their pins, and install TTS and EVE
+        shell: bash
+        run: |
+          copa=$(sed -n 's/.*NAME COPACABANA.*GIT_TAG \([^ )]*\).*/\1/p' cmake/dependencies.cmake)
+          tts=$(sed -n '/NAME TTS/,/)/s/.*GIT_TAG \([^ )]*\).*/\1/p' cmake/dependencies.cmake)
+          eve=$(sed -n '/NAME EVE/,/)/s/.*GIT_TAG \([^ )]*\).*/\1/p' cmake/dependencies.cmake)
+          test -n "$copa" && test -n "$tts" && test -n "$eve"
+          git clone --quiet https://github.com/jfalcou/copacabana deps/copacabana
+          git -C deps/copacabana checkout --quiet "$copa"
+          git clone --quiet https://github.com/jfalcou/tts deps/tts
+          git -C deps/tts checkout --quiet "$tts"
+          cmake -S deps/tts -B deps/tts/build -G Ninja -DTTS_BUILD_TEST=OFF -DTTS_BUILD_DOCUMENTATION=OFF -DTTS_QUIET=ON
+          cmake --install deps/tts/build --prefix "$PWD/deps/prefix"
+          git clone --quiet https://github.com/jfalcou/eve deps/eve
+          git -C deps/eve checkout --quiet "$eve"
+          cmake -S deps/eve -B deps/eve/build -G Ninja -DEVE_BUILD_TEST=OFF -DEVE_BUILD_BENCHMARKS=OFF -DEVE_BUILD_DOCUMENTATION=OFF
+          cmake --install deps/eve/build --prefix "$PWD/deps/prefix"
+
+      ## No _deps directory afterwards: CPM ran nothing.
+      - name: Configure with the dependencies from the environment
+        shell: bash
+        run: |
+          cmake --preset clang -DKYOSU_EXTERNAL_DEPENDENCIES=ON \
+                -DCOPACABANA_SOURCE_DIR="$PWD/deps/copacabana" -DCMAKE_PREFIX_PATH="$PWD/deps/prefix"
+          test ! -d build/clang/_deps
+
+      ## One unit: every unit of kyosu instantiates EVE, and one is enough to read every package from the prefix.
+      - name: Build and run one unit test
+        shell: bash
+        run: |
+          cmake --build --preset clang --config Release --target unit.infra.literals.exe
+          ctest --preset clang --build-config Release -R '^unit\.infra\.literals\.exe$' --output-on-failure --no-tests=error --timeout 300
