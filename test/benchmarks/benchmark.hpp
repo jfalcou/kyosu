@@ -192,7 +192,7 @@ namespace kyosu::bench
           tts::buffer<double> row;
 
           // Retrieve the lane count (N) to normalize time-per-lambda into time-per-element
-          double current_N = static_cast<double>(run_cardinals[r]);
+          auto current_N = static_cast<double>(run_cardinals[r]);
 
           while (*ptr != '\n' && *ptr != '\0')
           {
