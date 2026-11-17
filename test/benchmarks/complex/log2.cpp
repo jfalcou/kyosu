@@ -15,12 +15,12 @@ TTS_CASE_TPL("Benchmark complex log2", float, double)
 {
   using type = kyosu::complex_t<T>;
 
-  auto rnd_kyosu = [&]() { return type{::tts::random_value<T>(-10, 10), ::tts::random_value<T>(-10, 10)}; };
+  auto x = kyosu::bench::random<type>(-10, 10);
 
   {
     kyosu::bench::benchmark _("complex<" + tts::as_text(tts::typename_<T>) + "> log2");
-    TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar ", kyosu::log2, rnd_kyosu);
-    TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide", kyosu::log2, rnd_kyosu);
+    TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar ", kyosu::log2, x);
+    TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide", kyosu::log2, x);
   }
 
   TTS_PASS("Benchmarks - SUCCESS");

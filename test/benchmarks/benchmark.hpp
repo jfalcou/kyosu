@@ -7,13 +7,17 @@
 //======================================================================================================================
 #pragma once
 
+#include <algorithm>
+#include <complex>
 #include <iostream>
 #include <fstream>
+#include <random>
 #include <sstream>
 #include <string>
 #include <cstdlib>
 #include <utility>
 #include <type_traits>
+#include <vector>
 
 #define ANKERL_NANOBENCH_IMPLEMENT
 #include <nanobench.h>
@@ -21,12 +25,32 @@
 #define TTS_MAIN
 #include <tts/tts.hpp>
 #include <eve/module/core.hpp>
+#include <kyosu/kyosu.hpp>
 
 #define TTS_RUN_BENCHMARK(RUNNER, TYPE, NAME, FUNC, ...) (RUNNER).run<TYPE>(NAME, FUNC, __VA_ARGS__)
 #define TTS_RUN_BENCHMARK_TPL(RUNNER, TYPE, NAME, FUNC, ...) (RUNNER).template run<TYPE>(NAME, FUNC, __VA_ARGS__)
 
 namespace kyosu::bench
 {
+  // The generator of every buffer, at its default seed as in the benchmarks of EVE, so two executions time the same
+  // values.
+  inline std::mt19937 prng = {};
+
+  // The number of values of a buffer, a multiple of the width of every eve::wide of kyosu.
+  inline constexpr std::size_t size = 1024;
+
+  // Draws size values of Z, each component uniform on [mini, maxi].
+  template<typename Z> std::vector<Z> random(double mini, double maxi)
+  {
+    using T = kyosu::as_real_type_t<Z>;
+
+    std::uniform_real_distribution<T> component(static_cast<T>(mini), static_cast<T>(maxi));
+
+    std::vector<Z> values(size);
+    for (auto& v : values) kumi::for_each([&](auto& part) { part = component(prng); }, v);
+    return values;
+  }
+
   class benchmark
   {
   private:
@@ -44,60 +68,78 @@ namespace kyosu::bench
       bench.epochs(repetitions);
     }
 
-    template<typename TestType, typename Func, typename... Gens>
-    void execute_single_run(tts::text const& name, Func&& func, kumi::tuple<Gens...> const& gens)
+    // The buffer a run of TestType reads, built before the timing: the values as drawn, packed into wides, or
+    // converted to std::complex from their real and imaginary parts.
+    template<typename TestType, typename Z> static std::vector<TestType> inputs(std::vector<Z> const& values)
+    {
+      if constexpr (std::same_as<TestType, Z>)
+      {
+        return values;
+      }
+      else if constexpr (eve::simd_value<TestType>)
+      {
+        constexpr std::size_t N = eve::width_v<TestType>;
+        std::vector<TestType> out;
+        out.reserve(values.size() / N);
+        for (std::size_t i = 0; i + N <= values.size(); i += N)
+        {
+          out.push_back(TestType([&](auto j, auto) { return values[i + j]; }));
+        }
+        return out;
+      }
+      else
+      {
+        std::vector<TestType> out;
+        out.reserve(values.size());
+        for (auto const& v : values) out.push_back(TestType(kyosu::real(v), kyosu::imag(v)));
+        return out;
+      }
+    }
+
+    template<typename TestType, typename Func, typename... Inputs>
+    void time_run(tts::text const& name, Func& func, Inputs const&... in)
     {
       base_type_name = ::tts::as_text(::tts::typename_<TestType>);
 
       constexpr std::ptrdiff_t N = eve::width_v<TestType>;
       run_cardinals.push_back(N);
 
-      // 1. PURE GENERATION
-      auto args = kumi::map([](auto const& g) -> TestType { return TestType(g()); }, gens);
+      std::size_t const count = std::min({in.size()...});
+      bench.batch(count * N);
 
-      bench.batch(N);
-
-      // 2. THE HOT LOOP
       bench.run(name.data(), [&]() {
-        // A. Anchor Inputs
-        kumi::for_each(
-          [](auto& arg) {
-            if constexpr (eve::product_type<std::decay_t<decltype(arg)>>)
-            {
-              kumi::for_each([](auto& v) { ankerl::nanobench::doNotOptimizeAway(v); }, arg);
-            }
-            else
-            {
-              ankerl::nanobench::doNotOptimizeAway(arg);
-            }
-          },
-          args);
-
-        // B. Pure Execution
-        auto res = kumi::apply(std::forward<Func>(func), args);
-
-        // C. Anchor Output
-        if constexpr (eve::product_type<std::decay_t<decltype(res)>>)
+        for (std::size_t i = 0; i < count; ++i)
         {
-          kumi::for_each([](auto const& v) { ankerl::nanobench::doNotOptimizeAway(v); }, res);
-        }
-        else
-        {
-          ankerl::nanobench::doNotOptimizeAway(res);
+          auto res = func(in[i]...);
+
+          if constexpr (eve::product_type<std::decay_t<decltype(res)>>)
+          {
+            kumi::for_each([](auto const& v) { ankerl::nanobench::doNotOptimizeAway(v); }, res);
+          }
+          else
+          {
+            ankerl::nanobench::doNotOptimizeAway(res);
+          }
         }
       });
     }
 
+    template<typename TestType, typename Func, typename... Values>
+    void execute_single_run(tts::text const& name, Func& func, Values const&... values)
+    {
+      time_run<TestType>(name, func, inputs<TestType>(values)...);
+    }
+
   public:
     // Fallback constructor for when no name is provided (or just repetitions are provided)
-    benchmark(std::size_t repetitions = 2000) : repetitions(repetitions), base_file_name(tts::text("benchmark"))
+    benchmark(std::size_t repetitions = 100) : repetitions(repetitions), base_file_name(tts::text("benchmark"))
     {
       configure_bench();
     }
 
     // Auto constructor for string literals.
     // The constraint prevents integers from accidentally trapping here instead of the repetitions constructor.
-    benchmark(auto const& name, std::size_t repetitions = 2000)
+    benchmark(auto const& name, std::size_t repetitions = 100)
     requires(!std::is_integral_v<std::decay_t<decltype(name)>>)
       : repetitions(repetitions), base_file_name(tts::text(name))
     {
@@ -115,10 +157,10 @@ namespace kyosu::bench
       return *this;
     }
 
-    template<typename TestType, typename Name, typename Func, typename... Generators>
-    benchmark& run(Name const& name, Func&& func, Generators const&... g)
+    template<typename TestType, typename Name, typename Func, typename... Values>
+    benchmark& run(Name const& name, Func&& func, Values const&... values)
     {
-      execute_single_run<TestType>(tts::text(name), std::forward<Func>(func), kumi::tuple<Generators...>{g...});
+      execute_single_run<TestType>(tts::text(name), func, values...);
       return *this;
     }
 
