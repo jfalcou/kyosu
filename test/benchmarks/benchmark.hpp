@@ -34,7 +34,7 @@ namespace kyosu::bench
 {
   // The generator of every buffer, at its default seed as in the benchmarks of EVE, so two executions time the same
   // values.
-  inline std::mt19937 prng = {};
+  inline std::mt19937 prng = {}; // NOSONAR - each buffer advances it, reproducible by its seed, no security use
 
   // The number of values of a buffer, a multiple of the width of every eve::wide of kyosu.
   inline constexpr std::size_t size = 1024;
@@ -81,9 +81,9 @@ namespace kyosu::bench
         constexpr std::size_t N = eve::width_v<TestType>;
         std::vector<TestType> out;
         out.reserve(values.size() / N);
-        for (std::size_t i = 0; i + N <= values.size(); i += N)
+        for (std::size_t n = 0; n + N <= values.size(); n += N)
         {
-          out.push_back(TestType([&](auto j, auto) { return values[i + j]; }));
+          out.push_back(TestType([&values, n](auto lane, auto) { return values[n + lane]; }));
         }
         return out;
       }
@@ -104,13 +104,13 @@ namespace kyosu::bench
       constexpr std::ptrdiff_t N = eve::width_v<TestType>;
       run_cardinals.push_back(N);
 
-      std::size_t const count = std::min({in.size()...});
+      std::size_t const count = std::min({std::size(in)...});
       bench.batch(count * N);
 
       bench.run(name.data(), [&]() {
-        for (std::size_t i = 0; i < count; ++i)
+        for (std::size_t n = 0; n < count; ++n)
         {
-          auto res = func(in[i]...);
+          auto res = func(in[n]...);
 
           if constexpr (eve::product_type<std::decay_t<decltype(res)>>)
           {
@@ -132,15 +132,16 @@ namespace kyosu::bench
 
   public:
     // Fallback constructor for when no name is provided (or just repetitions are provided)
-    benchmark(std::size_t repetitions = 100) : repetitions(repetitions), base_file_name(tts::text("benchmark"))
+    explicit benchmark(std::size_t repetitions = 100) : repetitions(repetitions), base_file_name(tts::text("benchmark"))
     {
       configure_bench();
     }
 
     // Auto constructor for string literals.
     // The constraint prevents integers from accidentally trapping here instead of the repetitions constructor.
-    benchmark(auto const& name, std::size_t repetitions = 100)
-    requires(!std::is_integral_v<std::decay_t<decltype(name)>>)
+    template<typename Name>
+    explicit benchmark(Name const& name, std::size_t repetitions = 100)
+    requires(!std::is_integral_v<Name>)
       : repetitions(repetitions), base_file_name(tts::text(name))
     {
       configure_bench();
@@ -186,12 +187,12 @@ namespace kyosu::bench
 
         // Parse the text block cleanly into a 2D grid
         tts::buffer<tts::buffer<double>> grid;
-        for (std::size_t i = 0; i < results.size(); ++i)
+        for (std::size_t r = 0; r < results.size(); ++r)
         {
           tts::buffer<double> row;
 
           // Retrieve the lane count (N) to normalize time-per-lambda into time-per-element
-          double current_N = static_cast<double>(run_cardinals[i]);
+          double current_N = static_cast<double>(run_cardinals[r]);
 
           while (*ptr != '\n' && *ptr != '\0')
           {
@@ -213,19 +214,19 @@ namespace kyosu::bench
         }
 
         // Write Transposed CSV: Headers (1 Column per benchmark run)
-        for (std::size_t i = 0; i < results.size(); ++i)
+        for (std::size_t r = 0; r < results.size(); ++r)
         {
-          tts::text header{"%s", results[i].config().mBenchmarkName.c_str()};
+          tts::text header{"%s", results[r].config().mBenchmarkName.c_str()};
           out_file << header.data();
-          if (i + 1 < results.size()) out_file << ",";
+          if (r + 1 < results.size()) out_file << ",";
         }
         out_file << "\n";
 
         // Find maximum columns (epochs) across all runs
         std::size_t max_epochs = 0;
-        for (std::size_t i = 0; i < grid.size(); ++i)
+        for (std::size_t g = 0; g < grid.size(); ++g)
         {
-          max_epochs = tts::_::max(max_epochs, grid[i].size());
+          max_epochs = tts::_::max(max_epochs, grid[g].size());
         }
 
         // Write Transposed CSV: Columns (Measurement data pivoting)
@@ -317,12 +318,12 @@ namespace kyosu::bench
 
       bool counters_failed = false;
 
-      for (std::size_t i = 0; i < results.size(); ++i)
+      for (std::size_t r = 0; r < results.size(); ++r)
       {
-        auto const& res = results[i];
+        auto const& res = results[r];
         double current_time = res.median(ankerl::nanobench::Result::Measure::elapsed);
         double batch_size = static_cast<double>(res.config().mBatch);
-        std::ptrdiff_t N = run_cardinals[i];
+        std::ptrdiff_t N = run_cardinals[r];
 
         double elem_per_sec = batch_size / current_time;
         double speedup = elem_per_sec / baseline_elem_per_sec;
