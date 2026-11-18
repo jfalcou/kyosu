@@ -15,12 +15,12 @@ TTS_CASE_TPL("Benchmark complex rot_angle", float, double)
 {
   using type = kyosu::complex_t<T>;
 
-  auto rnd_kyosu = [&]() { return type{::tts::random_value<T>(-10, 10), ::tts::random_value<T>(-10, 10)}; };
+  auto x = kyosu::bench::random<type>(-10, 10);
 
   {
     kyosu::bench::benchmark _("complex<" + tts::as_text(tts::typename_<T>) + "> rot_angle");
-    TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar ", kyosu::rot_angle, rnd_kyosu);
-    TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide", kyosu::rot_angle, rnd_kyosu);
+    TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar ", kyosu::rot_angle, x);
+    TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide", kyosu::rot_angle, x);
   }
 
   TTS_PASS("Benchmarks - SUCCESS");

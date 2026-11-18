@@ -15,12 +15,12 @@ TTS_CASE_TPL("Benchmark complex to_semipolar", float, double)
 {
   using type = kyosu::complex_t<T>;
 
-  auto rnd_kyosu = [&]() { return type{::tts::random_value<T>(-10, 10), ::tts::random_value<T>(-10, 10)}; };
+  auto x = kyosu::bench::random<type>(-10, 10);
 
   {
     kyosu::bench::benchmark _("complex<" + tts::as_text(tts::typename_<T>) + "> to_semipolar");
-    TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar ", kyosu::to_semipolar, rnd_kyosu);
-    TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide", kyosu::to_semipolar, rnd_kyosu);
+    TTS_RUN_BENCHMARK_TPL(_, type, "kyosu::scalar ", kyosu::to_semipolar, x);
+    TTS_RUN_BENCHMARK_TPL(_, eve::wide<type>, "kyosu::wide", kyosu::to_semipolar, x);
   }
 
   TTS_PASS("Benchmarks - SUCCESS");
