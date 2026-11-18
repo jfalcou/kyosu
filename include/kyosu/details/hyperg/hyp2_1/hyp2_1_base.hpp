@@ -131,7 +131,7 @@ namespace kyosu::_
       auto are_a_cmb_c_small = are_ac_small && is_cmb_small;
 
       auto br_R1 = [&](auto test, auto) { // (abs_z <= RR)
-        r = if_else(test && notdone, hyp_ps_zero(a, b, c, z, test && notdone && test), r);
+        r = if_else(test && notdone, hyp_ps_zero(a, b, c, z, notdone && test), r);
         return r;
       };
 
