@@ -130,5 +130,38 @@
   "peak_kib": 1597896,
   "sha": "0a5f09ace32a37e21308192f6ea880c13aa849bf",
   "units": 285
+ },
+ {
+  "branch": "main",
+  "cpu_us": 3899153628,
+  "date": "2026-11-18T13:31:36Z",
+  "link_cpu_us": 46619498,
+  "link_peak_kib": 126908,
+  "links": 285,
+  "modules": {
+   "unit/complex": {
+    "cpu_us": 887526483,
+    "peak_kib": 1193048,
+    "units": 64
+   },
+   "unit/function": {
+    "cpu_us": 2677210497,
+    "peak_kib": 1598456,
+    "units": 186
+   },
+   "unit/infra": {
+    "cpu_us": 162666765,
+    "peak_kib": 671116,
+    "units": 22
+   },
+   "unit/quaternion": {
+    "cpu_us": 171749883,
+    "peak_kib": 1039232,
+    "units": 13
+   }
+  },
+  "peak_kib": 1598456,
+  "sha": "989339710f4b11499a821d4bc67894a808b9b74b",
+  "units": 285
  }
 ]
