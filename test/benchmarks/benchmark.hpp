@@ -12,9 +12,7 @@
 #include <iostream>
 #include <fstream>
 #include <random>
-#include <sstream>
 #include <string>
-#include <cstdlib>
 #include <utility>
 #include <type_traits>
 #include <vector>
@@ -178,68 +176,26 @@ namespace kyosu::bench
         tts::text filename = base_file_name + ".csv";
         std::ofstream out_file(filename.data());
 
-        // Extract raw elapsed times using Mustache into a temporary stringstream
-        std::stringstream ss;
-        bench.render("{{#result}}{{#measurement}}{{elapsed}} {{/measurement}}\n{{/result}}", ss);
-
-        std::string raw_dump = ss.str();
-        char const* ptr = raw_dump.c_str();
-
-        // Parse the text block cleanly into a 2D grid
-        tts::buffer<tts::buffer<double>> grid;
+        std::size_t epochs = 0;
         for (std::size_t r = 0; r < results.size(); ++r)
         {
-          tts::buffer<double> row;
+          out_file << results[r].config().mBenchmarkName << (r + 1 < results.size() ? "," : "\n");
+          epochs = tts::_::max(epochs, results[r].size());
+        }
 
-          // Retrieve the lane count (N) to normalize time-per-lambda into time-per-element
-          auto current_N = static_cast<double>(run_cardinals[r]);
-
-          while (*ptr != '\n' && *ptr != '\0')
+        for (std::size_t e = 0; e < epochs; ++e)
+        {
+          for (std::size_t r = 0; r < results.size(); ++r)
           {
-            char* end = nullptr;
-            double val = std::strtod(ptr, &end);
-            if (ptr != end)
+            auto const& res = results[r];
+            if (e < res.size())
             {
-              row.push_back(val / current_N); // Normalize here!
-              ptr = end;
-            }
-            else
-            {
-              break;
-            }
-            while (*ptr == ' ') ++ptr;
-          }
-          if (*ptr == '\n') ++ptr;
-          grid.push_back(std::move(row));
-        }
-
-        // Write Transposed CSV: Headers (1 Column per benchmark run)
-        for (std::size_t r = 0; r < results.size(); ++r)
-        {
-          tts::text header{"%s", results[r].config().mBenchmarkName.c_str()};
-          out_file << header.data();
-          if (r + 1 < results.size()) out_file << ",";
-        }
-        out_file << "\n";
-
-        // Find maximum columns (epochs) across all runs
-        std::size_t max_epochs = 0;
-        for (std::size_t g = 0; g < grid.size(); ++g)
-        {
-          max_epochs = tts::_::max(max_epochs, grid[g].size());
-        }
-
-        // Write Transposed CSV: Columns (Measurement data pivoting)
-        for (std::size_t epoch = 0; epoch < max_epochs; ++epoch)
-        {
-          for (std::size_t col = 0; col < grid.size(); ++col)
-          {
-            if (epoch < grid[col].size())
-            {
-              tts::text val{"%g", grid[col][epoch]};
+              // Do not divide by the cardinal of the run: an epoch times one call of the lambda, a pass over the batch.
+              double const elapsed = res.get(e, ankerl::nanobench::Result::Measure::elapsed);
+              tts::text val{"%g", elapsed / static_cast<double>(res.config().mBatch)};
               out_file << val.data();
             }
-            if (col + 1 < grid.size()) out_file << ",";
+            if (r + 1 < results.size()) out_file << ",";
           }
           out_file << "\n";
         }
