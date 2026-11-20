@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Configure CMake and Build
-        uses: jfalcou/copacabana/.github/actions/config@main
+        uses: jfalcou/copacabana/.github/actions/config@eb45d6163c3cafed95d34b541400500f500ad585
         with:
           config: Release
           preset: ${{ matrix.compiler.preset }}
