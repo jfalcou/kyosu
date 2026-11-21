@@ -15,7 +15,6 @@ namespace kyosu::_
     auto p = kyosu::pure(z);
     auto az = kyosu::abs(p);
     using c_t = complex_t<decltype(az)>;
-    auto cx = c_t(kyosu::real(z), az);
     auto c = f(c_t(kyosu::real(z), az), rs...);
     return kyosu::real(c) + kyosu::ipart(c) * kyosu::signnz(p);
   }
