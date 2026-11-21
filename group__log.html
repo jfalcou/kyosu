@@ -233,14 +233,15 @@ Variables</h2></td></tr>
 <div class="line">  <span class="keyword">using </span>wq_t = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;q_t, 2&gt;</a>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        \n&quot;</span>;</div>
-<div class="line">  e_t e(2.9f);</div>
+<div class="line">  e_t e(-2.9f);</div>
 <div class="line">  we_t we = we_t(e);</div>
 <div class="line">  std::cout &lt;&lt; e &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gabc0fe7e42be704597604cc8dec55f4ae">log</a>(e) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; we &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gabc0fe7e42be704597604cc8dec55f4ae">log</a>(we) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gabc0fe7e42be704597604cc8dec55f4ae">log</a>(c_t(e)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gabc0fe7e42be704597604cc8dec55f4ae">log</a>(q_t(e)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gabc0fe7e42be704597604cc8dec55f4ae">log</a>(wc_t(e)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gabc0fe7e42be704597604cc8dec55f4ae">log</a>(wq_t(e)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt;  <span class="stringliteral">&quot;log(c_t(e))        &quot;</span>&lt;&lt;<a class="code hl_variable" href="#gabc0fe7e42be704597604cc8dec55f4ae">log</a>(c_t(e))       &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt;  <span class="stringliteral">&quot;log(c_t(e, -0.0f)) &quot;</span>&lt;&lt;<a class="code hl_variable" href="#gabc0fe7e42be704597604cc8dec55f4ae">log</a>(c_t(e, -0.0f))&lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt;  <span class="stringliteral">&quot;log(q_t(e))        &quot;</span>&lt;&lt;<a class="code hl_variable" href="#gabc0fe7e42be704597604cc8dec55f4ae">log</a>(q_t(e))       &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt;  <span class="stringliteral">&quot;log(wc_t(e))       &quot;</span>&lt;&lt;<a class="code hl_variable" href="#gabc0fe7e42be704597604cc8dec55f4ae">log</a>(wc_t(e))      &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt;  <span class="stringliteral">&quot;log(wq_t(e))       &quot;</span>&lt;&lt;<a class="code hl_variable" href="#gabc0fe7e42be704597604cc8dec55f4ae">log</a>(wq_t(e))      &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     \n&quot;</span>;</div>
 <div class="line">  c_t c(3.5f, -2.9f);</div>

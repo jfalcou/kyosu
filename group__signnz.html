@@ -172,48 +172,25 @@ Variables</h2></td></tr>
 </div><!-- fragment --><h2 class="groupheader">Callable Signnzatures </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekyosu.html">kyosu</a></div>
 <div class="line">{</div>
-<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="#ga97b7c90af61b1ac3e294eb76a15488f6">signnz</a>(T z) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="#ga97b7c90af61b1ac3e294eb76a15488f6">signnz</a>(T z ) <span class="keyword">noexcept</span>;</div>
+<div class="line">   <span class="keyword">template</span>&lt;kyosu::concepts::cayley_dickson_like T&gt; <span class="keyword">constexpr</span> T <a class="code hl_variable" href="#ga97b7c90af61b1ac3e294eb76a15488f6">signnz</a>(T z, T ifzero_value ) <span class="keyword">noexcept</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__signnz_html_ga97b7c90af61b1ac3e294eb76a15488f6"><div class="ttname"><a href="#ga97b7c90af61b1ac3e294eb76a15488f6">kyosu::signnz</a></div><div class="ttdeci">constexpr auto signnz</div><div class="ttdef"><b>Definition</b> signnz.hpp:60</div></div>
+<div class="ttc" id="agroup__signnz_html_ga97b7c90af61b1ac3e294eb76a15488f6"><div class="ttname"><a href="#ga97b7c90af61b1ac3e294eb76a15488f6">kyosu::signnz</a></div><div class="ttdeci">constexpr auto signnz</div><div class="ttdef"><b>Definition</b> signnz.hpp:69</div></div>
 <div class="ttc" id="anamespacekyosu_html"><div class="ttname"><a href="namespacekyosu.html">kyosu</a></div><div class="ttdoc">Main KYOSU namespace.</div><div class="ttdef"><b>Definition</b> cinf.hpp:13</div></div>
 </div><!-- fragment --><p><b>Parameters</b></p>
 <ul>
 <li><span class="tt">z</span>: Value to process.</li>
 </ul>
 <p><b>Return value</b></p>
-<p>Returns the "signnz" of the argument i.e. its normalized value, and the non zero sign of the real part if the input is zero.</p>
+<p>Returns the "signnz" of the argument i.e. its normalized value, and a 'ifzero_value<span class="tt"> of norm one if the input is zero.</p><ul>
+<li>By default the </li>
+</ul>
+<p></span>ifzero value for non Real types is i*sgn(<a class="el" href="group__real.html#ga4121e4e64916c81e31b622b9b45c93fb">real(z)</a>) (i*i == -1).</p><ul>
+<li>As this choice is not the only possible as soon as the input is not Real, a second parameter allows to choose a different value for this case which will be normalized before use.</li>
+</ul>
 <h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;eve/wide.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;kyosu/kyosu.hpp&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a>;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_variable" href="#ga97b7c90af61b1ac3e294eb76a15488f6">kyosu::signnz</a>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real:        &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; 72.9f &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga97b7c90af61b1ac3e294eb76a15488f6">signnz</a>(72.9f) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Complex:     &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kyosu::complex_t&lt;float&gt;(3.5f, -2.9f) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga97b7c90af61b1ac3e294eb76a15488f6">signnz</a>(<a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;float&gt;</a>(3.5f, -2.9f)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Quaternion:  &quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kyosu::quaternion_t&lt;double&gt;(1., 2., 3., 4.) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span></div>
-<div class="line">            &lt;&lt; <a class="code hl_variable" href="#ga97b7c90af61b1ac3e294eb76a15488f6">signnz</a>(<a class="code hl_typedef" href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t&lt;double&gt;</a>(1., 2., 3., 4.)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;SIMD:        &quot;</span>;</div>
-<div class="line">  <span class="keyword">using </span>wc_t = <a class="code hl_structRef" href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide&lt;kyosu::complex_t&lt;double&gt;</a>, 2&gt;;</div>
-<div class="line">  std::cout &lt;&lt; wc_t(kyosu::complex_t&lt;double&gt;(1.3, -3.7)) &lt;&lt; <span class="stringliteral">&quot; -&gt; &quot;</span> &lt;&lt; <a class="code hl_variable" href="#ga97b7c90af61b1ac3e294eb76a15488f6">signnz</a>(wc_t(<a class="code hl_typedef" href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t&lt;double&gt;</a>(1.3, -3.7)))</div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__types_html_ga10a5d4f4bdbbbc385c544fb41c7d628e"><div class="ttname"><a href="group__types.html#ga10a5d4f4bdbbbc385c544fb41c7d628e">kyosu::complex_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 2, T &gt; complex_t</div><div class="ttdoc">Type alias for complex numbers.</div><div class="ttdef"><b>Definition</b> complex.hpp:26</div></div>
-<div class="ttc" id="agroup__types_html_ga43659263f005aec8e7e223b889004a22"><div class="ttname"><a href="group__types.html#ga43659263f005aec8e7e223b889004a22">kyosu::quaternion_t</a></div><div class="ttdeci">as_cayley_dickson_n_t&lt; 4, T &gt; quaternion_t</div><div class="ttdoc">Type alias for quaternion numbers.</div><div class="ttdef"><b>Definition</b> quaternion.hpp:23</div></div>
-<div class="ttc" id="astructeve_1_1wide_html"><div class="ttname"><a href="https://jfalcou.github.io/eve/structeve_1_1wide.html">eve::wide</a></div></div>
-</div><!-- fragment --> 
+<dl class="section attention"><dt>Attention</dt><dd>An example for this function is still to be written, as <span class="tt">doc/signnz.cpp</span>. </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->

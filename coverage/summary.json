@@ -1,7 +1,7 @@
 {
-    "branch_covered": 2041,
+    "branch_covered": 2031,
     "branch_percent": 63.7,
-    "branch_total": 3203,
+    "branch_total": 3189,
     "files": [
         {
             "branch_covered": 2,
@@ -296,9 +296,9 @@
             "branch_percent": 100.0,
             "branch_total": 1,
             "filename": "include/kyosu/details/callable.hpp",
-            "function_covered": 328,
+            "function_covered": 329,
             "function_percent": 99.4,
-            "function_total": 330,
+            "function_total": 331,
             "line_covered": 4,
             "line_percent": 100.0,
             "line_total": 4
@@ -956,9 +956,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/convert.hpp",
-            "function_covered": 336,
+            "function_covered": 342,
             "function_percent": 99.1,
-            "function_total": 339,
+            "function_total": 345,
             "line_covered": 12,
             "line_percent": 100.0,
             "line_total": 12
@@ -1612,13 +1612,13 @@
             "line_total": 6
         },
         {
-            "branch_covered": 123,
-            "branch_percent": 96.1,
-            "branch_total": 128,
+            "branch_covered": 109,
+            "branch_percent": 95.6,
+            "branch_total": 114,
             "filename": "include/kyosu/functions/if_else.hpp",
-            "function_covered": 653,
-            "function_percent": 87.2,
-            "function_total": 749,
+            "function_covered": 632,
+            "function_percent": 86.8,
+            "function_total": 728,
             "line_covered": 15,
             "line_percent": 100.0,
             "line_total": 15
@@ -2240,9 +2240,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/muli.hpp",
-            "function_covered": 83,
-            "function_percent": 96.5,
-            "function_total": 86,
+            "function_covered": 86,
+            "function_percent": 96.6,
+            "function_total": 89,
             "line_covered": 9,
             "line_percent": 100.0,
             "line_total": 9
@@ -2552,9 +2552,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/sign.hpp",
-            "function_covered": 65,
-            "function_percent": 98.5,
-            "function_total": 66,
+            "function_covered": 56,
+            "function_percent": 98.2,
+            "function_total": 57,
             "line_covered": 6,
             "line_percent": 100.0,
             "line_total": 6
@@ -2564,9 +2564,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kyosu/functions/signnz.hpp",
-            "function_covered": 53,
+            "function_covered": 62,
             "function_percent": 100.0,
-            "function_total": 53,
+            "function_total": 62,
             "line_covered": 6,
             "line_percent": 100.0,
             "line_total": 6
@@ -2968,8 +2968,8 @@
             "line_total": 39
         },
         {
-            "branch_covered": 111,
-            "branch_percent": 90.2,
+            "branch_covered": 115,
+            "branch_percent": 93.5,
             "branch_total": 123,
             "filename": "include/kyosu/types/io.hpp",
             "function_covered": 151,
@@ -3028,9 +3028,9 @@
             "line_total": 4
         }
     ],
-    "function_covered": 25584,
+    "function_covered": 25573,
     "function_percent": 98.1,
-    "function_total": 26075,
+    "function_total": 26064,
     "gcovr/summary_format_version": "0.6",
     "line_covered": 4821,
     "line_percent": 94.6,
