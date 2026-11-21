@@ -27,5 +27,5 @@ TTS_CASE_WITH("Check kyosu::signnz over quaternion",
   using ke_t = kyosu::quaternion_t<T>;
   auto q = ke_t(r, i, j, k);
   TTS_RELATIVE_EQUAL(kyosu::signnz(q), q / kyosu::abs(q), tts::prec<T>());
-  TTS_RELATIVE_EQUAL(kyosu::signnz(kyosu::quaternion(T(0.0))), kyosu::quaternion(T(1.0)), tts::prec<T>());
+  TTS_RELATIVE_EQUAL(kyosu::signnz(kyosu::quaternion(T(0.0))), kyosu::quaternion(T(0.0), T(1.0)), tts::prec<T>());
 };

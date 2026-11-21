@@ -15,14 +15,15 @@ int main()
   using wq_t = eve::wide<q_t, 2>;
 
   std::cout << "Real:        \n";
-  e_t e(2.9f);
+  e_t e(-2.9f);
   we_t we = we_t(e);
   std::cout << e << " -> " << log(e) << "\n";
   std::cout << we << " -> " << log(we) << "\n";
-  std::cout << log(c_t(e)) << "\n";
-  std::cout << log(q_t(e)) << "\n";
-  std::cout << log(wc_t(e)) << "\n";
-  std::cout << log(wq_t(e)) << "\n";
+  std::cout <<  "log(c_t(e))        "<<log(c_t(e))       << "\n";
+  std::cout <<  "log(c_t(e, -0.0f)) "<<log(c_t(e, -0.0f))<< "\n";
+  std::cout <<  "log(q_t(e))        "<<log(q_t(e))       << "\n";
+  std::cout <<  "log(wc_t(e))       "<<log(wc_t(e))      << "\n";
+  std::cout <<  "log(wq_t(e))       "<<log(wq_t(e))      << "\n";
 
   std::cout << "Complex:     \n";
   c_t c(3.5f, -2.9f);
