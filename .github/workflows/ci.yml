@@ -27,7 +27,7 @@ jobs:
   ##################################################################################################
   precommit:
     name: Meta Checks
-    uses: jfalcou/copacabana/.github/workflows/precommit.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/precommit.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
 
   ##################################################################################################
   ## Unit Tests
@@ -35,21 +35,21 @@ jobs:
   linux-tests:
     name: Linux
     needs: precommit
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/linux.yml
 
   no-pch-tests:
     name: Linux
     needs: precommit
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/linux-no-pch.yml
 
   macos-tests:
     name: MacOS
     needs: precommit
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/macos.yml
 
@@ -58,7 +58,7 @@ jobs:
   ##################################################################################################
   sanitizer-tests:
     name: Sanitizers
-    uses: jfalcou/copacabana/.github/workflows/sanitizers.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/sanitizers.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       build-targets: unit.exe doc.exe
       test-targets: unit|doc
@@ -69,7 +69,7 @@ jobs:
   ##################################################################################################
   coverage-report:
     name: Coverage
-    uses: jfalcou/copacabana/.github/workflows/coverage.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/coverage.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       project: kyosu
       build-targets: kyosu-test
